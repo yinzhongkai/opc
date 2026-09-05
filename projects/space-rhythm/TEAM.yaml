@@ -1,4 +1,4 @@
-# 当前仅配置组织管理员；active 表示在册，不表示会话已创建或初始化。
+# 当前配置组织管理员和产品经理；active 表示在册，不表示会话已创建或初始化。
 project: space-rhythm
 managedBy: organization-manager-01
 memberStates: [active, inactive]
@@ -13,3 +13,10 @@ members:
     scope:
       - 维护本项目成员、岗位和知识配置，按用户明确需求组织增员
       - 跟踪成员初始化协议与知识配置缺口
+  - id: product-manager-01
+    role: product-manager
+    status: active
+    scope:
+      - 澄清本项目目标用户、问题、使用场景、范围与非目标
+      - 维护需求优先级、可验证验收标准与待决定事项
+      - 整理用户确认纳入的需求产物，交接已确认需求

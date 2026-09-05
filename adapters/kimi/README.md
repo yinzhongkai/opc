@@ -9,7 +9,7 @@
 - 成员的 `roles/<role-id>.md`。
 - 该岗位基础知识与当前项目补充知识合并后的全部 `knowledge/<id>.md`。
 
-例如，`space-rhythm` 当前唯一成员 `organization-manager-01` 使用岗位 `organization-manager`，需要基础知识 `team-management.md`，没有项目补充知识。这是可直接读取的普通 Markdown 资料。
+例如，`space-rhythm` 的成员 `organization-manager-01` 使用岗位 `organization-manager`，需要基础知识 `team-management.md`，没有项目补充知识。这是可直接读取的普通 Markdown 资料。
 
 组织管理员另需两个共享索引和候选定义；检查公共定义变更影响时，需要相关的其他项目成员表和岗位配置。资料不能访问时，报告未能检查的影响范围。
 

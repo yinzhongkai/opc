@@ -71,7 +71,7 @@ knowledge: [project-management]
 
 正文定义共同职责、边界与产出。这里的 `knowledge` 是基础知识，至少包含一个知识 ID。
 
-项目的 [TEAM.yaml](projects/space-rhythm/TEAM.yaml) 同时保存岗位补充知识和成员名单。以下以当前唯一成员说明配置（scope 简写）：
+项目的 [TEAM.yaml](projects/space-rhythm/TEAM.yaml) 同时保存岗位补充知识和成员名单。以下摘录组织管理员作为配置示例（scope 简写），完整成员以该文件为准：
 
 ```yaml
 project: space-rhythm
