@@ -1,0 +1,15 @@
+# 当前仅配置组织管理员；active 表示在册，不表示会话已创建或初始化。
+project: space-rhythm
+managedBy: organization-manager-01
+memberStates: [active, inactive]
+
+# 当前无项目补充知识，使用岗位基础知识。
+roleKnowledge: {}
+
+members:
+  - id: organization-manager-01
+    role: organization-manager
+    status: active
+    scope:
+      - 维护本项目成员、岗位和知识配置，按用户明确需求组织增员
+      - 跟踪成员初始化协议与知识配置缺口

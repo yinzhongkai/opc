@@ -44,9 +44,7 @@
 │   ├── backend-development.md
 │   └── ...
 ├── projects/
-│   ├── accounting-app/
-│   ├── japan-trip/
-│   └── ai-book/
+│   └── space-rhythm/              太空律动
 └── adapters/
     ├── codex/README.md
     └── kimi/
@@ -56,7 +54,7 @@
 
 `knowledge/` 没有子目录，每个文件以其知识 ID 命名。这里的专业知识是普通资料，与平台原生 Skills 不同。会话初始化由 `AGENTS.md` 引导至公共协议。
 
-`projects/` 附带记账软件、日本旅行和图书写作三个示例项目，均未启动实际业务任务。使用时先确认项目目标与约束，再安排成员开展工作。
+`projects/` 当前仅保留[太空律动](projects/space-rhythm/PROJECT.md)项目。原记账软件、日本旅行和图书写作三个示例项目已移除，可从 Git 历史恢复。使用时先确认项目目标与约束，再安排成员开展工作。
 
 ## 如何配置
 
@@ -73,26 +71,18 @@ knowledge: [project-management]
 
 正文定义共同职责、边界与产出。这里的 `knowledge` 是基础知识，至少包含一个知识 ID。
 
-项目的 [TEAM.yaml](projects/accounting-app/TEAM.yaml) 同时保存岗位补充知识和成员名单。以下是摘录：
+项目的 [TEAM.yaml](projects/space-rhythm/TEAM.yaml) 同时保存岗位补充知识和成员名单。以下以当前唯一成员说明配置（scope 简写）：
 
 ```yaml
-roleKnowledge:
-  project-manager: [software-development-basics]
-  developer: [frontend-development, backend-development]
+project: space-rhythm
+managedBy: organization-manager-01
+roleKnowledge: {}
 
 members:
-  - id: project-manager-01
-    role: project-manager
+  - id: organization-manager-01
+    role: organization-manager
     status: active
-    scope: [研发计划、依赖和风险协调]
-  - id: frontend-dev-01
-    role: developer
-    status: active
-    scope: [页面、交互和前端单元测试]
-  - id: backend-dev-01
-    role: developer
-    status: active
-    scope: [服务端接口、数据存储和后端单元测试]
+    scope: [成员与岗位知识配置、按需增员、初始化缺口跟踪]
 ```
 
 `roleKnowledge` 是以共享岗位 ID 为键、补充知识 ID 列表为值的映射。未配置的岗位只使用基础知识；整个字段可以省略或写为 `{}`。补充项只能增加知识，不能移除基础知识或覆盖职责。
@@ -125,13 +115,13 @@ members:
 让工具能访问模板目录及目标项目资料，新会话发送：
 
 ```text
-项目：accounting-app
-成员：frontend-dev-01
+项目：space-rhythm
+成员：organization-manager-01
 请按 SESSION_PROTOCOL.md 初始化，读取我的岗位基础知识和项目补充知识，
 并汇报岗位、分工、实际读取的文件与当前任务。
 ```
 
-如果显式填写岗位，这个成员的岗位是 `developer`。只说“你是研发工程师”且同岗位有多人时，需要补充成员 ID。项目和成员能唯一确定时，岗位从名单推导。
+如果显式填写岗位，这个成员的岗位是 `organization-manager`，基础知识为 `team-management`，当前无项目补充知识。只声明岗位且同岗位有多人时，需要补充成员 ID。项目和成员能唯一确定时，岗位从名单推导。
 
 会话查找成员 → 读取岗位 → 合并基础与补充知识并读取正文 → 读取项目背景、任务、决定和交接 → 返回初始化回执。详细字段和失败处理以 [初始化协议](SESSION_PROTOCOL.md) 为准。
 
