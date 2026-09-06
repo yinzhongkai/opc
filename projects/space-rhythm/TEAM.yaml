@@ -1,4 +1,4 @@
-# 当前配置组织管理员和产品经理；active 表示在册，不表示会话已创建或初始化。
+# 当前配置组织管理员、产品经理和系统架构师；active 表示在册，不表示会话已创建或初始化。
 project: space-rhythm
 managedBy: organization-manager-01
 memberStates: [active, inactive]
@@ -20,3 +20,11 @@ members:
       - 澄清本项目目标用户、问题、使用场景、范围与非目标
       - 维护需求优先级、可验证验收标准与待决定事项
       - 整理用户确认纳入的需求产物，交接已确认需求
+  - id: architect-01
+    role: architect
+    status: active
+    scope:
+      - 将产品需求转换为可实现、可验证的技术需求，建立产品需求到技术需求的追溯关系
+      - 定义系统边界、模块职责、接口契约、数据模型和关键质量要求，形成技术需求说明
+      - 评估技术可行性、方案权衡与风险，明确验证方法和技术验收条件
+      - 与 product-manager-01 澄清需求歧义及技术约束，为研发和测试提供技术依据
