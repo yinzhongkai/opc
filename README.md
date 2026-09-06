@@ -56,6 +56,8 @@
 
 `projects/` 当前仅保留[太空律动](projects/space-rhythm/PROJECT.md)项目。原记账软件、日本旅行和图书写作三个示例项目已移除，可从 Git 历史恢复。使用时先确认项目目标与约束，再安排成员开展工作。
 
+太空律动的 [PRD、TRD 与算法设计说明](projects/space-rhythm/artifacts/README.md)统一放在项目成果目录。各类文档只维护当前交付版本，中间草稿、过程报告和备份不保留。工作区的 `安装包/`、`reference_source/`、`tools/` 分别保存原始安装包、源码快照和分析工具。
+
 ## 如何配置
 
 共享岗位以 [project-manager.md](roles/project-manager.md) 为例，其文件头为：
