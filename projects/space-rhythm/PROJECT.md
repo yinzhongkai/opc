@@ -46,6 +46,14 @@
 - 责任配置：该成员为首名项目经理，原协调记录维护人待指定，按根项目运行协议指定其承担协调记录维护；默认最终确认人仍为建项用户。
 - 记录人：框架超级管理员。本次仅创建成员配置，不代表已创建或初始化成员会话，也不登记未经指派的业务任务。
 
+### 2026-09-07：新增逆向分析方向研发工程师
+
+- 授权来源：本会话用户明确请求“帮我在 space-rhythm 项目中加一个项目成员，岗位是研发工程师，具体内容是做linux & window 系统下可执行文件的逆向分析工作”；配置中将系统名称规范为 Linux 与 Windows。
+- 配置变更：创建 [developer-reverse-01](members/developer-reverse-01.yaml)，复用共享 [developer 岗位](../../roles/developer.md)，并登记到 [TEAM.yaml](TEAM.yaml)。具体分工以成员文件为准。
+- 知识配置：基础知识沿用 [software-engineering](../../knowledge/software-engineering.md)，新增 [reverse-engineering](../../knowledge/reverse-engineering.md) 并加入本项目 developer 的岗位补充知识，有效集合依次为 software-engineering、reverse-engineering。
+- 影响范围：当前仅新增研发成员使用此补充组合；本项目后续同岗位成员也会加载该组合，以各自 scope 区分分工。未修改共享岗位的基础配置、项目经理分工或协调记录维护责任。
+- 记录人：框架超级管理员。本次仅建立成员与知识配置，不代表已创建或初始化成员会话、安装工具或开始分析样本；具体样本、分析目标与完成条件由后续实际任务明确，不登记未经指派的业务任务。
+
 ## 当前资料
 
 成员见 [TEAM.yaml](TEAM.yaml)，任务见 [TASKS.md](TASKS.md)，摘要见 [STATUS.md](STATUS.md)，交接见 [HANDOFFS.md](HANDOFFS.md)，成果见 [索引](artifacts/README.md)。

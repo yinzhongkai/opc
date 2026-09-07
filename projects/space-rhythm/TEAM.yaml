@@ -1,5 +1,8 @@
 schemaVersion: 3
 project: 'space-rhythm'
-roleKnowledge: {}
+roleKnowledge:
+  developer:
+    - reverse-engineering
 members:
   - project-manager-01
+  - developer-reverse-01
