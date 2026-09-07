@@ -5,6 +5,7 @@
 | 成果 ID | 名称与正文链接 | 负责人 | 关联任务 | 版本 | 状态 | 批准决定 |
 |---|---|---|---|---|---|---|
 | A-001 | [package 安装包静态分析报告](A-001-package-static-analysis.md) | developer-reverse-01 | T-001 | 0.1 | draft | 尚无 |
+| A-002 | [音画双向节奏创作工具产品需求](A-002-audio-visual-rhythm-product-brief.md) | product-manager-01 | T-002 | 0.2 | approved | D-001 |
 | A-003 | [安装包软件功能逆向报告](A-003-software-functional-reverse-analysis.md) | developer-reverse-01 | T-003 | 0.1 | draft | 尚无 |
 
 ## 正文元信息样式（不是真实成果）
