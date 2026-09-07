@@ -11,6 +11,7 @@
 | [project-management](project-management.md) | 项目管理 |
 | [requirements-analysis](requirements-analysis.md) | 需求分析 |
 | [research](research.md) | 资料研究与事实核查 |
+| [reverse-engineering](reverse-engineering.md) | Linux 与 Windows 可执行文件逆向分析 |
 | [software-development-basics](software-development-basics.md) | 软件研发基础 |
 | [software-engineering](software-engineering.md) | 软件工程 |
 | [system-design](system-design.md) | 系统设计 |
