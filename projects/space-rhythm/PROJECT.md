@@ -62,6 +62,14 @@
 - 责任配置：协调记录维护人仍为 [project-manager-01](members/project-manager-01.yaml)，默认最终确认人及其他成员分工不变。
 - 记录人：框架超级管理员。本次仅创建成员配置，不代表已创建或初始化成员会话，也不登记未经指派的产品任务。
 
+### 2026-09-07：新增系统架构师
+
+- 授权来源：本会话用户明确请求“帮我在 space-rhythm 项目中加一个项目成员，岗位是系统架构师”。
+- 配置变更：创建 [architect-01](members/architect-01.yaml)，复用共享 [architect 岗位](../../roles/architect.md)，并登记到 [TEAM.yaml](TEAM.yaml)。
+- 分工依据：本次未指定细分方向，采用共享系统架构师岗位的共同职责作为初始范围；具体分工以成员文件为准，基础知识沿用 [system-design](../../knowledge/system-design.md)，未添加项目补充知识。
+- 责任配置：协调记录维护人、默认最终确认人及其他成员分工不变。现有交接仍按其原目标处理，新增成员不会自动接收交接或业务任务。
+- 记录人：框架超级管理员。本次仅创建成员配置，不代表已创建或初始化成员会话，也不登记未经指派的架构任务。
+
 ## 当前资料
 
 成员见 [TEAM.yaml](TEAM.yaml)，任务见 [TASKS.md](TASKS.md)，摘要见 [STATUS.md](STATUS.md)，交接见 [HANDOFFS.md](HANDOFFS.md)，成果见 [索引](artifacts/README.md)。
