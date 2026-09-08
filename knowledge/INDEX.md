@@ -7,6 +7,7 @@
 | [backend-development](backend-development.md) | 后端开发 |
 | [cpp-core-systems-engineering](cpp-core-systems-engineering.md) | C++ 核心系统工程 |
 | [critical-review](critical-review.md) | 独立评审 |
+| [ffmpeg-media-engineering](ffmpeg-media-engineering.md) | FFmpeg 多媒体工程 |
 | [frontend-development](frontend-development.md) | 前端开发 |
 | [planning](planning.md) | 方案规划 |
 | [project-management](project-management.md) | 项目管理 |
