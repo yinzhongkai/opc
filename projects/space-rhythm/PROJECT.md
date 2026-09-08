@@ -79,6 +79,15 @@
 - 影响范围：新共享岗位可供当前克隆的其他项目后续按需使用；项目补充知识当前只影响 space-rhythm 的 build-engineer。现有成员的岗位、知识组合、任务和交接均不改变。
 - 记录人：框架超级管理员。本次仅创建成员与知识配置，不代表已创建或初始化成员会话、安装构建工具、开始 Qt 编译或登记未经指派的业务任务。
 
+### 2026-09-08：新增 C++ 核心/系统工程师
+
+- 授权来源：本会话用户明确请求在 space-rhythm 项目中增加 C++ 核心/系统工程师，负责时间模型、事件时间线、撤销重做、事件融合、Worker/IPC 和项目存储骨架。
+- 配置变更：新增共享 [core-systems-engineer 岗位](../../roles/core-systems-engineer.md)，创建 [core-systems-engineer-cpp-01](members/core-systems-engineer-cpp-01.yaml)，并登记到 [TEAM.yaml](TEAM.yaml)。该岗位负责核心基础能力的实现与验证，系统架构师继续负责架构契约和关键技术决定。
+- 知识配置：基础知识为 [software-engineering](../../knowledge/software-engineering.md)；新增 [cpp-core-systems-engineering](../../knowledge/cpp-core-systems-engineering.md) 作为本项目 core-systems-engineer 的岗位补充知识，有效集合依次为 software-engineering、cpp-core-systems-engineering。
+- 分工依据：具体 scope 采用用户明确的六项核心范围，并与现有时间、事件、Worker 和存储架构契约保持一致；C++ 标准版本、IPC 传输与序列化或存储介质等未确认细节仍按项目决定流程处理。
+- 影响范围：新共享岗位可供当前克隆的其他项目后续按需使用；项目补充知识当前只影响 space-rhythm 的 core-systems-engineer。现有成员的岗位、知识组合、任务和交接均不改变。
+- 记录人：框架超级管理员。本次仅创建成员与知识配置，不代表已创建或初始化成员会话、开始核心模块实现或登记未经指派的业务任务。
+
 ## 当前资料
 
 成员见 [TEAM.yaml](TEAM.yaml)，任务见 [TASKS.md](TASKS.md)，摘要见 [STATUS.md](STATUS.md)，交接见 [HANDOFFS.md](HANDOFFS.md)，成果见 [索引](artifacts/README.md)。

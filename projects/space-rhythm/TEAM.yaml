@@ -5,9 +5,12 @@ roleKnowledge:
     - reverse-engineering
   build-engineer:
     - windows-qt-build-engineering
+  core-systems-engineer:
+    - cpp-core-systems-engineering
 members:
   - project-manager-01
   - developer-reverse-01
   - product-manager-01
   - architect-01
   - build-engineer-windows-qt-01
+  - core-systems-engineer-cpp-01

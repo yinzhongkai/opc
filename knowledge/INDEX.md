@@ -5,6 +5,7 @@
 | 知识 ID | 名称 |
 |---|---|
 | [backend-development](backend-development.md) | 后端开发 |
+| [cpp-core-systems-engineering](cpp-core-systems-engineering.md) | C++ 核心系统工程 |
 | [critical-review](critical-review.md) | 独立评审 |
 | [frontend-development](frontend-development.md) | 前端开发 |
 | [planning](planning.md) | 方案规划 |
