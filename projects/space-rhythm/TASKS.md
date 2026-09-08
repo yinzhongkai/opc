@@ -132,15 +132,15 @@
 
 ## T-012：从官方源码构建可复现的 Windows x64 Qt SDK
 - 负责人：build-engineer-windows-qt-01
-- 状态：todo
+- 状态：completed
 - 授权来源与日期：本会话用户于 2026-09-08 明确要求把任务细化后交给已创建的 Windows/Qt 构建工程师执行；Qt 源码构建和 x64 已由此前用户要求确认。
 - 目标与范围：依据已确认的 MSVC 2022 Build Tools x64 和 LGPLv3/shared 路径，在用户确认 Qt 确切版本后，从固定官方源码建立可复现 x64 shared Qt SDK，并验证最小 Qt Quick/QML 程序；不自行改变 D-006/D-007，不使用预编译 Qt 包，不把 `-developer-build` 当交付 SDK。
 - 输入与依赖：T-011；D-002、D-004、D-005、D-006、D-007、D-008 confirmed；A-004 0.5、A-005 0.3、A-007 0.1、A-008 0.3。
 - 优先级：高；按前置条件排队。
 - 完成条件与确认方式：源码、构建和安装目录隔离且路径短；登记源码来源/版本/哈希、编译器/SDK/CMake/Ninja/Python 版本、完整 configure 参数/摘要、模块白名单、产物/符号/运行库清单和哈希；完成 Debug/Release 约定配置及最小 QML x64 编译运行/部署暂存冒烟；证明 Qt 与同进程原生依赖 ABI/运行库一致；形成脚本、说明和实际日志，负责人自查。
-- 进展：build-engineer-windows-qt-01 已接收 H-002，并已完成前置 T-011；A-008 已更新至 0.3。用户已确认 MSVC 2022 Build Tools x64、Qt LGPLv3/shared 路径和 Qt 6.11.2 精确版本，T-012 的技术决定门禁已关闭。当前未下载源码、未安装工具、未执行 Qt 配置或构建，后续 shadow build、模块白名单、许可证门禁、清单和 QML 冒烟步骤已在 A-008 中规划。
-- 成果与验证证据：[A-007 0.1 第 3.1 节](artifacts/A-007-four-engineer-execution-plan.md)定义构建步骤和验收；实际 SDK 证据暂无。
-- 阻塞与下一位行动人：T-011、D-006、D-007、D-008 已完成，技术决定无剩余阻塞；本轮版本确认不自动授权系统级工具安装、Qt 源码下载或长时间构建。下一位行动人为用户明确要求启动 T-012 后，由 build-engineer-windows-qt-01 按 A-008 0.3 执行并留存证据。
+- 进展：用户于 2026-09-08 明确要求“启动 T-012”后，已安装并验证 Visual Studio Build Tools 2022 17.14.39、MSVC 19.44.35228.0、Windows SDK 10.0.26100.0、CMake 3.31.6-msvc6、Ninja 1.12.1 和 Python 3.13.15 x64。Qt 6.11.2 官方源码归档的 1,019,661,552 字节及 SHA-256 已与 D-008 完全核对；已在 `C:\sr` 隔离短路径完成 x64 shared Release/Debug 配置、构建和安装。独立 CMake 消费端已完成 Qt Quick/QML + Multimedia 双配置编译、`windeployqt` 部署与 offscreen 运行；Qt 版本、x64 ABI、QML load、`MediaPlayer` 实例化、事件循环和 Release/Debug CRT 均通过实际验证。最终日志和三份 SHA-256 清单已生成，任务完成条件全部满足。
+- 成果与验证证据：[A-009 0.1：Windows x64 Qt 6.11.2 源码 SDK 构建与验收记录](artifacts/A-009-windows-qt-6.11.2-source-sdk-build.md)；[T-012 可复核摘要](evidence/T-012/verification-summary.md)；复现入口为仓库 `tooling/qt/Invoke-Qt6112Build.ps1`，完整机器日志和清单位于 `C:\sr\evidence\T-012`，SDK 位于 `C:\sr\q\qt6112`。负责人已逐项自查，最终 configure/build/install/smoke/manifest 均退出 0。
+- 阻塞与下一位行动人：T-012 无剩余阻塞。T-013 的 Qt SDK 前置已满足，但仍等待有权确认 D-003 的构建组合；确认后由 build-engineer-windows-qt-01 依据 H-002 启动工程骨架与 CI 基线。最低 Windows 版本仍未确认，不影响 T-012 当前开发机结论，但会约束后续兼容与发布验收。
 - 更新日期：2026-09-08。
 
 ## T-011：审计 Windows 构建环境并形成 D-006 决策输入
