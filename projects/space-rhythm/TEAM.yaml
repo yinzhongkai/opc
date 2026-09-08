@@ -3,8 +3,11 @@ project: 'space-rhythm'
 roleKnowledge:
   developer:
     - reverse-engineering
+  build-engineer:
+    - windows-qt-build-engineering
 members:
   - project-manager-01
   - developer-reverse-01
   - product-manager-01
   - architect-01
+  - build-engineer-windows-qt-01

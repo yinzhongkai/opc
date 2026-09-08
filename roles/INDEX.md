@@ -10,6 +10,7 @@
 | [planner](planner.md) | 规划师 |
 | [architect](architect.md) | 系统架构师 |
 | [developer](developer.md) | 研发工程师 |
+| [build-engineer](build-engineer.md) | 构建工程师 |
 | [tester](tester.md) | 测试工程师 |
 | [writer](writer.md) | 作者 |
 | [reviewer](reviewer.md) | 独立评审者 |

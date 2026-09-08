@@ -70,6 +70,15 @@
 - 责任配置：协调记录维护人、默认最终确认人及其他成员分工不变。现有交接仍按其原目标处理，新增成员不会自动接收交接或业务任务。
 - 记录人：框架超级管理员。本次仅创建成员配置，不代表已创建或初始化成员会话，也不登记未经指派的架构任务。
 
+### 2026-09-08：新增 Windows/Qt 构建工程师
+
+- 授权来源：本会话用户明确请求在 space-rhythm 项目中增加 Windows/Qt 构建工程师，负责 Windows x64 工具链、Qt 源码编译、CMake/Ninja、依赖 ABI 和 CI。
+- 配置变更：新增共享 [build-engineer 岗位](../../roles/build-engineer.md)，创建 [build-engineer-windows-qt-01](members/build-engineer-windows-qt-01.yaml)，并登记到 [TEAM.yaml](TEAM.yaml)。该岗位具有独立的工具链、构建、依赖与 CI 职责，未复用会加载逆向分析知识的 developer 岗位。
+- 知识配置：基础知识为 [software-engineering](../../knowledge/software-engineering.md)；新增 [windows-qt-build-engineering](../../knowledge/windows-qt-build-engineering.md) 作为本项目 build-engineer 的岗位补充知识，有效集合依次为 software-engineering、windows-qt-build-engineering。
+- 分工依据：具体 scope 采用用户明确的 Windows x64、Qt 源码、CMake/Ninja、依赖 ABI 和 CI 范围，并与当前已确认的 Windows x64、Qt 源码构建基线保持一致。编译器路线等未确认事项仍按项目决定流程处理，本次建员不替代确认。
+- 影响范围：新共享岗位可供当前克隆的其他项目后续按需使用；项目补充知识当前只影响 space-rhythm 的 build-engineer。现有成员的岗位、知识组合、任务和交接均不改变。
+- 记录人：框架超级管理员。本次仅创建成员与知识配置，不代表已创建或初始化成员会话、安装构建工具、开始 Qt 编译或登记未经指派的业务任务。
+
 ## 当前资料
 
 成员见 [TEAM.yaml](TEAM.yaml)，任务见 [TASKS.md](TASKS.md)，摘要见 [STATUS.md](STATUS.md)，交接见 [HANDOFFS.md](HANDOFFS.md)，成果见 [索引](artifacts/README.md)。
