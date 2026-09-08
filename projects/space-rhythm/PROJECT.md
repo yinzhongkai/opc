@@ -97,6 +97,16 @@
 - 影响范围：新共享岗位可供当前克隆的其他项目后续按需使用；项目补充知识当前只影响 space-rhythm 的 multimedia-engineer。现有成员的岗位、知识组合、任务和交接均不改变。
 - 记录人：框架超级管理员。本次仅创建成员与知识配置，不代表已创建或初始化成员会话、开始媒体模块实现或登记未经指派的业务任务。
 
+### 2026-09-08：新增 C++/Qt 测试工程师
+
+- 授权来源：本会话用户明确请求在 space-rhythm 项目中增加 C++/Qt 测试工程师，前期可以兼职，负责测试框架、黄金样例、接口测试和性能基线。
+- 配置变更：复用共享 [tester 岗位](../../roles/tester.md)，创建 [tester-cpp-qt-01](members/tester-cpp-qt-01.yaml)，并登记到 [TEAM.yaml](TEAM.yaml)；不新增职责重复的共享岗位。
+- 知识配置：基础知识沿用 [testing](../../knowledge/testing.md)；新增 [cpp-qt-testing](../../knowledge/cpp-qt-testing.md) 作为本项目 tester 的岗位补充知识，有效集合依次为 testing、cpp-qt-testing。
+- 分工依据：具体 scope 采用用户明确的测试框架、黄金样例、接口测试和性能基线范围；“前期可以兼职”记录为按需兼职投入，不预设工时，也不把其他现有成员自动改为兼任该身份。
+- 决策边界：GoogleTest、CTest、Qt Test 与 Qt Quick Test 仍属于 D-003 proposed 的候选组合，本次建员不确认测试框架或版本；性能阈值仍等待基准硬件、数据集和产品门槛确认。
+- 影响范围：项目补充知识当前只影响 space-rhythm 的 tester，本项目后续同岗位成员也会加载相同组合。现有成员的岗位、知识组合、任务和交接均不改变。
+- 记录人：框架超级管理员。本次仅创建成员与知识配置，不代表已创建或初始化成员会话、执行测试、建立性能结论或登记未经指派的业务任务。
+
 ## 当前资料
 
 成员见 [TEAM.yaml](TEAM.yaml)，任务见 [TASKS.md](TASKS.md)，摘要见 [STATUS.md](STATUS.md)，交接见 [HANDOFFS.md](HANDOFFS.md)，成果见 [索引](artifacts/README.md)。
