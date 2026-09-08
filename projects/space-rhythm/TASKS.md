@@ -122,38 +122,38 @@
 - 状态：todo
 - 授权来源与日期：本会话用户于 2026-09-08 明确要求把任务细化后交给已创建的 Windows/Qt 构建工程师执行。
 - 目标与范围：在 D-006 和 D-003 构建组合确认后先建立纯 C++ 核心、媒体适配和测试目标，再在可复现 Qt SDK 就绪后补齐应用、worker 与 Qt 目标的 CMake Presets/Ninja 工程骨架、依赖清单和 Windows CI；不实现业务 UI/算法，不批准签名或发布。
-- 输入与依赖：T-011；D-003/D-006 proposed；Qt 目标和完整 QML 冒烟依赖 T-012；A-005 0.3 第 7、9 节，A-006 0.1 WP-01，A-007 0.1。
+- 输入与依赖：T-011；D-006/D-007/D-008 confirmed，D-003 proposed；Qt 目标和完整 QML 冒烟依赖 T-012；A-005 0.3 第 7、9 节，A-006 0.1 WP-01，A-007 0.1，A-008 0.3。
 - 优先级：高；按前置条件排队。
 - 完成条件与确认方式：建立 A-005 建议目录的最小可链接目标；提供开发/CI presets、编译警告、x64/运行库/ABI 保护、统一测试入口和依赖 manifest/baseline；x86/ARM64 配置明确失败；CI 可配置、编译、运行无 GUI 单测和最小 QML 冒烟，并检查运行时依赖；保存构建日志和产物清单；负责人自查，不包含正式安装器/签名批准。
-- 进展：已完成任务拆分和依赖登记，尚未由负责人会话接收。
+- 进展：build-engineer-windows-qt-01 已接收 H-002，并已完成前置 T-011；A-008 已更新至 0.3。D-006 已确认 MSVC 2022 Build Tools x64，D-007 已确认 Qt LGPLv3/shared 路径，D-008 已确认 Qt 6.11.2；当前尚未创建工程文件，仍等待 D-003 构建组合确认，Qt 目标另等待 T-012。A-008 已提出源码根目录、GitHub Actions、presets、x64/ABI 门禁和证据归档方案。
 - 成果与验证证据：[A-007 0.1 第 3.1、4 节](artifacts/A-007-four-engineer-execution-plan.md)定义工程骨架和 C-07 所有权；实际工程文件暂无。
-- 阻塞与下一位行动人：等待 T-011、D-006 和 D-003 构建组合确认；纯 C++/测试骨架可先落地，Qt 目标最终完成另等 T-012。build-engineer-windows-qt-01 先执行 T-011。
+- 阻塞与下一位行动人：T-011、D-006、D-007、D-008 已完成；仍等待用户确认 D-003 构建组合，Qt 目标最终完成另依赖 T-012。D-003 确认前不提交正式依赖 baseline；下一位行动人为用户。
 - 更新日期：2026-09-08。
 
 ## T-012：从官方源码构建可复现的 Windows x64 Qt SDK
 - 负责人：build-engineer-windows-qt-01
 - 状态：todo
 - 授权来源与日期：本会话用户于 2026-09-08 明确要求把任务细化后交给已创建的 Windows/Qt 构建工程师执行；Qt 源码构建和 x64 已由此前用户要求确认。
-- 目标与范围：在用户确认编译器路线、Qt 确切版本和许可证路径后，从固定官方源码建立可复现 x64 shared Qt SDK，并验证最小 Qt Quick/QML 程序；不自行决定 D-006 或许可证，不使用预编译 Qt 包，不把 `-developer-build` 当交付 SDK。
-- 输入与依赖：T-011；D-002、D-004、D-005 confirmed，D-006 proposed；Qt 确切版本/许可待确认；A-004 0.5、A-005 0.3、A-007 0.1。
+- 目标与范围：依据已确认的 MSVC 2022 Build Tools x64 和 LGPLv3/shared 路径，在用户确认 Qt 确切版本后，从固定官方源码建立可复现 x64 shared Qt SDK，并验证最小 Qt Quick/QML 程序；不自行改变 D-006/D-007，不使用预编译 Qt 包，不把 `-developer-build` 当交付 SDK。
+- 输入与依赖：T-011；D-002、D-004、D-005、D-006、D-007、D-008 confirmed；A-004 0.5、A-005 0.3、A-007 0.1、A-008 0.3。
 - 优先级：高；按前置条件排队。
 - 完成条件与确认方式：源码、构建和安装目录隔离且路径短；登记源码来源/版本/哈希、编译器/SDK/CMake/Ninja/Python 版本、完整 configure 参数/摘要、模块白名单、产物/符号/运行库清单和哈希；完成 Debug/Release 约定配置及最小 QML x64 编译运行/部署暂存冒烟；证明 Qt 与同进程原生依赖 ABI/运行库一致；形成脚本、说明和实际日志，负责人自查。
-- 进展：已完成任务拆分和依赖登记，尚未由负责人会话接收。
+- 进展：build-engineer-windows-qt-01 已接收 H-002，并已完成前置 T-011；A-008 已更新至 0.3。用户已确认 MSVC 2022 Build Tools x64、Qt LGPLv3/shared 路径和 Qt 6.11.2 精确版本，T-012 的技术决定门禁已关闭。当前未下载源码、未安装工具、未执行 Qt 配置或构建，后续 shadow build、模块白名单、许可证门禁、清单和 QML 冒烟步骤已在 A-008 中规划。
 - 成果与验证证据：[A-007 0.1 第 3.1 节](artifacts/A-007-four-engineer-execution-plan.md)定义构建步骤和验收；实际 SDK 证据暂无。
-- 阻塞与下一位行动人：D-006、Qt 确切版本和许可证路径未确认，不能开始正式 SDK 构建。build-engineer-windows-qt-01 先完成 T-011，由用户依据其报告作决定。
+- 阻塞与下一位行动人：T-011、D-006、D-007、D-008 已完成，技术决定无剩余阻塞；本轮版本确认不自动授权系统级工具安装、Qt 源码下载或长时间构建。下一位行动人为用户明确要求启动 T-012 后，由 build-engineer-windows-qt-01 按 A-008 0.3 执行并留存证据。
 - 更新日期：2026-09-08。
 
 ## T-011：审计 Windows 构建环境并形成 D-006 决策输入
 - 负责人：build-engineer-windows-qt-01
-- 状态：todo
+- 状态：completed
 - 授权来源与日期：本会话用户于 2026-09-08 明确要求把任务细化后交给已创建的 Windows/Qt 构建工程师执行。
 - 目标与范围：对当前 Windows x64 构建环境做只读事实盘点，比较 MSVC 2022 Build Tools 与全链路 MinGW-w64 对 Qt 源码、FFmpeg/C++ 依赖、ABI、调试和 CI 的影响，向用户提供 D-006 的可核对决策输入；不安装软件、不下载源码、不编译 Qt、不替用户确认技术决定。
 - 输入与依赖：D-002、D-004、D-005 confirmed，D-006 proposed；A-004 0.5、A-005 0.3、A-006 0.1 WP-01、A-007 0.1；当前主机只读环境信息。
 - 优先级：高（用户要求本轮启动）。
 - 完成条件与确认方式：盘点 Windows/CPU/内存/磁盘、`vswhere`、MSVC/Windows SDK、MinGW、CMake、Ninja、Python、Git 与环境变量；区分已安装、可发现、版本不满足和缺失；从 Qt 支持范围、x64 ABI、依赖可得性、调试/CI、安装体量与许可输入比较两路线，给出推荐、风险、最小安装清单和验证命令；列出 Qt 版本/许可证/最低 Windows 版本等仍需决定项；形成并登记版本化报告，所有结论可由命令输出复核。
-- 进展：任务和启动交接已登记，等待负责人在自己的项目会话中接收后转为 in_progress。
-- 成果与验证证据：[A-007 0.1 第 2、3.1 节](artifacts/A-007-four-engineer-execution-plan.md)给出盘点范围和验收；实际环境报告暂无。
-- 阻塞与下一位行动人：无技术前置阻塞。build-engineer-windows-qt-01 接收 H-002 后立即执行；盘点完成后由用户确认 D-006，再启动 T-012。
+- 进展：build-engineer-windows-qt-01 已于 2026-09-08 接收 H-002，完整读取任务输入并完成当前主机只读盘点。已核对 Windows/硬件/磁盘、Visual Studio/MSVC/Windows SDK、MinGW、CMake/Ninja/Python/Git、Qt/vcpkg、相关环境变量、长路径策略及仓库构建骨架；未下载、安装或编译任何组件。已基于 Qt 与 Microsoft 官方资料完成 MSVC/MinGW 比较和后续执行方案。
+- 成果与验证证据：[A-008 0.3：Windows 构建环境审计与执行方案](artifacts/A-008-windows-build-environment-audit-and-execution-plan.md)，状态 draft。当前主机为 Windows 11 x64，硬件与磁盘容量可进入构建准备；Git 2.55.0.windows.4 可用，未发现 MSVC/Windows SDK、MinGW、CMake、Ninja、Qt 或 vcpkg，系统 `python.exe` 仅为不可用的 Windows Store 别名。报告保存审计范围、命令复核入口、路线比较、已确认的 MSVC/LGPLv3/Qt 6.11.2 基线、最小安装清单与 T-012/T-013 门禁；负责人已完成覆盖和决定边界自查。
+- 阻塞与下一位行动人：本任务无阻塞并已按完成条件形成版本化报告。用户已确认 D-006、D-007 与 D-008；T-012 等待用户明确启动执行，T-013 另等待 D-003 构建组合确认。
 - 更新日期：2026-09-08。
 
 ## T-010：细化四位研发成员任务并发起执行交接
