@@ -9,6 +9,7 @@
 | [researcher](researcher.md) | 研究员 |
 | [planner](planner.md) | 规划师 |
 | [architect](architect.md) | 系统架构师 |
+| [core-systems-engineer](core-systems-engineer.md) | 核心系统工程师 |
 | [developer](developer.md) | 研发工程师 |
 | [build-engineer](build-engineer.md) | 构建工程师 |
 | [tester](tester.md) | 测试工程师 |
