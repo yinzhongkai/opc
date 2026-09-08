@@ -45,11 +45,11 @@
 - 关联任务：T-011、T-012、T-013
 - 期望结果：在自己的项目会话中接收本交接，先把 T-011 更新为 in_progress，只读审计当前 Windows 构建环境并提交 D-006 决策输入；用户确认编译器、Qt 版本和许可证路径后执行 T-012；可复现 Qt SDK 就绪且 D-003 构建组合确认后执行 T-013。不得自行安装工具或把候选路线写成已确认决定。
 - 输入与证据：D-002、D-004、D-005 confirmed，D-003/D-006 proposed；[A-004 0.5](artifacts/A-004-mvp-technical-feasibility-and-requirements.md)、[A-005 0.3](artifacts/A-005-mvp-technology-stack-proposal.md)、[A-006 0.1 WP-01](artifacts/A-006-domain-work-packages.md)、[A-007 0.1](artifacts/A-007-four-engineer-execution-plan.md)；T-011～T-013。
-- 未完成事项：D-006 已确认 MSVC 2022 Build Tools x64，D-007 已确认 LGPLv3/shared 路径，D-008 已确认 Qt 6.11.2；最低 Windows 版本和 D-003 构建组合仍未确认。正式下载、安装和构建尚未授权或执行。
+- 未完成事项：T-012 已完成，Qt SDK 前置已就绪。最低 Windows 版本和 D-003 构建组合仍未确认；其中 D-003 阻塞 T-013 启动，最低 Windows 版本将约束后续兼容与发布验证。
 - 状态：accepted
 - 创建日期：2026-09-08
 - 接收反馈：build-engineer-windows-qt-01 于 2026-09-08 已读取 H-002、T-011～T-013、D-002～D-006 及 A-004 0.5、A-005 0.3、A-006 0.1、A-007 0.1，确认在岗位 scope 内接收 Windows/Qt 构建工作流；先执行只读 T-011，不把接收解释为安装、技术定案或发布授权。
-- 处理结果与证据：T-011 已完成，见 [A-008 0.3：Windows 构建环境审计与执行方案](artifacts/A-008-windows-build-environment-audit-and-execution-plan.md)。用户已确认 D-006、D-007 与 D-008，T-012 的技术决定门禁已经关闭，等待用户明确启动实际下载安装与构建；T-013 仍等待 D-003 和 T-012。本交接覆盖整条工作流，保持 accepted，待后续结果由发起人核对关闭。
+- 处理结果与证据：T-011 已完成，见 [A-008 0.3：Windows 构建环境审计与执行方案](artifacts/A-008-windows-build-environment-audit-and-execution-plan.md)。用户确认 D-006、D-007、D-008 并启动 T-012 后，已完成 MSVC 2022 x64 工具链、Qt 6.11.2 官方源码哈希、shared Release/Debug SDK、ABI/CRT、QML/Multimedia 消费端与部署冒烟验证，见 [A-009 0.1](artifacts/A-009-windows-qt-6.11.2-source-sdk-build.md)及其 [T-012 证据摘要](evidence/T-012/verification-summary.md)。T-013 的 Qt 前置已满足，仍等待 D-003。本交接覆盖整条工作流，保持 accepted，待后续结果由发起人核对关闭。
 - 关闭或取消依据：暂无。
 
 ## H-001：协调已确认产品方向的后续计划
