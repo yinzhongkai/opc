@@ -9,6 +9,7 @@
 | [book-production](book-production.md) | 图书生产与统稿 |
 | [book-review](book-review.md) | 图书审校与一致性检查 |
 | [cpp-core-systems-engineering](cpp-core-systems-engineering.md) | C++ 核心系统工程 |
+| [cpp-qt-testing](cpp-qt-testing.md) | C++ 与 Qt 测试工程 |
 | [critical-review](critical-review.md) | 独立评审 |
 | [ffmpeg-media-engineering](ffmpeg-media-engineering.md) | FFmpeg 多媒体工程 |
 | [frontend-development](frontend-development.md) | 前端开发 |

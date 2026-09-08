@@ -9,6 +9,8 @@ roleKnowledge:
     - cpp-core-systems-engineering
   multimedia-engineer:
     - ffmpeg-media-engineering
+  tester:
+    - cpp-qt-testing
 members:
   - project-manager-01
   - developer-reverse-01
@@ -17,3 +19,4 @@ members:
   - build-engineer-windows-qt-01
   - core-systems-engineer-cpp-01
   - multimedia-engineer-ffmpeg-01
+  - tester-cpp-qt-01
