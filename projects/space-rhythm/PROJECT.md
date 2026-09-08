@@ -88,6 +88,15 @@
 - 影响范围：新共享岗位可供当前克隆的其他项目后续按需使用；项目补充知识当前只影响 space-rhythm 的 core-systems-engineer。现有成员的岗位、知识组合、任务和交接均不改变。
 - 记录人：框架超级管理员。本次仅创建成员与知识配置，不代表已创建或初始化成员会话、开始核心模块实现或登记未经指派的业务任务。
 
+### 2026-09-08：新增 FFmpeg 多媒体工程师
+
+- 授权来源：本会话用户明确请求在 space-rhythm 项目中增加 FFmpeg 多媒体工程师，负责媒体探测、解码、PTS/VFR 时间映射、音视频同步、代理文件和导出。
+- 配置变更：新增共享 [multimedia-engineer 岗位](../../roles/multimedia-engineer.md)，创建 [multimedia-engineer-ffmpeg-01](members/multimedia-engineer-ffmpeg-01.yaml)，并登记到 [TEAM.yaml](TEAM.yaml)。该岗位负责媒体管线的实现与验证，未复用会加载逆向分析知识的 developer 岗位。
+- 知识配置：基础知识为 [software-engineering](../../knowledge/software-engineering.md)；新增 [ffmpeg-media-engineering](../../knowledge/ffmpeg-media-engineering.md) 作为本项目 multimedia-engineer 的岗位补充知识，有效集合依次为 software-engineering、ffmpeg-media-engineering。
+- 分工依据：具体 scope 采用用户明确的六项媒体范围，并与现有只读媒体输入、规范时间、VFR、代理、同步及导出事务约束保持一致；具体输入输出格式、编码器、质量、硬件加速和许可证等未确认项仍按项目决定流程处理。
+- 影响范围：新共享岗位可供当前克隆的其他项目后续按需使用；项目补充知识当前只影响 space-rhythm 的 multimedia-engineer。现有成员的岗位、知识组合、任务和交接均不改变。
+- 记录人：框架超级管理员。本次仅创建成员与知识配置，不代表已创建或初始化成员会话、开始媒体模块实现或登记未经指派的业务任务。
+
 ## 当前资料
 
 成员见 [TEAM.yaml](TEAM.yaml)，任务见 [TASKS.md](TASKS.md)，摘要见 [STATUS.md](STATUS.md)，交接见 [HANDOFFS.md](HANDOFFS.md)，成果见 [索引](artifacts/README.md)。
