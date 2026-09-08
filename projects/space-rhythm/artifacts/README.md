@@ -10,6 +10,7 @@
 | A-004 | [一期 MVP 技术可行性与技术需求](A-004-mvp-technical-feasibility-and-requirements.md) | architect-01 | T-004 / T-005 / T-006 / T-007 / T-008 | 0.5 | draft | 尚无 |
 | A-005 | [一期技术栈选型建议](A-005-mvp-technology-stack-proposal.md) | architect-01 | T-006 / T-007 / T-008 | 0.3 | draft | 尚无 |
 | A-006 | [一期技术需求领域拆分与专业工作包](A-006-domain-work-packages.md) | architect-01 | T-009 | 0.1 | draft | 尚无 |
+| A-007 | [四人研发任务细化与启动计划](A-007-four-engineer-execution-plan.md) | architect-01 | T-010 | 0.1 | draft | 尚无 |
 
 ## 正文元信息样式（不是真实成果）
 
