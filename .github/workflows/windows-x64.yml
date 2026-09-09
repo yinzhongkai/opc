@@ -1,0 +1,59 @@
+name: Windows x64
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-test-smoke:
+    name: MSVC x64 / Qt 6.11.2
+    runs-on: [self-hosted, Windows, X64, space-rhythm-qt6112]
+    timeout-minutes: 45
+    env:
+      QT_ROOT: C:\sr\q\qt6112
+      VCPKG_ROOT: ${{ runner.temp }}\vcpkg-2026.07.29
+      VCPKG_DISABLE_METRICS: '1'
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Reuse Qt SDK and prepare pinned vcpkg
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          if (-not (Test-Path -LiteralPath "$env:QT_ROOT\lib\cmake\Qt6\Qt6Config.cmake")) {
+            throw "The prebuilt Qt 6.11.2 SDK is missing at $env:QT_ROOT"
+          }
+          if (-not (Test-Path -LiteralPath "$env:VCPKG_ROOT\.git")) {
+            git clone --branch 2026.07.29 --depth 1 https://github.com/microsoft/vcpkg.git $env:VCPKG_ROOT
+          }
+          $actualBaseline = (git -c "safe.directory=$($env:VCPKG_ROOT.Replace('\', '/'))" -C $env:VCPKG_ROOT rev-parse HEAD).Trim()
+          if ($actualBaseline -ne '9e593bb18ea69cc5095e012465dcd675a822ed0d') {
+            throw "Unexpected vcpkg baseline: $actualBaseline"
+          }
+          & "$env:VCPKG_ROOT\bootstrap-vcpkg.bat" -disableMetrics
+
+      - name: Configure, build, test, deploy and smoke
+        shell: pwsh
+        run: |
+          ./tooling/windows/Invoke-ProjectBuild.ps1 `
+            -Preset ci-windows-msvc-x64 `
+            -Stage All `
+            -Clean
+
+      - name: Upload install closure and evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: space-rhythm-windows-x64
+          if-no-files-found: warn
+          path: |
+            out/install/ci-windows-msvc-x64/
+            out/evidence/T-013/ci-windows-msvc-x64/
+          retention-days: 14

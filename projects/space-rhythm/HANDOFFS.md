@@ -110,12 +110,12 @@
 - 关联任务：T-011、T-012、T-013
 - 期望结果：在自己的项目会话中接收本交接，先把 T-011 更新为 in_progress，只读审计当前 Windows 构建环境并提交 D-006 决策输入；用户确认编译器、Qt 版本和许可证路径后执行 T-012；可复现 Qt SDK 就绪且 D-003 构建组合确认后执行 T-013。不得自行安装工具或把候选路线写成已确认决定。
 - 输入与证据：D-002～D-008 confirmed；[A-004 0.5](artifacts/A-004-mvp-technical-feasibility-and-requirements.md)、[A-005 0.4](artifacts/A-005-mvp-technology-stack-proposal.md)、[A-006 0.1 WP-01](artifacts/A-006-domain-work-packages.md)、[A-007 0.1](artifacts/A-007-four-engineer-execution-plan.md)、[A-009 0.1](artifacts/A-009-windows-qt-6.11.2-source-sdk-build.md)、[A-012 0.1](artifacts/A-012-core-domain-contract-0x.md)；T-011～T-013。
-- 未完成事项：T-011/T-012 已完成，D-003/D-006～D-008 已确认，T-013 无技术前置阻塞；最低 Windows 版本仍将约束后续兼容与发布验证，但不阻止工程骨架。
+- 未完成事项：T-011/T-012/T-013 已完成；最低 Windows 版本仍将约束后续兼容与发布验证。待发起人 architect-01 核对完整工作流结果并关闭本交接。
 - 状态：accepted
 - 创建日期：2026-09-08
 - 接收反馈：build-engineer-windows-qt-01 于 2026-09-08 已读取 H-002、T-011～T-013、D-002～D-006 及 A-004 0.5、A-005 0.3、A-006 0.1、A-007 0.1，确认在岗位 scope 内接收 Windows/Qt 构建工作流；先执行只读 T-011，不把接收解释为安装、技术定案或发布授权。
-- 处理结果与证据：T-011 已完成，见 [A-008 0.3：Windows 构建环境审计与执行方案](artifacts/A-008-windows-build-environment-audit-and-execution-plan.md)。用户确认 D-006、D-007、D-008 并启动 T-012 后，已完成 MSVC 2022 x64 工具链、Qt 6.11.2 官方源码哈希、shared Release/Debug SDK、ABI/CRT、QML/Multimedia 消费端与部署冒烟验证，见 [A-009 0.1](artifacts/A-009-windows-qt-6.11.2-source-sdk-build.md)及其 [T-012 证据摘要](evidence/T-012/verification-summary.md)。用户于 2026-09-09 确认 D-003，T-013 启动门禁已解除；本交接覆盖整条工作流，保持 accepted，待 T-013 结果由发起人核对关闭。
-- 关闭或取消依据：暂无。
+- 处理结果与证据：T-011 已完成，见 [A-008 0.3：Windows 构建环境审计与执行方案](artifacts/A-008-windows-build-environment-audit-and-execution-plan.md)。T-012 已完成 MSVC 2022 x64 工具链、Qt 6.11.2 官方源码哈希、shared Release/Debug SDK、ABI/CRT、QML/Multimedia 消费端与部署冒烟验证，见 [A-009 0.1](artifacts/A-009-windows-qt-6.11.2-source-sdk-build.md)及其 [T-012 证据摘要](evidence/T-012/verification-summary.md)。用户于 2026-09-09 确认 D-003 并启动 T-013；现已完成 Windows x64 应用、Worker、核心库、媒体适配和测试的 CMake/Ninja 骨架、固定 vcpkg baseline、GoogleTest/CTest、Qt/QML 冒烟、Windows CI 及三套 preset 验证，见 [A-013 0.1](artifacts/A-013-windows-x64-cmake-ci-skeleton.md)及其 [T-013 证据摘要](evidence/T-013/verification-summary.md)。本交接覆盖的三项任务均完成，保持 accepted，等待发起人核对关闭。
+- 关闭或取消依据：执行方已完成 T-011～T-013；按交接关闭职责等待发起人 architect-01 核对后填写最终关闭依据。
 
 ## H-001：协调已确认产品方向的后续计划
 - 发起人：product-manager-01
