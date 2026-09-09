@@ -1,0 +1,161 @@
+{
+  "schemaVersion": 1,
+  "mediaContractVersion": "0.1.0",
+  "vectorSetVersion": 1,
+  "licensePolicy": "Every fixture is generated from synthetic test patterns or fixed bytes authored for this project; no package/ or third-party audiovisual content is an input.",
+  "fixtures": [
+    {
+      "id": "GM-CFR-001",
+      "category": "cfr",
+      "outputFile": "cfr_av.mkv",
+      "source": "Project-generated FFmpeg lavfi testsrc2 and silence",
+      "license": "CC0-1.0",
+      "canonicalRecipe": "v1|cfr_av.mkv|lavfi:testsrc2=16x16:25fps:0.2s+anullsrc=mono:48000:0.2s|matroska:ffv1+pcm_s16le|video_pts_ms=0,40,80,120,160",
+      "recipeSha256": "9a93e92f347e5929263fb72d54206d8f47ba36a0403c8a22da2576ae0a99577c",
+      "expectedStreams": ["video", "audio"],
+      "expectedTimeVectors": [
+        {"id": "GM-CFR-001-V0", "ticks": 0, "originTicks": 0, "timeBaseNumerator": 1, "timeBaseDenominator": 1000, "rounding": "nearest_ties_to_even", "expectedTimeNs": 0},
+        {"id": "GM-CFR-001-V1", "ticks": 40, "originTicks": 0, "timeBaseNumerator": 1, "timeBaseDenominator": 1000, "rounding": "nearest_ties_to_even", "expectedTimeNs": 40000000},
+        {"id": "GM-CFR-001-V2", "ticks": 80, "originTicks": 0, "timeBaseNumerator": 1, "timeBaseDenominator": 1000, "rounding": "nearest_ties_to_even", "expectedTimeNs": 80000000},
+        {"id": "GM-CFR-001-V3", "ticks": 120, "originTicks": 0, "timeBaseNumerator": 1, "timeBaseDenominator": 1000, "rounding": "nearest_ties_to_even", "expectedTimeNs": 120000000},
+        {"id": "GM-CFR-001-V4", "ticks": 160, "originTicks": 0, "timeBaseNumerator": 1, "timeBaseDenominator": 1000, "rounding": "nearest_ties_to_even", "expectedTimeNs": 160000000}
+      ]
+    },
+    {
+      "id": "GM-VFR-001",
+      "category": "vfr",
+      "outputFile": "vfr_video.mkv",
+      "source": "Project-generated FFmpeg lavfi testsrc2 with explicit presentation timestamps",
+      "license": "CC0-1.0",
+      "canonicalRecipe": "v1|vfr_video.mkv|lavfi:testsrc2=16x16:25fps:5frames|settb=1/1000|pts=0,40,100,140,240|matroska:ffv1",
+      "recipeSha256": "7453fc778b309b98fac0f596b1f5cb14508e22e59bd211ff90137408e3af9d15",
+      "expectedStreams": ["video"],
+      "expectedTimeVectors": [
+        {"id": "GM-VFR-001-V0", "ticks": 0, "originTicks": 0, "timeBaseNumerator": 1, "timeBaseDenominator": 1000, "rounding": "nearest_ties_to_even", "expectedTimeNs": 0},
+        {"id": "GM-VFR-001-V1", "ticks": 40, "originTicks": 0, "timeBaseNumerator": 1, "timeBaseDenominator": 1000, "rounding": "nearest_ties_to_even", "expectedTimeNs": 40000000},
+        {"id": "GM-VFR-001-V2", "ticks": 100, "originTicks": 0, "timeBaseNumerator": 1, "timeBaseDenominator": 1000, "rounding": "nearest_ties_to_even", "expectedTimeNs": 100000000},
+        {"id": "GM-VFR-001-V3", "ticks": 140, "originTicks": 0, "timeBaseNumerator": 1, "timeBaseDenominator": 1000, "rounding": "nearest_ties_to_even", "expectedTimeNs": 140000000},
+        {"id": "GM-VFR-001-V4", "ticks": 240, "originTicks": 0, "timeBaseNumerator": 1, "timeBaseDenominator": 1000, "rounding": "nearest_ties_to_even", "expectedTimeNs": 240000000}
+      ]
+    },
+    {
+      "id": "GM-ROT-SAR-001",
+      "category": "rotation_sar_color",
+      "outputFile": "rotated_sar.mov",
+      "source": "Project-generated FFmpeg lavfi testsrc2",
+      "license": "CC0-1.0",
+      "canonicalRecipe": "v1|rotated_sar.mov|lavfi:testsrc2=16x8:2fps:1s|sar=4/3|rotate_cw=90|bt709:tv|mov:rawvideo:yuv420p",
+      "recipeSha256": "314f1f2a1438c8ecc7a30fb73f58efb8d6bed63a88deac5a111ba9745508024f",
+      "expectedStreams": ["video"],
+      "expectedDisplay": {"codedWidth": 16, "codedHeight": 8, "sarNumerator": 4, "sarDenominator": 3, "codedDarNumerator": 8, "codedDarDenominator": 3, "clockwiseRotationDegrees": 90, "orientedDarNumerator": 3, "orientedDarDenominator": 8, "colorPrimaries": "bt709", "colorTransfer": "bt709", "colorMatrix": "bt709", "colorRange": "limited"},
+      "expectedTimeVectors": [
+        {"id": "GM-ROT-SAR-001-V0", "ticks": 0, "originTicks": 0, "timeBaseNumerator": 1, "timeBaseDenominator": 1000, "rounding": "nearest_ties_to_even", "expectedTimeNs": 0},
+        {"id": "GM-ROT-SAR-001-V1", "ticks": 500, "originTicks": 0, "timeBaseNumerator": 1, "timeBaseDenominator": 1000, "rounding": "nearest_ties_to_even", "expectedTimeNs": 500000000}
+      ]
+    },
+    {
+      "id": "GM-MULTI-001",
+      "category": "multiple_streams",
+      "outputFile": "multi_stream.mkv",
+      "source": "Project-generated FFmpeg lavfi testsrc2 and two silent audio sources",
+      "license": "CC0-1.0",
+      "canonicalRecipe": "v1|multi_stream.mkv|video=16x16:25fps:0.2s|audio0=mono:48000|audio1=mono:44100|language=eng,jpn|default_audio=0|matroska:ffv1+pcm_s16le",
+      "recipeSha256": "39f68e0b16ff87885c4f4eb64b8d18bd9dfe0ad742ef2da0b8e872728ab6ba3b",
+      "expectedStreams": ["video", "audio", "audio"],
+      "expectedSelection": {"defaultVideoOrdinal": 0, "defaultAudioOrdinal": 0, "explicitAlternateAudioOrdinal": 1, "audioLanguages": ["eng", "jpn"], "audioSampleRates": [48000, 44100]},
+      "expectedTimeVectors": [
+        {"id": "GM-MULTI-001-A0-S1", "ticks": 1, "originTicks": 0, "timeBaseNumerator": 1, "timeBaseDenominator": 48000, "rounding": "nearest_ties_to_even", "expectedTimeNs": 20833},
+        {"id": "GM-MULTI-001-A1-S1", "ticks": 1, "originTicks": 0, "timeBaseNumerator": 1, "timeBaseDenominator": 44100, "rounding": "nearest_ties_to_even", "expectedTimeNs": 22676}
+      ]
+    },
+    {
+      "id": "GM-AUDIO-44100-001",
+      "category": "sample_rate",
+      "outputFile": "audio_44100.wav",
+      "source": "Project-generated digital silence",
+      "license": "CC0-1.0",
+      "canonicalRecipe": "v1|audio_44100.wav|silence|pcm_s16le|mono|sample_rate=44100|sample_count=4410",
+      "recipeSha256": "21a78fffe12d8fae31cde268be751814362b0962331ae20050245dc5370bd84b",
+      "expectedStreams": ["audio"],
+      "expectedAudio": {"sampleRate": 44100, "sampleCount": 4410, "channelLayout": "mono", "sampleFormat": "s16"},
+      "expectedTimeVectors": [
+        {"id": "GM-AUDIO-44100-001-S0", "ticks": 0, "originTicks": 0, "timeBaseNumerator": 1, "timeBaseDenominator": 44100, "rounding": "nearest_ties_to_even", "expectedTimeNs": 0},
+        {"id": "GM-AUDIO-44100-001-S1", "ticks": 1, "originTicks": 0, "timeBaseNumerator": 1, "timeBaseDenominator": 44100, "rounding": "nearest_ties_to_even", "expectedTimeNs": 22676},
+        {"id": "GM-AUDIO-44100-001-S2205", "ticks": 2205, "originTicks": 0, "timeBaseNumerator": 1, "timeBaseDenominator": 44100, "rounding": "nearest_ties_to_even", "expectedTimeNs": 50000000},
+        {"id": "GM-AUDIO-44100-001-S4409", "ticks": 4409, "originTicks": 0, "timeBaseNumerator": 1, "timeBaseDenominator": 44100, "rounding": "nearest_ties_to_even", "expectedTimeNs": 99977324},
+        {"id": "GM-AUDIO-44100-001-END", "ticks": 4410, "originTicks": 0, "timeBaseNumerator": 1, "timeBaseDenominator": 44100, "rounding": "ceil", "expectedTimeNs": 100000000}
+      ]
+    },
+    {
+      "id": "GM-AUDIO-48000-001",
+      "category": "sample_rate",
+      "outputFile": "audio_48000.wav",
+      "source": "Project-generated digital silence",
+      "license": "CC0-1.0",
+      "canonicalRecipe": "v1|audio_48000.wav|silence|pcm_s16le|mono|sample_rate=48000|sample_count=4800",
+      "recipeSha256": "6837e8223eb7178c9569b087ee7a5f26a2102808aaa22e5fe05b2e0d9f200ef7",
+      "expectedStreams": ["audio"],
+      "expectedAudio": {"sampleRate": 48000, "sampleCount": 4800, "channelLayout": "mono", "sampleFormat": "s16"},
+      "expectedTimeVectors": [
+        {"id": "GM-AUDIO-48000-001-S0", "ticks": 0, "originTicks": 0, "timeBaseNumerator": 1, "timeBaseDenominator": 48000, "rounding": "nearest_ties_to_even", "expectedTimeNs": 0},
+        {"id": "GM-AUDIO-48000-001-S1", "ticks": 1, "originTicks": 0, "timeBaseNumerator": 1, "timeBaseDenominator": 48000, "rounding": "nearest_ties_to_even", "expectedTimeNs": 20833},
+        {"id": "GM-AUDIO-48000-001-S2400", "ticks": 2400, "originTicks": 0, "timeBaseNumerator": 1, "timeBaseDenominator": 48000, "rounding": "nearest_ties_to_even", "expectedTimeNs": 50000000},
+        {"id": "GM-AUDIO-48000-001-S4799", "ticks": 4799, "originTicks": 0, "timeBaseNumerator": 1, "timeBaseDenominator": 48000, "rounding": "nearest_ties_to_even", "expectedTimeNs": 99979167},
+        {"id": "GM-AUDIO-48000-001-END", "ticks": 4800, "originTicks": 0, "timeBaseNumerator": 1, "timeBaseDenominator": 48000, "rounding": "ceil", "expectedTimeNs": 100000000}
+      ]
+    },
+    {
+      "id": "GM-CORRUPT-001",
+      "category": "corrupt_media",
+      "outputFile": "corrupt_ebml.mkv",
+      "source": "Project-authored fixed truncated EBML byte sequence",
+      "license": "CC0-1.0",
+      "canonicalRecipe": "v1|corrupt_ebml.mkv|bytes=1A45DFA34286810142F7810142F2810442F381084282846D6174726F736B61|truncate_after=27",
+      "recipeSha256": "a8bfb71271547ffd8ba34a1e642c76e219617bdbaf0b0b95db089a727c1b2495",
+      "expectedStreams": [],
+      "expectedError": {"category": "media", "code": "corrupt_media", "stage": "probe"},
+      "expectedTimeVectors": []
+    },
+    {
+      "id": "GM-MISSING-VIDEO-001",
+      "category": "missing_stream",
+      "outputFile": "audio_only.mka",
+      "source": "Project-generated FFmpeg lavfi silence",
+      "license": "CC0-1.0",
+      "canonicalRecipe": "v1|audio_only.mka|lavfi:anullsrc=mono:48000:0.1s|matroska:pcm_s16le|streams=audio_only",
+      "recipeSha256": "28fd80c48b8b12675c98ece2827c4000fa14453dee165c8bf626c966ca1077aa",
+      "expectedStreams": ["audio"],
+      "expectedSelectionError": {"request": "video:required_default_then_lowest_index", "category": "media", "code": "missing_required_stream"},
+      "expectedTimeVectors": []
+    },
+    {
+      "id": "GM-MISSING-AUDIO-001",
+      "category": "missing_stream",
+      "outputFile": "video_only.mkv",
+      "source": "Project-generated FFmpeg lavfi testsrc2",
+      "license": "CC0-1.0",
+      "canonicalRecipe": "v1|video_only.mkv|lavfi:testsrc2=16x16:25fps:0.2s|matroska:ffv1|streams=video_only",
+      "recipeSha256": "57fdc675174150023ccf378665e0676646d0ed020bfa3118921ac241a4ed53e8",
+      "expectedStreams": ["video"],
+      "expectedSelectionError": {"request": "audio:required_default_then_lowest_index", "category": "media", "code": "missing_required_stream"},
+      "expectedTimeVectors": []
+    },
+    {
+      "id": "GM-NEG-START-001",
+      "category": "negative_start_time",
+      "outputFile": "negative_start.mkv",
+      "source": "Project-generated FFmpeg lavfi testsrc2 with explicit negative presentation timestamps",
+      "license": "CC0-1.0",
+      "canonicalRecipe": "v1|negative_start.mkv|lavfi:testsrc2=16x16:25fps:4frames|settb=1/1000|pts=-80,-40,0,40|avoid_negative_ts=disabled|matroska:ffv1",
+      "recipeSha256": "a1b88162bae7c12e883eebdb9f42e753fa708950ad1ff9f014b18da7b0055e15",
+      "expectedStreams": ["video"],
+      "expectedOrigin": {"ticks": -80, "timeBaseNumerator": 1, "timeBaseDenominator": 1000, "source": "selected_stream_start_or_first_presentation"},
+      "expectedTimeVectors": [
+        {"id": "GM-NEG-START-001-V0", "ticks": -80, "originTicks": -80, "timeBaseNumerator": 1, "timeBaseDenominator": 1000, "rounding": "nearest_ties_to_even", "expectedTimeNs": 0},
+        {"id": "GM-NEG-START-001-V1", "ticks": -40, "originTicks": -80, "timeBaseNumerator": 1, "timeBaseDenominator": 1000, "rounding": "nearest_ties_to_even", "expectedTimeNs": 40000000},
+        {"id": "GM-NEG-START-001-V2", "ticks": 0, "originTicks": -80, "timeBaseNumerator": 1, "timeBaseDenominator": 1000, "rounding": "nearest_ties_to_even", "expectedTimeNs": 80000000},
+        {"id": "GM-NEG-START-001-V3", "ticks": 40, "originTicks": -80, "timeBaseNumerator": 1, "timeBaseDenominator": 1000, "rounding": "nearest_ties_to_even", "expectedTimeNs": 120000000}
+      ]
+    }
+  ]
+}

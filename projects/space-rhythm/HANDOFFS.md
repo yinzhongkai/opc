@@ -85,10 +85,10 @@
 - 期望结果：在自己的项目会话中接收本交接，先把 T-017 更新为 in_progress，交付媒体时间/缓冲契约和黄金样例矩阵；T-013 统一 x64 构建骨架就绪后依据已确认的 D-003 和核心时间契约执行 T-018；核心/worker/媒体基础可集成后执行 T-019。遵守核心拥有规范 `timeNs`、媒体拥有 PTS 解释的单一责任边界。
 - 输入与证据：[A-004 0.5](artifacts/A-004-mvp-technical-feasibility-and-requirements.md)、[A-005 0.4](artifacts/A-005-mvp-technology-stack-proposal.md)、[A-006 0.1 WP-04](artifacts/A-006-domain-work-packages.md)、[A-007 0.1](artifacts/A-007-four-engineer-execution-plan.md)、[A-012 0.1](artifacts/A-012-core-domain-contract-0x.md)；D-003/D-006 confirmed；T-017～T-019。
 - 未完成事项：FFmpeg 具体版本、H.264 后端、发布容器/编码器矩阵和许可证路径尚未确认；不得用原型选择代替发布决定，也不得使用许可不清样例。
-- 状态：open
+- 状态：accepted
 - 创建日期：2026-09-08
-- 接收反馈：尚未接收。
-- 处理结果与证据：暂无。
+- 接收反馈：multimedia-engineer-ffmpeg-01 于 2026-09-09 依据用户明确指令接收；本轮仅执行 T-017，不提前执行 T-018/T-019，不修改 `package/`。
+- 处理结果与证据：T-017 已于 2026-09-09 完成，交付 [A-014 0.1 媒体契约](artifacts/A-014-media-time-buffer-and-golden-contract.md)、[10 个合法样例配方与 28 个时间向量](../../tests/golden/media/fixtures-v1.json)、[可复现生成器](../../tests/golden/media/Generate-GoldenMedia.ps1)、[验证器](../../tests/golden/media/Test-GoldenMediaManifest.ps1)和[CC0 声明](../../tests/golden/media/LICENSE.md)。manifest 自查通过；当前无 ffmpeg/ffprobe，未生成媒体二进制，脚本将在固定 FFmpeg 构建可用时自动登记实际媒体 SHA-256 与 probe 证据。T-018/T-019 未启动，`package/` 未修改。
 - 关闭或取消依据：暂无。
 
 ## H-003：启动 C++ 核心与系统工作流
