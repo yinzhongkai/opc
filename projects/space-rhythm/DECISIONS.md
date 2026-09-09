@@ -67,15 +67,15 @@
 - 记录人及更新日期：architect-01，2026-09-07。
 
 ## D-003：第一阶段其余技术栈基线
-- 状态：proposed
+- 状态：confirmed
 - 提出者：architect-01
-- 问题与候选方案：在 D-002 已确认 Qt Quick/QML 与 C/C++ 后，需要选择构建、媒体、视觉分析、音频处理、渲染、并发隔离、持久化、测试和依赖管理方案。候选可以依赖 Qt Multimedia/单体进程/多种高级框架，也可以采用直接 FFmpeg 媒体管线、轻量 C/C++ 算法核心和独立 worker。详细比较及版本/许可证条件见 A-005 0.3。
+- 问题与候选方案：在 D-002 已确认 Qt Quick/QML 与 C/C++ 后，需要选择构建、媒体、视觉分析、音频处理、渲染、并发隔离、持久化、测试和依赖管理方案。候选可以依赖 Qt Multimedia/单体进程/多种高级框架，也可以采用直接 FFmpeg 媒体管线、轻量 C/C++ 算法核心和独立 worker。详细比较及版本/许可证条件见 A-005 0.4。
 - 确认人：PROJECT 默认最终确认人，即提出建项请求的本会话用户。
-- 结果：尚未确认。architect-01 建议采用 C++20/C17、CMake Presets + Ninja、vcpkg manifest、FFmpeg 库 API、OpenCV 经典算法、C++ DSP + KissFFT、QAudioSink、QQuickItem/QSGGeometryNode、可选 ONNX Runtime、UI/worker 双进程、版本化 JSON 项目文件、GoogleTest + Qt Test/Qt Quick Test；暂不引入 JUCE、生产 Python 运行时、数据库或默认深度学习模型。
-- 确认来源与日期：尚无；本记录由 architect-01 于 2026-09-07 依据用户询问“其他的技术选择呢”提出，等待用户确认或调整。
-- 适用范围与影响：确认后影响 A-004/A-005、原型工程骨架、依赖锁定、CI 和发布许可；目标平台按 D-004/D-005 限定为 Windows x64，Qt 由源码构建，编译器按 D-006 使用 MSVC 2022 Build Tools x64，Qt 许可证按 D-007 使用 LGPLv3/shared 路径，Qt 精确版本按 D-008 使用 6.11.2；H.264 编码后端、最低 Windows 版本和具体依赖版本仍须单独确认或通过原型冻结。
+- 结果：第一阶段采用 C++20/C17、CMake Presets + Ninja、vcpkg manifest 管理非 Qt 依赖、FFmpeg 库 API、OpenCV 经典算法、自研 C++ DSP + KissFFT、QAudioSink、QQuickItem/QSGGeometryNode、UI/worker 双进程、版本化本地 IPC、版本化 JSON 项目文件与可重建二进制缓存、GoogleTest + CTest + Qt Test/Qt Quick Test。ONNX Runtime 仅在经典算法未通过效果门禁且收益、性能、许可和部署证据充分时引入；一期不引入 JUCE、生产 Python 运行时、数据库或默认深度学习模型。自行构建的 Qt SDK 不由 vcpkg 重建；JSON 不承载大媒体、帧、PCM 或大特征；本地 IPC 优先使用 QLocalSocket 适配，具体大数据传输方式由原型冻结。
+- 确认来源与日期：本会话用户于 2026-09-09 在 architect-01 逐项解释上述技术路线、用途、边界和风险后明确回复“确认 D-003 的技术选型”。
+- 适用范围与影响：本决定解除 T-013 正式工程骨架、依赖 manifest/baseline、FFmpeg/OpenCV/KissFFT/测试框架及双进程/JSON 实现路线的总体选型门禁；目标平台按 D-004/D-005 限定为 Windows x64，Qt 由源码构建，编译器按 D-006 使用 MSVC 2022 Build Tools x64，Qt 许可证按 D-007 使用 LGPLv3/shared 路径，Qt 精确版本按 D-008 使用 6.11.2。FFmpeg/OpenCV/KissFFT 等精确版本和 feature 集仍由 T-013 及对应原型锁定；H.264 编码后端、最低 Windows 版本、安装器、签名、代表素材、效果阈值、音色和内容许可证仍须单独确认。
 - 替代关系：无。
-- 记录人及更新日期：architect-01，2026-09-07。
+- 记录人及更新日期：architect-01，2026-09-07；2026-09-09 依据用户明确确认更新结果。
 
 ## D-001：第一阶段目标用户与主验证路径
 - 状态：confirmed
