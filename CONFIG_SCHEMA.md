@@ -8,6 +8,8 @@
 
 岗位、知识文件名必须等于其 ID 加 `.md`；项目 ID 必须等于项目目录名；成员 ID 在本项目内唯一，对应 `members/<member-id>.yaml`。`projects/` 不存在或为空均合法，其下每个非隐藏子目录都应是完整项目。
 
+成员 ID 的默认命名规则是：首名且通常唯一的岗位成员直接使用岗位 ID，例如 `project-manager`；不为可能出现的后续成员预先追加 `-01`。确有多人同岗、岗位 ID 已被当前成员或历史记录使用，或需要表达稳定分工时，可追加有意义的职责后缀，必要时再使用编号。已有合法成员 ID 不因命名风格变化自动重命名，避免破坏任务、决定、交接和成果中的引用。
+
 超级管理员是根 [SUPER_ADMIN.md](SUPER_ADMIN.md) 定义的框架入口，不是项目岗位或成员。项目不配置管理员账号、管理员成员 ID 或 `managedBy`，也不为超级管理员配置 roleKnowledge。
 
 空白模板位于 `templates/project/`。模板中的 `{{project_id}}`、`{{project_name}}` 供复制时替换，不能作为真实项目身份。
@@ -37,10 +39,10 @@ TEAM 是在册成员索引。成员文件是身份与分工的唯一事实来源
 
 成员文件不配置个人知识、平台会话 ID 或会话标题，也不接受上述三个字段之外的配置。在册成员必须引用 active 项目岗位；不能绑定框架入口 `super-admin`。岗位或知识的状态属于公共定义有效性，与成员配置分开。
 
-例如 TEAM 的 `members: [project-manager-01]` 对应文件 `members/project-manager-01.yaml`，其内容形如：
+例如 TEAM 的 `members: [project-manager]` 对应文件 `members/project-manager.yaml`，其内容形如：
 
 ```yaml
-id: project-manager-01
+id: project-manager
 role: project-manager
 scope:
   - 在已确认范围内协调本项目计划、依赖和风险
