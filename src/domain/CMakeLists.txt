@@ -1,5 +1,6 @@
 add_library(space_rhythm_core STATIC
     core_skeleton.cpp
+    timeline.cpp
 )
 add_library(SpaceRhythm::Core ALIAS space_rhythm_core)
 
