@@ -97,10 +97,10 @@
 - 关联任务：T-014、T-015、T-016
 - 期望结果：在自己的项目会话中接收本交接，先把 T-014 更新为 in_progress，交付规范时间、事件、修订与事务 0.x 契约；T-013 纯 C++ 构建骨架和契约就绪后执行 T-015；工程骨架和核心实现可用后执行 T-016。保持 domain 无 Qt Quick/FFmpeg 依赖，不私自确认 D-003/D-006。
 - 输入与证据：[A-004 0.5](artifacts/A-004-mvp-technical-feasibility-and-requirements.md)、[A-005 0.3](artifacts/A-005-mvp-technology-stack-proposal.md)、[A-006 0.1 WP-02/WP-08](artifacts/A-006-domain-work-packages.md)、[A-007 0.1](artifacts/A-007-four-engineer-execution-plan.md)；T-014～T-016。
-- 未完成事项：D-003 的具体 IPC/存储实现组合仍未确认；C++ 编译验证依赖后续 x64 工具链，但契约、schema 和测试向量可先开展。
-- 状态：open
+- 未完成事项：D-003 的具体 IPC/存储实现组合仍未确认；T-015 的 C++ 编译验证依赖 T-013 的纯 C++ 工程骨架，但契约、schema 和测试向量可先开展。D-006 已在交接创建后更新为 MSVC 2022 Build Tools x64 confirmed，T-012 也已完成。
+- 状态：accepted
 - 创建日期：2026-09-08
-- 接收反馈：尚未接收。
+- 接收反馈：core-systems-engineer-cpp-01 于 2026-09-08 完成身份、任务、决定和输入版本刷新，确认接收 T-014～T-016；已将 T-014 转为 in_progress，并以 [A-010 0.1](artifacts/A-010-cpp-core-systems-execution-plan.md)登记执行方案。接收范围不包含 QML 页面、媒体解码、CV/DSP 算法或发布策略。
 - 处理结果与证据：暂无。
 - 关闭或取消依据：暂无。
 
