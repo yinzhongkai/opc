@@ -11,6 +11,16 @@ roleKnowledge:
     - ffmpeg-media-engineering
   tester:
     - cpp-qt-testing
+  ui-engineer:
+    - qt-quick-ui-engineering
+  video-algorithm-engineer:
+    - opencv-video-rhythm-analysis
+  audio-dsp-engineer:
+    - audio-dsp-rhythm-engineering
+  graphics-engineer:
+    - qt-scene-graph-engineering
+  release-engineer:
+    - windows-release-engineering
 members:
   - project-manager-01
   - developer-reverse-01
@@ -20,3 +30,8 @@ members:
   - core-systems-engineer-cpp-01
   - multimedia-engineer-ffmpeg-01
   - tester-cpp-qt-01
+  - ui-engineer-qt-quick-01
+  - video-algorithm-engineer-cv-01
+  - audio-dsp-engineer-01
+  - graphics-engineer-qt-scenegraph-01
+  - release-engineer-windows-01

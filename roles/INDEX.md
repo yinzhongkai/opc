@@ -13,6 +13,11 @@
 | [developer](developer.md) | 研发工程师 |
 | [multimedia-engineer](multimedia-engineer.md) | 多媒体工程师 |
 | [build-engineer](build-engineer.md) | 构建工程师 |
+| [ui-engineer](ui-engineer.md) | 用户界面工程师 |
+| [video-algorithm-engineer](video-algorithm-engineer.md) | 视频算法工程师 |
+| [audio-dsp-engineer](audio-dsp-engineer.md) | 音频 DSP 工程师 |
+| [graphics-engineer](graphics-engineer.md) | 实时图形工程师 |
+| [release-engineer](release-engineer.md) | 发布工程师 |
 | [tester](tester.md) | 测试工程师 |
 | [writer](writer.md) | 作者 |
 | [reviewer](reviewer.md) | 独立评审者 |
