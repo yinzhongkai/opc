@@ -1,6 +1,7 @@
 include(GoogleTest)
 
 add_executable(space_rhythm_core_tests
+    unit/core_contract_vectors_test.cpp
     unit/core_skeleton_test.cpp
 )
 target_link_libraries(space_rhythm_core_tests PRIVATE
