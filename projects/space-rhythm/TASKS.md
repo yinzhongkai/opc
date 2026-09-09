@@ -314,16 +314,16 @@
 
 ## T-014：定义规范时间、事件、修订和事务核心契约 0.x
 - 负责人：core-systems-engineer-cpp-01
-- 状态：in_progress
+- 状态：completed
 - 授权来源与日期：本会话用户于 2026-09-08 明确要求把任务细化后交给已创建的 C++ 核心/系统工程师执行。
 - 目标与范围：冻结前先形成无 QML/FFmpeg 依赖的核心 0.x 契约，拥有规范 `timeNs`、事件、轨道、修订、锁定/人工编辑、错误和事务语义；不决定媒体 PTS 的具体解释，不改变 A-004 产品/技术范围，不把 proposed 技术栈写成定案。
 - 输入与依赖：A-004 0.5 第 4 节、TR-A-002～005、TR-F-004/006/007，A-006 0.1 WP-02，A-007 0.1；与 T-017 对齐媒体边界，与 T-020 对齐测试向量。
 - 优先级：高（用户要求本轮启动）。
 - 完成条件与确认方式：定义有符号 64 位 `timeNs`、带检查的换算/溢出/舍入规则；定义 `RhythmEvent`、来源/强度/置信度、锁定/人工编辑、`timelineRevision`、`analysisRevision`、错误 taxonomy 与诊断 ID；定义命令和事务提交、取消/失败、DTO/schema 版本兼容；提供正常、边界和错误测试向量；媒体层能映射进来、测试层能独立断言且无同义模型；形成并登记版本化契约成果，负责人自查，无独立评审要求。
-- 进展：core-systems-engineer-cpp-01 已于 2026-09-08 接收 H-003，完成身份与输入刷新、任务依赖和仓库基线核对，并形成 T-014～T-016 的分阶段执行方案；当前开始编写核心 0.x 契约与测试向量，尚未创建业务源码。
-- 成果与验证证据：[A-007 0.1 第 2、3.2、4 节](artifacts/A-007-four-engineer-execution-plan.md)给出任务边界、验收及 C-01～C-03 所有权；[A-010 0.1](artifacts/A-010-cpp-core-systems-execution-plan.md)记录实施顺序、依赖门禁、验证矩阵和协作边界；实际契约尚未产出。
-- 阻塞与下一位行动人：本任务无技术前置阻塞，下一位行动人为 core-systems-engineer-cpp-01，按 A-010 编写核心 0.x 契约与测试向量。D-006 已确认 MSVC 2022 Build Tools x64，不再是当前阻塞；D-003 未确认不妨碍契约工作，但后续具体依赖与 IPC/存储实现不得提前冻结。
-- 更新日期：2026-09-08。
+- 进展：core-systems-engineer-cpp-01 已依据 A-010 完成核心契约 0.1，定义 TimeNs/ProjectTimeNs、轨道、RhythmEvent/AnalysisCandidate、timelineRevision/analysisRevision、原子事务、幂等与取消、撤销重做和保存点、稳定错误 taxonomy 及编码中立的 DTO/schema 兼容规则；未启动 T-015，未创建业务源码。
+- 成果与验证证据：[A-012 0.1：核心时间、事件、修订与事务契约 0.x](artifacts/A-012-core-domain-contract-0x.md)，状态 draft；包含 72 条具有唯一稳定 ID、具体输入和可判定预期的 TIME/EVENT/TXN/MERGE/HISTORY/DTO 测试向量。负责人已完成需求追踪、术语与责任边界、舍入和负数预期、事务原子性、锁定保护、幂等顺序、错误码、兼容行为、向量唯一性、本地链接及尾随空白自查；72 条向量 ID 无重复，引用文件均存在，bundled Python `Fraction` 对关键正负舍入向量的独立复算结果为 `TIME_VECTOR_ARITHMETIC=PASS`。仓库尚无 T-013 业务构建骨架，本任务为契约成果，因此未执行 C++ 编译或自动化测试。
+- 阻塞与下一位行动人：本任务无阻塞并已按完成条件结束。T-015 保持 todo 且本会话不启动；其后续仍等待 T-013 的纯 C++ x64 工程骨架，并受 D-003 技术栈确认约束。A-012 可由 T-017 复用规范时间边界、由 T-020 按原向量 ID 建立独立断言。
+- 更新日期：2026-09-09。
 
 ## T-013：建立应用、worker、核心库和测试的 CMake/CI 工程骨架
 - 负责人：build-engineer-windows-qt-01

@@ -15,6 +15,7 @@
 | A-009 | [Windows x64 Qt 6.11.2 源码 SDK 构建与验收记录](A-009-windows-qt-6.11.2-source-sdk-build.md) | build-engineer-windows-qt-01 | T-012 | 0.1 | draft | 尚无 |
 | A-010 | [C++ 核心/系统工作流执行方案](A-010-cpp-core-systems-execution-plan.md) | core-systems-engineer-cpp-01 | T-014 / T-015 / T-016 | 0.1 | draft | 尚无 |
 | A-011 | [一期 MVP 完整研发编制与任务计划](A-011-complete-mvp-engineering-staffing-and-task-plan.md) | architect-01 | T-023 | 0.1 | draft | 尚无 |
+| A-012 | [核心时间、事件、修订与事务契约 0.x](A-012-core-domain-contract-0x.md) | core-systems-engineer-cpp-01 | T-014 | 0.1 | draft | 尚无 |
 
 ## 正文元信息样式（不是真实成果）
 
