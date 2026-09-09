@@ -3,11 +3,21 @@ include(GoogleTest)
 add_executable(space_rhythm_core_tests
     unit/core_contract_vectors_test.cpp
     unit/core_skeleton_test.cpp
+    unit/ipc_system_test.cpp
+    unit/job_system_test.cpp
+    unit/project_store_test.cpp
 )
 target_link_libraries(space_rhythm_core_tests PRIVATE
     SpaceRhythm::Core
     SpaceRhythm::MediaAdapter
+    SpaceRhythm::System
     GTest::gtest_main
+    Qt6::Core
+    Qt6::Network
+)
+add_dependencies(space_rhythm_core_tests space_rhythm_worker)
+target_compile_definitions(space_rhythm_core_tests PRIVATE
+    SPACE_RHYTHM_WORKER_EXE="$<TARGET_FILE:space_rhythm_worker>"
 )
 space_rhythm_apply_build_policy(space_rhythm_core_tests)
 gtest_discover_tests(space_rhythm_core_tests

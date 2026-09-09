@@ -66,6 +66,7 @@ qt_standard_project_setup(REQUIRES 6.11.2)
 
 add_subdirectory(src/domain)
 add_subdirectory(src/media)
+add_subdirectory(src/system)
 add_subdirectory(src/worker)
 add_subdirectory(src/app)
 
