@@ -288,16 +288,16 @@
 
 ## T-016：实现 worker、版本化 IPC、项目存储与恢复骨架
 - 负责人：core-systems-engineer-cpp-01
-- 状态：todo
+- 状态：completed
 - 授权来源与日期：本会话用户于 2026-09-08 明确要求把任务细化后交给已创建的 C++ 核心/系统工程师执行。
 - 目标与范围：建立长任务进程隔离、作业状态机、版本化 IPC、取消/诊断、项目 schema/迁移、原子保存、恢复和可重建缓存；先用 mock job 证明系统语义，不实现媒体/算法任务本体，不让 worker 直接持有 UI `QObject`。
-- 输入与依赖：T-014 和 D-003 已完成/确认；仍依赖 T-013、T-015；A-004 0.5、A-006 0.1 WP-08、A-007 0.1。
+- 输入与依赖：T-013～T-015 已完成，D-003 已确认；A-004 0.5、A-006 0.1 WP-08、A-007 0.1。
 - 优先级：高；按前置条件排队。
 - 完成条件与确认方式：状态机覆盖 queued/running/cancelling/succeeded/failed/cancelled，具备版本握手、幂等请求、进度、取消、超时和诊断 ID；IPC 不用 JSON 复制大帧/PCM；项目保存/迁移/自动恢复/素材重定位/缓存指纹和临时结果提交可测；worker 崩溃、磁盘不足、缓存损坏不破坏最近成功保存；负责人提交开发自测和故障注入证据。
-- 进展：已完成任务拆分和依赖登记，尚未由负责人会话接收。
-- 成果与验证证据：[A-007 0.1 第 3.2、4 节](artifacts/A-007-four-engineer-execution-plan.md)定义系统骨架与 C-05/C-06 所有权；实际实现暂无。
-- 阻塞与下一位行动人：D-003 已确认双进程、版本化本地 IPC 和 JSON 项目总体路线，T-014 已完成；仍等待 T-013/T-015。core-systems-engineer-cpp-01 在这些前置完成后执行。
-- 更新日期：2026-09-08。
+- 进展：2026-09-09，已交付纯作业状态机、schema/protocol 1 长度前缀本地 IPC、同用户权限与强制版本握手、mock Worker、幂等请求/取消、进度/超时/崩溃/诊断 ID、过期修订保护；已交付项目 schema 2、v1→v2 迁移、原子主保存/自动保存、带来源及时间的异常恢复、指纹素材重定位，以及带格式/长度/SHA-256 校验和配额裁剪的可重建缓存。JSON IPC 只承载小型控制元数据，大帧、PCM、采样和像素等通过 file/cache 引用传递；公共系统接口无 Qt 类型。
+- 成果与验证证据：实现位于仓库 `src/system`，mock 入口位于 `src/worker/main.cpp`，GoogleTest 位于 `tests/unit/job_system_test.cpp`、`ipc_system_test.cpp` 和 `project_store_test.cpp`；[T-016 可复核验证摘要](evidence/T-016/verification-summary.md)记录故障矩阵和 MSVC 19.44 `/W4 /WX` 下 Debug、Release、CI 三套 Windows x64 CTest 32/32 通过结果。
+- 阻塞与下一位行动人：T-016 无剩余阻塞并已按完成条件结束；H-003 由目标成员完成处理记录，保持 accepted，等待发起人 architect-01 核对后关闭。本会话按用户边界停止，不启动媒体、UI、CV 或 DSP 任务。
+- 更新日期：2026-09-09。
 
 ## T-015：实现事件时间线事务、撤销与确定性融合核心
 - 负责人：core-systems-engineer-cpp-01

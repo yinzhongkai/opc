@@ -1,0 +1,198 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://space-rhythm.local/schema/space-rhythm-project-v2.schema.json",
+  "title": "Space Rhythm project",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "requiredFeatures",
+    "appVersion",
+    "timeline",
+    "assets",
+    "settings",
+    "extensions"
+  ],
+  "properties": {
+    "schemaVersion": { "const": 2 },
+    "requiredFeatures": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "enum": ["core.timeline.v1", "project.assets.v1"] }
+    },
+    "appVersion": { "type": "string", "minLength": 1 },
+    "timeline": { "$ref": "#/$defs/timeline" },
+    "assets": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/asset" }
+    },
+    "settings": { "$ref": "#/$defs/stringMap" },
+    "extensions": { "$ref": "#/$defs/stringMap" }
+  },
+  "$defs": {
+    "identifier": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9_.:-]+$"
+    },
+    "uint64": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]{0,19})$"
+    },
+    "int64": {
+      "type": "string",
+      "pattern": "^-?(0|[1-9][0-9]{0,18})$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[A-Fa-f0-9]{64}$"
+    },
+    "stringMap": {
+      "type": "object",
+      "additionalProperties": { "type": "string" }
+    },
+    "opaque": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["owner", "schemaVersion", "requiredFeatures", "payload"],
+      "properties": {
+        "owner": { "$ref": "#/$defs/identifier" },
+        "schemaVersion": { "type": "integer", "minimum": 1 },
+        "requiredFeatures": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/identifier" }
+        },
+        "payload": { "$ref": "#/$defs/stringMap" }
+      }
+    },
+    "opaqueMap": {
+      "type": "object",
+      "additionalProperties": { "$ref": "#/$defs/opaque" }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "origin",
+        "producerId",
+        "producerVersion",
+        "candidateIds",
+        "extensions"
+      ],
+      "properties": {
+        "origin": { "enum": ["user", "analysis", "import"] },
+        "producerId": { "$ref": "#/$defs/identifier" },
+        "producerVersion": { "type": "string", "minLength": 1 },
+        "inputFingerprint": { "type": "string", "minLength": 1 },
+        "parametersDigest": { "type": "string", "minLength": 1 },
+        "analysisRevision": { "$ref": "#/$defs/identifier" },
+        "candidateIds": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/identifier" }
+        },
+        "extensions": { "$ref": "#/$defs/opaqueMap" }
+      }
+    },
+    "track": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "orderIndex", "extensions"],
+      "properties": {
+        "id": { "$ref": "#/$defs/identifier" },
+        "orderIndex": { "type": "integer", "minimum": 0 },
+        "label": { "type": "string" },
+        "extensions": { "$ref": "#/$defs/opaqueMap" }
+      }
+    },
+    "event": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "trackId",
+        "timeNs",
+        "durationNs",
+        "kind",
+        "source",
+        "strengthPpm",
+        "locked",
+        "userEdited",
+        "extensions"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/identifier" },
+        "trackId": { "$ref": "#/$defs/identifier" },
+        "timeNs": { "$ref": "#/$defs/int64" },
+        "durationNs": { "$ref": "#/$defs/int64" },
+        "kind": {
+          "enum": [
+            "shot",
+            "motion_peak",
+            "action_peak",
+            "beat",
+            "onset",
+            "band_energy",
+            "manual"
+          ]
+        },
+        "source": { "$ref": "#/$defs/source" },
+        "strengthPpm": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000
+        },
+        "confidencePpm": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000
+        },
+        "locked": { "type": "boolean" },
+        "userEdited": { "type": "boolean" },
+        "soundAssignment": { "$ref": "#/$defs/opaque" },
+        "extensions": { "$ref": "#/$defs/opaqueMap" }
+      }
+    },
+    "timeline": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "coreSchemaVersion",
+        "coreContractVersion",
+        "projectId",
+        "timelineRevision",
+        "tracks",
+        "events",
+        "extensions"
+      ],
+      "properties": {
+        "coreSchemaVersion": { "const": 1 },
+        "coreContractVersion": { "const": "0.1.0" },
+        "projectId": { "$ref": "#/$defs/identifier" },
+        "timelineRevision": { "$ref": "#/$defs/uint64" },
+        "tracks": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/track" }
+        },
+        "events": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/event" }
+        },
+        "extensions": { "$ref": "#/$defs/opaqueMap" }
+      }
+    },
+    "asset": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["assetId", "storedPath", "sizeBytes", "fingerprintSha256"],
+      "properties": {
+        "assetId": { "$ref": "#/$defs/identifier" },
+        "storedPath": { "type": "string", "minLength": 1 },
+        "sizeBytes": { "$ref": "#/$defs/uint64" },
+        "fingerprintSha256": { "$ref": "#/$defs/sha256" }
+      }
+    }
+  }
+}

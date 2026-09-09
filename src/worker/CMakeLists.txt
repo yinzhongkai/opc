@@ -8,6 +8,7 @@ set_target_properties(space_rhythm_worker PROPERTIES
 target_link_libraries(space_rhythm_worker PRIVATE
     SpaceRhythm::Core
     SpaceRhythm::MediaAdapter
+    SpaceRhythm::System
     Qt6::Core
     Qt6::Network
 )
