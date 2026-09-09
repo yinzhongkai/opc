@@ -4,16 +4,17 @@
 - 成果 ID：A-005
 - 负责人：architect-01
 - 关联任务：T-006、T-007、T-008
-- 版本：0.3
-- 更新日期：2026-09-07
+- 版本：0.4
+- 更新日期：2026-09-09
 - 状态：draft
 - 适用范围：D-001 产品方向、D-002 Qt Quick/QML 与 C/C++ 技术基线、D-004/D-005 Windows x64 与 Qt 源码构建范围下的一期原型及 MVP 工程栈；不构成生产部署、采购或许可证法律结论。
-- 来源及输入版本：D-001、D-002、D-003 proposed、D-004、D-005、D-006 proposed；[A-004 0.5](A-004-mvp-technical-feasibility-and-requirements.md)；本会话用户于 2026-09-07 确认 Qt Quick/QML、Windows 平台、x64 架构与 Qt 源码构建；各组件当前官方文档。
-- 批准依据：文档整体尚无批准决定。Qt Quick/QML 与 C/C++ 已由 D-002 确认，Windows x64 与 Qt 源码构建已由 D-004/D-005 确认；本文件其余选择汇总为 D-003 proposed，编译器路线为 D-006 proposed，等待用户确认或调整。
+- 来源及输入版本：D-001～D-008 confirmed；[A-004 0.5](A-004-mvp-technical-feasibility-and-requirements.md)；本会话用户于 2026-09-09 在逐项了解技术路线、用途、边界和风险后确认 D-003；各组件当前官方文档。
+- 批准依据：D-002 已确认 Qt Quick/QML 与 C/C++，D-003 已确认本文件第一阶段总体技术组合，D-004～D-008 已确认 Windows x64、MSVC 2022、Qt LGPLv3/shared 与 Qt 6.11.2。本文仍为 draft，因为第三方精确版本/feature、H.264 后端、最低 Windows、安装器/签名和产品效果输入仍需后续验证或决定；D-003 不构成生产部署或许可证法律批准。
 - 版本记录：
   - 2026-09-07，0.1，形成一期技术栈、排除项、工程目录和冻结门槛建议。
   - 2026-09-07，0.2，依据 D-004 将目标平台收敛为 Windows，移除 Linux 构建、CI、分发和验收要求；保留最低 Windows 版本等待确认项。
   - 2026-09-07，0.3，依据 D-005 固定 Windows x64 和 Qt 源码构建，补充构建前置、ABI、目录隔离与可复现要求；编译器路线登记为 D-006 proposed。
+  - 2026-09-09，0.4，依据用户明确确认将 D-003 总体技术组合更新为 confirmed；同步记录 D-006～D-008 已确认事实和仍需单独冻结的实现、许可与发布输入。
 
 ## 1. 推荐结论
 
@@ -23,21 +24,21 @@
 |---|---|---|---|
 | UI | Qt Quick/QML + Qt Quick Controls | D-002 已确认 | 适合时间线、状态绑定、动画和统一视觉。 |
 | Qt 供应方式 | 固定官方源码，Windows x64 shared build | D-005 已确认 | 不依赖预编译 Qt 包；源码、构建、安装和产物清单可追溯，编译器路线另见 D-006。 |
-| UI 后端 | Qt/C++ ViewModel、`QAbstractItemModel`、注册 QML 类型 | 建议 | 保持 QML 轻量，把数据、命令和生命周期放在可测试 C++。 |
-| 语言 | C++20 为主，C17 用于窄 ABI/第三方库 | D-003 proposed | C++20 足以提供 RAII、`std::span`、`std::jthread/stop_token` 等能力，工具链成熟；不需要为一期追新到 C++23。 |
-| 构建 | CMake + `CMakePresets.json` + Ninja | D-003 proposed | 同一套 Windows 配置覆盖开发机和 CI，避免手工参数漂移；本阶段不建立 Linux preset。[CMake Presets](https://cmake.org/cmake/help/latest/guide/user-interaction/index.html#presets) |
-| 依赖 | vcpkg manifest 管理非 Qt 依赖，Qt 构建为独立版本化 SDK | D-003 proposed | manifest 锁定 FFmpeg/OpenCV 等依赖；Qt 使用独立源码、配置记录和安装前缀，不交给 vcpkg 隐式漂移。[vcpkg manifest](https://learn.microsoft.com/vcpkg/concepts/manifest-mode) |
-| 媒体 | FFmpeg `libavformat/libavcodec/libswresample/libswscale` API | D-003 proposed | 直接掌控 PTS、VFR、解码、重采样、编码和封装；避免预览与导出采用不同媒体真值。[FFmpeg 文档](https://ffmpeg.org/documentation.html) |
-| 音频设备 | Qt Multimedia `QAudioSink` 仅作 PCM 输出端 | D-003 proposed | 产品 P0 不要求专业低延迟采集；核心混音和时钟仍在 C++，设备适配留给 Qt。[QAudioSink](https://doc.qt.io/qt-6/qaudiosink.html) |
-| 视频分析 | OpenCV 经典算法 | D-003 proposed | 先以帧差/直方图、光流、运动能量和峰值检测建立可解释基线；OpenCV 4.5+ 采用 Apache 2.0。[OpenCV License](https://opencv.org/license/) |
-| 音频分析 | 自研 C++ DSP + KissFFT 候选 | D-003 proposed | 一期只需 STFT、频带能量、谱通量、瞬态和节拍候选；KissFFT 是轻量 BSD-3-Clause C 库，易封装和分发。[KissFFT](https://github.com/mborgerding/kissfft) |
-| 可选模型 | ONNX Runtime C++ | 延后到 G1 失败后 | 只有经典算法无法满足自然度门槛时才引入，不携带 Python 运行时。[ONNX Runtime C++](https://onnxruntime.ai/docs/get-started/with-cpp.html) |
-| 高频绘制 | C++ `QQuickItem` + `QSGGeometryNode`，必要时 Shader Tools | D-003 proposed | 波形、频谱和事件标记批量提交几何，避免一个采样点一个 QML Item。[Qt Quick Scene Graph](https://doc.qt.io/qt-6/qtquick-visualcanvas-scenegraph.html) |
-| 进程模型 | UI 主进程 + `space-rhythm-worker` 后台进程 | D-003 proposed | 解码、分析或导出崩溃不带走未保存 UI；控制消息走本地 IPC，大数据写缓存或共享缓冲。 |
-| IPC | 长度前缀的版本化消息 + `QLocalSocket` 适配 | D-003 proposed | 在 Windows 上由 Qt 映射为命名管道；只开放当前用户访问。[QLocalSocket](https://doc.qt.io/qt-6/qlocalsocket.html) |
-| 项目存储 | 版本化 JSON 项目文件 + 可重建二进制缓存 | D-003 proposed | 一期事件量可控，JSON 易迁移和诊断；数据库暂时没有必要。 |
-| C++ 测试 | GoogleTest + CTest | D-003 proposed | 核心算法和契约测试可在 Windows CI 中无 GUI 运行。[GoogleTest/CMake](https://google.github.io/googletest/quickstart-cmake.html) |
-| Qt/QML 测试 | Qt Test + Qt Quick Test | D-003 proposed | 分别覆盖 Qt/C++ 适配层和 QML 交互。[Qt 测试概览](https://doc.qt.io/qt-6/testing-and-debugging.html) |
+| UI 后端 | Qt/C++ ViewModel、`QAbstractItemModel`、注册 QML 类型 | D-003 已确认 | 保持 QML 轻量，把数据、命令和生命周期放在可测试 C++。 |
+| 语言 | C++20 为主，C17 用于窄 ABI/第三方库 | D-003 已确认 | C++20 足以提供 RAII、`std::span`、`std::jthread/stop_token` 等能力，工具链成熟；不需要为一期追新到 C++23。 |
+| 构建 | CMake + `CMakePresets.json` + Ninja | D-003 已确认 | 同一套 Windows 配置覆盖开发机和 CI，避免手工参数漂移；本阶段不建立 Linux preset。[CMake Presets](https://cmake.org/cmake/help/latest/guide/user-interaction/index.html#presets) |
+| 依赖 | vcpkg manifest 管理非 Qt 依赖，Qt 构建为独立版本化 SDK | D-003 已确认 | manifest 锁定 FFmpeg/OpenCV 等依赖；Qt 使用独立源码、配置记录和安装前缀，不交给 vcpkg 隐式漂移。[vcpkg manifest](https://learn.microsoft.com/vcpkg/concepts/manifest-mode) |
+| 媒体 | FFmpeg `libavformat/libavcodec/libswresample/libswscale` API | D-003 已确认 | 直接掌控 PTS、VFR、解码、重采样、编码和封装；避免预览与导出采用不同媒体真值。[FFmpeg 文档](https://ffmpeg.org/documentation.html) |
+| 音频设备 | Qt Multimedia `QAudioSink` 仅作 PCM 输出端 | D-003 已确认 | 产品 P0 不要求专业低延迟采集；核心混音和时钟仍在 C++，设备适配留给 Qt。[QAudioSink](https://doc.qt.io/qt-6/qaudiosink.html) |
+| 视频分析 | OpenCV 经典算法 | D-003 已确认 | 先以帧差/直方图、光流、运动能量和峰值检测建立可解释基线；OpenCV 4.5+ 采用 Apache 2.0。[OpenCV License](https://opencv.org/license/) |
+| 音频分析 | 自研 C++ DSP + KissFFT | D-003 已确认 | 一期只需 STFT、频带能量、谱通量、瞬态和节拍候选；KissFFT 是轻量 BSD-3-Clause C 库，易封装和分发。[KissFFT](https://github.com/mborgerding/kissfft) |
+| 可选模型 | ONNX Runtime C++ | D-003 已确认：仅在 G1 失败后评估 | 只有经典算法无法满足自然度门槛时才引入，不携带 Python 运行时。[ONNX Runtime C++](https://onnxruntime.ai/docs/get-started/with-cpp.html) |
+| 高频绘制 | C++ `QQuickItem` + `QSGGeometryNode`，必要时 Shader Tools | D-003 已确认 | 波形、频谱和事件标记批量提交几何，避免一个采样点一个 QML Item。[Qt Quick Scene Graph](https://doc.qt.io/qt-6/qtquick-visualcanvas-scenegraph.html) |
+| 进程模型 | UI 主进程 + `space-rhythm-worker` 后台进程 | D-003 已确认 | 解码、分析或导出崩溃不带走未保存 UI；控制消息走本地 IPC，大数据写缓存或共享缓冲。 |
+| IPC | 长度前缀的版本化消息 + `QLocalSocket` 优先适配 | D-003 已确认总体路线 | 在 Windows 上由 Qt 映射为命名管道；只开放当前用户访问，大数据传输方式由原型冻结。[QLocalSocket](https://doc.qt.io/qt-6/qlocalsocket.html) |
+| 项目存储 | 版本化 JSON 项目文件 + 可重建二进制缓存 | D-003 已确认 | 一期事件量可控，JSON 易迁移和诊断；大媒体和大特征不写入 JSON，数据库暂时没有必要。 |
+| C++ 测试 | GoogleTest + CTest | D-003 已确认 | 核心算法和契约测试可在 Windows CI 中无 GUI 运行。[GoogleTest/CMake](https://google.github.io/googletest/quickstart-cmake.html) |
+| Qt/QML 测试 | Qt Test + Qt Quick Test | D-003 已确认 | 分别覆盖 Qt/C++ 适配层和 QML 交互。[Qt 测试概览](https://doc.qt.io/qt-6/testing-and-debugging.html) |
 
 ## 2. 版本建议
 
@@ -191,11 +192,11 @@ tests/
 6. 保存 JSON、关闭重开并恢复事件；worker 中止或崩溃不破坏保存文件。
 7. GoogleTest 验证时间换算和合并规则，Qt Quick Test 验证拖动/锁定交互。
 
-在进入该切片前，先按 D-005 完成 Windows x64 Qt SDK 源码构建，并以最小 QML 程序验证运行和部署；编译器路线须先按 D-006 确认。切片通过后再冻结确切 FFmpeg、OpenCV、KissFFT、vcpkg baseline 和工具集版本。Qt 许可证路径、最低 Windows 版本和 H.264 编码后端必须在发布型构建前确认。
+Windows x64 Qt 6.11.2 shared SDK 已按 D-005～D-008 和 T-012 完成源码构建及 QML/Multimedia 冒烟。T-013 可据 D-003 建立工程骨架和依赖 baseline；对应原型通过后再冻结确切 FFmpeg、OpenCV、KissFFT 和 feature 集。最低 Windows 版本和 H.264 编码后端仍须在发布型构建前确认。
 
-## 10. 待用户确认的技术基线
+## 10. 已确认的技术基线与剩余冻结项
 
-建议用户下一步确认或调整 D-003 的总体组合。若接受，可以把以下内容作为工程默认值：
+D-003 已由用户确认，以下内容作为第一阶段工程默认值：
 
 - C++20/C17、CMake Presets、Ninja、vcpkg manifest。
 - FFmpeg 直接 API，OpenCV 经典算法，自研 C++ DSP + KissFFT。
@@ -204,4 +205,4 @@ tests/
 - GoogleTest + Qt Test/Qt Quick Test。
 - ONNX Runtime 只作为 G1 失败后的可选项。
 
-已确认：Windows x64、Qt 官方源码自行构建。仍需单独确认：D-006 的 MSVC 2022 Build Tools 或 MinGW-w64 路线、Qt 商业或 LGPL 路径、Qt 确切版本、最低 Windows 版本、Windows 安装器/签名方式、H.264 编码后端及发布格式矩阵。Linux、x86、ARM64 和 ARM64EC 已排除在第一阶段范围外。
+已确认：Windows x64、MSVC 2022 Build Tools、Qt 6.11.2 官方源码 shared 构建和 LGPLv3 路径。仍需单独确认或通过对应原型冻结：FFmpeg/OpenCV/KissFFT 精确版本和 feature 集、最低 Windows 版本、Windows 安装器/签名方式、H.264 编码后端及发布格式矩阵。Linux、x86、ARM64 和 ARM64EC 已排除在第一阶段范围外。
