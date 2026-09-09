@@ -327,16 +327,16 @@
 
 ## T-013：建立应用、worker、核心库和测试的 CMake/CI 工程骨架
 - 负责人：build-engineer-windows-qt-01
-- 状态：todo
+- 状态：completed
 - 授权来源与日期：本会话用户于 2026-09-08 明确要求把任务细化后交给已创建的 Windows/Qt 构建工程师执行。
 - 目标与范围：依据已确认的 D-003/D-006 先建立纯 C++ 核心、媒体适配和测试目标，再基于已完成的可复现 Qt SDK 补齐应用、worker 与 Qt 目标的 CMake Presets/Ninja 工程骨架、依赖清单和 Windows CI；不实现业务 UI/算法，不批准签名或发布。
 - 输入与依赖：T-011/T-012 已完成；D-003、D-006、D-007、D-008 confirmed；A-005 0.4 第 7、9 节，A-006 0.1 WP-01，A-007 0.1，A-008 0.3，A-009 0.1，A-012 0.1。
 - 优先级：高；按前置条件排队。
 - 完成条件与确认方式：建立 A-005 建议目录的最小可链接目标；提供开发/CI presets、编译警告、x64/运行库/ABI 保护、统一测试入口和依赖 manifest/baseline；x86/ARM64 配置明确失败；CI 可配置、编译、运行无 GUI 单测和最小 QML 冒烟，并检查运行时依赖；保存构建日志和产物清单；负责人自查，不包含正式安装器/签名批准。
-- 进展：build-engineer-windows-qt-01 已接收 H-002；T-011/T-012 已完成，MSVC 2022 Build Tools x64、Qt LGPLv3/shared、Qt 6.11.2 源码 SDK 和 QML/Multimedia 冒烟均已就绪。用户于 2026-09-09 确认 D-003，正式工程骨架和依赖 baseline 的决定门禁已解除；当前尚未创建业务工程文件。
-- 成果与验证证据：[A-007 0.1 第 3.1、4 节](artifacts/A-007-four-engineer-execution-plan.md)定义工程骨架和 C-07 所有权；实际工程文件暂无。
-- 阻塞与下一位行动人：T-011/T-012 与 D-003/D-006/D-007/D-008 均已完成或确认，无技术前置阻塞；下一位行动人为 build-engineer-windows-qt-01，依据 H-002 启动 T-013。
-- 更新日期：2026-09-08。
+- 进展：build-engineer-windows-qt-01 已完成应用、Worker、纯 C++ 核心、媒体适配和测试的 Windows x64 工程骨架；加入 CMake 3.31/Ninja 的 Debug、Release、CI presets，MSVC 19.44/x64/C17/C++20/动态 CRT/精确 Qt 6.11.2 门禁，固定 vcpkg manifest/baseline 及 FFmpeg/OpenCV/KissFFT 可选入口，GoogleTest/CTest、Qt Test/Qt Quick Test、应用 QML、Worker 进程、x86/ARM64 拒绝测试，Windows CI、部署、PE/依赖核对和逐文件哈希证据。只复用 T-012 SDK，未重新构建 Qt，未实现业务逻辑，未修改 `package/`。
+- 成果与验证证据：[A-013 0.1：Windows x64 CMake/Ninja 工程与 CI 骨架](artifacts/A-013-windows-x64-cmake-ci-skeleton.md)，状态 draft；[T-013 可复核摘要](evidence/T-013/verification-summary.md)。Debug、Release、CI 三套最终验证均配置成功、完成 67/67 编译并通过 7/7 CTest；App/Worker 均确认 `8664 machine (x64)`，Debug/Release CRT 与 Qt DLL 配置匹配，三套安装闭包及 SHA-256 清单已生成。完整机器日志位于被忽略的 `out/evidence/T-013`。
+- 阻塞与下一位行动人：T-013 无剩余阻塞并已按完成条件结束。T-015、T-016、T-018、T-021 及后续 UI/算法任务可消费相应目标和 presets；最低 Windows 版本仍需在后续兼容/发布任务中确认。H-002 保持 accepted，等待发起人 architect-01 核对 T-011～T-013 结果后关闭。
+- 更新日期：2026-09-09。
 
 ## T-012：从官方源码构建可复现的 Windows x64 Qt SDK
 - 负责人：build-engineer-windows-qt-01

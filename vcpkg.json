@@ -1,0 +1,48 @@
+{
+  "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg-tool/main/docs/vcpkg.schema.json",
+  "name": "space-rhythm",
+  "version-string": "0.1.0",
+  "description": "Non-Qt dependency manifest for the Space Rhythm Windows x64 build",
+  "builtin-baseline": "9e593bb18ea69cc5095e012465dcd675a822ed0d",
+  "supports": "windows & x64 & !uwp",
+  "dependencies": [
+    "gtest"
+  ],
+  "features": {
+    "audio-analysis": {
+      "description": "Optional audio analysis dependency; no product algorithm is enabled by this feature alone",
+      "dependencies": [
+        "kissfft"
+      ]
+    },
+    "media": {
+      "description": "Optional LGPLv3-compatible FFmpeg API surface; GPL and nonfree features are excluded",
+      "dependencies": [
+        {
+          "name": "ffmpeg",
+          "default-features": false,
+          "features": [
+            "avcodec",
+            "avformat",
+            "swresample",
+            "swscale",
+            "version3"
+          ]
+        }
+      ]
+    },
+    "video-analysis": {
+      "description": "Optional classic OpenCV primitives without DNN, Qt or bundled FFmpeg integration",
+      "dependencies": [
+        {
+          "name": "opencv4",
+          "default-features": false,
+          "features": [
+            "intrinsics",
+            "thread"
+          ]
+        }
+      ]
+    }
+  }
+}
