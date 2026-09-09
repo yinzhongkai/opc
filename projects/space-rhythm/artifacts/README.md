@@ -13,6 +13,7 @@
 | A-007 | [四人研发任务细化与启动计划](A-007-four-engineer-execution-plan.md) | architect-01 | T-010 | 0.1 | draft | 尚无 |
 | A-008 | [Windows 构建环境审计与执行方案](A-008-windows-build-environment-audit-and-execution-plan.md) | build-engineer-windows-qt-01 | T-011 | 0.3 | draft | 尚无 |
 | A-009 | [Windows x64 Qt 6.11.2 源码 SDK 构建与验收记录](A-009-windows-qt-6.11.2-source-sdk-build.md) | build-engineer-windows-qt-01 | T-012 | 0.1 | draft | 尚无 |
+| A-011 | [一期 MVP 完整研发编制与任务计划](A-011-complete-mvp-engineering-staffing-and-task-plan.md) | architect-01 | T-023 | 0.1 | draft | 尚无 |
 
 ## 正文元信息样式（不是真实成果）
 

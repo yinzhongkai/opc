@@ -5,6 +5,7 @@
 | 知识 ID | 名称 |
 |---|---|
 | [backend-development](backend-development.md) | 后端开发 |
+| [audio-dsp-rhythm-engineering](audio-dsp-rhythm-engineering.md) | 音频 DSP 与节奏工程 |
 | [book-planning](book-planning.md) | 图书定位与章节规划 |
 | [book-production](book-production.md) | 图书生产与统稿 |
 | [book-review](book-review.md) | 图书审校与一致性检查 |
@@ -13,12 +14,15 @@
 | [critical-review](critical-review.md) | 独立评审 |
 | [ffmpeg-media-engineering](ffmpeg-media-engineering.md) | FFmpeg 多媒体工程 |
 | [frontend-development](frontend-development.md) | 前端开发 |
+| [opencv-video-rhythm-analysis](opencv-video-rhythm-analysis.md) | OpenCV 视频节奏分析 |
 | [planning](planning.md) | 方案规划 |
 | [project-management](project-management.md) | 项目管理 |
 | [requirements-analysis](requirements-analysis.md) | 需求分析 |
 | [reader-feedback](reader-feedback.md) | 读者学习反馈与修订 |
 | [research](research.md) | 资料研究与事实核查 |
 | [reverse-engineering](reverse-engineering.md) | Linux 与 Windows 可执行文件逆向分析 |
+| [qt-quick-ui-engineering](qt-quick-ui-engineering.md) | Qt Quick/QML 界面设计与工程 |
+| [qt-scene-graph-engineering](qt-scene-graph-engineering.md) | Qt Scene Graph 实时渲染工程 |
 | [software-development-basics](software-development-basics.md) | 软件研发基础 |
 | [software-engineering](software-engineering.md) | 软件工程 |
 | [system-design](system-design.md) | 系统设计 |
@@ -27,6 +31,7 @@
 | [testing](testing.md) | 测试设计与执行 |
 | [travel-planning](travel-planning.md) | 旅行规划 |
 | [windows-qt-build-engineering](windows-qt-build-engineering.md) | Windows x64 与 Qt 构建工程 |
+| [windows-release-engineering](windows-release-engineering.md) | Windows 发布与供应链工程 |
 | [writing](writing.md) | 长篇写作与编辑 |
 
 ## 文件约定

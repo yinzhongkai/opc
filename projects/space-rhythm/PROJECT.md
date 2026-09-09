@@ -107,6 +107,16 @@
 - 影响范围：项目补充知识当前只影响 space-rhythm 的 tester，本项目后续同岗位成员也会加载相同组合。现有成员的岗位、知识组合、任务和交接均不改变。
 - 记录人：框架超级管理员。本次仅创建成员与知识配置，不代表已创建或初始化成员会话、执行测试、建立性能结论或登记未经指派的业务任务。
 
+### 2026-09-09：补齐一期 MVP 五个专业研发岗位
+
+- 授权来源：本会话用户要求系统架构师判断各领域开发人员与任务，并进一步明确要求“把你新增加成员和成员任务补充到文档里并提交”。
+- 配置变更：新增共享 `ui-engineer`、`video-algorithm-engineer`、`audio-dsp-engineer`、`graphics-engineer`、`release-engineer` 五个岗位；创建 [ui-engineer-qt-quick-01](members/ui-engineer-qt-quick-01.yaml)、[video-algorithm-engineer-cv-01](members/video-algorithm-engineer-cv-01.yaml)、[audio-dsp-engineer-01](members/audio-dsp-engineer-01.yaml)、[graphics-engineer-qt-scenegraph-01](members/graphics-engineer-qt-scenegraph-01.yaml)、[release-engineer-windows-01](members/release-engineer-windows-01.yaml)，并登记到 [TEAM.yaml](TEAM.yaml)。
+- 知识配置：分别新增并配置 `qt-quick-ui-engineering`、`opencv-video-rhythm-analysis`、`audio-dsp-rhythm-engineering`、`qt-scene-graph-engineering`、`windows-release-engineering` 项目岗位补充知识；各岗位基础知识均为 `software-engineering`。
+- 分工依据：五个岗位分别覆盖 A-006 的 WP-03、WP-05、WP-06、WP-07、WP-10，与已有构建、核心系统、多媒体和测试成员共同形成一期从工程底座到发布候选的完整研发责任矩阵；UI 岗位在 MVP 内合并承担基础 UI/UX 与 QML 开发，低层高密度渲染仍由图形岗位负责。
+- 任务授权：用户同一请求同时授权补充成员任务；系统架构师据此在 T-023～T-038 和 H-006～H-010 中记录人力规划及各成员工作流。任务登记不代表成员会话已经创建、初始化或开始执行。
+- 影响范围：新增共享岗位可供当前克隆其他项目后续按需使用；项目补充知识当前只影响 space-rhythm 的对应岗位。现有成员的身份、scope、任务状态和协调记录维护责任不变。
+- 记录人：框架超级管理员，仅在本次明确授权范围内维护成员配置；业务任务内容由 architect-01 依据用户的跨领域任务授权登记。
+
 ## 当前资料
 
 成员见 [TEAM.yaml](TEAM.yaml)，任务见 [TASKS.md](TASKS.md)，摘要见 [STATUS.md](STATUS.md)，交接见 [HANDOFFS.md](HANDOFFS.md)，成果见 [索引](artifacts/README.md)。
