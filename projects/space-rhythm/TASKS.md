@@ -106,16 +106,16 @@
 
 ## T-030：定义 PCM、采样时间、音频特征与测试音色契约
 - 负责人：audio-dsp-engineer-01
-- 状态：todo
+- 状态：completed
 - 授权来源与日期：本会话用户于 2026-09-09 要求补充系统架构师判断的新增成员及成员任务并提交。
 - 目标与范围：定义 DSP 输入 PCM、采样时间、缓冲所有权、特征/候选、参数、错误和测试音色边界；不冻结 FFT 后端或随包音色，不重定义媒体 PTS 或核心事件。
-- 输入与依赖：A-004 0.5、A-006 0.1 WP-06、A-011 0.1；与 T-014/T-017/T-020 对齐，可立即开展。
+- 输入与依赖：A-004 0.5、A-006 0.1 WP-06、A-011 0.1、A-012 0.1、A-014 0.3、A-015 0.2、A-016 0.1；T-014/T-017/T-018/T-020 已完成并已对齐。
 - 优先级：未设定（架构建议：立即启动）。
 - 完成条件与确认方式：明确格式、采样率、声道、交错、有效帧、起点、重采样延迟、样本索引到 timeNs 舍入；定义特征帧、候选、置信度、错误和版本兼容；建立脉冲、节拍、变速、噪声、静音等可生成黄金样例和合法测试音色清单；形成版本化契约及测试向量，负责人自查。
-- 进展：任务及 H-008 已登记，等待负责人接收。
-- 成果与验证证据：[A-011 0.1 第 2～4 节](artifacts/A-011-complete-mvp-engineering-staffing-and-task-plan.md)；实际契约暂无。
-- 阻塞与下一位行动人：无技术前置阻塞；audio-dsp-engineer-01 接收 H-008 后执行。
-- 更新日期：2026-09-09。
+- 进展：2026-09-10，audio-dsp-engineer-01 依据用户明确指令接收 H-008，并完成 `dspContractVersion 0.1.0`。契约已收窄 A-015 实际 interleaved float PCM，冻结 segment/采样索引/重采样证据、精确 TimeNs 舍入、lease 生命周期、特征/候选 DTO、低置信语义、版本/摘要、错误及消费者边界；未实现分析或混音算法。
+- 成果与验证证据：[A-018 0.1：音频 DSP PCM、特征、候选与测试音色契约](artifacts/A-018-audio-dsp-pcm-feature-candidate-contract.md)、[向量清单](../../tests/golden/audio/fixtures-v1.json)、[生成/校验器](../../tests/golden/audio/Generate-AudioDspVectors.ps1)、[实际 SHA-256 证据](../../tests/golden/audio/generated/actual-hashes-v1.json)与[许可声明](../../tests/golden/audio/LICENSE.md)。10 项 CC0 合成向量（含 3 个合法测试音色）在生成模式和 `-ValidateOnly` 模式均通过 hash、长度、schema、许可和登记自检。
+- 阻塞与下一位行动人：T-030 无阻塞并按完成条件结束。A-015 公共 DTO 尚未暴露 resampler delay/version/显式声道顺序，已作为后续 PCM adapter 的必填 provenance，不在本任务虚构。T-031/T-032 保持 `todo`，本轮按用户要求停止。
+- 更新日期：2026-09-10。
 
 ## T-029：评估视频卡点效果、性能并执行可选模型门禁
 - 负责人：video-algorithm-engineer-cv-01

@@ -1,0 +1,90 @@
+{
+  "schemaVersion": 1,
+  "dspContractVersion": "0.1.0",
+  "vectorSetVersion": 1,
+  "timbreManifestVersion": 1,
+  "generatorId": "space-rhythm-audio-dsp-vector-generator",
+  "generatorVersion": "1.0.0",
+  "fixtures": [
+    {
+      "id": "AV-IMPULSE-001",
+      "outputFile": "impulse-48000-mono.f32le",
+      "byteLength": 192000,
+      "frameCount": 48000,
+      "recipeSha256": "23a79a61da515945b90b3c4409f1dfcd648e8807be477bcc3f612cabf677b057",
+      "pcmSha256": "bb58d0b6ca0c2b73b36b5629f64b2a141155f3592e50008099cd088f84ed5ba1"
+    },
+    {
+      "id": "AV-FIXED-BEAT-120-001",
+      "outputFile": "fixed-beat-120bpm-48000-mono.f32le",
+      "byteLength": 384000,
+      "frameCount": 96000,
+      "recipeSha256": "e4b1d8ebe9c620068facde073219e1ab641ecfebb5e2cc69898173b57a9a0ece",
+      "pcmSha256": "c44e3d6c621a7bd8c3d481e941688cb4a31a036a6c915b376594a616b23dcf0a"
+    },
+    {
+      "id": "AV-TEMPO-CHANGE-001",
+      "outputFile": "tempo-change-48000-mono.f32le",
+      "byteLength": 576000,
+      "frameCount": 144000,
+      "recipeSha256": "e2111fd09f15cad25b86f365f2d453ad1a123409ad0d7d08e54ad6c56649ccd9",
+      "pcmSha256": "9a023e968e7539bb17eb86147596378b800e1579e485b1de03597079ca72b6e3"
+    },
+    {
+      "id": "AV-SILENCE-44100-001",
+      "outputFile": "silence-44100-mono.f32le",
+      "byteLength": 176400,
+      "frameCount": 44100,
+      "recipeSha256": "36a5adc3f07898c77537cbe9ee4702e1e23552e8c3bc607b737fe5577be18c6c",
+      "pcmSha256": "fd6f479534cdd14635e88dfedf25c3859c01062b645f2a85570f20451b4a95bc"
+    },
+    {
+      "id": "AV-NOISE-001",
+      "outputFile": "noise-48000-mono.f32le",
+      "byteLength": 192000,
+      "frameCount": 48000,
+      "recipeSha256": "d96ba518702e329d09197d90932583bcee3e7cd6d48f67d1378b84dcfb14a61a",
+      "pcmSha256": "d0a412e27b90675e067edf2aa674209a543601f6b5639dfcd91f407500aaa9d7"
+    },
+    {
+      "id": "AV-BOUNDARY-001",
+      "outputFile": "boundary-48000-stereo.f32le",
+      "byteLength": 128,
+      "frameCount": 16,
+      "recipeSha256": "6603bc58c60cb5ae091e8e148ef40907369e7f0d67115ca50a57113acc7ffce7",
+      "pcmSha256": "4a4bc46ced2d02248933f73d233ab82cea0c43ce50561f22abba85b4beed0266"
+    },
+    {
+      "id": "AV-NONFINITE-001",
+      "outputFile": "nonfinite-48000-mono.f32le",
+      "byteLength": 16,
+      "frameCount": 4,
+      "recipeSha256": "06bc0a66e4f304498fe820b5521f0d3bc33d378c411bd4a147b5388c3fdc0570",
+      "pcmSha256": "9759c8518a6bc15a409b93899ec0b9b17013e2b747af489364d4ef42f4e95d54"
+    },
+    {
+      "id": "AT-CLICK-001",
+      "outputFile": "timbre-click-48000-mono.f32le",
+      "byteLength": 3840,
+      "frameCount": 960,
+      "recipeSha256": "5c2f5136e34d77e418a9dd3b8e6d1a96f87b82c7d8a9bf234578b31d39918908",
+      "pcmSha256": "c7c80114be72af053793540bc5b5b6b80e9923672670405719d0902f0618ce28"
+    },
+    {
+      "id": "AT-LOW-PULSE-001",
+      "outputFile": "timbre-low-triangle-48000-mono.f32le",
+      "byteLength": 19200,
+      "frameCount": 4800,
+      "recipeSha256": "084dacdbc350d969969f488718518296efc311a88b2d073584d3a1c690e13c5d",
+      "pcmSha256": "328fe2e5b80b188dfd3a3fc7af33f1801429b0754038eda9f77bc478cff75e82"
+    },
+    {
+      "id": "AT-NOISE-HIT-001",
+      "outputFile": "timbre-noise-hit-48000-mono.f32le",
+      "byteLength": 9600,
+      "frameCount": 2400,
+      "recipeSha256": "a00a4413ed20b55ac5143335f703be3bca8651f2766797958da227afa0ea8bc3",
+      "pcmSha256": "bf7868e48350a6fcbf3b2509e15c67658f203807e141d77df077b4ac8629152a"
+    }
+  ]
+}

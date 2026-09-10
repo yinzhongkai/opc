@@ -33,10 +33,10 @@
 - 期望结果：在自己的项目会话中接收本交接，先把 T-030 更新为 in_progress，形成 PCM、采样时间、特征/候选和测试音色契约；媒体/工程输入就绪后执行 T-031/T-032，输出确定性混音 PCM 供图形和媒体导出消费。
 - 输入与证据：D-001～D-008；A-004 0.5、A-005 0.4、A-006 0.1 WP-06、[A-011 0.1](artifacts/A-011-complete-mvp-engineering-staffing-and-task-plan.md)；T-030～T-032。
 - 未完成事项：D-003 已确认 C++ DSP + KissFFT 总体路线；合法音色、采样率和产品效果门槛尚未确认，不得使用来源不明音色。
-- 状态：open
+- 状态：accepted
 - 创建日期：2026-09-09
-- 接收反馈：尚未接收。
-- 处理结果与证据：暂无。
+- 接收反馈：2026-09-10，audio-dsp-engineer-01 依据用户本轮明确指令接收；处理范围限定为先完成 T-030，本轮不执行 T-031/T-032。
+- 处理结果与证据：2026-09-10，T-030 已完成并形成 [A-018 0.1](artifacts/A-018-audio-dsp-pcm-feature-candidate-contract.md)、[10 项可复现向量与 3 个合法测试音色清单](../../tests/golden/audio/fixtures-v1.json)及[实际 SHA-256 证据](../../tests/golden/audio/generated/actual-hashes-v1.json)；生成与只校验模式均通过。H-008 继续保持 accepted，T-031/T-032 未启动。
 - 关闭或取消依据：暂无。
 
 ## H-007：启动 C++/OpenCV 视频算法工作流
