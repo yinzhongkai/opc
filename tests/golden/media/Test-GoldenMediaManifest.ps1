@@ -63,7 +63,7 @@ $resolvedManifest = (Resolve-Path -LiteralPath $ManifestPath).Path
 $manifest = Get-Content -Raw -LiteralPath $resolvedManifest | ConvertFrom-Json
 
 if ($manifest.schemaVersion -ne 1) { throw "Unsupported manifest schemaVersion: $($manifest.schemaVersion)" }
-if ($manifest.mediaContractVersion -ne '0.1.0') { throw "Unexpected media contract version: $($manifest.mediaContractVersion)" }
+if ($manifest.mediaContractVersion -ne '1.0.0') { throw "Unexpected media contract version: $($manifest.mediaContractVersion)" }
 if ($manifest.vectorSetVersion -ne 1) { throw "Unexpected vector set version: $($manifest.vectorSetVersion)" }
 
 $fixtureIds = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::Ordinal)

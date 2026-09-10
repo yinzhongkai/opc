@@ -10,6 +10,7 @@
 #include <limits>
 #include <numeric>
 #include <ranges>
+#include <set>
 #include <string>
 #include <vector>
 
@@ -306,40 +307,216 @@ TEST(MediaDecode, AnnouncesDynamicFormatEpochBeforeAffectedFrame)
 
 TEST(MediaDecode, ProducesContinuousWaveformSourcePcmAtDeclaredRate)
 {
-    for (const auto& [file, input_rate] : std::array{
-             std::pair{"audio_44100.wav", 44100U},
-             std::pair{"audio_48000.wav", 48000U}}) {
-        const auto source = media::MediaSource::open(golden(file));
+    struct ResampleCase {
+        const char* file;
+        std::uint32_t input_rate;
+        std::uint32_t output_rate;
+        std::uint64_t expected_samples;
+        bool performed;
+        const char* expected_parameters_sha256;
+    };
+    const auto build = media::query_ffmpeg_build_info();
+    ASSERT_TRUE(build);
+    const auto swresample_version = build.value().library_versions.at("swresample");
+    for (const auto& test_case : std::array{
+             ResampleCase{"audio_44100.wav", 44100U, 44100U, 4410U, false,
+                          "2ba50712d5d3c0e905fad2116cb85b1f5d21a235f584a77832163bcf023634a1"},
+             ResampleCase{"audio_44100.wav", 44100U, 48000U, 4800U, true,
+                          "a105c7b1d8dae523e54001bbebb86cb25f7cbe41ce3d796fa39071a4f3da4a64"},
+             ResampleCase{"audio_48000.wav", 48000U, 44100U, 4410U, true,
+                          "2d5d0829635a6f16d0578499d33df70ef765d12eab89753510c3828a181143cc"}}) {
+        SCOPED_TRACE(std::string{test_case.file} + " -> "
+                     + std::to_string(test_case.output_rate));
+        const auto source = media::MediaSource::open(golden(test_case.file));
         ASSERT_TRUE(source);
         const auto selection = select_audio(source.value());
         std::uint64_t samples = 0;
         std::optional<std::int64_t> next;
         std::string segment;
+        bool saw_drain = false;
+        bool saw_nonzero_delay = false;
+        bool proved_delay_accounted_continuity = false;
         const auto decoded = source.value()->decode_audio(
             selection,
             selection.audio.selected.front(),
-            {44100, 1},
+            {test_case.output_rate, 1},
             media::DecodeLimits{},
             {{}, [&](media::PcmBuffer pcm) {
                  if (next) {
                      EXPECT_EQ(pcm.first_sample_index, *next);
                      EXPECT_EQ(pcm.segment_id, segment);
+                     if (pcm.resample_trace.delay_before_input_frames.numerator > 0) {
+                         proved_delay_accounted_continuity = pcm.first_sample_index == *next;
+                     }
                  } else {
                      segment = pcm.segment_id;
+                     EXPECT_EQ(pcm.segment_origin_sample_index, pcm.first_sample_index);
+                     EXPECT_EQ(pcm.segment_origin_time_ns, pcm.time_ns);
                  }
                  next = pcm.first_sample_index + static_cast<std::int64_t>(pcm.sample_count);
                  samples += pcm.sample_count;
+                 EXPECT_EQ(pcm.schema_version, media::schema_version);
+                 EXPECT_EQ(pcm.media_contract_version, media::contract_version);
                  EXPECT_EQ(pcm.sample_format, "flt");
-                 EXPECT_EQ(pcm.sample_rate, 44100U);
+                 EXPECT_EQ(pcm.sample_rate, test_case.output_rate);
+                 EXPECT_EQ(pcm.channel_layout, "mono");
+                 EXPECT_EQ(pcm.channel_order, std::vector<std::string>{"FC"});
                  EXPECT_EQ(pcm.lease.byte_size(), pcm.sample_count * sizeof(float));
+                 const auto relative = core::checked_subtract(
+                     pcm.first_sample_index, pcm.segment_origin_sample_index);
+                 EXPECT_TRUE(relative);
+                 if (relative) {
+                     const auto expected_time = media::sample_index_to_time_ns(
+                         relative.value(),
+                         pcm.sample_rate,
+                         pcm.segment_origin_time_ns,
+                         core::RoundingMode::nearest_ties_to_even);
+                     EXPECT_TRUE(expected_time);
+                     if (expected_time) {
+                         EXPECT_EQ(pcm.time_ns, expected_time.value());
+                     }
+                 }
+
+                 const auto& trace = pcm.resample_trace;
+                 EXPECT_EQ(trace.performed, test_case.performed);
+                 EXPECT_EQ(trace.input_sample_rate, test_case.input_rate);
+                 EXPECT_EQ(trace.output_sample_rate, test_case.output_rate);
+                 EXPECT_EQ(trace.parameters_digest_sha256.size(), 64U);
+                 EXPECT_EQ(trace.parameters_digest_sha256,
+                           test_case.expected_parameters_sha256);
+                 EXPECT_TRUE(std::ranges::all_of(trace.parameters_digest_sha256, [](char value) {
+                     return (value >= '0' && value <= '9')
+                         || (value >= 'a' && value <= 'f');
+                 }));
+                 EXPECT_GE(trace.delay_before_input_frames.numerator, 0);
+                 EXPECT_GT(trace.delay_before_input_frames.denominator, 0);
+                 EXPECT_EQ(trace.delay_unit, "input_frames");
+                 EXPECT_TRUE(trace.delay_accounted_in_first_sample_index);
+                 saw_drain = saw_drain || trace.emitted_from_drain;
+                 saw_nonzero_delay = saw_nonzero_delay
+                     || trace.delay_before_input_frames.numerator > 0;
+                 if (test_case.performed) {
+                     EXPECT_EQ(trace.implementation_id, "ffmpeg.swresample");
+                     EXPECT_EQ(trace.implementation_version, swresample_version);
+                 } else {
+                     EXPECT_EQ(trace.implementation_id, "identity");
+                     EXPECT_EQ(trace.implementation_version, "1");
+                     EXPECT_EQ(trace.delay_before_input_frames, (media::Rational{0, 1}));
+                     EXPECT_FALSE(trace.emitted_from_drain);
+                 }
                  return media::PublishResult::accepted;
              }});
-        ASSERT_TRUE(decoded) << "input rate " << input_rate << ": "
+        ASSERT_TRUE(decoded) << "input rate " << test_case.input_rate << ": "
                              << core::to_string(decoded.error().code);
-        EXPECT_EQ(samples, 4410U) << "input rate " << input_rate;
-        EXPECT_EQ(decoded.value().samples_published, 4410U)
-            << "input rate " << input_rate;
+        EXPECT_EQ(samples, test_case.expected_samples);
+        EXPECT_EQ(decoded.value().samples_published, test_case.expected_samples);
+        EXPECT_EQ(saw_drain, test_case.performed);
+        EXPECT_EQ(saw_nonzero_delay, test_case.performed);
+        EXPECT_EQ(proved_delay_accounted_continuity, test_case.performed);
     }
+}
+
+TEST(MediaDecode, AudioSeekStartsANewSegmentWithFreshResamplerState)
+{
+    const auto source = media::MediaSource::open(golden("audio_48000.wav"));
+    ASSERT_TRUE(source);
+    const auto selection = select_audio(source.value());
+    media::PcmBuffer beginning;
+    const auto from_beginning = source.value()->decode_audio(
+        selection,
+        selection.audio.selected.front(),
+        {48000, 1},
+        media::DecodeLimits{},
+        {{}, [&](media::PcmBuffer pcm) {
+             beginning = std::move(pcm);
+             return media::PublishResult::would_block;
+         }});
+    ASSERT_TRUE(from_beginning);
+
+    media::PcmBuffer sought;
+    const auto from_seek = source.value()->decode_audio(
+        selection,
+        selection.audio.selected.front(),
+        {48000, 1, std::optional<core::TimeNs>{50'000'000}},
+        media::DecodeLimits{},
+        {{}, [&](media::PcmBuffer pcm) {
+             sought = std::move(pcm);
+             return media::PublishResult::would_block;
+         }});
+    ASSERT_TRUE(from_seek) << core::to_string(from_seek.error().code);
+    EXPECT_NE(sought.segment_id, beginning.segment_id);
+    EXPECT_EQ(sought.time_ns, 50'000'000);
+    EXPECT_EQ(sought.first_sample_index, 2400);
+    EXPECT_EQ(sought.segment_origin_sample_index, sought.first_sample_index);
+    EXPECT_EQ(sought.segment_origin_time_ns, sought.time_ns);
+    EXPECT_EQ(sought.resample_trace.delay_before_input_frames, (media::Rational{0, 1}));
+    EXPECT_FALSE(sought.resample_trace.emitted_from_drain);
+}
+
+TEST(MediaDecode, AudioFormatChangeDrainsOldSegmentAndStartsNewTrace)
+{
+    const auto source = media::MediaSource::open(golden("dynamic_audio.ts"));
+    ASSERT_TRUE(source);
+    const auto selection = select_audio(source.value());
+    std::size_t announcements = 0;
+    std::set<std::string> segments;
+    bool saw_44100_to_48000 = false;
+    bool saw_48000_identity = false;
+    bool saw_old_segment_drain = false;
+    const auto decoded = source.value()->decode_audio(
+        selection,
+        selection.audio.selected.front(),
+        {48000, 1},
+        media::DecodeLimits{},
+        {[&](const media::FormatChanged& change) {
+             ++announcements;
+             EXPECT_TRUE(change.audio);
+             return media::PublishResult::accepted;
+         },
+         [&](media::PcmBuffer pcm) {
+             segments.insert(pcm.segment_id);
+             const auto& trace = pcm.resample_trace;
+             if (trace.input_sample_rate == 44100U && trace.output_sample_rate == 48000U) {
+                 saw_44100_to_48000 = trace.performed;
+                 saw_old_segment_drain = saw_old_segment_drain || trace.emitted_from_drain;
+             }
+             if (trace.input_sample_rate == 48000U && trace.output_sample_rate == 48000U) {
+                 saw_48000_identity = !trace.performed;
+                 EXPECT_FALSE(trace.emitted_from_drain);
+             }
+             return media::PublishResult::accepted;
+         }});
+    ASSERT_TRUE(decoded) << core::to_string(decoded.error().code);
+    EXPECT_GE(announcements, 2U);
+    EXPECT_GE(segments.size(), 2U);
+    EXPECT_TRUE(saw_44100_to_48000);
+    EXPECT_TRUE(saw_48000_identity);
+    EXPECT_TRUE(saw_old_segment_drain);
+}
+
+TEST(MediaLifecycle, AudioCancellationDoesNotDrainOrInventANewSegment)
+{
+    const auto source = media::MediaSource::open(golden("audio_44100.wav"));
+    ASSERT_TRUE(source);
+    const auto selection = select_audio(source.value());
+    core::CancellationToken cancellation;
+    std::vector<media::PcmBuffer> published;
+    const auto decoded = source.value()->decode_audio(
+        selection,
+        selection.audio.selected.front(),
+        {48000, 1},
+        media::DecodeLimits{},
+        {{}, [&](media::PcmBuffer pcm) {
+             published.push_back(std::move(pcm));
+             cancellation.cancel();
+             return media::PublishResult::accepted;
+         }},
+        &cancellation);
+    ASSERT_FALSE(decoded);
+    EXPECT_EQ(decoded.error().category, core::ErrorCategory::cancelled);
+    ASSERT_EQ(published.size(), 1U);
+    EXPECT_FALSE(published.front().resample_trace.emitted_from_drain);
+    EXPECT_TRUE(published.front().resample_trace.delay_accounted_in_first_sample_index);
 }
 
 TEST(MediaLifecycle, CancellationIsDistinctAndLeasesOutliveDecoder)

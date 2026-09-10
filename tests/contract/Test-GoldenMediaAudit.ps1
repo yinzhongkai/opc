@@ -36,8 +36,8 @@ if ($manifest.mediaContractVersion -ne $policy.mediaContractVersion -or
     $actual.mediaContractVersion -ne $policy.mediaContractVersion) {
     throw 'Golden audit media contract version mismatch.'
 }
-if ($manifest.fixtures.Count -ne 12 -or $policy.fixtures.Count -ne 12 -or
-    $actual.fixtures.Count -ne 12) {
+if ($manifest.fixtures.Count -ne 13 -or $policy.fixtures.Count -ne 13 -or
+    $actual.fixtures.Count -ne 13) {
     throw "Golden fixture cardinality mismatch: manifest=$($manifest.fixtures.Count), policy=$($policy.fixtures.Count), actual=$($actual.fixtures.Count)."
 }
 if ($licenseText -notmatch 'CC0-1\.0') {

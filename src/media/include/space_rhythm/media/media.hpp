@@ -17,8 +17,8 @@
 
 namespace space_rhythm::media {
 
-inline constexpr std::string_view contract_version{"0.1.0"};
-inline constexpr std::uint32_t schema_version = 1;
+inline constexpr std::string_view contract_version{"1.0.0"};
+inline constexpr std::uint32_t schema_version = 2;
 
 enum class StreamKind { video, audio, subtitle, data, attachment, unknown };
 enum class RateMode { constant, variable, unknown };
@@ -235,17 +235,38 @@ struct VideoFrame {
     BufferLease lease;
 };
 
+struct ResampleTrace {
+    bool performed{false};
+    std::uint32_t input_sample_rate{};
+    std::uint32_t output_sample_rate{};
+    std::string implementation_id;
+    std::string implementation_version;
+    std::string parameters_digest_sha256;
+    Rational delay_before_input_frames{0, 1};
+    std::string delay_unit{"input_frames"};
+    bool delay_accounted_in_first_sample_index{true};
+    bool emitted_from_drain{false};
+
+    bool operator==(const ResampleTrace&) const = default;
+};
+
 struct PcmBuffer {
+    std::uint32_t schema_version{media::schema_version};
+    std::string media_contract_version{contract_version};
     StreamKey stream_key;
     core::TimeNs time_ns{};
     core::DurationNs duration_ns{};
     std::string segment_id;
+    core::TimeNs segment_origin_time_ns{};
+    std::int64_t segment_origin_sample_index{};
     std::int64_t first_sample_index{};
     std::uint64_t sample_count{};
     std::uint32_t sample_rate{};
     std::string sample_format;
     std::string channel_layout;
+    std::vector<std::string> channel_order;
     bool planar{false};
+    ResampleTrace resample_trace;
     std::vector<PlaneView> planes;
     BufferLease lease;
 };
@@ -283,6 +304,7 @@ struct VideoOutputSpec {
 struct AudioOutputSpec {
     std::uint32_t sample_rate{};
     std::uint32_t channels{1};
+    std::optional<core::TimeNs> seek_target_time_ns;
 };
 
 struct DecodeLimits {
@@ -356,6 +378,9 @@ core::Result<std::int64_t> time_ns_to_sample_index(
     core::TimeNs origin_time_ns,
     std::uint32_t sample_rate,
     core::RoundingMode rounding);
+core::Result<std::uint32_t> validate_pcm_schema(
+    std::uint32_t candidate_schema_version,
+    std::string_view candidate_contract_version);
 
 class MediaSource final {
 public:
