@@ -12,8 +12,23 @@ add_test(
 )
 set_tests_properties(media.golden_generate PROPERTIES
     FIXTURES_SETUP golden-media
-    LABELS "golden;media"
+    LABELS "t021;golden;media;headless;gate-g1;gate-g3"
     TIMEOUT 180
+)
+
+add_test(
+    NAME contract.golden.media_audit
+    COMMAND "${SPACE_RHYTHM_POWERSHELL_EXECUTABLE}" -NoProfile -File
+        "${CMAKE_CURRENT_SOURCE_DIR}/contract/Test-GoldenMediaAudit.ps1"
+        -ManifestPath "${CMAKE_CURRENT_SOURCE_DIR}/golden/media/fixtures-v1.json"
+        -ActualEvidencePath "${CMAKE_CURRENT_SOURCE_DIR}/golden/media/generated/actual-hashes-and-probe-v1.json"
+        -FixtureRoot "${CMAKE_CURRENT_SOURCE_DIR}/golden/media/generated"
+        -PolicyPath "${CMAKE_CURRENT_SOURCE_DIR}/contract/golden-media-audit-v1.json"
+        -LicensePath "${CMAKE_CURRENT_SOURCE_DIR}/golden/media/LICENSE.md"
+)
+set_tests_properties(contract.golden.media_audit PROPERTIES
+    FIXTURES_REQUIRED golden-media
+    LABELS "t021;contract;golden;media;headless;gate-g1;gate-g3;gate-g4"
 )
 
 add_executable(space_rhythm_media_tests
@@ -27,12 +42,43 @@ target_compile_definitions(space_rhythm_media_tests PRIVATE
     SPACE_RHYTHM_GOLDEN_MEDIA_DIR="${CMAKE_CURRENT_SOURCE_DIR}/golden/media/generated"
 )
 space_rhythm_apply_build_policy(space_rhythm_media_tests)
-gtest_discover_tests(space_rhythm_media_tests
-    DISCOVERY_MODE PRE_TEST
-    DISCOVERY_TIMEOUT 120
-    PROPERTIES
-        FIXTURES_REQUIRED golden-media
-        LABELS "golden;media;unit"
+gtest_add_tests(TARGET space_rhythm_media_tests TEST_LIST space_rhythm_media_test_cases)
+set_tests_properties(${space_rhythm_media_test_cases} PROPERTIES
+    FIXTURES_REQUIRED golden-media
+    LABELS "t021;golden;media;unit;headless;gate-g1;gate-g3"
+)
+
+add_executable(space_rhythm_contract_tests
+    contract/core_public_contract_test.cpp
+    contract/system_public_contract_test.cpp
+)
+target_link_libraries(space_rhythm_contract_tests PRIVATE
+    SpaceRhythm::Core
+    SpaceRhythm::System
+    GTest::gtest_main
+    Qt6::Core
+)
+space_rhythm_apply_build_policy(space_rhythm_contract_tests)
+gtest_add_tests(TARGET space_rhythm_contract_tests TEST_LIST space_rhythm_contract_test_cases)
+set_tests_properties(${space_rhythm_contract_test_cases} PROPERTIES
+    LABELS "t021;contract;headless;gate-g1;gate-g2;gate-g4"
+)
+
+add_executable(space_rhythm_media_contract_tests
+    contract/media_public_contract_test.cpp
+)
+target_link_libraries(space_rhythm_media_contract_tests PRIVATE
+    SpaceRhythm::MediaAdapter
+    GTest::gtest_main
+)
+target_compile_definitions(space_rhythm_media_contract_tests PRIVATE
+    SPACE_RHYTHM_GOLDEN_MEDIA_DIR="${CMAKE_CURRENT_SOURCE_DIR}/golden/media/generated"
+)
+space_rhythm_apply_build_policy(space_rhythm_media_contract_tests)
+gtest_add_tests(TARGET space_rhythm_media_contract_tests TEST_LIST space_rhythm_media_contract_test_cases)
+set_tests_properties(${space_rhythm_media_contract_test_cases} PROPERTIES
+    FIXTURES_REQUIRED golden-media
+    LABELS "t021;contract;golden;media;headless;gate-g1;gate-g2;gate-g3;gate-g4"
 )
 
 add_executable(space_rhythm_core_tests
@@ -55,9 +101,9 @@ target_compile_definitions(space_rhythm_core_tests PRIVATE
     SPACE_RHYTHM_WORKER_EXE="$<TARGET_FILE:space_rhythm_worker>"
 )
 space_rhythm_apply_build_policy(space_rhythm_core_tests)
-gtest_discover_tests(space_rhythm_core_tests
-    DISCOVERY_MODE PRE_TEST
-    PROPERTIES LABELS "unit"
+gtest_add_tests(TARGET space_rhythm_core_tests TEST_LIST space_rhythm_core_test_cases)
+set_tests_properties(${space_rhythm_core_test_cases} PROPERTIES
+    LABELS "t021;unit;headless;gate-g0;gate-g1"
 )
 
 qt_add_executable(space_rhythm_qt_smoke
@@ -77,7 +123,9 @@ add_test(
         -DFALLBACK_INPUT=${CMAKE_CURRENT_SOURCE_DIR}/qml
         -P "${CMAKE_CURRENT_SOURCE_DIR}/cmake/RunQtCoreSmoke.cmake"
 )
-set_tests_properties(qt.core_smoke PROPERTIES LABELS "qt;smoke")
+set_tests_properties(qt.core_smoke PROPERTIES
+    LABELS "t021;qt;headless;smoke;gate-g0;gate-g1"
+)
 
 qt_add_executable(space_rhythm_qml_smoke
     qml/quick_test_main.cpp
@@ -102,7 +150,7 @@ add_test(
         -P "${CMAKE_CURRENT_SOURCE_DIR}/cmake/RunQtCoreSmoke.cmake"
 )
 set_tests_properties(qml.quick_smoke PROPERTIES
-    LABELS "qml;qt;smoke"
+    LABELS "t021;qml;qt;headless;smoke;gate-g0;gate-g1"
     ENVIRONMENT "QT_QPA_PLATFORM=offscreen"
 )
 
@@ -115,7 +163,7 @@ add_test(
         -P "${CMAKE_CURRENT_SOURCE_DIR}/cmake/RunAppSmoke.cmake"
 )
 set_tests_properties(app.qml_smoke PROPERTIES
-    LABELS "app;qml;qt;smoke"
+    LABELS "t021;app;integration;qml;qt;headless;smoke;gate-g0"
     ENVIRONMENT "QT_QPA_PLATFORM=offscreen"
 )
 
@@ -127,7 +175,9 @@ add_test(
         -DQML_TEST_DIR=${CMAKE_CURRENT_SOURCE_DIR}/qml
         -P "${CMAKE_CURRENT_SOURCE_DIR}/cmake/RunWorkerSmoke.cmake"
 )
-set_tests_properties(worker.process_smoke PROPERTIES LABELS "worker;qt;smoke")
+set_tests_properties(worker.process_smoke PROPERTIES
+    LABELS "t021;worker;integration;qt;headless;smoke;gate-g0;gate-g4"
+)
 
 foreach(_unsupported_arch IN ITEMS x86 arm64)
     add_test(
@@ -138,5 +188,7 @@ foreach(_unsupported_arch IN ITEMS x86 arm64)
             -DBINARY_DIR=${CMAKE_CURRENT_BINARY_DIR}/reject-${_unsupported_arch}
             -P "${CMAKE_CURRENT_SOURCE_DIR}/cmake/RejectArchitecture.cmake"
     )
-    set_tests_properties(build.reject_${_unsupported_arch} PROPERTIES LABELS "build-guard")
+    set_tests_properties(build.reject_${_unsupported_arch} PROPERTIES
+        LABELS "t021;compatibility;headless;build-guard;gate-g0"
+    )
 endforeach()
