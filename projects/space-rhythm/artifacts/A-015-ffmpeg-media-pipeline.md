@@ -4,14 +4,14 @@
 - 成果 ID：A-015
 - 负责人：multimedia-engineer-ffmpeg-01
 - 关联任务：T-018
-- 版本：0.1
+- 版本：0.2
 - 更新日期：2026-09-10
 - 状态：draft
 - 适用范围：只读媒体探测、流选择、解复用、视频/音频解码、媒体时间到核心 `TimeNs` 的映射、CPU 格式归一、代理帧、缩略图、波形源 PCM、视频 seek、缓冲 lease/背压、资源与取消边界；不含 T-019 的播放同步或导出事务，不含 UI、CV、DSP、发布编码器和安装器批准。
-- 来源及输入版本：[A-012 0.1](A-012-core-domain-contract-0x.md)、[A-013 0.1](A-013-windows-x64-cmake-ci-skeleton.md)、[A-014 0.2](A-014-media-time-buffer-and-golden-contract.md)、D-003 confirmed、H-004；用户于 2026-09-10 对 T-018 的明确执行要求。
+- 来源及输入版本：[A-012 0.1](A-012-core-domain-contract-0x.md)、[A-013 0.1](A-013-windows-x64-cmake-ci-skeleton.md)、[A-014 0.3](A-014-media-time-buffer-and-golden-contract.md)、D-003 confirmed、H-004；用户于 2026-09-10 对 T-018 及 T021-DEFECT-001 的明确执行要求。
 - 批准依据：尚无；任务完成不自动批准成果。
 - 实现契约：`mediaContractVersion = 0.1.0`，`schemaVersion = 1`
-- 版本记录：2026-09-10，0.1，首次实现并验证 FFmpeg 媒体基础管线。
+- 版本记录：2026-09-10，0.2，修复 T021-DEFECT-001，以单一确定性映射统一探测、解码和转换后帧的公开颜色范围值，并补充映射单测及 Debug/CI headless 回归证据；2026-09-10，0.1，首次实现并验证 FFmpeg 媒体基础管线。
 
 ## 1. 固定依赖解析与许可证
 
@@ -40,7 +40,7 @@
 | 探测 | `AVFormatContext` + interrupt callback；记录源 SHA-256、容器、流、codec、time base/start/duration、SAR/DAR、display matrix、颜色和音频格式；探测字节、时长、流数、源大小均有上限。 |
 | 流选择 | 显式 key、required/optional default-first、all；按素材指纹、类型、可解码性、attached picture 与 stream index 确定性处理，多 default 发稳定诊断。 |
 | 时间映射 | PTS 优先、best-effort 仅作显式恢复、DTS 只作来源/诊断；共同 presentation origin；MSVC 192-bit checked 有理数运算，只在最终一步调用 A-012 舍入语义。 |
-| 视频 | send/receive 解码循环；swscale 显式输入矩阵/range 到 full-range BGRA；可选应用纯 0/90/180/270° 显示旋转；尺寸、颜色、方向或输出规格改变时先发 `FormatChanged` 再发新 epoch 帧。 |
+| 视频 | send/receive 解码循环；`AVCOL_RANGE_MPEG/JPEG/UNSPECIFIED` 与未知值分别统一为公开 `limited/full/unknown`，探测和解码帧共用映射且不暴露 `tv/pc`；swscale 显式输入矩阵/range 到 `full` BGRA；可选应用纯 0/90/180/270° 显示旋转；尺寸、颜色、方向或输出规格改变时先发 `FormatChanged` 再发新 epoch 帧。 |
 | 音频 | swresample 输出 interleaved float mono/stereo；输出采样索引连续；用源采样位置区分真实 discontinuity 与 resampler delay；格式切换和 EOF 都排空重采样器。 |
 | 代理与 seek | 代理帧保持宽高上限，缩略图给定规格；视频 seek 将核心时间精确反算为流 ticks，demux seek 后从关键帧/preroll 解码并按真实展示 PTS 选择，nearest 等距取较早帧。 |
 | 所有权/背压 | FFmpeg format/codec/frame/packet/sws/swr/SHA 均由 C++ custom-deleter RAII 管理；发布后为不可变 shared `BufferLease`；有界队列同时限制 items/bytes，最后一个下游 lease 释放前不返还字节配额。 |
@@ -85,6 +85,10 @@
 
 安装命令已分别从 clean Debug/Release 构建实际复制 7 个 FFmpeg shared DLL。逐文件核验表明 Debug 安装件与 vcpkg `debug/bin` 全部同哈希、Release 安装件与 vcpkg `bin` 全部同哈希，且每个 Debug DLL 都与对应 Release DLL 不同；Release 名称、大小和 SHA-256 见 [runtime-dlls.sha256.csv](../evidence/T-018/runtime-dlls.sha256.csv)。安装后的应用 QML smoke 又被同一主机策略超时，因此这里只确认媒体 DLL 的配置匹配安装闭包，不宣称发布安装或产品运行批准。
 
+### 4.1 T021-DEFECT-001 修复回归
+
+独立测试 oracle 仍为 A-014 的 `limited`，没有改成 FFmpeg 原名 `tv`。新增映射单测覆盖 MPEG、JPEG、UNSPECIFIED、`AVCOL_RANGE_NB` 和非法负值；集成测试同时验证探测信息为 `limited`、full-range BGRA 缩略图/代理帧为 `full`。Debug `media` 标签通过 22/22；T-021 Debug headless 与 CI/RelWithDebInfo headless 最终各通过 62/62。CI 首轮仅有一次 `MediaResource.LongMaterialKeepsWorkingBuffersBounded` 进程未启动，颜色相关测试全部通过；未改代码、二进制、测试或主机策略的完整重试通过 62/62。原始日志保存在忽略的 `out/evidence/T-018/T021-DEFECT-001/`，可提交摘要见 [缺陷修复证据](../evidence/T-018/T021-DEFECT-001.md)。既有 Qt/QML smoke 显式回退未修改，本修订不处理 WDAC。
+
 ## 5. 结论与边界
 
-固定 baseline 的 FFmpeg 8.1.2#3 满足 T-018/A-014 所需只读探测、解码、精确时间、格式、seek、缓冲与资源契约，无需换版。T-018 可以完成；T-019 保持 `todo`，没有实现预览主时钟、同步、导出事务或发布编码器。
+固定 baseline 的 FFmpeg 8.1.2#3 满足 T-018/A-014 所需只读探测、解码、精确时间、格式、seek、缓冲与资源契约，无需换版。T021-DEFECT-001 已修复并回归；T-018 恢复完成，T-019 保持 `todo`，没有实现预览主时钟、同步、导出事务或发布编码器。

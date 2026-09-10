@@ -38,6 +38,12 @@ target_link_libraries(space_rhythm_media_tests PRIVATE
     SpaceRhythm::MediaAdapter
     GTest::gtest_main
 )
+target_include_directories(space_rhythm_media_tests PRIVATE
+    "${PROJECT_SOURCE_DIR}/src/media"
+)
+target_include_directories(space_rhythm_media_tests SYSTEM PRIVATE
+    ${FFMPEG_INCLUDE_DIRS}
+)
 target_compile_definitions(space_rhythm_media_tests PRIVATE
     SPACE_RHYTHM_GOLDEN_MEDIA_DIR="${CMAKE_CURRENT_SOURCE_DIR}/golden/media/generated"
 )
