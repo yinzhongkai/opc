@@ -231,7 +231,7 @@
 - 完成条件与确认方式：提供统一 `ctest` 入口、标签、headless 配置和失败诊断归档；覆盖时间换算边界/溢出、事件锁定/事务/修订、PTS/VFR/旋转、IPC 状态机、schema 迁移及原子保存契约；黄金样例登记来源或生成方式、许可证、哈希、期望值及容差依据；按 D-003 接入 GoogleTest、Qt Test/Qt Quick Test；负责人自查并在 Windows x64 可用环境中保存实际运行证据。
 - 进展：tester-cpp-qt-01 于 2026-09-10 完成统一 `Invoke-HeadlessTests.ps1`、CTest `t021` 与分层/门槛标签、JUnit/环境/日志/LastTest 失败归档；首轮新增 11 项仅调用公开 API 的独立契约测试及 12 个 CC0 样例/30 个时间向量审计。用户同日要求基于 `40b1734` 独立复测 T021-DEFECT-001 后，保留 GM-ROT-SAR-001 的 `limited` oracle，并补齐经公开 `MediaSource` 观察的 `full/unknown` 用例，独立契约增至 12 项。Debug 与干净 CI/RelWithDebInfo 各实际执行 63 项并 63 pass、0 fail、0 blocked、0 skip；首次 Release 记录仍为 34 pass、1 个当时的契约 fail、26 blocked。
 - 成果与验证证据：[A-017 0.2：Windows headless 契约测试入口与证据](artifacts/A-017-windows-headless-contract-test-entry-and-evidence.md)、[T-021 验证摘要](evidence/T-021/verification-summary.md)、[首次运行索引](evidence/T-021/runs-v1.json)及 [`40b1734` 独立复测索引](evidence/T-021/runs-v2.json)。原始证据位于忽略的 `out/evidence/T-021/`，索引记录输入、环境、JUnit、CTest、发现、标签、LastTest、构建日志及 result SHA-256；所有运行使用固定 seed、UTC、offscreen、软件 RHI 和独立 TEMP/TMP。
-- 阻塞与下一位行动人：`T021-DEFECT-001` 已按用户指定条件独立复测为 `resolved`：A-014 0.3 的公开 `limited/full/unknown` 映射及 GM-ROT-SAR-001 在 Debug、CI/RelWithDebInfo 均通过，既有 oracle 与媒体实现未由测试会话修改。`T021-ENV-001` 继续为 `blocked`：首次 Release 的既有 `space_rhythm_core_tests.exe` 被 WDAC 阻止启动，26 项不得改写为 pass，下一行动人为 build-engineer-windows-qt-01/主机策略管理员。G0～G4、性能、效果和硬件兼容均为 `not-evaluated`。T-022 保持 todo，未启动。
+- 阻塞与下一位行动人：`T021-DEFECT-001` 已按用户指定条件独立复测为 `resolved`：A-014 0.3 的公开 `limited/full/unknown` 映射及 GM-ROT-SAR-001 在 Debug、CI/RelWithDebInfo 均通过，既有 oracle 与媒体实现未由测试会话修改。`T021-ENV-001` 继续为 `blocked`：首次 Release 的既有 `space_rhythm_core_tests.exe` 被 WDAC 阻止启动，原 26 项记录不得改写；build-engineer-windows-qt-01 已完成专项诊断并以重建产物真实运行 26/26，但严格 Release 全套仍为 53/63，Code Integrity `VerifiedAndReputableDesktop` 对其他同轮生成程序继续给出 `0xC0E90002`/Win32 4551。下一行动人为主机策略管理员，需按 [专项诊断](evidence/T-013/t021-env-001-verification-summary.md)提供最小开发信任路线后，再由 tester-cpp-qt-01 无 fallback 复跑 63/63。G0～G4、性能、效果和硬件兼容均为 `not-evaluated`。T-022 保持 todo，未启动。
 - 更新日期：2026-09-10。
 
 ## T-020：制定测试策略、需求追踪与可复现规则
@@ -333,10 +333,10 @@
 - 输入与依赖：T-011/T-012 已完成；D-003、D-006、D-007、D-008 confirmed；A-005 0.4 第 7、9 节，A-006 0.1 WP-01，A-007 0.1，A-008 0.3，A-009 0.1，A-012 0.1。
 - 优先级：高；按前置条件排队。
 - 完成条件与确认方式：建立 A-005 建议目录的最小可链接目标；提供开发/CI presets、编译警告、x64/运行库/ABI 保护、统一测试入口和依赖 manifest/baseline；x86/ARM64 配置明确失败；CI 可配置、编译、运行无 GUI 单测和最小 QML 冒烟，并检查运行时依赖；保存构建日志和产物清单；负责人自查，不包含正式安装器/签名批准。
-- 进展：build-engineer-windows-qt-01 已完成应用、Worker、纯 C++ 核心、媒体适配和测试的 Windows x64 工程骨架；加入 CMake 3.31/Ninja 的 Debug、Release、CI presets，MSVC 19.44/x64/C17/C++20/动态 CRT/精确 Qt 6.11.2 门禁，固定 vcpkg manifest/baseline 及 FFmpeg/OpenCV/KissFFT 可选入口，GoogleTest/CTest、Qt Test/Qt Quick Test、应用 QML、Worker 进程、x86/ARM64 拒绝测试，Windows CI、部署、PE/依赖核对和逐文件哈希证据。只复用 T-012 SDK，未重新构建 Qt，未实现业务逻辑，未修改 `package/`。
-- 成果与验证证据：[A-013 0.1：Windows x64 CMake/Ninja 工程与 CI 骨架](artifacts/A-013-windows-x64-cmake-ci-skeleton.md)，状态 draft；[T-013 可复核摘要](evidence/T-013/verification-summary.md)。Debug、Release、CI 三套最终验证均配置成功、完成 67/67 编译并通过 7/7 CTest；App/Worker 均确认 `8664 machine (x64)`，Debug/Release CRT 与 Qt DLL 配置匹配，三套安装闭包及 SHA-256 清单已生成。完整机器日志位于被忽略的 `out/evidence/T-013`。
-- 阻塞与下一位行动人：T-013 无剩余阻塞并已按完成条件结束。T-015、T-016、T-018、T-021 及后续 UI/算法任务可消费相应目标和 presets；最低 Windows 版本仍需在后续兼容/发布任务中确认。H-002 保持 accepted，等待发起人 architect-01 核对 T-011～T-013 结果后关闭。
-- 更新日期：2026-09-09。
+- 进展：build-engineer-windows-qt-01 已完成应用、Worker、纯 C++ 核心、媒体适配和测试的 Windows x64 工程骨架；加入 CMake 3.31/Ninja 的 Debug、Release、CI presets，MSVC 19.44/x64/C17/C++20/动态 CRT/精确 Qt 6.11.2 门禁，固定 vcpkg manifest/baseline 及 FFmpeg/OpenCV/KissFFT 可选入口，GoogleTest/CTest、Qt Test/Qt Quick Test、应用 QML、Worker 进程、x86/ARM64 拒绝测试，Windows CI、部署、PE/依赖核对和逐文件哈希证据。只复用 T-012 SDK，未重新构建 Qt，未实现业务逻辑，未修改 `package/`。2026-09-10 按用户明确授权完成 T021-ENV-001 后续诊断：旧 Release core 哈希稳定触发 Win32 4551/Code Integrity `0xC0E90002`；原路径 clean rebuild 与全新目录 rebuild 后 core 均可运行，当前 26/26 实际通过；严格 Release headless 全套仍为 53/63，未使用 fallback，未把其余策略阻断改写为通过。
+- 成果与验证证据：[A-013 0.2：Windows x64 CMake/Ninja 工程与 CI 骨架](artifacts/A-013-windows-x64-cmake-ci-skeleton.md)，状态 draft；[T-013 可复核摘要](evidence/T-013/verification-summary.md)保留 0.1 历史基线；[T021-ENV-001 专项诊断](evidence/T-013/t021-env-001-verification-summary.md)及其 [Code Integrity 事件摘录](evidence/T-013/t021-env-001-code-integrity-events.json)。Debug、Release、CI 的 PE/CRT/导入/签名/路径/启动已对照；完整机器日志位于被忽略的 `out/evidence/T021-ENV-001`。
+- 阻塞与下一位行动人：T-013 工程骨架本身无剩余阻塞并保持 completed；T021-ENV-001 不能由测试入口降级关闭，需主机策略管理员依据 Policy GUID `{0283ac0f-fff1-49ae-ada1-8a933130cad6}` 提供组织管理的非生产开发签名路线，或在 ACL 受控、非用户可写的专用构建根上建立最小补充策略，再由 tester-cpp-qt-01 严格复跑 Release 63/63。最低 Windows 版本仍需在后续兼容/发布任务中确认。H-002 保持 accepted，等待发起人 architect-01 核对 T-011～T-013 结果后关闭。
+- 更新日期：2026-09-10。
 
 ## T-012：从官方源码构建可复现的 Windows x64 Qt SDK
 - 负责人：build-engineer-windows-qt-01

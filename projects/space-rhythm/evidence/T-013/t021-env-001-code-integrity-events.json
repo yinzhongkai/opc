@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "issue": "T021-ENV-001",
+  "capturedUtc": "2026-09-10T07:45:14Z",
+  "computer": "tiger",
+  "logName": "Microsoft-Windows-CodeIntegrity/Operational",
+  "binary": {
+    "path": "C:\\Users\\YinZh\\Desktop\\space-rhythm\\out\\build\\windows-msvc-x64-release\\space_rhythm_core_tests.exe",
+    "sha256FlatHash": "06EA5BD9AC55A8C16892C104FFD039E968369BABB116C7C67E824707E97BF02E"
+  },
+  "events": [
+    {
+      "eventId": 3033,
+      "recordId": 6671,
+      "timeCreatedUtc": "2026-09-10T07:45:14.3744337Z",
+      "process": "\\Device\\HarddiskVolume3\\Program Files\\PowerShell\\7\\pwsh.exe",
+      "file": "\\Device\\HarddiskVolume3\\Users\\YinZh\\Desktop\\space-rhythm\\out\\build\\windows-msvc-x64-release\\space_rhythm_core_tests.exe",
+      "requestedPolicy": 2,
+      "validatedPolicy": 1,
+      "statusDecimal": 3236495362,
+      "statusHex": "0xC0E90002"
+    },
+    {
+      "eventId": 3077,
+      "recordId": 6673,
+      "timeCreatedUtc": "2026-09-10T07:45:14.3769944Z",
+      "process": "\\Device\\HarddiskVolume3\\Program Files\\PowerShell\\7\\pwsh.exe",
+      "file": "\\Device\\HarddiskVolume3\\Users\\YinZh\\Desktop\\space-rhythm\\out\\build\\windows-msvc-x64-release\\space_rhythm_core_tests.exe",
+      "requestedSigningLevel": 2,
+      "validatedSigningLevel": 1,
+      "statusHex": "0xC0E90002",
+      "sha256FlatHash": "06EA5BD9AC55A8C16892C104FFD039E968369BABB116C7C67E824707E97BF02E",
+      "policyName": "VerifiedAndReputableDesktop",
+      "policyGuid": "{0283ac0f-fff1-49ae-ada1-8a933130cad6}",
+      "policyId": "27555.1000.240208",
+      "userWriteable": false,
+      "signingScenario": 1
+    },
+    {
+      "eventId": 3118,
+      "recordId": 6675,
+      "timeCreatedUtc": "2026-09-10T07:45:14.3770159Z",
+      "file": "\\Device\\HarddiskVolume3\\Users\\YinZh\\Desktop\\space-rhythm\\out\\build\\windows-msvc-x64-release\\space_rhythm_core_tests.exe",
+      "sha256FlatHash": "06EA5BD9AC55A8C16892C104FFD039E968369BABB116C7C67E824707E97BF02E",
+      "eventDescription": "Smart App Control Block Details",
+      "defenderStatusCode": "0x0",
+      "defenderTrust": -16777216,
+      "cachedDefenderTrust": 122177,
+      "defenderCloudCallRequested": true,
+      "defenderMadeCloudCall": false,
+      "isUnfriendlyFile": false,
+      "defenderThreatName": ""
+    }
+  ],
+  "appLockerMatches": {
+    "Microsoft-Windows-AppLocker/EXE and DLL": 0,
+    "Microsoft-Windows-AppLocker/MSI and Script": 0
+  },
+  "policyInventoryRead": {
+    "ciToolExitDecimal": -2147024891,
+    "ciToolExitHex": "0x80070005",
+    "deviceGuardCim": "access-denied"
+  },
+  "safety": {
+    "policyModified": false,
+    "allowlistModified": false,
+    "signingPerformed": false,
+    "wdacBypassUsed": false
+  }
+}

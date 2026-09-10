@@ -16,7 +16,7 @@
 | A-010 | [C++ 核心/系统工作流执行方案](A-010-cpp-core-systems-execution-plan.md) | core-systems-engineer-cpp-01 | T-014 / T-015 / T-016 | 0.1 | draft | 尚无 |
 | A-011 | [一期 MVP 完整研发编制与任务计划](A-011-complete-mvp-engineering-staffing-and-task-plan.md) | architect-01 | T-023 | 0.1 | draft | 尚无 |
 | A-012 | [核心时间、事件、修订与事务契约 0.x](A-012-core-domain-contract-0x.md) | core-systems-engineer-cpp-01 | T-014 | 0.1 | draft | 尚无 |
-| A-013 | [Windows x64 CMake/Ninja 工程与 CI 骨架](A-013-windows-x64-cmake-ci-skeleton.md) | build-engineer-windows-qt-01 | T-013 | 0.1 | draft | 尚无 |
+| A-013 | [Windows x64 CMake/Ninja 工程与 CI 骨架](A-013-windows-x64-cmake-ci-skeleton.md) | build-engineer-windows-qt-01 | T-013 | 0.2 | draft | 尚无 |
 | A-014 | [媒体时间、流、缓冲与黄金样例契约 0.x](A-014-media-time-buffer-and-golden-contract.md) | multimedia-engineer-ffmpeg-01 | T-017 | 0.3 | draft | 尚无 |
 | A-015 | [FFmpeg 媒体探测、解码、时间映射与代理管线](A-015-ffmpeg-media-pipeline.md) | multimedia-engineer-ffmpeg-01 | T-018 | 0.2 | draft | 尚无 |
 | A-016 | [C++/Qt 测试策略、需求追踪与可复现规则](A-016-cpp-qt-test-strategy-and-traceability.md) | tester-cpp-qt-01 | T-020 | 0.1 | draft | 尚无 |
