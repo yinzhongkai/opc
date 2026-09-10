@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "mediaContractVersion": "0.1.0",
+  "mediaContractVersion": "1.0.0",
   "vectorSetVersion": 1,
   "licensePolicy": "Every fixture is generated from synthetic test patterns or fixed bytes authored for this project; no package/ or third-party audiovisual content is an input.",
   "fixtures": [
@@ -103,6 +103,21 @@
         {"id": "GM-AUDIO-48000-001-S4799", "ticks": 4799, "originTicks": 0, "timeBaseNumerator": 1, "timeBaseDenominator": 48000, "rounding": "nearest_ties_to_even", "expectedTimeNs": 99979167},
         {"id": "GM-AUDIO-48000-001-END", "ticks": 4800, "originTicks": 0, "timeBaseNumerator": 1, "timeBaseDenominator": 48000, "rounding": "ceil", "expectedTimeNs": 100000000}
       ]
+    },
+    {
+      "id": "GM-AUDIO-DYNAMIC-001",
+      "category": "dynamic_audio_format_epoch",
+      "outputFile": "dynamic_audio.ts",
+      "source": "Project-generated FFmpeg lavfi silence at two sample rates",
+      "license": "CC0-1.0",
+      "canonicalRecipe": "v2|dynamic_audio.ts|audio0=mono:44100:0.12s|audio1=mono:48000:0.12s|mpegts-concat:mp2:128k|format_epochs=44100,48000",
+      "recipeSha256": "a4488648fb7a505ed43567ad90be9123f6e84469de5f458de338392b45cf9820",
+      "expectedStreams": ["audio"],
+      "expectedFormatEpochs": [
+        {"inputSampleRate": 44100, "outputSampleRate": 48000, "resamplePerformed": true},
+        {"inputSampleRate": 48000, "outputSampleRate": 48000, "resamplePerformed": false}
+      ],
+      "expectedTimeVectors": []
     },
     {
       "id": "GM-CORRUPT-001",

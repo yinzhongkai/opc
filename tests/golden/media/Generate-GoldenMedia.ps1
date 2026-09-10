@@ -100,6 +100,35 @@ foreach ($fixture in $manifest.fixtures) {
                 '-f','lavfi','-i','anullsrc=r=48000:cl=mono','-t','0.1','-c:a','pcm_s16le','-fflags','+bitexact','-flags:a','+bitexact'
             )
         }
+        'GM-AUDIO-DYNAMIC-001' {
+            $partAName = 'dynamic_audio_part_a.ts'
+            $partBName = 'dynamic_audio_part_b.ts'
+            Invoke-Ffmpeg -OutputFile $partAName -Arguments @(
+                '-f','lavfi','-i','anullsrc=r=44100:cl=mono','-t','0.12',
+                '-map','0:a:0','-c:a','mp2','-b:a','128k','-f','mpegts',
+                '-mpegts_copyts','1','-muxdelay','0','-fflags','+bitexact','-flags:a','+bitexact'
+            )
+            Invoke-Ffmpeg -OutputFile $partBName -Arguments @(
+                '-f','lavfi','-i','anullsrc=r=48000:cl=mono','-t','0.12',
+                '-map','0:a:0','-c:a','mp2','-b:a','128k','-f','mpegts',
+                '-mpegts_copyts','1','-muxdelay','0','-fflags','+bitexact','-flags:a','+bitexact'
+            )
+            $finalPath = Join-Path $outputRoot $fixture.outputFile
+            $destination = [System.IO.File]::Create($finalPath)
+            try {
+                foreach ($partName in @($partAName, $partBName)) {
+                    $partPath = Join-Path $outputRoot $partName
+                    $source = [System.IO.File]::OpenRead($partPath)
+                    try { $source.CopyTo($destination) }
+                    finally { $source.Dispose() }
+                }
+            }
+            finally {
+                $destination.Dispose()
+                Remove-Item -LiteralPath (Join-Path $outputRoot $partAName) -Force
+                Remove-Item -LiteralPath (Join-Path $outputRoot $partBName) -Force
+            }
+        }
         'GM-CORRUPT-001' {
             $bytes = [Convert]::FromHexString('1A45DFA34286810142F7810142F2810442F381084282846D6174726F736B61')
             [System.IO.File]::WriteAllBytes((Join-Path $outputRoot $fixture.outputFile), $bytes[0..26])
@@ -172,6 +201,9 @@ $probeRecords = foreach ($fixture in $manifest.fixtures) {
     $probeJson = $null
     & $ffprobe -v error -show_format -show_streams -show_frames -of json $path 2>$null | Out-String | ForEach-Object { $probeJson = $_ }
     $ffprobeExitCode = $LASTEXITCODE
+    if ($ffprobeExitCode -ne 0) {
+        $probeJson = $null
+    }
     [pscustomobject]@{
         fixtureId = [string]$fixture.id
         outputFile = [string]$fixture.outputFile

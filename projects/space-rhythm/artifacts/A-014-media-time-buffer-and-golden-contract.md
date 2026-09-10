@@ -1,24 +1,24 @@
-# 媒体时间、流、缓冲与黄金样例契约 0.x
+# 媒体时间、流、缓冲与黄金样例契约 1.0
 
 - 项目：space-rhythm
 - 成果 ID：A-014
 - 负责人：multimedia-engineer-ffmpeg-01
 - 关联任务：T-017
-- 版本：0.3
+- 版本：0.4
 - 更新日期：2026-09-10
 - 状态：draft
-- 适用范围：第一阶段媒体探测、流选择、解码帧/PCM 交接、媒体时间到核心 `timeNs` 的映射、seek 结果和合法黄金样例；不实现 FFmpeg 解码管线，不冻结发布容器/编码器、硬件加速或许可证组合，不定义事件、项目时间线、IPC 传输或音频 DSP 语义。
-- 来源及输入版本：[A-004 0.5](A-004-mvp-technical-feasibility-and-requirements.md)、[A-005 0.4](A-005-mvp-technology-stack-proposal.md)、[A-006 0.1 WP-04](A-006-domain-work-packages.md)、[A-007 0.1](A-007-four-engineer-execution-plan.md)、[A-012 0.1](A-012-core-domain-contract-0x.md)；D-003/D-006 confirmed；H-004；用户于 2026-09-09 对 T-017 的明确执行要求及 2026-09-10 对 T021-DEFECT-001 颜色范围规范化的明确要求。
+- 适用范围：第一阶段媒体探测、流选择、解码帧/PCM 交接、媒体时间到核心 `timeNs` 的映射、seek 结果和合法黄金样例；不冻结发布容器/编码器、硬件加速或许可证组合，不定义事件、项目时间线、IPC 传输或音频 DSP 算法语义。
+- 来源及输入版本：[A-004 0.5](A-004-mvp-technical-feasibility-and-requirements.md)、[A-005 0.4](A-005-mvp-technology-stack-proposal.md)、[A-006 0.1 WP-04](A-006-domain-work-packages.md)、[A-007 0.1](A-007-four-engineer-execution-plan.md)、[A-012 0.1](A-012-core-domain-contract-0x.md)、[A-018 0.1](A-018-audio-dsp-pcm-feature-candidate-contract.md)；D-003/D-006 confirmed；H-004、H-011；用户于 2026-09-09 对 T-017、2026-09-10 对 T021-DEFECT-001 及 H-011 的明确执行要求。
 - 批准依据：尚无。T-017 要求负责人自查并形成候选契约，无独立评审或用户批准要求。
-- 媒体契约版本：`mediaContractVersion = 0.1.0`
-- 逻辑 DTO schema：`schemaVersion = 1`
+- 媒体契约版本：`mediaContractVersion = 1.0.0`
+- 逻辑 DTO schema：`schemaVersion = 2`
 - 测试向量集：`vectorSetVersion = 1`
 - 黄金样例清单：`goldenManifestVersion = 1`
-- 版本记录：2026-09-10，0.3，澄清 `ColorDescription.range` 的封闭公开词汇与 FFmpeg 枚举映射，禁止泄露 `tv`/`pc` 私有名称，不改变 `mediaContractVersion`、schema 或既有向量；2026-09-10，0.2，在不改变 `mediaContractVersion`、schema 或既有向量语义的前提下，补充 `packet_dts` 事实来源，扩展长素材/动态格式样例，并登记固定 FFmpeg 构建生成的实际媒体 hash 与 ffprobe 证据；2026-09-09，0.1，首次定义 C-04 媒体信息、流选择、时间映射、显示属性、帧/PCM 缓冲、背压、生命周期、seek、错误和黄金样例配方。
+- 版本记录：2026-09-10，0.4，H-011 将 PCM 的显式声道顺序、segment 原点及逐缓冲 resampler timing provenance 设为必填，按兼容规则将公共契约提升到 1.0.0、schema 2，增加旧版拒绝、音频 seek/格式切换/排空规则和动态音频黄金样例；2026-09-10，0.3，澄清 `ColorDescription.range` 的封闭公开词汇与 FFmpeg 枚举映射，禁止泄露 `tv`/`pc` 私有名称；2026-09-10，0.2，补充 `packet_dts` 事实来源，扩展长素材/动态格式样例并登记实际证据；2026-09-09，0.1，首次定义媒体基础契约。
 
 ## 1. 规范词与单一责任边界
 
-“必须”“不得”“应”是规范要求；“可以”“建议”是非强制实现选择。只有满足相关规则和向量，才能声明兼容 `mediaContractVersion 0.1.0`。
+“必须”“不得”“应”是规范要求；“可以”“建议”是非强制实现选择。只有满足相关规则和向量，才能声明兼容 `mediaContractVersion 1.0.0`。
 
 媒体层拥有：
 
@@ -44,8 +44,8 @@
 
 ```text
 MediaInfo {
-  schemaVersion: 1
-  mediaContractVersion: "0.1.0"
+  schemaVersion: 2
+  mediaContractVersion: "1.0.0"
   sourceFingerprintSha256: 64 lowercase hex
   probeImplementation: { ffmpegVersion, buildConfigurationDigest }
   formatNames: ordered unique list<ASCII token>
@@ -65,7 +65,7 @@ MediaInfo {
 
 ```text
 StreamInfo {
-  schemaVersion: 1
+  schemaVersion: 2
   streamKey: { sourceFingerprintSha256, streamIndex }
   containerStreamId: optional Int64
   programIds: ordered list<Int64>
@@ -125,7 +125,7 @@ RationalTimestamp {
 - PTS 表示展示/播放位置，是视频帧和解码 PCM 映射的首选时间事实。
 - DTS 表示解码顺序，只用于解码、seek/preroll 和诊断；不得直接成为展示 `timeNs`，也不得在 PTS 缺失时无条件顶替 PTS。
 - 解码帧 `pts` 可用时使用它；仅在 `pts` 缺失且 FFmpeg 给出 best-effort timestamp 时可以使用后者，并将 `origin=best_effort` 和恢复诊断写入结果。
-- 时间戳缺失时保持 `present=false`。schema 1 严格模式不使用平均帧率、帧序号或 DTS 猜测；没有可验证 PTS/best-effort 时返回 `timestamp_unavailable`。
+- 时间戳缺失时保持 `present=false`。schema 2 严格模式不使用平均帧率、帧序号或 DTS 猜测；没有可验证 PTS/best-effort 时返回 `timestamp_unavailable`。
 - 允许显式启用 `synthesized_duration` 恢复策略，但必须以前一已知展示时间和可信 duration 为依据，标记为合成值，并进入映射版本/缓存键；VFR 上不得用 average fps 合成。
 
 ### 3.2 公共零点
@@ -173,20 +173,45 @@ timeNs = round(exactRelativeNs, explicitRoundingMode)
 
 ```text
 exactSampleTimeNs =
-  originTimeNs + firstSampleIndex * 1_000_000_000 / sampleRate
+  segmentOriginTimeNs
+  + (firstSampleIndex - segmentOriginSampleIndex) * 1_000_000_000 / sampleRate
 ```
 
 - 样本点 `timeNs` 使用 `nearest_ties_to_even`；PCM 覆盖区间起点 floor、终点 ceil。
 - `timeNs -> sampleIndex` 必须带目的：第一条不早于目标的样本用 `ceil`，最后一条不晚于目标的样本用 `floor`，最近样本用 `nearest_ties_to_even`。最近值恰好等距时取偶数索引。
 - 同一连续 segment 的 `next.firstSampleIndex` 必须等于 `current.firstSampleIndex + current.sampleCount`。源时间戳缺口、重叠、丢样或格式变化开始新的 `segmentId` 并报告 discontinuity，不能靠改索引隐藏。
-- 重采样后的索引属于明确的输出采样率；适配器必须计入重采样延迟、首尾 padding 和排空结果。输入/输出采样率或延迟改变时开始新的 `formatEpoch`。
-- PCM 的项目放置和 DSP 特征语义不属于本契约；消费者直接使用核心 `TimeNs` 和这里的样本索引映射。
+- `segmentOriginTimeNs` 是本 segment 第一条实际输入样本映射到 A-012 `TimeNs` 的位置；`segmentOriginSampleIndex` 是同一点在输出采样率索引域的值。两者在 segment 内不变，新 decode、seek、格式变化或时间不连续会创建新 segment 并重新取实际原点。
+- 重采样后的索引属于明确的输出采样率。每次有输入转换前，媒体层用 `swr_next_pts` 从实际 resampler 状态取得已补偿 delay 的下一输出时间并以 `nearest_ties_to_even` 转成 `firstSampleIndex`；它必须与同 segment 的已交付连续末端相等，否则返回显式 discontinuity，不允许以累计输出帧数覆盖。drain 没有新输入时间，沿用上一实际输出末端。`delayAccountedInFirstSampleIndex=true` 是强制不变量，DSP 或其他消费者不得再次减/加 delay。
+
+每个 schema 2 `PcmBuffer` 必须携带下列 `resampleTrace`；缺字段不允许以 PTS、累计输出帧数或日志反推：
+
+| 字段 | 来源与规范值 |
+|---|---|
+| `performed` | 实际已初始化配置的输入/输出采样率是否不同；相同为 `false`，不同为 `true`。 |
+| `inputSampleRate` / `outputSampleRate` | 当前已解码 `AVFrame.sample_rate` 与已初始化 `SwrContext` 的目标采样率。 |
+| `implementationId` / `implementationVersion` | identity 为 `identity` / `1`；实际变采样为 `ffmpeg.swresample` / 运行时 `swresample_version()` 的 `major.minor.micro`。 |
+| `parametersDigestSha256` | `space-rhythm.media.resample-parameters/v1` 规范串的 UTF-8 SHA-256；串包含实际输入/输出采样率、采样格式、声道布局、输出 planar 选择、实现 ID/版本、delay 查询基数及 `swr_next_pts` 索引策略。 |
+| `delayBeforeInputFramesNumerator` / `Denominator` | 对本次 `swr_convert` 调用前立即读取的 `swr_get_delay`；查询基数为输入/输出采样率的 LCM，再约分为输入帧单位。分子非负、分母为正。 |
+| `delayUnit` | 固定为 `input_frames`。 |
+| `delayAccountedInFirstSampleIndex` | 必须为 `true`；这是消费者不得二次补偿的机器可检验声明。 |
+| `emittedFromDrain` | 有输入的转换为 `false`；`swr_convert(..., nullptr, 0)` 实际产出的缓冲为 `true`。 |
+
+identity 仍可使用 swresample 做采样格式/声道归一，但 timing 路径必须报告 `performed=false`、`identity/1`、delay `0/1` 且不产生 drain 缓冲；参数摘要仍来自实际配置。trace 的实现、版本与参数摘要在同一 resampler 实例内不变，delay 和 drain 标志按每次实际转换调用记录，不能要求逐缓冲完全相等。
+
+状态变化规则：
+
+- 普通 decoder flush 只取出尚未 receive 的输入帧，不新建 segment；其后 resampler drain 保持旧 segment/epoch/原点，实际输出标 `emittedFromDrain=true`。
+- format change 先排空旧 resampler（输出仍归旧 segment），再以新 `AVFrame` 配置初始化 resampler，先发布新 `FormatChanged`/epoch，再开启新 segment 和新 trace 配置。
+- 时间戳缺口/重叠在排空旧 resampler 后显式 `swr_close` + `swr_init` 清空状态；输出格式未变时 epoch 可不变，但 segment、原点和首个 delay 重新开始。
+- audio seek 先执行 demux seek 与 decoder flush；丢弃目标之前的帧，并以 `ceil` 裁至第一条不早于目标的输入样本，然后用全新 resampler/segment/原点发布。seek 前实例不得向 seek 后 segment 排空。
+- 取消或下游拒绝后立即停止，不 drain、不发布迟到缓冲、不虚构新 segment；已发布 lease 的生命周期不受影响。一次新的 decode 调用总是新 segment。
+- PCM 的项目放置和 DSP 特征算法不属于本契约；消费者直接使用核心 `TimeNs` 和这里的样本索引映射。
 
 ## 5. Seek 契约
 
 ```text
 SeekRequest {
-  schemaVersion: 1
+  schemaVersion: 2
   selectedStream: StreamKey
   targetTimeNs: TimeNs
   mode: at_or_before | at_or_after | nearest | exact_or_error
@@ -210,7 +235,7 @@ SeekResult {
 - demuxer seek 成功只说明取得候选位置，不是命中目标。必须从可用关键帧/随机访问点解码并按展示 PTS 向前筛选。
 - `at_or_before` 返回覆盖目标或最晚不晚于目标的帧；`at_or_after` 返回第一条不早于目标的帧；`nearest` 比较精确绝对误差，等距时选较早 `timeNs`；`exact_or_error` 没有完全相同展示时间时返回 `seek_unreachable`。
 - VFR 使用真实展示时间和区间，不使用平均帧率。所有模式都返回实际落点、误差和 preroll 证据。
-- 音频 seek 先按第 4 节把目标转换为样本索引，解码/重采样后裁到约定样本边界；不得仅依赖包时间戳声称样本精确。
+- 音频 `AudioOutputSpec.seekTargetTimeNs` 先以 floor 换回参考流 ticks 执行 backward demux seek，再按第 4 节解码并以 ceil 裁到第一条不早于目标的输入样本；新的 `segmentOrigin*` 取实际裁切样本，不能仅依赖 demuxer 返回值或包时间戳声称样本精确。
 
 FFmpeg `avformat_seek_file` 的 `timestamp/min_ts/max_ts` 单位取决于参考流，且 seek 目标仍需解码验证；实现不得把 API 返回 0 当作契约成功结果。
 
@@ -238,7 +263,7 @@ DisplayGeometry {
 - 90°/270° 旋转后的展示 DAR 是旋转前 DAR 的倒数；0°/180° 不变。镜像不改变 DAR。
 - display matrix 优先于旧 `rotate` metadata；两者冲突时保留双方、使用 matrix 并记录 `conflicting_display_transform`。
 - FFmpeg 的 `av_display_rotation_get()` 返回逆时针角度；本契约字段是顺时针角度，因此适配器使用 `normalize(-counterClockwiseDegrees)`。接近整数的纯旋转按最近整数归一；奇异、透视、剪切或无法无损表达的矩阵返回 `unsupported_display_transform`，不得静默丢弃。
-- schema 1 公共 CPU 帧保持源像素方向并携带 DisplayGeometry。实际旋转/镜像/重采样只在显式请求的归一化输出规格中发生，并产生新的格式 epoch。
+- schema 2 公共 CPU 帧保持源像素方向并携带 DisplayGeometry。实际旋转/镜像/重采样只在显式请求的归一化输出规格中发生，并产生新的格式 epoch。
 
 ### 6.2 颜色
 
@@ -267,12 +292,12 @@ BufferLease {
 - 生产者在发布前独占可写所有权；发布后只能通过不可变 lease 读取。需要修改的消费者必须申请唯一新缓冲或显式复制。
 - view 中的 plane pointer/span 只在 lease 存活期间有效；缓存指针越过 lease 释放是契约错误。
 - 缓冲池只有在最后一份 lease 释放后才能复用底层内存。取消、flush 或关闭不得回收仍被消费者持有的缓冲。
-- schema 1 只交付 CPU 可寻址 plane；硬件 frame/context 留在适配层，必须先映射/转换或升级契约，不能暴露 FFmpeg 硬件上下文。
+- schema 2 只交付 CPU 可寻址 plane；硬件 frame/context 留在适配层，必须先映射/转换或升级契约，不能暴露 FFmpeg 硬件上下文。
 - 进程内 lease 不能原样跨 IPC。跨进程传输由 C-05 明确共享内存/复制、所有权转移、访问权限和释放握手后另行适配；JSON 不承载帧或 PCM 字节。
 
 ```text
 VideoFrame {
-  schemaVersion: 1
+  schemaVersion: 2
   streamKey: StreamKey
   timeNs: TimeNs
   durationNs: optional DurationNs
@@ -290,17 +315,22 @@ VideoFrame {
 }
 
 PcmBuffer {
-  schemaVersion: 1
+  schemaVersion: 2
+  mediaContractVersion: "1.0.0"
   streamKey: StreamKey
   timeNs: TimeNs
   durationNs: DurationNs
   segmentId: OpaqueId
+  segmentOriginTimeNs: TimeNs
+  segmentOriginSampleIndex: Int64
   firstSampleIndex: Int64
   sampleCount: UInt64
   sampleRate: positive UInt32
   sampleFormat: ASCII token
-  channelLayout: versioned explicit channel order/mask
+  channelLayout: versioned layout token
+  channelOrder: ordered list<canonical channel token>
   planar: bool
+  resampleTrace: ResampleTrace
   planes: ordered list<{ offsetBytes, strideBytes, validBytes }>
   lease: BufferLease
 }
@@ -328,7 +358,7 @@ ChannelState = created | open | draining | ended | failed | cancelled | closed
 
 ## 9. 结构化错误
 
-媒体错误沿用 A-012 的 `ErrorInfo` envelope、diagnosticId、cause 和有界 context。schema 1 增加下列稳定 code；不得用 FFmpeg 自由文本作为程序分支：
+媒体错误沿用 A-012 的 `ErrorInfo` envelope、diagnosticId、cause 和有界 context。schema 2 使用下列稳定 code；不得用 FFmpeg 自由文本作为程序分支：
 
 | category/code | 触发条件 |
 |---|---|
@@ -342,7 +372,7 @@ ChannelState = created | open | draining | ended | failed | cancelled | closed
 | `media/timestamp_origin_changed` | 冻结后发现更早起点，旧映射必须失效。 |
 | `media/timestamp_discontinuity` | 时间跳变、逆序、回绕或缺口需要显式处理。 |
 | `media/seek_unreachable` | 目标按请求模式/容差无法到达。 |
-| `media/unsupported_display_transform` | 显示矩阵无法由 schema 1 无损表达。 |
+| `media/unsupported_display_transform` | 显示矩阵无法由 schema 2 无损表达。 |
 | `media/format_changed` | 下游策略拒绝动态格式 epoch。 |
 | `media/decode_failed` | 解码器在当前错误策略下不能继续。 |
 | `validation/invalid_time_base` | 时间基缺失或分子/分母非正。 |
@@ -366,6 +396,7 @@ ChannelState = created | open | draining | ended | failed | cancelled | closed
 | GM-MULTI-001 | 多流 | 合成视频+48k/44.1k 静音；CC0-1.0 | `39f68e0b16ff87885c4f4eb64b8d18bd9dfe0ad742ef2da0b8e872728ab6ba3b` | 1 video + 2 audio；默认选 eng/48k，显式可选 jpn/44.1k。 |
 | GM-AUDIO-44100-001 | 44.1 kHz 采样 | 合成数字静音；CC0-1.0 | `21a78fffe12d8fae31cde268be751814362b0962331ae20050245dc5370bd84b` | 4410 samples；索引 `[0,1,2205,4409,4410]` 对应 `[0,22676,50m,99977324,100m]` ns。 |
 | GM-AUDIO-48000-001 | 48 kHz 采样 | 合成数字静音；CC0-1.0 | `6837e8223eb7178c9569b087ee7a5f26a2102808aaa22e5fe05b2e0d9f200ef7` | 4800 samples；索引 `[0,1,2400,4799,4800]` 对应 `[0,20833,50m,99979167,100m]` ns。 |
+| GM-AUDIO-DYNAMIC-001 | 动态采样率与 trace epoch | 两段 44.1/48 kHz 合成静音 MPEG-TS 拼接；CC0-1.0 | `a4488648fb7a505ed43567ad90be9123f6e84469de5f458de338392b45cf9820` | 48 kHz 输出先为 44.1→48 kHz swresample trace 并排空旧 segment，再切为 48 kHz identity trace 和新 segment/epoch。 |
 | GM-CORRUPT-001 | 损坏媒体 | 固定截断 EBML 字节；CC0-1.0 | `a8bfb71271547ffd8ba34a1e642c76e219617bdbaf0b0b95db089a727c1b2495` | probe 返回 `media/corrupt_media`，不产生部分 MediaInfo 成功。 |
 | GM-MISSING-VIDEO-001 | 缺视频流 | 合成静音；CC0-1.0 | `28fd80c48b8b12675c98ece2827c4000fa14453dee165c8bf626c966ca1077aa` | required video 返回 `missing_required_stream`；audio 可选。 |
 | GM-MISSING-AUDIO-001 | 缺音频流 | 合成 testsrc2；CC0-1.0 | `57fdc675174150023ccf378665e0676646d0ed020bfa3118921ac241a4ed53e8` | required audio 返回 `missing_required_stream`；video 可选。 |
@@ -402,6 +433,8 @@ manifest 中另有 30 个可由 BigInteger 精确复算的 `expectedTimeVectors`
 
 - `mediaContractVersion` 使用语义版本。改变时间零点、选择顺序、舍入、seek 落点、所有权、背压或生命周期是破坏性变化，必须提升 major 并给出迁移和向量影响。
 - 逻辑 DTO 增删必需字段、改变单位/范围或 enum 语义必须提升 `schemaVersion`。可忽略且可 round-trip 的数据只能放 namespaced `extensions`。
+- schema 2 的 PCM provenance 是必填事实，schema 1 没有足够信息可无损迁移；适配器公开 `validate_pcm_schema()`，对 `schemaVersion=1/mediaContractVersion=0.1.0` 或任意不匹配组合稳定返回 `compatibility/unsupported_schema`。调用者必须用 schema 2 重新解码，禁止以 PTS、输出帧数、默认值或日志补字段。
+- schema 1 的非 PCM 时间向量、黄金样例媒体字节和选择/颜色语义不被改写；清单继续保留 `vectorSetVersion=1`/`goldenManifestVersion=1`，只把其声明的当前媒体契约更新为 1.0.0，并新增独立动态音频样例 ID。
 - `vectorSetVersion`/`goldenManifestVersion` 递增时保留旧 ID；改变旧向量期望必须说明反例与契约版本，不能复用 ID 偷换语义。
 - FFmpeg 精确版本和 feature 集由 T-013/T-018 固定；适配器可变化，但公共 DTO、错误和向量不得随 FFmpeg 私有布局漂移。
 - 消费者需要新增时间语义时先请求 A-012 所有者；T-017 不得通过 extension 创建第二套规范时间。
@@ -410,15 +443,16 @@ manifest 中另有 30 个可由 BigInteger 精确复算的 `expectedTimeVectors`
 
 - 完整对照 A-012 0.1：直接复用 `TimeNs`、`DurationNs`、`TimeBase`、四种舍入、checked overflow 和 ErrorInfo envelope；没有定义同义纳秒类型。
 - 覆盖 T-017 完成条件：MediaInfo、流选择、旋转/SAR/DAR、颜色、帧/PCM、所有权、背压、生命周期、PTS/DTS/time_base、start/负/未知时间戳、CFR/VFR、seek、采样索引和结构化错误均有规范规则。
-- 黄金矩阵覆盖 CFR、VFR、旋转、SAR/DAR/颜色、多流、44.1/48kHz、损坏、缺视频、缺音频、负起点、20 秒长素材和动态格式；全部来源为项目合成或固定字节，许可证为 CC0-1.0，不使用 `package/`。
-- 执行固定 FFmpeg 8.1.2 `Generate-GoldenMedia.ps1`：`GOLDEN_MEDIA_MANIFEST=PASS fixtures=12 timeVectors=30 contract=0.1.0`，`GOLDEN_MEDIA_GENERATION=PASS fixtures=12`；除故意损坏样例 ffprobe exit=1 外其余均为 0。
-- 当前文件 SHA-256：manifest `d7ad1a59b02022e34666c91cd845c39f7fe2610248999cf717eaccc3d5bc12da`；验证器 `16ed0c0b7d251f485d581934bcbfa3fdaf95b443a6d13033f3692b1d441b9be1`；生成器 `02022c07c22e884904db436b185f80b03667d3378f920f3e45da5cef70ede870`；许可声明 `237a9ddf30e7be10962815cc9314487ed5aab7ddd124f96cd4697c83d00264f7`；实际 hash/ffprobe 证据 `775c8c88d113b0d26216436f5b1713b6970939522200d66bfb1ebf0bee7f967d`。
-- T-018 已按本契约实现并由 [A-015 0.2](A-015-ffmpeg-media-pipeline.md)登记；T021-DEFECT-001 的范围映射回归证据已补齐，T-019 未启动。本成果不宣称发布编码器结论或生产许可批准。
+- 黄金矩阵覆盖 CFR、VFR、旋转、SAR/DAR/颜色、多流、44.1/48kHz、损坏、缺视频、缺音频、负起点、20 秒长素材、动态视频格式及动态音频采样率/trace；全部来源为项目合成或固定字节，许可证为 CC0-1.0，不使用 `package/`。
+- 执行固定 FFmpeg 8.1.2 `Generate-GoldenMedia.ps1`：`GOLDEN_MEDIA_MANIFEST=PASS fixtures=13 timeVectors=30 contract=1.0.0`，`GOLDEN_MEDIA_GENERATION=PASS fixtures=13`；除故意损坏样例 ffprobe exit=1 外其余均为 0。
+- 当前文件 SHA-256：manifest `f267c6d2e98d6a35279ff049ec306de3ab13c42c986b8608c033b507a4682704`；验证器 `e7245f13754c6a3ef0e61b36ac6f9eeaca677ae2033c3abe03d9cb35cba0f6fb`；生成器 `9ef146463cf3cd50bffdbe581cc3a7bb592121a8c3b307cafa75380853b11f41`；许可声明 `237a9ddf30e7be10962815cc9314487ed5aab7ddd124f96cd4697c83d00264f7`；实际 hash/ffprobe 证据 `238ed9c2832560ac04dbc6aaae6f8a24f0a7cdec7df317015931e88918c5b68a`。损坏样例的 ffprobe 非零退出时规范化 `probeJson=null`，连续两次生成的证据 hash 相同。
+- T-018 已按本契约实现并由 [A-015 0.3](A-015-ffmpeg-media-pipeline.md)登记；H-011 provenance 与 T021-DEFECT-001 范围映射证据均已补齐，T-019 未启动。本成果不宣称发布编码器结论或生产许可批准。
 
 ## 13. 参考依据
 
 - [FFmpeg AVFormatContext](https://ffmpeg.org/doxygen/trunk/structAVFormatContext.html)：format start time 使用 `AV_TIME_BASE` 单位，探测与资源限制字段属于 format 上下文。
 - [FFmpeg AVStream](https://ffmpeg.org/doxygen/trunk/structAVStream.html)：stream time base 是帧时间戳单位，stream start time 是展示顺序首帧 PTS 且可未知。
 - [FFmpeg AVFrame](https://ffmpeg.org/doxygen/trunk/structAVFrame.html)：decoded frame PTS/time base、best-effort timestamp、duration、色彩、采样率、plane 与引用计数缓冲事实。
+- [FFmpeg swresample](https://ffmpeg.org/doxygen/trunk/group__lswr.html)：`swr_get_delay` 的基数单位、`swr_convert` 输入/排空调用和运行库版本事实。
 - [FFmpeg demuxing/seek](https://ffmpeg.org/doxygen/trunk/group__lavf__decoding.html)：seek 时间戳单位取决于参考流，`avformat_seek_file` 只定位候选展示点。
 - [FFmpeg display matrix](https://ffmpeg.org/doxygen/trunk/group__lavu__video__display.html)：display matrix 变换与旋转角度方向。

@@ -520,6 +520,38 @@ std::string channel_layout_name(const AVChannelLayout& layout)
     return value.data();
 }
 
+core::Result<std::vector<std::string>> channel_order(const AVChannelLayout& layout)
+{
+    if (layout.nb_channels <= 0) {
+        return core::Result<std::vector<std::string>>::failure(
+            media_error(core::ErrorCode::unsupported_media,
+                        "media.audio.channel_order"));
+    }
+    std::vector<std::string> result;
+    result.reserve(static_cast<std::size_t>(layout.nb_channels));
+    for (int index = 0; index < layout.nb_channels; ++index) {
+        const auto channel = av_channel_layout_channel_from_index(
+            &layout, static_cast<unsigned int>(index));
+        std::array<char, 32> name{};
+        if (channel == AV_CHAN_NONE
+            || av_channel_name(name.data(), name.size(), channel) < 0
+            || name.front() == '\0') {
+            return core::Result<std::vector<std::string>>::failure(
+                media_error(core::ErrorCode::unsupported_media,
+                            "media.audio.channel_order"));
+        }
+        result.emplace_back(name.data());
+    }
+    return core::Result<std::vector<std::string>>::success(std::move(result));
+}
+
+std::string library_version_text(unsigned int version)
+{
+    return std::to_string(AV_VERSION_MAJOR(version)) + "."
+        + std::to_string(AV_VERSION_MINOR(version)) + "."
+        + std::to_string(AV_VERSION_MICRO(version));
+}
+
 ColorDescription color_description(const AVCodecParameters& parameters)
 {
     ColorDescription result;
@@ -995,6 +1027,115 @@ std::string audio_signature(const AVFrame& frame, const AudioOutputSpec& output)
     return signature.str();
 }
 
+core::Result<ResampleTrace> resample_trace_configuration(
+    const AVFrame& frame,
+    const AVChannelLayout& output_layout,
+    const AudioOutputSpec& output)
+{
+    const bool performed = frame.sample_rate != static_cast<int>(output.sample_rate);
+    ResampleTrace trace;
+    trace.performed = performed;
+    trace.input_sample_rate = static_cast<std::uint32_t>(frame.sample_rate);
+    trace.output_sample_rate = output.sample_rate;
+    trace.implementation_id = performed ? "ffmpeg.swresample" : "identity";
+    trace.implementation_version = performed
+        ? library_version_text(swresample_version())
+        : "1";
+    trace.delay_unit = "input_frames";
+    trace.delay_accounted_in_first_sample_index = true;
+    trace.emitted_from_drain = false;
+
+    std::ostringstream parameters;
+    parameters << "space-rhythm.media.resample-parameters/v1\n"
+               << "timingImplementation=" << trace.implementation_id << '\n'
+               << "timingImplementationVersion=" << trace.implementation_version << '\n'
+               << "inputSampleRate=" << trace.input_sample_rate << '\n'
+               << "outputSampleRate=" << trace.output_sample_rate << '\n'
+               << "inputSampleFormat="
+               << enum_name(av_get_sample_fmt_name(static_cast<AVSampleFormat>(frame.format)))
+               << '\n'
+               << "outputSampleFormat=" << enum_name(av_get_sample_fmt_name(AV_SAMPLE_FMT_FLT))
+               << '\n'
+               << "inputChannelLayout=" << channel_layout_name(frame.ch_layout) << '\n'
+               << "outputChannelLayout=" << channel_layout_name(output_layout) << '\n'
+               << "outputPlanar=0\n"
+               << "delayQuery=lcm(inputSampleRate,outputSampleRate)\n"
+               << "delayUnit=input_frames\n"
+               << "delayAccountedInFirstSampleIndex=1\n"
+               << "firstSampleIndex=swr_next_pts_nearest_ties_to_even\n";
+    const auto canonical = parameters.str();
+    const auto digest = sha256_bytes(
+        std::as_bytes(std::span{canonical.data(), canonical.size()}),
+        "media.audio.resampler.parameters");
+    if (!digest) {
+        return core::Result<ResampleTrace>::failure(digest.error());
+    }
+    trace.parameters_digest_sha256 = digest.value();
+    return core::Result<ResampleTrace>::success(std::move(trace));
+}
+
+core::Result<Rational> resampler_delay_before_input(
+    SwrContext& resampler,
+    std::uint32_t input_sample_rate,
+    std::uint32_t output_sample_rate)
+{
+    if (input_sample_rate == 0 || output_sample_rate == 0) {
+        return core::Result<Rational>::failure(
+            validation_error(core::ErrorCode::invalid_time_base,
+                             "media.audio.resampler.delay"));
+    }
+    const auto divisor = std::gcd(input_sample_rate, output_sample_rate);
+    const auto reduced_input = static_cast<std::uint64_t>(input_sample_rate / divisor);
+    std::uint64_t high = 0;
+    const auto delay_base = _umul128(reduced_input,
+                                    static_cast<std::uint64_t>(output_sample_rate),
+                                    &high);
+    if (high != 0 || delay_base == 0
+        || delay_base > static_cast<std::uint64_t>(std::numeric_limits<std::int64_t>::max())) {
+        return core::Result<Rational>::failure(
+            validation_error(core::ErrorCode::time_overflow,
+                             "media.audio.resampler.delay"));
+    }
+    const auto delay_units = swr_get_delay(&resampler,
+                                           static_cast<std::int64_t>(delay_base));
+    if (delay_units < 0) {
+        return core::Result<Rational>::failure(
+            media_error(core::ErrorCode::decode_failed,
+                        "media.audio.resampler.delay"));
+    }
+    const auto denominator = static_cast<std::int64_t>(delay_base / input_sample_rate);
+    const auto common = std::gcd(delay_units, denominator);
+    return core::Result<Rational>::success(
+        {delay_units / common, denominator / common});
+}
+
+core::Result<std::int64_t> resampler_output_sample_index(
+    SwrContext& resampler,
+    std::int64_t input_sample_index,
+    std::uint32_t input_sample_rate,
+    std::uint32_t output_sample_rate)
+{
+    const auto input_pts = round_product(input_sample_index,
+                                         output_sample_rate,
+                                         1,
+                                         core::RoundingMode::toward_zero,
+                                         "media.audio.resampler.next_pts");
+    if (!input_pts) {
+        return core::Result<std::int64_t>::failure(input_pts.error());
+    }
+    const auto output_pts = swr_next_pts(&resampler, input_pts.value());
+    if (output_pts == std::numeric_limits<std::int64_t>::min()) {
+        return core::Result<std::int64_t>::failure(
+            media_error(core::ErrorCode::timestamp_unavailable,
+                        "media.audio.resampler.next_pts"));
+    }
+    return round_product(output_pts,
+                         1,
+                         input_sample_rate,
+                         core::RoundingMode::nearest_ties_to_even,
+                         "media.audio.resampler.next_pts");
+}
+
 core::Result<RationalTimestamp> frame_timestamp(const AVFrame& frame,
                                                 const AVStream& stream)
 {
@@ -1357,16 +1498,11 @@ core::Result<FfmpegBuildInfo> query_ffmpeg_build_info()
         return core::Result<FfmpegBuildInfo>::failure(digest.error());
     }
     result.build_configuration_sha256 = digest.value();
-    const auto version_text = [](unsigned int version) {
-        return std::to_string(AV_VERSION_MAJOR(version)) + "."
-            + std::to_string(AV_VERSION_MINOR(version)) + "."
-            + std::to_string(AV_VERSION_MICRO(version));
-    };
-    result.library_versions.emplace("avcodec", version_text(avcodec_version()));
-    result.library_versions.emplace("avformat", version_text(avformat_version()));
-    result.library_versions.emplace("avutil", version_text(avutil_version()));
-    result.library_versions.emplace("swresample", version_text(swresample_version()));
-    result.library_versions.emplace("swscale", version_text(swscale_version()));
+    result.library_versions.emplace("avcodec", library_version_text(avcodec_version()));
+    result.library_versions.emplace("avformat", library_version_text(avformat_version()));
+    result.library_versions.emplace("avutil", library_version_text(avutil_version()));
+    result.library_versions.emplace("swresample", library_version_text(swresample_version()));
+    result.library_versions.emplace("swscale", library_version_text(swscale_version()));
     return core::Result<FfmpegBuildInfo>::success(std::move(result));
 }
 
@@ -1451,6 +1587,24 @@ core::Result<std::int64_t> time_ns_to_sample_index(core::TimeNs time_ns,
                          1'000'000'000ULL,
                          rounding,
                          "media.time.to_sample");
+}
+
+core::Result<std::uint32_t> validate_pcm_schema(
+    std::uint32_t candidate_schema_version,
+    std::string_view candidate_contract_version)
+{
+    if (candidate_schema_version != schema_version
+        || candidate_contract_version != contract_version) {
+        return core::Result<std::uint32_t>::failure(make_error(
+            core::ErrorCategory::compatibility,
+            core::ErrorCode::unsupported_schema,
+            "media.pcm.schema",
+            {{"actualSchemaVersion", std::to_string(candidate_schema_version)},
+             {"actualContractVersion", std::string{candidate_contract_version}},
+             {"requiredSchemaVersion", std::to_string(schema_version)},
+             {"requiredContractVersion", std::string{contract_version}}}));
+    }
+    return core::Result<std::uint32_t>::success(schema_version);
 }
 
 struct MediaSource::Impl {
@@ -1936,6 +2090,26 @@ core::Result<DecodeSummary> MediaSource::decode_audio(
     if (!decoder) {
         return core::Result<DecodeSummary>::failure(decoder.error());
     }
+    if (output.seek_target_time_ns.has_value()) {
+        const auto target_ticks = seek_timestamp(selection.presentation_origin,
+                                                 *output.seek_target_time_ns,
+                                                 make_time_base(av_stream.time_base),
+                                                 core::RoundingMode::floor);
+        if (!target_ticks) {
+            return core::Result<DecodeSummary>::failure(target_ticks.error());
+        }
+        const int seek_result = av_seek_frame(format.value().get(),
+                                              *stream_index,
+                                              target_ticks.value(),
+                                              AVSEEK_FLAG_BACKWARD);
+        if (seek_result < 0) {
+            return core::Result<DecodeSummary>::failure(media_error(
+                core::ErrorCode::seek_unreachable,
+                "media.audio.seek",
+                {{"ffmpeg", ffmpeg_error_string(seek_result)}}));
+        }
+        avcodec_flush_buffers(decoder.value().get());
+    }
     PacketPtr packet{av_packet_alloc()};
     FramePtr frame{av_frame_alloc()};
     if (!packet || !frame) {
@@ -1952,8 +2126,14 @@ core::Result<DecodeSummary> MediaSource::decode_audio(
     std::int64_t next_source_sample_index = 0;
     std::uint32_t source_sample_rate = 0;
     bool have_source_sample_index = false;
+    core::TimeNs segment_origin_time_ns = 0;
+    std::int64_t segment_origin_sample_index = 0;
+    std::vector<std::string> current_channel_order;
+    std::string current_channel_layout{"unknown"};
+    ResampleTrace current_trace_configuration;
     auto publish_pcm = [&](std::vector<std::byte> bytes,
-                           int converted) -> std::optional<core::ErrorInfo> {
+                           int converted,
+                           ResampleTrace trace) -> std::optional<core::ErrorInfo> {
         if (converted <= 0) {
             return std::nullopt;
         }
@@ -1965,24 +2145,42 @@ core::Result<DecodeSummary> MediaSource::decode_audio(
         const auto duration = core::scale_ticks(converted,
                                                 {1, output.sample_rate},
                                                 core::RoundingMode::nearest_ties_to_even);
-        const auto time = sample_index_to_time_ns(next_sample_index,
+        const auto relative_index = core::checked_subtract(next_sample_index,
+                                                           segment_origin_sample_index);
+        if (!relative_index) {
+            return relative_index.error();
+        }
+        const auto time = sample_index_to_time_ns(relative_index.value(),
                                                   output.sample_rate,
-                                                  0,
+                                                  segment_origin_time_ns,
                                                   core::RoundingMode::nearest_ties_to_even);
         if (!duration || !time) {
             return duration ? time.error() : duration.error();
         }
         PcmBuffer delivered;
+        delivered.schema_version = schema_version;
+        delivered.media_contract_version = contract_version;
         delivered.stream_key = stream;
         delivered.time_ns = time.value();
         delivered.duration_ns = duration.value();
-        delivered.segment_id = "audio-segment:" + std::to_string(segment);
+        delivered.segment_id = "audio:" + stream.source_fingerprint_sha256 + ":"
+            + std::to_string(stream.stream_index) + ":"
+            + (output.seek_target_time_ns.has_value()
+                   ? "seek-" + std::to_string(*output.seek_target_time_ns)
+                   : std::string{"begin"})
+            + ":"
+            + std::to_string(segment_origin_time_ns) + ":"
+            + std::to_string(segment);
+        delivered.segment_origin_time_ns = segment_origin_time_ns;
+        delivered.segment_origin_sample_index = segment_origin_sample_index;
         delivered.first_sample_index = next_sample_index;
         delivered.sample_count = static_cast<std::uint64_t>(converted);
         delivered.sample_rate = output.sample_rate;
         delivered.sample_format = "flt";
-        delivered.channel_layout = output.channels == 1 ? "mono" : "stereo";
+        delivered.channel_layout = current_channel_layout;
+        delivered.channel_order = current_channel_order;
         delivered.planar = false;
+        delivered.resample_trace = std::move(trace);
         delivered.planes.push_back({0,
                                     static_cast<std::int64_t>(output.channels
                                                               * sizeof(float)),
@@ -1994,7 +2192,12 @@ core::Result<DecodeSummary> MediaSource::decode_audio(
             "audio:"
                 + std::to_string(next_buffer_id.fetch_add(1, std::memory_order_relaxed)));
         const auto published = callbacks.on_pcm(std::move(delivered));
-        next_sample_index += converted;
+        const auto checked_next = core::checked_add(next_sample_index,
+                                                    static_cast<std::int64_t>(converted));
+        if (!checked_next) {
+            return checked_next.error();
+        }
+        next_sample_index = checked_next.value();
         summary.samples_published += static_cast<std::uint64_t>(converted);
         summary.bytes_published += byte_size;
         summary.peak_single_buffer_bytes =
@@ -2028,6 +2231,16 @@ core::Result<DecodeSummary> MediaSource::decode_audio(
             }
             std::vector<std::byte> bytes(static_cast<std::size_t>(byte_capacity));
             std::uint8_t* output_data = reinterpret_cast<std::uint8_t*>(bytes.data());
+            const auto delay = resampler_delay_before_input(*resampler,
+                                                            current_trace_configuration
+                                                                .input_sample_rate,
+                                                            output.sample_rate);
+            if (!delay) {
+                return delay.error();
+            }
+            auto trace = current_trace_configuration;
+            trace.delay_before_input_frames = delay.value();
+            trace.emitted_from_drain = true;
             const int converted = swr_convert(resampler.get(),
                                               &output_data,
                                               output_capacity,
@@ -2043,7 +2256,7 @@ core::Result<DecodeSummary> MediaSource::decode_audio(
             }
             bytes.resize(static_cast<std::size_t>(converted)
                          * output.channels * sizeof(float));
-            if (const auto error = publish_pcm(std::move(bytes), converted)) {
+            if (const auto error = publish_pcm(std::move(bytes), converted, std::move(trace))) {
                 return error;
             }
             if (summary.terminal_publish_result != PublishResult::accepted) {
@@ -2081,6 +2294,35 @@ core::Result<DecodeSummary> MediaSource::decode_audio(
                      {{"decodedFrame", std::to_string(summary.frames_published - 1)}}});
             }
             const auto signature = audio_signature(*frame, output);
+            core::TimeNs effective_mapped_time = mapped.value();
+            int input_sample_offset = 0;
+            int input_sample_count = frame->nb_samples;
+            if (output.seek_target_time_ns.has_value()
+                && effective_mapped_time < *output.seek_target_time_ns) {
+                const auto offset = time_ns_to_sample_index(
+                    *output.seek_target_time_ns,
+                    effective_mapped_time,
+                    static_cast<std::uint32_t>(frame->sample_rate),
+                    core::RoundingMode::ceil);
+                if (!offset) {
+                    return offset.error();
+                }
+                if (offset.value() >= frame->nb_samples) {
+                    av_frame_unref(frame.get());
+                    continue;
+                }
+                input_sample_offset = static_cast<int>(offset.value());
+                input_sample_count -= input_sample_offset;
+                const auto adjusted_time = sample_index_to_time_ns(
+                    input_sample_offset,
+                    static_cast<std::uint32_t>(frame->sample_rate),
+                    effective_mapped_time,
+                    core::RoundingMode::nearest_ties_to_even);
+                if (!adjusted_time) {
+                    return adjusted_time.error();
+                }
+                effective_mapped_time = adjusted_time.value();
+            }
             if (signature != previous_signature) {
                 if (const auto error = drain_resampler()) {
                     return error;
@@ -2094,6 +2336,20 @@ core::Result<DecodeSummary> MediaSource::decode_audio(
                 SwrContext* raw = nullptr;
                 AVChannelLayout target_layout{};
                 av_channel_layout_default(&target_layout, static_cast<int>(output.channels));
+                const auto target_channel_order = channel_order(target_layout);
+                const auto trace_configuration = resample_trace_configuration(
+                    *frame, target_layout, output);
+                const auto target_layout_name = channel_layout_name(target_layout);
+                if (!target_channel_order || !trace_configuration
+                    || target_layout_name == "unknown") {
+                    av_channel_layout_uninit(&target_layout);
+                    return target_channel_order
+                        ? (trace_configuration
+                               ? media_error(core::ErrorCode::unsupported_media,
+                                             "media.audio.channel_layout")
+                               : trace_configuration.error())
+                        : target_channel_order.error();
+                }
                 const int allocation = swr_alloc_set_opts2(&raw,
                                                            &target_layout,
                                                            AV_SAMPLE_FMT_FLT,
@@ -2104,7 +2360,10 @@ core::Result<DecodeSummary> MediaSource::decode_audio(
                                                            0,
                                                            nullptr);
                 av_channel_layout_uninit(&target_layout);
-                if (allocation < 0 || raw == nullptr || swr_init(raw) < 0) {
+                const int initialization = allocation < 0
+                    ? allocation
+                    : (raw == nullptr ? AVERROR(ENOMEM) : swr_init(raw));
+                if (allocation < 0 || raw == nullptr || initialization < 0) {
                     if (raw != nullptr) {
                         swr_free(&raw);
                     }
@@ -2112,6 +2371,9 @@ core::Result<DecodeSummary> MediaSource::decode_audio(
                                        "media.audio.resampler");
                 }
                 resampler.reset(raw);
+                current_channel_order = target_channel_order.value();
+                current_channel_layout = target_layout_name;
+                current_trace_configuration = trace_configuration.value();
                 have_sample_index = false;
                 have_source_sample_index = false;
                 FormatChanged change;
@@ -2119,7 +2381,7 @@ core::Result<DecodeSummary> MediaSource::decode_audio(
                 change.stream_key = stream;
                 change.audio = AudioFormat{output.sample_rate,
                                            "flt",
-                                           output.channels == 1 ? "mono" : "stereo",
+                                           current_channel_layout,
                                            false};
                 if (callbacks.on_format_changed) {
                     const auto published = callbacks.on_format_changed(change);
@@ -2129,46 +2391,94 @@ core::Result<DecodeSummary> MediaSource::decode_audio(
                     }
                 }
             }
-            const auto timestamp_sample = time_ns_to_sample_index(
-                mapped.value(),
-                0,
-                output.sample_rate,
-                core::RoundingMode::nearest_ties_to_even);
             const auto source_timestamp_sample = time_ns_to_sample_index(
-                mapped.value(),
+                effective_mapped_time,
                 0,
                 static_cast<std::uint32_t>(frame->sample_rate),
                 core::RoundingMode::nearest_ties_to_even);
-            if (!timestamp_sample || !source_timestamp_sample) {
-                return timestamp_sample ? source_timestamp_sample.error()
-                                        : timestamp_sample.error();
+            if (!source_timestamp_sample) {
+                return source_timestamp_sample.error();
             }
             const bool discontinuity = have_source_sample_index
                 && (source_sample_rate != static_cast<std::uint32_t>(frame->sample_rate)
                     || source_timestamp_sample.value() != next_source_sample_index);
-            if (!have_sample_index || discontinuity) {
-                if (discontinuity) {
-                    summary.diagnostics.push_back(
-                        {"timestamp_discontinuity",
-                         {{"expectedSourceSampleIndex",
-                           std::to_string(next_source_sample_index)},
-                          {"actualSourceSampleIndex",
-                           std::to_string(source_timestamp_sample.value())},
-                          {"sourceSampleRate", std::to_string(frame->sample_rate)}}});
-                    ++segment;
+            if (discontinuity) {
+                summary.diagnostics.push_back(
+                    {"timestamp_discontinuity",
+                     {{"expectedSourceSampleIndex", std::to_string(next_source_sample_index)},
+                      {"actualSourceSampleIndex",
+                       std::to_string(source_timestamp_sample.value())},
+                      {"sourceSampleRate", std::to_string(frame->sample_rate)}}});
+                if (const auto error = drain_resampler()) {
+                    return error;
                 }
-                next_sample_index = timestamp_sample.value();
-                have_sample_index = true;
+                if (summary.terminal_publish_result != PublishResult::accepted) {
+                    return std::nullopt;
+                }
+                swr_close(resampler.get());
+                const int reset_result = swr_init(resampler.get());
+                if (reset_result < 0) {
+                    return media_error(core::ErrorCode::decode_failed,
+                                       "media.audio.resampler.flush",
+                                       {{"ffmpeg", ffmpeg_error_string(reset_result)}});
+                }
+                ++segment;
+                have_sample_index = false;
+                have_source_sample_index = false;
+            }
+            const bool starts_new_segment = !have_sample_index;
+            if (starts_new_segment) {
+                segment_origin_time_ns = effective_mapped_time;
             }
             const auto checked_source_next = core::checked_add(
-                source_timestamp_sample.value(), static_cast<std::int64_t>(frame->nb_samples));
+                source_timestamp_sample.value(), static_cast<std::int64_t>(input_sample_count));
             if (!checked_source_next) {
                 return checked_source_next.error();
             }
             next_source_sample_index = checked_source_next.value();
             source_sample_rate = static_cast<std::uint32_t>(frame->sample_rate);
             have_source_sample_index = true;
-            const int output_capacity = swr_get_out_samples(resampler.get(), frame->nb_samples);
+            const int bytes_per_sample = av_get_bytes_per_sample(
+                static_cast<AVSampleFormat>(frame->format));
+            if (bytes_per_sample <= 0) {
+                return media_error(core::ErrorCode::unsupported_media,
+                                   "media.audio.sample_format");
+            }
+            const bool input_planar = av_sample_fmt_is_planar(
+                                          static_cast<AVSampleFormat>(frame->format))
+                != 0;
+            const auto input_planes = input_planar ? frame->ch_layout.nb_channels : 1;
+            std::vector<const std::uint8_t*> adjusted_input(
+                static_cast<std::size_t>(input_planes));
+            for (int plane = 0; plane < input_planes; ++plane) {
+                const auto channel_factor = input_planar ? 1 : frame->ch_layout.nb_channels;
+                adjusted_input[static_cast<std::size_t>(plane)] = frame->extended_data[plane]
+                    + static_cast<std::ptrdiff_t>(input_sample_offset)
+                        * bytes_per_sample * channel_factor;
+            }
+            const std::uint8_t* const* input_data = adjusted_input.data();
+            const auto accounted_sample_index = resampler_output_sample_index(
+                *resampler,
+                source_timestamp_sample.value(),
+                current_trace_configuration.input_sample_rate,
+                output.sample_rate);
+            if (!accounted_sample_index) {
+                return accounted_sample_index.error();
+            }
+            if (!starts_new_segment && accounted_sample_index.value() != next_sample_index) {
+                return media_error(
+                    core::ErrorCode::timestamp_discontinuity,
+                    "media.audio.resampler.sample_index",
+                    {{"expectedFirstSampleIndex", std::to_string(next_sample_index)},
+                     {"actualFirstSampleIndex",
+                      std::to_string(accounted_sample_index.value())}});
+            }
+            next_sample_index = accounted_sample_index.value();
+            if (starts_new_segment) {
+                segment_origin_sample_index = next_sample_index;
+                have_sample_index = true;
+            }
+            const int output_capacity = swr_get_out_samples(resampler.get(), input_sample_count);
             if (output_capacity < 0) {
                 return media_error(core::ErrorCode::decode_failed,
                                    "media.audio.resampler.capacity");
@@ -2181,13 +2491,21 @@ core::Result<DecodeSummary> MediaSource::decode_audio(
             }
             std::vector<std::byte> bytes(static_cast<std::size_t>(byte_capacity));
             std::uint8_t* output_data = reinterpret_cast<std::uint8_t*>(bytes.data());
-            const std::uint8_t* const* input_data =
-                const_cast<const std::uint8_t* const*>(frame->extended_data);
+            const auto delay = resampler_delay_before_input(*resampler,
+                                                            current_trace_configuration
+                                                                .input_sample_rate,
+                                                            output.sample_rate);
+            if (!delay) {
+                return delay.error();
+            }
+            auto trace = current_trace_configuration;
+            trace.delay_before_input_frames = delay.value();
+            trace.emitted_from_drain = false;
             const int converted = swr_convert(resampler.get(),
                                               &output_data,
                                               output_capacity,
                                               input_data,
-                                              frame->nb_samples);
+                                              input_sample_count);
             if (converted < 0) {
                 return media_error(core::ErrorCode::decode_failed,
                                    "media.audio.resampler.convert",
@@ -2195,7 +2513,7 @@ core::Result<DecodeSummary> MediaSource::decode_audio(
             }
             bytes.resize(static_cast<std::size_t>(converted)
                          * output.channels * sizeof(float));
-            if (const auto error = publish_pcm(std::move(bytes), converted)) {
+            if (const auto error = publish_pcm(std::move(bytes), converted, std::move(trace))) {
                 return error;
             }
             av_frame_unref(frame.get());

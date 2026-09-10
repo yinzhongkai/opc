@@ -44,6 +44,22 @@ media::MediaSelection select_video(const std::shared_ptr<media::MediaSource>& so
     return selected.value();
 }
 
+TEST(T021MediaContract, PcmSchemaTwoIsRequiredAndLegacySchemaIsRejected)
+{
+    EXPECT_EQ(media::schema_version, 2U);
+    EXPECT_EQ(media::contract_version, "1.0.0");
+
+    const auto current = media::validate_pcm_schema(media::schema_version,
+                                                    media::contract_version);
+    ASSERT_TRUE(current);
+    EXPECT_EQ(current.value(), media::schema_version);
+
+    const auto legacy = media::validate_pcm_schema(1U, "0.1.0");
+    ASSERT_FALSE(legacy);
+    EXPECT_EQ(legacy.error().category, core::ErrorCategory::compatibility);
+    EXPECT_EQ(legacy.error().code, core::ErrorCode::unsupported_schema);
+}
+
 class TemporaryMediaFile final {
 public:
     explicit TemporaryMediaFile(std::filesystem::path path)

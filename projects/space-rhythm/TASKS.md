@@ -268,9 +268,9 @@
 - 输入与依赖：T-012/T-014 已完成，D-003 已确认 FFmpeg 库 API 路线；仍依赖 T-013、T-017；A-004 0.5、A-005 0.4、A-007 0.1。
 - 优先级：高；按前置条件排队。
 - 完成条件与确认方式：FFmpeg 资源全部使用可审计生命周期管理；CFR/VFR、旋转、多流和音频样例的 `timeNs`/定位符合契约；长素材使用有界队列和缓存，不整段加载；取消、损坏、不支持与资源不足返回结构化错误且不泄漏；记录 FFmpeg build configuration、格式能力矩阵、峰值内存和单元/集成自测；产出代码和可复核运行证据。
-- 进展：multimedia-engineer-ffmpeg-01 于 2026-09-10 完成原 T-018；同日依据用户明确指令重新处理并解决 T021-DEFECT-001。固定 baseline 未变；原实现能力不变。本次在媒体适配层建立单一颜色范围映射：FFmpeg MPEG/TV、JPEG/PC、未指定/未知分别公开为 `limited`、`full`、`unknown`，探测、解码帧和 full-range BGRA 输出共用规则，不泄露 `tv`/`pc`。T-019 保持未启动，未处理 WDAC，未修改 `package/`。
-- 成果与验证证据：[A-015 0.2](artifacts/A-015-ffmpeg-media-pipeline.md)、[A-014 0.3](artifacts/A-014-media-time-buffer-and-golden-contract.md)、[可复核摘要](evidence/T-018/verification-summary.md)、[T021-DEFECT-001 修复证据](evidence/T-018/T021-DEFECT-001.md)、[运行时 DLL 哈希](evidence/T-018/runtime-dlls.sha256.csv)及[实际黄金媒体 SHA-256/ffprobe 证据](../../tests/golden/media/generated/actual-hashes-and-probe-v1.json)。原 T-018 三套 preset 各通过 49/49；修订后 Debug media 22/22、T-021 Debug headless 62/62、CI headless 未修改二进制重试 62/62。独立 `limited` 测试 oracle 未修改。
-- 阻塞与下一位行动人：T021-DEFECT-001 已修复且无剩余实现阻塞；tester-cpp-qt-01 可依据修复证据更新其 T-021 缺陷记录。T-019 保持 `todo`，须等待后续明确启动。
+- 进展：multimedia-engineer-ffmpeg-01 于 2026-09-10 完成原 T-018，同日解决 T021-DEFECT-001；随后依据用户明确指令接收 H-011 并补齐媒体 PCM resampler timing provenance。公共版本提升为 `mediaContractVersion=1.0.0/schemaVersion=2`，`PcmBuffer` 实际填充声道顺序、segment 原点和逐转换 trace；delay 直接来自每次 `swr_convert` 前的 `swr_get_delay`，版本来自运行时 swresample，参数摘要来自版本化实际配置。新增样本精确 audio seek、动态采样率 segment/epoch、取消不排空及旧 schema 拒绝。固定 baseline 与 default/GPL/nonfree 状态未变；未修改 DSP、`package/` 或缓存目录。
+- 成果与验证证据：[A-015 0.3](artifacts/A-015-ffmpeg-media-pipeline.md)、[A-014 0.4](artifacts/A-014-media-time-buffer-and-golden-contract.md)、[H-011 验证摘要](evidence/T-018/H-011-resampler-provenance.md)、[原可复核摘要](evidence/T-018/verification-summary.md)、[T021-DEFECT-001 修复证据](evidence/T-018/T021-DEFECT-001.md)、[运行时 DLL 哈希](evidence/T-018/runtime-dlls.sha256.csv)及[13 项实际黄金媒体 SHA-256/ffprobe 证据](../../tests/golden/media/generated/actual-hashes-and-probe-v1.json)。H-011 修订后 Windows x64 Debug、CI/RelWithDebInfo、Release 媒体专项均由最终二进制 27/27 通过；schema 1 独立拒绝 oracle 与非零 delay/连续 `firstSampleIndex` 断言均通过。
+- 阻塞与下一位行动人：H-011 与 T021-DEFECT-001 已修复且无剩余媒体实现阻塞；H-011 发起人 audio-dsp-engineer-01 可在后续获授权任务中消费 schema 2 字段，DSP 不得重复补偿 delay。T-019 保持 `todo`，须等待后续明确启动。
 - 更新日期：2026-09-10。
 
 ## T-017：定义媒体时间、缓冲契约与黄金样例矩阵

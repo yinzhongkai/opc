@@ -7,11 +7,11 @@
 - 期望结果：由媒体所有者在后续获授权任务中为每个 PCM segment/buffer 公开字段完整且可验证的 resampler trace，使 DSP 无需读取 PTS、帧数或日志即可判断采样时间连续性；不得由 DSP 修改 A-015 或代填媒体事实。
 - 输入与证据：[A-015 0.2](artifacts/A-015-ffmpeg-media-pipeline.md)、[A-018 0.1](artifacts/A-018-audio-dsp-pcm-feature-candidate-contract.md)、[A-019 0.1](artifacts/A-019-audio-analysis-implementation-and-oracles.md)；T-031 PCM adapter 的 `resample_timing_unavailable` fail-closed 测试。
 - 未完成事项：请求字段为 `channelOrder`、`segmentOriginTimeNs`、`segmentOriginSampleIndex`，以及 `resampleTrace.{performed,inputSampleRate,outputSampleRate,implementationId,implementationVersion,parametersDigestSha256,delayBeforeInputFramesNumerator,delayBeforeInputFramesDenominator,delayUnit,delayAccountedInFirstSampleIndex,emittedFromDrain}`；还需说明 trace 在 seek、format change、flush/drain 和新 segment 时的生成/变化规则。字段应来自实际 FFmpeg/swresample 状态与版本化配置，不接受由 PTS、输出帧数或日志推断。
-- 状态：open
+- 状态：completed
 - 创建日期：2026-09-10
-- 接收反馈：尚未接收。
-- 处理结果与证据：T-031 已支持调用者明确提供的 `identity/1` trace；任何非身份或字段不完整的 trace 均返回 `validation/resample_timing_unavailable`，不阻塞本任务对身份向量的分析验证。
-- 关闭或取消依据：暂无。
+- 接收反馈：multimedia-engineer-ffmpeg-01 于 2026-09-10 依据用户明确指令接收；按公共 DTO 必填语义变化提升媒体 schema/API 版本，在实际 FFmpeg/swresample 状态上补齐 timing provenance，并仅执行媒体专项验证，不启动 T-019、不修改 DSP、`package/` 或缓存目录。
+- 处理结果与证据：2026-09-10，媒体层已按 [A-014 0.4](artifacts/A-014-media-time-buffer-and-golden-contract.md) 与 [A-015 0.3](artifacts/A-015-ffmpeg-media-pipeline.md) 提升至 `mediaContractVersion=1.0.0/schemaVersion=2`，并实际填充全部请求字段。运行时版本、版本化配置 SHA-256、`AVFrame`/输出 `AVChannelLayout` 和每次转换前 `swr_get_delay` 是唯一来源；identity、44.1→48、48→44.1、drain、50 ms seek、动态格式和取消测试均通过。非零 delay 缓冲仍保持连续 `firstSampleIndex` 且标志为已记账，消费者不得二次补偿。Debug、CI、Release 最终媒体专项均由最新二进制 27/27 通过，未使用回退。详见 [H-011 验证摘要](evidence/T-018/H-011-resampler-provenance.md)和实际 [13 项黄金媒体/ffprobe 证据](../../tests/golden/media/generated/actual-hashes-and-probe-v1.json)。未修改 DSP 实现。
+- 关闭或取消依据：用户于 2026-09-10 明确授权处理 H-011；请求字段、生命周期规则、兼容拒绝、专项测试、文档与证据已全部交付，故完成关闭。
 
 ## H-010：启动 Windows 发布工作流
 - 发起人：architect-01
