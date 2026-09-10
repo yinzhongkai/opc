@@ -73,6 +73,22 @@ process-creation policy failure (or the host's zero/empty-output variant) may
 fall back to the pinned SDK's trusted `qml`/`qmltestrunner`; compilation,
 existence checks and QML tests still have to pass and the log emits a warning.
 
+Do not use that fallback for T-021 Release acceptance. A strict run must execute
+every generated binary and produce its expected test output. To capture a WDAC
+failure without changing policy, signing files or adding an allowlist, run:
+
+```powershell
+./tooling/windows/Invoke-WdacBinaryDiagnostic.ps1
+```
+
+The diagnostic records the resolved path, SHA-256, PE/x64 header, CRT/imports,
+ACL, alternate streams/`Zone.Identifier`, Authenticode status, effective link
+command, repeated process-start result, and matching Code Integrity/AppLocker
+events under `out/evidence/T021-ENV-001`. Use `-ExecutableName` and
+`-BuildRoots Label=Path` for another generated target or a fresh output tree.
+Exit 0 with no stdout/stderr is recorded as `started-exit-zero-no-output`, not
+as a passed test.
+
 ## CI runner contract
 
 The Windows workflow uses a self-hosted runner labeled
