@@ -1,5 +1,7 @@
 #include <space_rhythm/media/media.hpp>
 
+#include "ffmpeg_color_range.hpp"
+
 #include <gtest/gtest.h>
 
 #include <algorithm>
@@ -15,6 +17,15 @@ namespace media = space_rhythm::media;
 namespace core = space_rhythm::core;
 
 namespace {
+
+TEST(MediaColorRange, NormalizesFfmpegRangeToClosedPublicVocabulary)
+{
+    EXPECT_EQ(media::detail::normalize_color_range(AVCOL_RANGE_MPEG), "limited");
+    EXPECT_EQ(media::detail::normalize_color_range(AVCOL_RANGE_JPEG), "full");
+    EXPECT_EQ(media::detail::normalize_color_range(AVCOL_RANGE_UNSPECIFIED), "unknown");
+    EXPECT_EQ(media::detail::normalize_color_range(AVCOL_RANGE_NB), "unknown");
+    EXPECT_EQ(media::detail::normalize_color_range(static_cast<AVColorRange>(-1)), "unknown");
+}
 
 std::filesystem::path golden(std::string_view name)
 {
@@ -238,6 +249,7 @@ TEST(MediaDecode, NormalizesRotationSarAndColorForThumbnail)
     ASSERT_TRUE(stream.video->geometry.display_transform);
     EXPECT_EQ(stream.video->geometry.display_transform->clockwise_rotation_degrees, 90);
     EXPECT_EQ(stream.video->color.primaries, "bt709");
+    EXPECT_EQ(stream.video->color.range, "limited");
 
     const auto thumbnail = source.value()->thumbnail(
         selection, selection.video.selected.front(), 0, 8, 16);
@@ -245,6 +257,7 @@ TEST(MediaDecode, NormalizesRotationSarAndColorForThumbnail)
     EXPECT_EQ(thumbnail.value().geometry.coded_width, 8);
     EXPECT_EQ(thumbnail.value().geometry.coded_height, 16);
     EXPECT_EQ(thumbnail.value().lease.byte_size(), 8U * 16U * 4U);
+    EXPECT_EQ(thumbnail.value().color.range, "full");
 
     const auto proxy = source.value()->proxy_frame(
         selection, selection.video.selected.front(), 0, 8, 8);
@@ -252,6 +265,7 @@ TEST(MediaDecode, NormalizesRotationSarAndColorForThumbnail)
     EXPECT_EQ(proxy.value().geometry.coded_width, 4);
     EXPECT_EQ(proxy.value().geometry.coded_height, 8);
     EXPECT_LE(proxy.value().lease.byte_size(), 8U * 8U * 4U);
+    EXPECT_EQ(proxy.value().color.range, "full");
 }
 
 TEST(MediaDecode, AnnouncesDynamicFormatEpochBeforeAffectedFrame)

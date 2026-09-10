@@ -4,17 +4,17 @@
 - 成果 ID：A-014
 - 负责人：multimedia-engineer-ffmpeg-01
 - 关联任务：T-017
-- 版本：0.2
+- 版本：0.3
 - 更新日期：2026-09-10
 - 状态：draft
 - 适用范围：第一阶段媒体探测、流选择、解码帧/PCM 交接、媒体时间到核心 `timeNs` 的映射、seek 结果和合法黄金样例；不实现 FFmpeg 解码管线，不冻结发布容器/编码器、硬件加速或许可证组合，不定义事件、项目时间线、IPC 传输或音频 DSP 语义。
-- 来源及输入版本：[A-004 0.5](A-004-mvp-technical-feasibility-and-requirements.md)、[A-005 0.4](A-005-mvp-technology-stack-proposal.md)、[A-006 0.1 WP-04](A-006-domain-work-packages.md)、[A-007 0.1](A-007-four-engineer-execution-plan.md)、[A-012 0.1](A-012-core-domain-contract-0x.md)；D-003/D-006 confirmed；H-004；用户于 2026-09-09 对 T-017 的明确执行要求。
+- 来源及输入版本：[A-004 0.5](A-004-mvp-technical-feasibility-and-requirements.md)、[A-005 0.4](A-005-mvp-technology-stack-proposal.md)、[A-006 0.1 WP-04](A-006-domain-work-packages.md)、[A-007 0.1](A-007-four-engineer-execution-plan.md)、[A-012 0.1](A-012-core-domain-contract-0x.md)；D-003/D-006 confirmed；H-004；用户于 2026-09-09 对 T-017 的明确执行要求及 2026-09-10 对 T021-DEFECT-001 颜色范围规范化的明确要求。
 - 批准依据：尚无。T-017 要求负责人自查并形成候选契约，无独立评审或用户批准要求。
 - 媒体契约版本：`mediaContractVersion = 0.1.0`
 - 逻辑 DTO schema：`schemaVersion = 1`
 - 测试向量集：`vectorSetVersion = 1`
 - 黄金样例清单：`goldenManifestVersion = 1`
-- 版本记录：2026-09-10，0.2，在不改变 `mediaContractVersion`、schema 或既有向量语义的前提下，补充 `packet_dts` 事实来源，扩展长素材/动态格式样例，并登记固定 FFmpeg 构建生成的实际媒体 hash 与 ffprobe 证据；2026-09-09，0.1，首次定义 C-04 媒体信息、流选择、时间映射、显示属性、帧/PCM 缓冲、背压、生命周期、seek、错误和黄金样例配方。
+- 版本记录：2026-09-10，0.3，澄清 `ColorDescription.range` 的封闭公开词汇与 FFmpeg 枚举映射，禁止泄露 `tv`/`pc` 私有名称，不改变 `mediaContractVersion`、schema 或既有向量；2026-09-10，0.2，在不改变 `mediaContractVersion`、schema 或既有向量语义的前提下，补充 `packet_dts` 事实来源，扩展长素材/动态格式样例，并登记固定 FFmpeg 构建生成的实际媒体 hash 与 ffprobe 证据；2026-09-09，0.1，首次定义 C-04 媒体信息、流选择、时间映射、显示属性、帧/PCM 缓冲、背压、生命周期、seek、错误和黄金样例配方。
 
 ## 1. 规范词与单一责任边界
 
@@ -244,6 +244,8 @@ DisplayGeometry {
 
 `ColorDescription` 至少包含 `pixelFormat`、`bitDepth`、`range`、`primaries`、`transfer`、`matrix`、`chromaLocation`，以及可选 mastering display/content light metadata；每项允许显式 `unknown`。
 
+- `range` 的公开值封闭为 `limited | full | unknown`。FFmpeg `AVCOL_RANGE_MPEG`（命令行/名称别名 `tv`）必须映射为 `limited`，`AVCOL_RANGE_JPEG`（别名 `pc`）必须映射为 `full`，`AVCOL_RANGE_UNSPECIFIED` 及适配器不认识的未来/非法值必须映射为 `unknown`；公共 DTO 不得暴露 `tv`、`pc` 或其他 FFmpeg 原始名称。
+- 探测阶段的 codec parameters、解码帧事实及格式转换后的输出描述必须复用同一映射。转换到 full-range BGRA 的帧报告 `full`，不能报告 `pc`；这不把源素材的 `limited` 改写为源事实 `full`。
 - 优先使用解码帧事实，再使用流 codec parameters；二者冲突时不静默覆盖，记录来源和 `color_metadata_changed`。
 - 未确认字段不得按分辨率启发式伪装为源事实。若产品允许推断，推断结果必须标 `assumed`、说明规则并进入转换参数摘要。
 - swscale/其他转换必须显式给出输入和输出颜色描述；转换后帧记录输出描述和转换参数摘要。丢失 HDR/高位深信息必须显式报告，不得称为无损归一化。
@@ -411,7 +413,7 @@ manifest 中另有 30 个可由 BigInteger 精确复算的 `expectedTimeVectors`
 - 黄金矩阵覆盖 CFR、VFR、旋转、SAR/DAR/颜色、多流、44.1/48kHz、损坏、缺视频、缺音频、负起点、20 秒长素材和动态格式；全部来源为项目合成或固定字节，许可证为 CC0-1.0，不使用 `package/`。
 - 执行固定 FFmpeg 8.1.2 `Generate-GoldenMedia.ps1`：`GOLDEN_MEDIA_MANIFEST=PASS fixtures=12 timeVectors=30 contract=0.1.0`，`GOLDEN_MEDIA_GENERATION=PASS fixtures=12`；除故意损坏样例 ffprobe exit=1 外其余均为 0。
 - 当前文件 SHA-256：manifest `d7ad1a59b02022e34666c91cd845c39f7fe2610248999cf717eaccc3d5bc12da`；验证器 `16ed0c0b7d251f485d581934bcbfa3fdaf95b443a6d13033f3692b1d441b9be1`；生成器 `02022c07c22e884904db436b185f80b03667d3378f920f3e45da5cef70ede870`；许可声明 `237a9ddf30e7be10962815cc9314487ed5aab7ddd124f96cd4697c83d00264f7`；实际 hash/ffprobe 证据 `775c8c88d113b0d26216436f5b1713b6970939522200d66bfb1ebf0bee7f967d`。
-- T-018 已按本契约实现并由 [A-015 0.1](A-015-ffmpeg-media-pipeline.md)登记；T-019 未启动。本成果不宣称发布编码器结论或生产许可批准。
+- T-018 已按本契约实现并由 [A-015 0.2](A-015-ffmpeg-media-pipeline.md)登记；T021-DEFECT-001 的范围映射回归证据已补齐，T-019 未启动。本成果不宣称发布编码器结论或生产许可批准。
 
 ## 13. 参考依据
 

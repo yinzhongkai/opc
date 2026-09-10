@@ -9,5 +9,6 @@
 - 长素材：20 秒、500 帧；16×16 BGRA 单缓冲峰值 1024 bytes，累计 512000 bytes。
 - 运行时：Debug/Release 安装各包含 7 个 FFmpeg DLL；逐文件核验分别与 vcpkg `debug/bin`、`bin` 同哈希，且两种配置的对应 DLL 均不同。Release 逐文件证据见 `runtime-dlls.sha256.csv`。
 - 环境说明：Qt smoke 使用 T-013 既有 WDAC 显式回退；媒体测试不使用该回退。安装后应用 smoke 在本机策略下超时，未据此宣称发布安装通过。
+- T021-DEFECT-001：已将 FFmpeg MPEG/`tv`、JPEG/`pc`、未指定/未知范围统一映射为公开 `limited`、`full`、`unknown`，探测与解码输出共用映射。Debug media 22/22、T-021 Debug headless 62/62、CI headless 原二进制重试 62/62；详见 [缺陷修复证据](T021-DEFECT-001.md)。
 - 完整本机日志：被忽略的 `out/evidence/T-018/`；可提交的逐帧 ffprobe 与媒体 hash：`tests/golden/media/generated/actual-hashes-and-probe-v1.json`。
 - 范围：T-019 未启动；未实现 UI、CV、DSP 或发布编码器。

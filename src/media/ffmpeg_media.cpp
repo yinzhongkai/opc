@@ -1,5 +1,7 @@
 #include <space_rhythm/media/media.hpp>
 
+#include "ffmpeg_color_range.hpp"
+
 extern "C" {
 #include <libavcodec/avcodec.h>
 #include <libavcodec/packet.h>
@@ -529,7 +531,7 @@ ColorDescription color_description(const AVCodecParameters& parameters)
                                         static_cast<std::int32_t>(descriptor->comp[index].depth));
         }
     }
-    result.range = enum_name(av_color_range_name(parameters.color_range));
+    result.range = detail::normalize_color_range(parameters.color_range);
     result.primaries = enum_name(av_color_primaries_name(parameters.color_primaries));
     result.transfer = enum_name(av_color_transfer_name(parameters.color_trc));
     result.matrix = enum_name(av_color_space_name(parameters.color_space));
@@ -1024,7 +1026,7 @@ ColorDescription frame_color(const AVFrame& frame)
                                         static_cast<std::int32_t>(descriptor->comp[index].depth));
         }
     }
-    result.range = enum_name(av_color_range_name(frame.color_range));
+    result.range = detail::normalize_color_range(frame.color_range);
     result.primaries = enum_name(av_color_primaries_name(frame.color_primaries));
     result.transfer = enum_name(av_color_transfer_name(frame.color_trc));
     result.matrix = enum_name(av_color_space_name(frame.colorspace));
@@ -1771,7 +1773,7 @@ core::Result<DecodeSummary> MediaSource::decode_video(
                 || normalized_color.matrix == "unknown";
             normalized_color.pixel_format = "bgra";
             normalized_color.bit_depth = 8;
-            normalized_color.range = "pc";
+            normalized_color.range = detail::normalize_color_range(AVCOL_RANGE_JPEG);
             normalized_color.matrix = "rgb";
             normalized_color.assumed = color_assumed;
             const DisplayGeometry normalized_geometry{
@@ -2413,7 +2415,7 @@ core::Result<SeekResult> MediaSource::seek_video(
             candidate.color = frame_color(*frame);
             candidate.color.pixel_format = "bgra";
             candidate.color.bit_depth = 8;
-            candidate.color.range = "pc";
+            candidate.color.range = detail::normalize_color_range(AVCOL_RANGE_JPEG);
             candidate.color.matrix = "rgb";
             candidate.pixel_format = "bgra";
             const auto bytes = static_cast<std::uint64_t>(converted.value().bytes.size());
