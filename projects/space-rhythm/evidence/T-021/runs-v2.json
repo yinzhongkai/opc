@@ -1,0 +1,143 @@
+{
+  "schemaVersion": 1,
+  "evidenceVersion": 2,
+  "task": "T-021",
+  "purpose": "Independent retest of T021-DEFECT-001 against the public ColorDescription.range contract.",
+  "baseCommit": "40b1734780a7d43efe026719192b8ba1537bc232",
+  "trackedWorktreeDirtyDuringRuns": true,
+  "trackedChangesDuringRuns": [
+    "tests/contract/media_public_contract_test.cpp"
+  ],
+  "oraclePolicy": "The existing GM-ROT-SAR-001 expected value remained limited. Independent public-API observations were added for full BGRA output and an unknown-range source; no media implementation or existing oracle was changed.",
+  "rawEvidenceRoot": "out/evidence/T-021",
+  "inputIdentity": {
+    "a014ContractSha256": "1e079e8b22d7d3990b0ffd12bee13485d7866e4f5c89d276b5bc5408cb493922",
+    "a015ImplementationRecordSha256": "0e07a4e8fc9021b2117174b8607f1ece1e9b381149be79c77e1a7ad7ec4c4a7b",
+    "mediaPublicContractTestSha256": "d5376716d788550ecbfaad06374c9d108fe6feea253fd12312ac69a8ad19c608",
+    "headlessRunnerSha256": "5704022b2d3fcfc80fd1dccc1fd05abd767485a6958cfcb746687b485c91631d",
+    "ffmpegMediaImplementationSha256": "d3b3461c9c61ac7e2794824d3013abb0a5a8da55d62c3f6b6ee6a675a2768eed",
+    "ffmpegColorRangeImplementationSha256": "f068fd4e63de1cc7f2bc8b8e866e767dd06797f770eb2d39a23706171688eadd",
+    "gmRotSar001Sha256": "20f26854c2489fb40803c8b4073db4990b614bff9c6f59be605d96baa9b412eb",
+    "runtimeUnknownBmpSha256": "74aae4a8fead568755858e56ace08c57c42e6ff168120e3ab86872426b8c4018"
+  },
+  "publicContractChecks": [
+    {
+      "value": "limited",
+      "observation": "MediaSource::info().streams[].video.color.range for GM-ROT-SAR-001",
+      "debug": "pass",
+      "ciRelWithDebInfo": "pass"
+    },
+    {
+      "value": "full",
+      "observation": "MediaSource::thumbnail().color.range for full-range BGRA output from GM-ROT-SAR-001",
+      "debug": "pass",
+      "ciRelWithDebInfo": "pass"
+    },
+    {
+      "value": "unknown",
+      "observation": "MediaSource::info().streams[].video.color.range for a project-authored 1x1 BMP without color metadata",
+      "debug": "pass",
+      "ciRelWithDebInfo": "pass"
+    }
+  ],
+  "finalRuns": [
+    {
+      "preset": "windows-msvc-x64-debug",
+      "runId": "20260910T072054Z-40b1734780a7-windows-msvc-x64-debug-01",
+      "status": "pass",
+      "tests": 63,
+      "passed": 63,
+      "failed": 0,
+      "blocked": 0,
+      "skipped": 0,
+      "buildStartedFromAbsentDirectory": true,
+      "environmentSha256": "d7dc2e51beff120e2011d909e6867a5768ccaa4f97679e3cd057cc15529c348b",
+      "junitSha256": "e3835e4c0ff3d277505216b6d7a592725ff4b51175b9a9acfcac680bc3f6ecc0",
+      "ctestLogSha256": "9f32b210b41c8652da7d2a147b0b08bb99460b321fa1e8b6f7a20855c6ebf6ff",
+      "resultSha256": "6d01f413ab11825f0e8b48643d300994a6ca92c64a15b7cd81f0167898f7744c",
+      "discoverySha256": "23a3282d7b4e4ac058dd2fa51c7605e6de85ace7fd7de15845bd1da82b599a8b",
+      "labelsSha256": "72e455b129edec669f2b4026f41b02e6b4d68d2212ef954453256984a48b4635",
+      "lastTestLogSha256": "fb4f69470545196fc5d2069118c5a7f78a85bf3f0f6f23669de2a19635b64458",
+      "buildLogs": [
+        {
+          "path": "build/build-20260910-152054.log",
+          "sha256": "56dd8c4454fd4a27308ca50e616f87bb2918008aabd865bb20e7d1e56a7c4819"
+        },
+        {
+          "path": "build/build-20260910-152102.log",
+          "sha256": "3ad3016e88a5791f0a0cdb1e9d3f57672e518cf06a7efb1caef364c164acd31c"
+        }
+      ],
+      "nativeLogs": [
+        {
+          "path": "build/native-20260910-152054.log",
+          "sha256": "403cf20ffc281a0f30d52dd7a116ad678117afcbaa0bf6eb9b028de8a2b9af92"
+        },
+        {
+          "path": "build/native-20260910-152102.log",
+          "sha256": "33344e95b9abb4cf37681f4edbccbd847e2599cb7a0f3325b3e2e9bf87ae2939"
+        }
+      ]
+    },
+    {
+      "preset": "ci-windows-msvc-x64",
+      "configuration": "RelWithDebInfo",
+      "runId": "20260910T072336Z-40b1734780a7-ci-windows-msvc-x64-01",
+      "status": "pass",
+      "tests": 63,
+      "passed": 63,
+      "failed": 0,
+      "blocked": 0,
+      "skipped": 0,
+      "buildStartedFromAbsentDirectory": true,
+      "environmentSha256": "3ff6cadcec5762940d802d9655963da6eec978b4f0726f4963130cb138f2bf5f",
+      "junitSha256": "9ddc317307a7e9ad198e01f3394cc78efca6d54c4d13e3430e3c3aa2ad12b98a",
+      "ctestLogSha256": "161c6aea7e5ffc5b210aaeba23a153b0a72cd947225ebce1d7d682eeea716873",
+      "resultSha256": "92e51f513a753a3fd40395450f24aa4ad9b1f8a4741719d7d8406d602d4c5bee",
+      "discoverySha256": "5e0c460032228256867dcd5aca378d793edfcf58e2b0be9958ff807496aa623c",
+      "labelsSha256": "55c0639c1a9e807da53828e69b4627d55d40825928be3d01fbd7d18e12e3b1ae",
+      "lastTestLogSha256": "f55be599eced32366422f946d204ee08ed56c6cded1d9f61924b23051b17b91d",
+      "buildLogs": [
+        {
+          "path": "build/build-20260910-152336.log",
+          "sha256": "0877a929be3f915ed2161b720da36c26f8b2fcd80335d57b0c94b834f3bff0b3"
+        },
+        {
+          "path": "build/build-20260910-152344.log",
+          "sha256": "995b26cf2475af9b32592086c54aad741fc0e804f8f253047fd87ad5f792e056"
+        }
+      ],
+      "nativeLogs": [
+        {
+          "path": "build/native-20260910-152336.log",
+          "sha256": "3ea14f67373be48d61bf1fe4a234abec075c8a860a50e0fae7a4322e7db2f11f"
+        },
+        {
+          "path": "build/native-20260910-152344.log",
+          "sha256": "12fa72c39e9131a68b232fe6c9a1afbae2d665404742a829a183bb3f8eee68ae"
+        }
+      ]
+    }
+  ],
+  "preservedDiagnostics": [
+    {
+      "runId": "20260910T072025Z-40b1734780a7-windows-msvc-x64-debug-01",
+      "status": "blocked-before-test",
+      "resultSha256": "d48e4adfdc4be60abf5a51a27bc0616973488c14dd9b5d4d2c8e2678f76699fe",
+      "reason": "Passing -Clean to the existing two-stage runner removed the build directory again at the Build stage. No test ran; the following Debug run started from an absent build directory."
+    },
+    {
+      "runId": "20260910T072155Z-40b1734780a7-ci-windows-msvc-x64-01",
+      "status": "pass-excluded-from-final-set",
+      "resultSha256": "afd6bc5f59f66403cfdd20e482d8ae2e7540b7f0280fd37146185cde178e247f",
+      "reason": "The 63/63 run reused an existing CI build directory and the runner copied a stale LastTestsFailed.log. A verified clean build and run replaced it as final evidence."
+    }
+  ],
+  "unresolvedEnvironmentDiagnostics": [
+    {
+      "id": "T021-ENV-001",
+      "status": "blocked",
+      "scope": "Historical windows-msvc-x64-release run: 26 core GoogleTest cases blocked by host WDAC. Release was outside this retest request and was not reclassified."
+    }
+  ]
+}

@@ -224,14 +224,14 @@
 ## T-021：实现统一测试入口、契约测试与黄金样例库
 - 负责人：tester-cpp-qt-01
 - 状态：completed
-- 授权来源与日期：本会话用户于 2026-09-08 明确要求把任务细化后交给已创建的 C++/Qt 测试工程师执行；同一用户于 2026-09-10 确认 T-013、T-014、T-017、T-020、D-003 前置满足及 T-015、T-016、T-018 已有实现，并明确启动 T-021。
+- 授权来源与日期：本会话用户于 2026-09-08 明确要求把任务细化后交给已创建的 C++/Qt 测试工程师执行；同一用户于 2026-09-10 确认 T-013、T-014、T-017、T-020、D-003 前置满足及 T-015、T-016、T-018 已有实现，并明确启动 T-021；同日用户明确要求基于 `40b1734` 独立复测 T021-DEFECT-001，只有 Debug 和 CI/RelWithDebInfo 通过后才标记 resolved。
 - 目标与范围：在测试策略和首批核心/媒体契约可用后，依据 D-003 建立 Windows headless 测试入口、契约测试和许可可核对的黄金样例；不把 `package/` 逆向样本作为可分发测试资产。
-- 输入与依赖：T-013、T-014、T-017、T-020 completed，D-003 confirmed；T-015、T-016、T-018 实际实现；A-004 0.5、A-005 0.4、A-007 0.1、A-012 0.1、A-014 0.2、A-015 0.1、A-016 0.1。
+- 输入与依赖：T-013、T-014、T-017、T-020 completed，D-003 confirmed；T-015、T-016、T-018 实际实现；A-004 0.5、A-005 0.4、A-007 0.1、A-012 0.1、A-014 0.3、A-015 0.2、A-016 0.1；T021-DEFECT-001 修复提交 `40b1734`。
 - 优先级：高（用户要求本轮执行）。
 - 完成条件与确认方式：提供统一 `ctest` 入口、标签、headless 配置和失败诊断归档；覆盖时间换算边界/溢出、事件锁定/事务/修订、PTS/VFR/旋转、IPC 状态机、schema 迁移及原子保存契约；黄金样例登记来源或生成方式、许可证、哈希、期望值及容差依据；按 D-003 接入 GoogleTest、Qt Test/Qt Quick Test；负责人自查并在 Windows x64 可用环境中保存实际运行证据。
-- 进展：tester-cpp-qt-01 于 2026-09-10 完成统一 `Invoke-HeadlessTests.ps1`、CTest `t021` 与分层/门槛标签、JUnit/环境/日志/LastTest 失败归档；新增 11 项仅调用公开 API 的独立契约测试，覆盖时间与溢出、锁定/事务/修订、PTS/CFR/VFR/旋转、IPC 状态机/协议、schema 迁移、原子保存和缓存损坏；新增 12 个 CC0 样例与 30 个时间向量的配方/许可/hash/期望/零容差审计。现有 GoogleTest、Qt Test、Qt Quick Test、应用/worker smoke 和媒体 golden 已纳入同一入口。Debug/CI 各实际执行 61 项，60 pass、1 fail；Release 34 pass、1 fail、26 blocked，未发生 skip。
-- 成果与验证证据：[A-017 0.1：Windows headless 契约测试入口与证据](artifacts/A-017-windows-headless-contract-test-entry-and-evidence.md)、[T-021 验证摘要](evidence/T-021/verification-summary.md)及 [机器可读运行索引](evidence/T-021/runs-v1.json)。原始证据位于忽略的 `out/evidence/T-021/`，索引记录环境/JUnit/CTest/result SHA-256；所有运行使用固定 seed、UTC、offscreen、软件 RHI 和独立 TEMP/TMP。
-- 阻塞与下一位行动人：T-021 交付物已完成，但被测结果并非通过。`T021-DEFECT-001` 为 A-014 0.2 期望 `ColorDescription.range=limited`、三 preset 实际均为 `tv`，下一行动人为 multimedia-engineer-ffmpeg-01 或 A-014 契约所有者；`T021-ENV-001` 为 Release 的既有 `space_rhythm_core_tests.exe` 被 WDAC 阻止启动，26 项保持 blocked，下一行动人为 build-engineer-windows-qt-01/主机策略管理员。G0～G4、性能、效果和硬件兼容均为 `not-evaluated`。T-022 保持 todo，未启动。
+- 进展：tester-cpp-qt-01 于 2026-09-10 完成统一 `Invoke-HeadlessTests.ps1`、CTest `t021` 与分层/门槛标签、JUnit/环境/日志/LastTest 失败归档；首轮新增 11 项仅调用公开 API 的独立契约测试及 12 个 CC0 样例/30 个时间向量审计。用户同日要求基于 `40b1734` 独立复测 T021-DEFECT-001 后，保留 GM-ROT-SAR-001 的 `limited` oracle，并补齐经公开 `MediaSource` 观察的 `full/unknown` 用例，独立契约增至 12 项。Debug 与干净 CI/RelWithDebInfo 各实际执行 63 项并 63 pass、0 fail、0 blocked、0 skip；首次 Release 记录仍为 34 pass、1 个当时的契约 fail、26 blocked。
+- 成果与验证证据：[A-017 0.2：Windows headless 契约测试入口与证据](artifacts/A-017-windows-headless-contract-test-entry-and-evidence.md)、[T-021 验证摘要](evidence/T-021/verification-summary.md)、[首次运行索引](evidence/T-021/runs-v1.json)及 [`40b1734` 独立复测索引](evidence/T-021/runs-v2.json)。原始证据位于忽略的 `out/evidence/T-021/`，索引记录输入、环境、JUnit、CTest、发现、标签、LastTest、构建日志及 result SHA-256；所有运行使用固定 seed、UTC、offscreen、软件 RHI 和独立 TEMP/TMP。
+- 阻塞与下一位行动人：`T021-DEFECT-001` 已按用户指定条件独立复测为 `resolved`：A-014 0.3 的公开 `limited/full/unknown` 映射及 GM-ROT-SAR-001 在 Debug、CI/RelWithDebInfo 均通过，既有 oracle 与媒体实现未由测试会话修改。`T021-ENV-001` 继续为 `blocked`：首次 Release 的既有 `space_rhythm_core_tests.exe` 被 WDAC 阻止启动，26 项不得改写为 pass，下一行动人为 build-engineer-windows-qt-01/主机策略管理员。G0～G4、性能、效果和硬件兼容均为 `not-evaluated`。T-022 保持 todo，未启动。
 - 更新日期：2026-09-10。
 
 ## T-020：制定测试策略、需求追踪与可复现规则

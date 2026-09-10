@@ -4,14 +4,14 @@
 - 成果 ID：A-017
 - 负责人：tester-cpp-qt-01
 - 关联任务：T-021
-- 版本：0.1
+- 版本：0.2
 - 更新日期：2026-09-10
 - 状态：draft
 - 适用范围：依据 A-016 0.1 建立 T-021 Windows x64 headless 统一入口、CTest 标签、失败诊断归档、独立公开契约测试及合法媒体黄金样例审计；不修改被测业务实现，不执行 T-022，不给未确认的性能、效果、硬件、Windows 或发布门槛通过结论。
-- 来源及输入版本：[A-012 0.1](A-012-core-domain-contract-0x.md)、[A-014 0.2](A-014-media-time-buffer-and-golden-contract.md)、[A-015 0.1](A-015-ffmpeg-media-pipeline.md)、[A-016 0.1](A-016-cpp-qt-test-strategy-and-traceability.md)；D-003 confirmed；T-013、T-014、T-017、T-020 completed；T-015、T-016、T-018 实际实现；用户于 2026-09-10 明确启动 T-021。
-- 批准依据：尚无。T-021 的测试基础设施交付完成不等于被测产品、G0～G4 或发布批准；当前实际结果含 fail 与 blocked。
+- 来源及输入版本：[A-012 0.1](A-012-core-domain-contract-0x.md)、[A-014 0.3](A-014-media-time-buffer-and-golden-contract.md)、[A-015 0.2](A-015-ffmpeg-media-pipeline.md)、[A-016 0.1](A-016-cpp-qt-test-strategy-and-traceability.md)；D-003 confirmed；T-013、T-014、T-017、T-020 completed；T-015、T-016、T-018 实际实现；用户于 2026-09-10 明确启动 T-021，并要求基于提交 `40b1734` 独立复测 T021-DEFECT-001。
+- 批准依据：尚无。T021-DEFECT-001 的 Debug/CI 独立复测通过不等于被测产品、G0～G4 或发布批准；Release 仍含 WDAC blocked。
 - 测试入口版本：`headlessTestEntryVersion = 0.1.0`
-- 版本记录：2026-09-10，0.1，首次实现统一入口、标签与诊断证据，新增 11 项独立公开契约测试和 12 样例审计，并记录 Debug/Release/CI 实际结果。
+- 版本记录：2026-09-10，0.2，基于 `40b1734` 保留既有 oracle 独立复测颜色范围，补齐公开 `limited/full/unknown` 观察点，Debug 与 CI/RelWithDebInfo 各 63/63 pass，并保留 Release WDAC blocked；2026-09-10，0.1，首次实现统一入口、标签与诊断证据，新增 11 项独立公开契约测试和 12 样例审计，并记录 Debug/Release/CI 实际结果。
 
 ## 1. 实现结果
 
@@ -32,9 +32,9 @@ GoogleTest 采用 CMake 静态测试注册，以便即使受管主机阻止某�
 | `T021SchemaContract` | `ProjectStore::deserialize` | schema 1→2 迁移、未来 schema 拒绝 | pass |
 | `T021StorageContract` | `ProjectStore::save/load` + 公开 `SaveFault` | disk full/partial/before commit 均保留最后成功提交 | pass |
 | `T021CacheContract` | `RebuildableCache::put/get` | 内容损坏返回 `cache_corrupt`、要求重建并移除坏条目 | pass |
-| `T021MediaContract` | `map_presentation_time`、`MediaSource` | 时间溢出、CFR PTS、VFR 非帧序号重建、旋转/SAR/BT.709/range | 2 pass，1 fail |
+| `T021MediaContract` | `map_presentation_time`、`MediaSource` | 时间溢出、CFR PTS、VFR 非帧序号重建、旋转/SAR/BT.709，以及公开 `limited/full/unknown` range | 基于 `40b1734` 的 Debug/CI 为 4/4 pass；Release 未在本轮复测 |
 
-测试只调用公开头文件中的 API，预期来自 A-012/A-014 的稳定字面 oracle 和状态不变量。测试没有读取实现私有状态，没有复制时间换算、JSON、缓存格式或 FFmpeg metadata 解析逻辑。存储故障使用公开注入点；临时文件由独立 `QTemporaryDir` 创建且统一入口将系统临时根限定到本次 `work/`。
+测试只调用公开头文件中的 API，预期来自 A-012/A-014 的稳定字面 oracle 和状态不变量。测试没有读取实现私有状态，没有复制时间换算、JSON、缓存格式或 FFmpeg metadata 解析逻辑。存储故障使用公开注入点；临时存储和本轮项目自有固定字节 BMP 均受 RAII 管理，统一入口将系统临时根限定到本次 `work/`。
 
 ## 3. 黄金样例逐项核对
 
@@ -59,18 +59,33 @@ GoogleTest 采用 CMake 静态测试注册，以便即使受管主机阻止某�
 
 ## 4. 实际运行与问题
 
+### 4.1 首次执行
+
 | preset | 总数 | 结果 | 原始 run-id |
 |---|---:|---|---|
 | Debug | 61 | 60 pass，1 fail | `20260910T062656Z-b9ae42a53a67-windows-msvc-x64-debug-01` |
 | Release | 61 | 34 pass，1 fail，26 blocked | `20260910T062715Z-b9ae42a53a67-windows-msvc-x64-release-01` |
 | CI/RelWithDebInfo | 61 | 60 pass，1 fail | `20260910T062734Z-b9ae42a53a67-ci-windows-msvc-x64-01` |
 
-稳定产品失败 `T021-DEFECT-001`：`GM-ROT-SAR-001` 的公开 `ColorDescription.range` 实际为 `tv`，A-014 0.2 期望 `limited`。三套配置一致失败，不修改测试 oracle，也不修改被测媒体实现。
+首次执行稳定产品失败 `T021-DEFECT-001`：`GM-ROT-SAR-001` 的公开 `ColorDescription.range` 实际为 `tv`，A-014 0.2 期望 `limited`。三套配置一致失败；该历史证据保持原样。
 
 环境阻断 `T021-ENV-001`：Release 的既有 `space_rhythm_core_tests.exe` 被 WDAC 阻止启动，26 项记为 `blocked`；同 preset 的独立契约可执行文件及媒体、Qt/QML、应用/worker 测试可运行。发现阶段的两次首次/同条件重试证据均保留，未用回退替代 GoogleTest。
 
+### 4.2 `40b1734` 独立复测
+
+既有 GM-ROT-SAR-001 `limited` oracle 未修改；新增契约只通过公开 `MediaSource` 验证同一样例的 full-range BGRA 缩略图为 `full`，以及无颜色元数据的项目自有 1×1 BMP 源为 `unknown`。测试未包含或调用 `ffmpeg_color_range.hpp`，也未修改媒体实现。
+
+| preset | 总数 | 结果 | 原始 run-id |
+|---|---:|---|---|
+| Debug | 63 | 63 pass | `20260910T072054Z-40b1734780a7-windows-msvc-x64-debug-01` |
+| CI/RelWithDebInfo | 63 | 63 pass | `20260910T072336Z-40b1734780a7-ci-windows-msvc-x64-01` |
+
+两次终态运行都从不存在的 build 目录配置和构建；JUnit 均为 0 failures、0 skipped。环境、JUnit、CTest、发现、标签、LastTest 和构建日志哈希见 [runs-v2.json](../evidence/T-021/runs-v2.json)。因此按用户指定条件将 `T021-DEFECT-001` 标记为 `resolved`。一次因现有入口 `-Clean` 在 Build 阶段重复清理而未执行测试的 Debug 尝试，以及一次携带旧 `LastTestsFailed.log` 的复用 CI 运行均作为诊断保留，未计入终态结果。
+
+本轮未运行 Release，也未改变 `T021-ENV-001`：首次 Release 的 26 项 core GoogleTest 仍为 WDAC `blocked`，不能写成全绿。
+
 ## 5. 状态与边界
 
-T-021 的交付物已经完成：入口、标签、诊断归档、独立契约覆盖、黄金审计和三 preset 实际证据均存在。因此任务状态可记为 completed；这不把测试结果写成全绿。被测结果当前为 `fail`，Release 部分范围为 `blocked`。
+T-021 的交付物和本次指定复测均已完成：入口、标签、诊断归档、独立契约覆盖、黄金审计、首次三 preset 证据及基于 `40b1734` 的 Debug/CI 复测证据均存在。因此任务状态保持 completed；T021-DEFECT-001 为 resolved，但 Release 部分范围仍为 `blocked`，整体不写成全绿。
 
 所有性能耗时仅是执行诊断，没有确认的性能阈值和基准硬件矩阵，故性能、效果、硬件/Windows 兼容及 G0～G4 均保持 `not-evaluated`。T-022 没有启动、没有建立或执行其端到端/故障/性能批次。

@@ -20,7 +20,7 @@
 | A-014 | [媒体时间、流、缓冲与黄金样例契约 0.x](A-014-media-time-buffer-and-golden-contract.md) | multimedia-engineer-ffmpeg-01 | T-017 | 0.3 | draft | 尚无 |
 | A-015 | [FFmpeg 媒体探测、解码、时间映射与代理管线](A-015-ffmpeg-media-pipeline.md) | multimedia-engineer-ffmpeg-01 | T-018 | 0.2 | draft | 尚无 |
 | A-016 | [C++/Qt 测试策略、需求追踪与可复现规则](A-016-cpp-qt-test-strategy-and-traceability.md) | tester-cpp-qt-01 | T-020 | 0.1 | draft | 尚无 |
-| A-017 | [Windows headless 契约测试入口与证据](A-017-windows-headless-contract-test-entry-and-evidence.md) | tester-cpp-qt-01 | T-021 | 0.1 | draft | 尚无 |
+| A-017 | [Windows headless 契约测试入口与证据](A-017-windows-headless-contract-test-entry-and-evidence.md) | tester-cpp-qt-01 | T-021 | 0.2 | draft | 尚无 |
 
 ## 正文元信息样式（不是真实成果）
 

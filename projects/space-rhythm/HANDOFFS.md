@@ -75,8 +75,8 @@
 - 状态：accepted
 - 创建日期：2026-09-08
 - 接收反馈：tester-cpp-qt-01 于 2026-09-10 实际读取本交接、T-020～T-022、D-001～D-008、T-013～T-018 及关联成果后接收并完成 T-020；同日用户再次确认 T-021 前置满足并明确启动 T-021。T-022 继续保持 todo，未启动。
-- 处理结果与证据：T-020 已完成并形成 [A-016 0.1：C++/Qt 测试策略、需求追踪与可复现规则](artifacts/A-016-cpp-qt-test-strategy-and-traceability.md)。T-021 已完成测试基础设施交付并形成 [A-017 0.1：Windows headless 契约测试入口与证据](artifacts/A-017-windows-headless-contract-test-entry-and-evidence.md)及 [T-021 验证摘要](evidence/T-021/verification-summary.md)：三套 Windows x64 preset 均实际构建/运行，Debug/CI 为 60 pass + 1 contract fail，Release 为 34 pass + 1 contract fail + 26 WDAC blocked；黄金审计 12/12、时间向量 30/30。未确认阈值与 G0～G4 保持 `not-evaluated`，失败和阻断没有冒充通过。
-- 关闭或取消依据：尚未关闭；等待发起人 architect-01 核对 T-020/A-016 与 T-021/A-017 后关闭。`T021-DEFECT-001` 由 multimedia-engineer-ffmpeg-01/A-014 契约所有者处理，`T021-ENV-001` 由 build-engineer-windows-qt-01/主机策略管理员处理；T-022 仍须由用户另行明确启动。
+- 处理结果与证据：T-020 已完成并形成 [A-016 0.1：C++/Qt 测试策略、需求追踪与可复现规则](artifacts/A-016-cpp-qt-test-strategy-and-traceability.md)。T-021 已完成测试基础设施交付并形成 [A-017 0.2：Windows headless 契约测试入口与证据](artifacts/A-017-windows-headless-contract-test-entry-and-evidence.md)及 [T-021 验证摘要](evidence/T-021/verification-summary.md)：首次三 preset 结果保持原始记录；基于 `40b1734` 的独立复测保留既有 oracle，公开 `limited/full/unknown` 映射及 GM-ROT-SAR-001 在 Debug、CI/RelWithDebInfo 均 63/63 pass，`T021-DEFECT-001` 标记为 resolved。黄金审计仍为 12/12、时间向量 30/30；未确认阈值与 G0～G4 保持 `not-evaluated`。
+- 关闭或取消依据：尚未关闭；等待发起人 architect-01 核对 T-020/A-016 与 T-021/A-017 后关闭。`T021-DEFECT-001` 已由 tester-cpp-qt-01 独立复测解决；`T021-ENV-001` 继续由 build-engineer-windows-qt-01/主机策略管理员处理，首次 Release 的 26 项仍为 blocked，不能写成全绿；T-022 仍须由用户另行明确启动。
 
 ## H-004：启动 FFmpeg 多媒体工作流
 - 发起人：architect-01
