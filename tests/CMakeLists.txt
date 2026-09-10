@@ -1,5 +1,40 @@
 include(GoogleTest)
 
+find_program(SPACE_RHYTHM_POWERSHELL_EXECUTABLE NAMES pwsh powershell REQUIRED)
+set(SPACE_RHYTHM_FFMPEG_TOOL_DIR
+    "${VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/tools/ffmpeg")
+add_test(
+    NAME media.golden_generate
+    COMMAND "${SPACE_RHYTHM_POWERSHELL_EXECUTABLE}" -NoProfile -File
+        "${CMAKE_CURRENT_SOURCE_DIR}/golden/media/Generate-GoldenMedia.ps1"
+        -FfmpegPath "${SPACE_RHYTHM_FFMPEG_TOOL_DIR}/ffmpeg.exe"
+        -FfprobePath "${SPACE_RHYTHM_FFMPEG_TOOL_DIR}/ffprobe.exe"
+)
+set_tests_properties(media.golden_generate PROPERTIES
+    FIXTURES_SETUP golden-media
+    LABELS "golden;media"
+    TIMEOUT 180
+)
+
+add_executable(space_rhythm_media_tests
+    unit/media_golden_test.cpp
+)
+target_link_libraries(space_rhythm_media_tests PRIVATE
+    SpaceRhythm::MediaAdapter
+    GTest::gtest_main
+)
+target_compile_definitions(space_rhythm_media_tests PRIVATE
+    SPACE_RHYTHM_GOLDEN_MEDIA_DIR="${CMAKE_CURRENT_SOURCE_DIR}/golden/media/generated"
+)
+space_rhythm_apply_build_policy(space_rhythm_media_tests)
+gtest_discover_tests(space_rhythm_media_tests
+    DISCOVERY_MODE PRE_TEST
+    DISCOVERY_TIMEOUT 120
+    PROPERTIES
+        FIXTURES_REQUIRED golden-media
+        LABELS "golden;media;unit"
+)
+
 add_executable(space_rhythm_core_tests
     unit/core_contract_vectors_test.cpp
     unit/core_skeleton_test.cpp

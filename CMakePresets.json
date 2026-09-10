@@ -28,6 +28,7 @@
         "SPACE_RHYTHM_WARNINGS_AS_ERRORS": "ON",
         "VCPKG_HOST_TRIPLET": "x64-windows",
         "VCPKG_INSTALLED_DIR": "${sourceDir}/out/vcpkg_installed",
+        "VCPKG_MANIFEST_FEATURES": "media",
         "VCPKG_OVERLAY_TRIPLETS": "${sourceDir}/cmake/triplets",
         "VCPKG_TARGET_TRIPLET": "x64-windows-space-rhythm"
       },
@@ -91,7 +92,7 @@
         "outputOnFailure": true
       },
       "environment": {
-        "PATH": "$env{QT_ROOT}/bin;$penv{PATH}",
+        "PATH": "${sourceDir}/out/vcpkg_installed/x64-windows-space-rhythm/debug/bin;$env{QT_ROOT}/bin;$penv{PATH}",
         "QT_QPA_PLATFORM": "offscreen"
       },
       "execution": {
@@ -105,7 +106,7 @@
         "outputOnFailure": true
       },
       "environment": {
-        "PATH": "$env{QT_ROOT}/bin;$penv{PATH}",
+        "PATH": "${sourceDir}/out/vcpkg_installed/x64-windows-space-rhythm/bin;$env{QT_ROOT}/bin;$penv{PATH}",
         "QT_QPA_PLATFORM": "offscreen"
       },
       "execution": {
@@ -119,7 +120,7 @@
         "outputOnFailure": true
       },
       "environment": {
-        "PATH": "$env{QT_ROOT}/bin;$penv{PATH}",
+        "PATH": "${sourceDir}/out/vcpkg_installed/x64-windows-space-rhythm/bin;$env{QT_ROOT}/bin;$penv{PATH}",
         "QT_QPA_PLATFORM": "offscreen"
       },
       "execution": {

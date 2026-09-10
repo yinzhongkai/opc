@@ -68,11 +68,17 @@ foreach ($fixture in $manifest.fixtures) {
             )
         }
         'GM-ROT-SAR-001' {
-            Invoke-Ffmpeg -OutputFile $fixture.outputFile -Arguments @(
-                '-f','lavfi','-i','testsrc2=size=16x8:rate=2:duration=1','-vf','setsar=4/3',
-                '-c:v','rawvideo','-pix_fmt','yuv420p','-metadata:s:v:0','rotate=90',
-                '-color_primaries','bt709','-color_trc','bt709','-colorspace','bt709','-color_range','tv','-fflags','+bitexact'
+            $baseName = 'rotated_sar_base.mkv'
+            Invoke-Ffmpeg -OutputFile $baseName -Arguments @(
+                '-f','lavfi','-i','testsrc2=size=16x8:rate=2:duration=1',
+                '-vf','setsar=4/3,setparams=range=limited:color_primaries=bt709:color_trc=bt709:colorspace=bt709',
+                '-c:v','ffv1','-level','3','-pix_fmt','yuv420p','-fflags','+bitexact','-flags:v','+bitexact'
             )
+            Invoke-Ffmpeg -OutputFile $fixture.outputFile -Arguments @(
+                '-display_rotation','-90','-i',(Join-Path $outputRoot $baseName),
+                '-map','0:v:0','-c','copy','-fflags','+bitexact'
+            )
+            Remove-Item -LiteralPath (Join-Path $outputRoot $baseName) -Force
         }
         'GM-MULTI-001' {
             Invoke-Ffmpeg -OutputFile $fixture.outputFile -Arguments @(
@@ -110,30 +116,86 @@ foreach ($fixture in $manifest.fixtures) {
         }
         'GM-NEG-START-001' {
             Invoke-Ffmpeg -OutputFile $fixture.outputFile -Arguments @(
-                '-f','lavfi','-i','testsrc2=size=16x16:rate=25:duration=0.16','-vf','settb=expr=1/1000,setpts=-80+40*N',
-                '-fps_mode','vfr','-enc_time_base','1:1000','-avoid_negative_ts','disabled','-c:v','ffv1','-level','3','-fflags','+bitexact','-flags:v','+bitexact'
+                '-copyts','-f','lavfi','-i','testsrc2=size=16x16:rate=25:duration=0.16','-vf','settb=expr=1/1000,setpts=-80+40*N',
+                '-fps_mode','passthrough','-enc_time_base','1:1000','-avoid_negative_ts','disabled','-c:v','ffv1','-level','3','-fflags','+bitexact','-flags:v','+bitexact'
             )
+        }
+        'GM-LONG-001' {
+            Invoke-Ffmpeg -OutputFile $fixture.outputFile -Arguments @(
+                '-f','lavfi','-i','testsrc2=size=16x16:rate=25:duration=20',
+                '-f','lavfi','-i','anullsrc=r=48000:cl=mono','-t','20',
+                '-map','0:v:0','-map','1:a:0','-c:v','ffv1','-level','3','-c:a','pcm_s16le',
+                '-fflags','+bitexact','-flags:v','+bitexact','-flags:a','+bitexact'
+            )
+        }
+        'GM-DYNAMIC-001' {
+            $partAName = 'dynamic_format_part_a.ts'
+            $partBName = 'dynamic_format_part_b.ts'
+            Invoke-Ffmpeg -OutputFile $partAName -Arguments @(
+                '-f','lavfi','-i','testsrc2=size=16x16:rate=25:duration=0.2',
+                '-map','0:v:0','-c:v','mpeg2video','-g','1','-bf','0','-f','mpegts','-fflags','+bitexact','-flags:v','+bitexact'
+            )
+            Invoke-Ffmpeg -OutputFile $partBName -Arguments @(
+                '-f','lavfi','-i','testsrc2=size=32x16:rate=25:duration=0.2',
+                '-map','0:v:0','-c:v','mpeg2video','-g','1','-bf','0','-f','mpegts','-fflags','+bitexact','-flags:v','+bitexact'
+            )
+            $finalPath = Join-Path $outputRoot $fixture.outputFile
+            $destination = [System.IO.File]::Create($finalPath)
+            try {
+                foreach ($partName in @($partAName, $partBName)) {
+                    $partPath = Join-Path $outputRoot $partName
+                    $source = [System.IO.File]::OpenRead($partPath)
+                    try { $source.CopyTo($destination) }
+                    finally { $source.Dispose() }
+                }
+            }
+            finally {
+                $destination.Dispose()
+                Remove-Item -LiteralPath (Join-Path $outputRoot $partAName) -Force
+                Remove-Item -LiteralPath (Join-Path $outputRoot $partBName) -Force
+            }
         }
         default { throw "No generator is defined for fixture $($fixture.id)" }
     }
 }
+
+$ffmpegVersionOutput = & $ffmpeg -version 2>&1
+if ($LASTEXITCODE -ne 0) { throw 'ffmpeg -version failed' }
+$ffprobeVersionOutput = & $ffprobe -version 2>&1
+if ($LASTEXITCODE -ne 0) { throw 'ffprobe -version failed' }
+$configurationLine = [string]($ffmpegVersionOutput | Where-Object { $_ -like 'configuration:*' } | Select-Object -First 1)
+$configuration = $configurationLine -replace '^configuration:\s*', ''
 
 $probeRecords = foreach ($fixture in $manifest.fixtures) {
     $path = Join-Path $outputRoot $fixture.outputFile
     $hash = (Get-FileHash -Algorithm SHA256 -LiteralPath $path).Hash.ToLowerInvariant()
     $probeJson = $null
     & $ffprobe -v error -show_format -show_streams -show_frames -of json $path 2>$null | Out-String | ForEach-Object { $probeJson = $_ }
+    $ffprobeExitCode = $LASTEXITCODE
     [pscustomobject]@{
         fixtureId = [string]$fixture.id
         outputFile = [string]$fixture.outputFile
         recipeSha256 = [string]$fixture.recipeSha256
         mediaSha256 = $hash
-        ffmpegVersion = (& $ffmpeg -version | Select-Object -First 1)
-        ffprobeExitCode = $LASTEXITCODE
+        ffprobeExitCode = $ffprobeExitCode
         probeJson = $probeJson
     }
 }
 
 $hashManifestPath = Join-Path $outputRoot 'actual-hashes-and-probe-v1.json'
-$probeRecords | ConvertTo-Json -Depth 100 | Set-Content -LiteralPath $hashManifestPath -Encoding utf8NoBOM
+$evidence = [pscustomobject]@{
+    schemaVersion = 1
+    mediaContractVersion = [string]$manifest.mediaContractVersion
+    ffmpegVersion = [string]($ffmpegVersionOutput | Select-Object -First 1)
+    ffprobeVersion = [string]($ffprobeVersionOutput | Select-Object -First 1)
+    configuration = $configuration
+    configurationSha256 = Get-FileHash -InputStream ([System.IO.MemoryStream]::new([Text.Encoding]::UTF8.GetBytes($configuration))) -Algorithm SHA256 | Select-Object -ExpandProperty Hash
+    enabledManifestFeatures = @('avcodec','avdevice','avfilter','avformat','ffmpeg','ffprobe','swresample','swscale','version3')
+    defaultFeaturesEnabled = $false
+    gplEnabled = $configuration -match '(^|\s)--enable-gpl(\s|$)'
+    nonfreeEnabled = $configuration -match '(^|\s)--enable-nonfree(\s|$)'
+    fixtures = @($probeRecords)
+}
+$evidence.configurationSha256 = $evidence.configurationSha256.ToLowerInvariant()
+$evidence | ConvertTo-Json -Depth 100 | Set-Content -LiteralPath $hashManifestPath -Encoding utf8NoBOM
 Write-Output "GOLDEN_MEDIA_GENERATION=PASS fixtures=$($manifest.fixtures.Count) manifest=$hashManifestPath"

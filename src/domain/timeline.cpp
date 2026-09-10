@@ -990,6 +990,8 @@ std::string_view to_string(ErrorCategory category) noexcept
         return "cancelled";
     case ErrorCategory::compatibility:
         return "compatibility";
+    case ErrorCategory::media:
+        return "media";
     case ErrorCategory::resource_limit:
         return "resource_limit";
     case ErrorCategory::internal:
@@ -1045,6 +1047,32 @@ std::string_view to_string(ErrorCode code) noexcept
         return "unsupported_feature";
     case ErrorCode::unknown_enum:
         return "unknown_enum";
+    case ErrorCode::unsupported_media:
+        return "unsupported_media";
+    case ErrorCode::corrupt_media:
+        return "corrupt_media";
+    case ErrorCode::missing_required_stream:
+        return "missing_required_stream";
+    case ErrorCode::stream_not_found:
+        return "stream_not_found";
+    case ErrorCode::stream_type_mismatch:
+        return "stream_type_mismatch";
+    case ErrorCode::timestamp_unavailable:
+        return "timestamp_unavailable";
+    case ErrorCode::timestamp_origin_unavailable:
+        return "timestamp_origin_unavailable";
+    case ErrorCode::timestamp_origin_changed:
+        return "timestamp_origin_changed";
+    case ErrorCode::timestamp_discontinuity:
+        return "timestamp_discontinuity";
+    case ErrorCode::seek_unreachable:
+        return "seek_unreachable";
+    case ErrorCode::unsupported_display_transform:
+        return "unsupported_display_transform";
+    case ErrorCode::format_changed:
+        return "format_changed";
+    case ErrorCode::decode_failed:
+        return "decode_failed";
     case ErrorCode::resource_limit:
         return "resource_limit";
     case ErrorCode::invariant_violation:

@@ -47,6 +47,16 @@ if(NOT SPACE_RHYTHM_QT_ROOT)
 endif()
 
 list(PREPEND CMAKE_PREFIX_PATH "${SPACE_RHYTHM_QT_ROOT}")
+list(PREPEND CMAKE_MODULE_PATH
+    "${VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/share/ffmpeg")
+find_package(FFMPEG REQUIRED)
+if(FFMPEG_VERSION)
+    set(SPACE_RHYTHM_FFMPEG_VERSION "${FFMPEG_VERSION}" CACHE STRING
+        "Resolved FFmpeg package version")
+endif()
+if(NOT SPACE_RHYTHM_FFMPEG_VERSION)
+    message(FATAL_ERROR "The FFmpeg package did not report a version")
+endif()
 find_package(Qt6 6.11.2 EXACT REQUIRED COMPONENTS Core Gui Network Qml Quick Test QuickTest)
 find_package(GTest CONFIG REQUIRED)
 
@@ -78,3 +88,4 @@ message(STATUS "Space Rhythm target architecture: x64")
 message(STATUS "Space Rhythm MSVC baseline: ${MSVC_VERSION}")
 message(STATUS "Space Rhythm Qt SDK: ${_space_rhythm_qt_root} (${Qt6_VERSION})")
 message(STATUS "Space Rhythm MSVC runtime: dynamic (/MD, /MDd)")
+message(STATUS "Space Rhythm FFmpeg: ${SPACE_RHYTHM_FFMPEG_VERSION}")
