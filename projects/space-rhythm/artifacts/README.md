@@ -17,7 +17,8 @@
 | A-011 | [一期 MVP 完整研发编制与任务计划](A-011-complete-mvp-engineering-staffing-and-task-plan.md) | architect-01 | T-023 | 0.1 | draft | 尚无 |
 | A-012 | [核心时间、事件、修订与事务契约 0.x](A-012-core-domain-contract-0x.md) | core-systems-engineer-cpp-01 | T-014 | 0.1 | draft | 尚无 |
 | A-013 | [Windows x64 CMake/Ninja 工程与 CI 骨架](A-013-windows-x64-cmake-ci-skeleton.md) | build-engineer-windows-qt-01 | T-013 | 0.1 | draft | 尚无 |
-| A-014 | [媒体时间、流、缓冲与黄金样例契约 0.x](A-014-media-time-buffer-and-golden-contract.md) | multimedia-engineer-ffmpeg-01 | T-017 | 0.1 | draft | 尚无 |
+| A-014 | [媒体时间、流、缓冲与黄金样例契约 0.x](A-014-media-time-buffer-and-golden-contract.md) | multimedia-engineer-ffmpeg-01 | T-017 | 0.2 | draft | 尚无 |
+| A-015 | [FFmpeg 媒体探测、解码、时间映射与代理管线](A-015-ffmpeg-media-pipeline.md) | multimedia-engineer-ffmpeg-01 | T-018 | 0.1 | draft | 尚无 |
 
 ## 正文元信息样式（不是真实成果）
 

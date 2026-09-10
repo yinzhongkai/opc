@@ -4,8 +4,8 @@
 - 成果 ID：A-014
 - 负责人：multimedia-engineer-ffmpeg-01
 - 关联任务：T-017
-- 版本：0.1
-- 更新日期：2026-09-09
+- 版本：0.2
+- 更新日期：2026-09-10
 - 状态：draft
 - 适用范围：第一阶段媒体探测、流选择、解码帧/PCM 交接、媒体时间到核心 `timeNs` 的映射、seek 结果和合法黄金样例；不实现 FFmpeg 解码管线，不冻结发布容器/编码器、硬件加速或许可证组合，不定义事件、项目时间线、IPC 传输或音频 DSP 语义。
 - 来源及输入版本：[A-004 0.5](A-004-mvp-technical-feasibility-and-requirements.md)、[A-005 0.4](A-005-mvp-technology-stack-proposal.md)、[A-006 0.1 WP-04](A-006-domain-work-packages.md)、[A-007 0.1](A-007-four-engineer-execution-plan.md)、[A-012 0.1](A-012-core-domain-contract-0x.md)；D-003/D-006 confirmed；H-004；用户于 2026-09-09 对 T-017 的明确执行要求。
@@ -14,7 +14,7 @@
 - 逻辑 DTO schema：`schemaVersion = 1`
 - 测试向量集：`vectorSetVersion = 1`
 - 黄金样例清单：`goldenManifestVersion = 1`
-- 版本记录：2026-09-09，0.1，首次定义 C-04 媒体信息、流选择、时间映射、显示属性、帧/PCM 缓冲、背压、生命周期、seek、错误和黄金样例配方。
+- 版本记录：2026-09-10，0.2，在不改变 `mediaContractVersion`、schema 或既有向量语义的前提下，补充 `packet_dts` 事实来源，扩展长素材/动态格式样例，并登记固定 FFmpeg 构建生成的实际媒体 hash 与 ffprobe 证据；2026-09-09，0.1，首次定义 C-04 媒体信息、流选择、时间映射、显示属性、帧/PCM 缓冲、背压、生命周期、seek、错误和黄金样例配方。
 
 ## 1. 规范词与单一责任边界
 
@@ -115,7 +115,7 @@ RationalTimestamp {
   present: bool
   ticks: Int64                  // present=true 时有效
   timeBase: TimeBase            // 秒/刻度；分子、分母必须 > 0
-  origin: packet_pts | frame_pts | best_effort | stream_start |
+  origin: packet_pts | packet_dts | frame_pts | best_effort | stream_start |
           format_start | decoded_first_presentation | synthesized_duration
 }
 ```
@@ -360,18 +360,20 @@ ChannelState = created | open | draining | ended | failed | cancelled | closed
 |---|---|---|---|---|
 | GM-CFR-001 | CFR + A/V | 合成 testsrc2/静音；CC0-1.0 | `9a93e92f347e5929263fb72d54206d8f47ba36a0403c8a22da2576ae0a99577c` | video PTS ms `[0,40,80,120,160]`；timeNs `[0,40m,80m,120m,160m]`。 |
 | GM-VFR-001 | VFR | 合成 testsrc2；CC0-1.0 | `7453fc778b309b98fac0f596b1f5cb14508e22e59bd211ff90137408e3af9d15` | PTS ms `[0,40,100,140,240]` 原样映射；不得按平均 fps 重建。 |
-| GM-ROT-SAR-001 | 旋转、SAR/DAR、颜色 | 合成 testsrc2；CC0-1.0 | `314f1f2a1438c8ecc7a30fb73f58efb8d6bed63a88deac5a111ba9745508024f` | 16×8、SAR 4:3、编码 DAR 8:3、顺时针 90° 后 DAR 3:8、BT.709 limited。 |
+| GM-ROT-SAR-001 | 旋转、SAR/DAR、颜色 | 合成 testsrc2；CC0-1.0 | `5e0467cd9ed47cb2249ef09c838a57c8fc978f06d441335a5d1d25298e109fd3` | 16×8、SAR 4:3、编码 DAR 8:3、显示矩阵逆时针 -90° 映射为顺时针 90°，方向后 DAR 3:8、BT.709 limited。 |
 | GM-MULTI-001 | 多流 | 合成视频+48k/44.1k 静音；CC0-1.0 | `39f68e0b16ff87885c4f4eb64b8d18bd9dfe0ad742ef2da0b8e872728ab6ba3b` | 1 video + 2 audio；默认选 eng/48k，显式可选 jpn/44.1k。 |
 | GM-AUDIO-44100-001 | 44.1 kHz 采样 | 合成数字静音；CC0-1.0 | `21a78fffe12d8fae31cde268be751814362b0962331ae20050245dc5370bd84b` | 4410 samples；索引 `[0,1,2205,4409,4410]` 对应 `[0,22676,50m,99977324,100m]` ns。 |
 | GM-AUDIO-48000-001 | 48 kHz 采样 | 合成数字静音；CC0-1.0 | `6837e8223eb7178c9569b087ee7a5f26a2102808aaa22e5fe05b2e0d9f200ef7` | 4800 samples；索引 `[0,1,2400,4799,4800]` 对应 `[0,20833,50m,99979167,100m]` ns。 |
 | GM-CORRUPT-001 | 损坏媒体 | 固定截断 EBML 字节；CC0-1.0 | `a8bfb71271547ffd8ba34a1e642c76e219617bdbaf0b0b95db089a727c1b2495` | probe 返回 `media/corrupt_media`，不产生部分 MediaInfo 成功。 |
 | GM-MISSING-VIDEO-001 | 缺视频流 | 合成静音；CC0-1.0 | `28fd80c48b8b12675c98ece2827c4000fa14453dee165c8bf626c966ca1077aa` | required video 返回 `missing_required_stream`；audio 可选。 |
 | GM-MISSING-AUDIO-001 | 缺音频流 | 合成 testsrc2；CC0-1.0 | `57fdc675174150023ccf378665e0676646d0ed020bfa3118921ac241a4ed53e8` | required audio 返回 `missing_required_stream`；video 可选。 |
-| GM-NEG-START-001 | 负 start/PTS | 合成 testsrc2+显式 PTS；CC0-1.0 | `a1b88162bae7c12e883eebdb9f42e753fa708950ad1ff9f014b18da7b0055e15` | 原始 ms `[-80,-40,0,40]`，公共零点 -80ms，timeNs `[0,40m,80m,120m]`。 |
+| GM-NEG-START-001 | 负 start/PTS | 合成 testsrc2+显式 PTS；CC0-1.0 | `f05d1d88be4457662b284bab2259283a23e3dd6f58f98e96410198f693ba39af` | `-copyts` 保留原始 ms `[-80,-40,0,40]`，公共零点 -80ms，timeNs `[0,40m,80m,120m]`。 |
+| GM-LONG-001 | 长素材有界内存 | 合成 20 秒 A/V；CC0-1.0 | `268d33f6726fb53bcfaf74de3d2db66647c9a0d50034e102dbe99d31fa9796e4` | 500 个视频帧逐帧交付；16×16 BGRA 单缓冲峰值 1024 bytes，不整段加载。 |
+| GM-DYNAMIC-001 | 动态视频格式 epoch | 两段合成 MPEG-TS 拼接；CC0-1.0 | `11b72d19cf3d4f95ab51e005c8dd2d6ba105cf0c253f0349e72acc7b90aedc37` | 16×16 → 32×16；必须先发布 epoch 1/2 的 `FormatChanged` 再交付对应帧。 |
 
 表中的 hash 是 `canonicalRecipe` UTF-8 字节的 SHA-256，独立于文本换行和 FFmpeg muxer 的版本元数据。它冻结样例语义、来源和生成方法，不伪装成尚未生成的媒体文件 hash。
 
-生成器在项目固定的 FFmpeg/ffprobe 构建可用后才生成二进制，并自动写 `generated/actual-hashes-and-probe-v1.json`，登记实际媒体 SHA-256、FFmpeg 版本、recipe hash、probe JSON 和退出码。实际媒体 hash 只对同一固定构建与配方有复现意义；生成文件默认不进入 Git。FFmpeg 不可用时脚本在写输出前失败，`-ValidateOnly` 只检查清单和时间算术。
+生成器在项目固定的 FFmpeg/ffprobe 构建可用后生成二进制，并自动写入已登记的 [actual-hashes-and-probe-v1.json](../../../tests/golden/media/generated/actual-hashes-and-probe-v1.json)，包含实际媒体 SHA-256、FFmpeg 版本及 configuration、recipe hash、逐帧/流/容器 ffprobe JSON 和退出码。实际媒体 hash 只对同一固定构建与配方有复现意义；媒体二进制仍被忽略，证据 JSON 纳入版本控制。FFmpeg 不可用时脚本在写输出前失败，`-ValidateOnly` 只检查清单和时间算术。
 
 ### 10.2 逻辑边界向量
 
@@ -392,7 +394,7 @@ ChannelState = created | open | draining | ended | failed | cancelled | closed
 | MTV-BACKPRESSURE-001 | 达到 maxBytes 但未达 maxItems | publish=`would_block` 或等待；不得入队或静默丢弃。 |
 | MTV-FORMAT-001 | 分辨率/采样率改变但未发布新 epoch | 拒绝并返回 `media/format_changed`。 |
 
-manifest 中另有 28 个可由 BigInteger 精确复算的 `expectedTimeVectors`；其 ID、输入、舍入和期望必须逐项匹配，不能通过修改期望值掩盖实现偏差。
+manifest 中另有 30 个可由 BigInteger 精确复算的 `expectedTimeVectors`；其 ID、输入、舍入和期望必须逐项匹配，不能通过修改期望值掩盖实现偏差。
 
 ## 11. 兼容与变更规则
 
@@ -406,11 +408,10 @@ manifest 中另有 28 个可由 BigInteger 精确复算的 `expectedTimeVectors`
 
 - 完整对照 A-012 0.1：直接复用 `TimeNs`、`DurationNs`、`TimeBase`、四种舍入、checked overflow 和 ErrorInfo envelope；没有定义同义纳秒类型。
 - 覆盖 T-017 完成条件：MediaInfo、流选择、旋转/SAR/DAR、颜色、帧/PCM、所有权、背压、生命周期、PTS/DTS/time_base、start/负/未知时间戳、CFR/VFR、seek、采样索引和结构化错误均有规范规则。
-- 黄金矩阵覆盖 CFR、VFR、旋转、SAR/DAR/颜色、多流、44.1/48kHz、损坏、缺视频、缺音频和负起点；全部来源为项目合成或固定字节，许可证为 CC0-1.0，不使用 `package/`。
-- 执行 `Test-GoldenMediaManifest.ps1`：`GOLDEN_MEDIA_MANIFEST=PASS fixtures=10 timeVectors=28 contract=0.1.0`。
-- 执行 `Generate-GoldenMedia.ps1 -ValidateOnly`：manifest 再验证通过，`GOLDEN_MEDIA_GENERATION=SKIPPED_VALIDATE_ONLY`；当前 PATH 无 ffmpeg/ffprobe，未安装依赖、未生成或伪造媒体二进制 hash。
-- 当前文件 SHA-256：manifest `09f7d7d5eac4b2844d1a18736e67af890839d40d8eb633631b093bdacb384a9b`；验证器 `16ed0c0b7d251f485d581934bcbfa3fdaf95b443a6d13033f3692b1d441b9be1`；生成器 `730146e7afdd1a2e06b076d487f4c391cae0275294441dfe081aecf958a4aa51`；许可声明 `237a9ddf30e7be10962815cc9314487ed5aab7ddd124f96cd4697c83d00264f7`。
-- T-018/T-019 未启动；未修改、读取或执行 `package/`。本成果不宣称已有 FFmpeg 解码运行证据、发布编码器结论或生产许可批准。
+- 黄金矩阵覆盖 CFR、VFR、旋转、SAR/DAR/颜色、多流、44.1/48kHz、损坏、缺视频、缺音频、负起点、20 秒长素材和动态格式；全部来源为项目合成或固定字节，许可证为 CC0-1.0，不使用 `package/`。
+- 执行固定 FFmpeg 8.1.2 `Generate-GoldenMedia.ps1`：`GOLDEN_MEDIA_MANIFEST=PASS fixtures=12 timeVectors=30 contract=0.1.0`，`GOLDEN_MEDIA_GENERATION=PASS fixtures=12`；除故意损坏样例 ffprobe exit=1 外其余均为 0。
+- 当前文件 SHA-256：manifest `d7ad1a59b02022e34666c91cd845c39f7fe2610248999cf717eaccc3d5bc12da`；验证器 `16ed0c0b7d251f485d581934bcbfa3fdaf95b443a6d13033f3692b1d441b9be1`；生成器 `02022c07c22e884904db436b185f80b03667d3378f920f3e45da5cef70ede870`；许可声明 `237a9ddf30e7be10962815cc9314487ed5aab7ddd124f96cd4697c83d00264f7`；实际 hash/ffprobe 证据 `775c8c88d113b0d26216436f5b1713b6970939522200d66bfb1ebf0bee7f967d`。
+- T-018 已按本契约实现并由 [A-015 0.1](A-015-ffmpeg-media-pipeline.md)登记；T-019 未启动。本成果不宣称发布编码器结论或生产许可批准。
 
 ## 13. 参考依据
 

@@ -87,8 +87,8 @@
 - 未完成事项：FFmpeg 具体版本、H.264 后端、发布容器/编码器矩阵和许可证路径尚未确认；不得用原型选择代替发布决定，也不得使用许可不清样例。
 - 状态：accepted
 - 创建日期：2026-09-08
-- 接收反馈：multimedia-engineer-ffmpeg-01 于 2026-09-09 依据用户明确指令接收；本轮仅执行 T-017，不提前执行 T-018/T-019，不修改 `package/`。
-- 处理结果与证据：T-017 已于 2026-09-09 完成，交付 [A-014 0.1 媒体契约](artifacts/A-014-media-time-buffer-and-golden-contract.md)、[10 个合法样例配方与 28 个时间向量](../../tests/golden/media/fixtures-v1.json)、[可复现生成器](../../tests/golden/media/Generate-GoldenMedia.ps1)、[验证器](../../tests/golden/media/Test-GoldenMediaManifest.ps1)和[CC0 声明](../../tests/golden/media/LICENSE.md)。manifest 自查通过；当前无 ffmpeg/ffprobe，未生成媒体二进制，脚本将在固定 FFmpeg 构建可用时自动登记实际媒体 SHA-256 与 probe 证据。T-018/T-019 未启动，`package/` 未修改。
+- 接收反馈：multimedia-engineer-ffmpeg-01 于 2026-09-09 依据用户明确指令接收并完成 T-017；又于 2026-09-10 依据用户明确指令启动 T-018，使用现有 `vcpkg.json` 的 `media` feature 与固定 baseline，不提前执行 T-019，不修改 `package/`。
+- 处理结果与证据：T-017 已于 2026-09-09 完成；T-018 已于 2026-09-10 完成。交付 [A-014 0.2 媒体契约](artifacts/A-014-media-time-buffer-and-golden-contract.md)、[A-015 0.1 FFmpeg 管线](artifacts/A-015-ffmpeg-media-pipeline.md)、[12 个合法样例配方与 30 个时间向量](../../tests/golden/media/fixtures-v1.json)、[实际媒体 SHA-256/ffprobe 证据](../../tests/golden/media/generated/actual-hashes-and-probe-v1.json)及 [T-018 可复核摘要](evidence/T-018/verification-summary.md)。固定 baseline 未变，解析 FFmpeg 8.1.2#3/ABI 与 LGPLv3-or-later 配置已登记，default/GPL/nonfree 保持关闭；Debug、Release、CI 各通过 49/49 CTest，媒体专项 16/16。T-019 未启动，`package/` 未修改或暂存。
 - 关闭或取消依据：暂无。
 
 ## H-003：启动 C++ 核心与系统工作流

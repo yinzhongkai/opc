@@ -41,11 +41,11 @@
     {
       "id": "GM-ROT-SAR-001",
       "category": "rotation_sar_color",
-      "outputFile": "rotated_sar.mov",
+      "outputFile": "rotated_sar.mkv",
       "source": "Project-generated FFmpeg lavfi testsrc2",
       "license": "CC0-1.0",
-      "canonicalRecipe": "v1|rotated_sar.mov|lavfi:testsrc2=16x8:2fps:1s|sar=4/3|rotate_cw=90|bt709:tv|mov:rawvideo:yuv420p",
-      "recipeSha256": "314f1f2a1438c8ecc7a30fb73f58efb8d6bed63a88deac5a111ba9745508024f",
+      "canonicalRecipe": "v1|rotated_sar.mkv|lavfi:testsrc2=16x8:2fps:1s|setsar=4/3+setparams=bt709:tv|matroska:ffv1:yuv420p|remux:display_rotation=-90",
+      "recipeSha256": "5e0467cd9ed47cb2249ef09c838a57c8fc978f06d441335a5d1d25298e109fd3",
       "expectedStreams": ["video"],
       "expectedDisplay": {"codedWidth": 16, "codedHeight": 8, "sarNumerator": 4, "sarDenominator": 3, "codedDarNumerator": 8, "codedDarDenominator": 3, "clockwiseRotationDegrees": 90, "orientedDarNumerator": 3, "orientedDarDenominator": 8, "colorPrimaries": "bt709", "colorTransfer": "bt709", "colorMatrix": "bt709", "colorRange": "limited"},
       "expectedTimeVectors": [
@@ -146,8 +146,8 @@
       "outputFile": "negative_start.mkv",
       "source": "Project-generated FFmpeg lavfi testsrc2 with explicit negative presentation timestamps",
       "license": "CC0-1.0",
-      "canonicalRecipe": "v1|negative_start.mkv|lavfi:testsrc2=16x16:25fps:4frames|settb=1/1000|pts=-80,-40,0,40|avoid_negative_ts=disabled|matroska:ffv1",
-      "recipeSha256": "a1b88162bae7c12e883eebdb9f42e753fa708950ad1ff9f014b18da7b0055e15",
+      "canonicalRecipe": "v1|negative_start.mkv|lavfi:testsrc2=16x16:25fps:4frames|copyts|settb=1/1000|pts=-80,-40,0,40|fps_mode=passthrough|avoid_negative_ts=disabled|matroska:ffv1",
+      "recipeSha256": "f05d1d88be4457662b284bab2259283a23e3dd6f58f98e96410198f693ba39af",
       "expectedStreams": ["video"],
       "expectedOrigin": {"ticks": -80, "timeBaseNumerator": 1, "timeBaseDenominator": 1000, "source": "selected_stream_start_or_first_presentation"},
       "expectedTimeVectors": [
@@ -156,6 +156,35 @@
         {"id": "GM-NEG-START-001-V2", "ticks": 0, "originTicks": -80, "timeBaseNumerator": 1, "timeBaseDenominator": 1000, "rounding": "nearest_ties_to_even", "expectedTimeNs": 80000000},
         {"id": "GM-NEG-START-001-V3", "ticks": 40, "originTicks": -80, "timeBaseNumerator": 1, "timeBaseDenominator": 1000, "rounding": "nearest_ties_to_even", "expectedTimeNs": 120000000}
       ]
+    },
+    {
+      "id": "GM-LONG-001",
+      "category": "bounded_memory",
+      "outputFile": "long_bounded.mkv",
+      "source": "Project-generated FFmpeg lavfi testsrc2 and digital silence",
+      "license": "CC0-1.0",
+      "canonicalRecipe": "v1|long_bounded.mkv|lavfi:testsrc2=16x16:25fps:20s+anullsrc=mono:48000:20s|matroska:ffv1+pcm_s16le|frames=500|memory=bounded",
+      "recipeSha256": "268d33f6726fb53bcfaf74de3d2db66647c9a0d50034e102dbe99d31fa9796e4",
+      "expectedStreams": ["video", "audio"],
+      "expectedTimeVectors": [
+        {"id": "GM-LONG-001-V0", "ticks": 0, "originTicks": 0, "timeBaseNumerator": 1, "timeBaseDenominator": 1000, "rounding": "nearest_ties_to_even", "expectedTimeNs": 0},
+        {"id": "GM-LONG-001-V499", "ticks": 19960, "originTicks": 0, "timeBaseNumerator": 1, "timeBaseDenominator": 1000, "rounding": "nearest_ties_to_even", "expectedTimeNs": 19960000000}
+      ]
+    },
+    {
+      "id": "GM-DYNAMIC-001",
+      "category": "dynamic_format_epoch",
+      "outputFile": "dynamic_format.ts",
+      "source": "Project-generated FFmpeg lavfi testsrc2 segments",
+      "license": "CC0-1.0",
+      "canonicalRecipe": "v1|dynamic_format.ts|lavfi:testsrc2=16x16:25fps:0.2s+testsrc2=32x16:25fps:0.2s|mpegts-concat:mpeg2video:g1|format_epochs=16x16,32x16",
+      "recipeSha256": "11b72d19cf3d4f95ab51e005c8dd2d6ba105cf0c253f0349e72acc7b90aedc37",
+      "expectedStreams": ["video"],
+      "expectedFormatEpochs": [
+        {"codedWidth": 16, "codedHeight": 16},
+        {"codedWidth": 32, "codedHeight": 16}
+      ],
+      "expectedTimeVectors": []
     }
   ]
 }

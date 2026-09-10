@@ -262,16 +262,16 @@
 
 ## T-018：实现 FFmpeg 探测、解码、时间映射与代理管线
 - 负责人：multimedia-engineer-ffmpeg-01
-- 状态：todo
+- 状态：completed
 - 授权来源与日期：本会话用户于 2026-09-08 明确要求把任务细化后交给已创建的 FFmpeg 多媒体工程师执行。
 - 目标与范围：依据已确认契约，用 FFmpeg C API 和 C++ RAII 实现只读媒体探测、解复用、视频/音频解码、格式归一、真实时间映射、代理帧/缩略图/波形源数据和 seek；不实现镜头/运动算法、节奏 DSP、QML 页面或最终发布编码矩阵。
 - 输入与依赖：T-012/T-014 已完成，D-003 已确认 FFmpeg 库 API 路线；仍依赖 T-013、T-017；A-004 0.5、A-005 0.4、A-007 0.1。
 - 优先级：高；按前置条件排队。
 - 完成条件与确认方式：FFmpeg 资源全部使用可审计生命周期管理；CFR/VFR、旋转、多流和音频样例的 `timeNs`/定位符合契约；长素材使用有界队列和缓存，不整段加载；取消、损坏、不支持与资源不足返回结构化错误且不泄漏；记录 FFmpeg build configuration、格式能力矩阵、峰值内存和单元/集成自测；产出代码和可复核运行证据。
-- 进展：已完成任务拆分和依赖登记，尚未由负责人会话接收。
-- 成果与验证证据：[A-007 0.1 第 3.3 节](artifacts/A-007-four-engineer-execution-plan.md)定义实现面与验收；实际实现暂无。
-- 阻塞与下一位行动人：D-003 已确认且 T-012/T-014 已完成；仍等待 T-013 的统一 x64 媒体目标和 T-017 媒体契约。multimedia-engineer-ffmpeg-01 可先完成 T-017。
-- 更新日期：2026-09-08。
+- 进展：multimedia-engineer-ffmpeg-01 于 2026-09-10 完成本任务。固定 baseline 未变，`media` feature 以 `default-features=false` 解析 FFmpeg 8.1.2#3；已用 FFmpeg C API/C++ RAII 实现探测、确定性流选择、解复用、视频/音频解码、核心 `TimeNs` 精确映射、BGRA/float PCM 归一、代理帧、缩略图、重采样 drain、视频 seek、动态格式 epoch、lease/背压、取消与资源上限。T-019 保持未启动，未实现 UI/CV/DSP/发布编码器，`package/` 未修改或暂存。
+- 成果与验证证据：[A-015 0.1](artifacts/A-015-ffmpeg-media-pipeline.md)、[A-014 0.2](artifacts/A-014-media-time-buffer-and-golden-contract.md)、[可复核摘要](evidence/T-018/verification-summary.md)、[运行时 DLL 哈希](evidence/T-018/runtime-dlls.sha256.csv)及[实际黄金媒体 SHA-256/ffprobe 证据](../../tests/golden/media/generated/actual-hashes-and-probe-v1.json)。Debug、Release、CI 三套 x64 preset 均在 `/W4 /WX` 下编译，最终各通过 49/49 CTest，媒体专项 16/16；12 个黄金样例和 30 个时间向量生成/验证通过，长素材实测单帧工作缓冲峰值 1024 bytes。
+- 阻塞与下一位行动人：本任务无剩余阻塞。固定 baseline 的 FFmpeg 已满足 A-014；H-004 发起人 architect-01 可核对本交付。按用户要求本会话到此停止，不启动 T-019。
+- 更新日期：2026-09-10。
 
 ## T-017：定义媒体时间、缓冲契约与黄金样例矩阵
 - 负责人：multimedia-engineer-ffmpeg-01
@@ -282,8 +282,8 @@
 - 优先级：高（用户要求本轮启动）。
 - 完成条件与确认方式：定义 `MediaInfo`、旋转/SAR/DAR、流选择、帧/PCM 所有权/背压/生命周期；明确未知/负时间戳、start time、CFR/VFR、seek、采样索引和舍入规则；生成 CFR、VFR、旋转、采样率差异、损坏和缺失流样例或脚本，登记来源/许可/哈希和期望时间向量；与 T-014 契约无同义冲突；形成并登记版本化契约成果，负责人自查，无独立评审要求。
 - 进展：multimedia-engineer-ffmpeg-01 于 2026-09-09 接收 H-004 并完成本任务。已定义 `MediaInfo`、显式流选择、PTS/DTS/time_base/start time 与负/未知时间戳处理、CFR/VFR、seek、采样索引、旋转/SAR/DAR/颜色、帧/PCM lease、背压、动态格式 epoch 和结构化错误；全部纳秒结果直接使用 A-012 `TimeNs`，未建立同义时间模型。已建立 10 个 CC0 合成/固定字节样例配方和 28 个精确时间向量，未执行 T-018/T-019。
-- 成果与验证证据：[A-014 0.1：媒体时间、流、缓冲与黄金样例契约](artifacts/A-014-media-time-buffer-and-golden-contract.md)，状态 draft；[fixtures-v1.json](../../tests/golden/media/fixtures-v1.json)、[manifest 验证器](../../tests/golden/media/Test-GoldenMediaManifest.ps1)、[可复现生成器](../../tests/golden/media/Generate-GoldenMedia.ps1)和[许可声明](../../tests/golden/media/LICENSE.md)。实际执行结果为 `GOLDEN_MEDIA_MANIFEST=PASS fixtures=10 timeVectors=28 contract=0.1.0`，生成器 `-ValidateOnly` 通过；当前无 ffmpeg/ffprobe，依任务的“样例或脚本”条件交付脚本与规范配方，未伪造媒体文件 hash。
-- 阻塞与下一位行动人：本任务无阻塞且已完成。H-004 发起人 architect-01 可核对本交付；T-018/T-019 保持原状态，须等待后续明确启动。
+- 成果与验证证据：[A-014 0.2：媒体时间、流、缓冲与黄金样例契约](artifacts/A-014-media-time-buffer-and-golden-contract.md)，状态 draft；[fixtures-v1.json](../../tests/golden/media/fixtures-v1.json)、[manifest 验证器](../../tests/golden/media/Test-GoldenMediaManifest.ps1)、[可复现生成器](../../tests/golden/media/Generate-GoldenMedia.ps1)和[许可声明](../../tests/golden/media/LICENSE.md)。T-018 使用固定 FFmpeg 后已扩展并实际生成 12 个样例、30 个时间向量及真实媒体 SHA-256/ffprobe 证据；`mediaContractVersion` 仍为 0.1.0，既有向量语义未变。
+- 阻塞与下一位行动人：本任务无阻塞且已完成。后续明确授权的 T-018 亦已完成；H-004 发起人 architect-01 可核对本交付。T-019 保持 `todo`，须等待后续明确启动。
 - 更新日期：2026-09-09。
 
 ## T-016：实现 worker、版本化 IPC、项目存储与恢复骨架
