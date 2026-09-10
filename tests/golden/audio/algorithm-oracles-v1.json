@@ -1,0 +1,132 @@
+{
+  "schemaVersion": 1,
+  "oracleSetVersion": 1,
+  "vectorSetVersion": 1,
+  "matchSemantics": "Only fields present under expected are asserted; ordered arrays require exact order.",
+  "producer": {
+    "algorithmId": "space-rhythm.audio-analysis.classic",
+    "algorithmVersion": "1.0.0",
+    "backendId": "kissfft-float",
+    "backendVersion": "131.2.0-vcpkg.port+cmake.131.1.0",
+    "backendFeature": "float",
+    "parameterSetId": "space-rhythm.audio-analysis.production",
+    "parameterSetVersion": "1.0.0",
+    "deterministicSeed": 6003370060466505817,
+    "parameterDigestsBySampleRate": {
+      "44100": "c76b32e4cd30fdbc0f540235ce97401248b9d6cea5fbb9dc5985062c88b10a82",
+      "48000": "3c7493a42ae78009be222d29754e6a11ca8eb0e234307dde0a8bfe73d33c22f8"
+    },
+    "windowCoefficientsDigestSha256": "4906ede244241938adc967b93ef9d0502baea192dd78abbb644436c61000467c"
+  },
+  "tolerances": {
+    "sampleIndexFramesAbsolute": 0,
+    "timeNsAbsolute": 0,
+    "tempoMilliBpmAbsolute": 0,
+    "confidencePpmAbsolute": 0,
+    "strengthPpmAbsolute": 1,
+    "featureMantissaAbsolute": 4,
+    "stableOrderKey": ["timeNs", "kindAscii", "candidateIdAscii"]
+  },
+  "fixtures": [
+    {
+      "fixtureId": "AV-IMPULSE-001",
+      "pcmSha256": "bb58d0b6ca0c2b73b36b5629f64b2a141155f3592e50008099cd088f84ed5ba1",
+      "testId": "AudioAnalysisOracle.ImpulseEnergyAndCandidateTimesAreDeterministic",
+      "expected": {
+        "status": "success",
+        "onsetSampleIndices": [0, 24000, 47999],
+        "firstFrameShortTimeEnergy": {"mantissa": 549316406, "decimalScale": -12},
+        "repeatEquivalent": true,
+        "candidateOrder": "stableOrderKey"
+      }
+    },
+    {
+      "fixtureId": "AV-FIXED-BEAT-120-001",
+      "pcmSha256": "c44e3d6c621a7bd8c3d481e941688cb4a31a036a6c915b376594a616b23dcf0a",
+      "testId": "AudioAnalysisOracle.FixedBeatProducesSampleExactStableCandidates",
+      "expected": {
+        "status": "success",
+        "onsetSampleIndices": [0, 24000, 48000, 72000],
+        "beatSampleIndices": [0, 24000, 48000, 72000],
+        "tempoMilliBpm": [120000, 120000, 120000, 120000],
+        "overallConfidencePpm": 1000000,
+        "firstSpectralChange": {"valid": false, "invalidReason": "no_previous_frame"}
+      }
+    },
+    {
+      "fixtureId": "AV-TEMPO-CHANGE-001",
+      "pcmSha256": "9a023e968e7539bb17eb86147596378b800e1579e485b1de03597079ca72b6e3",
+      "testId": "AudioAnalysisOracle.TempoChangePreservesOrderedLocalTempo",
+      "expected": {
+        "status": "success",
+        "beatSampleIndices": [0, 24000, 48000, 64000, 80000, 96000, 108000, 120000, 132000],
+        "tempoMilliBpm": [120000, 120000, 120000, 180000, 180000, 180000, 240000, 240000, 240000],
+        "overallConfidencePpm": 850000
+      }
+    },
+    {
+      "fixtureId": "AV-SILENCE-44100-001",
+      "pcmSha256": "fd6f479534cdd14635e88dfedf25c3859c01062b645f2a85570f20451b4a95bc",
+      "testId": "AudioAnalysisOracle.SilenceAt44100IsNoSignal",
+      "expected": {"status": "no_signal", "reasonCodes": ["silence"], "candidateCount": 0, "firstFrameShortTimeEnergyMantissa": 0}
+    },
+    {
+      "fixtureId": "AV-NOISE-001",
+      "pcmSha256": "d0a412e27b90675e067edf2aa674209a543601f6b5639dfcd91f407500aaa9d7",
+      "testId": "AudioAnalysisOracle.DeterministicNoiseDoesNotInventBeat",
+      "expected": {"status": "low_confidence", "requiredReasonCodes": ["noisy"], "beatCandidateCount": 0}
+    },
+    {
+      "fixtureId": "AV-BOUNDARY-001",
+      "pcmSha256": "4a4bc46ced2d02248933f73d233ab82cea0c43ce50561f22abba85b4beed0266",
+      "testId": "AudioAnalysisOracle.StereoBoundarySignalDoesNotCrossProjectOrigin",
+      "expected": {"status": "low_confidence", "requiredReasonCodes": ["insufficient_duration"], "hasCandidateBeforeProjectOrigin": true, "channelOrder": ["FL", "FR"]}
+    },
+    {
+      "fixtureId": "AV-NONFINITE-001",
+      "pcmSha256": "9759c8518a6bc15a409b93899ec0b9b17013e2b747af489364d4ef42f4e95d54",
+      "testId": "AudioAnalysisOracle.NonFinitePcmFailsWithoutPartialResult",
+      "expected": {"status": "failed", "errorCategory": "validation", "errorCode": "non_finite_pcm", "featureFrameCount": 0, "candidateCount": 0}
+    }
+  ],
+  "additionalDeterministicScenarios": [
+    {
+      "id": "T031-FREE-RHYTHM-001",
+      "source": "Project-generated deterministic PCM",
+      "license": "CC0-1.0",
+      "recipe": "f32le|48000|mono|80000frames|0.75@4000,13000,27000,46000,71000|zero-elsewhere",
+      "pcmSha256": "a5e138387e61b220e59d6d2f21fc6d2faec05825d03c2654acec7fbbb7df2d7b",
+      "expected": {"status": "low_confidence", "requiredReasonCodes": ["aperiodic"], "beatCandidateCount": 0}
+    },
+    {
+      "id": "T031-WEAK-TRANSIENT-001",
+      "source": "Project-generated deterministic PCM",
+      "license": "CC0-1.0",
+      "recipe": "f32le|48000|mono|48000frames|float32bits-0x3d4ccccd@0,12000,24000,36000|zero-elsewhere",
+      "pcmSha256": "c45be13bdf92fc1fd1af188cc0776bb4058cec130db622492265ad6523ef9b4e",
+      "expected": {"status": "low_confidence", "reasonCodes": ["weak_transients"], "candidateCount": 0}
+    },
+    {
+      "id": "T031-SEGMENT-INTERRUPT-001",
+      "source": "Project-generated deterministic PCM",
+      "license": "CC0-1.0",
+      "recipe": "two-segments|each-f32le-48000-mono-12000frames|0.75@1000,8000|no-cross-segment-period",
+      "perSegmentPcmSha256": "539bbe9ded8c74d1b29d3a4dc873f1cd2094dbd3ee0b6849481b87e052ef3cb9",
+      "expected": {"status": "low_confidence", "onsetCandidateCount": 4, "beatCandidateCount": 0}
+    },
+    {
+      "id": "T031-CANCEL-001",
+      "source": "Project-generated deterministic PCM",
+      "license": "CC0-1.0",
+      "recipe": "f32le|48000|mono|480000frames|all-zero",
+      "pcmSha256": "124617c1f65e92d3bc895fbd869e4bb16a30754b198f59e6e973949b9aaa1b01",
+      "expected": {"status": "cancelled", "errorCategory": "cancelled", "errorCode": "cancelled", "candidateCount": 0}
+    },
+    {
+      "id": "T031-RESOURCE-LIMIT-001",
+      "inputFixtureId": "AV-FIXED-BEAT-120-001",
+      "limits": {"maxInputFrames": 1},
+      "expected": {"status": "failed", "errorCategory": "resource_limit", "errorCode": "resource_limit"}
+    }
+  ]
+}

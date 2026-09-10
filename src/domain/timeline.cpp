@@ -1073,6 +1073,32 @@ std::string_view to_string(ErrorCode code) noexcept
         return "format_changed";
     case ErrorCode::decode_failed:
         return "decode_failed";
+    case ErrorCode::invalid_pcm_buffer:
+        return "invalid_pcm_buffer";
+    case ErrorCode::unsupported_pcm_format:
+        return "unsupported_pcm_format";
+    case ErrorCode::unsupported_channel_layout:
+        return "unsupported_channel_layout";
+    case ErrorCode::non_finite_pcm:
+        return "non_finite_pcm";
+    case ErrorCode::pcm_out_of_range:
+        return "pcm_out_of_range";
+    case ErrorCode::pcm_discontinuity:
+        return "pcm_discontinuity";
+    case ErrorCode::resample_timing_unavailable:
+        return "resample_timing_unavailable";
+    case ErrorCode::timestamp_mismatch:
+        return "timestamp_mismatch";
+    case ErrorCode::invalid_analysis_parameters:
+        return "invalid_analysis_parameters";
+    case ErrorCode::unsupported_parameter_schema:
+        return "unsupported_parameter_schema";
+    case ErrorCode::invalid_feature_frame:
+        return "invalid_feature_frame";
+    case ErrorCode::invalid_analysis_candidate:
+        return "invalid_analysis_candidate";
+    case ErrorCode::cancelled:
+        return "cancelled";
     case ErrorCode::resource_limit:
         return "resource_limit";
     case ErrorCode::invariant_violation:

@@ -1,5 +1,18 @@
 # 行动请求与交接
 
+## H-011：补齐媒体 PCM resampler timing provenance 公共字段
+- 发起人：audio-dsp-engineer-01
+- 目标：multimedia-engineer-ffmpeg-01
+- 关联任务：T-031、T-018
+- 期望结果：由媒体所有者在后续获授权任务中为每个 PCM segment/buffer 公开字段完整且可验证的 resampler trace，使 DSP 无需读取 PTS、帧数或日志即可判断采样时间连续性；不得由 DSP 修改 A-015 或代填媒体事实。
+- 输入与证据：[A-015 0.2](artifacts/A-015-ffmpeg-media-pipeline.md)、[A-018 0.1](artifacts/A-018-audio-dsp-pcm-feature-candidate-contract.md)、[A-019 0.1](artifacts/A-019-audio-analysis-implementation-and-oracles.md)；T-031 PCM adapter 的 `resample_timing_unavailable` fail-closed 测试。
+- 未完成事项：请求字段为 `channelOrder`、`segmentOriginTimeNs`、`segmentOriginSampleIndex`，以及 `resampleTrace.{performed,inputSampleRate,outputSampleRate,implementationId,implementationVersion,parametersDigestSha256,delayBeforeInputFramesNumerator,delayBeforeInputFramesDenominator,delayUnit,delayAccountedInFirstSampleIndex,emittedFromDrain}`；还需说明 trace 在 seek、format change、flush/drain 和新 segment 时的生成/变化规则。字段应来自实际 FFmpeg/swresample 状态与版本化配置，不接受由 PTS、输出帧数或日志推断。
+- 状态：open
+- 创建日期：2026-09-10
+- 接收反馈：尚未接收。
+- 处理结果与证据：T-031 已支持调用者明确提供的 `identity/1` trace；任何非身份或字段不完整的 trace 均返回 `validation/resample_timing_unavailable`，不阻塞本任务对身份向量的分析验证。
+- 关闭或取消依据：暂无。
+
 ## H-010：启动 Windows 发布工作流
 - 发起人：architect-01
 - 目标：release-engineer-windows-01
@@ -35,8 +48,8 @@
 - 未完成事项：D-003 已确认 C++ DSP + KissFFT 总体路线；合法音色、采样率和产品效果门槛尚未确认，不得使用来源不明音色。
 - 状态：accepted
 - 创建日期：2026-09-09
-- 接收反馈：2026-09-10，audio-dsp-engineer-01 依据用户本轮明确指令接收；处理范围限定为先完成 T-030，本轮不执行 T-031/T-032。
-- 处理结果与证据：2026-09-10，T-030 已完成并形成 [A-018 0.1](artifacts/A-018-audio-dsp-pcm-feature-candidate-contract.md)、[10 项可复现向量与 3 个合法测试音色清单](../../tests/golden/audio/fixtures-v1.json)及[实际 SHA-256 证据](../../tests/golden/audio/generated/actual-hashes-v1.json)；生成与只校验模式均通过。H-008 继续保持 accepted，T-031/T-032 未启动。
+- 接收反馈：2026-09-10，audio-dsp-engineer-01 依据用户明确指令接收；已依次完成 T-030、T-031。T-032 继续不执行。
+- 处理结果与证据：2026-09-10，T-030 已形成 [A-018 0.1](artifacts/A-018-audio-dsp-pcm-feature-candidate-contract.md)、[10 项可复现向量与 3 个合法测试音色清单](../../tests/golden/audio/fixtures-v1.json)及[实际 SHA-256 证据](../../tests/golden/audio/generated/actual-hashes-v1.json)。T-031 已形成 [A-019 0.1](artifacts/A-019-audio-analysis-implementation-and-oracles.md)、[版本化算法 oracle](../../tests/golden/audio/algorithm-oracles-v1.json)和[验证摘要](evidence/T-031/verification-summary.md)：固定 baseline 的 KissFFT float、PCM fail-closed adapter、特征/候选、参数摘要、稳定排序及 Debug/CI/Release 专项 17/17 已交付；性能/效果阈值保持 `measured/not-evaluated`。非身份 resampler provenance 缺口另登记 H-011。H-008 继续保持 accepted，等待用户另行启动 T-032。
 - 关闭或取消依据：暂无。
 
 ## H-007：启动 C++/OpenCV 视频算法工作流
