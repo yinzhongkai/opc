@@ -2,9 +2,12 @@
 
 #include <space_rhythm/media/media.hpp>
 
+#include <array>
 #include <filesystem>
+#include <fstream>
 #include <limits>
 #include <memory>
+#include <utility>
 #include <vector>
 
 namespace {
@@ -39,6 +42,45 @@ media::MediaSelection select_video(const std::shared_ptr<media::MediaSource>& so
         return {};
     }
     return selected.value();
+}
+
+class TemporaryMediaFile final {
+public:
+    explicit TemporaryMediaFile(std::filesystem::path path)
+        : path_(std::move(path))
+    {
+    }
+
+    ~TemporaryMediaFile()
+    {
+        std::error_code error;
+        std::filesystem::remove(path_, error);
+    }
+
+    TemporaryMediaFile(const TemporaryMediaFile&) = delete;
+    TemporaryMediaFile& operator=(const TemporaryMediaFile&) = delete;
+
+    [[nodiscard]] const std::filesystem::path& path() const noexcept { return path_; }
+
+private:
+    std::filesystem::path path_;
+};
+
+TemporaryMediaFile write_bmp_without_color_metadata()
+{
+    const auto path = std::filesystem::temp_directory_path()
+        / "t021-public-color-range-unknown.bmp";
+    constexpr std::array<unsigned char, 58> bytes{
+        0x42, 0x4d, 0x3a, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x36, 0x00,
+        0x00, 0x00, 0x28, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x01, 0x00,
+        0x00, 0x00, 0x01, 0x00, 0x18, 0x00, 0x00, 0x00, 0x00, 0x00, 0x04, 0x00,
+        0x00, 0x00, 0x13, 0x0b, 0x00, 0x00, 0x13, 0x0b, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xff, 0x00};
+    std::ofstream output(path, std::ios::binary | std::ios::trunc);
+    output.write(reinterpret_cast<const char*>(bytes.data()),
+                 static_cast<std::streamsize>(bytes.size()));
+    output.close();
+    return TemporaryMediaFile{path};
 }
 
 TEST(T021MediaContract, PresentationTimeUsesLiteralPtsOraclesAndReportsOverflow)
@@ -116,6 +158,22 @@ TEST(T021MediaContract, RotationSarAndColorAreExposedAsNormalizedMetadata)
     EXPECT_EQ(stream.video->color.transfer, "bt709");
     EXPECT_EQ(stream.video->color.matrix, "bt709");
     EXPECT_EQ(stream.video->color.range, "limited");
+
+    const auto thumbnail = source.value()->thumbnail(
+        selection, selection.video.selected.front(), 0, 8, 16);
+    ASSERT_TRUE(thumbnail) << core::to_string(thumbnail.error().code);
+    EXPECT_EQ(thumbnail.value().color.range, "full");
+}
+
+TEST(T021MediaContract, MissingSourceColorRangeIsExposedAsUnknown)
+{
+    const auto fixture = write_bmp_without_color_metadata();
+    const auto source = media::MediaSource::open(fixture.path());
+    ASSERT_TRUE(source) << core::to_string(source.error().code);
+    ASSERT_EQ(source.value()->info().streams.size(), 1U);
+    const auto& stream = source.value()->info().streams.front();
+    ASSERT_TRUE(stream.video);
+    EXPECT_EQ(stream.video->color.range, "unknown");
 }
 
 } // namespace
