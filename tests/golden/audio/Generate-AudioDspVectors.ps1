@@ -297,6 +297,22 @@ if ($manifest.schemaVersion -ne 1 -or
     $manifest.timbreManifestVersion -ne 1) {
     throw 'Audio DSP manifest version mismatch.'
 }
+$oracleFile = [string]$manifest.algorithmOracle.file
+if ([IO.Path]::GetFileName($oracleFile) -cne $oracleFile) {
+    throw 'Audio DSP algorithm oracle file must be a basename.'
+}
+$oraclePath = Join-Path ([IO.Path]::GetDirectoryName($manifestFullPath)) $oracleFile
+$oracle = Get-Content -Raw -LiteralPath $oraclePath | ConvertFrom-Json
+if ($oracle.schemaVersion -ne 1 -or
+    $oracle.oracleSetVersion -ne $manifest.algorithmOracle.oracleSetVersion -or
+    $oracle.vectorSetVersion -ne $manifest.vectorSetVersion -or
+    $oracle.producer.algorithmId -cne $manifest.algorithmOracle.algorithmId -or
+    $oracle.producer.algorithmVersion -cne $manifest.algorithmOracle.algorithmVersion -or
+    $oracle.producer.parameterSetVersion -cne $manifest.algorithmOracle.parameterSetVersion -or
+    $oracle.producer.backendId -cne $manifest.algorithmOracle.backendId -or
+    $oracle.producer.backendVersion -cne $manifest.algorithmOracle.backendVersion) {
+    throw 'Audio DSP algorithm oracle metadata mismatch.'
+}
 
 $fixtureIds = [Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
 $outputFiles = [Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
@@ -386,6 +402,29 @@ $expectedIds = @(
 foreach ($expectedId in $expectedIds) {
     if (-not $fixtureIds.Contains($expectedId)) {
         throw "Missing required audio DSP fixture id: $expectedId"
+    }
+}
+$oracleIds = [Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
+foreach ($fixtureOracle in $oracle.fixtures) {
+    $oracleId = [string]$fixtureOracle.fixtureId
+    if (-not $oracleIds.Add($oracleId)) {
+        throw "Duplicate algorithm oracle fixture id: $oracleId"
+    }
+    $manifestFixtures = @($manifest.fixtures | Where-Object { $_.id -ceq $oracleId })
+    if ($manifestFixtures.Count -ne 1 -or
+        $manifestFixtures[0].role -notin @('analysis_input', 'negative_contract_input') -or
+        $manifestFixtures[0].pcmSha256 -cne $fixtureOracle.pcmSha256) {
+        throw "Algorithm oracle input mismatch: $oracleId"
+    }
+}
+if ($oracleIds.Count -ne 7) {
+    throw "Expected seven A-018 analysis algorithm oracles, found $($oracleIds.Count)."
+}
+foreach ($scenario in $oracle.additionalDeterministicScenarios) {
+    if ($scenario.PSObject.Properties['source'] -and
+        ($scenario.source -cne 'Project-generated deterministic PCM' -or
+         $scenario.license -cne 'CC0-1.0')) {
+        throw "Algorithm scenario source/license mismatch: $($scenario.id)"
     }
 }
 $testTimbreCount = @($manifest.fixtures | Where-Object { $_.role -ceq 'test_timbre' }).Count

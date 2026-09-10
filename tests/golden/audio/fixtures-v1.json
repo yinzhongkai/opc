@@ -8,6 +8,16 @@
     "version": "1.0.0",
     "script": "Generate-AudioDspVectors.ps1"
   },
+  "algorithmOracle": {
+    "schemaVersion": 1,
+    "oracleSetVersion": 1,
+    "file": "algorithm-oracles-v1.json",
+    "algorithmId": "space-rhythm.audio-analysis.classic",
+    "algorithmVersion": "1.0.0",
+    "parameterSetVersion": "1.0.0",
+    "backendId": "kissfft-float",
+    "backendVersion": "131.2.0-vcpkg.port+cmake.131.1.0"
+  },
   "licensePolicy": "Every fixture and test timbre is deterministic project-generated PCM dedicated under CC0-1.0; package/, user media, and third-party recordings are forbidden inputs.",
   "pcmEncoding": {
     "sampleFormat": "f32_le",

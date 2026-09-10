@@ -17,6 +17,49 @@ set_tests_properties(media.golden_generate PROPERTIES
 )
 
 add_test(
+    NAME audio.golden_generate
+    COMMAND "${SPACE_RHYTHM_POWERSHELL_EXECUTABLE}" -NoProfile -File
+        "${CMAKE_CURRENT_SOURCE_DIR}/golden/audio/Generate-AudioDspVectors.ps1"
+)
+set_tests_properties(audio.golden_generate PROPERTIES
+    FIXTURES_SETUP golden-audio
+    LABELS "t031;golden;audio;headless;gate-g1;gate-g3"
+    TIMEOUT 60
+)
+
+add_executable(space_rhythm_audio_analysis_tests
+    unit/audio_analysis_test.cpp
+)
+target_link_libraries(space_rhythm_audio_analysis_tests PRIVATE
+    SpaceRhythm::AudioAnalysis
+    GTest::gtest_main
+)
+target_compile_definitions(space_rhythm_audio_analysis_tests PRIVATE
+    SPACE_RHYTHM_GOLDEN_AUDIO_DIR="${CMAKE_CURRENT_SOURCE_DIR}/golden/audio/generated"
+)
+space_rhythm_apply_build_policy(space_rhythm_audio_analysis_tests)
+gtest_add_tests(
+    TARGET space_rhythm_audio_analysis_tests
+    TEST_LIST space_rhythm_audio_analysis_test_cases
+)
+set_tests_properties(${space_rhythm_audio_analysis_test_cases} PROPERTIES
+    FIXTURES_REQUIRED golden-audio
+    LABELS "t031;unit;golden;audio;headless;gate-g1;gate-g3"
+)
+
+add_executable(space_rhythm_audio_analysis_benchmark
+    performance/audio_analysis_benchmark.cpp
+)
+target_link_libraries(space_rhythm_audio_analysis_benchmark PRIVATE
+    SpaceRhythm::AudioAnalysis
+    Psapi
+)
+target_compile_definitions(space_rhythm_audio_analysis_benchmark PRIVATE
+    SPACE_RHYTHM_GOLDEN_AUDIO_DIR="${CMAKE_CURRENT_SOURCE_DIR}/golden/audio/generated"
+)
+space_rhythm_apply_build_policy(space_rhythm_audio_analysis_benchmark)
+
+add_test(
     NAME contract.golden.media_audit
     COMMAND "${SPACE_RHYTHM_POWERSHELL_EXECUTABLE}" -NoProfile -File
         "${CMAKE_CURRENT_SOURCE_DIR}/contract/Test-GoldenMediaAudit.ps1"

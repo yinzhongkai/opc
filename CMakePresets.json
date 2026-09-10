@@ -28,7 +28,7 @@
         "SPACE_RHYTHM_WARNINGS_AS_ERRORS": "ON",
         "VCPKG_HOST_TRIPLET": "x64-windows",
         "VCPKG_INSTALLED_DIR": "${sourceDir}/out/vcpkg_installed",
-        "VCPKG_MANIFEST_FEATURES": "media",
+        "VCPKG_MANIFEST_FEATURES": "media;audio-analysis",
         "VCPKG_OVERLAY_TRIPLETS": "${sourceDir}/cmake/triplets",
         "VCPKG_TARGET_TRIPLET": "x64-windows-space-rhythm"
       },

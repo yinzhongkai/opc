@@ -93,16 +93,16 @@
 
 ## T-031：实现音频特征、瞬态和节拍候选分析
 - 负责人：audio-dsp-engineer-01
-- 状态：todo
+- 状态：completed
 - 授权来源与日期：本会话用户于 2026-09-09 要求补充系统架构师判断的新增成员及成员任务并提交。
 - 目标与范围：实现短时能量、频段能量、谱变化、瞬态、节拍和置信度等 C/C++ DSP 分析；不直接修改核心时间线，不把低置信度素材伪装成稳定节拍。
-- 输入与依赖：T-014 已完成，D-003 已确认 C++ DSP + KissFFT 总体路线；仍依赖 T-013、T-017、T-018、T-030；A-011 0.1。
+- 输入与依赖：T-013、T-014、T-017、T-018、T-030 已完成，D-003 已确认 C++ DSP + KissFFT 总体路线；A-011 0.1、A-012 0.1、A-014 0.3、A-015 0.2、A-016 0.1、A-017 0.2、A-018 0.1。
 - 优先级：未设定（架构建议：PCM 契约和媒体输入就绪后启动）。
 - 完成条件与确认方式：窗、步长、FFT、平滑、峰值和置信度参数版本化；输出候选含时间、类型、强度、置信度、来源和失败原因；固定 PCM 结果确定性；覆盖稳定节拍、变速、自由节奏、弱瞬态、噪声和静音；记录吞吐、内存、取消延迟和数值容差，负责人提交自测。
-- 进展：任务已登记，尚未由负责人会话接收。
-- 成果与验证证据：[A-011 0.1](artifacts/A-011-complete-mvp-engineering-staffing-and-task-plan.md)；实际实现暂无。
-- 阻塞与下一位行动人：仍等待 T-013/T-017/T-018/T-030；audio-dsp-engineer-01 可先完成 T-030。
-- 更新日期：2026-09-09。
+- 进展：2026-09-10，用户明确确认全部前置满足并启动；audio-dsp-engineer-01 已完成 A-018 PCM 窄适配、周期 Hann/KissFFT 分析、短时/频段能量、谱变化、瞬态/节拍候选、置信度、稳定排序、错误/取消/资源限制及 Windows 验证。固定 baseline 未升级，T-032 未执行。
+- 成果与验证证据：[A-019 0.1：音频特征、瞬态与节拍候选实现和算法 oracle](artifacts/A-019-audio-analysis-implementation-and-oracles.md)、[公共接口](../../src/audio_analysis/include/space_rhythm/audio/analysis.hpp)、[实现](../../src/audio_analysis/analysis.cpp)、[A-018 算法 oracle](../../tests/golden/audio/algorithm-oracles-v1.json)、[GoogleTest](../../tests/unit/audio_analysis_test.cpp)及[验证摘要](evidence/T-031/verification-summary.md)。Debug、CI/RelWithDebInfo、Release 专项各 17/17；CI/Release 吞吐、峰值内存和取消延迟已实测，未确认阈值保持 `measured/not-evaluated`。
+- 阻塞与下一位行动人：T-031 完成条件已满足，无实现阻塞。A-015 0.2 非身份重采样字段仍缺失，H-011 已向 multimedia-engineer-ffmpeg-01 提出字段级请求；缺失时 DSP 稳定返回 `resample_timing_unavailable`。T-032 保持 `todo`，须由用户另行明确启动。
+- 更新日期：2026-09-10。
 
 ## T-030：定义 PCM、采样时间、音频特征与测试音色契约
 - 负责人：audio-dsp-engineer-01
