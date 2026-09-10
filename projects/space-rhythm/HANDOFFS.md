@@ -74,9 +74,9 @@
 - 未完成事项：D-003 已确认 GoogleTest/CTest + Qt Test/Qt Quick Test；基准硬件、代表素材、性能和产品效果阈值尚未确认，未确认阈值只能报告测量值，不能给出通过结论。
 - 状态：accepted
 - 创建日期：2026-09-08
-- 接收反馈：tester-cpp-qt-01 于 2026-09-10 实际读取本交接、T-020～T-022、D-001～D-008、T-013～T-018 及关联成果后接收；本轮只执行 T-020，T-021/T-022 继续保持 todo，不提前运行测试或实现测试代码。
-- 处理结果与证据：T-020 已完成并形成 [A-016 0.1：C++/Qt 测试策略、需求追踪与可复现规则](artifacts/A-016-cpp-qt-test-strategy-and-traceability.md)。计划逐项覆盖 TR-A-001～006、TR-F-001～018、TR-Q-001～010 和 G0～G4，定义八层测试、复现与证据状态规则；所有未确认阈值保持 `not-evaluated`，测量结果不得冒充通过。T-021/T-022 尚无执行结果。
-- 关闭或取消依据：尚未关闭；等待发起人 architect-01 核对 T-020/A-016 后关闭。后续 T-021/T-022 仍按各自任务前置和用户明确启动执行。
+- 接收反馈：tester-cpp-qt-01 于 2026-09-10 实际读取本交接、T-020～T-022、D-001～D-008、T-013～T-018 及关联成果后接收并完成 T-020；同日用户再次确认 T-021 前置满足并明确启动 T-021。T-022 继续保持 todo，未启动。
+- 处理结果与证据：T-020 已完成并形成 [A-016 0.1：C++/Qt 测试策略、需求追踪与可复现规则](artifacts/A-016-cpp-qt-test-strategy-and-traceability.md)。T-021 已完成测试基础设施交付并形成 [A-017 0.1：Windows headless 契约测试入口与证据](artifacts/A-017-windows-headless-contract-test-entry-and-evidence.md)及 [T-021 验证摘要](evidence/T-021/verification-summary.md)：三套 Windows x64 preset 均实际构建/运行，Debug/CI 为 60 pass + 1 contract fail，Release 为 34 pass + 1 contract fail + 26 WDAC blocked；黄金审计 12/12、时间向量 30/30。未确认阈值与 G0～G4 保持 `not-evaluated`，失败和阻断没有冒充通过。
+- 关闭或取消依据：尚未关闭；等待发起人 architect-01 核对 T-020/A-016 与 T-021/A-017 后关闭。`T021-DEFECT-001` 由 multimedia-engineer-ffmpeg-01/A-014 契约所有者处理，`T021-ENV-001` 由 build-engineer-windows-qt-01/主机策略管理员处理；T-022 仍须由用户另行明确启动。
 
 ## H-004：启动 FFmpeg 多媒体工作流
 - 发起人：architect-01

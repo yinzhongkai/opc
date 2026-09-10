@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "task": "T-021",
+  "sourceHeadBeforeEvidenceCommit": "b9ae42a53a67148176fc533995016daa8dd21902",
+  "trackedWorktreeDirtyDuringRuns": true,
+  "inputIdentity": "Each raw environment.json contains SHA-256 values for the T-021 CMake, contract-test, audit-policy, golden-manifest, and golden-evidence inputs.",
+  "rawEvidenceRoot": "out/evidence/T-021",
+  "runs": [
+    {
+      "preset": "windows-msvc-x64-debug",
+      "runId": "20260910T062656Z-b9ae42a53a67-windows-msvc-x64-debug-01",
+      "status": "fail",
+      "tests": 61,
+      "passed": 60,
+      "failed": 1,
+      "blocked": 0,
+      "skipped": 0,
+      "environmentSha256": "93097f4df93a304a28ea7f0153889f695d6cac93461aa11be4043c39d2635abf",
+      "junitSha256": "990e64dd9ebccd9998b9bcfae22982525385c4dd63189818c6f4c04dab553d13",
+      "ctestLogSha256": "730fa662f6b4cbd3a62cd889a81a3ce4b70f19f0182ac5d05e83f2d389c4c223",
+      "resultSha256": "b5c77d557e6f3938df56e7fc745b5c84f474a371d05972fb137ea46bb1219d40"
+    },
+    {
+      "preset": "windows-msvc-x64-release",
+      "runId": "20260910T062715Z-b9ae42a53a67-windows-msvc-x64-release-01",
+      "status": "fail-and-blocked",
+      "tests": 61,
+      "passed": 34,
+      "failed": 1,
+      "blocked": 26,
+      "skipped": 0,
+      "environmentSha256": "ee924afed23a2a7890e89f47e13e32676f465a048bdeb8982094ce90da564d27",
+      "junitSha256": "e664fc9e06ed57c598ad55856d1297207f93de5f341c956736b18249de5bd3e4",
+      "ctestLogSha256": "73bbc6c4df18116aea67071ea66b572b7a53aea9c0b1bd1216534094eaa0a346",
+      "resultSha256": "54c1f653b4b7f087a6cb07a245ea71fc418a81ca442bc42a7eb21ed489f9aea5"
+    },
+    {
+      "preset": "ci-windows-msvc-x64",
+      "runId": "20260910T062734Z-b9ae42a53a67-ci-windows-msvc-x64-01",
+      "status": "fail",
+      "tests": 61,
+      "passed": 60,
+      "failed": 1,
+      "blocked": 0,
+      "skipped": 0,
+      "environmentSha256": "663befe8bf92efb5a9621bac6d1eb6765328e9c372cc48c42fc102d115c1fbf5",
+      "junitSha256": "94c03032a279ceb20ae1fdd6cd8f8dd7549ab603df39ba00f446722e37f8362d",
+      "ctestLogSha256": "eaaae024f3fbd7a12dbf3e7b323fd83720210f4a2af10b12b55cbaa6e8120ad4",
+      "resultSha256": "330afa8bcc05489de5613164023ffea59455c8fd4dd5092fae553bbd5129e892"
+    }
+  ],
+  "resolvedHarnessDiagnostics": [
+    {
+      "runId": "20260910T060846Z-b9ae42a53a67-windows-msvc-x64-debug-01",
+      "status": "blocked",
+      "reason": "CIM CPU inventory returned no object; the environment collector was made null-safe before final runs."
+    },
+    {
+      "runId": "20260910T062548Z-b9ae42a53a67-windows-msvc-x64-debug-01",
+      "status": "blocked",
+      "reason": "Expanded environment inventory exposed null audio CIM data and a vcpkg safe.directory requirement; both were corrected before final runs."
+    }
+  ],
+  "preservedEnvironmentDiagnostics": [
+    {
+      "runIds": [
+        "20260910T061319Z-b9ae42a53a67-windows-msvc-x64-release-01",
+        "20260910T061354Z-b9ae42a53a67-windows-msvc-x64-release-01"
+      ],
+      "status": "blocked",
+      "reason": "WDAC blocked space_rhythm_core_tests.exe during PRE_TEST discovery. Static GoogleTest registration allowed the final run to execute unaffected tests while preserving blocked core cases."
+    }
+  ]
+}

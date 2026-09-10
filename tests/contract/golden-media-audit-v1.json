@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "goldenManifestVersion": 1,
+  "mediaContractVersion": "0.1.0",
+  "comparisonPolicy": "Published integer time values and metadata tokens are compared exactly. No pixel, PCM, perceptual, or performance tolerance is approved in T-021.",
+  "fixtures": [
+    { "fixtureId": "GM-CFR-001", "requiredExpectations": ["expectedStreams", "expectedTimeVectors"], "tolerance": { "mode": "exact", "value": 0, "unit": "ns and metadata equality", "basis": "A-014 0.2 CFR PTS oracle" } },
+    { "fixtureId": "GM-VFR-001", "requiredExpectations": ["expectedStreams", "expectedTimeVectors"], "tolerance": { "mode": "exact", "value": 0, "unit": "ns and metadata equality", "basis": "A-014 0.2 explicit VFR PTS oracle" } },
+    { "fixtureId": "GM-ROT-SAR-001", "requiredExpectations": ["expectedStreams", "expectedDisplay", "expectedTimeVectors"], "tolerance": { "mode": "exact", "value": 0, "unit": "integer, rational, and metadata equality", "basis": "A-014 0.2 normalized display metadata oracle" } },
+    { "fixtureId": "GM-MULTI-001", "requiredExpectations": ["expectedStreams", "expectedSelection", "expectedTimeVectors"], "tolerance": { "mode": "exact", "value": 0, "unit": "selection and metadata equality", "basis": "A-014 0.2 deterministic stream selection oracle" } },
+    { "fixtureId": "GM-AUDIO-44100-001", "requiredExpectations": ["expectedStreams", "expectedAudio", "expectedTimeVectors"], "tolerance": { "mode": "exact", "value": 0, "unit": "sample count/rate and integer ns", "basis": "A-014 0.2 rational sample-time oracle" } },
+    { "fixtureId": "GM-AUDIO-48000-001", "requiredExpectations": ["expectedStreams", "expectedAudio", "expectedTimeVectors"], "tolerance": { "mode": "exact", "value": 0, "unit": "sample count/rate and integer ns", "basis": "A-014 0.2 rational sample-time oracle" } },
+    { "fixtureId": "GM-CORRUPT-001", "requiredExpectations": ["expectedStreams", "expectedError"], "tolerance": { "mode": "exact", "value": 0, "unit": "error category/code/stage equality", "basis": "A-014 0.2 stable error contract" } },
+    { "fixtureId": "GM-MISSING-VIDEO-001", "requiredExpectations": ["expectedStreams", "expectedSelectionError"], "tolerance": { "mode": "exact", "value": 0, "unit": "error category/code equality", "basis": "A-014 0.2 required-stream contract" } },
+    { "fixtureId": "GM-MISSING-AUDIO-001", "requiredExpectations": ["expectedStreams", "expectedSelectionError"], "tolerance": { "mode": "exact", "value": 0, "unit": "error category/code equality", "basis": "A-014 0.2 required-stream contract" } },
+    { "fixtureId": "GM-NEG-START-001", "requiredExpectations": ["expectedStreams", "expectedOrigin", "expectedTimeVectors"], "tolerance": { "mode": "exact", "value": 0, "unit": "origin ticks and integer ns", "basis": "A-014 0.2 presentation-origin contract" } },
+    { "fixtureId": "GM-LONG-001", "requiredExpectations": ["expectedStreams", "expectedTimeVectors"], "tolerance": { "mode": "exact", "value": 0, "unit": "integer ns and declared stream equality", "basis": "A-014 0.2 bounded-material correctness oracle; no performance threshold" } },
+    { "fixtureId": "GM-DYNAMIC-001", "requiredExpectations": ["expectedStreams", "expectedFormatEpochs"], "tolerance": { "mode": "exact", "value": 0, "unit": "format epoch geometry equality", "basis": "A-014 0.2 format-change contract" } }
+  ]
+}
