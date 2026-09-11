@@ -36,7 +36,7 @@
 - 状态：accepted
 - 创建日期：2026-09-09
 - 接收反馈：2026-09-09，graphics-engineer-qt-scenegraph-01 已完成会话初始化并接收；按交接要求先启动 T-033，T-034/T-035 继续等待其前置依赖。
-- 处理结果与证据：2026-09-11，T-033 已完成：[A-021 0.1](artifacts/A-021-render-recipe-thread-offscreen-contract.md)、[T-033 验证摘要](evidence/T-033/verification-summary.md)、[公共接口](../../src/rendering/include/space_rhythm/rendering/render_contract.hpp)及[18 个契约向量](../../tests/contract/render_public_contract_test.cpp)。已冻结 RenderRecipe/不可变快照、UI/渲染线程和 GPU generation 生命周期、QQuickItem/QSGGeometryNode 更新边界、离屏帧/lease/背压/取消/设备丢失及坐标命中语义；未实现 T-034，未使用 Qt 私有 API。此为阶段处理证据，T-034/T-035 仍未完成，H-009 保持 accepted，不关闭。
+- 处理结果与证据：2026-09-11，T-033 已完成：[A-021 0.1](artifacts/A-021-render-recipe-thread-offscreen-contract.md)、[T-033 验证摘要](evidence/T-033/verification-summary.md)、[公共接口](../../src/rendering/include/space_rhythm/rendering/render_contract.hpp)及[18 个契约向量](../../tests/contract/render_public_contract_test.cpp)，冻结 RenderRecipe/不可变快照、线程/GPU generation、QSG 更新、离屏帧/队列及坐标命中契约。同日 T-034 已完成：[A-022 0.1](artifacts/A-022-batched-scene-graph-visual-templates.md)、[T-034 验证摘要](evidence/T-034/verification-summary.md)、[共享几何核心](../../src/rendering/include/space_rhythm/rendering/geometry_core.hpp)、[QQuickItem/QSGGeometryNode 适配](../../src/rendering/include/space_rhythm/rendering/scene_graph_render_item.hpp)、[9 项几何测试](../../tests/unit/render_geometry_test.cpp)及[2 项 QSG 测试](../../tests/unit/render_scene_graph_test.cpp)。已实现高密度事件/波形 LOD、波形/频谱/稳定 seed 脉冲三类 1.0.0 模板、裁剪、动态批量上传、旧快照拒绝和 device generation 重建，最终 Debug T-034 专项 11/11；仅用 Qt 公共 API。此为阶段处理证据，T-035 仍未启动，H-009 保持 accepted，不关闭。
 - 关闭或取消依据：暂无。
 
 ## H-008：启动音频 DSP 工作流

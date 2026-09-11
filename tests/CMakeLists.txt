@@ -190,6 +190,43 @@ set_tests_properties(${space_rhythm_render_contract_test_cases} PROPERTIES
     LABELS "t033;contract;rendering;headless;gate-g2;gate-g3;gate-g4"
 )
 
+add_executable(space_rhythm_render_geometry_tests
+    unit/render_geometry_test.cpp
+)
+target_link_libraries(space_rhythm_render_geometry_tests PRIVATE
+    SpaceRhythm::RenderingGeometry
+    GTest::gtest_main
+)
+space_rhythm_apply_build_policy(space_rhythm_render_geometry_tests)
+gtest_add_tests(
+    TARGET space_rhythm_render_geometry_tests
+    TEST_LIST space_rhythm_render_geometry_test_cases
+)
+set_tests_properties(${space_rhythm_render_geometry_test_cases} PROPERTIES
+    LABELS "t034;unit;rendering;geometry-core;headless;gate-g1;gate-g3"
+)
+
+add_executable(space_rhythm_render_scene_graph_tests
+    unit/render_scene_graph_test.cpp
+)
+target_link_libraries(space_rhythm_render_scene_graph_tests PRIVATE
+    SpaceRhythm::SceneGraph
+    GTest::gtest_main
+    Qt6::Core
+    Qt6::Gui
+    Qt6::Quick
+)
+space_rhythm_apply_build_policy(space_rhythm_render_scene_graph_tests)
+gtest_add_tests(
+    TARGET space_rhythm_render_scene_graph_tests
+    TEST_LIST space_rhythm_render_scene_graph_test_cases
+)
+set_tests_properties(${space_rhythm_render_scene_graph_test_cases} PROPERTIES
+    LABELS "t034;unit;rendering;scene-graph;headless;gate-g1;gate-g3"
+    ENVIRONMENT "QT_QPA_PLATFORM=offscreen"
+    ENVIRONMENT_MODIFICATION "PATH=path_list_prepend:${SPACE_RHYTHM_QT_ROOT}/bin"
+)
+
 add_executable(space_rhythm_core_tests
     unit/core_contract_vectors_test.cpp
     unit/core_skeleton_test.cpp
