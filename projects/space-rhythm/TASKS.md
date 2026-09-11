@@ -67,16 +67,16 @@
 
 ## T-033：定义 RenderRecipe、渲染线程与离屏接口契约
 - 负责人：graphics-engineer-qt-scenegraph-01
-- 状态：in_progress
+- 状态：completed
 - 授权来源与日期：本会话用户于 2026-09-09 要求补充系统架构师判断的新增成员及成员任务并提交。
 - 目标与范围：定义版本化渲染配方、数据快照、界面/渲染线程边界、GPU 资源生命周期、命中接口及离屏帧契约；不冻结后端私有 API，不改变 UI 或核心事件语义。
 - 输入与依赖：A-004 0.5、A-005 0.4、A-006 0.1 WP-07、A-011 0.1，D-003 confirmed；与 T-014/T-024/T-030/T-017 对齐，可先用接口草案和测试向量。
 - 优先级：未设定（架构建议：立即启动）。
 - 完成条件与确认方式：RenderRecipe 含修订、特征、模板参数、尺寸、时间范围、帧率、颜色和种子；明确不可变快照、节点/资源创建更新释放、设备丢失、错误和版本兼容；离屏输出含帧时间、格式、所有权和背压；形成版本化契约及边界测试向量，负责人自查。
-- 进展：2026-09-09，graphics-engineer-qt-scenegraph-01 完成成员会话初始化并接收 H-009，开始梳理 RenderRecipe、渲染线程/资源生命周期与离屏帧接口契约；当前尚未形成契约成果。
-- 成果与验证证据：[A-011 0.1 第 2～4 节](artifacts/A-011-complete-mvp-engineering-staffing-and-task-plan.md)；实际契约暂无。
-- 阻塞与下一位行动人：无技术前置阻塞；D-003 已确认 Qt Scene Graph 总体路线，graphics-engineer-qt-scenegraph-01 继续执行契约与边界测试向量设计，具体资源策略和性能参数由本任务验证后冻结。
-- 更新日期：2026-09-09。
+- 进展：2026-09-11，完成 `renderContractVersion 0.1.0/schema 1` 的纯 C++ 契约：版本化 RenderRecipe、深拷贝不可变 RenderSnapshot、精确帧时间、整数坐标/命中、Scene Graph device generation 生命周期、RGBA8/sRGB/top-down 离屏帧、FrameLease 与按在途 lease 计数的有界背压/取消/设备丢失语义。明确 QQuickItem/QSGGeometryNode 只在 `updatePaintNode()` 渲染线程同步点更新、UI 线程只交换快照、资源经 render job/invalidation 清理；仅使用 Qt 公共 API，未实现 T-034。
+- 成果与验证证据：[A-021 0.1](artifacts/A-021-render-recipe-thread-offscreen-contract.md)、[公共接口](../../src/rendering/include/space_rhythm/rendering/render_contract.hpp)、[实现](../../src/rendering/render_contract.cpp)、[GoogleTest 契约向量](../../tests/contract/render_public_contract_test.cpp)及[验证摘要](evidence/T-033/verification-summary.md)。Windows x64 Debug `/W4 /WX` 全目标构建通过，`RenderContractVectors.*` 18/18 通过。
+- 阻塞与下一位行动人：T-033 无阻塞并按完成条件结束。T-034/T-035 均未启动；视觉风格、实际模板参数、基准 GPU 与像素/性能容差仍留给后续任务。须由用户另行明确启动 T-034，H-009 在 T-033～T-035 全部完成前保持 accepted。
+- 更新日期：2026-09-11。
 
 ## T-032：实现事件音色触发、确定性混音、试听与离线输出
 - 负责人：audio-dsp-engineer-01

@@ -174,6 +174,22 @@ set_tests_properties(${space_rhythm_media_contract_test_cases} PROPERTIES
     LABELS "t021;contract;golden;media;headless;gate-g1;gate-g2;gate-g3;gate-g4"
 )
 
+add_executable(space_rhythm_render_contract_tests
+    contract/render_public_contract_test.cpp
+)
+target_link_libraries(space_rhythm_render_contract_tests PRIVATE
+    SpaceRhythm::RenderingContract
+    GTest::gtest_main
+)
+space_rhythm_apply_build_policy(space_rhythm_render_contract_tests)
+gtest_add_tests(
+    TARGET space_rhythm_render_contract_tests
+    TEST_LIST space_rhythm_render_contract_test_cases
+)
+set_tests_properties(${space_rhythm_render_contract_test_cases} PROPERTIES
+    LABELS "t033;contract;rendering;headless;gate-g2;gate-g3;gate-g4"
+)
+
 add_executable(space_rhythm_core_tests
     unit/core_contract_vectors_test.cpp
     unit/core_skeleton_test.cpp

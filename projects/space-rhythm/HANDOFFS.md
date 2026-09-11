@@ -36,7 +36,7 @@
 - 状态：accepted
 - 创建日期：2026-09-09
 - 接收反馈：2026-09-09，graphics-engineer-qt-scenegraph-01 已完成会话初始化并接收；按交接要求先启动 T-033，T-034/T-035 继续等待其前置依赖。
-- 处理结果与证据：暂无。
+- 处理结果与证据：2026-09-11，T-033 已完成：[A-021 0.1](artifacts/A-021-render-recipe-thread-offscreen-contract.md)、[T-033 验证摘要](evidence/T-033/verification-summary.md)、[公共接口](../../src/rendering/include/space_rhythm/rendering/render_contract.hpp)及[18 个契约向量](../../tests/contract/render_public_contract_test.cpp)。已冻结 RenderRecipe/不可变快照、UI/渲染线程和 GPU generation 生命周期、QQuickItem/QSGGeometryNode 更新边界、离屏帧/lease/背压/取消/设备丢失及坐标命中语义；未实现 T-034，未使用 Qt 私有 API。此为阶段处理证据，T-034/T-035 仍未完成，H-009 保持 accepted，不关闭。
 - 关闭或取消依据：暂无。
 
 ## H-008：启动音频 DSP 工作流
