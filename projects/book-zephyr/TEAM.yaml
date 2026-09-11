@@ -1,4 +1,6 @@
 schemaVersion: 3
 project: book-zephyr
-roleKnowledge: {}
-members: []
+roleKnowledge:
+  project-manager: [book-production]
+members:
+  - project-manager
