@@ -300,6 +300,46 @@ set_tests_properties(qml.quick_smoke PROPERTIES
     ENVIRONMENT "QT_QPA_PLATFORM=offscreen"
 )
 
+qt_add_executable(space_rhythm_ui_bridge_tests
+    qt/ui_bridge_test.cpp
+)
+target_link_libraries(space_rhythm_ui_bridge_tests PRIVATE
+    SpaceRhythm::UiBridge
+    Qt6::Core
+    Qt6::Gui
+    Qt6::Qml
+    Qt6::Quick
+    Qt6::Test
+)
+space_rhythm_apply_build_policy(space_rhythm_ui_bridge_tests ALLOW_GENERATED_WARNINGS)
+add_test(NAME qt.ui_bridge COMMAND space_rhythm_ui_bridge_tests)
+set_tests_properties(qt.ui_bridge PROPERTIES
+    LABELS "t025;qt;bridge;headless;gate-g0;gate-g1"
+    ENVIRONMENT "QT_QPA_PLATFORM=offscreen;QT_QUICK_CONTROLS_STYLE=Basic"
+    ENVIRONMENT_MODIFICATION "PATH=path_list_prepend:${SPACE_RHYTHM_QT_ROOT}/bin"
+)
+
+qt_add_executable(space_rhythm_ui_qml_tests
+    qml/quick_test_main.cpp
+)
+target_compile_definitions(space_rhythm_ui_qml_tests PRIVATE
+    QUICK_TEST_SOURCE_DIR="${CMAKE_CURRENT_SOURCE_DIR}/qml/t025"
+)
+target_link_libraries(space_rhythm_ui_qml_tests PRIVATE
+    Qt6::Core
+    Qt6::Gui
+    Qt6::Qml
+    Qt6::Quick
+    Qt6::QuickTest
+)
+space_rhythm_apply_build_policy(space_rhythm_ui_qml_tests ALLOW_GENERATED_WARNINGS)
+add_test(NAME qml.ui_shell COMMAND space_rhythm_ui_qml_tests)
+set_tests_properties(qml.ui_shell PROPERTIES
+    LABELS "t025;qml;qt;headless;gate-g0;gate-g1"
+    ENVIRONMENT "QT_QPA_PLATFORM=offscreen;QT_QUICK_CONTROLS_STYLE=Basic"
+    ENVIRONMENT_MODIFICATION "PATH=path_list_prepend:${SPACE_RHYTHM_QT_ROOT}/bin"
+)
+
 add_test(
     NAME app.qml_smoke
     COMMAND "${CMAKE_COMMAND}"
@@ -309,8 +349,9 @@ add_test(
         -P "${CMAKE_CURRENT_SOURCE_DIR}/cmake/RunAppSmoke.cmake"
 )
 set_tests_properties(app.qml_smoke PROPERTIES
-    LABELS "t021;app;integration;qml;qt;headless;smoke;gate-g0"
-    ENVIRONMENT "QT_QPA_PLATFORM=offscreen"
+    LABELS "t021;t025;app;integration;qml;qt;headless;smoke;gate-g0"
+    ENVIRONMENT "QT_QPA_PLATFORM=offscreen;QT_QUICK_CONTROLS_STYLE=Basic"
+    ENVIRONMENT_MODIFICATION "PATH=path_list_prepend:${SPACE_RHYTHM_QT_ROOT}/bin"
 )
 
 add_test(

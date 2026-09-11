@@ -1,0 +1,189 @@
+#pragma once
+
+#include <space_rhythm/core/timeline.hpp>
+#include <space_rhythm/rendering/geometry_core.hpp>
+#include <space_rhythm/system/runtime.hpp>
+
+#include <QString>
+#include <QVector>
+
+#include <cstdint>
+#include <functional>
+#include <memory>
+#include <optional>
+#include <string_view>
+
+namespace space_rhythm::ui {
+
+inline constexpr std::uint32_t bridge_schema_version = 1;
+inline constexpr std::string_view bridge_contract_version{"0.1.0"};
+
+inline QString qt_string(std::string_view value)
+{
+    return QString::fromLatin1(value.data(), static_cast<qsizetype>(value.size()));
+}
+
+enum class UiRoute {
+    start,
+    workspace,
+    fatal,
+};
+
+enum class WorkspaceState {
+    idle,
+    loading,
+    running,
+    cancelling,
+    failed,
+    recovery,
+    read_only,
+};
+
+enum class UiCommandKind {
+    create_project,
+    open_project,
+    return_to_start,
+    activate_stage,
+    start_analysis,
+    cancel_active_task,
+    retry_failed_operation,
+    recover_autosave,
+    open_primary,
+    save_project,
+    export_project,
+    toggle_preview,
+    stop_preview,
+};
+
+enum class PreviewState {
+    stopped,
+    priming,
+    playing,
+    paused,
+    error,
+};
+
+enum class MockScenario {
+    start,
+    idle,
+    loading,
+    running,
+    cancelling,
+    failed,
+    recovery,
+    read_only,
+    fatal,
+};
+
+struct UiBridgeDescriptor {
+    std::uint32_t schema_version{bridge_schema_version};
+    QString contract_version{qt_string(bridge_contract_version)};
+    QString core_contract_version{qt_string(core::contract_version)};
+    std::uint32_t system_ipc_schema_version{system::ipc_schema_version};
+    std::uint32_t project_schema_version{system::project_schema_version};
+    QString rendering_contract_version{qt_string(rendering::contract_version)};
+
+    bool operator==(const UiBridgeDescriptor&) const = default;
+};
+
+struct UiErrorDto {
+    QString category;
+    QString code;
+    QString stage;
+    QString message_key;
+    QString diagnostic_id;
+    bool retryable{false};
+    bool project_safe{true};
+
+    bool operator==(const UiErrorDto&) const = default;
+};
+
+struct AssetDto {
+    QString asset_id;
+    QString display_name;
+    QString kind;
+    QString state;
+    QString duration_text;
+    QString detail_text;
+
+    bool operator==(const AssetDto&) const = default;
+};
+
+struct TaskDto {
+    QString request_id;
+    QString operation;
+    QString subject;
+    QString stage;
+    system::JobStatus status{system::JobStatus::queued};
+    core::NormPpm progress_ppm{};
+    bool retryable{false};
+    QString diagnostic_id;
+
+    bool operator==(const TaskDto&) const = default;
+};
+
+struct TemplateParameterDto {
+    QString name;
+    QString label;
+    QString unit;
+    std::int64_t minimum{};
+    std::int64_t maximum{};
+    std::int64_t engineering_default{};
+    std::int64_t value{};
+    bool advanced{false};
+
+    bool operator==(const TemplateParameterDto&) const = default;
+};
+
+struct WorkspaceSnapshotDto {
+    std::uint32_t schema_version{bridge_schema_version};
+    QString contract_version{qt_string(bridge_contract_version)};
+    UiRoute route{UiRoute::start};
+    WorkspaceState state{WorkspaceState::idle};
+    QString project_id;
+    QString project_title;
+    QString active_stage{"import"};
+    bool dirty{false};
+    bool read_only{false};
+    bool recovery_available{false};
+    core::TimelineRevision timeline_revision{};
+    core::TimeNs preview_time_ns{};
+    rendering::FrameIndex frame_index{};
+    PreviewState preview_state{PreviewState::stopped};
+    QVector<AssetDto> assets;
+    QVector<TaskDto> tasks;
+    QVector<TemplateParameterDto> template_parameters;
+    std::optional<UiErrorDto> error;
+
+    bool operator==(const WorkspaceSnapshotDto&) const = default;
+};
+
+struct UiCommand {
+    std::uint32_t schema_version{bridge_schema_version};
+    QString contract_version{qt_string(bridge_contract_version)};
+    QString request_id;
+    UiCommandKind kind{UiCommandKind::return_to_start};
+    QString argument;
+
+    bool operator==(const UiCommand&) const = default;
+};
+
+// Production adapters and the deterministic mock both implement this contract.
+// post() must return without waiting for media, worker, disk or rendering work;
+// later immutable snapshots are delivered through Observer.
+class WorkspaceService {
+public:
+    using Observer = std::function<void(WorkspaceSnapshotDto)>;
+
+    virtual ~WorkspaceService() = default;
+    [[nodiscard]] virtual UiBridgeDescriptor descriptor() const = 0;
+    [[nodiscard]] virtual WorkspaceSnapshotDto current_snapshot() const = 0;
+    virtual void set_observer(Observer observer) = 0;
+    virtual void post(UiCommand command) = 0;
+};
+
+[[nodiscard]] MockScenario parse_mock_scenario(QString value) noexcept;
+[[nodiscard]] std::unique_ptr<WorkspaceService> make_mock_workspace_service(
+    MockScenario scenario = MockScenario::start);
+
+} // namespace space_rhythm::ui
