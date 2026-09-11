@@ -297,4 +297,45 @@ void SceneGraphRenderItem::bind_window(QQuickWindow* window)
     }
 }
 
+GeometryFrameRenderItem::GeometryFrameRenderItem(QQuickItem* parent)
+    : QQuickItem(parent)
+{
+    setFlag(QQuickItem::ItemHasContents, true);
+}
+
+GeometryFrameRenderItem::~GeometryFrameRenderItem() = default;
+
+void GeometryFrameRenderItem::submit_geometry_frame(
+    std::shared_ptr<const GeometryFrame> frame)
+{
+    {
+        std::scoped_lock lock{pending_mutex_};
+        pending_frame_ = std::move(frame);
+    }
+    update();
+}
+
+std::shared_ptr<const GeometryFrame>
+GeometryFrameRenderItem::submitted_geometry_frame() const
+{
+    std::scoped_lock lock{pending_mutex_};
+    return pending_frame_;
+}
+
+QSGNode* GeometryFrameRenderItem::updatePaintNode(QSGNode* old_node,
+                                                  UpdatePaintNodeData* data)
+{
+    static_cast<void>(data);
+    std::shared_ptr<const GeometryFrame> frame;
+    {
+        std::scoped_lock lock{pending_mutex_};
+        frame = pending_frame_;
+    }
+    if (!frame) {
+        delete old_node;
+        return nullptr;
+    }
+    return synchronize_geometry_nodes(old_node, *frame);
+}
+
 } // namespace space_rhythm::rendering

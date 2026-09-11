@@ -41,16 +41,16 @@
 
 ## T-035：验证屏上/离屏一致性、GPU 降级与渲染性能
 - 负责人：graphics-engineer-qt-scenegraph-01
-- 状态：todo
+- 状态：completed
 - 授权来源与日期：本会话用户于 2026-09-09 要求补充系统架构师判断的新增成员及成员任务并提交。
 - 目标与范围：让预览与导出复用同一渲染配方和核心数据，建立 GPU 能力探测、降级、设备差异和性能证据；不负责媒体编码或发布批准。
 - 输入与依赖：T-025、T-032、T-034；基准硬件和像素容差待确认；A-011 0.1。完成后的离屏帧由媒体导出任务消费，该下游关系不是本任务前置。
 - 优先级：未设定（架构建议：视觉模板基础完成后启动）。
 - 完成条件与确认方式：相同事件修订、特征、参数、尺寸、帧时间和种子产生可解释的屏上/离屏等价结果；输出帧接口可由媒体层消费；记录帧时间、CPU/GPU、显存和上传量；低能力设备有明确降级与诊断；负责人自测并保存兼容/性能证据。
-- 进展：任务已登记，尚未由负责人会话接收。
-- 成果与验证证据：[A-011 0.1](artifacts/A-011-complete-mvp-engineering-staffing-and-task-plan.md)；实际实现暂无。
-- 阻塞与下一位行动人：等待 T-025/T-032/T-034 及测试门槛；graphics-engineer-qt-scenegraph-01 先执行 T-033。
-- 更新日期：2026-09-09。
+- 进展：2026-09-11，完成 offscreen schema/contract 0.1.0 和 `SpaceRhythm::OffscreenRendering`：默认 D3D11 GPU 使用公共 `QQuickGraphicsDevice/QQuickRenderControl/QQuickRenderTarget`，Qt Software 使用公共 paint-device fallback；两者固定复用同一 immutable snapshot、recipe、`build_geometry_frame()`、帧时间和 seed，输出 A-021 RGBA8/sRGB/top-down `RenderedFrame/FrameLease` 并沿用 lease 级有界背压。实现能力探测、进程级后端边界、结构化 render/device-lost diagnostic、旧 generation/session 终止和新 generation 重建；未使用 Qt 私有 API。
+- 成果与验证证据：[A-025 0.1](artifacts/A-025-qt-offscreen-rendering-and-measurements.md)、[公共接口](../../src/rendering/include/space_rhythm/rendering/offscreen_renderer.hpp)、[实现](../../src/rendering/offscreen_renderer.cpp)、[7 项 GoogleTest](../../tests/unit/offscreen_rendering_test.cpp)、[机器可读测量](evidence/T-035/measurements-v1.json)及[验证摘要](evidence/T-035/verification-summary.md)。本机 software/GPU 各三模板屏上/离屏 exact hash 均相等，六组 max diff=0、diff pixels=0；帧/CPU/geometry/readback、上传顶点/bytes、working set 已实测，GPU frame time/动态显存占用明确 unavailable。最终 T-035 2/2 CTest 进程、内部 7/7 case 通过；T-033～T-035 合并回归 31/31 通过。
+- 阻塞与下一位行动人：T-035 无实现阻塞并按负责人完成条件结束。基准 GPU、像素容差和性能阈值尚未确认，全部结果仅为 `measured/not-evaluated`，不作性能/视觉批准。H-009 仍保持 accepted，下一行动人为 architect-01，验收 T-033～T-035 后决定关闭。
+- 更新日期：2026-09-11。
 
 ## T-034：实现高密度时间线、波形与三类视觉模板
 - 负责人：graphics-engineer-qt-scenegraph-01

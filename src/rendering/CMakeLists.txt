@@ -41,10 +41,33 @@ target_link_libraries(space_rhythm_scene_graph
 )
 space_rhythm_apply_build_policy(space_rhythm_scene_graph)
 
+add_library(space_rhythm_offscreen_rendering STATIC
+    include/space_rhythm/rendering/offscreen_renderer.hpp
+    offscreen_renderer.cpp
+)
+add_library(SpaceRhythm::OffscreenRendering ALIAS space_rhythm_offscreen_rendering)
+target_include_directories(space_rhythm_offscreen_rendering PUBLIC
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    $<INSTALL_INTERFACE:include>
+)
+target_link_libraries(space_rhythm_offscreen_rendering
+    PUBLIC
+        SpaceRhythm::SceneGraph
+        Qt6::Core
+        Qt6::Gui
+        Qt6::Quick
+    PRIVATE
+        d3d11
+        dxgi
+        Psapi
+)
+space_rhythm_apply_build_policy(space_rhythm_offscreen_rendering)
+
 install(TARGETS
     space_rhythm_rendering_contract
     space_rhythm_rendering_geometry
     space_rhythm_scene_graph
+    space_rhythm_offscreen_rendering
     ARCHIVE DESTINATION lib
 )
 install(DIRECTORY include/ DESTINATION include)

@@ -227,6 +227,40 @@ set_tests_properties(${space_rhythm_render_scene_graph_test_cases} PROPERTIES
     ENVIRONMENT_MODIFICATION "PATH=path_list_prepend:${SPACE_RHYTHM_QT_ROOT}/bin"
 )
 
+add_executable(space_rhythm_offscreen_rendering_tests
+    unit/offscreen_rendering_test.cpp
+)
+target_link_libraries(space_rhythm_offscreen_rendering_tests PRIVATE
+    SpaceRhythm::OffscreenRendering
+    GTest::gtest
+    Qt6::Core
+    Qt6::Gui
+    Qt6::Quick
+)
+space_rhythm_apply_build_policy(space_rhythm_offscreen_rendering_tests)
+add_test(
+    NAME rendering.offscreen_software_contract
+    COMMAND space_rhythm_offscreen_rendering_tests
+        --gtest_filter=OffscreenContract.*:OffscreenSoftware.*
+)
+set_tests_properties(rendering.offscreen_software_contract PROPERTIES
+    LABELS "t035;contract;rendering;offscreen;software;headless;measured;not-evaluated;gate-g1;gate-g3;gate-g4"
+    ENVIRONMENT "QT_QPA_PLATFORM=offscreen;QT_QUICK_BACKEND=software"
+    ENVIRONMENT_MODIFICATION "PATH=path_list_prepend:${SPACE_RHYTHM_QT_ROOT}/bin"
+    TIMEOUT 120
+)
+add_test(
+    NAME rendering.offscreen_default_gpu
+    COMMAND space_rhythm_offscreen_rendering_tests
+        --gtest_filter=OffscreenDefaultGpu.*
+)
+set_tests_properties(rendering.offscreen_default_gpu PROPERTIES
+    LABELS "t035;integration;rendering;offscreen;default-gpu;headless;measured;not-evaluated;gate-g1;gate-g3"
+    ENVIRONMENT "QT_QPA_PLATFORM=windows;QT_SCALE_FACTOR=1"
+    ENVIRONMENT_MODIFICATION "PATH=path_list_prepend:${SPACE_RHYTHM_QT_ROOT}/bin"
+    TIMEOUT 60
+)
+
 add_executable(space_rhythm_core_tests
     unit/core_contract_vectors_test.cpp
     unit/core_skeleton_test.cpp
