@@ -45,11 +45,11 @@
 - 关联任务：T-030、T-031、T-032
 - 期望结果：在自己的项目会话中接收本交接，先把 T-030 更新为 in_progress，形成 PCM、采样时间、特征/候选和测试音色契约；媒体/工程输入就绪后执行 T-031/T-032，输出确定性混音 PCM 供图形和媒体导出消费。
 - 输入与证据：D-001～D-008；A-004 0.5、A-005 0.4、A-006 0.1 WP-06、[A-011 0.1](artifacts/A-011-complete-mvp-engineering-staffing-and-task-plan.md)；T-030～T-032。
-- 未完成事项：D-003 已确认 C++ DSP + KissFFT 总体路线；合法音色、采样率和产品效果门槛尚未确认，不得使用来源不明音色。
+- 未完成事项：T-030～T-032 工作流均已完成。产品默认音色、产品效果/性能门槛、设备矩阵和完整发布门禁仍未确认；A-018 三个 CC0 音色仅作测试，不得替代产品选型。
 - 状态：accepted
 - 创建日期：2026-09-09
-- 接收反馈：2026-09-10，audio-dsp-engineer-01 依据用户明确指令接收；已依次完成 T-030、T-031。T-032 继续不执行。
-- 处理结果与证据：2026-09-10，T-030 已形成 A-018 0.1、10 项可复现向量与 3 个合法测试音色清单及实际 SHA-256；T-031 已形成 A-019 0.1、版本化算法 oracle 和三配置专项 17/17。2026-09-11，依据用户授权完成 H-011/T-031 验收修订，[A-018 0.2](artifacts/A-018-audio-dsp-pcm-feature-candidate-contract.md)与[A-019 0.2](artifacts/A-019-audio-analysis-implementation-and-oracles.md)已对齐媒体 schema 2，adapter 直接消费媒体事实，三配置各 22/22；H-011 已 `closed`。性能/效果阈值仍为 `measured/not-evaluated`。H-008 继续保持 accepted，等待用户另行启动 T-032。
+- 接收反馈：2026-09-10，audio-dsp-engineer-01 依据用户明确指令接收并依次完成 T-030、T-031；2026-09-11，用户明确启动并完成 T-032 授权。
+- 处理结果与证据：T-030 已形成 [A-018 0.2](artifacts/A-018-audio-dsp-pcm-feature-candidate-contract.md)及 10 项可复现向量/3 个 CC0 测试音色；T-031 已形成 [A-019 0.2](artifacts/A-019-audio-analysis-implementation-and-oracles.md)，并完成 H-011 schema 2 验收。T-032 已形成 [A-020 0.1](artifacts/A-020-audio-rendering-and-preview-implementation.md)和[验证摘要](evidence/T-032/verification-summary.md)，实现确定性混音、PCM/WAV 与 QAudioSink 适配；Debug/CI 功能与 golden 及 Release 同源专项有成功记录，但最终 Release 单元复跑被 WDAC/SAC 阻断，未宣称最新专项或完整 Release 门禁通过。性能/效果、产品音色和设备矩阵仍为 measured/not-evaluated。H-008 的期望工作流已交付，状态保持 accepted，等待发起人 architect-01 关闭。
 - 关闭或取消依据：暂无。
 
 ## H-007：启动 C++/OpenCV 视频算法工作流
