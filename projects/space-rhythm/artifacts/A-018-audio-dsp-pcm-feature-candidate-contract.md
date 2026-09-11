@@ -4,18 +4,18 @@
 - 成果 ID: A-018
 - 负责人: audio-dsp-engineer-01
 - 关联任务: T-030
-- 版本: 0.1
-- 更新日期: 2026-09-10
+- 版本: 0.2
+- 更新日期: 2026-09-11
 - 状态: draft
 - 适用范围: 定义 DSP 消费的 PCM、采样时间、segment、重采样延迟、缓冲所有权、特征帧、分析候选、参数/算法版本、错误、可复现合成向量和测试音色; 不实现 T-031 分析算法或 T-032 混音/试听，不改变媒体 PTS 或核心事件语义。
-- 来源及输入版本: [A-012 0.1](A-012-core-domain-contract-0x.md) `TimeNs`、候选 envelope 与 `ErrorInfo`; [A-014 0.3](A-014-media-time-buffer-and-golden-contract.md) 媒体 PCM/采样索引/所有权; [A-015 0.2](A-015-ffmpeg-media-pipeline.md) 实际 FFmpeg PCM 输出; [A-016 0.1](A-016-cpp-qt-test-strategy-and-traceability.md) 可复现、证据和许可规则; A-004 0.5、A-005 0.4、A-006 0.1 WP-06、A-011 0.1; D-001～D-008 confirmed; 用户于 2026-09-10 明确要求接收 H-008 并完成 T-030。
+- 来源及输入版本: [A-012 0.1](A-012-core-domain-contract-0x.md) `TimeNs`、候选 envelope 与 `ErrorInfo`; [A-014 0.4](A-014-media-time-buffer-and-golden-contract.md) 媒体 PCM/采样索引/所有权; [A-015 0.3](A-015-ffmpeg-media-pipeline.md) 实际 FFmpeg PCM 输出; [A-016 0.1](A-016-cpp-qt-test-strategy-and-traceability.md) 可复现、证据和许可规则; A-004 0.5、A-005 0.4、A-006 0.1 WP-06、A-011 0.1; D-001～D-008 confirmed; 用户于 2026-09-10 明确要求接收 H-008 并完成 T-030，2026-09-11 明确授权验收提交 `156b19f` 并修订 T-031 适配边界。
 - 批准依据: 尚无。T-030 完成条件为负责人自查并形成候选契约，不等于算法效果、产品音色或发布许可批准。
 - DSP 契约版本: `dspContractVersion = 0.1.0`
 - 逻辑 DTO schema: `schemaVersion = 1`
 - 参数 schema: `parameterSchemaVersion = 1`
 - 测试向量集: `vectorSetVersion = 1`
 - 测试音色清单: `timbreManifestVersion = 1`
-- 版本记录: 2026-09-10，0.1，首次定义 PCM 入口、精确时间、segment/延迟、特征和候选 DTO、低置信语义、参数摘要、错误及 10 个合成向量。
+- 版本记录: 2026-09-11，0.2，对齐 A-014 0.4/A-015 0.3 的媒体 schema 2：`PcmNarrowAdapter` 必须直接消费媒体提供的 `channelOrder`、segment 原点与 `ResampleTrace`，不得再由调用者重复填写媒体事实；明确旧 schema、缺字段和矛盾 trace fail closed，并登记真实媒体管线验收。2026-09-10，0.1，首次定义 PCM 入口、精确时间、segment/延迟、特征和候选 DTO、低置信语义、参数摘要、错误及 10 个合成向量。
 
 ## 1. 规范词与单一责任
 
@@ -35,21 +35,23 @@ DSP 领域不拥有:
 - 产品默认音色、音色商用许可、采样率默认值、效果或性能放行阈值;
 - QML/JavaScript 中的 DSP 计算、媒体封装或设备时钟。
 
-## 2. A-015 实际 PCM 入口兼容性
+## 2. A-015 schema 2 实际 PCM 入口兼容性
 
-| A-015 字段/行为 | DSP schema 1 映射 |
+| A-015 schema 2 字段/行为 | DSP schema 1 映射 |
 |---|---|
+| `schema_version = 2` / `media_contract_version = "1.0.0"` | 进入任何格式或时间处理前严格校验；旧 schema/contract 返回 `compatibility/unsupported_schema`。 |
 | `sample_format = "flt"` | 当前 Windows x64/IEEE-754/小端基线映射为 `f32_le`; 其他表示不得猜测。 |
-| `channel_layout = "mono" | "stereo"` | 分别映射为顺序 `FC` 或 `FL,FR`; 不得只传声道数。 |
+| `channel_layout` + `channel_order` | 只接受媒体显式给出的 `mono + [FC]` 或 `stereo + [FL,FR]`；不得从布局或声道数重建顺序。 |
 | `planar = false` | `interleaving = interleaved`，帧内按 `channelOrder` 排列。 |
 | `sample_count` | `validFrameCount`，按每声道帧数计，不乘声道数。 |
 | plane 0 `row_bytes = channels * 4` | `frameStrideBytes`; `validBytes = validFrameCount * frameStrideBytes`。 |
 | `lease.format_epoch()` | `formatEpoch`; 格式变化必须先通知新 epoch。 |
-| `segment_id` / `first_sample_index` | 原样保留; 同 segment 严格连续。 |
+| `segment_id` / `segment_origin_time_ns` / `segment_origin_sample_index` / `first_sample_index` | 全部原样保留；调用者不另传 origin，同 segment 严格连续。 |
 | `time_ns` / `duration_ns` | 仅作上游声明与交叉验证; DSP 依绝对采样索引重新计算。 |
+| `resample_trace` | 直接保留媒体逐缓冲事实；delay/drain 可逐缓冲变化，配置字段在同 segment 必须稳定。 |
 | 不可变 `BufferLease` | DSP 保留 lease 的共享所有权并只读处理。 |
 
-当前上游结构尚未显式携带重采样延迟、重采样实现版本和版本化声道顺序。进入 DSP 前必须由窄适配层补齐第 3 节 `DspPcmBuffer`; PCM lease 可零拷贝复用，缺失时序元数据不得从帧数、包时间或日志反推。
+A-014 0.4/A-015 0.3 已在 schema 2 公共 `PcmBuffer` 中提供全部媒体事实。生产入口固定为 `PcmNarrowAdapter::adapt(const media::PcmBuffer&)`；不存在第二个 context 或可覆盖 origin/trace 的参数。PCM lease 零拷贝复用，缺字段、旧 schema 或矛盾事实必须终止，仍不得从 PTS、帧数、包时间或日志反推。
 
 ## 3. DSP PCM、segment 与所有权
 
@@ -57,7 +59,7 @@ DSP 领域不拥有:
 DspPcmBuffer {
   schemaVersion: 1
   dspContractVersion: "0.1.0"
-  mediaContractVersion: "0.1.0"
+  mediaContractVersion: "1.0.0"
   inputFingerprintSha256: 64 lowercase hex
   streamKey: A-014 StreamKey
   segmentId: OpaqueId
@@ -104,9 +106,9 @@ PCM 不变量:
 Resample 规则:
 
 - `performed=false` 时输入/输出率相同，delay 为 `0/1`，`emittedFromDrain=false`，implementation 显式为 `identity/1`。
-- `performed=true` 时全部字段由媒体适配器产生。delay 是该次输入前缓存的精确输入帧数; EOF/format-change 排空产物标记 `emittedFromDrain=true`。
-- `firstSampleIndex` 是经延迟帐务后的输出展示采样位置。消费者不得把 delay 再加到时间上; delay 是证据，不是第二时钟。
-- delay、实现版本或帐务状态缺失时返回 `validation/resample_timing_unavailable`，不得标记连续。
+- `performed=true` 时全部字段由媒体 schema 2 生产者产生。delay 是该次输入前缓存的精确输入帧数；EOF/format-change 排空产物标记 `emittedFromDrain=true`。同一 segment 内实现、版本、输入/输出率和参数摘要固定，delay/drain 是允许逐缓冲变化的调用事实；drain 后不得再出现普通输入缓冲。
+- `firstSampleIndex` 已由媒体 resampler 计入 delay，是输出展示采样位置。DSP 原样复制该索引，时间式只使用 `firstSampleIndex`、segment 原点和采样率，绝不把 `delayBeforeInputFrames` 再加/减一次；delay 是可审计证据，不是第二时钟。
+- `channelOrder`、segment ID、trace 字符串/摘要/delay/帐务状态缺失，trace 与输出采样率、identity/performed 语义或同 segment 配置矛盾时 fail closed。旧媒体 schema/contract 返回 `compatibility/unsupported_schema`；trace 问题返回 `validation/resample_timing_unavailable`，不得标记连续。
 
 所有权规则:
 
@@ -351,7 +353,7 @@ DSP 复用 A-012 `ErrorInfo` envelope。下列是 schema 1 需新增的稳定逻
 
 ## 11. 实现和消费者交接边界
 
-- T-031 的 PCM adapter 应直接复用 A-015 的字节与 lease，补充本契约要求的 channel order 和 `ResampleTrace`；不得复制 PCM 来掩盖所有权问题，也不得从 PTS 猜 delay。若 FFmpeg 端尚未暴露 delay/version，返回 `resample_timing_unavailable` 或在生产边界显式补齐后再分析。
+- T-031 的 PCM adapter 直接复用 A-015 schema 2 的字节与 lease，并直接读取该缓冲上的 `channelOrder`、segment 原点和 `ResampleTrace`；不得另设调用者 context 覆盖媒体事实，不得复制 PCM 来掩盖所有权问题，也不得从 PTS 猜 delay。任何必填 provenance 缺失或矛盾都返回稳定错误后停止分析。
 - T-031 冻结生产参数集和算法 oracle 时，需为每项期待值注明 algorithm/version、backend/version、参数摘要与容差；不得把本契约中的信号构造意图当作算法已经通过。
 - T-032 只能使用已登记、许可清楚且 hash 匹配的音色。当前允许的测试音色仅为 `AT-CLICK-001`、`AT-LOW-PULSE-001`、`AT-NOISE-HIT-001`；产品默认音色仍需独立选型、许可核验和验收。
 - core 只消费 A-012 映射后的不可变候选并负责用户批准/时间线提交；graphics 只消费稳定特征/候选视图；media 负责实际 PCM 与 resampler trace；DSP 不拥有媒体解码、时间线提交或产品资产授权。
@@ -371,4 +373,4 @@ DSP 复用 A-012 `ErrorInfo` envelope。下列是 schema 1 需新增的稳定逻
 | 脉冲、固定/变速节拍、静音、噪声、边界信号 | 第 9 节和 `fixtures-v1.json` |
 | 合法测试音色、生成方式、许可与 SHA-256 | 第 9、11 节，manifest 与 `LICENSE.md` |
 
-自检结论：A-015 0.2 的 mono/stereo interleaved `flt` PCM、有效帧、采样起点、segment 和 lease 可无拷贝映射到本契约；其公共 DTO 尚不能证明 resampler delay、版本和显式声道顺序，因此本契约将其列为 adapter 的必填 provenance，而不虚构值。生成器已从规范配方重建全部 10 项并核对配方/PCM SHA-256、字节长度、许可和 schema；`-ValidateOnly` 可在不改写 PCM 时复核清单。T-030 不包含算法实现、产品音色批准、T-031/T-032 工作或 `package/` 内容。
+自检结论：提交 `156b19f` 的 A-015 0.3 schema 2 `PcmBuffer` 已能把 mono/stereo interleaved `flt` PCM、有效帧、显式声道顺序、segment 原点、已计 delay 的 `firstSampleIndex`、逐缓冲 resampler trace 和 lease 无拷贝映射到本契约。T-031 验收修订使用真实媒体管线覆盖 identity、44.1→48 kHz、48→44.1 kHz、非零 delay、drain、seek 与 format-change segment；缺字段、旧 schema 和矛盾 trace 均 fail closed。生成器继续从规范配方重建全部 10 项并核对配方/PCM SHA-256、字节长度、许可和 schema；T-032 未启动，`package/` 未进入范围。

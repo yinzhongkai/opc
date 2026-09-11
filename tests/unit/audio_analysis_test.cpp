@@ -10,7 +10,10 @@
 #include <filesystem>
 #include <fstream>
 #include <limits>
+#include <memory>
+#include <optional>
 #include <ranges>
+#include <set>
 #include <stdexcept>
 #include <string>
 #include <tuple>
@@ -22,11 +25,11 @@ using space_rhythm::audio::AnalysisResult;
 using space_rhythm::audio::AnalysisStatus;
 using space_rhythm::audio::CandidateKind;
 using space_rhythm::audio::DspPcmBuffer;
-using space_rhythm::audio::PcmAdapterContext;
 using space_rhythm::audio::PcmNarrowAdapter;
-using space_rhythm::audio::ResampleTrace;
 using space_rhythm::core::ErrorCode;
 using space_rhythm::media::BufferLease;
+using space_rhythm::media::MediaSelection;
+using space_rhythm::media::MediaSource;
 using space_rhythm::media::PcmBuffer;
 using space_rhythm::media::PlaneView;
 using space_rhythm::media::StreamKey;
@@ -90,10 +93,42 @@ constexpr FixtureSpec kNonFinite{"nonfinite-48000-mono.f32le",
                                  1,
                                  4,
                                  0};
+constexpr std::string_view kSyntheticIdentityParametersDigest{
+    "08954dce7647560265a6c959e8eb2b90d8101319cf9c17b0624a56ccea094584"};
 
 [[nodiscard]] std::filesystem::path fixture_path(const FixtureSpec& spec)
 {
     return std::filesystem::path{SPACE_RHYTHM_GOLDEN_AUDIO_DIR} / spec.file;
+}
+
+[[nodiscard]] std::filesystem::path media_fixture_path(const std::string_view file)
+{
+    return std::filesystem::path{SPACE_RHYTHM_GOLDEN_MEDIA_DIR} / file;
+}
+
+[[nodiscard]] space_rhythm::media::ResampleTrace synthetic_identity_trace(
+    const std::uint32_t sample_rate)
+{
+    space_rhythm::media::ResampleTrace trace;
+    trace.input_sample_rate = sample_rate;
+    trace.output_sample_rate = sample_rate;
+    trace.implementation_id = "identity";
+    trace.implementation_version = "1";
+    trace.parameters_digest_sha256 = kSyntheticIdentityParametersDigest;
+    return trace;
+}
+
+[[nodiscard]] MediaSelection select_audio(const std::shared_ptr<MediaSource>& source)
+{
+    const auto selection = source->select(
+        {space_rhythm::media::SelectionMode::none, std::nullopt, false},
+        {space_rhythm::media::SelectionMode::required_default_then_lowest_index,
+         std::nullopt,
+         false});
+    if (!selection) {
+        throw std::runtime_error{"unable to select golden media audio"};
+    }
+    return selection.value();
 }
 
 [[nodiscard]] std::vector<std::byte> read_bytes(const std::filesystem::path& path)
@@ -137,12 +172,17 @@ constexpr FixtureSpec kNonFinite{"nonfinite-48000-mono.f32le",
     pcm.duration_ns = duration.value();
     pcm.segment_id = segment_id.empty() ? std::string{spec.id} + "-segment-0"
                                         : std::move(segment_id);
+    pcm.segment_origin_time_ns = 0;
+    pcm.segment_origin_sample_index = 0;
     pcm.first_sample_index = spec.first_sample_index;
     pcm.sample_count = spec.frame_count;
     pcm.sample_rate = spec.sample_rate;
     pcm.sample_format = "flt";
     pcm.channel_layout = spec.channels == 1U ? "mono" : "stereo";
+    pcm.channel_order = spec.channels == 1U ? std::vector<std::string>{"FC"}
+                                            : std::vector<std::string>{"FL", "FR"};
     pcm.planar = false;
+    pcm.resample_trace = synthetic_identity_trace(spec.sample_rate);
     const auto stride = static_cast<std::uint32_t>(spec.channels * sizeof(float));
     pcm.planes.push_back(PlaneView{0,
                                    stride,
@@ -156,8 +196,7 @@ constexpr FixtureSpec kNonFinite{"nonfinite-48000-mono.f32le",
 {
     auto pcm = make_media_pcm(read_bytes(fixture_path(spec)), spec);
     PcmNarrowAdapter adapter;
-    const auto adapted = adapter.adapt(
-        pcm, PcmAdapterContext{0, 0, ResampleTrace::identity(spec.sample_rate)});
+    const auto adapted = adapter.adapt(pcm);
     if (!adapted) {
         throw std::runtime_error{"fixture adaptation failed: "
                                  + std::string{space_rhythm::core::to_string(adapted.error().code)}};
@@ -183,8 +222,7 @@ constexpr FixtureSpec kNonFinite{"nonfinite-48000-mono.f32le",
                            first_sample_index};
     auto pcm = make_media_pcm(std::move(bytes), spec, std::move(segment_id));
     PcmNarrowAdapter adapter;
-    const auto adapted = adapter.adapt(
-        pcm, PcmAdapterContext{0, 0, ResampleTrace::identity(sample_rate)});
+    const auto adapted = adapter.adapt(pcm);
     if (!adapted) {
         throw std::runtime_error{"memory fixture adaptation failed"};
     }
@@ -222,16 +260,23 @@ constexpr FixtureSpec kNonFinite{"nonfinite-48000-mono.f32le",
     return tempos;
 }
 
-TEST(AudioPcmAdapter, RequiresExplicitResamplerProvenance)
+TEST(AudioPcmAdapter, RejectsMissingSchemaTwoMediaFacts)
 {
     auto pcm = make_media_pcm(read_bytes(fixture_path(kImpulse)), kImpulse);
     PcmNarrowAdapter adapter;
-    const auto result = adapter.adapt(pcm, PcmAdapterContext{});
-    ASSERT_FALSE(result);
-    EXPECT_EQ(result.error().code, ErrorCode::resample_timing_unavailable);
+    pcm.channel_order.clear();
+    const auto missing_channel_order = adapter.adapt(pcm);
+    ASSERT_FALSE(missing_channel_order);
+    EXPECT_EQ(missing_channel_order.error().code, ErrorCode::unsupported_channel_layout);
+
+    pcm.channel_order = {"FC"};
+    pcm.resample_trace.implementation_version.clear();
+    const auto missing_trace_field = adapter.adapt(pcm);
+    ASSERT_FALSE(missing_trace_field);
+    EXPECT_EQ(missing_trace_field.error().code, ErrorCode::resample_timing_unavailable);
 }
 
-TEST(AudioPcmAdapter, AcceptsExplicitIdentityTraceAndRetainsLease)
+TEST(AudioPcmAdapter, DirectlyConsumesSchemaTwoIdentityFactsAndRetainsLease)
 {
     const auto buffer = adapt_fixture(kBoundary);
     EXPECT_EQ(buffer.channel_order, (std::vector<std::string>{"FL", "FR"}));
@@ -254,15 +299,47 @@ TEST(AudioPcmAdapter, AcceptsExplicitIdentityTraceAndRetainsLease)
 TEST(AudioPcmAdapter, RejectsIncompleteNonIdentityTraceWithoutGuessing)
 {
     auto pcm = make_media_pcm(read_bytes(fixture_path(kImpulse)), kImpulse);
-    auto trace = ResampleTrace::identity(48'000);
-    trace.performed = true;
-    trace.input_sample_rate = 44'100;
-    trace.implementation_version.clear();
-    trace.delay_unit.clear();
+    pcm.resample_trace.performed = true;
+    pcm.resample_trace.input_sample_rate = 44'100;
+    pcm.resample_trace.implementation_id = "ffmpeg.swresample";
+    pcm.resample_trace.implementation_version.clear();
+    pcm.resample_trace.delay_unit.clear();
     PcmNarrowAdapter adapter;
-    const auto result = adapter.adapt(pcm, PcmAdapterContext{0, 0, trace});
+    const auto result = adapter.adapt(pcm);
     ASSERT_FALSE(result);
     EXPECT_EQ(result.error().code, ErrorCode::resample_timing_unavailable);
+}
+
+TEST(AudioPcmAdapter, RejectsLegacySchemaAndContradictoryTrace)
+{
+    auto legacy = make_media_pcm(read_bytes(fixture_path(kImpulse)), kImpulse);
+    legacy.schema_version = 1;
+    legacy.media_contract_version = "0.1.0";
+    PcmNarrowAdapter adapter;
+    const auto legacy_result = adapter.adapt(legacy);
+    ASSERT_FALSE(legacy_result);
+    EXPECT_EQ(legacy_result.error().code, ErrorCode::unsupported_schema);
+
+    auto contradicted = make_media_pcm(read_bytes(fixture_path(kImpulse)), kImpulse);
+    contradicted.resample_trace.performed = true;
+    contradicted.resample_trace.implementation_id = "ffmpeg.swresample";
+    const auto performed_without_rate_change = adapter.adapt(contradicted);
+    ASSERT_FALSE(performed_without_rate_change);
+    EXPECT_EQ(performed_without_rate_change.error().code,
+              ErrorCode::resample_timing_unavailable);
+
+    contradicted = make_media_pcm(read_bytes(fixture_path(kImpulse)), kImpulse);
+    contradicted.resample_trace.delay_accounted_in_first_sample_index = false;
+    const auto unaccounted_delay = adapter.adapt(contradicted);
+    ASSERT_FALSE(unaccounted_delay);
+    EXPECT_EQ(unaccounted_delay.error().code, ErrorCode::resample_timing_unavailable);
+
+    contradicted = make_media_pcm(read_bytes(fixture_path(kImpulse)), kImpulse);
+    contradicted.resample_trace.output_sample_rate = 44'100;
+    const auto mismatched_output_rate = adapter.adapt(contradicted);
+    ASSERT_FALSE(mismatched_output_rate);
+    EXPECT_EQ(mismatched_output_rate.error().code,
+              ErrorCode::resample_timing_unavailable);
 }
 
 TEST(AudioPcmAdapter, RejectsSameSegmentIndexGap)
@@ -279,10 +356,186 @@ TEST(AudioPcmAdapter, RejectsSameSegmentIndexGap)
     auto first = make_media_pcm(std::move(first_bytes), first_spec, "same-segment");
     auto second = make_media_pcm(std::move(second_bytes), second_spec, "same-segment");
     PcmNarrowAdapter adapter;
-    ASSERT_TRUE(adapter.adapt(first, {0, 0, ResampleTrace::identity(48'000)}));
-    const auto result = adapter.adapt(second, {0, 0, ResampleTrace::identity(48'000)});
+    ASSERT_TRUE(adapter.adapt(first));
+    const auto result = adapter.adapt(second);
     ASSERT_FALSE(result);
     EXPECT_EQ(result.error().code, ErrorCode::pcm_discontinuity);
+}
+
+TEST(AudioPcmAdapterMediaPipeline, ConsumesIdentityAndBidirectionalResamplingDirectly)
+{
+    struct ResampleCase {
+        const char* file;
+        std::uint32_t input_rate;
+        std::uint32_t output_rate;
+        std::uint64_t expected_samples;
+        bool performed;
+    };
+    for (const auto& test_case : std::array{
+             ResampleCase{"audio_44100.wav", 44'100, 44'100, 4'410, false},
+             ResampleCase{"audio_44100.wav", 44'100, 48'000, 4'800, true},
+             ResampleCase{"audio_48000.wav", 48'000, 44'100, 4'410, true}}) {
+        SCOPED_TRACE(std::string{test_case.file} + " -> "
+                     + std::to_string(test_case.output_rate));
+        const auto source = MediaSource::open(media_fixture_path(test_case.file));
+        ASSERT_TRUE(source);
+        const auto selection = select_audio(source.value());
+        PcmNarrowAdapter adapter;
+        std::optional<std::int64_t> next_sample_index;
+        std::string segment_id;
+        std::uint64_t samples = 0;
+        bool adapter_failed = false;
+        bool saw_nonzero_delay = false;
+        bool saw_drain = false;
+        bool proved_no_second_compensation = false;
+        const auto decoded = source.value()->decode_audio(
+            selection,
+            selection.audio.selected.front(),
+            {test_case.output_rate, 1},
+            space_rhythm::media::DecodeLimits{},
+            {{}, [&](PcmBuffer pcm) {
+                 const auto adapted = adapter.adapt(pcm);
+                 if (!adapted) {
+                     adapter_failed = true;
+                     return space_rhythm::media::PublishResult::cancelled;
+                 }
+                 const auto& dsp = adapted.value();
+                 EXPECT_EQ(dsp.media_contract_version, pcm.media_contract_version);
+                 EXPECT_EQ(dsp.channel_order, pcm.channel_order);
+                 EXPECT_EQ(dsp.segment_origin_time_ns, pcm.segment_origin_time_ns);
+                 EXPECT_EQ(dsp.segment_origin_sample_index,
+                           pcm.segment_origin_sample_index);
+                 EXPECT_EQ(dsp.first_sample_index, pcm.first_sample_index);
+                 EXPECT_EQ(dsp.resample_trace, pcm.resample_trace);
+                 EXPECT_EQ(pcm.resample_trace.performed, test_case.performed);
+                 EXPECT_EQ(pcm.resample_trace.input_sample_rate, test_case.input_rate);
+                 EXPECT_EQ(pcm.resample_trace.output_sample_rate, test_case.output_rate);
+                 EXPECT_TRUE(pcm.resample_trace.delay_accounted_in_first_sample_index);
+                 if (next_sample_index) {
+                     EXPECT_EQ(pcm.segment_id, segment_id);
+                     EXPECT_EQ(pcm.first_sample_index, *next_sample_index);
+                     EXPECT_EQ(dsp.first_sample_index, *next_sample_index);
+                 } else {
+                     segment_id = pcm.segment_id;
+                     EXPECT_EQ(pcm.first_sample_index, pcm.segment_origin_sample_index);
+                     EXPECT_EQ(pcm.time_ns, pcm.segment_origin_time_ns);
+                 }
+                 next_sample_index = pcm.first_sample_index
+                     + static_cast<std::int64_t>(pcm.sample_count);
+                 samples += pcm.sample_count;
+                 saw_drain = saw_drain || pcm.resample_trace.emitted_from_drain;
+                 if (pcm.resample_trace.delay_before_input_frames.numerator > 0) {
+                     saw_nonzero_delay = true;
+                     const auto relative = space_rhythm::core::checked_subtract(
+                         dsp.first_sample_index, dsp.segment_origin_sample_index);
+                     EXPECT_TRUE(relative);
+                     if (relative) {
+                         const auto direct_time = space_rhythm::media::sample_index_to_time_ns(
+                             relative.value(),
+                             dsp.sample_rate,
+                             dsp.segment_origin_time_ns,
+                             space_rhythm::core::RoundingMode::nearest_ties_to_even);
+                         EXPECT_TRUE(direct_time);
+                         if (direct_time) {
+                             EXPECT_EQ(direct_time.value(), pcm.time_ns);
+                             proved_no_second_compensation = true;
+                         }
+                     }
+                 }
+                 return space_rhythm::media::PublishResult::accepted;
+             }});
+        ASSERT_TRUE(decoded) << space_rhythm::core::to_string(decoded.error().code);
+        EXPECT_FALSE(adapter_failed);
+        EXPECT_EQ(samples, test_case.expected_samples);
+        EXPECT_EQ(saw_nonzero_delay, test_case.performed);
+        EXPECT_EQ(saw_drain, test_case.performed);
+        EXPECT_EQ(proved_no_second_compensation, test_case.performed);
+    }
+}
+
+TEST(AudioPcmAdapterMediaPipeline, ConsumesSeekSegmentOriginWithoutCallerContext)
+{
+    const auto source = MediaSource::open(media_fixture_path("audio_48000.wav"));
+    ASSERT_TRUE(source);
+    const auto selection = select_audio(source.value());
+    PcmNarrowAdapter adapter;
+    std::optional<DspPcmBuffer> sought;
+    const auto decoded = source.value()->decode_audio(
+        selection,
+        selection.audio.selected.front(),
+        {48'000, 1, std::optional<space_rhythm::core::TimeNs>{50'000'000}},
+        space_rhythm::media::DecodeLimits{},
+        {{}, [&](PcmBuffer pcm) {
+             const auto adapted = adapter.adapt(pcm);
+             EXPECT_TRUE(adapted);
+             if (adapted) {
+                 sought = adapted.value();
+             }
+             return space_rhythm::media::PublishResult::would_block;
+         }});
+    ASSERT_TRUE(decoded) << space_rhythm::core::to_string(decoded.error().code);
+    ASSERT_TRUE(sought.has_value());
+    EXPECT_EQ(sought->first_sample_index, 2'400);
+    EXPECT_EQ(sought->segment_origin_sample_index, sought->first_sample_index);
+    EXPECT_EQ(sought->segment_origin_time_ns, 50'000'000);
+    EXPECT_FALSE(sought->resample_trace.performed);
+    EXPECT_EQ(sought->resample_trace.delay_before_input_frames,
+              (space_rhythm::media::Rational{0, 1}));
+}
+
+TEST(AudioPcmAdapterMediaPipeline, ConsumesFormatChangeSegmentsAndOldResamplerDrain)
+{
+    const auto source = MediaSource::open(media_fixture_path("dynamic_audio.ts"));
+    ASSERT_TRUE(source);
+    const auto selection = select_audio(source.value());
+    PcmNarrowAdapter adapter;
+    std::set<std::uint64_t> announced_epochs;
+    std::set<std::string> segments;
+    bool adapter_failed = false;
+    bool saw_44100_to_48000 = false;
+    bool saw_old_segment_drain = false;
+    bool saw_48000_identity = false;
+    const auto decoded = source.value()->decode_audio(
+        selection,
+        selection.audio.selected.front(),
+        {48'000, 1},
+        space_rhythm::media::DecodeLimits{},
+        {[&](const space_rhythm::media::FormatChanged& change) {
+             announced_epochs.insert(change.format_epoch);
+             EXPECT_TRUE(change.audio.has_value());
+             return space_rhythm::media::PublishResult::accepted;
+         },
+         [&](PcmBuffer pcm) {
+             EXPECT_TRUE(announced_epochs.contains(pcm.lease.format_epoch()));
+             const auto adapted = adapter.adapt(pcm);
+             if (!adapted) {
+                 adapter_failed = true;
+                 return space_rhythm::media::PublishResult::cancelled;
+             }
+             EXPECT_EQ(adapted.value().segment_id, pcm.segment_id);
+             EXPECT_EQ(adapted.value().segment_origin_time_ns,
+                       pcm.segment_origin_time_ns);
+             segments.insert(pcm.segment_id);
+             const auto& trace = pcm.resample_trace;
+             if (trace.input_sample_rate == 44'100
+                 && trace.output_sample_rate == 48'000) {
+                 saw_44100_to_48000 = trace.performed;
+                 saw_old_segment_drain = saw_old_segment_drain
+                     || trace.emitted_from_drain;
+             }
+             if (trace.input_sample_rate == 48'000
+                 && trace.output_sample_rate == 48'000) {
+                 saw_48000_identity = !trace.performed;
+             }
+             return space_rhythm::media::PublishResult::accepted;
+         }});
+    ASSERT_TRUE(decoded) << space_rhythm::core::to_string(decoded.error().code);
+    EXPECT_FALSE(adapter_failed);
+    EXPECT_GE(announced_epochs.size(), 2U);
+    EXPECT_GE(segments.size(), 2U);
+    EXPECT_TRUE(saw_44100_to_48000);
+    EXPECT_TRUE(saw_old_segment_drain);
+    EXPECT_TRUE(saw_48000_identity);
 }
 
 TEST(AudioAnalysisParameters, ProductionSetIsVersionedAndDigestStable)

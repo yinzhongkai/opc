@@ -32,27 +32,7 @@ struct RationalFrames {
     bool operator==(const RationalFrames&) const = default;
 };
 
-struct ResampleTrace {
-    bool performed{false};
-    std::uint32_t input_sample_rate{};
-    std::uint32_t output_sample_rate{};
-    std::string implementation_id;
-    std::string implementation_version;
-    std::string parameters_digest_sha256;
-    RationalFrames delay_before_input_frames;
-    std::string delay_unit{"input_frames"};
-    bool delay_accounted_in_first_sample_index{true};
-    bool emitted_from_drain{false};
-
-    [[nodiscard]] static ResampleTrace identity(std::uint32_t sample_rate);
-    bool operator==(const ResampleTrace&) const = default;
-};
-
-struct PcmAdapterContext {
-    core::TimeNs segment_origin_time_ns{};
-    std::int64_t segment_origin_sample_index{};
-    std::optional<ResampleTrace> resample_trace;
-};
+using ResampleTrace = media::ResampleTrace;
 
 struct DspPcmBuffer {
     std::uint32_t schema_version{audio::schema_version};
@@ -83,9 +63,7 @@ struct DspPcmBuffer {
 
 class PcmNarrowAdapter final {
 public:
-    [[nodiscard]] core::Result<DspPcmBuffer> adapt(
-        const media::PcmBuffer& source,
-        const PcmAdapterContext& context);
+    [[nodiscard]] core::Result<DspPcmBuffer> adapt(const media::PcmBuffer& source);
     void reset() noexcept;
 
 private:
@@ -98,7 +76,8 @@ private:
         std::int64_t next_sample_index{};
         std::uint32_t sample_rate{};
         std::vector<std::string> channel_order;
-        ResampleTrace resample_trace;
+        ResampleTrace resample_trace_configuration;
+        bool saw_drain{false};
     };
     std::optional<PreviousBuffer> previous_;
 };

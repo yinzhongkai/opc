@@ -19,7 +19,6 @@
 namespace space_rhythm::audio {
 namespace {
 
-constexpr std::string_view kIdentityDigestPrefix{"identity-v1|sampleRate="};
 constexpr double kMeasurementScale = 1'000'000'000'000.0;
 constexpr double kPpmScale = 1'000'000.0;
 constexpr double kPi = 3.141592653589793238462643383279502884;
@@ -445,18 +444,6 @@ struct KissFftDeleter {
 
 } // namespace
 
-ResampleTrace ResampleTrace::identity(const std::uint32_t sample_rate)
-{
-    ResampleTrace trace;
-    trace.input_sample_rate = sample_rate;
-    trace.output_sample_rate = sample_rate;
-    trace.implementation_id = "identity";
-    trace.implementation_version = "1";
-    trace.parameters_digest_sha256 = sha256_hex(
-        std::string{kIdentityDigestPrefix} + std::to_string(sample_rate));
-    return trace;
-}
-
 std::uint32_t DspPcmBuffer::channel_count() const noexcept
 {
     return static_cast<std::uint32_t>(channel_order.size());
@@ -500,9 +487,7 @@ core::Result<float> DspPcmBuffer::sample(const std::uint64_t frame,
     return core::Result<float>::success(value);
 }
 
-core::Result<DspPcmBuffer> PcmNarrowAdapter::adapt(
-    const media::PcmBuffer& source,
-    const PcmAdapterContext& context)
+core::Result<DspPcmBuffer> PcmNarrowAdapter::adapt(const media::PcmBuffer& source)
 {
     const auto fail = [](const core::ErrorCategory category,
                          const core::ErrorCode code,
@@ -510,25 +495,24 @@ core::Result<DspPcmBuffer> PcmNarrowAdapter::adapt(
         return core::Result<DspPcmBuffer>::failure(
             make_error(category, code, "audio.pcm.adapt", reason));
     };
-    if (!context.resample_trace.has_value()) {
-        return fail(core::ErrorCategory::validation,
-                    core::ErrorCode::resample_timing_unavailable,
-                    "missing_resample_trace");
+    const auto media_schema = media::validate_pcm_schema(source.schema_version,
+                                                         source.media_contract_version);
+    if (!media_schema) {
+        return core::Result<DspPcmBuffer>::failure(media_schema.error());
     }
     if (source.sample_format != "flt" || source.planar) {
         return fail(core::ErrorCategory::compatibility,
                     core::ErrorCode::unsupported_pcm_format,
                     "requires_interleaved_flt");
     }
-    std::vector<std::string> channel_order;
-    if (source.channel_layout == "mono") {
-        channel_order.emplace_back("FC");
-    } else if (source.channel_layout == "stereo") {
-        channel_order = {"FL", "FR"};
-    } else {
+    const bool mono = source.channel_layout == "mono"
+        && source.channel_order == std::vector<std::string>{"FC"};
+    const bool stereo = source.channel_layout == "stereo"
+        && source.channel_order == std::vector<std::string>{"FL", "FR"};
+    if (!mono && !stereo) {
         return fail(core::ErrorCategory::compatibility,
                     core::ErrorCode::unsupported_channel_layout,
-                    "requires_mono_or_stereo");
+                    "requires_explicit_consistent_fc_or_fl_fr_order");
     }
     if (source.sample_rate == 0U || source.sample_count == 0U || source.segment_id.empty()
         || !source.lease || source.planes.size() != 1U
@@ -538,7 +522,8 @@ core::Result<DspPcmBuffer> PcmNarrowAdapter::adapt(
                     "invalid_scalar_or_identity_field");
     }
     const auto& plane = source.planes.front();
-    const auto frame_stride = static_cast<std::uint32_t>(channel_order.size() * sizeof(float));
+    const auto frame_stride = static_cast<std::uint32_t>(source.channel_order.size()
+                                                         * sizeof(float));
     std::uint64_t expected_bytes = 0U;
     if (!checked_multiply(source.sample_count, frame_stride, expected_bytes)
         || source.sample_count > std::numeric_limits<std::uint32_t>::max()
@@ -552,12 +537,15 @@ core::Result<DspPcmBuffer> PcmNarrowAdapter::adapt(
                     "invalid_plane_or_lease_view");
     }
 
-    const auto& trace = *context.resample_trace;
+    const auto& trace = source.resample_trace;
     if (trace.input_sample_rate == 0U || trace.output_sample_rate != source.sample_rate
         || trace.implementation_id.empty() || trace.implementation_version.empty()
         || !is_lower_sha256(trace.parameters_digest_sha256)
         || trace.delay_before_input_frames.numerator < 0
         || trace.delay_before_input_frames.denominator <= 0
+        || std::gcd(trace.delay_before_input_frames.numerator,
+                    trace.delay_before_input_frames.denominator)
+            != 1
         || trace.delay_unit != "input_frames"
         || !trace.delay_accounted_in_first_sample_index) {
         return fail(core::ErrorCategory::validation,
@@ -567,16 +555,23 @@ core::Result<DspPcmBuffer> PcmNarrowAdapter::adapt(
     if (!trace.performed
         && (trace.input_sample_rate != trace.output_sample_rate
             || trace.implementation_id != "identity" || trace.implementation_version != "1"
-            || trace.delay_before_input_frames != RationalFrames{0, 1}
+            || trace.delay_before_input_frames != media::Rational{0, 1}
             || trace.emitted_from_drain)) {
         return fail(core::ErrorCategory::validation,
                     core::ErrorCode::resample_timing_unavailable,
                     "invalid_identity_trace");
     }
+    if (trace.performed
+        && (trace.input_sample_rate == trace.output_sample_rate
+            || trace.implementation_id != "ffmpeg.swresample")) {
+        return fail(core::ErrorCategory::validation,
+                    core::ErrorCode::resample_timing_unavailable,
+                    "invalid_performed_trace");
+    }
 
     const auto expected_time = sample_time_ns(source.first_sample_index,
-                                              context.segment_origin_sample_index,
-                                              context.segment_origin_time_ns,
+                                              source.segment_origin_sample_index,
+                                              source.segment_origin_time_ns,
                                               source.sample_rate,
                                               core::RoundingMode::nearest_ties_to_even);
     const auto expected_duration = core::scale_ticks(
@@ -597,12 +592,26 @@ core::Result<DspPcmBuffer> PcmNarrowAdapter::adapt(
     if (previous_.has_value() && previous_->segment_id == source.segment_id) {
         if (previous_->stream_key != source.stream_key
             || previous_->format_epoch != source.lease.format_epoch()
-            || previous_->segment_origin_time_ns != context.segment_origin_time_ns
-            || previous_->segment_origin_sample_index != context.segment_origin_sample_index
+            || previous_->segment_origin_time_ns != source.segment_origin_time_ns
+            || previous_->segment_origin_sample_index != source.segment_origin_sample_index
             || previous_->next_sample_index != source.first_sample_index
             || previous_->sample_rate != source.sample_rate
-            || previous_->channel_order != channel_order
-            || previous_->resample_trace != trace) {
+            || previous_->channel_order != source.channel_order
+            || previous_->resample_trace_configuration.performed != trace.performed
+            || previous_->resample_trace_configuration.input_sample_rate
+                != trace.input_sample_rate
+            || previous_->resample_trace_configuration.output_sample_rate
+                != trace.output_sample_rate
+            || previous_->resample_trace_configuration.implementation_id
+                != trace.implementation_id
+            || previous_->resample_trace_configuration.implementation_version
+                != trace.implementation_version
+            || previous_->resample_trace_configuration.parameters_digest_sha256
+                != trace.parameters_digest_sha256
+            || previous_->resample_trace_configuration.delay_unit != trace.delay_unit
+            || previous_->resample_trace_configuration.delay_accounted_in_first_sample_index
+                != trace.delay_accounted_in_first_sample_index
+            || (previous_->saw_drain && !trace.emitted_from_drain)) {
             return fail(core::ErrorCategory::validation,
                         core::ErrorCode::pcm_discontinuity,
                         "same_segment_metadata_or_index_changed");
@@ -622,16 +631,17 @@ core::Result<DspPcmBuffer> PcmNarrowAdapter::adapt(
     }
 
     DspPcmBuffer result;
+    result.media_contract_version = source.media_contract_version;
     result.input_fingerprint_sha256 = source.stream_key.source_fingerprint_sha256;
     result.stream_key = source.stream_key;
     result.segment_id = source.segment_id;
     result.format_epoch = source.lease.format_epoch();
-    result.segment_origin_time_ns = context.segment_origin_time_ns;
-    result.segment_origin_sample_index = context.segment_origin_sample_index;
+    result.segment_origin_time_ns = source.segment_origin_time_ns;
+    result.segment_origin_sample_index = source.segment_origin_sample_index;
     result.first_sample_index = source.first_sample_index;
     result.valid_frame_count = source.sample_count;
     result.sample_rate = source.sample_rate;
-    result.channel_order = channel_order;
+    result.channel_order = source.channel_order;
     result.frame_stride_bytes = frame_stride;
     result.offset_bytes = plane.offset_bytes;
     result.valid_bytes = expected_bytes;
@@ -641,12 +651,13 @@ core::Result<DspPcmBuffer> PcmNarrowAdapter::adapt(
     previous_ = PreviousBuffer{source.stream_key,
                                source.segment_id,
                                source.lease.format_epoch(),
-                               context.segment_origin_time_ns,
-                               context.segment_origin_sample_index,
+                               source.segment_origin_time_ns,
+                               source.segment_origin_sample_index,
                                next_sample_index.value(),
                                source.sample_rate,
-                               std::move(channel_order),
-                               trace};
+                               source.channel_order,
+                               trace,
+                               trace.emitted_from_drain};
     return core::Result<DspPcmBuffer>::success(std::move(result));
 }
 

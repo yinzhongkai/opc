@@ -96,26 +96,26 @@
 - 状态：completed
 - 授权来源与日期：本会话用户于 2026-09-09 要求补充系统架构师判断的新增成员及成员任务并提交。
 - 目标与范围：实现短时能量、频段能量、谱变化、瞬态、节拍和置信度等 C/C++ DSP 分析；不直接修改核心时间线，不把低置信度素材伪装成稳定节拍。
-- 输入与依赖：T-013、T-014、T-017、T-018、T-030 已完成，D-003 已确认 C++ DSP + KissFFT 总体路线；A-011 0.1、A-012 0.1、A-014 0.3、A-015 0.2、A-016 0.1、A-017 0.2、A-018 0.1。
+- 输入与依赖：T-013、T-014、T-017、T-018、T-030 已完成，D-003 已确认 C++ DSP + KissFFT 总体路线；A-011 0.1、A-012 0.1、A-014 0.4、A-015 0.3、A-016 0.1、A-017 0.2、A-018 0.2。
 - 优先级：未设定（架构建议：PCM 契约和媒体输入就绪后启动）。
 - 完成条件与确认方式：窗、步长、FFT、平滑、峰值和置信度参数版本化；输出候选含时间、类型、强度、置信度、来源和失败原因；固定 PCM 结果确定性；覆盖稳定节拍、变速、自由节奏、弱瞬态、噪声和静音；记录吞吐、内存、取消延迟和数值容差，负责人提交自测。
-- 进展：2026-09-10，用户明确确认全部前置满足并启动；audio-dsp-engineer-01 已完成 A-018 PCM 窄适配、周期 Hann/KissFFT 分析、短时/频段能量、谱变化、瞬态/节拍候选、置信度、稳定排序、错误/取消/资源限制及 Windows 验证。固定 baseline 未升级，T-032 未执行。
-- 成果与验证证据：[A-019 0.1：音频特征、瞬态与节拍候选实现和算法 oracle](artifacts/A-019-audio-analysis-implementation-and-oracles.md)、[公共接口](../../src/audio_analysis/include/space_rhythm/audio/analysis.hpp)、[实现](../../src/audio_analysis/analysis.cpp)、[A-018 算法 oracle](../../tests/golden/audio/algorithm-oracles-v1.json)、[GoogleTest](../../tests/unit/audio_analysis_test.cpp)及[验证摘要](evidence/T-031/verification-summary.md)。Debug、CI/RelWithDebInfo、Release 专项各 17/17；CI/Release 吞吐、峰值内存和取消延迟已实测，未确认阈值保持 `measured/not-evaluated`。
-- 阻塞与下一位行动人：T-031 完成条件已满足，无实现阻塞。A-015 0.2 非身份重采样字段仍缺失，H-011 已向 multimedia-engineer-ffmpeg-01 提出字段级请求；缺失时 DSP 稳定返回 `resample_timing_unavailable`。T-032 保持 `todo`，须由用户另行明确启动。
-- 更新日期：2026-09-10。
+- 进展：2026-09-10，用户明确确认全部前置满足并启动；audio-dsp-engineer-01 已完成 A-018 PCM 窄适配、周期 Hann/KissFFT 分析、短时/频段能量、谱变化、瞬态/节拍候选、置信度、稳定排序、错误/取消/资源限制及 Windows 验证。2026-09-11，用户明确授权把已 `completed` 的 T-031 作为 H-011 验收修订重新置为 `in_progress`；修订删除调用者补填媒体事实的 `PcmAdapterContext`，直接消费 `156b19f` 的媒体 schema 2 `PcmBuffer`，完成真实管线和 fail-closed 回归后恢复 `completed`。算法、参数、oracle、固定 baseline 均未改变，T-032 未执行。
+- 成果与验证证据：[A-019 0.2：音频特征、瞬态与节拍候选实现和算法 oracle](artifacts/A-019-audio-analysis-implementation-and-oracles.md)、[A-018 0.2](artifacts/A-018-audio-dsp-pcm-feature-candidate-contract.md)、[公共接口](../../src/audio_analysis/include/space_rhythm/audio/analysis.hpp)、[实现](../../src/audio_analysis/analysis.cpp)、[A-018 算法 oracle](../../tests/golden/audio/algorithm-oracles-v1.json)、[GoogleTest](../../tests/unit/audio_analysis_test.cpp)及[验证摘要](evidence/T-031/verification-summary.md)。原三配置专项各 17/17；本次验收修订 Debug、CI/RelWithDebInfo、Release 各 22/22，CI 媒体专项另 27/27。Debug 前两次曾被 WDAC 在断言前阻止，最终重建复跑通过；既有性能实测继续有效，未确认阈值保持 `measured/not-evaluated`。
+- 阻塞与下一位行动人：T-031 功能与验收修订完成，无实现阻塞；H-011 已由发起人验收并关闭。T021-ENV-001 的项目级环境问题仍按原任务记录，本次 Debug 瞬态不改写该结论。T-032 保持 `todo`，须由用户另行明确启动。
+- 更新日期：2026-09-11。
 
 ## T-030：定义 PCM、采样时间、音频特征与测试音色契约
 - 负责人：audio-dsp-engineer-01
 - 状态：completed
 - 授权来源与日期：本会话用户于 2026-09-09 要求补充系统架构师判断的新增成员及成员任务并提交。
 - 目标与范围：定义 DSP 输入 PCM、采样时间、缓冲所有权、特征/候选、参数、错误和测试音色边界；不冻结 FFT 后端或随包音色，不重定义媒体 PTS 或核心事件。
-- 输入与依赖：A-004 0.5、A-006 0.1 WP-06、A-011 0.1、A-012 0.1、A-014 0.3、A-015 0.2、A-016 0.1；T-014/T-017/T-018/T-020 已完成并已对齐。
+- 输入与依赖：A-004 0.5、A-006 0.1 WP-06、A-011 0.1、A-012 0.1、A-014 0.4、A-015 0.3、A-016 0.1；T-014/T-017/T-018/T-020 已完成并已对齐。
 - 优先级：未设定（架构建议：立即启动）。
 - 完成条件与确认方式：明确格式、采样率、声道、交错、有效帧、起点、重采样延迟、样本索引到 timeNs 舍入；定义特征帧、候选、置信度、错误和版本兼容；建立脉冲、节拍、变速、噪声、静音等可生成黄金样例和合法测试音色清单；形成版本化契约及测试向量，负责人自查。
 - 进展：2026-09-10，audio-dsp-engineer-01 依据用户明确指令接收 H-008，并完成 `dspContractVersion 0.1.0`。契约已收窄 A-015 实际 interleaved float PCM，冻结 segment/采样索引/重采样证据、精确 TimeNs 舍入、lease 生命周期、特征/候选 DTO、低置信语义、版本/摘要、错误及消费者边界；未实现分析或混音算法。
-- 成果与验证证据：[A-018 0.1：音频 DSP PCM、特征、候选与测试音色契约](artifacts/A-018-audio-dsp-pcm-feature-candidate-contract.md)、[向量清单](../../tests/golden/audio/fixtures-v1.json)、[生成/校验器](../../tests/golden/audio/Generate-AudioDspVectors.ps1)、[实际 SHA-256 证据](../../tests/golden/audio/generated/actual-hashes-v1.json)与[许可声明](../../tests/golden/audio/LICENSE.md)。10 项 CC0 合成向量（含 3 个合法测试音色）在生成模式和 `-ValidateOnly` 模式均通过 hash、长度、schema、许可和登记自检。
-- 阻塞与下一位行动人：T-030 无阻塞并按完成条件结束。A-015 公共 DTO 尚未暴露 resampler delay/version/显式声道顺序，已作为后续 PCM adapter 的必填 provenance，不在本任务虚构。T-031/T-032 保持 `todo`，本轮按用户要求停止。
-- 更新日期：2026-09-10。
+- 成果与验证证据：[A-018 0.2：音频 DSP PCM、特征、候选与测试音色契约](artifacts/A-018-audio-dsp-pcm-feature-candidate-contract.md)、[向量清单](../../tests/golden/audio/fixtures-v1.json)、[生成/校验器](../../tests/golden/audio/Generate-AudioDspVectors.ps1)、[实际 SHA-256 证据](../../tests/golden/audio/generated/actual-hashes-v1.json)与[许可声明](../../tests/golden/audio/LICENSE.md)。10 项 CC0 合成向量（含 3 个合法测试音色）在生成模式和 `-ValidateOnly` 模式均通过 hash、长度、schema、许可和登记自检；2026-09-11 的 0.2 修订已对齐媒体 schema 2 直接消费边界。
+- 阻塞与下一位行动人：T-030 无阻塞并按完成条件结束。原媒体 provenance 缺口已由提交 `156b19f` 补齐并经 T-031 消费方验收，H-011 已关闭；缺字段、旧 schema 或矛盾 trace 继续 fail closed。T-032 保持 `todo`，须由用户另行明确启动。
+- 更新日期：2026-09-11。
 
 ## T-029：评估视频卡点效果、性能并执行可选模型门禁
 - 负责人：video-algorithm-engineer-cv-01

@@ -24,9 +24,7 @@ using Clock = std::chrono::steady_clock;
 using space_rhythm::audio::AnalysisResult;
 using space_rhythm::audio::AnalysisStatus;
 using space_rhythm::audio::DspPcmBuffer;
-using space_rhythm::audio::PcmAdapterContext;
 using space_rhythm::audio::PcmNarrowAdapter;
-using space_rhythm::audio::ResampleTrace;
 using space_rhythm::media::BufferLease;
 using space_rhythm::media::PcmBuffer;
 using space_rhythm::media::PlaneView;
@@ -73,20 +71,28 @@ constexpr std::string_view kFixtureHash{
     }
     pcm.duration_ns = duration.value();
     pcm.segment_id = std::move(segment_id);
+    pcm.segment_origin_time_ns = 0;
+    pcm.segment_origin_sample_index = 0;
     pcm.first_sample_index = 0;
     pcm.sample_count = frames;
     pcm.sample_rate = kSampleRate;
     pcm.sample_format = "flt";
     pcm.channel_layout = "mono";
+    pcm.channel_order = {"FC"};
     pcm.planar = false;
+    pcm.resample_trace.input_sample_rate = kSampleRate;
+    pcm.resample_trace.output_sample_rate = kSampleRate;
+    pcm.resample_trace.implementation_id = "identity";
+    pcm.resample_trace.implementation_version = "1";
+    pcm.resample_trace.parameters_digest_sha256 =
+        "08954dce7647560265a6c959e8eb2b90d8101319cf9c17b0624a56ccea094584";
     pcm.planes.push_back(PlaneView{0,
                                    sizeof(float),
                                    static_cast<std::uint32_t>(frames),
                                    frames * sizeof(float)});
     pcm.lease = BufferLease::from_bytes(std::move(bytes), 1, "T-031-benchmark");
     PcmNarrowAdapter adapter;
-    const auto result = adapter.adapt(
-        pcm, PcmAdapterContext{0, 0, ResampleTrace::identity(kSampleRate)});
+    const auto result = adapter.adapt(pcm);
     if (!result) {
         throw std::runtime_error{"benchmark PCM adapter rejected input"};
     }
