@@ -54,16 +54,16 @@
 
 ## T-034：实现高密度时间线、波形与三类视觉模板
 - 负责人：graphics-engineer-qt-scenegraph-01
-- 状态：todo
+- 状态：completed
 - 授权来源与日期：本会话用户于 2026-09-09 要求补充系统架构师判断的新增成员及成员任务并提交。
 - 目标与范围：使用 Qt Quick Scene Graph 实现高密度事件/波形绘制和波形/示波器、频谱几何、粒子或线条脉冲三类基础模板；不实现产品工作流、音频分析或媒体编码。
 - 输入与依赖：T-012、T-014 和 D-003 已完成/确认；仍依赖 T-013、T-030、T-033；A-011 0.1。
 - 优先级：未设定（架构建议：工程骨架和契约就绪后启动）。
 - 完成条件与确认方式：高密度数据采用批量几何/纹理/等价方案而非一点一个 QML Item；三类模板参数、范围、默认值和随机种子版本化；线程与 GPU 资源生命周期符合契约；具备裁剪、空输入、极密数据和设备恢复自测；形成可供 UI 和离屏路径消费的模块。
-- 进展：任务已登记，尚未由负责人会话接收。
-- 成果与验证证据：[A-011 0.1](artifacts/A-011-complete-mvp-engineering-staffing-and-task-plan.md)；实际代码暂无。
-- 阻塞与下一位行动人：D-003 已确认且 T-014 已完成；仍等待 T-013/T-030/T-033。graphics-engineer-qt-scenegraph-01 先完成 T-033。
-- 更新日期：2026-09-09。
+- 进展：2026-09-11，完成 geometry schema 1/contract 0.1.0 的纯 C++ 几何核心和公共 Qt Scene Graph 适配：事件时间线按像素聚合，波形按像素 min/max envelope，频谱按宽度分组取峰值，节奏脉冲由版本化 seed 稳定生成；三模板均为 1.0.0，参数范围、工程默认值、摘要、批次/总顶点上限版本化。`SceneGraphRenderItem` 仅在 `updatePaintNode()` 创建/复用 `QSGGeometryNode`，使用动态批量顶点和 device generation 重建；屏上与后续离屏共用 `build_geometry_frame()`。未执行 T-035。
+- 成果与验证证据：[A-022 0.1](artifacts/A-022-batched-scene-graph-visual-templates.md)、[几何公共接口](../../src/rendering/include/space_rhythm/rendering/geometry_core.hpp)、[Scene Graph 公共接口](../../src/rendering/include/space_rhythm/rendering/scene_graph_render_item.hpp)、[实现](../../src/rendering/geometry_core.cpp)、[Qt 适配](../../src/rendering/scene_graph_render_item.cpp)、[9 项几何 GoogleTest](../../tests/unit/render_geometry_test.cpp)、[2 项 QSG GoogleTest](../../tests/unit/render_scene_graph_test.cpp)及[验证摘要](evidence/T-034/verification-summary.md)。Windows x64 Debug `/W4 /WX` 全目标构建通过，最终 T-034 专项 11/11 通过。
+- 阻塞与下一位行动人：T-034 无阻塞并按完成条件结束。视觉风格、效果/性能门槛、基准 GPU、像素容差和设备矩阵仍未确认，不在本任务宣称通过。T-035 保持 todo，须由用户另行明确启动；H-009 在 T-035 完成前保持 accepted。
+- 更新日期：2026-09-11。
 
 ## T-033：定义 RenderRecipe、渲染线程与离屏接口契约
 - 负责人：graphics-engineer-qt-scenegraph-01
