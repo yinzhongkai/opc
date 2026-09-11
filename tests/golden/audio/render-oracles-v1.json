@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "oracleSetVersion": 1,
+  "renderContractVersion": "0.1.0",
+  "algorithm": {
+    "id": "space-rhythm.audio-render.integer-q23",
+    "version": "1.0.0",
+    "backendId": "portable-cxx20",
+    "backendVersion": "1.0.0",
+    "parameterSetId": "space-rhythm.audio-render.test-timbres",
+    "parameterSetVersion": "1.0.0",
+    "parameterSummarySha256": "3e0eb79a7a61b75bf671c6c17ece300408e2a0e0ea29f2f158f4b2b63ffa17c7"
+  },
+  "license": "CC0-1.0",
+  "productDefaultTimbreSelection": "not-evaluated",
+  "scenarios": [
+    {
+      "id": "AR-WAV-LOW-PULSE-001",
+      "events": [
+        {"id": "beat", "kind": "beat", "timeNs": 0, "strengthPpm": 1000000}
+      ],
+      "sampleRate": 48000,
+      "channelOrder": ["FL", "FR"],
+      "frameCount": 4800,
+      "pcmF32leSha256": "9a8211f7d16e8e42a69d76623c3b5f1d80e7fc78484c752017975e2f53f3d182",
+      "wavF32leSha256": "a2b9c9f33733e9c3e64486aaeabe706a44334a49155012bb2c05224a4de34614"
+    }
+  ]
+}
