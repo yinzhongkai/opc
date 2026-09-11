@@ -48,6 +48,7 @@
 
 - 2026-09-11，框架超级管理员按建项用户请求建立版本 3 空团队，未创建或初始化成员会话。
 - 2026-09-11，框架超级管理员按用户“创建首批成员且每名成员单独提交”的请求创建 `project-manager`，配置见 [members/project-manager.yaml](members/project-manager.yaml)，并为其补充 `book-production` 知识。由于其是首名项目经理且原维护人待指定，将协调记录维护人指定为该成员；成员尚未在新会话初始化。
+- 2026-09-11，框架超级管理员按同一请求创建 `planner`，配置见 [members/planner.yaml](members/planner.yaml)，为其补充 `writing`、`book-production`、`book-planning` 和 `technical-book-validation` 知识；成员尚未在新会话初始化。
 
 ## 当前资料
 

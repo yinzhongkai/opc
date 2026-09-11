@@ -2,5 +2,7 @@ schemaVersion: 3
 project: book-zephyr
 roleKnowledge:
   project-manager: [book-production]
+  planner: [writing, book-production, book-planning, technical-book-validation]
 members:
   - project-manager
+  - planner
