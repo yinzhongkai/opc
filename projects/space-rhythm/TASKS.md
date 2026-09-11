@@ -171,16 +171,16 @@
 
 ## T-025：实现 Qt Quick 工作区、页面骨架与 C++ ViewModel 桥接
 - 负责人：ui-engineer-qt-quick-01
-- 状态：todo
+- 状态：completed
 - 授权来源与日期：本会话用户于 2026-09-09 要求补充系统架构师判断的新增成员及成员任务并提交。
 - 目标与范围：实现应用外壳、项目/素材导入、预览、播放、参数和任务页面骨架，以及 QML 与 C++ ViewModel/模型/作业接口；可使用 mock service 并行，不实现媒体或算法本体。
-- 输入与依赖：T-012/T-014 已完成，D-002/D-003 confirmed；仍依赖 T-013、T-024；A-011 0.1。
+- 输入与依赖：T-012/T-013/T-014/T-024 已完成，D-002/D-003 confirmed；A-011 0.1、A-023 0.1，以及当前核心、系统、媒体、音频和图形公开契约。
 - 优先级：未设定（架构建议：设计与工程骨架就绪后启动）。
 - 完成条件与确认方式：QML 仅负责视图/绑定/交互；领域和作业通过版本化 C++ 接口；页面覆盖空闲、加载、处理中、取消、失败、恢复和只读状态；mock 与真实 service 可替换；无长任务阻塞界面线程；组件具备对象名/可访问标识和基础 Qt Quick 自测。
-- 进展：任务已登记，尚未由负责人会话接收。
-- 成果与验证证据：[A-011 0.1](artifacts/A-011-complete-mvp-engineering-staffing-and-task-plan.md)；实际实现暂无。
-- 阻塞与下一位行动人：等待 T-013/T-014/T-024；T-024 可立即开展。
-- 更新日期：2026-09-09。
+- 进展：2026-09-11，用户明确确认前置条件全部满足并要求执行 T-025；ui-engineer-qt-quick-01 完成启动页、持续工作区和致命错误页，拆分素材、预览、时间线、检查器、任务抽屉等 11 个 QML 组件，新增 UI bridge 0.1.0/schema 1 的 `WorkspaceService`、共享 DTO、一个 QObject ViewModel 和三个 QAbstractItemModel。QML 只接收格式化时间/修订及字符串化模板整数，不保存或计算 `TimeNs`、revision、frame index；实际 `SceneGraphRenderItem` 由 C++ 在 Loader 进入工作区后挂载。确定性 mock 覆盖 idle/loading/running/cancelling/failed/recovery/readOnly/fatal，并与后续真实 service 共用接口、错误和异步快照语义。关键控件具备稳定 `objectName` 与 Accessible 信息；新增 Qt Quick Test、C++ bridge test 和 CTest headless 入口。本轮未执行 T-026。
+- 成果与验证证据：[A-024 0.1：Qt Quick 工作区与版本化 ViewModel 桥接实现](artifacts/A-024-qt-quick-workspace-and-viewmodel-bridge.md)及 [T-025 验证摘要](evidence/T-025/verification-summary.md)。Windows x64 Debug 定向构建和 `space_rhythm_app_qmllint` 通过；C++ bridge 9/9、QML 6/6，最终 `ctest -L '^t025$'` 3/3 通过，含实际应用 QML/Scene Graph smoke。
+- 阻塞与下一位行动人：T-025 无阻塞并按完成条件结束。T-026 保持 `todo`，须等待用户后续明确启动；T-035 的 T-025 前置现已满足，但本任务未执行 T-035。视觉风格、产品文案、默认音色、发布导出格式、产品默认模板参数和可访问性/性能门槛继续待确认。
+- 更新日期：2026-09-11。
 
 ## T-024：定义 UI 信息架构、交互原型与基础设计系统
 - 负责人：ui-engineer-qt-quick-01

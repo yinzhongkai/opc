@@ -81,6 +81,7 @@ add_subdirectory(src/audio_analysis)
 add_subdirectory(src/audio_render)
 add_subdirectory(src/rendering)
 add_subdirectory(src/system)
+add_subdirectory(src/ui)
 add_subdirectory(src/worker)
 add_subdirectory(src/app)
 
