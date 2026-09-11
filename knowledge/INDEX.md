@@ -5,16 +5,21 @@
 | 知识 ID | 名称 |
 |---|---|
 | [backend-development](backend-development.md) | 后端开发 |
+| [book-planning](book-planning.md) | 图书定位与章节规划 |
+| [book-production](book-production.md) | 图书生产与统稿 |
+| [book-review](book-review.md) | 图书审校与一致性检查 |
 | [critical-review](critical-review.md) | 独立评审 |
 | [frontend-development](frontend-development.md) | 前端开发 |
 | [planning](planning.md) | 方案规划 |
 | [project-management](project-management.md) | 项目管理 |
 | [requirements-analysis](requirements-analysis.md) | 需求分析 |
+| [reader-feedback](reader-feedback.md) | 读者学习反馈与修订 |
 | [research](research.md) | 资料研究与事实核查 |
 | [software-development-basics](software-development-basics.md) | 软件研发基础 |
 | [software-engineering](software-engineering.md) | 软件工程 |
 | [system-design](system-design.md) | 系统设计 |
 | [team-management](team-management.md) | 团队组织与成员维护 |
+| [technical-book-validation](technical-book-validation.md) | 技术书示例与实验验证 |
 | [testing](testing.md) | 测试设计与执行 |
 | [travel-planning](travel-planning.md) | 旅行规划 |
 | [writing](writing.md) | 长篇写作与编辑 |
