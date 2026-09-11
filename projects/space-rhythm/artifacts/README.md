@@ -28,6 +28,7 @@
 | A-022 | [批量 Scene Graph 几何与三类视觉模板实现](A-022-batched-scene-graph-visual-templates.md) | graphics-engineer-qt-scenegraph-01 | T-034 | 0.1 | draft | 尚无 |
 | A-023 | [Qt Quick/QML 信息架构、交互线框与基础设计系统](A-023-qt-quick-ui-information-architecture-and-design-system.md) | ui-engineer-qt-quick-01 | T-024 | 0.1 | draft | 尚无 |
 | A-024 | [Qt Quick 工作区与版本化 ViewModel 桥接实现](A-024-qt-quick-workspace-and-viewmodel-bridge.md) | ui-engineer-qt-quick-01 | T-025 | 0.1 | draft | 尚无 |
+| A-025 | [Qt Quick 离屏渲染、降级与一致性测量](A-025-qt-offscreen-rendering-and-measurements.md) | graphics-engineer-qt-scenegraph-01 | T-035 | 0.1 | draft | 尚无 |
 
 ## 正文元信息样式（不是真实成果）
 

@@ -68,4 +68,25 @@ private:
     QMetaObject::Connection invalidated_connection_;
 };
 
+// Adapter for callers that already invoked build_geometry_frame(). This keeps
+// the QSG upload path identical for redirected and ordinary QQuickWindow
+// rendering without rebuilding or reinterpreting geometry on the render
+// thread. The submitted frame is immutable after publication.
+class GeometryFrameRenderItem final : public QQuickItem {
+public:
+    explicit GeometryFrameRenderItem(QQuickItem* parent = nullptr);
+    ~GeometryFrameRenderItem() override;
+
+    void submit_geometry_frame(std::shared_ptr<const GeometryFrame> frame);
+    [[nodiscard]] std::shared_ptr<const GeometryFrame> submitted_geometry_frame() const;
+
+protected:
+    QSGNode* updatePaintNode(QSGNode* old_node,
+                             UpdatePaintNodeData* data) override;
+
+private:
+    mutable std::mutex pending_mutex_;
+    std::shared_ptr<const GeometryFrame> pending_frame_;
+};
+
 } // namespace space_rhythm::rendering
