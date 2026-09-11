@@ -5,13 +5,13 @@
 - 目标：multimedia-engineer-ffmpeg-01
 - 关联任务：T-031、T-018
 - 期望结果：由媒体所有者在后续获授权任务中为每个 PCM segment/buffer 公开字段完整且可验证的 resampler trace，使 DSP 无需读取 PTS、帧数或日志即可判断采样时间连续性；不得由 DSP 修改 A-015 或代填媒体事实。
-- 输入与证据：[A-015 0.2](artifacts/A-015-ffmpeg-media-pipeline.md)、[A-018 0.1](artifacts/A-018-audio-dsp-pcm-feature-candidate-contract.md)、[A-019 0.1](artifacts/A-019-audio-analysis-implementation-and-oracles.md)；T-031 PCM adapter 的 `resample_timing_unavailable` fail-closed 测试。
+- 输入与证据：原请求依据 [A-015 0.2](artifacts/A-015-ffmpeg-media-pipeline.md)、A-018 0.1、A-019 0.1 与 T-031 `resample_timing_unavailable` fail-closed 测试；消费方验收依据提交 `156b19f`、[A-014 0.4](artifacts/A-014-media-time-buffer-and-golden-contract.md)、[A-015 0.3](artifacts/A-015-ffmpeg-media-pipeline.md)、[A-018 0.2](artifacts/A-018-audio-dsp-pcm-feature-candidate-contract.md)、[A-019 0.2](artifacts/A-019-audio-analysis-implementation-and-oracles.md)及[T-031 验证摘要](evidence/T-031/verification-summary.md)。
 - 未完成事项：请求字段为 `channelOrder`、`segmentOriginTimeNs`、`segmentOriginSampleIndex`，以及 `resampleTrace.{performed,inputSampleRate,outputSampleRate,implementationId,implementationVersion,parametersDigestSha256,delayBeforeInputFramesNumerator,delayBeforeInputFramesDenominator,delayUnit,delayAccountedInFirstSampleIndex,emittedFromDrain}`；还需说明 trace 在 seek、format change、flush/drain 和新 segment 时的生成/变化规则。字段应来自实际 FFmpeg/swresample 状态与版本化配置，不接受由 PTS、输出帧数或日志推断。
-- 状态：completed
+- 状态：closed
 - 创建日期：2026-09-10
 - 接收反馈：multimedia-engineer-ffmpeg-01 于 2026-09-10 依据用户明确指令接收；按公共 DTO 必填语义变化提升媒体 schema/API 版本，在实际 FFmpeg/swresample 状态上补齐 timing provenance，并仅执行媒体专项验证，不启动 T-019、不修改 DSP、`package/` 或缓存目录。
-- 处理结果与证据：2026-09-10，媒体层已按 [A-014 0.4](artifacts/A-014-media-time-buffer-and-golden-contract.md) 与 [A-015 0.3](artifacts/A-015-ffmpeg-media-pipeline.md) 提升至 `mediaContractVersion=1.0.0/schemaVersion=2`，并实际填充全部请求字段。运行时版本、版本化配置 SHA-256、`AVFrame`/输出 `AVChannelLayout` 和每次转换前 `swr_get_delay` 是唯一来源；identity、44.1→48、48→44.1、drain、50 ms seek、动态格式和取消测试均通过。非零 delay 缓冲仍保持连续 `firstSampleIndex` 且标志为已记账，消费者不得二次补偿。Debug、CI、Release 最终媒体专项均由最新二进制 27/27 通过，未使用回退。详见 [H-011 验证摘要](evidence/T-018/H-011-resampler-provenance.md)和实际 [13 项黄金媒体/ffprobe 证据](../../tests/golden/media/generated/actual-hashes-and-probe-v1.json)。未修改 DSP 实现。
-- 关闭或取消依据：用户于 2026-09-10 明确授权处理 H-011；请求字段、生命周期规则、兼容拒绝、专项测试、文档与证据已全部交付，故完成关闭。
+- 处理结果与证据：2026-09-10，媒体层已按 [A-014 0.4](artifacts/A-014-media-time-buffer-and-golden-contract.md) 与 [A-015 0.3](artifacts/A-015-ffmpeg-media-pipeline.md) 提升至 `mediaContractVersion=1.0.0/schemaVersion=2`，并实际填充全部请求字段。运行时版本、版本化配置 SHA-256、`AVFrame`/输出 `AVChannelLayout` 和每次转换前 `swr_get_delay` 是唯一来源；identity、44.1→48、48→44.1、drain、50 ms seek、动态格式和取消测试均通过。非零 delay 缓冲仍保持连续 `firstSampleIndex` 且标志为已记账，消费者不得二次补偿。Debug、CI、Release 最终媒体专项均由最新二进制 27/27 通过，未使用回退。详见 [媒体方 H-011 验证摘要](evidence/T-018/H-011-resampler-provenance.md)和实际 [13 项黄金媒体/ffprobe 证据](../../tests/golden/media/generated/actual-hashes-and-probe-v1.json)。2026-09-11，发起人 audio-dsp-engineer-01 验收提交 `156b19f`：T-031 adapter 改为直接消费 schema 2 字段，真实媒体 identity/双向变采样/非零 delay/drain/seek/format-change 及负向回归在 Debug、CI、Release 各 22/22，CI 媒体专项另 27/27。DSP 未修改媒体实现，也未二次补偿 delay。
+- 关闭或取消依据：用户于 2026-09-11 明确要求由 H-011 发起人验收并在通过后关闭。发起人核对 `156b19f` 的字段、生命周期、连续性和媒体方 27/27 证据，并以消费方三配置 22/22 实际测试确认期望结果；故将此前错误的非协议状态 `completed` 更正为 `closed`。Debug 前两次 WDAC 瞬态已保留在证据中，最终复跑通过；这不改写 T021-ENV-001 的项目级状态。
 
 ## H-010：启动 Windows 发布工作流
 - 发起人：architect-01
@@ -49,7 +49,7 @@
 - 状态：accepted
 - 创建日期：2026-09-09
 - 接收反馈：2026-09-10，audio-dsp-engineer-01 依据用户明确指令接收；已依次完成 T-030、T-031。T-032 继续不执行。
-- 处理结果与证据：2026-09-10，T-030 已形成 [A-018 0.1](artifacts/A-018-audio-dsp-pcm-feature-candidate-contract.md)、[10 项可复现向量与 3 个合法测试音色清单](../../tests/golden/audio/fixtures-v1.json)及[实际 SHA-256 证据](../../tests/golden/audio/generated/actual-hashes-v1.json)。T-031 已形成 [A-019 0.1](artifacts/A-019-audio-analysis-implementation-and-oracles.md)、[版本化算法 oracle](../../tests/golden/audio/algorithm-oracles-v1.json)和[验证摘要](evidence/T-031/verification-summary.md)：固定 baseline 的 KissFFT float、PCM fail-closed adapter、特征/候选、参数摘要、稳定排序及 Debug/CI/Release 专项 17/17 已交付；性能/效果阈值保持 `measured/not-evaluated`。非身份 resampler provenance 缺口另登记 H-011。H-008 继续保持 accepted，等待用户另行启动 T-032。
+- 处理结果与证据：2026-09-10，T-030 已形成 A-018 0.1、10 项可复现向量与 3 个合法测试音色清单及实际 SHA-256；T-031 已形成 A-019 0.1、版本化算法 oracle 和三配置专项 17/17。2026-09-11，依据用户授权完成 H-011/T-031 验收修订，[A-018 0.2](artifacts/A-018-audio-dsp-pcm-feature-candidate-contract.md)与[A-019 0.2](artifacts/A-019-audio-analysis-implementation-and-oracles.md)已对齐媒体 schema 2，adapter 直接消费媒体事实，三配置各 22/22；H-011 已 `closed`。性能/效果阈值仍为 `measured/not-evaluated`。H-008 继续保持 accepted，等待用户另行启动 T-032。
 - 关闭或取消依据：暂无。
 
 ## H-007：启动 C++/OpenCV 视频算法工作流

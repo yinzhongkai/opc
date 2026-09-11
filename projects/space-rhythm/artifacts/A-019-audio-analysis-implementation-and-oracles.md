@@ -4,17 +4,17 @@
 - 成果 ID: A-019
 - 负责人: audio-dsp-engineer-01
 - 关联任务: T-031
-- 版本: 0.1
-- 更新日期: 2026-09-10
+- 版本: 0.2
+- 更新日期: 2026-09-11
 - 状态: draft
 - 适用范围: Windows x64 上的 A-018 PCM 窄适配、窗口化、短时/频段能量、谱变化、瞬态及节拍候选；不修改媒体契约、核心时间线或执行 T-032 混音/试听。
-- 来源及输入版本: A-012 0.1、A-013 0.2、A-014 0.3、A-015 0.2、A-016 0.1、A-017 0.2、A-018 0.1，D-003 confirmed；用户于 2026-09-10 明确确认前置并启动 T-031。
+- 来源及输入版本: A-012 0.1、A-013 0.2、A-014 0.4、A-015 0.3、A-016 0.1、A-017 0.2、A-018 0.2，D-003 confirmed；用户于 2026-09-10 明确确认前置并启动 T-031，2026-09-11 明确授权验收提交 `156b19f` 并将必要适配修改登记为 T-031 验收修订。
 - 批准依据: 尚无；效果阈值和性能阈值均未确认，本成果只报告 `measured/not-evaluated`。
-- 版本记录: 2026-09-10，0.1，首次实现分析链、固定参数、算法 oracle、Windows 验证和性能测量。
+- 版本记录: 2026-09-11，0.2，T-031 验收修订移除调用者重复填写媒体事实的 `PcmAdapterContext`，直接消费媒体 schema 2 `PcmBuffer`；增加真实 FFmpeg 管线的双向重采样、delay/drain、seek、format-change 和 fail-closed 验证，不改变算法、参数集或 oracle。2026-09-10，0.1，首次实现分析链、固定参数、算法 oracle、Windows 验证和性能测量。
 
 ## 1. 实现边界
 
-公共入口位于 `space_rhythm/audio/analysis.hpp`，实现位于 `src/audio_analysis/analysis.cpp`。`PcmNarrowAdapter` 只把 A-015 的 `flt`、interleaved、mono/stereo PCM 和 lease 收窄为 A-018 视图；它不解码、不重采样、不复制 PCM、不解释 PTS，也不提交核心事件。`Analyzer` 是非实时、无外部状态的批分析器；每次调用返回完整结果，失败或取消不返回部分候选。
+公共入口位于 `space_rhythm/audio/analysis.hpp`，实现位于 `src/audio_analysis/analysis.cpp`。`PcmNarrowAdapter::adapt(const media::PcmBuffer&)` 只把 A-015 schema 2 的 `flt`、interleaved、mono/stereo PCM 和 lease 收窄为 A-018 视图；`channel_order`、segment 原点与 `resample_trace` 全部直接来自该缓冲，不存在调用者补填或覆盖媒体事实的第二参数。它不解码、不重采样、不复制 PCM、不解释 PTS，也不提交核心事件。`Analyzer` 是非实时、无外部状态的批分析器；每次调用返回完整结果，失败或取消不返回部分候选。
 
 支持的 PCM 入口严格为：IEEE-754 binary32 little-endian、frame-major interleaved；单声道顺序 `FC` 或双声道顺序 `FL,FR`；实际正整数采样率，生产参数当前只冻结 44,100 Hz 和 48,000 Hz；`validFrameCount` 取 A-015 `sample_count`，stride 必须分别为 4/8 字节。lease 从媒体缓冲共享持有，分析结束前保持有效，DSP 不取得写所有权。
 
@@ -29,9 +29,11 @@ timeNs(i) = segmentOriginTimeNs
 
 ## 2. resampler provenance fail-closed
 
-身份转换只有在调用者提供完整 `identity/1` trace 时成立：`performed=false`、输入/输出率相同、delay `0/1 input_frames`、delay 已计入 `firstSampleIndex`、`emittedFromDrain=false`，参数摘要由 `identity-v1|sampleRate=<rate>` 计算。DSP 不从 PTS、帧数、时长或日志反推上述事实。
+适配器先调用媒体 schema 校验，只接受 `schemaVersion=2/mediaContractVersion=1.0.0`。identity 必须由媒体缓冲声明完整 `identity/1` trace：`performed=false`、输入/输出率相同、delay `0/1 input_frames`、delay 已计入 `firstSampleIndex`、`emittedFromDrain=false`。DSP 不生成 identity trace，也不从声道数、PTS、帧数、时长或日志反推媒体事实。
 
-非身份转换要求媒体所有者显式提供 `performed`、输入/输出率、实现 ID/版本、完整参数 SHA-256、调用前精确输入帧 delay 的分子/分母、delay 帐务标记和 drain 标记。任一字段缺失或矛盾均返回 `validation/resample_timing_unavailable`。A-015 0.2 当前公共 DTO 尚不能提供完整字段，因此非身份重采样进入 DSP 时按该错误终止；字段级请求见 H-011。此实现没有修改媒体 DTO 或伪造 provenance。
+非身份转换直接使用媒体所有者提供的 `performed`、输入/输出率、`ffmpeg.swresample` 实现 ID/运行时版本、参数 SHA-256、调用前精确输入帧 delay 的约分分数、delay 帐务标记和 drain 标记。同一 segment 只要求配置事实稳定，允许 delay 与 drain 随转换调用变化；一旦出现 drain，后续普通输入缓冲被判为 discontinuity。字段缺失或 trace 自相矛盾返回 `validation/resample_timing_unavailable`，旧 schema 返回 `compatibility/unsupported_schema`，声道顺序缺失/矛盾返回 `compatibility/unsupported_channel_layout`。
+
+`firstSampleIndex` 被逐值原样复制到 DSP 缓冲，并以 `segmentOriginTimeNs + (firstSampleIndex - segmentOriginSampleIndex) * 1e9 / sampleRate` 复核媒体 `timeNs`。计算路径完全不读取 `delayBeforeInputFrames`；真实 44.1→48/48→44.1 非零 delay 缓冲同时满足媒体首索引、DSP 首索引和上一缓冲末端三者相等，证明 delay 已由媒体记入索引，DSP 不做第二次补偿。
 
 ## 3. 固定依赖与运行时边界
 
@@ -92,16 +94,16 @@ timeNs(i) = segmentOriginTimeNs
 
 同一 oracle 文件另登记自由节奏、弱瞬态、双 segment 中断和取消用的确定性内存向量，包含规范 recipe、来源、`CC0-1.0` 和实际 PCM SHA-256；资源上限复用已登记固定节拍向量。三个 A-018 `AT-*` 测试音色未被本任务用于生产算法或产品默认内容，许可与 hash 保持不变。`package/` 和来源不明素材均未读取或修改。
 
-覆盖的终止错误包括 `invalid_pcm_buffer`、`unsupported_pcm_format`、`unsupported_channel_layout`、`non_finite_pcm`、`pcm_out_of_range`、`pcm_discontinuity`、`resample_timing_unavailable`、`timestamp_mismatch`、`invalid_analysis_parameters`、`unsupported_parameter_schema`、`time_overflow`、`resource_limit` 和 `cancelled`。取消和失败都会清空 feature/candidate，不伪装为完整低置信结果。
+覆盖的终止错误包括 `unsupported_schema`、`invalid_pcm_buffer`、`unsupported_pcm_format`、`unsupported_channel_layout`、`non_finite_pcm`、`pcm_out_of_range`、`pcm_discontinuity`、`resample_timing_unavailable`、`timestamp_mismatch`、`invalid_analysis_parameters`、`unsupported_parameter_schema`、`time_overflow`、`resource_limit` 和 `cancelled`。验收回归还直接把真实 `MediaSource::decode_audio` 的 identity、44.1→48 kHz、48→44.1 kHz、非零 delay/drain、50 ms seek 和动态格式 segment 逐缓冲送入同一个 adapter；取消和失败都会清空 feature/candidate，不伪装为完整低置信结果。
 
 ## 7. Windows 验证与测量
 
-最终可复核结果见 [T-031 verification summary](../evidence/T-031/verification-summary.md)。Debug 与 CI/RelWithDebInfo 均完成构建和 T-031 标签测试；CI 首轮曾有单个进程启动被 WDAC `0xc0e90002` 拦截，单项复跑及完整复跑均通过，记录为环境瞬态而非算法失败。Release 的真实状态按最终复核记录，不以其他配置替代。
+最终可复核结果见 [T-031 verification summary](../evidence/T-031/verification-summary.md)。原 T-031 三配置验证记录保持不变；本次 schema 2 验收修订在 Debug、CI/RelWithDebInfo、Release 均完成编译并各 22/22 通过。Debug 新链接二进制的前两次启动曾被 WDAC 在断言前阻止，最终同一源码重建并复跑通过；瞬态记录保留为 T021-ENV-001 观察，不据此声称项目级策略问题已关闭。
 
 性能程序对 48 kHz mono、96,000 frames 固定节拍执行 5 次预热和 30 次原始采样，并对 480,000 frames 合成静音执行 30 次取消延迟采样；记录进程 peak working set 和分析器有界内存估算。由于项目尚未确认性能或效果阈值，所有结果只标为 `measured`，结论为 `not-evaluated`，不声称 pass/fail。
 
-## 8. 未完成输入与下游边界
+## 8. 验收结论与下游边界
 
-- H-011 等待媒体所有者提供公开、字段完整的 resampler provenance；在此之前只有显式 identity trace 可进入 DSP，其他情况稳定返回 `resample_timing_unavailable`。
+- H-011 的提交 `156b19f` 已通过 DSP 消费方验收：字段、生命周期和 fail-closed 行为满足原请求，发起人已将交接状态从错误的 `completed` 更正为 `closed`。媒体实现未由 DSP 修改。
 - 产品代表素材、效果验收口径、性能硬件基线和阈值尚未确认；本任务不从合成 oracle 推导产品效果已通过。
 - T-032 未启动；本成果不实现音色触发、混音、QAudioSink 试听或离线 WAV/PCM 输出。

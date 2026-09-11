@@ -1,7 +1,7 @@
 # T-031 Windows x64 验证与测量摘要
 
-- 证据版本：1
-- 执行日期：2026-09-10
+- 证据版本：2
+- 执行日期：2026-09-10（原实现）；2026-09-11（H-011 验收修订）
 - 执行人：audio-dsp-engineer-01
 - 原始证据：`out/evidence/T-031/<preset>/`（按 A-016 忽略，不纳入 Git）
 - 环境：Windows NT 10.0.26200.0 x64；AMD64 Family 26 Model 96，16 logical processors；MSVC 19.44.35228；CMake 3.31.6-msvc6；Ninja 1.12.1。
@@ -32,6 +32,22 @@ CI 较早一轮的首个 GoogleTest 进程曾被 WDAC `0xc0e90002` 阻止，而�
 
 测试覆盖：固定/变速节拍、脉冲、自由节奏、弱瞬态、确定性噪声、静音、NaN/±Inf、44.1/48 kHz、`FL,FR` 双声道、负索引、segment 中断、显式 identity/incomplete resampler trace、同 segment gap、time overflow、取消和资源上限。固定输入/参数/seed 的 feature/candidate 重复等价，候选稳定排序。
 
+## H-011 schema 2 消费方验收修订
+
+- 核验输入：媒体提交 `156b19f`，A-014 0.4/A-015 0.3，`mediaContractVersion=1.0.0/schemaVersion=2`。
+- 接口结果：删除 `PcmAdapterContext` 及 DSP 自建 `ResampleTrace::identity`；唯一入口为 `PcmNarrowAdapter::adapt(const media::PcmBuffer&)`。adapter 直接读取并保留媒体 `channel_order`、`segment_origin_time_ns`、`segment_origin_sample_index` 和 `resample_trace`，PCM lease 仍零拷贝共享。
+- delay 记账证明：真实 44.1→48 kHz 与 48→44.1 kHz 缓冲出现非零 `delayBeforeInputFrames` 时，断言 `dsp.firstSampleIndex == media.firstSampleIndex == previousBufferEnd`；DSP 时间仅由该索引、segment 原点和输出采样率复算并等于媒体 `timeNs`。trace delay 只保留作证据，未进入时间公式，因此没有二次补偿。
+- 真实媒体覆盖：`audio_44100.wav` identity 44.1→44.1、44.1→48、`audio_48000.wav` 48→44.1；两种变采样都观察到非零 delay 与 drain；50 ms seek 得到新 segment/origin 和 sample index 2400；`dynamic_audio.ts` 观察到旧 44.1→48 segment drain 后新 48 kHz identity epoch/segment。
+- fail closed：空 `channelOrder`、缺 implementation version/delay unit、schema 1/contract 0.1.0、`performed` 与采样率矛盾、`delayAccountedInFirstSampleIndex=false`、trace 输出率与 PCM 不符全部被拒绝；同 segment 的配置静默变化或 drain 后恢复普通输入也拒绝。adapter 不读 PTS、帧数或日志，不修改媒体 DTO/实现。
+
+| preset | 编译 | T-031 CTest | 验收判定 |
+|---|---:|---:|---|
+| `windows-msvc-x64-debug` | pass | 22/22 pass | schema 2 消费方验收通过；前两次启动曾被 WDAC 阻止，最终重建复跑通过 |
+| `ci-windows-msvc-x64`（RelWithDebInfo） | pass | 22/22 pass | schema 2 消费方验收通过 |
+| `windows-msvc-x64-release` | pass | 22/22 pass | schema 2 消费方验收通过；本轮未复现 Release 阻断 |
+
+同一 CI 构建另行执行 `ctest --preset ci-windows-msvc-x64 -L media --output-on-failure`，媒体 schema、双向重采样、seek、format-change、取消和 golden audit 共 27/27 通过。原始命令/日志位于忽略目录 `out/evidence/T-031/H-011-acceptance/`；配置均使用固定 baseline 与 `-UseExistingDependencies`，未升级依赖。Debug 新链接二进制的前两次启动被“应用程序控制策略已阻止此文件”拒绝；重新构建后第三次完整 22/22 直接通过。三配置均由本次源码重新配置、编译并直接运行，无 fallback；瞬态不解释为 T021-ENV-001 已关闭。
+
 ## 性能与取消测量
 
 方法：48 kHz mono `AV-FIXED-BEAT-120-001`（96,000 frames）预热 5 次、记录 30 次；另以已登记 SHA-256 的 480,000-frame 静音输入记录 30 次取消请求到返回的延迟。峰值内存为进程 `PeakWorkingSetSize`，同时记录分析器按 DTO/FFT scratch 上界估算。全部使用单进程默认参数；原始 samples 保存在被忽略 JSON。
@@ -47,5 +63,5 @@ CI 较早一轮的首个 GoogleTest 进程曾被 WDAC `0xc0e90002` 阻止，而�
 
 - 吞吐、峰值内存和取消延迟状态均为 `measured`；项目未确认硬件基线或性能阈值，故为 `not-evaluated`，不标 pass/fail。
 - 合成 oracle 证明确定性和契约行为；产品代表素材、标注和效果阈值未确认，效果为 `not-evaluated`。
-- A-015 0.2 未公开完整非身份 resampler provenance；DSP 对缺失字段返回 `resample_timing_unavailable`。字段级接口请求已登记 H-011，未修改媒体契约或伪造 trace。
+- A-015 0.3 已公开完整 schema 2 resampler provenance，并由 DSP 对提交 `156b19f` 完成上述消费方验收；缺失或矛盾字段继续 fail closed。H-011 已由发起人关闭，DSP 未修改媒体契约、实现或伪造 trace。
 - 本轮 Release T-031 测试通过，但 CI install 和 Debug benchmark 仍观察到 T021-ENV-001；因此不把本轮局部成功解释为 WDAC 环境阻断已关闭。

@@ -36,6 +36,7 @@ target_link_libraries(space_rhythm_audio_analysis_tests PRIVATE
 )
 target_compile_definitions(space_rhythm_audio_analysis_tests PRIVATE
     SPACE_RHYTHM_GOLDEN_AUDIO_DIR="${CMAKE_CURRENT_SOURCE_DIR}/golden/audio/generated"
+    SPACE_RHYTHM_GOLDEN_MEDIA_DIR="${CMAKE_CURRENT_SOURCE_DIR}/golden/media/generated"
 )
 space_rhythm_apply_build_policy(space_rhythm_audio_analysis_tests)
 gtest_add_tests(
@@ -43,7 +44,7 @@ gtest_add_tests(
     TEST_LIST space_rhythm_audio_analysis_test_cases
 )
 set_tests_properties(${space_rhythm_audio_analysis_test_cases} PROPERTIES
-    FIXTURES_REQUIRED golden-audio
+    FIXTURES_REQUIRED "golden-audio;golden-media"
     LABELS "t031;unit;golden;audio;headless;gate-g1;gate-g3"
 )
 
