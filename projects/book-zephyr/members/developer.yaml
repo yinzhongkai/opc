@@ -1,0 +1,5 @@
+id: developer
+role: developer
+scope:
+  - 负责 nRF54L15 DK 上的 Zephyr 示例工程、实现说明和可复现构建步骤
+  - 提供代码与技术内容的实现核查，区分资料结论、构建结果和用户实际上板证据
