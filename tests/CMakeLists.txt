@@ -385,7 +385,9 @@ target_link_libraries(space_rhythm_ui_integration_tests PRIVATE
 )
 target_compile_definitions(space_rhythm_ui_integration_tests PRIVATE
     SPACE_RHYTHM_T026_MEDIA_FILE="${CMAKE_CURRENT_SOURCE_DIR}/golden/media/generated/cfr_av.mkv"
+    SPACE_RHYTHM_T026_WORKER_EXE="$<TARGET_FILE:space_rhythm_worker>"
 )
+add_dependencies(space_rhythm_ui_integration_tests space_rhythm_worker)
 space_rhythm_apply_build_policy(space_rhythm_ui_integration_tests ALLOW_GENERATED_WARNINGS)
 add_test(NAME qt.ui_real_workflow COMMAND space_rhythm_ui_integration_tests)
 set_tests_properties(qt.ui_real_workflow PROPERTIES

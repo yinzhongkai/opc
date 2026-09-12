@@ -35,8 +35,8 @@ ApplicationWindow {
 
     QtObject {
         id: standaloneViewModel
-        property string bridgeContractVersion: "0.2.0"
-        property int bridgeSchemaVersion: 2
+        property string bridgeContractVersion: "0.3.0"
+        property int bridgeSchemaVersion: 3
         property string route: "start"
         property string workspaceState: "idle"
         property string projectTitle: ""
@@ -63,6 +63,12 @@ ApplicationWindow {
         property bool canRedo: false
         property bool canEditTimeline: route === "workspace" && !readOnly
         property bool workerConnected: true
+        property bool timelineGestureActive: false
+        property bool timelineSeekPending: false
+        property real timelineGhostRatio: 0.0
+        property string interactionStatusText: ""
+        property bool developmentAudioMappingEnabled: false
+        property string audioMappingStatusText: "待确认：产品默认音色未配置"
         property string selectedEventText: "未选择事件"
         property bool selectedEventLocked: false
         property string viewportText: "00:00.000 – 00:10.000"
@@ -103,6 +109,11 @@ ApplicationWindow {
         function beginTimelineDrag(xPixels, widthPixels) { lastCommand = "dragBegin" }
         function updateTimelineDrag(xPixels, widthPixels) { lastCommand = "drag" }
         function endTimelineDrag() { lastCommand = "dragEnd" }
+        function beginTimelineSeek(xPixels, widthPixels) { timelineGestureActive = true; timelineSeekPending = true }
+        function updateTimelineSeek(xPixels, widthPixels) { timelineGhostRatio = xPixels / widthPixels }
+        function endTimelineSeek() { timelineGestureActive = false; timelineSeekPending = false }
+        function cancelTimelineGesture() { timelineGestureActive = false; timelineSeekPending = false }
+        function enableDevelopmentAudioMapping() { developmentAudioMappingEnabled = true }
         function toggleSelectedEventLock() { selectedEventLocked = !selectedEventLocked }
         function batchOffsetSelected(milliseconds) { lastCommand = "offset" }
         function undo() { lastCommand = "undo" }

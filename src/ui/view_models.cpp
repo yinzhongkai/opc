@@ -75,6 +75,8 @@ QString preview_state_name(PreviewState state)
         return QStringLiteral("playing");
     case PreviewState::paused:
         return QStringLiteral("paused");
+    case PreviewState::seeking:
+        return QStringLiteral("seeking");
     case PreviewState::error:
         return QStringLiteral("error");
     }
@@ -456,13 +458,21 @@ bool ApplicationViewModel::canExport() const noexcept
 {
     const auto stable_state = snapshot_.state == WorkspaceState::idle ||
                               snapshot_.state == WorkspaceState::read_only;
+    const auto needs_audio_mapping = !snapshot_.assets.isEmpty() &&
+                                     snapshot_.assets.front().kind.contains(
+                                         QStringLiteral("audio"));
     return snapshot_.route == UiRoute::workspace && stable_state &&
-           !snapshot_.assets.isEmpty();
+           !snapshot_.assets.isEmpty() &&
+           (!needs_audio_mapping || snapshot_.development_audio_mapping_enabled);
 }
 
 bool ApplicationViewModel::canPreview() const noexcept
 {
+    const auto needs_audio_mapping = !snapshot_.assets.isEmpty() &&
+                                     snapshot_.assets.front().kind.contains(
+                                         QStringLiteral("audio"));
     return snapshot_.route == UiRoute::workspace && !snapshot_.assets.isEmpty() &&
+           (!needs_audio_mapping || snapshot_.development_audio_mapping_enabled) &&
            snapshot_.state != WorkspaceState::loading &&
            snapshot_.state != WorkspaceState::cancelling;
 }
@@ -491,6 +501,36 @@ bool ApplicationViewModel::canEditTimeline() const noexcept
 bool ApplicationViewModel::workerConnected() const noexcept
 {
     return snapshot_.worker_connected;
+}
+
+bool ApplicationViewModel::timelineGestureActive() const noexcept
+{
+    return snapshot_.timeline_gesture_active;
+}
+
+bool ApplicationViewModel::timelineSeekPending() const noexcept
+{
+    return snapshot_.timeline_seek_pending;
+}
+
+double ApplicationViewModel::timelineGhostRatio() const noexcept
+{
+    return snapshot_.timeline_ghost_ratio;
+}
+
+QString ApplicationViewModel::interactionStatusText() const
+{
+    return snapshot_.interaction_status_text;
+}
+
+bool ApplicationViewModel::developmentAudioMappingEnabled() const noexcept
+{
+    return snapshot_.development_audio_mapping_enabled;
+}
+
+QString ApplicationViewModel::audioMappingStatusText() const
+{
+    return snapshot_.audio_mapping_status_text;
 }
 
 QString ApplicationViewModel::selectedEventText() const
@@ -709,6 +749,33 @@ void ApplicationViewModel::updateTimelineDrag(double x_pixels, double width_pixe
 void ApplicationViewModel::endTimelineDrag()
 {
     dispatch(UiCommandKind::timeline_drag_end);
+}
+
+void ApplicationViewModel::beginTimelineSeek(double x_pixels, double width_pixels)
+{
+    dispatch(UiCommandKind::timeline_seek_begin,
+             pointer_argument(x_pixels, width_pixels));
+}
+
+void ApplicationViewModel::updateTimelineSeek(double x_pixels, double width_pixels)
+{
+    dispatch(UiCommandKind::timeline_seek_update,
+             pointer_argument(x_pixels, width_pixels));
+}
+
+void ApplicationViewModel::endTimelineSeek()
+{
+    dispatch(UiCommandKind::timeline_seek_end);
+}
+
+void ApplicationViewModel::cancelTimelineGesture()
+{
+    dispatch(UiCommandKind::timeline_gesture_cancel);
+}
+
+void ApplicationViewModel::enableDevelopmentAudioMapping()
+{
+    dispatch(UiCommandKind::enable_development_audio_mapping);
 }
 
 void ApplicationViewModel::toggleSelectedEventLock()

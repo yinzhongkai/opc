@@ -104,6 +104,37 @@ Frame {
                 Accessible.name: qsTr("可见范围 %1").arg(text)
             }
 
+            Rectangle {
+                id: interactionGhost
+                objectName: "timelineInteractionGhost"
+                visible: root.viewModel.timelineGestureActive
+                x: Math.max(2, Math.min(parent.width - width - 2,
+                                        root.viewModel.timelineGhostRatio * parent.width))
+                y: 2
+                width: 2
+                height: parent.height - 4
+                z: 5
+                color: root.viewModel.timelineSeekPending ? "#e3b341" : "#6ed5ff"
+                Accessible.name: root.viewModel.timelineSeekPending
+                                 ? qsTr("待确认播放定位")
+                                 : qsTr("待提交事件位置")
+                Accessible.description: root.viewModel.interactionStatusText
+                Accessible.role: Accessible.StaticText
+            }
+
+            Label {
+                objectName: "timelineInteractionStatus"
+                anchors.left: parent.left
+                anchors.bottom: parent.bottom
+                anchors.margins: 8
+                z: 6
+                visible: root.viewModel.interactionStatusText.length > 0
+                text: root.viewModel.interactionStatusText
+                color: "#c9d1d9"
+                Accessible.name: text
+                Accessible.role: Accessible.StaticText
+            }
+
             MouseArea {
                 id: timelinePointer
                 objectName: "timelinePointerArea"
@@ -112,15 +143,22 @@ Frame {
                 acceptedButtons: Qt.LeftButton | Qt.MiddleButton | Qt.RightButton
                 hoverEnabled: true
                 property real previousX: 0
+                property bool seeking: false
 
                 onPressed: function(mouse) {
                     previousX = mouse.x
-                    if (mouse.button === Qt.LeftButton
-                            && !(mouse.modifiers & Qt.ControlModifier))
+                    seeking = mouse.button === Qt.LeftButton
+                              && (mouse.modifiers & Qt.AltModifier)
+                    if (seeking)
+                        root.viewModel.beginTimelineSeek(mouse.x, width)
+                    else if (mouse.button === Qt.LeftButton
+                             && !(mouse.modifiers & Qt.ControlModifier))
                         root.viewModel.beginTimelineDrag(mouse.x, width)
                 }
                 onPositionChanged: function(mouse) {
-                    if (pressedButtons & Qt.LeftButton)
+                    if ((pressedButtons & Qt.LeftButton) && seeking)
+                        root.viewModel.updateTimelineSeek(mouse.x, width)
+                    else if (pressedButtons & Qt.LeftButton)
                         root.viewModel.updateTimelineDrag(mouse.x, width)
                     else if (pressedButtons & (Qt.MiddleButton | Qt.RightButton)) {
                         root.viewModel.panTimeline(mouse.x - previousX, width)
@@ -128,8 +166,13 @@ Frame {
                     }
                 }
                 onReleased: function(mouse) {
-                    if (mouse.button === Qt.LeftButton)
-                        root.viewModel.endTimelineDrag()
+                    if (mouse.button === Qt.LeftButton) {
+                        if (seeking)
+                            root.viewModel.endTimelineSeek()
+                        else
+                            root.viewModel.endTimelineDrag()
+                        seeking = false
+                    }
                 }
                 onClicked: function(mouse) {
                     if (mouse.button === Qt.LeftButton) {
@@ -165,6 +208,10 @@ Frame {
                     event.accepted = true
                 } else if (event.key === Qt.Key_Right) {
                     root.viewModel.panTimeline(-40, width)
+                    event.accepted = true
+                } else if (event.key === Qt.Key_Escape
+                           && root.viewModel.timelineGestureActive) {
+                    root.viewModel.cancelTimelineGesture()
                     event.accepted = true
                 }
             }

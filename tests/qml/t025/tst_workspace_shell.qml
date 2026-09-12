@@ -51,8 +51,8 @@ TestCase {
 
     QtObject {
         id: viewModel
-        property string bridgeContractVersion: "0.2.0"
-        property int bridgeSchemaVersion: 2
+        property string bridgeContractVersion: "0.3.0"
+        property int bridgeSchemaVersion: 3
         property string route: "workspace"
         property string workspaceState: "idle"
         property string projectTitle: "测试项目"
@@ -79,6 +79,12 @@ TestCase {
         property bool canRedo: true
         property bool canEditTimeline: workspaceState === "idle" && !readOnly
         property bool workerConnected: true
+        property bool timelineGestureActive: false
+        property bool timelineSeekPending: false
+        property real timelineGhostRatio: 0.0
+        property string interactionStatusText: ""
+        property bool developmentAudioMappingEnabled: false
+        property string audioMappingStatusText: "待确认：产品默认音色未配置"
         property string selectedEventText: "event-1 · beat · 00:12.340"
         property bool selectedEventLocked: false
         property string viewportText: "00:10.000 – 00:20.000"
@@ -115,6 +121,11 @@ TestCase {
         function beginTimelineDrag(xPixels, widthPixels) { lastCommand = "dragBegin" }
         function updateTimelineDrag(xPixels, widthPixels) { lastCommand = "drag" }
         function endTimelineDrag() { lastCommand = "dragEnd" }
+        function beginTimelineSeek(xPixels, widthPixels) { timelineGestureActive = true; timelineSeekPending = true; lastCommand = "seekBegin" }
+        function updateTimelineSeek(xPixels, widthPixels) { timelineGhostRatio = xPixels / widthPixels; lastCommand = "seekUpdate" }
+        function endTimelineSeek() { timelineGestureActive = false; timelineSeekPending = false; lastCommand = "seekEnd" }
+        function cancelTimelineGesture() { timelineGestureActive = false; timelineSeekPending = false; lastCommand = "gestureCancel" }
+        function enableDevelopmentAudioMapping() { developmentAudioMappingEnabled = true; lastCommand = "enableDevAudio" }
         function toggleSelectedEventLock() { selectedEventLocked = !selectedEventLocked }
         function batchOffsetSelected(milliseconds) { lastCommand = "offset" }
         function undo() { lastCommand = "undo" }
@@ -169,6 +180,9 @@ TestCase {
         verify(findChild(workspace, "timelineUndoButton").Accessible.description.length > 0)
         verify(findChild(workspace, "eventLockButton").Accessible.description.length > 0)
         verify(findChild(workspace, "taskCancelConfirmationDialog") !== null)
+        verify(findChild(workspace, "timelineInteractionGhost") !== null)
+        verify(findChild(workspace, "timelineInteractionStatus") !== null)
+        verify(findChild(workspace, "enableDevelopmentAudioMappingButton") !== null)
     }
 
     function test_resizeHighDpiAndFocusTraversal() {

@@ -18,8 +18,8 @@
 
 namespace space_rhythm::ui {
 
-inline constexpr std::uint32_t bridge_schema_version = 2;
-inline constexpr std::string_view bridge_contract_version{"0.2.0"};
+inline constexpr std::uint32_t bridge_schema_version = 3;
+inline constexpr std::string_view bridge_contract_version{"0.3.0"};
 
 inline QString qt_string(std::string_view value)
 {
@@ -69,6 +69,11 @@ enum class UiCommandKind {
     timeline_drag_begin,
     timeline_drag_update,
     timeline_drag_end,
+    timeline_gesture_cancel,
+    timeline_seek_begin,
+    timeline_seek_update,
+    timeline_seek_end,
+    enable_development_audio_mapping,
     toggle_selected_event_lock,
     batch_offset_selected,
     undo,
@@ -82,6 +87,7 @@ enum class PreviewState {
     priming,
     playing,
     paused,
+    seeking,
     error,
 };
 
@@ -186,6 +192,12 @@ struct WorkspaceSnapshotDto {
     bool can_undo{false};
     bool can_redo{false};
     bool worker_connected{true};
+    bool timeline_gesture_active{false};
+    bool timeline_seek_pending{false};
+    double timeline_ghost_ratio{};
+    QString interaction_status_text;
+    bool development_audio_mapping_enabled{false};
+    QString audio_mapping_status_text;
     QString last_saved_path;
     QString last_export_path;
     QVector<AssetDto> assets;
@@ -229,6 +241,8 @@ struct IntegratedWorkspaceOptions {
     QString import_path;
     QString export_path;
     bool headless{false};
+    QString worker_executable_path;
+    std::uint32_t worker_test_delay_ms{};
 };
 
 // Real core/media/audio/rendering adapter. The options are primarily useful to
