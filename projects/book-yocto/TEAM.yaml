@@ -2,4 +2,5 @@ schemaVersion: 3
 project: 'book-yocto'
 roleKnowledge:
   project-manager: [book-production]
-members: [project-manager]
+  writer: [book-production, reader-feedback, book-planning]
+members: [project-manager, writer]
