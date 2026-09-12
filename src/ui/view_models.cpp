@@ -472,6 +472,54 @@ bool ApplicationViewModel::canRecover() const noexcept
     return snapshot_.recovery_available && snapshot_.state == WorkspaceState::recovery;
 }
 
+bool ApplicationViewModel::canUndo() const noexcept
+{
+    return canEditTimeline() && snapshot_.can_undo;
+}
+
+bool ApplicationViewModel::canRedo() const noexcept
+{
+    return canEditTimeline() && snapshot_.can_redo;
+}
+
+bool ApplicationViewModel::canEditTimeline() const noexcept
+{
+    return snapshot_.route == UiRoute::workspace && !snapshot_.read_only &&
+           snapshot_.state == WorkspaceState::idle;
+}
+
+bool ApplicationViewModel::workerConnected() const noexcept
+{
+    return snapshot_.worker_connected;
+}
+
+QString ApplicationViewModel::selectedEventText() const
+{
+    return snapshot_.selected_event_text;
+}
+
+bool ApplicationViewModel::selectedEventLocked() const noexcept
+{
+    return snapshot_.selected_event_locked;
+}
+
+QString ApplicationViewModel::viewportText() const
+{
+    return QStringLiteral("%1 – %2")
+        .arg(format_time_ns(snapshot_.viewport_range.start_ns),
+             format_time_ns(snapshot_.viewport_range.end_ns));
+}
+
+QString ApplicationViewModel::lastSavedPath() const
+{
+    return snapshot_.last_saved_path;
+}
+
+QString ApplicationViewModel::lastExportPath() const
+{
+    return snapshot_.last_export_path;
+}
+
 QAbstractItemModel* ApplicationViewModel::assets() noexcept
 {
     return &assets_;
@@ -566,6 +614,151 @@ void ApplicationViewModel::stopPreview()
     if (snapshot_.preview_state != PreviewState::stopped) {
         dispatch(UiCommandKind::stop_preview);
     }
+}
+
+void ApplicationViewModel::openProjectFrom(const QString& path)
+{
+    if (!path.isEmpty()) {
+        dispatch(UiCommandKind::open_project_from, path);
+    }
+}
+
+void ApplicationViewModel::importAsset(const QString& path)
+{
+    if (!path.isEmpty() && !snapshot_.read_only) {
+        dispatch(UiCommandKind::import_asset, path);
+    }
+}
+
+void ApplicationViewModel::saveProjectTo(const QString& path)
+{
+    if (!path.isEmpty() && !snapshot_.read_only) {
+        dispatch(UiCommandKind::save_project_to, path);
+    }
+}
+
+void ApplicationViewModel::exportProjectTo(const QString& path)
+{
+    if (!path.isEmpty() && canExport()) {
+        dispatch(UiCommandKind::export_project_to, path);
+    }
+}
+
+namespace {
+
+QString pointer_argument(double x_pixels, double width_pixels)
+{
+    return QStringLiteral("%1|%2")
+        .arg(QString::number(x_pixels, 'g', 17),
+             QString::number(width_pixels, 'g', 17));
+}
+
+} // namespace
+
+void ApplicationViewModel::zoomTimeline(int steps)
+{
+    dispatch(UiCommandKind::timeline_zoom, QString::number(steps));
+}
+
+void ApplicationViewModel::panTimeline(double delta_pixels, double width_pixels)
+{
+    dispatch(UiCommandKind::timeline_pan, pointer_argument(delta_pixels, width_pixels));
+}
+
+void ApplicationViewModel::seekTimeline(double x_pixels, double width_pixels)
+{
+    dispatch(UiCommandKind::timeline_seek, pointer_argument(x_pixels, width_pixels));
+}
+
+void ApplicationViewModel::selectTimelineEvent(double x_pixels, double width_pixels)
+{
+    dispatch(UiCommandKind::timeline_select, pointer_argument(x_pixels, width_pixels));
+}
+
+void ApplicationViewModel::addTimelineEvent(double x_pixels, double width_pixels)
+{
+    if (canEditTimeline()) {
+        dispatch(UiCommandKind::timeline_add_manual_event,
+                 pointer_argument(x_pixels, width_pixels));
+    }
+}
+
+void ApplicationViewModel::toggleTimelineEventSelection(double x_pixels,
+                                                        double width_pixels)
+{
+    dispatch(UiCommandKind::timeline_toggle_selection,
+             pointer_argument(x_pixels, width_pixels));
+}
+
+void ApplicationViewModel::beginTimelineDrag(double x_pixels, double width_pixels)
+{
+    if (canEditTimeline()) {
+        dispatch(UiCommandKind::timeline_drag_begin,
+                 pointer_argument(x_pixels, width_pixels));
+    }
+}
+
+void ApplicationViewModel::updateTimelineDrag(double x_pixels, double width_pixels)
+{
+    if (canEditTimeline()) {
+        dispatch(UiCommandKind::timeline_drag_update,
+                 pointer_argument(x_pixels, width_pixels));
+    }
+}
+
+void ApplicationViewModel::endTimelineDrag()
+{
+    dispatch(UiCommandKind::timeline_drag_end);
+}
+
+void ApplicationViewModel::toggleSelectedEventLock()
+{
+    if (canEditTimeline() && !snapshot_.selected_event_id.isEmpty()) {
+        dispatch(UiCommandKind::toggle_selected_event_lock);
+    }
+}
+
+void ApplicationViewModel::batchOffsetSelected(const QString& milliseconds)
+{
+    if (canEditTimeline() && !snapshot_.selected_event_id.isEmpty()) {
+        dispatch(UiCommandKind::batch_offset_selected, milliseconds);
+    }
+}
+
+void ApplicationViewModel::undo()
+{
+    if (canUndo()) {
+        dispatch(UiCommandKind::undo);
+    }
+}
+
+void ApplicationViewModel::redo()
+{
+    if (canRedo()) {
+        dispatch(UiCommandKind::redo);
+    }
+}
+
+void ApplicationViewModel::reconnectWorker()
+{
+    if (!snapshot_.worker_connected) {
+        dispatch(UiCommandKind::reconnect_worker);
+    }
+}
+
+std::shared_ptr<const rendering::RenderSnapshot> ApplicationViewModel::renderSnapshot() const
+{
+    return snapshot_.render_snapshot;
+}
+
+core::TimeRange ApplicationViewModel::viewportTimeRange() const noexcept
+{
+    return snapshot_.viewport_range;
+}
+
+rendering::FrameIndex ApplicationViewModel::authoritativeFrameIndex() const noexcept
+{
+    return snapshot_.frame_index;
 }
 
 void ApplicationViewModel::dispatch(UiCommandKind kind, QString argument)

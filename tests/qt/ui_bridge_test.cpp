@@ -33,6 +33,15 @@ private slots:
                  space_rhythm::system::project_schema_version);
         QCOMPARE(descriptor.rendering_contract_version,
                  ui::qt_string(space_rhythm::rendering::contract_version));
+        QCOMPARE(descriptor.media_contract_version,
+                 ui::qt_string(space_rhythm::media::contract_version));
+        QCOMPARE(descriptor.audio_analysis_contract_version,
+                 ui::qt_string(space_rhythm::audio::contract_version));
+        QCOMPARE(descriptor.audio_render_contract_version,
+                 ui::qt_string(space_rhythm::audio::render::contract_version));
+        QCOMPARE(descriptor.playback_export_contract_version,
+                 ui::qt_string(
+                     space_rhythm::media::playback_export::contract_version));
     }
 
     void qmlSurfaceDoesNotExposeRawAuthorityValues()
@@ -46,6 +55,10 @@ private slots:
         QCOMPARE(meta->indexOfProperty("timeNs"), -1);
         QCOMPARE(meta->indexOfProperty("previewTimeNs"), -1);
         QCOMPARE(meta->indexOfProperty("frameIndex"), -1);
+        QCOMPARE(meta->indexOfProperty("viewportRange"), -1);
+        QCOMPARE(meta->indexOfProperty("renderSnapshot"), -1);
+        QCOMPARE(meta->indexOfMethod("authoritativeFrameIndex()"), -1);
+        QCOMPARE(meta->indexOfMethod("renderSnapshot()"), -1);
         QCOMPARE(view_model.timelineRevisionText(), QStringLiteral("r42"));
         QCOMPARE(view_model.previewTimeText(), QStringLiteral("00:12.340"));
     }

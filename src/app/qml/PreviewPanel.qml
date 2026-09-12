@@ -30,22 +30,14 @@ Frame {
                 Accessible.role: Accessible.Graphic
             }
 
-            Column {
-                anchors.centerIn: parent
-                spacing: 6
+            Label {
+                anchors.left: parent.left
+                anchors.top: parent.top
+                anchors.margins: 8
                 z: 2
-                Label {
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    text: qsTr("SceneGraphRenderItem")
-                    color: "#35c2ff"
-                    Accessible.name: text
-                }
-                Label {
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    text: qsTr("等待同修订 RenderSnapshot")
-                    color: "#a8b3c0"
-                    Accessible.name: text
-                }
+                text: qsTr("C++ SceneGraph · %1").arg(root.viewModel.timelineRevisionText)
+                color: "#a8b3c0"
+                Accessible.name: text
             }
         }
 

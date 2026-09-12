@@ -71,11 +71,11 @@
 - 关联任务：T-024、T-025、T-026
 - 期望结果：在自己的项目会话中接收本交接，先把 T-024 更新为 in_progress，形成完整工作流、交互原型和基础设计系统；工程和核心契约就绪后执行 T-025/T-026，可用 mock service 并行，不把媒体或算法重计算放进 QML。
 - 输入与证据：D-001～D-008；A-002 0.2、A-004 0.5、A-005 0.4、A-006 0.1 WP-03、[A-011 0.1](artifacts/A-011-complete-mvp-engineering-staffing-and-task-plan.md)；T-024～T-026。
-- 未完成事项：T-024/T-025 已完成；T-026 尚未启动。视觉风格、产品文案、产品默认音色、发布导出格式、产品默认视觉模板参数、可访问性/性能门槛仍需产品或对应责任人确认；T-035 的 T-025 前置现已满足，但须由其负责人按授权另行执行。
+- 未完成事项：T-024/T-025/T-026 已完成。视觉风格、产品文案、产品默认音色、发布导出格式、产品默认视觉模板参数、设备矩阵及可访问性/性能门槛仍需产品或对应责任人确认；当前 T-019 NUT/raw RGBA/PCM 仅为 `testOnly` 开发格式。
 - 状态：accepted
 - 创建日期：2026-09-09
-- 接收反馈：ui-engineer-qt-quick-01 于 2026-09-09 完成成员会话初始化并确认接收；2026-09-11 用户明确要求继续完成 T-024，并要求 T-025、T-035 不得提前启动；T-024 完成后，用户明确确认 T-025 前置全部满足并授权执行 T-025，同时要求不提前执行 T-026。
-- 处理结果与证据：2026-09-11，T-024 已完成并形成 [A-023 0.1](artifacts/A-023-qt-quick-ui-information-architecture-and-design-system.md)，覆盖完整信息架构、线框、状态矩阵、交互规则、可访问性、设计系统和 ViewModel/mock 清单。T-025 随后完成并形成 [A-024 0.1](artifacts/A-024-qt-quick-workspace-and-viewmodel-bridge.md)及 [验证摘要](evidence/T-025/verification-summary.md)：交付启动/工作区/致命错误应用壳层、11 个拆分 QML 组件、UI bridge 0.1.0/schema 1、可替换 `WorkspaceService` 和确定性 mock；QML 不暴露 64 位权威时间/修订/帧，实际 `SceneGraphRenderItem` 由 C++ 挂载。Qt/C++/QML headless 最终 3/3 通过。未知产品项继续待确认；T-026 保持 `todo` 且未启动，因此 H-006 保持 `accepted`，不关闭。
+- 接收反馈：ui-engineer-qt-quick-01 于 2026-09-09 完成成员会话初始化并确认接收；2026-09-11 用户明确要求继续完成 T-024，并要求 T-025、T-035 不得提前启动；T-024 完成后，用户明确确认 T-025 前置全部满足并授权执行 T-025，同时要求不提前执行 T-026。2026-09-12，用户明确要求执行 T-026，并要求接入现有真实核心、媒体、音频、渲染、T-019 时钟及冻结/安全导出能力。
+- 处理结果与证据：2026-09-11，T-024 已完成并形成 [A-023 0.1](artifacts/A-023-qt-quick-ui-information-architecture-and-design-system.md)，覆盖完整信息架构、线框、状态矩阵、交互规则、可访问性、设计系统和 ViewModel/mock 清单。T-025 随后完成并形成 [A-024 0.1](artifacts/A-024-qt-quick-workspace-and-viewmodel-bridge.md)及 [验证摘要](evidence/T-025/verification-summary.md)：交付启动/工作区/致命错误应用壳层、11 个拆分 QML 组件、UI bridge 0.1.0/schema 1、可替换 `WorkspaceService` 和确定性 mock；QML 不暴露 64 位权威时间/修订/帧，实际 `SceneGraphRenderItem` 由 C++ 挂载。2026-09-12，T-026 完成并形成 [A-027 0.1](artifacts/A-027-qt-quick-real-workflow-integration.md)及 [验证摘要](evidence/T-026/verification-summary.md)：bridge 提升为 0.2.0/schema 2，默认注入真实 service，串联导入—分析—核心编辑—T-019 C++ 预览—原子保存—冻结/离屏/安全导出；覆盖多选批量偏移、锁定、拖动 coalescing、撤销重做、取消确认、活动 worker 断线及迟到结果丢弃。真实集成 7/7、Qt/QML headless 4/4 及关联核心/媒体/音频/渲染回归均通过；固定 FFmpeg CLI 单独启动仍受既有 WDAC/SAC 环境限制并未冒充门禁通过。三项关联任务均已交付，H-006 继续保持 `accepted`，等待发起人 architect-01 核对后关闭。
 - 关闭或取消依据：暂无。
 
 ## H-005：启动 C++/Qt 测试工作流

@@ -334,6 +334,7 @@ TEST(AudioRenderPreview, UnavailableDeviceDoesNotChangeOfflinePcm)
     EXPECT_FALSE(start.started);
     EXPECT_EQ(start.error, render::PreviewError::device_unavailable);
     EXPECT_FALSE(preview.active());
+    EXPECT_FALSE(preview.processed_frames().has_value());
     EXPECT_EQ(render::pcm_f32le_bytes(output.value()), before);
 }
 

@@ -51,8 +51,8 @@ TestCase {
 
     QtObject {
         id: viewModel
-        property string bridgeContractVersion: "0.1.0"
-        property int bridgeSchemaVersion: 1
+        property string bridgeContractVersion: "0.2.0"
+        property int bridgeSchemaVersion: 2
         property string route: "workspace"
         property string workspaceState: "idle"
         property string projectTitle: "测试项目"
@@ -75,6 +75,15 @@ TestCase {
         property bool canExport: true
         property bool canPreview: true
         property bool canRecover: false
+        property bool canUndo: true
+        property bool canRedo: true
+        property bool canEditTimeline: workspaceState === "idle" && !readOnly
+        property bool workerConnected: true
+        property string selectedEventText: "event-1 · beat · 00:12.340"
+        property bool selectedEventLocked: false
+        property string viewportText: "00:10.000 – 00:20.000"
+        property string lastSavedPath: "C:/test/project.srp"
+        property string lastExportPath: ""
         property var assets: assets
         property var tasks: tasks
         property var templateParameters: parameters
@@ -93,6 +102,24 @@ TestCase {
         function exportProject() { lastCommand = "export" }
         function togglePreview() { previewState = "playing"; lastCommand = "preview" }
         function stopPreview() { previewState = "stopped"; lastCommand = "stop" }
+        function openProjectFrom(path) { lastCommand = "openFrom" }
+        function importAsset(path) { lastCommand = "import" }
+        function saveProjectTo(path) { lastCommand = "saveTo" }
+        function exportProjectTo(path) { lastCommand = "exportTo" }
+        function zoomTimeline(steps) { lastCommand = "zoom" }
+        function panTimeline(deltaPixels, widthPixels) { lastCommand = "pan" }
+        function seekTimeline(xPixels, widthPixels) { lastCommand = "seek" }
+        function selectTimelineEvent(xPixels, widthPixels) { lastCommand = "select" }
+        function addTimelineEvent(xPixels, widthPixels) { lastCommand = "addEvent" }
+        function toggleTimelineEventSelection(xPixels, widthPixels) { lastCommand = "toggleSelection" }
+        function beginTimelineDrag(xPixels, widthPixels) { lastCommand = "dragBegin" }
+        function updateTimelineDrag(xPixels, widthPixels) { lastCommand = "drag" }
+        function endTimelineDrag() { lastCommand = "dragEnd" }
+        function toggleSelectedEventLock() { selectedEventLocked = !selectedEventLocked }
+        function batchOffsetSelected(milliseconds) { lastCommand = "offset" }
+        function undo() { lastCommand = "undo" }
+        function redo() { lastCommand = "redo" }
+        function reconnectWorker() { workerConnected = true }
     }
 
     ApplicationWindow {
@@ -139,6 +166,32 @@ TestCase {
         verify(timeline !== null)
         verify(timeline.Accessible.name.indexOf("r9007199254740993") >= 0)
         verify(findChild(workspace, "taskCancel_task-01") !== null)
+        verify(findChild(workspace, "timelineUndoButton").Accessible.description.length > 0)
+        verify(findChild(workspace, "eventLockButton").Accessible.description.length > 0)
+        verify(findChild(workspace, "taskCancelConfirmationDialog") !== null)
+    }
+
+    function test_resizeHighDpiAndFocusTraversal() {
+        window.width = 960
+        window.height = 640
+        wait(0)
+        verify(findChild(workspace, "previewPanel").width > 0)
+        verify(findChild(workspace, "timelinePanel").height >= 180)
+
+        window.width = 1600
+        window.height = 1000
+        wait(0)
+        verify(findChild(workspace, "previewPanel").width > 400)
+        verify(window.screen.devicePixelRatio >= 1.0)
+
+        const timeline = findChild(workspace, "timelineSurface")
+        workspace.forceActiveFocus(Qt.TabFocusReason)
+        timeline.forceActiveFocus(Qt.TabFocusReason)
+        wait(0)
+        verify(timeline.focus)
+        compare(timeline.KeyNavigation.tab.objectName, "timelineUndoButton")
+        compare(findChild(workspace, "timelineUndoButton").KeyNavigation.tab.objectName,
+                "timelineRedoButton")
     }
 
     function test_loadingRunningCancellingFailedAndReadOnlyStates() {

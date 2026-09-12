@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import QtQuick.Dialogs
 
 FocusScope {
     id: root
@@ -53,7 +54,7 @@ FocusScope {
             text: qsTr("打开项目")
             Accessible.name: text
             Accessible.description: qsTr("打开已有的 Space Rhythm 项目")
-            onClicked: root.viewModel.openProject()
+            onClicked: openProjectDialog.open()
         }
 
         Frame {
@@ -105,5 +106,14 @@ FocusScope {
             color: "#a8b3c0"
             Accessible.name: text
         }
+    }
+
+    FileDialog {
+        id: openProjectDialog
+        objectName: "openProjectDialog"
+        title: qsTr("打开 Space Rhythm 项目")
+        fileMode: FileDialog.OpenFile
+        nameFilters: [qsTr("Space Rhythm 项目 (*.srp)"), qsTr("所有文件 (*)")]
+        onAccepted: root.viewModel.openProjectFrom(selectedFile.toString())
     }
 }

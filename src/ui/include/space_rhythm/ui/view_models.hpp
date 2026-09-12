@@ -113,6 +113,15 @@ class ApplicationViewModel final : public QObject {
     Q_PROPERTY(bool canExport READ canExport NOTIFY viewStateChanged)
     Q_PROPERTY(bool canPreview READ canPreview NOTIFY viewStateChanged)
     Q_PROPERTY(bool canRecover READ canRecover NOTIFY viewStateChanged)
+    Q_PROPERTY(bool canUndo READ canUndo NOTIFY viewStateChanged)
+    Q_PROPERTY(bool canRedo READ canRedo NOTIFY viewStateChanged)
+    Q_PROPERTY(bool canEditTimeline READ canEditTimeline NOTIFY viewStateChanged)
+    Q_PROPERTY(bool workerConnected READ workerConnected NOTIFY viewStateChanged)
+    Q_PROPERTY(QString selectedEventText READ selectedEventText NOTIFY viewStateChanged)
+    Q_PROPERTY(bool selectedEventLocked READ selectedEventLocked NOTIFY viewStateChanged)
+    Q_PROPERTY(QString viewportText READ viewportText NOTIFY viewStateChanged)
+    Q_PROPERTY(QString lastSavedPath READ lastSavedPath NOTIFY viewStateChanged)
+    Q_PROPERTY(QString lastExportPath READ lastExportPath NOTIFY viewStateChanged)
     Q_PROPERTY(QAbstractItemModel* assets READ assets CONSTANT)
     Q_PROPERTY(QAbstractItemModel* tasks READ tasks CONSTANT)
     Q_PROPERTY(QAbstractItemModel* templateParameters READ templateParameters CONSTANT)
@@ -149,6 +158,15 @@ public:
     [[nodiscard]] bool canExport() const noexcept;
     [[nodiscard]] bool canPreview() const noexcept;
     [[nodiscard]] bool canRecover() const noexcept;
+    [[nodiscard]] bool canUndo() const noexcept;
+    [[nodiscard]] bool canRedo() const noexcept;
+    [[nodiscard]] bool canEditTimeline() const noexcept;
+    [[nodiscard]] bool workerConnected() const noexcept;
+    [[nodiscard]] QString selectedEventText() const;
+    [[nodiscard]] bool selectedEventLocked() const noexcept;
+    [[nodiscard]] QString viewportText() const;
+    [[nodiscard]] QString lastSavedPath() const;
+    [[nodiscard]] QString lastExportPath() const;
     [[nodiscard]] QAbstractItemModel* assets() noexcept;
     [[nodiscard]] QAbstractItemModel* tasks() noexcept;
     [[nodiscard]] QAbstractItemModel* templateParameters() noexcept;
@@ -166,6 +184,30 @@ public:
     Q_INVOKABLE void exportProject();
     Q_INVOKABLE void togglePreview();
     Q_INVOKABLE void stopPreview();
+    Q_INVOKABLE void openProjectFrom(const QString& path);
+    Q_INVOKABLE void importAsset(const QString& path);
+    Q_INVOKABLE void saveProjectTo(const QString& path);
+    Q_INVOKABLE void exportProjectTo(const QString& path);
+    Q_INVOKABLE void zoomTimeline(int steps);
+    Q_INVOKABLE void panTimeline(double deltaPixels, double widthPixels);
+    Q_INVOKABLE void seekTimeline(double xPixels, double widthPixels);
+    Q_INVOKABLE void selectTimelineEvent(double xPixels, double widthPixels);
+    Q_INVOKABLE void addTimelineEvent(double xPixels, double widthPixels);
+    Q_INVOKABLE void toggleTimelineEventSelection(double xPixels, double widthPixels);
+    Q_INVOKABLE void beginTimelineDrag(double xPixels, double widthPixels);
+    Q_INVOKABLE void updateTimelineDrag(double xPixels, double widthPixels);
+    Q_INVOKABLE void endTimelineDrag();
+    Q_INVOKABLE void toggleSelectedEventLock();
+    Q_INVOKABLE void batchOffsetSelected(const QString& milliseconds);
+    Q_INVOKABLE void undo();
+    Q_INVOKABLE void redo();
+    Q_INVOKABLE void reconnectWorker();
+
+    // C++-only authority accessors. They are deliberately absent from the Qt
+    // meta-object, so QML cannot store, round or reinterpret these values.
+    [[nodiscard]] std::shared_ptr<const rendering::RenderSnapshot> renderSnapshot() const;
+    [[nodiscard]] core::TimeRange viewportTimeRange() const noexcept;
+    [[nodiscard]] rendering::FrameIndex authoritativeFrameIndex() const noexcept;
 
 signals:
     void viewStateChanged();

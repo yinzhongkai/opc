@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import QtQuick.Dialogs
 
 Frame {
     id: root
@@ -29,14 +30,66 @@ Frame {
             Layout.fillHeight: true
             currentIndex: tabs.currentIndex
 
-            Label {
-                text: root.viewModel.readOnly
-                      ? qsTr("只读：可检查选中事件，不能提交修改")
-                      : qsTr("选择时间线事件后在此编辑精确属性")
-                color: "#a8b3c0"
-                wrapMode: Text.WordWrap
-                padding: 12
-                Accessible.name: text
+            ColumnLayout {
+                spacing: 10
+                Label {
+                    objectName: "selectedEventSummary"
+                    Layout.fillWidth: true
+                    Layout.margins: 12
+                    text: root.viewModel.selectedEventText
+                    color: "#f0f6fc"
+                    wrapMode: Text.WordWrap
+                    Accessible.name: qsTr("选中事件 %1").arg(text)
+                }
+                Button {
+                    objectName: "eventLockButton"
+                    Layout.fillWidth: true
+                    Layout.leftMargin: 12
+                    Layout.rightMargin: 12
+                    text: root.viewModel.selectedEventLocked ? qsTr("解除锁定") : qsTr("锁定事件")
+                    enabled: root.viewModel.canEditTimeline
+                             && root.viewModel.selectedEventText !== qsTr("未选择事件")
+                    Accessible.name: text
+                    Accessible.description: enabled
+                        ? qsTr("锁定事件后，拖动与批量偏移将由 C++ 核心拒绝")
+                        : qsTr("请选择可编辑事件")
+                    onClicked: root.viewModel.toggleSelectedEventLock()
+                }
+                RowLayout {
+                    Layout.fillWidth: true
+                    Layout.leftMargin: 12
+                    Layout.rightMargin: 12
+                    TextField {
+                        id: batchOffsetField
+                        objectName: "batchOffsetMillisecondsField"
+                        Layout.fillWidth: true
+                        placeholderText: qsTr("偏移毫秒，例如 120")
+                        inputMethodHints: Qt.ImhFormattedNumbersOnly
+                        validator: IntValidator { bottom: -3600000; top: 3600000 }
+                        Accessible.name: qsTr("批量偏移毫秒")
+                        Accessible.description: qsTr("输入由 C++ 转换为 TimeNs 并校验")
+                    }
+                    Button {
+                        objectName: "batchOffsetButton"
+                        text: qsTr("应用")
+                        enabled: root.viewModel.canEditTimeline
+                                 && batchOffsetField.acceptableInput
+                        Accessible.name: qsTr("应用批量偏移")
+                        Accessible.description: qsTr("通过核心 BatchOffsetEvents 事务提交")
+                        onClicked: root.viewModel.batchOffsetSelected(batchOffsetField.text)
+                    }
+                }
+                Label {
+                    Layout.fillWidth: true
+                    Layout.margins: 12
+                    text: root.viewModel.readOnly
+                          ? qsTr("只读：可检查事件，不能提交修改")
+                          : qsTr("时间值仅以格式化文本显示；权威值保留在 C++。")
+                    color: "#a8b3c0"
+                    wrapMode: Text.WordWrap
+                    Accessible.name: text
+                }
+                Item { Layout.fillHeight: true }
             }
 
             ColumnLayout {
@@ -100,10 +153,20 @@ Frame {
                     enabled: root.viewModel.canExport
                     Accessible.name: text
                     Accessible.description: enabled ? qsTr("按当前快照创建后台任务") : qsTr("导出当前不可用")
-                    onClicked: root.viewModel.exportProject()
+                    onClicked: inspectorExportDialog.open()
                 }
                 Item { Layout.fillHeight: true }
             }
         }
+    }
+
+    FileDialog {
+        id: inspectorExportDialog
+        objectName: "inspectorExportDialog"
+        title: qsTr("导出冻结快照（开发格式）")
+        fileMode: FileDialog.SaveFile
+        defaultSuffix: "nut"
+        nameFilters: [qsTr("T-019 测试导出 (*.nut)")]
+        onAccepted: root.viewModel.exportProjectTo(selectedFile.toString())
     }
 }

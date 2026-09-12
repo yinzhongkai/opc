@@ -19,6 +19,7 @@ struct QtAudioPreview::Impl final {
     QByteArray bytes;
     std::unique_ptr<QBuffer> buffer;
     std::unique_ptr<QAudioSink> sink;
+    std::uint32_t sample_rate{};
 };
 
 QtAudioPreview::QtAudioPreview() : implementation_(std::make_unique<Impl>()) {}
@@ -74,6 +75,7 @@ PreviewStartResult QtAudioPreview::start(const RenderedPcm& pcm,
                 "QAudioSink could not be created"};
     }
     implementation_->sink->setVolume(1.0);
+    implementation_->sample_rate = pcm.sample_rate;
     implementation_->sink->start(implementation_->buffer.get());
     if (implementation_->sink->error() == QtAudio::OpenError) {
         stop();
@@ -94,12 +96,32 @@ void QtAudioPreview::stop() noexcept
     }
     implementation_->buffer.reset();
     implementation_->bytes.clear();
+    implementation_->sample_rate = 0;
 }
 
 bool QtAudioPreview::active() const noexcept
 {
     return implementation_->sink != nullptr
         && implementation_->sink->state() != QtAudio::StoppedState;
+}
+
+std::optional<std::uint64_t> QtAudioPreview::processed_frames() const noexcept
+{
+    if (!implementation_->sink || implementation_->sample_rate == 0) {
+        return std::nullopt;
+    }
+    const auto processed_microseconds = implementation_->sink->processedUSecs();
+    if (processed_microseconds < 0) {
+        return std::nullopt;
+    }
+    const auto seconds = static_cast<std::uint64_t>(processed_microseconds) / 1'000'000U;
+    const auto remainder = static_cast<std::uint64_t>(processed_microseconds) % 1'000'000U;
+    if (seconds > std::numeric_limits<std::uint64_t>::max() /
+                      implementation_->sample_rate) {
+        return std::nullopt;
+    }
+    return seconds * implementation_->sample_rate +
+           remainder * implementation_->sample_rate / 1'000'000U;
 }
 
 std::string_view to_string(const PreviewError error) noexcept

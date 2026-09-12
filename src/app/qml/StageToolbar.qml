@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import QtQuick.Dialogs
 
 ToolBar {
     id: root
@@ -59,7 +60,12 @@ ToolBar {
             enabled: root.viewModel.canSave
             Accessible.name: text
             Accessible.description: enabled ? qsTr("原子保存当前项目") : qsTr("没有可保存的修改或项目只读")
-            onClicked: root.viewModel.saveProject()
+            onClicked: {
+                if (root.viewModel.lastSavedPath.length > 0)
+                    root.viewModel.saveProject()
+                else
+                    saveProjectDialog.open()
+            }
         }
         ToolButton {
             objectName: "exportStageButton"
@@ -67,7 +73,7 @@ ToolBar {
             enabled: root.viewModel.canExport
             Accessible.name: text
             Accessible.description: enabled ? qsTr("创建后台导出任务") : qsTr("需要已就绪项目，导出格式待确认")
-            onClicked: root.viewModel.exportProject()
+            onClicked: exportProjectDialog.open()
         }
 
         Item { Layout.fillWidth: true }
@@ -86,5 +92,25 @@ ToolBar {
             Accessible.name: text
             Accessible.description: qsTr("写入动作已禁用，可试听或导出当前快照")
         }
+    }
+
+    FileDialog {
+        id: saveProjectDialog
+        objectName: "saveProjectDialog"
+        title: qsTr("保存 Space Rhythm 项目")
+        fileMode: FileDialog.SaveFile
+        defaultSuffix: "srp"
+        nameFilters: [qsTr("Space Rhythm 项目 (*.srp)")]
+        onAccepted: root.viewModel.saveProjectTo(selectedFile.toString())
+    }
+
+    FileDialog {
+        id: exportProjectDialog
+        objectName: "exportProjectDialog"
+        title: qsTr("导出冻结快照（开发格式）")
+        fileMode: FileDialog.SaveFile
+        defaultSuffix: "nut"
+        nameFilters: [qsTr("T-019 测试导出 (*.nut)")]
+        onAccepted: root.viewModel.exportProjectTo(selectedFile.toString())
     }
 }

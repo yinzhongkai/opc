@@ -46,5 +46,13 @@ Rectangle {
             Accessible.name: text
             onClicked: root.viewModel.retryFailedOperation()
         }
+        Button {
+            objectName: "workerReconnectButton"
+            visible: !root.viewModel.workerConnected
+            text: qsTr("重新连接 worker")
+            Accessible.name: text
+            Accessible.description: qsTr("恢复连接后可重试失败操作")
+            onClicked: root.viewModel.reconnectWorker()
+        }
     }
 }
