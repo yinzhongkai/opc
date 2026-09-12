@@ -7,6 +7,7 @@
 #include <space_rhythm/build/core_skeleton.hpp>
 #include <space_rhythm/media/media_adapter_skeleton.hpp>
 #include <space_rhythm/system/runtime.hpp>
+#include <space_rhythm/worker/ui_worker_protocol.hpp>
 
 int main(int argc, char* argv[])
 {
@@ -19,6 +20,11 @@ int main(int argc, char* argv[])
     if (mock_worker_index >= 0 && mock_worker_index + 1 < arguments.size()) {
         return space_rhythm::system::run_mock_worker(
             arguments.at(mock_worker_index + 1).toStdString());
+    }
+    const auto ui_worker_index = arguments.indexOf(QStringLiteral("--ui-worker"));
+    if (ui_worker_index >= 0 && ui_worker_index + 1 < arguments.size()) {
+        return space_rhythm::worker::run_ui_worker_server(
+            arguments.at(ui_worker_index + 1).toStdString());
     }
 
     if (arguments.contains(QStringLiteral("--smoke"))) {

@@ -259,6 +259,23 @@ public:
             snapshot_.preview_time_ns = 5'000'000'000;
             publish();
             break;
+        case UiCommandKind::timeline_seek_begin:
+            snapshot_.timeline_gesture_active = true;
+            snapshot_.timeline_seek_pending = true;
+            snapshot_.preview_state = PreviewState::seeking;
+            publish();
+            break;
+        case UiCommandKind::timeline_seek_update:
+            snapshot_.timeline_ghost_ratio = 0.5;
+            publish();
+            break;
+        case UiCommandKind::timeline_seek_end:
+            snapshot_.timeline_gesture_active = false;
+            snapshot_.timeline_seek_pending = false;
+            snapshot_.preview_time_ns = 5'000'000'000;
+            snapshot_.preview_state = PreviewState::paused;
+            publish();
+            break;
         case UiCommandKind::timeline_select:
         case UiCommandKind::timeline_toggle_selection:
             snapshot_.selected_event_id = QStringLiteral("mock-event-1");
@@ -266,12 +283,31 @@ public:
             publish();
             break;
         case UiCommandKind::timeline_add_manual_event:
-        case UiCommandKind::timeline_drag_update:
         case UiCommandKind::batch_offset_selected:
             apply_mock_edit();
             break;
         case UiCommandKind::timeline_drag_begin:
+            snapshot_.timeline_gesture_active = true;
+            publish();
+            break;
+        case UiCommandKind::timeline_drag_update:
+            snapshot_.timeline_ghost_ratio = 0.5;
+            publish();
+            break;
         case UiCommandKind::timeline_drag_end:
+            snapshot_.timeline_gesture_active = false;
+            apply_mock_edit();
+            break;
+        case UiCommandKind::timeline_gesture_cancel:
+            snapshot_.timeline_gesture_active = false;
+            snapshot_.timeline_seek_pending = false;
+            publish();
+            break;
+        case UiCommandKind::enable_development_audio_mapping:
+            snapshot_.development_audio_mapping_enabled = true;
+            snapshot_.audio_mapping_status_text =
+                QStringLiteral("已显式启用 A-018 CC0 开发映射（非产品默认）");
+            publish();
             break;
         case UiCommandKind::toggle_selected_event_lock:
             if (!snapshot_.selected_event_id.isEmpty() && editable()) {

@@ -24,6 +24,7 @@ target_link_libraries(space_rhythm_ui_bridge
         SpaceRhythm::AudioRender
         SpaceRhythm::PlaybackExport
         SpaceRhythm::OffscreenRendering
+        SpaceRhythm::UiWorkerProtocol
         Qt6::Core
         Qt6::Gui
         Qt6::Qml
@@ -31,6 +32,15 @@ target_link_libraries(space_rhythm_ui_bridge
     PRIVATE
         SpaceRhythm::AudioPreviewQt
         Qt6::Multimedia
+)
+
+qt_add_resources(space_rhythm_ui_bridge "ui_development_timbres"
+    PREFIX "/space-rhythm/development-timbres"
+    BASE "${PROJECT_SOURCE_DIR}/tests/golden/audio/generated"
+    FILES
+        "${PROJECT_SOURCE_DIR}/tests/golden/audio/generated/timbre-click-48000-mono.f32le"
+        "${PROJECT_SOURCE_DIR}/tests/golden/audio/generated/timbre-low-triangle-48000-mono.f32le"
+        "${PROJECT_SOURCE_DIR}/tests/golden/audio/generated/timbre-noise-hit-48000-mono.f32le"
 )
 space_rhythm_apply_build_policy(space_rhythm_ui_bridge)
 

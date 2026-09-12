@@ -126,8 +126,13 @@ FocusScope {
     }
     Shortcut {
         sequence: "Escape"
-        enabled: root.viewModel.canCancel
-        onActivated: taskDrawer.confirmCancel()
+        enabled: root.viewModel.timelineGestureActive || root.viewModel.canCancel
+        onActivated: {
+            if (root.viewModel.timelineGestureActive)
+                root.viewModel.cancelTimelineGesture()
+            else
+                taskDrawer.confirmCancel()
+        }
     }
     Shortcut {
         sequence: StandardKey.Undo

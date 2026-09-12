@@ -117,6 +117,12 @@ class ApplicationViewModel final : public QObject {
     Q_PROPERTY(bool canRedo READ canRedo NOTIFY viewStateChanged)
     Q_PROPERTY(bool canEditTimeline READ canEditTimeline NOTIFY viewStateChanged)
     Q_PROPERTY(bool workerConnected READ workerConnected NOTIFY viewStateChanged)
+    Q_PROPERTY(bool timelineGestureActive READ timelineGestureActive NOTIFY viewStateChanged)
+    Q_PROPERTY(bool timelineSeekPending READ timelineSeekPending NOTIFY viewStateChanged)
+    Q_PROPERTY(double timelineGhostRatio READ timelineGhostRatio NOTIFY viewStateChanged)
+    Q_PROPERTY(QString interactionStatusText READ interactionStatusText NOTIFY viewStateChanged)
+    Q_PROPERTY(bool developmentAudioMappingEnabled READ developmentAudioMappingEnabled NOTIFY viewStateChanged)
+    Q_PROPERTY(QString audioMappingStatusText READ audioMappingStatusText NOTIFY viewStateChanged)
     Q_PROPERTY(QString selectedEventText READ selectedEventText NOTIFY viewStateChanged)
     Q_PROPERTY(bool selectedEventLocked READ selectedEventLocked NOTIFY viewStateChanged)
     Q_PROPERTY(QString viewportText READ viewportText NOTIFY viewStateChanged)
@@ -162,6 +168,12 @@ public:
     [[nodiscard]] bool canRedo() const noexcept;
     [[nodiscard]] bool canEditTimeline() const noexcept;
     [[nodiscard]] bool workerConnected() const noexcept;
+    [[nodiscard]] bool timelineGestureActive() const noexcept;
+    [[nodiscard]] bool timelineSeekPending() const noexcept;
+    [[nodiscard]] double timelineGhostRatio() const noexcept;
+    [[nodiscard]] QString interactionStatusText() const;
+    [[nodiscard]] bool developmentAudioMappingEnabled() const noexcept;
+    [[nodiscard]] QString audioMappingStatusText() const;
     [[nodiscard]] QString selectedEventText() const;
     [[nodiscard]] bool selectedEventLocked() const noexcept;
     [[nodiscard]] QString viewportText() const;
@@ -197,6 +209,11 @@ public:
     Q_INVOKABLE void beginTimelineDrag(double xPixels, double widthPixels);
     Q_INVOKABLE void updateTimelineDrag(double xPixels, double widthPixels);
     Q_INVOKABLE void endTimelineDrag();
+    Q_INVOKABLE void beginTimelineSeek(double xPixels, double widthPixels);
+    Q_INVOKABLE void updateTimelineSeek(double xPixels, double widthPixels);
+    Q_INVOKABLE void endTimelineSeek();
+    Q_INVOKABLE void cancelTimelineGesture();
+    Q_INVOKABLE void enableDevelopmentAudioMapping();
     Q_INVOKABLE void toggleSelectedEventLock();
     Q_INVOKABLE void batchOffsetSelected(const QString& milliseconds);
     Q_INVOKABLE void undo();

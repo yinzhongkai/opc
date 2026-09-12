@@ -33,6 +33,29 @@ Frame {
             ColumnLayout {
                 spacing: 10
                 Label {
+                    objectName: "audioMappingStatus"
+                    Layout.fillWidth: true
+                    Layout.margins: 12
+                    text: root.viewModel.audioMappingStatusText
+                    color: root.viewModel.developmentAudioMappingEnabled
+                           ? "#7ee787" : "#e3b341"
+                    wrapMode: Text.WordWrap
+                    Accessible.name: text
+                }
+                Button {
+                    objectName: "enableDevelopmentAudioMappingButton"
+                    Layout.fillWidth: true
+                    Layout.leftMargin: 12
+                    Layout.rightMargin: 12
+                    text: root.viewModel.developmentAudioMappingEnabled
+                          ? qsTr("CC0 开发音色映射已启用")
+                          : qsTr("启用 CC0 开发音色映射")
+                    enabled: !root.viewModel.developmentAudioMappingEnabled
+                    Accessible.name: text
+                    Accessible.description: qsTr("显式使用 A-018 测试音色，仅用于开发试听与测试导出，不代表产品默认音色")
+                    onClicked: root.viewModel.enableDevelopmentAudioMapping()
+                }
+                Label {
                     objectName: "selectedEventSummary"
                     Layout.fillWidth: true
                     Layout.margins: 12
