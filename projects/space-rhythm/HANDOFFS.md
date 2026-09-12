@@ -98,11 +98,11 @@
 - 期望结果：在自己的项目会话中接收本交接，先把 T-017 更新为 in_progress，交付媒体时间/缓冲契约和黄金样例矩阵；T-013 统一 x64 构建骨架就绪后依据已确认的 D-003 和核心时间契约执行 T-018；核心/worker/媒体基础可集成后执行 T-019。遵守核心拥有规范 `timeNs`、媒体拥有 PTS 解释的单一责任边界。
 - 输入与证据：[A-004 0.5](artifacts/A-004-mvp-technical-feasibility-and-requirements.md)、[A-005 0.4](artifacts/A-005-mvp-technology-stack-proposal.md)、[A-006 0.1 WP-04](artifacts/A-006-domain-work-packages.md)、[A-007 0.1](artifacts/A-007-four-engineer-execution-plan.md)、[A-012 0.1](artifacts/A-012-core-domain-contract-0x.md)；D-003/D-006 confirmed；T-017～T-019。
 - 未完成事项：FFmpeg 具体版本、H.264 后端、发布容器/编码器矩阵和许可证路径尚未确认；不得用原型选择代替发布决定，也不得使用许可不清样例。
-- 状态：accepted
+- 状态：closed
 - 创建日期：2026-09-08
 - 接收反馈：multimedia-engineer-ffmpeg-01 于 2026-09-09 依据用户明确指令接收并完成 T-017；于 2026-09-10 完成 T-018 及后续颜色/PCM provenance 修订；又于 2026-09-12 依据用户确认全部前置满足的明确指令启动并完成 T-019。全过程沿用现有 `vcpkg.json` 的 `media` feature 与固定 baseline，未修改 `package/`。
 - 处理结果与证据：T-017、T-018、T-019 均已完成。媒体契约/管线最终修订为 [A-014 0.4](artifacts/A-014-media-time-buffer-and-golden-contract.md)与 [A-015 0.3](artifacts/A-015-ffmpeg-media-pipeline.md)；预览/导出形成 [A-026 0.1](artifacts/A-026-preview-synchronization-and-safe-export.md)及 [T-019 验证摘要](evidence/T-019/verification-summary.md)。T-019 以实际播放 sample count/单调时钟驱动 C++ 播放头，覆盖 VFR、pause/resume/seek、掉帧/漂移；冻结修订和媒体/渲染/音频输入，直接消费 T-035/T-032，使用明确 `testOnly` NUT/rawvideo/PCM 的 FFmpeg C API 后端和同目录原子提交。Debug 9/9 实际通过，CI/Release 构建通过但运行受既有 WDAC/Code Integrity 阻断并如实登记。固定 baseline、FFmpeg 8.1.2#3、LGPLv3-or-later、default/GPL/nonfree 关闭状态未变；未选择 H.264 或发布容器。
-- 关闭或取消依据：尚未关闭；T-017～T-019 目标成员处理已完成，等待发起人 architect-01 核对 A-014 0.4、A-015 0.3、A-026 0.1 与对应证据后关闭。发布容器/H.264/许可证矩阵继续是发布决策缺口，不由本交接静默确认。
+- 关闭或取消依据：2026-09-12，发起人 architect-01 核对提交 `f1eac20`、A-014 0.4、A-015 0.3、A-026 0.1 与 T-019 验证证据，并独立复跑 Debug `t019` 测试 9/9 通过；确认核心拥有规范 `timeNs`、媒体拥有 PTS 解释的边界未漂移，实际播放帧主时钟/VFR 选帧、导出输入冻结、T-035/T-032 直接消费、`testOnly` 编码器和同目录安全文件事务均满足本交接范围。据此关闭 H-004。CI/Release 运行仍受已登记的 WDAC/Code Integrity 环境问题阻断，发布容器/H.264/许可证矩阵继续作为发布决策缺口，不由本次关闭静默确认。
 
 ## H-003：启动 C++ 核心与系统工作流
 - 发起人：architect-01
