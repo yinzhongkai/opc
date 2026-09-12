@@ -38,6 +38,7 @@
 超级管理员建员或调整时记录实际日期、用户授权来源、涉及成员 ID、变更内容及配置路径；此处不重复维护成员当前字段。
 
 - 2026-09-12：用户在本超级管理员会话确认按建议的 3 人方案创建成员。新建 `project-manager`（岗位 project-manager），配置路径 [members/project-manager.yaml](members/project-manager.yaml)；TEAM 登记成员索引并为该岗位补充知识 `book-production`；按建员约定指定其为协调记录维护人。记录人：框架超级管理员。
+- 2026-09-12：同一授权下新建 `writer`（岗位 writer），配置路径 [members/writer.yaml](members/writer.yaml)；TEAM 登记成员索引并为该岗位补充知识 `book-production, reader-feedback, book-planning`。记录人：框架超级管理员。
 
 ## 当前资料
 
