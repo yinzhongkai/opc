@@ -141,6 +141,26 @@ set_tests_properties(${space_rhythm_media_test_cases} PROPERTIES
     LABELS "t021;golden;media;unit;headless;gate-g1;gate-g3"
 )
 
+add_executable(space_rhythm_playback_export_tests
+    unit/playback_export_test.cpp
+)
+target_link_libraries(space_rhythm_playback_export_tests PRIVATE
+    SpaceRhythm::PlaybackExport
+    GTest::gtest_main
+)
+target_compile_definitions(space_rhythm_playback_export_tests PRIVATE
+    SPACE_RHYTHM_T019_TEST_WORK_ROOT="${PROJECT_BINARY_DIR}/test-work/t019"
+)
+space_rhythm_apply_build_policy(space_rhythm_playback_export_tests)
+gtest_add_tests(
+    TARGET space_rhythm_playback_export_tests
+    TEST_LIST space_rhythm_playback_export_test_cases
+)
+set_tests_properties(${space_rhythm_playback_export_test_cases} PROPERTIES
+    LABELS "t019;unit;integration;media;export;headless;gate-g1;gate-g3;gate-g4"
+    TIMEOUT 60
+)
+
 add_executable(space_rhythm_contract_tests
     contract/core_public_contract_test.cpp
     contract/system_public_contract_test.cpp
