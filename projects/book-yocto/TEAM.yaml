@@ -3,4 +3,5 @@ project: 'book-yocto'
 roleKnowledge:
   project-manager: [book-production]
   writer: [book-production, reader-feedback, book-planning]
-members: [project-manager, writer]
+  reviewer: [book-production, book-review, reader-feedback, technical-book-validation]
+members: [project-manager, writer, reviewer]
