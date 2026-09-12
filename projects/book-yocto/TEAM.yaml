@@ -1,4 +1,5 @@
 schemaVersion: 3
 project: 'book-yocto'
-roleKnowledge: {}
-members: []
+roleKnowledge:
+  project-manager: [book-production]
+members: [project-manager]
