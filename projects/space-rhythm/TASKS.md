@@ -249,16 +249,16 @@
 
 ## T-019：实现预览同步与安全导出事务
 - 负责人：multimedia-engineer-ffmpeg-01
-- 状态：todo
-- 授权来源与日期：本会话用户于 2026-09-08 明确要求把任务细化后交给已创建的 FFmpeg 多媒体工程师执行。
+- 状态：completed
+- 授权来源与日期：本会话用户于 2026-09-08 明确要求把任务细化后交给已创建的 FFmpeg 多媒体工程师执行；同一用户于 2026-09-12 明确确认全部前置条件已满足并要求执行 T-019。
 - 目标与范围：在时间线、worker 和解码基础可用后实现播放主时钟、帧调度、seek/暂停/恢复、漂移诊断及固定修订导出事务；不决定 H.264 发布后端、格式产品范围或许可证策略，不实现视觉模板与音频 DSP。
 - 输入与依赖：T-015、T-016、T-018、T-032、T-035；A-004 0.5、A-006 0.1 WP-04、A-007 0.1、A-011 0.1；H.264/容器发布矩阵仍待确认。
 - 优先级：高；按前置条件排队。
 - 完成条件与确认方式：明确并验证预览主时钟、视频帧选择、掉帧和漂移处理；导出开始冻结 `timelineRevision`、媒体/渲染/音频参数与随机种子，写临时文件后成功提交，取消/失败不覆盖已有目标；编码器接口可替换，在后端未定时只用已确认测试格式；对测试样例证明预览与导出事件位置误差不超过一个输出帧并保存日志；负责人完成自测并登记证据。
-- 进展：已完成任务拆分和依赖登记，尚未由负责人会话接收。
-- 成果与验证证据：[A-007 0.1 第 3.3 节](artifacts/A-007-four-engineer-execution-plan.md)定义同步和事务边界；实际实现与测试证据暂无。
-- 阻塞与下一位行动人：等待 T-015、T-016、T-018、T-032、T-035；H.264 和发布格式未确认不阻止抽象及测试格式验证，但阻止发布型导出结论。multimedia-engineer-ffmpeg-01 先执行 T-017。
-- 更新日期：2026-09-08。
+- 进展：multimedia-engineer-ffmpeg-01 于 2026-09-12 完成 T-019。`PreviewSynchronizer` 有音轨时仅按设备实际累计播放 frame 数推进，无音轨时按单调时钟推进；实现 VFR 实际时间戳选帧、暂停/恢复、可重置音频计数的 seek、presentation drop 与漂移诊断，播放头全部由 C++ `TimeNs` 状态产生。导出开始逐项冻结修订、媒体指纹/流选择、`RenderRecipe/RenderSnapshot`、T-032 音频参数/音色 hash、范围/fps/seed；直接接受 T-035 `RenderedFrame` 和 T-032 `RenderedPcm`。可替换编码器当前只允许显式 `testOnly` NUT/rawvideo/PCM，FFmpeg C API 完成写出；同目录临时文件仅在 trailer 成功后原子替换。取消、磁盘不足、编码失败、旧修订、错序和 worker 中断均 fail closed。
+- 成果与验证证据：[A-026 0.1：预览同步与安全导出事务](artifacts/A-026-preview-synchronization-and-safe-export.md)、[T-019 验证摘要](evidence/T-019/verification-summary.md)及 `src/playback_export`/`tests/unit/playback_export_test.cpp`。Windows x64 Debug `/W4 /WX` 构建并实际 9/9 pass；CI/RelWithDebInfo 与 Release 均构建成功，但新测试程序均被既有 Code Integrity/WDAC `0xC0E90002` 阻止启动，未使用 fallback、未写成通过。Debug 真实 FFmpeg 产物由公开 `MediaSource` 重新探测到 video/audio 流，事件位置测试在 30 fps 下最大误差 33,000,000 ns，小于一帧上限 33,333,334 ns。
+- 阻塞与下一位行动人：T-019 技术范围无剩余实现阻塞。H.264、发布容器/编码器矩阵与许可证仍未确认，因此不形成发布导出结论；`T021-ENV-001` 主机策略问题仍归原责任链处理。H-004 保持 accepted，等待发起人 architect-01 验收 A-026/T-019 后关闭。
+- 更新日期：2026-09-12。
 
 ## T-018：实现 FFmpeg 探测、解码、时间映射与代理管线
 - 负责人：multimedia-engineer-ffmpeg-01
@@ -270,8 +270,8 @@
 - 完成条件与确认方式：FFmpeg 资源全部使用可审计生命周期管理；CFR/VFR、旋转、多流和音频样例的 `timeNs`/定位符合契约；长素材使用有界队列和缓存，不整段加载；取消、损坏、不支持与资源不足返回结构化错误且不泄漏；记录 FFmpeg build configuration、格式能力矩阵、峰值内存和单元/集成自测；产出代码和可复核运行证据。
 - 进展：multimedia-engineer-ffmpeg-01 于 2026-09-10 完成原 T-018，同日解决 T021-DEFECT-001；随后依据用户明确指令接收 H-011 并补齐媒体 PCM resampler timing provenance。公共版本提升为 `mediaContractVersion=1.0.0/schemaVersion=2`，`PcmBuffer` 实际填充声道顺序、segment 原点和逐转换 trace；delay 直接来自每次 `swr_convert` 前的 `swr_get_delay`，版本来自运行时 swresample，参数摘要来自版本化实际配置。新增样本精确 audio seek、动态采样率 segment/epoch、取消不排空及旧 schema 拒绝。固定 baseline 与 default/GPL/nonfree 状态未变；未修改 DSP、`package/` 或缓存目录。
 - 成果与验证证据：[A-015 0.3](artifacts/A-015-ffmpeg-media-pipeline.md)、[A-014 0.4](artifacts/A-014-media-time-buffer-and-golden-contract.md)、[H-011 验证摘要](evidence/T-018/H-011-resampler-provenance.md)、[原可复核摘要](evidence/T-018/verification-summary.md)、[T021-DEFECT-001 修复证据](evidence/T-018/T021-DEFECT-001.md)、[运行时 DLL 哈希](evidence/T-018/runtime-dlls.sha256.csv)及[13 项实际黄金媒体 SHA-256/ffprobe 证据](../../tests/golden/media/generated/actual-hashes-and-probe-v1.json)。H-011 修订后 Windows x64 Debug、CI/RelWithDebInfo、Release 媒体专项均由最终二进制 27/27 通过；schema 1 独立拒绝 oracle 与非零 delay/连续 `firstSampleIndex` 断言均通过。
-- 阻塞与下一位行动人：H-011 与 T021-DEFECT-001 已修复且无剩余媒体实现阻塞；H-011 发起人 audio-dsp-engineer-01 可在后续获授权任务中消费 schema 2 字段，DSP 不得重复补偿 delay。T-019 保持 `todo`，须等待后续明确启动。
-- 更新日期：2026-09-10。
+- 阻塞与下一位行动人：H-011 与 T021-DEFECT-001 已修复且无剩余媒体实现阻塞；H-011 发起人 audio-dsp-engineer-01 可在后续获授权任务中消费 schema 2 字段，DSP 不得重复补偿 delay。后续获用户明确授权的 T-019 已于 2026-09-12 完成。
+- 更新日期：2026-09-12。
 
 ## T-017：定义媒体时间、缓冲契约与黄金样例矩阵
 - 负责人：multimedia-engineer-ffmpeg-01
@@ -283,8 +283,8 @@
 - 完成条件与确认方式：定义 `MediaInfo`、旋转/SAR/DAR、流选择、帧/PCM 所有权/背压/生命周期；明确未知/负时间戳、start time、CFR/VFR、seek、采样索引和舍入规则；生成 CFR、VFR、旋转、采样率差异、损坏和缺失流样例或脚本，登记来源/许可/哈希和期望时间向量；与 T-014 契约无同义冲突；形成并登记版本化契约成果，负责人自查，无独立评审要求。
 - 进展：multimedia-engineer-ffmpeg-01 于 2026-09-09 接收 H-004 并完成本任务。已定义 `MediaInfo`、显式流选择、PTS/DTS/time_base/start time 与负/未知时间戳处理、CFR/VFR、seek、采样索引、旋转/SAR/DAR/颜色、帧/PCM lease、背压、动态格式 epoch 和结构化错误；全部纳秒结果直接使用 A-012 `TimeNs`，未建立同义时间模型。已建立 10 个 CC0 合成/固定字节样例配方和 28 个精确时间向量，未执行 T-018/T-019。
 - 成果与验证证据：[A-014 0.2：媒体时间、流、缓冲与黄金样例契约](artifacts/A-014-media-time-buffer-and-golden-contract.md)，状态 draft；[fixtures-v1.json](../../tests/golden/media/fixtures-v1.json)、[manifest 验证器](../../tests/golden/media/Test-GoldenMediaManifest.ps1)、[可复现生成器](../../tests/golden/media/Generate-GoldenMedia.ps1)和[许可声明](../../tests/golden/media/LICENSE.md)。T-018 使用固定 FFmpeg 后已扩展并实际生成 12 个样例、30 个时间向量及真实媒体 SHA-256/ffprobe 证据；`mediaContractVersion` 仍为 0.1.0，既有向量语义未变。
-- 阻塞与下一位行动人：本任务无阻塞且已完成。后续明确授权的 T-018 亦已完成；H-004 发起人 architect-01 可核对本交付。T-019 保持 `todo`，须等待后续明确启动。
-- 更新日期：2026-09-09。
+- 阻塞与下一位行动人：本任务无阻塞且已完成。后续明确授权的 T-018、T-019 亦已完成；H-004 发起人 architect-01 可核对完整交付。
+- 更新日期：2026-09-12。
 
 ## T-016：实现 worker、版本化 IPC、项目存储与恢复骨架
 - 负责人：core-systems-engineer-cpp-01

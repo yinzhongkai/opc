@@ -17,8 +17,8 @@
 | A-011 | [一期 MVP 完整研发编制与任务计划](A-011-complete-mvp-engineering-staffing-and-task-plan.md) | architect-01 | T-023 | 0.1 | draft | 尚无 |
 | A-012 | [核心时间、事件、修订与事务契约 0.x](A-012-core-domain-contract-0x.md) | core-systems-engineer-cpp-01 | T-014 | 0.1 | draft | 尚无 |
 | A-013 | [Windows x64 CMake/Ninja 工程与 CI 骨架](A-013-windows-x64-cmake-ci-skeleton.md) | build-engineer-windows-qt-01 | T-013 | 0.2 | draft | 尚无 |
-| A-014 | [媒体时间、流、缓冲与黄金样例契约 0.x](A-014-media-time-buffer-and-golden-contract.md) | multimedia-engineer-ffmpeg-01 | T-017 | 0.3 | draft | 尚无 |
-| A-015 | [FFmpeg 媒体探测、解码、时间映射与代理管线](A-015-ffmpeg-media-pipeline.md) | multimedia-engineer-ffmpeg-01 | T-018 | 0.2 | draft | 尚无 |
+| A-014 | [媒体时间、流、缓冲与黄金样例契约 0.x](A-014-media-time-buffer-and-golden-contract.md) | multimedia-engineer-ffmpeg-01 | T-017 | 0.4 | draft | 尚无 |
+| A-015 | [FFmpeg 媒体探测、解码、时间映射与代理管线](A-015-ffmpeg-media-pipeline.md) | multimedia-engineer-ffmpeg-01 | T-018 | 0.3 | draft | 尚无 |
 | A-016 | [C++/Qt 测试策略、需求追踪与可复现规则](A-016-cpp-qt-test-strategy-and-traceability.md) | tester-cpp-qt-01 | T-020 | 0.1 | draft | 尚无 |
 | A-017 | [Windows headless 契约测试入口与证据](A-017-windows-headless-contract-test-entry-and-evidence.md) | tester-cpp-qt-01 | T-021 | 0.2 | draft | 尚无 |
 | A-018 | [音频 DSP PCM、特征、候选与测试音色契约 0.x](A-018-audio-dsp-pcm-feature-candidate-contract.md) | audio-dsp-engineer-01 | T-030 | 0.2 | draft | 尚无 |
@@ -29,6 +29,7 @@
 | A-023 | [Qt Quick/QML 信息架构、交互线框与基础设计系统](A-023-qt-quick-ui-information-architecture-and-design-system.md) | ui-engineer-qt-quick-01 | T-024 | 0.1 | draft | 尚无 |
 | A-024 | [Qt Quick 工作区与版本化 ViewModel 桥接实现](A-024-qt-quick-workspace-and-viewmodel-bridge.md) | ui-engineer-qt-quick-01 | T-025 | 0.1 | draft | 尚无 |
 | A-025 | [Qt Quick 离屏渲染、降级与一致性测量](A-025-qt-offscreen-rendering-and-measurements.md) | graphics-engineer-qt-scenegraph-01 | T-035 | 0.1 | draft | 尚无 |
+| A-026 | [预览同步与安全导出事务](A-026-preview-synchronization-and-safe-export.md) | multimedia-engineer-ffmpeg-01 | T-019 | 0.1 | draft | 尚无 |
 
 ## 正文元信息样式（不是真实成果）
 
