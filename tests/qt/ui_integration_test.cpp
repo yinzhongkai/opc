@@ -7,6 +7,7 @@
 #include <QSignalSpy>
 #include <QTemporaryDir>
 #include <QTest>
+#include <QTimer>
 #include <QUrl>
 
 #include <cmath>
@@ -18,12 +19,14 @@ namespace {
 
 namespace ui = space_rhythm::ui;
 
-ui::IntegratedWorkspaceOptions integrated_options(std::uint32_t worker_delay_ms = 0)
+ui::IntegratedWorkspaceOptions integrated_options(std::uint32_t worker_delay_ms = 0,
+                                                   std::uint32_t project_io_delay_ms = 0)
 {
     ui::IntegratedWorkspaceOptions options;
     options.headless = true;
     options.worker_executable_path = QStringLiteral(SPACE_RHYTHM_T026_WORKER_EXE);
     options.worker_test_delay_ms = worker_delay_ms;
+    options.project_io_test_delay_ms = project_io_delay_ms;
     return options;
 }
 
@@ -159,6 +162,35 @@ private slots:
         const auto last_row = view_model.tasks()->rowCount() - 1;
         QCOMPARE(view_model.tasks()->index(last_row, 0).data(ui::TaskListModel::StatusRole),
                  QStringLiteral("cancelled"));
+    }
+
+    void cancelledWorkerJobDoesNotPoisonPreviewAfterReconnect()
+    {
+        ui::ApplicationViewModel view_model(ui::make_integrated_workspace_service(
+            integrated_options(2'000)));
+        view_model.createProject();
+        view_model.importAsset(QUrl::fromLocalFile(
+            QStringLiteral(SPACE_RHYTHM_T026_MEDIA_FILE)).toString());
+        QTRY_COMPARE_WITH_TIMEOUT(view_model.workspaceState(), QStringLiteral("idle"), 30'000);
+
+        view_model.startAnalysis();
+        QCOMPARE(view_model.workspaceState(), QStringLiteral("running"));
+        view_model.cancelActiveTask();
+        QCOMPARE(view_model.workspaceState(), QStringLiteral("cancelling"));
+        QTRY_COMPARE_WITH_TIMEOUT(view_model.workspaceState(), QStringLiteral("idle"), 10'000);
+        QTRY_VERIFY_WITH_TIMEOUT(!view_model.workerConnected(), 5'000);
+
+        view_model.reconnectWorker();
+        QTRY_VERIFY_WITH_TIMEOUT(view_model.workerConnected(), 5'000);
+        QTRY_COMPARE_WITH_TIMEOUT(view_model.workspaceState(), QStringLiteral("idle"), 5'000);
+        view_model.addTimelineEvent(160.0, 640.0);
+        view_model.enableDevelopmentAudioMapping();
+        QVERIFY(view_model.developmentAudioMappingEnabled());
+        view_model.togglePreview();
+        QTRY_COMPARE_WITH_TIMEOUT(view_model.previewState(), QStringLiteral("playing"), 10'000);
+        QCOMPARE(view_model.workspaceState(), QStringLiteral("idle"));
+        QVERIFY(view_model.errorStage().isEmpty());
+        view_model.stopPreview();
     }
 
     void activeWorkerDisconnectIsRecoverableWithoutPublishingLateResults()
@@ -367,6 +399,65 @@ private slots:
         QCOMPARE(reader.route(), QStringLiteral("workspace"));
         QVERIFY(reader.renderSnapshot() != nullptr);
         QVERIFY(!reader.dirty());
+    }
+
+    void largeProjectOpenStaysResponsiveAndFailedOpenCanRetry()
+    {
+        QTemporaryDir work;
+        QVERIFY(work.isValid());
+        const auto large_path = work.filePath(QStringLiteral("large.srp"));
+        const auto recovery_path = work.filePath(QStringLiteral("recover.srp"));
+
+        space_rhythm::system::ProjectDocument document;
+        document.app_version = "0.1.0";
+        document.timeline.project_id = space_rhythm::core::ProjectId{"large-project"};
+        document.timeline.tracks.push_back(
+            {space_rhythm::core::TrackId{"track-0"}, 0, std::string{"Main"}, {}});
+        document.settings["project.title"] = "Large project";
+        document.settings["test.largePayload"] = std::string(8U * 1024U * 1024U, 'x');
+        space_rhythm::system::ProjectStore store;
+        const auto saved = store.save(
+            std::filesystem::path{large_path.toStdWString()}, document);
+        QVERIFY(saved.has_value());
+        QVERIFY(QFileInfo(large_path).size() > 8LL * 1024LL * 1024LL);
+
+        QFile corrupt(recovery_path);
+        QVERIFY(corrupt.open(QIODevice::WriteOnly | QIODevice::Truncate));
+        QCOMPARE(corrupt.write("{", 1), 1);
+        corrupt.close();
+
+        ui::ApplicationViewModel reader(ui::make_integrated_workspace_service(
+            integrated_options(0, 600)));
+        bool heartbeat = false;
+        QTimer::singleShot(25, &reader, [&heartbeat] { heartbeat = true; });
+        reader.openProjectFrom(QUrl::fromLocalFile(large_path).toString());
+        QCOMPARE(reader.workspaceState(), QStringLiteral("loading"));
+        QTRY_VERIFY_WITH_TIMEOUT(heartbeat, 250);
+        QCOMPARE(reader.workspaceState(), QStringLiteral("loading"));
+        QTRY_COMPARE_WITH_TIMEOUT(reader.workspaceState(), QStringLiteral("idle"), 10'000);
+        QCOMPARE(reader.projectTitle(), QStringLiteral("Large project"));
+
+        reader.openProjectFrom(QUrl::fromLocalFile(recovery_path).toString());
+        QCOMPARE(reader.workspaceState(), QStringLiteral("loading"));
+        QTRY_COMPARE_WITH_TIMEOUT(reader.workspaceState(), QStringLiteral("failed"), 10'000);
+        QVERIFY(reader.errorStage().startsWith(QStringLiteral("project.")));
+
+        QFile source(large_path);
+        QVERIFY(source.open(QIODevice::ReadOnly));
+        QVERIFY(corrupt.open(QIODevice::WriteOnly | QIODevice::Truncate));
+        QCOMPARE(corrupt.write(source.readAll()), QFileInfo(large_path).size());
+        corrupt.close();
+        source.close();
+
+        heartbeat = false;
+        QTimer::singleShot(25, &reader, [&heartbeat] { heartbeat = true; });
+        reader.retryFailedOperation();
+        QCOMPARE(reader.workspaceState(), QStringLiteral("loading"));
+        QTRY_VERIFY_WITH_TIMEOUT(heartbeat, 250);
+        QCOMPARE(reader.workspaceState(), QStringLiteral("loading"));
+        QTRY_COMPARE_WITH_TIMEOUT(reader.workspaceState(), QStringLiteral("idle"), 10'000);
+        QCOMPARE(reader.projectTitle(), QStringLiteral("Large project"));
+        QVERIFY(reader.errorStage().isEmpty());
     }
 };
 

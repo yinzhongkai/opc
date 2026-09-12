@@ -4,13 +4,13 @@
 - 成果 ID：A-027
 - 负责人：ui-engineer-qt-quick-01
 - 关联任务：T-026
-- 版本：0.2
+- 版本：0.3
 - 更新日期：2026-09-12
 - 状态：draft
 - 适用范围：一期 Windows x64 Qt Quick 应用的真实核心、系统、媒体、音频、播放同步、屏上/离屏渲染、项目保存及测试导出格式集成；覆盖完整用户路径、时间线事务、作业取消/断线恢复和 UI 自动化。
 - 来源及输入版本：D-001～D-008 confirmed；A-012 0.1、A-014 0.4、A-015 0.3、A-018 0.2、A-019 0.2、A-020 0.1、A-021 0.1、A-022 0.1、A-023 0.1、A-024 0.1、A-025 0.1、A-026 0.1；T-015、T-016、T-018、T-019、T-025、T-032、T-034、T-035 completed。
 - 批准依据：尚无。任务完成不自动批准本成果；视觉风格、产品文案、产品默认音色、发布导出格式、产品默认模板参数和可访问性/性能阈值仍待确认。
-- 版本记录：2026-09-12，0.2，按 architect-01 的 `T026-DEFECT-001`～`004` 修订手势事务、真实 UI/worker 双进程、事件音轨闭环及非阻塞保存/分块导出；0.1，首次接入真实六阶段路径、时间线事务、T-019 时钟、作业恢复、冻结快照及安全导出。
+- 版本记录：2026-09-12，0.3，按 architect-01 的 `T026-DEFECT-005`、`006` 将 worker 作业与试听准备取消域隔离，并把项目加载迁移到可丢弃迟到结果的后台 IO；0.2，按 `T026-DEFECT-001`～`004` 修订手势事务、真实 UI/worker 双进程、事件音轨闭环及非阻塞保存/分块导出；0.1，首次接入真实六阶段路径、时间线事务、T-019 时钟、作业恢复、冻结快照及安全导出。
 
 ## 1. 修订结论
 
@@ -24,6 +24,8 @@
 4. 产品默认音色仍待确认，初始状态不建立静默默认 mapping。用户只有显式选择“启用 CC0 开发音色映射”后，C++ 才装载 A-018 三个登记测试音色，并固定把 onset/beat/manual 映射到 click/low-pulse/noise-hit。试听和导出消费同一事件、mapping、音色 hash 与 T-032 mixer；试听不再播放解码源 PCM。存在设备时 `QtAudioPreview::processed_frames()` 驱动 T-019 audio-sample 主时钟，headless/设备不可用时使用其 C++ monotonic 回退。
 5. 主保存与 autosave 均复制不可变 `ProjectDocument` 后在后台执行；按 IO epoch 串行化主保存、autosave 与 session marker，旧 autosave 不会覆盖较新的 clean/dirty 事实。`post()` 返回时保存仍未发布完成。
 6. 导出先由 T-019 `freeze_export` 冻结媒体选择、RenderSnapshot、事件音频参数/音色 hash、范围、帧率和 seed。T-035 逐帧事件泵保持 GUI 响应；视频完成后在后台以 4096 frame 块调用 T-032 `render_chunk` 并流式写入 `ExportSession`，不会在 GUI 线程生成整段 PCM，取消仍删除临时文件并保留既有目标。
+7. worker 作业只持有 `active_job_cancellation_`，事件试听准备只持有 `preview_cancellation_` 和独立操作序号。取消导入/分析不会污染重连后的试听；新试听、停止试听、切换/重建项目会取消并失效旧试听结果。
+8. `open_project()` 立即发布 `loading` 后把 `ProjectStore::load()`、文件可写性检查和可选测试延迟全部放入后台 IO；GUI 线程只应用同一 workspace generation 的完成结果。打开错误保留原工作区并可由“重试”走相同异步命令恢复。
 
 发布容器与编码器尚未决定，界面继续明确当前输出为 T-019 `testOnly` NUT/raw RGBA/PCM 开发格式。
 
@@ -35,7 +37,7 @@
 |---|---|---|
 | 媒体探测、解码、DSP 分析 | 独立 `space-rhythm-worker` | 小型进度 envelope + 已校验结果文件引用 |
 | 核心事务、ViewModel 发布、QQuickRenderControl 逐帧调用 | GUI 线程的短事务/事件泵 | 不可变 snapshot 与格式化展示值 |
-| 项目主保存、autosave、marker | 串行后台 IO | 成功/结构化错误；只在同修订时 mark saved |
+| 项目打开、主保存、autosave、marker | 串行后台 IO | 成功/结构化错误；加载拒绝迟到 generation，保存只在同修订时 mark saved |
 | 事件试听整段准备 | 后台线程 | T-032 事件 PCM；过期 revision 丢弃 |
 | 导出音频混音、编码 finish/commit | 后台线程，4096-frame 分块 | 进度、取消或原子完成 |
 
@@ -59,7 +61,7 @@ QML 中没有 `Animation`、`Timer` 或 frame/time/revision 运算充当权威�
 
 导入、分析和导出继续登记到 `JobCoordinator`，展示 queued/running/cancelling/succeeded/failed/cancelled 与 ppm 进度。worker QProcess 的 `finished/errorOccurred` 是断线事实源；测试故障注入命令实际 kill 外部进程，不再直接伪造 ViewModel 失败。断线保留项目和原素材、拒绝迟到结果并提供重启 worker；重试使用新 request/job ID。
 
-主保存、autosave、结果 codec、T-032/T-035/T-019 错误都映射到版本化 `UiErrorDto`。只读状态不提交核心或磁盘写入，但可检查和在具备显式音频 mapping 时预览/导出冻结快照。
+项目打开、主保存、autosave、结果 codec、T-032/T-035/T-019 错误都映射到版本化 `UiErrorDto`。项目打开失败记录原路径；用户修复或替换文件后，“重试”重新发起后台加载，不在 GUI 回调中读盘。只读状态不提交核心或磁盘写入，但可检查和在具备显式音频 mapping 时预览/导出冻结快照。
 
 ## 5. 保留项
 

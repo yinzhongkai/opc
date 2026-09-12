@@ -187,7 +187,8 @@ public:
 
     ~IntegratedWorkspaceService() override
     {
-        cancellation_.cancel();
+        active_job_cancellation_.cancel();
+        preview_cancellation_.cancel();
         worker_expected_stop_ = true;
         if (worker_process_.state() != QProcess::NotRunning) {
             worker_process_.kill();
@@ -395,6 +396,9 @@ private:
 
     void reset_project(const QString& title)
     {
+        preview_cancellation_.cancel();
+        preview_cancellation_ = core::CancellationToken{};
+        ++preview_operation_sequence_;
         core::TimelineSnapshot initial;
         initial.project_id = core::ProjectId{"project-ui"};
         initial.tracks.push_back(
@@ -567,7 +571,7 @@ private:
             active_job_.reset();
             return false;
         }
-        cancellation_ = core::CancellationToken{};
+        active_job_cancellation_ = core::CancellationToken{};
         snapshot_.state = WorkspaceState::running;
         snapshot_.error.reset();
         publish();
@@ -1091,36 +1095,67 @@ private:
 
     void open_project(const QString& path_value)
     {
+        last_failed_kind_ = UiCommandKind::open_project_from;
+        last_failed_argument_ = path_value;
+        preview_cancellation_.cancel();
+        preview_cancellation_ = core::CancellationToken{};
+        ++preview_operation_sequence_;
+        preview_timer_.stop();
+        audio_preview_.stop();
+        audio_clock_active_ = false;
+        preview_clock_.reset();
+        preview_pcm_.reset();
+        preview_pcm_revision_.reset();
+        const auto generation = ++workspace_generation_;
+        const auto path = local_path(path_value);
         snapshot_.route = UiRoute::workspace;
         snapshot_.state = WorkspaceState::loading;
+        snapshot_.preview_state = PreviewState::stopped;
+        snapshot_.error.reset();
         publish();
-        QTimer::singleShot(0, this, [this, path_value] {
-            const auto loaded = project_store_.load(local_path(path_value));
-            if (!loaded) {
-                fail(ui_error(loaded.error()));
-                return;
+        workers_.emplace_back([this, generation, path, path_value] {
+            if (options_.project_io_test_delay_ms > 0) {
+                std::this_thread::sleep_for(
+                    std::chrono::milliseconds{options_.project_io_test_delay_ms});
             }
-            timeline_ = std::make_unique<core::Timeline>(loaded.value().document.timeline);
-            snapshot_.project_id = QString::fromStdString(
-                loaded.value().document.timeline.project_id.value);
-            const auto title = loaded.value().document.settings.find("project.title");
-            snapshot_.project_title = title == loaded.value().document.settings.end()
-                                          ? QFileInfo(path_value).completeBaseName()
-                                          : QString::fromStdString(title->second);
-            snapshot_.last_saved_path = path_value;
-            snapshot_.read_only = !QFileInfo(QString::fromStdWString(
-                local_path(path_value).wstring())).isWritable();
-            snapshot_.state = stable_state();
-            const auto media_path = loaded.value().document.settings.find("media.path");
-            if (media_path != loaded.value().document.settings.end()) {
-                start_import(QStringLiteral("open-media-%1")
-                                 .arg(QDateTime::currentMSecsSinceEpoch()),
-                             QString::fromStdWString(
-                                 std::filesystem::path{media_path->second}.wstring()));
-                return;
-            }
-            rebuild_render_snapshot();
-            publish();
+            system::ProjectStore store;
+            auto loaded = [&] {
+                const std::scoped_lock lock(project_io_mutex_);
+                return store.load(path);
+            }();
+            const bool read_only = !QFileInfo(QString::fromStdWString(path.wstring()))
+                                        .isWritable();
+            QMetaObject::invokeMethod(this, [this, generation, path_value,
+                                             loaded = std::move(loaded), read_only]() mutable {
+                if (generation != workspace_generation_) {
+                    return;
+                }
+                if (!loaded) {
+                    fail(ui_error(loaded.error()));
+                    return;
+                }
+                timeline_ = std::make_unique<core::Timeline>(
+                    loaded.value().document.timeline);
+                snapshot_.project_id = QString::fromStdString(
+                    loaded.value().document.timeline.project_id.value);
+                const auto title = loaded.value().document.settings.find("project.title");
+                snapshot_.project_title = title == loaded.value().document.settings.end()
+                                              ? QFileInfo(path_value).completeBaseName()
+                                              : QString::fromStdString(title->second);
+                snapshot_.last_saved_path = path_value;
+                snapshot_.read_only = read_only;
+                snapshot_.state = stable_state();
+                const auto media_path = loaded.value().document.settings.find("media.path");
+                if (media_path != loaded.value().document.settings.end()) {
+                    start_import(QStringLiteral("open-media-%1")
+                                     .arg(QDateTime::currentMSecsSinceEpoch()),
+                                 QString::fromStdWString(
+                                     std::filesystem::path{media_path->second}.wstring()));
+                    return;
+                }
+                rebuild_render_snapshot();
+                publish();
+            }, Qt::QueuedConnection);
         });
     }
 
@@ -1749,12 +1784,15 @@ private:
         const auto timbres = development_timbres_;
         const auto parameters = development_audio_parameters_;
         const auto generation = workspace_generation_;
-        const auto cancellation = cancellation_;
+        preview_cancellation_.cancel();
+        preview_cancellation_ = core::CancellationToken{};
+        const auto cancellation = preview_cancellation_;
+        const auto preview_operation = ++preview_operation_sequence_;
         snapshot_.preview_state = PreviewState::priming;
         snapshot_.interaction_status_text = QStringLiteral("正在后台生成事件试听音轨");
         publish();
         workers_.emplace_back([this, timeline, range, revision, timbres, parameters,
-                               generation, cancellation] {
+                               generation, cancellation, preview_operation] {
             std::optional<audio_render::RenderedPcm> pcm;
             std::optional<core::ErrorInfo> error;
             const auto duration = range.end_ns - range.start_ns;
@@ -1778,13 +1816,17 @@ private:
                     pcm = rendered.value();
                 }
             }
-            QMetaObject::invokeMethod(this, [this, generation, revision, pcm, error] {
+            QMetaObject::invokeMethod(this, [this, generation, revision, pcm, error,
+                                             preview_operation] {
                 if (generation != workspace_generation_ ||
+                    preview_operation != preview_operation_sequence_ ||
                     timeline_->snapshot()->timeline_revision != revision) {
-                    snapshot_.preview_state = PreviewState::stopped;
-                    snapshot_.interaction_status_text =
-                        QStringLiteral("时间线已更新；试听准备结果已丢弃");
-                    publish();
+                    if (preview_operation == preview_operation_sequence_) {
+                        snapshot_.preview_state = PreviewState::stopped;
+                        snapshot_.interaction_status_text =
+                            QStringLiteral("时间线已更新；试听准备结果已丢弃");
+                        publish();
+                    }
                     return;
                 }
                 if (error) {
@@ -1976,6 +2018,9 @@ private:
 
     void stop_preview()
     {
+        preview_cancellation_.cancel();
+        preview_cancellation_ = core::CancellationToken{};
+        ++preview_operation_sequence_;
         preview_timer_.stop();
         audio_preview_.stop();
         audio_clock_active_ = false;
@@ -2045,7 +2090,7 @@ private:
         auto session = playback::ExportSession::create(frozen.value(),
                                                        local_path(path_value),
                                                        playback::make_ffmpeg_test_encoder(),
-                                                       &cancellation_);
+                                                       &active_job_cancellation_);
         if (!session) {
             finish_job_failure(request_id, ui_error(session.error()));
             return;
@@ -2081,7 +2126,7 @@ private:
             export_timer_.stop();
             return;
         }
-        if (cancellation_.is_cancelled()) {
+        if (active_job_cancellation_.is_cancelled()) {
             state.renderer->cancel();
             state.session->cancel();
             const auto request_id = state.request_id;
@@ -2091,7 +2136,8 @@ private:
             return;
         }
         if (state.next_frame < state.frame_count) {
-            const auto rendered = state.renderer->render_frame(state.next_frame, &cancellation_);
+            const auto rendered = state.renderer->render_frame(
+                state.next_frame, &active_job_cancellation_);
             if (!rendered) {
                 export_failure(rendered.error());
                 return;
@@ -2122,7 +2168,7 @@ private:
         export_timer_.stop();
         const auto shared_state = export_state_;
         const auto timbres = development_timbres_;
-        const auto cancellation = cancellation_;
+        const auto cancellation = active_job_cancellation_;
         workers_.emplace_back([this, shared_state, timbres, cancellation] {
             std::optional<core::ErrorInfo> error;
             if (shared_state->frozen->includes_audio()) {
@@ -2224,7 +2270,7 @@ private:
             fail(ui_error(cancelled.error()));
             return;
         }
-        cancellation_.cancel();
+        active_job_cancellation_.cancel();
         snapshot_.state = WorkspaceState::cancelling;
         publish();
         if (active_job_uses_worker_ &&
@@ -2254,6 +2300,8 @@ private:
             start_analysis(request_id);
         } else if (last_failed_kind_ == UiCommandKind::export_project_to) {
             start_export(request_id, last_failed_argument_);
+        } else if (last_failed_kind_ == UiCommandKind::open_project_from) {
+            open_project(last_failed_argument_);
         } else {
             publish();
         }
@@ -2289,12 +2337,13 @@ private:
     std::optional<core::TimelineRevision> preview_pcm_revision_;
     audio_render::RenderParameters development_audio_parameters_;
     std::vector<audio_render::Timbre> development_timbres_;
-    system::ProjectStore project_store_;
     system::JobCoordinator coordinator_;
     std::map<std::string, JobMeta> jobs_;
     QVector<QString> job_order_;
     std::optional<std::string> active_job_;
-    core::CancellationToken cancellation_;
+    core::CancellationToken active_job_cancellation_;
+    core::CancellationToken preview_cancellation_;
+    std::uint64_t preview_operation_sequence_{};
     std::vector<std::jthread> workers_;
     QProcess worker_process_;
     QString worker_server_name_;

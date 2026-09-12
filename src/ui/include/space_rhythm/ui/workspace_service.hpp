@@ -243,6 +243,7 @@ struct IntegratedWorkspaceOptions {
     bool headless{false};
     QString worker_executable_path;
     std::uint32_t worker_test_delay_ms{};
+    std::uint32_t project_io_test_delay_ms{};
 };
 
 // Real core/media/audio/rendering adapter. The options are primarily useful to
