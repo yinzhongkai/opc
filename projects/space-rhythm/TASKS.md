@@ -158,16 +158,16 @@
 
 ## T-026：完成时间线编辑、作业状态、错误恢复和用户路径集成
 - 负责人：ui-engineer-qt-quick-01
-- 状态：todo
-- 授权来源与日期：本会话用户于 2026-09-09 要求补充系统架构师判断的新增成员及成员任务并提交。
+- 状态：completed
+- 授权来源与日期：本会话用户于 2026-09-12 明确要求执行 T-026、接入现有真实能力、提交自测证据并更新 T-026/H-006；原任务由 2026-09-09 编制请求登记。
 - 目标与范围：完成事件时间线、播放头、参数、作业进度/取消、错误/恢复界面及导入—分析—编辑—试听—保存—导出用户路径；不在 UI 内实现算法或媒体循环。
-- 输入与依赖：T-015、T-016、T-018、T-025、T-034；算法和音频可先用 mock；A-011 0.1。完成后的用户路径由端到端质量任务验证，该下游关系不是本任务前置。
+- 输入与依赖：T-015、T-016、T-018、T-019、T-025、T-032、T-034、T-035 已完成；A-011 0.1、A-024 0.1、A-025 0.1、A-026 0.1，以及当前核心、系统、媒体、音频和渲染公开契约。完成后的用户路径由端到端质量任务验证，该下游关系不是本任务前置。
 - 优先级：未设定（架构建议：核心和媒体接口可用后启动）。
 - 完成条件与确认方式：支持缩放/滚动/拖动/锁定/偏移、播放头、键盘及撤销重做；作业状态可取消且不阻塞 UI；错误含阶段、项目安全、恢复动作和诊断 ID；高 DPI、窗口缩放、焦点和可访问性具备检查；提交 Qt Quick/UI 集成自测和用户路径记录。
-- 进展：任务已登记，尚未由负责人会话接收。
-- 成果与验证证据：[A-011 0.1](artifacts/A-011-complete-mvp-engineering-staffing-and-task-plan.md)；实际界面暂无。
-- 阻塞与下一位行动人：等待 T-015/T-016/T-018/T-025/T-034；ui-engineer-qt-quick-01 先执行 T-024。
-- 更新日期：2026-09-09。
+- 进展：2026-09-12，用户明确要求执行 T-026。ui-engineer-qt-quick-01 将应用默认注入切换为 UI bridge 0.2.0/schema 2 的真实 `IntegratedWorkspaceService`，串联 MediaSource 探测/PCM 解码、PcmNarrowAdapter/Analyzer、核心 Merge/Move/Lock/BatchOffset/undo/redo、T-019 PreviewSynchronizer、ProjectStore、不可变 RenderSnapshot、双 SceneGraphRenderItem、T-035 软件/GPU 离屏帧、T-032 PCM 及 T-019 安全导出事务。解码源 PCM 经 QAudioSink 播放时以实际 `processed_frames()` 驱动 T-019 audio-sample 主时钟，设备不可用/headless 才使用 C++ monotonic 回退。QML 新增原生文件选择、时间线单选/Ctrl 多选/缩放/平移/拖动/锁定/批量偏移、取消确认、worker 重连和稳定可访问锚点；未暴露 64 位权威值，也未使用 QML 动画计时。真实集成程序最终 7/7，Qt/QML headless 4/4，T-019 9/9、核心/系统 10/10、媒体 5/5、DSP 20/20、QAudio 1/1、软件离屏 1/1。固定 FFmpeg CLI 的单独 golden fixture 启动仍受既有 WDAC/SAC `0xC0E90002` 限制，已如实保留，未冒充 CI/Release 门禁通过。
+- 成果与验证证据：[A-027 0.1：Qt Quick 真实服务、时间线与安全导出集成](artifacts/A-027-qt-quick-real-workflow-integration.md)及 [T-026 验证摘要](evidence/T-026/verification-summary.md)。
+- 阻塞与下一位行动人：T-026 范围内无实现阻塞并按完成条件结束。视觉风格、产品文案、产品默认音色、发布导出格式、产品默认视觉模板参数、设备矩阵及可访问性/性能门槛继续待确认；当前导出明确为 T-019 `testOnly` 开发格式。H-006 已补齐三阶段证据并保持 `accepted`，等待发起人 architect-01 核对后决定关闭；不自动启动下游 T-022。
+- 更新日期：2026-09-12。
 
 ## T-025：实现 Qt Quick 工作区、页面骨架与 C++ ViewModel 桥接
 - 负责人：ui-engineer-qt-quick-01

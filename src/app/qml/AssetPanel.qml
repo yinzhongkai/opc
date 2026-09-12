@@ -3,6 +3,7 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import QtQuick.Dialogs
 
 Frame {
     id: root
@@ -32,7 +33,7 @@ Frame {
                     enabled: !root.viewModel.readOnly
                     Accessible.name: qsTr("添加素材")
                     Accessible.description: enabled ? qsTr("选择视频或音频素材") : qsTr("项目只读")
-                    onClicked: root.viewModel.activateStage("import")
+                    onClicked: importDialog.open()
                 }
             }
         }
@@ -89,5 +90,15 @@ Frame {
                 }
             }
         }
+    }
+
+    FileDialog {
+        id: importDialog
+        objectName: "assetImportDialog"
+        title: qsTr("导入视频或音频")
+        fileMode: FileDialog.OpenFile
+        nameFilters: [qsTr("媒体文件 (*.mp4 *.mkv *.mov *.avi *.wav *.mka *.mp3 *.flac)"),
+                      qsTr("所有文件 (*)")]
+        onAccepted: root.viewModel.importAsset(selectedFile.toString())
     }
 }

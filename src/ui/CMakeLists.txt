@@ -2,6 +2,7 @@ add_library(space_rhythm_ui_bridge STATIC
     include/space_rhythm/ui/scene_graph_attachment.hpp
     include/space_rhythm/ui/view_models.hpp
     include/space_rhythm/ui/workspace_service.hpp
+    integrated_workspace_service.cpp
     mock_workspace_service.cpp
     scene_graph_attachment.cpp
     view_models.cpp
@@ -18,10 +19,18 @@ target_link_libraries(space_rhythm_ui_bridge
         SpaceRhythm::System
         SpaceRhythm::RenderingGeometry
         SpaceRhythm::SceneGraph
+        SpaceRhythm::MediaAdapter
+        SpaceRhythm::AudioAnalysis
+        SpaceRhythm::AudioRender
+        SpaceRhythm::PlaybackExport
+        SpaceRhythm::OffscreenRendering
         Qt6::Core
         Qt6::Gui
         Qt6::Qml
         Qt6::Quick
+    PRIVATE
+        SpaceRhythm::AudioPreviewQt
+        Qt6::Multimedia
 )
 space_rhythm_apply_build_policy(space_rhythm_ui_bridge)
 

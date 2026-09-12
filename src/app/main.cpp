@@ -8,13 +8,15 @@
 
 #include <cstdio>
 #include <memory>
+#include <optional>
 
 #include <space_rhythm/ui/scene_graph_attachment.hpp>
 #include <space_rhythm/ui/view_models.hpp>
+#include <space_rhythm/rendering/scene_graph_render_item.hpp>
 
 namespace {
 
-space_rhythm::ui::MockScenario mock_scenario(const QStringList& arguments)
+std::optional<space_rhythm::ui::MockScenario> mock_scenario(const QStringList& arguments)
 {
     constexpr QLatin1StringView prefix{"--ui-scenario="};
     for (const auto& argument : arguments) {
@@ -23,7 +25,17 @@ space_rhythm::ui::MockScenario mock_scenario(const QStringList& arguments)
                 argument.sliced(prefix.size()));
         }
     }
-    return space_rhythm::ui::MockScenario::start;
+    return std::nullopt;
+}
+
+QString option_value(const QStringList& arguments, QLatin1StringView prefix)
+{
+    for (const auto& argument : arguments) {
+        if (argument.startsWith(prefix)) {
+            return argument.sliced(prefix.size());
+        }
+    }
+    return {};
 }
 
 } // namespace
@@ -43,12 +55,24 @@ int main(int argc, char* argv[])
         qputenv("QT_QPA_PLATFORM", "offscreen");
     }
 
+    QGuiApplication::setHighDpiScaleFactorRoundingPolicy(
+        Qt::HighDpiScaleFactorRoundingPolicy::PassThrough);
     QGuiApplication application(argc, argv);
     auto scenario = mock_scenario(QCoreApplication::arguments());
-    if (smoke_requested && scenario == space_rhythm::ui::MockScenario::start) {
+    std::unique_ptr<space_rhythm::ui::WorkspaceService> service;
+    if (smoke_requested && !scenario) {
         scenario = space_rhythm::ui::MockScenario::idle;
     }
-    auto service = space_rhythm::ui::make_mock_workspace_service(scenario);
+    if (scenario) {
+        service = space_rhythm::ui::make_mock_workspace_service(*scenario);
+    } else {
+        const auto arguments = QCoreApplication::arguments();
+        service = space_rhythm::ui::make_integrated_workspace_service({
+            option_value(arguments, QLatin1StringView{"--project="}),
+            option_value(arguments, QLatin1StringView{"--import="}),
+            option_value(arguments, QLatin1StringView{"--export="}),
+            false});
+    }
     space_rhythm::ui::ApplicationViewModel application_view_model(std::move(service));
     QQmlApplicationEngine engine;
     engine.setInitialProperties({
@@ -63,7 +87,15 @@ int main(int argc, char* argv[])
     }
 
     QPointer<QQuickItem> attached_preview_host;
-    const auto attach_preview_if_available = [&engine, &attached_preview_host]() {
+    QPointer<QQuickItem> attached_timeline_host;
+    QPointer<space_rhythm::rendering::SceneGraphRenderItem> preview_item;
+    QPointer<space_rhythm::rendering::SceneGraphRenderItem> timeline_item;
+    const auto synchronize_render_items = [&engine,
+                                           &application_view_model,
+                                           &attached_preview_host,
+                                           &attached_timeline_host,
+                                           &preview_item,
+                                           &timeline_item]() {
         if (engine.rootObjects().isEmpty()) {
             return false;
         }
@@ -73,9 +105,29 @@ int main(int argc, char* argv[])
             return false;
         }
         if (attached_preview_host != preview_host) {
-            [[maybe_unused]] auto* scene_graph_item =
-                space_rhythm::ui::attach_scene_graph_render_item(*preview_host);
+            preview_item = space_rhythm::ui::attach_scene_graph_render_item(*preview_host);
+            preview_item->setObjectName(QStringLiteral("previewSceneGraphRenderItem"));
             attached_preview_host = preview_host;
+        }
+        auto* timeline_host = engine.rootObjects().front()->findChild<QQuickItem*>(
+            QStringLiteral("timelineSceneGraphHost"));
+        if (timeline_host != nullptr && attached_timeline_host != timeline_host) {
+            timeline_item = space_rhythm::ui::attach_scene_graph_render_item(*timeline_host);
+            timeline_item->setObjectName(QStringLiteral("timelineSceneGraphRenderItem"));
+            attached_timeline_host = timeline_host;
+        }
+        const auto render_snapshot = application_view_model.renderSnapshot();
+        const auto viewport = application_view_model.viewportTimeRange();
+        const auto frame = application_view_model.authoritativeFrameIndex();
+        if (preview_item) {
+            preview_item->submit_render_snapshot(render_snapshot);
+            preview_item->set_viewport_time_range(viewport);
+            preview_item->set_frame_index(frame);
+        }
+        if (timeline_item) {
+            timeline_item->submit_render_snapshot(render_snapshot);
+            timeline_item->set_viewport_time_range(viewport);
+            timeline_item->set_frame_index(frame);
         }
         return true;
     };
@@ -83,10 +135,10 @@ int main(int argc, char* argv[])
     QObject::connect(&application_view_model,
                      &space_rhythm::ui::ApplicationViewModel::viewStateChanged,
                      &application,
-                     [&application, attach_preview_if_available]() {
-                         QTimer::singleShot(0, &application, attach_preview_if_available);
+                     [&application, synchronize_render_items]() {
+                         QTimer::singleShot(0, &application, synchronize_render_items);
                      });
-    const bool preview_attached = attach_preview_if_available();
+    const bool preview_attached = synchronize_render_items();
 
     if (smoke_requested) {
         if (!preview_attached) {

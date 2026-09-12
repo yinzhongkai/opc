@@ -128,6 +128,19 @@ UiErrorDto fatal_error()
     };
 }
 
+UiErrorDto recoverable_worker_error()
+{
+    return {
+        QStringLiteral("internal"),
+        QStringLiteral("worker_crashed"),
+        QStringLiteral("worker.transport"),
+        QStringLiteral("ui.worker.disconnected"),
+        QStringLiteral("UI-MOCK-WORKER-001"),
+        true,
+        true,
+    };
+}
+
 class MockWorkspaceService final : public QObject, public WorkspaceService {
 public:
     explicit MockWorkspaceService(MockScenario scenario)
@@ -170,6 +183,10 @@ public:
         case UiCommandKind::open_project:
             begin_project_load(QStringLiteral("节奏实验 01"), true, false);
             break;
+        case UiCommandKind::open_project_from:
+            snapshot_.last_saved_path = command.argument;
+            begin_project_load(QStringLiteral("节奏实验 01"), true, false);
+            break;
         case UiCommandKind::return_to_start:
             snapshot_ = WorkspaceSnapshotDto{};
             snapshot_.template_parameters = waveform_parameters();
@@ -191,6 +208,9 @@ public:
                 publish();
             }
             break;
+        case UiCommandKind::import_asset:
+            begin_mock_import();
+            break;
         case UiCommandKind::cancel_active_task:
             request_cancel();
             break;
@@ -211,7 +231,15 @@ public:
         case UiCommandKind::save_project:
             begin_save();
             break;
+        case UiCommandKind::save_project_to:
+            snapshot_.last_saved_path = command.argument;
+            begin_save();
+            break;
         case UiCommandKind::export_project:
+            begin_export();
+            break;
+        case UiCommandKind::export_project_to:
+            snapshot_.last_export_path = command.argument;
             begin_export();
             break;
         case UiCommandKind::toggle_preview:
@@ -223,10 +251,107 @@ public:
                 publish();
             }
             break;
+        case UiCommandKind::timeline_zoom:
+        case UiCommandKind::timeline_pan:
+            publish();
+            break;
+        case UiCommandKind::timeline_seek:
+            snapshot_.preview_time_ns = 5'000'000'000;
+            publish();
+            break;
+        case UiCommandKind::timeline_select:
+        case UiCommandKind::timeline_toggle_selection:
+            snapshot_.selected_event_id = QStringLiteral("mock-event-1");
+            snapshot_.selected_event_text = QStringLiteral("mock-event-1 · beat · 00:05.000");
+            publish();
+            break;
+        case UiCommandKind::timeline_add_manual_event:
+        case UiCommandKind::timeline_drag_update:
+        case UiCommandKind::batch_offset_selected:
+            apply_mock_edit();
+            break;
+        case UiCommandKind::timeline_drag_begin:
+        case UiCommandKind::timeline_drag_end:
+            break;
+        case UiCommandKind::toggle_selected_event_lock:
+            if (!snapshot_.selected_event_id.isEmpty() && editable()) {
+                snapshot_.selected_event_locked = !snapshot_.selected_event_locked;
+                apply_mock_edit();
+            }
+            break;
+        case UiCommandKind::undo:
+            if (editable() && snapshot_.can_undo) {
+                snapshot_.can_undo = false;
+                snapshot_.can_redo = true;
+                ++snapshot_.timeline_revision;
+                publish();
+            }
+            break;
+        case UiCommandKind::redo:
+            if (editable() && snapshot_.can_redo) {
+                snapshot_.can_undo = true;
+                snapshot_.can_redo = false;
+                ++snapshot_.timeline_revision;
+                publish();
+            }
+            break;
+        case UiCommandKind::reconnect_worker:
+            snapshot_.worker_connected = true;
+            snapshot_.state = snapshot_.read_only ? WorkspaceState::read_only
+                                                  : WorkspaceState::idle;
+            snapshot_.error.reset();
+            publish();
+            break;
+        case UiCommandKind::simulate_worker_disconnect:
+            snapshot_.worker_connected = false;
+            snapshot_.state = WorkspaceState::failed;
+            snapshot_.error = recoverable_worker_error();
+            publish();
+            break;
         }
     }
 
 private:
+    bool editable() const noexcept
+    {
+        return snapshot_.route == UiRoute::workspace && !snapshot_.read_only &&
+               snapshot_.state == WorkspaceState::idle;
+    }
+
+    void apply_mock_edit()
+    {
+        if (!editable()) {
+            return;
+        }
+        ++snapshot_.timeline_revision;
+        snapshot_.dirty = true;
+        snapshot_.can_undo = true;
+        snapshot_.can_redo = false;
+        snapshot_.selected_event_id = QStringLiteral("mock-event-1");
+        snapshot_.selected_event_text = QStringLiteral("mock-event-1 · manual · 00:05.000");
+        publish();
+    }
+
+    void begin_mock_import()
+    {
+        if (!editable()) {
+            return;
+        }
+        snapshot_.state = WorkspaceState::loading;
+        snapshot_.active_stage = QStringLiteral("import");
+        publish();
+        const auto generation = transition_generation_;
+        QTimer::singleShot(0, this, [this, generation]() {
+            if (generation != transition_generation_) {
+                return;
+            }
+            snapshot_.assets = sample_assets();
+            snapshot_.active_stage = QStringLiteral("analyze");
+            snapshot_.state = WorkspaceState::idle;
+            publish();
+        });
+    }
+
     void apply_scenario(MockScenario scenario)
     {
         snapshot_ = WorkspaceSnapshotDto{};

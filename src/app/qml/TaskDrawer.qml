@@ -12,6 +12,7 @@ Frame {
     implicitHeight: Math.max(72, Math.min(180, taskList.contentHeight + 42))
     Accessible.name: qsTr("后台任务抽屉")
     Accessible.description: qsTr("显示排队、运行、取消中、成功、失败和已取消任务")
+    function confirmCancel() { cancelConfirmation.open() }
 
     ColumnLayout {
         anchors.fill: parent
@@ -106,8 +107,8 @@ Frame {
                         enabled: taskDelegate.status === "running" && root.viewModel.canCancel
                         text: taskDelegate.status === "cancelling" ? qsTr("正在取消") : qsTr("取消")
                         Accessible.name: text
-                        Accessible.description: qsTr("请求取消；等待 worker 确认后才进入已取消")
-                        onClicked: root.viewModel.cancelActiveTask()
+                        Accessible.description: qsTr("打开取消确认；worker 确认后才进入已取消")
+                        onClicked: cancelConfirmation.open()
                     }
                     Button {
                         objectName: "taskRetry_" + taskDelegate.requestId
@@ -120,5 +121,20 @@ Frame {
                 }
             }
         }
+    }
+
+    Dialog {
+        id: cancelConfirmation
+        objectName: "taskCancelConfirmationDialog"
+        modal: true
+        title: qsTr("取消正在运行的任务？")
+        standardButtons: Dialog.Yes | Dialog.No
+        contentItem: Label {
+            text: qsTr("已有结果不会发布；项目与原素材保持安全。")
+            wrapMode: Text.WordWrap
+            Accessible.name: text
+            Accessible.role: Accessible.StaticText
+        }
+        onAccepted: root.viewModel.cancelActiveTask()
     }
 }

@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import QtQuick.Dialogs
 
 FocusScope {
     id: root
@@ -111,7 +112,12 @@ FocusScope {
     Shortcut {
         sequence: StandardKey.Save
         enabled: root.viewModel.canSave
-        onActivated: root.viewModel.saveProject()
+        onActivated: {
+            if (root.viewModel.lastSavedPath.length > 0)
+                root.viewModel.saveProject()
+            else
+                shortcutSaveDialog.open()
+        }
     }
     Shortcut {
         sequence: "Space"
@@ -121,6 +127,45 @@ FocusScope {
     Shortcut {
         sequence: "Escape"
         enabled: root.viewModel.canCancel
-        onActivated: root.viewModel.cancelActiveTask()
+        onActivated: taskDrawer.confirmCancel()
+    }
+    Shortcut {
+        sequence: StandardKey.Undo
+        enabled: root.viewModel.canUndo
+        onActivated: root.viewModel.undo()
+    }
+    Shortcut {
+        sequence: StandardKey.Redo
+        enabled: root.viewModel.canRedo
+        onActivated: root.viewModel.redo()
+    }
+    Shortcut {
+        sequence: "Ctrl+Shift+E"
+        enabled: root.viewModel.canExport
+        onActivated: shortcutExportDialog.open()
+    }
+    Shortcut {
+        sequence: "F6"
+        onActivated: timelinePanel.forceActiveFocus(Qt.TabFocusReason)
+    }
+
+    FileDialog {
+        id: shortcutSaveDialog
+        objectName: "shortcutSaveDialog"
+        title: qsTr("保存 Space Rhythm 项目")
+        fileMode: FileDialog.SaveFile
+        defaultSuffix: "srp"
+        nameFilters: [qsTr("Space Rhythm 项目 (*.srp)")]
+        onAccepted: root.viewModel.saveProjectTo(selectedFile.toString())
+    }
+
+    FileDialog {
+        id: shortcutExportDialog
+        objectName: "shortcutExportDialog"
+        title: qsTr("导出冻结快照（开发格式）")
+        fileMode: FileDialog.SaveFile
+        defaultSuffix: "nut"
+        nameFilters: [qsTr("T-019 测试导出 (*.nut)")]
+        onAccepted: root.viewModel.exportProjectTo(selectedFile.toString())
     }
 }

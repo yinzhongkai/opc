@@ -1,6 +1,9 @@
 #pragma once
 
 #include <space_rhythm/core/timeline.hpp>
+#include <space_rhythm/audio/analysis.hpp>
+#include <space_rhythm/audio/render.hpp>
+#include <space_rhythm/media/playback_export.hpp>
 #include <space_rhythm/rendering/geometry_core.hpp>
 #include <space_rhythm/system/runtime.hpp>
 
@@ -15,8 +18,8 @@
 
 namespace space_rhythm::ui {
 
-inline constexpr std::uint32_t bridge_schema_version = 1;
-inline constexpr std::string_view bridge_contract_version{"0.1.0"};
+inline constexpr std::uint32_t bridge_schema_version = 2;
+inline constexpr std::string_view bridge_contract_version{"0.2.0"};
 
 inline QString qt_string(std::string_view value)
 {
@@ -53,6 +56,25 @@ enum class UiCommandKind {
     export_project,
     toggle_preview,
     stop_preview,
+    open_project_from,
+    import_asset,
+    save_project_to,
+    export_project_to,
+    timeline_zoom,
+    timeline_pan,
+    timeline_seek,
+    timeline_select,
+    timeline_add_manual_event,
+    timeline_toggle_selection,
+    timeline_drag_begin,
+    timeline_drag_update,
+    timeline_drag_end,
+    toggle_selected_event_lock,
+    batch_offset_selected,
+    undo,
+    redo,
+    reconnect_worker,
+    simulate_worker_disconnect,
 };
 
 enum class PreviewState {
@@ -82,6 +104,11 @@ struct UiBridgeDescriptor {
     std::uint32_t system_ipc_schema_version{system::ipc_schema_version};
     std::uint32_t project_schema_version{system::project_schema_version};
     QString rendering_contract_version{qt_string(rendering::contract_version)};
+    QString media_contract_version{qt_string(media::contract_version)};
+    QString audio_analysis_contract_version{qt_string(audio::contract_version)};
+    QString audio_render_contract_version{qt_string(audio::render::contract_version)};
+    QString playback_export_contract_version{
+        qt_string(media::playback_export::contract_version)};
 
     bool operator==(const UiBridgeDescriptor&) const = default;
 };
@@ -150,6 +177,17 @@ struct WorkspaceSnapshotDto {
     core::TimeNs preview_time_ns{};
     rendering::FrameIndex frame_index{};
     PreviewState preview_state{PreviewState::stopped};
+    core::TimeRange timeline_range{0, 10'000'000'000};
+    core::TimeRange viewport_range{0, 10'000'000'000};
+    std::shared_ptr<const rendering::RenderSnapshot> render_snapshot;
+    QString selected_event_id;
+    QString selected_event_text;
+    bool selected_event_locked{false};
+    bool can_undo{false};
+    bool can_redo{false};
+    bool worker_connected{true};
+    QString last_saved_path;
+    QString last_export_path;
     QVector<AssetDto> assets;
     QVector<TaskDto> tasks;
     QVector<TemplateParameterDto> template_parameters;
@@ -185,5 +223,18 @@ public:
 [[nodiscard]] MockScenario parse_mock_scenario(QString value) noexcept;
 [[nodiscard]] std::unique_ptr<WorkspaceService> make_mock_workspace_service(
     MockScenario scenario = MockScenario::start);
+
+struct IntegratedWorkspaceOptions {
+    QString project_path;
+    QString import_path;
+    QString export_path;
+    bool headless{false};
+};
+
+// Real core/media/audio/rendering adapter. The options are primarily useful to
+// deterministic headless integration tests; ordinary UI paths arrive through
+// versioned UiCommand values.
+[[nodiscard]] std::unique_ptr<WorkspaceService> make_integrated_workspace_service(
+    IntegratedWorkspaceOptions options = {});
 
 } // namespace space_rhythm::ui
