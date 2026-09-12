@@ -71,12 +71,12 @@
 - 关联任务：T-024、T-025、T-026
 - 期望结果：在自己的项目会话中接收本交接，先把 T-024 更新为 in_progress，形成完整工作流、交互原型和基础设计系统；工程和核心契约就绪后执行 T-025/T-026，可用 mock service 并行，不把媒体或算法重计算放进 QML。
 - 输入与证据：D-001～D-008；A-002 0.2、A-004 0.5、A-005 0.4、A-006 0.1 WP-03、[A-011 0.1](artifacts/A-011-complete-mvp-engineering-staffing-and-task-plan.md)；T-024～T-026。
-- 未完成事项：T-024/T-025/T-026 已完成。视觉风格、产品文案、产品默认音色、发布导出格式、产品默认视觉模板参数、设备矩阵及可访问性/性能门槛仍需产品或对应责任人确认；当前 T-019 NUT/raw RGBA/PCM 仅为 `testOnly` 开发格式。
+- 未完成事项：T-024/T-025 已完成；T-026 已由负责人在 `f792e64` 标记完成，但发起人验收发现 `T026-DEFECT-001`～`004`，须经用户或项目经理明确重开后修复、复测。视觉风格、产品文案、产品默认音色、发布导出格式、产品默认视觉模板参数、设备矩阵及可访问性/性能门槛仍需产品或对应责任人确认；当前 T-019 NUT/raw RGBA/PCM 仅为 `testOnly` 开发格式。
 - 状态：accepted
 - 创建日期：2026-09-09
 - 接收反馈：ui-engineer-qt-quick-01 于 2026-09-09 完成成员会话初始化并确认接收；2026-09-11 用户明确要求继续完成 T-024，并要求 T-025、T-035 不得提前启动；T-024 完成后，用户明确确认 T-025 前置全部满足并授权执行 T-025，同时要求不提前执行 T-026。2026-09-12，用户明确要求执行 T-026，并要求接入现有真实核心、媒体、音频、渲染、T-019 时钟及冻结/安全导出能力。
 - 处理结果与证据：2026-09-11，T-024 已完成并形成 [A-023 0.1](artifacts/A-023-qt-quick-ui-information-architecture-and-design-system.md)，覆盖完整信息架构、线框、状态矩阵、交互规则、可访问性、设计系统和 ViewModel/mock 清单。T-025 随后完成并形成 [A-024 0.1](artifacts/A-024-qt-quick-workspace-and-viewmodel-bridge.md)及 [验证摘要](evidence/T-025/verification-summary.md)：交付启动/工作区/致命错误应用壳层、11 个拆分 QML 组件、UI bridge 0.1.0/schema 1、可替换 `WorkspaceService` 和确定性 mock；QML 不暴露 64 位权威时间/修订/帧，实际 `SceneGraphRenderItem` 由 C++ 挂载。2026-09-12，T-026 完成并形成 [A-027 0.1](artifacts/A-027-qt-quick-real-workflow-integration.md)及 [验证摘要](evidence/T-026/verification-summary.md)：bridge 提升为 0.2.0/schema 2，默认注入真实 service，串联导入—分析—核心编辑—T-019 C++ 预览—原子保存—冻结/离屏/安全导出；覆盖多选批量偏移、锁定、拖动 coalescing、撤销重做、取消确认、活动 worker 断线及迟到结果丢弃。真实集成 7/7、Qt/QML headless 4/4 及关联核心/媒体/音频/渲染回归均通过；固定 FFmpeg CLI 单独启动仍受既有 WDAC/SAC 环境限制并未冒充门禁通过。三项关联任务均已交付，H-006 继续保持 `accepted`，等待发起人 architect-01 核对后关闭。
-- 关闭或取消依据：暂无。
+- 关闭或取消依据：尚未关闭。2026-09-12，发起人 architect-01 核对提交 `f792e64`、A-027 0.1 和 T-026 证据；标准 `ctest -L t026` 中 3 项通过、黄金素材生成仍因已登记的 FFmpeg CLI/WDAC 环境限制失败并使真实工作流未运行，改用仓库既有黄金素材、排除 fixture 自动生成后，UI bridge、真实工作流、普通/1.5× QML 和应用 smoke 共 5/5 通过。但代码审查结论为 `revise`：`T026-DEFECT-001`，事件拖动在每次 pointer move 直接提交 `MoveEvent`，结束仅清状态，缺少 A-023 要求的 ghost、单次松开提交、Escape 取消和基准修订失效处理；seek 同样缺少 pending/ack/取消语义。`T026-DEFECT-002`，导入/分析仍在 UI 进程 `std::jthread` 执行，断线仅由测试命令模拟，未消费 T-016 `LocalIpcClient`/worker 进程，不能作为 D-003 双进程链路或 T-022 的真实前置。`T026-DEFECT-003`，试听播放解码源 PCM；导出以空音色和空 mapping 调用 T-032 mixer，事件全部未映射并产生静音 PCM，不满足视频到节奏音轨的闭环。`T026-DEFECT-004`，项目保存/自动保存和导出末尾整段音频混音仍在 GUI 线程同步执行，违反 `WorkspaceService::post()` 不等待磁盘/渲染工作的契约，也使长素材取消响应和内存有界性缺少保证。上述问题修复前不关闭 H-006，不启动 T-022；既有产品待确认项不作为静默默认值处理。
 
 ## H-005：启动 C++/Qt 测试工作流
 - 发起人：architect-01
