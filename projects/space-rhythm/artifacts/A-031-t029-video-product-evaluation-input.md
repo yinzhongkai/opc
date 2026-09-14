@@ -4,14 +4,14 @@
 - 成果 ID：A-031
 - 负责人：product-manager-01
 - 关联任务：T-039；供 T-029、T-022 使用
-- 版本：0.3
+- 版本：0.4
 - 更新日期：2026-09-14
-- 状态：approved
+- 状态：in_review
 - 适用范围：第一阶段“视频到可编辑节奏音轨”主流程的代表产品数据、人工标注、自然度主观评估及经典视频算法效果/性能门禁输入；不执行算法评估，不批准学习模型或生产发布。
-- 来源及输入版本：本会话用户于 2026-09-14 的直接授权与逐项确认；D-001～D-010 confirmed；A-002 0.2 approved；A-011 0.1、A-016 0.1、A-028 0.2、A-029 0.1、A-030 0.2；H-013、`source-availability-audit-v1.json`、`product-dataset-manifest-v1.json`、`execution-readiness-v2.json`。
-- 批准依据：0.2 由 D-009 confirmed 批准；0.3 的 4 个来源替换和 VFR/慢动作探测目标由 D-010 confirmed 批准。D-009 中未变化的使用边界、基准机、协议和数值门槛保持有效。
-- 协议版本：`productEvaluationInputVersion=0.2.0`
-- 版本记录：2026-09-14，0.2，按 D-009 写入已确认的 B 站来源清单与分区、基准机实测元组、运行条件、逐项门槛和总 gate 规则；0.1 为首次方法稿。2026-09-14，0.3，按 H-013 的实际获取/probe 审计，在同类别和分区内替换 4 个超窗来源，补足声明层 `slow_motion` 配额并指定 3 个 VFR 探测目标；同日由 D-010 确认。T-029 执行人仍须以实际 probe/裁决验证配额，不能把本次来源批准当作实测通过。
+- 来源及输入版本：本会话用户于 2026-09-14 的直接授权与逐项确认；D-001～D-010 confirmed；D-011 proposed；A-002 0.2 approved；A-011 0.1、A-016 0.1、A-028 0.2、A-029 0.1、A-030 0.3；H-013、`product-dataset-manifest-v2.json`、`execution-readiness-v3.json`。
+- 批准依据：0.3 由 D-009、D-010 confirmed 批准。0.4 根据 execution-readiness-v3 的实际 CFR 结果提出独立真实 VFR 原始素材技术集与双 gate，正在等待 D-011 确认；确认前不改变 D-009 的现行 VFR 要求，也不得作为 T-029 已批准输入。
+- 协议版本：`productEvaluationInputVersion=0.3.0-proposed`
+- 版本记录：2026-09-14，0.2，按 D-009 写入已确认的 B 站来源清单与分区、基准机实测元组、运行条件、逐项门槛和总 gate 规则；0.1 为首次方法稿。2026-09-14，0.3，按 H-013 的实际获取/probe 审计，在同类别和分区内替换 4 个超窗来源，补足声明层 `slow_motion` 配额并指定 3 个 VFR 探测目标；同日由 D-010 确认。2026-09-14，0.4，根据 execution-readiness-v3 已证明三个目标平台流均为 CFR 的事实，保留已确认的 40 条 B 站产品主集，提出另建真实 VFR 原始素材技术鲁棒性集；版本待 D-011 确认。
 
 ## 1. 输入状态与不可替代边界
 
@@ -22,8 +22,9 @@
 | 代表视频集要求与 manifest 字段 | `product-defined` | 可据此收集和审计真实产品视频 |
 | 人工标注、复核与修正计量协议 | `product-defined` | 可据此制作标注工具/文件并培训标注者 |
 | “卡点自然” rubric、1～5 尺度和播放条件 | `product-defined` | 可据此构造盲评流程并保存原始评分 |
-| 实际代表产品视频来源、权限边界、配额与分区 | `confirmed-source-manifest` | 0.2 的 36 个已成功来源继续保留；第 8.1 节 4 个替换来源已由 D-010 确认，等待 T-029 实际获取/probe 后形成新版数据 manifest |
-| 基准 Windows 硬件与运行条件 | `confirmed` | 按第 8.2 节复核实际测量签名 |
+| 40 条 B 站代表产品主集 | `confirmed-and-probed` | D-010 的 4 个替换来源及原 36 条均已获取，结构配额通过；实际为 CFR 40、VFR 0，不能承担 VFR gate |
+| 独立真实 VFR 原始素材技术集 | `proposed-missing-actual-media` | 第 8.2 节仅定义准入、配额、分区和证据；D-011 未确认且尚无实际原始素材/hash/probe，不得记为通过 |
+| 基准 Windows 硬件与运行条件 | `confirmed` | 按第 8.3 节复核实际测量签名 |
 | 效果、自然度和性能数值阈值 | `confirmed` | 按第 6～8 节判定；未运行 T-029 前仍为 `not-evaluated` |
 
 T-028 的 10 项 CC0 合成 golden 用于契约、确定性、时间映射和回归测试，不属于目标用户的真实创作素材，禁止计入产品数据规模、自然度评分、人工修正量或产品通过率。Wine 8.0 隔离环境的性能数值也不是已承诺 Windows 基准机结果。
@@ -44,9 +45,9 @@ T-028 的 10 项 CC0 合成 golden 用于契约、确定性、时间映射和回
 
 同一原始视频、连续裁切片段、同一拍摄事件或只做转码/裁剪的近重复内容不得跨 `tuning` 与 `final_evaluation`，以避免内容泄漏。每次评估先冻结 manifest、媒体和标注 hash；发生任何变化须建立新数据集版本，旧结果不覆盖。
 
-### 2.2 必须覆盖的切片
+### 2.2 必须覆盖的切片与数据集归属
 
-每个片段可以有多个标签。最终产品集必须覆盖全部下列切片；具体片段数、总时长和配额由 D-009 确认，任何切片没有达到已确认最低配额时，该切片及总 gate 均为 `not-evaluated`。
+每个片段可以有多个标签。D-009 已确认全部切片均须验证，任何切片没有达到已确认最低配额时，该切片及总 gate 均为 `not-evaluated`。0.4 提议只改变切片由哪套真实数据承载，不删除切片、不降低数量或阈值：40 条 B 站主集承载产品类别、CFR、慢动作及视觉/语义切片；另建的真实 VFR 原始素材技术集承载 VFR 切片。两套数据各自冻结 manifest/hash，结果不得混为一个平均数。
 
 | 维度 | 必须覆盖的切片 | 主要产品风险 |
 |---|---|---|
@@ -58,6 +59,8 @@ T-028 的 10 项 CC0 合成 golden 用于契约、确定性、时间映射和回
 | 负例与质量 | `near_static`、`flash_or_exposure_change`、`motion_blur_or_occlusion`、`low_quality_compression` | 伪候选、低质量输入仍伪装高置信度 |
 | 产品场景 | 用户确认的真实短视频/独立音视频内容类别 | 技术切片覆盖但不代表目标用户工作流 |
 
+D-011 确认前，以上拆分不生效，A-031 0.3/D-009 的现行规则仍适用，T-029 的 VFR gate 继续为 `fail`。确认后，非 VFR 的 18 个视觉/语义切片仍须在 40 条产品主集中各至少 3 条且至少 1 条属于主集 `final_evaluation`；VFR 技术集仍须实际 `vfr>=3` 且至少 1 条属于该技术集的 `final_evaluation`。主集通过不能抵消 VFR 技术集失败，反之亦然。
+
 ### 2.3 每个片段的 manifest 最小字段
 
 | 字段 | 要求 |
@@ -68,6 +71,9 @@ T-028 的 10 项 CC0 合成 golden 用于契约、确定性、时间映射和回
 | `sourceAndUsagePermission` | 来源、权利人/提供人、内部评估或可再分发边界、确认日期 |
 | `durationNs`、`geometry` | 真实时长、宽高、旋转和像素宽高比 |
 | `frameRateMode` | `cfr|vfr`，同时记录探测到的时间基与帧率摘要 |
+| `datasetPurpose` | `product_representative|vfr_technical_robustness`；两个目的的样本、分区和汇总不得混淆 |
+| `sourceOriginalityEvidence` | VFR 技术集记录原始采集设备/软件、容器/编码信息和“未经平台转码或人为造 VFR”的证据；产品主集可写 `platform_transcode` |
+| `sourceFrameTimesSha256` | 对实际输入源流完整解码后的帧时间序列计算 SHA-256；VFR 准入必须先看原始源流，再验证代理保持 |
 | `streamKey` | A-014/A-028 约定的稳定视频流键 |
 | `contentCategories`、`qualityAttributes` | 使用第 2.2 节稳定 token，可多选 |
 | `datasetPartition` | `calibration|tuning|final_evaluation` |
@@ -147,7 +153,7 @@ D-009 已确认聚合和通过阈值；仍必须保存逐评审者、逐片段�
 - 评分紧随播放完成，不显示他人答案。校准片段只用于理解尺度，不计入正式结果。
 - 每个版本分别填写五维评分、总体自然度、直接导出意愿和可选短原因；成对呈现时再记录 `A|B|tie` 偏好，偏好不覆盖单版本评分。
 
-每次会话必须记录：应用/算法/参数/音色映射/数据集/rubric 版本及 hash，Windows edition/build，显示器刷新率与缩放，音频设备与驱动/采样率，系统和应用音量，是否耳机，房间环境，评审者匿名 ID、目标用户画像、随机种子、开始结束时间和中断。评审人数、构成和缺失处理按第 8.3 节执行；实际显示和音频设备在首次会话前冻结为运行证据。
+每次会话必须记录：应用/算法/参数/音色映射/数据集/rubric 版本及 hash，Windows edition/build，显示器刷新率与缩放，音频设备与驱动/采样率，系统和应用音量，是否耳机，房间环境，评审者匿名 ID、目标用户画像、随机种子、开始结束时间和中断。评审人数、构成和缺失处理按第 8.4 节执行；实际显示和音频设备在首次会话前冻结为运行证据。
 
 ### 5.2 人工修正评估
 
@@ -200,16 +206,16 @@ F1 作为 precision/recall 的派生诊断同时报告，但不允许只用一�
 
 经典算法只有在冻结的 `final_evaluation` 上实际违反至少一个已确认效果门槛、且已排除输入质量、标注分歧、媒体时间映射或错误基准环境后，才满足“可以提出可选模型方案”的必要条件。即使满足，也只允许提交收益、性能、许可、CPU/GPU、包体和部署影响比较；引入 ONNX Runtime 或模型文件仍需新决定。
 
-## 8. D-009 已确认基线与 H-013 来源修订
+## 8. D-009 已确认基线、H-013 实测与 D-011 收口提案
 
-用户已于 2026-09-14 对 C-1～C-3 逐项确认。D-009 对 0.2 的确认仍是历史事实；H-013 发现的实际来源失效和 slice 缺口使 0.3 必须重新确认。除第 8.1 节 4 个来源及对应预期覆盖外，C-1 的使用边界/总配额、C-2 和 C-3 均未修改。本节不表示已运行 T-029，也不表示任何效果、自然度、性能或 VFR 配额已经通过。
+用户已于 2026-09-14 对 C-1～C-3 逐项确认，并以 D-010 批准 0.3 的 4 个来源替换。execution-readiness-v3 随后证明 40 条来源全部为 CFR；三个所谓 VFR 目标的平台流和 PTS 保持代理均为 CFR。0.4 因此不再根据标题寻找 VFR，而是提出独立真实原始素材技术集。D-011 未确认前，D-009/D-010 与 A-031 0.3 仍是最后批准基线，VFR gate 保持 `fail`，不得按本提案放宽或改判。
 
 ### 8.1 C-1 代表产品视频
 
 - 交付方式：由 product-manager-01 从 B 站公开页面筛选真实来源，T-029 执行人按下表获取片段并放入用户控制的外部只读目录。
 - 使用边界：用户确认仅用于本项目内部测试，不用于其他用途或对外分发；该确认是产品测试边界，不冒充对第三方权利的法律结论。
 - 分区：`calibration=4`、`tuning=16`、`final_evaluation=20`，每个产品类别 10 条。
-- 时长与配额：每条 20～60 秒，总时长预计 20～30 分钟；第 2.2 节每个技术 slice 至少 3 条，其中至少 1 条属于 `final_evaluation`。
+- 时长与配额：每条 20～60 秒，总时长预计 20～30 分钟；0.4 提议由本主集继续承担全部非 VFR 视觉/语义 slice，每项至少 3 条且至少 1 条属于 `final_evaluation`，VFR 改由第 8.2 节独立技术集承担。
 - 证据边界：允许保存 B 站链接、BV 号、脱敏位置、SHA-256、探测摘要、标注和评分；不得将视频原文件提交到 Git。
 
 来源页面元数据由 product-manager-01 于 2026-09-14 从 B 站公开搜索结果读取。所有片段在自然度评估中静音原音；下表时间窗是相对源视频的播放时间，实际获取后由执行成员用真实时间戳校正并计算媒体 hash。不得以 T-028 合成 golden、`package/` 或其他内容代替。
@@ -229,20 +235,20 @@ F1 作为 precision/recall 的派生诊断同时报告，但不允许只用一�
 | SR-BILI-GAME-001 | calibration | 游戏/动作高光 | [BV1bGYE6XEoF](https://www.bilibili.com/video/BV1bGYE6XEoF/) 原神战斗混剪 | 00:15～01:00 | fast_cut、impact、mixed_global_local |
 | SR-BILI-GAME-002 | tuning | 游戏/动作高光 | [BV17BT2zbEND](https://www.bilibili.com/video/BV17BT2zbEND/) 三角洲高光混剪 | 00:15～01:00 | fast_cut、impact、flash_or_exposure_change |
 | SR-BILI-GAME-003 | final_evaluation | 游戏/动作高光 | [BV14v4y1p7Ki](https://www.bilibili.com/video/BV14v4y1p7Ki/) 1080P60 高光 | 00:15～01:00 | fast_cut、slow_motion、tempo_or_energy_change |
-| SR-BILI-GAME-004 | tuning | 游戏/动作高光 | [BV1jeYq6nEC4](https://www.bilibili.com/video/BV1jeYq6nEC4/) 移动端赛车实况 | 00:15～01:00 | long_take_or_no_cut、global_camera_motion、low_quality_compression、vfr |
+| SR-BILI-GAME-004 | tuning | 游戏/动作高光 | [BV1jeYq6nEC4](https://www.bilibili.com/video/BV1jeYq6nEC4/) 移动端赛车实况 | 00:15～01:00 | long_take_or_no_cut、global_camera_motion、low_quality_compression |
 | SR-BILI-GAME-005 | final_evaluation | 游戏/动作高光 | [BV1z4411K7Jx](https://www.bilibili.com/video/BV1z4411K7Jx/) 游戏高燃混剪 | 00:15～01:00 | fast_cut、stop、reversal |
 | SR-BILI-GAME-006 | tuning | 游戏/动作高光 | [BV1akYZ6vEHz](https://www.bilibili.com/video/BV1akYZ6vEHz/) 4K60 运动游戏实况 | 00:15～01:00 | long_take_or_no_cut、global_camera_motion、repetitive_motion |
 | SR-BILI-GAME-007 | final_evaluation | 游戏/动作高光 | [BV1LkYD6pEVv](https://www.bilibili.com/video/BV1LkYD6pEVv/) 4K60 跑酷实况 | 00:15～01:00 | long_take_or_no_cut、repetitive_motion、tempo_or_energy_change |
 | SR-BILI-GAME-008 | tuning | 游戏/动作高光 | [BV1Kqbw6oEZE](https://www.bilibili.com/video/BV1Kqbw6oEZE/) 4K60 骑行实况 | 00:15～01:00 | global_camera_motion、reversal、motion_blur_or_occlusion |
 | SR-BILI-GAME-009 | final_evaluation | 游戏/动作高光 | [BV1Zxju6PE2c](https://www.bilibili.com/video/BV1Zxju6PE2c/) FPS 无解说实况 | 00:15～01:00 | long_take_or_no_cut、mixed_global_local、impact |
 | SR-BILI-GAME-010 | final_evaluation | 游戏/动作高光 | [BV1dJ411q7f8](https://www.bilibili.com/video/BV1dJ411q7f8/) 1080P60 战场实况 | 00:15～01:00 | global_camera_motion、stop、low_quality_compression |
-| SR-BILI-TRAVEL-001 | calibration | 旅行/风景混剪 | [BV1Ex411H7he](https://www.bilibili.com/video/BV1Ex411H7he/) iPhone 1080p60 扫街 | 00:15～01:00 | slow_cut_or_transition、global_camera_motion、tempo_or_energy_change、vfr |
+| SR-BILI-TRAVEL-001 | calibration | 旅行/风景混剪 | [BV1Ex411H7he](https://www.bilibili.com/video/BV1Ex411H7he/) iPhone 1080p60 扫街 | 00:15～01:00 | slow_cut_or_transition、global_camera_motion、tempo_or_energy_change |
 | SR-BILI-TRAVEL-002 | tuning | 旅行/风景混剪 | [BV19VYe6MEJs](https://www.bilibili.com/video/BV19VYe6MEJs/) 风景旅行片段 | 00:15～01:00 | slow_cut_or_transition、near_static、sparse_free_rhythm |
 | SR-BILI-TRAVEL-003 | final_evaluation | 旅行/风景混剪 | [BV1TsYR6nEk6](https://www.bilibili.com/video/BV1TsYR6nEk6/) 旷野风景短片 | 00:15～01:00 | global_camera_motion、sparse_free_rhythm、ambiguous_action |
 | SR-BILI-TRAVEL-004 | tuning | 旅行/风景混剪 | [BV1u7411P7Vx](https://www.bilibili.com/video/BV1u7411P7Vx/) 环球旅行高燃片 | 00:15～01:00 | fast_cut、tempo_or_energy_change、mixed_global_local |
 | SR-BILI-TRAVEL-005 | final_evaluation | 旅行/风景混剪 | [BV1va411y7MC](https://www.bilibili.com/video/BV1va411y7MC/) 机车旅途混剪 | 00:15～01:00 | fast_cut、global_camera_motion、motion_blur_or_occlusion |
 | SR-BILI-TRAVEL-006 | tuning | 旅行/风景混剪 | [BV1MT411V7Cg](https://www.bilibili.com/video/BV1MT411V7Cg/) 园林航拍长镜头 | 00:15～01:00 | long_take_or_no_cut、near_static、sparse_free_rhythm |
-| SR-BILI-TRAVEL-007 | final_evaluation | 旅行/风景混剪 | [BV1F6b86bELD](https://www.bilibili.com/video/BV1F6b86bELD/) Action 5 Pro 海边与乡景混合帧率片段 | 00:30～01:15 | slow_cut_or_transition、near_static、slow_motion、vfr |
+| SR-BILI-TRAVEL-007 | final_evaluation | 旅行/风景混剪 | [BV1F6b86bELD](https://www.bilibili.com/video/BV1F6b86bELD/) Action 5 Pro 海边与乡景混合帧率片段 | 00:30～01:15 | slow_cut_or_transition、near_static、slow_motion |
 | SR-BILI-TRAVEL-008 | tuning | 旅行/风景混剪 | [BV1HiYC6VEVC](https://www.bilibili.com/video/BV1HiYC6VEVC/) 风景长镜头 | 00:15～01:00 | long_take_or_no_cut、ambiguous_action、low_quality_compression |
 | SR-BILI-TRAVEL-009 | final_evaluation | 旅行/风景混剪 | [BV1zDbV62Ea1](https://www.bilibili.com/video/BV1zDbV62Ea1/) 4K 纽约城市空镜 | 00:15～01:00 | global_camera_motion、slow_cut_or_transition、flash_or_exposure_change |
 | SR-BILI-TRAVEL-010 | final_evaluation | 旅行/风景混剪 | [BV1714y1B7ba](https://www.bilibili.com/video/BV1714y1B7ba/) 4K 公路长镜头 | 00:15～01:00 | long_take_or_no_cut、global_camera_motion、repetitive_motion |
@@ -257,22 +263,50 @@ F1 作为 precision/recall 的派生诊断同时报告，但不允许只用一�
 | SR-BILI-LIFE-009 | final_evaluation | 生活 Vlog/长镜头 | [BV1rrYi6oEhQ](https://www.bilibili.com/video/BV1rrYi6oEhQ/) Room Tour 一镜到底 | 00:15～01:00 | long_take_or_no_cut、global_camera_motion、stop |
 | SR-BILI-LIFE-010 | final_evaluation | 生活 Vlog/长镜头 | [BV1d3Yi6jEri](https://www.bilibili.com/video/BV1d3Yi6jEri/) 第一视角开箱 Vlog | 00:15～01:00 | long_take_or_no_cut、local_subject_motion、ambiguous_action |
 
-#### H-013 的替换差异与确认边界
+#### H-013 的 0.3 替换与实际 probe 结论
 
 product-manager-01 于 2026-09-14 从 B 站公开页面核验了 4 个候选的标题和公开时长；这只能证明页面存在且候选源时长覆盖所选窗口，不能证明下载流的帧率模式或人工 slice 标签。
 
-| clipId | 0.2 失效来源 | 0.3 候选来源 | 同类/同分区 | 公开源时长与新窗口 | 主要补配额目标 |
+| clipId | 0.2 失效来源 | 0.3 已批准来源 | 同类/同分区 | 公开源时长与新窗口 | execution-readiness-v3 结果 |
 |---|---|---|---|---|---|
-| `SR-BILI-GAME-004` | `BV1FCXhY8ESH`，49.421s 小于批准终点 50s | `BV1jeYq6nEC4` | game / tuning | 135s；15～60s | 移动端录屏的 `vfr` 探测目标、低质量压缩、长镜头和全局运动 |
-| `SR-BILI-TRAVEL-001` | `BV1YAYz6nEcC`，51.366s 小于批准终点 52s | `BV1Ex411H7he` | travel / calibration | 109s；15～60s | iPhone 实拍的 `vfr` 探测目标、慢切/运镜和节奏变化 |
-| `SR-BILI-TRAVEL-007` | `BV1C8YX6uE8p`，55.402s 小于批准终点 56s | `BV1F6b86bELD` | travel / final_evaluation | 370s；30～75s | 混合 30/60fps 描述下的 `vfr` 探测目标、慢动作、慢切和近静止 |
-| `SR-BILI-LIFE-007` | `BV16hrhBoEp7`，21.640s 小于批准终点 22s | `BV1Ts41117Hv` | life / final_evaluation | 144s；15～60s | 实拍慢镜头与局部动作；补足 `slow_motion` 声明配额 |
+| `SR-BILI-GAME-004` | `BV1FCXhY8ESH`，49.421s 小于批准终点 50s | `BV1jeYq6nEC4` | game / tuning | 135s；15～60s | 源流 CFR；代理 CFR；PTS 保持 pass |
+| `SR-BILI-TRAVEL-001` | `BV1YAYz6nEcC`，51.366s 小于批准终点 52s | `BV1Ex411H7he` | travel / calibration | 109s；15～60s | 源流 CFR；代理 CFR；PTS 保持 pass |
+| `SR-BILI-TRAVEL-007` | `BV1C8YX6uE8p`，55.402s 小于批准终点 56s | `BV1F6b86bELD` | travel / final_evaluation | 370s；30～75s | 源流 CFR；代理 CFR；PTS 保持 pass |
+| `SR-BILI-LIFE-007` | `BV16hrhBoEp7`，21.640s 小于批准终点 22s | `BV1Ts41117Hv` | life / final_evaluation | 144s；15～60s | 源流 CFR；代理 CFR；PTS 保持 pass |
 
-按 0.3 表格做静态计数，仍为 40 条、`calibration/tuning/final_evaluation=4/16/20`、四类各 10 条；`slow_motion` 预期为 4 条且 4 条均在 final，`vfr` 探测目标为 3 条且 1 条在 final，其余 18 个必测技术 slice 均不少于 4 条且至少 1 条在 final。这里的 `vfr` 是选源目标而不是 probe 结论：B 站转码可能输出 CFR，代理过程也必须保留源 PTS。只有 T-029 执行人实际获取候选、同时记录选中平台流和时间戳保持代理的 probe，并获得 `vfr>=3`、其中 final `>=1`，才算恢复 VFR 配额；任一候选实际为 CFR 时，H-013 不得关闭，须由 product-manager-01 再次显式换源并升版本。
+dataset 0.2.0 已实际恢复 40 条、`calibration/tuning/final_evaluation=4/16/20`、四类各 10 条，40/40 媒体 hash 与 4/4 PTS 保持检查通过；但实际为 CFR 40、VFR 0。`slow_motion=4/final=4` 及其余视觉/语义 slice 仍只是声明标签，须经真人裁决。B 站页面中的“手机录屏”“混合帧率”“60fps”等标题或描述不再作为 VFR 选源依据。
 
-上表“预期覆盖”不是人工标注真值；`cfr|vfr` 以实际 ffprobe 为准，慢动作、低质量及其他视觉/语义切片以裁决标注为准。如实际获取失败、时长不足、内容不符或某 slice 配额不足，必须由 product-manager-01 在相同类别和分区内显式替换并升版本，不得由实现成员静默缩短时间窗或替换来源。D-010 已批准 0.3 的来源清单，但没有预先批准任何实测结果或后续静默替换。
+### 8.2 D-011 提议的 C-1B 独立真实 VFR 技术鲁棒性集
 
-### 8.2 C-2 Windows 基准机与运行条件
+本节只有在 D-011 confirmed 后才生效；在此之前没有改变 D-009 门禁。技术集是 40 条 B 站产品主集之外的附加数据，不替换主集样本、不计入四类各 10 条，也不允许其结果与主集平均后掩盖失败。
+
+#### 8.2.1 最低组成与分区
+
+- 至少 3 个互不近重复的真实 VFR 原始媒体，来自至少 2 种采集设备或录制软件族；同一原始文件的转码、裁切或不同窗口只计 1 个来源。
+- 至少 2 条为 `tuning`、至少 1 条为冻结的 `final_evaluation`；final 原始文件、窗口、标注、代理和参数在解封前分别冻结 hash。
+- 内容须来自目标用户实际可能处理的拍摄或录屏，至少覆盖相机实拍和屏幕/游戏录制两种采集路径，并在集合内包含可裁决的 `shot`、`motion_peak`、`action_peak` 与明确负例；不得只收纯测试图案。
+- 每个效果评估窗口为 20～60 秒。性能仍执行 D-009 的 VFR 典型 1080p30/60 秒与最大 4K60/180 秒场景；性能窗口可以来自同一批原始文件，但不能重复计入 3 个来源配额。
+
+| 技术 clipId | 分区 | 实际来源 | 准入目标 | 当前状态 |
+|---|---|---|---|---|
+| `SR-VFR-TECH-001` | tuning | 待提供真实原始文件 | 相机实拍；产品化画面事件 | `missing_actual_media` |
+| `SR-VFR-TECH-002` | tuning | 待提供真实原始文件 | 屏幕或游戏录制；负载变化下帧间隔波动 | `missing_actual_media` |
+| `SR-VFR-TECH-003` | final_evaluation | 待提供真实原始文件 | 与前两条非近重复；含可裁决动作/镜头事件 | `missing_actual_media` |
+
+#### 8.2.2 VFR 准入证据
+
+- 必须是采集设备或录制软件直接产生的原始容器/视频流；不得使用 B 站、YouTube 等公开平台转码流，不得把 CFR 人工丢帧、复制帧、改时间戳或变速后伪造成 VFR，不得使用 T-028 合成 golden。
+- 在任何代理生成前先对原始源流完整解码并保存帧 PTS 序列 hash、正帧间隔数量、不同间隔分布和 probe digest。只有存在至少两种有效正帧间隔，且超过 5% 的正帧间隔相对中位数偏差大于 1 ms，才标为 `vfr`；标题、扩展名、`avg_frame_rate`/`r_frame_rate` 单项差异均不能单独证明 VFR。
+- 代理仍按不跳帧、真实 PTS/timeNs 和 720p 上限生成；逐帧数量、时长、帧率模式、中位帧间隔及原始/代理时间戳偏差必须通过现有 PTS 保持检查。原始源流不是 VFR或代理保持失败时 fail closed，不计入配额。
+- 每条保存 `mediaSha256`、只读位置 token、采集设备/软件族、采集日期、原始/代理 probe 版本与 digest、`sourceFrameTimesSha256`、代理 hash 和分区；原始媒体及代理均不提交 Git。
+
+#### 8.2.3 对 D-009 总 gate 的提议修改
+
+1. 将 D-009 的数据门禁拆为 `productRepresentativeGate` 与 `vfrRobustnessGate`。前者使用 40 条 B 站主集；后者使用本节至少 3 条真实 VFR 原始媒体。T-029 总 gate 采用 AND：两者都通过且其余人工/Windows 前置齐全才可判定。
+2. 不修改 `vfr>=3`、其中 final `>=1` 的最低数量，不修改第 6～7 节任何 `E-*`、`P-*` 数值、比较符或聚合方式。VFR 技术集按相同标注、人工修正和盲评协议执行，并单独报告所有有有效分母的 E-* slice 指标；VFR 典型/最大性能场景继续使用原 P-* 门槛。
+3. 主集的产品效果、自然度或性能通过不能补偿 VFR 技术集失败；VFR 技术集通过也不能补偿主集失败。VFR 实际素材不足、probe 不满足或必选证据缺失时，`vfrRobustnessGate=not-evaluated|fail`，T-029 overall 不得为 pass。
+
+### 8.3 C-2 Windows 基准机与运行条件
 
 - 基准 ID 与机型：`TIGER`，ASUSTeK `TX Air FA401KM_FA401KM`。
 - Windows：Microsoft Windows 11 家庭版中文版，64 位，Version `10.0.26200`，Build `26200`。
@@ -289,25 +323,25 @@ product-manager-01 于 2026-09-14 从 B 站公开页面核验了 4 个候选的�
 
 上述基准机信息来自本机 Windows 原生只读探测，不使用 Wine 观测替代。正式测量时仍须重新保存 OS、驱动、电源、温度/降频诊断、构建和输入 hash。
 
-### 8.3 C-3 评审、数值阈值与总 gate
+### 8.4 C-3 评审、数值阈值与总 gate
 
 - 评审者：5 名独立评审者，至少 3 名有短视频剪辑或卡点制作经验；算法实现者不进入正式自然度评审。
 - 有效评分：每条 `final_evaluation` 视频至少 3 份；单条最多允许缺失 1 名评审，少于 3 份时为 `not-evaluated`。
 - tie：成对盲评允许 tie，tie 计入“未输”，辅助净得分按 0.5 票计算。
 - 数值阈值：使用第 6～7 节已确认的全部 `E-*` 与 `P-*` 数值、单位、比较方向和聚合方式。
-- 判定分区：只在冻结的 `final_evaluation` 分区上判定总 gate。
+- 判定分区：产品主集只在冻结的 20 条 `final_evaluation` 上判定代表性产品 gate；D-011 若确认，VFR 技术集另在其冻结的 `final_evaluation` 上判定 VFR slice gate，两个结果不混合平均。
 - 总 gate：所有必选 `E-*` 与 `P-*` 必须同时通过，不得用平均分抵消失败项；任一必测 slice 未达门槛则总体不通过。
 - `unavailable`：任一必选指标因数据不足为 `unavailable` 时，总体为 `not-evaluated`；CPU-only 路径的 GPU 时间和显存允许 `unavailable` 且不影响总 gate。
 - 模型边界：经典算法失败后只能提出模型方案，不自动引入模型。
 
-本轮只确认产品输入，没有运行 T-029。任何实测数值在 video-algorithm-engineer-cv-01 保存完整证据前仍为 `not-evaluated`。
+本轮只形成 D-011/A-031 0.4 待确认提案，没有运行 T-029，也没有实际 VFR 原始素材。D-011 确认前不得按 0.4 改变 gate；确认后，任何 VFR 结果在 video-algorithm-engineer-cv-01 保存原始源流和代理的完整 probe/hash、裁决标注及评审证据前仍为 `not-evaluated`。
 
 ## 9. 交付给 T-029 的证据包
 
-D-009 确认后，T-029 执行人应冻结并引用：
+D-009/D-010 已确认；D-011 若确认，T-029 执行人应分别冻结并引用：
 
 1. 本文件版本与 SHA-256；
-2. 产品数据 manifest、媒体 hash、权限边界和分区 hash；
+2. 40 条产品主集与独立 VFR 技术集各自的数据 manifest、媒体 hash、权限边界和分区 hash；
 3. 原始/复核/裁决标注文件及各自 hash；
 4. rubric、评分尺度、播放条件、音色映射和随机化 seed；
 5. 基准硬件与软件环境签名；
@@ -315,4 +349,4 @@ D-009 确认后，T-029 执行人应冻结并引用：
 7. classic 的算法/参数/build hash 与逐次原始结果；
 8. 人工修正日志、逐评审者原始评分和汇总脚本版本。
 
-任何缺项都必须保留为 `missing_confirmed_input`、`measured` 或 `not-evaluated`，不得使用合成 golden、建议值或当前实现观测补齐后宣称产品效果通过。
+任何缺项都必须保留为 `missing_confirmed_input`、`measured` 或 `not-evaluated`，不得使用合成 golden、CFR 人工造 VFR、建议值或当前实现观测补齐后宣称产品效果通过。D-011 未确认时，本文件 0.4 也属于 `missing_confirmed_input`，不能据此改变 D-009 的现行判定。
