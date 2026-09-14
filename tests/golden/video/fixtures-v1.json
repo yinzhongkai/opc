@@ -9,7 +9,7 @@
   "generator": {
     "id": "space-rhythm-video-analysis-fixture-generator",
     "version": "1.0.0",
-    "status": "specified_not_implemented_in_t027"
+    "status": "implemented_in_t028"
   },
   "licensePolicy": "All contract fixtures are deterministic project-authored synthetic patterns dedicated under CC0-1.0. package/, user media, and third-party audiovisual works are forbidden inputs.",
   "actualMediaPolicy": "T-027 freezes recipes and annotations. T-028 must generate bytes with the fixed FFmpeg baseline, record actualMediaSha256 and probe evidence, and preserve recipe/annotation hashes.",
@@ -38,8 +38,8 @@
       "durationNs": 3000000000,
       "canonicalRecipe": "v1|VV-HARD-CUT-001|160x90|fps=30/1|durationNs=3000000000|solid(32,64,96)[0,1000000000);solid(220,40,20)[1000000000,3000000000)|hard-cut=1000000000",
       "recipeSha256": "9053e7c8842601546ab3d2cd56b554f992686ed73f8b7779aa5ca93c7ef64b16",
-      "mediaStatus": "specified_not_generated",
-      "actualMediaSha256": null,
+      "mediaStatus": "generated",
+      "actualMediaSha256": "382bf6a809e3962f4b13fc56fa02aef7f177b6412a5de51f6683e52ce191536b",
       "groundTruth": [
         {"id": "gt-shot-001", "kind": "shot", "timeNs": 1000000000, "durationNs": 0, "matchWindowBeforeNs": 33333334, "matchWindowAfterNs": 33333334}
       ],
@@ -60,8 +60,8 @@
       "durationNs": 4000000000,
       "canonicalRecipe": "v1|VV-DISSOLVE-001|160x90|fps=30/1|durationNs=4000000000|checker-a[0,1000000000);linear-blend(a,b)[1000000000,2000000000);checker-b[2000000000,4000000000)|transition=[1000000000,2000000000)",
       "recipeSha256": "7c1e6281413d331f98813c314f171dfe3415bbe44c29ef1fd57702e8f805f1d1",
-      "mediaStatus": "specified_not_generated",
-      "actualMediaSha256": null,
+      "mediaStatus": "generated",
+      "actualMediaSha256": "7054ceb5045869de83b51af38b6f97357dd56011a38166fc4363cf1309ed54e9",
       "groundTruth": [
         {"id": "gt-shot-001", "kind": "shot", "timeNs": 1000000000, "durationNs": 1000000000, "matchWindowBeforeNs": 0, "matchWindowAfterNs": 0}
       ],
@@ -82,8 +82,8 @@
       "durationNs": 3000000000,
       "canonicalRecipe": "v1|VV-FLASH-001|160x90|fps=30/1|durationNs=3000000000|checker-a-except-frame-30|frame-30=solid(255,255,255)|frame-31=checker-a|semantic-events=none",
       "recipeSha256": "625e8481a5b7e3d0fcc12786080ff87e4c0a4091b89f5d4058fc55f227d39e62",
-      "mediaStatus": "specified_not_generated",
-      "actualMediaSha256": null,
+      "mediaStatus": "generated",
+      "actualMediaSha256": "fa3d49874150871886eeaf97bd46736adae18619924dfc747e1f4094cc3627f2",
       "groundTruth": [],
       "negativeKinds": ["shot", "motion_peak", "action_peak"],
       "annotationCanonical": "v1|VV-FLASH-001|events=|negative=action_peak,motion_peak,shot",
@@ -102,8 +102,8 @@
       "durationNs": 3000000000,
       "canonicalRecipe": "v1|VV-GLOBAL-PAN-001|canvas=320x90|crop=160x90|fps=30/1|durationNs=3000000000|pan-velocity=ramp(0,500000000),constant(500000000,2500000000),ramp-down(2500000000,3000000000)|no-local-object",
       "recipeSha256": "5fce02332ede19dd5c0e4c71f7df134b9fb9609fd4b9364bf5e80a0fe5e783c4",
-      "mediaStatus": "specified_not_generated",
-      "actualMediaSha256": null,
+      "mediaStatus": "generated",
+      "actualMediaSha256": "a27785db6856592956adfcbccd33bea3711f26cdbdd9d58e157ebc23db911101",
       "groundTruth": [
         {"id": "gt-motion-001", "kind": "motion_peak", "timeNs": 500000000, "durationNs": 0, "matchWindowBeforeNs": 66666667, "matchWindowAfterNs": 66666667}
       ],
@@ -124,8 +124,8 @@
       "durationNs": 3000000000,
       "canonicalRecipe": "v1|VV-LOCAL-IMPACT-001|160x90|fps=30/1|durationNs=3000000000|static-grid-background|square=16x16|x=20+40*t|y=20+piecewise-parabola-impact-at-1500000000|global-transform=none",
       "recipeSha256": "de46df785ed4f2604de10c6073943f5d7fdbb73a9421d4880ce6ede99b1063fd",
-      "mediaStatus": "specified_not_generated",
-      "actualMediaSha256": null,
+      "mediaStatus": "generated",
+      "actualMediaSha256": "5328d9a3a7856924fbbb9256bead00a5cff5348c0c4445abe1504efe5ae8ff67",
       "groundTruth": [
         {"id": "gt-motion-001", "kind": "motion_peak", "timeNs": 1500000000, "durationNs": 0, "matchWindowBeforeNs": 50000000, "matchWindowAfterNs": 50000000},
         {"id": "gt-action-001", "kind": "action_peak", "timeNs": 1500000000, "durationNs": 0, "matchWindowBeforeNs": 50000000, "matchWindowAfterNs": 50000000}
@@ -147,8 +147,8 @@
       "durationNs": 3000000000,
       "canonicalRecipe": "v1|VV-STATIC-001|160x90|fps=30/1|durationNs=3000000000|static-grid-background|all-frames-byte-equivalent|semantic-events=none",
       "recipeSha256": "adeb00d8c2543d90bc237a39ef6e47f50e17c4f1eba7cb25bbbceae6a238bf7a",
-      "mediaStatus": "specified_not_generated",
-      "actualMediaSha256": null,
+      "mediaStatus": "generated",
+      "actualMediaSha256": "baef5bebf17ba22e02d45bf1123fccc8f19d2bf0edc699d5d69b4c82b35f5d72",
       "groundTruth": [],
       "negativeKinds": ["shot", "motion_peak", "action_peak"],
       "annotationCanonical": "v1|VV-STATIC-001|events=|negative=action_peak,motion_peak,shot",
@@ -167,8 +167,8 @@
       "durationNs": 4000000000,
       "canonicalRecipe": "v1|VV-SLOW-MOTION-001|160x90|fps=60/1|durationNs=4000000000|static-grid-background|square=20x20|velocity=ease-out-until-2500000000|hold[2500000000,4000000000)|global-transform=none",
       "recipeSha256": "d87adc445d514381ac345e1bac96eb66c36449bbe65cf5b34cab10b178a9c58d",
-      "mediaStatus": "specified_not_generated",
-      "actualMediaSha256": null,
+      "mediaStatus": "generated",
+      "actualMediaSha256": "0c1ca8317a530d861afc007e4accafd628425407e36f015b02937715c9338ca3",
       "groundTruth": [
         {"id": "gt-motion-001", "kind": "motion_peak", "timeNs": 2500000000, "durationNs": 0, "matchWindowBeforeNs": 100000000, "matchWindowAfterNs": 100000000},
         {"id": "gt-action-001", "kind": "action_peak", "timeNs": 2500000000, "durationNs": 0, "matchWindowBeforeNs": 100000000, "matchWindowAfterNs": 100000000}
@@ -190,8 +190,8 @@
       "durationNs": 600000000,
       "canonicalRecipe": "v1|VV-VFR-REVERSAL-001|160x90|ptsNs=0,40000000,100000000,140000000,240000000,400000000,600000000|square-x=10,20,35,50,35,20,10|direction-reversal=240000000|no-frame-index-time-reconstruction",
       "recipeSha256": "d9ba0f725d7bf28b990e594d3b5b09f48e99131cde0d5ef116a152e174e90542",
-      "mediaStatus": "specified_not_generated",
-      "actualMediaSha256": null,
+      "mediaStatus": "generated",
+      "actualMediaSha256": "7fec956c8201543ca645c48190c3120375f904cd0273285a67d553c6c3589a10",
       "groundTruth": [
         {"id": "gt-motion-001", "kind": "motion_peak", "timeNs": 240000000, "durationNs": 0, "matchWindowBeforeNs": 60000000, "matchWindowAfterNs": 60000000},
         {"id": "gt-action-001", "kind": "action_peak", "timeNs": 240000000, "durationNs": 0, "matchWindowBeforeNs": 60000000, "matchWindowAfterNs": 60000000}
@@ -213,8 +213,8 @@
       "durationNs": 3000000000,
       "canonicalRecipe": "v1|VV-COMPRESSION-NOISE-001|160x90|fps=30/1|durationNs=3000000000|static-grid-background|block-noise=lcg(1664525,1013904223,u32,seed=1447645769),amplitude=3/255,block=8x8|semantic-events=none",
       "recipeSha256": "02374201beab680624e668ba957e111a51ff1c7e3dbf4bf1a6fede7f209adc53",
-      "mediaStatus": "specified_not_generated",
-      "actualMediaSha256": null,
+      "mediaStatus": "generated",
+      "actualMediaSha256": "8c1fee3beb783b0f440502bb1bef9ef3471541562c91d9a5da407d62b1b56585",
       "groundTruth": [],
       "negativeKinds": ["shot", "motion_peak", "action_peak"],
       "annotationCanonical": "v1|VV-COMPRESSION-NOISE-001|events=|negative=action_peak,motion_peak,shot",
@@ -233,8 +233,8 @@
       "durationNs": 2500000000,
       "canonicalRecipe": "v1|VV-FAST-CUT-ACTION-001|160x90|fps=30/1|durationNs=2500000000|shots=500000000,1000000000,1500000000|local-impact=1250000000|scene-colors=navy,orange,green,purple|impact-object=16x16",
       "recipeSha256": "cae600f69fba8be75fa071e26236017f46af0cf16077f43ddb3a786f1910b5a2",
-      "mediaStatus": "specified_not_generated",
-      "actualMediaSha256": null,
+      "mediaStatus": "generated",
+      "actualMediaSha256": "89f4cf26b86c7f02775b87b3448b1a74e1e3da0cf70cc22fa5064c691bb562b1",
       "groundTruth": [
         {"id": "gt-shot-001", "kind": "shot", "timeNs": 500000000, "durationNs": 0, "matchWindowBeforeNs": 33333334, "matchWindowAfterNs": 33333334},
         {"id": "gt-shot-002", "kind": "shot", "timeNs": 1000000000, "durationNs": 0, "matchWindowBeforeNs": 33333334, "matchWindowAfterNs": 33333334},

@@ -62,7 +62,7 @@
 - 状态：accepted
 - 创建日期：2026-09-09
 - 接收反馈：video-algorithm-engineer-cv-01 于 2026-09-14 完成成员身份、岗位、有效知识、相关决定、任务和上游契约刷新后确认接收；本轮先执行 T-027，完成后才按顺序进入 T-028、T-029，不越过效果与模型门禁。
-- 处理结果与证据：2026-09-14，T-027 已按顺序完成并形成 [A-028 0.1](artifacts/A-028-video-analysis-contract-sample-metrics.md)、[10 项 CC0 合成样本 manifest](../../tests/golden/video/fixtures-v1.json)及[验证摘要](evidence/T-027/verification-summary.md)。契约明确消费媒体 schema 2 的真实 `timeNs`，输出 core `AnalysisCandidate` 的 shot/motion_peak/action_peak、算法/参数版本、PPM 强度/置信度和稳定低质量原因；机器校验实际通过 10 项样本、9 类必需覆盖和全部配方/标注 hash。未生成的真实媒体字节属于 T-028；代表产品素材、人工标注和“卡点自然”阈值仍待确认，任何相关数值只可为 `measured/not-evaluated`。下一项严格为 T-028，T-029 尚未启动。
+- 处理结果与证据：2026-09-14，T-027 已按顺序完成并形成 [A-028 0.2](artifacts/A-028-video-analysis-contract-sample-metrics.md)、10 项 CC0 合成样本配方和指标契约。同日用户明确启动 T-028，现已完成 [A-029 0.1](artifacts/A-029-classic-video-analysis-and-golden.md)及[验证摘要](evidence/T-028/verification-summary.md)：实现 OpenCV 4.12.0 经典 shot/motion_peak/action_peak，直接使用媒体 schema 2 真实 `timeNs`，生成固定 FFmpeg 8.1.2 FFV1 golden 并连续两次取得相同 hash；Debug/CI/Release 三套最终 Windows PE 在 Wine 8.0 隔离环境各 8/8 通过，合成矩阵无 FP/FN。最终 PE 本机原生启动仍受既有 WDAC/SAC `0xC0E90002` 拒绝，未伪装为原生通过。代表产品素材、人工标注、基准硬件和“卡点自然”阈值仍待确认，效果/性能仅为 `measured/not-evaluated`。T-029 继续保持 `todo`，本轮未提前启动。
 - 关闭或取消依据：暂无。
 
 ## H-006：启动 Qt Quick/QML UI 设计开发工作流
