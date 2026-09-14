@@ -1,5 +1,18 @@
 # 行动请求与交接
 
+## H-012：确认 T-029 的真实产品输入与数值门槛
+- 发起人：product-manager-01
+- 目标：用户
+- 关联任务：T-039、T-029
+- 期望结果：依据 A-031 0.1 第 8 节提供或确认代表产品视频、样本配额与分区、基准 Windows 硬件元组，以及逐项效果/性能/自然度数值阈值；授权来源必须可辨认。确认后允许 video-algorithm-engineer-cv-01 冻结实际输入 hash 并继续 T-029。
+- 输入与证据：[A-031 0.1：T-029 视频产品评估输入与用户确认清单](artifacts/A-031-t029-video-product-evaluation-input.md)；[A-030 0.1](artifacts/A-030-video-product-evaluation-and-model-gate.md)；D-009 proposed；T-029 blocked。
+- 未完成事项：仓库当前没有代表产品视频或人工产品标注；未确认基准 Windows 硬件和任何数值门槛。T-028 的 CC0 合成 golden 只属于契约/回归数据，Wine 8.0 测量只属于已有观测，二者均不能替代本交接输入。
+- 状态：open
+- 创建日期：2026-09-14
+- 接收反馈：尚未接收；目标为用户，收到实际答复后由发起人据实记录。
+- 处理结果与证据：暂无。
+- 关闭或取消依据：暂无。
+
 ## H-011：补齐媒体 PCM resampler timing provenance 公共字段
 - 发起人：audio-dsp-engineer-01
 - 目标：multimedia-engineer-ffmpeg-01
@@ -137,11 +150,11 @@
 - 期望结果：接收已确认的第一阶段产品方向，依据 D-001 和 A-002 0.2 协调 PROJECT/STATUS 摘要同步，并在现有团队职责和用户授权范围内安排后续技术可行性评估；如缺少适合的技术成员或需要新增成员，向用户说明具体缺口，不由本交接自动创建成员或指派实现。
 - 输入与证据：[A-002 0.2：音画双向节奏创作工具产品需求](artifacts/A-002-audio-visual-rhythm-product-brief.md)，状态 approved；D-001，状态 confirmed；逆向输入 A-001 0.1 与 A-003 0.1。
 - 未完成事项：技术可行性、技术栈、领域拆分和研发编制已由 T-004～T-010、T-023 完成；尚未确认代表产品视频及人工标注、“卡点自然”rubric/评分尺度/播放条件、基准硬件和效果/性能阈值，导致 T-029 blocked。最低 Windows、正式导出格式、安装器、签名和发布渠道仍由发布流程确认；项目工期与预算尚未设定。
-- 状态：accepted
+- 状态：closed
 - 创建日期：2026-09-07
 - 接收反馈：project-manager-01 于 2026-09-14 按用户明确要求刷新身份、岗位、有效知识、项目决定、任务、交接及 H-001 输入后确认接收；接收范围是同步已确认产品方向、核对技术可行性和当前团队计划，并整理剩余产品输入，不取得专业结论或最终批准权。
 - 处理结果与证据：已依据 D-001 和已批准的 [A-002 0.2](artifacts/A-002-audio-visual-rhythm-product-brief.md)更新 [PROJECT.md](PROJECT.md) 的目标、范围、非目标、阶段和验收边界，并刷新 [STATUS.md](STATUS.md)。技术可行性与需求已由 T-004～T-008/[A-004 0.5](artifacts/A-004-mvp-technical-feasibility-and-requirements.md)、技术栈由 [A-005 0.4](artifacts/A-005-mvp-technology-stack-proposal.md)、领域拆分由 T-009/[A-006 0.1](artifacts/A-006-domain-work-packages.md)、执行计划与完整研发编制由 T-010、T-023/[A-011 0.1](artifacts/A-011-complete-mvp-engineering-staffing-and-task-plan.md)形成；当前 38 项任务中 33 项 completed。剩余关键输入已由 T-029/[A-030 0.1](artifacts/A-030-video-product-evaluation-and-model-gate.md)具体化，下一步需产品侧整理并由用户确认，未将合成样本或 draft 口径当作产品批准。
-- 关闭或取消依据：尚未关闭；等待发起人 product-manager-01 核对本次目标摘要、可行性/计划证据和剩余产品输入整理。发起人确认期望结果满足后按协议关闭；后续具体产品输入工作如需独立跟踪，应登记新任务或交接，不覆盖本次接收记录。
+- 关闭或取消依据：product-manager-01 于 2026-09-14 刷新项目资料后核对：PROJECT/STATUS 已准确同步 D-001 与 A-002 0.2，T-004～T-010、T-023 及 A-004～A-011 已覆盖技术可行性、技术栈、领域拆分和完整研发计划，T-029/A-030 已具体化剩余产品输入且未将合成样本当作产品批准。原期望结果全部满足，故由原发起人关闭 H-001；后续产品输入另由 T-039、D-009 和 H-012 跟踪。
 
 已在任务内明确安排的轻量评审或复核无需重复建立交接；另有补充输入、协调或责任转交请求时再登记。
 
