@@ -17,14 +17,14 @@
 - 发起人：video-algorithm-engineer-cv-01
 - 目标：product-manager-01
 - 关联任务：T-029、T-039
-- 期望结果：在相同产品类别和数据分区内显式替换 4 个超出源时长的批准片段并升级 A-031；替换/增补后的来源须经实际获取与 probe 恢复 40 条、`calibration/tuning/final=4/16/20`、每类 10 条，并让每个必测技术 slice 至少有 3 条且至少 1 条属于 final，尤其补足实际 VFR 配额。不得静默缩短原时间窗或由算法负责人自行换源。
-- 输入与证据：[A-031 当前修订稿](artifacts/A-031-t029-video-product-evaluation-input.md)、[dataset 0.2.0 manifest](evidence/T-029/product-dataset-manifest-v2.json)、[execution-readiness-v3](evidence/T-029/execution-readiness-v3.json)。历史输入为 A-031 0.2（提交 `68a8c0e`）、来源可用性审计、dataset manifest v1 和 execution-readiness-v2；4 个失效来源已由 D-010/A-031 0.3 完成替换。
-- 未完成事项：D-010 的 4 个替换来源已全部获取，结构配额已恢复；但三个 VFR 目标的所选平台流和 PTS 保持代理均实测为 CFR，完整数据仍为 VFR 0，未达到 `vfr>=3/final>=1`。A-031 0.3 的 `slow_motion=4/final=4` 及其他语义 slice 只是预期标签，尚未经人工裁决。依据 D-010，product-manager-01 必须再次提交同类别/同分区的真实 VFR 候选、升级 A-031 并取得新决定；不能只凭标题宣称配额满足。
+- 期望结果：D-010 的 4 个失效来源替换须实际恢复 40 条、`calibration/tuning/final=4/16/20` 和每类 10 条；按 D-011，VFR 收口改由 40 条 B 站主集之外的独立真实原始素材技术集承担，仍须实际 `vfr>=3/final>=1`，以原始源流逐帧 PTS 和代理保持证据准入。不得依据标题猜测 VFR、静默缩短时间窗、人工制造 VFR 或由算法负责人自行换源。
+- 输入与证据：[A-031 0.4 approved](artifacts/A-031-t029-video-product-evaluation-input.md)、D-011 confirmed、[dataset 0.2.0 manifest](evidence/T-029/product-dataset-manifest-v2.json)、[execution-readiness-v3](evidence/T-029/execution-readiness-v3.json)。历史输入为 A-031 0.2（提交 `68a8c0e`）、来源可用性审计、dataset manifest v1 和 execution-readiness-v2；4 个失效来源已由 D-010/A-031 0.3 完成替换。
+- 未完成事项：D-010 的 4 个替换来源已全部获取，结构配额已恢复；但三个 VFR 目标的所选平台流和 PTS 保持代理均实测为 CFR，完整 B 站主集为 VFR 0。依据 D-011，不再继续凭 B 站标题或转码流寻找 VFR；仍须取得至少 3 条、其中 final 至少 1 条真实 VFR 原始媒体，由 T-029 执行人冻结 hash、逐帧 PTS、代理保持与分区证据。实际素材尚未提供，`vfrRobustnessGate=not-evaluated`；`slow_motion=4/final=4` 及其他语义 slice 也仍须人工裁决。
 - 状态：accepted
 - 创建日期：2026-09-14
 - 接收反馈：product-manager-01 于 2026-09-14 刷新 T-029、D-009、A-031 0.2、A-030 0.2 及三份媒体审计证据后接收。确认 4 个失效来源必须同类别/同分区替换；36 个已成功来源可保留。实际 VFR 不能由标题或预期标签代替，仍须由 T-029 执行人 probe。
-- 处理结果与证据：A-031 0.3 的 D-010 替换已完成实测：4 个来源均获取成功，40/40 SHA、结构分区和类别配额通过，4/4 PTS 保持检查通过；但 `GAME-004`、`TRAVEL-001`、`TRAVEL-007` 的实际源流/代理均为 CFR。product-manager-01 据用户本轮授权形成 [A-031 0.4](artifacts/A-031-t029-video-product-evaluation-input.md) `in_review` 和 D-011 proposed：保留 40 条 B 站来源为产品主集，另建至少 3 条真实 VFR 原始素材技术集（至少 1 条 final），原始源流逐帧 PTS probe 准入，两套 gate 以 AND 进入 overall。D-011 未确认、实际 VFR 原始素材未冻结前，D-009 的 VFR 要求不变，当前 VFR gate 继续 fail，H-013 不关闭。
-- 关闭或取消依据：未关闭。D-010 明定任一 VFR 目标实际为 CFR 时不得关闭 H-013；当前三个目标全部为 CFR，关闭条件不满足。若 D-011 后续 confirmed，确认本身也不关闭 H-013；只有 A-031 0.4 转为 approved，独立技术集已冻结不少于 3 条且 final 不少于 1 条真实 VFR 原始媒体，并由 T-029 执行人以原始源流逐帧 PTS 与代理保持证据实际判定配额通过后，product-manager-01 才可核对并关闭。
+- 处理结果与证据：A-031 0.3 的 D-010 替换已完成实测：4 个来源均获取成功，40/40 SHA、结构分区和类别配额通过，4/4 PTS 保持检查通过；但 `GAME-004`、`TRAVEL-001`、`TRAVEL-007` 的实际源流/代理均为 CFR。用户于 2026-09-14 回复“采用”，确认 D-011 并批准 [A-031 0.4](artifacts/A-031-t029-video-product-evaluation-input.md)：保留 40 条 B 站来源为产品主集，另建至少 3 条真实 VFR 原始素材技术集（至少 1 条 final），原始源流逐帧 PTS probe 准入，两套 gate 以 AND 进入 overall。方案已生效，但实际 VFR 原始素材仍未冻结，H-013 不关闭。
+- 关闭或取消依据：未关闭。D-011 的确认本身不等于实际配额通过；只有独立技术集已冻结不少于 3 条且 final 不少于 1 条真实 VFR 原始媒体，并由 T-029 执行人以原始源流逐帧 PTS 与代理保持证据实际判定配额通过后，product-manager-01 才可核对并关闭。
 
 ## H-012：确认 T-029 的真实产品输入与数值门槛
 - 发起人：product-manager-01
