@@ -31,6 +31,17 @@ TABLE_ROW = re.compile(
     r"\s*\[([^]]+)\]\((https://www\.bilibili\.com/video/(BV[0-9A-Za-z]+)/)\)\s*([^|]*?)\s*\|"
     r"\s*(\d{2}:\d{2})～(\d{2}:\d{2})\s*\|\s*([^|]+?)\s*\|$"
 )
+REPLACEMENT_CLIP_IDS = {
+    "SR-BILI-GAME-004",
+    "SR-BILI-TRAVEL-001",
+    "SR-BILI-TRAVEL-007",
+    "SR-BILI-LIFE-007",
+}
+ARTIFACT_VERSION = re.compile(r"^- 版本：(?P<version>\S+)\s*$", re.MULTILINE)
+INPUT_VERSION = re.compile(
+    r"^- 协议版本：`productEvaluationInputVersion=(?P<version>[^`]+)`\s*$",
+    re.MULTILINE,
+)
 
 
 @dataclass(frozen=True)
@@ -89,6 +100,15 @@ def parse_specs(path: Path) -> list[ClipSpec]:
     if len({spec.clip_id for spec in specs}) != len(specs):
         raise ValueError("duplicate clipId in A-031")
     return specs
+
+
+def parse_source_versions(path: Path) -> tuple[str, str]:
+    text = path.read_text(encoding="utf-8")
+    artifact_match = ARTIFACT_VERSION.search(text)
+    input_match = INPUT_VERSION.search(text)
+    if not artifact_match or not input_match:
+        raise ValueError("A-031 artifact or product-evaluation input version is missing")
+    return artifact_match.group("version"), input_match.group("version")
 
 
 def validate_declared_quotas(specs: list[ClipSpec]) -> dict[str, Any]:
@@ -211,7 +231,30 @@ def av_http_options(headers: dict[str, Any], source_url: str) -> dict[str, str]:
     return options
 
 
-def transcode_window(spec: ClipSpec, source: dict[str, Any], output_path: Path) -> None:
+def summarize_timing(frame_times_ns: list[int]) -> dict[str, Any]:
+    if not frame_times_ns:
+        raise ValueError("cannot summarize an empty frame timestamp sequence")
+    deltas = [right - left for left, right in zip(frame_times_ns, frame_times_ns[1:]) if right > left]
+    median_delta = int(statistics.median(deltas)) if deltas else 0
+    deviating = sum(abs(delta - median_delta) > 1_000_000 for delta in deltas)
+    frame_rate_mode = "vfr" if deltas and deviating / len(deltas) > 0.05 else "cfr"
+    timing_digest = hashlib.sha256(
+        ",".join(str(value) for value in frame_times_ns).encode("ascii")
+    ).hexdigest()
+    duration_ns = (frame_times_ns[-1] - frame_times_ns[0]) + median_delta
+    return {
+        "frameRateMode": frame_rate_mode,
+        "frameCount": len(frame_times_ns),
+        "firstFrameTimeNs": frame_times_ns[0],
+        "lastFrameTimeNs": frame_times_ns[-1],
+        "durationNs": duration_ns,
+        "medianFrameDeltaNs": median_delta,
+        "deviatingDeltaCount": deviating,
+        "frameTimesSha256": timing_digest,
+    }
+
+
+def transcode_window(spec: ClipSpec, source: dict[str, Any], output_path: Path) -> dict[str, Any]:
     selected = source["format"]
     source_width = int(selected.get("width") or 0)
     source_height = int(selected.get("height") or 0)
@@ -245,7 +288,10 @@ def transcode_window(spec: ClipSpec, source: dict[str, Any], output_path: Path) 
             output_stream.bit_rate = 6_000_000
             output_stream.gop_size = max(1, int(round(float(rate))))
             output_stream.time_base = Fraction(1, 1_000_000)
+            output_stream.codec_context.time_base = Fraction(1, 60_000)
             first_source_time_ns: int | None = None
+            source_frame_times_ns: list[int] = []
+            non_monotonic_or_duplicate_frames_dropped = 0
             encoded_frames = 0
             for frame in input_container.decode(video_stream):
                 if frame.pts is None or frame.time_base is None:
@@ -255,22 +301,42 @@ def transcode_window(spec: ClipSpec, source: dict[str, Any], output_path: Path) 
                     continue
                 if source_time_ns >= spec.end_seconds * 1_000_000_000:
                     break
+                if source_frame_times_ns and source_time_ns <= source_frame_times_ns[-1]:
+                    non_monotonic_or_duplicate_frames_dropped += 1
+                    continue
                 if first_source_time_ns is None:
                     first_source_time_ns = source_time_ns
+                source_frame_times_ns.append(source_time_ns)
                 if frame.width != width or frame.height != height:
                     frame = frame.reformat(width=width, height=height, format="yuv420p")
                 elif frame.format.name != "yuv420p":
                     frame = frame.reformat(format="yuv420p")
-                frame.pts = int(round((source_time_ns - first_source_time_ns) / 1_000.0))
+                proxy_pts_us = int(round((source_time_ns - first_source_time_ns) / 1_000.0))
+                frame.pts = proxy_pts_us
                 frame.time_base = Fraction(1, 1_000_000)
-                for packet in output_stream.encode(frame):
-                    output_container.mux(packet)
+                try:
+                    for packet in output_stream.encode(frame):
+                        output_container.mux(packet)
+                except Exception as error:
+                    raise RuntimeError(
+                        f"{spec.clip_id}: proxy encode failed at accepted frame {encoded_frames}; "
+                        f"sourceTimeNs={source_time_ns}, proxyPtsUs={proxy_pts_us}, "
+                        f"sourceGeometry={source_width}x{source_height}, "
+                        f"proxyGeometry={width}x{height}, selectedFps={selected_fps}, rate={rate}"
+                    ) from error
                 encoded_frames += 1
             for packet in output_stream.encode():
                 output_container.mux(packet)
             if first_source_time_ns is None or encoded_frames == 0:
                 raise ValueError(f"{spec.clip_id}: approved window produced no frames")
     temporary_path.replace(output_path)
+    timing = summarize_timing(source_frame_times_ns)
+    timing["status"] = "decoded_selected_platform_stream"
+    timing["timeDomain"] = "source_stream_absolute_timeNs"
+    timing["proxyNormalization"] = "first selected source frame maps to proxy timeNs 0"
+    timing["nonMonotonicOrDuplicateFramesDropped"] = non_monotonic_or_duplicate_frames_dropped
+    timing["probeDigestSha256"] = sha256_json(timing)
+    return timing
 
 
 def probe_proxy(path: Path) -> dict[str, Any]:
@@ -291,14 +357,7 @@ def probe_proxy(path: Path) -> dict[str, Any]:
             frame_times_ns.append(int(Fraction(frame.pts) * frame.time_base * 1_000_000_000))
     if not frame_times_ns:
         raise ValueError(f"proxy decoded zero timestamped frames: {path}")
-    deltas = [right - left for left, right in zip(frame_times_ns, frame_times_ns[1:]) if right > left]
-    median_delta = int(statistics.median(deltas)) if deltas else 0
-    deviating = sum(abs(delta - median_delta) > 1_000_000 for delta in deltas)
-    frame_rate_mode = "vfr" if deltas and deviating / len(deltas) > 0.05 else "cfr"
-    timing_digest = hashlib.sha256(
-        ",".join(str(value) for value in frame_times_ns).encode("ascii")
-    ).hexdigest()
-    duration_ns = (frame_times_ns[-1] - frame_times_ns[0]) + median_delta
+    timing = summarize_timing(frame_times_ns)
     probe = {
         "codecName": codec_name,
         "pixelFormat": pixel_format,
@@ -306,29 +365,67 @@ def probe_proxy(path: Path) -> dict[str, Any]:
         "height": height,
         "timeBase": time_base,
         "averageFrameRate": average_rate,
-        "frameRateMode": frame_rate_mode,
-        "frameCount": len(frame_times_ns),
-        "firstFrameTimeNs": frame_times_ns[0],
-        "lastFrameTimeNs": frame_times_ns[-1],
-        "durationNs": duration_ns,
-        "medianFrameDeltaNs": median_delta,
-        "deviatingDeltaCount": deviating,
-        "frameTimesSha256": timing_digest,
+        **timing,
     }
     probe["probeDigestSha256"] = sha256_json(probe)
     return probe
 
 
-def acquire_one(spec: ClipSpec, media_dir: Path, reuse_existing: bool) -> dict[str, Any]:
+def acquire_one(
+    spec: ClipSpec,
+    media_dir: Path,
+    reuse_existing: bool,
+    previous_record: dict[str, Any] | None,
+) -> dict[str, Any]:
     print(f"ACQUIRE_BEGIN {spec.clip_id} {spec.bvid}", flush=True)
     source = extract_source_info(spec)
     if source["id"] != spec.bvid:
         raise ValueError(f"{spec.clip_id}: resolved id {source['id']} != {spec.bvid}")
     output_path = media_dir / f"{spec.clip_id}.mkv"
-    if not (reuse_existing and output_path.exists()):
-        transcode_window(spec, source, output_path)
+    reused_proxy = reuse_existing and output_path.exists()
+    selected_source_timing = None
+    if not reused_proxy:
+        selected_source_timing = transcode_window(spec, source, output_path)
     probe = probe_proxy(output_path)
     selected = source["format"]
+    media_sha256 = sha256_file(output_path)
+    if (
+        selected_source_timing is None
+        and previous_record
+        and previous_record.get("source", {}).get("bvid") == spec.bvid
+        and previous_record.get("mediaSha256") == media_sha256
+    ):
+        selected_source_timing = previous_record.get("selectedSourceTiming")
+    if selected_source_timing and selected_source_timing.get("status") == "decoded_selected_platform_stream":
+        duration_error_ns = abs(
+            int(selected_source_timing["durationNs"]) - int(probe["durationNs"])
+        )
+        median_delta_error_ns = abs(
+            int(selected_source_timing["medianFrameDeltaNs"])
+            - int(probe["medianFrameDeltaNs"])
+        )
+        pts_preservation_check = {
+            "status": "pass",
+            "frameCountMatch": selected_source_timing["frameCount"] == probe["frameCount"],
+            "frameRateModeMatch": (
+                selected_source_timing["frameRateMode"] == probe["frameRateMode"]
+            ),
+            "durationErrorNs": duration_error_ns,
+            "medianFrameDeltaErrorNs": median_delta_error_ns,
+            "timingErrorToleranceNs": 1_000_000,
+        }
+        if not (
+            pts_preservation_check["frameCountMatch"]
+            and pts_preservation_check["frameRateModeMatch"]
+            and duration_error_ns <= pts_preservation_check["timingErrorToleranceNs"]
+            and median_delta_error_ns <= pts_preservation_check["timingErrorToleranceNs"]
+        ):
+            pts_preservation_check["status"] = "fail"
+    else:
+        pts_preservation_check = {
+            "status": "not-evaluated",
+            "reason": "selected source stream was not re-decoded for this reused proxy",
+        }
     record = {
         "clipId": spec.clip_id,
         "datasetPartition": spec.partition,
@@ -354,6 +451,7 @@ def acquire_one(spec: ClipSpec, media_dir: Path, reuse_existing: bool) -> dict[s
             "requestedStartNs": spec.start_seconds * 1_000_000_000,
             "requestedEndNs": spec.end_seconds * 1_000_000_000,
         },
+        "sourceSelectionDecision": "D-010" if spec.clip_id in REPLACEMENT_CLIP_IDS else "D-009",
         "readOnlyLocationToken": f"t029-media/{spec.clip_id}.mkv",
         "sourceAndUsagePermission": {
             "scope": "space-rhythm-internal-test-only",
@@ -368,8 +466,14 @@ def acquire_one(spec: ClipSpec, media_dir: Path, reuse_existing: bool) -> dict[s
             "sensitiveContent": "pending_human_review",
             "publicEvidenceMayContainMediaBytes": False,
         },
-        "mediaSha256": sha256_file(output_path),
+        "mediaSha256": media_sha256,
         "byteLength": output_path.stat().st_size,
+        "selectedSourceTiming": selected_source_timing or {
+            "status": "not_redecoded_reused_proxy",
+            "timeDomain": "unavailable",
+            "proxyNormalization": "existing proxy retained and independently re-probed",
+        },
+        "ptsPreservationCheck": pts_preservation_check,
         "probe": probe,
     }
     print(
@@ -431,11 +535,98 @@ def audit_one(spec: ClipSpec) -> dict[str, Any]:
     return record
 
 
+def validate_actual_quotas(
+    records: list[dict[str, Any]],
+    failures: list[dict[str, str]],
+    declared_quotas: dict[str, Any],
+    full_dataset_requested: bool,
+    metadata_only: bool,
+) -> dict[str, Any]:
+    if metadata_only or not full_dataset_requested:
+        return {
+            "status": "not-evaluated",
+            "reason": "actual quotas require a complete acquired dataset",
+        }
+
+    partition_counts = {
+        name: sum(record["datasetPartition"] == name for record in records)
+        for name in ("calibration", "tuning", "final_evaluation")
+    }
+    category_counts: dict[str, int] = {}
+    proxy_mode_counts: dict[str, int] = {"cfr": 0, "vfr": 0}
+    for record in records:
+        category = record["productCategory"]
+        category_counts[category] = category_counts.get(category, 0) + 1
+        mode = record["probe"]["frameRateMode"]
+        proxy_mode_counts[mode] = proxy_mode_counts.get(mode, 0) + 1
+    vfr_final_count = sum(
+        record["datasetPartition"] == "final_evaluation"
+        and record["probe"]["frameRateMode"] == "vfr"
+        for record in records
+    )
+    replacement_probe = [
+        {
+            "clipId": record["clipId"],
+            "selectedSourceFrameRateMode": record["selectedSourceTiming"].get("frameRateMode"),
+            "proxyFrameRateMode": record["probe"]["frameRateMode"],
+            "ptsPreservationStatus": record["ptsPreservationCheck"]["status"],
+        }
+        for record in records
+        if record["clipId"] in REPLACEMENT_CLIP_IDS
+    ]
+    structural_pass = (
+        not failures
+        and len(records) == 40
+        and partition_counts == {"calibration": 4, "tuning": 16, "final_evaluation": 20}
+        and sorted(category_counts.values()) == [10, 10, 10, 10]
+    )
+    vfr_pass = proxy_mode_counts.get("vfr", 0) >= 3 and vfr_final_count >= 1
+    return {
+        "status": "fail" if not structural_pass or not vfr_pass else "not-evaluated",
+        "structural": {
+            "status": "pass" if structural_pass else "fail",
+            "clipCount": len(records),
+            "partitionCounts": partition_counts,
+            "categoryCounts": dict(sorted(category_counts.items())),
+        },
+        "frameRateMode": {
+            "status": "pass" if vfr_pass else "fail",
+            "proxyCounts": dict(sorted(proxy_mode_counts.items())),
+            "vfrFinalEvaluationCount": vfr_final_count,
+            "requiredVfrMinimum": 3,
+            "requiredVfrFinalEvaluationMinimum": 1,
+            "replacementProbe": replacement_probe,
+        },
+        "semanticSlices": {
+            "status": "not-evaluated",
+            "declaredExpectedCoverageStatus": declared_quotas["status"],
+            "declaredExpectedCoverageCounts": declared_quotas[
+                "declaredExpectedCoverageCounts"
+            ],
+            "reason": "slow_motion and other visual or semantic slices require adjudicated human annotation",
+        },
+    }
+
+
 def build_manifest(args: argparse.Namespace) -> tuple[dict[str, Any], int]:
     specs = parse_specs(args.source_doc)
+    artifact_version, input_version = parse_source_versions(args.source_doc)
     declared_quotas = validate_declared_quotas(specs)
+    full_dataset_requested = not args.clip_id and not args.limit
+    if args.clip_id:
+        requested_ids = set(args.clip_id)
+        known_ids = {spec.clip_id for spec in specs}
+        unknown_ids = sorted(requested_ids - known_ids)
+        if unknown_ids:
+            raise ValueError(f"unknown --clip-id values: {unknown_ids}")
+        specs = [spec for spec in specs if spec.clip_id in requested_ids]
     if args.limit:
         specs = specs[: args.limit]
+    previous_records: dict[str, dict[str, Any]] = {}
+    for previous_manifest in args.previous_manifest:
+        previous = json.loads(previous_manifest.read_text(encoding="utf-8"))
+        for record in previous.get("clips", []):
+            previous_records[record["clipId"]] = record
     args.output_dir.mkdir(parents=True, exist_ok=True)
     records: list[dict[str, Any]] = []
     failures: list[dict[str, str]] = []
@@ -444,7 +635,12 @@ def build_manifest(args: argparse.Namespace) -> tuple[dict[str, Any], int]:
             records.append(
                 audit_one(spec)
                 if args.metadata_only
-                else acquire_one(spec, args.output_dir, args.reuse_existing)
+                else acquire_one(
+                    spec,
+                    args.output_dir,
+                    args.reuse_existing,
+                    previous_records.get(spec.clip_id),
+                )
             )
         except Exception as error:  # noqa: BLE001 - preserve per-source acquisition evidence.
             print(f"ACQUIRE_FAILED {spec.clip_id} {type(error).__name__}: {error}", flush=True)
@@ -453,11 +649,12 @@ def build_manifest(args: argparse.Namespace) -> tuple[dict[str, Any], int]:
             )
     manifest: dict[str, Any] = {
         "schemaVersion": 1,
-        "datasetVersion": "0.1.0",
-        "productEvaluationInputVersion": "0.1.0",
-        "sourceArtifact": "A-031@0.2",
+        "datasetVersion": args.dataset_version or input_version,
+        "productEvaluationInputVersion": input_version,
+        "sourceArtifact": f"A-031@{artifact_version}",
         "sourceArtifactSha256": sha256_file(args.source_doc),
         "permissionDecision": "D-009",
+        "sourceSelectionDecisions": ["D-009", "D-010"],
         "acquisitionTool": {
             "script": "tests/evaluation/video/acquire_product_evaluation_media.py",
             "ytDlpVersion": yt_dlp.version.__version__,
@@ -478,8 +675,19 @@ def build_manifest(args: argparse.Namespace) -> tuple[dict[str, Any], int]:
         "clips": sorted(records, key=lambda item: item["clipId"]),
         "failures": failures,
     }
+    manifest["actualQuotaValidation"] = validate_actual_quotas(
+        records,
+        failures,
+        declared_quotas,
+        full_dataset_requested,
+        args.metadata_only,
+    )
     manifest["datasetManifestSha256"] = sha256_json(manifest)
-    return manifest, 0 if not failures and len(records) == len(specs) else 1
+    if failures or len(records) != len(specs):
+        return manifest, 1
+    if manifest["actualQuotaValidation"]["status"] == "fail":
+        return manifest, 2
+    return manifest, 0
 
 
 def parse_args() -> argparse.Namespace:
@@ -495,7 +703,14 @@ def parse_args() -> argparse.Namespace:
         default=Path("out/evaluation/T-029/media"),
     )
     parser.add_argument("--manifest-out", type=Path, required=True)
+    parser.add_argument(
+        "--dataset-version",
+        default="",
+        help="dataset version; defaults to A-031 productEvaluationInputVersion",
+    )
     parser.add_argument("--limit", type=int, default=0)
+    parser.add_argument("--clip-id", action="append", default=[])
+    parser.add_argument("--previous-manifest", action="append", type=Path, default=[])
     parser.add_argument("--reuse-existing", action="store_true")
     parser.add_argument("--metadata-only", action="store_true")
     return parser.parse_args()
@@ -512,6 +727,7 @@ def main() -> int:
         f"ACQUISITION_SUMMARY requested={manifest['requestedClipCount']} "
         f"audited={manifest['auditedClipCount']} acquired={manifest['acquiredClipCount']} "
         f"failed={manifest['failedClipCount']} "
+        f"quota={manifest['actualQuotaValidation']['status']} "
         f"manifestSha256={manifest['datasetManifestSha256']}",
         flush=True,
     )

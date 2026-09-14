@@ -1,0 +1,171 @@
+{
+  "schemaVersion": 3,
+  "taskId": "T-029",
+  "taskStatus": "blocked",
+  "recordedAt": "2026-09-14",
+  "source": {
+    "artifact": "A-031@0.3",
+    "artifactSha256": "4f703ac8b9d6a2e83f0157a9840c431436c619bccd0f3e8656cc628b1efd9d88",
+    "permissionDecision": "D-009",
+    "replacementSelectionDecision": "D-010",
+    "usageBoundary": "internal_test_only",
+    "redistributable": false,
+    "legalRightsConclusion": false
+  },
+  "replacementAcquisition": {
+    "status": "completed",
+    "requested": 4,
+    "acquired": 4,
+    "failed": 0,
+    "clips": [
+      {
+        "clipId": "SR-BILI-GAME-004",
+        "bvid": "BV1jeYq6nEC4",
+        "partition": "tuning",
+        "category": "game",
+        "selectedSourceFrameRateMode": "cfr",
+        "proxyFrameRateMode": "cfr",
+        "ptsPreservation": "pass",
+        "mediaSha256": "c17ab74fb81d90ddef30fa4d64cb1185aadb1ec060965394b0449e0cbf2c12ca"
+      },
+      {
+        "clipId": "SR-BILI-TRAVEL-001",
+        "bvid": "BV1Ex411H7he",
+        "partition": "calibration",
+        "category": "travel",
+        "selectedSourceFrameRateMode": "cfr",
+        "proxyFrameRateMode": "cfr",
+        "ptsPreservation": "pass",
+        "mediaSha256": "1adf3c58944be62f785d3a64e9222b1c0ad0657db34cbb7f732e1c96e33da821"
+      },
+      {
+        "clipId": "SR-BILI-TRAVEL-007",
+        "bvid": "BV1F6b86bELD",
+        "partition": "final_evaluation",
+        "category": "travel",
+        "selectedSourceFrameRateMode": "cfr",
+        "proxyFrameRateMode": "cfr",
+        "ptsPreservation": "pass",
+        "mediaSha256": "cf2edd5474f1f42cf76544e1b2887e3ab56737a01ecfc790f2b6d2937e715a79"
+      },
+      {
+        "clipId": "SR-BILI-LIFE-007",
+        "bvid": "BV1Ts41117Hv",
+        "partition": "final_evaluation",
+        "category": "life",
+        "selectedSourceFrameRateMode": "cfr",
+        "proxyFrameRateMode": "cfr",
+        "ptsPreservation": "pass",
+        "mediaSha256": "ed4c370a6d73eb1dc228161967b2b47fdf01659522f36fb69486fc9ff2489ea2"
+      }
+    ]
+  },
+  "mediaAndProbeFreeze": {
+    "status": "complete_for_A031_0_3_sources",
+    "manifestFile": "product-dataset-manifest-v2.json",
+    "manifestFileSha256": "2032a00762364e696066298b91534eb2157bedb2f1f2c19b407ba9f628dee68b",
+    "manifestContentSha256": "225e8eafbfaf1ee4624b682ba8700d34ee3e185803bdd775a129a7f027b51959",
+    "datasetVersion": "0.2.0",
+    "productEvaluationInputVersion": "0.2.0",
+    "acquiredClipCount": 40,
+    "totalByteLength": 1359437599,
+    "totalDurationNs": 1815044000000,
+    "mediaRootToken": "out/evaluation/T-029/media",
+    "mediaIgnoredByGit": true,
+    "mediaBytesCommittedToGit": false,
+    "signedMediaUrlsPersisted": false,
+    "mediaSha256Recheck": {
+      "checked": 40,
+      "passed": 40,
+      "failed": 0
+    }
+  },
+  "quotaValidation": {
+    "structural": {
+      "status": "pass",
+      "clipCount": 40,
+      "partitions": {
+        "calibration": 4,
+        "tuning": 16,
+        "final_evaluation": 20
+      },
+      "categories": {
+        "dance": 10,
+        "game": 10,
+        "travel": 10,
+        "life": 10
+      }
+    },
+    "frameRateMode": {
+      "status": "fail",
+      "actual": {
+        "cfr": 40,
+        "vfr": 0,
+        "vfrFinalEvaluation": 0
+      },
+      "required": {
+        "vfrMinimum": 3,
+        "vfrFinalEvaluationMinimum": 1
+      },
+      "reason": "all three D-010 VFR target platform streams and their timestamp-preserving proxies probed as CFR"
+    },
+    "semanticSlices": {
+      "status": "not-evaluated",
+      "declaredExpectedCoverageStatus": "pass",
+      "declaredSlowMotion": {
+        "all": 4,
+        "finalEvaluation": 4
+      },
+      "declaredOtherSlices": "all remaining 18 declared technical slices have at least 4 clips and at least 1 final_evaluation clip",
+      "reason": "A-031 requires slow_motion and other visual or semantic slices to be confirmed by adjudicated human annotation; expected source labels are not ground truth"
+    },
+    "overallDatasetGate": "fail"
+  },
+  "acquisitionToolCorrection": {
+    "status": "resolved_and_rechecked",
+    "initialIssue": "TRAVEL-001 exposed coarse MPEG-4 encoder time-base rejection and the first LIFE-007 proxy showed 18 ms accumulated duration error",
+    "correction": "use a 1/60000 codec time base, drop duplicate or non-monotonic decoded source timestamps fail-closed, and store selected-source timing plus proxy PTS preservation checks",
+    "finalResult": "all four replacement proxies acquired; frame count, frame-rate mode, duration and median delta preservation checks pass within 1 ms"
+  },
+  "humanEvidence": {
+    "status": "missing",
+    "initialAnnotation": "not-run",
+    "review": "not-run",
+    "adjudication": "not-run",
+    "blindEvaluation": "not-run",
+    "adjudicatedAnnotationSha256": null
+  },
+  "sequenceGuard": {
+    "adjudicatedAnnotationHashPresent": false,
+    "classicMayStart": false,
+    "classicStarted": false,
+    "windowsFormalBenchmarkStarted": false,
+    "reason": "the user explicitly limited this continuation to replacement acquisition and quota verification, and A-031 requires frozen adjudicated annotations before classic execution"
+  },
+  "handoffH013": {
+    "closeConditionSatisfied": false,
+    "statusAfterVerification": "accepted",
+    "reason": "D-010 requires actual vfr>=3 including final>=1, but actual probe is vfr=0"
+  },
+  "gates": {
+    "sourceWindows": "pass",
+    "structuralQuota": "pass",
+    "vfrQuota": "fail",
+    "semanticSliceQuota": "not-evaluated",
+    "productEffect": "not-evaluated",
+    "manualCorrection": "not-evaluated",
+    "naturalness": "not-evaluated",
+    "performance": "not-evaluated",
+    "overall": "not-evaluated",
+    "modelEligibility": "not-evaluated"
+  },
+  "model": {
+    "modelEvaluationStarted": false,
+    "modelProposalCreated": false,
+    "onnxIntroduced": false
+  },
+  "nextActions": [
+    "H-013 remains accepted: product-manager-01 must submit another versioned same-category and same-partition VFR source replacement under a new decision",
+    "H-014 remains open: independent human adjudication and compliant Windows benchmark conditions are still required before formal classic execution"
+  ]
+}
