@@ -33,6 +33,7 @@
 | A-027 | [Qt Quick 真实服务、时间线与安全导出集成](A-027-qt-quick-real-workflow-integration.md) | ui-engineer-qt-quick-01 | T-026 | 0.3 | draft | 尚无 |
 | A-028 | [视频分析输入/输出契约、代表样本与效果指标 0.x](A-028-video-analysis-contract-sample-metrics.md) | video-algorithm-engineer-cv-01 | T-027 | 0.2 | draft | 尚无 |
 | A-029 | [经典视频分析实现、真实 golden 与自测](A-029-classic-video-analysis-and-golden.md) | video-algorithm-engineer-cv-01 | T-028 | 0.1 | draft | 尚无 |
+| A-030 | [视频产品效果、性能与可选模型门禁评估](A-030-video-product-evaluation-and-model-gate.md) | video-algorithm-engineer-cv-01 | T-029 | 0.1 | draft | 尚无 |
 
 ## 正文元信息样式（不是真实成果）
 
