@@ -4,14 +4,14 @@
 - 成果 ID：A-031
 - 负责人：product-manager-01
 - 关联任务：T-039；供 T-029、T-022 使用
-- 版本：0.2
+- 版本：0.3
 - 更新日期：2026-09-14
 - 状态：approved
 - 适用范围：第一阶段“视频到可编辑节奏音轨”主流程的代表产品数据、人工标注、自然度主观评估及经典视频算法效果/性能门禁输入；不执行算法评估，不批准学习模型或生产发布。
-- 来源及输入版本：本会话用户于 2026-09-14 的直接授权与逐项确认；D-001～D-008 confirmed；A-002 0.2 approved；A-011 0.1、A-016 0.1、A-028 0.2、A-029 0.1、A-030 0.1；H-001 项目经理整理结果。
-- 批准依据：D-009 confirmed。用户确认 B 站内部测试素材边界、四类 40 条分区和配额、当前 Windows 基准机、运行条件及全部效果/自然度/性能阈值。
-- 协议版本：`productEvaluationInputVersion=0.1.0`
-- 版本记录：2026-09-14，0.2，按 D-009 写入已确认的 B 站来源清单与分区、基准机实测元组、运行条件、逐项门槛和总 gate 规则；0.1 为首次方法稿。
+- 来源及输入版本：本会话用户于 2026-09-14 的直接授权与逐项确认；D-001～D-010 confirmed；A-002 0.2 approved；A-011 0.1、A-016 0.1、A-028 0.2、A-029 0.1、A-030 0.2；H-013、`source-availability-audit-v1.json`、`product-dataset-manifest-v1.json`、`execution-readiness-v2.json`。
+- 批准依据：0.2 由 D-009 confirmed 批准；0.3 的 4 个来源替换和 VFR/慢动作探测目标由 D-010 confirmed 批准。D-009 中未变化的使用边界、基准机、协议和数值门槛保持有效。
+- 协议版本：`productEvaluationInputVersion=0.2.0`
+- 版本记录：2026-09-14，0.2，按 D-009 写入已确认的 B 站来源清单与分区、基准机实测元组、运行条件、逐项门槛和总 gate 规则；0.1 为首次方法稿。2026-09-14，0.3，按 H-013 的实际获取/probe 审计，在同类别和分区内替换 4 个超窗来源，补足声明层 `slow_motion` 配额并指定 3 个 VFR 探测目标；同日由 D-010 确认。T-029 执行人仍须以实际 probe/裁决验证配额，不能把本次来源批准当作实测通过。
 
 ## 1. 输入状态与不可替代边界
 
@@ -22,7 +22,7 @@
 | 代表视频集要求与 manifest 字段 | `product-defined` | 可据此收集和审计真实产品视频 |
 | 人工标注、复核与修正计量协议 | `product-defined` | 可据此制作标注工具/文件并培训标注者 |
 | “卡点自然” rubric、1～5 尺度和播放条件 | `product-defined` | 可据此构造盲评流程并保存原始评分 |
-| 实际代表产品视频来源、权限边界、配额与分区 | `confirmed-source-manifest` | 按第 8.1 节获取实际媒体并由 T-029 执行人冻结 hash；这是执行证据，不是未决产品输入 |
+| 实际代表产品视频来源、权限边界、配额与分区 | `confirmed-source-manifest` | 0.2 的 36 个已成功来源继续保留；第 8.1 节 4 个替换来源已由 D-010 确认，等待 T-029 实际获取/probe 后形成新版数据 manifest |
 | 基准 Windows 硬件与运行条件 | `confirmed` | 按第 8.2 节复核实际测量签名 |
 | 效果、自然度和性能数值阈值 | `confirmed` | 按第 6～8 节判定；未运行 T-029 前仍为 `not-evaluated` |
 
@@ -200,9 +200,9 @@ F1 作为 precision/recall 的派生诊断同时报告，但不允许只用一�
 
 经典算法只有在冻结的 `final_evaluation` 上实际违反至少一个已确认效果门槛、且已排除输入质量、标注分歧、媒体时间映射或错误基准环境后，才满足“可以提出可选模型方案”的必要条件。即使满足，也只允许提交收益、性能、许可、CPU/GPU、包体和部署影响比较；引入 ONNX Runtime 或模型文件仍需新决定。
 
-## 8. D-009 已确认实际基线
+## 8. D-009 已确认基线与 H-013 来源修订
 
-用户已于 2026-09-14 对 C-1～C-3 逐项确认。本节是可交给 T-029 执行人的产品基线；这不表示已运行 T-029，也不表示任何效果或性能已通过。
+用户已于 2026-09-14 对 C-1～C-3 逐项确认。D-009 对 0.2 的确认仍是历史事实；H-013 发现的实际来源失效和 slice 缺口使 0.3 必须重新确认。除第 8.1 节 4 个来源及对应预期覆盖外，C-1 的使用边界/总配额、C-2 和 C-3 均未修改。本节不表示已运行 T-029，也不表示任何效果、自然度、性能或 VFR 配额已经通过。
 
 ### 8.1 C-1 代表产品视频
 
@@ -229,20 +229,20 @@ F1 作为 precision/recall 的派生诊断同时报告，但不允许只用一�
 | SR-BILI-GAME-001 | calibration | 游戏/动作高光 | [BV1bGYE6XEoF](https://www.bilibili.com/video/BV1bGYE6XEoF/) 原神战斗混剪 | 00:15～01:00 | fast_cut、impact、mixed_global_local |
 | SR-BILI-GAME-002 | tuning | 游戏/动作高光 | [BV17BT2zbEND](https://www.bilibili.com/video/BV17BT2zbEND/) 三角洲高光混剪 | 00:15～01:00 | fast_cut、impact、flash_or_exposure_change |
 | SR-BILI-GAME-003 | final_evaluation | 游戏/动作高光 | [BV14v4y1p7Ki](https://www.bilibili.com/video/BV14v4y1p7Ki/) 1080P60 高光 | 00:15～01:00 | fast_cut、slow_motion、tempo_or_energy_change |
-| SR-BILI-GAME-004 | tuning | 游戏/动作高光 | [BV1FCXhY8ESH](https://www.bilibili.com/video/BV1FCXhY8ESH/) 5E 高光 | 00:00～00:50 | fast_cut、impact、low_quality_compression |
+| SR-BILI-GAME-004 | tuning | 游戏/动作高光 | [BV1jeYq6nEC4](https://www.bilibili.com/video/BV1jeYq6nEC4/) 移动端赛车实况 | 00:15～01:00 | long_take_or_no_cut、global_camera_motion、low_quality_compression、vfr |
 | SR-BILI-GAME-005 | final_evaluation | 游戏/动作高光 | [BV1z4411K7Jx](https://www.bilibili.com/video/BV1z4411K7Jx/) 游戏高燃混剪 | 00:15～01:00 | fast_cut、stop、reversal |
 | SR-BILI-GAME-006 | tuning | 游戏/动作高光 | [BV1akYZ6vEHz](https://www.bilibili.com/video/BV1akYZ6vEHz/) 4K60 运动游戏实况 | 00:15～01:00 | long_take_or_no_cut、global_camera_motion、repetitive_motion |
 | SR-BILI-GAME-007 | final_evaluation | 游戏/动作高光 | [BV1LkYD6pEVv](https://www.bilibili.com/video/BV1LkYD6pEVv/) 4K60 跑酷实况 | 00:15～01:00 | long_take_or_no_cut、repetitive_motion、tempo_or_energy_change |
 | SR-BILI-GAME-008 | tuning | 游戏/动作高光 | [BV1Kqbw6oEZE](https://www.bilibili.com/video/BV1Kqbw6oEZE/) 4K60 骑行实况 | 00:15～01:00 | global_camera_motion、reversal、motion_blur_or_occlusion |
 | SR-BILI-GAME-009 | final_evaluation | 游戏/动作高光 | [BV1Zxju6PE2c](https://www.bilibili.com/video/BV1Zxju6PE2c/) FPS 无解说实况 | 00:15～01:00 | long_take_or_no_cut、mixed_global_local、impact |
 | SR-BILI-GAME-010 | final_evaluation | 游戏/动作高光 | [BV1dJ411q7f8](https://www.bilibili.com/video/BV1dJ411q7f8/) 1080P60 战场实况 | 00:15～01:00 | global_camera_motion、stop、low_quality_compression |
-| SR-BILI-TRAVEL-001 | calibration | 旅行/风景混剪 | [BV1YAYz6nEcC](https://www.bilibili.com/video/BV1YAYz6nEcC/) 中世纪风景短片 | 00:00～00:52 | slow_cut_or_transition、global_camera_motion、tempo_or_energy_change |
+| SR-BILI-TRAVEL-001 | calibration | 旅行/风景混剪 | [BV1Ex411H7he](https://www.bilibili.com/video/BV1Ex411H7he/) iPhone 1080p60 扫街 | 00:15～01:00 | slow_cut_or_transition、global_camera_motion、tempo_or_energy_change、vfr |
 | SR-BILI-TRAVEL-002 | tuning | 旅行/风景混剪 | [BV19VYe6MEJs](https://www.bilibili.com/video/BV19VYe6MEJs/) 风景旅行片段 | 00:15～01:00 | slow_cut_or_transition、near_static、sparse_free_rhythm |
 | SR-BILI-TRAVEL-003 | final_evaluation | 旅行/风景混剪 | [BV1TsYR6nEk6](https://www.bilibili.com/video/BV1TsYR6nEk6/) 旷野风景短片 | 00:15～01:00 | global_camera_motion、sparse_free_rhythm、ambiguous_action |
 | SR-BILI-TRAVEL-004 | tuning | 旅行/风景混剪 | [BV1u7411P7Vx](https://www.bilibili.com/video/BV1u7411P7Vx/) 环球旅行高燃片 | 00:15～01:00 | fast_cut、tempo_or_energy_change、mixed_global_local |
 | SR-BILI-TRAVEL-005 | final_evaluation | 旅行/风景混剪 | [BV1va411y7MC](https://www.bilibili.com/video/BV1va411y7MC/) 机车旅途混剪 | 00:15～01:00 | fast_cut、global_camera_motion、motion_blur_or_occlusion |
 | SR-BILI-TRAVEL-006 | tuning | 旅行/风景混剪 | [BV1MT411V7Cg](https://www.bilibili.com/video/BV1MT411V7Cg/) 园林航拍长镜头 | 00:15～01:00 | long_take_or_no_cut、near_static、sparse_free_rhythm |
-| SR-BILI-TRAVEL-007 | final_evaluation | 旅行/风景混剪 | [BV1C8YX6uE8p](https://www.bilibili.com/video/BV1C8YX6uE8p/) 希腊海岸长镜头 | 00:00～00:56 | long_take_or_no_cut、near_static、slow_cut_or_transition |
+| SR-BILI-TRAVEL-007 | final_evaluation | 旅行/风景混剪 | [BV1F6b86bELD](https://www.bilibili.com/video/BV1F6b86bELD/) Action 5 Pro 海边与乡景混合帧率片段 | 00:30～01:15 | slow_cut_or_transition、near_static、slow_motion、vfr |
 | SR-BILI-TRAVEL-008 | tuning | 旅行/风景混剪 | [BV1HiYC6VEVC](https://www.bilibili.com/video/BV1HiYC6VEVC/) 风景长镜头 | 00:15～01:00 | long_take_or_no_cut、ambiguous_action、low_quality_compression |
 | SR-BILI-TRAVEL-009 | final_evaluation | 旅行/风景混剪 | [BV1zDbV62Ea1](https://www.bilibili.com/video/BV1zDbV62Ea1/) 4K 纽约城市空镜 | 00:15～01:00 | global_camera_motion、slow_cut_or_transition、flash_or_exposure_change |
 | SR-BILI-TRAVEL-010 | final_evaluation | 旅行/风景混剪 | [BV1714y1B7ba](https://www.bilibili.com/video/BV1714y1B7ba/) 4K 公路长镜头 | 00:15～01:00 | long_take_or_no_cut、global_camera_motion、repetitive_motion |
@@ -252,12 +252,25 @@ F1 作为 precision/recall 的派生诊断同时报告，但不允许只用一�
 | SR-BILI-LIFE-004 | tuning | 生活 Vlog/长镜头 | [BV1kqYi6bEUi](https://www.bilibili.com/video/BV1kqYi6bEUi/) 画师生活碎片 | 00:15～01:00 | fast_cut、local_subject_motion、ambiguous_action |
 | SR-BILI-LIFE-005 | final_evaluation | 生活 Vlog/长镜头 | [BV18nYC6WEKH](https://www.bilibili.com/video/BV18nYC6WEKH/) 宅家日常 Vlog | 00:15～01:00 | near_static、local_subject_motion、low_quality_compression |
 | SR-BILI-LIFE-006 | tuning | 生活 Vlog/长镜头 | [BV1PEjPzyECh](https://www.bilibili.com/video/BV1PEjPzyECh/) 一镜到底片段 | 00:15～01:00 | long_take_or_no_cut、mixed_global_local、repetitive_motion |
-| SR-BILI-LIFE-007 | final_evaluation | 生活 Vlog/长镜头 | [BV16hrhBoEp7](https://www.bilibili.com/video/BV16hrhBoEp7/) 校园篮球接力一镜到底 | 00:00～00:22 | long_take_or_no_cut、impact、reversal |
+| SR-BILI-LIFE-007 | final_evaluation | 生活 Vlog/长镜头 | [BV1Ts41117Hv](https://www.bilibili.com/video/BV1Ts41117Hv/) 1500fps 猫咪慢镜头 | 00:15～01:00 | slow_motion、local_subject_motion、impact、ambiguous_action |
 | SR-BILI-LIFE-008 | tuning | 生活 Vlog/长镜头 | [BV1KnYX6LEKS](https://www.bilibili.com/video/BV1KnYX6LEKS/) 房间一镜到底 | 00:00～01:00 | long_take_or_no_cut、near_static、global_camera_motion |
 | SR-BILI-LIFE-009 | final_evaluation | 生活 Vlog/长镜头 | [BV1rrYi6oEhQ](https://www.bilibili.com/video/BV1rrYi6oEhQ/) Room Tour 一镜到底 | 00:15～01:00 | long_take_or_no_cut、global_camera_motion、stop |
 | SR-BILI-LIFE-010 | final_evaluation | 生活 Vlog/长镜头 | [BV1d3Yi6jEri](https://www.bilibili.com/video/BV1d3Yi6jEri/) 第一视角开箱 Vlog | 00:15～01:00 | long_take_or_no_cut、local_subject_motion、ambiguous_action |
 
-上表“预期覆盖”不是人工标注真值；`cfr|vfr`、慢动作、低质量及其他切片均以实际 ffprobe 与裁决标注为准。如实际获取失败、时长不足、内容不符或某 slice 配额不足，必须由 product-manager-01 在相同类别和分区内显式替换并升版本，不得由实现成员静默替换。
+#### H-013 的替换差异与确认边界
+
+product-manager-01 于 2026-09-14 从 B 站公开页面核验了 4 个候选的标题和公开时长；这只能证明页面存在且候选源时长覆盖所选窗口，不能证明下载流的帧率模式或人工 slice 标签。
+
+| clipId | 0.2 失效来源 | 0.3 候选来源 | 同类/同分区 | 公开源时长与新窗口 | 主要补配额目标 |
+|---|---|---|---|---|---|
+| `SR-BILI-GAME-004` | `BV1FCXhY8ESH`，49.421s 小于批准终点 50s | `BV1jeYq6nEC4` | game / tuning | 135s；15～60s | 移动端录屏的 `vfr` 探测目标、低质量压缩、长镜头和全局运动 |
+| `SR-BILI-TRAVEL-001` | `BV1YAYz6nEcC`，51.366s 小于批准终点 52s | `BV1Ex411H7he` | travel / calibration | 109s；15～60s | iPhone 实拍的 `vfr` 探测目标、慢切/运镜和节奏变化 |
+| `SR-BILI-TRAVEL-007` | `BV1C8YX6uE8p`，55.402s 小于批准终点 56s | `BV1F6b86bELD` | travel / final_evaluation | 370s；30～75s | 混合 30/60fps 描述下的 `vfr` 探测目标、慢动作、慢切和近静止 |
+| `SR-BILI-LIFE-007` | `BV16hrhBoEp7`，21.640s 小于批准终点 22s | `BV1Ts41117Hv` | life / final_evaluation | 144s；15～60s | 实拍慢镜头与局部动作；补足 `slow_motion` 声明配额 |
+
+按 0.3 表格做静态计数，仍为 40 条、`calibration/tuning/final_evaluation=4/16/20`、四类各 10 条；`slow_motion` 预期为 4 条且 4 条均在 final，`vfr` 探测目标为 3 条且 1 条在 final，其余 18 个必测技术 slice 均不少于 4 条且至少 1 条在 final。这里的 `vfr` 是选源目标而不是 probe 结论：B 站转码可能输出 CFR，代理过程也必须保留源 PTS。只有 T-029 执行人实际获取候选、同时记录选中平台流和时间戳保持代理的 probe，并获得 `vfr>=3`、其中 final `>=1`，才算恢复 VFR 配额；任一候选实际为 CFR 时，H-013 不得关闭，须由 product-manager-01 再次显式换源并升版本。
+
+上表“预期覆盖”不是人工标注真值；`cfr|vfr` 以实际 ffprobe 为准，慢动作、低质量及其他视觉/语义切片以裁决标注为准。如实际获取失败、时长不足、内容不符或某 slice 配额不足，必须由 product-manager-01 在相同类别和分区内显式替换并升版本，不得由实现成员静默缩短时间窗或替换来源。D-010 已批准 0.3 的来源清单，但没有预先批准任何实测结果或后续静默替换。
 
 ### 8.2 C-2 Windows 基准机与运行条件
 
