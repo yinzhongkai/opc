@@ -1,0 +1,163 @@
+{
+  "schemaVersion": 2,
+  "taskId": "T-029",
+  "taskStatus": "blocked",
+  "recordedAt": "2026-09-14",
+  "source": {
+    "artifact": "A-031@0.2",
+    "artifactSha256": "88467ff4ccbb07148fdbfc944b42fb52bec647cf7e1c4cabe8a35434ef15f7ff",
+    "permissionDecision": "D-009",
+    "usageBoundary": "internal_test_only",
+    "redistributable": false,
+    "legalRightsConclusion": false
+  },
+  "sourceAvailability": {
+    "status": "fail",
+    "evidenceFile": "source-availability-audit-v1.json",
+    "evidenceFileSha256": "d6f9a4711cbc91cad90215f675d39bd25f7039ddc71cca3ed99547da901301db",
+    "requestedClipCount": 40,
+    "validWindowCount": 36,
+    "invalidWindowCount": 4,
+    "invalidWindows": [
+      {
+        "clipId": "SR-BILI-GAME-004",
+        "partition": "tuning",
+        "category": "game",
+        "approvedEndSeconds": 50,
+        "sourceDurationSeconds": 49.421
+      },
+      {
+        "clipId": "SR-BILI-TRAVEL-001",
+        "partition": "calibration",
+        "category": "travel",
+        "approvedEndSeconds": 52,
+        "sourceDurationSeconds": 51.366
+      },
+      {
+        "clipId": "SR-BILI-TRAVEL-007",
+        "partition": "final_evaluation",
+        "category": "travel",
+        "approvedEndSeconds": 56,
+        "sourceDurationSeconds": 55.402
+      },
+      {
+        "clipId": "SR-BILI-LIFE-007",
+        "partition": "final_evaluation",
+        "category": "life",
+        "approvedEndSeconds": 22,
+        "sourceDurationSeconds": 21.640
+      }
+    ],
+    "replacementRule": "product-manager-01 must replace within the same category and partition and version A-031; the implementation owner must not silently shorten or substitute"
+  },
+  "mediaAndProbeFreeze": {
+    "status": "partial",
+    "manifestFile": "product-dataset-manifest-v1.json",
+    "manifestFileSha256": "a97443151c8b1dc1894227ade465ffbd532c4498eca554fe3dd6513724bb6a05",
+    "manifestContentSha256": "2046cb6055784029ca04d6a79114fbdf074385a79dbc9dc0b852531c750ed571",
+    "acquiredClipCount": 36,
+    "totalByteLength": 1141653591,
+    "totalDurationNs": 1635045000000,
+    "mediaRootToken": "out/evaluation/T-029/media",
+    "mediaIgnoredByGit": true,
+    "mediaBytesCommittedToGit": false,
+    "signedMediaUrlsPersisted": false,
+    "mediaSha256Recheck": {
+      "checked": 36,
+      "passed": 36,
+      "failed": 0
+    },
+    "perClipMediaProbeAndFrameTimesHashes": "frozen in product-dataset-manifest-v1.json"
+  },
+  "quotaValidation": {
+    "status": "fail",
+    "requiredClipCount": 40,
+    "actualClipCount": 36,
+    "partitions": {
+      "required": {
+        "calibration": 4,
+        "tuning": 16,
+        "final_evaluation": 20
+      },
+      "actual": {
+        "calibration": 3,
+        "tuning": 15,
+        "final_evaluation": 18
+      }
+    },
+    "categories": {
+      "requiredEach": 10,
+      "actual": {
+        "dance": 10,
+        "game": 9,
+        "travel": 8,
+        "life": 9
+      }
+    },
+    "frameRateModeFromProbe": {
+      "cfr": 36,
+      "vfr": 0,
+      "requiredVfrMinimum": 3,
+      "requiredVfrFinalMinimum": 1
+    },
+    "declaredExpectedSlowMotion": {
+      "count": 2,
+      "finalEvaluationCount": 2,
+      "requiredMinimum": 3,
+      "requiredFinalMinimum": 1,
+      "status": "provisional_shortfall_pending_human_review"
+    },
+    "otherTechnicalSlices": "not-evaluated until adjudicated human annotation",
+    "rule": "each required technical slice needs at least 3 clips including at least 1 final_evaluation clip"
+  },
+  "humanEvidence": {
+    "status": "missing",
+    "requiredIndependentReviewers": 5,
+    "requiredExperiencedReviewers": 3,
+    "algorithmImplementerIsFormalReviewer": false,
+    "initialAnnotation": "not-run",
+    "review": "not-run",
+    "adjudication": "not-run",
+    "blindEvaluation": "not-run",
+    "initialAnnotationSha256": null,
+    "reviewSha256": null,
+    "adjudicatedAnnotationSha256": null,
+    "blindRatingsSha256": null
+  },
+  "windowsBenchmark": {
+    "status": "blocked",
+    "benchmarkId": "TIGER",
+    "requiredPower": "AC plus Windows Best Performance",
+    "observedPowerScheme": "Balanced",
+    "releasePeNativeStart": "blocked_before_main_by_WDAC_or_SAC",
+    "nativeExitCode": "0xC0E90002",
+    "wineAcceptedAsSubstitute": false,
+    "classicRun": "not-run",
+    "performanceRuns": "not-run"
+  },
+  "sequenceGuard": {
+    "adjudicatedAnnotationHashPresent": false,
+    "classicMayStart": false,
+    "classicStarted": false,
+    "reason": "A-031 requires frozen adjudicated annotations before classic execution"
+  },
+  "gates": {
+    "datasetAndQuota": "fail",
+    "productEffect": "not-evaluated",
+    "manualCorrection": "not-evaluated",
+    "naturalness": "not-evaluated",
+    "performance": "not-evaluated",
+    "overall": "not-evaluated",
+    "modelEligibility": "not-evaluated"
+  },
+  "model": {
+    "modelEvaluationStarted": false,
+    "modelProposalCreated": false,
+    "onnxIntroduced": false,
+    "reason": "classic has not run on a frozen valid final_evaluation set and therefore has no real threshold failure"
+  },
+  "nextActions": [
+    "H-013: product-manager-01 replaces invalid sources and restores actual quota/VFR/slice coverage in a versioned A-031",
+    "H-014: user provides independent human annotation/review/blind-evaluation participants and restores the confirmed native Windows benchmark conditions"
+  ]
+}

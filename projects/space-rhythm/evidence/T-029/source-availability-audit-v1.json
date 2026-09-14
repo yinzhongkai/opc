@@ -1,0 +1,1623 @@
+{
+  "schemaVersion": 1,
+  "datasetVersion": "0.1.0",
+  "productEvaluationInputVersion": "0.1.0",
+  "sourceArtifact": "A-031@0.2",
+  "sourceArtifactSha256": "88467ff4ccbb07148fdbfc944b42fb52bec647cf7e1c4cabe8a35434ef15f7ff",
+  "permissionDecision": "D-009",
+  "acquisitionTool": {
+    "script": "tests/evaluation/video/acquire_product_evaluation_media.py",
+    "ytDlpVersion": "2026.08.19",
+    "pyAvVersion": "18.1.0",
+    "ffmpegLibraries": {
+      "libavutil": [
+        60,
+        26,
+        102
+      ],
+      "libavcodec": [
+        62,
+        28,
+        102
+      ],
+      "libavformat": [
+        62,
+        12,
+        102
+      ],
+      "libavdevice": [
+        62,
+        3,
+        102
+      ],
+      "libavfilter": [
+        11,
+        14,
+        102
+      ],
+      "libswscale": [
+        9,
+        5,
+        102
+      ],
+      "libswresample": [
+        6,
+        3,
+        102
+      ]
+    },
+    "proxyCodec": "mpeg4",
+    "proxyPixelFormat": "yuv420p",
+    "audioIncluded": false
+  },
+  "mediaRootToken": "out/evaluation/T-029/media",
+  "mediaBytesCommittedToGit": false,
+  "mode": "metadata_only",
+  "declaredQuotaValidation": {
+    "status": "provisional_shortfall_pending_human_review",
+    "partitionCounts": {
+      "calibration": 4,
+      "tuning": 16,
+      "final_evaluation": 20
+    },
+    "categoryCounts": {
+      "旅行/风景混剪": 10,
+      "游戏/动作高光": 10,
+      "生活 Vlog/长镜头": 10,
+      "舞蹈/运动": 10
+    },
+    "declaredExpectedCoverageCounts": {
+      "ambiguous_action": {
+        "all": 6,
+        "final_evaluation": 2
+      },
+      "fast_cut": {
+        "all": 12,
+        "final_evaluation": 5
+      },
+      "flash_or_exposure_change": {
+        "all": 4,
+        "final_evaluation": 2
+      },
+      "global_camera_motion": {
+        "all": 10,
+        "final_evaluation": 6
+      },
+      "impact": {
+        "all": 8,
+        "final_evaluation": 4
+      },
+      "local_subject_motion": {
+        "all": 7,
+        "final_evaluation": 3
+      },
+      "long_take_or_no_cut": {
+        "all": 12,
+        "final_evaluation": 7
+      },
+      "low_quality_compression": {
+        "all": 4,
+        "final_evaluation": 2
+      },
+      "mixed_global_local": {
+        "all": 8,
+        "final_evaluation": 3
+      },
+      "motion_blur_or_occlusion": {
+        "all": 4,
+        "final_evaluation": 3
+      },
+      "near_static": {
+        "all": 6,
+        "final_evaluation": 2
+      },
+      "repetitive_motion": {
+        "all": 7,
+        "final_evaluation": 3
+      },
+      "reversal": {
+        "all": 5,
+        "final_evaluation": 3
+      },
+      "slow_cut_or_transition": {
+        "all": 8,
+        "final_evaluation": 3
+      },
+      "slow_motion": {
+        "all": 2,
+        "final_evaluation": 2
+      },
+      "sparse_free_rhythm": {
+        "all": 6,
+        "final_evaluation": 3
+      },
+      "stop": {
+        "all": 4,
+        "final_evaluation": 3
+      },
+      "tempo_or_energy_change": {
+        "all": 7,
+        "final_evaluation": 4
+      }
+    },
+    "declaredExpectedCoverageShortfalls": {
+      "slow_motion": {
+        "all": 2,
+        "final_evaluation": 2
+      }
+    },
+    "probeOrHumanDerivedSlicesNotJudgedHere": [
+      "cfr",
+      "vfr"
+    ]
+  },
+  "requestedClipCount": 40,
+  "auditedClipCount": 36,
+  "acquiredClipCount": 0,
+  "failedClipCount": 4,
+  "clips": [
+    {
+      "clipId": "SR-BILI-DANCE-001",
+      "datasetPartition": "calibration",
+      "productCategory": "舞蹈/运动",
+      "contentCategoriesExpectedPendingHumanReview": [
+        "fast_cut",
+        "local_subject_motion",
+        "repetitive_motion"
+      ],
+      "source": {
+        "provider": "bilibili_public_page",
+        "bvid": "BV1oq4y1E7co",
+        "pageUrl": "https://www.bilibili.com/video/BV1oq4y1E7co/",
+        "pageLabel": "BV1oq4y1E7co",
+        "title": "【舞蹈混剪】每个延伸都是朝着梦想的方向",
+        "uploader": "安渡ANDU",
+        "uploaderId": "401111334",
+        "uploadDate": "20210428",
+        "sourceDurationSeconds": 182.368,
+        "selectedFormatId": "30064",
+        "selectedFormatCodec": "avc1.640028",
+        "selectedFormatWidth": 1280,
+        "selectedFormatHeight": 720,
+        "selectedFormatFps": 29.412
+      },
+      "sourceWindow": {
+        "requestedStartNs": 15000000000,
+        "requestedEndNs": 60000000000,
+        "coveredBySourceDuration": true
+      },
+      "sourceAndUsagePermission": {
+        "scope": "space-rhythm-internal-test-only",
+        "confirmedBy": "project-default-final-confirmer",
+        "decisionId": "D-009",
+        "confirmationDate": "2026-09-14",
+        "legalConclusion": false,
+        "redistributable": false
+      },
+      "signedMediaUrlPersisted": false
+    },
+    {
+      "clipId": "SR-BILI-DANCE-002",
+      "datasetPartition": "tuning",
+      "productCategory": "舞蹈/运动",
+      "contentCategoriesExpectedPendingHumanReview": [
+        "fast_cut",
+        "flash_or_exposure_change",
+        "mixed_global_local"
+      ],
+      "source": {
+        "provider": "bilibili_public_page",
+        "bvid": "BV1nE411f7NK",
+        "pageUrl": "https://www.bilibili.com/video/BV1nE411f7NK/",
+        "pageLabel": "BV1nE411f7NK",
+        "title": "史上最强solo一键换装！神仙剪辑无人能敌！Jennie换装特效两开花颠覆你的感官！",
+        "uploader": "Wink眨宝momo",
+        "uploaderId": "25592782",
+        "uploadDate": "20191009",
+        "sourceDurationSeconds": 168.276,
+        "selectedFormatId": "30064",
+        "selectedFormatCodec": "avc1.640028",
+        "selectedFormatWidth": 1280,
+        "selectedFormatHeight": 720,
+        "selectedFormatFps": 29.97
+      },
+      "sourceWindow": {
+        "requestedStartNs": 15000000000,
+        "requestedEndNs": 60000000000,
+        "coveredBySourceDuration": true
+      },
+      "sourceAndUsagePermission": {
+        "scope": "space-rhythm-internal-test-only",
+        "confirmedBy": "project-default-final-confirmer",
+        "decisionId": "D-009",
+        "confirmationDate": "2026-09-14",
+        "legalConclusion": false,
+        "redistributable": false
+      },
+      "signedMediaUrlPersisted": false
+    },
+    {
+      "clipId": "SR-BILI-DANCE-003",
+      "datasetPartition": "final_evaluation",
+      "productCategory": "舞蹈/运动",
+      "contentCategoriesExpectedPendingHumanReview": [
+        "fast_cut",
+        "impact",
+        "tempo_or_energy_change"
+      ],
+      "source": {
+        "provider": "bilibili_public_page",
+        "bvid": "BV1AE411e7Tb",
+        "pageUrl": "https://www.bilibili.com/video/BV1AE411e7Tb/",
+        "pageLabel": "BV1AE411e7Tb",
+        "title": "【王一博超S狼系混剪 | Animals】野性难驯  烈火燎原 | 疯狂踩点  | 不看后悔系列 |  舞蹈杂志广告综艺混剪",
+        "uploader": "挽豆荚",
+        "uploaderId": "17251282",
+        "uploadDate": "20191111",
+        "sourceDurationSeconds": 231.68,
+        "selectedFormatId": "30064",
+        "selectedFormatCodec": "avc1.640028",
+        "selectedFormatWidth": 1280,
+        "selectedFormatHeight": 720,
+        "selectedFormatFps": 25.0
+      },
+      "sourceWindow": {
+        "requestedStartNs": 15000000000,
+        "requestedEndNs": 60000000000,
+        "coveredBySourceDuration": true
+      },
+      "sourceAndUsagePermission": {
+        "scope": "space-rhythm-internal-test-only",
+        "confirmedBy": "project-default-final-confirmer",
+        "decisionId": "D-009",
+        "confirmationDate": "2026-09-14",
+        "legalConclusion": false,
+        "redistributable": false
+      },
+      "signedMediaUrlPersisted": false
+    },
+    {
+      "clipId": "SR-BILI-DANCE-004",
+      "datasetPartition": "tuning",
+      "productCategory": "舞蹈/运动",
+      "contentCategoriesExpectedPendingHumanReview": [
+        "local_subject_motion",
+        "repetitive_motion",
+        "ambiguous_action"
+      ],
+      "source": {
+        "provider": "bilibili_public_page",
+        "bvid": "BV1E8VBzWEDv",
+        "pageUrl": "https://www.bilibili.com/video/BV1E8VBzWEDv/",
+        "pageLabel": "BV1E8VBzWEDv",
+        "title": "他很乖｜谁懂他跳双人舞的下位感啊",
+        "uploader": "-万里睽违-",
+        "uploaderId": "274732083",
+        "uploadDate": "20250505",
+        "sourceDurationSeconds": 102.678,
+        "selectedFormatId": "30064",
+        "selectedFormatCodec": "avc1.640028",
+        "selectedFormatWidth": 1152,
+        "selectedFormatHeight": 720,
+        "selectedFormatFps": 30.0
+      },
+      "sourceWindow": {
+        "requestedStartNs": 15000000000,
+        "requestedEndNs": 60000000000,
+        "coveredBySourceDuration": true
+      },
+      "sourceAndUsagePermission": {
+        "scope": "space-rhythm-internal-test-only",
+        "confirmedBy": "project-default-final-confirmer",
+        "decisionId": "D-009",
+        "confirmationDate": "2026-09-14",
+        "legalConclusion": false,
+        "redistributable": false
+      },
+      "signedMediaUrlPersisted": false
+    },
+    {
+      "clipId": "SR-BILI-DANCE-005",
+      "datasetPartition": "final_evaluation",
+      "productCategory": "舞蹈/运动",
+      "contentCategoriesExpectedPendingHumanReview": [
+        "fast_cut",
+        "impact",
+        "flash_or_exposure_change"
+      ],
+      "source": {
+        "provider": "bilibili_public_page",
+        "bvid": "BV1RE41197xT",
+        "pageUrl": "https://www.bilibili.com/video/BV1RE41197xT/",
+        "pageLabel": "BV1RE41197xT",
+        "title": "【易烊千玺】【踩点】【高燃】慎点！！舞台舞蹈混剪  新粉大型入坑现场 前方高能【believer】提神醒脑 四字弟弟十九岁生日快乐",
+        "uploader": "蘭若生春夏",
+        "uploaderId": "364434986",
+        "uploadDate": "20190928",
+        "sourceDurationSeconds": 215.463,
+        "selectedFormatId": "30064",
+        "selectedFormatCodec": "avc1.64001F",
+        "selectedFormatWidth": 1280,
+        "selectedFormatHeight": 720,
+        "selectedFormatFps": 25.0
+      },
+      "sourceWindow": {
+        "requestedStartNs": 15000000000,
+        "requestedEndNs": 60000000000,
+        "coveredBySourceDuration": true
+      },
+      "sourceAndUsagePermission": {
+        "scope": "space-rhythm-internal-test-only",
+        "confirmedBy": "project-default-final-confirmer",
+        "decisionId": "D-009",
+        "confirmationDate": "2026-09-14",
+        "legalConclusion": false,
+        "redistributable": false
+      },
+      "signedMediaUrlPersisted": false
+    },
+    {
+      "clipId": "SR-BILI-DANCE-006",
+      "datasetPartition": "tuning",
+      "productCategory": "舞蹈/运动",
+      "contentCategoriesExpectedPendingHumanReview": [
+        "slow_cut_or_transition",
+        "mixed_global_local",
+        "stop"
+      ],
+      "source": {
+        "provider": "bilibili_public_page",
+        "bvid": "BV1qxYd6BEZo",
+        "pageUrl": "https://www.bilibili.com/video/BV1qxYd6BEZo/",
+        "pageLabel": "BV1qxYd6BEZo",
+        "title": "长征主题舞蹈开幕式，剪辑自用",
+        "uploader": "活不了一点ab",
+        "uploaderId": "1433686352",
+        "uploadDate": "20260912",
+        "sourceDurationSeconds": 97.852,
+        "selectedFormatId": "30064",
+        "selectedFormatCodec": "avc1.640028",
+        "selectedFormatWidth": 1280,
+        "selectedFormatHeight": 720,
+        "selectedFormatFps": 27.0
+      },
+      "sourceWindow": {
+        "requestedStartNs": 15000000000,
+        "requestedEndNs": 60000000000,
+        "coveredBySourceDuration": true
+      },
+      "sourceAndUsagePermission": {
+        "scope": "space-rhythm-internal-test-only",
+        "confirmedBy": "project-default-final-confirmer",
+        "decisionId": "D-009",
+        "confirmationDate": "2026-09-14",
+        "legalConclusion": false,
+        "redistributable": false
+      },
+      "signedMediaUrlPersisted": false
+    },
+    {
+      "clipId": "SR-BILI-DANCE-007",
+      "datasetPartition": "final_evaluation",
+      "productCategory": "舞蹈/运动",
+      "contentCategoriesExpectedPendingHumanReview": [
+        "slow_motion",
+        "local_subject_motion",
+        "motion_blur_or_occlusion"
+      ],
+      "source": {
+        "provider": "bilibili_public_page",
+        "bvid": "BV1NwY76rEMH",
+        "pageUrl": "https://www.bilibili.com/video/BV1NwY76rEMH/",
+        "pageLabel": "BV1NwY76rEMH",
+        "title": "【左奇函】适合不适合 2look 4K直拍混剪 ｜皮衣 vs 卫衣",
+        "uploader": "25号底片丨左奇函",
+        "uploaderId": "3690992930654891",
+        "uploadDate": "20260911",
+        "sourceDurationSeconds": 183.3,
+        "selectedFormatId": "30064",
+        "selectedFormatCodec": "avc1.640028",
+        "selectedFormatWidth": 1280,
+        "selectedFormatHeight": 720,
+        "selectedFormatFps": 30.0
+      },
+      "sourceWindow": {
+        "requestedStartNs": 15000000000,
+        "requestedEndNs": 60000000000,
+        "coveredBySourceDuration": true
+      },
+      "sourceAndUsagePermission": {
+        "scope": "space-rhythm-internal-test-only",
+        "confirmedBy": "project-default-final-confirmer",
+        "decisionId": "D-009",
+        "confirmationDate": "2026-09-14",
+        "legalConclusion": false,
+        "redistributable": false
+      },
+      "signedMediaUrlPersisted": false
+    },
+    {
+      "clipId": "SR-BILI-DANCE-008",
+      "datasetPartition": "tuning",
+      "productCategory": "舞蹈/运动",
+      "contentCategoriesExpectedPendingHumanReview": [
+        "impact",
+        "reversal",
+        "tempo_or_energy_change"
+      ],
+      "source": {
+        "provider": "bilibili_public_page",
+        "bvid": "BV17aYU6HEdh",
+        "pageUrl": "https://www.bilibili.com/video/BV17aYU6HEdh/",
+        "pageLabel": "BV17aYU6HEdh",
+        "title": "起手惊风，落地为赢 吾穿林响【唐诗逸|穿林响】舞蹈混剪-迟来的生贺2",
+        "uploader": "金铃舞楼兰",
+        "uploaderId": "23040559",
+        "uploadDate": "20260912",
+        "sourceDurationSeconds": 163.143,
+        "selectedFormatId": "30064",
+        "selectedFormatCodec": "avc1.640028",
+        "selectedFormatWidth": 1280,
+        "selectedFormatHeight": 720,
+        "selectedFormatFps": 30.0
+      },
+      "sourceWindow": {
+        "requestedStartNs": 15000000000,
+        "requestedEndNs": 60000000000,
+        "coveredBySourceDuration": true
+      },
+      "sourceAndUsagePermission": {
+        "scope": "space-rhythm-internal-test-only",
+        "confirmedBy": "project-default-final-confirmer",
+        "decisionId": "D-009",
+        "confirmationDate": "2026-09-14",
+        "legalConclusion": false,
+        "redistributable": false
+      },
+      "signedMediaUrlPersisted": false
+    },
+    {
+      "clipId": "SR-BILI-DANCE-009",
+      "datasetPartition": "final_evaluation",
+      "productCategory": "舞蹈/运动",
+      "contentCategoriesExpectedPendingHumanReview": [
+        "slow_cut_or_transition",
+        "motion_blur_or_occlusion",
+        "mixed_global_local"
+      ],
+      "source": {
+        "provider": "bilibili_public_page",
+        "bvid": "BV12Y4y147Ld",
+        "pageUrl": "https://www.bilibili.com/video/BV12Y4y147Ld/",
+        "pageLabel": "BV12Y4y147Ld",
+        "title": "“你是不食烟火的仙瑶”——国家队舞蹈混剪",
+        "uploader": "未名之名",
+        "uploaderId": "18271384",
+        "uploadDate": "20220512",
+        "sourceDurationSeconds": 216.27,
+        "selectedFormatId": "30064",
+        "selectedFormatCodec": "avc1.640028",
+        "selectedFormatWidth": 1280,
+        "selectedFormatHeight": 720,
+        "selectedFormatFps": 25.0
+      },
+      "sourceWindow": {
+        "requestedStartNs": 15000000000,
+        "requestedEndNs": 60000000000,
+        "coveredBySourceDuration": true
+      },
+      "sourceAndUsagePermission": {
+        "scope": "space-rhythm-internal-test-only",
+        "confirmedBy": "project-default-final-confirmer",
+        "decisionId": "D-009",
+        "confirmationDate": "2026-09-14",
+        "legalConclusion": false,
+        "redistributable": false
+      },
+      "signedMediaUrlPersisted": false
+    },
+    {
+      "clipId": "SR-BILI-DANCE-010",
+      "datasetPartition": "final_evaluation",
+      "productCategory": "舞蹈/运动",
+      "contentCategoriesExpectedPendingHumanReview": [
+        "repetitive_motion",
+        "reversal",
+        "sparse_free_rhythm"
+      ],
+      "source": {
+        "provider": "bilibili_public_page",
+        "bvid": "BV1aT411R77K",
+        "pageUrl": "https://www.bilibili.com/video/BV1aT411R77K/",
+        "pageLabel": "BV1aT411R77K",
+        "title": "长袖善舞［ 水袖舞］ / 混剪",
+        "uploader": "至美不过鲸落",
+        "uploaderId": "1765068177",
+        "uploadDate": "20230211",
+        "sourceDurationSeconds": 72.142,
+        "selectedFormatId": "30064",
+        "selectedFormatCodec": "avc1.640028",
+        "selectedFormatWidth": 1280,
+        "selectedFormatHeight": 720,
+        "selectedFormatFps": 29.412
+      },
+      "sourceWindow": {
+        "requestedStartNs": 10000000000,
+        "requestedEndNs": 55000000000,
+        "coveredBySourceDuration": true
+      },
+      "sourceAndUsagePermission": {
+        "scope": "space-rhythm-internal-test-only",
+        "confirmedBy": "project-default-final-confirmer",
+        "decisionId": "D-009",
+        "confirmationDate": "2026-09-14",
+        "legalConclusion": false,
+        "redistributable": false
+      },
+      "signedMediaUrlPersisted": false
+    },
+    {
+      "clipId": "SR-BILI-GAME-001",
+      "datasetPartition": "calibration",
+      "productCategory": "游戏/动作高光",
+      "contentCategoriesExpectedPendingHumanReview": [
+        "fast_cut",
+        "impact",
+        "mixed_global_local"
+      ],
+      "source": {
+        "provider": "bilibili_public_page",
+        "bvid": "BV1bGYE6XEoF",
+        "pageUrl": "https://www.bilibili.com/video/BV1bGYE6XEoF/",
+        "pageLabel": "BV1bGYE6XEoF",
+        "title": "【原神xFire】全程高能！原神战斗高光时刻极限混剪",
+        "uploader": "CambridgeOX",
+        "uploaderId": "1481790328",
+        "uploadDate": "20260911",
+        "sourceDurationSeconds": 226.51,
+        "selectedFormatId": "30064",
+        "selectedFormatCodec": "avc1.640028",
+        "selectedFormatWidth": 1280,
+        "selectedFormatHeight": 720,
+        "selectedFormatFps": 30.0
+      },
+      "sourceWindow": {
+        "requestedStartNs": 15000000000,
+        "requestedEndNs": 60000000000,
+        "coveredBySourceDuration": true
+      },
+      "sourceAndUsagePermission": {
+        "scope": "space-rhythm-internal-test-only",
+        "confirmedBy": "project-default-final-confirmer",
+        "decisionId": "D-009",
+        "confirmationDate": "2026-09-14",
+        "legalConclusion": false,
+        "redistributable": false
+      },
+      "signedMediaUrlPersisted": false
+    },
+    {
+      "clipId": "SR-BILI-GAME-002",
+      "datasetPartition": "tuning",
+      "productCategory": "游戏/动作高光",
+      "contentCategoriesExpectedPendingHumanReview": [
+        "fast_cut",
+        "impact",
+        "flash_or_exposure_change"
+      ],
+      "source": {
+        "provider": "bilibili_public_page",
+        "bvid": "BV17BT2zbEND",
+        "pageUrl": "https://www.bilibili.com/video/BV17BT2zbEND/",
+        "pageLabel": "BV17BT2zbEND",
+        "title": "带你感受⚡【三角洲极致高光超燃混剪】⚡",
+        "uploader": "GuardianLXY",
+        "uploaderId": "5828291",
+        "uploadDate": "20250607",
+        "sourceDurationSeconds": 148.455,
+        "selectedFormatId": "30064",
+        "selectedFormatCodec": "avc1.640028",
+        "selectedFormatWidth": 1280,
+        "selectedFormatHeight": 720,
+        "selectedFormatFps": 30.0
+      },
+      "sourceWindow": {
+        "requestedStartNs": 15000000000,
+        "requestedEndNs": 60000000000,
+        "coveredBySourceDuration": true
+      },
+      "sourceAndUsagePermission": {
+        "scope": "space-rhythm-internal-test-only",
+        "confirmedBy": "project-default-final-confirmer",
+        "decisionId": "D-009",
+        "confirmationDate": "2026-09-14",
+        "legalConclusion": false,
+        "redistributable": false
+      },
+      "signedMediaUrlPersisted": false
+    },
+    {
+      "clipId": "SR-BILI-GAME-003",
+      "datasetPartition": "final_evaluation",
+      "productCategory": "游戏/动作高光",
+      "contentCategoriesExpectedPendingHumanReview": [
+        "fast_cut",
+        "slow_motion",
+        "tempo_or_energy_change"
+      ],
+      "source": {
+        "provider": "bilibili_public_page",
+        "bvid": "BV14v4y1p7Ki",
+        "pageUrl": "https://www.bilibili.com/video/BV14v4y1p7Ki/",
+        "pageLabel": "BV14v4y1p7Ki",
+        "title": "[1080P60FPS]独属于qiqi的混剪时刻,感受独属于他的高光时刻,",
+        "uploader": "暮咲Master",
+        "uploaderId": "503893388",
+        "uploadDate": "20230404",
+        "sourceDurationSeconds": 224.954,
+        "selectedFormatId": "30064",
+        "selectedFormatCodec": "avc1.640028",
+        "selectedFormatWidth": 1280,
+        "selectedFormatHeight": 720,
+        "selectedFormatFps": 29.412
+      },
+      "sourceWindow": {
+        "requestedStartNs": 15000000000,
+        "requestedEndNs": 60000000000,
+        "coveredBySourceDuration": true
+      },
+      "sourceAndUsagePermission": {
+        "scope": "space-rhythm-internal-test-only",
+        "confirmedBy": "project-default-final-confirmer",
+        "decisionId": "D-009",
+        "confirmationDate": "2026-09-14",
+        "legalConclusion": false,
+        "redistributable": false
+      },
+      "signedMediaUrlPersisted": false
+    },
+    {
+      "clipId": "SR-BILI-GAME-005",
+      "datasetPartition": "final_evaluation",
+      "productCategory": "游戏/动作高光",
+      "contentCategoriesExpectedPendingHumanReview": [
+        "fast_cut",
+        "stop",
+        "reversal"
+      ],
+      "source": {
+        "provider": "bilibili_public_page",
+        "bvid": "BV1z4411K7Jx",
+        "pageUrl": "https://www.bilibili.com/video/BV1z4411K7Jx/",
+        "pageLabel": "BV1z4411K7Jx",
+        "title": "前方高能！！！感受这场视觉盛宴吧！【游戏混剪/全程高燃】",
+        "uploader": "赤瞳混剪",
+        "uploaderId": "19783079",
+        "uploadDate": "20190607",
+        "sourceDurationSeconds": 185.265,
+        "selectedFormatId": "30064",
+        "selectedFormatCodec": "avc1.640028",
+        "selectedFormatWidth": 1280,
+        "selectedFormatHeight": 720,
+        "selectedFormatFps": 30.0
+      },
+      "sourceWindow": {
+        "requestedStartNs": 15000000000,
+        "requestedEndNs": 60000000000,
+        "coveredBySourceDuration": true
+      },
+      "sourceAndUsagePermission": {
+        "scope": "space-rhythm-internal-test-only",
+        "confirmedBy": "project-default-final-confirmer",
+        "decisionId": "D-009",
+        "confirmationDate": "2026-09-14",
+        "legalConclusion": false,
+        "redistributable": false
+      },
+      "signedMediaUrlPersisted": false
+    },
+    {
+      "clipId": "SR-BILI-GAME-006",
+      "datasetPartition": "tuning",
+      "productCategory": "游戏/动作高光",
+      "contentCategoriesExpectedPendingHumanReview": [
+        "long_take_or_no_cut",
+        "global_camera_motion",
+        "repetitive_motion"
+      ],
+      "source": {
+        "provider": "bilibili_public_page",
+        "bvid": "BV1akYZ6vEHz",
+        "pageUrl": "https://www.bilibili.com/video/BV1akYZ6vEHz/",
+        "pageLabel": "BV1akYZ6vEHz",
+        "title": "【PS5极限国度】超高画质 [4K HDR 60fps] 游戏实况",
+        "uploader": "哔哩游戏达人",
+        "uploaderId": "589603351",
+        "uploadDate": "20260913",
+        "sourceDurationSeconds": 491.932,
+        "selectedFormatId": "30064",
+        "selectedFormatCodec": "avc1.640028",
+        "selectedFormatWidth": 1280,
+        "selectedFormatHeight": 720,
+        "selectedFormatFps": 29.97
+      },
+      "sourceWindow": {
+        "requestedStartNs": 15000000000,
+        "requestedEndNs": 60000000000,
+        "coveredBySourceDuration": true
+      },
+      "sourceAndUsagePermission": {
+        "scope": "space-rhythm-internal-test-only",
+        "confirmedBy": "project-default-final-confirmer",
+        "decisionId": "D-009",
+        "confirmationDate": "2026-09-14",
+        "legalConclusion": false,
+        "redistributable": false
+      },
+      "signedMediaUrlPersisted": false
+    },
+    {
+      "clipId": "SR-BILI-GAME-007",
+      "datasetPartition": "final_evaluation",
+      "productCategory": "游戏/动作高光",
+      "contentCategoriesExpectedPendingHumanReview": [
+        "long_take_or_no_cut",
+        "repetitive_motion",
+        "tempo_or_energy_change"
+      ],
+      "source": {
+        "provider": "bilibili_public_page",
+        "bvid": "BV1LkYD6pEVv",
+        "pageUrl": "https://www.bilibili.com/video/BV1LkYD6pEVv/",
+        "pageLabel": "BV1LkYD6pEVv",
+        "title": "Subway Surfers Classic (2026) - Gameplay (PC UHD) [4K60FPS]",
+        "uploader": "TheRomStudio",
+        "uploaderId": "3747510742944667",
+        "uploadDate": "20260912",
+        "sourceDurationSeconds": 123.437,
+        "selectedFormatId": "30064",
+        "selectedFormatCodec": "avc1.640033",
+        "selectedFormatWidth": 1280,
+        "selectedFormatHeight": 720,
+        "selectedFormatFps": 30.0
+      },
+      "sourceWindow": {
+        "requestedStartNs": 15000000000,
+        "requestedEndNs": 60000000000,
+        "coveredBySourceDuration": true
+      },
+      "sourceAndUsagePermission": {
+        "scope": "space-rhythm-internal-test-only",
+        "confirmedBy": "project-default-final-confirmer",
+        "decisionId": "D-009",
+        "confirmationDate": "2026-09-14",
+        "legalConclusion": false,
+        "redistributable": false
+      },
+      "signedMediaUrlPersisted": false
+    },
+    {
+      "clipId": "SR-BILI-GAME-008",
+      "datasetPartition": "tuning",
+      "productCategory": "游戏/动作高光",
+      "contentCategoriesExpectedPendingHumanReview": [
+        "global_camera_motion",
+        "reversal",
+        "motion_blur_or_occlusion"
+      ],
+      "source": {
+        "provider": "bilibili_public_page",
+        "bvid": "BV1Kqbw6oEZE",
+        "pageUrl": "https://www.bilibili.com/video/BV1Kqbw6oEZE/",
+        "pageLabel": "BV1Kqbw6oEZE",
+        "title": "【极速骑行6】铃木隼游戏竞技实况丨PS5 Pro（4K 60FPS HDR）",
+        "uploader": "哔哩游戏达人",
+        "uploaderId": "589603351",
+        "uploadDate": "20260907",
+        "sourceDurationSeconds": 340.508,
+        "selectedFormatId": "30064",
+        "selectedFormatCodec": "avc1.640028",
+        "selectedFormatWidth": 1280,
+        "selectedFormatHeight": 720,
+        "selectedFormatFps": 30.0
+      },
+      "sourceWindow": {
+        "requestedStartNs": 15000000000,
+        "requestedEndNs": 60000000000,
+        "coveredBySourceDuration": true
+      },
+      "sourceAndUsagePermission": {
+        "scope": "space-rhythm-internal-test-only",
+        "confirmedBy": "project-default-final-confirmer",
+        "decisionId": "D-009",
+        "confirmationDate": "2026-09-14",
+        "legalConclusion": false,
+        "redistributable": false
+      },
+      "signedMediaUrlPersisted": false
+    },
+    {
+      "clipId": "SR-BILI-GAME-009",
+      "datasetPartition": "final_evaluation",
+      "productCategory": "游戏/动作高光",
+      "contentCategoriesExpectedPendingHumanReview": [
+        "long_take_or_no_cut",
+        "mixed_global_local",
+        "impact"
+      ],
+      "source": {
+        "provider": "bilibili_public_page",
+        "bvid": "BV1Zxju6PE2c",
+        "pageUrl": "https://www.bilibili.com/video/BV1Zxju6PE2c/",
+        "pageLabel": "BV1Zxju6PE2c",
+        "title": "《使命召唤：现代战争》IW8 模组 多人对局 M60 机枪实机游玩（无解说）",
+        "uploader": "深夜游戏99",
+        "uploaderId": "97537007",
+        "uploadDate": "20260616",
+        "sourceDurationSeconds": 483.88,
+        "selectedFormatId": "30064",
+        "selectedFormatCodec": "avc1.640028",
+        "selectedFormatWidth": 1280,
+        "selectedFormatHeight": 720,
+        "selectedFormatFps": 29.97
+      },
+      "sourceWindow": {
+        "requestedStartNs": 15000000000,
+        "requestedEndNs": 60000000000,
+        "coveredBySourceDuration": true
+      },
+      "sourceAndUsagePermission": {
+        "scope": "space-rhythm-internal-test-only",
+        "confirmedBy": "project-default-final-confirmer",
+        "decisionId": "D-009",
+        "confirmationDate": "2026-09-14",
+        "legalConclusion": false,
+        "redistributable": false
+      },
+      "signedMediaUrlPersisted": false
+    },
+    {
+      "clipId": "SR-BILI-GAME-010",
+      "datasetPartition": "final_evaluation",
+      "productCategory": "游戏/动作高光",
+      "contentCategoriesExpectedPendingHumanReview": [
+        "global_camera_motion",
+        "stop",
+        "low_quality_compression"
+      ],
+      "source": {
+        "provider": "bilibili_public_page",
+        "bvid": "BV1dJ411q7f8",
+        "pageUrl": "https://www.bilibili.com/video/BV1dJ411q7f8/",
+        "pageLabel": "BV1dJ411q7f8",
+        "title": "[1080/60FPS]战争附言重大更新？国服爆满！画质打击感提升了无数个档次",
+        "uploader": "CurtainMX",
+        "uploaderId": "27432869",
+        "uploadDate": "20191204",
+        "sourceDurationSeconds": 289.531,
+        "selectedFormatId": "30064",
+        "selectedFormatCodec": "avc1.64001F",
+        "selectedFormatWidth": 1280,
+        "selectedFormatHeight": 720,
+        "selectedFormatFps": 30.303
+      },
+      "sourceWindow": {
+        "requestedStartNs": 15000000000,
+        "requestedEndNs": 60000000000,
+        "coveredBySourceDuration": true
+      },
+      "sourceAndUsagePermission": {
+        "scope": "space-rhythm-internal-test-only",
+        "confirmedBy": "project-default-final-confirmer",
+        "decisionId": "D-009",
+        "confirmationDate": "2026-09-14",
+        "legalConclusion": false,
+        "redistributable": false
+      },
+      "signedMediaUrlPersisted": false
+    },
+    {
+      "clipId": "SR-BILI-LIFE-001",
+      "datasetPartition": "calibration",
+      "productCategory": "生活 Vlog/长镜头",
+      "contentCategoriesExpectedPendingHumanReview": [
+        "slow_cut_or_transition",
+        "local_subject_motion",
+        "sparse_free_rhythm"
+      ],
+      "source": {
+        "provider": "bilibili_public_page",
+        "bvid": "BV1huYz6LE5J",
+        "pageUrl": "https://www.bilibili.com/video/BV1huYz6LE5J/",
+        "pageLabel": "BV1huYz6LE5J",
+        "title": "英国日常生活VLOG：晚饭做了泰式绿咖喱",
+        "uploader": "蕾姐的海外生活",
+        "uploaderId": "1461188856",
+        "uploadDate": "20260913",
+        "sourceDurationSeconds": 209.118,
+        "selectedFormatId": "30064",
+        "selectedFormatCodec": "avc1.640028",
+        "selectedFormatWidth": 720,
+        "selectedFormatHeight": 1280,
+        "selectedFormatFps": 29.557
+      },
+      "sourceWindow": {
+        "requestedStartNs": 15000000000,
+        "requestedEndNs": 60000000000,
+        "coveredBySourceDuration": true
+      },
+      "sourceAndUsagePermission": {
+        "scope": "space-rhythm-internal-test-only",
+        "confirmedBy": "project-default-final-confirmer",
+        "decisionId": "D-009",
+        "confirmationDate": "2026-09-14",
+        "legalConclusion": false,
+        "redistributable": false
+      },
+      "signedMediaUrlPersisted": false
+    },
+    {
+      "clipId": "SR-BILI-LIFE-002",
+      "datasetPartition": "tuning",
+      "productCategory": "生活 Vlog/长镜头",
+      "contentCategoriesExpectedPendingHumanReview": [
+        "slow_cut_or_transition",
+        "near_static",
+        "ambiguous_action"
+      ],
+      "source": {
+        "provider": "bilibili_public_page",
+        "bvid": "BV1epYS6jEgn",
+        "pageUrl": "https://www.bilibili.com/video/BV1epYS6jEgn/",
+        "pageLabel": "BV1epYS6jEgn",
+        "title": "Vlog🪟｜晚间日常·下班后也有在好好生活耶✨",
+        "uploader": "JOJO珠儿",
+        "uploaderId": "521172380",
+        "uploadDate": "20260913",
+        "sourceDurationSeconds": 66.037,
+        "selectedFormatId": "30064",
+        "selectedFormatCodec": "avc1.640033",
+        "selectedFormatWidth": 1280,
+        "selectedFormatHeight": 720,
+        "selectedFormatFps": 30.0
+      },
+      "sourceWindow": {
+        "requestedStartNs": 10000000000,
+        "requestedEndNs": 55000000000,
+        "coveredBySourceDuration": true
+      },
+      "sourceAndUsagePermission": {
+        "scope": "space-rhythm-internal-test-only",
+        "confirmedBy": "project-default-final-confirmer",
+        "decisionId": "D-009",
+        "confirmationDate": "2026-09-14",
+        "legalConclusion": false,
+        "redistributable": false
+      },
+      "signedMediaUrlPersisted": false
+    },
+    {
+      "clipId": "SR-BILI-LIFE-003",
+      "datasetPartition": "final_evaluation",
+      "productCategory": "生活 Vlog/长镜头",
+      "contentCategoriesExpectedPendingHumanReview": [
+        "mixed_global_local",
+        "sparse_free_rhythm",
+        "tempo_or_energy_change"
+      ],
+      "source": {
+        "provider": "bilibili_public_page",
+        "bvid": "BV1GyYq6CE51",
+        "pageUrl": "https://www.bilibili.com/video/BV1GyYq6CE51/",
+        "pageLabel": "BV1GyYq6CE51",
+        "title": "VLOG｜吉国生活日记",
+        "uploader": "蓉忆雪",
+        "uploaderId": "3546578235165354",
+        "uploadDate": "20260913",
+        "sourceDurationSeconds": 275.767,
+        "selectedFormatId": "30064",
+        "selectedFormatCodec": "avc1.640033",
+        "selectedFormatWidth": 720,
+        "selectedFormatHeight": 1280,
+        "selectedFormatFps": 30.0
+      },
+      "sourceWindow": {
+        "requestedStartNs": 15000000000,
+        "requestedEndNs": 60000000000,
+        "coveredBySourceDuration": true
+      },
+      "sourceAndUsagePermission": {
+        "scope": "space-rhythm-internal-test-only",
+        "confirmedBy": "project-default-final-confirmer",
+        "decisionId": "D-009",
+        "confirmationDate": "2026-09-14",
+        "legalConclusion": false,
+        "redistributable": false
+      },
+      "signedMediaUrlPersisted": false
+    },
+    {
+      "clipId": "SR-BILI-LIFE-004",
+      "datasetPartition": "tuning",
+      "productCategory": "生活 Vlog/长镜头",
+      "contentCategoriesExpectedPendingHumanReview": [
+        "fast_cut",
+        "local_subject_motion",
+        "ambiguous_action"
+      ],
+      "source": {
+        "provider": "bilibili_public_page",
+        "bvid": "BV1kqYi6bEUi",
+        "pageUrl": "https://www.bilibili.com/video/BV1kqYi6bEUi/",
+        "pageLabel": "BV1kqYi6bEUi",
+        "title": "旅居vlog｜自由画师日常生活碎片🧩",
+        "uploader": "伊莱莎_ELIZA",
+        "uploaderId": "320339034",
+        "uploadDate": "20260913",
+        "sourceDurationSeconds": 158.545,
+        "selectedFormatId": "30064",
+        "selectedFormatCodec": "avc1.640028",
+        "selectedFormatWidth": 720,
+        "selectedFormatHeight": 1280,
+        "selectedFormatFps": 30.0
+      },
+      "sourceWindow": {
+        "requestedStartNs": 15000000000,
+        "requestedEndNs": 60000000000,
+        "coveredBySourceDuration": true
+      },
+      "sourceAndUsagePermission": {
+        "scope": "space-rhythm-internal-test-only",
+        "confirmedBy": "project-default-final-confirmer",
+        "decisionId": "D-009",
+        "confirmationDate": "2026-09-14",
+        "legalConclusion": false,
+        "redistributable": false
+      },
+      "signedMediaUrlPersisted": false
+    },
+    {
+      "clipId": "SR-BILI-LIFE-005",
+      "datasetPartition": "final_evaluation",
+      "productCategory": "生活 Vlog/长镜头",
+      "contentCategoriesExpectedPendingHumanReview": [
+        "near_static",
+        "local_subject_motion",
+        "low_quality_compression"
+      ],
+      "source": {
+        "provider": "bilibili_public_page",
+        "bvid": "BV18nYC6WEKH",
+        "pageUrl": "https://www.bilibili.com/video/BV18nYC6WEKH/",
+        "pageLabel": "BV18nYC6WEKH",
+        "title": "ADHD夯蛋er宅家日常vlog",
+        "uploader": "六百块钱_600",
+        "uploaderId": "1481782765",
+        "uploadDate": "20260914",
+        "sourceDurationSeconds": 316.302,
+        "selectedFormatId": "30064",
+        "selectedFormatCodec": "avc1.640033",
+        "selectedFormatWidth": 720,
+        "selectedFormatHeight": 1280,
+        "selectedFormatFps": 30.0
+      },
+      "sourceWindow": {
+        "requestedStartNs": 15000000000,
+        "requestedEndNs": 60000000000,
+        "coveredBySourceDuration": true
+      },
+      "sourceAndUsagePermission": {
+        "scope": "space-rhythm-internal-test-only",
+        "confirmedBy": "project-default-final-confirmer",
+        "decisionId": "D-009",
+        "confirmationDate": "2026-09-14",
+        "legalConclusion": false,
+        "redistributable": false
+      },
+      "signedMediaUrlPersisted": false
+    },
+    {
+      "clipId": "SR-BILI-LIFE-006",
+      "datasetPartition": "tuning",
+      "productCategory": "生活 Vlog/长镜头",
+      "contentCategoriesExpectedPendingHumanReview": [
+        "long_take_or_no_cut",
+        "mixed_global_local",
+        "repetitive_motion"
+      ],
+      "source": {
+        "provider": "bilibili_public_page",
+        "bvid": "BV1PEjPzyECh",
+        "pageUrl": "https://www.bilibili.com/video/BV1PEjPzyECh/",
+        "pageLabel": "BV1PEjPzyECh",
+        "title": "【时代少年团】这段长达一分半的一镜到底比小时代还小时代",
+        "uploader": "爆拳张无敌啦啦啦",
+        "uploaderId": "443883427",
+        "uploadDate": "20250427",
+        "sourceDurationSeconds": 89.688,
+        "selectedFormatId": "30064",
+        "selectedFormatCodec": "avc1.640033",
+        "selectedFormatWidth": 1280,
+        "selectedFormatHeight": 716,
+        "selectedFormatFps": 30.0
+      },
+      "sourceWindow": {
+        "requestedStartNs": 15000000000,
+        "requestedEndNs": 60000000000,
+        "coveredBySourceDuration": true
+      },
+      "sourceAndUsagePermission": {
+        "scope": "space-rhythm-internal-test-only",
+        "confirmedBy": "project-default-final-confirmer",
+        "decisionId": "D-009",
+        "confirmationDate": "2026-09-14",
+        "legalConclusion": false,
+        "redistributable": false
+      },
+      "signedMediaUrlPersisted": false
+    },
+    {
+      "clipId": "SR-BILI-LIFE-008",
+      "datasetPartition": "tuning",
+      "productCategory": "生活 Vlog/长镜头",
+      "contentCategoriesExpectedPendingHumanReview": [
+        "long_take_or_no_cut",
+        "near_static",
+        "global_camera_motion"
+      ],
+      "source": {
+        "provider": "bilibili_public_page",
+        "bvid": "BV1KnYX6LEKS",
+        "pageUrl": "https://www.bilibili.com/video/BV1KnYX6LEKS/",
+        "pageLabel": "BV1KnYX6LEKS",
+        "title": "一镜到底‎⊹˚记录阴天的日系古早味房间",
+        "uploader": "雜食犬",
+        "uploaderId": "5388714",
+        "uploadDate": "20260912",
+        "sourceDurationSeconds": 60.58,
+        "selectedFormatId": "30064",
+        "selectedFormatCodec": "avc1.640028",
+        "selectedFormatWidth": 1280,
+        "selectedFormatHeight": 720,
+        "selectedFormatFps": 30.0
+      },
+      "sourceWindow": {
+        "requestedStartNs": 0,
+        "requestedEndNs": 60000000000,
+        "coveredBySourceDuration": true
+      },
+      "sourceAndUsagePermission": {
+        "scope": "space-rhythm-internal-test-only",
+        "confirmedBy": "project-default-final-confirmer",
+        "decisionId": "D-009",
+        "confirmationDate": "2026-09-14",
+        "legalConclusion": false,
+        "redistributable": false
+      },
+      "signedMediaUrlPersisted": false
+    },
+    {
+      "clipId": "SR-BILI-LIFE-009",
+      "datasetPartition": "final_evaluation",
+      "productCategory": "生活 Vlog/长镜头",
+      "contentCategoriesExpectedPendingHumanReview": [
+        "long_take_or_no_cut",
+        "global_camera_motion",
+        "stop"
+      ],
+      "source": {
+        "provider": "bilibili_public_page",
+        "bvid": "BV1rrYi6oEhQ",
+        "pageUrl": "https://www.bilibili.com/video/BV1rrYi6oEhQ/",
+        "pageLabel": "BV1rrYi6oEhQ",
+        "title": "68平一镜到底roomtour｜小是小了点，但很好住",
+        "uploader": "ooccun",
+        "uploaderId": "24854148",
+        "uploadDate": "20260913",
+        "sourceDurationSeconds": 316.58,
+        "selectedFormatId": "30064",
+        "selectedFormatCodec": "avc1.640033",
+        "selectedFormatWidth": 1280,
+        "selectedFormatHeight": 720,
+        "selectedFormatFps": 30.0
+      },
+      "sourceWindow": {
+        "requestedStartNs": 15000000000,
+        "requestedEndNs": 60000000000,
+        "coveredBySourceDuration": true
+      },
+      "sourceAndUsagePermission": {
+        "scope": "space-rhythm-internal-test-only",
+        "confirmedBy": "project-default-final-confirmer",
+        "decisionId": "D-009",
+        "confirmationDate": "2026-09-14",
+        "legalConclusion": false,
+        "redistributable": false
+      },
+      "signedMediaUrlPersisted": false
+    },
+    {
+      "clipId": "SR-BILI-LIFE-010",
+      "datasetPartition": "final_evaluation",
+      "productCategory": "生活 Vlog/长镜头",
+      "contentCategoriesExpectedPendingHumanReview": [
+        "long_take_or_no_cut",
+        "local_subject_motion",
+        "ambiguous_action"
+      ],
+      "source": {
+        "provider": "bilibili_public_page",
+        "bvid": "BV1d3Yi6jEri",
+        "pageUrl": "https://www.bilibili.com/video/BV1d3Yi6jEri/",
+        "pageLabel": "BV1d3Yi6jEri",
+        "title": "新手村第一视角开箱Vlog(一镜到底）",
+        "uploader": "你的7姨娘",
+        "uploaderId": "17868126",
+        "uploadDate": "20260913",
+        "sourceDurationSeconds": 189.433,
+        "selectedFormatId": "30064",
+        "selectedFormatCodec": "avc1.640033",
+        "selectedFormatWidth": 1280,
+        "selectedFormatHeight": 720,
+        "selectedFormatFps": 30.0
+      },
+      "sourceWindow": {
+        "requestedStartNs": 15000000000,
+        "requestedEndNs": 60000000000,
+        "coveredBySourceDuration": true
+      },
+      "sourceAndUsagePermission": {
+        "scope": "space-rhythm-internal-test-only",
+        "confirmedBy": "project-default-final-confirmer",
+        "decisionId": "D-009",
+        "confirmationDate": "2026-09-14",
+        "legalConclusion": false,
+        "redistributable": false
+      },
+      "signedMediaUrlPersisted": false
+    },
+    {
+      "clipId": "SR-BILI-TRAVEL-002",
+      "datasetPartition": "tuning",
+      "productCategory": "旅行/风景混剪",
+      "contentCategoriesExpectedPendingHumanReview": [
+        "slow_cut_or_transition",
+        "near_static",
+        "sparse_free_rhythm"
+      ],
+      "source": {
+        "provider": "bilibili_public_page",
+        "bvid": "BV19VYe6MEJs",
+        "pageUrl": "https://www.bilibili.com/video/BV19VYe6MEJs/",
+        "pageLabel": "BV19VYe6MEJs",
+        "title": "“想象一下在这里醒来 这是不是你理想中的梦中情屋”",
+        "uploader": "风景旅行收藏家",
+        "uploaderId": "3494364072380525",
+        "uploadDate": "20260913",
+        "sourceDurationSeconds": 192.563,
+        "selectedFormatId": "30064",
+        "selectedFormatCodec": "avc1.640028",
+        "selectedFormatWidth": 720,
+        "selectedFormatHeight": 1280,
+        "selectedFormatFps": 29.996
+      },
+      "sourceWindow": {
+        "requestedStartNs": 15000000000,
+        "requestedEndNs": 60000000000,
+        "coveredBySourceDuration": true
+      },
+      "sourceAndUsagePermission": {
+        "scope": "space-rhythm-internal-test-only",
+        "confirmedBy": "project-default-final-confirmer",
+        "decisionId": "D-009",
+        "confirmationDate": "2026-09-14",
+        "legalConclusion": false,
+        "redistributable": false
+      },
+      "signedMediaUrlPersisted": false
+    },
+    {
+      "clipId": "SR-BILI-TRAVEL-003",
+      "datasetPartition": "final_evaluation",
+      "productCategory": "旅行/风景混剪",
+      "contentCategoriesExpectedPendingHumanReview": [
+        "global_camera_motion",
+        "sparse_free_rhythm",
+        "ambiguous_action"
+      ],
+      "source": {
+        "provider": "bilibili_public_page",
+        "bvid": "BV1TsYR6nEk6",
+        "pageUrl": "https://www.bilibili.com/video/BV1TsYR6nEk6/",
+        "pageLabel": "BV1TsYR6nEk6",
+        "title": "“像旷野的风，肆意且自由~”",
+        "uploader": "柠檬味星河",
+        "uploaderId": "247802676",
+        "uploadDate": "20260912",
+        "sourceDurationSeconds": 87.585,
+        "selectedFormatId": "30064",
+        "selectedFormatCodec": "avc1.640028",
+        "selectedFormatWidth": 1280,
+        "selectedFormatHeight": 720,
+        "selectedFormatFps": 30.0
+      },
+      "sourceWindow": {
+        "requestedStartNs": 15000000000,
+        "requestedEndNs": 60000000000,
+        "coveredBySourceDuration": true
+      },
+      "sourceAndUsagePermission": {
+        "scope": "space-rhythm-internal-test-only",
+        "confirmedBy": "project-default-final-confirmer",
+        "decisionId": "D-009",
+        "confirmationDate": "2026-09-14",
+        "legalConclusion": false,
+        "redistributable": false
+      },
+      "signedMediaUrlPersisted": false
+    },
+    {
+      "clipId": "SR-BILI-TRAVEL-004",
+      "datasetPartition": "tuning",
+      "productCategory": "旅行/风景混剪",
+      "contentCategoriesExpectedPendingHumanReview": [
+        "fast_cut",
+        "tempo_or_energy_change",
+        "mixed_global_local"
+      ],
+      "source": {
+        "provider": "bilibili_public_page",
+        "bvid": "BV1u7411P7Vx",
+        "pageUrl": "https://www.bilibili.com/video/BV1u7411P7Vx/",
+        "pageLabel": "BV1u7411P7Vx",
+        "title": "【环球旅行短片】环球旅行高燃短片《世界在我脚下》",
+        "uploader": "YOUAN安",
+        "uploaderId": "22272462",
+        "uploadDate": "20200220",
+        "sourceDurationSeconds": 265.233,
+        "selectedFormatId": "100024",
+        "selectedFormatCodec": "av01.0.00M.10.0.110.01.01.01.0",
+        "selectedFormatWidth": 1280,
+        "selectedFormatHeight": 718,
+        "selectedFormatFps": 30.0
+      },
+      "sourceWindow": {
+        "requestedStartNs": 15000000000,
+        "requestedEndNs": 60000000000,
+        "coveredBySourceDuration": true
+      },
+      "sourceAndUsagePermission": {
+        "scope": "space-rhythm-internal-test-only",
+        "confirmedBy": "project-default-final-confirmer",
+        "decisionId": "D-009",
+        "confirmationDate": "2026-09-14",
+        "legalConclusion": false,
+        "redistributable": false
+      },
+      "signedMediaUrlPersisted": false
+    },
+    {
+      "clipId": "SR-BILI-TRAVEL-005",
+      "datasetPartition": "final_evaluation",
+      "productCategory": "旅行/风景混剪",
+      "contentCategoriesExpectedPendingHumanReview": [
+        "fast_cut",
+        "global_camera_motion",
+        "motion_blur_or_occlusion"
+      ],
+      "source": {
+        "provider": "bilibili_public_page",
+        "bvid": "BV1va411y7MC",
+        "pageUrl": "https://www.bilibili.com/video/BV1va411y7MC/",
+        "pageLabel": "BV1va411y7MC",
+        "title": "【机车/混剪】——这是一次漫长的旅途。",
+        "uploader": "空守一座心城",
+        "uploaderId": "397668126",
+        "uploadDate": "20220210",
+        "sourceDurationSeconds": 177.121,
+        "selectedFormatId": "30032",
+        "selectedFormatCodec": "avc1.64001F",
+        "selectedFormatWidth": 960,
+        "selectedFormatHeight": 480,
+        "selectedFormatFps": 29.412
+      },
+      "sourceWindow": {
+        "requestedStartNs": 15000000000,
+        "requestedEndNs": 60000000000,
+        "coveredBySourceDuration": true
+      },
+      "sourceAndUsagePermission": {
+        "scope": "space-rhythm-internal-test-only",
+        "confirmedBy": "project-default-final-confirmer",
+        "decisionId": "D-009",
+        "confirmationDate": "2026-09-14",
+        "legalConclusion": false,
+        "redistributable": false
+      },
+      "signedMediaUrlPersisted": false
+    },
+    {
+      "clipId": "SR-BILI-TRAVEL-006",
+      "datasetPartition": "tuning",
+      "productCategory": "旅行/风景混剪",
+      "contentCategoriesExpectedPendingHumanReview": [
+        "long_take_or_no_cut",
+        "near_static",
+        "sparse_free_rhythm"
+      ],
+      "source": {
+        "provider": "bilibili_public_page",
+        "bvid": "BV1MT411V7Cg",
+        "pageUrl": "https://www.bilibili.com/video/BV1MT411V7Cg/",
+        "pageLabel": "BV1MT411V7Cg",
+        "title": "【园林如梦·夏】夏至「荷」集·航拍·长镜头 / 怡园 艺圃 留园 狮子林 拙政园",
+        "uploader": "白袍慕云",
+        "uploaderId": "7990981",
+        "uploadDate": "20220621",
+        "sourceDurationSeconds": 511.914,
+        "selectedFormatId": "30064",
+        "selectedFormatCodec": "avc1.640028",
+        "selectedFormatWidth": 1280,
+        "selectedFormatHeight": 720,
+        "selectedFormatFps": 29.412
+      },
+      "sourceWindow": {
+        "requestedStartNs": 15000000000,
+        "requestedEndNs": 60000000000,
+        "coveredBySourceDuration": true
+      },
+      "sourceAndUsagePermission": {
+        "scope": "space-rhythm-internal-test-only",
+        "confirmedBy": "project-default-final-confirmer",
+        "decisionId": "D-009",
+        "confirmationDate": "2026-09-14",
+        "legalConclusion": false,
+        "redistributable": false
+      },
+      "signedMediaUrlPersisted": false
+    },
+    {
+      "clipId": "SR-BILI-TRAVEL-008",
+      "datasetPartition": "tuning",
+      "productCategory": "旅行/风景混剪",
+      "contentCategoriesExpectedPendingHumanReview": [
+        "long_take_or_no_cut",
+        "ambiguous_action",
+        "low_quality_compression"
+      ],
+      "source": {
+        "provider": "bilibili_public_page",
+        "bvid": "BV1HiYC6VEVC",
+        "pageUrl": "https://www.bilibili.com/video/BV1HiYC6VEVC/",
+        "pageLabel": "BV1HiYC6VEVC",
+        "title": "学着看长镜头（chunshanj）",
+        "uploader": "寻找瞳的人",
+        "uploaderId": "4084495",
+        "uploadDate": "20260914",
+        "sourceDurationSeconds": 84.606,
+        "selectedFormatId": "30064",
+        "selectedFormatCodec": "avc1.640033",
+        "selectedFormatWidth": 1280,
+        "selectedFormatHeight": 720,
+        "selectedFormatFps": 28.0
+      },
+      "sourceWindow": {
+        "requestedStartNs": 15000000000,
+        "requestedEndNs": 60000000000,
+        "coveredBySourceDuration": true
+      },
+      "sourceAndUsagePermission": {
+        "scope": "space-rhythm-internal-test-only",
+        "confirmedBy": "project-default-final-confirmer",
+        "decisionId": "D-009",
+        "confirmationDate": "2026-09-14",
+        "legalConclusion": false,
+        "redistributable": false
+      },
+      "signedMediaUrlPersisted": false
+    },
+    {
+      "clipId": "SR-BILI-TRAVEL-009",
+      "datasetPartition": "final_evaluation",
+      "productCategory": "旅行/风景混剪",
+      "contentCategoriesExpectedPendingHumanReview": [
+        "global_camera_motion",
+        "slow_cut_or_transition",
+        "flash_or_exposure_change"
+      ],
+      "source": {
+        "provider": "bilibili_public_page",
+        "bvid": "BV1zDbV62Ea1",
+        "pageUrl": "https://www.bilibili.com/video/BV1zDbV62Ea1/",
+        "pageLabel": "BV1zDbV62Ea1",
+        "title": "【空镜素材】‌4K超清纽约市的日常生活  4K HDR视频素材",
+        "uploader": "觅音素",
+        "uploaderId": "3546850997045534",
+        "uploadDate": "20260912",
+        "sourceDurationSeconds": 337.621,
+        "selectedFormatId": "30064",
+        "selectedFormatCodec": "avc1.640028",
+        "selectedFormatWidth": 1280,
+        "selectedFormatHeight": 720,
+        "selectedFormatFps": 30.0
+      },
+      "sourceWindow": {
+        "requestedStartNs": 15000000000,
+        "requestedEndNs": 60000000000,
+        "coveredBySourceDuration": true
+      },
+      "sourceAndUsagePermission": {
+        "scope": "space-rhythm-internal-test-only",
+        "confirmedBy": "project-default-final-confirmer",
+        "decisionId": "D-009",
+        "confirmationDate": "2026-09-14",
+        "legalConclusion": false,
+        "redistributable": false
+      },
+      "signedMediaUrlPersisted": false
+    },
+    {
+      "clipId": "SR-BILI-TRAVEL-010",
+      "datasetPartition": "final_evaluation",
+      "productCategory": "旅行/风景混剪",
+      "contentCategoriesExpectedPendingHumanReview": [
+        "long_take_or_no_cut",
+        "global_camera_motion",
+        "repetitive_motion"
+      ],
+      "source": {
+        "provider": "bilibili_public_page",
+        "bvid": "BV1714y1B7ba",
+        "pageUrl": "https://www.bilibili.com/video/BV1714y1B7ba/",
+        "pageLabel": "BV1714y1B7ba",
+        "title": "【免版权 可商用 4K空镜素材】超长镜头|公路之旅",
+        "uploader": "MOGU素材",
+        "uploaderId": "486032117",
+        "uploadDate": "20230803",
+        "sourceDurationSeconds": 230.155,
+        "selectedFormatId": "30064",
+        "selectedFormatCodec": "avc1.640028",
+        "selectedFormatWidth": 1280,
+        "selectedFormatHeight": 718,
+        "selectedFormatFps": 29.412
+      },
+      "sourceWindow": {
+        "requestedStartNs": 15000000000,
+        "requestedEndNs": 60000000000,
+        "coveredBySourceDuration": true
+      },
+      "sourceAndUsagePermission": {
+        "scope": "space-rhythm-internal-test-only",
+        "confirmedBy": "project-default-final-confirmer",
+        "decisionId": "D-009",
+        "confirmationDate": "2026-09-14",
+        "legalConclusion": false,
+        "redistributable": false
+      },
+      "signedMediaUrlPersisted": false
+    }
+  ],
+  "failures": [
+    {
+      "clipId": "SR-BILI-GAME-004",
+      "errorType": "ValueError",
+      "message": "SR-BILI-GAME-004: source duration 49.421s does not cover approved end 50s"
+    },
+    {
+      "clipId": "SR-BILI-TRAVEL-001",
+      "errorType": "ValueError",
+      "message": "SR-BILI-TRAVEL-001: source duration 51.366s does not cover approved end 52s"
+    },
+    {
+      "clipId": "SR-BILI-TRAVEL-007",
+      "errorType": "ValueError",
+      "message": "SR-BILI-TRAVEL-007: source duration 55.402s does not cover approved end 56s"
+    },
+    {
+      "clipId": "SR-BILI-LIFE-007",
+      "errorType": "ValueError",
+      "message": "SR-BILI-LIFE-007: source duration 21.640s does not cover approved end 22s"
+    }
+  ],
+  "datasetManifestSha256": "77882f1bcaf64c9f4af76bd6c9fd2752411034b3548084d8c0b44f1074989e15"
+}

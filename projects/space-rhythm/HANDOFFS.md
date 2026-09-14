@@ -1,5 +1,31 @@
 # 行动请求与交接
 
+## H-014：提供 T-029 独立真人证据与合规 Windows 基准运行条件
+- 发起人：video-algorithm-engineer-cv-01
+- 目标：用户
+- 关联任务：T-029
+- 期望结果：组织 5 名相互独立的真人评审者，其中至少 3 名具有短视频剪辑或卡点制作经验，按 A-031 0.2 完成人工初标、独立复核/裁决和随机化盲评；算法实现者不得作为正式评审者。并使确认的 `TIGER` 基准机在接通电源、Windows 最佳性能模式下允许 T-028 的同一 Release PE 原生启动，以便按一次预热 + 五次正式测量完成门禁。
+- 输入与证据：[A-031 0.2](artifacts/A-031-t029-video-product-evaluation-input.md)、[A-030 0.2](artifacts/A-030-video-product-evaluation-and-model-gate.md)、[T-029 执行就绪证据](evidence/T-029/execution-readiness-v2.json)。
+- 未完成事项：尚无初标、复核、裁决或盲评记录及 SHA-256；当前活动电源方案为“平衡”而非“最佳性能”，Release PE 在进入 `main` 前被 WDAC/SAC 以 `0xC0E90002` 拒绝。Wine 不可作为确认 Windows 基准的替代。
+- 状态：open
+- 创建日期：2026-09-14
+- 接收反馈：暂无。
+- 处理结果与证据：暂无。
+- 关闭或取消依据：暂无。
+
+## H-013：替换 T-029 失效来源并恢复实际样本配额
+- 发起人：video-algorithm-engineer-cv-01
+- 目标：product-manager-01
+- 关联任务：T-029、T-039
+- 期望结果：在相同产品类别和数据分区内显式替换 4 个超出源时长的批准片段并升级 A-031；替换/增补后的来源须经实际获取与 probe 恢复 40 条、`calibration/tuning/final=4/16/20`、每类 10 条，并让每个必测技术 slice 至少有 3 条且至少 1 条属于 final，尤其补足实际 VFR 配额。不得静默缩短原时间窗或由算法负责人自行换源。
+- 输入与证据：[A-031 0.2](artifacts/A-031-t029-video-product-evaluation-input.md)、[来源可用性审计](evidence/T-029/source-availability-audit-v1.json)、[产品数据 manifest](evidence/T-029/product-dataset-manifest-v1.json)、[T-029 执行就绪证据](evidence/T-029/execution-readiness-v2.json)。失效项为 `SR-BILI-GAME-004`（tuning/game）、`SR-BILI-TRAVEL-001`（calibration/travel）、`SR-BILI-TRAVEL-007`（final/travel）、`SR-BILI-LIFE-007`（final/life）；36 个已成功代理可保留并按新版 manifest 复核。
+- 未完成事项：当前只有 36 条有效代理，实际分区 `3/15/18`、类别 `10/9/8/9`；probe 为 CFR 36、VFR 0；A-031 预期 slow_motion 只有 2 条且尚未经人工裁决。产品负责人选择候选来源后仍由 T-029 执行人实际获取、probe 和复核，不能只凭标题宣称配额满足。
+- 状态：open
+- 创建日期：2026-09-14
+- 接收反馈：暂无。
+- 处理结果与证据：暂无。
+- 关闭或取消依据：暂无。
+
 ## H-012：确认 T-029 的真实产品输入与数值门槛
 - 发起人：product-manager-01
 - 目标：用户
@@ -75,7 +101,7 @@
 - 状态：accepted
 - 创建日期：2026-09-09
 - 接收反馈：video-algorithm-engineer-cv-01 于 2026-09-14 完成成员身份、岗位、有效知识、相关决定、任务和上游契约刷新后确认接收；本轮先执行 T-027，完成后才按顺序进入 T-028、T-029，不越过效果与模型门禁。
-- 处理结果与证据：2026-09-14，T-027 已按顺序完成并形成 [A-028 0.2](artifacts/A-028-video-analysis-contract-sample-metrics.md)、10 项 CC0 合成样本配方和指标契约。同日用户明确启动并完成 T-028，形成 [A-029 0.1](artifacts/A-029-classic-video-analysis-and-golden.md)及[验证摘要](evidence/T-028/verification-summary.md)：实现 OpenCV 4.12.0 经典 shot/motion_peak/action_peak，直接使用媒体 schema 2 真实 `timeNs`，生成固定 FFmpeg 8.1.2 FFV1 golden 并连续两次取得相同 hash；Debug/CI/Release 三套最终 Windows PE 在 Wine 8.0 隔离环境各 8/8 通过，合成矩阵无 FP/FN。最终 PE 本机原生启动仍受既有 WDAC/SAC `0xC0E90002` 拒绝，未伪装为原生通过。同日用户明确授权启动 T-029；负责人完成输入就绪审计并形成 [A-030 0.1](artifacts/A-030-video-product-evaluation-and-model-gate.md)，确认仓库内尚无代表产品视频、人工标注、已确认自然度 rubric、基准硬件和效果/性能阈值。T-029 已启动但因 `missing_confirmed_input` 转为 `blocked`；产品、性能和模型门禁均为 `not-evaluated`，未引入模型。
+- 处理结果与证据：2026-09-14，T-027 已按顺序完成并形成 [A-028 0.2](artifacts/A-028-video-analysis-contract-sample-metrics.md)、10 项 CC0 合成样本配方和指标契约。同日用户明确启动并完成 T-028，形成 [A-029 0.1](artifacts/A-029-classic-video-analysis-and-golden.md)及[验证摘要](evidence/T-028/verification-summary.md)：实现 OpenCV 4.12.0 经典 shot/motion_peak/action_peak，直接使用媒体 schema 2 真实 `timeNs`，生成固定 FFmpeg 8.1.2 FFV1 golden 并连续两次取得相同 hash；Debug/CI/Release 三套最终 Windows PE 在 Wine 8.0 隔离环境各 8/8 通过，合成矩阵无 FP/FN。最终 PE 本机原生启动仍受既有 WDAC/SAC `0xC0E90002` 拒绝，未伪装为原生通过。同日用户明确授权启动 T-029；首次缺输入审计形成 A-030 0.1，随后 D-009/A-031 0.2 补齐产品定义。负责人按新版输入实际审计 40 项并冻结 36 个内部测试代理的媒体/probe/帧时间 hash，发现 4 个批准时间窗超出源时长、VFR 实际配额为 0；真人初标/复核/裁决/盲评证据仍缺失，确认基准机也处于“平衡”电源方案且 Release PE 被 WDAC/SAC 阻止。当前 [A-030 0.2](artifacts/A-030-video-product-evaluation-and-model-gate.md)如实记录数据/配额 `fail`，效果、自然度、人工修正、性能、总体和模型资格 `not-evaluated`；classic 未越过裁决标注前置，未提出模型或引入 ONNX。后续输入由 H-013、H-014 跟踪。
 - 关闭或取消依据：暂无。
 
 ## H-006：启动 Qt Quick/QML UI 设计开发工作流
