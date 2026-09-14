@@ -132,15 +132,15 @@
 
 ## T-029：评估视频卡点效果、性能并执行可选模型门禁
 - 负责人：video-algorithm-engineer-cv-01
-- 状态：todo
-- 授权来源与日期：本会话用户于 2026-09-09 要求补充系统架构师判断的新增成员及成员任务并提交；同一用户于 2026-09-14 明确授权启动 T-029，并要求纳入代表产品视频与人工标注、“卡点自然”评估口径、基准硬件和效果/性能阈值。
+- 状态：blocked
+- 授权来源与日期：本会话用户于 2026-09-09 要求补充系统架构师判断的新增成员及成员任务并提交；同一用户于 2026-09-14 明确授权启动 T-029，并要求纳入代表产品视频与人工标注、“卡点自然”评估口径、基准硬件和效果/性能阈值；随后再次明确要求按 A-031 0.2 获取实际视频、完成真人初标/复核/盲评和确认 Windows 基准运行，禁止提交原视频、越过 classic 真实失败门槛或自行引入 ONNX。
 - 目标与范围：在代表性数据上评估镜头、运动和动作候选的效果、可解释性、人工修正量与性能，决定是否具备进入可选模型评估的证据；不自行确定产品门槛或引入模型。
-- 输入与依赖：T-027、T-028 已完成；D-009 confirmed；A-031 0.2 approved，已确认产品来源清单/分区/配额、标注和自然度协议、基准硬件与逐项阈值；A-011 0.1、A-028 0.2、A-029 0.1、A-030 0.1。
+- 输入与依赖：T-027、T-028 已完成；D-009 confirmed；A-031 0.2 approved，已确认产品来源清单/分区/配额、标注和自然度协议、基准硬件与逐项阈值；A-011 0.1、A-028 0.2、A-029 0.1、A-030 0.2。
 - 优先级：未设定（架构建议：经典算法可运行后启动）。
 - 完成条件与确认方式：按样本类别报告命中、误报、时间误差、人工修正量或确认的等价指标；记录吞吐、内存、线程和取消；列出已知失败模式；经典算法未达门槛时提交模型收益、运行时、许可、CPU/GPU 和包体影响，等待新决定；形成可复核效果/性能报告。
-- 进展：T-027 契约和 T-028 经典算法/真实 golden/自测已完成；2026-09-14 的首次输入就绪审计因产品输入缺失形成 A-030 0.1。随后 product-manager-01 按用户授权形成 A-031，用户逐项确认 D-009；A-031 已升为 0.2/approved，产品输入阻塞已解除。本轮用户明确要求 product-manager-01 不代为执行 T-029，因此尚未获取媒体、冻结 hash/标注或运行评估。
-- 成果与验证证据：[A-011 0.1](artifacts/A-011-complete-mvp-engineering-staffing-and-task-plan.md)、[A-030 0.1](artifacts/A-030-video-product-evaluation-and-model-gate.md)、[A-031 0.2](artifacts/A-031-t029-video-product-evaluation-input.md)、D-009 confirmed 及[首次输入就绪证据](evidence/T-029/input-readiness-v1.json)；产品效果/性能实际评估尚未发生。
-- 阻塞与下一位行动人：无未决产品输入阻塞。下一位行动人为 video-algorithm-engineer-cv-01：依 A-031 0.2 获取实际视频、校验时间窗和 slice 配额、冻结媒体/probe/标注 hash，再运行经典算法与人工评审。任何必选证据缺失时依协议记录 `not-evaluated`，不得用合成 golden 或 Wine 测量填充。
+- 进展：负责人按 A-031 0.2 实际审计 40 个 B 站来源并获取 36 个静音 720p 内部测试代理，逐项冻结媒体 SHA-256、完整 probe、真实帧时间序列 SHA-256 和 manifest 摘要；媒体总计 1,141,653,591 bytes、1,635.045 秒，36/36 hash 复核一致，原始/代理媒体均留在 Git 忽略的 `out/`。4 个批准时间窗超出实际源时长：`SR-BILI-GAME-004` 49.421s<50s、`SR-BILI-TRAVEL-001` 51.366s<52s、`SR-BILI-TRAVEL-007` 55.402s<56s、`SR-BILI-LIFE-007` 21.640s<22s；因此实际分区为 `3/15/18`、类别为 `10/9/8/9`。实际 probe 全部为 CFR，VFR 为 0，不满足至少 3 条且至少 1 条 final 的配额；A-031 预期慢动作仅 2 条，仍须由裁决标注确认/补足。独立真人初标、复核、裁决和盲评均未发生，标注 hash 为空；A-031 要求裁决标注先冻结，所以 classic 未运行。确认基准机当前活动电源为“平衡”而非“最佳性能”，Release PE 又在 `main` 前被 WDAC/SAC 以 `0xC0E90002` 拒绝，故未执行正式性能测量。数据/配额门禁为 `fail`；效果、自然度、人工修正、性能、总体及模型资格均为 `not-evaluated`。未提出模型方案，未引入 ONNX。
+- 成果与验证证据：[A-030 0.2](artifacts/A-030-video-product-evaluation-and-model-gate.md)、[A-031 0.2](artifacts/A-031-t029-video-product-evaluation-input.md)、[来源可用性审计](evidence/T-029/source-availability-audit-v1.json)、[产品数据 manifest](evidence/T-029/product-dataset-manifest-v1.json)、[执行就绪与门禁证据](evidence/T-029/execution-readiness-v2.json)及[获取/冻结工具](../../tests/evaluation/video/acquire_product_evaluation_media.py)。媒体 SHA、probe 和帧时间 hash 位于 manifest；原始/代理媒体未提交 Git。
+- 阻塞与下一位行动人：`H-013` 由 product-manager-01 在相同类别/分区显式替换 4 个失效来源并升级 A-031，恢复 40 条、`4/16/20`、每类 10 及实际 VFR/技术 slice 配额；`H-014` 由用户组织 5 名独立真人（至少 3 名有经验）完成初标、复核/裁决和盲评，并使 TIGER 在接通电源 + Windows 最佳性能模式下允许同一 Release PE 原生启动。完整裁决标注 hash 和合规 Windows 运行条件同时到位后，video-algorithm-engineer-cv-01 才能继续 classic 与门禁评估；不得用 AI、合成 golden 或 Wine 代填。
 - 更新日期：2026-09-14。
 
 ## T-028：实现经典镜头、运动与动作峰值分析
