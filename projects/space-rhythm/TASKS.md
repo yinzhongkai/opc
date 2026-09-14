@@ -122,25 +122,25 @@
 - 状态：todo
 - 授权来源与日期：本会话用户于 2026-09-09 要求补充系统架构师判断的新增成员及成员任务并提交。
 - 目标与范围：在代表性数据上评估镜头、运动和动作候选的效果、可解释性、人工修正量与性能，决定是否具备进入可选模型评估的证据；不自行确定产品门槛或引入模型。
-- 输入与依赖：T-027 已完成；仍等待 T-028；产品样本、卡点自然口径、基准硬件和阈值待确认；A-011 0.1、A-028 0.1。
+- 输入与依赖：T-027、T-028 已完成；产品样本、卡点自然口径、基准硬件和阈值待确认；A-011 0.1、A-028 0.2、A-029 0.1。
 - 优先级：未设定（架构建议：经典算法可运行后启动）。
 - 完成条件与确认方式：按样本类别报告命中、误报、时间误差、人工修正量或确认的等价指标；记录吞吐、内存、线程和取消；列出已知失败模式；经典算法未达门槛时提交模型收益、运行时、许可、CPU/GPU 和包体影响，等待新决定；形成可复核效果/性能报告。
-- 进展：T-027 契约、样本规格和指标已完成；本任务尚未接收或启动，严格等待 T-028 完成。
+- 进展：T-027 契约和 T-028 经典算法/真实 golden/自测已完成；本任务仍未接收或启动，本轮遵守用户指令未执行模型门禁或产品效果评估。
 - 成果与验证证据：[A-011 0.1](artifacts/A-011-complete-mvp-engineering-staffing-and-task-plan.md)；实际评估暂无。
-- 阻塞与下一位行动人：等待 T-028 及产品/测试输入；video-algorithm-engineer-cv-01 下一步先执行 T-028。未确认的“卡点自然”阈值只允许产生 `measured/not-evaluated` 结果。
+- 阻塞与下一位行动人：等待用户另行明确启动，并等待产品真实样本、人工评估口径、基准硬件和阈值；未确认的“卡点自然”阈值只允许产生 `measured/not-evaluated` 结果。
 - 更新日期：2026-09-14。
 
 ## T-028：实现经典镜头、运动与动作峰值分析
 - 负责人：video-algorithm-engineer-cv-01
-- 状态：todo
-- 授权来源与日期：本会话用户于 2026-09-09 要求补充系统架构师判断的新增成员及成员任务并提交。
+- 状态：completed
+- 授权来源与日期：本会话用户于 2026-09-09 要求补充系统架构师判断的新增成员及成员任务并提交；同一用户于 2026-09-14 明确要求刷新身份后执行 T-028，生成真实 golden 并完成确定性、PTS/VFR、有界内存、取消及性能自测，同时不得提前启动 T-029。
 - 目标与范围：基于 C++/OpenCV 和代理帧实现镜头切换、全局/局部运动曲线与动作峰值候选；不直接融合或覆盖核心时间线，不默认引入模型。
 - 输入与依赖：T-013、T-014、T-017、T-018、T-020、T-027 已完成，D-003 已确认 OpenCV 经典算法路线；A-011 0.1、A-012 0.1、A-014 0.4、A-015 0.3、A-016 0.1、A-028 0.1。
 - 优先级：未设定（架构建议：工程、媒体和契约就绪后启动）。
 - 完成条件与确认方式：输出 shot/motion_peak/action_peak 的 timeNs、强度、置信度、来源、算法/参数版本和低质量原因；真实 PTS/VFR 映射正确；相同输入与参数结果可复现；覆盖闪烁、运镜、局部动作、快切、慢切和静止样例；使用有界内存并支持取消；负责人提交单元、黄金和性能自测。
-- 进展：T-027 已完成输入/输出、样本规格和指标冻结；本任务尚未接收或启动，是严格顺序中的下一项。
-- 成果与验证证据：[A-011 0.1](artifacts/A-011-complete-mvp-engineering-staffing-and-task-plan.md)；实际代码暂无。
-- 阻塞与下一位行动人：无技术前置阻塞；下一步由 video-algorithm-engineer-cv-01 接收并执行 T-028。实际生成 golden、经典算法实现及自测完成前不得启动 T-029。
+- 进展：video-algorithm-engineer-cv-01 于 2026-09-14 完成 `SpaceRhythm::VideoAnalysis`：OpenCV 4.12.0 经典硬切/渐变/flash、Farneback 全局/局部运动、局部显著性及 acceleration/reversal/PTS-window stop 动作峰；直接消费媒体 schema 2 真实 `timeNs`，输出 core schema 1 稳定候选、算法/参数摘要、置信度和低质量原因。10 项 CC0 配方已由固定 FFmpeg 8.1.2 生成真实 FFV1 golden，连续两次生成 hash 一致；三套 `/W4 /WX` 构建目标通过，三套最终 Windows PE 在 Wine 8.0 隔离环境各 8/8 测试通过，覆盖确定性、PTS 回跳/VFR、有界内存和取消。合成集效果及 Release 性能已测量，所有未确认门槛保持 `not-evaluated`。
+- 成果与验证证据：[A-029 0.1：经典视频分析实现、真实 golden 与自测](artifacts/A-029-classic-video-analysis-and-golden.md)、[公共接口](../../src/video_analysis/include/space_rhythm/video/analysis.hpp)、[实现](../../src/video_analysis/analysis.cpp)、[真实 golden manifest](../../tests/golden/video/fixtures-v1.json)、[实际 hash/ffprobe 证据](../../tests/golden/video/generated/actual-hashes-and-probe-v1.json)、[GoogleTest](../../tests/unit/video_analysis_test.cpp)及[验证摘要](evidence/T-028/verification-summary.md)。合成矩阵 shot/motion/action 分别为 5/0/0、5/0/0、4/0/0（TP/FP/FN），仅为 `measured/not-evaluated`；性能和取消原始数值见机器可读证据。
+- 阻塞与下一位行动人：负责人范围内实现和自测无阻塞。最终 Release PE 在本机原生启动前仍受既有 WDAC/SAC/Code Integrity 以 `0xC0E90002` 拒绝，故不宣称原生执行通过；同一未改写 Windows PE 已在隔离环境实跑。H-007 等待 architect-01 核对。T-029 保持 `todo`，须由用户另行明确启动。
 - 更新日期：2026-09-14。
 
 ## T-027：建立视频分析契约、样本矩阵和效果指标

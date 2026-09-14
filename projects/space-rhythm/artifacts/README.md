@@ -31,7 +31,8 @@
 | A-025 | [Qt Quick 离屏渲染、降级与一致性测量](A-025-qt-offscreen-rendering-and-measurements.md) | graphics-engineer-qt-scenegraph-01 | T-035 | 0.1 | draft | 尚无 |
 | A-026 | [预览同步与安全导出事务](A-026-preview-synchronization-and-safe-export.md) | multimedia-engineer-ffmpeg-01 | T-019 | 0.1 | draft | 尚无 |
 | A-027 | [Qt Quick 真实服务、时间线与安全导出集成](A-027-qt-quick-real-workflow-integration.md) | ui-engineer-qt-quick-01 | T-026 | 0.3 | draft | 尚无 |
-| A-028 | [视频分析输入/输出契约、代表样本与效果指标 0.x](A-028-video-analysis-contract-sample-metrics.md) | video-algorithm-engineer-cv-01 | T-027 | 0.1 | draft | 尚无 |
+| A-028 | [视频分析输入/输出契约、代表样本与效果指标 0.x](A-028-video-analysis-contract-sample-metrics.md) | video-algorithm-engineer-cv-01 | T-027 | 0.2 | draft | 尚无 |
+| A-029 | [经典视频分析实现、真实 golden 与自测](A-029-classic-video-analysis-and-golden.md) | video-algorithm-engineer-cv-01 | T-028 | 0.1 | draft | 尚无 |
 
 ## 正文元信息样式（不是真实成果）
 

@@ -17,6 +17,19 @@ set_tests_properties(media.golden_generate PROPERTIES
 )
 
 add_test(
+    NAME video.golden_generate
+    COMMAND "${SPACE_RHYTHM_POWERSHELL_EXECUTABLE}" -NoProfile -File
+        "${CMAKE_CURRENT_SOURCE_DIR}/golden/video/Generate-GoldenVideo.ps1"
+        -FfmpegPath "${SPACE_RHYTHM_FFMPEG_TOOL_DIR}/ffmpeg.exe"
+        -FfprobePath "${SPACE_RHYTHM_FFMPEG_TOOL_DIR}/ffprobe.exe"
+)
+set_tests_properties(video.golden_generate PROPERTIES
+    FIXTURES_SETUP golden-video
+    LABELS "t028;golden;video;headless;gate-g1;gate-g3"
+    TIMEOUT 300
+)
+
+add_test(
     NAME audio.golden_generate
     COMMAND "${SPACE_RHYTHM_POWERSHELL_EXECUTABLE}" -NoProfile -File
         "${CMAKE_CURRENT_SOURCE_DIR}/golden/audio/Generate-AudioDspVectors.ps1"
@@ -102,6 +115,60 @@ target_compile_definitions(space_rhythm_audio_analysis_benchmark PRIVATE
     SPACE_RHYTHM_GOLDEN_AUDIO_DIR="${CMAKE_CURRENT_SOURCE_DIR}/golden/audio/generated"
 )
 space_rhythm_apply_build_policy(space_rhythm_audio_analysis_benchmark)
+
+add_executable(space_rhythm_video_analysis_tests
+    unit/video_analysis_test.cpp
+)
+target_link_libraries(space_rhythm_video_analysis_tests PRIVATE
+    SpaceRhythm::VideoAnalysis
+    GTest::gtest_main
+)
+target_compile_definitions(space_rhythm_video_analysis_tests PRIVATE
+    SPACE_RHYTHM_GOLDEN_VIDEO_DIR="${CMAKE_CURRENT_SOURCE_DIR}/golden/video/generated"
+)
+space_rhythm_apply_build_policy(space_rhythm_video_analysis_tests)
+gtest_add_tests(
+    TARGET space_rhythm_video_analysis_tests
+    TEST_LIST space_rhythm_video_analysis_test_cases
+)
+set_tests_properties(${space_rhythm_video_analysis_test_cases} PROPERTIES
+    FIXTURES_REQUIRED golden-video
+    LABELS "t028;unit;golden;video;headless;gate-g1;gate-g3"
+    TIMEOUT 180
+)
+
+add_executable(space_rhythm_video_analysis_benchmark
+    performance/video_analysis_benchmark.cpp
+)
+target_link_libraries(space_rhythm_video_analysis_benchmark PRIVATE
+    SpaceRhythm::VideoAnalysis
+    Psapi
+)
+target_compile_definitions(space_rhythm_video_analysis_benchmark PRIVATE
+    SPACE_RHYTHM_GOLDEN_VIDEO_DIR="${CMAKE_CURRENT_SOURCE_DIR}/golden/video/generated"
+)
+space_rhythm_apply_build_policy(space_rhythm_video_analysis_benchmark)
+
+add_executable(space_rhythm_video_analysis_golden_measurement
+    performance/video_analysis_golden_measurement.cpp
+)
+target_link_libraries(space_rhythm_video_analysis_golden_measurement PRIVATE
+    SpaceRhythm::VideoAnalysis
+)
+target_compile_definitions(space_rhythm_video_analysis_golden_measurement PRIVATE
+    SPACE_RHYTHM_GOLDEN_VIDEO_DIR="${CMAKE_CURRENT_SOURCE_DIR}/golden/video/generated"
+)
+space_rhythm_apply_build_policy(space_rhythm_video_analysis_golden_measurement)
+
+add_test(
+    NAME video.analysis_performance_smoke
+    COMMAND space_rhythm_video_analysis_benchmark --smoke
+)
+set_tests_properties(video.analysis_performance_smoke PROPERTIES
+    FIXTURES_REQUIRED golden-video
+    LABELS "t028;performance;video;headless;measured;not-evaluated"
+    TIMEOUT 120
+)
 
 add_test(
     NAME contract.golden.media_audit
