@@ -18,12 +18,12 @@
 - 目标：product-manager-01
 - 关联任务：T-029、T-039
 - 期望结果：在相同产品类别和数据分区内显式替换 4 个超出源时长的批准片段并升级 A-031；替换/增补后的来源须经实际获取与 probe 恢复 40 条、`calibration/tuning/final=4/16/20`、每类 10 条，并让每个必测技术 slice 至少有 3 条且至少 1 条属于 final，尤其补足实际 VFR 配额。不得静默缩短原时间窗或由算法负责人自行换源。
-- 输入与证据：[A-031 0.2](artifacts/A-031-t029-video-product-evaluation-input.md)、[来源可用性审计](evidence/T-029/source-availability-audit-v1.json)、[产品数据 manifest](evidence/T-029/product-dataset-manifest-v1.json)、[T-029 执行就绪证据](evidence/T-029/execution-readiness-v2.json)。失效项为 `SR-BILI-GAME-004`（tuning/game）、`SR-BILI-TRAVEL-001`（calibration/travel）、`SR-BILI-TRAVEL-007`（final/travel）、`SR-BILI-LIFE-007`（final/life）；36 个已成功代理可保留并按新版 manifest 复核。
+- 输入与证据：[A-031 0.2（提交 68a8c0e；当前正文已升 0.3）](artifacts/A-031-t029-video-product-evaluation-input.md)、[来源可用性审计](evidence/T-029/source-availability-audit-v1.json)、[产品数据 manifest](evidence/T-029/product-dataset-manifest-v1.json)、[T-029 执行就绪证据](evidence/T-029/execution-readiness-v2.json)。失效项为 `SR-BILI-GAME-004`（tuning/game）、`SR-BILI-TRAVEL-001`（calibration/travel）、`SR-BILI-TRAVEL-007`（final/travel）、`SR-BILI-LIFE-007`（final/life）；36 个已成功代理可保留并按新版 manifest 复核。
 - 未完成事项：当前只有 36 条有效代理，实际分区 `3/15/18`、类别 `10/9/8/9`；probe 为 CFR 36、VFR 0；A-031 预期 slow_motion 只有 2 条且尚未经人工裁决。产品负责人选择候选来源后仍由 T-029 执行人实际获取、probe 和复核，不能只凭标题宣称配额满足。
-- 状态：open
+- 状态：accepted
 - 创建日期：2026-09-14
-- 接收反馈：暂无。
-- 处理结果与证据：暂无。
+- 接收反馈：product-manager-01 于 2026-09-14 刷新 T-029、D-009、A-031 0.2、A-030 0.2 及三份媒体审计证据后接收。确认 4 个失效来源必须同类别/同分区替换；36 个已成功来源可保留。实际 VFR 不能由标题或预期标签代替，仍须由 T-029 执行人 probe。
+- 处理结果与证据：已形成 [A-031 0.3](artifacts/A-031-t029-video-product-evaluation-input.md)，用户于 2026-09-14 回复“可以替换”，D-010 confirmed，A-031 0.3 已转为 `approved`。确认映射为 `GAME-004 -> BV1jeYq6nEC4`、`TRAVEL-001 -> BV1Ex411H7he`、`TRAVEL-007 -> BV1F6b86bELD`、`LIFE-007 -> BV1Ts41117Hv`；公开页面时长分别为 135/109/370/144 秒，均覆盖新 45 秒窗口。静态清单恢复 40 条、`4/16/20`、每类 10 条；声明层 `slow_motion=4/final=4`，VFR 探测目标 `3/final=1`，其余 18 个必测技术 slice 均至少 4 条且至少 1 条 final。下一位行动人为 video-algorithm-engineer-cv-01：实际获取、保留源 PTS、probe 和人工裁决；实际 probe 未达到 `vfr>=3/final>=1` 前不得声称配额恢复，也不得关闭 H-013。
 - 关闭或取消依据：暂无。
 
 ## H-012：确认 T-029 的真实产品输入与数值门槛
