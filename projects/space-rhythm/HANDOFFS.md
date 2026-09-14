@@ -62,7 +62,7 @@
 - 状态：accepted
 - 创建日期：2026-09-09
 - 接收反馈：video-algorithm-engineer-cv-01 于 2026-09-14 完成成员身份、岗位、有效知识、相关决定、任务和上游契约刷新后确认接收；本轮先执行 T-027，完成后才按顺序进入 T-028、T-029，不越过效果与模型门禁。
-- 处理结果与证据：2026-09-14，T-027 已按顺序完成并形成 [A-028 0.2](artifacts/A-028-video-analysis-contract-sample-metrics.md)、10 项 CC0 合成样本配方和指标契约。同日用户明确启动 T-028，现已完成 [A-029 0.1](artifacts/A-029-classic-video-analysis-and-golden.md)及[验证摘要](evidence/T-028/verification-summary.md)：实现 OpenCV 4.12.0 经典 shot/motion_peak/action_peak，直接使用媒体 schema 2 真实 `timeNs`，生成固定 FFmpeg 8.1.2 FFV1 golden 并连续两次取得相同 hash；Debug/CI/Release 三套最终 Windows PE 在 Wine 8.0 隔离环境各 8/8 通过，合成矩阵无 FP/FN。最终 PE 本机原生启动仍受既有 WDAC/SAC `0xC0E90002` 拒绝，未伪装为原生通过。代表产品素材、人工标注、基准硬件和“卡点自然”阈值仍待确认，效果/性能仅为 `measured/not-evaluated`。T-029 继续保持 `todo`，本轮未提前启动。
+- 处理结果与证据：2026-09-14，T-027 已按顺序完成并形成 [A-028 0.2](artifacts/A-028-video-analysis-contract-sample-metrics.md)、10 项 CC0 合成样本配方和指标契约。同日用户明确启动并完成 T-028，形成 [A-029 0.1](artifacts/A-029-classic-video-analysis-and-golden.md)及[验证摘要](evidence/T-028/verification-summary.md)：实现 OpenCV 4.12.0 经典 shot/motion_peak/action_peak，直接使用媒体 schema 2 真实 `timeNs`，生成固定 FFmpeg 8.1.2 FFV1 golden 并连续两次取得相同 hash；Debug/CI/Release 三套最终 Windows PE 在 Wine 8.0 隔离环境各 8/8 通过，合成矩阵无 FP/FN。最终 PE 本机原生启动仍受既有 WDAC/SAC `0xC0E90002` 拒绝，未伪装为原生通过。同日用户明确授权启动 T-029；负责人完成输入就绪审计并形成 [A-030 0.1](artifacts/A-030-video-product-evaluation-and-model-gate.md)，确认仓库内尚无代表产品视频、人工标注、已确认自然度 rubric、基准硬件和效果/性能阈值。T-029 已启动但因 `missing_confirmed_input` 转为 `blocked`；产品、性能和模型门禁均为 `not-evaluated`，未引入模型。
 - 关闭或取消依据：暂无。
 
 ## H-006：启动 Qt Quick/QML UI 设计开发工作流
