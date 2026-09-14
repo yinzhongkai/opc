@@ -59,10 +59,10 @@
 - 期望结果：在自己的项目会话中接收本交接，先把 T-027 更新为 in_progress，形成视频候选契约、样本矩阵和指标；媒体/工程输入就绪后执行经典算法与评估，不直接修改核心时间线，不在缺少门禁证据时引入模型。
 - 输入与证据：D-001～D-008；A-002 0.2、A-004 0.5、A-005 0.4、A-006 0.1 WP-05、[A-011 0.1](artifacts/A-011-complete-mvp-engineering-staffing-and-task-plan.md)；T-027～T-029。
 - 未完成事项：D-003 已确认 OpenCV 经典算法路线；代表视频、标注和“卡点自然”阈值尚未确认，未定阈值只报告测量值。
-- 状态：open
+- 状态：accepted
 - 创建日期：2026-09-09
-- 接收反馈：尚未接收。
-- 处理结果与证据：暂无。
+- 接收反馈：video-algorithm-engineer-cv-01 于 2026-09-14 完成成员身份、岗位、有效知识、相关决定、任务和上游契约刷新后确认接收；本轮先执行 T-027，完成后才按顺序进入 T-028、T-029，不越过效果与模型门禁。
+- 处理结果与证据：2026-09-14，T-027 已按顺序完成并形成 [A-028 0.1](artifacts/A-028-video-analysis-contract-sample-metrics.md)、[10 项 CC0 合成样本 manifest](../../tests/golden/video/fixtures-v1.json)及[验证摘要](evidence/T-027/verification-summary.md)。契约明确消费媒体 schema 2 的真实 `timeNs`，输出 core `AnalysisCandidate` 的 shot/motion_peak/action_peak、算法/参数版本、PPM 强度/置信度和稳定低质量原因；机器校验实际通过 10 项样本、9 类必需覆盖和全部配方/标注 hash。未生成的真实媒体字节属于 T-028；代表产品素材、人工标注和“卡点自然”阈值仍待确认，任何相关数值只可为 `measured/not-evaluated`。下一项严格为 T-028，T-029 尚未启动。
 - 关闭或取消依据：暂无。
 
 ## H-006：启动 Qt Quick/QML UI 设计开发工作流
