@@ -33,7 +33,7 @@
 | A-027 | [Qt Quick 真实服务、时间线与安全导出集成](A-027-qt-quick-real-workflow-integration.md) | ui-engineer-qt-quick-01 | T-026 | 0.3 | draft | 尚无 |
 | A-028 | [视频分析输入/输出契约、代表样本与效果指标 0.x](A-028-video-analysis-contract-sample-metrics.md) | video-algorithm-engineer-cv-01 | T-027 | 0.2 | draft | 尚无 |
 | A-029 | [经典视频分析实现、真实 golden 与自测](A-029-classic-video-analysis-and-golden.md) | video-algorithm-engineer-cv-01 | T-028 | 0.1 | draft | 尚无 |
-| A-030 | [视频产品效果、性能与可选模型门禁评估](A-030-video-product-evaluation-and-model-gate.md) | video-algorithm-engineer-cv-01 | T-029 | 0.2 | draft | 尚无；真实执行因数据/真人/Windows 前置阻塞 |
+| A-030 | [视频产品效果、性能与可选模型门禁评估](A-030-video-product-evaluation-and-model-gate.md) | video-algorithm-engineer-cv-01 | T-029 | 0.3 | draft | 尚无；结构配额已恢复，VFR/真人/Windows 前置仍阻塞 |
 | A-031 | [T-029 视频产品评估输入与用户确认清单](A-031-t029-video-product-evaluation-input.md) | product-manager-01 | T-039、H-013 | 0.3 | approved | D-010 confirmed；已批准 4 个来源替换，实际 VFR/其他 slice 仍须 T-029 probe/裁决 |
 
 ## 正文元信息样式（不是真实成果）
