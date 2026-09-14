@@ -5,13 +5,13 @@
 - 目标：用户
 - 关联任务：T-039、T-029
 - 期望结果：依据 A-031 0.1 第 8 节提供或确认代表产品视频、样本配额与分区、基准 Windows 硬件元组，以及逐项效果/性能/自然度数值阈值；授权来源必须可辨认。确认后允许 video-algorithm-engineer-cv-01 冻结实际输入 hash 并继续 T-029。
-- 输入与证据：[A-031 0.1：T-029 视频产品评估输入与用户确认清单](artifacts/A-031-t029-video-product-evaluation-input.md)；[A-030 0.1](artifacts/A-030-video-product-evaluation-and-model-gate.md)；D-009 proposed；T-029 blocked。
-- 未完成事项：仓库当前没有代表产品视频或人工产品标注；未确认基准 Windows 硬件和任何数值门槛。T-028 的 CC0 合成 golden 只属于契约/回归数据，Wine 8.0 测量只属于已有观测，二者均不能替代本交接输入。
-- 状态：open
+- 输入与证据：[A-031 0.2：T-029 视频产品评估输入](artifacts/A-031-t029-video-product-evaluation-input.md)，状态 approved；[A-030 0.1](artifacts/A-030-video-product-evaluation-and-model-gate.md)；D-009 confirmed。
+- 未完成事项：本交接的产品确认已完成。实际媒体获取、probe/hash冻结、人工标注、评审和效果/性能运行属于 T-029 执行，本轮按用户指令不由 product-manager-01 代为执行。T-028 合成 golden 和 Wine 测量仍不得替代产品数据或 Windows 基准结果。
+- 状态：closed
 - 创建日期：2026-09-14
-- 接收反馈：尚未接收；目标为用户，收到实际答复后由发起人据实记录。
-- 处理结果与证据：暂无。
-- 关闭或取消依据：暂无。
+- 接收反馈：用户于 2026-09-14 明确确认 D-009，并与 product-manager-01 逐项确认 C-1～C-3 的来源、配额、硬件、运行条件、评审和数值门槛。
+- 处理结果与证据：D-009 已为 confirmed；A-031 已升为 0.2/approved，写入四类 40 个 B 站真实来源与片段时间窗、`4/16/20` 分区、本机 Windows 基准元组、720p 代理/线程/预热条件和已确认 `E-*`/`P-*` gate。
+- 关闭或取消依据：发起人 product-manager-01 已核对用户逐项确认与 A-031 0.2，原期望结果全部满足，故关闭 H-012。
 
 ## H-011：补齐媒体 PCM resampler timing provenance 公共字段
 - 发起人：audio-dsp-engineer-01

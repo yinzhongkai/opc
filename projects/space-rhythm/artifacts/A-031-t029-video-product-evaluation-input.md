@@ -4,14 +4,14 @@
 - 成果 ID：A-031
 - 负责人：product-manager-01
 - 关联任务：T-039；供 T-029、T-022 使用
-- 版本：0.1
+- 版本：0.2
 - 更新日期：2026-09-14
-- 状态：draft
+- 状态：approved
 - 适用范围：第一阶段“视频到可编辑节奏音轨”主流程的代表产品数据、人工标注、自然度主观评估及经典视频算法效果/性能门禁输入；不执行算法评估，不批准学习模型或生产发布。
-- 来源及输入版本：本会话用户于 2026-09-14 的直接授权；D-001～D-008 confirmed；A-002 0.2 approved；A-011 0.1、A-016 0.1、A-028 0.2、A-029 0.1、A-030 0.1；T-029 blocked；H-001 项目经理整理结果。
-- 批准依据：尚无。标注、rubric、评分与播放协议由 product-manager-01 按本次授权形成；实际素材、基准硬件和数值阈值等待 D-009 确认。
+- 来源及输入版本：本会话用户于 2026-09-14 的直接授权与逐项确认；D-001～D-008 confirmed；A-002 0.2 approved；A-011 0.1、A-016 0.1、A-028 0.2、A-029 0.1、A-030 0.1；H-001 项目经理整理结果。
+- 批准依据：D-009 confirmed。用户确认 B 站内部测试素材边界、四类 40 条分区和配额、当前 Windows 基准机、运行条件及全部效果/自然度/性能阈值。
 - 协议版本：`productEvaluationInputVersion=0.1.0`
-- 版本记录：2026-09-14，0.1，首次形成代表产品集要求、标注协议、自然度 rubric、评分尺度、播放条件、门槛结构和最小确认清单。
+- 版本记录：2026-09-14，0.2，按 D-009 写入已确认的 B 站来源清单与分区、基准机实测元组、运行条件、逐项门槛和总 gate 规则；0.1 为首次方法稿。
 
 ## 1. 输入状态与不可替代边界
 
@@ -22,9 +22,9 @@
 | 代表视频集要求与 manifest 字段 | `product-defined` | 可据此收集和审计真实产品视频 |
 | 人工标注、复核与修正计量协议 | `product-defined` | 可据此制作标注工具/文件并培训标注者 |
 | “卡点自然” rubric、1～5 尺度和播放条件 | `product-defined` | 可据此构造盲评流程并保存原始评分 |
-| 实际代表产品视频、许可/hash、配额与分区 | `missing-confirmed-input` | D-009 确认并冻结前不得运行产品效果门禁 |
-| 基准 Windows 硬件 | `missing-confirmed-input` | D-009 确认前性能数字只能标 `measured` |
-| 效果、自然度和性能数值阈值 | `missing-confirmed-input` | D-009 确认前所有对应 gate 为 `not-evaluated` |
+| 实际代表产品视频来源、权限边界、配额与分区 | `confirmed-source-manifest` | 按第 8.1 节获取实际媒体并由 T-029 执行人冻结 hash；这是执行证据，不是未决产品输入 |
+| 基准 Windows 硬件与运行条件 | `confirmed` | 按第 8.2 节复核实际测量签名 |
+| 效果、自然度和性能数值阈值 | `confirmed` | 按第 6～8 节判定；未运行 T-029 前仍为 `not-evaluated` |
 
 T-028 的 10 项 CC0 合成 golden 用于契约、确定性、时间映射和回归测试，不属于目标用户的真实创作素材，禁止计入产品数据规模、自然度评分、人工修正量或产品通过率。Wine 8.0 隔离环境的性能数值也不是已承诺 Windows 基准机结果。
 
@@ -134,7 +134,7 @@ T-028 的 10 项 CC0 合成 golden 用于契约、确定性、时间映射和回
 
 2 分表示介于 1 与 3 之间，4 分表示介于 3 与 5 之间。`overallNaturalness` 使用同一 1～5 尺度，回答“作为目标用户，我认为这条卡点节奏整体听起来有多自然”；它不由五个维度自动平均生成。`directExportReadiness` 另记录 `direct_export|minor_edit|major_edit|unusable`。
 
-在 D-009 确认聚合和通过阈值前，必须保存逐评审者、逐片段、逐版本原始值，只能报告分布、中位数、四分位数和 `N/A` 比例，不能计算产品“通过率”。
+D-009 已确认聚合和通过阈值；仍必须保存逐评审者、逐片段、逐版本原始值，同时报告分布、中位数、四分位数和 `N/A` 比例，不得只留通过率。
 
 ## 5. 播放与评审条件
 
@@ -147,7 +147,7 @@ T-028 的 10 项 CC0 合成 golden 用于契约、确定性、时间映射和回
 - 评分紧随播放完成，不显示他人答案。校准片段只用于理解尺度，不计入正式结果。
 - 每个版本分别填写五维评分、总体自然度、直接导出意愿和可选短原因；成对呈现时再记录 `A|B|tie` 偏好，偏好不覆盖单版本评分。
 
-每次会话必须记录：应用/算法/参数/音色映射/数据集/rubric 版本及 hash，Windows edition/build，显示器刷新率与缩放，音频设备与驱动/采样率，系统和应用音量，是否耳机，房间环境，评审者匿名 ID、目标用户画像、随机种子、开始结束时间和中断。具体设备型号、评审人数和构成由 D-009 确认。
+每次会话必须记录：应用/算法/参数/音色映射/数据集/rubric 版本及 hash，Windows edition/build，显示器刷新率与缩放，音频设备与驱动/采样率，系统和应用音量，是否耳机，房间环境，评审者匿名 ID、目标用户画像、随机种子、开始结束时间和中断。评审人数、构成和缺失处理按第 8.3 节执行；实际显示和音频设备在首次会话前冻结为运行证据。
 
 ### 5.2 人工修正评估
 
@@ -155,26 +155,30 @@ T-028 的 10 项 CC0 合成 golden 用于契约、确定性、时间映射和回
 
 ## 6. 效果门槛结构
 
-以下指标、比较符、单位和聚合方式已经固定，数值列必须由 D-009 确认。每个指标同时按总体、`kind` 和第 2.2 节关键 slice 报告；总体平均不能掩盖任一已确认必过切片。分母为零时写 `unavailable(reason=undefined_denominator)`，不得填 0 或 pass。
+以下指标、比较符、单位、聚合方式和数值已经 D-009 确认。每个指标同时按总体、`kind` 和第 2.2 节关键 slice 报告；总体平均不能掩盖任一已确认必过切片。分母为零时写 `unavailable(reason=undefined_denominator)`，不得填 0 或 pass。
 
 | 门槛 ID | 指标 | 比较符 | 单位/聚合 | 数值状态 |
 |---|---|---|---|---|
-| `E-SHOT-PRECISION` | shot precision | `>=` | overall + slice；micro 与 macro | `TBD_USER_CONFIRM` |
-| `E-SHOT-RECALL` | shot recall | `>=` | overall + slice；micro 与 macro | `TBD_USER_CONFIRM` |
-| `E-MOTION-PRECISION` | motion_peak precision | `>=` | overall + slice；micro 与 macro | `TBD_USER_CONFIRM` |
-| `E-MOTION-RECALL` | motion_peak recall | `>=` | overall + slice；micro 与 macro | `TBD_USER_CONFIRM` |
-| `E-ACTION-PRECISION` | action_peak precision | `>=` | overall + slice；micro 与 macro | `TBD_USER_CONFIRM` |
-| `E-ACTION-RECALL` | action_peak recall | `>=` | overall + slice；micro 与 macro | `TBD_USER_CONFIRM` |
-| `E-FP-MIN` | false positives per minute | `<=` | 每 kind、每 slice 的 P95 与总体 | `TBD_USER_CONFIRM` |
-| `E-TIME-P95` | 匹配事件绝对时间误差 P95 | `<=` | ms；每 kind + overall | `TBD_USER_CONFIRM` |
-| `E-GRADUAL-IOU` | 渐变转场区间 IoU | `>=` | 每片段 + macro median | `TBD_USER_CONFIRM` |
-| `E-EDIT-ADD` | 人工新增事件数 | `<=` | 次/分钟；每 slice P95 + overall | `TBD_USER_CONFIRM` |
-| `E-EDIT-DELETE` | 人工删除事件数 | `<=` | 次/分钟；每 slice P95 + overall | `TBD_USER_CONFIRM` |
-| `E-EDIT-MOVE` | 人工移动事件数及移动量 | `<=` | 次/分钟 + 绝对 ms P95 | `TBD_USER_CONFIRM` |
-| `E-EDIT-RECLASSIFY` | 人工改类事件数 | `<=` | 次/分钟；每 slice P95 + overall | `TBD_USER_CONFIRM` |
-| `E-NATURALNESS` | `overallNaturalness` | `>=` | 逐片原始分布 + overall median；低分率单列 | `TBD_USER_CONFIRM` |
-| `E-DIRECT-EXPORT` | `direct_export|minor_edit` 占比 | `>=` | overall + 关键 slice | `TBD_USER_CONFIRM` |
-| `E-PAIR-PREFERENCE` | classic 相对 human_reference 的偏好 | `>=` | win/tie/loss，tie 规则随阈值确认 | `TBD_USER_CONFIRM` |
+| `E-SHOT-PRECISION` | shot precision | `>=` | overall micro + slice；macro 同报 | overall `0.90`；单个必测 slice `0.80` |
+| `E-SHOT-RECALL` | shot recall | `>=` | overall micro + slice；macro 同报 | overall `0.85`；单个必测 slice `0.70` |
+| `E-MOTION-PRECISION` | motion_peak precision | `>=` | overall micro + slice；macro 同报 | overall `0.80`；单个必测 slice `0.65` |
+| `E-MOTION-RECALL` | motion_peak recall | `>=` | overall micro + slice；macro 同报 | overall `0.70`；单个必测 slice `0.55` |
+| `E-ACTION-PRECISION` | action_peak precision | `>=` | overall micro + slice；macro 同报 | overall `0.75`；单个必测 slice `0.60` |
+| `E-ACTION-RECALL` | action_peak recall | `>=` | overall micro + slice；macro 同报 | overall `0.65`；单个必测 slice `0.50` |
+| `E-FP-MIN` | false positives per minute | `<=` | 每 kind、每 slice P95 与总体 | overall：shot `0.5`、motion `1.0`、action `1.0`、三类合计 `2.0`；任一必测 slice 单类 P95 `2.0` |
+| `E-TIME-P95` | 匹配事件绝对时间误差 P95 | `<=` | ms；每 kind + overall | shot `50 ms`、motion `100 ms`、action `80 ms`、overall `100 ms` |
+| `E-GRADUAL-IOU` | 渐变转场区间 IoU | `>=` | 每片段 + macro median | overall macro median `0.60`；必测 slice median `0.50` |
+| `E-EDIT-ADD` | 人工新增事件数 | `<=` | 次/视频分钟 | overall `1.5` |
+| `E-EDIT-DELETE` | 人工删除事件数 | `<=` | 次/视频分钟 | overall `1.0` |
+| `E-EDIT-MOVE` | 人工移动事件数及移动量 | `<=` | 次/视频分钟 + 绝对 ms P95 | `1.5`；移动量 P95 `100 ms` |
+| `E-EDIT-RECLASSIFY` | 人工改类事件数 | `<=` | 次/视频分钟 | overall `0.5` |
+| `E-EDIT-TOTAL` | 总修正操作 | `<=` | 次/视频分钟 | overall `3.0`；任一必测 slice P95 `5.0` |
+| `E-EDIT-ACTIVE-TIME` | 活跃编辑时间 | `<=` | 秒/视频分钟 | median `30 s`；P95 `60 s` |
+| `E-NATURALNESS` | `overallNaturalness` | `>=` | 逐片原始分布 + median；低分率单列 | overall median `4/5`；必测 slice median `3.5/5`；1～2 分占比 `<=10%` |
+| `E-RUBRIC-DIMENSIONS` | 五个 rubric 维度 | `>=` | 每维 overall + slice median | overall 各 `3.5/5`；任一 slice 各 `3/5` |
+| `E-DIRECT-EXPORT` | `direct_export|minor_edit` 占比 | `>=` | overall + 关键 slice | `0.80`；`unusable <=0.05` |
+| `E-PAIR-PREFERENCE` | classic 相对 human_reference 的偏好 | `>=` | win/tie/loss | classic `win+tie >=0.60`；tie 作为未输，辅助净得分按 `0.5` 票 |
+| `E-NA-RATE` | 自然度有效评分的 `N/A` 占比 | `<=` | overall + 逐片 | `0.05`；超过时该项 `not-evaluated` |
 
 F1 作为 precision/recall 的派生诊断同时报告，但不允许只用一个 F1 门槛掩盖高误报或高漏报。置信度分桶只做校准观测，`confidencePpm` 不解释为自然度概率。
 
@@ -184,51 +188,106 @@ F1 作为 precision/recall 的派生诊断同时报告，但不允许只用一�
 
 | 门槛 ID | 指标 | 比较符 | 单位/聚合 | 数值状态 |
 |---|---|---|---|---|
-| `P-ANALYSIS-RTF` | 分析 real-time factor | `<=` | wall seconds / media seconds；P95 | `TBD_USER_CONFIRM` |
-| `P-ANALYZED-FPS` | analyzed fps | `>=` | frames/s；P05 与 median | `TBD_USER_CONFIRM` |
-| `P-WALL-P95` | 典型/最大素材 wall time | `<=` | seconds；P95 | `TBD_USER_CONFIRM` |
-| `P-PRIVATE-BYTES` | 峰值 private bytes | `<=` | MiB；最大值 | `TBD_USER_CONFIRM` |
-| `P-WORKING-BYTES` | 峰值 working bytes | `<=` | MiB；最大值 | `TBD_USER_CONFIRM` |
-| `P-THREADS` | 峰值线程数 | `<=` | count；最大值 | `TBD_USER_CONFIRM` |
-| `P-CANCEL-P95` | 取消请求到稳定 cancelled | `<=` | ms；P95 | `TBD_USER_CONFIRM` |
+| `P-ANALYSIS-RTF` | 分析 real-time factor | `<=` | wall seconds / media seconds；P95 | 典型 `1.0`；最大 `2.0` |
+| `P-ANALYZED-FPS` | analyzed fps | `>=` | frames/s；P05 与 median | P05 `30 fps` |
+| `P-WALL-P95` | 典型/最大素材 wall time | `<=` | seconds；P95 | 60 秒典型素材 `60 s`；180 秒最大素材 `360 s` |
+| `P-PRIVATE-BYTES` | 峰值 private bytes | `<=` | MiB；最大值 | `2048 MiB` |
+| `P-WORKING-BYTES` | 峰值 working bytes | `<=` | MiB；最大值 | `1536 MiB` |
+| `P-THREADS` | 峰值线程数 | `<=` | count；最大值 | 进程总数 `32`；分析期间相对 idle 新增 `12` |
+| `P-CANCEL-P95` | 取消请求到稳定 cancelled | `<=` | ms；P95 | `500 ms` |
+
+每个性能场景同时只运行 1 个分析任务，FFmpeg 解码线程为 2，OpenCV 计算线程最多 8。超过 720p 的输入等比缩小至不超过 `1280x720`，竖屏为 `720x1280`，不跳帧且保留真实时间戳。先预热 1 次，再保存 5 次正式测量；冷启动结果单列，不进入正式 gate。
 
 经典算法只有在冻结的 `final_evaluation` 上实际违反至少一个已确认效果门槛、且已排除输入质量、标注分歧、媒体时间映射或错误基准环境后，才满足“可以提出可选模型方案”的必要条件。即使满足，也只允许提交收益、性能、许可、CPU/GPU、包体和部署影响比较；引入 ONNX Runtime 或模型文件仍需新决定。
 
-## 8. 用户最小确认清单
+## 8. D-009 已确认实际基线
 
-为解除 T-029 的 `missing_confirmed_input`，用户只需提供下列三组事实；未列的协议细节按本文件 0.1 执行。建议按原字段直接回复，未知项不要填默认值。
+用户已于 2026-09-14 对 C-1～C-3 逐项确认。本节是可交给 T-029 执行人的产品基线；这不表示已运行 T-029，也不表示任何效果或性能已通过。
 
-### C-1 真实代表产品视频
+### 8.1 C-1 代表产品视频
 
-- 产品视频只读目录或交付方式：`<待确认>`
-- 每个视频的来源/使用权限是否允许本项目内部评估：`<逐项确认>`
-- `calibration / tuning / final_evaluation` 的实际片段清单：`<待提供>`
-- 每个分区的片段数、总时长及第 2.2 节各切片最低配额：`<待确认>`
-- 是否允许保存脱敏位置、SHA-256、探测摘要、标注和评分证据：`<是/否及边界>`
+- 交付方式：由 product-manager-01 从 B 站公开页面筛选真实来源，T-029 执行人按下表获取片段并放入用户控制的外部只读目录。
+- 使用边界：用户确认仅用于本项目内部测试，不用于其他用途或对外分发；该确认是产品测试边界，不冒充对第三方权利的法律结论。
+- 分区：`calibration=4`、`tuning=16`、`final_evaluation=20`，每个产品类别 10 条。
+- 时长与配额：每条 20～60 秒，总时长预计 20～30 分钟；第 2.2 节每个技术 slice 至少 3 条，其中至少 1 条属于 `final_evaluation`。
+- 证据边界：允许保存 B 站链接、BV 号、脱敏位置、SHA-256、探测摘要、标注和评分；不得将视频原文件提交到 Git。
 
-提供后由执行成员计算实际媒体 hash；用户不需要手工计算，但必须确认这些实际文件就是获准评估的版本。不得以 T-028 合成 golden、`package/` 或未知许可下载内容代替。
+来源页面元数据由 product-manager-01 于 2026-09-14 从 B 站公开搜索结果读取。所有片段在自然度评估中静音原音；下表时间窗是相对源视频的播放时间，实际获取后由执行成员用真实时间戳校正并计算媒体 hash。不得以 T-028 合成 golden、`package/` 或其他内容代替。
 
-### C-2 基准 Windows 硬件
+| clipId | partition | 类别 | B 站来源 | 时间窗 | 预期覆盖（须以实际媒体/标注复核） |
+|---|---|---|---|---|---|
+| SR-BILI-DANCE-001 | calibration | 舞蹈/运动 | [BV1oq4y1E7co](https://www.bilibili.com/video/BV1oq4y1E7co/) 舞蹈混剪 | 00:15～01:00 | fast_cut、local_subject_motion、repetitive_motion |
+| SR-BILI-DANCE-002 | tuning | 舞蹈/运动 | [BV1nE411f7NK](https://www.bilibili.com/video/BV1nE411f7NK/) 换装舞蹈混剪 | 00:15～01:00 | fast_cut、flash_or_exposure_change、mixed_global_local |
+| SR-BILI-DANCE-003 | final_evaluation | 舞蹈/运动 | [BV1AE411e7Tb](https://www.bilibili.com/video/BV1AE411e7Tb/) 高燃舞蹈混剪 | 00:15～01:00 | fast_cut、impact、tempo_or_energy_change |
+| SR-BILI-DANCE-004 | tuning | 舞蹈/运动 | [BV1E8VBzWEDv](https://www.bilibili.com/video/BV1E8VBzWEDv/) 双人舞片段 | 00:15～01:00 | local_subject_motion、repetitive_motion、ambiguous_action |
+| SR-BILI-DANCE-005 | final_evaluation | 舞蹈/运动 | [BV1RE41197xT](https://www.bilibili.com/video/BV1RE41197xT/) 舞台高燃混剪 | 00:15～01:00 | fast_cut、impact、flash_or_exposure_change |
+| SR-BILI-DANCE-006 | tuning | 舞蹈/运动 | [BV1qxYd6BEZo](https://www.bilibili.com/video/BV1qxYd6BEZo/) 舞蹈开幕式 | 00:15～01:00 | slow_cut_or_transition、mixed_global_local、stop |
+| SR-BILI-DANCE-007 | final_evaluation | 舞蹈/运动 | [BV1NwY76rEMH](https://www.bilibili.com/video/BV1NwY76rEMH/) 4K 直拍混剪 | 00:15～01:00 | slow_motion、local_subject_motion、motion_blur_or_occlusion |
+| SR-BILI-DANCE-008 | tuning | 舞蹈/运动 | [BV17aYU6HEdh](https://www.bilibili.com/video/BV17aYU6HEdh/) 舞蹈混剪 | 00:15～01:00 | impact、reversal、tempo_or_energy_change |
+| SR-BILI-DANCE-009 | final_evaluation | 舞蹈/运动 | [BV12Y4y147Ld](https://www.bilibili.com/video/BV12Y4y147Ld/) 舞蹈群像 | 00:15～01:00 | slow_cut_or_transition、motion_blur_or_occlusion、mixed_global_local |
+| SR-BILI-DANCE-010 | final_evaluation | 舞蹈/运动 | [BV1aT411R77K](https://www.bilibili.com/video/BV1aT411R77K/) 水袖舞混剪 | 00:10～00:55 | repetitive_motion、reversal、sparse_free_rhythm |
+| SR-BILI-GAME-001 | calibration | 游戏/动作高光 | [BV1bGYE6XEoF](https://www.bilibili.com/video/BV1bGYE6XEoF/) 原神战斗混剪 | 00:15～01:00 | fast_cut、impact、mixed_global_local |
+| SR-BILI-GAME-002 | tuning | 游戏/动作高光 | [BV17BT2zbEND](https://www.bilibili.com/video/BV17BT2zbEND/) 三角洲高光混剪 | 00:15～01:00 | fast_cut、impact、flash_or_exposure_change |
+| SR-BILI-GAME-003 | final_evaluation | 游戏/动作高光 | [BV14v4y1p7Ki](https://www.bilibili.com/video/BV14v4y1p7Ki/) 1080P60 高光 | 00:15～01:00 | fast_cut、slow_motion、tempo_or_energy_change |
+| SR-BILI-GAME-004 | tuning | 游戏/动作高光 | [BV1FCXhY8ESH](https://www.bilibili.com/video/BV1FCXhY8ESH/) 5E 高光 | 00:00～00:50 | fast_cut、impact、low_quality_compression |
+| SR-BILI-GAME-005 | final_evaluation | 游戏/动作高光 | [BV1z4411K7Jx](https://www.bilibili.com/video/BV1z4411K7Jx/) 游戏高燃混剪 | 00:15～01:00 | fast_cut、stop、reversal |
+| SR-BILI-GAME-006 | tuning | 游戏/动作高光 | [BV1akYZ6vEHz](https://www.bilibili.com/video/BV1akYZ6vEHz/) 4K60 运动游戏实况 | 00:15～01:00 | long_take_or_no_cut、global_camera_motion、repetitive_motion |
+| SR-BILI-GAME-007 | final_evaluation | 游戏/动作高光 | [BV1LkYD6pEVv](https://www.bilibili.com/video/BV1LkYD6pEVv/) 4K60 跑酷实况 | 00:15～01:00 | long_take_or_no_cut、repetitive_motion、tempo_or_energy_change |
+| SR-BILI-GAME-008 | tuning | 游戏/动作高光 | [BV1Kqbw6oEZE](https://www.bilibili.com/video/BV1Kqbw6oEZE/) 4K60 骑行实况 | 00:15～01:00 | global_camera_motion、reversal、motion_blur_or_occlusion |
+| SR-BILI-GAME-009 | final_evaluation | 游戏/动作高光 | [BV1Zxju6PE2c](https://www.bilibili.com/video/BV1Zxju6PE2c/) FPS 无解说实况 | 00:15～01:00 | long_take_or_no_cut、mixed_global_local、impact |
+| SR-BILI-GAME-010 | final_evaluation | 游戏/动作高光 | [BV1dJ411q7f8](https://www.bilibili.com/video/BV1dJ411q7f8/) 1080P60 战场实况 | 00:15～01:00 | global_camera_motion、stop、low_quality_compression |
+| SR-BILI-TRAVEL-001 | calibration | 旅行/风景混剪 | [BV1YAYz6nEcC](https://www.bilibili.com/video/BV1YAYz6nEcC/) 中世纪风景短片 | 00:00～00:52 | slow_cut_or_transition、global_camera_motion、tempo_or_energy_change |
+| SR-BILI-TRAVEL-002 | tuning | 旅行/风景混剪 | [BV19VYe6MEJs](https://www.bilibili.com/video/BV19VYe6MEJs/) 风景旅行片段 | 00:15～01:00 | slow_cut_or_transition、near_static、sparse_free_rhythm |
+| SR-BILI-TRAVEL-003 | final_evaluation | 旅行/风景混剪 | [BV1TsYR6nEk6](https://www.bilibili.com/video/BV1TsYR6nEk6/) 旷野风景短片 | 00:15～01:00 | global_camera_motion、sparse_free_rhythm、ambiguous_action |
+| SR-BILI-TRAVEL-004 | tuning | 旅行/风景混剪 | [BV1u7411P7Vx](https://www.bilibili.com/video/BV1u7411P7Vx/) 环球旅行高燃片 | 00:15～01:00 | fast_cut、tempo_or_energy_change、mixed_global_local |
+| SR-BILI-TRAVEL-005 | final_evaluation | 旅行/风景混剪 | [BV1va411y7MC](https://www.bilibili.com/video/BV1va411y7MC/) 机车旅途混剪 | 00:15～01:00 | fast_cut、global_camera_motion、motion_blur_or_occlusion |
+| SR-BILI-TRAVEL-006 | tuning | 旅行/风景混剪 | [BV1MT411V7Cg](https://www.bilibili.com/video/BV1MT411V7Cg/) 园林航拍长镜头 | 00:15～01:00 | long_take_or_no_cut、near_static、sparse_free_rhythm |
+| SR-BILI-TRAVEL-007 | final_evaluation | 旅行/风景混剪 | [BV1C8YX6uE8p](https://www.bilibili.com/video/BV1C8YX6uE8p/) 希腊海岸长镜头 | 00:00～00:56 | long_take_or_no_cut、near_static、slow_cut_or_transition |
+| SR-BILI-TRAVEL-008 | tuning | 旅行/风景混剪 | [BV1HiYC6VEVC](https://www.bilibili.com/video/BV1HiYC6VEVC/) 风景长镜头 | 00:15～01:00 | long_take_or_no_cut、ambiguous_action、low_quality_compression |
+| SR-BILI-TRAVEL-009 | final_evaluation | 旅行/风景混剪 | [BV1zDbV62Ea1](https://www.bilibili.com/video/BV1zDbV62Ea1/) 4K 纽约城市空镜 | 00:15～01:00 | global_camera_motion、slow_cut_or_transition、flash_or_exposure_change |
+| SR-BILI-TRAVEL-010 | final_evaluation | 旅行/风景混剪 | [BV1714y1B7ba](https://www.bilibili.com/video/BV1714y1B7ba/) 4K 公路长镜头 | 00:15～01:00 | long_take_or_no_cut、global_camera_motion、repetitive_motion |
+| SR-BILI-LIFE-001 | calibration | 生活 Vlog/长镜头 | [BV1huYz6LE5J](https://www.bilibili.com/video/BV1huYz6LE5J/) 晚餐日常 Vlog | 00:15～01:00 | slow_cut_or_transition、local_subject_motion、sparse_free_rhythm |
+| SR-BILI-LIFE-002 | tuning | 生活 Vlog/长镜头 | [BV1epYS6jEgn](https://www.bilibili.com/video/BV1epYS6jEgn/) 晚间日常 Vlog | 00:10～00:55 | slow_cut_or_transition、near_static、ambiguous_action |
+| SR-BILI-LIFE-003 | final_evaluation | 生活 Vlog/长镜头 | [BV1GyYq6CE51](https://www.bilibili.com/video/BV1GyYq6CE51/) 生活日记 Vlog | 00:15～01:00 | mixed_global_local、sparse_free_rhythm、tempo_or_energy_change |
+| SR-BILI-LIFE-004 | tuning | 生活 Vlog/长镜头 | [BV1kqYi6bEUi](https://www.bilibili.com/video/BV1kqYi6bEUi/) 画师生活碎片 | 00:15～01:00 | fast_cut、local_subject_motion、ambiguous_action |
+| SR-BILI-LIFE-005 | final_evaluation | 生活 Vlog/长镜头 | [BV18nYC6WEKH](https://www.bilibili.com/video/BV18nYC6WEKH/) 宅家日常 Vlog | 00:15～01:00 | near_static、local_subject_motion、low_quality_compression |
+| SR-BILI-LIFE-006 | tuning | 生活 Vlog/长镜头 | [BV1PEjPzyECh](https://www.bilibili.com/video/BV1PEjPzyECh/) 一镜到底片段 | 00:15～01:00 | long_take_or_no_cut、mixed_global_local、repetitive_motion |
+| SR-BILI-LIFE-007 | final_evaluation | 生活 Vlog/长镜头 | [BV16hrhBoEp7](https://www.bilibili.com/video/BV16hrhBoEp7/) 校园篮球接力一镜到底 | 00:00～00:22 | long_take_or_no_cut、impact、reversal |
+| SR-BILI-LIFE-008 | tuning | 生活 Vlog/长镜头 | [BV1KnYX6LEKS](https://www.bilibili.com/video/BV1KnYX6LEKS/) 房间一镜到底 | 00:00～01:00 | long_take_or_no_cut、near_static、global_camera_motion |
+| SR-BILI-LIFE-009 | final_evaluation | 生活 Vlog/长镜头 | [BV1rrYi6oEhQ](https://www.bilibili.com/video/BV1rrYi6oEhQ/) Room Tour 一镜到底 | 00:15～01:00 | long_take_or_no_cut、global_camera_motion、stop |
+| SR-BILI-LIFE-010 | final_evaluation | 生活 Vlog/长镜头 | [BV1d3Yi6jEri](https://www.bilibili.com/video/BV1d3Yi6jEri/) 第一视角开箱 Vlog | 00:15～01:00 | long_take_or_no_cut、local_subject_motion、ambiguous_action |
 
-- 基准 ID 与实际可用机器：`<待确认>`
-- Windows edition/build：`<待确认>`
-- CPU、物理/逻辑核心数：`<待确认>`
-- 内存容量：`<待确认>`
-- GPU 与驱动版本：`<待确认；无独显也需明确>`
-- 存储类型与可用空间：`<待确认>`
-- 电源方案：`<待确认>`
-- 评估时的线程上限、代理尺寸/采样策略、冷/热缓存规则：`<待确认>`
-- 典型素材和最大素材的时长、分辨率、帧率/VFR边界：`<待确认>`
+上表“预期覆盖”不是人工标注真值；`cfr|vfr`、慢动作、低质量及其他切片均以实际 ffprobe 与裁决标注为准。如实际获取失败、时长不足、内容不符或某 slice 配额不足，必须由 product-manager-01 在相同类别和分区内显式替换并升版本，不得由实现成员静默替换。
 
-本机受限探测和 Wine 容器不得替代上述实际 Windows 基准元组。
+### 8.2 C-2 Windows 基准机与运行条件
 
-### C-3 数值阈值
+- 基准 ID 与机型：`TIGER`，ASUSTeK `TX Air FA401KM_FA401KM`。
+- Windows：Microsoft Windows 11 家庭版中文版，64 位，Version `10.0.26200`，Build `26200`。
+- CPU：AMD Ryzen AI 7 H 350 with Radeon 860M，8 物理核 / 16 逻辑处理器。
+- 内存：`33,413,771,264 bytes`，名义 32 GB（约 31.1 GiB）。
+- GPU：NVIDIA GeForce RTX 5060 Laptop GPU，driver `32.0.15.7297`；AMD Radeon 860M，driver `32.0.22032.6002`。
+- 存储：SK hynix `HFS001TEM9X174N`，NVMe SSD，约 1 TB；选定时 C 盘可用 `592,158,224,384 bytes`，可用空间必须每次运行重新记录。
+- 供电：探测时电池 100% 且接通电源；正式评估固定为接通电源 + Windows 最佳性能模式，运行前保存实际活动电源方案证据。
+- 典型素材：1920x1080、30 fps、60 秒，CFR 与 VFR 分别测量。
+- 最大素材：3840x2160、60 fps、180 秒，CFR 与 VFR 分别测量。
+- 输入代理：最大 1280x720，竖屏 720x1280，等比缩放；不跳帧，保留真实 PTS/timeNs。
+- 并发/线程：同时 1 个分析任务；FFmpeg 解码线程 2；OpenCV 计算线程最多 8。
+- 缓存/重复：每场景预热 1 次后测量 5 次；正式 gate 使用预热后样本，首次冷启动单列报告。
 
-- 第 6 节所有 `E-*` 门槛的数值、必过 slice、评审人数/目标用户构成、缺失票和 tie 处理：`<逐项确认>`
-- 第 7 节所有 `P-*` 门槛的数值，以及典型/最大素材分别适用的预算：`<逐项确认>`
-- 总 gate 规则：是否要求全部必选 `E-*`、`P-*` 同时满足，以及允许的 `unavailable` 项：`<待确认>`
+上述基准机信息来自本机 Windows 原生只读探测，不使用 Wine 观测替代。正式测量时仍须重新保存 OS、驱动、电源、温度/降频诊断、构建和输入 hash。
 
-确认回复必须保留单位和比较方向。例如只写“自然度 4”仍不完整，至少应说明是 `overall median >= 4/5`、适用哪些 slice、低分是否另设上限及需要多少独立目标用户型评审者。
+### 8.3 C-3 评审、数值阈值与总 gate
+
+- 评审者：5 名独立评审者，至少 3 名有短视频剪辑或卡点制作经验；算法实现者不进入正式自然度评审。
+- 有效评分：每条 `final_evaluation` 视频至少 3 份；单条最多允许缺失 1 名评审，少于 3 份时为 `not-evaluated`。
+- tie：成对盲评允许 tie，tie 计入“未输”，辅助净得分按 0.5 票计算。
+- 数值阈值：使用第 6～7 节已确认的全部 `E-*` 与 `P-*` 数值、单位、比较方向和聚合方式。
+- 判定分区：只在冻结的 `final_evaluation` 分区上判定总 gate。
+- 总 gate：所有必选 `E-*` 与 `P-*` 必须同时通过，不得用平均分抵消失败项；任一必测 slice 未达门槛则总体不通过。
+- `unavailable`：任一必选指标因数据不足为 `unavailable` 时，总体为 `not-evaluated`；CPU-only 路径的 GPU 时间和显存允许 `unavailable` 且不影响总 gate。
+- 模型边界：经典算法失败后只能提出模型方案，不自动引入模型。
+
+本轮只确认产品输入，没有运行 T-029。任何实测数值在 video-algorithm-engineer-cv-01 保存完整证据前仍为 `not-evaluated`。
 
 ## 9. 交付给 T-029 的证据包
 
