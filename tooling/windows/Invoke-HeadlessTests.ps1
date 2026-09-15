@@ -199,6 +199,7 @@ try {
             'tests/contract/golden-media-audit-v1.json',
             'tests/contract/Test-GoldenMediaAudit.ps1',
             'tooling/windows/Invoke-HeadlessTests.ps1',
+            'tests/unit/media_golden_test.cpp',
             'tests/golden/media/fixtures-v1.json',
             'tests/golden/media/generated/actual-hashes-and-probe-v1.json'
             if ($Task -eq 'T-022') {
