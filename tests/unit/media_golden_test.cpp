@@ -127,6 +127,16 @@ TEST(MediaProbe, RejectsCorruptMediaWithoutPartialSuccess)
     EXPECT_EQ(source.error().code, core::ErrorCode::corrupt_media);
 }
 
+TEST(MediaProbe, UnavailableInputReturnsStructuredUnsupportedMedia)
+{
+    const auto source = media::MediaSource::open(golden("fixture-does-not-exist.bin"));
+    ASSERT_FALSE(source);
+    EXPECT_EQ(source.error().category, core::ErrorCategory::media);
+    EXPECT_EQ(source.error().code, core::ErrorCode::unsupported_media);
+    EXPECT_EQ(source.error().message_key, "media.open");
+    EXPECT_FALSE(source.error().diagnostic_id.empty());
+}
+
 TEST(MediaProbe, SelectsMultipleStreamsDeterministically)
 {
     const auto source = media::MediaSource::open(golden("multi_stream.mkv"));
