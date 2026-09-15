@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Space Rhythm · USER-01 验收台</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <div>
+      <p class="eyebrow">T-029 · personal-single-user-acceptance</p>
+      <h1>USER-01 验收台</h1>
+    </div>
+    <div id="save-state" class="pill">尚未载入</div>
+  </header>
+
+  <main>
+    <section id="load-panel" class="card">
+      <h2>载入会话</h2>
+      <p>从 URL 参数载入冻结的会话定义；评分和标注只保存在本机浏览器，导出后再由校验器冻结。</p>
+      <div class="row">
+        <input id="session-url" aria-label="会话定义 URL">
+        <button id="load-session">载入</button>
+      </div>
+      <p id="load-error" class="error" role="alert"></p>
+    </section>
+
+    <section id="workflow" hidden>
+      <nav class="phase-strip" aria-label="评估阶段">
+        <div id="phase-reference" class="phase"><span>1</span>人工参考</div>
+        <div id="phase-blind" class="phase"><span>2</span>随机盲评</div>
+        <div id="phase-correction" class="phase"><span>3</span>人工修正</div>
+      </nav>
+
+      <section class="workspace">
+        <aside class="card clips-card">
+          <div class="section-heading">
+            <h2>片段</h2>
+            <strong id="progress">0 / 0</strong>
+          </div>
+          <div id="clip-list" class="clip-list"></div>
+        </aside>
+
+        <div class="main-column">
+          <section class="card context-card">
+            <div>
+              <p class="eyebrow" id="phase-label"></p>
+              <h2 id="clip-title">请选择片段</h2>
+            </div>
+            <div class="meta" id="clip-meta"></div>
+          </section>
+
+          <section id="reference-panel" class="card" hidden>
+            <div class="notice">人工参考阶段固定静音；界面不展示 classic 候选、置信度、音色或历史评分。</div>
+            <video id="reference-video" controls muted preload="metadata"></video>
+            <div class="time-readout">
+              <span>播放器 <strong id="player-time">0.000 s</strong></span>
+              <span>吸附真实 PTS <strong id="frame-time">0 ns</strong></span>
+              <span>decodeOrdinal <strong id="frame-ordinal">0</strong></span>
+            </div>
+            <div class="mark-grid">
+              <button data-kind="shot">标记镜头切换</button>
+              <button data-kind="motion_peak">标记运动峰值</button>
+              <button data-kind="action_peak">标记动作峰值</button>
+              <button id="negative-start">负例区间起点</button>
+              <button id="negative-end" disabled>负例区间终点</button>
+            </div>
+            <p id="negative-status" class="muted"></p>
+            <div class="review-box">
+              <p>确认已逐项检查（即使该类无事件也必须勾选）：</p>
+              <label><input type="checkbox" data-review-kind="shot"> 镜头切换</label>
+              <label><input type="checkbox" data-review-kind="motion_peak"> 运动峰值</label>
+              <label><input type="checkbox" data-review-kind="action_peak"> 动作峰值</label>
+              <label><input type="checkbox" data-review-kind="negative_span"> 明确负例</label>
+              <button id="complete-clip" class="primary">完成本片段自查</button>
+            </div>
+          </section>
+
+          <section id="blind-panel" class="card" hidden>
+            <div class="notice">播放器不显示版本身份和时间线。A/B 各完整播放至少一次；每个版本最多重播两次。</div>
+            <div class="ab-grid">
+              <article><h3>版本 A</h3><video id="blind-a" preload="metadata"></video><button data-play="A">完整播放 A</button><span id="plays-a">0 / 3</span></article>
+              <article><h3>版本 B</h3><video id="blind-b" preload="metadata"></video><button data-play="B">完整播放 B</button><span id="plays-b">0 / 3</span></article>
+            </div>
+            <div id="rating-form"></div>
+          </section>
+
+          <section id="correction-panel" class="card" hidden>
+            <div class="notice">只有对应片段的正式盲评已提交后才显示 classic 事件。所有 add/delete/move/reclassify/lock 都写入原始操作日志。</div>
+            <video id="correction-video" controls preload="metadata"></video>
+            <div class="mark-grid correction-actions">
+              <button data-correction-add="shot">新增镜头切换</button>
+              <button data-correction-add="motion_peak">新增运动峰值</button>
+              <button data-correction-add="action_peak">新增动作峰值</button>
+              <select id="correction-readiness" aria-label="修正后可用状态">
+                <option value="">选择修正后状态</option>
+                <option value="direct_export">direct_export</option>
+                <option value="minor_edit">minor_edit</option>
+                <option value="major_edit">major_edit</option>
+                <option value="unusable">unusable</option>
+              </select>
+              <button id="complete-correction" class="primary">完成本片段修正</button>
+            </div>
+            <div id="correction-events"></div>
+          </section>
+
+          <section id="event-panel" class="card" hidden>
+            <div class="section-heading"><h2>本片段参考事件</h2><span id="event-count">0</span></div>
+            <div id="event-list" class="event-list"></div>
+          </section>
+        </div>
+      </section>
+
+      <section class="card footer-actions">
+        <div>
+          <strong>本机会话记录</strong>
+          <p>浏览器自动保存；正式冻结前必须导出 JSON 并运行仓库校验器。</p>
+        </div>
+        <button id="export-draft">导出当前草稿</button>
+        <button id="export-final" class="primary">完整性检查并导出</button>
+      </section>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>

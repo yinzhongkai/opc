@@ -1,0 +1,195 @@
+{
+  "schemaVersion": 1,
+  "taskId": "T-029",
+  "status": "measured",
+  "measurementScope": "T-028-release-pe-native-host-readiness-only",
+  "recordedAtUtc": "2026-09-15T08:41:15.3523880+00:00",
+  "completedAtUtc": "2026-09-15T08:41:17.7428776+00:00",
+  "source": {
+    "productEvaluationInput": "A-031@0.5",
+    "productEvaluationInputSha256": "7f139236d71155607aab4d8ea8c5790bd46e39879cfc21fb633a6a8bca71964f",
+    "decisions": [
+      "D-011",
+      "D-014"
+    ],
+    "gitHeadAtBuild": "c35f38cf671f8a41c14afdbbb141e62ee1a6f686",
+    "benchmarkSourceSha256": "8e7235475638a62f191360900992fe79f83488ba20940396b3fce34a249a4fa2",
+    "benchmarkCmakeSha256": "5cbe451fd4ed600e7edb3900a6d0489c5665ff41c5857adfbaf8b3ddedaa721f",
+    "benchmarkPeSha256": "0fc8b1c56687ca76d184a2fd00e7176495a90dfd631320c9a2bb92b9276a0782",
+    "benchmarkPeBytes": 288768,
+    "rawMeasurementSha256": "a19e33d407a619774e4ee270ce77a14c60fea0caf081ccfca3193cb789dd4b5f"
+  },
+  "sequence": {
+    "warmupRuns": 1,
+    "measuredRuns": 5,
+    "cancellationRuns": 5,
+    "coldStartExcludedFromSamples": true,
+    "priorInvalidAttemptCount": 4,
+    "priorInvalidAttemptReason": "excluded: four evidence-wrapper attempts failed only after PE completion (empty stderr and single-object Count handling); none produced a complete envelope"
+  },
+  "environment": {
+    "benchmarkId": "TIGER",
+    "machineName": "TIGER",
+    "computerSystem": [
+      {
+        "Manufacturer": "ASUSTeK COMPUTER INC.",
+        "Model": "TX Air FA401KM_FA401KM",
+        "TotalPhysicalMemory": 33413771264
+      }
+    ],
+    "operatingSystem": [
+      {
+        "Caption": "Microsoft Windows 11 家庭版 中文版",
+        "Version": "10.0.26200",
+        "BuildNumber": "26200",
+        "OSArchitecture": "64 位"
+      }
+    ],
+    "processorBefore": [
+      {
+        "Name": "AMD Ryzen AI 7 H 350 w/ Radeon 860M ",
+        "NumberOfCores": 8,
+        "NumberOfLogicalProcessors": 16,
+        "CurrentClockSpeed": 2000,
+        "MaxClockSpeed": 2000
+      }
+    ],
+    "processorAfter": [
+      {
+        "Name": "AMD Ryzen AI 7 H 350 w/ Radeon 860M ",
+        "NumberOfCores": 8,
+        "NumberOfLogicalProcessors": 16,
+        "CurrentClockSpeed": 2000,
+        "MaxClockSpeed": 2000
+      }
+    ],
+    "videoControllers": [
+      {
+        "Name": "NVIDIA GeForce RTX 5060 Laptop GPU",
+        "DriverVersion": "32.0.15.7297"
+      },
+      {
+        "Name": "AMD Radeon(TM) 860M Graphics",
+        "DriverVersion": "32.0.22032.6002"
+      }
+    ],
+    "diskDrives": [
+      {
+        "Model": "HFS001TEM9X174N",
+        "MediaType": "Fixed hard disk media",
+        "Size": 1024203640320
+      }
+    ],
+    "systemDriveFreeBytesBefore": 579101405184,
+    "batteries": [
+      {
+        "Name": "GA40347",
+        "Status": "OK",
+        "BatteryStatus": 2,
+        "EstimatedChargeRemaining": 100
+      }
+    ],
+    "temperatureDiagnostics": {
+      "status": "unavailable",
+      "reason": "MSAcpi_ThermalZoneTemperature returned no readable sensor rows"
+    },
+    "activePowerSchemeRaw": "电源方案 GUID: 381b4222-f694-41f0-9685-ff5bb260df2e  (平衡)",
+    "activeOverlayAcPowerScheme": "ded574b5-45a0-4f42-8737-46345c09c238",
+    "bestPerformanceOverlayExpected": "ded574b5-45a0-4f42-8737-46345c09c238",
+    "bestPerformanceOverlayStatus": "pass",
+    "verifiedAndReputablePolicyState": 0,
+    "unsignedPeExecutionPrerequisite": "pass"
+  },
+  "processObservation": {
+    "exitCode": 0,
+    "wallDurationMsIncludingDecodeAndProcessOverhead": 1278,
+    "peakWorkingSetBytesPolled": 26431488,
+    "peakPrivateBytesPolled": 21512192,
+    "peakThreadCountPolled": 8,
+    "stdout": "VIDEO_ANALYSIS_MEASUREMENT=PASS output=C:\\Users\\YinZh\\Desktop\\space-rhythm\\projects\\space-rhythm\\evidence\\T-029\\t028-release-windows-measurement-v1.json",
+    "stderr": "",
+    "pollingIntervalMs": 10
+  },
+  "rawMeasurement": {
+    "schemaVersion": 1,
+    "taskId": "T-028",
+    "status": "measured",
+    "effectThresholdEvaluation": "not-evaluated",
+    "performanceThresholdEvaluation": "not-evaluated",
+    "buildPreset": "windows-msvc-x64-release",
+    "executionEnvironment": "native-windows-tiger-best-performance",
+    "operatingSystem": "Windows",
+    "processorIdentifier": "AMD64 Family 26 Model 96 Stepping 0, AuthenticAMD",
+    "logicalProcessorCount": 16,
+    "systemPhysicalMemoryBytes": 33413771264,
+    "gpuTiming": "unavailable(reason=cpu-only-classic-path)",
+    "gpuMemory": "unavailable(reason=cpu-only-classic-path)",
+    "fixtureId": "VV-GLOBAL-PAN-001",
+    "algorithmId": "space-rhythm.video-analysis.classic",
+    "algorithmVersion": "1.0.0",
+    "opencvVersion": "4.12.0",
+    "opencvThreadLimit": 8,
+    "opencvReportedThreads": 8,
+    "ffmpegDecoderThreads": 2,
+    "ffmpegVersion": "8.1.2",
+    "parameterSetId": "space-rhythm.video-analysis.production",
+    "parameterSetVersion": "1.0.0",
+    "parametersDigestSha256": "321ae1fc8c905dfd108c003898eaf0f2c761b9eae67f4ae0479b34e68b896574",
+    "inputFrameCount": 90,
+    "inputPixelCountPerRun": 1296000,
+    "inputDurationNs": 2967000000,
+    "warmupRuns": 1,
+    "measuredRuns": 5,
+    "durationUsSamples": [
+      201162,
+      186496,
+      175500,
+      174688,
+      176782
+    ],
+    "durationUsMedian": 176782,
+    "durationUsP95": 201162,
+    "analyzedFramesPerSecondSamples": [
+      447,
+      482,
+      512,
+      515,
+      509
+    ],
+    "analyzedFramesPerSecondMedian": 509,
+    "realtimeFactorPpmSamples": [
+      14749306,
+      15909188,
+      16905982,
+      16984566,
+      16783382
+    ],
+    "realtimeFactorPpmMedian": 16783382,
+    "processPeakWorkingSetBytesBefore": 24035328,
+    "processPeakWorkingSetBytesAfter": 24035328,
+    "analyzerEstimatedPeakWorkingBytes": 359960,
+    "cancellationRuns": 5,
+    "cancellationLatencyUsSamples": [
+      1467,
+      2004,
+      1582,
+      2557,
+      2189
+    ],
+    "cancellationLatencyUsMedian": 2004,
+    "cancellationLatencyUsP95": 2557
+  },
+  "gates": {
+    "nativeReleasePeStart": "pass",
+    "tigerBestPerformanceOverlay": "pass",
+    "t028ReleaseBaseline": "measured",
+    "t029FormalPerformance": "not-evaluated(reason=T-028 synthetic 160x90 fixture is not the confirmed product/VFR scenario matrix)",
+    "productRepresentativeGate": "not-evaluated(reason=USER-01 reference, blind-rating and correction records are missing)",
+    "vfrRobustnessGate": "not-evaluated(reason=missing_actual_original_VFR_media)",
+    "overall": "not-evaluated"
+  },
+  "model": {
+    "modelEvaluationStarted": false,
+    "onnxIntroduced": false
+  }
+}

@@ -1,11 +1,14 @@
 #include <space_rhythm/video/analysis.hpp>
 
+#include <opencv2/core/utility.hpp>
+
 #include <windows.h>
 #include <psapi.h>
 
 #include <algorithm>
 #include <array>
 #include <atomic>
+#include <charconv>
 #include <chrono>
 #include <cstdint>
 #include <filesystem>
@@ -32,6 +35,86 @@ struct Fixture
     media::StreamKey stream_key;
     std::vector<media::VideoFrame> frames;
 };
+
+struct Options
+{
+    bool smoke = false;
+    std::filesystem::path output_path;
+    std::string build_preset;
+    std::string execution_environment;
+    std::size_t warmup_runs = 3U;
+    std::size_t measured_runs = 10U;
+    std::size_t cancellation_runs = 20U;
+};
+
+[[nodiscard]] std::size_t parse_positive_count(const std::string_view value,
+                                               const std::string_view option)
+{
+    std::size_t parsed = 0U;
+    const auto result = std::from_chars(value.data(), value.data() + value.size(), parsed);
+    if (result.ec != std::errc{} || result.ptr != value.data() + value.size() || parsed == 0U)
+    {
+        throw std::runtime_error{std::string{option} + " must be a positive integer"};
+    }
+    return parsed;
+}
+
+[[nodiscard]] Options parse_options(const int argc, const char* const argv[])
+{
+    Options options;
+    if (argc == 2 && std::string_view{argv[1]} == "--smoke")
+    {
+        options.smoke = true;
+        options.warmup_runs = 1U;
+        options.measured_runs = 1U;
+        options.cancellation_runs = 1U;
+        return options;
+    }
+
+    for (int index = 1; index < argc; index += 2)
+    {
+        if (index + 1 >= argc)
+        {
+            throw std::runtime_error{"missing command-line option value"};
+        }
+        const std::string_view option{argv[index]};
+        const std::string_view value{argv[index + 1]};
+        if (option == "--output")
+        {
+            options.output_path = value;
+        }
+        else if (option == "--build-preset")
+        {
+            options.build_preset = value;
+        }
+        else if (option == "--execution-environment")
+        {
+            options.execution_environment = value;
+        }
+        else if (option == "--warmup-runs")
+        {
+            options.warmup_runs = parse_positive_count(value, option);
+        }
+        else if (option == "--measured-runs")
+        {
+            options.measured_runs = parse_positive_count(value, option);
+        }
+        else if (option == "--cancellation-runs")
+        {
+            options.cancellation_runs = parse_positive_count(value, option);
+        }
+        else
+        {
+            throw std::runtime_error{"unknown command-line option: " + std::string{option}};
+        }
+    }
+    if (options.output_path.empty() || options.build_preset.empty() ||
+        options.execution_environment.empty())
+    {
+        throw std::runtime_error{"--output, --build-preset and --execution-environment are required"};
+    }
+    return options;
+}
 
 [[nodiscard]] Fixture decode_fixture()
 {
@@ -126,16 +209,9 @@ int main(const int argc, const char* const argv[])
 {
     try
     {
-        const bool smoke = argc == 2 && std::string_view{argv[1]} == "--smoke";
-        if (!smoke && (argc != 7 || std::string_view{argv[1]} != "--output" ||
-                       std::string_view{argv[3]} != "--build-preset" ||
-                       std::string_view{argv[5]} != "--execution-environment"))
-        {
-            std::cerr << "usage: space_rhythm_video_analysis_benchmark "
-                         "--smoke | --output <json> --build-preset <name> "
-                         "--execution-environment <name>\n";
-            return 2;
-        }
+        const auto options = parse_options(argc, argv);
+        constexpr int opencv_thread_limit = 8;
+        cv::setNumThreads(opencv_thread_limit);
         const auto fixture = decode_fixture();
         const auto parameters = video::production_parameters();
         const auto request = make_request(fixture, parameters);
@@ -145,9 +221,9 @@ int main(const int argc, const char* const argv[])
             throw std::runtime_error{"cannot query FFmpeg build"};
         }
         video::Analyzer analyzer;
-        const std::size_t warmup_runs = smoke ? 1U : 3U;
-        const std::size_t measured_runs = smoke ? 1U : 10U;
-        const std::size_t cancellation_runs = smoke ? 1U : 20U;
+        const auto warmup_runs = options.warmup_runs;
+        const auto measured_runs = options.measured_runs;
+        const auto cancellation_runs = options.cancellation_runs;
         for (std::size_t run = 0; run < warmup_runs; ++run)
         {
             const auto result = analyzer.analyze(fixture.frames, request, parameters);
@@ -217,7 +293,7 @@ int main(const int argc, const char* const argv[])
             }
         }
 
-        if (smoke)
+        if (options.smoke)
         {
             std::cout << "VIDEO_ANALYSIS_PERFORMANCE_SMOKE=PASS\n";
             return 0;
@@ -233,7 +309,7 @@ int main(const int argc, const char* const argv[])
         std::array<char, 1'024> processor{};
         const auto processor_length = GetEnvironmentVariableA(
             "PROCESSOR_IDENTIFIER", processor.data(), static_cast<DWORD>(processor.size()));
-        const std::filesystem::path output_path{argv[2]};
+        const auto& output_path = options.output_path;
         std::filesystem::create_directories(output_path.parent_path());
         std::ofstream output(output_path, std::ios::binary | std::ios::trunc);
         if (!output)
@@ -246,8 +322,9 @@ int main(const int argc, const char* const argv[])
                << "  \"status\": \"measured\",\n"
                << "  \"effectThresholdEvaluation\": \"not-evaluated\",\n"
                << "  \"performanceThresholdEvaluation\": \"not-evaluated\",\n"
-               << "  \"buildPreset\": \"" << argv[4] << "\",\n"
-               << "  \"executionEnvironment\": \"" << argv[6] << "\",\n"
+               << "  \"buildPreset\": \"" << options.build_preset << "\",\n"
+               << "  \"executionEnvironment\": \"" << options.execution_environment
+               << "\",\n"
                << "  \"operatingSystem\": \"Windows\",\n"
                << "  \"processorIdentifier\": \""
                << (processor_length == 0U || processor_length >= processor.size()
@@ -262,6 +339,9 @@ int main(const int argc, const char* const argv[])
                << "  \"algorithmId\": \"" << video::algorithm_id << "\",\n"
                << "  \"algorithmVersion\": \"" << video::algorithm_version << "\",\n"
                << "  \"opencvVersion\": \"" << video::opencv_runtime_version() << "\",\n"
+               << "  \"opencvThreadLimit\": " << opencv_thread_limit << ",\n"
+               << "  \"opencvReportedThreads\": " << cv::getNumThreads() << ",\n"
+               << "  \"ffmpegDecoderThreads\": 2,\n"
                << "  \"ffmpegVersion\": \"" << ffmpeg.value().ffmpeg_version << "\",\n"
                << "  \"parameterSetId\": \"" << parameters.id << "\",\n"
                << "  \"parameterSetVersion\": \"" << parameters.version << "\",\n"

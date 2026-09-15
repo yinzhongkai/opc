@@ -36,3 +36,9 @@ python tests/evaluation/video/acquire_product_evaluation_media.py `
 `--previous-manifest`，仅在 clipId、BVID 和媒体 SHA-256 全部一致时继承先前保存的源流时间戳摘要。
 完整获取返回码 `0` 表示来源和实际配额没有已知失败，`1` 表示获取/探测失败，`2` 表示获取完整但
 实际配额失败；语义 slice 在真人裁决前仍会明确保持 `not-evaluated`，不会因声明标签自动通过。
+
+## USER-01 人工验收
+
+A-031 0.5 / D-014 的本地三阶段界面、逐帧 PTS 会话生成器和正式操作步骤见
+[`user01-app/README.md`](user01-app/README.md)。人工参考、隐藏随机化盲评和人工修正必须使用不同
+会话，且不得在前置 hash 未冻结时解锁下一阶段。
