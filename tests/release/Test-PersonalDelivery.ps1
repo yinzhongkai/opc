@@ -226,7 +226,10 @@ try {
     New-Item -ItemType Directory -Path $coreTemp -Force | Out-Null
     $env:TEMP = $coreTemp
     $env:TMP = $coreTemp
-    $env:PATH = "$installBin;$oldPath"
+    $qtTestBin = Join-Path $inputs.toolchain.qtRoot 'bin'
+    $qtTestDll = Join-Path $qtTestBin 'Qt6Test.dll'
+    Assert-Condition -Condition (Test-Path -LiteralPath $qtTestDll -PathType Leaf) -Message 'Controlled Qt SDK lacks the test-only Qt6Test.dll required by the workflow harness'
+    $env:PATH = "$installBin;$qtTestBin;$oldPath"
     $coreReport = Join-Path $evidence 'core-workflow.qt.txt'
     $coreFunction = 'realImportAnalysisEditPreviewSaveAndExportPath'
     & $coreWorkflowExe $coreFunction '-o' "$coreReport,txt"
@@ -346,7 +349,12 @@ try {
             testFunction = $coreFunction
             exitCode = $coreExit
             result = 'pass'
-            runtimeSearchPathPrefix = $installBin
+            runtimeSearchPathPrefix = @($installBin, $qtTestBin)
+            testHarnessOnlyDependency = [ordered]@{
+                path = $qtTestDll
+                purpose = 'Qt Test runner only; production Qt/runtime DLLs resolve from the installed package directory first'
+                includedInDeliveryPackage = $false
+            }
             report = $coreReport
             t022TestedCommit = 'be61c71e9803'
             productionAndWorkflowSourceDeltaAfterT022 = @($sourceDelta)
@@ -361,6 +369,14 @@ try {
                 'worker disconnect/reconnect'
             )
         }
+        preservedDiagnostics = @(
+            [ordered]@{
+                result = 'fail'
+                exitCode = -1073741515
+                windowsStatus = '0xC0000135'
+                reason = 'Initial T-038 harness run omitted the controlled Qt SDK bin needed only for Qt6Test.dll. Package transaction, normal first launch, and cleanup completed; no delivery dependency was added.'
+            }
+        )
         diagnostics = $policy
         evaluationBoundary = [ordered]@{
             productEffectEvaluation = 'not-evaluated(deferred-to-personal-use-feedback)'

@@ -708,7 +708,8 @@ $knownLimitations = @"
 - The application currently embeds development CC0 test timbres. No product default timbre is approved,
   so this package is never candidate-eligible.
 - Qt Quick Controls styles are not pruned until the product style is confirmed.
-- T-022 and current-host T-038 gates have not completed. Packaging success is not release approval.
+- T-022 is complete. Current-host T-038 evidence is still required for each delivery package;
+  packaging success alone is not release approval.
 "@
 Set-Content -LiteralPath (Join-Path $payloadRoot 'docs\known-limitations.md') `
     -Value $knownLimitations -Encoding utf8
@@ -724,7 +725,7 @@ $missingInputs = @(
     'minimum supported Windows version',
     'VC Runtime redistribution strategy',
     'production container/H.264/AAC backend',
-    'T-022 and T-038 release gates',
+    'T-038 current-host personal delivery validation evidence',
     'product timbre and visual style approval')
 $buildInputs = [ordered]@{
     schemaVersion = 3
