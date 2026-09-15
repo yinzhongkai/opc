@@ -28,15 +28,15 @@
 
 ## T-037：建立 Windows 个人未签名部署与事务安装流水线
 - 负责人：release-engineer-windows-01
-- 状态：in_progress
+- 状态：completed
 - 授权来源与日期：本会话用户于 2026-09-09 要求补充系统架构师判断的新增成员及成员任务并提交。
 - 目标与范围：从受控构建产物建立仅供用户本人在自有 Windows 电脑上使用的应用私有部署、安装/修复/升级/卸载和回滚流水线；输出明确标记为 `unsigned-engineering`，不使用签名凭据、不承诺 SAC/WDAC 兼容、不公开分发或发布产品。
 - 输入与依赖：T-013、T-019、T-032、T-035、T-036；D-004～D-008、D-012、D-013；最低 Windows 版本待确认；A-011 0.1；H-016 closed。
 - 优先级：未设定（架构建议：功能闭环后启动）。
 - 完成条件与确认方式：部署清单仅使用受控产物；应用、Qt、运行库、插件和原生依赖采用私有布局；安装、修复/升级、卸载和失败回滚边界明确；生成可复现脚本、日志、哈希、SBOM 和许可证包；所有输出显式标记 unsigned、个人使用与不兼容 SAC/WDAC 的边界，并在 D-013 指定的当前 `TIGER` 完成 App/Worker smoke。独立 GUI 安装器和代码签名不作为本阶段完成条件；负责人自查。
-- 进展：2026-09-15，用户明确要求 release-engineer-windows-01 继续执行 unsigned 部分。已实现 `Invoke-UnsignedRelease.ps1`：刷新 Release 构建，固定核对 Qt/`windeployqt`/vcpkg，执行 dry-run 来源门禁和实际部署，递归解析 PE 导入并只从固定 Qt、vcpkg 或签名有效的 Windows SDK D3D Redist 取运行文件；生成 runtime/payload/bundle hash、build-inputs schema 2、SPDX 2.3、上游 SPDX、许可证/notices、Qt 替换说明、known limitations 和不含凭据的 signing request。另实现显式路径的安装/修复/回滚/卸载事务工具与端到端测试。当前闭包 81 个 PE/103,338,584 字节，排除了 `qmltooling`、`generic`、translations、Debug CRT、PDB、测试/构建工具、`vc_redist.x64.exe` 及未导入的 FFmpeg DLL；相同输入两次 ZIP hash 一致，当前包完整通过不带 smoke 的事务链。最终元数据扩展前的一份受控归档曾完整通过事务与 App/Worker smoke，但后续复跑在 App smoke fail closed，测试安装根 App 被 Code Integrity 以 `0xC0E90002` 拒绝；一次 bundle 原路径诊断又定位到未签名 `Qt6QuickDialogs2.dll`（SHA-256 `CEFC1734...0E9DCB`，与当前包一致）被拒、App 退出 2，Worker 退出 0。当前包未反复执行 App 来美化最新失败。
-- 成果与验证证据：[A-033 0.1](artifacts/A-033-windows-unsigned-deployment-and-transaction-pipeline.md)、[T-037 unsigned 验证摘要](evidence/T-037/verification-summary.md)、[使用说明](../../docs/windows-unsigned-release.md)及 `tooling/windows/Invoke-UnsignedRelease.ps1`、`tooling/windows/Invoke-UnsignedInstallTransaction.ps1`、`tests/release/Test-UnsignedPackage.ps1`。完整机器证据和工程包位于被忽略的 `out/evidence/T-037/`、`out/release/T-037/`。
-- 阻塞与下一位行动人：2026-09-15，D-012 已解除 H-015 和受信任签名作为本任务前置；D-013 又确认用户已在当前 `TIGER` 手动关闭 SAC，只读状态为 `VerifiedAndReputablePolicyState=0`，H-016 因此关闭。T-037 保持 `in_progress`，下一位行动人为 release-engineer-windows-01：在当前 `TIGER` 对最新受控包复验 App/Worker smoke，并按新范围修订 A-033 与证据。当前包因 dirty 工程输入、78 个未签名 PE、内嵌开发测试音色及未完成 T-022/T-038 继续强制标记 `unsigned-engineering`、`candidateEligible=false`。最低 Windows、产品格式/H.264/AAC、默认音色/视觉风格仍须按各自责任链确认；未完成其余门禁前不得把工程 ZIP 称为发布候选或生产发布物。
+- 进展：2026-09-15，已按 D-012/D-013 收口个人未签名范围。流水线固定核对 Qt/`windeployqt`/vcpkg，执行 dry-run 来源门禁、实际部署与递归 PE 导入闭包校验，生成 runtime/payload/bundle hash、build-inputs schema 3、SPDX 2.3、上游 SPDX、许可证/notices、Qt 替换说明、known limitations 和无凭据 signing request；schema 3 明确写入用户本人、自有 Windows、禁止公开/第三方交付且不宣称 SAC/WDAC 兼容。显式路径事务工具覆盖 install、含未登记文件时拒绝 repair、repair、rollback、installed validate、uninstall 和根外用户数据保留。由已提交源 `02c65ce4b596675d102ed3c82459528b60f63297` 生成的最新 ZIP 大小为 44,725,623 字节，SHA-256 为 `CD94BC9CABF1B0AD29062EE39DD14DEBCBF2AAEB6B777D69036874221D8C634C`，相同输入连续两次归档一致；闭包为 81 个 PE/103,338,584 字节，78 个未签名。当前 `TIGER` 的 `VerifiedAndReputablePolicyState` 在验证前后均为 0；同一次完整验证中 App 以 `SPACE_RHYTHM_APP_SMOKE_OK Qt=6.11.2 arch=x64` 退出 0，Worker 以 `SPACE_RHYTHM_WORKER_SMOKE_OK Qt=6.11.2 arch=x64` 退出 0，随后完整卸载、安装根清除且根外数据哨兵保留。该结果只适用于 SAC-off 的当前主机，不构成 SAC/WDAC 兼容证据。
+- 成果与验证证据：[A-033 0.2](artifacts/A-033-windows-unsigned-deployment-and-transaction-pipeline.md)、[T-037 个人未签名验证摘要](evidence/T-037/verification-summary.md)、[TIGER SAC-off 结构化证据](evidence/T-037/tiger-sac-off-smoke-20260915.json)、[使用说明](../../docs/windows-unsigned-release.md)及 `tooling/windows/Invoke-UnsignedRelease.ps1`、`tooling/windows/Invoke-UnsignedInstallTransaction.ps1`、`tests/release/Test-UnsignedPackage.ps1`。完整生成物位于被忽略的 `out/release/T-037/`。
+- 阻塞与下一位行动人：T-037 在 D-012/D-013 范围内无阻塞并已完成。包继续强制标记 `unsigned-engineering`、`candidateEligible=false`，不得称为发布候选、生产发布物或 SAC/WDAC 兼容包。下一位行动人为 release-engineer-windows-01：待 T-022 完成后按 T-038 在同一当前主机形成个人交付证据；最低 Windows、正式媒体格式/H.264/AAC 和产品默认资产继续按各自责任链处理。
 - 更新日期：2026-09-15。
 
 ## T-036：制定 Windows 发布输入、许可证与 SBOM 计划
