@@ -5,13 +5,13 @@
 - 目标：用户
 - 关联任务：T-037、T-038；可供 T-021/T-022 的未签名 Release 复验使用
 - 期望结果：确认一台用户自有的干净 Windows x64 电脑或虚拟机，允许正常运行本项目未签名 Win32 EXE/DLL，并可由 release-engineer-windows-01 执行应用/Worker 首次启动、安装/修复/回滚/卸载和核心工作流验证；提供 Windows edition/build、物理机或虚拟机类型、是否启用会阻断未签名程序的 SAC/WDAC，以及可用复验窗口。
-- 输入与证据：D-012 confirmed；[A-033 0.1](artifacts/A-033-windows-unsigned-deployment-and-transaction-pipeline.md)；[T-037 unsigned 验证摘要](evidence/T-037/verification-summary.md)。当前 `TIGER` 的 Code Integrity 会拒绝部分未签名 App/Qt PE，因此不能作为个人未签名交付的通过环境。
-- 未完成事项：尚未确认替代验证电脑或虚拟机及复验窗口。无需购买代码签名证书，也不要求关闭或修改当前 `TIGER` 的 SAC/WDAC；若某台候选机本身强制阻断未签名程序，应换用另一台自有环境。
-- 状态：open
+- 输入与证据：D-012/D-013 confirmed；[A-033 0.1](artifacts/A-033-windows-unsigned-deployment-and-transaction-pipeline.md)；[T-037 unsigned 验证摘要](evidence/T-037/verification-summary.md)。当前 `TIGER` 曾由 Code Integrity 拒绝部分未签名 App/Qt PE；用户现已自行关闭 SAC 并指定继续使用该主机。
+- 未完成事项：环境提供事项已完成。App/Worker、事务安装和核心工作流是否通过仍须由 release-engineer-windows-01 在 T-037/T-038 中实际验证，不属于本交接关闭结论。
+- 状态：closed
 - 创建日期：2026-09-15
-- 接收反馈：尚无。
-- 处理结果与证据：暂无。
-- 关闭或取消依据：尚无。
+- 接收反馈：用户于 2026-09-15 明确不接受虚拟机，随后要求直接关闭当前 `TIGER` 的 SAC，并在手动操作完成后回复“已关闭”。
+- 处理结果与证据：project-manager-01 于用户反馈后只读查询 `HKLM:\SYSTEM\CurrentControlSet\Control\CI\Policy`，确认 `VerifiedAndReputablePolicyState=0`。D-013 已将当前 `TIGER` 指定为个人未签名验证环境；未执行应用或修改其他安全设置。
+- 关闭或取消依据：用户已提供本交接要求的自有 Windows x64 验证环境和立即可用复验窗口，且只读状态证明 SAC 已关闭，故由发起人 project-manager-01 关闭。测试通过与否仍由 T-037/T-038 记录。
 
 ## H-015：为自建 Qt 与 Release 闭包提供最小 WDAC/SAC 信任路线
 - 发起人：release-engineer-windows-01
@@ -32,11 +32,11 @@
 - 关联任务：T-029
 - 期望结果：组织 5 名相互独立的真人评审者，其中至少 3 名具有短视频剪辑或卡点制作经验，按 A-031 0.2 完成人工初标、独立复核/裁决和随机化盲评；算法实现者不得作为正式评审者。并使确认的 `TIGER` 基准机在接通电源、Windows 最佳性能模式下允许 T-028 的同一 Release PE 原生启动，以便按一次预热 + 五次正式测量完成门禁。
 - 输入与证据：[A-031 0.3](artifacts/A-031-t029-video-product-evaluation-input.md)、[A-030 0.3](artifacts/A-030-video-product-evaluation-and-model-gate.md)、[T-029 最新执行就绪证据](evidence/T-029/execution-readiness-v3.json)。
-- 未完成事项：尚无初标、复核、裁决或盲评记录及 SHA-256；当前活动电源方案为“平衡”而非“最佳性能”，Release PE 在进入 `main` 前被 WDAC/SAC 以 `0xC0E90002` 拒绝。Wine 不可作为确认 Windows 基准的替代。
+- 未完成事项：尚无初标、复核、裁决或盲评记录及 SHA-256；当前活动电源方案最近证据仍为“平衡”而非“最佳性能”。用户已关闭 SAC，但 T-028 的同一 Release PE 尚未在新状态下实际复验，不能仅凭注册表状态判定 Windows 基准条件通过。Wine 不可作为确认 Windows 基准的替代。
 - 状态：open
 - 创建日期：2026-09-14
-- 接收反馈：暂无。
-- 处理结果与证据：暂无。
+- 接收反馈：用户于 2026-09-15 明确要求在当前 `TIGER` 测试，并手动关闭 SAC；project-manager-01 只读核对 `VerifiedAndReputablePolicyState=0`。
+- 处理结果与证据：SAC 强制状态已有变化，但尚无 T-028 Release PE 原生启动、最佳性能电源方案及一次预热 + 五次正式测量证据；真人评审和真实 VFR 输入也未补齐，H-014 保持 open。
 - 关闭或取消依据：暂无。
 
 ## H-013：替换 T-029 失效来源并恢复实际样本配额
