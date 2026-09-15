@@ -169,6 +169,25 @@ add_test(
     NAME video.analysis_performance_smoke
     COMMAND space_rhythm_video_analysis_benchmark --smoke
 )
+
+add_executable(space_rhythm_engineering_quality_measurement
+    performance/engineering_quality_measurement.cpp
+)
+target_link_libraries(space_rhythm_engineering_quality_measurement PRIVATE
+    SpaceRhythm::PlaybackExport
+    SpaceRhythm::System
+    Psapi
+)
+space_rhythm_apply_build_policy(space_rhythm_engineering_quality_measurement)
+add_test(
+    NAME engineering.sync_recovery_measurement
+    COMMAND space_rhythm_engineering_quality_measurement
+        --output "${PROJECT_BINARY_DIR}/test-work/t022/engineering-quality-measurement.json"
+)
+set_tests_properties(engineering.sync_recovery_measurement PROPERTIES
+    LABELS "t022;performance;integration;recovery;headless;measured;not-evaluated;gate-g2;gate-g3"
+    TIMEOUT 60
+)
 set_tests_properties(video.analysis_performance_smoke PROPERTIES
     FIXTURES_REQUIRED golden-video
     LABELS "t028;performance;video;headless;measured;not-evaluated"
@@ -537,3 +556,43 @@ foreach(_unsupported_arch IN ITEMS x86 arm64)
         LABELS "t021;compatibility;headless;build-guard;gate-g0"
     )
 endforeach()
+
+# T-022 is an independent engineering gate assembled from public-contract,
+# real integration, fault, golden, Qt/QML and compatibility tests. Product
+# effect and unconfirmed performance thresholds remain outside this label.
+set(_space_rhythm_t022_fixed_tests
+    media.golden_generate
+    video.golden_generate
+    audio.golden_generate
+    audio.render_performance_smoke
+    video.analysis_performance_smoke
+    engineering.sync_recovery_measurement
+    contract.golden.media_audit
+    rendering.offscreen_software_contract
+    rendering.offscreen_default_gpu
+    qt.core_smoke
+    qml.quick_smoke
+    qt.ui_bridge
+    qt.ui_real_workflow
+    qml.ui_shell
+    qml.ui_shell_high_dpi
+    app.qml_smoke
+    worker.process_smoke
+    build.reject_x86
+    build.reject_arm64
+)
+set(_space_rhythm_t022_gtest_cases
+    ${space_rhythm_audio_render_test_cases}
+    ${space_rhythm_audio_analysis_test_cases}
+    ${space_rhythm_video_analysis_test_cases}
+    ${space_rhythm_media_test_cases}
+    ${space_rhythm_playback_export_test_cases}
+    ${space_rhythm_contract_test_cases}
+    ${space_rhythm_media_contract_test_cases}
+    ${space_rhythm_render_contract_test_cases}
+    ${space_rhythm_render_geometry_test_cases}
+    ${space_rhythm_render_scene_graph_test_cases}
+    ${space_rhythm_core_test_cases}
+)
+set_property(TEST ${_space_rhythm_t022_fixed_tests} APPEND PROPERTY LABELS t022)
+set_property(TEST ${_space_rhythm_t022_gtest_cases} APPEND PROPERTY LABELS t022)

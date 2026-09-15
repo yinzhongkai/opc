@@ -3,6 +3,9 @@ param(
     [ValidateSet('windows-msvc-x64-debug', 'windows-msvc-x64-release', 'ci-windows-msvc-x64')]
     [string]$Preset = 'windows-msvc-x64-debug',
 
+    [ValidateSet('T-021', 'T-022')]
+    [string]$Task = 'T-021',
+
     [string]$QtRoot = 'C:\sr\q\qt6112',
     [string]$VcpkgRoot = 'C:\sr\tools\vcpkg-2026.07.29',
     [string]$EvidenceRoot = '',
@@ -16,12 +19,13 @@ $ErrorActionPreference = 'Stop'
 
 $sourceRoot = [System.IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..\..'))
 $buildRoot = Join-Path $sourceRoot "out\build\$Preset"
+$taskLabel = $Task.ToLowerInvariant().Replace('-', '')
 $commit = (& git.exe -C $sourceRoot rev-parse --short=12 HEAD).Trim()
 if ($LASTEXITCODE -ne 0) { throw 'Unable to resolve the source Git commit.' }
 $utcStamp = [DateTime]::UtcNow.ToString('yyyyMMddTHHmmssZ')
 $runId = "$utcStamp-$commit-$Preset-01"
 if ([string]::IsNullOrWhiteSpace($EvidenceRoot)) {
-    $EvidenceRoot = Join-Path $sourceRoot "out\evidence\T-021\$runId"
+    $EvidenceRoot = Join-Path $sourceRoot "out\evidence\$Task\$runId"
 }
 $EvidenceRoot = [System.IO.Path]::GetFullPath($EvidenceRoot)
 $workRoot = Join-Path $EvidenceRoot 'work'
@@ -50,7 +54,7 @@ if ($AllowWdacFallback) { $buildArguments.AllowWdacFallback = $true }
 
 $result = [ordered]@{
     schemaVersion = 1
-    task = 'T-021'
+    task = $Task
     runId = $runId
     preset = $Preset
     status = 'not-run'
@@ -59,8 +63,13 @@ $result = [ordered]@{
     finishedUtc = $null
     durationMs = $null
     junit = 'ctest-junit.xml'
-    label = 't021'
-    excludedScopes = @('T-022', 'package/', 'scripts/__pycache__/')
+    label = $taskLabel
+    excludedScopes = if ($Task -eq 'T-021') {
+        @('T-022', 'package/', 'scripts/__pycache__/')
+    }
+    else {
+        @('T-029 product evaluation', 'package/', 'scripts/__pycache__/')
+    }
 }
 $stopwatch = [System.Diagnostics.Stopwatch]::StartNew()
 
@@ -72,6 +81,7 @@ function Get-SafeCim {
 
 try {
     & $buildScript @buildArguments -Stage Configure
+    $buildArguments.Remove('Clean')
     & $buildScript @buildArguments -Stage Build
 
     $vswhere = Join-Path ${env:ProgramFiles(x86)} 'Microsoft Visual Studio\Installer\vswhere.exe'
@@ -139,7 +149,7 @@ try {
         -C $vcpkgRootFull rev-parse HEAD).Trim()
     $environment = [ordered]@{
         schemaVersion = 1
-        task = 'T-021'
+        task = $Task
         runId = $runId
         gitCommit = (& git.exe -C $sourceRoot rev-parse HEAD).Trim()
         trackedWorktreeDirty = [bool]((& git.exe -C $sourceRoot status --porcelain --untracked-files=no) | Select-Object -First 1)
@@ -191,6 +201,24 @@ try {
             'tooling/windows/Invoke-HeadlessTests.ps1',
             'tests/golden/media/fixtures-v1.json',
             'tests/golden/media/generated/actual-hashes-and-probe-v1.json'
+            if ($Task -eq 'T-022') {
+                'projects/space-rhythm/artifacts/A-016-cpp-qt-test-strategy-and-traceability.md'
+                'tests/qt/ui_integration_test.cpp'
+                'tests/unit/playback_export_test.cpp'
+                'tests/performance/engineering_quality_measurement.cpp'
+                'tests/performance/audio_analysis_benchmark.cpp'
+                'tests/performance/audio_render_benchmark.cpp'
+                'tests/performance/video_analysis_benchmark.cpp'
+                'tests/golden/media/LICENSE.md'
+                'tests/golden/video/fixtures-v1.json'
+                'tests/golden/video/LICENSE.md'
+                'tests/golden/video/generated/actual-hashes-and-probe-v1.json'
+                'tests/golden/audio/fixtures-v1.json'
+                'tests/golden/audio/LICENSE.md'
+                'tests/golden/audio/algorithm-oracles-v1.json'
+                'tests/golden/audio/render-oracles-v1.json'
+                'tests/golden/audio/generated/actual-hashes-v1.json'
+            }
         ) | ForEach-Object {
             $inputPath = Join-Path $sourceRoot $_
             [ordered]@{
@@ -203,7 +231,7 @@ try {
         Set-Content -LiteralPath (Join-Path $EvidenceRoot 'environment.json') -Encoding utf8
 
     $discoveryPath = Join-Path $EvidenceRoot 'ctest-discovery.json'
-    $discovery = & $ctest --test-dir $buildRoot --show-only=json-v1 -L t021
+    $discovery = & $ctest --test-dir $buildRoot --show-only=json-v1 -L $taskLabel
     if ($LASTEXITCODE -ne 0) { throw 'CTest discovery failed.' }
     $discovery | Set-Content -LiteralPath $discoveryPath -Encoding utf8
 
@@ -215,13 +243,59 @@ try {
     $junitPath = Join-Path $EvidenceRoot 'ctest-junit.xml'
     $ctestLog = Join-Path $EvidenceRoot 'ctest.log'
     & $ctest --test-dir $buildRoot --output-on-failure --no-tests=error `
-        --parallel $Parallel -L t021 --output-junit $junitPath 2>&1 |
+        --parallel $Parallel -L $taskLabel --output-junit $junitPath 2>&1 |
         Tee-Object -LiteralPath $ctestLog
     $testExitCode = $LASTEXITCODE
     $result.exitCode = $testExitCode
     if ($testExitCode -ne 0) {
         $result.status = 'fail'
         throw "CTest failed with exit code $testExitCode."
+    }
+    if ($Task -eq 'T-022') {
+        $measurementsRoot = Join-Path $EvidenceRoot 'measurements'
+        New-Item -ItemType Directory -Force -Path $measurementsRoot | Out-Null
+        $measurementCommands = @(
+            [ordered]@{
+                name = 'audio-analysis'
+                executable = Join-Path $buildRoot 'space_rhythm_audio_analysis_benchmark.exe'
+                arguments = @('--output', (Join-Path $measurementsRoot 'audio-analysis.json'))
+            },
+            [ordered]@{
+                name = 'audio-render'
+                executable = Join-Path $buildRoot 'space_rhythm_audio_render_benchmark.exe'
+                arguments = @('--output', (Join-Path $measurementsRoot 'audio-render.json'))
+            },
+            [ordered]@{
+                name = 'video-analysis'
+                executable = Join-Path $buildRoot 'space_rhythm_video_analysis_benchmark.exe'
+                arguments = @(
+                    '--output', (Join-Path $measurementsRoot 'video-analysis.json'),
+                    '--build-preset', $Preset,
+                    '--execution-environment', 'TIGER-local-personal-unsigned',
+                    '--warmup-runs', '3',
+                    '--measured-runs', '10',
+                    '--cancellation-runs', '20'
+                )
+            },
+            [ordered]@{
+                name = 'sync-recovery'
+                executable = Join-Path $buildRoot 'space_rhythm_engineering_quality_measurement.exe'
+                arguments = @('--output', (Join-Path $measurementsRoot 'sync-recovery.json'))
+            }
+        )
+        foreach ($measurement in $measurementCommands) {
+            if (-not (Test-Path -LiteralPath $measurement.executable -PathType Leaf)) {
+                throw "Measurement executable was not found: $($measurement.executable)"
+            }
+            $measurementOutput = & $measurement.executable @($measurement.arguments) 2>&1
+            $measurementExitCode = $LASTEXITCODE
+            $measurementOutput | Set-Content -LiteralPath (
+                Join-Path $measurementsRoot "$($measurement.name).log") -Encoding utf8
+            $measurementOutput | ForEach-Object { Write-Host $_ }
+            if ($measurementExitCode -ne 0) {
+                throw "T-022 measurement '$($measurement.name)' failed with exit code $measurementExitCode."
+            }
+        }
     }
     $result.status = 'pass'
 }
@@ -243,5 +317,18 @@ finally {
     }
     $result | ConvertTo-Json -Depth 6 |
         Set-Content -LiteralPath (Join-Path $EvidenceRoot 'result.json') -Encoding utf8
-    Write-Host "T-021 evidence: $EvidenceRoot"
+    $hashRecords = @(Get-ChildItem -LiteralPath $EvidenceRoot -Recurse -File |
+        Where-Object { $_.Name -ne 'sha256.json' } |
+        Sort-Object FullName |
+        ForEach-Object {
+            [ordered]@{
+                path = [System.IO.Path]::GetRelativePath($EvidenceRoot, $_.FullName).Replace('\', '/')
+                sha256 = (Get-FileHash -LiteralPath $_.FullName -Algorithm SHA256).Hash.ToLowerInvariant()
+                sizeBytes = $_.Length
+            }
+        })
+    [ordered]@{ schemaVersion = 1; task = $Task; files = $hashRecords } |
+        ConvertTo-Json -Depth 6 |
+        Set-Content -LiteralPath (Join-Path $EvidenceRoot 'sha256.json') -Encoding utf8
+    Write-Host "$Task evidence: $EvidenceRoot"
 }
