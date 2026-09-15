@@ -416,6 +416,7 @@ add_test(
 )
 set_tests_properties(qt.core_smoke PROPERTIES
     LABELS "t021;qt;headless;smoke;gate-g0;gate-g1"
+    RESOURCE_LOCK space_rhythm_generated_qt_smoke
 )
 
 qt_add_executable(space_rhythm_qml_smoke
@@ -443,6 +444,7 @@ add_test(
 set_tests_properties(qml.quick_smoke PROPERTIES
     LABELS "t021;qml;qt;headless;smoke;gate-g0;gate-g1"
     ENVIRONMENT "QT_QPA_PLATFORM=offscreen"
+    RESOURCE_LOCK space_rhythm_generated_qt_smoke
 )
 
 qt_add_executable(space_rhythm_ui_bridge_tests
