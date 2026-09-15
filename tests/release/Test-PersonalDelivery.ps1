@@ -112,12 +112,21 @@ function Read-PolicyEvents {
             }
         }
         catch {
-            $queries.Add([ordered]@{
-                    log = $log
-                    status = 'query-failed'
-                    error = $_.Exception.Message
-                    matched = $null
-                })
+            if ($_.FullyQualifiedErrorId -like 'NoMatchingEventsFound,*') {
+                $queries.Add([ordered]@{
+                        log = $log
+                        status = 'queried'
+                        matched = 0
+                    })
+            }
+            else {
+                $queries.Add([ordered]@{
+                        log = $log
+                        status = 'query-failed'
+                        error = $_.Exception.Message
+                        matched = $null
+                    })
+            }
         }
     }
     return [ordered]@{ queries = @($queries); events = @($events) }
@@ -212,7 +221,7 @@ try {
         throw "Normal integrated App first launch exited early: $stderr"
     }
     Stop-Process -Id $firstLaunchProcess.Id -Force
-    $firstLaunchProcess.WaitForExit(5000)
+    [void]$firstLaunchProcess.WaitForExit(5000)
     $firstLaunchControlledExitCode = $firstLaunchProcess.ExitCode
     $firstLaunchProcess = $null
 
