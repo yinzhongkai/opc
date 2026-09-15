@@ -33,6 +33,7 @@
 | [windows-qt-build-engineering](windows-qt-build-engineering.md) | Windows x64 与 Qt 构建工程 |
 | [windows-release-engineering](windows-release-engineering.md) | Windows 发布与供应链工程 |
 | [writing](writing.md) | 长篇写作与编辑 |
+| [xhs-plog-creation](xhs-plog-creation.md) | 小红书 plog 内容创作 |
 
 ## 文件约定
 

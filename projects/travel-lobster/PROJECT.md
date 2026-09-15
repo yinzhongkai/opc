@@ -41,6 +41,7 @@
 - 2026-09-15：同上授权。创建成员 `planner`（岗位 planner，首名该岗位成员，使用岗位 ID），配置文件 `members/planner.yaml`，已登记 TEAM，并为 planner 岗位配置项目补充知识 `travel-planning`。——框架超级管理员
 - 2026-09-15：同上授权。创建成员 `writer`（岗位 writer，首名该岗位成员，使用岗位 ID），配置文件 `members/writer.yaml`，已登记 TEAM。——框架超级管理员
 - 2026-09-15：用户在超级管理员会话中指出团队缺少项目经理。创建成员 `project-manager`（岗位 project-manager，首名该岗位成员，使用岗位 ID），配置文件 `members/project-manager.yaml`，已登记 TEAM；按建员约定将其指定为协调记录维护人（承担记录整理，不因此获得其他岗位职责或自行批准权）。——框架超级管理员
+- 2026-09-15：用户在超级管理员会话中要求新建小红书相关创作知识，并指出可参考平台的小红书技能。新增 active 知识 `xhs-plog-creation`（`knowledge/xhs-plog-creation.md`，已登记知识目录），配置为 writer 岗位项目补充知识。——框架超级管理员
 
 ## 当前资料
 
