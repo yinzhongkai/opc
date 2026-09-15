@@ -229,12 +229,22 @@ try {
     $qtTestBin = Join-Path $inputs.toolchain.qtRoot 'bin'
     $qtTestDll = Join-Path $qtTestBin 'Qt6Test.dll'
     Assert-Condition -Condition (Test-Path -LiteralPath $qtTestDll -PathType Leaf) -Message 'Controlled Qt SDK lacks the test-only Qt6Test.dll required by the workflow harness'
-    $env:PATH = "$installBin;$qtTestBin;$oldPath"
+    $env:PATH = "$qtTestBin;$oldPath"
     $coreReport = Join-Path $evidence 'core-workflow.qt.txt'
+    $coreWrapperLog = Join-Path $evidence 'core-workflow.wrapper.log'
     $coreFunction = 'realImportAnalysisEditPreviewSaveAndExportPath'
-    & $coreWorkflowExe $coreFunction '-o' "$coreReport,txt"
+    $coreReportStem = 't038-personal-delivery-core'
+    $cmakeLine = @(Select-String -LiteralPath (Join-Path $releaseBuild 'CMakeCache.txt') -Pattern '^CMAKE_COMMAND:INTERNAL=')
+    Assert-Condition -Condition ($cmakeLine.Count -eq 1) -Message 'Release CMake cache does not identify one CMake command'
+    $cmake = $cmakeLine[0].Line.Substring('CMAKE_COMMAND:INTERNAL='.Length)
+    $qtWrapper = Join-Path $sourceRoot 'tests\cmake\RunQtTestWithReport.cmake'
+    $coreOutput = @(& $cmake "-DPRIMARY_EXE=$($coreWorkflowExe.Replace('\', '/'))" "-DREPORT_STEM=$coreReportStem" "-DTEST_FUNCTION=$coreFunction" '-P' $qtWrapper 2>&1)
     $coreExit = $LASTEXITCODE
+    $coreOutput | Set-Content -LiteralPath $coreWrapperLog -Encoding utf8
     Assert-Condition -Condition ($coreExit -eq 0) -Message "Release core workflow failed with exit code $coreExit"
+    $temporaryCoreReport = Join-Path $coreTemp "$coreReportStem.txt"
+    Assert-Condition -Condition (Test-Path -LiteralPath $temporaryCoreReport -PathType Leaf) -Message 'Release core workflow did not produce its bounded Qt report'
+    Copy-Item -LiteralPath $temporaryCoreReport -Destination $coreReport
     Assert-Condition -Condition (Test-Path -LiteralPath $coreReport -PathType Leaf) -Message 'Release core workflow did not produce a Qt report'
     $coreReportText = Get-Content -LiteralPath $coreReport -Raw
     Assert-Condition -Condition ($coreReportText -match 'PASS\s+: UiIntegrationTest::realImportAnalysisEditPreviewSaveAndExportPath\(\)') -Message 'Release core workflow report lacks the expected pass marker'
@@ -349,15 +359,18 @@ try {
             testFunction = $coreFunction
             exitCode = $coreExit
             result = 'pass'
-            runtimeSearchPathPrefix = @($installBin, $qtTestBin)
+            runtimeEnvironment = 'controlled T-022 Release harness; installed package runtime is validated independently by normal first launch and App/Worker smoke'
+            runtimeSearchPathPrefix = $qtTestBin
             testHarnessOnlyDependency = [ordered]@{
                 path = $qtTestDll
-                purpose = 'Qt Test runner only; production Qt/runtime DLLs resolve from the installed package directory first'
+                purpose = 'Qt Test runner only; it is not a delivery dependency'
                 includedInDeliveryPackage = $false
             }
             report = $coreReport
+            wrapperLog = $coreWrapperLog
             t022TestedCommit = 'be61c71e9803'
             productionAndWorkflowSourceDeltaAfterT022 = @($sourceDelta)
+            packageLinkage = 'Installed App and Worker hashes exactly match the current Release build; production and workflow source has no delta from the T-022 tested commit.'
             path = @(
                 'import synthetic video',
                 'analyze',
@@ -375,6 +388,13 @@ try {
                 exitCode = -1073741515
                 windowsStatus = '0xC0000135'
                 reason = 'Initial T-038 harness run omitted the controlled Qt SDK bin needed only for Qt6Test.dll. Package transaction, normal first launch, and cleanup completed; no delivery dependency was added.'
+            },
+            [ordered]@{
+                result = 'fail'
+                exitCode = -1
+                timeoutSeconds = 196
+                boundedReproductionExitCode = -1073740791
+                reason = 'A second attempt forced the external Qt Test executable to resolve through the installed package layout. It stalled before creating a report and was terminated; a bounded reproduction identified incompatible offscreen platform-plugin discovery for that non-delivery executable. The package App itself launched normally.'
             }
         )
         diagnostics = $policy
