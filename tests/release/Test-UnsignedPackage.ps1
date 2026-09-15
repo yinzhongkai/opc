@@ -15,6 +15,42 @@ function Assert-Condition {
     if (-not $Condition) { throw $Message }
 }
 
+function Invoke-SmokeProcess {
+    param(
+        [Parameter(Mandatory)][string]$Executable,
+        [Parameter(Mandatory)][string]$ExpectedMarker
+    )
+
+    $startInfo = [System.Diagnostics.ProcessStartInfo]::new()
+    $startInfo.FileName = $Executable
+    [void]$startInfo.ArgumentList.Add('--smoke')
+    $startInfo.UseShellExecute = $false
+    $startInfo.CreateNoWindow = $true
+    $startInfo.RedirectStandardOutput = $true
+    $startInfo.RedirectStandardError = $true
+
+    $process = [System.Diagnostics.Process]::new()
+    $process.StartInfo = $startInfo
+    Assert-Condition -Condition $process.Start() -Message "Unable to start smoke process: $Executable"
+    $stdoutTask = $process.StandardOutput.ReadToEndAsync()
+    $stderrTask = $process.StandardError.ReadToEndAsync()
+    $process.WaitForExit()
+    $stdout = $stdoutTask.GetAwaiter().GetResult().TrimEnd()
+    $stderr = $stderrTask.GetAwaiter().GetResult().TrimEnd()
+    $exitCode = $process.ExitCode
+    $process.Dispose()
+
+    Assert-Condition -Condition ($exitCode -eq 0) `
+        -Message "Smoke failed with exit code $exitCode for $Executable; stdout=$stdout; stderr=$stderr"
+    Assert-Condition -Condition ($stdout -match [regex]::Escape($ExpectedMarker)) `
+        -Message "Smoke marker was not observed for $Executable; stdout=$stdout; stderr=$stderr"
+    return [ordered]@{
+        exitCode = $exitCode
+        output = @($stdout -split "`r?`n" | Where-Object { $_ -ne '' })
+        stderr = @($stderr -split "`r?`n" | Where-Object { $_ -ne '' })
+    }
+}
+
 function Assert-HashManifest {
     param(
         [Parameter(Mandatory)][string]$Root,
@@ -135,20 +171,12 @@ if ($RunSmoke) {
     $oldPlatform = $env:QT_QPA_PLATFORM
     try {
         $env:QT_QPA_PLATFORM = 'offscreen'
-        $appOutput = @(& (Join-Path $installRoot 'bin\space-rhythm.exe') --smoke 2>&1)
-        $appExit = $LASTEXITCODE
-        Assert-Condition -Condition ($appExit -eq 0) `
-            -Message "Installed App smoke failed with exit code $appExit`: $($appOutput -join [Environment]::NewLine)"
-        Assert-Condition -Condition (($appOutput -join "`n") -match 'SPACE_RHYTHM_APP_SMOKE_OK Qt=6\.11\.2 arch=x64') `
-            -Message 'Installed App smoke did not emit the required marker'
-        $appSmokeResult = [ordered]@{ exitCode = $appExit; output = @($appOutput) }
-        $workerOutput = @(& (Join-Path $installRoot 'bin\space-rhythm-worker.exe') --smoke 2>&1)
-        $workerExit = $LASTEXITCODE
-        Assert-Condition -Condition ($workerExit -eq 0) `
-            -Message "Installed Worker smoke failed with exit code $workerExit`: $($workerOutput -join [Environment]::NewLine)"
-        Assert-Condition -Condition (($workerOutput -join "`n") -match 'SPACE_RHYTHM_WORKER_SMOKE_OK Qt=6\.11\.2 arch=x64') `
-            -Message 'Installed Worker smoke did not emit the required marker'
-        $workerSmokeResult = [ordered]@{ exitCode = $workerExit; output = @($workerOutput) }
+        $appSmokeResult = Invoke-SmokeProcess `
+            -Executable (Join-Path $installRoot 'bin\space-rhythm.exe') `
+            -ExpectedMarker 'SPACE_RHYTHM_APP_SMOKE_OK Qt=6.11.2 arch=x64'
+        $workerSmokeResult = Invoke-SmokeProcess `
+            -Executable (Join-Path $installRoot 'bin\space-rhythm-worker.exe') `
+            -ExpectedMarker 'SPACE_RHYTHM_WORKER_SMOKE_OK Qt=6.11.2 arch=x64'
     }
     finally {
         if ($null -eq $oldPlatform) {
