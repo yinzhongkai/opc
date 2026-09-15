@@ -13,30 +13,30 @@
 - 阻塞与下一位行动人：T-039 范围内无阻塞并已完成；产品输入确认已完成。下一位行动人为 video-algorithm-engineer-cv-01，依 A-031 0.2 获取实际媒体、复核 slice 配额、冻结 probe/hash 与标注后执行 T-029；本轮用户明确要求 product-manager-01 不代为执行。
 - 更新日期：2026-09-14。
 
-## T-038：验证干净 Windows 环境并形成发布候选证据
+## T-038：验证干净 Windows 环境并形成个人未签名交付证据
 - 负责人：release-engineer-windows-01
 - 状态：todo
 - 授权来源与日期：本会话用户于 2026-09-09 要求补充系统架构师判断的新增成员及成员任务并提交。
-- 目标与范围：在功能、质量和安装流水线就绪后验证发布候选的安装、首次启动、升级、卸载、回滚、用户数据保留和诊断，形成可追溯证据；不批准或执行生产发布。
-- 输入与依赖：T-022、T-037；D-004～D-008；最低 Windows 版本、安装器、签名主体与发布矩阵待确认；A-011 0.1。
-- 优先级：未设定（架构建议：发布候选阶段必需）。
-- 完成条件与确认方式：在确认的干净 Windows x64 兼容矩阵上复核哈希、签名状态、依赖、安装/升级/卸载/回滚、首次启动和核心工作流；记录环境、命令、结果、失败与未覆盖项，输出发布候选证据包；负责人自查，测试通过不等于最终发布批准。
-- 进展：任务已登记，尚未由负责人会话接收。
+- 目标与范围：在功能、质量和个人未签名部署流水线就绪后，在允许未签名 Win32 程序运行的自有干净 Windows x64 电脑或虚拟机验证安装、首次启动、修复/升级、卸载、回滚、用户数据保留和诊断，形成可追溯的个人交付证据；不验证 SAC/WDAC 兼容，不批准公开分发或生产发布。
+- 输入与依赖：T-022、T-037；D-004～D-008、D-012；最低 Windows 版本仍待确认；A-011 0.1；用户提供或确认一套允许未签名程序运行的自有干净 Windows x64 验证环境。
+- 优先级：未设定（架构建议：个人交付验证阶段必需）。
+- 完成条件与确认方式：在确认的个人 Windows x64 验证环境上复核哈希、明确记录 unsigned 状态、依赖、安装/修复或升级/卸载/回滚、首次启动和核心工作流；记录系统版本、安全策略适用边界、环境、命令、结果、失败与未覆盖项，输出个人未签名交付证据包。不得关闭安全策略来制造通过，也不得把结果外推为 SAC/WDAC 兼容、公开分发或生产发布；负责人自查。
+- 进展：2026-09-15，用户通过 D-012 将任务从签名/发布候选验证收口为个人未签名交付验证；任务尚未由负责人启动，历史登记的签名状态改为如实记录 unsigned 而非通过门禁。
 - 成果与验证证据：[A-011 0.1](artifacts/A-011-complete-mvp-engineering-staffing-and-task-plan.md)；实际证据暂无。
-- 阻塞与下一位行动人：等待 T-022/T-037 及发布输入确认；release-engineer-windows-01 先执行 T-036。
-- 更新日期：2026-09-09。
+- 阻塞与下一位行动人：等待 T-022/T-037，并等待 H-016 提供允许未签名程序运行的自有干净 Windows x64 电脑或虚拟机；随后由 release-engineer-windows-01 执行。本任务不再等待 H-015 或签名证书。
+- 更新日期：2026-09-15。
 
-## T-037：建立 Windows 部署、安装器与签名工程流水线
+## T-037：建立 Windows 个人未签名部署与事务安装流水线
 - 负责人：release-engineer-windows-01
 - 状态：in_progress
 - 授权来源与日期：本会话用户于 2026-09-09 要求补充系统架构师判断的新增成员及成员任务并提交。
-- 目标与范围：从受控构建产物建立应用私有部署、安装/升级/卸载、回滚和隔离签名工程流程；不自行选择安装器、使用签名凭据或发布产品。
-- 输入与依赖：T-013、T-019、T-032、T-035、T-036；D-004～D-008；安装器、最低 Windows 版本和签名输入待确认；A-011 0.1。
+- 目标与范围：从受控构建产物建立仅供用户本人在自有 Windows 电脑上使用的应用私有部署、安装/修复/升级/卸载和回滚流水线；输出明确标记为 `unsigned-engineering`，不使用签名凭据、不承诺 SAC/WDAC 兼容、不公开分发或发布产品。
+- 输入与依赖：T-013、T-019、T-032、T-035、T-036；D-004～D-008、D-012；最低 Windows 版本待确认；A-011 0.1。
 - 优先级：未设定（架构建议：功能闭环后启动）。
-- 完成条件与确认方式：部署清单仅使用受控产物；应用、Qt、运行库、插件和原生依赖采用私有布局；安装、升级、卸载和失败回滚边界明确；签名凭据与普通构建隔离，未授权时使用 unsigned 流程；生成可复现脚本、日志、哈希、SBOM 和许可证包，负责人自查。
+- 完成条件与确认方式：部署清单仅使用受控产物；应用、Qt、运行库、插件和原生依赖采用私有布局；安装、修复/升级、卸载和失败回滚边界明确；生成可复现脚本、日志、哈希、SBOM 和许可证包；所有输出显式标记 unsigned、个人使用与不兼容 SAC/WDAC 的边界，并在 H-016 所述环境完成 App/Worker smoke。独立 GUI 安装器和代码签名不作为本阶段完成条件；负责人自查。
 - 进展：2026-09-15，用户明确要求 release-engineer-windows-01 继续执行 unsigned 部分。已实现 `Invoke-UnsignedRelease.ps1`：刷新 Release 构建，固定核对 Qt/`windeployqt`/vcpkg，执行 dry-run 来源门禁和实际部署，递归解析 PE 导入并只从固定 Qt、vcpkg 或签名有效的 Windows SDK D3D Redist 取运行文件；生成 runtime/payload/bundle hash、build-inputs schema 2、SPDX 2.3、上游 SPDX、许可证/notices、Qt 替换说明、known limitations 和不含凭据的 signing request。另实现显式路径的安装/修复/回滚/卸载事务工具与端到端测试。当前闭包 81 个 PE/103,338,584 字节，排除了 `qmltooling`、`generic`、translations、Debug CRT、PDB、测试/构建工具、`vc_redist.x64.exe` 及未导入的 FFmpeg DLL；相同输入两次 ZIP hash 一致，当前包完整通过不带 smoke 的事务链。最终元数据扩展前的一份受控归档曾完整通过事务与 App/Worker smoke，但后续复跑在 App smoke fail closed，测试安装根 App 被 Code Integrity 以 `0xC0E90002` 拒绝；一次 bundle 原路径诊断又定位到未签名 `Qt6QuickDialogs2.dll`（SHA-256 `CEFC1734...0E9DCB`，与当前包一致）被拒、App 退出 2，Worker 退出 0。当前包未反复执行 App 来美化最新失败。
 - 成果与验证证据：[A-033 0.1](artifacts/A-033-windows-unsigned-deployment-and-transaction-pipeline.md)、[T-037 unsigned 验证摘要](evidence/T-037/verification-summary.md)、[使用说明](../../docs/windows-unsigned-release.md)及 `tooling/windows/Invoke-UnsignedRelease.ps1`、`tooling/windows/Invoke-UnsignedInstallTransaction.ps1`、`tests/release/Test-UnsignedPackage.ps1`。完整机器证据和工程包位于被忽略的 `out/evidence/T-037/`、`out/release/T-037/`。
-- 阻塞与下一位行动人：unsigned 组包、供应链和事务实现已完成并自查，但严格 App 启动仍因 H-015 blocked，整个 T-037 不能结束。当前包因 dirty 工程输入、78 个未签名 PE、内嵌开发测试音色及未完成 T-022/T-038 被强制标记 `unsigned-engineering`、`candidateEligible=false`。用户/项目计划仍需确认正式安装器、安装 scope/升级/自动更新、VC Runtime、最低 Windows、产品格式/H.264/AAC、默认音色/视觉风格、签名主体/证书/时间戳/渠道；用户还需协调策略管理员完成 H-015。确认前不执行签名，不把工程 ZIP 称为安装器或发布候选。
+- 阻塞与下一位行动人：2026-09-15，D-012 已解除 H-015、受信任签名和当前 `TIGER` SAC/WDAC 放行作为本任务前置；T-037 保持 `in_progress`，等待 release-engineer-windows-01 在 H-016 所述环境复验 App/Worker smoke，并按新范围修订 A-033 与证据。当前包因 dirty 工程输入、78 个未签名 PE、内嵌开发测试音色及未完成 T-022/T-038 继续强制标记 `unsigned-engineering`、`candidateEligible=false`。最低 Windows、产品格式/H.264/AAC、默认音色/视觉风格仍须按各自责任链确认；未完成其余门禁前不得把工程 ZIP 称为发布候选或生产发布物。
 - 更新日期：2026-09-15。
 
 ## T-036：制定 Windows 发布输入、许可证与 SBOM 计划
@@ -49,8 +49,8 @@
 - 完成条件与确认方式：列出源提交、构建预设、工具链、依赖、测试和版本冻结输入；定义私有部署、安装/升级/卸载/回滚、用户数据、缓存和日志边界；建立 Qt/FFmpeg/OpenCV/FFT/音色/模型/安装器许可证与 SBOM 字段；列出签名、最低 Windows 和渠道待决定项；形成版本化计划并自查。
 - 进展：2026-09-14，release-engineer-windows-01 按用户指令完成会话初始化并接收 H-010；形成 A-032 0.1，覆盖发布输入冻结、私有依赖布局、安装/升级/卸载/回滚和用户数据边界、SBOM/许可证字段、签名隔离、干净 Windows 矩阵及待确认项。实际运行当前 Release 安装阶段：`windeployqt` 成功生成闭包，严格 App smoke 以 `0xC0E90002` 失败；Code Integrity 3033/3077 将根因定位到未签名 `Qt6QmlMeta.dll` 不满足 `VerifiedAndReputableDesktop` 策略。已完成不修改策略/白名单/签名的受控取证和 `windeployqt` 缩减 dry-run。
 - 成果与验证证据：[A-032 0.1](artifacts/A-032-windows-release-input-license-sbom-plan.md)、[T-036 可复核摘要](evidence/T-036/verification-summary.md)；完整机器日志位于被忽略的 `out/evidence/T-036/`。
-- 阻塞与下一位行动人：T-036 计划完成条件已满足。T-037 可由 release-engineer-windows-01 在 unsigned 边界内继续；T-038/严格 Release 需要用户协调主机策略管理员完成 H-015，并确认最低 Windows、正式格式/H.264 后端、安装器、签名主体/证书和渠道。
-- 更新日期：2026-09-14。
+- 阻塞与下一位行动人：T-036 计划完成条件已满足。依据 D-012，T-037/T-038 改走个人未签名工程包路线，不再等待 H-015、签名证书、发布渠道或独立 GUI 安装器；下一步由 release-engineer-windows-01 在 H-016 所述环境收口 T-037。最低 Windows 和正式格式/H.264 后端仍按各自责任链确认。
+- 更新日期：2026-09-15。
 
 ## T-035：验证屏上/离屏一致性、GPU 降级与渲染性能
 - 负责人：graphics-engineer-qt-scenegraph-01
