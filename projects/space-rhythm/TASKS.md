@@ -28,16 +28,16 @@
 
 ## T-037：建立 Windows 部署、安装器与签名工程流水线
 - 负责人：release-engineer-windows-01
-- 状态：todo
+- 状态：in_progress
 - 授权来源与日期：本会话用户于 2026-09-09 要求补充系统架构师判断的新增成员及成员任务并提交。
 - 目标与范围：从受控构建产物建立应用私有部署、安装/升级/卸载、回滚和隔离签名工程流程；不自行选择安装器、使用签名凭据或发布产品。
 - 输入与依赖：T-013、T-019、T-032、T-035、T-036；D-004～D-008；安装器、最低 Windows 版本和签名输入待确认；A-011 0.1。
 - 优先级：未设定（架构建议：功能闭环后启动）。
 - 完成条件与确认方式：部署清单仅使用受控产物；应用、Qt、运行库、插件和原生依赖采用私有布局；安装、升级、卸载和失败回滚边界明确；签名凭据与普通构建隔离，未授权时使用 unsigned 流程；生成可复现脚本、日志、哈希、SBOM 和许可证包，负责人自查。
-- 进展：任务已登记，尚未由负责人会话接收。
-- 成果与验证证据：[A-011 0.1](artifacts/A-011-complete-mvp-engineering-staffing-and-task-plan.md)；实际流水线暂无。
-- 阻塞与下一位行动人：等待功能产物及发布决定；T-036 可立即开展。
-- 更新日期：2026-09-09。
+- 进展：2026-09-15，用户明确要求 release-engineer-windows-01 继续执行 unsigned 部分。已实现 `Invoke-UnsignedRelease.ps1`：刷新 Release 构建，固定核对 Qt/`windeployqt`/vcpkg，执行 dry-run 来源门禁和实际部署，递归解析 PE 导入并只从固定 Qt、vcpkg 或签名有效的 Windows SDK D3D Redist 取运行文件；生成 runtime/payload/bundle hash、build-inputs schema 2、SPDX 2.3、上游 SPDX、许可证/notices、Qt 替换说明、known limitations 和不含凭据的 signing request。另实现显式路径的安装/修复/回滚/卸载事务工具与端到端测试。当前闭包 81 个 PE/103,338,584 字节，排除了 `qmltooling`、`generic`、translations、Debug CRT、PDB、测试/构建工具、`vc_redist.x64.exe` 及未导入的 FFmpeg DLL；相同输入两次 ZIP hash 一致，当前包完整通过不带 smoke 的事务链。最终元数据扩展前的一份受控归档曾完整通过事务与 App/Worker smoke，但后续复跑在 App smoke fail closed，测试安装根 App 被 Code Integrity 以 `0xC0E90002` 拒绝；一次 bundle 原路径诊断又定位到未签名 `Qt6QuickDialogs2.dll`（SHA-256 `CEFC1734...0E9DCB`，与当前包一致）被拒、App 退出 2，Worker 退出 0。当前包未反复执行 App 来美化最新失败。
+- 成果与验证证据：[A-033 0.1](artifacts/A-033-windows-unsigned-deployment-and-transaction-pipeline.md)、[T-037 unsigned 验证摘要](evidence/T-037/verification-summary.md)、[使用说明](../../docs/windows-unsigned-release.md)及 `tooling/windows/Invoke-UnsignedRelease.ps1`、`tooling/windows/Invoke-UnsignedInstallTransaction.ps1`、`tests/release/Test-UnsignedPackage.ps1`。完整机器证据和工程包位于被忽略的 `out/evidence/T-037/`、`out/release/T-037/`。
+- 阻塞与下一位行动人：unsigned 组包、供应链和事务实现已完成并自查，但严格 App 启动仍因 H-015 blocked，整个 T-037 不能结束。当前包因 dirty 工程输入、78 个未签名 PE、内嵌开发测试音色及未完成 T-022/T-038 被强制标记 `unsigned-engineering`、`candidateEligible=false`。用户/项目计划仍需确认正式安装器、安装 scope/升级/自动更新、VC Runtime、最低 Windows、产品格式/H.264/AAC、默认音色/视觉风格、签名主体/证书/时间戳/渠道；用户还需协调策略管理员完成 H-015。确认前不执行签名，不把工程 ZIP 称为安装器或发布候选。
+- 更新日期：2026-09-15。
 
 ## T-036：制定 Windows 发布输入、许可证与 SBOM 计划
 - 负责人：release-engineer-windows-01

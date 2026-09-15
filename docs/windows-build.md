@@ -89,6 +89,11 @@ events under `out/evidence/T021-ENV-001`. Use `-ExecutableName` and
 Exit 0 with no stdout/stderr is recorded as `started-exit-zero-no-output`, not
 as a passed test.
 
+The build install tree is development evidence, not a release package. The
+separate T-037 unsigned deployment, SBOM/license, deterministic archive and
+transaction-test entry is documented in
+[`windows-unsigned-release.md`](windows-unsigned-release.md).
+
 ## CI runner contract
 
 The Windows workflow uses a self-hosted runner labeled

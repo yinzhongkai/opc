@@ -10,7 +10,7 @@
 - 状态：open
 - 创建日期：2026-09-14
 - 接收反馈：尚无。
-- 处理结果与证据：尚无。
+- 处理结果与证据：2026-09-15，T-037 unsigned 的连续受控组包与诊断中先出现 App/Worker 均退出 0、正确窗口无新策略事件，后续事务复跑又在测试安装根对 App 产生 3033/3077/3118 与 `0xC0E90002`；一次定位性 bundle 原路径诊断允许 App 启动，但改为拒绝 `Qt6QuickDialogs2.dll`（SHA-256 `CEFC1734...0E9DCB`，与当前最终归档一致），App 报告 QML root 未创建并退出 2，Worker 退出 0。见 [A-033 0.1 第 6 节](artifacts/A-033-windows-unsigned-deployment-and-transaction-pipeline.md)和[T-037 摘要](evidence/T-037/verification-summary.md)。当前最终闭包有 78 个运行 PE 未签名且未反复执行 App；先成功、后分别阻断 App/Qt DLL 进一步证明当前声誉/策略判定不稳定，不能据此认为组织管理信任路线已提供或阻塞已解除。
 - 关闭或取消依据：尚无。
 
 ## H-014：提供 T-029 独立真人证据与合规 Windows 基准运行条件
@@ -75,7 +75,7 @@
 - 状态：accepted
 - 创建日期：2026-09-09
 - 接收反馈：2026-09-14，release-engineer-windows-01 已按会话协议刷新身份、岗位、有效知识、项目当前事实及本交接输入，确认在本人 scope 内接收；已将 T-036 更新为 in_progress，本轮优先处理 Qt DLL、`windeployqt` 和 WDAC/SAC 策略阻塞，不使用签名凭据或放宽生产安全策略。
-- 处理结果与证据：2026-09-14，T-036 已完成并形成 [A-032 0.1](artifacts/A-032-windows-release-input-license-sbom-plan.md)及[T-036 可复核摘要](evidence/T-036/verification-summary.md)。当前 Qt DLL 来源/哈希和 `windeployqt` 实际复制已验证，严格启动失败定位为 `VerifiedAndReputableDesktop` 对未签名 `Qt6QmlMeta.dll` 的 `0xC0E90002` 拒绝。策略管理员动作已登记为 H-015；本交接继续保持 accepted，等待 T-037/T-038 后续结果。
+- 处理结果与证据：2026-09-14，T-036 已完成并形成 [A-032 0.1](artifacts/A-032-windows-release-input-license-sbom-plan.md)及[T-036 可复核摘要](evidence/T-036/verification-summary.md)。当前 Qt DLL 来源/哈希和 `windeployqt` 实际复制已验证，严格启动失败定位为 `VerifiedAndReputableDesktop` 对未签名 `Qt6QmlMeta.dll` 的 `0xC0E90002` 拒绝。策略管理员动作已登记为 H-015。2026-09-15，用户明确启动 T-037 unsigned 部分；已形成 [A-033 0.1](artifacts/A-033-windows-unsigned-deployment-and-transaction-pipeline.md)和[T-037 unsigned 验证摘要](evidence/T-037/verification-summary.md)，完成受控闭包、SBOM/许可证、确定性 ZIP 和安装/修复/回滚/卸载自测。T-037 保持 in_progress，本交接继续 accepted，等待正式安装器/签名输入及 T-038。
 - 关闭或取消依据：暂无。
 
 ## H-009：启动 Qt Scene Graph 实时图形工作流
