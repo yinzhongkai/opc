@@ -1,0 +1,206 @@
+{
+  "schemaVersion": 1,
+  "taskId": "T-038",
+  "artifactId": "A-035",
+  "artifactVersion": "0.1",
+  "decisionIds": [
+    "D-012",
+    "D-013",
+    "D-015"
+  ],
+  "result": "pass(personal-unsigned,current-TIGER,SAC-off)",
+  "validationRunnerCommit": "bd9eb97a3b538550790d340b6117362184ee65f2",
+  "evidenceScope": "Exact personal unsigned package delivery validation on the current TIGER with SAC state 0; not SAC/WDAC, other-Windows, product-effect, public-distribution, or production-release evidence",
+  "host": {
+    "computerName": "TIGER",
+    "architecture": "AMD64",
+    "registryProductName": "Windows 10 Home China",
+    "displayVersion": "25H2",
+    "build": "26200.9457"
+  },
+  "package": {
+    "relativePath": "out/release/T-038/unsigned/space-rhythm-0.1.0-dev-t038-unsigned.zip",
+    "version": "0.1.0-dev-t038",
+    "packageKind": "unsigned-engineering",
+    "deliveryScope": "personal-unsigned",
+    "candidateEligible": false,
+    "sourceCommit": "bd9eb97a3b538550790d340b6117362184ee65f2",
+    "sourceWorktreeClean": false,
+    "zipLength": 44740342,
+    "zipSha256": "2CC3F8B4AC5A6BC4B3EE8CC42C8305094F372A9E16F9DCAF937B59872FF8C3E6",
+    "runtimePeCount": 81,
+    "authenticode": {
+      "notSigned": 78,
+      "validMicrosoft": 3
+    },
+    "appSha256": "67D01EBF70B6DA0E12C6AB624658D9E1BC1CC3892F6A5BAA43410178B32560A6",
+    "workerSha256": "D87FC84ECA91B506B3D7ADAB515A60008A3338CEA16E35054DBFE4E670C316DB",
+    "matchesCurrentReleaseBuild": true,
+    "sacWdacCompatibilityClaim": "none"
+  },
+  "packagingDeterminism": {
+    "comparison": "same source commit, version, and OutputRoot",
+    "runSha256": [
+      "2CC3F8B4AC5A6BC4B3EE8CC42C8305094F372A9E16F9DCAF937B59872FF8C3E6",
+      "2CC3F8B4AC5A6BC4B3EE8CC42C8305094F372A9E16F9DCAF937B59872FF8C3E6"
+    ],
+    "result": "pass",
+    "differentOutputRootProbe": {
+      "zipSha256": "6266695500DA4EBA6E40C57DD3074DD5596E44C69108EE9EF088290BA68A6DEB",
+      "interpretation": "Not a determinism comparison: build-inputs.json embeds the different absolute output path; binary hashes were identical."
+    }
+  },
+  "execution": {
+    "startedUtc": "2026-09-15T12:13:23.3939922Z",
+    "completedUtc": "2026-09-15T12:14:45.2316574Z",
+    "result": "pass",
+    "firstLaunch": {
+      "mode": "normal-integrated-gui",
+      "arguments": [],
+      "offscreen": false,
+      "aliveAfterMilliseconds": 3000,
+      "qmlRootAndEventLoopObserved": true,
+      "teardown": "harness-controlled process termination after bounded observation",
+      "controlledExitCode": -1
+    },
+    "appSmoke": {
+      "exitCode": 0,
+      "output": "SPACE_RHYTHM_APP_SMOKE_OK Qt=6.11.2 arch=x64"
+    },
+    "workerSmoke": {
+      "exitCode": 0,
+      "output": "SPACE_RHYTHM_WORKER_SMOKE_OK Qt=6.11.2 arch=x64"
+    },
+    "postRollbackAppSmoke": {
+      "exitCode": 0,
+      "output": "SPACE_RHYTHM_APP_SMOKE_OK Qt=6.11.2 arch=x64"
+    },
+    "operations": [
+      "validate",
+      "install",
+      "normal-integrated-first-launch",
+      "app-smoke",
+      "worker-smoke",
+      "reject-unregistered-repair",
+      "repair",
+      "rollback",
+      "validate-installed",
+      "post-rollback-app-smoke",
+      "uninstall",
+      "preserve-external-data"
+    ]
+  },
+  "coreWorkflow": {
+    "testFunction": "realImportAnalysisEditPreviewSaveAndExportPath",
+    "result": "pass",
+    "exitCode": 0,
+    "totals": {
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0,
+      "durationMilliseconds": 778
+    },
+    "t022TestedCommit": "be61c71e9803",
+    "productionAndWorkflowSourceDeltaAfterT022": [
+      "src/worker/main.cpp"
+    ],
+    "testHarnessOnlyQt6TestIncludedInPackage": false,
+    "path": [
+      "import synthetic video",
+      "analyze",
+      "edit/lock/undo/redo",
+      "preview/seek",
+      "save",
+      "testOnly NUT export",
+      "probe/decode exported audio",
+      "worker disconnect/reconnect"
+    ],
+    "t022SupplementalCoverage": [
+      "saved project reopen",
+      "fault recovery matrix",
+      "three-preset 166/166 engineering oracles"
+    ]
+  },
+  "postconditions": {
+    "verifiedAndReputablePolicyState": 0,
+    "installRootExists": false,
+    "externalUserDataSentinelExists": true,
+    "auditInstalled": false,
+    "auditLastAction": "uninstall",
+    "auditBackupPath": ""
+  },
+  "policyObservation": {
+    "windowStartUtc": "2026-09-15T12:13:23.3939922Z",
+    "windowEndUtc": "2026-09-15T12:14:45.2316574Z",
+    "queries": [
+      {
+        "log": "Microsoft-Windows-CodeIntegrity/Operational",
+        "status": "queried",
+        "matched": 0
+      },
+      {
+        "log": "Microsoft-Windows-AppLocker/EXE and DLL",
+        "status": "queried",
+        "matched": 0
+      }
+    ],
+    "sacWdacCompatibilityValidated": false,
+    "interpretation": "SAC was off; successful execution and zero matched events do not establish SAC/WDAC compatibility."
+  },
+  "preservedDiagnostics": [
+    {
+      "result": "fail",
+      "exitCode": -1073741515,
+      "windowsStatus": "0xC0000135",
+      "reason": "Initial external core-workflow harness lacked the test-only Qt6Test.dll. No test DLL was added to the package."
+    },
+    {
+      "result": "fail",
+      "exitCode": -1,
+      "timeoutSeconds": 196,
+      "boundedReproductionExitCode": -1073740791,
+      "reason": "Forcing the external test executable through the package layout caused qoffscreen plugin discovery failure; the package App itself launched."
+    },
+    {
+      "result": "fail",
+      "exitCode": 0,
+      "repetitions": 3,
+      "stdout": "",
+      "stderr": "",
+      "reason": "The pre-fix Worker did not flush redirected smoke output. It was fixed, rebuilt, and the final no-retry smoke passed."
+    }
+  ],
+  "rawEvidenceSha256": {
+    "out/evidence/T-038/final/result.json": "75FC824B3A22E01883B13F4F9A1A9E528E4A3A62EFABC59695A7DBCD6B123B21",
+    "out/evidence/T-038/final/core-workflow.qt.txt": "FFEFB0FEC711F66AD6C8B1B21DE9AF3420003BF55CF2625F7DA52D85C986264F",
+    "out/evidence/T-038/final/core-workflow.wrapper.log": "3B4EB109D5551E9731207517F148D8DBDF8BD830155671DD2E7D718B6D631663",
+    "out/evidence/T-038/final/first-launch.stdout.log": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "out/evidence/T-038/final/first-launch.stderr.log": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "payload/manifest/build-inputs.json": "04C0021DEC0B954E0F581229E026890D589F5E670D72CFB6DF5DB4432A66E096",
+    "payload/manifest/runtime-files.sha256.csv": "82FDE6B781B1437F148887EE665AF9CD83E3CF78F8EBBEC3ED2C32D3CD85FDDB",
+    "payload/manifest/payload-files.sha256.csv": "33AB6A1D385F02ED03138055B288B0EEB1C393A10E5F7E7D430CC7CC25B0C64D",
+    "manifest/bundle-files.sha256.csv": "90760DDCD8417312D0DBCBAEF695AF9A649FB3BFC2B9230A69E2CAA454928C45",
+    "payload/sbom/space-rhythm.spdx.json": "37DE1E1EB2650EA89A17998934171FB6E6FEAAD07A16F09E20C59D968B9F244A"
+  },
+  "evaluationBoundary": {
+    "productEffectEvaluation": "not-evaluated(deferred-to-personal-use-feedback)",
+    "naturalnessEvaluation": "not-evaluated(deferred-to-personal-use-feedback)",
+    "realVfrEvaluation": "not-evaluated(deferred-to-personal-use-feedback)",
+    "formalProductPerformanceEvaluation": "not-evaluated(deferred-to-personal-use-feedback)",
+    "minimumWindowsCompatibility": "not-evaluated",
+    "formalH264AacContainerMatrix": "not-evaluated",
+    "publicDistributionApproved": false,
+    "productionReleaseApproved": false
+  },
+  "repositorySelfCheck": {
+    "frameworkValidation": "pass",
+    "roles": 17,
+    "knowledgeFiles": 24,
+    "projects": 1,
+    "projectTemplates": 1,
+    "localLinks": 724,
+    "unitTestsPassed": 37,
+    "unitTestsFailed": 0,
+    "gitDiffCheck": "pass"
+  }
+}

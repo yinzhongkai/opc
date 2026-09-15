@@ -15,15 +15,15 @@
 
 ## T-038：验证当前 TIGER 并形成个人未签名交付证据
 - 负责人：release-engineer-windows-01
-- 状态：in_progress
+- 状态：completed
 - 授权来源与日期：本会话用户于 2026-09-09 要求补充系统架构师判断的新增成员及成员任务并提交；2026-09-15 又通过 D-015 将 T-029 正式产品效果验收移出本阶段个人试用交付前置。
 - 目标与范围：在功能、质量和个人未签名部署流水线就绪后，于用户指定且已关闭 SAC 的当前 `TIGER` 验证安装、首次启动、修复/升级、卸载、回滚、用户数据保留和诊断，形成可追溯的个人交付证据；不验证干净系统兼容矩阵或 SAC/WDAC 兼容，不批准公开分发或生产发布。
 - 输入与依赖：T-022、T-037；T-029 已按 D-015 cancelled 且不是本阶段前置；D-004～D-008、D-012、D-013、D-015；最低 Windows 版本仍待确认；A-011 0.1；H-016 closed。
 - 优先级：未设定（架构建议：个人交付验证阶段必需）。
 - 完成条件与确认方式：在当前 `TIGER` 上复核哈希、明确记录 unsigned 与 SAC-off 状态、依赖、安装/修复或升级/卸载/回滚、首次启动和核心工作流；记录系统版本、安全策略适用边界、环境、命令、结果、失败与未覆盖项，输出个人未签名交付证据包。必须注明 `productEffectEvaluation=not-evaluated(deferred-to-personal-use-feedback)`；不得把结果外推为产品效果/VFR通过、SAC/WDAC 兼容、干净 Windows 兼容矩阵、公开分发或生产发布；负责人自查。
-- 进展：2026-09-15，用户先通过 D-012 将任务从签名/发布候选验证收口为个人未签名交付验证，随后通过 D-013 指定当前 `TIGER` 并手动关闭 SAC；只读状态为 `VerifiedAndReputablePolicyState=0`。D-015 又取消当前阶段 T-029 正式产品效果验收，任务须把该项如实标为延期未评估。同日 T-022 已完成并形成 A-034 0.1，三套 preset 各 166/166 工程 oracle pass；用户随后明确要求 release-engineer-windows-01 启动并执行 T-038，负责人已完成会话刷新并开始当前主机验证。
-- 成果与验证证据：[A-011 0.1](artifacts/A-011-complete-mvp-engineering-staffing-and-task-plan.md)、[A-033 0.2](artifacts/A-033-windows-unsigned-deployment-and-transaction-pipeline.md)、[A-034 0.1](artifacts/A-034-t022-engineering-e2e-fault-recovery-quality-gates.md)；T-038 自身执行证据暂无。
-- 阻塞与下一位行动人：当前无前置阻塞；T-022、T-037 均已完成，不再等待 T-029、真实 VFR、个人评分、替代电脑、虚拟机、H-015 或签名证书。当前行动人为 release-engineer-windows-01：复核交付包、执行安装事务、首次启动和核心工作流，形成个人未签名交付证据包。
+- 进展：2026-09-15，用户先通过 D-012 将任务收口为个人未签名交付验证，通过 D-013 指定当前 `TIGER` 且 SAC 状态为 0，并通过 D-015 将产品效果验收延期。同日 T-022/T-037 completed 后，release-engineer-windows-01 在当前主机完成 T-038。最终包源/验证器提交为 `bd9eb97a3b538550790d340b6117362184ee65f2`，ZIP 为 44,740,342 字节、SHA-256 `2CC3F8B4AC5A6BC4B3EE8CC42C8305094F372A9E16F9DCAF937B59872FF8C3E6`；相同 OutputRoot 连续两次生成一致。完整事务、无参数正常 GUI 首启、App/Worker smoke、T-022 Release 核心工作流、repair/rollback/installed validate/回滚后 smoke/uninstall 和根外用户数据保留均实际通过，策略状态前后为 0。修复前 Worker 在重定向 stdout 时 exit 0 但 marker 丢失，已显式 flush、重建包并以无重试 smoke 通过；Qt Test harness 的两次失败也保留在结构化证据中。`productEffectEvaluation=not-evaluated(deferred-to-personal-use-feedback)`，不外推 SAC/WDAC、干净 Windows、产品效果或发布资格。
+- 成果与验证证据：[A-035 0.1](artifacts/A-035-windows-personal-unsigned-delivery-validation.md)、[T-038 验证摘要](evidence/T-038/verification-summary.md)、[TIGER 机器可读证据](evidence/T-038/tiger-personal-delivery-20260915.json)、[A-033 0.2](artifacts/A-033-windows-unsigned-deployment-and-transaction-pipeline.md)、[A-034 0.1](artifacts/A-034-t022-engineering-e2e-fault-recovery-quality-gates.md)及 `tests/release/Test-PersonalDelivery.ps1`。完整原始证据位于被忽略的 `out/evidence/T-038/`，冻结生成物位于 `out/release/T-038/`。
+- 阻塞与下一位行动人：T-038 在 D-012/D-013/D-015 范围内无阻塞并已完成；包继续为 `unsigned-engineering`、`candidateEligible=false`。H-010 仍由发起人 architect-01 核对并决定关闭，项目级汇总由 project-manager-01 刷新；后续个人试用反馈若发现问题，应另建缺陷/任务。最低 Windows、正式 H.264/AAC/容器、VC Runtime、其他主机和 SAC/WDAC 兼容仍未评估。
 - 更新日期：2026-09-15。
 
 ## T-037：建立 Windows 个人未签名部署与事务安装流水线
