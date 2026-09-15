@@ -2,19 +2,27 @@ if(NOT DEFINED PRIMARY_EXE OR NOT DEFINED FALLBACK_EXE OR NOT DEFINED FALLBACK_I
     message(FATAL_ERROR "PRIMARY_EXE, FALLBACK_EXE and FALLBACK_INPUT are required")
 endif()
 
+get_filename_component(_primary_name "${PRIMARY_EXE}" NAME_WE)
+set(_report "$ENV{TEMP}/${_primary_name}-qtest.txt")
+file(REMOVE "${_report}")
+
 execute_process(
-    COMMAND "${PRIMARY_EXE}"
+    COMMAND "${PRIMARY_EXE}" -o "${_report},txt"
     RESULT_VARIABLE _result
     OUTPUT_VARIABLE _stdout
     ERROR_VARIABLE _stderr
     TIMEOUT 20
 )
-set(_combined "${_stdout}\n${_stderr}")
+set(_report_text "")
+if(EXISTS "${_report}")
+    file(READ "${_report}" _report_text)
+endif()
+set(_combined "${_report_text}\n${_stdout}\n${_stderr}")
 string(STRIP "${_combined}" _combined_stripped)
 
 if(_result EQUAL 0)
     if(NOT _combined_stripped STREQUAL "")
-        message(STATUS "Generated Qt test smoke passed")
+        message(STATUS "Generated Qt test smoke passed:\n${_report_text}")
         return()
     endif()
     if(NOT "$ENV{SPACE_RHYTHM_ALLOW_WDAC_FALLBACK}" STREQUAL "1")
