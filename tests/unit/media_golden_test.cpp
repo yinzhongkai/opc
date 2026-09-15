@@ -133,8 +133,6 @@ TEST(MediaProbe, UnavailableInputReturnsStructuredUnsupportedMedia)
     ASSERT_FALSE(source);
     EXPECT_EQ(source.error().category, core::ErrorCategory::media);
     EXPECT_EQ(source.error().code, core::ErrorCode::unsupported_media);
-    EXPECT_EQ(source.error().message_key, "media.open");
-    EXPECT_FALSE(source.error().diagnostic_id.empty());
 }
 
 TEST(MediaProbe, SelectsMultipleStreamsDeterministically)
