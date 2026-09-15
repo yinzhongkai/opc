@@ -488,6 +488,7 @@ set_tests_properties(qt.ui_real_workflow PROPERTIES
     LABELS "t026;qt;integration;ui;media;audio;rendering;headless;gate-g1;gate-g3;gate-g4"
     ENVIRONMENT "QT_QPA_PLATFORM=offscreen;QT_QUICK_BACKEND=software;QT_QUICK_CONTROLS_STYLE=Basic"
     ENVIRONMENT_MODIFICATION "PATH=path_list_prepend:${SPACE_RHYTHM_QT_ROOT}/bin"
+    RUN_SERIAL TRUE
     TIMEOUT 180
 )
 
