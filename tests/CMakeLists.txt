@@ -482,21 +482,38 @@ target_compile_definitions(space_rhythm_ui_integration_tests PRIVATE
 )
 add_dependencies(space_rhythm_ui_integration_tests space_rhythm_worker)
 space_rhythm_apply_build_policy(space_rhythm_ui_integration_tests ALLOW_GENERATED_WARNINGS)
-add_test(
-    NAME qt.ui_real_workflow
-    COMMAND "${CMAKE_COMMAND}"
-        -DPRIMARY_EXE=$<TARGET_FILE:space_rhythm_ui_integration_tests>
-        -DREPORT_STEM=space-rhythm-ui-integration-qtest
-        -P "${CMAKE_CURRENT_SOURCE_DIR}/cmake/RunQtTestWithReport.cmake"
+set(_space_rhythm_ui_integration_functions
+    workerResultReferencesAreVersionedAndVerifiedOutOfBand
+    realImportCompletesOffTheGuiThread
+    cancellationWaitsForWorkerTerminalAcknowledgement
+    cancelledWorkerJobDoesNotPoisonPreviewAfterReconnect
+    activeWorkerDisconnectIsRecoverableWithoutPublishingLateResults
+    dragAndSeekUsePendingTransactionsAndRejectStaleRevision
+    realImportAnalysisEditPreviewSaveAndExportPath
+    savedProjectReopensThroughTheSameVersionedBridge
+    largeProjectOpenStaysResponsiveAndFailedOpenCanRetry
 )
-set_tests_properties(qt.ui_real_workflow PROPERTIES
-    FIXTURES_REQUIRED golden-media
-    LABELS "t026;qt;integration;ui;media;audio;rendering;headless;gate-g1;gate-g3;gate-g4"
-    ENVIRONMENT "QT_QPA_PLATFORM=offscreen;QT_QUICK_BACKEND=software;QT_QUICK_CONTROLS_STYLE=Basic"
-    ENVIRONMENT_MODIFICATION "PATH=path_list_prepend:${SPACE_RHYTHM_QT_ROOT}/bin"
-    RUN_SERIAL TRUE
-    TIMEOUT 180
-)
+set(_space_rhythm_ui_integration_ctest_cases)
+foreach(_case IN LISTS _space_rhythm_ui_integration_functions)
+    set(_test_name "qt.ui_real_workflow.${_case}")
+    list(APPEND _space_rhythm_ui_integration_ctest_cases "${_test_name}")
+    add_test(
+        NAME "${_test_name}"
+        COMMAND "${CMAKE_COMMAND}"
+            -DPRIMARY_EXE=$<TARGET_FILE:space_rhythm_ui_integration_tests>
+            -DREPORT_STEM=space-rhythm-ui-integration-${_case}
+            -DTEST_FUNCTION=${_case}
+            -P "${CMAKE_CURRENT_SOURCE_DIR}/cmake/RunQtTestWithReport.cmake"
+    )
+    set_tests_properties("${_test_name}" PROPERTIES
+        FIXTURES_REQUIRED golden-media
+        LABELS "t026;qt;integration;ui;media;audio;rendering;headless;gate-g1;gate-g3;gate-g4"
+        ENVIRONMENT "QT_QPA_PLATFORM=offscreen;QT_QUICK_BACKEND=software;QT_QUICK_CONTROLS_STYLE=Basic"
+        ENVIRONMENT_MODIFICATION "PATH=path_list_prepend:${SPACE_RHYTHM_QT_ROOT}/bin"
+        RUN_SERIAL TRUE
+        TIMEOUT 180
+    )
+endforeach()
 
 qt_add_executable(space_rhythm_ui_qml_tests
     qml/quick_test_main.cpp
@@ -582,7 +599,7 @@ set(_space_rhythm_t022_fixed_tests
     qt.core_smoke
     qml.quick_smoke
     qt.ui_bridge
-    qt.ui_real_workflow
+    ${_space_rhythm_ui_integration_ctest_cases}
     qml.ui_shell
     qml.ui_shell_high_dpi
     app.qml_smoke

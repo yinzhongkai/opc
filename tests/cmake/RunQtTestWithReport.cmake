@@ -4,8 +4,13 @@ endif()
 
 set(_report "$ENV{TEMP}/${REPORT_STEM}.txt")
 file(REMOVE "${_report}")
+set(_test_arguments)
+if(DEFINED TEST_FUNCTION AND NOT TEST_FUNCTION STREQUAL "")
+    list(APPEND _test_arguments "${TEST_FUNCTION}")
+endif()
+list(APPEND _test_arguments -o "${_report},txt")
 execute_process(
-    COMMAND "${PRIMARY_EXE}" -o "${_report},txt"
+    COMMAND "${PRIMARY_EXE}" ${_test_arguments}
     RESULT_VARIABLE _result
     OUTPUT_VARIABLE _stdout
     ERROR_VARIABLE _stderr
