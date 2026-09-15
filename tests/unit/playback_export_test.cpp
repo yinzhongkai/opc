@@ -441,6 +441,40 @@ TEST(ExportTransaction, CancellationPreservesExistingTargetAndDeletesTemporary)
     EXPECT_EQ(read_text(target), "old-target");
 }
 
+TEST(ExportTransaction, ConcurrentOutputJobConflictPreservesOwnerAndExistingTarget)
+{
+    auto frozen = make_frozen(false);
+    const auto directory = test_directory("concurrent-output-conflict");
+    const auto target = directory / "existing.nut";
+    write_text(target, "old-target");
+
+    auto owner_trace = std::make_shared<EncoderTrace>();
+    auto owner_created = playback::ExportSession::create(
+        frozen,
+        target,
+        std::make_unique<InjectedEncoder>(owner_trace, FailurePoint::none));
+    ASSERT_TRUE(owner_created);
+    auto owner = std::move(owner_created.value());
+    ASSERT_TRUE(std::filesystem::exists(owner->temporary_path()));
+
+    auto contender_trace = std::make_shared<EncoderTrace>();
+    auto contender = playback::ExportSession::create(
+        frozen,
+        target,
+        std::make_unique<InjectedEncoder>(contender_trace, FailurePoint::none));
+    ASSERT_FALSE(contender);
+    EXPECT_EQ(contender.error().category, core::ErrorCategory::conflict);
+    EXPECT_EQ(contender.error().code, core::ErrorCode::history_conflict);
+    EXPECT_FALSE(contender_trace->opened);
+    EXPECT_EQ(read_text(target), "old-target");
+    EXPECT_TRUE(std::filesystem::exists(owner->temporary_path()));
+
+    owner->cancel();
+    EXPECT_EQ(owner->state(), playback::ExportSessionState::cancelled);
+    EXPECT_FALSE(std::filesystem::exists(owner->temporary_path()));
+    EXPECT_EQ(read_text(target), "old-target");
+}
+
 TEST(ExportTransaction, DiskFailureAndEncoderFailurePreserveExistingTarget)
 {
     for (const auto [name, error] : std::vector<std::pair<std::string, core::ErrorInfo>>{
