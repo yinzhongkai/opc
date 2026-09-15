@@ -41,16 +41,16 @@
 
 ## T-036：制定 Windows 发布输入、许可证与 SBOM 计划
 - 负责人：release-engineer-windows-01
-- 状态：todo
+- 状态：completed
 - 授权来源与日期：本会话用户于 2026-09-09 要求补充系统架构师判断的新增成员及成员任务并提交。
 - 目标与范围：定义发布候选输入、部署布局、依赖/SBOM/许可证材料、安装事务、签名隔离和干净环境验证计划；不作法律结论，不接触凭据，不执行生产发布。
 - 输入与依赖：D-004～D-008，A-004 0.5、A-005 0.3、A-006 0.1 WP-10、A-009 0.1、A-011 0.1；可与实现任务并行。
 - 优先级：未设定（架构建议：立即启动，以提前暴露分发风险）。
 - 完成条件与确认方式：列出源提交、构建预设、工具链、依赖、测试和版本冻结输入；定义私有部署、安装/升级/卸载/回滚、用户数据、缓存和日志边界；建立 Qt/FFmpeg/OpenCV/FFT/音色/模型/安装器许可证与 SBOM 字段；列出签名、最低 Windows 和渠道待决定项；形成版本化计划并自查。
-- 进展：任务及 H-010 已登记，等待负责人接收。
-- 成果与验证证据：[A-011 0.1 第 2～6 节](artifacts/A-011-complete-mvp-engineering-staffing-and-task-plan.md)；实际发布计划暂无。
-- 阻塞与下一位行动人：无技术前置阻塞；release-engineer-windows-01 接收 H-010 后执行。
-- 更新日期：2026-09-09。
+- 进展：2026-09-14，release-engineer-windows-01 按用户指令完成会话初始化并接收 H-010；形成 A-032 0.1，覆盖发布输入冻结、私有依赖布局、安装/升级/卸载/回滚和用户数据边界、SBOM/许可证字段、签名隔离、干净 Windows 矩阵及待确认项。实际运行当前 Release 安装阶段：`windeployqt` 成功生成闭包，严格 App smoke 以 `0xC0E90002` 失败；Code Integrity 3033/3077 将根因定位到未签名 `Qt6QmlMeta.dll` 不满足 `VerifiedAndReputableDesktop` 策略。已完成不修改策略/白名单/签名的受控取证和 `windeployqt` 缩减 dry-run。
+- 成果与验证证据：[A-032 0.1](artifacts/A-032-windows-release-input-license-sbom-plan.md)、[T-036 可复核摘要](evidence/T-036/verification-summary.md)；完整机器日志位于被忽略的 `out/evidence/T-036/`。
+- 阻塞与下一位行动人：T-036 计划完成条件已满足。T-037 可由 release-engineer-windows-01 在 unsigned 边界内继续；T-038/严格 Release 需要用户协调主机策略管理员完成 H-015，并确认最低 Windows、正式格式/H.264 后端、安装器、签名主体/证书和渠道。
+- 更新日期：2026-09-14。
 
 ## T-035：验证屏上/离屏一致性、GPU 降级与渲染性能
 - 负责人：graphics-engineer-qt-scenegraph-01
