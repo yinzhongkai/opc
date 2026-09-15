@@ -1,5 +1,44 @@
 # 项目任务
 
+## T-042：从新工程根重建并验证个人未签名交付包
+- 负责人：release-engineer-windows-01
+- 状态：todo
+- 授权来源与日期：2026-09-15，本会话用户明确要求在 `projects/space-rhythm/` 下新建独立目录保存完整产品工程；project-manager-01 依据 D-016 将发布闭环复验纳入迁移计划。
+- 目标与范围：在 T-040/T-041 完成后，从 `projects/space-rhythm/workspace/` 新工程根重建确定性 `unsigned-engineering` 包，验证发布脚本、清单路径、安装事务、正常首启、App/Worker smoke 和核心工作流仍可执行；不修改 D-012/D-013/D-015 的个人使用边界，不批准公开或生产发布。
+- 输入与依赖：T-040、T-041 completed；D-012、D-013、D-015、D-016 confirmed；A-033～A-035；迁移前冻结包和证据只读保留。
+- 优先级：高；位于工程迁移关键路径末端。
+- 完成条件与确认方式：从新工程根生成包和机器可读输入清单；连续两次同输入归档一致；当前 `TIGER` 完成安装、repair、rollback、uninstall、用户数据保留、正常 GUI 首启、App/Worker smoke 和核心工作流；所有路径均指向新工程根且没有依赖根目录旧 `src/tests/tooling/docs/cmake`；输出版本化证据并保持 `candidateEligible=false` 与全部延期未评估边界；负责人自查。
+- 进展：任务已登记，等待 T-040/T-041。
+- 成果与验证证据：待负责人形成迁移后发布证据；迁移前基线为 A-033 0.2、A-034 0.1、A-035 0.1。
+- 阻塞与下一位行动人：计划依赖尚未完成；T-041 完成后由 release-engineer-windows-01 执行。
+- 更新日期：2026-09-15。
+
+## T-041：在新工程根独立复验构建、测试和路径隔离
+- 负责人：tester-cpp-qt-01
+- 状态：todo
+- 授权来源与日期：2026-09-15，本会话用户明确要求在 `projects/space-rhythm/` 下新建独立目录保存完整产品工程；project-manager-01 依据 D-016 将独立回归纳入迁移计划。
+- 目标与范围：独立确认迁移后的工程从 `projects/space-rhythm/workspace/` 配置、构建和测试，既有公开契约、端到端、故障恢复及路径隔离不因目录变化退化；不替开发修复迁移缺陷，不重开已取消的 T-029。
+- 输入与依赖：T-040 completed；D-016 confirmed；A-016、A-017、A-034；迁移前 T-022 三 preset 166/166 基线。
+- 优先级：高；位于 T-040 与 T-042 之间。
+- 完成条件与确认方式：从新工程根以干净跟踪工作树执行 Windows x64 Debug、CI/RelWithDebInfo、Release 三套统一入口；核对 CTest/JUnit、Qt/QML、真实 UI/Worker、媒体、存储、取消和恢复结果；检查测试临时目录、fixture、生成清单及证据路径不写回仓库根旧工程位置；记录失败、修正归属、测试数量变化和未评估边界，形成版本化证据并由负责人自查。
+- 进展：任务已登记，等待 T-040。
+- 成果与验证证据：待负责人形成迁移后独立复验证据；迁移前基线为 A-034 0.1。
+- 阻塞与下一位行动人：计划依赖尚未完成；T-040 完成后由 tester-cpp-qt-01 执行。
+- 更新日期：2026-09-15。
+
+## T-040：将完整产品工程根迁入项目目录
+- 负责人：build-engineer-windows-qt-01
+- 状态：todo
+- 授权来源与日期：2026-09-15，本会话用户确认仍使用 `opc` 仓库，并要求在 `projects/space-rhythm/` 下新建独立目录保存完整工程源码；project-manager-01 依据已确认范围登记执行任务。
+- 目标与范围：新建 `projects/space-rhythm/workspace/`，使用保留 Git 历史的移动，将根 `CMakeLists.txt`、`CMakePresets.json`、`vcpkg.json`、`cmake/`、`src/`、`tests/`、`tooling/` 和工程 `docs/` 迁入其中，修订 CMake、preset、Qt/QML、测试、发布脚本、CI 和文档中的有效路径，使该目录成为唯一产品工程根；不修改产品行为或框架规则。
+- 输入与依赖：D-016 confirmed；当前 HEAD 与迁移前 T-022/T-038 证据；根工程入口、`.github/workflows/windows-x64.yml`、`.gitignore`；现有 Qt 6.11.2/vcpkg/MSVC 基线。
+- 优先级：高；当前迁移关键路径首项。
+- 完成条件与确认方式：通过 `git mv` 或等价保留历史的方式完成全部跟踪工程文件迁移；仓库根不再保留产品 `src/tests/tooling/docs/cmake` 或产品 CMake/vcpkg 入口；`.github/workflows` 保留根位置但工作目录指向 `projects/space-rhythm/workspace/`；所有相对路径、本地 Markdown 链接、QML import、CMake source/binary 路径、测试 fixture、发布输入与 Git source-delta 检查均更新；未来构建/测试/发布输出进入 `projects/space-rhythm/workspace/out/`；不得移动或删除根 `out/` 历史证据、冻结包、未跟踪 `package/` 或框架 `scripts/__pycache__/`；至少完成三 preset 配置/编译和构建工程自查，形成版本化迁移说明与证据。
+- 进展：任务已登记，尚未由负责人启动；盘点基线为 `cmake/` 2 个、`docs/` 2 个、`src/` 67 个、`tests/` 67 个、`tooling/` 11 个跟踪文件，另有根 CMake/preset/vcpkg 入口和 1 个仓库级 Windows 工作流。
+- 成果与验证证据：待负责人形成迁移说明、文件映射、路径审计和构建证据；迁移前提交为 `9de4719`。
+- 阻塞与下一位行动人：无前置阻塞。下一位行动人为 build-engineer-windows-qt-01，先接收 H-018 并执行本任务；完成后移交 tester-cpp-qt-01 执行 T-041。
+- 更新日期：2026-09-15。
+
 ## T-039：形成 T-029 所需的视频产品评估输入
 - 负责人：product-manager-01
 - 状态：completed
