@@ -37,6 +37,7 @@
 | A-031 | [T-029 视频产品评估输入与用户确认清单](A-031-t029-video-product-evaluation-input.md) | product-manager-01 | T-039、H-013、H-017 | 0.5 | approved | D-014 confirmed；个人单用户验收协议已落实，真实 VFR、E-*/P-* 与 Windows 门禁未放宽，实际证据仍待 T-029 |
 | A-032 | [Windows 发布输入、许可证与 SBOM 计划](A-032-windows-release-input-license-sbom-plan.md) | release-engineer-windows-01 | T-036 | 0.1 | draft | 尚无；已定位 Qt6QmlMeta/WDAC-SAC 阻塞并形成 T-037/T-038 门禁 |
 | A-033 | [Windows 个人未签名部署与事务安装工程流水线](A-033-windows-unsigned-deployment-and-transaction-pipeline.md) | release-engineer-windows-01 | T-037 | 0.2 | draft | D-012/D-013 confirmed；仅个人未签名范围，当前 TIGER SAC-off 验证通过，不含 SAC/WDAC 兼容声明 |
+| A-034 | [T-022 工程端到端、故障恢复与质量门禁证据](A-034-t022-engineering-e2e-fault-recovery-quality-gates.md) | tester-cpp-qt-01 | T-022 | 0.1 | draft | 三 preset 各 166/166 工程 oracle pass；产品效果、自然度、真实 VFR、正式产品性能均 deferred/not-evaluated |
 
 ## 正文元信息样式（不是真实成果）
 
