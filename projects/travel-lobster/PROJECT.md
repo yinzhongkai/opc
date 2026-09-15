@@ -38,6 +38,7 @@
 成员当前字段以各成员文件与 [TEAM.yaml](TEAM.yaml) 为准，此处只记录配置变更事实。
 
 - 2026-09-15：用户在超级管理员会话中要求创建产品经理、规划师、作者三名成员并分别提交。创建成员 `product-manager`（岗位 product-manager，首名该岗位成员，使用岗位 ID），配置文件 `members/product-manager.yaml`，已登记 TEAM。——框架超级管理员
+- 2026-09-15：同上授权。创建成员 `planner`（岗位 planner，首名该岗位成员，使用岗位 ID），配置文件 `members/planner.yaml`，已登记 TEAM，并为 planner 岗位配置项目补充知识 `travel-planning`。——框架超级管理员
 
 ## 当前资料
 
