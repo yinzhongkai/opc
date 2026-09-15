@@ -90,6 +90,7 @@ unsigned engineering output.
 This unsigned output is always named and marked `unsigned-engineering` and is
 never candidate-eligible. D-012/D-013 remove a separate GUI installer, trusted
 signing and SAC/WDAC compatibility from T-037's personal-use completion gates.
-Minimum Windows, VC Runtime redistribution, product codec/content decisions,
-T-022 and current-host T-038 remain separate subsequent work; this bundle does
-not satisfy or weaken them.
+Minimum Windows, VC Runtime redistribution and product codec/content decisions
+remain separate work. T-022 is complete; each delivery package still requires
+the current-host T-038 validation, and bundle creation does not satisfy or
+weaken that gate.
