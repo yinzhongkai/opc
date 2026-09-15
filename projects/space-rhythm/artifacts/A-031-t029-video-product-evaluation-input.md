@@ -4,14 +4,14 @@
 - 成果 ID：A-031
 - 负责人：product-manager-01
 - 关联任务：T-039；供 T-029、T-022 使用
-- 版本：0.4
-- 更新日期：2026-09-14
+- 版本：0.5
+- 更新日期：2026-09-15
 - 状态：approved
 - 适用范围：第一阶段“视频到可编辑节奏音轨”主流程的代表产品数据、人工标注、自然度主观评估及经典视频算法效果/性能门禁输入；不执行算法评估，不批准学习模型或生产发布。
-- 来源及输入版本：本会话用户于 2026-09-14 的直接授权与逐项确认；D-001～D-011 confirmed；A-002 0.2 approved；A-011 0.1、A-016 0.1、A-028 0.2、A-029 0.1、A-030 0.3；H-013、`product-dataset-manifest-v2.json`、`execution-readiness-v3.json`。
-- 批准依据：0.3 由 D-009、D-010 confirmed 批准。0.4 根据 execution-readiness-v3 的实际 CFR 结果拆出独立真实 VFR 原始素材技术集，并以双 gate 保持 D-009 的 VFR 数量、效果和性能要求；用户于 2026-09-14 回复“采用”，D-011 confirmed。
-- 协议版本：`productEvaluationInputVersion=0.3.0`
-- 版本记录：2026-09-14，0.2，按 D-009 写入已确认的 B 站来源清单与分区、基准机实测元组、运行条件、逐项门槛和总 gate 规则；0.1 为首次方法稿。2026-09-14，0.3，按 H-013 的实际获取/probe 审计，在同类别和分区内替换 4 个超窗来源，补足声明层 `slow_motion` 配额并指定 3 个 VFR 探测目标；同日由 D-010 确认。2026-09-14，0.4，根据 execution-readiness-v3 已证明三个目标平台流均为 CFR 的事实，保留已确认的 40 条 B 站产品主集，另建真实 VFR 原始素材技术鲁棒性集；同日由 D-011 确认。
+- 来源及输入版本：本会话用户于 2026-09-14～2026-09-15 的直接授权与逐项确认；D-001～D-014 confirmed；A-002 0.2 approved；A-011 0.1、A-016 0.1、A-028 0.2、A-029 0.1、A-030 0.3；H-013、H-017、`product-dataset-manifest-v2.json`、`execution-readiness-v3.json`。
+- 批准依据：0.3 由 D-009、D-010 confirmed 批准；0.4 由 D-011 confirmed 批准独立真实 VFR 技术集和双 gate。0.5 依据用户于 2026-09-15 确认的 D-014，将本阶段主观评审改为 `personal-single-user-acceptance`；只替换多人角色、评分份数和独立复核/裁决要求，不修改真实 VFR、E-*/P-* 数值或 Windows 基准门禁。
+- 协议版本：`productEvaluationInputVersion=0.4.0`
+- 版本记录：2026-09-14，0.2，按 D-009 写入已确认的 B 站来源清单与分区、基准机实测元组、运行条件、逐项门槛和总 gate 规则；0.1 为首次方法稿。2026-09-14，0.3，按 H-013 的实际获取/probe 审计，在同类别和分区内替换 4 个超窗来源，补足声明层 `slow_motion` 配额并指定 3 个 VFR 探测目标；同日由 D-010 确认。2026-09-14，0.4，根据 execution-readiness-v3 已证明三个目标平台流均为 CFR 的事实，保留已确认的 40 条 B 站产品主集，另建真实 VFR 原始素材技术鲁棒性集；同日由 D-011 确认。2026-09-15，0.5，按 D-014 将五人独立评审改为用户本人 `USER-01` 的个人单用户验收，固定人工参考与盲评隔离、逐片完整性、单用户聚合和不可外推标记；同日由用户授权落实。
 
 ## 1. 输入状态与不可替代边界
 
@@ -20,8 +20,9 @@
 | 输入 | 本版本状态 | 可供 T-029 使用的范围 |
 |---|---|---|
 | 代表视频集要求与 manifest 字段 | `product-defined` | 可据此收集和审计真实产品视频 |
-| 人工标注、复核与修正计量协议 | `product-defined` | 可据此制作标注工具/文件并培训标注者 |
+| 个人单用户人工参考与修正计量协议 | `confirmed-protocol` | D-014 固定 `USER-01`，取消独立复核/裁决前置；可据此制作工具和记录文件 |
 | “卡点自然” rubric、1～5 尺度和播放条件 | `product-defined` | 可据此构造盲评流程并保存原始评分 |
+| 个人单用户评分完整性 | `confirmed-missing-actual-records` | 主集和 VFR 技术集每条 final 均须 `USER-01` 的 1 份有效评分且不允许缺失；当前尚未执行 |
 | 40 条 B 站代表产品主集 | `confirmed-and-probed` | D-010 的 4 个替换来源及原 36 条均已获取，结构配额通过；实际为 CFR 40、VFR 0，不能承担 VFR gate |
 | 独立真实 VFR 原始素材技术集 | `confirmed-missing-actual-media` | 第 8.2 节的准入、配额、分区和证据已由 D-011 确认；尚无实际原始素材/hash/probe，`vfrRobustnessGate=not-evaluated` |
 | 基准 Windows 硬件与运行条件 | `confirmed` | 按第 8.3 节复核实际测量签名 |
@@ -80,17 +81,17 @@ D-011 已确认以上拆分。非 VFR 的 18 个视觉/语义切片仍须在 40 
 | `probeVersionAndDigest` | FFmpeg/探测器版本及规范探测摘要 hash |
 | `privacyAndDistribution` | 是否含人脸、私人场所或敏感信息；证据能否公开 |
 
-## 3. 人工事件标注与复核协议
+## 3. 个人单用户人工参考与修正协议
 
 ### 3.1 角色与顺序
 
-1. 标注负责人先冻结媒体 manifest，不运行当前算法结果给标注者看。
-2. 初标者在静音视频上独立标注可见事件，不看算法候选、置信度或音色结果。
-3. 不同人员担任复核者，逐项执行 `accept|modify|reject`，并检查明确负例区间。
-4. 初标与复核不一致时保留双方原始版本，由指定裁决者依据本协议形成 `adjudicated` 版本；不得直接覆盖原始意见。
-5. `adjudicated` 标注 hash 冻结后，算法才能在对应分区运行。`final_evaluation` 的标注在参数和映射冻结后才用于匹配与汇总。
+1. 执行人先冻结媒体 manifest、分区和窗口，建立 `reference_authoring` 会话；不得向 `USER-01` 展示当前算法候选、置信度、音色结果或任何历史评分。
+2. `USER-01` 在静音视频上制作人工参考，标注可见事件、节奏作用和明确负例。允许在同一参考制作会话内自查并执行 `accept|modify|reject`，但必须保留初始版本、修改日志和最终版本，不得覆盖来源记录。
+3. D-014 取消独立复核者与独立裁决者前置。最终人工参考标记为 `single_user_reference`，不能命名为独立复核或多人裁决结果；对应角色字段按第 3.3 节明确记为不适用。
+4. `single_user_reference` 的媒体、标注协议、事件时间线和 hash 冻结后，算法才能在对应分区运行。`final_evaluation` 的参考在参数和映射冻结后才用于匹配与汇总。
+5. 人工参考制作、自然度盲评和人工修正使用不同会话 ID。`USER-01` 完成参考制作并关闭其界面后才能进入随机化盲评；同一片段须先完成盲评，再进入会暴露 `classic` 事件来源的人工修正会话。
 
-正式结果必须记录匿名角色 ID、是否属于目标用户型创作者、培训/校准版本和利益冲突；算法实现者不能独自充当最终标注、复核和自然度评审三种角色。评审人数和目标用户构成由 D-009 与数值门槛一起确认。
+正式结果必须记录 `acceptanceScope=personal-single-user-acceptance`、固定匿名角色 ID `USER-01`、是否属于目标用户型创作者、培训/校准版本、各会话起止时间和利益冲突。`USER-01` 同时承担参考制作、主观盲评和人工修正，因此存在 D-014 已接受的记忆、偏好与确认偏差；会话隔离和随机化只能降低而不能消除该风险，结果不得表述为独立多人证据。
 
 ### 3.2 事件语义
 
@@ -103,20 +104,23 @@ D-011 已确认以上拆分。非 VFR 的 18 个视觉/语义切片仍须在 40 
 
 ### 3.3 标注字段与时间规则
 
-每项至少包含 A-030 所需字段：`annotationId`、`clipId`、`kind`、`timeNs`、`durationNs`、`matchWindowBeforeNs`、`matchWindowAfterNs`、`annotationVersion`、`annotatorAnonymousId`、`reviewerAnonymousId`。另增加：
+每项至少包含 A-030 所需字段：`annotationId`、`clipId`、`kind`、`timeNs`、`durationNs`、`matchWindowBeforeNs`、`matchWindowAfterNs`、`annotationVersion`、`annotatorAnonymousId=USER-01`。另增加：
 
 - `boundaryOrMotionOrActionClass`；
 - `rhythmRole`；
 - `uncertaintyReasonToken`；
-- `reviewDecision` 与 `adjudicatorAnonymousId`；
+- `selfCheckDecision=accept|modify|reject` 与 `referenceStatus=single_user_reference`；
+- `referenceAuthorAnonymousId=USER-01`、`referenceAuthoringSessionId`；
+- `reviewerAnonymousId=null(reason=single_user_scope)`、`adjudicatorAnonymousId=null(reason=single_user_scope)`；
+- `acceptanceScope=personal-single-user-acceptance`；
 - `sourceFrameTimeNs`、`sourceDecodeOrdinal`；
-- `annotationProtocolVersion=0.1.0`。
+- `annotationProtocolVersion=0.2.0`。
 
 所有时间来自媒体层真实 `timeNs`，标注工具吸附到实际显示帧并保存 `decodeOrdinal`；禁止用 `frameIndex/nominalFps` 反推。前后匹配窗口由画面本身的可定位精度确定并写理由，不得根据算法误差事后放宽。标注规范串按 A-028 的 kind/time/ID 规则排序并计算 SHA-256。
 
 ### 3.4 人工修正量
 
-标注冻结后，由目标用户型评估者在正常产品时间线中修正经典算法结果，系统记录原始候选、最终事件和完整操作日志：
+盲评完成后，由 `USER-01` 在单独的正常产品时间线会话中修正经典算法结果，系统记录原始候选、最终事件和完整操作日志：
 
 - `add`：最终保留的人工事件没有同 kind 可匹配候选；
 - `delete`：算法候选在最终时间线被移除；
@@ -140,24 +144,25 @@ D-011 已确认以上拆分。非 VFR 的 18 个视觉/语义切片仍须在 40 
 
 2 分表示介于 1 与 3 之间，4 分表示介于 3 与 5 之间。`overallNaturalness` 使用同一 1～5 尺度，回答“作为目标用户，我认为这条卡点节奏整体听起来有多自然”；它不由五个维度自动平均生成。`directExportReadiness` 另记录 `direct_export|minor_edit|major_edit|unusable`。
 
-D-009 已确认聚合和通过阈值；仍必须保存逐评审者、逐片段、逐版本原始值，同时报告分布、中位数、四分位数和 `N/A` 比例，不得只留通过率。
+D-009 已确认聚合和通过阈值；D-014 只把评审人数改为单用户，不修改任何评分锚点或数值门槛。必须保存 `USER-01` 的逐片段、逐版本原始值；overall 与 slice 的中位数、四分位数、低分率、`N/A` 比例和直接导出占比均在有效 final 片段上聚合，不对一个人的评分复制、加权或伪造成多人票。评审者间一致性及任何需要两个以上真人的统计固定报告为 `unavailable(reason=single_reviewer_scope)`，不进入通过补偿。
 
 ## 5. 播放与评审条件
 
 ### 5.1 自然度盲评
 
-- 每个片段生成 `classic` 和 `human_reference` 两个试听版本；后者来自同一真实产品视频的裁决后人工事件时间线，不是合成 golden。两者使用完全相同的固定音色组、事件到音色映射、混音、响度和导出链，只改变事件时间线。
-- 隐藏算法名称、置信度、时间线、事件标记和文件名；版本顺序和片段顺序随机化，随机种子写入证据。评审者不得在评分前查看答案或互相讨论。
-- 画面完整播放，音频开启，不允许拖动或逐帧查看。每个版本先播放一次，评审者可主动重播最多两次；实际播放次数必须记录。
+- 产品主集与真实 VFR 技术集的每条 `final_evaluation` 片段都生成 `classic` 和 `human_reference` 两个试听版本；后者来自该片段已冻结的 `single_user_reference`，不是合成 golden。两者使用完全相同的固定音色组、事件到音色映射、混音、响度和导出链，只改变事件时间线。
+- 盲评工具隐藏算法名称、置信度、时间线、事件标记、原始文件名、参考制作记录和先前评分；版本顺序和片段顺序在会话开始前随机化，随机种子写入证据。`USER-01` 不得在盲评会话中打开人工参考或答案。
+- 画面完整播放，音频开启，不允许拖动或逐帧查看。每个版本先播放一次，`USER-01` 可主动重播最多两次；实际播放次数必须记录。
 - 同一评审会话使用同一设备、系统音量、应用音量、显示模式和环境。不得在两版本之间改变音量、耳机/扬声器或显示刷新设置。
-- 评分紧随播放完成，不显示他人答案。校准片段只用于理解尺度，不计入正式结果。
-- 每个版本分别填写五维评分、总体自然度、直接导出意愿和可选短原因；成对呈现时再记录 `A|B|tie` 偏好，偏好不覆盖单版本评分。
+- 评分紧随播放完成，不显示版本身份、参考制作记录或先前答案。校准片段只用于理解尺度，不计入正式结果。
+- `USER-01` 对每个版本分别填写五维评分、总体自然度、直接导出意愿和可选短原因；成对呈现时再记录 `A|B|tie` 偏好，偏好不覆盖单版本评分。
+- 每条 final 必须形成 1 组且仅 1 组正式有效评分，不允许缺失或以均值插补。技术故障或中断导致无效时，旧记录须保留 `invalidReasonToken`，并以新 `trialId` 重新完整播放该片段的一对版本；不得从多次有效结果中挑选有利评分。
 
-每次会话必须记录：应用/算法/参数/音色映射/数据集/rubric 版本及 hash，Windows edition/build，显示器刷新率与缩放，音频设备与驱动/采样率，系统和应用音量，是否耳机，房间环境，评审者匿名 ID、目标用户画像、随机种子、开始结束时间和中断。评审人数、构成和缺失处理按第 8.4 节执行；实际显示和音频设备在首次会话前冻结为运行证据。
+每次会话必须记录：`acceptanceScope=personal-single-user-acceptance`、应用/算法/参数/音色映射/数据集/rubric 版本及 hash，Windows edition/build，显示器刷新率与缩放，音频设备与驱动/采样率，系统和应用音量，是否耳机，房间环境，`reviewerAnonymousId=USER-01`、目标用户画像、随机种子、开始结束时间、中断、`trialId` 与有效性。评分完整性按第 8.4 节执行；实际显示和音频设备在首次会话前冻结为运行证据。
 
 ### 5.2 人工修正评估
 
-人工修正与盲评分开进行。评估者看到正常产品工作区、时间线和事件来源，使用冻结的 `classic` 结果从头修到自己认为可直接导出的状态。开始前重置项目，禁止复制另一位评估者结果；结束时保存最终 revision、操作日志、活跃编辑时间和项目 hash。没有达到可直接导出时也必须保存当前事实并选择 `major_edit|unusable`，不得强迫完成。
+人工修正与盲评分开进行。`USER-01` 只有在对应片段的正式盲评提交后，才能进入正常产品工作区查看事件来源并使用冻结的 `classic` 结果从头修到自己认为可直接导出的状态。开始前重置项目，不得加载人工参考时间线或先前修正结果；结束时保存最终 revision、操作日志、活跃编辑时间和项目 hash。没有达到可直接导出时也必须保存当前事实并选择 `major_edit|unusable`，不得强迫完成。
 
 ## 6. 效果门槛结构
 
@@ -206,9 +211,9 @@ F1 作为 precision/recall 的派生诊断同时报告，但不允许只用一�
 
 经典算法只有在冻结的 `final_evaluation` 上实际违反至少一个已确认效果门槛、且已排除输入质量、标注分歧、媒体时间映射或错误基准环境后，才满足“可以提出可选模型方案”的必要条件。即使满足，也只允许提交收益、性能、许可、CPU/GPU、包体和部署影响比较；引入 ONNX Runtime 或模型文件仍需新决定。
 
-## 8. D-009 已确认基线、H-013 实测与 D-011 收口方案
+## 8. D-009 已确认基线、H-013 实测、D-011 收口与 D-014 个人验收
 
-用户已于 2026-09-14 对 C-1～C-3 逐项确认，并以 D-010 批准 0.3 的 4 个来源替换。execution-readiness-v3 随后证明 40 条来源全部为 CFR；三个所谓 VFR 目标的平台流和 PTS 保持代理均为 CFR。D-011 据此批准 0.4：不再根据标题寻找 VFR，改用独立真实原始素材技术集。D-009/D-010 的数量与阈值未放宽；实际 VFR 素材和 probe 缺失时不得改判为通过。
+用户已于 2026-09-14 对 C-1～C-3 逐项确认，并以 D-010 批准 0.3 的 4 个来源替换。execution-readiness-v3 随后证明 40 条来源全部为 CFR；三个所谓 VFR 目标的平台流和 PTS 保持代理均为 CFR。D-011 据此批准 0.4：不再根据标题寻找 VFR，改用独立真实原始素材技术集。2026-09-15，D-014 在个人自用范围内把主观评审改为 `USER-01` 的个人单用户验收。该变化不修改 D-009/D-011 的素材数量、真实 VFR、效果、性能或 Windows 基准门禁；实际素材、评分和测量缺失时不得改判为通过。
 
 ### 8.1 C-1 代表产品视频
 
@@ -274,7 +279,7 @@ product-manager-01 于 2026-09-14 从 B 站公开页面核验了 4 个候选的�
 | `SR-BILI-TRAVEL-007` | `BV1C8YX6uE8p`，55.402s 小于批准终点 56s | `BV1F6b86bELD` | travel / final_evaluation | 370s；30～75s | 源流 CFR；代理 CFR；PTS 保持 pass |
 | `SR-BILI-LIFE-007` | `BV16hrhBoEp7`，21.640s 小于批准终点 22s | `BV1Ts41117Hv` | life / final_evaluation | 144s；15～60s | 源流 CFR；代理 CFR；PTS 保持 pass |
 
-dataset 0.2.0 已实际恢复 40 条、`calibration/tuning/final_evaluation=4/16/20`、四类各 10 条，40/40 媒体 hash 与 4/4 PTS 保持检查通过；但实际为 CFR 40、VFR 0。`slow_motion=4/final=4` 及其余视觉/语义 slice 仍只是声明标签，须经真人裁决。B 站页面中的“手机录屏”“混合帧率”“60fps”等标题或描述不再作为 VFR 选源依据。
+dataset 0.2.0 已实际恢复 40 条、`calibration/tuning/final_evaluation=4/16/20`、四类各 10 条，40/40 媒体 hash 与 4/4 PTS 保持检查通过；但实际为 CFR 40、VFR 0。`slow_motion=4/final=4` 及其余视觉/语义 slice 仍只是声明标签，须由 `USER-01` 按第 3 节形成并冻结 `single_user_reference` 后才能作为本阶段人工参考。B 站页面中的“手机录屏”“混合帧率”“60fps”等标题或描述不再作为 VFR 选源依据。
 
 ### 8.2 D-011 确认的 C-1B 独立真实 VFR 技术鲁棒性集
 
@@ -325,28 +330,32 @@ dataset 0.2.0 已实际恢复 40 条、`calibration/tuning/final_evaluation=4/16
 
 ### 8.4 C-3 评审、数值阈值与总 gate
 
-- 评审者：5 名独立评审者，至少 3 名有短视频剪辑或卡点制作经验；算法实现者不进入正式自然度评审。
-- 有效评分：每条 `final_evaluation` 视频至少 3 份；单条最多允许缺失 1 名评审，少于 3 份时为 `not-evaluated`。
+- 验收范围：`personal-single-user-acceptance`，仅用于 D-012/D-013 的用户本人个人自用一期范围；不得宣称独立多人产品验证通过，也不得外推到其他用户、公开分发或第三方交付。
+- 评审者：固定匿名 ID `USER-01`，不再要求 5 名独立评审者或至少 3 名有剪辑经验者；人工参考制作、盲评和人工修正的角色重合必须如实记录。
+- 有效评分：产品主集和真实 VFR 技术集的每条 `final_evaluation` 视频均须取得 `USER-01` 的 1 组正式有效评分，不允许缺失、复制或插补。任一片段缺失时，对应数据集 gate 及 overall 为 `not-evaluated`。
+- 独立性统计：独立复核、独立裁决与评审者间一致性不再是本阶段前置；相关字段固定为 `not_applicable(reason=single_user_scope)` 或 `unavailable(reason=single_reviewer_scope)`，不得伪造多人统计，也不得把不可用统计当作通过证据。
 - tie：成对盲评允许 tie，tie 计入“未输”，辅助净得分按 0.5 票计算。
-- 数值阈值：使用第 6～7 节已确认的全部 `E-*` 与 `P-*` 数值、单位、比较方向和聚合方式。
+- 数值阈值：完整保留第 6～7 节已确认的全部 `E-*` 与 `P-*` 数值、单位、比较方向和聚合方式；单用户范围不构成降低阈值、删除 slice 或平均补偿的理由。
 - 判定分区：产品主集只在冻结的 20 条 `final_evaluation` 上判定代表性产品 gate；按 D-011，VFR 技术集另在其冻结的 `final_evaluation` 上判定 VFR slice gate，两个结果不混合平均。
 - 总 gate：所有必选 `E-*` 与 `P-*` 必须同时通过，不得用平均分抵消失败项；任一必测 slice 未达门槛则总体不通过。
-- `unavailable`：任一必选指标因数据不足为 `unavailable` 时，总体为 `not-evaluated`；CPU-only 路径的 GPU 时间和显存允许 `unavailable` 且不影响总 gate。
+- 真实 VFR：继续要求至少 3 条真实原始 VFR，且 final 至少 1 条；原始源流逐帧 PTS、代理保持和双数据集 AND gate 完全按第 8.2 节执行。
+- Windows 性能：继续使用第 8.3 节 `TIGER`、接通电源与 Windows 最佳性能模式、固定代理/线程、一次预热加五次正式测量；个人验收不允许用其他环境或 Wine 数值替代。
+- `unavailable`：除本节明确列为非 gate 的单评审者独立性统计外，任一必选指标因数据不足为 `unavailable` 时，总体为 `not-evaluated`；CPU-only 路径的 GPU 时间和显存允许 `unavailable` 且不影响总 gate。
 - 模型边界：经典算法失败后只能提出模型方案，不自动引入模型。
 
-本轮确认 D-011/A-031 0.4，没有运行 T-029，也没有实际 VFR 原始素材。任何 VFR 结果在 video-algorithm-engineer-cv-01 保存原始源流和代理的完整 probe/hash、裁决标注及评审证据前仍为 `not-evaluated`。
+本轮按 D-014 修订并批准 A-031 0.5，没有运行 T-029，没有代替 `USER-01` 生成评分，也没有实际 VFR 原始素材。任何 VFR 结果在 video-algorithm-engineer-cv-01 保存原始源流和代理的完整 probe/hash、`single_user_reference` 及个人盲评证据前仍为 `not-evaluated`。
 
 ## 9. 交付给 T-029 的证据包
 
-D-009～D-011 已确认；T-029 执行人应分别冻结并引用：
+D-009、D-011、D-014 已确认；T-029 执行人应分别冻结并引用：
 
 1. 本文件版本与 SHA-256；
 2. 40 条产品主集与独立 VFR 技术集各自的数据 manifest、媒体 hash、权限边界和分区 hash；
-3. 原始/复核/裁决标注文件及各自 hash；
-4. rubric、评分尺度、播放条件、音色映射和随机化 seed；
+3. `USER-01` 的初始参考、自查修改日志、冻结 `single_user_reference` 及各自 hash，并保存独立复核/裁决字段的不适用原因；
+4. rubric、评分尺度、播放条件、音色映射、随机化 seed、`trialId`、无效试次原因和参考制作/盲评分离的会话记录；
 5. 基准硬件与软件环境签名；
 6. 已确认的 `E-*`、`P-*` 数值门槛和来源；
 7. classic 的算法/参数/build hash 与逐次原始结果；
-8. 人工修正日志、逐评审者原始评分和汇总脚本版本。
+8. `USER-01` 的人工修正日志、逐片段逐版本原始评分、逐片评分完整性检查、`personal-single-user-acceptance` 标记和汇总脚本版本。
 
-任何缺项都必须保留为 `missing_confirmed_input`、`measured` 或 `not-evaluated`，不得使用合成 golden、CFR 人工造 VFR、建议值或当前实现观测补齐后宣称产品效果通过。当前真实 VFR 原始素材缺失，因此 VFR 鲁棒性门禁仍为 `not-evaluated`，不能因 0.4 已批准而视为通过。
+任何缺项都必须保留为 `missing_confirmed_input`、`measured` 或 `not-evaluated`，不得使用合成 golden、CFR 人工造 VFR、复制单用户评分、建议值或当前实现观测补齐后宣称产品效果通过。当前真实 VFR 原始素材和 `USER-01` 实际记录均缺失，因此相应门禁仍为 `not-evaluated`，不能因 0.5 已批准而视为通过。

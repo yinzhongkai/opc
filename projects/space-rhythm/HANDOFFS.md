@@ -6,12 +6,12 @@
 - 关联任务：T-039、T-029
 - 期望结果：将 D-014 准确写入 A-031 新版本：评审者固定为 `USER-01`，产品主集和真实 VFR 技术集的每条 final 均须 1 份有效评分且不允许缺失；人工参考制作与随机化盲评分开执行；取消五人构成、三名有经验、每条三份评分及独立复核/裁决前置；将结果和不适用统计明确标记为个人单用户范围。保持 D-011 的真实 VFR 配额/probe、双数据集 AND gate、既有评分尺度、E-*/P-* 数值和 Windows 基准要求不变。
 - 输入与证据：D-014 confirmed；[A-031 0.4](artifacts/A-031-t029-video-product-evaluation-input.md)；D-009～D-013；H-013、H-014。
-- 未完成事项：A-031 当前仍为 0.4，尚未由 product-manager-01 形成与 D-014 一致的新版本；A-030 和 T-029 执行证据也尚未由 video-algorithm-engineer-cv-01 基于新产品输入更新。
-- 状态：open
+- 未完成事项：product-manager-01 的 A-031 修订已完成；A-030 和 T-029 执行证据仍须由 video-algorithm-engineer-cv-01 基于 A-031 0.5 更新，`USER-01` 尚未实际制作人工参考或评分，真实 VFR 与 Windows 性能前置仍未完成。
+- 状态：accepted
 - 创建日期：2026-09-15
-- 接收反馈：暂无，等待 product-manager-01 在其成员会话接收。
-- 处理结果与证据：D-014 已由用户确认并由项目经理登记；尚未开始产品成果修订，不能把决定确认当作实际标注或评分完成。
-- 关闭或取消依据：暂无。A-031 新版本准确落实 D-014、维持未放宽边界并由 product-manager-01 提供可复核版本后关闭。
+- 接收反馈：product-manager-01 于 2026-09-15 刷新 D-014、H-017、H-013/H-014、T-029/T-039 和 A-031 0.4 后接收；处理范围仅为产品验收协议，不执行 T-029，不代写 `USER-01` 的实际记录。
+- 处理结果与证据：已形成并批准 [A-031 0.5](artifacts/A-031-t029-video-product-evaluation-input.md)，固定 `acceptanceScope=personal-single-user-acceptance`、`reviewerAnonymousId=USER-01`、参考制作/盲评/人工修正会话隔离、主集与 VFR 技术集逐条 final 各 1 组且不得缺失的评分规则，以及单评审者统计的不可用原因。第 6～7 节 E-*/P-* 数值、第 8.2 节真实 VFR `>=3/final>=1` 与逐帧 PTS/双 gate、第 8.3 节 `TIGER` Windows 性能条件均未修改。当前实际评分、真实 VFR 和正式 Windows 测量仍为 `not-evaluated`。
+- 关闭或取消依据：尚未关闭；product-manager-01 已提供可复核结果，等待发起人 project-manager-01 核对 A-031 0.5 与 D-014 后关闭。
 
 ## H-016：提供个人未签名 Windows 交付验证环境
 - 发起人：project-manager-01
