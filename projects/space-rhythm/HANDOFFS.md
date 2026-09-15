@@ -1,5 +1,18 @@
 # 行动请求与交接
 
+## H-015：为自建 Qt 与 Release 闭包提供最小 WDAC/SAC 信任路线
+- 发起人：release-engineer-windows-01
+- 目标：用户（请协调有权主机策略管理员）
+- 关联任务：T-036、T-037、T-038；同时影响 T-021/T-022 严格 Release 门禁
+- 期望结果：管理员核对 `VerifiedAndReputableDesktop` 策略 GUID `{0283ac0f-fff1-49ae-ada1-8a933130cad6}`，并二选一提供可持续的最小开发/CI 信任路线：A（首选）组织管理的非生产签名服务 + 最小 signer/publisher 规则；B 为 ACL 受控、普通构建账号不可改写的专用输出根 + 仅对该根的补充策略。变更后提供策略标识、生效时间和严格 Release 复验窗口。
+- 输入与证据：[A-032 0.1 第 8 节](artifacts/A-032-windows-release-input-license-sbom-plan.md)、[T-036 可复核摘要](evidence/T-036/verification-summary.md)、[T021-ENV-001 旧诊断](evidence/T-013/t021-env-001-verification-summary.md)。当前最新证据明确指向 `Qt6QmlMeta.dll` SHA-256 `F35EF425...681A665C`，Code Integrity 状态 `0xC0E90002`。
+- 未完成事项：不接受关闭 SAC/WDAC、全局允许用户 profile/Desktop/仓库根、对普通账号可写目录建路径规则、对每次重链接产物建易变 hash 白名单，或把 `-AllowWdacFallback`/反复重试当作验收。本成员未被授权更改系统策略或使用签名凭据。
+- 状态：open
+- 创建日期：2026-09-14
+- 接收反馈：尚无。
+- 处理结果与证据：尚无。
+- 关闭或取消依据：尚无。
+
 ## H-014：提供 T-029 独立真人证据与合规 Windows 基准运行条件
 - 发起人：video-algorithm-engineer-cv-01
 - 目标：用户
@@ -59,10 +72,10 @@
 - 期望结果：在自己的项目会话中接收本交接，先把 T-036 更新为 in_progress，形成发布输入、许可证/SBOM、安装事务、签名隔离和干净环境计划；功能闭环与决定输入就绪后依次执行 T-037/T-038，不把候选验证写成生产发布批准。
 - 输入与证据：D-003～D-008；A-004 0.5、A-005 0.4、A-006 0.1 WP-10、[A-011 0.1](artifacts/A-011-complete-mvp-engineering-staffing-and-task-plan.md)；T-036～T-038。
 - 未完成事项：最低 Windows、安装器、H.264/发布格式、签名主体/证书和渠道尚未确认；未授权时不得使用签名凭据。
-- 状态：open
+- 状态：accepted
 - 创建日期：2026-09-09
-- 接收反馈：尚未接收。
-- 处理结果与证据：暂无。
+- 接收反馈：2026-09-14，release-engineer-windows-01 已按会话协议刷新身份、岗位、有效知识、项目当前事实及本交接输入，确认在本人 scope 内接收；已将 T-036 更新为 in_progress，本轮优先处理 Qt DLL、`windeployqt` 和 WDAC/SAC 策略阻塞，不使用签名凭据或放宽生产安全策略。
+- 处理结果与证据：2026-09-14，T-036 已完成并形成 [A-032 0.1](artifacts/A-032-windows-release-input-license-sbom-plan.md)及[T-036 可复核摘要](evidence/T-036/verification-summary.md)。当前 Qt DLL 来源/哈希和 `windeployqt` 实际复制已验证，严格启动失败定位为 `VerifiedAndReputableDesktop` 对未签名 `Qt6QmlMeta.dll` 的 `0xC0E90002` 拒绝。策略管理员动作已登记为 H-015；本交接继续保持 accepted，等待 T-037/T-038 后续结果。
 - 关闭或取消依据：暂无。
 
 ## H-009：启动 Qt Scene Graph 实时图形工作流
