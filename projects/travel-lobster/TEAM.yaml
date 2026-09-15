@@ -2,4 +2,4 @@ schemaVersion: 3
 project: 'travel-lobster'
 roleKnowledge:
   planner: [travel-planning]
-members: [product-manager, planner]
+members: [product-manager, planner, writer]
