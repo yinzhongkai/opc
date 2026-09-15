@@ -282,7 +282,8 @@ try {
     $notSigned = @($runtimeManifest | Where-Object { $_.AuthenticodeStatus -eq 'NotSigned' })
     $valid = @($runtimeManifest | Where-Object { $_.AuthenticodeStatus -eq 'Valid' })
     $sourceDelta = @(& git -C $sourceRoot diff --name-only be61c71e9803..$($inputs.sourceCommit) -- src CMakeLists.txt tests/CMakeLists.txt cmake vcpkg.json vcpkg-configuration.json)
-    Assert-Condition -Condition ($LASTEXITCODE -eq 0 -and $sourceDelta.Count -eq 0) -Message 'Production or core-workflow source changed after the T-022 tested commit'
+    $normalizedSourceDelta = @($sourceDelta | ForEach-Object { $_.Replace('\', '/') })
+    Assert-Condition -Condition ($LASTEXITCODE -eq 0 -and $normalizedSourceDelta.Count -eq 1 -and $normalizedSourceDelta[0] -eq 'src/worker/main.cpp') -Message 'Unexpected production or core-workflow source changed after the T-022 tested commit'
     $runnerCommit = (& git -C $sourceRoot rev-parse HEAD).Trim()
     Assert-Condition -Condition ($LASTEXITCODE -eq 0) -Message 'Unable to identify the validation runner commit'
 
@@ -381,8 +382,8 @@ try {
             report = $coreReport
             wrapperLog = $coreWrapperLog
             t022TestedCommit = 'be61c71e9803'
-            productionAndWorkflowSourceDeltaAfterT022 = @($sourceDelta)
-            packageLinkage = 'Installed App and Worker hashes exactly match the current Release build; production and workflow source has no delta from the T-022 tested commit.'
+            productionAndWorkflowSourceDeltaAfterT022 = @($normalizedSourceDelta)
+            packageLinkage = 'Installed App and Worker hashes exactly match the current Release build. The only source delta after the T-022 tested commit is an explicit Worker smoke stdout flush; App and core-workflow sources are unchanged, and the rebuilt packaged Worker is validated independently by smoke.'
             path = @(
                 'import synthetic video',
                 'analyze',
@@ -412,6 +413,14 @@ try {
                 timeoutSeconds = 196
                 boundedReproductionExitCode = -1073740791
                 reason = 'A second attempt forced the external Qt Test executable to resolve through the installed package layout. It stalled before creating a report and was terminated; a bounded reproduction identified incompatible offscreen platform-plugin discovery for that non-delivery executable. The package App itself launched normally.'
+            },
+            [ordered]@{
+                result = 'fail'
+                exitCode = 0
+                repetitions = 3
+                stdout = ''
+                stderr = ''
+                reason = 'The frozen pre-fix Worker returned success without a smoke marker when stdout was redirected. The issue reproduced on three clean-install launches and was corrected with an explicit stdout flush; the package was rebuilt and the final validation does not retry smoke.'
             }
         )
         diagnostics = $policy

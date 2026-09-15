@@ -29,6 +29,7 @@ int main(int argc, char* argv[])
 
     if (arguments.contains(QStringLiteral("--smoke"))) {
         std::fprintf(stdout, "SPACE_RHYTHM_WORKER_SMOKE_OK Qt=%s arch=x64\n", qVersion());
+        std::fflush(stdout);
         QTimer::singleShot(0, &application, &QCoreApplication::quit);
     }
 
