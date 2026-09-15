@@ -2,4 +2,5 @@ schemaVersion: 3
 project: 'travel-lobster'
 roleKnowledge:
   planner: [travel-planning]
+  writer: [xhs-plog-creation]
 members: [product-manager, planner, writer, project-manager]

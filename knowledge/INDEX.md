@@ -23,6 +23,7 @@
 | [testing](testing.md) | 测试设计与执行 |
 | [travel-planning](travel-planning.md) | 旅行规划 |
 | [writing](writing.md) | 长篇写作与编辑 |
+| [xhs-plog-creation](xhs-plog-creation.md) | 小红书 plog 内容创作 |
 
 ## 文件约定
 
