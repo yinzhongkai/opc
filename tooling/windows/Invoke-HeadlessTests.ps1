@@ -200,6 +200,7 @@ try {
             'tests/contract/Test-GoldenMediaAudit.ps1',
             'tooling/windows/Invoke-HeadlessTests.ps1',
             'tests/cmake/RunQtCoreSmoke.cmake',
+            'tests/cmake/RunQtTestWithReport.cmake',
             'tests/unit/media_golden_test.cpp',
             'tests/golden/media/fixtures-v1.json',
             'tests/golden/media/generated/actual-hashes-and-probe-v1.json'

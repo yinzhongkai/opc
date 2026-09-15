@@ -482,7 +482,13 @@ target_compile_definitions(space_rhythm_ui_integration_tests PRIVATE
 )
 add_dependencies(space_rhythm_ui_integration_tests space_rhythm_worker)
 space_rhythm_apply_build_policy(space_rhythm_ui_integration_tests ALLOW_GENERATED_WARNINGS)
-add_test(NAME qt.ui_real_workflow COMMAND space_rhythm_ui_integration_tests)
+add_test(
+    NAME qt.ui_real_workflow
+    COMMAND "${CMAKE_COMMAND}"
+        -DPRIMARY_EXE=$<TARGET_FILE:space_rhythm_ui_integration_tests>
+        -DREPORT_STEM=space-rhythm-ui-integration-qtest
+        -P "${CMAKE_CURRENT_SOURCE_DIR}/cmake/RunQtTestWithReport.cmake"
+)
 set_tests_properties(qt.ui_real_workflow PROPERTIES
     FIXTURES_REQUIRED golden-media
     LABELS "t026;qt;integration;ui;media;audio;rendering;headless;gate-g1;gate-g3;gate-g4"
