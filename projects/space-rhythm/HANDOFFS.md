@@ -45,12 +45,12 @@
 - 关联任务：T-029
 - 期望结果：按 D-014 由匿名验收者 `USER-01` 为产品主集与真实 VFR 技术集的每条 `final_evaluation` 视频提供 1 份有效评分，人工参考制作与随机化盲评分开执行并保存原始记录/hash，结果只标记为 `personal-single-user-acceptance`。同时使确认的 `TIGER` 基准机在接通电源、Windows 最佳性能模式下允许 T-028 的同一 Release PE 原生启动，以便按一次预热 + 五次正式测量完成门禁。
 - 输入与证据：D-014 confirmed；[A-031 0.5](artifacts/A-031-t029-video-product-evaluation-input.md) approved、H-017 closed；[A-030 0.4](artifacts/A-030-video-product-evaluation-and-model-gate.md)；[T-029 最新执行就绪证据](evidence/T-029/execution-readiness-v4.json)；[TIGER 原生 Release 基线](evidence/T-029/windows-release-baseline-v1.json)。
-- 未完成事项：尚无 `USER-01` 的实际人工参考、随机化盲评或人工修正记录及 SHA-256；真实 VFR 原始素材仍由 H-013 跟踪。Windows 子条件已完成：当前 `TIGER` 在 AC Best Performance overlay、SAC=0、OpenCV 8/FFmpeg 2 线程下原生完成 T-028 Release PE 一次预热 + 五次正式测量。该 160×90 synthetic fixture 只证明主机/PE 就绪，不能替代正式 T-029 产品/VFR P-* 场景；Wine 不作为确认 Windows 基准。
-- 状态：open
+- 未完成事项：Windows 子条件已完成；`USER-01` 的实际人工参考、随机化盲评和人工修正未形成，真实 VFR 原始素材也未提供。D-015 已将这些正式产品验收输入从当前个人试用阶段取消，而非判为完成或通过。
+- 状态：cancelled
 - 创建日期：2026-09-14
 - 接收反馈：用户于 2026-09-15 明确要求在当前 `TIGER` 测试并手动关闭 SAC；同日明确本人作为唯一评审者，并在获知单人范围和外推限制后确认采用“个人单用户验收”方案。project-manager-01 只读核对 `VerifiedAndReputablePolicyState=0` 及交流电最佳性能覆盖模式。
-- 处理结果与证据：D-014/A-031 0.5 已把五人独立评审前置改为个人单用户验收。video-algorithm-engineer-cv-01 已准备 40 条逐帧真实 PTS 参考会话、40 个本地静音预览、参考/盲评/修正三阶段 UI、隐藏随机化答案表及冻结校验流程；实际记录仍须 `USER-01` 亲自完成。2026-09-15 的有效 TIGER Release 序列为 1 warmup + 5 measured，分析 wall 样本 `201162/186496/175500/174688/176782 us`、取消 P95 `2557 us`，原生视频分析单测 8/8 通过；完整环境、PE/source hash 和无效封装尝试见 windows-release-baseline-v1。真实 VFR 输入仍由 H-013 跟踪，H-014 保持 open。
-- 关闭或取消依据：暂无。
+- 处理结果与证据：D-014/A-031 0.5 已把五人独立评审前置改为个人单用户验收。video-algorithm-engineer-cv-01 已准备 40 条逐帧真实 PTS 参考会话、40 个本地静音预览、参考/盲评/修正三阶段 UI、隐藏随机化答案表及冻结校验流程。用户首次导出的 40/40 submission 的 40 条 `events` 均为空且 `modificationLog=0`，project-manager-01 未将其冻结为有效参考。2026-09-15 的有效 TIGER Release 序列为 1 warmup + 5 measured，分析 wall 样本 `201162/186496/175500/174688/176782 us`、取消 P95 `2557 us`，原生视频分析单测 8/8 通过；完整环境、PE/source hash 和无效封装尝试见 windows-release-baseline-v1。
+- 关闭或取消依据：用户于 2026-09-15 明确要求跳过该步骤、改为个人实际使用中发现问题后反馈；D-015 confirmed 后，本交接所求的实际人工参考/盲评/修正不再属于本阶段前置，故取消。已有 Windows 基线和工具保留，但不构成产品效果通过。
 
 ## H-013：替换 T-029 失效来源并恢复实际样本配额
 - 发起人：video-algorithm-engineer-cv-01
@@ -58,12 +58,12 @@
 - 关联任务：T-029、T-039
 - 期望结果：D-010 的 4 个失效来源替换须实际恢复 40 条、`calibration/tuning/final=4/16/20` 和每类 10 条；按 D-011，VFR 收口改由 40 条 B 站主集之外的独立真实原始素材技术集承担，仍须实际 `vfr>=3/final>=1`，以原始源流逐帧 PTS 和代理保持证据准入。不得依据标题猜测 VFR、静默缩短时间窗、人工制造 VFR 或由算法负责人自行换源。
 - 输入与证据：[A-031 0.4 approved](artifacts/A-031-t029-video-product-evaluation-input.md)、D-011 confirmed、[dataset 0.2.0 manifest](evidence/T-029/product-dataset-manifest-v2.json)、[execution-readiness-v3](evidence/T-029/execution-readiness-v3.json)。历史输入为 A-031 0.2（提交 `68a8c0e`）、来源可用性审计、dataset manifest v1 和 execution-readiness-v2；4 个失效来源已由 D-010/A-031 0.3 完成替换。
-- 未完成事项：D-010 的 4 个替换来源已全部获取，结构配额已恢复；但三个 VFR 目标的所选平台流和 PTS 保持代理均实测为 CFR，完整 B 站主集为 VFR 0。依据 D-011，不再继续凭 B 站标题或转码流寻找 VFR；仍须取得至少 3 条、其中 final 至少 1 条真实 VFR 原始媒体，由 T-029 执行人冻结 hash、逐帧 PTS、代理保持与分区证据。实际素材尚未提供，`vfrRobustnessGate=not-evaluated`；`slow_motion=4/final=4` 及其他语义 slice 也仍须人工裁决。
-- 状态：accepted
+- 未完成事项：D-010 的 4 个替换来源已全部获取，结构配额已恢复；但完整 B 站主集为 VFR 0，至少 3 条、其中 final 至少 1 条的真实 VFR 原始媒体从未提供，`vfrRobustnessGate=not-evaluated`。D-015 已将正式 VFR 产品验收从当前个人试用阶段取消，而非降低或判定该门禁通过。
+- 状态：cancelled
 - 创建日期：2026-09-14
 - 接收反馈：product-manager-01 于 2026-09-14 刷新 T-029、D-009、A-031 0.2、A-030 0.2 及三份媒体审计证据后接收。确认 4 个失效来源必须同类别/同分区替换；36 个已成功来源可保留。实际 VFR 不能由标题或预期标签代替，仍须由 T-029 执行人 probe。
 - 处理结果与证据：A-031 0.3 的 D-010 替换已完成实测：4 个来源均获取成功，40/40 SHA、结构分区和类别配额通过，4/4 PTS 保持检查通过；但 `GAME-004`、`TRAVEL-001`、`TRAVEL-007` 的实际源流/代理均为 CFR。用户于 2026-09-14 回复“采用”，确认 D-011 并批准 [A-031 0.4](artifacts/A-031-t029-video-product-evaluation-input.md)：保留 40 条 B 站来源为产品主集，另建至少 3 条真实 VFR 原始素材技术集（至少 1 条 final），原始源流逐帧 PTS probe 准入，两套 gate 以 AND 进入 overall。2026-09-15 用户又要求寻找影流之主等 B 站卡点视频；这些页面可作为内容参考，但现有 B 站产品主集已经 40/40 完整，平台转码流不得计入 D-011 的真实 VFR 技术集。方案已生效，但实际 VFR 原始素材仍未冻结，H-013 不关闭。
-- 关闭或取消依据：未关闭。D-011 的确认本身不等于实际配额通过；只有独立技术集已冻结不少于 3 条且 final 不少于 1 条真实 VFR 原始媒体，并由 T-029 执行人以原始源流逐帧 PTS 与代理保持证据实际判定配额通过后，product-manager-01 才可核对并关闭。
+- 关闭或取消依据：用户于 2026-09-15 明确要求跳过本阶段正式评估并改在个人实际使用中反馈问题；D-015 confirmed 后，真实 VFR 数据收集不再是当前个人试用交付前置，故取消本交接。未来重开正式 T-029 时仍须恢复 D-011 原数量和 probe 要求，不能把本次取消视为通过。
 
 ## H-012：确认 T-029 的真实产品输入与数值门槛
 - 发起人：product-manager-01
