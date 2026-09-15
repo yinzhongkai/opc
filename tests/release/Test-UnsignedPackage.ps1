@@ -8,6 +8,7 @@ param(
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
+$startedUtc = (Get-Date).ToUniversalTime().ToString('o')
 
 function Assert-Condition {
     param([Parameter(Mandatory)][bool]$Condition, [Parameter(Mandatory)][string]$Message)
@@ -68,11 +69,17 @@ Assert-Condition -Condition (Test-Path -LiteralPath $transactionTool -PathType L
     -Message 'Bundle transaction tool is missing'
 
 $inputs = Get-Content -Raw -LiteralPath (Join-Path $payload 'manifest\build-inputs.json') | ConvertFrom-Json
-Assert-Condition -Condition ($inputs.schemaVersion -eq 2) -Message 'Build input inventory schema is not version 2'
+Assert-Condition -Condition ($inputs.schemaVersion -eq 3) -Message 'Build input inventory schema is not version 3'
 Assert-Condition -Condition ($inputs.packageKind -eq 'unsigned-engineering') -Message 'Package kind is not unsigned-engineering'
 Assert-Condition -Condition ($inputs.candidateEligible -eq $false) -Message 'Unsigned package must not be candidate-eligible'
+Assert-Condition -Condition ($inputs.deliveryScope.mode -eq 'personal-unsigned') -Message 'Package scope is not personal-unsigned'
+Assert-Condition -Condition ($inputs.deliveryScope.selfOwnedWindowsOnly -eq $true) -Message 'Package is not restricted to self-owned Windows hosts'
+Assert-Condition -Condition ($inputs.deliveryScope.publicDistributionAllowed -eq $false) -Message 'Package permits public distribution'
+Assert-Condition -Condition ($inputs.deliveryScope.thirdPartyDeliveryAllowed -eq $false) -Message 'Package permits third-party delivery'
+Assert-Condition -Condition ($inputs.deliveryScope.sacWdacCompatibilityClaim -eq 'none') -Message 'Package claims SAC/WDAC compatibility'
 Assert-Condition -Condition ($inputs.securityBoundary.signaturesApplied -eq $false) -Message 'Unsigned package reports applied signatures'
 Assert-Condition -Condition ($inputs.securityBoundary.signingCredentialAccess -eq 'none') -Message 'Unsigned package reports credential access'
+Assert-Condition -Condition ($inputs.securityBoundary.sacWdacCompatibilityValidated -eq $false) -Message 'Unsigned package reports SAC/WDAC validation'
 
 $requiredComponentFields = @(
     'name', 'version', 'purl', 'sourceUrl', 'sourceCommitOrArchiveHash', 'buildConfigurationHash',
@@ -122,6 +129,8 @@ Set-Content -LiteralPath $externalSentinel -Value 'outside install and state roo
 & $transactionTool -Action Install -BundleRoot $bundle -InstallRoot $installRoot -StateRoot $stateRoot
 Assert-Condition -Condition (Test-Path -LiteralPath (Join-Path $installRoot 'bin\space-rhythm.exe')) `
     -Message 'Transaction install did not create the application'
+$appSmokeResult = $null
+$workerSmokeResult = $null
 if ($RunSmoke) {
     $oldPlatform = $env:QT_QPA_PLATFORM
     try {
@@ -132,12 +141,14 @@ if ($RunSmoke) {
             -Message "Installed App smoke failed with exit code $appExit`: $($appOutput -join [Environment]::NewLine)"
         Assert-Condition -Condition (($appOutput -join "`n") -match 'SPACE_RHYTHM_APP_SMOKE_OK Qt=6\.11\.2 arch=x64') `
             -Message 'Installed App smoke did not emit the required marker'
+        $appSmokeResult = [ordered]@{ exitCode = $appExit; output = @($appOutput) }
         $workerOutput = @(& (Join-Path $installRoot 'bin\space-rhythm-worker.exe') --smoke 2>&1)
         $workerExit = $LASTEXITCODE
         Assert-Condition -Condition ($workerExit -eq 0) `
             -Message "Installed Worker smoke failed with exit code $workerExit`: $($workerOutput -join [Environment]::NewLine)"
         Assert-Condition -Condition (($workerOutput -join "`n") -match 'SPACE_RHYTHM_WORKER_SMOKE_OK Qt=6\.11\.2 arch=x64') `
             -Message 'Installed Worker smoke did not emit the required marker'
+        $workerSmokeResult = [ordered]@{ exitCode = $workerExit; output = @($workerOutput) }
     }
     finally {
         if ($null -eq $oldPlatform) {
@@ -174,7 +185,11 @@ Assert-Condition -Condition (Test-Path -LiteralPath $externalSentinel -PathType 
     Version = $inputs.version
     SourceCommit = $inputs.sourceCommit
     CandidateEligible = $inputs.candidateEligible
+    ComputerName = $env:COMPUTERNAME
+    StartedUtc = $startedUtc
+    CompletedUtc = (Get-Date).ToUniversalTime().ToString('o')
     TestRoot = $testRootFull
+    Smoke = if ($RunSmoke) { [ordered]@{ app = $appSmokeResult; worker = $workerSmokeResult } } else { $null }
     Operations = @('validate', 'install') + $(if ($RunSmoke) { @('app-smoke', 'worker-smoke') } else { @() }) + `
         @('reject-unregistered-repair', 'repair', 'rollback', 'validate-installed', 'uninstall', 'preserve-external-data')
 } | ConvertTo-Json -Depth 5

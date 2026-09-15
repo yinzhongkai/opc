@@ -2,8 +2,9 @@
 
 `tooling/windows/Invoke-UnsignedRelease.ps1` implements the unsigned portion of
 T-037. It consumes only the configured `windows-msvc-x64-release` build and the
-pinned Qt/vcpkg roots. It does not select a production installer, access signing
-credentials, change WDAC/SAC, or approve a release candidate.
+pinned Qt/vcpkg roots. Under D-012/D-013 the result is limited to the project
+owner on self-owned Windows computers: no public distribution, third-party
+delivery, SAC/WDAC compatibility claim, signing credentials or release approval.
 
 ## Build the engineering bundle
 
@@ -44,9 +45,10 @@ Git.
 
 ## Validate the transaction boundary
 
-The bundle includes `tools/Invoke-UnsignedInstallTransaction.ps1`. It is a
-backend-neutral engineering harness, not the selected product installer. Every
-operation requires explicit, non-overlapping install and state roots:
+The bundle includes `tools/Invoke-UnsignedInstallTransaction.ps1` as the
+confirmed personal engineering delivery mechanism; a separate GUI installer is
+outside the current scope. Every operation requires explicit, non-overlapping
+install and state roots:
 
 ```powershell
 $bundle = './out/release/T-037/unsigned/space-rhythm-0.1.0-dev-unsigned'
@@ -83,11 +85,11 @@ the test independently verifies every entry in `manifest/bundle-files.sha256.csv
 the separately reported ZIP hash remains the authenticity handoff for this
 unsigned engineering output.
 
-## Remaining gates
+## Scope and subsequent gates
 
 This unsigned output is always named and marked `unsigned-engineering` and is
-never candidate-eligible. T-037 cannot finish until the authorized decision
-owners select the installer/scope/upgrade policy and VC Runtime mode and provide
-the signing inputs. H-015 still requires an organization-managed WDAC/SAC trust
-route. Minimum Windows, product codec/content decisions, T-022 and clean-machine
-T-038 also remain outside this engineering bundle.
+never candidate-eligible. D-012/D-013 remove a separate GUI installer, trusted
+signing and SAC/WDAC compatibility from T-037's personal-use completion gates.
+Minimum Windows, VC Runtime redistribution, product codec/content decisions,
+T-022 and current-host T-038 remain separate subsequent work; this bundle does
+not satisfy or weaken them.
