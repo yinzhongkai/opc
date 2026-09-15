@@ -6,12 +6,12 @@
 - 关联任务：T-039、T-029
 - 期望结果：将 D-014 准确写入 A-031 新版本：评审者固定为 `USER-01`，产品主集和真实 VFR 技术集的每条 final 均须 1 份有效评分且不允许缺失；人工参考制作与随机化盲评分开执行；取消五人构成、三名有经验、每条三份评分及独立复核/裁决前置；将结果和不适用统计明确标记为个人单用户范围。保持 D-011 的真实 VFR 配额/probe、双数据集 AND gate、既有评分尺度、E-*/P-* 数值和 Windows 基准要求不变。
 - 输入与证据：D-014 confirmed；[A-031 0.4](artifacts/A-031-t029-video-product-evaluation-input.md)；D-009～D-013；H-013、H-014。
-- 未完成事项：product-manager-01 的 A-031 修订已完成；A-030 和 T-029 执行证据仍须由 video-algorithm-engineer-cv-01 基于 A-031 0.5 更新，`USER-01` 尚未实际制作人工参考或评分，真实 VFR 与 Windows 性能前置仍未完成。
-- 状态：accepted
+- 未完成事项：H-017 范围内无未完成事项。A-030 和 T-029 执行证据仍须由 video-algorithm-engineer-cv-01 基于 A-031 0.5 更新，`USER-01` 尚未实际制作人工参考或评分，真实 VFR 与 Windows 性能前置仍未完成；这些属于 T-029、H-013/H-014 的下游执行，不阻止本交接关闭。
+- 状态：closed
 - 创建日期：2026-09-15
 - 接收反馈：product-manager-01 于 2026-09-15 刷新 D-014、H-017、H-013/H-014、T-029/T-039 和 A-031 0.4 后接收；处理范围仅为产品验收协议，不执行 T-029，不代写 `USER-01` 的实际记录。
 - 处理结果与证据：已形成并批准 [A-031 0.5](artifacts/A-031-t029-video-product-evaluation-input.md)，固定 `acceptanceScope=personal-single-user-acceptance`、`reviewerAnonymousId=USER-01`、参考制作/盲评/人工修正会话隔离、主集与 VFR 技术集逐条 final 各 1 组且不得缺失的评分规则，以及单评审者统计的不可用原因。第 6～7 节 E-*/P-* 数值、第 8.2 节真实 VFR `>=3/final>=1` 与逐帧 PTS/双 gate、第 8.3 节 `TIGER` Windows 性能条件均未修改。当前实际评分、真实 VFR 和正式 Windows 测量仍为 `not-evaluated`。
-- 关闭或取消依据：尚未关闭；product-manager-01 已提供可复核结果，等待发起人 project-manager-01 核对 A-031 0.5 与 D-014 后关闭。
+- 关闭或取消依据：project-manager-01 于 2026-09-15 复核提交 `c35f38c` 和 A-031 0.5：`USER-01`、逐条 final 一组且不允许缺失、人工参考/盲评/修正会话隔离、单用户不可外推标记及不可用统计均已落实；真实 VFR `>=3/final>=1`、逐帧 PTS/双 gate、E-*/P-* 数值和 `TIGER` Windows 基准条件保持不变，满足 H-017 期望结果，故由原发起人关闭。
 
 ## H-016：提供个人未签名 Windows 交付验证环境
 - 发起人：project-manager-01
@@ -44,12 +44,12 @@
 - 目标：用户
 - 关联任务：T-029
 - 期望结果：按 D-014 由匿名验收者 `USER-01` 为产品主集与真实 VFR 技术集的每条 `final_evaluation` 视频提供 1 份有效评分，人工参考制作与随机化盲评分开执行并保存原始记录/hash，结果只标记为 `personal-single-user-acceptance`。同时使确认的 `TIGER` 基准机在接通电源、Windows 最佳性能模式下允许 T-028 的同一 Release PE 原生启动，以便按一次预热 + 五次正式测量完成门禁。
-- 输入与证据：D-014 confirmed；[A-031 0.4](artifacts/A-031-t029-video-product-evaluation-input.md)，待 H-017 修订；[A-030 0.3](artifacts/A-030-video-product-evaluation-and-model-gate.md)；[T-029 最新执行就绪证据](evidence/T-029/execution-readiness-v3.json)。
-- 未完成事项：尚无 `USER-01` 的人工参考、随机化盲评记录及 SHA-256；A-031 尚未按 D-014 修订。当前只读查询已显示接通交流电时 `ActiveOverlayAcPowerScheme=ded574b5-45a0-4f42-8737-46345c09c238`，即 Windows Best Performance 覆盖模式，但 T-028 的同一 Release PE 尚未在该状态下完成一次预热 + 五次正式测量并保存同轮环境证据。Wine 不可作为确认 Windows 基准的替代。
+- 输入与证据：D-014 confirmed；[A-031 0.5](artifacts/A-031-t029-video-product-evaluation-input.md) approved、H-017 closed；[A-030 0.4](artifacts/A-030-video-product-evaluation-and-model-gate.md)；[T-029 最新执行就绪证据](evidence/T-029/execution-readiness-v4.json)；[TIGER 原生 Release 基线](evidence/T-029/windows-release-baseline-v1.json)。
+- 未完成事项：尚无 `USER-01` 的实际人工参考、随机化盲评或人工修正记录及 SHA-256；真实 VFR 原始素材仍由 H-013 跟踪。Windows 子条件已完成：当前 `TIGER` 在 AC Best Performance overlay、SAC=0、OpenCV 8/FFmpeg 2 线程下原生完成 T-028 Release PE 一次预热 + 五次正式测量。该 160×90 synthetic fixture 只证明主机/PE 就绪，不能替代正式 T-029 产品/VFR P-* 场景；Wine 不作为确认 Windows 基准。
 - 状态：open
 - 创建日期：2026-09-14
 - 接收反馈：用户于 2026-09-15 明确要求在当前 `TIGER` 测试并手动关闭 SAC；同日明确本人作为唯一评审者，并在获知单人范围和外推限制后确认采用“个人单用户验收”方案。project-manager-01 只读核对 `VerifiedAndReputablePolicyState=0` 及交流电最佳性能覆盖模式。
-- 处理结果与证据：D-014 已把五人独立评审前置改为个人单用户验收；这只是协议确认，`USER-01` 尚未实际制作人工参考或评分。交流电最佳性能条件当前已具备，不要求传统电源计划列表额外显示“高性能”；正式 T-028 测量仍须同轮保存环境证据并完成一次预热 + 五次正式运行。真实 VFR 输入仍由 H-013 跟踪，H-014 保持 open。
+- 处理结果与证据：D-014/A-031 0.5 已把五人独立评审前置改为个人单用户验收。video-algorithm-engineer-cv-01 已准备 40 条逐帧真实 PTS 参考会话、40 个本地静音预览、参考/盲评/修正三阶段 UI、隐藏随机化答案表及冻结校验流程；实际记录仍须 `USER-01` 亲自完成。2026-09-15 的有效 TIGER Release 序列为 1 warmup + 5 measured，分析 wall 样本 `201162/186496/175500/174688/176782 us`、取消 P95 `2557 us`，原生视频分析单测 8/8 通过；完整环境、PE/source hash 和无效封装尝试见 windows-release-baseline-v1。真实 VFR 输入仍由 H-013 跟踪，H-014 保持 open。
 - 关闭或取消依据：暂无。
 
 ## H-013：替换 T-029 失效来源并恢复实际样本配额

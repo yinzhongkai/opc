@@ -140,8 +140,13 @@ set_tests_properties(${space_rhythm_video_analysis_test_cases} PROPERTIES
 add_executable(space_rhythm_video_analysis_benchmark
     performance/video_analysis_benchmark.cpp
 )
+find_package(OpenCV 4.12.0 EXACT REQUIRED COMPONENTS core)
+target_include_directories(space_rhythm_video_analysis_benchmark SYSTEM PRIVATE
+    ${OpenCV_INCLUDE_DIRS}
+)
 target_link_libraries(space_rhythm_video_analysis_benchmark PRIVATE
     SpaceRhythm::VideoAnalysis
+    ${OpenCV_LIBS}
     Psapi
 )
 target_compile_definitions(space_rhythm_video_analysis_benchmark PRIVATE
