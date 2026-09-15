@@ -283,11 +283,14 @@ try {
     $valid = @($runtimeManifest | Where-Object { $_.AuthenticodeStatus -eq 'Valid' })
     $sourceDelta = @(& git -C $sourceRoot diff --name-only be61c71e9803..$($inputs.sourceCommit) -- src CMakeLists.txt tests/CMakeLists.txt cmake vcpkg.json vcpkg-configuration.json)
     Assert-Condition -Condition ($LASTEXITCODE -eq 0 -and $sourceDelta.Count -eq 0) -Message 'Production or core-workflow source changed after the T-022 tested commit'
+    $runnerCommit = (& git -C $sourceRoot rev-parse HEAD).Trim()
+    Assert-Condition -Condition ($LASTEXITCODE -eq 0) -Message 'Unable to identify the validation runner commit'
 
     $result = [ordered]@{
         schemaVersion = 1
         evidenceVersion = 1
         taskId = 'T-038'
+        validationRunnerCommit = $runnerCommit
         result = 'pass'
         startedUtc = $started.ToString('o')
         completedUtc = $completed.ToString('o')
@@ -385,10 +388,15 @@ try {
                 'analyze',
                 'edit/lock/undo/redo',
                 'preview/seek',
-                'save/reopen',
+                'save',
                 'testOnly NUT export',
                 'probe/decode exported audio',
                 'worker disconnect/reconnect'
+            )
+            t022SupplementalCoverage = @(
+                'saved project reopen',
+                'fault recovery matrix',
+                'three-preset 166/166 engineering oracles'
             )
         }
         preservedDiagnostics = @(
