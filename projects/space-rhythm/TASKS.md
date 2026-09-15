@@ -133,15 +133,15 @@
 ## T-029：评估视频卡点效果、性能并执行可选模型门禁
 - 负责人：video-algorithm-engineer-cv-01
 - 状态：blocked
-- 授权来源与日期：本会话用户于 2026-09-09 要求补充系统架构师判断的新增成员及成员任务并提交；同一用户于 2026-09-14 明确授权启动 T-029，并要求纳入代表产品视频与人工标注、“卡点自然”评估口径、基准硬件和效果/性能阈值；随后要求按 A-031 0.2 获取实际视频。D-010/A-031 0.3 形成后，用户再次明确继续 T-029，仅获取/probe 4 个替换来源、更新 manifest 和验证配额，满足后核对 H-013；暂时禁止越过真人裁决标注和 Windows 基准条件运行正式 classic 门禁。
+- 授权来源与日期：本会话用户于 2026-09-09 要求补充系统架构师判断的新增成员及成员任务并提交；同一用户于 2026-09-14 明确授权启动 T-029，并要求纳入代表产品视频与人工标注、“卡点自然”评估口径、基准硬件和效果/性能阈值；随后要求按 A-031 0.2 获取实际视频。D-010/A-031 0.3 形成后，用户再次明确继续 T-029，仅获取/probe 4 个替换来源、更新 manifest 和验证配额，满足后核对 H-013；暂时禁止越过真人裁决标注和 Windows 基准条件运行正式 classic 门禁。2026-09-15，用户在获知独立性和外推限制后确认 D-014，将本阶段主观评审改为个人单用户验收；真实 VFR 和 Windows 基准门禁不变。
 - 目标与范围：在代表性数据上评估镜头、运动和动作候选的效果、可解释性、人工修正量与性能，决定是否具备进入可选模型评估的证据；不自行确定产品门槛或引入模型。
-- 输入与依赖：T-027、T-028 已完成；D-009、D-010 confirmed；A-031 0.3 approved，已确认 4 个同类别/同分区替换来源并保留其余来源、标注和自然度协议、基准硬件与逐项阈值；A-011 0.1、A-028 0.2、A-029 0.1、A-030 0.3。
+- 输入与依赖：T-027、T-028 已完成；D-009～D-011、D-014 confirmed；A-031 0.4 approved，已确认 40 条 B 站产品主集与独立真实 VFR 技术集的双 gate，个人单用户验收细则等待 H-017 形成 A-031 新版本；A-011 0.1、A-028 0.2、A-029 0.1、A-030 0.3。
 - 优先级：未设定（架构建议：经典算法可运行后启动）。
 - 完成条件与确认方式：按样本类别报告命中、误报、时间误差、人工修正量或确认的等价指标；记录吞吐、内存、线程和取消；列出已知失败模式；经典算法未达门槛时提交模型收益、运行时、许可、CPU/GPU 和包体影响，等待新决定；形成可复核效果/性能报告。
 - 进展：负责人按 D-010/A-031 0.3 获取并 probe `GAME-004`、`TRAVEL-001`、`TRAVEL-007`、`LIFE-007` 四个替换来源，保留其余 36 个代理，形成 dataset 0.2.0。40/40 媒体 SHA 复核一致，总计 1,359,437,599 bytes、1,815.044 秒；来源时间窗、`calibration/tuning/final=4/16/20` 及舞蹈/游戏/旅行/生活各 10 条均通过。获取工具现同时冻结新来源的所选平台流时间戳摘要、代理 probe 与 PTS 保持检查；TRAVEL-001 暴露的粗编码时基拒绝及 LIFE-007 原代理 18 ms 累计偏差已通过 `1/60000` 编码时基与重建消除，4/4 PTS 检查通过。实际结果同时否定 D-010 的 VFR 选源假设：`GAME-004`、`TRAVEL-001`、`TRAVEL-007` 的平台流与代理全部为 CFR，完整数据为 CFR 40、VFR 0，不满足 `vfr>=3/final>=1`。静态预期标签达到 `slow_motion=4/final=4` 且其他 18 个 slice 均至少 4 条并含 final，但这些不是人工真值，须等待裁决标注，当前为 `not-evaluated`。依用户边界未运行正式 classic 或 Windows 性能门禁，未提出模型方案、未引入 ONNX。
-- 成果与验证证据：[A-030 0.3](artifacts/A-030-video-product-evaluation-and-model-gate.md)、[A-031 0.3](artifacts/A-031-t029-video-product-evaluation-input.md)、D-010 confirmed、[dataset 0.2.0 manifest](evidence/T-029/product-dataset-manifest-v2.json)、[执行就绪与配额证据](evidence/T-029/execution-readiness-v3.json)及[获取/冻结工具](../../tests/evaluation/video/acquire_product_evaluation_media.py)。manifest 文件 SHA-256 为 `2032a00762364e696066298b91534eb2157bedb2f1f2c19b407ba9f628dee68b`，内容摘要为 `225e8eafbfaf1ee4624b682ba8700d34ee3e185803bdd775a129a7f027b51959`；媒体和代理仍位于 Git 忽略的 `out/`。
-- 阻塞与下一位行动人：H-013 关闭条件未满足，保持 `accepted`。依据 D-010，product-manager-01 需再次提交同类别/同分区的真实 VFR 候选、升级 A-031 并形成新决定，不能把页面描述当作 probe；slow_motion 等语义 slice 仍由 H-014 所需真人裁决确认。`H-014` 的独立真人裁决与合规 Windows 基准条件继续作为正式 classic 门禁前置，本阶段没有越过。
-- 更新日期：2026-09-14。
+- 成果与验证证据：[A-030 0.3](artifacts/A-030-video-product-evaluation-and-model-gate.md)、[A-031 0.4](artifacts/A-031-t029-video-product-evaluation-input.md)、D-010/D-011/D-014 confirmed、[dataset 0.2.0 manifest](evidence/T-029/product-dataset-manifest-v2.json)、[执行就绪与配额证据](evidence/T-029/execution-readiness-v3.json)及[获取/冻结工具](../../tests/evaluation/video/acquire_product_evaluation_media.py)。manifest 文件 SHA-256 为 `2032a00762364e696066298b91534eb2157bedb2f1f2c19b407ba9f628dee68b`，内容摘要为 `225e8eafbfaf1ee4624b682ba8700d34ee3e185803bdd775a129a7f027b51959`；媒体和代理仍位于 Git 忽略的 `out/`。D-014 已确认个人单用户验收范围，但尚无实际标注、评分或更新后的执行证据。
+- 阻塞与下一位行动人：H-013 关闭条件未满足，保持 `accepted`；仍须取得至少 3 条且 final 至少 1 条真实 VFR 原始媒体，B 站平台转码流不能替代。下一位产品行动人为 product-manager-01，按 H-017 将 D-014 落入 A-031 新版本；随后 video-algorithm-engineer-cv-01 才能按新协议准备 `USER-01` 的人工参考/盲评包并运行正式 classic。H-014 的实际单用户记录和 `TIGER` 一次预热 + 五次正式 Windows 基准测量仍是前置；交流电最佳性能覆盖模式当前已核实，但必须在正式测量同轮保存证据。
+- 更新日期：2026-09-15。
 
 ## T-028：实现经典镜头、运动与动作峰值分析
 - 负责人：video-algorithm-engineer-cv-01

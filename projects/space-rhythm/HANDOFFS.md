@@ -1,5 +1,18 @@
 # 行动请求与交接
 
+## H-017：按 D-014 修订 T-029 个人单用户验收协议
+- 发起人：project-manager-01
+- 目标：product-manager-01
+- 关联任务：T-039、T-029
+- 期望结果：将 D-014 准确写入 A-031 新版本：评审者固定为 `USER-01`，产品主集和真实 VFR 技术集的每条 final 均须 1 份有效评分且不允许缺失；人工参考制作与随机化盲评分开执行；取消五人构成、三名有经验、每条三份评分及独立复核/裁决前置；将结果和不适用统计明确标记为个人单用户范围。保持 D-011 的真实 VFR 配额/probe、双数据集 AND gate、既有评分尺度、E-*/P-* 数值和 Windows 基准要求不变。
+- 输入与证据：D-014 confirmed；[A-031 0.4](artifacts/A-031-t029-video-product-evaluation-input.md)；D-009～D-013；H-013、H-014。
+- 未完成事项：A-031 当前仍为 0.4，尚未由 product-manager-01 形成与 D-014 一致的新版本；A-030 和 T-029 执行证据也尚未由 video-algorithm-engineer-cv-01 基于新产品输入更新。
+- 状态：open
+- 创建日期：2026-09-15
+- 接收反馈：暂无，等待 product-manager-01 在其成员会话接收。
+- 处理结果与证据：D-014 已由用户确认并由项目经理登记；尚未开始产品成果修订，不能把决定确认当作实际标注或评分完成。
+- 关闭或取消依据：暂无。A-031 新版本准确落实 D-014、维持未放宽边界并由 product-manager-01 提供可复核版本后关闭。
+
 ## H-016：提供个人未签名 Windows 交付验证环境
 - 发起人：project-manager-01
 - 目标：用户
@@ -26,17 +39,17 @@
 - 处理结果与证据：2026-09-15，历史 SAC/WDAC 开启状态下的连续受控组包与诊断曾先出现 App/Worker 均退出 0，后续又由 Code Integrity 以 `0xC0E90002` 阻断 App 或未签名 `Qt6QuickDialogs2.dll`；这些证据保留为策略开启期间的历史事实。D-012 随后将目标改为仅供用户本人使用的 `unsigned-engineering` 工程包并明确不承诺 SAC/WDAC 兼容，H-016 则按 D-013 提供 SAC 已关闭的当前 `TIGER`。在新范围下，最新受控包已完成 App/Worker smoke 与完整事务，见 [A-033 0.2 第 6 节](artifacts/A-033-windows-unsigned-deployment-and-transaction-pipeline.md)和[T-037 摘要](evidence/T-037/verification-summary.md)；该 SAC=0 结果不证明 H-015 原请求的信任路线或策略兼容性已经实现。
 - 关闭或取消依据：用户作为本交接目标和项目最终确认人于 2026-09-15 明确选择个人未签名范围；D-012 confirmed 后，本交接所求的策略管理员信任路线不再属于本阶段前置，故按用户范围变更取消。历史 Code Integrity 证据保留，不把取消解释为当前 `TIGER` 已能运行未签名包。
 
-## H-014：提供 T-029 独立真人证据与合规 Windows 基准运行条件
+## H-014：提供 T-029 个人单用户验收证据与合规 Windows 基准运行条件
 - 发起人：video-algorithm-engineer-cv-01
 - 目标：用户
 - 关联任务：T-029
-- 期望结果：组织 5 名相互独立的真人评审者，其中至少 3 名具有短视频剪辑或卡点制作经验，按 A-031 0.2 完成人工初标、独立复核/裁决和随机化盲评；算法实现者不得作为正式评审者。并使确认的 `TIGER` 基准机在接通电源、Windows 最佳性能模式下允许 T-028 的同一 Release PE 原生启动，以便按一次预热 + 五次正式测量完成门禁。
-- 输入与证据：[A-031 0.3](artifacts/A-031-t029-video-product-evaluation-input.md)、[A-030 0.3](artifacts/A-030-video-product-evaluation-and-model-gate.md)、[T-029 最新执行就绪证据](evidence/T-029/execution-readiness-v3.json)。
-- 未完成事项：尚无初标、复核、裁决或盲评记录及 SHA-256；当前活动电源方案最近证据仍为“平衡”而非“最佳性能”。用户已关闭 SAC，但 T-028 的同一 Release PE 尚未在新状态下实际复验，不能仅凭注册表状态判定 Windows 基准条件通过。Wine 不可作为确认 Windows 基准的替代。
+- 期望结果：按 D-014 由匿名验收者 `USER-01` 为产品主集与真实 VFR 技术集的每条 `final_evaluation` 视频提供 1 份有效评分，人工参考制作与随机化盲评分开执行并保存原始记录/hash，结果只标记为 `personal-single-user-acceptance`。同时使确认的 `TIGER` 基准机在接通电源、Windows 最佳性能模式下允许 T-028 的同一 Release PE 原生启动，以便按一次预热 + 五次正式测量完成门禁。
+- 输入与证据：D-014 confirmed；[A-031 0.4](artifacts/A-031-t029-video-product-evaluation-input.md)，待 H-017 修订；[A-030 0.3](artifacts/A-030-video-product-evaluation-and-model-gate.md)；[T-029 最新执行就绪证据](evidence/T-029/execution-readiness-v3.json)。
+- 未完成事项：尚无 `USER-01` 的人工参考、随机化盲评记录及 SHA-256；A-031 尚未按 D-014 修订。当前只读查询已显示接通交流电时 `ActiveOverlayAcPowerScheme=ded574b5-45a0-4f42-8737-46345c09c238`，即 Windows Best Performance 覆盖模式，但 T-028 的同一 Release PE 尚未在该状态下完成一次预热 + 五次正式测量并保存同轮环境证据。Wine 不可作为确认 Windows 基准的替代。
 - 状态：open
 - 创建日期：2026-09-14
-- 接收反馈：用户于 2026-09-15 明确要求在当前 `TIGER` 测试，并手动关闭 SAC；project-manager-01 只读核对 `VerifiedAndReputablePolicyState=0`。
-- 处理结果与证据：SAC 强制状态已有变化，但尚无 T-028 Release PE 原生启动、最佳性能电源方案及一次预热 + 五次正式测量证据；真人评审和真实 VFR 输入也未补齐，H-014 保持 open。
+- 接收反馈：用户于 2026-09-15 明确要求在当前 `TIGER` 测试并手动关闭 SAC；同日明确本人作为唯一评审者，并在获知单人范围和外推限制后确认采用“个人单用户验收”方案。project-manager-01 只读核对 `VerifiedAndReputablePolicyState=0` 及交流电最佳性能覆盖模式。
+- 处理结果与证据：D-014 已把五人独立评审前置改为个人单用户验收；这只是协议确认，`USER-01` 尚未实际制作人工参考或评分。交流电最佳性能条件当前已具备，不要求传统电源计划列表额外显示“高性能”；正式 T-028 测量仍须同轮保存环境证据并完成一次预热 + 五次正式运行。真实 VFR 输入仍由 H-013 跟踪，H-014 保持 open。
 - 关闭或取消依据：暂无。
 
 ## H-013：替换 T-029 失效来源并恢复实际样本配额
@@ -49,7 +62,7 @@
 - 状态：accepted
 - 创建日期：2026-09-14
 - 接收反馈：product-manager-01 于 2026-09-14 刷新 T-029、D-009、A-031 0.2、A-030 0.2 及三份媒体审计证据后接收。确认 4 个失效来源必须同类别/同分区替换；36 个已成功来源可保留。实际 VFR 不能由标题或预期标签代替，仍须由 T-029 执行人 probe。
-- 处理结果与证据：A-031 0.3 的 D-010 替换已完成实测：4 个来源均获取成功，40/40 SHA、结构分区和类别配额通过，4/4 PTS 保持检查通过；但 `GAME-004`、`TRAVEL-001`、`TRAVEL-007` 的实际源流/代理均为 CFR。用户于 2026-09-14 回复“采用”，确认 D-011 并批准 [A-031 0.4](artifacts/A-031-t029-video-product-evaluation-input.md)：保留 40 条 B 站来源为产品主集，另建至少 3 条真实 VFR 原始素材技术集（至少 1 条 final），原始源流逐帧 PTS probe 准入，两套 gate 以 AND 进入 overall。方案已生效，但实际 VFR 原始素材仍未冻结，H-013 不关闭。
+- 处理结果与证据：A-031 0.3 的 D-010 替换已完成实测：4 个来源均获取成功，40/40 SHA、结构分区和类别配额通过，4/4 PTS 保持检查通过；但 `GAME-004`、`TRAVEL-001`、`TRAVEL-007` 的实际源流/代理均为 CFR。用户于 2026-09-14 回复“采用”，确认 D-011 并批准 [A-031 0.4](artifacts/A-031-t029-video-product-evaluation-input.md)：保留 40 条 B 站来源为产品主集，另建至少 3 条真实 VFR 原始素材技术集（至少 1 条 final），原始源流逐帧 PTS probe 准入，两套 gate 以 AND 进入 overall。2026-09-15 用户又要求寻找影流之主等 B 站卡点视频；这些页面可作为内容参考，但现有 B 站产品主集已经 40/40 完整，平台转码流不得计入 D-011 的真实 VFR 技术集。方案已生效，但实际 VFR 原始素材仍未冻结，H-013 不关闭。
 - 关闭或取消依据：未关闭。D-011 的确认本身不等于实际配额通过；只有独立技术集已冻结不少于 3 条且 final 不少于 1 条真实 VFR 原始媒体，并由 T-029 执行人以原始源流逐帧 PTS 与代理保持证据实际判定配额通过后，product-manager-01 才可核对并关闭。
 
 ## H-012：确认 T-029 的真实产品输入与数值门槛
