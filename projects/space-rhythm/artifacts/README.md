@@ -36,6 +36,7 @@
 | A-030 | [视频产品效果、性能与可选模型门禁评估](A-030-video-product-evaluation-and-model-gate.md) | video-algorithm-engineer-cv-01 | T-029 | 0.3 | draft | 尚无；结构配额已恢复，VFR/真人/Windows 前置仍阻塞 |
 | A-031 | [T-029 视频产品评估输入与用户确认清单](A-031-t029-video-product-evaluation-input.md) | product-manager-01 | T-039、H-013 | 0.4 | approved | D-011 confirmed；独立真实 VFR 技术集已批准，实际素材与 probe 缺失时门禁仍为 `not-evaluated` |
 | A-032 | [Windows 发布输入、许可证与 SBOM 计划](A-032-windows-release-input-license-sbom-plan.md) | release-engineer-windows-01 | T-036 | 0.1 | draft | 尚无；已定位 Qt6QmlMeta/WDAC-SAC 阻塞并形成 T-037/T-038 门禁 |
+| A-033 | [Windows unsigned 部署与事务安装工程流水线](A-033-windows-unsigned-deployment-and-transaction-pipeline.md) | release-engineer-windows-01 | T-037（unsigned 部分） | 0.1 | draft | 尚无；强制非候选，正式安装器与签名阶段未完成 |
 
 ## 正文元信息样式（不是真实成果）
 
