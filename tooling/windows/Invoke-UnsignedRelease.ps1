@@ -696,17 +696,19 @@ Set-Content -LiteralPath (Join-Path $payloadRoot 'docs\qt-source-build-and-repla
 $knownLimitations = @"
 # Known limitations of this unsigned engineering package
 
-- Every Space Rhythm, self-built Qt and vcpkg binary remains unsigned. WDAC/Smart App Control may block
-  `Qt6QmlMeta.dll`, the applications, tools, or another file with `0xC0E90002`.
-- This is not the selected product installer. Install scope, upgrade policy, auto-update and file
-  association are unconfirmed; the included transaction tool requires explicit install and state paths.
+- This package is limited by D-012/D-013 to the project owner on self-owned Windows computers. It must
+  not be publicly distributed or delivered to a third party, and makes no SAC/WDAC compatibility claim.
+- Every Space Rhythm, self-built Qt and vcpkg binary remains unsigned. A computer that blocks unsigned
+  Win32 programs may reject the applications, tools, or DLLs; no trusted publisher chain is provided.
+- The included explicit-path transaction tool is the personal engineering delivery mechanism. A separate
+  GUI installer, auto-update and file association are outside the confirmed scope.
 - The VC Runtime deployment strategy and minimum Windows version are unconfirmed. No `vc_redist.x64.exe`
   or private VC Runtime is bundled.
 - Product container/H.264/AAC choices are unconfirmed; export remains explicitly `testOnly`.
 - The application currently embeds development CC0 test timbres. No product default timbre is approved,
   so this package is never candidate-eligible.
 - Qt Quick Controls styles are not pruned until the product style is confirmed.
-- T-022 and clean-Windows T-038 gates have not completed. Packaging success is not release approval.
+- T-022 and current-host T-038 gates have not completed. Packaging success is not release approval.
 "@
 Set-Content -LiteralPath (Join-Path $payloadRoot 'docs\known-limitations.md') `
     -Value $knownLimitations -Encoding utf8
@@ -719,16 +721,13 @@ $runtimeRecords | Export-Csv -LiteralPath (Join-Path $manifestRoot 'runtime-file
     -NoTypeInformation -Encoding utf8
 
 $missingInputs = @(
-    'formal installer and install scope',
     'minimum supported Windows version',
     'VC Runtime redistribution strategy',
     'production container/H.264/AAC backend',
-    'signing subject, certificate, timestamp service and channel',
-    'H-015 managed WDAC/SAC trust route',
     'T-022 and T-038 release gates',
     'product timbre and visual style approval')
 $buildInputs = [ordered]@{
-    schemaVersion = 2
+    schemaVersion = 3
     packageKind = 'unsigned-engineering'
     product = 'Space Rhythm'
     version = $Version
@@ -736,6 +735,16 @@ $buildInputs = [ordered]@{
     sourceWorktreeClean = ($gitStatus.Count -eq 0)
     sourceWorktreeStatus = @($gitStatus)
     candidateEligible = $false
+    deliveryScope = [ordered]@{
+        mode = 'personal-unsigned'
+        intendedUser = 'project owner'
+        selfOwnedWindowsOnly = $true
+        publicDistributionAllowed = $false
+        thirdPartyDeliveryAllowed = $false
+        sacWdacCompatibilityClaim = 'none'
+        validationHost = 'TIGER'
+        decisionIds = @('D-012', 'D-013')
+    }
     preset = $Preset
     architecture = 'x86_64'
     toolchain = [ordered]@{
@@ -860,6 +869,7 @@ $buildInputs = [ordered]@{
         signingCredentialAccess = 'none'
         wdacPolicyChanged = $false
         fallbackUsed = $false
+        sacWdacCompatibilityValidated = $false
     }
 }
 $buildInputs | ConvertTo-Json -Depth 10 |
@@ -867,10 +877,11 @@ $buildInputs | ConvertTo-Json -Depth 10 |
 
 $signingRequest = [ordered]@{
     schemaVersion = 1
-    status = 'not-requested'
+    status = 'not-required-for-personal-unsigned-scope'
     packageKind = 'unsigned-engineering'
     sourceCommit = $gitCommit
     credentialAccess = 'none'
+    decisionIds = @('D-012', 'D-013')
     requiredAuthorization = @('signing subject', 'certificate or managed signing service', 'timestamp service', 'channel policy')
     files = @($runtimeRecords | ForEach-Object {
         [ordered]@{ relativePath = $_.RelativePath; sha256 = $_.SHA256; authenticodeStatus = $_.AuthenticodeStatus }
@@ -892,13 +903,15 @@ $bundleReadme = @"
 # Space Rhythm $Version unsigned engineering bundle
 
 This bundle is unsigned, not candidate-eligible, and not approved for production release.
+Under D-012/D-013 it is only for the project owner on self-owned Windows computers. Public distribution
+and third-party delivery are prohibited, and no SAC/WDAC compatibility claim is made.
 Verify the separately published ZIP SHA-256 first, then verify `manifest/bundle-files.sha256.csv`
 before executing the included tool. That manifest detects corruption but does not authenticate this unsigned bundle.
 `payload/SpaceRhythm` is the application-private payload; its nested manifest is
 `payload/SpaceRhythm/manifest/payload-files.sha256.csv`.
 
-The installer technology and scope are not selected. For transaction testing only, invoke the included
-PowerShell tool with explicit, non-system `-InstallRoot` and `-StateRoot` paths. The tool never deletes
+The included PowerShell transaction tool is the personal engineering delivery mechanism; no separate GUI
+installer is provided. Invoke it with explicit, non-system `-InstallRoot` and `-StateRoot` paths. It never deletes
 user projects, media, settings, autosaves, cache, or logs outside those explicit roots.
 "@
 Set-Content -LiteralPath (Join-Path $bundleRoot 'README.md') -Value $bundleReadme -Encoding utf8
@@ -912,6 +925,8 @@ $summary = [ordered]@{
     schemaVersion = 1
     packageKind = 'unsigned-engineering'
     candidateEligible = $false
+    deliveryScope = 'personal-unsigned'
+    sacWdacCompatibilityClaim = 'none'
     sourceCommit = $gitCommit
     sourceWorktreeClean = ($gitStatus.Count -eq 0)
     bundleRoot = $bundleRoot
@@ -931,4 +946,4 @@ $summary | ConvertTo-Json -Depth 8 |
 Write-Host "Unsigned engineering bundle: $bundleRoot"
 Write-Host "Archive: $zipPath"
 Write-Host "SHA-256: $($summary.zipSha256)"
-Write-Warning 'This output is unsigned, not candidate-eligible, and not a production installer.'
+Write-Warning 'This output is unsigned, personal-use only, not SAC/WDAC-validated, and not a production release.'
