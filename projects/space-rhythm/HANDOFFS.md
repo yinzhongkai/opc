@@ -5,12 +5,12 @@
 - 目标：用户
 - 关联任务：T-037、T-038；可供 T-021/T-022 的未签名 Release 复验使用
 - 期望结果：确认一台用户自有的干净 Windows x64 电脑或虚拟机，允许正常运行本项目未签名 Win32 EXE/DLL，并可由 release-engineer-windows-01 执行应用/Worker 首次启动、安装/修复/回滚/卸载和核心工作流验证；提供 Windows edition/build、物理机或虚拟机类型、是否启用会阻断未签名程序的 SAC/WDAC，以及可用复验窗口。
-- 输入与证据：D-012/D-013 confirmed；[A-033 0.1](artifacts/A-033-windows-unsigned-deployment-and-transaction-pipeline.md)；[T-037 unsigned 验证摘要](evidence/T-037/verification-summary.md)。当前 `TIGER` 曾由 Code Integrity 拒绝部分未签名 App/Qt PE；用户现已自行关闭 SAC 并指定继续使用该主机。
-- 未完成事项：环境提供事项已完成。App/Worker、事务安装和核心工作流是否通过仍须由 release-engineer-windows-01 在 T-037/T-038 中实际验证，不属于本交接关闭结论。
+- 输入与证据：D-012/D-013 confirmed；[A-033 0.2](artifacts/A-033-windows-unsigned-deployment-and-transaction-pipeline.md)；[T-037 个人未签名验证摘要](evidence/T-037/verification-summary.md)。当前 `TIGER` 曾由 Code Integrity 拒绝部分未签名 App/Qt PE；用户现已自行关闭 SAC 并指定继续使用该主机。
+- 未完成事项：环境提供事项和 T-037 App/Worker、事务安装复验均已完成；T-038 核心工作流证据仍待 T-022 前置完成后由 release-engineer-windows-01 执行，不属于本交接关闭结论。
 - 状态：closed
 - 创建日期：2026-09-15
 - 接收反馈：用户于 2026-09-15 明确不接受虚拟机，随后要求直接关闭当前 `TIGER` 的 SAC，并在手动操作完成后回复“已关闭”。
-- 处理结果与证据：project-manager-01 于用户反馈后只读查询 `HKLM:\SYSTEM\CurrentControlSet\Control\CI\Policy`，确认 `VerifiedAndReputablePolicyState=0`。D-013 已将当前 `TIGER` 指定为个人未签名验证环境；未执行应用或修改其他安全设置。
+- 处理结果与证据：project-manager-01 于用户反馈后只读查询 `HKLM:\SYSTEM\CurrentControlSet\Control\CI\Policy`，确认 `VerifiedAndReputablePolicyState=0`。D-013 已将当前 `TIGER` 指定为个人未签名验证环境；环境提供阶段未执行应用或修改其他安全设置。此后 release-engineer-windows-01 已在 T-037 对最新受控包完成 App/Worker smoke 与完整安装事务，结果见 A-033 0.2；成功条件是当前 SAC=0，不构成 SAC/WDAC 兼容证据。
 - 关闭或取消依据：用户已提供本交接要求的自有 Windows x64 验证环境和立即可用复验窗口，且只读状态证明 SAC 已关闭，故由发起人 project-manager-01 关闭。测试通过与否仍由 T-037/T-038 记录。
 
 ## H-015：为自建 Qt 与 Release 闭包提供最小 WDAC/SAC 信任路线
@@ -23,7 +23,7 @@
 - 状态：cancelled
 - 创建日期：2026-09-14
 - 接收反馈：用户于 2026-09-15 明确选择“个人未签名范围”，不再要求当前阶段兼容 `TIGER` 的 SAC/WDAC，也不采购公共代码签名证书。
-- 处理结果与证据：2026-09-15，T-037 unsigned 的连续受控组包与诊断中先出现 App/Worker 均退出 0、正确窗口无新策略事件，后续事务复跑又在测试安装根对 App 产生 3033/3077/3118 与 `0xC0E90002`；一次定位性 bundle 原路径诊断允许 App 启动，但改为拒绝 `Qt6QuickDialogs2.dll`（SHA-256 `CEFC1734...0E9DCB`，与当前最终归档一致），App 报告 QML root 未创建并退出 2，Worker 退出 0。见 [A-033 0.1 第 6 节](artifacts/A-033-windows-unsigned-deployment-and-transaction-pipeline.md)和[T-037 摘要](evidence/T-037/verification-summary.md)。当前最终闭包有 78 个运行 PE 未签名且未反复执行 App；先成功、后分别阻断 App/Qt DLL 进一步证明当前声誉/策略判定不稳定。D-012 已将交付目标改为仅供用户本人使用的 `unsigned-engineering` 工程包，并明确不承诺 SAC/WDAC 兼容；后续改由 H-016 提供允许未签名程序运行的自有验证环境。
+- 处理结果与证据：2026-09-15，历史 SAC/WDAC 开启状态下的连续受控组包与诊断曾先出现 App/Worker 均退出 0，后续又由 Code Integrity 以 `0xC0E90002` 阻断 App 或未签名 `Qt6QuickDialogs2.dll`；这些证据保留为策略开启期间的历史事实。D-012 随后将目标改为仅供用户本人使用的 `unsigned-engineering` 工程包并明确不承诺 SAC/WDAC 兼容，H-016 则按 D-013 提供 SAC 已关闭的当前 `TIGER`。在新范围下，最新受控包已完成 App/Worker smoke 与完整事务，见 [A-033 0.2 第 6 节](artifacts/A-033-windows-unsigned-deployment-and-transaction-pipeline.md)和[T-037 摘要](evidence/T-037/verification-summary.md)；该 SAC=0 结果不证明 H-015 原请求的信任路线或策略兼容性已经实现。
 - 关闭或取消依据：用户作为本交接目标和项目最终确认人于 2026-09-15 明确选择个人未签名范围；D-012 confirmed 后，本交接所求的策略管理员信任路线不再属于本阶段前置，故按用户范围变更取消。历史 Code Integrity 证据保留，不把取消解释为当前 `TIGER` 已能运行未签名包。
 
 ## H-014：提供 T-029 独立真人证据与合规 Windows 基准运行条件
@@ -88,7 +88,7 @@
 - 状态：accepted
 - 创建日期：2026-09-09
 - 接收反馈：2026-09-14，release-engineer-windows-01 已按会话协议刷新身份、岗位、有效知识、项目当前事实及本交接输入，确认在本人 scope 内接收；已将 T-036 更新为 in_progress，本轮优先处理 Qt DLL、`windeployqt` 和 WDAC/SAC 策略阻塞，不使用签名凭据或放宽生产安全策略。
-- 处理结果与证据：2026-09-14，T-036 已完成并形成 [A-032 0.1](artifacts/A-032-windows-release-input-license-sbom-plan.md)及[T-036 可复核摘要](evidence/T-036/verification-summary.md)。当前 Qt DLL 来源/哈希和 `windeployqt` 实际复制已验证，严格启动失败定位为 `VerifiedAndReputableDesktop` 对未签名 `Qt6QmlMeta.dll` 的 `0xC0E90002` 拒绝。策略管理员动作已登记为 H-015。2026-09-15，用户明确启动 T-037 unsigned 部分；已形成 [A-033 0.1](artifacts/A-033-windows-unsigned-deployment-and-transaction-pipeline.md)和[T-037 unsigned 验证摘要](evidence/T-037/verification-summary.md)，完成受控闭包、SBOM/许可证、确定性 ZIP 和安装/修复/回滚/卸载自测。同日用户确认 D-012，H-015 已取消，后续改由 H-016 提供个人未签名验证环境；T-037 保持 in_progress，本交接继续 accepted，等待该环境复验及 T-038。
+- 处理结果与证据：2026-09-14，T-036 已完成并形成 [A-032 0.1](artifacts/A-032-windows-release-input-license-sbom-plan.md)及[T-036 可复核摘要](evidence/T-036/verification-summary.md)，Qt DLL 来源/哈希和 `windeployqt` 实际复制已验证，历史 SAC/WDAC 开启状态下的阻断也已如实取证。2026-09-15，D-012/D-013 将后续范围确认为用户本人、自有 Windows 的个人未签名交付，并指定 SAC 已关闭的当前 `TIGER`；H-015 取消、H-016 关闭。T-037 已完成：最新受控包由提交 `02c65ce4b596675d102ed3c82459528b60f63297` 生成，ZIP SHA-256 为 `CD94BC9CABF1B0AD29062EE39DD14DEBCBF2AAEB6B777D69036874221D8C634C`，在 `VerifiedAndReputablePolicyState=0` 条件下通过 App/Worker smoke 及完整安装事务，详见 [A-033 0.2](artifacts/A-033-windows-unsigned-deployment-and-transaction-pipeline.md)与[T-037 验证摘要](evidence/T-037/verification-summary.md)。该结果不是 SAC/WDAC 兼容性证明。H-010 继续由同一成员承接尚待 T-022 的 T-038，故保持 `accepted`。
 - 关闭或取消依据：暂无。
 
 ## H-009：启动 Qt Scene Graph 实时图形工作流

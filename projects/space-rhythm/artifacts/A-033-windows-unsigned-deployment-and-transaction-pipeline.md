@@ -1,27 +1,27 @@
-# Windows unsigned 部署与事务安装工程流水线
+# Windows 个人未签名部署与事务安装工程流水线
 
 - 项目：space-rhythm
 - 成果 ID：A-033
 - 负责人：release-engineer-windows-01
-- 关联任务：T-037（unsigned 部分）
-- 版本：0.1
+- 关联任务：T-037
+- 版本：0.2
 - 更新日期：2026-09-15
 - 状态：draft
-- 适用范围：从固定 Windows x64 Release 构建生成明确标识为非候选的 unsigned 工程包，覆盖受控 `windeployqt`、递归 PE 依赖闭包、哈希、SPDX、许可证、签名交接清单及显式路径的安装/修复/回滚/卸载事务；不选择正式安装器或 scope，不接触签名凭据，不改变 WDAC/SAC，不批准生产发布。
-- 来源及输入版本：用户于 2026-09-15 明确要求继续执行 T-037 的 unsigned 部分；T-013、T-019、T-032、T-035、T-036 completed；D-003～D-008 confirmed；A-011 0.1、A-013 0.2、A-020 0.1、A-025 0.1、A-026 0.1、A-032 0.1；当前工程验证源 HEAD `41ce475c620fbfbb2e299130ea9e18477971ff47`。
-- 批准依据：尚无。unsigned 工程包和事务测试成功不等于安装器选型、签名、兼容矩阵、发布候选或生产发布批准。
-- 版本记录：2026-09-15，0.1，首次交付 unsigned 受控组包、供应链材料、确定性 ZIP 和事务测试路径。
+- 适用范围：按 D-012/D-013，从固定 Windows x64 Release 构建生成仅供项目用户本人在自有 Windows 电脑使用的 `unsigned-engineering` 工程包，覆盖受控 `windeployqt`、递归 PE 依赖闭包、哈希、SPDX、许可证及显式路径的安装/修复/回滚/卸载事务；不公开分发或交付第三方，不接触签名凭据，不改变 WDAC/SAC，不宣称 SAC/WDAC 或其他 Windows 环境兼容，不批准生产发布。
+- 来源及输入版本：用户于 2026-09-15 明确要求继续执行 T-037，并在 D-012/D-013 确认个人未签名范围、当前 `TIGER` 和 SAC-off 验证条件；T-013、T-019、T-032、T-035、T-036 completed；D-003～D-008、D-012、D-013 confirmed；A-011 0.1、A-013 0.2、A-020 0.1、A-025 0.1、A-026 0.1、A-032 0.1；最终受控包源提交 `02c65ce4b596675d102ed3c82459528b60f63297`。
+- 批准依据：D-012/D-013 仅批准个人未签名交付范围和当前主机验证条件；不批准公开分发、SAC/WDAC 兼容、发布候选或生产发布。
+- 版本记录：2026-09-15，0.1，首次交付 unsigned 受控组包、供应链材料、确定性 ZIP 和事务测试路径；2026-09-15，0.2，对齐 D-012/D-013，生成 schema 3 个人范围包并在 SAC=0 的当前 `TIGER` 完成 App/Worker smoke，收口 T-037。
 
 ## 1. 交付结论
 
-T-037 的 unsigned 部分已经形成可执行流水线：
+T-037 已在 D-012/D-013 的个人未签名范围内形成并验证可执行流水线：
 
 - [`Invoke-UnsignedRelease.ps1`](../../../tooling/windows/Invoke-UnsignedRelease.ps1) 只消费当前 `windows-msvc-x64-release` 构建、固定 Qt 6.11.2 SDK 和固定 vcpkg 安装树，刷新 Release 构建后生成应用私有闭包。
-- [`Invoke-UnsignedInstallTransaction.ps1`](../../../tooling/windows/Invoke-UnsignedInstallTransaction.ps1) 是正式安装器未定期间的后端中立工程工具；所有操作必须显式给出安装根和状态根。
+- [`Invoke-UnsignedInstallTransaction.ps1`](../../../tooling/windows/Invoke-UnsignedInstallTransaction.ps1) 是本阶段确认的个人工程交付机制；不提供独立 GUI 安装器，所有操作必须显式给出安装根和状态根。
 - [`Test-UnsignedPackage.ps1`](../../../tests/release/Test-UnsignedPackage.ps1) 验证包类型、安全标记、必需/禁止文件、SPDX 结构及安装、App/Worker smoke、修复、回滚和卸载事务。
 - [仓库使用说明](../../../docs/windows-unsigned-release.md)记录正常命令、失败边界和剩余门禁。
 
-当前实际输出是 `space-rhythm-0.1.0-dev-unsigned.zip`，SHA-256 `9591F8B0E3B1CD28789A785D91077D298EE10011B4A7D3EBEA810DAC9781449B`，大小 44,725,377 字节。由于本轮源码修改和既有 `package/`、`scripts/__pycache__/` 未跟踪内容尚未提交，清单明确记录 `sourceWorktreeClean=false`、`candidateEligible=false`；这只是工程验证包，不是发布候选。
+最终输出是 `space-rhythm-0.1.0-dev-unsigned.zip`，SHA-256 `CD94BC9CABF1B0AD29062EE39DD14DEBCBF2AAEB6B777D69036874221D8C634C`，大小 44,725,623 字节；相同输入连续两次生成一致。其源提交为 `02c65ce4b596675d102ed3c82459528b60f63297`；清单只记录既有未跟踪 `package/` 和 `scripts/__pycache__/`，两者未作为构建或运行时输入，因此 `sourceWorktreeClean=false`。包始终为 `candidateEligible=false`，不是发布候选。
 
 ## 2. 输入、来源与 fail-closed 规则
 
@@ -55,17 +55,17 @@ T-037 的 unsigned 部分已经形成可执行流水线：
 payload 同时包含：
 
 - `manifest/runtime-files.sha256.csv`：每个运行 PE 的相对路径、大小、SHA-256、组件/版本、vcpkg ABI 或 Qt/源码构建 hash、受控来源、架构、链接方式与 Authenticode 状态。
-- `manifest/build-inputs.json` schema 2：源提交、dirty 状态、工具链、固定哈希、`windeployqt` 参数/映射数、系统依赖和未决输入；7 个源/构建/运行组件逐项包含 purl、来源、源码 hash/声明、构建摘要、许可证路径、修改/补丁、再分发依据、运行文件 hash、签名聚合与任务证据。
+- `manifest/build-inputs.json` schema 3：除源提交、dirty 状态、工具链、固定哈希、部署和 7 个组件清单外，机器可读固定 `personal-unsigned`、仅自有 Windows、禁止公开分发/第三方交付及 `sacWdacCompatibilityClaim=none`。
 - `manifest/payload-files.sha256.csv` 与 bundle manifest：分别验证完整 payload 和 bundle，拒绝未登记文件。
 - `sbom/space-rhythm.spdx.json`：SPDX 2.3 汇总；另保留 Qt 四份上游 SPDX 及 FFmpeg/OpenCV/KissFFT/GoogleTest 的 vcpkg SPDX。
 - `licenses/`、`THIRD-PARTY-NOTICES.txt`、Qt 源码/构建/动态替换说明与 known limitations。它们是工程材料，不代替法律意见。
-- `signing/signing-request.json`：只保存待签文件哈希、当前 Authenticode 状态和待授权输入；`status=not-requested`、`credentialAccess=none`，没有签名命令、PIN、token 或私钥。
+- `signing/signing-request.json`：只保存未来若扩大分发范围时所需的文件哈希和 Authenticode 状态；当前 `status=not-required-for-personal-unsigned-scope`、`credentialAccess=none`，没有签名命令、PIN、token 或私钥。
 
-确定性 ZIP 以源提交时间固定所有 entry timestamp；相同输入连续两次实际生成的归档 SHA-256 相同。签名阶段未来必须消费已冻结的 unsigned 哈希闭包，并在隔离环境重新生成签名后哈希/SBOM；本流水线未访问任何凭据。
+确定性 ZIP 以源提交时间固定所有 entry timestamp；相同输入连续两次实际生成的归档 SHA-256 相同。若未来扩大到公开/第三方分发并重新要求签名，须另立决定并从冻结闭包建立隔离签名阶段；本流水线未访问任何凭据。
 
 ## 5. 安装、修复、回滚与卸载事务
 
-正式安装器和每用户/每机器 scope 未确认，因此事务工具不提供默认系统目录。调用者必须给出互不包含的 `BundleRoot`、`InstallRoot`、`StateRoot`，且拒绝驱动器根：
+D-012 已确认用显式路径事务工具作为个人工程交付机制，不要求独立 GUI 安装器。调用者必须给出互不包含的 `BundleRoot`、`InstallRoot`、`StateRoot`，且拒绝驱动器根：
 
 - `Install/Repair`：先验证源 manifest，复制到目标卷同级 staging，再验证 staging；只允许替换与状态 manifest 一致的已登记 payload，将其移到唯一登记 backup，最后以目录 move 切换并原子写状态；状态提交失败时移走新 payload 并恢复旧目录。
 - 失败恢复：切换或状态写入失败时恢复上一安装；不把部分文件写入现有根。
@@ -73,23 +73,20 @@ payload 同时包含：
 - `Uninstall`：先验证当前 payload、状态 hash 和登记 backup，再把两者移入同卷隔离目录，原子提交卸载状态后才清除；只写显式状态根。
 - 用户项目、原始媒体、设置、自动保存、缓存和日志位于这两个显式根之外时一律不读、不改、不删；当前没有 purge 用户数据选项。
 
-在最终组件元数据扩展之前，一份受控归档曾在仓库忽略的测试根完整通过 `validate → install → App smoke → Worker smoke → repair → rollback → installed validate → uninstall`；随后对该归档复跑时完成 manifest 校验和 staging 安装，却在 App smoke 处受主机策略阻断并 fail closed，没有继续执行或用较早结果替代最新失败。定位完成后清理了已登记测试安装。当前最终归档由固定 `windeployqt` 映射额外纳入两个 Qt TLS 插件，闭包为上节记录的 81 个 PE；为避免在已经获得策略拒绝证据后反复尝试执行，未再次启动 App。最终事务专项实际完成 `validate → install → 拒绝含未登记文件的 repair → repair → rollback → installed validate → uninstall`，并确认显式根外的用户数据哨兵仍存在。
+最终包在当前 `TIGER` 实际完成 `bundle manifest → payload manifest → install → App smoke → Worker smoke → 拒绝含未登记文件的 repair → repair → rollback → installed validate → uninstall`。卸载后安装根不存在，审计状态为 `installed=false/lastAction=uninstall`，显式根外用户数据哨兵仍存在。
 
-## 6. 启动与 WDAC/SAC 结果（最终元数据扩展前的受控归档）
+## 6. 当前 TIGER 的 SAC-off 启动结果
 
-较早的正确 offscreen 运行中，App 输出 `SPACE_RHYTHM_APP_SMOKE_OK Qt=6.11.2 arch=x64` 并退出 0，Worker 输出对应 marker 并退出 0，两个 probe window 均无新增 Code Integrity/AppLocker 事件。首次遗漏 offscreen 的 App 诊断超时且无策略事件，已明确判为错误配置，不作为通过或 WDAC 拒绝。
+最终验证主机为 `TIGER`/AMD64；注册表报告 `ProductName=Windows 10 Home China`、`DisplayVersion=25H2`、build `26200.9457`。正式测试前检查且测试结束后复核 `VerifiedAndReputablePolicyState=0`。测试窗口为 `2026-09-15T07:19:05.0834419Z` 至 `2026-09-15T07:19:37.6414752Z`：
 
-该受控归档的后续事务复跑出现相反结果：从测试安装根启动 App 时，Code Integrity 3033/3077/3118 记录 `VerifiedAndReputableDesktop`、`0xC0E90002`，拒绝未签名 App。为定位而进行的一次 bundle 原路径诊断允许 App 进程启动，但在加载 `Qt6QuickDialogs2.dll` 时产生两组 3033/3077；该 DLL SHA-256 为 `CEFC1734C74EE5E2F7B6A1AE7AA68556002C711B56446E78FC0465A5440E9DCB`，与当前最终归档中的同名 DLL 一致，App 报告 `QML root was not created` 并退出 2。Worker 在该轮为 `started-exit-zero:0`，窗口内无新策略事件。
+- App SHA-256 `7391BE3B859E41A2567AC03842C13D57C9FE7D9314F15C3EEAC0D64AB3EBC082`，offscreen smoke 输出 `SPACE_RHYTHM_APP_SMOKE_OK Qt=6.11.2 arch=x64`，退出 0。
+- Worker SHA-256 `5C12BB3F390544314BDC3B633CEE13E463FF728C959663FC66695916EFF15260`，输出 `SPACE_RHYTHM_WORKER_SMOKE_OK Qt=6.11.2 arch=x64`，退出 0。
+- 该窗口内按 `space-rhythm|Qt6|T-037-unsigned-transaction` 过滤 Code Integrity Operational 与 AppLocker EXE and DLL，相关事件数为 0。
 
-这组先成功、后分别阻断 App 和 Qt DLL 的真实记录进一步确认 SAC/WDAC 判定不稳定，H-015 不能关闭。78 个运行 PE 仍为 `NotSigned`。本轮未修改策略、白名单、ACL 或签名，没有 fallback，也没有用再次重试把最新失败美化为通过。
+结构化记录见 [`tiger-sac-off-smoke-20260915.json`](../evidence/T-037/tiger-sac-off-smoke-20260915.json)。这里证明的仅是这两个精确哈希在当前 TIGER、当前 SAC=0 条件下完成 smoke；SAC 未处于执行兼容性门禁的状态，因此结果不能用于宣称软件兼容 SAC/WDAC，也不能外推到其他 Windows 主机。历史 SAC 开启时的拒绝证据继续保留，但不再是 D-012/D-013 范围内的 T-037 前置。
 
-## 7. 剩余门禁
+## 7. 完成结论与后续边界
 
-T-037 保持 `in_progress`：unsigned 组包、供应链和事务实现已完成，但 unsigned 严格 App 启动仍被 H-015 阻断；以下也阻止整个任务完成：
+T-037 的完成条件已满足：受控私有闭包、个人工程安装事务、可复现 ZIP、哈希、schema 3 构建输入、SPDX/许可证、明确 unsigned/个人范围，以及 D-013 当前 TIGER 的 App/Worker smoke 均已验证，任务可标记 `completed`。
 
-- 正式安装器、每用户/每机器 scope、升级/自动更新/文件关联和 VC Runtime 策略尚未确认。
-- 签名主体、证书或托管签名服务、时间戳和渠道尚未授权；H-015 的组织管理 WDAC/SAC 信任路线未完成。
-- 产品容器/H.264/AAC、默认音色和视觉风格未确认；当前应用仍内嵌开发用 CC0 测试音色，故包强制非候选。
-- T-022、最低 Windows 与 T-038 干净机器矩阵尚未完成。
-
-这些缺口不影响继续复核 unsigned 工程脚本，但任何输出都必须保持 `unsigned-engineering`、`candidateEligible=false`，不得被重命名为 installer、release candidate 或 production release。
+T-022、T-038、最低 Windows、VC Runtime 分发、产品容器/H.264/AAC、默认音色和视觉风格仍是各自责任链的后续工作，不反向阻止 T-037，但使当前包继续保持 `unsigned-engineering`、`candidateEligible=false`。独立 GUI 安装器、签名和 SAC/WDAC 兼容已由 D-012/D-013 移出本阶段范围；未来扩大分发时须重新决定，不能沿用本次结果作兼容或生产发布证明。

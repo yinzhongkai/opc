@@ -1,0 +1,97 @@
+{
+  "schemaVersion": 1,
+  "taskId": "T-037",
+  "artifactId": "A-033",
+  "artifactVersion": "0.2",
+  "decisionIds": [
+    "D-012",
+    "D-013"
+  ],
+  "evidenceScope": "Exact unsigned package smoke and transaction validation on the current TIGER with SAC state 0; not SAC/WDAC compatibility evidence",
+  "host": {
+    "computerName": "TIGER",
+    "architecture": "AMD64",
+    "registryProductName": "Windows 10 Home China",
+    "displayVersion": "25H2",
+    "build": "26200.9457"
+  },
+  "package": {
+    "relativePath": "out/release/T-037/unsigned/space-rhythm-0.1.0-dev-unsigned.zip",
+    "packageKind": "unsigned-engineering",
+    "deliveryScope": "personal-unsigned",
+    "candidateEligible": false,
+    "schemaVersion": 3,
+    "sourceCommit": "02c65ce4b596675d102ed3c82459528b60f63297",
+    "sourceWorktreeClean": false,
+    "sourceWorktreeStatus": [
+      "?? package/osci-render-blender-plugin.zip",
+      "?? package/osci-render-premium-linux.zip",
+      "?? package/osci-render-premium-windows.zip",
+      "?? package/sosci-linux.zip",
+      "?? package/sosci-windows.zip",
+      "?? scripts/__pycache__/test_validate_framework.cpython-312.pyc"
+    ],
+    "zipLength": 44725623,
+    "zipSha256": "CD94BC9CABF1B0AD29062EE39DD14DEBCBF2AAEB6B777D69036874221D8C634C",
+    "runtimePeCount": 81,
+    "runtimeBytes": 103338584,
+    "authenticode": {
+      "notSigned": 78,
+      "validMicrosoft": 3
+    },
+    "sacWdacCompatibilityClaim": "none"
+  },
+  "preconditions": {
+    "verifiedAndReputablePolicyState": 0,
+    "bundleManifestValidated": true,
+    "payloadManifestValidated": true
+  },
+  "execution": {
+    "command": ".\\tests\\release\\Test-UnsignedPackage.ps1 -BundleRoot .\\out\\release\\T-037\\unsigned\\space-rhythm-0.1.0-dev-unsigned -RunSmoke",
+    "startedUtc": "2026-09-15T07:19:05.0834419Z",
+    "completedUtc": "2026-09-15T07:19:37.6414752Z",
+    "result": "pass",
+    "app": {
+      "sha256": "7391BE3B859E41A2567AC03842C13D57C9FE7D9314F15C3EEAC0D64AB3EBC082",
+      "exitCode": 0,
+      "output": "SPACE_RHYTHM_APP_SMOKE_OK Qt=6.11.2 arch=x64"
+    },
+    "worker": {
+      "sha256": "5C12BB3F390544314BDC3B633CEE13E463FF728C959663FC66695916EFF15260",
+      "exitCode": 0,
+      "output": "SPACE_RHYTHM_WORKER_SMOKE_OK Qt=6.11.2 arch=x64"
+    },
+    "operations": [
+      "validate",
+      "install",
+      "app-smoke",
+      "worker-smoke",
+      "reject-unregistered-repair",
+      "repair",
+      "rollback",
+      "validate-installed",
+      "uninstall",
+      "preserve-external-data"
+    ]
+  },
+  "postconditions": {
+    "verifiedAndReputablePolicyState": 0,
+    "installRootExists": false,
+    "externalUserDataSentinelExists": true,
+    "auditInstalled": false,
+    "auditLastAction": "uninstall",
+    "auditBackupPath": ""
+  },
+  "policyObservation": {
+    "windowStartUtc": "2026-09-15T07:19:05.0834419Z",
+    "windowEndUtc": "2026-09-15T07:19:39.6414752Z",
+    "logs": [
+      "Microsoft-Windows-CodeIntegrity/Operational",
+      "Microsoft-Windows-AppLocker/EXE and DLL"
+    ],
+    "messageFilter": "space-rhythm|Qt6|T-037-unsigned-transaction",
+    "relevantEventCount": 0,
+    "sacWdacCompatibilityValidated": false,
+    "interpretation": "SAC was off. Zero relevant events and successful smoke apply only to this exact package on this host and do not establish SAC/WDAC compatibility."
+  }
+}
