@@ -6,7 +6,7 @@
 - 任务进展：共 42 项；38 项 `completed`；T-029 为 `cancelled`；T-040、T-041、T-042 为 `todo`；无 `blocked` 或 `in_progress` 任务。
 - 关键成果：A-002 0.2 已获 D-001 批准；A-012～A-029 覆盖主要实现、契约与验证；A-030 0.4、A-031 0.5 和 execution-readiness-v4 保留 T-029 已完成准备及未评估边界；A-032 0.1 已完成 Windows 发布计划；A-033 0.2 已记录确定性 `unsigned-engineering` 闭包、SBOM/许可证和事务安装；A-034 0.1 记录 T-022 三套 preset 各 166/166 工程 oracle pass；A-035 0.1 记录当前 `TIGER` 的个人未签名交付链通过。成果索引共 35 项，A-002 与 A-031 为 `approved`，其余为 `draft`。
 - 交付范围决定：D-012 已确认仅供用户本人使用的个人未签名工程包；D-013 进一步确认用户已手动关闭当前 `TIGER` 的 SAC 并将其指定为验证主机，只读状态为 `VerifiedAndReputablePolicyState=0`。不公开分发、不交付第三方、不承诺 SAC/WDAC 兼容的边界不变；公共签名证书、签名主体、发布渠道和独立 GUI 安装器仍不是本阶段必选门禁。
-- 工程迁移范围：D-016 已确认 `projects/space-rhythm/workspace/` 为新工程根。`.github/workflows/` 因 GitHub 规则留在仓库根但切换工作目录；项目管理资料保留在其上级目录；框架 AGENTS/协议、roles、knowledge、templates、adapters、`scripts/` 留在根。根 `out/` 历史证据和冻结包、未跟踪 `package/`、`scripts/__pycache__/` 均不移动、不删除。
+- 工程迁移范围：D-016 已确认 `projects/space-rhythm/workspace/` 为新工程根，`.github/workflows/` 也完全迁入其中；仓库根不保留工作流入口，故 GitHub Actions 自动构建、PR 检查和手动 workflow dispatch 暂时停用。项目管理资料保留在 workspace 上级目录；框架 AGENTS/协议、roles、knowledge、templates、adapters、`scripts/` 留在根。根 `out/` 历史证据和冻结包、未跟踪 `package/`、`scripts/__pycache__/` 均不移动、不删除。
 - 交接状态：新增 H-018 `pending`，等待 build-engineer-windows-qt-01 接收 T-040。H-005、H-010 的原执行工作均已完成但仍为 `accepted`，等待 architect-01 核对关闭；H-013/H-014/H-015 已取消，H-016/H-017 已关闭。
 - 当前阻塞：T-040 无前置阻塞；T-041 按计划等待 T-040，T-042 按计划等待 T-040/T-041。T-029、H-013/H-014 是经用户确认取消并延期的未评估范围，不是通过项。
 - 测试链状态：T-022 已完成，Windows x64 Debug、CI/RelWithDebInfo、Release 三套 preset 均实际 166/166 pass、0 fail、0 skip；该结论仅限工程 oracle。G2 为 `pass(engineering-scope)`；产品效果、自然度、真实 VFR、正式产品性能及其余未确认门槛继续为 `not-evaluated`，不能把项目整体写成质量门禁全绿。

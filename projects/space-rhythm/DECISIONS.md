@@ -5,9 +5,9 @@
 - 问题：当前产品源码、CMake、测试、构建/发布工具和工程文档位于仓库根目录，而项目管理资料位于 `projects/space-rhythm/`，缺少清晰的物理归属，用户要求把整个工程移入 space-rhythm 项目下。
 - 提出者：project-manager-01
 - 确认人：本会话用户（默认最终确认人）
-- 确认来源与日期：2026-09-15，本会话用户先指出根 `src/` 没有和项目绑定，随后确认仍放在 `opc` 仓库内，并明确要求在 `projects/space-rhythm/` 下新建独立目录保存完整工程源码。
-- 结果：新建 `projects/space-rhythm/workspace/` 作为唯一产品工程根，将当前跟踪的根 `CMakeLists.txt`、`CMakePresets.json`、`vcpkg.json` 以及 `cmake/`、`src/`、`tests/`、`tooling/`、工程 `docs/` 全部迁入该目录并更新有效引用。项目管理文件、成员配置、成果和证据继续位于 `projects/space-rhythm/`。仓库级 `.github/workflows/` 因 GitHub 发现规则保留在仓库根，但须改为以 `projects/space-rhythm/workspace/` 为工程工作目录；框架的 AGENTS/协议、roles、knowledge、templates、adapters 和 `scripts/` 保持在根目录。
-- 适用范围与影响：T-040 负责保留 Git 历史地完成目录迁移和构建入口修订，T-041 在新工程根独立复验三套工程门禁，T-042 从新工程根重建并验证个人未签名交付包。迁移不得夹带产品行为变更，不删除或覆盖根 `out/` 中的 T-022/T-038 历史证据和冻结包，也不移动未跟踪的 `package/` 原始样本或 `scripts/__pycache__/`。旧 T-038 包及证据继续作为原提交的历史冻结结果；新布局只有通过 T-041/T-042 后才成为后续默认工程入口。
+- 确认来源与日期：2026-09-15，本会话用户先指出根 `src/` 没有和项目绑定，随后确认仍放在 `opc` 仓库内，并明确要求在 `projects/space-rhythm/` 下新建独立目录保存完整工程源码；2026-09-16，在获知 GitHub 只发现仓库根工作流的影响后，用户进一步确认 `.github/workflows/` 也先完全移入 workspace。
+- 结果：新建 `projects/space-rhythm/workspace/` 作为唯一产品工程根，将当前跟踪的根 `CMakeLists.txt`、`CMakePresets.json`、`vcpkg.json` 以及 `cmake/`、`src/`、`tests/`、`tooling/`、工程 `docs/` 和 `.github/workflows/` 全部迁入该目录并更新有效引用。项目管理文件、成员配置、成果和证据继续位于 `projects/space-rhythm/`；框架的 AGENTS/协议、roles、knowledge、templates、adapters 和 `scripts/` 保持在根目录。仓库根不保留 GitHub Actions 入口。
+- 适用范围与影响：T-040 负责保留 Git 历史地完成目录迁移和构建入口修订，T-041 在新工程根独立复验三套工程门禁，T-042 从新工程根重建并验证个人未签名交付包。由于仓库根 `.github/workflows/` 被完全移走，GitHub Actions 不会自动发现迁移后的工作流，push、PR 和手动 Actions 自动构建暂时停用；恢复自动化须由用户另行确认根入口方案。迁移不得夹带产品行为变更，不删除或覆盖根 `out/` 中的 T-022/T-038 历史证据和冻结包，也不移动未跟踪的 `package/` 原始样本或 `scripts/__pycache__/`。旧 T-038 包及证据继续作为原提交的历史冻结结果；新布局只有通过 T-041/T-042 后才成为后续默认工程入口。
 - 关联任务/成果：T-040、T-041、T-042；现有 A-033～A-035 作为迁移前基线。
 - 替代关系：以 `projects/space-rhythm/workspace/` 的明确绑定替代 PROJECT 中“软件源码或外部资料位置按实际需要另行确定”的未绑定状态；不替代 D-001～D-015 的产品、技术、测试或个人未签名交付边界。
 

@@ -4,9 +4,9 @@
 - 发起人：project-manager-01
 - 目标：build-engineer-windows-qt-01
 - 关联任务：T-040；后续 T-041、T-042
-- 期望结果：在自己的项目会话中接收 D-016/T-040，新建 `projects/space-rhythm/workspace/`，把所有跟踪的产品工程文件迁入其中，更新 CMake/preset、测试、Qt/QML、构建/发布工具、CI 和工程文档路径，并以三 preset 配置/编译和路径审计证明该目录是唯一工程根；完成后明确移交 tester-cpp-qt-01。
+- 期望结果：在自己的项目会话中接收 D-016/T-040，新建 `projects/space-rhythm/workspace/`，把所有跟踪的产品工程文件及 `.github/workflows/` 迁入其中，更新 CMake/preset、测试、Qt/QML、构建/发布工具、CI 和工程文档路径，并以三 preset 配置/编译和路径审计证明该目录是唯一工程根；完成后明确移交 tester-cpp-qt-01。
 - 输入与证据：D-016 confirmed；迁移前提交 `9de4719`；根 `CMakeLists.txt`、`CMakePresets.json`、`vcpkg.json`、`cmake/`、`src/`、`tests/`、`tooling/`、`docs/`；`.github/workflows/windows-x64.yml`；A-013、A-034、A-035。
-- 未完成事项：尚未移动任何工程文件。`.github/workflows/` 必须留在仓库根但改为以 `projects/space-rhythm/workspace/` 为工作目录；项目管理资料继续位于 `projects/space-rhythm/`。框架文件、根 `out/` 历史证据/冻结包、未跟踪 `package/` 和 `scripts/__pycache__/` 不得移动或删除。T-041/T-042 是迁移后的独立测试与发布验证，不由本交接提前宣称完成。
+- 未完成事项：尚未移动任何工程文件。用户已确认 `.github/workflows/` 完全迁入 `projects/space-rhythm/workspace/.github/workflows/`，仓库根不保留工作流入口，因此 GitHub Actions 自动构建/PR 检查暂时停用；本任务只记录该已确认影响，不创建隐式兼容入口。项目管理资料继续位于 `projects/space-rhythm/`。框架文件、根 `out/` 历史证据/冻结包、未跟踪 `package/` 和 `scripts/__pycache__/` 不得移动或删除。T-041/T-042 是迁移后的独立测试与发布验证，不由本交接提前宣称完成。
 - 状态：pending
 - 创建日期：2026-09-15
 - 接收反馈：等待 build-engineer-windows-qt-01 在原会话接收。
