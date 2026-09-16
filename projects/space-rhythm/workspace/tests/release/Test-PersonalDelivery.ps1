@@ -6,6 +6,9 @@ param(
     [Parameter(Mandatory)]
     [string]$ZipPath,
 
+    [ValidateSet('T-038', 'T-042')]
+    [string]$TaskId = 'T-038',
+
     [string]$ReleaseBuildRoot = '',
     [string]$TestRoot = '',
     [string]$EvidenceRoot = ''
@@ -137,20 +140,23 @@ $repositoryRoot = (& git.exe -C $sourceRoot rev-parse --show-toplevel).Trim()
 Assert-Condition -Condition ($LASTEXITCODE -eq 0 -and -not [string]::IsNullOrWhiteSpace($repositoryRoot)) -Message 'Unable to resolve the Git repository root from the product workspace'
 $repositoryRoot = Get-NormalizedPath -LiteralPath $repositoryRoot
 $workspacePrefix = [System.IO.Path]::GetRelativePath($repositoryRoot, $sourceRoot).Replace('\', '/')
+$expectedWorkspacePrefix = 'projects/space-rhythm/workspace'
+Assert-Condition -Condition ($workspacePrefix -eq $expectedWorkspacePrefix) -Message "Product source root is not the D-016 workspace: $sourceRoot"
 $outputRoot = Get-NormalizedPath -LiteralPath (Join-Path $sourceRoot 'out')
+$taskToken = $TaskId.ToLowerInvariant().Replace('-', '')
 if ([string]::IsNullOrWhiteSpace($ReleaseBuildRoot)) {
     $ReleaseBuildRoot = Join-Path $outputRoot 'build\windows-msvc-x64-release'
 }
 if ([string]::IsNullOrWhiteSpace($TestRoot)) {
-    $TestRoot = Join-Path $outputRoot 'tests\T-038-personal-delivery'
+    $TestRoot = Join-Path $outputRoot "tests\$TaskId-personal-delivery"
 }
 if ([string]::IsNullOrWhiteSpace($EvidenceRoot)) {
-    $EvidenceRoot = Join-Path $outputRoot 'evidence\T-038\current'
+    $EvidenceRoot = Join-Path $outputRoot "evidence\$TaskId\current"
 }
 
-$bundle = Get-NormalizedPath -LiteralPath $BundleRoot
-$zip = Get-NormalizedPath -LiteralPath $ZipPath
-$releaseBuild = Get-NormalizedPath -LiteralPath $ReleaseBuildRoot
+$bundle = Assert-OutputPath -LiteralPath $BundleRoot -OutputRoot $outputRoot -Description 'BundleRoot'
+$zip = Assert-OutputPath -LiteralPath $ZipPath -OutputRoot $outputRoot -Description 'ZipPath'
+$releaseBuild = Assert-OutputPath -LiteralPath $ReleaseBuildRoot -OutputRoot $outputRoot -Description 'ReleaseBuildRoot'
 $test = Reset-OutputDirectory -LiteralPath $TestRoot -OutputRoot $outputRoot -Description 'TestRoot'
 $evidence = Reset-OutputDirectory -LiteralPath $EvidenceRoot -OutputRoot $outputRoot -Description 'EvidenceRoot'
 Assert-Condition -Condition (-not $test.StartsWith($evidence + '\', [System.StringComparison]::OrdinalIgnoreCase) -and -not $evidence.StartsWith($test + '\', [System.StringComparison]::OrdinalIgnoreCase)) -Message 'TestRoot and EvidenceRoot must not contain one another'
@@ -169,8 +175,26 @@ Assert-Condition -Condition ($inputs.schemaVersion -eq 3) -Message 'Package inpu
 Assert-Condition -Condition ($inputs.packageKind -eq 'unsigned-engineering' -and $inputs.candidateEligible -eq $false) -Message 'Package is not an unsigned, non-candidate engineering package'
 Assert-Condition -Condition ($inputs.deliveryScope.mode -eq 'personal-unsigned' -and $inputs.deliveryScope.publicDistributionAllowed -eq $false -and $inputs.deliveryScope.thirdPartyDeliveryAllowed -eq $false -and $inputs.deliveryScope.sacWdacCompatibilityClaim -eq 'none') -Message 'Package delivery scope exceeds the approved personal unsigned boundary'
 
+$expectedOutputRoot = Get-NormalizedPath -LiteralPath $outputRoot
+$expectedPackageOutputRoot = Get-NormalizedPath -LiteralPath (Split-Path -Parent $bundle)
+Assert-Condition -Condition ($null -ne $inputs.pathLayout) -Message 'Package does not record the migrated workspace path layout'
+Assert-Condition -Condition ((Get-NormalizedPath -LiteralPath $inputs.pathLayout.repositoryRoot) -eq $repositoryRoot) -Message 'Package repository root does not match the current checkout'
+Assert-Condition -Condition ($inputs.pathLayout.productWorkspaceRelativePath -eq $expectedWorkspacePrefix) -Message 'Package product workspace relative path is not the D-016 path'
+Assert-Condition -Condition ((Get-NormalizedPath -LiteralPath $inputs.pathLayout.productSourceRoot) -eq $sourceRoot) -Message 'Package source root is not the current product workspace'
+Assert-Condition -Condition ((Get-NormalizedPath -LiteralPath $inputs.pathLayout.productOutputRoot) -eq $expectedOutputRoot) -Message 'Package output root is outside the current product workspace'
+Assert-Condition -Condition ((Get-NormalizedPath -LiteralPath $inputs.pathLayout.releaseBuildRoot) -eq $releaseBuild) -Message 'Package Release build root does not match the tested build'
+Assert-Condition -Condition ((Get-NormalizedPath -LiteralPath $inputs.pathLayout.packageOutputRoot) -eq $expectedPackageOutputRoot) -Message 'Package output path does not match the tested bundle'
+
+$legacyRootEntries = @('src', 'tests', 'tooling', 'docs', 'cmake', 'CMakeLists.txt', 'CMakePresets.json', 'vcpkg.json', 'vcpkg-configuration.json')
+$presentLegacyRootEntries = @($legacyRootEntries | Where-Object { Test-Path -LiteralPath (Join-Path $repositoryRoot $_) })
+Assert-Condition -Condition ($presentLegacyRootEntries.Count -eq 0) -Message "Legacy repository-root product entries are present: $($presentLegacyRootEntries -join ', ')"
+$cmakeHomeLine = @(Select-String -LiteralPath (Join-Path $releaseBuild 'CMakeCache.txt') -Pattern '^CMAKE_HOME_DIRECTORY:INTERNAL=')
+Assert-Condition -Condition ($cmakeHomeLine.Count -eq 1) -Message 'Release CMake cache does not identify one product source root'
+$cmakeHome = Get-NormalizedPath -LiteralPath $cmakeHomeLine[0].Line.Substring('CMAKE_HOME_DIRECTORY:INTERNAL='.Length)
+Assert-Condition -Condition ($cmakeHome -eq $sourceRoot) -Message "Release build still references a legacy product root: $cmakeHome"
+
 $sacBefore = Get-SacState
-Assert-Condition -Condition ($sacBefore -eq 0) -Message "T-038 requires the D-013 TIGER SAC-off condition; found state $sacBefore"
+Assert-Condition -Condition ($sacBefore -eq 0) -Message "$TaskId requires the D-013 TIGER SAC-off condition; found state $sacBefore"
 
 $transactionOutput = (& $packageTest -BundleRoot $bundle -TestRoot (Join-Path $test 'transaction') -RunSmoke | Out-String)
 $transactionResult = $transactionOutput | ConvertFrom-Json
@@ -182,7 +206,7 @@ $stateRoot = Join-Path $deliveryRoot 'state'
 $externalRoot = Join-Path $deliveryRoot 'external-user-data'
 $externalSentinel = Join-Path $externalRoot 'must-survive.txt'
 New-Item -ItemType Directory -Path $externalRoot -Force | Out-Null
-Set-Content -LiteralPath $externalSentinel -Value 'T-038 data outside install and state roots' -Encoding utf8
+Set-Content -LiteralPath $externalSentinel -Value "$TaskId data outside install and state roots" -Encoding utf8
 
 $firstLaunchProcess = $null
 $manualUninstalled = $false
@@ -246,7 +270,7 @@ try {
     $coreReport = Join-Path $evidence 'core-workflow.qt.txt'
     $coreWrapperLog = Join-Path $evidence 'core-workflow.wrapper.log'
     $coreFunction = 'realImportAnalysisEditPreviewSaveAndExportPath'
-    $coreReportStem = 't038-personal-delivery-core'
+    $coreReportStem = "$taskToken-personal-delivery-core"
     $cmakeLine = @(Select-String -LiteralPath (Join-Path $releaseBuild 'CMakeCache.txt') -Pattern '^CMAKE_COMMAND:INTERNAL=')
     Assert-Condition -Condition ($cmakeLine.Count -eq 1) -Message 'Release CMake cache does not identify one CMake command'
     $cmake = $cmakeLine[0].Line.Substring('CMAKE_COMMAND:INTERNAL='.Length)
@@ -278,9 +302,9 @@ try {
     Assert-Condition -Condition ($auditState.installed -eq $false -and $auditState.lastAction -eq 'uninstall' -and [string]::IsNullOrWhiteSpace([string]$auditState.backupPath)) -Message 'Installation audit state does not record a clean uninstall'
 
     $sacAfter = Get-SacState
-    Assert-Condition -Condition ($sacAfter -eq 0) -Message "SAC state changed during T-038 validation: $sacAfter"
+    Assert-Condition -Condition ($sacAfter -eq 0) -Message "SAC state changed during $TaskId validation: $sacAfter"
     $completed = (Get-Date).ToUniversalTime()
-    $policy = Read-PolicyEvents -StartUtc $started -EndUtc $completed -Pattern 'space-rhythm|Qt6|T-038-personal-delivery'
+    $policy = Read-PolicyEvents -StartUtc $started -EndUtc $completed -Pattern "space-rhythm|Qt6|$([regex]::Escape($TaskId))-personal-delivery"
 
     $os = Get-ItemProperty -LiteralPath 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion'
     $notSigned = @($runtimeManifest | Where-Object { $_.AuthenticodeStatus -eq 'NotSigned' })
@@ -317,13 +341,24 @@ try {
         }
     }
     Assert-Condition -Condition ($unexpectedSourceDelta.Count -eq 0 -and $contentChanges.Count -eq 1 -and $contentChanges[0] -eq 'src/worker/main.cpp') -Message 'Unexpected production or core-workflow source changed after the T-022 tested commit; only path relocation plus the reviewed Worker stdout flush is allowed'
+    $t041TestedCommit = '616307cfc50cb448915358bf1d2a5e6836346eba'
+    $postMigrationProductPaths = @(
+        "$workspacePrefix/src",
+        "$workspacePrefix/CMakeLists.txt",
+        "$workspacePrefix/tests/CMakeLists.txt",
+        "$workspacePrefix/cmake",
+        "$workspacePrefix/vcpkg.json",
+        "$workspacePrefix/vcpkg-configuration.json")
+    $sourceDeltaAfterT041 = @(& git -C $repositoryRoot diff --name-status "$t041TestedCommit..$($inputs.sourceCommit)" -- @postMigrationProductPaths)
+    Assert-Condition -Condition ($LASTEXITCODE -eq 0) -Message 'Unable to compare the packaged product source with the T-041 tested commit'
+    Assert-Condition -Condition ($sourceDeltaAfterT041.Count -eq 0) -Message 'Production or core-workflow source changed after the T-041 migrated-workspace regression'
     $runnerCommit = (& git -C $repositoryRoot rev-parse HEAD).Trim()
     Assert-Condition -Condition ($LASTEXITCODE -eq 0) -Message 'Unable to identify the validation runner commit'
 
     $result = [ordered]@{
         schemaVersion = 1
-        evidenceVersion = 1
-        taskId = 'T-038'
+        evidenceVersion = $(if ($TaskId -eq 'T-042') { 2 } else { 1 })
+        taskId = $TaskId
         validationRunnerCommit = $runnerCommit
         result = 'pass'
         startedUtc = $started.ToString('o')
@@ -361,6 +396,20 @@ try {
             installedAppSha256 = $installedAppHash
             installedWorkerSha256 = $installedWorkerHash
             matchesCurrentReleaseBuild = $true
+        }
+        workspaceIsolation = [ordered]@{
+            repositoryRoot = $repositoryRoot
+            productSourceRoot = $sourceRoot
+            productWorkspaceRelativePath = $workspacePrefix
+            productOutputRoot = $outputRoot
+            packageOutputRoot = $expectedPackageOutputRoot
+            releaseBuildRoot = $releaseBuild
+            cmakeHomeDirectory = $cmakeHome
+            legacyRepositoryRootProductEntriesPresent = @($presentLegacyRootEntries)
+            packageRecordedPathLayout = $inputs.pathLayout
+            t041TestedCommit = $t041TestedCommit
+            productionAndWorkflowSourceDeltaAfterT041 = @($sourceDeltaAfterT041)
+            oldRepositoryRootProductDependencyObserved = $false
         }
         installation = [ordered]@{
             fullTransactionValidation = $transactionResult
@@ -405,7 +454,7 @@ try {
             testFunction = $coreFunction
             exitCode = $coreExit
             result = 'pass'
-            runtimeEnvironment = 'controlled T-022 Release harness; installed package runtime is validated independently by normal first launch and App/Worker smoke'
+            runtimeEnvironment = 'controlled T-041 migrated-workspace Release harness; installed package runtime is validated independently by normal first launch and App/Worker smoke'
             runtimeSearchPathPrefix = $qtTestBin
             testHarnessOnlyDependency = [ordered]@{
                 path = $qtTestDll
@@ -433,7 +482,7 @@ try {
                 'three-preset 166/166 engineering oracles'
             )
         }
-        preservedDiagnostics = @(
+        preservedDiagnostics = $(if ($TaskId -eq 'T-038') { @(
             [ordered]@{
                 result = 'fail'
                 exitCode = -1073741515
@@ -455,7 +504,8 @@ try {
                 stderr = ''
                 reason = 'The frozen pre-fix Worker returned success without a smoke marker when stdout was redirected. The issue reproduced on three clean-install launches and was corrected with an explicit stdout flush; the package was rebuilt and the final validation does not retry smoke.'
             }
-        )
+        ) } else { @() })
+        baselineDiagnosticsReference = $(if ($TaskId -eq 'T-042') { 'A-035 / T-038 retained baseline; no T-042 diagnostic failure occurred before this passing run.' } else { $null })
         diagnostics = $policy
         evaluationBoundary = [ordered]@{
             productEffectEvaluation = 'not-evaluated(deferred-to-personal-use-feedback)'

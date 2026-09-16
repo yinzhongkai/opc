@@ -560,6 +560,10 @@ foreach ($expectedCacheEntry in @(
         throw "Release build cache does not contain the frozen input: $expectedCacheEntry"
     }
 }
+$expectedSourceRoot = $sourceRoot.Replace('\', '/')
+if ($cacheText -notmatch "(?m)^CMAKE_HOME_DIRECTORY:INTERNAL=$([regex]::Escape($expectedSourceRoot))\r?$") {
+    throw "Release build cache does not use the migrated product workspace: $sourceRoot"
+}
 [void](Invoke-CapturedProcess -FilePath $vs.CMake `
     -Arguments @('--build', $buildRoot, '--parallel', $Parallel.ToString()) `
     -LogStem 'cmake-build-release')
@@ -713,8 +717,8 @@ $knownLimitations = @"
 - The application currently embeds development CC0 test timbres. No product default timbre is approved,
   so this package is never candidate-eligible.
 - Qt Quick Controls styles are not pruned until the product style is confirmed.
-- T-022 is complete. Current-host T-038 evidence is still required for each delivery package;
-  packaging success alone is not release approval.
+- T-038 established the pre-migration personal-delivery baseline. Every newly generated package still
+  requires current-host validation; packaging success alone is not release approval.
 "@
 Set-Content -LiteralPath (Join-Path $payloadRoot 'docs\known-limitations.md') `
     -Value $knownLimitations -Encoding utf8
@@ -730,7 +734,7 @@ $missingInputs = @(
     'minimum supported Windows version',
     'VC Runtime redistribution strategy',
     'production container/H.264/AAC backend',
-    'T-038 current-host personal delivery validation evidence',
+    'current-package current-host personal delivery validation evidence',
     'product timbre and visual style approval')
 $buildInputs = [ordered]@{
     schemaVersion = 3
@@ -741,6 +745,15 @@ $buildInputs = [ordered]@{
     sourceWorktreeClean = ($gitStatus.Count -eq 0)
     sourceWorktreeStatus = @($gitStatus)
     candidateEligible = $false
+    pathLayout = [ordered]@{
+        repositoryRoot = $repositoryRoot
+        productWorkspaceRelativePath = [System.IO.Path]::GetRelativePath($repositoryRoot, $sourceRoot).Replace('\', '/')
+        productSourceRoot = $sourceRoot
+        productOutputRoot = $outRoot
+        releaseBuildRoot = $buildRoot
+        vcpkgInstalledRoot = $vcpkgInstalledRoot
+        packageOutputRoot = $OutputRoot
+    }
     deliveryScope = [ordered]@{
         mode = 'personal-unsigned'
         intendedUser = 'project owner'
@@ -935,6 +948,7 @@ $summary = [ordered]@{
     sacWdacCompatibilityClaim = 'none'
     sourceCommit = $gitCommit
     sourceWorktreeClean = ($gitStatus.Count -eq 0)
+    pathLayout = $buildInputs.pathLayout
     bundleRoot = $bundleRoot
     zipPath = $zipPath
     zipLength = (Get-Item -LiteralPath $zipPath).Length
