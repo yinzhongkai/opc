@@ -19,6 +19,7 @@
 | [DECISIONS.md](project/DECISIONS.md) | 决定记录样式 |
 | [HANDOFFS.md](project/HANDOFFS.md) | 交接记录样式 |
 | [artifacts/README.md](project/artifacts/README.md) | 成果索引与元信息样式 |
+| [workspace/README.md](project/workspace/README.md) | 项目工作目录说明；成员日常读写与中间产物落点 |
 
 建项后检查占位符、配置与本地链接，输出成员启动消息。结构检查通过不代表成员会话已经初始化或示例任务已经登记。
 

@@ -81,7 +81,7 @@ knowledge: [software-engineering]
 
 ## 项目共享文件
 
-实际项目及空白模板均包含 `AGENTS.md`、`PROJECT.md`、`TEAM.yaml`、`members/README.md`、`TASKS.md`、`STATUS.md`、`DECISIONS.md`、`HANDOFFS.md` 和 `artifacts/README.md`。空白模板使用空 members 列表，不预置真实成员文件。没有任务、决定或交接时明确写“暂无”，不要把格式样例登记为真实记录。
+实际项目及空白模板均包含 `AGENTS.md`、`PROJECT.md`、`TEAM.yaml`、`members/README.md`、`TASKS.md`、`STATUS.md`、`DECISIONS.md`、`HANDOFFS.md`、`artifacts/README.md` 和 `workspace/README.md`。`workspace/` 是项目的工作目录，成员日常读写与中间产物落在其中，正式成果仍入 `artifacts/`。空白模板使用空 members 列表，不预置真实成员文件。没有任务、决定或交接时明确写“暂无”，不要把格式样例登记为真实记录。
 
 Markdown 记录字段和状态由 [PROJECT_PROTOCOL.md](PROJECT_PROTOCOL.md) 定义。初始化时还须人工核对 PROJECT 中的确认人、协调记录维护人和任务事实；校验器不把 Markdown 的业务语义当作已验证事实。
 
