@@ -2,7 +2,7 @@
 
 - 汇总日期与信息截至点：2026-09-13；信息范围为 T-001–T-003 完成、书稿迁移及用户通读计划声明后的各台账记录。
 - 维护人：project-manager（按 [PROJECT.md](PROJECT.md) 指定的协调记录维护人）。
-- 当前阶段：筹备；目标为使本项目 `yocto/` 目录书稿草稿达到出版程度，详见 [PROJECT.md](PROJECT.md)。书稿已于 2026-09-13 迁入 `projects/book-yocto/yocto/` 并纳入 Git。
+- 当前阶段：筹备；目标为使本项目 `workspace/yocto/` 目录书稿草稿达到出版程度，详见 [PROJECT.md](PROJECT.md)。书稿 2026-09-13 迁入 `projects/book-yocto/yocto/` 并纳入 Git，2026-09-16 经用户指示再迁入 `projects/book-yocto/workspace/yocto/`（内容与行号未变）。
 - 任务进展：
   - T-001 书稿现状评估（writer）：completed，产出 [A-001](artifacts/A-001-书稿现状评估.md) v0.1（draft）。
   - T-002 起草全书打磨计划（project-manager）：completed，产出 [A-002](artifacts/A-002-book-polishing-plan.md) v0.1（draft），含五阶段建议与评审组织建议。
@@ -10,7 +10,7 @@
 - 关键成果：A-001、A-002、A-003 均为 v0.1 draft，均未经批准。
 - 阻塞、待确认事项及下一位行动人：
   - **用户**：①持 A-003 通读草稿逐条校验（进行中，用户 2026-09-12 声明）；②确认 D-001–D-006（D-001 tiger 组技术验证范围最关键，A-003 的环境提示可作决策参考）；③通读 chapter 8 时顺带裁决 X-1（deploy 路径 ipk/rpm 出入）。
-  - 可并行：~~P1 确定性修复项可随时安排~~ 已登记 **T-004**（修复 yocto/index.md，负责人 writer，todo，2026-09-13 用户确认）；下一位行动人 writer。
+  - 可并行：~~P1 确定性修复项可随时安排~~ 已登记 **T-004**（修复 workspace/yocto/index.md，负责人 writer，todo，2026-09-13 用户确认）；下一位行动人 writer。
 - 通读期协作约定（2026-09-13 用户确认）：通读中发现的问题按类型分流——清单内结论直接标注在 A-003，清单外内容问题提给 writer，存疑项标 reviewer，范围/计划问题提给 project-manager，配置问题转超级管理员；**拿不准的一律先汇集到 project-manager 会话，由其分类、登记交接并跟踪到关闭**。
 
 本文件是摘要，原始事实以 [TASKS.md](TASKS.md)、[DECISIONS.md](DECISIONS.md)、[HANDOFFS.md](HANDOFFS.md) 和 [成果索引](artifacts/README.md) 为准。汇总后注明实际信息范围，过期摘要不能覆盖原始记录。
