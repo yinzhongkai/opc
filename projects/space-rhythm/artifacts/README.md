@@ -16,7 +16,7 @@
 | A-010 | [C++ 核心/系统工作流执行方案](A-010-cpp-core-systems-execution-plan.md) | core-systems-engineer-cpp-01 | T-014 / T-015 / T-016 | 0.1 | draft | 尚无 |
 | A-011 | [一期 MVP 完整研发编制与任务计划](A-011-complete-mvp-engineering-staffing-and-task-plan.md) | architect-01 | T-023 | 0.1 | draft | 尚无 |
 | A-012 | [核心时间、事件、修订与事务契约 0.x](A-012-core-domain-contract-0x.md) | core-systems-engineer-cpp-01 | T-014 | 0.1 | draft | 尚无 |
-| A-013 | [Windows x64 CMake/Ninja 工程与 CI 骨架](A-013-windows-x64-cmake-ci-skeleton.md) | build-engineer-windows-qt-01 | T-013 | 0.2 | draft | 尚无 |
+| A-013 | [Windows x64 CMake/Ninja 工程与 CI 骨架](A-013-windows-x64-cmake-ci-skeleton.md) | build-engineer-windows-qt-01 | T-013 | 0.3 | draft | 尚无；D-016/T-040 后有效入口为项目 workspace，迁移证据见 A-036 0.1 |
 | A-014 | [媒体时间、流、缓冲与黄金样例契约 0.x](A-014-media-time-buffer-and-golden-contract.md) | multimedia-engineer-ffmpeg-01 | T-017 | 0.4 | draft | 尚无 |
 | A-015 | [FFmpeg 媒体探测、解码、时间映射与代理管线](A-015-ffmpeg-media-pipeline.md) | multimedia-engineer-ffmpeg-01 | T-018 | 0.3 | draft | 尚无 |
 | A-016 | [C++/Qt 测试策略、需求追踪与可复现规则](A-016-cpp-qt-test-strategy-and-traceability.md) | tester-cpp-qt-01 | T-020 | 0.1 | draft | 尚无 |
@@ -39,6 +39,7 @@
 | A-033 | [Windows 个人未签名部署与事务安装工程流水线](A-033-windows-unsigned-deployment-and-transaction-pipeline.md) | release-engineer-windows-01 | T-037 | 0.2 | draft | D-012/D-013 confirmed；仅个人未签名范围，当前 TIGER SAC-off 验证通过，不含 SAC/WDAC 兼容声明 |
 | A-034 | [T-022 工程端到端、故障恢复与质量门禁证据](A-034-t022-engineering-e2e-fault-recovery-quality-gates.md) | tester-cpp-qt-01 | T-022 | 0.1 | draft | 三 preset 各 166/166 工程 oracle pass；产品效果、自然度、真实 VFR、正式产品性能均 deferred/not-evaluated |
 | A-035 | [Windows 个人未签名交付验证](A-035-windows-personal-unsigned-delivery-validation.md) | release-engineer-windows-01 | T-038 | 0.1 | draft | D-012/D-013/D-015 范围；当前 TIGER SAC-off 交付链通过，不含 SAC/WDAC、产品效果、公开分发或生产发布结论 |
+| A-036 | [产品工程根迁入项目 workspace](A-036-product-workspace-root-migration.md) | build-engineer-windows-qt-01 | T-040、H-018 | 0.1 | draft | D-016 confirmed；三 preset clean configure/build 通过，T-041/T-042 尚未执行，根 GitHub Actions 入口按决定暂时停用 |
 
 ## 正文元信息样式（不是真实成果）
 

@@ -196,9 +196,9 @@ T-029 必须先完成 T-028 并取得可复核的经典算法基线证据。
 
 ## 6. 代表样本矩阵与完整性
 
-机器可读清单为 [`tests/golden/video/fixtures-v1.json`](../../../tests/golden/video/fixtures-v1.json)，
-许可声明见 [`LICENSE.md`](../../../tests/golden/video/LICENSE.md)，结构和规范串校验入口为
-[`Test-GoldenVideoManifest.ps1`](../../../tests/golden/video/Test-GoldenVideoManifest.ps1)。
+机器可读清单为 [`tests/golden/video/fixtures-v1.json`](../workspace/tests/golden/video/fixtures-v1.json)，
+许可声明见 [`LICENSE.md`](../workspace/tests/golden/video/LICENSE.md)，结构和规范串校验入口为
+[`Test-GoldenVideoManifest.ps1`](../workspace/tests/golden/video/Test-GoldenVideoManifest.ps1)。
 
 | 样本 | 代表切片 | 正向标注 | 主要负向约束 |
 |---|---|---|---|

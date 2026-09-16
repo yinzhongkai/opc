@@ -15,8 +15,8 @@
 ## 1. 实现结论
 
 新增 `SpaceRhythm::VideoAnalysis` 纯 C++ 静态库，公共接口见
-[`analysis.hpp`](../../../src/video_analysis/include/space_rhythm/video/analysis.hpp)，实现见
-[`analysis.cpp`](../../../src/video_analysis/analysis.cpp)。实现直接消费媒体 schema 2 已归一化
+[`analysis.hpp`](../workspace/src/video_analysis/include/space_rhythm/video/analysis.hpp)，实现见
+[`analysis.cpp`](../workspace/src/video_analysis/analysis.cpp)。实现直接消费媒体 schema 2 已归一化
 BGRA `VideoFrame` 及其真实 `timeNs`，输出核心 schema 1 `AnalysisCandidate`；不重建名义帧率时间，
 不写核心时间线，也不改变媒体层 PTS 所有权。
 
@@ -44,11 +44,11 @@ BGRA `VideoFrame` 及其真实 `timeNs`，输出核心 schema 1 `AnalysisCandida
 
 ## 3. 真实 golden
 
-[`Generate-GoldenVideo.ps1`](../../../tests/golden/video/Generate-GoldenVideo.ps1) 以项目自制 C#
+[`Generate-GoldenVideo.ps1`](../workspace/tests/golden/video/Generate-GoldenVideo.ps1) 以项目自制 C#
 确定性 BGRA 帧和锁定 FFmpeg `8.1.2` 生成 10 项 FFV1/bgr0 MKV。生成器支持正常生成、
 `-RawOnly` 隔离编码和 `-ValidateOnly`；媒体文件保持 gitignored，仓库提交配方、实际 SHA-256、
 字节数和 ffprobe 证据。完整记录见
-[`actual-hashes-and-probe-v1.json`](../../../tests/golden/video/generated/actual-hashes-and-probe-v1.json)。
+[`actual-hashes-and-probe-v1.json`](../workspace/tests/golden/video/generated/actual-hashes-and-probe-v1.json)。
 
 同一生成流程连续执行两次，10 项媒体 SHA-256 全部一致。CFR 样本分别为 30/1 或 60/1；
 VFR 样本实际 PTS 为 `0, 40, 100, 140, 240, 400, 600 ms`，算法候选落在真实 240 ms，未按

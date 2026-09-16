@@ -63,7 +63,7 @@ mono 直接输出。stereo 使用确定性线性声像：中心左右均为 1.0�
 
 ## 5. Oracle、测试和设备失败
 
-[render-oracles-v1.json](../../../tests/golden/audio/render-oracles-v1.json) 冻结一个 4,800-frame stereo low-pulse 场景：PCM SHA-256 为 `9a8211f7d16e8e42a69d76623c3b5f1d80e7fc78484c752017975e2f53f3d182`，WAV SHA-256 为 `a2b9c9f33733e9c3e64486aaeabe706a44334a49155012bb2c05224a4de34614`。精确值、事件顺序、重复运行和分块边界的数值容差均为 0。
+[render-oracles-v1.json](../workspace/tests/golden/audio/render-oracles-v1.json) 冻结一个 4,800-frame stereo low-pulse 场景：PCM SHA-256 为 `9a8211f7d16e8e42a69d76623c3b5f1d80e7fc78484c752017975e2f53f3d182`，WAV SHA-256 为 `a2b9c9f33733e9c3e64486aaeabe706a44334a49155012bb2c05224a4de34614`。精确值、事件顺序、重复运行和分块边界的数值容差均为 0。
 
 自动化覆盖三音色清单/哈希/许可、变造与 NaN、最近采样触发、起点前尾音、重叠、规则/主增益、声像、硬削波、重复运行、事件乱序、1/257/1024/17/3333-frame 分块、PCM/WAV 同源、取消、资源上限、未知产品音色和 null `QAudioDevice`。null 设备返回 `device_unavailable`，测试同时复核调用前后离线 PCM 字节未变。
 

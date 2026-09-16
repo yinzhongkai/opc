@@ -323,7 +323,7 @@ DSP 复用 A-012 `ErrorInfo` envelope。下列是 schema 1 需新增的稳定逻
 
 ## 9. 可复现向量与合法测试音色
 
-规范清单为 [fixtures-v1.json](../../../tests/golden/audio/fixtures-v1.json)，生成/自校脚本为 [Generate-AudioDspVectors.ps1](../../../tests/golden/audio/Generate-AudioDspVectors.ps1)，许可声明为 [LICENSE.md](../../../tests/golden/audio/LICENSE.md)，实际字节证据为 [actual-hashes-v1.json](../../../tests/golden/audio/generated/actual-hashes-v1.json)。生成器仅使用整数/Q23 配方、固定 LCG 和 IEEE-754 binary32 小端编码; 不读取 FFmpeg、`package/`、用户媒体或第三方录音。
+规范清单为 [fixtures-v1.json](../workspace/tests/golden/audio/fixtures-v1.json)，生成/自校脚本为 [Generate-AudioDspVectors.ps1](../workspace/tests/golden/audio/Generate-AudioDspVectors.ps1)，许可声明为 [LICENSE.md](../workspace/tests/golden/audio/LICENSE.md)，实际字节证据为 [actual-hashes-v1.json](../workspace/tests/golden/audio/generated/actual-hashes-v1.json)。生成器仅使用整数/Q23 配方、固定 LCG 和 IEEE-754 binary32 小端编码; 不读取 FFmpeg、`package/`、用户媒体或第三方录音。
 
 | ID | 类别 | 格式/长度 | PCM SHA-256 | 主要用途 |
 |---|---|---|---|---|

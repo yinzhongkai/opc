@@ -41,6 +41,7 @@ jobs:
 
       - name: Configure, build, test, deploy and smoke
         shell: pwsh
+        working-directory: projects/space-rhythm/workspace
         run: |
           ./tooling/windows/Invoke-ProjectBuild.ps1 `
             -Preset ci-windows-msvc-x64 `
@@ -54,6 +55,6 @@ jobs:
           name: space-rhythm-windows-x64
           if-no-files-found: warn
           path: |
-            out/install/ci-windows-msvc-x64/
-            out/evidence/T-013/ci-windows-msvc-x64/
+            projects/space-rhythm/workspace/out/install/ci-windows-msvc-x64/
+            projects/space-rhythm/workspace/out/evidence/T-013/ci-windows-msvc-x64/
           retention-days: 14

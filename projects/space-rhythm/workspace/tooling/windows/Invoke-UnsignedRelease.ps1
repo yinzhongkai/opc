@@ -19,6 +19,11 @@ Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 
 $sourceRoot = [System.IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..\..'))
+$repositoryRoot = (& git.exe -C $sourceRoot rev-parse --show-toplevel).Trim()
+if ($LASTEXITCODE -ne 0 -or [string]::IsNullOrWhiteSpace($repositoryRoot)) {
+    throw 'Unable to resolve the Git repository root from the product workspace'
+}
+$repositoryRoot = [System.IO.Path]::GetFullPath($repositoryRoot)
 $outRoot = [System.IO.Path]::GetFullPath((Join-Path $sourceRoot 'out'))
 $buildRoot = [System.IO.Path]::GetFullPath((Join-Path $outRoot "build\$Preset"))
 $vcpkgInstalledRoot = [System.IO.Path]::GetFullPath(
@@ -530,13 +535,13 @@ foreach ($packageName in @('ffmpeg', 'opencv4', 'kissfft', 'gtest')) {
     $script:VcpkgPackages[$packageName] = Get-InstalledVcpkgPackage -Name $packageName
 }
 
-$gitCommit = (& git.exe -C $sourceRoot rev-parse HEAD).Trim()
+$gitCommit = (& git.exe -C $repositoryRoot rev-parse HEAD).Trim()
 if ($LASTEXITCODE -ne 0 -or $gitCommit -notmatch '^[0-9a-f]{40}$') {
     throw 'Unable to resolve the source Git commit'
 }
-$commitTimestampText = (& git.exe -C $sourceRoot show -s --format=%cI $gitCommit).Trim()
+$commitTimestampText = (& git.exe -C $repositoryRoot show -s --format=%cI $gitCommit).Trim()
 $commitTimestamp = [datetimeoffset]::Parse($commitTimestampText).ToUniversalTime()
-$gitStatus = @(& git.exe -C $sourceRoot status --porcelain=v1 --untracked-files=all)
+$gitStatus = @(& git.exe -C $repositoryRoot status --porcelain=v1 --untracked-files=all)
 if ($LASTEXITCODE -ne 0) {
     throw 'Unable to inspect the source worktree status'
 }
@@ -556,7 +561,7 @@ foreach ($expectedCacheEntry in @(
     }
 }
 [void](Invoke-CapturedProcess -FilePath $vs.CMake `
-    -Arguments @('--build', '--preset', $Preset, '--parallel', $Parallel.ToString()) `
+    -Arguments @('--build', $buildRoot, '--parallel', $Parallel.ToString()) `
     -LogStem 'cmake-build-release')
 
 $applicationSource = Join-Path $buildRoot 'space-rhythm.exe'

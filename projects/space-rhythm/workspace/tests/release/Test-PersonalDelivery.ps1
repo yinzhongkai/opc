@@ -133,6 +133,10 @@ function Read-PolicyEvents {
 }
 
 $sourceRoot = Get-NormalizedPath -LiteralPath (Join-Path $PSScriptRoot '..\..')
+$repositoryRoot = (& git.exe -C $sourceRoot rev-parse --show-toplevel).Trim()
+Assert-Condition -Condition ($LASTEXITCODE -eq 0 -and -not [string]::IsNullOrWhiteSpace($repositoryRoot)) -Message 'Unable to resolve the Git repository root from the product workspace'
+$repositoryRoot = Get-NormalizedPath -LiteralPath $repositoryRoot
+$workspacePrefix = [System.IO.Path]::GetRelativePath($repositoryRoot, $sourceRoot).Replace('\', '/')
 $outputRoot = Get-NormalizedPath -LiteralPath (Join-Path $sourceRoot 'out')
 if ([string]::IsNullOrWhiteSpace($ReleaseBuildRoot)) {
     $ReleaseBuildRoot = Join-Path $outputRoot 'build\windows-msvc-x64-release'
@@ -281,10 +285,39 @@ try {
     $os = Get-ItemProperty -LiteralPath 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion'
     $notSigned = @($runtimeManifest | Where-Object { $_.AuthenticodeStatus -eq 'NotSigned' })
     $valid = @($runtimeManifest | Where-Object { $_.AuthenticodeStatus -eq 'Valid' })
-    $sourceDelta = @(& git -C $sourceRoot diff --name-only be61c71e9803..$($inputs.sourceCommit) -- src CMakeLists.txt tests/CMakeLists.txt cmake vcpkg.json vcpkg-configuration.json)
+    $legacyProductPaths = @('src', 'CMakeLists.txt', 'tests/CMakeLists.txt', 'cmake', 'vcpkg.json', 'vcpkg-configuration.json')
+    $workspaceProductPaths = @($legacyProductPaths | ForEach-Object { "$workspacePrefix/$_" })
+    $sourceDelta = @(& git -C $repositoryRoot diff --find-renames=50% --name-status be61c71e9803..$($inputs.sourceCommit) -- @legacyProductPaths @workspaceProductPaths)
+    Assert-Condition -Condition ($LASTEXITCODE -eq 0) -Message 'Unable to compare the packaged source with the T-022 tested commit'
     $normalizedSourceDelta = @($sourceDelta | ForEach-Object { $_.Replace('\', '/') })
-    Assert-Condition -Condition ($LASTEXITCODE -eq 0 -and $normalizedSourceDelta.Count -eq 1 -and $normalizedSourceDelta[0] -eq 'src/worker/main.cpp') -Message 'Unexpected production or core-workflow source changed after the T-022 tested commit'
-    $runnerCommit = (& git -C $sourceRoot rev-parse HEAD).Trim()
+    $contentChanges = [System.Collections.Generic.List[string]]::new()
+    $unexpectedSourceDelta = [System.Collections.Generic.List[string]]::new()
+    foreach ($entry in $normalizedSourceDelta) {
+        $fields = @($entry -split "`t")
+        $statusMatch = if ($fields.Count -eq 3) {
+            [regex]::Match($fields[0], '^R([0-9]{3})$')
+        }
+        else {
+            $null
+        }
+        if ($null -eq $statusMatch -or -not $statusMatch.Success) {
+            $unexpectedSourceDelta.Add($entry)
+            continue
+        }
+        $score = [int]$statusMatch.Groups[1].Value
+        $oldPath = $fields[1]
+        $newPath = $fields[2]
+        $expectedNewPath = "$workspacePrefix/$oldPath"
+        if ($newPath -ne $expectedNewPath) {
+            $unexpectedSourceDelta.Add($entry)
+            continue
+        }
+        if ($score -ne 100) {
+            $contentChanges.Add($oldPath)
+        }
+    }
+    Assert-Condition -Condition ($unexpectedSourceDelta.Count -eq 0 -and $contentChanges.Count -eq 1 -and $contentChanges[0] -eq 'src/worker/main.cpp') -Message 'Unexpected production or core-workflow source changed after the T-022 tested commit; only path relocation plus the reviewed Worker stdout flush is allowed'
+    $runnerCommit = (& git -C $repositoryRoot rev-parse HEAD).Trim()
     Assert-Condition -Condition ($LASTEXITCODE -eq 0) -Message 'Unable to identify the validation runner commit'
 
     $result = [ordered]@{

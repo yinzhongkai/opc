@@ -26,6 +26,10 @@ import av
 import yt_dlp
 
 
+SOURCE_ROOT = Path(__file__).resolve().parents[3]
+PROJECT_ROOT = SOURCE_ROOT.parent
+
+
 TABLE_ROW = re.compile(
     r"^\|\s*(SR-BILI-[A-Z]+-\d{3})\s*\|\s*([^|]+?)\s*\|\s*([^|]+?)\s*\|"
     r"\s*\[([^]]+)\]\((https://www\.bilibili\.com/video/(BV[0-9A-Za-z]+)/)\)\s*([^|]*?)\s*\|"
@@ -695,7 +699,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--source-doc",
         type=Path,
-        default=Path("projects/space-rhythm/artifacts/A-031-t029-video-product-evaluation-input.md"),
+        default=PROJECT_ROOT / "artifacts/A-031-t029-video-product-evaluation-input.md",
     )
     parser.add_argument(
         "--output-dir",

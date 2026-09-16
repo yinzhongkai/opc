@@ -384,7 +384,7 @@ ChannelState = created | open | draining | ended | failed | cancelled | closed
 
 ## 10. 黄金样例矩阵
 
-规范清单位于 [fixtures-v1.json](../../../tests/golden/media/fixtures-v1.json)，生成器为 [Generate-GoldenMedia.ps1](../../../tests/golden/media/Generate-GoldenMedia.ps1)，只读验证器为 [Test-GoldenMediaManifest.ps1](../../../tests/golden/media/Test-GoldenMediaManifest.ps1)，许可声明见 [LICENSE.md](../../../tests/golden/media/LICENSE.md)。它们都明确拒绝使用 `package/` 或外部视听内容。
+规范清单位于 [fixtures-v1.json](../workspace/tests/golden/media/fixtures-v1.json)，生成器为 [Generate-GoldenMedia.ps1](../workspace/tests/golden/media/Generate-GoldenMedia.ps1)，只读验证器为 [Test-GoldenMediaManifest.ps1](../workspace/tests/golden/media/Test-GoldenMediaManifest.ps1)，许可声明见 [LICENSE.md](../workspace/tests/golden/media/LICENSE.md)。它们都明确拒绝使用 `package/` 或外部视听内容。
 
 ### 10.1 样例登记
 
@@ -406,7 +406,7 @@ ChannelState = created | open | draining | ended | failed | cancelled | closed
 
 表中的 hash 是 `canonicalRecipe` UTF-8 字节的 SHA-256，独立于文本换行和 FFmpeg muxer 的版本元数据。它冻结样例语义、来源和生成方法，不伪装成尚未生成的媒体文件 hash。
 
-生成器在项目固定的 FFmpeg/ffprobe 构建可用后生成二进制，并自动写入已登记的 [actual-hashes-and-probe-v1.json](../../../tests/golden/media/generated/actual-hashes-and-probe-v1.json)，包含实际媒体 SHA-256、FFmpeg 版本及 configuration、recipe hash、逐帧/流/容器 ffprobe JSON 和退出码。实际媒体 hash 只对同一固定构建与配方有复现意义；媒体二进制仍被忽略，证据 JSON 纳入版本控制。FFmpeg 不可用时脚本在写输出前失败，`-ValidateOnly` 只检查清单和时间算术。
+生成器在项目固定的 FFmpeg/ffprobe 构建可用后生成二进制，并自动写入已登记的 [actual-hashes-and-probe-v1.json](../workspace/tests/golden/media/generated/actual-hashes-and-probe-v1.json)，包含实际媒体 SHA-256、FFmpeg 版本及 configuration、recipe hash、逐帧/流/容器 ffprobe JSON 和退出码。实际媒体 hash 只对同一固定构建与配方有复现意义；媒体二进制仍被忽略，证据 JSON 纳入版本控制。FFmpeg 不可用时脚本在写输出前失败，`-ValidateOnly` 只检查清单和时间算术。
 
 ### 10.2 逻辑边界向量
 

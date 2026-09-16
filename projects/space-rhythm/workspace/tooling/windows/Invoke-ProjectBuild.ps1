@@ -158,8 +158,11 @@ $transcriptPath = Join-Path $EvidenceRoot "build-$runTimestamp.log"
 $script:NativeLogPath = Join-Path $EvidenceRoot "native-$runTimestamp.log"
 New-Item -ItemType File -Force -Path $script:NativeLogPath | Out-Null
 Start-Transcript -LiteralPath $transcriptPath -Force | Out-Null
+$locationPushed = $false
 
 try {
+    Push-Location -LiteralPath $sourceRoot
+    $locationPushed = $true
     $env:VSLANG = '1033'
     Import-VsDevEnvironment
     $QtRoot = [System.IO.Path]::GetFullPath($QtRoot)
@@ -279,6 +282,9 @@ try {
     }
 }
 finally {
+    if ($locationPushed) {
+        Pop-Location
+    }
     Stop-Transcript | Out-Null
     Write-Host "Evidence: $EvidenceRoot"
 }

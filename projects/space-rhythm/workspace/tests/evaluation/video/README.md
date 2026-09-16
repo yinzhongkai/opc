@@ -9,6 +9,7 @@
 依赖仅安装到被 Git 忽略的 `out/`，不是产品运行时依赖：
 
 ```powershell
+Set-Location projects/space-rhythm/workspace
 python -m pip install --target out/tools/t029-py -r tests/evaluation/video/requirements-t029.txt
 $env:PYTHONPATH = "out/tools/t029-py"
 ```
@@ -18,7 +19,7 @@ $env:PYTHONPATH = "out/tools/t029-py"
 ```powershell
 python tests/evaluation/video/acquire_product_evaluation_media.py `
   --metadata-only `
-  --manifest-out projects/space-rhythm/evidence/T-029/source-availability-audit-v1.json
+  --manifest-out ../evidence/T-029/source-availability-audit-v1.json
 ```
 
 获取代理并冻结证据：
@@ -26,7 +27,7 @@ python tests/evaluation/video/acquire_product_evaluation_media.py `
 ```powershell
 python tests/evaluation/video/acquire_product_evaluation_media.py `
   --output-dir out/evaluation/T-029/media `
-  --manifest-out projects/space-rhythm/evidence/T-029/product-dataset-manifest-v1.json
+  --manifest-out ../evidence/T-029/product-dataset-manifest-v1.json
 ```
 
 任一来源失效或时间窗不足时，工具仍保存其他 clip 的证据，但返回非零；不得据此静默缩短时间窗。

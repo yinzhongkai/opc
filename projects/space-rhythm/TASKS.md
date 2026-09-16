@@ -21,22 +21,22 @@
 - 输入与依赖：T-040 completed；D-016 confirmed；A-016、A-017、A-034；迁移前 T-022 三 preset 166/166 基线。
 - 优先级：高；位于 T-040 与 T-042 之间。
 - 完成条件与确认方式：从新工程根以干净跟踪工作树执行 Windows x64 Debug、CI/RelWithDebInfo、Release 三套统一入口；核对 CTest/JUnit、Qt/QML、真实 UI/Worker、媒体、存储、取消和恢复结果；检查测试临时目录、fixture、生成清单及证据路径不写回仓库根旧工程位置；记录失败、修正归属、测试数量变化和未评估边界，形成版本化证据并由负责人自查。
-- 进展：任务已登记，等待 T-040。
-- 成果与验证证据：待负责人形成迁移后独立复验证据；迁移前基线为 A-034 0.1。
-- 阻塞与下一位行动人：计划依赖尚未完成；T-040 完成后由 tester-cpp-qt-01 执行。
-- 更新日期：2026-09-15。
+- 进展：2026-09-16，T-040 已完成并提交 A-036 0.1 与三 preset 构建/路径隔离证据；本任务尚未启动，等待 tester-cpp-qt-01 独立执行。
+- 成果与验证证据：待负责人形成迁移后独立复验证据；迁移输入为 A-036 0.1、T-040 验证摘要，迁移前基线为 A-034 0.1。
+- 阻塞与下一位行动人：无计划阻塞；下一位行动人为 tester-cpp-qt-01，按本任务从新 workspace 独立复验，不复用 T-040 的通过结论替代测试。
+- 更新日期：2026-09-16。
 
 ## T-040：将完整产品工程根迁入项目目录
 - 负责人：build-engineer-windows-qt-01
-- 状态：todo
+- 状态：completed
 - 授权来源与日期：2026-09-15，本会话用户确认仍使用 `opc` 仓库，并要求在 `projects/space-rhythm/` 下新建独立目录保存完整工程源码；2026-09-16 又在获知 GitHub 自动发现限制后明确要求 `.github/workflows/` 先完全移入 workspace。project-manager-01 依据已确认范围登记执行任务。
 - 目标与范围：新建 `projects/space-rhythm/workspace/`，使用保留 Git 历史的移动，将根 `CMakeLists.txt`、`CMakePresets.json`、`vcpkg.json`、`cmake/`、`src/`、`tests/`、`tooling/`、工程 `docs/` 和 `.github/workflows/` 迁入其中，修订 CMake、preset、Qt/QML、测试、发布脚本、CI 和文档中的有效路径，使该目录成为唯一产品工程根；不修改产品行为或框架规则。
 - 输入与依赖：D-016 confirmed；当前 HEAD 与迁移前 T-022/T-038 证据；根工程入口、`.github/workflows/windows-x64.yml`、`.gitignore`；现有 Qt 6.11.2/vcpkg/MSVC 基线。
 - 优先级：高；当前迁移关键路径首项。
 - 完成条件与确认方式：通过 `git mv` 或等价保留历史的方式完成全部跟踪工程文件迁移；仓库根不再保留产品 `src/tests/tooling/docs/cmake`、产品 CMake/vcpkg 入口或 `.github/workflows/`；迁移后的工作流保存在 `projects/space-rhythm/workspace/.github/workflows/`，并明确记录其不会被 GitHub 自动发现；所有相对路径、本地 Markdown 链接、QML import、CMake source/binary 路径、测试 fixture、发布输入与 Git source-delta 检查均更新；未来构建/测试/发布输出进入 `projects/space-rhythm/workspace/out/`；不得移动或删除根 `out/` 历史证据、冻结包、未跟踪 `package/` 或框架 `scripts/__pycache__/`；至少完成三 preset 配置/编译和构建工程自查，形成版本化迁移说明与证据。
-- 进展：任务已登记，尚未由负责人启动；盘点基线为 `cmake/` 2 个、`docs/` 2 个、`src/` 67 个、`tests/` 67 个、`tooling/` 11 个跟踪文件，另有根 CMake/preset/vcpkg 入口和 1 个待完全迁移的 Windows 工作流。GitHub Actions 暂时停用是用户已知并确认的迁移结果，不应误报为路径缺陷。
-- 成果与验证证据：待负责人形成迁移说明、文件映射、路径审计和构建证据；迁移前提交为 `9de4719`。
-- 阻塞与下一位行动人：无前置阻塞。下一位行动人为 build-engineer-windows-qt-01，先接收 H-018 并执行本任务；完成后移交 tester-cpp-qt-01 执行 T-041。
+- 进展：2026-09-16，build-engineer-windows-qt-01 已通过实际 `git mv` 完成全部清单迁移并修订 CMake/preset、Qt/QML、测试、T-029、发布、Git source-delta、CI 和 Markdown 路径。迁移前后跟踪数保持 `cmake=2`、`docs=2`、`src=67`、`tests=67`、`tooling=11`、workflow `=1`；根产品入口已清空，根历史输出与排除项保留。Debug、Release、CI/RelWithDebInfo 三 preset 的 clean configure/build 均通过，87 个生成文件无旧根路径。GitHub Actions 暂时停用是用户已知并确认的迁移结果，不应误报为路径缺陷。
+- 成果与验证证据：[A-036 0.1](artifacts/A-036-product-workspace-root-migration.md)、[T-040 验证摘要](evidence/T-040/verification-summary.md)及[机器可读清单](evidence/T-040/migration-inventory-v1.json)；原始日志位于 workspace 被忽略的 `out/evidence/T-040/`。迁移前提交为 `9de4719`。
+- 阻塞与下一位行动人：本任务无遗留阻塞；已明确移交 tester-cpp-qt-01 执行 T-041。T-041/T-042 尚未执行，不得把本任务的 build pass 扩写为测试或发布通过。
 - 更新日期：2026-09-16。
 
 ## T-039：形成 T-029 所需的视频产品评估输入
@@ -74,7 +74,7 @@
 - 优先级：未设定（架构建议：功能闭环后启动）。
 - 完成条件与确认方式：部署清单仅使用受控产物；应用、Qt、运行库、插件和原生依赖采用私有布局；安装、修复/升级、卸载和失败回滚边界明确；生成可复现脚本、日志、哈希、SBOM 和许可证包；所有输出显式标记 unsigned、个人使用与不兼容 SAC/WDAC 的边界，并在 D-013 指定的当前 `TIGER` 完成 App/Worker smoke。独立 GUI 安装器和代码签名不作为本阶段完成条件；负责人自查。
 - 进展：2026-09-15，已按 D-012/D-013 收口个人未签名范围。流水线固定核对 Qt/`windeployqt`/vcpkg，执行 dry-run 来源门禁、实际部署与递归 PE 导入闭包校验，生成 runtime/payload/bundle hash、build-inputs schema 3、SPDX 2.3、上游 SPDX、许可证/notices、Qt 替换说明、known limitations 和无凭据 signing request；schema 3 明确写入用户本人、自有 Windows、禁止公开/第三方交付且不宣称 SAC/WDAC 兼容。显式路径事务工具覆盖 install、含未登记文件时拒绝 repair、repair、rollback、installed validate、uninstall 和根外用户数据保留。由已提交源 `02c65ce4b596675d102ed3c82459528b60f63297` 生成的最新 ZIP 大小为 44,725,623 字节，SHA-256 为 `CD94BC9CABF1B0AD29062EE39DD14DEBCBF2AAEB6B777D69036874221D8C634C`，相同输入连续两次归档一致；闭包为 81 个 PE/103,338,584 字节，78 个未签名。当前 `TIGER` 的 `VerifiedAndReputablePolicyState` 在验证前后均为 0；同一次完整验证中 App 以 `SPACE_RHYTHM_APP_SMOKE_OK Qt=6.11.2 arch=x64` 退出 0，Worker 以 `SPACE_RHYTHM_WORKER_SMOKE_OK Qt=6.11.2 arch=x64` 退出 0，随后完整卸载、安装根清除且根外数据哨兵保留。该结果只适用于 SAC-off 的当前主机，不构成 SAC/WDAC 兼容证据。
-- 成果与验证证据：[A-033 0.2](artifacts/A-033-windows-unsigned-deployment-and-transaction-pipeline.md)、[T-037 个人未签名验证摘要](evidence/T-037/verification-summary.md)、[TIGER SAC-off 结构化证据](evidence/T-037/tiger-sac-off-smoke-20260915.json)、[使用说明](../../docs/windows-unsigned-release.md)及 `tooling/windows/Invoke-UnsignedRelease.ps1`、`tooling/windows/Invoke-UnsignedInstallTransaction.ps1`、`tests/release/Test-UnsignedPackage.ps1`。完整生成物位于被忽略的 `out/release/T-037/`。
+- 成果与验证证据：[A-033 0.2](artifacts/A-033-windows-unsigned-deployment-and-transaction-pipeline.md)、[T-037 个人未签名验证摘要](evidence/T-037/verification-summary.md)、[TIGER SAC-off 结构化证据](evidence/T-037/tiger-sac-off-smoke-20260915.json)、[使用说明](workspace/docs/windows-unsigned-release.md)及 `tooling/windows/Invoke-UnsignedRelease.ps1`、`tooling/windows/Invoke-UnsignedInstallTransaction.ps1`、`tests/release/Test-UnsignedPackage.ps1`。完整生成物位于被忽略的 `out/release/T-037/`。
 - 阻塞与下一位行动人：T-037 在 D-012/D-013 范围内无阻塞并已完成。包继续强制标记 `unsigned-engineering`、`candidateEligible=false`，不得称为发布候选、生产发布物或 SAC/WDAC 兼容包。下一位行动人为 release-engineer-windows-01：待 T-022 完成后按 T-038 在同一当前主机形成个人交付证据；最低 Windows、正式媒体格式/H.264/AAC 和产品默认资产继续按各自责任链处理。
 - 更新日期：2026-09-15。
 
@@ -100,7 +100,7 @@
 - 优先级：未设定（架构建议：视觉模板基础完成后启动）。
 - 完成条件与确认方式：相同事件修订、特征、参数、尺寸、帧时间和种子产生可解释的屏上/离屏等价结果；输出帧接口可由媒体层消费；记录帧时间、CPU/GPU、显存和上传量；低能力设备有明确降级与诊断；负责人自测并保存兼容/性能证据。
 - 进展：2026-09-11，完成 offscreen schema/contract 0.1.0 和 `SpaceRhythm::OffscreenRendering`：默认 D3D11 GPU 使用公共 `QQuickGraphicsDevice/QQuickRenderControl/QQuickRenderTarget`，Qt Software 使用公共 paint-device fallback；两者固定复用同一 immutable snapshot、recipe、`build_geometry_frame()`、帧时间和 seed，输出 A-021 RGBA8/sRGB/top-down `RenderedFrame/FrameLease` 并沿用 lease 级有界背压。实现能力探测、进程级后端边界、结构化 render/device-lost diagnostic、旧 generation/session 终止和新 generation 重建；未使用 Qt 私有 API。
-- 成果与验证证据：[A-025 0.1](artifacts/A-025-qt-offscreen-rendering-and-measurements.md)、[公共接口](../../src/rendering/include/space_rhythm/rendering/offscreen_renderer.hpp)、[实现](../../src/rendering/offscreen_renderer.cpp)、[7 项 GoogleTest](../../tests/unit/offscreen_rendering_test.cpp)、[机器可读测量](evidence/T-035/measurements-v1.json)及[验证摘要](evidence/T-035/verification-summary.md)。本机 software/GPU 各三模板屏上/离屏 exact hash 均相等，六组 max diff=0、diff pixels=0；帧/CPU/geometry/readback、上传顶点/bytes、working set 已实测，GPU frame time/动态显存占用明确 unavailable。最终 T-035 2/2 CTest 进程、内部 7/7 case 通过；T-033～T-035 合并回归 31/31 通过。
+- 成果与验证证据：[A-025 0.1](artifacts/A-025-qt-offscreen-rendering-and-measurements.md)、[公共接口](workspace/src/rendering/include/space_rhythm/rendering/offscreen_renderer.hpp)、[实现](workspace/src/rendering/offscreen_renderer.cpp)、[7 项 GoogleTest](workspace/tests/unit/offscreen_rendering_test.cpp)、[机器可读测量](evidence/T-035/measurements-v1.json)及[验证摘要](evidence/T-035/verification-summary.md)。本机 software/GPU 各三模板屏上/离屏 exact hash 均相等，六组 max diff=0、diff pixels=0；帧/CPU/geometry/readback、上传顶点/bytes、working set 已实测，GPU frame time/动态显存占用明确 unavailable。最终 T-035 2/2 CTest 进程、内部 7/7 case 通过；T-033～T-035 合并回归 31/31 通过。
 - 阻塞与下一位行动人：T-035 无实现阻塞并按负责人完成条件结束。基准 GPU、像素容差和性能阈值尚未确认，全部结果仅为 `measured/not-evaluated`，不作性能/视觉批准。H-009 仍保持 accepted，下一行动人为 architect-01，验收 T-033～T-035 后决定关闭。
 - 更新日期：2026-09-11。
 
@@ -113,7 +113,7 @@
 - 优先级：未设定（架构建议：工程骨架和契约就绪后启动）。
 - 完成条件与确认方式：高密度数据采用批量几何/纹理/等价方案而非一点一个 QML Item；三类模板参数、范围、默认值和随机种子版本化；线程与 GPU 资源生命周期符合契约；具备裁剪、空输入、极密数据和设备恢复自测；形成可供 UI 和离屏路径消费的模块。
 - 进展：2026-09-11，完成 geometry schema 1/contract 0.1.0 的纯 C++ 几何核心和公共 Qt Scene Graph 适配：事件时间线按像素聚合，波形按像素 min/max envelope，频谱按宽度分组取峰值，节奏脉冲由版本化 seed 稳定生成；三模板均为 1.0.0，参数范围、工程默认值、摘要、批次/总顶点上限版本化。`SceneGraphRenderItem` 仅在 `updatePaintNode()` 创建/复用 `QSGGeometryNode`，使用动态批量顶点和 device generation 重建；屏上与后续离屏共用 `build_geometry_frame()`。未执行 T-035。
-- 成果与验证证据：[A-022 0.1](artifacts/A-022-batched-scene-graph-visual-templates.md)、[几何公共接口](../../src/rendering/include/space_rhythm/rendering/geometry_core.hpp)、[Scene Graph 公共接口](../../src/rendering/include/space_rhythm/rendering/scene_graph_render_item.hpp)、[实现](../../src/rendering/geometry_core.cpp)、[Qt 适配](../../src/rendering/scene_graph_render_item.cpp)、[9 项几何 GoogleTest](../../tests/unit/render_geometry_test.cpp)、[2 项 QSG GoogleTest](../../tests/unit/render_scene_graph_test.cpp)及[验证摘要](evidence/T-034/verification-summary.md)。Windows x64 Debug `/W4 /WX` 全目标构建通过，最终 T-034 专项 11/11 通过。
+- 成果与验证证据：[A-022 0.1](artifacts/A-022-batched-scene-graph-visual-templates.md)、[几何公共接口](workspace/src/rendering/include/space_rhythm/rendering/geometry_core.hpp)、[Scene Graph 公共接口](workspace/src/rendering/include/space_rhythm/rendering/scene_graph_render_item.hpp)、[实现](workspace/src/rendering/geometry_core.cpp)、[Qt 适配](workspace/src/rendering/scene_graph_render_item.cpp)、[9 项几何 GoogleTest](workspace/tests/unit/render_geometry_test.cpp)、[2 项 QSG GoogleTest](workspace/tests/unit/render_scene_graph_test.cpp)及[验证摘要](evidence/T-034/verification-summary.md)。Windows x64 Debug `/W4 /WX` 全目标构建通过，最终 T-034 专项 11/11 通过。
 - 阻塞与下一位行动人：T-034 无阻塞并按完成条件结束。视觉风格、效果/性能门槛、基准 GPU、像素容差和设备矩阵仍未确认，不在本任务宣称通过。T-035 保持 todo，须由用户另行明确启动；H-009 在 T-035 完成前保持 accepted。
 - 更新日期：2026-09-11。
 
@@ -126,7 +126,7 @@
 - 优先级：未设定（架构建议：立即启动）。
 - 完成条件与确认方式：RenderRecipe 含修订、特征、模板参数、尺寸、时间范围、帧率、颜色和种子；明确不可变快照、节点/资源创建更新释放、设备丢失、错误和版本兼容；离屏输出含帧时间、格式、所有权和背压；形成版本化契约及边界测试向量，负责人自查。
 - 进展：2026-09-11，完成 `renderContractVersion 0.1.0/schema 1` 的纯 C++ 契约：版本化 RenderRecipe、深拷贝不可变 RenderSnapshot、精确帧时间、整数坐标/命中、Scene Graph device generation 生命周期、RGBA8/sRGB/top-down 离屏帧、FrameLease 与按在途 lease 计数的有界背压/取消/设备丢失语义。明确 QQuickItem/QSGGeometryNode 只在 `updatePaintNode()` 渲染线程同步点更新、UI 线程只交换快照、资源经 render job/invalidation 清理；仅使用 Qt 公共 API，未实现 T-034。
-- 成果与验证证据：[A-021 0.1](artifacts/A-021-render-recipe-thread-offscreen-contract.md)、[公共接口](../../src/rendering/include/space_rhythm/rendering/render_contract.hpp)、[实现](../../src/rendering/render_contract.cpp)、[GoogleTest 契约向量](../../tests/contract/render_public_contract_test.cpp)及[验证摘要](evidence/T-033/verification-summary.md)。Windows x64 Debug `/W4 /WX` 全目标构建通过，`RenderContractVectors.*` 18/18 通过。
+- 成果与验证证据：[A-021 0.1](artifacts/A-021-render-recipe-thread-offscreen-contract.md)、[公共接口](workspace/src/rendering/include/space_rhythm/rendering/render_contract.hpp)、[实现](workspace/src/rendering/render_contract.cpp)、[GoogleTest 契约向量](workspace/tests/contract/render_public_contract_test.cpp)及[验证摘要](evidence/T-033/verification-summary.md)。Windows x64 Debug `/W4 /WX` 全目标构建通过，`RenderContractVectors.*` 18/18 通过。
 - 阻塞与下一位行动人：T-033 无阻塞并按完成条件结束。T-034/T-035 均未启动；视觉风格、实际模板参数、基准 GPU 与像素/性能容差仍留给后续任务。须由用户另行明确启动 T-034，H-009 在 T-033～T-035 全部完成前保持 accepted。
 - 更新日期：2026-09-11。
 
@@ -139,7 +139,7 @@
 - 优先级：未设定（架构建议：节奏特征和核心事件就绪后启动）。
 - 完成条件与确认方式：相同事件、音色、参数和种子产生等价 PCM；试听与离线复用混音核心，设备失败不破坏离线输出；重叠、尾音、非有限值、峰值与削波受控；合法测试音色有来源/许可/哈希；提交自动化测试、WAV/PCM 黄金结果和性能记录。
 - 进展：2026-09-11，用户明确启动 T-032；前置与 A-018 三个 CC0 测试音色已满足。已实现纯 C++ Q23 确定性混音、EventKind→音色映射、nearest-even 采样触发、重叠/尾音/增益/声像/硬削波、PCM/WAV 输出及只传输同一核心 PCM 的 QAudioSink 适配。测试音色继续只用于测试，不登记产品默认音色。
-- 成果与验证证据：[A-020 0.1](artifacts/A-020-audio-rendering-and-preview-implementation.md)、[T-032 验证摘要](evidence/T-032/verification-summary.md)、[render oracle](../../tests/golden/audio/render-oracles-v1.json)。Debug/CI 功能与 golden 有 13/13 同源成功记录，Release 同源专项曾 14/14；最终复跑时 Release 单元进程也受 WDAC/SAC 阻断，最新 Release 专项不宣称通过。Release 实测 140,724,290 frames/s、峰值工作集 243,499,008 bytes、取消延迟 0.085 ms，均为 measured/not-evaluated。
+- 成果与验证证据：[A-020 0.1](artifacts/A-020-audio-rendering-and-preview-implementation.md)、[T-032 验证摘要](evidence/T-032/verification-summary.md)、[render oracle](workspace/tests/golden/audio/render-oracles-v1.json)。Debug/CI 功能与 golden 有 13/13 同源成功记录，Release 同源专项曾 14/14；最终复跑时 Release 单元进程也受 WDAC/SAC 阻断，最新 Release 专项不宣称通过。Release 实测 140,724,290 frames/s、峰值工作集 243,499,008 bytes、取消延迟 0.085 ms，均为 measured/not-evaluated。
 - 阻塞与下一位行动人：任务实现无阻塞。T021-ENV-001/WDAC-SAC 阻止最新 Release 单元门禁；产品默认音色、效果/性能阈值、声卡矩阵与完整发布门禁仍待对应责任人和确认人，全仓 Release 另有非 T-032 Qt smoke 缺口。H-008 由发起人按流程关闭；本成员停止，不启动后续任务。
 - 更新日期：2026-09-11。
 
@@ -152,7 +152,7 @@
 - 优先级：未设定（架构建议：PCM 契约和媒体输入就绪后启动）。
 - 完成条件与确认方式：窗、步长、FFT、平滑、峰值和置信度参数版本化；输出候选含时间、类型、强度、置信度、来源和失败原因；固定 PCM 结果确定性；覆盖稳定节拍、变速、自由节奏、弱瞬态、噪声和静音；记录吞吐、内存、取消延迟和数值容差，负责人提交自测。
 - 进展：2026-09-10，用户明确确认全部前置满足并启动；audio-dsp-engineer-01 已完成 A-018 PCM 窄适配、周期 Hann/KissFFT 分析、短时/频段能量、谱变化、瞬态/节拍候选、置信度、稳定排序、错误/取消/资源限制及 Windows 验证。2026-09-11，用户明确授权把已 `completed` 的 T-031 作为 H-011 验收修订重新置为 `in_progress`；修订删除调用者补填媒体事实的 `PcmAdapterContext`，直接消费 `156b19f` 的媒体 schema 2 `PcmBuffer`，完成真实管线和 fail-closed 回归后恢复 `completed`。算法、参数、oracle、固定 baseline 均未改变，T-032 未执行。
-- 成果与验证证据：[A-019 0.2：音频特征、瞬态与节拍候选实现和算法 oracle](artifacts/A-019-audio-analysis-implementation-and-oracles.md)、[A-018 0.2](artifacts/A-018-audio-dsp-pcm-feature-candidate-contract.md)、[公共接口](../../src/audio_analysis/include/space_rhythm/audio/analysis.hpp)、[实现](../../src/audio_analysis/analysis.cpp)、[A-018 算法 oracle](../../tests/golden/audio/algorithm-oracles-v1.json)、[GoogleTest](../../tests/unit/audio_analysis_test.cpp)及[验证摘要](evidence/T-031/verification-summary.md)。原三配置专项各 17/17；本次验收修订 Debug、CI/RelWithDebInfo、Release 各 22/22，CI 媒体专项另 27/27。Debug 前两次曾被 WDAC 在断言前阻止，最终重建复跑通过；既有性能实测继续有效，未确认阈值保持 `measured/not-evaluated`。
+- 成果与验证证据：[A-019 0.2：音频特征、瞬态与节拍候选实现和算法 oracle](artifacts/A-019-audio-analysis-implementation-and-oracles.md)、[A-018 0.2](artifacts/A-018-audio-dsp-pcm-feature-candidate-contract.md)、[公共接口](workspace/src/audio_analysis/include/space_rhythm/audio/analysis.hpp)、[实现](workspace/src/audio_analysis/analysis.cpp)、[A-018 算法 oracle](workspace/tests/golden/audio/algorithm-oracles-v1.json)、[GoogleTest](workspace/tests/unit/audio_analysis_test.cpp)及[验证摘要](evidence/T-031/verification-summary.md)。原三配置专项各 17/17；本次验收修订 Debug、CI/RelWithDebInfo、Release 各 22/22，CI 媒体专项另 27/27。Debug 前两次曾被 WDAC 在断言前阻止，最终重建复跑通过；既有性能实测继续有效，未确认阈值保持 `measured/not-evaluated`。
 - 阻塞与下一位行动人：T-031 功能与验收修订完成，无实现阻塞；H-011 已由发起人验收并关闭。T021-ENV-001 的项目级环境问题仍按原任务记录，本次 Debug 瞬态不改写该结论。T-032 保持 `todo`，须由用户另行明确启动。
 - 更新日期：2026-09-11。
 
@@ -165,7 +165,7 @@
 - 优先级：未设定（架构建议：立即启动）。
 - 完成条件与确认方式：明确格式、采样率、声道、交错、有效帧、起点、重采样延迟、样本索引到 timeNs 舍入；定义特征帧、候选、置信度、错误和版本兼容；建立脉冲、节拍、变速、噪声、静音等可生成黄金样例和合法测试音色清单；形成版本化契约及测试向量，负责人自查。
 - 进展：2026-09-10，audio-dsp-engineer-01 依据用户明确指令接收 H-008，并完成 `dspContractVersion 0.1.0`。契约已收窄 A-015 实际 interleaved float PCM，冻结 segment/采样索引/重采样证据、精确 TimeNs 舍入、lease 生命周期、特征/候选 DTO、低置信语义、版本/摘要、错误及消费者边界；未实现分析或混音算法。
-- 成果与验证证据：[A-018 0.2：音频 DSP PCM、特征、候选与测试音色契约](artifacts/A-018-audio-dsp-pcm-feature-candidate-contract.md)、[向量清单](../../tests/golden/audio/fixtures-v1.json)、[生成/校验器](../../tests/golden/audio/Generate-AudioDspVectors.ps1)、[实际 SHA-256 证据](../../tests/golden/audio/generated/actual-hashes-v1.json)与[许可声明](../../tests/golden/audio/LICENSE.md)。10 项 CC0 合成向量（含 3 个合法测试音色）在生成模式和 `-ValidateOnly` 模式均通过 hash、长度、schema、许可和登记自检；2026-09-11 的 0.2 修订已对齐媒体 schema 2 直接消费边界。
+- 成果与验证证据：[A-018 0.2：音频 DSP PCM、特征、候选与测试音色契约](artifacts/A-018-audio-dsp-pcm-feature-candidate-contract.md)、[向量清单](workspace/tests/golden/audio/fixtures-v1.json)、[生成/校验器](workspace/tests/golden/audio/Generate-AudioDspVectors.ps1)、[实际 SHA-256 证据](workspace/tests/golden/audio/generated/actual-hashes-v1.json)与[许可声明](workspace/tests/golden/audio/LICENSE.md)。10 项 CC0 合成向量（含 3 个合法测试音色）在生成模式和 `-ValidateOnly` 模式均通过 hash、长度、schema、许可和登记自检；2026-09-11 的 0.2 修订已对齐媒体 schema 2 直接消费边界。
 - 阻塞与下一位行动人：T-030 无阻塞并按完成条件结束。原媒体 provenance 缺口已由提交 `156b19f` 补齐并经 T-031 消费方验收，H-011 已关闭；缺字段、旧 schema 或矛盾 trace 继续 fail closed。T-032 保持 `todo`，须由用户另行明确启动。
 - 更新日期：2026-09-11。
 
@@ -178,7 +178,7 @@
 - 优先级：未设定（架构建议：经典算法可运行后启动）。
 - 完成条件与确认方式：按样本类别报告命中、误报、时间误差、人工修正量或确认的等价指标；记录吞吐、内存、线程和取消；列出已知失败模式；经典算法未达门槛时提交模型收益、运行时、许可、CPU/GPU 和包体影响，等待新决定；形成可复核效果/性能报告。
 - 进展：负责人按 D-010/A-031 0.3 获取并 probe `GAME-004`、`TRAVEL-001`、`TRAVEL-007`、`LIFE-007` 四个替换来源，保留其余 36 个代理，形成 dataset 0.2.0。40/40 媒体 SHA 复核一致，总计 1,359,437,599 bytes、1,815.044 秒；来源时间窗、`calibration/tuning/final=4/16/20` 及舞蹈/游戏/旅行/生活各 10 条均通过。实际结果同时否定 D-010 的 VFR 选源假设：完整数据为 CFR 40、VFR 0。2026-09-15 接收 A-031 0.5/D-014/H-017 后，负责人建立 `USER-01` 参考制作、隐藏随机化 A/B 盲评和人工修正三阶段工具/界面/冻结校验；重新核对 40/40 媒体和源逐帧 PTS，生成 40 个 Git 忽略的静音 H.264 预览，并冻结 preview ordinal→source true `timeNs` 映射。参考会话 40 条中 final 20 条，界面已可用；用户首次导出的 40/40 submission 结构完整，但 40 条 `events` 全部为空且 `modificationLog=0`，未冻结为有效人工参考。当前 `TIGER` 的 AC Best Performance overlay 和 SAC=0 已同轮保存，T-028 Release PE 在 OpenCV 8/FFmpeg 2 线程下完成一组有效 1 warmup + 5 measured；wall 样本 `201162/186496/175500/174688/176782 us`、取消 P95 `2557 us`，原生视频分析单测 8/8 通过。该 synthetic 160×90 基线仅证明主机/PE 就绪，不构成正式 T-029 P-*；未运行产品/VFR 正式 classic，未提出模型方案、未引入 ONNX。
-- 成果与验证证据：[A-030 0.4](artifacts/A-030-video-product-evaluation-and-model-gate.md)、[A-031 0.5](artifacts/A-031-t029-video-product-evaluation-input.md)、D-010/D-011/D-014 confirmed、H-017 closed、[dataset 0.2.0 manifest](evidence/T-029/product-dataset-manifest-v2.json)、[execution-readiness-v4](evidence/T-029/execution-readiness-v4.json)、[TIGER Windows Release 基线](evidence/T-029/windows-release-baseline-v1.json)、[T-028 PE 原始 1+5](evidence/T-029/t028-release-windows-measurement-v1.json)、[USER-01 工作流工具](../../tests/evaluation/video/prepare_user01_workflow.py)及[操作界面说明](../../tests/evaluation/video/user01-app/README.md)。实际媒体、预览、会话、草稿、隐藏答案表和人工结果均留在 Git 忽略的 `out/`。
+- 成果与验证证据：[A-030 0.4](artifacts/A-030-video-product-evaluation-and-model-gate.md)、[A-031 0.5](artifacts/A-031-t029-video-product-evaluation-input.md)、D-010/D-011/D-014 confirmed、H-017 closed、[dataset 0.2.0 manifest](evidence/T-029/product-dataset-manifest-v2.json)、[execution-readiness-v4](evidence/T-029/execution-readiness-v4.json)、[TIGER Windows Release 基线](evidence/T-029/windows-release-baseline-v1.json)、[T-028 PE 原始 1+5](evidence/T-029/t028-release-windows-measurement-v1.json)、[USER-01 工作流工具](workspace/tests/evaluation/video/prepare_user01_workflow.py)及[操作界面说明](workspace/tests/evaluation/video/user01-app/README.md)。实际媒体、预览、会话、草稿、隐藏答案表和人工结果均留在 Git 忽略的 `out/`。
 - 阻塞与下一位行动人：用户于 2026-09-15 明确要求跳过本步骤、改为个人实际使用中发现问题后反馈；D-015 confirmed 后，T-029 在当前阶段取消，H-013/H-014 同步取消。现有结果保持 `not-evaluated`，不需要 `USER-01` 继续重做参考，也不得将取消或空 submission 解释为通过。下一位行动人为 tester-cpp-qt-01，按 D-015 执行 T-022 的工程端到端与故障恢复验证；未来只有用户基于实际问题明确要求时才新建缺陷任务或重开 T-029。
 - 更新日期：2026-09-15。
 
@@ -191,7 +191,7 @@
 - 优先级：未设定（架构建议：工程、媒体和契约就绪后启动）。
 - 完成条件与确认方式：输出 shot/motion_peak/action_peak 的 timeNs、强度、置信度、来源、算法/参数版本和低质量原因；真实 PTS/VFR 映射正确；相同输入与参数结果可复现；覆盖闪烁、运镜、局部动作、快切、慢切和静止样例；使用有界内存并支持取消；负责人提交单元、黄金和性能自测。
 - 进展：video-algorithm-engineer-cv-01 于 2026-09-14 完成 `SpaceRhythm::VideoAnalysis`：OpenCV 4.12.0 经典硬切/渐变/flash、Farneback 全局/局部运动、局部显著性及 acceleration/reversal/PTS-window stop 动作峰；直接消费媒体 schema 2 真实 `timeNs`，输出 core schema 1 稳定候选、算法/参数摘要、置信度和低质量原因。10 项 CC0 配方已由固定 FFmpeg 8.1.2 生成真实 FFV1 golden，连续两次生成 hash 一致；三套 `/W4 /WX` 构建目标通过，三套最终 Windows PE 在 Wine 8.0 隔离环境各 8/8 测试通过，覆盖确定性、PTS 回跳/VFR、有界内存和取消。2026-09-15 在 D-013 的当前 TIGER SAC=0 范围内，Release benchmark 增加可复核的显式运行次数并固定 OpenCV 8/FFmpeg 2 线程；原生完成 1 warmup + 5 measured 和视频分析单测 8/8。合成集效果及 Release 性能均只记为 `measured/not-evaluated`。
-- 成果与验证证据：[A-029 0.1：经典视频分析实现、真实 golden 与自测](artifacts/A-029-classic-video-analysis-and-golden.md)、[公共接口](../../src/video_analysis/include/space_rhythm/video/analysis.hpp)、[实现](../../src/video_analysis/analysis.cpp)、[真实 golden manifest](../../tests/golden/video/fixtures-v1.json)、[实际 hash/ffprobe 证据](../../tests/golden/video/generated/actual-hashes-and-probe-v1.json)、[GoogleTest](../../tests/unit/video_analysis_test.cpp)、[历史验证摘要](evidence/T-028/verification-summary.md)、[当前 TIGER 原生 Release 基线](evidence/T-029/windows-release-baseline-v1.json)及[1+5 原始结果](evidence/T-029/t028-release-windows-measurement-v1.json)。合成矩阵 shot/motion/action 分别为 5/0/0、5/0/0、4/0/0（TP/FP/FN），仅为 `measured/not-evaluated`。
+- 成果与验证证据：[A-029 0.1：经典视频分析实现、真实 golden 与自测](artifacts/A-029-classic-video-analysis-and-golden.md)、[公共接口](workspace/src/video_analysis/include/space_rhythm/video/analysis.hpp)、[实现](workspace/src/video_analysis/analysis.cpp)、[真实 golden manifest](workspace/tests/golden/video/fixtures-v1.json)、[实际 hash/ffprobe 证据](workspace/tests/golden/video/generated/actual-hashes-and-probe-v1.json)、[GoogleTest](workspace/tests/unit/video_analysis_test.cpp)、[历史验证摘要](evidence/T-028/verification-summary.md)、[当前 TIGER 原生 Release 基线](evidence/T-029/windows-release-baseline-v1.json)及[1+5 原始结果](evidence/T-029/t028-release-windows-measurement-v1.json)。合成矩阵 shot/motion/action 分别为 5/0/0、5/0/0、4/0/0（TP/FP/FN），仅为 `measured/not-evaluated`。
 - 阻塞与下一位行动人：负责人范围内实现和自测无阻塞；历史 SAC/WDAC 拒绝证据继续保留，但当前 D-013 个人未签名范围已允许同一目标在 TIGER 原生运行。T-029 已由用户另行启动且当前 blocked，不能把 T-028 synthetic 测量代替产品/VFR 正式门禁。
 - 更新日期：2026-09-14。
 
@@ -204,7 +204,7 @@
 - 优先级：未设定（架构建议：立即启动）。
 - 完成条件与确认方式：输入明确帧格式、尺寸、方向、真实 timeNs、代理映射和生命周期；候选含类型、时间、强度、置信度、来源、版本和低质量原因；样本覆盖快/慢切、闪烁、运镜、局部动作、静止和慢镜头并登记来源/许可/哈希；指标区分效果、人工修正量和性能，未定阈值标明待确认；形成版本化成果并自查。
 - 进展：video-algorithm-engineer-cv-01 已于 2026-09-14 完成身份与有效知识刷新并接收 H-007；形成 A-028 0.1，冻结 media schema 2 真实 `timeNs` 输入、core `AnalysisCandidate` 输出、shot/motion_peak/action_peak 语义、稳定版本/ID/排序、PPM 强度/置信度、低质量 token、确定性匹配及效果/人工修正/性能测量口径。另建立 10 项 CC0 合成样本配方和标注矩阵，覆盖 9 类必需场景；实际媒体字节留给 T-028 固定生成器产生。
-- 成果与验证证据：[A-028 0.1：视频分析输入/输出契约、代表样本与效果指标](artifacts/A-028-video-analysis-contract-sample-metrics.md)、[样本 manifest](../../tests/golden/video/fixtures-v1.json)、[manifest 校验器](../../tests/golden/video/Test-GoldenVideoManifest.ps1)、[许可声明](../../tests/golden/video/LICENSE.md)及[T-027 验证摘要](evidence/T-027/verification-summary.md)。校验器实际返回 `GOLDEN_VIDEO_MANIFEST=PASS fixtures=10 coverage=9 contract=0.1.0`；JSON、本地链接和 `git diff --check` 通过。系统 Python/工作区 Python 分别因占位符/PyYAML 缺失而未运行框架 YAML 校验，明确记为 unavailable。
+- 成果与验证证据：[A-028 0.1：视频分析输入/输出契约、代表样本与效果指标](artifacts/A-028-video-analysis-contract-sample-metrics.md)、[样本 manifest](workspace/tests/golden/video/fixtures-v1.json)、[manifest 校验器](workspace/tests/golden/video/Test-GoldenVideoManifest.ps1)、[许可声明](workspace/tests/golden/video/LICENSE.md)及[T-027 验证摘要](evidence/T-027/verification-summary.md)。校验器实际返回 `GOLDEN_VIDEO_MANIFEST=PASS fixtures=10 coverage=9 contract=0.1.0`；JSON、本地链接和 `git diff --check` 通过。系统 Python/工作区 Python 分别因占位符/PyYAML 缺失而未运行框架 YAML 校验，明确记为 unavailable。
 - 阻塞与下一位行动人：T-027 无阻塞且已完成；下一步由 video-algorithm-engineer-cv-01 另行接收并执行 T-028，完成经典算法及真实 golden 后才可进入 T-029。代表产品素材、人工标注和“卡点自然”阈值仍待用户/产品确认，只允许后续记录 `measured/not-evaluated`，不构成本任务自设通过标准。
 - 更新日期：2026-09-14。
 
@@ -321,7 +321,7 @@
 - 优先级：高；按前置条件排队。
 - 完成条件与确认方式：FFmpeg 资源全部使用可审计生命周期管理；CFR/VFR、旋转、多流和音频样例的 `timeNs`/定位符合契约；长素材使用有界队列和缓存，不整段加载；取消、损坏、不支持与资源不足返回结构化错误且不泄漏；记录 FFmpeg build configuration、格式能力矩阵、峰值内存和单元/集成自测；产出代码和可复核运行证据。
 - 进展：multimedia-engineer-ffmpeg-01 于 2026-09-10 完成原 T-018，同日解决 T021-DEFECT-001；随后依据用户明确指令接收 H-011 并补齐媒体 PCM resampler timing provenance。公共版本提升为 `mediaContractVersion=1.0.0/schemaVersion=2`，`PcmBuffer` 实际填充声道顺序、segment 原点和逐转换 trace；delay 直接来自每次 `swr_convert` 前的 `swr_get_delay`，版本来自运行时 swresample，参数摘要来自版本化实际配置。新增样本精确 audio seek、动态采样率 segment/epoch、取消不排空及旧 schema 拒绝。固定 baseline 与 default/GPL/nonfree 状态未变；未修改 DSP、`package/` 或缓存目录。
-- 成果与验证证据：[A-015 0.3](artifacts/A-015-ffmpeg-media-pipeline.md)、[A-014 0.4](artifacts/A-014-media-time-buffer-and-golden-contract.md)、[H-011 验证摘要](evidence/T-018/H-011-resampler-provenance.md)、[原可复核摘要](evidence/T-018/verification-summary.md)、[T021-DEFECT-001 修复证据](evidence/T-018/T021-DEFECT-001.md)、[运行时 DLL 哈希](evidence/T-018/runtime-dlls.sha256.csv)及[13 项实际黄金媒体 SHA-256/ffprobe 证据](../../tests/golden/media/generated/actual-hashes-and-probe-v1.json)。H-011 修订后 Windows x64 Debug、CI/RelWithDebInfo、Release 媒体专项均由最终二进制 27/27 通过；schema 1 独立拒绝 oracle 与非零 delay/连续 `firstSampleIndex` 断言均通过。
+- 成果与验证证据：[A-015 0.3](artifacts/A-015-ffmpeg-media-pipeline.md)、[A-014 0.4](artifacts/A-014-media-time-buffer-and-golden-contract.md)、[H-011 验证摘要](evidence/T-018/H-011-resampler-provenance.md)、[原可复核摘要](evidence/T-018/verification-summary.md)、[T021-DEFECT-001 修复证据](evidence/T-018/T021-DEFECT-001.md)、[运行时 DLL 哈希](evidence/T-018/runtime-dlls.sha256.csv)及[13 项实际黄金媒体 SHA-256/ffprobe 证据](workspace/tests/golden/media/generated/actual-hashes-and-probe-v1.json)。H-011 修订后 Windows x64 Debug、CI/RelWithDebInfo、Release 媒体专项均由最终二进制 27/27 通过；schema 1 独立拒绝 oracle 与非零 delay/连续 `firstSampleIndex` 断言均通过。
 - 阻塞与下一位行动人：H-011 与 T021-DEFECT-001 已修复且无剩余媒体实现阻塞；H-011 发起人 audio-dsp-engineer-01 可在后续获授权任务中消费 schema 2 字段，DSP 不得重复补偿 delay。后续获用户明确授权的 T-019 已于 2026-09-12 完成。
 - 更新日期：2026-09-12。
 
@@ -334,7 +334,7 @@
 - 优先级：高（用户要求本轮启动）。
 - 完成条件与确认方式：定义 `MediaInfo`、旋转/SAR/DAR、流选择、帧/PCM 所有权/背压/生命周期；明确未知/负时间戳、start time、CFR/VFR、seek、采样索引和舍入规则；生成 CFR、VFR、旋转、采样率差异、损坏和缺失流样例或脚本，登记来源/许可/哈希和期望时间向量；与 T-014 契约无同义冲突；形成并登记版本化契约成果，负责人自查，无独立评审要求。
 - 进展：multimedia-engineer-ffmpeg-01 于 2026-09-09 接收 H-004 并完成本任务。已定义 `MediaInfo`、显式流选择、PTS/DTS/time_base/start time 与负/未知时间戳处理、CFR/VFR、seek、采样索引、旋转/SAR/DAR/颜色、帧/PCM lease、背压、动态格式 epoch 和结构化错误；全部纳秒结果直接使用 A-012 `TimeNs`，未建立同义时间模型。已建立 10 个 CC0 合成/固定字节样例配方和 28 个精确时间向量，未执行 T-018/T-019。
-- 成果与验证证据：[A-014 0.2：媒体时间、流、缓冲与黄金样例契约](artifacts/A-014-media-time-buffer-and-golden-contract.md)，状态 draft；[fixtures-v1.json](../../tests/golden/media/fixtures-v1.json)、[manifest 验证器](../../tests/golden/media/Test-GoldenMediaManifest.ps1)、[可复现生成器](../../tests/golden/media/Generate-GoldenMedia.ps1)和[许可声明](../../tests/golden/media/LICENSE.md)。T-018 使用固定 FFmpeg 后已扩展并实际生成 12 个样例、30 个时间向量及真实媒体 SHA-256/ffprobe 证据；`mediaContractVersion` 仍为 0.1.0，既有向量语义未变。
+- 成果与验证证据：[A-014 0.2：媒体时间、流、缓冲与黄金样例契约](artifacts/A-014-media-time-buffer-and-golden-contract.md)，状态 draft；[fixtures-v1.json](workspace/tests/golden/media/fixtures-v1.json)、[manifest 验证器](workspace/tests/golden/media/Test-GoldenMediaManifest.ps1)、[可复现生成器](workspace/tests/golden/media/Generate-GoldenMedia.ps1)和[许可声明](workspace/tests/golden/media/LICENSE.md)。T-018 使用固定 FFmpeg 后已扩展并实际生成 12 个样例、30 个时间向量及真实媒体 SHA-256/ffprobe 证据；`mediaContractVersion` 仍为 0.1.0，既有向量语义未变。
 - 阻塞与下一位行动人：本任务无阻塞且已完成。后续明确授权的 T-018、T-019 亦已完成；H-004 发起人 architect-01 可核对完整交付。
 - 更新日期：2026-09-12。
 

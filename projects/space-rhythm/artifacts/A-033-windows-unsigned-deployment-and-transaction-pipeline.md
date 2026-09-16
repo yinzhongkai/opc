@@ -16,10 +16,10 @@
 
 T-037 已在 D-012/D-013 的个人未签名范围内形成并验证可执行流水线：
 
-- [`Invoke-UnsignedRelease.ps1`](../../../tooling/windows/Invoke-UnsignedRelease.ps1) 只消费当前 `windows-msvc-x64-release` 构建、固定 Qt 6.11.2 SDK 和固定 vcpkg 安装树，刷新 Release 构建后生成应用私有闭包。
-- [`Invoke-UnsignedInstallTransaction.ps1`](../../../tooling/windows/Invoke-UnsignedInstallTransaction.ps1) 是本阶段确认的个人工程交付机制；不提供独立 GUI 安装器，所有操作必须显式给出安装根和状态根。
-- [`Test-UnsignedPackage.ps1`](../../../tests/release/Test-UnsignedPackage.ps1) 验证包类型、安全标记、必需/禁止文件、SPDX 结构及安装、App/Worker smoke、修复、回滚和卸载事务。
-- [仓库使用说明](../../../docs/windows-unsigned-release.md)记录正常命令、失败边界和剩余门禁。
+- [`Invoke-UnsignedRelease.ps1`](../workspace/tooling/windows/Invoke-UnsignedRelease.ps1) 只消费当前 `windows-msvc-x64-release` 构建、固定 Qt 6.11.2 SDK 和固定 vcpkg 安装树，刷新 Release 构建后生成应用私有闭包。
+- [`Invoke-UnsignedInstallTransaction.ps1`](../workspace/tooling/windows/Invoke-UnsignedInstallTransaction.ps1) 是本阶段确认的个人工程交付机制；不提供独立 GUI 安装器，所有操作必须显式给出安装根和状态根。
+- [`Test-UnsignedPackage.ps1`](../workspace/tests/release/Test-UnsignedPackage.ps1) 验证包类型、安全标记、必需/禁止文件、SPDX 结构及安装、App/Worker smoke、修复、回滚和卸载事务。
+- [仓库使用说明](../workspace/docs/windows-unsigned-release.md)记录正常命令、失败边界和剩余门禁。
 
 最终输出是 `space-rhythm-0.1.0-dev-unsigned.zip`，SHA-256 `CD94BC9CABF1B0AD29062EE39DD14DEBCBF2AAEB6B777D69036874221D8C634C`，大小 44,725,623 字节；相同输入连续两次生成一致。其源提交为 `02c65ce4b596675d102ed3c82459528b60f63297`；清单只记录既有未跟踪 `package/` 和 `scripts/__pycache__/`，两者未作为构建或运行时输入，因此 `sourceWorktreeClean=false`。包始终为 `candidateEligible=false`，不是发布候选。
 

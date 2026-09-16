@@ -11,10 +11,11 @@
 
 ## 执行人准备参考会话
 
-从仓库根运行以下命令。它会再次核对 40 个产品代理的媒体 SHA-256，用 FFprobe 完整读取逐帧 PTS，
+从产品 workspace 运行以下命令。它会再次核对 40 个产品代理的媒体 SHA-256，用 FFprobe 完整读取逐帧 PTS，
 校验 `frameTimesSha256`，并生成浏览器可播放的本地 H.264 静音预览。原媒体和预览均不提交 Git。
 
 ```powershell
+Set-Location projects/space-rhythm/workspace
 $python = 'C:\Users\YinZh\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe'
 & $python tests/evaluation/video/prepare_user01_workflow.py prepare-reference
 ```

@@ -57,7 +57,7 @@ PyYAML 的 `yaml/__init__.py` 被主机策略拒绝读取并返回 `PermissionEr
 隔离执行通过仓库挂载调用本机 MSVC 产出的原始 Windows PE；未重编译为 Linux 版本。真实
 golden 由相同锁定 Windows FFmpeg 8.1.2 生成，并由相同 Windows FFprobe 8.1.2 探测。生成器
 证据见
-[`actual-hashes-and-probe-v1.json`](../../../../tests/golden/video/generated/actual-hashes-and-probe-v1.json)。
+[`actual-hashes-and-probe-v1.json`](../../workspace/tests/golden/video/generated/actual-hashes-and-probe-v1.json)。
 
 ## 交接状态
 

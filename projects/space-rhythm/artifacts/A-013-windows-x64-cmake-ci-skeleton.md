@@ -4,13 +4,13 @@
 - 成果 ID：A-013
 - 负责人：build-engineer-windows-qt-01
 - 关联任务：T-013
-- 版本：0.2
-- 更新日期：2026-09-10
+- 版本：0.3
+- 更新日期：2026-09-16
 - 状态：draft
 - 适用范围：Windows x64 的应用、Worker、纯 C++ 核心库、媒体适配库和测试工程骨架；CMake Presets/Ninja、非 Qt vcpkg manifest/baseline、GoogleTest/CTest、Qt Test/Qt Quick Test、QML/进程冒烟、安装闭包和 Windows CI。只复用 T-012 的 Qt 6.11.2 SDK，不重建 Qt，不实现业务逻辑，不创建安装器、签名或发布批准。
 - 来源及输入版本：用户于 2026-09-09 确认 D-003 并明确要求启动 T-013；2026-09-10 明确要求诊断 T021-ENV-001；T-011/T-012 completed；D-003、D-006、D-007、D-008 confirmed；[A-005 0.4](A-005-mvp-technology-stack-proposal.md)、[A-006 0.1](A-006-domain-work-packages.md)、[A-007 0.1](A-007-four-engineer-execution-plan.md)、[A-008 0.3](A-008-windows-build-environment-audit-and-execution-plan.md)、[A-009 0.1](A-009-windows-qt-6.11.2-source-sdk-build.md)、[A-012 0.1](A-012-core-domain-contract-0x.md)、[A-017 0.2](A-017-windows-headless-contract-test-entry-and-evidence.md)。
 - 批准依据：尚无。D-003 与 D-006～D-008 是本成果的已确认输入，不等同于批准本成果或发布。
-- 版本记录：2026-09-09，0.1，完成工程目标、固定依赖、自动测试、部署检查、CI 与三套预设验证；2026-09-10，0.2，增加 T021-ENV-001 的 WDAC/SAC 只读取证、Debug/Release/CI 对照、原路径与新路径重建验证、严格 Release headless 结果及最小策略需求，不改变 0.1 的历史验证记录。
+- 版本记录：2026-09-09，0.1，完成工程目标、固定依赖、自动测试、部署检查、CI 与三套预设验证；2026-09-10，0.2，增加 T021-ENV-001 的 WDAC/SAC 只读取证、Debug/Release/CI 对照、原路径与新路径重建验证、严格 Release headless 结果及最小策略需求，不改变 0.1 的历史验证记录；2026-09-16，0.3，按 D-016/T-040 把有效工程入口更新为 `projects/space-rhythm/workspace/`，历史验证数字不变，迁移证据由 A-036 0.1 承接。
 
 ## 1. 结论
 
@@ -37,7 +37,7 @@ T-013 已达到完成条件。仓库现有一套可由 Windows x64/MSVC 2022/Nin
 - 语言基线为 C17/C++20；MSVC 动态 CRT 固定为 `/MD`、`/MDd`。
 - 项目手写目标统一使用 `/W4 /permissive- /Zc:__cplusplus /utf-8`，并默认 `/WX`。Qt 自动生成的 QML cache 源码保留 `/W4`，不把其上游警告升级为本项目错误。
 - Qt 查找使用 `find_package(Qt6 6.11.2 EXACT ...)`，并核对实际 package root 与 `SPACE_RHYTHM_QT_ROOT` 一致；入口脚本再核对 T-012 SDK 的关键哈希。
-- 构建、vcpkg 安装、安装暂存和证据均进入仓库根 `out/`，不污染源码目录。
+- 构建、vcpkg 安装、安装暂存和新证据均进入产品 workspace 的 `out/`，不污染源码目录；迁移前根 `out/` 只读保留历史证据和冻结包。
 
 `CMakePresets.json` 提供 `windows-msvc-x64-debug`、`windows-msvc-x64-release`、`ci-windows-msvc-x64` 三个 configure/build/test preset，以及 `ci-windows-msvc-x64-workflow`。权威 PowerShell 入口负责导入 Build Tools x64 环境、调用 preset、部署、运行检查并生成日志和安装清单。
 
@@ -57,7 +57,7 @@ CTest 当前包含七项：GoogleTest 的核心/媒体适配链接，生成的 Q
 
 ## 6. CI 合同
 
-`.github/workflows/windows-x64.yml` 使用带 `self-hosted, Windows, X64, space-rhythm-qt6112` 标签的 runner。runner 必须预置与 T-012 一致的 `C:\sr\q\qt6112` 和 MSVC Build Tools；工作流只克隆 vcpkg tag `2026.07.29`、核对精确 baseline 并执行正常的 `-Stage All -Clean`。
+workspace 内归档的 `.github/workflows/windows-x64.yml` 使用带 `self-hosted, Windows, X64, space-rhythm-qt6112` 标签的 runner。runner 必须预置与 T-012 一致的 `C:\sr\q\qt6112` 和 MSVC Build Tools；工作流只克隆 vcpkg tag `2026.07.29`、核对精确 baseline 并执行正常的 `-Stage All -Clean`。按 D-016，仓库根没有 workflow 入口，GitHub 当前不会自动发现该文件。
 
 CI 不构建 Qt、不启用本机依赖复用或 WDAC 回退。无论成功失败，安装闭包与 `out/evidence/T-013/ci-windows-msvc-x64` 都作为 14 天构建工件上传，便于复核配置、测试、PE 和逐文件哈希。
 
@@ -78,12 +78,13 @@ CI 不构建 Qt、不启用本机依赖复用或 WDAC 回退。无论成功失�
 从普通 PowerShell 运行以下命令；脚本会自行导入 x64 Build Tools 环境：
 
 ```powershell
+Set-Location projects/space-rhythm/workspace
 ./tooling/windows/Invoke-ProjectBuild.ps1 -Preset windows-msvc-x64-debug -Stage All -Clean
 ./tooling/windows/Invoke-ProjectBuild.ps1 -Preset windows-msvc-x64-release -Stage All -Clean
 ./tooling/windows/Invoke-ProjectBuild.ps1 -Preset ci-windows-msvc-x64 -Stage All -Clean
 ```
 
-vcpkg 首次准备、直接使用 preset、恢复开关和 CI runner 前置条件见仓库 `docs/windows-build.md`。
+vcpkg 首次准备、直接使用 preset、恢复开关和 CI runner 前置条件见 workspace 的 `docs/windows-build.md`。T-040 迁移映射、三 preset 构建与隔离审计见 [A-036 0.1](A-036-product-workspace-root-migration.md)。
 
 ## 9. 边界与后续
 
@@ -102,6 +103,6 @@ vcpkg 首次准备、直接使用 preset、恢复开关和 CI runner 前置条�
 
 ## 11. T021-ENV-001 后续诊断
 
-仓库新增 `tooling/windows/Invoke-WdacBinaryDiagnostic.ps1`，以只读方式保存实际路径、SHA-256、PE/x64、CRT/导入表、ACL、Zone.Identifier、签名、CMake/Ninja 链接命令、重复启动结果、Code Integrity/AppLocker 事件和策略只读结果。旧 Release core 哈希 `06ea...f02e` 连续返回 Win32 4551，Code Integrity 3077 给出 `0xC0E90002` 和 Policy GUID `{0283ac0f-fff1-49ae-ada1-8a933130cad6}`；Debug 与 CI 同类程序可启动。
+workspace 内的 `tooling/windows/Invoke-WdacBinaryDiagnostic.ps1` 以只读方式保存实际路径、SHA-256、PE/x64、CRT/导入表、ACL、Zone.Identifier、签名、CMake/Ninja 链接命令、重复启动结果、Code Integrity/AppLocker 事件和策略只读结果。旧 Release core 哈希 `06ea...f02e` 连续返回 Win32 4551，Code Integrity 3077 给出 `0xC0E90002` 和 Policy GUID `{0283ac0f-fff1-49ae-ada1-8a933130cad6}`；Debug 与 CI 同类程序可启动。
 
 原路径 clean rebuild、全新目录 rebuild 均使 core 程序实际启动；当前 Release core 以 GoogleTest XML 证明 26/26。严格 Release headless 全套仍为 53/63，未使用 fallback，故 T021-ENV-001 仍需主机策略管理员提供组织管理的非生产开发签名/签名服务，或在非用户可写的专用构建根上设置最小补充策略。不得使用全局用户目录白名单、易变 hash 白名单或测试入口降级。完整事实、事件摘录和复核命令见 [专项诊断摘要](../evidence/T-013/t021-env-001-verification-summary.md)。

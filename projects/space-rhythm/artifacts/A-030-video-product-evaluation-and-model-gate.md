@@ -35,8 +35,8 @@
 
 ## 2. USER-01 三阶段输入、界面和隔离
 
-仓库工具为 [`prepare_user01_workflow.py`](../../../tests/evaluation/video/prepare_user01_workflow.py)，操作界面和逐步说明见
-[`user01-app/README.md`](../../../tests/evaluation/video/user01-app/README.md)。实际媒体、预览、草稿、隐藏答案表和冻结结果只保存在
+仓库工具为 [`prepare_user01_workflow.py`](../workspace/tests/evaluation/video/prepare_user01_workflow.py)，操作界面和逐步说明见
+[`user01-app/README.md`](../workspace/tests/evaluation/video/user01-app/README.md)。实际媒体、预览、草稿、隐藏答案表和冻结结果只保存在
 Git 忽略的 `out/evaluation/T-029/user01/`。只读 loopback 服务只暴露 UI 和该工作区，不暴露仓库其他文件。
 
 ### 2.1 `reference_authoring`

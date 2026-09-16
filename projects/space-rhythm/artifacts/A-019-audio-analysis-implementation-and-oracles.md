@@ -90,7 +90,7 @@ timeNs(i) = segmentOriginTimeNs
 
 ## 6. oracle、错误与覆盖
 
-[algorithm-oracles-v1.json](../../../tests/golden/audio/algorithm-oracles-v1.json) 为 A-018 `vectorSetVersion=1` 的 7 个分析/负向输入增加算法 1.0.0 oracle；[fixtures-v1.json](../../../tests/golden/audio/fixtures-v1.json) 登记 oracle 元数据，生成器会交叉校验版本、输入 ID 和 PCM SHA-256。固定节拍和变速节拍的 onset/beat 索引、tempo、overall confidence 为精确 oracle；脉冲还冻结首帧短时能量和重复等价；静音、噪声、双声道负索引边界与非有限值冻结状态/原因/错误和无部分结果语义。
+[algorithm-oracles-v1.json](../workspace/tests/golden/audio/algorithm-oracles-v1.json) 为 A-018 `vectorSetVersion=1` 的 7 个分析/负向输入增加算法 1.0.0 oracle；[fixtures-v1.json](../workspace/tests/golden/audio/fixtures-v1.json) 登记 oracle 元数据，生成器会交叉校验版本、输入 ID 和 PCM SHA-256。固定节拍和变速节拍的 onset/beat 索引、tempo、overall confidence 为精确 oracle；脉冲还冻结首帧短时能量和重复等价；静音、噪声、双声道负索引边界与非有限值冻结状态/原因/错误和无部分结果语义。
 
 同一 oracle 文件另登记自由节奏、弱瞬态、双 segment 中断和取消用的确定性内存向量，包含规范 recipe、来源、`CC0-1.0` 和实际 PCM SHA-256；资源上限复用已登记固定节拍向量。三个 A-018 `AT-*` 测试音色未被本任务用于生产算法或产品默认内容，许可与 hash 保持不变。`package/` 和来源不明素材均未读取或修改。
 

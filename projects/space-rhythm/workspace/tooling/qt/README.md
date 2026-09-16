@@ -17,6 +17,7 @@ The entry point also adds the shadow-build `qtbase\bin` directory and the matchi
 The native compiler probe runs during `Configure`/`All`; later stages reuse that evidence instead of repeatedly replacing and launching a new probe executable. The Qt consumer smoke test is a separate CMake project. It builds with `/MD` and `/MDd`, asks `windeployqt` to include `qoffscreen`, and starts both staged configurations with `QT_QPA_PLATFORM=offscreen`. Its console checkpoints report the Qt version, x64 ABI, QML load, Multimedia object construction, and event-loop completion.
 
 ```powershell
+Set-Location projects/space-rhythm/workspace
 pwsh -File .\tooling\qt\Invoke-Qt6112Build.ps1 -Stage All -Parallel 10
 ```
 

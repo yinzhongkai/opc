@@ -2,3 +2,7 @@
 /.vcpkg_installed/
 /CMakeUserPresets.json
 /Testing/
+/projects/space-rhythm/workspace/out/
+/projects/space-rhythm/workspace/.vcpkg_installed/
+/projects/space-rhythm/workspace/CMakeUserPresets.json
+/projects/space-rhythm/workspace/Testing/

@@ -10,9 +10,9 @@ from pathlib import Path
 from urllib.parse import unquote, urlsplit
 
 
-REPO_ROOT = Path(__file__).resolve().parents[3]
+SOURCE_ROOT = Path(__file__).resolve().parents[3]
 APP_ROOT = Path(__file__).resolve().parent / "user01-app"
-DEFAULT_WORKSPACE_ROOT = REPO_ROOT / "out/evaluation/T-029/user01"
+DEFAULT_WORKSPACE_ROOT = SOURCE_ROOT / "out/evaluation/T-029/user01"
 WORKSPACE_URL_PREFIX = "/out/evaluation/T-029/user01/"
 
 

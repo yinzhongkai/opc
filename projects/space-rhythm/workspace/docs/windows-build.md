@@ -37,10 +37,12 @@ git clone --branch 2026.07.29 --depth 1 https://github.com/microsoft/vcpkg.git C
 & C:\sr\tools\vcpkg-2026.07.29\bootstrap-vcpkg.bat -disableMetrics
 ```
 
-Then invoke the checked entry point from a normal PowerShell session. It locates
-Build Tools and imports the x64 developer environment itself:
+Then enter the product workspace and invoke the checked entry point from a
+normal PowerShell session. It locates Build Tools and imports the x64 developer
+environment itself:
 
 ```powershell
+Set-Location projects/space-rhythm/workspace
 ./tooling/windows/Invoke-ProjectBuild.ps1 -Preset windows-msvc-x64-debug -Stage All -Clean
 ./tooling/windows/Invoke-ProjectBuild.ps1 -Preset windows-msvc-x64-release -Stage All -Clean
 ./tooling/windows/Invoke-ProjectBuild.ps1 -Preset ci-windows-msvc-x64 -Stage All -Clean
@@ -55,7 +57,8 @@ cmake --build --preset windows-msvc-x64-debug
 ctest --preset windows-msvc-x64-debug
 ```
 
-Build, dependency and install outputs stay under `out/`. The entry script writes
+Build, dependency and install outputs stay under the workspace-local `out/`.
+The entry script writes
 transcripts and an installed-file SHA-256 manifest under `out/evidence/T-013/`.
 The test suite includes core/adapter linking, Qt Core, Qt Quick Test, application
 QML and worker process smoke tests, plus explicit configuration failures for x86
@@ -96,7 +99,12 @@ transaction-test entry is documented in
 
 ## CI runner contract
 
-The Windows workflow uses a self-hosted runner labeled
+The archived Windows workflow at `.github/workflows/windows-x64.yml` uses a
+self-hosted runner labeled
 `space-rhythm-qt6112`. The runner must expose MSVC 2022 Build Tools and the
 existing T-012 Qt SDK at `C:\sr\q\qt6112`; CI bootstraps only the pinned vcpkg
 tool. This preserves the rule that CI reuses Qt 6.11.2 rather than rebuilding it.
+
+Because the complete workflow directory now lives below the product workspace,
+GitHub does not automatically discover it. Push, pull-request and manual Actions
+runs remain disabled until a separately approved repository-root entry is added.

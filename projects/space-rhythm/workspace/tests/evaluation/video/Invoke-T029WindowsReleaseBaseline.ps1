@@ -17,22 +17,28 @@ param(
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 
-$repoRoot = [System.IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..\..\..'))
+$sourceRoot = [System.IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..\..\..'))
+$projectRoot = [System.IO.Path]::GetFullPath((Join-Path $sourceRoot '..'))
+$repositoryRoot = (& git.exe -C $sourceRoot rev-parse --show-toplevel).Trim()
+if ($LASTEXITCODE -ne 0 -or [string]::IsNullOrWhiteSpace($repositoryRoot)) {
+    throw 'Unable to resolve the Git repository root from the product workspace'
+}
+$repositoryRoot = [System.IO.Path]::GetFullPath($repositoryRoot)
 if ([string]::IsNullOrWhiteSpace($BenchmarkPath)) {
-    $BenchmarkPath = Join-Path $repoRoot 'out\build\windows-msvc-x64-release\space_rhythm_video_analysis_benchmark.exe'
+    $BenchmarkPath = Join-Path $sourceRoot 'out\build\windows-msvc-x64-release\space_rhythm_video_analysis_benchmark.exe'
 }
 if ([string]::IsNullOrWhiteSpace($RawMeasurementPath)) {
-    $RawMeasurementPath = Join-Path $repoRoot 'projects\space-rhythm\evidence\T-029\t028-release-windows-measurement-v1.json'
+    $RawMeasurementPath = Join-Path $projectRoot 'evidence\T-029\t028-release-windows-measurement-v1.json'
 }
 if ([string]::IsNullOrWhiteSpace($EvidencePath)) {
-    $EvidencePath = Join-Path $repoRoot 'projects\space-rhythm\evidence\T-029\windows-release-baseline-v1.json'
+    $EvidencePath = Join-Path $projectRoot 'evidence\T-029\windows-release-baseline-v1.json'
 }
 
 $BenchmarkPath = [System.IO.Path]::GetFullPath($BenchmarkPath)
 $RawMeasurementPath = [System.IO.Path]::GetFullPath($RawMeasurementPath)
 $EvidencePath = [System.IO.Path]::GetFullPath($EvidencePath)
 $allowedEvidenceRoot = [System.IO.Path]::GetFullPath(
-    (Join-Path $repoRoot 'projects\space-rhythm\evidence\T-029')).TrimEnd('\') + '\'
+    (Join-Path $projectRoot 'evidence\T-029')).TrimEnd('\') + '\'
 foreach ($path in @($RawMeasurementPath, $EvidencePath)) {
     if (-not $path.StartsWith($allowedEvidenceRoot, [System.StringComparison]::OrdinalIgnoreCase)) {
         throw "Evidence output must stay under $allowedEvidenceRoot"
@@ -106,9 +112,9 @@ $thermalBefore = @(Get-OptionalCim 'MSAcpi_ThermalZoneTemperature' 'root/wmi')
 $drive = Get-PSDrive -Name C
 $recordedAtUtc = [DateTimeOffset]::UtcNow.ToString('o')
 
-$vcpkgBin = Join-Path $repoRoot 'out\vcpkg_installed\x64-windows-space-rhythm\bin'
+$vcpkgBin = Join-Path $sourceRoot 'out\vcpkg_installed\x64-windows-space-rhythm\bin'
 $env:Path = "$vcpkgBin;$env:Path"
-$tempRoot = Join-Path $repoRoot 'out\evaluation\T-029\windows-baseline'
+$tempRoot = Join-Path $sourceRoot 'out\evaluation\T-029\windows-baseline'
 New-Item -ItemType Directory -Force -Path $tempRoot | Out-Null
 $stdoutPath = Join-Path $tempRoot 'benchmark.stdout.txt'
 $stderrPath = Join-Path $tempRoot 'benchmark.stderr.txt'
@@ -162,9 +168,9 @@ if ($rawMeasurement.opencvReportedThreads -gt 8 -or $rawMeasurement.ffmpegDecode
 
 $processorAfter = @(Get-OptionalCim 'Win32_Processor')
 $thermalAfter = @(Get-OptionalCim 'MSAcpi_ThermalZoneTemperature' 'root/wmi')
-$sourcePath = Join-Path $repoRoot 'tests\performance\video_analysis_benchmark.cpp'
-$cmakePath = Join-Path $repoRoot 'tests\CMakeLists.txt'
-$gitHead = (& git.exe -c "safe.directory=$($repoRoot.Replace('\', '/'))" -C $repoRoot rev-parse HEAD).Trim()
+$sourcePath = Join-Path $sourceRoot 'tests\performance\video_analysis_benchmark.cpp'
+$cmakePath = Join-Path $sourceRoot 'tests\CMakeLists.txt'
+$gitHead = (& git.exe -c "safe.directory=$($repositoryRoot.Replace('\', '/'))" -C $repositoryRoot rev-parse HEAD).Trim()
 
 $thermalEvidence = if ($thermalBefore.Count -eq 0 -and $thermalAfter.Count -eq 0) {
     [ordered]@{
@@ -191,7 +197,7 @@ $evidence = [ordered]@{
     source = [ordered]@{
         productEvaluationInput = 'A-031@0.5'
         productEvaluationInputSha256 = Get-Sha256 (
-            Join-Path $repoRoot 'projects\space-rhythm\artifacts\A-031-t029-video-product-evaluation-input.md')
+            Join-Path $projectRoot 'artifacts\A-031-t029-video-product-evaluation-input.md')
         decisions = @('D-011', 'D-014')
         gitHeadAtBuild = $gitHead
         benchmarkSourceSha256 = Get-Sha256 $sourcePath

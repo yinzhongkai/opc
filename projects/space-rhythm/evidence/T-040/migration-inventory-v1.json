@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "taskId": "T-040",
+  "executedDate": "2026-09-16",
+  "migrationDecision": "D-016",
+  "migrationBaseCommit": "9de4719",
+  "preExecutionHead": "68c5a20",
+  "workspace": "projects/space-rhythm/workspace",
+  "trackedInventory": {
+    "cmake": 2,
+    "docs": 2,
+    "src": 67,
+    "tests": 67,
+    "tooling": 11,
+    "workflows": 1,
+    "rootEntryFiles": 3
+  },
+  "presets": [
+    { "name": "windows-msvc-x64-debug", "buildType": "Debug", "configure": "pass", "build": "pass" },
+    { "name": "windows-msvc-x64-release", "buildType": "Release", "configure": "pass", "build": "pass" },
+    { "name": "ci-windows-msvc-x64", "buildType": "RelWithDebInfo", "configure": "pass", "build": "pass" }
+  ],
+  "dependencyReuse": {
+    "mode": "validated-tree-copy-plus-VCPKG_MANIFEST_INSTALL-off",
+    "fileCount": 787,
+    "byteCount": 615743725,
+    "statusSha256": "A59F88B85A93D9BAE237167EE66DE3BC8A98D275A0DF1106FB0102ECCE3AC100",
+    "rootTreeModified": false
+  },
+  "pathAudit": {
+    "generatedFilesScanned": 87,
+    "oldRootMatches": 0,
+    "missingLocalMarkdownLinks": 0,
+    "qmlImportResolvedInsideWorkspace": true,
+    "rootProductEntriesAbsent": true,
+    "rootWorkflowAbsent": true
+  },
+  "preserved": {
+    "rootOut": true,
+    "package": true,
+    "scriptsPycache": true,
+    "t038ZipSha256": "2CC3F8B4AC5A6BC4B3EE8CC42C8305094F372A9E16F9DCAF937B59872FF8C3E6"
+  },
+  "testsExecuted": false,
+  "nextTask": "T-041"
+}

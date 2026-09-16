@@ -15,7 +15,9 @@ from pathlib import Path
 from typing import Any
 
 
-REPO_ROOT = Path(__file__).resolve().parents[3]
+SOURCE_ROOT = Path(__file__).resolve().parents[3]
+PROJECT_ROOT = SOURCE_ROOT.parent
+REPOSITORY_ROOT = PROJECT_ROOT.parents[1]
 ACCEPTANCE_SCOPE = "personal-single-user-acceptance"
 USER_ID = "USER-01"
 WORKFLOW_VERSION = "0.1.0"
@@ -128,9 +130,15 @@ def transcode_preview(ffmpeg: Path, source: Path, target: Path) -> None:
     temporary.replace(target)
 
 
-def url_from_repo(path: Path) -> str:
+def url_from_source(path: Path) -> str:
     resolved = path.resolve()
-    relative = resolved.relative_to(REPO_ROOT.resolve())
+    relative = resolved.relative_to(SOURCE_ROOT.resolve())
+    return "/" + relative.as_posix()
+
+
+def url_from_repository(path: Path) -> str:
+    resolved = path.resolve()
+    relative = resolved.relative_to(REPOSITORY_ROOT.resolve())
     return "/" + relative.as_posix()
 
 
@@ -186,7 +194,7 @@ def prepare_reference(args: argparse.Namespace) -> int:
                     if preview_times
                     else {"status": "pending_generation"}
                 ),
-                "previewUrl": url_from_repo(preview_path),
+                "previewUrl": url_from_source(preview_path),
                 "previewStatus": "ready" if preview_path.is_file() else "pending_generation",
                 "referenceAudioPolicy": "muted",
             }
@@ -201,7 +209,7 @@ def prepare_reference(args: argparse.Namespace) -> int:
         "annotationProtocolVersion": "0.2.0",
         "productEvaluationInput": "A-031@0.5",
         "productEvaluationInputSha256": sha256_file(args.a031.resolve()),
-        "datasetManifest": url_from_repo(manifest_path),
+        "datasetManifest": url_from_repository(manifest_path),
         "datasetManifestFileSha256": sha256_file(manifest_path),
         "datasetManifestContentSha256": manifest.get("datasetManifestSha256"),
         "mediaBytesCommittedToGit": False,
@@ -383,7 +391,7 @@ def prepare_blind(args: argparse.Namespace) -> int:
             target = blind_media / f"{trial_id}-{label}.mp4"
             target.parent.mkdir(parents=True, exist_ok=True)
             shutil.copyfile(source, target)
-            public_variants[label] = {"mediaUrl": url_from_repo(target)}
+            public_variants[label] = {"mediaUrl": url_from_source(target)}
             answer_mapping[label] = source_name
         trials.append(
             {
@@ -458,7 +466,7 @@ def prepare_correction(args: argparse.Namespace) -> int:
                 "clipId": clip_id,
                 "datasetPurpose": row["datasetPurpose"],
                 "datasetPartition": "final_evaluation",
-                "mediaUrl": url_from_repo(media_path),
+                "mediaUrl": url_from_source(media_path),
                 "mediaSha256": row["mediaSha256"],
                 "frameTimesNs": row["frameTimesNs"],
                 "classicEvents": row["events"],
@@ -548,30 +556,29 @@ def build_parser() -> argparse.ArgumentParser:
     prepare.add_argument(
         "--product-manifest",
         type=Path,
-        default=REPO_ROOT / "projects/space-rhythm/evidence/T-029/product-dataset-manifest-v2.json",
+        default=PROJECT_ROOT / "evidence/T-029/product-dataset-manifest-v2.json",
     )
     prepare.add_argument(
         "--a031",
         type=Path,
-        default=REPO_ROOT
-        / "projects/space-rhythm/artifacts/A-031-t029-video-product-evaluation-input.md",
+        default=PROJECT_ROOT / "artifacts/A-031-t029-video-product-evaluation-input.md",
     )
     prepare.add_argument(
-        "--media-root", type=Path, default=REPO_ROOT / "out/evaluation/T-029/media"
+        "--media-root", type=Path, default=SOURCE_ROOT / "out/evaluation/T-029/media"
     )
     prepare.add_argument(
-        "--workspace-root", type=Path, default=REPO_ROOT / "out/evaluation/T-029/user01"
+        "--workspace-root", type=Path, default=SOURCE_ROOT / "out/evaluation/T-029/user01"
     )
     prepare.add_argument(
         "--ffprobe",
         type=Path,
-        default=REPO_ROOT
+        default=SOURCE_ROOT
         / "out/vcpkg_installed/x64-windows-space-rhythm/tools/ffmpeg/ffprobe.exe",
     )
     prepare.add_argument(
         "--ffmpeg",
         type=Path,
-        default=REPO_ROOT
+        default=SOURCE_ROOT
         / "out/vcpkg_installed/x64-windows-space-rhythm/tools/ffmpeg/ffmpeg.exe",
     )
     prepare.add_argument("--session-id", default="USER01-REFERENCE-PRODUCT-V1")
@@ -582,7 +589,7 @@ def build_parser() -> argparse.ArgumentParser:
     blind.add_argument("--reference", type=Path, required=True)
     blind.add_argument("--render-manifest", type=Path, required=True)
     blind.add_argument(
-        "--workspace-root", type=Path, default=REPO_ROOT / "out/evaluation/T-029/user01"
+        "--workspace-root", type=Path, default=SOURCE_ROOT / "out/evaluation/T-029/user01"
     )
     blind.add_argument("--session-id", default="USER01-BLIND-FINAL-V1")
     blind.add_argument("--seed")

@@ -205,7 +205,7 @@ try {
             'tests/golden/media/fixtures-v1.json',
             'tests/golden/media/generated/actual-hashes-and-probe-v1.json'
             if ($Task -eq 'T-022') {
-                'projects/space-rhythm/artifacts/A-016-cpp-qt-test-strategy-and-traceability.md'
+                '../artifacts/A-016-cpp-qt-test-strategy-and-traceability.md'
                 'tests/qt/ui_integration_test.cpp'
                 'tests/unit/playback_export_test.cpp'
                 'tests/performance/engineering_quality_measurement.cpp'

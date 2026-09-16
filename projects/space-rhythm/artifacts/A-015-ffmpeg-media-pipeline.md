@@ -27,13 +27,13 @@
 | configuration SHA-256 | `e952f157587581ba14fe1c26e12f358da5c48b779fb3d3493a56ec936c761259` |
 | 运行时许可证 | `GNU Lesser General Public License version 3 or later` |
 
-实际 configuration 开启 `version3`、`ffmpeg`、`ffprobe`、`avcodec`、`avdevice`、`avformat`、`avfilter`、`swresample`、`swscale`、shared、Windows threads 与 Windows 媒体/硬件接口；没有 `--enable-gpl` 或 `--enable-nonfree`。完整原文保存在 [黄金媒体实际证据](../../../tests/golden/media/generated/actual-hashes-and-probe-v1.json)，不是由本文重写的推断。
+实际 configuration 开启 `version3`、`ffmpeg`、`ffprobe`、`avcodec`、`avdevice`、`avformat`、`avfilter`、`swresample`、`swscale`、shared、Windows threads 与 Windows 媒体/硬件接口；没有 `--enable-gpl` 或 `--enable-nonfree`。完整原文保存在 [黄金媒体实际证据](../workspace/tests/golden/media/generated/actual-hashes-and-probe-v1.json)，不是由本文重写的推断。
 
 实际库版本为：libavcodec 62.28.102、libavdevice 62.3.102、libavfilter 11.14.102、libavformat 62.12.102、libavutil 60.26.102、libswresample 6.3.102、libswscale 9.5.102。`avdevice`/`avfilter` 供固定的黄金生成工具闭包使用；只读适配器本身使用 avformat/avcodec/avutil/swresample/swscale。
 
 ## 2. 实现边界
 
-公共头 [media.hpp](../../../src/media/include/space_rhythm/media/media.hpp) 不暴露 FFmpeg 类型，所有纳秒位置直接使用 A-012 `core::TimeNs`/`DurationNs`。`RationalTimestamp` 只保存容器事实，不构成第二套规范时间。
+公共头 [media.hpp](../workspace/src/media/include/space_rhythm/media/media.hpp) 不暴露 FFmpeg 类型，所有纳秒位置直接使用 A-012 `core::TimeNs`/`DurationNs`。`RationalTimestamp` 只保存容器事实，不构成第二套规范时间。
 
 | 能力 | 实现与契约点 |
 |---|---|
@@ -62,7 +62,7 @@
 
 ## 3. 黄金媒体与实测摘要
 
-固定生成器完成 13 个 CC0-1.0 合成/固定字节样例、30 个精确时间向量；新增动态音频格式样例用于真实 swresample epoch/segment 证据。实际媒体 hash 与逐帧 ffprobe 原文见 [actual-hashes-and-probe-v1.json](../../../tests/golden/media/generated/actual-hashes-and-probe-v1.json)，证据文件 SHA-256 为 `238ed9c2832560ac04dbc6aaae6f8a24f0a7cdec7df317015931e88918c5b68a`。
+固定生成器完成 13 个 CC0-1.0 合成/固定字节样例、30 个精确时间向量；新增动态音频格式样例用于真实 swresample epoch/segment 证据。实际媒体 hash 与逐帧 ffprobe 原文见 [actual-hashes-and-probe-v1.json](../workspace/tests/golden/media/generated/actual-hashes-and-probe-v1.json)，证据文件 SHA-256 为 `238ed9c2832560ac04dbc6aaae6f8a24f0a7cdec7df317015931e88918c5b68a`。
 
 | fixture | 实际媒体 SHA-256 | ffprobe |
 |---|---|---|

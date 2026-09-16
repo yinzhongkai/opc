@@ -8,9 +8,10 @@ delivery, SAC/WDAC compatibility claim, signing credentials or release approval.
 
 ## Build the engineering bundle
 
-Run from a normal PowerShell 7 session:
+Run from a normal PowerShell 7 session after entering the product workspace:
 
 ```powershell
+Set-Location projects/space-rhythm/workspace
 ./tooling/windows/Invoke-UnsignedRelease.ps1 -Version 0.1.0-dev
 ```
 
@@ -39,9 +40,9 @@ The script performs these fail-closed checks:
 7. creates a deterministic ZIP whose entry timestamps are fixed to the source
    commit time.
 
-Outputs are under `out/release/T-037/unsigned/`; raw command, mapping, PE and
-summary evidence is under `out/evidence/T-037/`. Both locations are ignored by
-Git.
+Outputs are under the workspace-local `out/release/T-037/unsigned/`; raw
+command, mapping, PE and summary evidence is under `out/evidence/T-037/`. Both
+locations are ignored by Git.
 
 ## Validate the transaction boundary
 

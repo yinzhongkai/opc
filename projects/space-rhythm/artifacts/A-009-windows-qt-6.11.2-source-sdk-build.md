@@ -96,7 +96,7 @@ configure.bat
 
 ## 6. 独立消费、部署和运行验收
 
-仓库中的 [smoke CMake project](../../../tooling/qt/smoke/CMakeLists.txt) 使用 `find_package(Qt6 6.11.2 EXACT)`，要求 Core、Gui、Qml、Quick、Multimedia，固定 C++20 和 `MultiThreadedDLL`/`MultiThreadedDebugDLL`。手写 `main.cpp` 使用 `/W4 /WX`；Qt 生成的 QML cache 源码使用 `/W4`，避免把上游生成代码警告误判为本项目失败。
+仓库中的 [smoke CMake project](../workspace/tooling/qt/smoke/CMakeLists.txt) 使用 `find_package(Qt6 6.11.2 EXACT)`，要求 Core、Gui、Qml、Quick、Multimedia，固定 C++20 和 `MultiThreadedDLL`/`MultiThreadedDebugDLL`。手写 `main.cpp` 使用 `/W4 /WX`；Qt 生成的 QML cache 源码使用 `/W4`，避免把上游生成代码警告误判为本项目失败。
 
 `windeployqt` 以 `--release`/`--debug`、`--compiler-runtime`、`--qmldir` 和 `--include-plugins qoffscreen` 生成两套暂存。两次运行均输出：
 
@@ -121,7 +121,7 @@ Debug 暂存仅是开发证据：`windeployqt --debug --compiler-runtime` 会复
 
 ## 8. 可重复执行入口
 
-入口为 [Invoke-Qt6112Build.ps1](../../../tooling/qt/Invoke-Qt6112Build.ps1)，说明见 [tooling/qt/README.md](../../../tooling/qt/README.md)。完整重建命令为：
+入口为 [Invoke-Qt6112Build.ps1](../workspace/tooling/qt/Invoke-Qt6112Build.ps1)，说明见 [tooling/qt/README.md](../workspace/tooling/qt/README.md)。完整重建命令为：
 
 ```powershell
 pwsh -File .\tooling\qt\Invoke-Qt6112Build.ps1 -Stage All -CleanBuild -Parallel 10
