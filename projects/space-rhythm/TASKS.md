@@ -15,15 +15,15 @@
 
 ## T-041：在新工程根独立复验构建、测试和路径隔离
 - 负责人：tester-cpp-qt-01
-- 状态：in_progress
+- 状态：completed
 - 授权来源与日期：2026-09-15，本会话用户明确要求在 `projects/space-rhythm/` 下新建独立目录保存完整产品工程；project-manager-01 依据 D-016 将独立回归纳入迁移计划。
 - 目标与范围：独立确认迁移后的工程从 `projects/space-rhythm/workspace/` 配置、构建和测试，既有公开契约、端到端、故障恢复及路径隔离不因目录变化退化；不替开发修复迁移缺陷，不重开已取消的 T-029。
 - 输入与依赖：T-040 completed；D-016 confirmed；A-016、A-017、A-034；迁移前 T-022 三 preset 166/166 基线。
 - 优先级：高；位于 T-040 与 T-042 之间。
 - 完成条件与确认方式：从新工程根以干净跟踪工作树执行 Windows x64 Debug、CI/RelWithDebInfo、Release 三套统一入口；核对 CTest/JUnit、Qt/QML、真实 UI/Worker、媒体、存储、取消和恢复结果；检查测试临时目录、fixture、生成清单及证据路径不写回仓库根旧工程位置；记录失败、修正归属、测试数量变化和未评估边界，形成版本化证据并由负责人自查。
-- 进展：2026-09-16，T-040 已完成并提交 A-036 0.1 与三 preset 构建/路径隔离证据；同日用户明确要求 tester-cpp-qt-01 接收并执行 T-041。负责人已刷新身份、D-016、A-016/A-017/A-034/A-036 与 T-040 证据，开始建立干净隔离 checkout，并从其中的 `projects/space-rhythm/workspace/` 独立复验三套统一入口。
-- 成果与验证证据：待负责人形成迁移后独立复验证据；迁移输入为 A-036 0.1、T-040 验证摘要，迁移前基线为 A-034 0.1。
-- 阻塞与下一位行动人：当前无阻塞；tester-cpp-qt-01 正在独立执行，不复用 T-040 的通过结论替代测试。T-041 完成前不得启动 T-042。
+- 进展：2026-09-16，用户明确要求 tester-cpp-qt-01 接收并执行 T-041。负责人从受测提交 `616307cfc50c` 创建全新干净 clone，并从其中的 `projects/space-rhythm/workspace/` 通过短 `R:` 映射实际执行 Debug、CI/RelWithDebInfo、Release 三套统一入口；最终各 166/166、0 fail、0 skip，测试数与迁移前 T-022 基线一致，三套 CTest/JUnit、Qt/QML、9 个真实 UI/Worker 场景、媒体、存储、取消恢复及路径隔离均通过。三套最终路径审计都确认配置前/测试后 tracked-clean、CMake/build/vcpkg/证据/TEMP 均属于新 workspace，旧根产品入口与根 `out/` 未被写入。首轮诊断依次暴露干净 clone 缺少被忽略开发音色、深路径 MSVC C1083、`subst` 路径审计误判，均限测试准备/诊断入口修正；另一次 Debug 为 165/166，取消→重连场景约 113 秒后状态为 `failed`，随后在未修改 oracle、测试或产品实现的独立 Debug 中 3.30 秒通过。全部失败证据保留，没有用终态结果覆盖历史。
+- 成果与验证证据：[A-037 0.1](artifacts/A-037-t041-post-migration-independent-regression.md)、[T-041 验证摘要](evidence/T-041/verification-summary.md)及[机器可读运行索引](evidence/T-041/runs-v1.json)；原始 JUnit、CTest/Qt 日志、环境、结构化测量、路径审计和逐文件哈希位于被忽略的 `workspace/out/evidence/T-041/`。测试基础设施提交为 `d198c09`、`e8448a3`、`616307c`；没有修改 `src/`、既有 oracle 或被测媒体实现。
+- 阻塞与下一位行动人：T-041 的执行范围无阻塞并已完成；最终三套为 `pass(engineering-scope)`，但保留一次未复现 Debug 取消恢复瞬态，不能表述为从未发生或产品质量全绿。产品效果、自然度、真实 VFR 与正式产品性能继续为 `not-evaluated(deferred-to-personal-use-feedback)`。下一行动人为 release-engineer-windows-01 在后续明确启动后执行 T-042；本会话未启动 T-042。
 - 更新日期：2026-09-16。
 
 ## T-040：将完整产品工程根迁入项目目录

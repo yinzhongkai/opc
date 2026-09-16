@@ -40,6 +40,7 @@
 | A-034 | [T-022 工程端到端、故障恢复与质量门禁证据](A-034-t022-engineering-e2e-fault-recovery-quality-gates.md) | tester-cpp-qt-01 | T-022 | 0.1 | draft | 三 preset 各 166/166 工程 oracle pass；产品效果、自然度、真实 VFR、正式产品性能均 deferred/not-evaluated |
 | A-035 | [Windows 个人未签名交付验证](A-035-windows-personal-unsigned-delivery-validation.md) | release-engineer-windows-01 | T-038 | 0.1 | draft | D-012/D-013/D-015 范围；当前 TIGER SAC-off 交付链通过，不含 SAC/WDAC、产品效果、公开分发或生产发布结论 |
 | A-036 | [产品工程根迁入项目 workspace](A-036-product-workspace-root-migration.md) | build-engineer-windows-qt-01 | T-040、H-018 | 0.1 | draft | D-016 confirmed；三 preset clean configure/build 通过，T-041/T-042 尚未执行，根 GitHub Actions 入口按决定暂时停用 |
+| A-037 | [T-041 迁移后独立工程回归与路径隔离证据](A-037-t041-post-migration-independent-regression.md) | tester-cpp-qt-01 | T-041 | 0.1 | draft | 三 preset 最终各 166/166、0 skip 且路径隔离通过；保留一次 Debug 取消恢复瞬态失败，产品效果/自然度/真实 VFR/正式性能仍 deferred/not-evaluated |
 
 ## 正文元信息样式（不是真实成果）
 
