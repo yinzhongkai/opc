@@ -322,7 +322,8 @@ try {
         $repositoryRoot = (& git.exe -C $sourceRoot rev-parse --show-toplevel).Trim()
         if ($LASTEXITCODE -ne 0) { throw 'Unable to resolve the repository root for T-041.' }
         $expectedRelativeSourceRoot = 'projects/space-rhythm/workspace'
-        $relativeSourceRoot = [System.IO.Path]::GetRelativePath($repositoryRoot, $sourceRoot).Replace('\', '/')
+        $relativeSourceRoot = (& git.exe -C $sourceRoot rev-parse --show-prefix).Trim().TrimEnd('/')
+        if ($LASTEXITCODE -ne 0) { throw 'Unable to resolve the product workspace prefix for T-041.' }
         $legacyEntries = @(
             'CMakeLists.txt',
             'CMakePresets.json',
