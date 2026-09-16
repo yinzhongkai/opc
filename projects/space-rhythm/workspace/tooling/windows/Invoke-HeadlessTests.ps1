@@ -85,6 +85,16 @@ try {
     if ($Task -eq 'T-041' -and $trackedBefore.Count -ne 0) {
         throw 'T-041 requires a clean tracked worktree before configure/build/test.'
     }
+    if ($Task -eq 'T-041') {
+        $audioGenerator = Join-Path $sourceRoot 'tests\golden\audio\Generate-AudioDspVectors.ps1'
+        $audioGeneratorOutput = & $audioGenerator 2>&1
+        $audioGeneratorOutput | Set-Content -LiteralPath (
+            Join-Path $EvidenceRoot 'prebuild-audio-golden.log') -Encoding utf8
+        $trackedAfterPrebuild = @(& git.exe -C $sourceRoot status --porcelain --untracked-files=no)
+        if ($trackedAfterPrebuild.Count -ne 0) {
+            throw 'T-041 audio golden prebuild changed tracked inputs.'
+        }
+    }
     & $buildScript @buildArguments -Stage Configure
     $buildArguments.Remove('Clean')
     & $buildScript @buildArguments -Stage Build
@@ -217,10 +227,13 @@ try {
                 'tests/performance/audio_analysis_benchmark.cpp'
                 'tests/performance/audio_render_benchmark.cpp'
                 'tests/performance/video_analysis_benchmark.cpp'
+                'tests/golden/media/Generate-GoldenMedia.ps1'
                 'tests/golden/media/LICENSE.md'
+                'tests/golden/video/Generate-GoldenVideo.ps1'
                 'tests/golden/video/fixtures-v1.json'
                 'tests/golden/video/LICENSE.md'
                 'tests/golden/video/generated/actual-hashes-and-probe-v1.json'
+                'tests/golden/audio/Generate-AudioDspVectors.ps1'
                 'tests/golden/audio/fixtures-v1.json'
                 'tests/golden/audio/LICENSE.md'
                 'tests/golden/audio/algorithm-oracles-v1.json'

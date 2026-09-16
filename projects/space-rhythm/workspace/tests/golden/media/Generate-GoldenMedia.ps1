@@ -204,6 +204,12 @@ $probeRecords = foreach ($fixture in $manifest.fixtures) {
     if ($ffprobeExitCode -ne 0) {
         $probeJson = $null
     }
+    else {
+        $absoluteFixturePath = [System.IO.Path]::GetFullPath($path)
+        $probeJson = $probeJson.Replace($absoluteFixturePath.Replace('\', '\\'), [string]$fixture.outputFile)
+        $probeJson = $probeJson.Replace($absoluteFixturePath, [string]$fixture.outputFile)
+        $probeJson = $probeJson.Replace($absoluteFixturePath.Replace('\', '/'), [string]$fixture.outputFile)
+    }
     [pscustomobject]@{
         fixtureId = [string]$fixture.id
         outputFile = [string]$fixture.outputFile
