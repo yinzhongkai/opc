@@ -3,7 +3,7 @@ param(
     [ValidateSet('windows-msvc-x64-debug', 'windows-msvc-x64-release', 'ci-windows-msvc-x64')]
     [string]$Preset = 'windows-msvc-x64-debug',
 
-    [ValidateSet('T-021', 'T-022')]
+    [ValidateSet('T-021', 'T-022', 'T-041')]
     [string]$Task = 'T-021',
 
     [string]$QtRoot = 'C:\sr\q\qt6112',
@@ -19,7 +19,7 @@ $ErrorActionPreference = 'Stop'
 
 $sourceRoot = [System.IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..\..'))
 $buildRoot = Join-Path $sourceRoot "out\build\$Preset"
-$taskLabel = $Task.ToLowerInvariant().Replace('-', '')
+$taskLabel = if ($Task -eq 'T-041') { 't022' } else { $Task.ToLowerInvariant().Replace('-', '') }
 $commit = (& git.exe -C $sourceRoot rev-parse --short=12 HEAD).Trim()
 if ($LASTEXITCODE -ne 0) { throw 'Unable to resolve the source Git commit.' }
 $utcStamp = [DateTime]::UtcNow.ToString('yyyyMMddTHHmmssZ')
@@ -64,11 +64,12 @@ $result = [ordered]@{
     durationMs = $null
     junit = 'ctest-junit.xml'
     label = $taskLabel
+    suiteReuse = if ($Task -eq 'T-041') { 'T-022 engineering gate (post-migration independent rerun)' } else { $null }
     excludedScopes = if ($Task -eq 'T-021') {
         @('T-022', 'package/', 'scripts/__pycache__/')
     }
     else {
-        @('T-029 product evaluation', 'package/', 'scripts/__pycache__/')
+        @('T-029 product evaluation', 'T-042 release rebuild', 'package/', 'scripts/__pycache__/')
     }
 }
 $stopwatch = [System.Diagnostics.Stopwatch]::StartNew()
@@ -80,6 +81,10 @@ function Get-SafeCim {
 }
 
 try {
+    $trackedBefore = @(& git.exe -C $sourceRoot status --porcelain --untracked-files=no)
+    if ($Task -eq 'T-041' -and $trackedBefore.Count -ne 0) {
+        throw 'T-041 requires a clean tracked worktree before configure/build/test.'
+    }
     & $buildScript @buildArguments -Stage Configure
     $buildArguments.Remove('Clean')
     & $buildScript @buildArguments -Stage Build
@@ -204,7 +209,7 @@ try {
             'tests/unit/media_golden_test.cpp',
             'tests/golden/media/fixtures-v1.json',
             'tests/golden/media/generated/actual-hashes-and-probe-v1.json'
-            if ($Task -eq 'T-022') {
+            if ($Task -in @('T-022', 'T-041')) {
                 '../artifacts/A-016-cpp-qt-test-strategy-and-traceability.md'
                 'tests/qt/ui_integration_test.cpp'
                 'tests/unit/playback_export_test.cpp'
@@ -254,7 +259,7 @@ try {
         $result.status = 'fail'
         throw "CTest failed with exit code $testExitCode."
     }
-    if ($Task -eq 'T-022') {
+    if ($Task -in @('T-022', 'T-041')) {
         $measurementsRoot = Join-Path $EvidenceRoot 'measurements'
         New-Item -ItemType Directory -Force -Path $measurementsRoot | Out-Null
         $measurementCommands = @(
@@ -299,6 +304,86 @@ try {
                 throw "T-022 measurement '$($measurement.name)' failed with exit code $measurementExitCode."
             }
         }
+    }
+    if ($Task -eq 'T-041') {
+        $repositoryRoot = (& git.exe -C $sourceRoot rev-parse --show-toplevel).Trim()
+        if ($LASTEXITCODE -ne 0) { throw 'Unable to resolve the repository root for T-041.' }
+        $expectedRelativeSourceRoot = 'projects/space-rhythm/workspace'
+        $relativeSourceRoot = [System.IO.Path]::GetRelativePath($repositoryRoot, $sourceRoot).Replace('\', '/')
+        $legacyEntries = @(
+            'CMakeLists.txt',
+            'CMakePresets.json',
+            'vcpkg.json',
+            'cmake',
+            'src',
+            'tests',
+            'tooling',
+            'docs',
+            '.github/workflows'
+        )
+        $legacyEntriesPresent = @($legacyEntries | Where-Object {
+            Test-Path -LiteralPath (Join-Path $repositoryRoot $_)
+        })
+        $cachePath = Join-Path $buildRoot 'CMakeCache.txt'
+        $cacheText = Get-Content -Raw -LiteralPath $cachePath
+        $cmakeHome = if ($cacheText -match '(?m)^CMAKE_HOME_DIRECTORY:INTERNAL=(.+)$') {
+            $Matches[1].Trim()
+        }
+        else { 'missing' }
+        $vcpkgInstalled = if ($cacheText -match '(?m)^VCPKG_INSTALLED_DIR:PATH=(.+)$') {
+            $Matches[1].Trim()
+        }
+        else { 'missing' }
+        $sourceOutRoot = [System.IO.Path]::GetFullPath((Join-Path $sourceRoot 'out'))
+        $trackedAfter = @(& git.exe -C $sourceRoot status --porcelain --untracked-files=no)
+        $pathAudit = [ordered]@{
+            schemaVersion = 1
+            task = 'T-041'
+            repositoryRoot = $repositoryRoot
+            sourceRoot = $sourceRoot
+            relativeSourceRoot = $relativeSourceRoot
+            expectedRelativeSourceRoot = $expectedRelativeSourceRoot
+            buildRoot = $buildRoot
+            evidenceRoot = $EvidenceRoot
+            temporaryRoot = $workRoot
+            trackedBeforeClean = ($trackedBefore.Count -eq 0)
+            trackedAfterClean = ($trackedAfter.Count -eq 0)
+            legacyEntriesPresent = $legacyEntriesPresent
+            repositoryRootOutExists = (Test-Path -LiteralPath (Join-Path $repositoryRoot 'out'))
+            cmakeHomeDirectory = $cmakeHome
+            cmakeHomeMatchesSourceRoot = ([System.IO.Path]::GetFullPath($cmakeHome) -eq $sourceRoot)
+            vcpkgInstalledDirectory = $vcpkgInstalled
+            vcpkgInstalledUnderWorkspaceOut = [System.IO.Path]::GetFullPath($vcpkgInstalled).StartsWith(
+                $sourceOutRoot,
+                [StringComparison]::OrdinalIgnoreCase
+            )
+            buildUnderWorkspaceOut = $buildRoot.StartsWith(
+                $sourceOutRoot,
+                [StringComparison]::OrdinalIgnoreCase
+            )
+            evidenceUsesNewWorkspacePath = $EvidenceRoot.Replace('\', '/').Contains(
+                '/projects/space-rhythm/workspace/out/evidence/T-041/'
+            )
+            temporaryUnderEvidence = $workRoot.StartsWith(
+                $EvidenceRoot.TrimEnd('\') + '\',
+                [StringComparison]::OrdinalIgnoreCase
+            )
+        }
+        $pathAudit.pass = (
+            $pathAudit.relativeSourceRoot -eq $expectedRelativeSourceRoot -and
+            $pathAudit.trackedBeforeClean -and
+            $pathAudit.trackedAfterClean -and
+            $pathAudit.legacyEntriesPresent.Count -eq 0 -and
+            -not $pathAudit.repositoryRootOutExists -and
+            $pathAudit.cmakeHomeMatchesSourceRoot -and
+            $pathAudit.vcpkgInstalledUnderWorkspaceOut -and
+            $pathAudit.buildUnderWorkspaceOut -and
+            $pathAudit.evidenceUsesNewWorkspacePath -and
+            $pathAudit.temporaryUnderEvidence
+        )
+        $pathAudit | ConvertTo-Json -Depth 6 |
+            Set-Content -LiteralPath (Join-Path $EvidenceRoot 'path-isolation.json') -Encoding utf8
+        if (-not $pathAudit.pass) { throw 'T-041 path isolation audit failed.' }
     }
     $result.status = 'pass'
 }
