@@ -62,7 +62,7 @@
 - 完成条件与确认方式：在当前 `TIGER` 上复核哈希、明确记录 unsigned 与 SAC-off 状态、依赖、安装/修复或升级/卸载/回滚、首次启动和核心工作流；记录系统版本、安全策略适用边界、环境、命令、结果、失败与未覆盖项，输出个人未签名交付证据包。必须注明 `productEffectEvaluation=not-evaluated(deferred-to-personal-use-feedback)`；不得把结果外推为产品效果/VFR通过、SAC/WDAC 兼容、干净 Windows 兼容矩阵、公开分发或生产发布；负责人自查。
 - 进展：2026-09-15，用户先通过 D-012 将任务收口为个人未签名交付验证，通过 D-013 指定当前 `TIGER` 且 SAC 状态为 0，并通过 D-015 将产品效果验收延期。同日 T-022/T-037 completed 后，release-engineer-windows-01 在当前主机完成 T-038。最终包源/验证器提交为 `bd9eb97a3b538550790d340b6117362184ee65f2`，ZIP 为 44,740,342 字节、SHA-256 `2CC3F8B4AC5A6BC4B3EE8CC42C8305094F372A9E16F9DCAF937B59872FF8C3E6`；相同 OutputRoot 连续两次生成一致。完整事务、无参数正常 GUI 首启、App/Worker smoke、T-022 Release 核心工作流、repair/rollback/installed validate/回滚后 smoke/uninstall 和根外用户数据保留均实际通过，策略状态前后为 0。修复前 Worker 在重定向 stdout 时 exit 0 但 marker 丢失，已显式 flush、重建包并以无重试 smoke 通过；Qt Test harness 的两次失败也保留在结构化证据中。`productEffectEvaluation=not-evaluated(deferred-to-personal-use-feedback)`，不外推 SAC/WDAC、干净 Windows、产品效果或发布资格。
 - 成果与验证证据：[A-035 0.1](artifacts/A-035-windows-personal-unsigned-delivery-validation.md)、[T-038 验证摘要](evidence/T-038/verification-summary.md)、[TIGER 机器可读证据](evidence/T-038/tiger-personal-delivery-20260915.json)、[A-033 0.2](artifacts/A-033-windows-unsigned-deployment-and-transaction-pipeline.md)、[A-034 0.1](artifacts/A-034-t022-engineering-e2e-fault-recovery-quality-gates.md)及 `tests/release/Test-PersonalDelivery.ps1`。完整原始证据位于被忽略的 `out/evidence/T-038/`，冻结生成物位于 `out/release/T-038/`。
-- 阻塞与下一位行动人：T-038 在 D-012/D-013/D-015 范围内无阻塞并已完成；包继续为 `unsigned-engineering`、`candidateEligible=false`。H-010 仍由发起人 architect-01 核对并决定关闭，项目级汇总由 project-manager-01 刷新；后续个人试用反馈若发现问题，应另建缺陷/任务。最低 Windows、正式 H.264/AAC/容器、VC Runtime、其他主机和 SAC/WDAC 兼容仍未评估。
+- 阻塞与下一位行动人：T-038 在 D-012/D-013/D-015 范围内无阻塞并已完成，H-010 已由发起人 architect-01 核对关闭；D-016 迁移后的 T-042 也已从新 workspace 重建并复验个人未签名包。包继续为 `unsigned-engineering`、`candidateEligible=false`；后续个人试用反馈若发现问题，应另建缺陷/任务。最低 Windows、正式 H.264/AAC/容器、VC Runtime、其他主机和 SAC/WDAC 兼容仍未评估。
 - 更新日期：2026-09-15。
 
 ## T-037：建立 Windows 个人未签名部署与事务安装流水线
@@ -179,7 +179,7 @@
 - 完成条件与确认方式：按样本类别报告命中、误报、时间误差、人工修正量或确认的等价指标；记录吞吐、内存、线程和取消；列出已知失败模式；经典算法未达门槛时提交模型收益、运行时、许可、CPU/GPU 和包体影响，等待新决定；形成可复核效果/性能报告。
 - 进展：负责人按 D-010/A-031 0.3 获取并 probe `GAME-004`、`TRAVEL-001`、`TRAVEL-007`、`LIFE-007` 四个替换来源，保留其余 36 个代理，形成 dataset 0.2.0。40/40 媒体 SHA 复核一致，总计 1,359,437,599 bytes、1,815.044 秒；来源时间窗、`calibration/tuning/final=4/16/20` 及舞蹈/游戏/旅行/生活各 10 条均通过。实际结果同时否定 D-010 的 VFR 选源假设：完整数据为 CFR 40、VFR 0。2026-09-15 接收 A-031 0.5/D-014/H-017 后，负责人建立 `USER-01` 参考制作、隐藏随机化 A/B 盲评和人工修正三阶段工具/界面/冻结校验；重新核对 40/40 媒体和源逐帧 PTS，生成 40 个 Git 忽略的静音 H.264 预览，并冻结 preview ordinal→source true `timeNs` 映射。参考会话 40 条中 final 20 条，界面已可用；用户首次导出的 40/40 submission 结构完整，但 40 条 `events` 全部为空且 `modificationLog=0`，未冻结为有效人工参考。当前 `TIGER` 的 AC Best Performance overlay 和 SAC=0 已同轮保存，T-028 Release PE 在 OpenCV 8/FFmpeg 2 线程下完成一组有效 1 warmup + 5 measured；wall 样本 `201162/186496/175500/174688/176782 us`、取消 P95 `2557 us`，原生视频分析单测 8/8 通过。该 synthetic 160×90 基线仅证明主机/PE 就绪，不构成正式 T-029 P-*；未运行产品/VFR 正式 classic，未提出模型方案、未引入 ONNX。
 - 成果与验证证据：[A-030 0.4](artifacts/A-030-video-product-evaluation-and-model-gate.md)、[A-031 0.5](artifacts/A-031-t029-video-product-evaluation-input.md)、D-010/D-011/D-014 confirmed、H-017 closed、[dataset 0.2.0 manifest](evidence/T-029/product-dataset-manifest-v2.json)、[execution-readiness-v4](evidence/T-029/execution-readiness-v4.json)、[TIGER Windows Release 基线](evidence/T-029/windows-release-baseline-v1.json)、[T-028 PE 原始 1+5](evidence/T-029/t028-release-windows-measurement-v1.json)、[USER-01 工作流工具](workspace/tests/evaluation/video/prepare_user01_workflow.py)及[操作界面说明](workspace/tests/evaluation/video/user01-app/README.md)。实际媒体、预览、会话、草稿、隐藏答案表和人工结果均留在 Git 忽略的 `out/`。
-- 阻塞与下一位行动人：用户于 2026-09-15 明确要求跳过本步骤、改为个人实际使用中发现问题后反馈；D-015 confirmed 后，T-029 在当前阶段取消，H-013/H-014 同步取消。现有结果保持 `not-evaluated`，不需要 `USER-01` 继续重做参考，也不得将取消或空 submission 解释为通过。下一位行动人为 tester-cpp-qt-01，按 D-015 执行 T-022 的工程端到端与故障恢复验证；未来只有用户基于实际问题明确要求时才新建缺陷任务或重开 T-029。
+- 阻塞与下一位行动人：用户于 2026-09-15 明确要求跳过本步骤、改为个人实际使用中发现问题后反馈；D-015 confirmed 后，T-029 在当前阶段取消，H-013/H-014 同步取消。T-022/T-038 后续工程与个人交付验证均已完成，H-007 已由发起人依据 `T-027/T-028 completed + T-029 cancelled` 关闭。现有结果保持 `not-evaluated`，不得将取消或空 submission 解释为通过；未来只有用户基于实际问题明确要求时才新建缺陷任务或重开 T-029。
 - 更新日期：2026-09-15。
 
 ## T-028：实现经典镜头、运动与动作峰值分析
@@ -270,7 +270,7 @@
 - 完成条件与确认方式：形成可重复的端到端测试，至少覆盖取消、worker 崩溃、损坏/不支持媒体、缓存损坏、素材丢失、磁盘不足和并发输出冲突；记录时延、吞吐、峰值内存、seek、音画漂移及恢复数据；按可执行范围输出 G0～G4 证据、失败项、复现步骤和归属任务，T-029 所承载的产品效果、自然度、人工修正量、真实 VFR 与正式产品性能固定报告 `not-evaluated(deferred-to-personal-use-feedback)`，不得误写 pass；负责人自查并把结果登记为版本化成果。
 - 进展：tester-cpp-qt-01 于 2026-09-15 按用户明确指令启动并完成 T-022。已把统一 Windows headless 入口扩展为 T-022 门禁，新增工程时延/吞吐/峰值内存测量、并发输出冲突契约及不支持媒体公开错误契约；将 9 个真实 Qt UI/worker 场景拆成独立进程，保留原断言并归档各自 Qt/JUnit 报告，避免跨用例 worker 生命周期污染。取消、worker 崩溃、损坏/不支持媒体、缓存损坏、素材丢失、磁盘/编码失败、并发输出、原子保存和 autosave fallback 均有实际自动化覆盖。最终跟踪提交 `be61c71` 在 Windows x64 Debug、CI/RelWithDebInfo、Release 三个 preset 各实际执行 166/166 pass、0 fail、0 skip；此前失败运行完整保留在索引中，未以重试覆盖。
 - 成果与验证证据：[A-034 0.1：T-022 工程端到端、故障恢复与质量门禁](artifacts/A-034-t022-engineering-e2e-fault-recovery-quality-gates.md)、[T-022 验证摘要](evidence/T-022/verification-summary.md)及[运行索引与 SHA-256](evidence/T-022/runs-v1.json)。原始环境、JUnit、CTest、Qt 报告、构建/运行日志、测量 JSON 和输入哈希保存在忽略的 `out/evidence/T-022/`；样例审计覆盖 13 个媒体、10 个视频、10 个音频 CC0-1.0/项目合成资产。性能数据只按实际结果标记 `measured`，无阈值项未写 pass；产品效果、自然度、真实 VFR 和正式产品性能均明确记录为 `not-evaluated(deferred-to-personal-use-feedback)`。
-- 阻塞与下一位行动人：T-022 工程可测范围无阻塞并已完成。G2 工程功能门禁通过；G0、G1、G3 正式性能结论和 G4 因产品输入/门槛延后，整体不能写成全绿。最低 Windows、真实设备/GPU、正式 H.264/AAC/容器和产品兼容矩阵仍未评估；`T021-ENV-001` 的历史 blocked 记录不因本轮 D-015/SAC-off 环境成功运行而追溯改写。下一行动人为 release-engineer-windows-01 按后续明确授权处理 T-038；本会话未启动 T-038。
+- 阻塞与下一位行动人：T-022 工程可测范围无阻塞并已完成，H-005 已由发起人 architect-01 核对关闭；后续 T-038、迁移后 T-041/T-042 亦已完成。G2 工程功能门禁通过；G0、G1、G3 正式性能结论和 G4 因产品输入/门槛延后，整体不能写成全绿。最低 Windows、真实设备/GPU、正式 H.264/AAC/容器和产品兼容矩阵仍未评估；`T021-ENV-001` 的历史 blocked 记录不因 D-015/SAC-off 环境成功运行而追溯改写。
 - 更新日期：2026-09-15。
 
 ## T-021：实现统一测试入口、契约测试与黄金样例库
@@ -348,7 +348,7 @@
 - 完成条件与确认方式：状态机覆盖 queued/running/cancelling/succeeded/failed/cancelled，具备版本握手、幂等请求、进度、取消、超时和诊断 ID；IPC 不用 JSON 复制大帧/PCM；项目保存/迁移/自动恢复/素材重定位/缓存指纹和临时结果提交可测；worker 崩溃、磁盘不足、缓存损坏不破坏最近成功保存；负责人提交开发自测和故障注入证据。
 - 进展：2026-09-09，已交付纯作业状态机、schema/protocol 1 长度前缀本地 IPC、同用户权限与强制版本握手、mock Worker、幂等请求/取消、进度/超时/崩溃/诊断 ID、过期修订保护；已交付项目 schema 2、v1→v2 迁移、原子主保存/自动保存、带来源及时间的异常恢复、指纹素材重定位，以及带格式/长度/SHA-256 校验和配额裁剪的可重建缓存。JSON IPC 只承载小型控制元数据，大帧、PCM、采样和像素等通过 file/cache 引用传递；公共系统接口无 Qt 类型。
 - 成果与验证证据：实现位于仓库 `src/system`，mock 入口位于 `src/worker/main.cpp`，GoogleTest 位于 `tests/unit/job_system_test.cpp`、`ipc_system_test.cpp` 和 `project_store_test.cpp`；[T-016 可复核验证摘要](evidence/T-016/verification-summary.md)记录故障矩阵和 MSVC 19.44 `/W4 /WX` 下 Debug、Release、CI 三套 Windows x64 CTest 32/32 通过结果。
-- 阻塞与下一位行动人：T-016 无剩余阻塞并已按完成条件结束；H-003 由目标成员完成处理记录，保持 accepted，等待发起人 architect-01 核对后关闭。本会话按用户边界停止，不启动媒体、UI、CV 或 DSP 任务。
+- 阻塞与下一位行动人：T-016 无剩余阻塞并已按完成条件结束；H-003 已由发起人 architect-01 核对关闭，T-022/T-041 的完整工程回归未发现核心/系统契约退化。媒体、UI、CV 或 DSP 仍由各自责任链处理。
 - 更新日期：2026-09-09。
 
 ## T-015：实现事件时间线事务、撤销与确定性融合核心
@@ -386,8 +386,8 @@
 - 优先级：高；按前置条件排队。
 - 完成条件与确认方式：建立 A-005 建议目录的最小可链接目标；提供开发/CI presets、编译警告、x64/运行库/ABI 保护、统一测试入口和依赖 manifest/baseline；x86/ARM64 配置明确失败；CI 可配置、编译、运行无 GUI 单测和最小 QML 冒烟，并检查运行时依赖；保存构建日志和产物清单；负责人自查，不包含正式安装器/签名批准。
 - 进展：build-engineer-windows-qt-01 已完成应用、Worker、纯 C++ 核心、媒体适配和测试的 Windows x64 工程骨架；加入 CMake 3.31/Ninja 的 Debug、Release、CI presets，MSVC 19.44/x64/C17/C++20/动态 CRT/精确 Qt 6.11.2 门禁，固定 vcpkg manifest/baseline 及 FFmpeg/OpenCV/KissFFT 可选入口，GoogleTest/CTest、Qt Test/Qt Quick Test、应用 QML、Worker 进程、x86/ARM64 拒绝测试，Windows CI、部署、PE/依赖核对和逐文件哈希证据。只复用 T-012 SDK，未重新构建 Qt，未实现业务逻辑，未修改 `package/`。2026-09-10 按用户明确授权完成 T021-ENV-001 后续诊断：旧 Release core 哈希稳定触发 Win32 4551/Code Integrity `0xC0E90002`；原路径 clean rebuild 与全新目录 rebuild 后 core 均可运行，当前 26/26 实际通过；严格 Release headless 全套仍为 53/63，未使用 fallback，未把其余策略阻断改写为通过。
-- 成果与验证证据：[A-013 0.2：Windows x64 CMake/Ninja 工程与 CI 骨架](artifacts/A-013-windows-x64-cmake-ci-skeleton.md)，状态 draft；[T-013 可复核摘要](evidence/T-013/verification-summary.md)保留 0.1 历史基线；[T021-ENV-001 专项诊断](evidence/T-013/t021-env-001-verification-summary.md)及其 [Code Integrity 事件摘录](evidence/T-013/t021-env-001-code-integrity-events.json)。Debug、Release、CI 的 PE/CRT/导入/签名/路径/启动已对照；完整机器日志位于被忽略的 `out/evidence/T021-ENV-001`。
-- 阻塞与下一位行动人：T-013 工程骨架本身无剩余阻塞并保持 completed；T021-ENV-001 不能由测试入口降级关闭，需主机策略管理员依据 Policy GUID `{0283ac0f-fff1-49ae-ada1-8a933130cad6}` 提供组织管理的非生产开发签名路线，或在 ACL 受控、非用户可写的专用构建根上建立最小补充策略，再由 tester-cpp-qt-01 严格复跑 Release 63/63。最低 Windows 版本仍需在后续兼容/发布任务中确认。H-002 保持 accepted，等待发起人 architect-01 核对 T-011～T-013 结果后关闭。
+- 成果与验证证据：[A-013 0.3：Windows x64 CMake/Ninja 工程与 CI 骨架](artifacts/A-013-windows-x64-cmake-ci-skeleton.md)，状态 draft；0.3 已按 D-016/T-040 更新有效工程入口，原验证数字保持历史基线；[T-013 可复核摘要](evidence/T-013/verification-summary.md)、[T021-ENV-001 专项诊断](evidence/T-013/t021-env-001-verification-summary.md)及其 [Code Integrity 事件摘录](evidence/T-013/t021-env-001-code-integrity-events.json)保留迁移前证据，迁移后构建/测试由 A-036/A-037 承接。
+- 阻塞与下一位行动人：T-013 工程骨架本身无剩余阻塞并保持 completed；H-002 已由发起人 architect-01 核对关闭，D-016/T-040/T-041 又确认迁移后的新 workspace 三套构建与 166/166 回归有效。`T021-ENV-001` 的历史 Code Integrity 阻断继续保留，不因 D-013 当前 `TIGER` SAC-off 条件下的成功运行而追溯改写；最低 Windows 版本仍需在后续兼容/发布任务中确认。
 - 更新日期：2026-09-10。
 
 ## T-012：从官方源码构建可复现的 Windows x64 Qt SDK

@@ -110,12 +110,12 @@
 - 关联任务：T-036、T-037、T-038
 - 期望结果：在自己的项目会话中接收本交接，先把 T-036 更新为 in_progress，形成发布输入、许可证/SBOM、安装事务、签名隔离和干净环境计划；功能闭环与决定输入就绪后依次执行 T-037/T-038，不把候选验证写成生产发布批准。
 - 输入与证据：D-003～D-008；A-004 0.5、A-005 0.4、A-006 0.1 WP-10、[A-011 0.1](artifacts/A-011-complete-mvp-engineering-staffing-and-task-plan.md)；T-036～T-038。
-- 未完成事项：T-036～T-038 已完成本阶段个人未签名交付闭环；签名主体/证书、发布渠道和独立 GUI 安装器已由 D-012 移出本阶段必选范围，最低 Windows、正式 H.264/AAC/容器、VC Runtime、其他主机及 SAC/WDAC 兼容仍未评估。H-010 等待发起人 architect-01 核对后关闭，交付包不得公开分发。
-- 状态：accepted
+- 未完成事项：H-010 范围内无；T-036～T-038 已完成 D-012/D-013/D-015 限定的个人未签名交付闭环，T-042 又在 D-016 迁移后的唯一工程根完成重建与复验。签名主体/证书、发布渠道和独立 GUI 安装器已移出本阶段必选范围；最低 Windows、正式 H.264/AAC/容器、VC Runtime、其他主机及 SAC/WDAC 兼容仍未评估，交付包不得公开分发。
+- 状态：closed
 - 创建日期：2026-09-09
 - 接收反馈：2026-09-14，release-engineer-windows-01 已按会话协议刷新身份、岗位、有效知识、项目当前事实及本交接输入，确认在本人 scope 内接收；已将 T-036 更新为 in_progress，本轮优先处理 Qt DLL、`windeployqt` 和 WDAC/SAC 策略阻塞，不使用签名凭据或放宽生产安全策略。
-- 处理结果与证据：2026-09-14，T-036 已完成并形成 [A-032 0.1](artifacts/A-032-windows-release-input-license-sbom-plan.md)及[T-036 可复核摘要](evidence/T-036/verification-summary.md)，Qt DLL 来源/哈希和 `windeployqt` 实际复制已验证，历史 SAC/WDAC 开启状态下的阻断也已如实取证。2026-09-15，D-012/D-013 将后续范围确认为用户本人、自有 Windows 的个人未签名交付，并指定 SAC 已关闭的当前 `TIGER`；H-015 取消、H-016 关闭。T-037 已完成：最新受控包由提交 `02c65ce4b596675d102ed3c82459528b60f63297` 生成，ZIP SHA-256 为 `CD94BC9CABF1B0AD29062EE39DD14DEBCBF2AAEB6B777D69036874221D8C634C`，在 `VerifiedAndReputablePolicyState=0` 条件下通过 App/Worker smoke 及完整安装事务，详见 [A-033 0.2](artifacts/A-033-windows-unsigned-deployment-and-transaction-pipeline.md)与[T-037 验证摘要](evidence/T-037/verification-summary.md)。同日 T-022 已完成并形成 [A-034 0.1](artifacts/A-034-t022-engineering-e2e-fault-recovery-quality-gates.md)，三套 preset 各 166/166 工程 oracle pass。随后 T-038 已完成并形成 [A-035 0.1](artifacts/A-035-windows-personal-unsigned-delivery-validation.md)及[T-038 验证摘要](evidence/T-038/verification-summary.md)：最终 ZIP SHA-256 为 `2CC3F8B4AC5A6BC4B3EE8CC42C8305094F372A9E16F9DCAF937B59872FF8C3E6`，当前 `TIGER` 上安装、正常首启、App/Worker smoke、核心工作流、repair、rollback、uninstall 和根外用户数据保留均通过，结论限定为 `pass(personal-unsigned,current-TIGER,SAC-off)`。产品效果、自然度、真实 VFR 和正式产品性能继续为延期未评估，全部结果均不构成 SAC/WDAC 兼容或公开发布证明。H-010 的执行工作已完成，保持 `accepted` 直至发起人 architect-01 核对关闭。
-- 关闭或取消依据：暂无。
+- 处理结果与证据：2026-09-14，T-036 已完成并形成 [A-032 0.1](artifacts/A-032-windows-release-input-license-sbom-plan.md)及[T-036 可复核摘要](evidence/T-036/verification-summary.md)，Qt DLL 来源/哈希和 `windeployqt` 实际复制已验证，历史 SAC/WDAC 开启状态下的阻断也已如实取证。2026-09-15，D-012/D-013 将后续范围确认为用户本人、自有 Windows 的个人未签名交付，并指定 SAC 已关闭的当前 `TIGER`；H-015 取消、H-016 关闭。T-037 已完成并形成 [A-033 0.2](artifacts/A-033-windows-unsigned-deployment-and-transaction-pipeline.md)，T-022 三套 preset 各 166/166 工程 oracle pass 后，T-038 又形成 [A-035 0.1](artifacts/A-035-windows-personal-unsigned-delivery-validation.md)，在当前 `TIGER` 完成安装、正常首启、App/Worker smoke、核心工作流、repair、rollback、uninstall 和根外用户数据保留。D-016 迁移后，T-042 进一步形成 [A-038 0.1](artifacts/A-038-t042-post-migration-personal-unsigned-delivery.md)：从新 workspace 连续两次生成 44,740,452 字节且 SHA-256 同为 `52E0BED1C7342995591D5F33335EF059BB6204BDCA4386E98F2A1A5E133C56B4` 的包，并再次通过完整个人交付链。最终结论限定为 `pass(personal-unsigned,current-TIGER,SAC-off,post-migration-workspace)`、`candidateEligible=false`；产品效果、自然度、真实 VFR、正式产品性能、SAC/WDAC 兼容和公开发布资格均未宣称通过。
+- 关闭或取消依据：2026-09-16，发起人 architect-01 核对 T-036～T-038 状态、A-032～A-035、T-022 三套 166/166 工程证据，以及迁移后 T-041 三套 166/166 和 T-042 的双次确定性组包、路径隔离、安装事务、正常 GUI 首启、App/Worker smoke 与核心工作流证据。确认发布输入/SBOM、个人未签名部署事务和当前 `TIGER` 交付验证已覆盖本交接在 D-012/D-013/D-015 范围内的期望，故关闭 H-010。关闭不批准签名、SAC/WDAC 或其他主机兼容、公开/第三方交付和生产发布。
 
 ## H-009：启动 Qt Scene Graph 实时图形工作流
 - 发起人：architect-01
@@ -149,12 +149,12 @@
 - 关联任务：T-027、T-028、T-029
 - 期望结果：在自己的项目会话中接收本交接，先把 T-027 更新为 in_progress，形成视频候选契约、样本矩阵和指标；媒体/工程输入就绪后执行经典算法与评估，不直接修改核心时间线，不在缺少门禁证据时引入模型。
 - 输入与证据：D-001～D-008；A-002 0.2、A-004 0.5、A-005 0.4、A-006 0.1 WP-05、[A-011 0.1](artifacts/A-011-complete-mvp-engineering-staffing-and-task-plan.md)；T-027～T-029。
-- 未完成事项：D-003 已确认 OpenCV 经典算法路线；代表视频、标注和“卡点自然”阈值尚未确认，未定阈值只报告测量值。
-- 状态：accepted
+- 未完成事项：H-007 当前个人试用阶段范围内无；T-027/T-028 已完成，T-029 已由用户依据 D-015 取消而非通过。产品效果、自然度、真实 VFR、人工修正量和正式产品性能保持 `not-evaluated(deferred-to-personal-use-feedback)`；未来若恢复正式评价、扩大用户或形成产品效果声明，须重新授权并恢复真实参考、评分、VFR 与性能门禁。
+- 状态：closed
 - 创建日期：2026-09-09
 - 接收反馈：video-algorithm-engineer-cv-01 于 2026-09-14 完成成员身份、岗位、有效知识、相关决定、任务和上游契约刷新后确认接收；本轮先执行 T-027，完成后才按顺序进入 T-028、T-029，不越过效果与模型门禁。
-- 处理结果与证据：2026-09-14，T-027 已按顺序完成并形成 [A-028 0.2](artifacts/A-028-video-analysis-contract-sample-metrics.md)、10 项 CC0 合成样本配方和指标契约。同日用户明确启动并完成 T-028，形成 [A-029 0.1](artifacts/A-029-classic-video-analysis-and-golden.md)及[验证摘要](evidence/T-028/verification-summary.md)：实现 OpenCV 4.12.0 经典 shot/motion_peak/action_peak，直接使用媒体 schema 2 真实 `timeNs`，生成固定 FFmpeg 8.1.2 FFV1 golden 并连续两次取得相同 hash；Debug/CI/Release 三套最终 Windows PE 在 Wine 8.0 隔离环境各 8/8 通过，合成矩阵无 FP/FN。最终 PE 本机原生启动仍受既有 WDAC/SAC `0xC0E90002` 拒绝，未伪装为原生通过。同日用户明确授权启动 T-029；首次缺输入审计形成 A-030 0.1，随后 D-009/A-031 0.2 补齐产品定义。负责人按 A-031 0.2 冻结 36 个可用代理并发现 4 个失效来源；D-010/A-031 0.3 随后批准替换。本轮继续执行后，4 个替换项均成功获取，dataset 0.2.0 达到 40 条、`4/16/20` 和每类 10 条，40/40 媒体 SHA 与 4/4 PTS 保持检查通过；但三个 VFR 目标的源流/代理均为 CFR，故 H-013 不关闭。当前 [A-030 0.3](artifacts/A-030-video-product-evaluation-and-model-gate.md)将结构配额记为 pass、VFR 记为 fail、语义 slice 与产品效果/性能记为 `not-evaluated`；classic 未越过裁决标注前置，未提出模型或引入 ONNX。后续仍由 H-013、H-014 跟踪。
-- 关闭或取消依据：暂无。
+- 处理结果与证据：2026-09-14，T-027 已按顺序完成并形成 [A-028 0.2](artifacts/A-028-video-analysis-contract-sample-metrics.md)、10 项 CC0 合成样本配方和指标契约；T-028 随后完成并形成 [A-029 0.1](artifacts/A-029-classic-video-analysis-and-golden.md)及[验证摘要](evidence/T-028/verification-summary.md)，实现 OpenCV 4.12.0 经典 shot/motion_peak/action_peak，直接使用媒体 schema 2 真实 `timeNs`，固定 FFmpeg 8.1.2 FFV1 golden 连续两次 hash 一致，三套最终 Windows PE 在 Wine 隔离环境各 8/8，当前 `TIGER` 又完成 Release 原生 8/8 与一次预热加五次测量。T-029 已完成 40 条产品主集和 `USER-01` 工具/Windows 基线准备，但真实 VFR 为 0，首次人工 submission 的事件与修改日志均为空，未形成有效产品效果证据，也未提出模型或引入 ONNX。2026-09-15 用户明确选择 D-015：当前个人试用阶段取消 T-029 正式产品效果验收，H-013/H-014 同步取消，既有准备与失败事实保留为 [A-030 0.4](artifacts/A-030-video-product-evaluation-and-model-gate.md)，不把取消解释为通过。
+- 关闭或取消依据：2026-09-16，发起人 architect-01 核对 T-027/T-028 均为 `completed`、T-029 为 `cancelled`，以及 A-028/A-029、合成 golden、确定性/PTS/有界内存/取消自测和当前 `TIGER` 原生基线；并复核 D-015 已明确用“个人实际使用中反馈问题”替代本阶段正式产品效果验收。H-007 的契约与经典算法实现目标已经交付，剩余正式效果/VFR/性能工作因范围决定合法取消，故关闭 H-007。此结论是 `completed + cancelled-by-scope`，不是 T-029 pass，不构成产品自然度、真实 VFR、一般用户适用性或模型门禁通过。
 
 ## H-006：启动 Qt Quick/QML UI 设计开发工作流
 - 发起人：architect-01
@@ -175,12 +175,12 @@
 - 关联任务：T-020、T-021、T-022
 - 期望结果：在自己的项目会话中接收本交接，先把 T-020 更新为 in_progress 并完成测试策略、需求追踪和可复现规则；T-013 测试骨架、T-014/T-017 契约可用且测试框架获确认后执行 T-021；基础实现集成后执行 T-022。每次只按实际状态更新任务，不把计划或等待依赖写成已经完成。
 - 输入与证据：[A-004 0.5](artifacts/A-004-mvp-technical-feasibility-and-requirements.md)、[A-005 0.4](artifacts/A-005-mvp-technology-stack-proposal.md)、[A-006 0.1](artifacts/A-006-domain-work-packages.md)、[A-007 0.1](artifacts/A-007-four-engineer-execution-plan.md)；D-003 confirmed；T-020～T-022。
-- 未完成事项：D-003 已确认 GoogleTest/CTest + Qt Test/Qt Quick Test；基准硬件、代表素材、性能和产品效果阈值尚未确认，未确认阈值只能报告测量值，不能给出通过结论。
-- 状态：accepted
+- 未完成事项：H-005 工程测试范围内无；T-020～T-022 已完成。基准硬件、真实产品素材、产品效果/自然度、真实 VFR、正式性能和兼容阈值继续按 D-015 标记延期未评估，不属于本交接关闭时的通过声明。
+- 状态：closed
 - 创建日期：2026-09-08
 - 接收反馈：tester-cpp-qt-01 于 2026-09-10 实际读取本交接、T-020～T-022、D-001～D-008、T-013～T-018 及关联成果后接收并完成 T-020；同日用户再次确认 T-021 前置满足并明确启动 T-021。2026-09-15，用户确认 D-015 已生效、T-029 已取消且不再作为个人试用阶段前置，并明确启动 T-022；接收方据此执行工程可测门禁，同时保留产品反馈延期边界。
 - 处理结果与证据：T-020 已完成并形成 [A-016 0.1：C++/Qt 测试策略、需求追踪与可复现规则](artifacts/A-016-cpp-qt-test-strategy-and-traceability.md)。T-021 已完成测试基础设施交付并形成 [A-017 0.2：Windows headless 契约测试入口与证据](artifacts/A-017-windows-headless-contract-test-entry-and-evidence.md)及 [T-021 验证摘要](evidence/T-021/verification-summary.md)：首次三 preset 结果保持原始记录；基于 `40b1734` 的独立复测保留既有 oracle，公开 `limited/full/unknown` 映射及 GM-ROT-SAR-001 在 Debug、CI/RelWithDebInfo 均 63/63 pass，`T021-DEFECT-001` 标记为 resolved。T-022 随后完成并形成 [A-034 0.1：工程端到端、故障恢复与质量门禁](artifacts/A-034-t022-engineering-e2e-fault-recovery-quality-gates.md)及 [T-022 验证摘要](evidence/T-022/verification-summary.md)：Windows x64 Debug、CI/RelWithDebInfo、Release 三个 preset 均实际 166/166 pass、0 fail、0 skip，覆盖真实 UI/worker/核心/媒体/存储链、取消与崩溃恢复、错误媒体/缓存/素材、磁盘与并发输出，原始失败和最终证据均保留。所有无门槛性能仅为 `measured`；产品效果、自然度、真实 VFR 与正式产品性能均为 `not-evaluated(deferred-to-personal-use-feedback)`。
-- 关闭或取消依据：执行方已完成 T-020～T-022，H-005 仍保持 accepted，等待发起人 architect-01 核对 A-016、A-017、A-034 后关闭。`T021-DEFECT-001` 已由 tester-cpp-qt-01 独立复测解决；`T021-ENV-001` 首次 Release 的 26 项历史记录继续为 blocked，不因本轮 D-015/SAC-off 环境三 preset 成功而追溯改写。G0、G1、G3 正式性能结论和 G4 仍受延期产品反馈/未确认门槛限制，不能写成全绿；本会话未启动 T-038。
+- 关闭或取消依据：2026-09-16，发起人 architect-01 核对 A-016 0.1、A-017 0.2、A-034 0.1 和机器可读运行索引：`T021-DEFECT-001` 已按指定条件独立复测为 resolved；T-022 在 Debug、CI/RelWithDebInfo、Release 三套 preset 各 166/166、0 fail、0 skip，覆盖真实 UI/worker/核心/媒体/存储链及取消、崩溃、损坏媒体/缓存、素材丢失、磁盘/编码失败和并发输出。D-016 迁移后，T-041 又在干净 clone 的新 workspace 三套各 166/166 并通过路径隔离，测试数未删减；一次未复现的 Debug 取消恢复瞬态及首次 `T021-ENV-001` blocked 历史均继续保留。由此关闭 H-005。G0/G1/G3 的正式性能结论及 G4 产品效果仍为延期未评估，不能将关闭表述为产品质量全绿。
 
 ## H-004：启动 FFmpeg 多媒体工作流
 - 发起人：architect-01
@@ -201,12 +201,12 @@
 - 关联任务：T-014、T-015、T-016
 - 期望结果：在自己的项目会话中接收本交接，先把 T-014 更新为 in_progress，交付规范时间、事件、修订与事务 0.x 契约；T-013 纯 C++ 构建骨架和契约就绪后执行 T-015；工程骨架和核心实现可用后执行 T-016。保持 domain 无 Qt Quick/FFmpeg 依赖，不私自确认 D-003/D-006。
 - 输入与证据：[A-004 0.5](artifacts/A-004-mvp-technical-feasibility-and-requirements.md)、[A-005 0.4](artifacts/A-005-mvp-technology-stack-proposal.md)、[A-006 0.1 WP-02/WP-08](artifacts/A-006-domain-work-packages.md)、[A-007 0.1](artifacts/A-007-four-engineer-execution-plan.md)、[A-012 0.1](artifacts/A-012-core-domain-contract-0x.md)；D-003 confirmed；T-014～T-016。
-- 未完成事项：目标成员范围内的 T-014、T-015、T-016 已全部完成；无实现阻塞。H-003 仍等待发起人 architect-01 核对结果并关闭。
-- 状态：accepted
+- 未完成事项：H-003 范围内无；T-014、T-015、T-016 已全部完成，后续 T-022/T-041 端到端与迁移回归未发现核心/系统契约退化。
+- 状态：closed
 - 创建日期：2026-09-08
 - 接收反馈：core-systems-engineer-cpp-01 于 2026-09-08 完成身份、任务、决定和输入版本刷新，确认接收 T-014～T-016；已将 T-014 转为 in_progress，并以 [A-010 0.1](artifacts/A-010-cpp-core-systems-execution-plan.md)登记执行方案。接收范围不包含 QML 页面、媒体解码、CV/DSP 算法或发布策略。
 - 处理结果与证据：core-systems-engineer-cpp-01 已完成 T-014 的 [A-012 0.1 核心契约](artifacts/A-012-core-domain-contract-0x.md)、T-015 的纯 C++ 时间线/事务/撤销重做/确定性融合实现，以及 T-016 的纯作业状态机、版本化同用户本地 IPC/mock Worker、项目 schema/迁移/原子保存/恢复、素材重定位和可重建缓存。T-015 证据见 [验证摘要](evidence/T-015/verification-summary.md)；T-016 的故障矩阵及 Debug/Release/CI 三套 Windows x64 CTest 32/32 结果见 [验证摘要](evidence/T-016/verification-summary.md)。实现保持公共 domain/system 接口无 Qt Quick/FFmpeg 依赖，未启动媒体、UI、CV 或 DSP 任务，未修改 `package/`。
-- 关闭或取消依据：暂无。
+- 关闭或取消依据：2026-09-16，发起人 architect-01 核对 A-012 0.1、T-015/T-016 验证摘要和当前迁移后源码边界：domain/system 公共接口未引入 Qt/QML、FFmpeg 或 OpenCV include；T-015 的 72 个契约向量及事务/撤销/确定性融合实现、T-016 的作业状态机/版本化 IPC/项目存储恢复与故障矩阵均已交付，原三套专项分别 16/16、32/32。T-022 与 T-041 又在完整工程三套 preset 各 166/166 验证核心、IPC、存储、取消和恢复链，故关闭 H-003。
 
 ## H-002：启动 Windows/Qt 构建工作流
 - 发起人：architect-01
@@ -214,12 +214,12 @@
 - 关联任务：T-011、T-012、T-013
 - 期望结果：在自己的项目会话中接收本交接，先把 T-011 更新为 in_progress，只读审计当前 Windows 构建环境并提交 D-006 决策输入；用户确认编译器、Qt 版本和许可证路径后执行 T-012；可复现 Qt SDK 就绪且 D-003 构建组合确认后执行 T-013。不得自行安装工具或把候选路线写成已确认决定。
 - 输入与证据：D-002～D-008 confirmed；[A-004 0.5](artifacts/A-004-mvp-technical-feasibility-and-requirements.md)、[A-005 0.4](artifacts/A-005-mvp-technology-stack-proposal.md)、[A-006 0.1 WP-01](artifacts/A-006-domain-work-packages.md)、[A-007 0.1](artifacts/A-007-four-engineer-execution-plan.md)、[A-009 0.1](artifacts/A-009-windows-qt-6.11.2-source-sdk-build.md)、[A-012 0.1](artifacts/A-012-core-domain-contract-0x.md)；T-011～T-013。
-- 未完成事项：T-011/T-012/T-013 已完成；最低 Windows 版本仍将约束后续兼容与发布验证。待发起人 architect-01 核对完整工作流结果并关闭本交接。
-- 状态：accepted
+- 未完成事项：H-002 范围内无；T-011/T-012/T-013 已完成。最低 Windows、其他主机和 SAC/WDAC 兼容仍未评估，继续约束后续兼容或公开发布，但不阻止构建工作流交接关闭。
+- 状态：closed
 - 创建日期：2026-09-08
 - 接收反馈：build-engineer-windows-qt-01 于 2026-09-08 已读取 H-002、T-011～T-013、D-002～D-006 及 A-004 0.5、A-005 0.3、A-006 0.1、A-007 0.1，确认在岗位 scope 内接收 Windows/Qt 构建工作流；先执行只读 T-011，不把接收解释为安装、技术定案或发布授权。
-- 处理结果与证据：T-011 已完成，见 [A-008 0.3：Windows 构建环境审计与执行方案](artifacts/A-008-windows-build-environment-audit-and-execution-plan.md)。T-012 已完成 MSVC 2022 x64 工具链、Qt 6.11.2 官方源码哈希、shared Release/Debug SDK、ABI/CRT、QML/Multimedia 消费端与部署冒烟验证，见 [A-009 0.1](artifacts/A-009-windows-qt-6.11.2-source-sdk-build.md)及其 [T-012 证据摘要](evidence/T-012/verification-summary.md)。用户于 2026-09-09 确认 D-003 并启动 T-013；现已完成 Windows x64 应用、Worker、核心库、媒体适配和测试的 CMake/Ninja 骨架、固定 vcpkg baseline、GoogleTest/CTest、Qt/QML 冒烟、Windows CI 及三套 preset 验证，见 [A-013 0.2](artifacts/A-013-windows-x64-cmake-ci-skeleton.md)及其 [T-013 证据摘要](evidence/T-013/verification-summary.md)。2026-09-10 又按用户明确指令完成 T021-ENV-001 的构建侧诊断和严格 Release 复核，见 [专项摘要](evidence/T-013/t021-env-001-verification-summary.md)：旧 core 哈希的 WDAC/SAC 拒绝已复现，重建后 core 26/26 实际通过，但 Release 全套仍为 53/63，必须由主机策略管理员提供可持续的最小开发信任路线。本交接覆盖的三项任务均完成，保持 accepted，等待发起人核对关闭。
-- 关闭或取消依据：执行方已完成 T-011～T-013；按交接关闭职责等待发起人 architect-01 核对后填写最终关闭依据。
+- 处理结果与证据：T-011 已完成，见 [A-008 0.3：Windows 构建环境审计与执行方案](artifacts/A-008-windows-build-environment-audit-and-execution-plan.md)。T-012 已完成 MSVC 2022 x64 工具链、Qt 6.11.2 官方源码哈希、shared Release/Debug SDK、ABI/CRT、QML/Multimedia 消费端与部署冒烟验证，见 [A-009 0.1](artifacts/A-009-windows-qt-6.11.2-source-sdk-build.md)及其 [T-012 证据摘要](evidence/T-012/verification-summary.md)。用户于 2026-09-09 确认 D-003 并启动 T-013；现已完成 Windows x64 应用、Worker、核心库、媒体适配和测试的 CMake/Ninja 骨架、固定 vcpkg baseline、GoogleTest/CTest、Qt/QML 冒烟、Windows CI 及三套 preset 验证，见迁移后更新的 [A-013 0.3](artifacts/A-013-windows-x64-cmake-ci-skeleton.md)及其 [T-013 证据摘要](evidence/T-013/verification-summary.md)。2026-09-10 的 [T021-ENV-001 专项摘要](evidence/T-013/t021-env-001-verification-summary.md)保留旧 core 哈希被 WDAC/SAC 拒绝、重建后 core 26/26 和严格 Release 53/63 的历史事实；D-016/T-040/T-041 随后证明新 workspace 三套 clean build 与完整 166/166 回归有效，但不把 SAC/WDAC 兼容写成通过。本交接覆盖的三项任务及迁移后构建连续性均已核对。
+- 关闭或取消依据：2026-09-16，发起人 architect-01 核对 A-008 0.3、A-009 0.1、A-013 0.3 及 T-012/T-013/T021-ENV-001 证据：MSVC 2022 x64、Qt 6.11.2 官方源码 shared Debug/Release SDK、ABI/CRT、QML/Multimedia 消费、CMake/Ninja/vcpkg/CTest 和 x64 拒绝门禁均已交付。D-016 将工程入口迁入项目 workspace 后，T-040 完成三套 clean configure/build，T-041 又在干净 clone 从新入口完成三套各 166/166 与路径隔离，证明构建骨架随迁移继续有效。历史 SAC/WDAC 阻断保留且未被误写为兼容通过；最低 Windows 仍未确认。据此关闭 H-002。
 
 ## H-001：协调已确认产品方向的后续计划
 - 发起人：product-manager-01
