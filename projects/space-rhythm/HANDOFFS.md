@@ -6,12 +6,12 @@
 - 关联任务：T-040；后续 T-041、T-042
 - 期望结果：在自己的项目会话中接收 D-016/T-040，新建 `projects/space-rhythm/workspace/`，把所有跟踪的产品工程文件及 `.github/workflows/` 迁入其中，更新 CMake/preset、测试、Qt/QML、构建/发布工具、CI 和工程文档路径，并以三 preset 配置/编译和路径审计证明该目录是唯一工程根；完成后明确移交 tester-cpp-qt-01。
 - 输入与证据：D-016 confirmed；迁移前提交 `9de4719`；根 `CMakeLists.txt`、`CMakePresets.json`、`vcpkg.json`、`cmake/`、`src/`、`tests/`、`tooling/`、`docs/`；`.github/workflows/windows-x64.yml`；A-013、A-034、A-035。
-- 未完成事项：T-040 工程迁移已完成；T-041 独立测试和 T-042 发布复验仍须由各自负责人执行。仓库根未保留 workflow 入口，因此 GitHub Actions 自动构建/PR 检查继续按 D-016 暂时停用；恢复入口仍需用户另行确认。发起人尚未关闭本交接。
-- 状态：accepted
+- 未完成事项：H-018 范围内无未完成事项。T-041 独立测试和 T-042 发布复验仍须由各自负责人执行，属于已登记的下游任务，不阻止本交接关闭。仓库根未保留 workflow 入口，因此 GitHub Actions 自动构建/PR 检查继续按 D-016 暂时停用；恢复入口仍需用户另行确认。
+- 状态：closed
 - 创建日期：2026-09-15
 - 接收反馈：2026-09-16，build-engineer-windows-qt-01 已在原会话接收 D-016/T-040，确认按清单完整迁移，不移动根 `out/`、`package/` 或 `scripts/__pycache__/`，也不提前执行 T-041/T-042。
 - 处理结果与证据：2026-09-16，已实际执行 `git mv` 完成全部清单迁移，根产品入口不存在，迁移前/后文件数一致；三 preset clean configure/build 通过，生成路径旧根匹配数为 0，根 T-038 冻结包哈希不变。成果为 [A-036 0.1](artifacts/A-036-product-workspace-root-migration.md)，证据为 [T-040 验证摘要](evidence/T-040/verification-summary.md)与[机器可读清单](evidence/T-040/migration-inventory-v1.json)。已移交 tester-cpp-qt-01 执行 T-041；未提前执行 T-041/T-042。
-- 关闭或取消依据：暂无。
+- 关闭或取消依据：2026-09-16，原发起人 project-manager-01 核对提交 `6cfe34d`、A-036 0.1、T-040 验证摘要及实际目录：迁移清单已完成，根产品入口不存在，新 workspace 入口齐全，三套 preset 配置/编译与旧路径审计通过，且已明确移交 tester-cpp-qt-01；满足 H-018 期望结果，故关闭。关闭不代表 T-041 测试或 T-042 发布复验已经通过。
 
 ## H-017：按 D-014 修订 T-029 个人单用户验收协议
 - 发起人：project-manager-01
