@@ -36,11 +36,12 @@
 | A-030 | [视频产品效果、性能与可选模型门禁评估](A-030-video-product-evaluation-and-model-gate.md) | video-algorithm-engineer-cv-01 | T-029 | 0.4 | draft | 尚无；USER-01 三阶段工具和 TIGER T-028 Release 1+5 基线已就绪，真实 VFR/实际人工记录/正式 P-* 仍缺失 |
 | A-031 | [T-029 视频产品评估输入与用户确认清单](A-031-t029-video-product-evaluation-input.md) | product-manager-01 | T-039、H-013、H-017 | 0.5 | approved | D-014 confirmed；个人单用户验收协议已落实，真实 VFR、E-*/P-* 与 Windows 门禁未放宽，实际证据仍待 T-029 |
 | A-032 | [Windows 发布输入、许可证与 SBOM 计划](A-032-windows-release-input-license-sbom-plan.md) | release-engineer-windows-01 | T-036 | 0.1 | draft | 尚无；已定位 Qt6QmlMeta/WDAC-SAC 阻塞并形成 T-037/T-038 门禁 |
-| A-033 | [Windows 个人未签名部署与事务安装工程流水线](A-033-windows-unsigned-deployment-and-transaction-pipeline.md) | release-engineer-windows-01 | T-037 | 0.2 | draft | D-012/D-013 confirmed；仅个人未签名范围，当前 TIGER SAC-off 验证通过，不含 SAC/WDAC 兼容声明 |
+| A-033 | [Windows 个人未签名部署与事务安装工程流水线](A-033-windows-unsigned-deployment-and-transaction-pipeline.md) | release-engineer-windows-01 | T-037、T-042 | 0.3 | draft | D-012/D-013/D-016；已从新 workspace 重建并复验个人未签名流水线，不含 SAC/WDAC 兼容声明 |
 | A-034 | [T-022 工程端到端、故障恢复与质量门禁证据](A-034-t022-engineering-e2e-fault-recovery-quality-gates.md) | tester-cpp-qt-01 | T-022 | 0.1 | draft | 三 preset 各 166/166 工程 oracle pass；产品效果、自然度、真实 VFR、正式产品性能均 deferred/not-evaluated |
 | A-035 | [Windows 个人未签名交付验证](A-035-windows-personal-unsigned-delivery-validation.md) | release-engineer-windows-01 | T-038 | 0.1 | draft | D-012/D-013/D-015 范围；当前 TIGER SAC-off 交付链通过，不含 SAC/WDAC、产品效果、公开分发或生产发布结论 |
 | A-036 | [产品工程根迁入项目 workspace](A-036-product-workspace-root-migration.md) | build-engineer-windows-qt-01 | T-040、H-018 | 0.1 | draft | D-016 confirmed；三 preset clean configure/build 通过，T-041/T-042 尚未执行，根 GitHub Actions 入口按决定暂时停用 |
 | A-037 | [T-041 迁移后独立工程回归与路径隔离证据](A-037-t041-post-migration-independent-regression.md) | tester-cpp-qt-01 | T-041 | 0.1 | draft | 三 preset 最终各 166/166、0 skip 且路径隔离通过；保留一次 Debug 取消恢复瞬态失败，产品效果/自然度/真实 VFR/正式性能仍 deferred/not-evaluated |
+| A-038 | [T-042 迁移后个人未签名交付验证](A-038-t042-post-migration-personal-unsigned-delivery.md) | release-engineer-windows-01 | T-042 | 0.1 | draft | 新 workspace 双次确定性重建及 TIGER 完整交付链通过；仅当前 SAC=0 个人范围，不含 SAC/WDAC、产品效果或生产发布结论 |
 
 ## 正文元信息样式（不是真实成果）
 

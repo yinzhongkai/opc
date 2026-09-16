@@ -3,14 +3,14 @@
 - 项目：space-rhythm
 - 成果 ID：A-033
 - 负责人：release-engineer-windows-01
-- 关联任务：T-037
-- 版本：0.2
-- 更新日期：2026-09-15
+- 关联任务：T-037、T-042
+- 版本：0.3
+- 更新日期：2026-09-16
 - 状态：draft
 - 适用范围：按 D-012/D-013，从固定 Windows x64 Release 构建生成仅供项目用户本人在自有 Windows 电脑使用的 `unsigned-engineering` 工程包，覆盖受控 `windeployqt`、递归 PE 依赖闭包、哈希、SPDX、许可证及显式路径的安装/修复/回滚/卸载事务；不公开分发或交付第三方，不接触签名凭据，不改变 WDAC/SAC，不宣称 SAC/WDAC 或其他 Windows 环境兼容，不批准生产发布。
-- 来源及输入版本：用户于 2026-09-15 明确要求继续执行 T-037，并在 D-012/D-013 确认个人未签名范围、当前 `TIGER` 和 SAC-off 验证条件；T-013、T-019、T-032、T-035、T-036 completed；D-003～D-008、D-012、D-013 confirmed；A-011 0.1、A-013 0.2、A-020 0.1、A-025 0.1、A-026 0.1、A-032 0.1；最终受控包源提交 `02c65ce4b596675d102ed3c82459528b60f63297`。
+- 来源及输入版本：用户于 2026-09-15 明确要求继续执行 T-037，并在 D-012/D-013 确认个人未签名范围、当前 `TIGER` 和 SAC-off 验证条件；2026-09-16 依据 D-016 和已完成 T-040/T-041 执行 T-042；A-036 0.1、A-037 0.1；迁移后受控包源提交 `24dd28e7c80ea85cb53558592d705f5dbb1c9645`。
 - 批准依据：D-012/D-013 仅批准个人未签名交付范围和当前主机验证条件；不批准公开分发、SAC/WDAC 兼容、发布候选或生产发布。
-- 版本记录：2026-09-15，0.1，首次交付 unsigned 受控组包、供应链材料、确定性 ZIP 和事务测试路径；2026-09-15，0.2，对齐 D-012/D-013，生成 schema 3 个人范围包并在 SAC=0 的当前 `TIGER` 完成 App/Worker smoke，收口 T-037。
+- 版本记录：2026-09-15，0.1，首次交付 unsigned 受控组包、供应链材料、确定性 ZIP 和事务测试路径；2026-09-15，0.2，对齐 D-012/D-013，生成 schema 3 个人范围包并在 SAC=0 的当前 `TIGER` 完成 App/Worker smoke，收口 T-037；2026-09-16，0.3，从 D-016 新 workspace 重建确定性包，增加路径清单与隔离断言并完成 T-042 当前主机交付复验。
 
 ## 1. 交付结论
 
@@ -89,4 +89,10 @@ D-012 已确认用显式路径事务工具作为个人工程交付机制，不�
 
 T-037 的完成条件已满足：受控私有闭包、个人工程安装事务、可复现 ZIP、哈希、schema 3 构建输入、SPDX/许可证、明确 unsigned/个人范围，以及 D-013 当前 TIGER 的 App/Worker smoke 均已验证，任务可标记 `completed`。
 
-T-022、T-038、最低 Windows、VC Runtime 分发、产品容器/H.264/AAC、默认音色和视觉风格仍是各自责任链的后续工作，不反向阻止 T-037，但使当前包继续保持 `unsigned-engineering`、`candidateEligible=false`。独立 GUI 安装器、签名和 SAC/WDAC 兼容已由 D-012/D-013 移出本阶段范围；未来扩大分发时须重新决定，不能沿用本次结果作兼容或生产发布证明。
+T-022/T-038 后续已分别形成工程回归与个人交付基线；最低 Windows、VC Runtime 分发、产品容器/H.264/AAC、默认音色和视觉风格仍未确认，使当前包继续保持 `unsigned-engineering`、`candidateEligible=false`。独立 GUI 安装器、签名和 SAC/WDAC 兼容已由 D-012/D-013 移出本阶段范围；未来扩大分发时须重新决定，不能沿用本次结果作兼容或生产发布证明。
+
+## 8. D-016 迁移后流水线复验
+
+T-042 在 `projects/space-rhythm/workspace/` 内重新执行本流水线。发布脚本现额外拒绝 `CMAKE_HOME_DIRECTORY` 不等于新工程根的 Release cache，并把 `productSourceRoot`、`productOutputRoot`、`releaseBuildRoot`、`vcpkgInstalledRoot` 和 `packageOutputRoot` 写入 schema 3 输入清单。交付验证器同时要求仓库根旧产品入口不存在、所有输出位于 workspace `out/`，且相对 T-041 受测提交 `616307cfc50c` 的产品和核心工作流源差异为空。
+
+迁移后包 `space-rhythm-0.1.0-dev-t042-unsigned.zip` 连续两次生成均为 44,740,452 字节，SHA-256 均为 `52E0BED1C7342995591D5F33335EF059BB6204BDCA4386E98F2A1A5E133C56B4`。当前 `TIGER` 完成正常 GUI 首启、App/Worker smoke、核心工作流及完整事务链；详见 [A-038](A-038-t042-post-migration-personal-unsigned-delivery.md)。这只复验迁移后的个人未签名工程交付，不扩张 D-012/D-013/D-015 边界，也不形成 SAC/WDAC 兼容或生产发布声明。

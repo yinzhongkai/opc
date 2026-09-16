@@ -2,15 +2,15 @@
 
 ## T-042：从新工程根重建并验证个人未签名交付包
 - 负责人：release-engineer-windows-01
-- 状态：in_progress
+- 状态：completed
 - 授权来源与日期：2026-09-15，本会话用户明确要求在 `projects/space-rhythm/` 下新建独立目录保存完整产品工程；project-manager-01 依据 D-016 将发布闭环复验纳入迁移计划。
 - 目标与范围：在 T-040/T-041 完成后，从 `projects/space-rhythm/workspace/` 新工程根重建确定性 `unsigned-engineering` 包，验证发布脚本、清单路径、安装事务、正常首启、App/Worker smoke 和核心工作流仍可执行；不修改 D-012/D-013/D-015 的个人使用边界，不批准公开或生产发布。
 - 输入与依赖：T-040、T-041 completed；D-012、D-013、D-015、D-016 confirmed；A-033～A-035；迁移前冻结包和证据只读保留。
 - 优先级：高；位于工程迁移关键路径末端。
 - 完成条件与确认方式：从新工程根生成包和机器可读输入清单；连续两次同输入归档一致；当前 `TIGER` 完成安装、repair、rollback、uninstall、用户数据保留、正常 GUI 首启、App/Worker smoke 和核心工作流；所有路径均指向新工程根且没有依赖根目录旧 `src/tests/tooling/docs/cmake`；输出版本化证据并保持 `candidateEligible=false` 与全部延期未评估边界；负责人自查。
-- 进展：2026-09-16，T-040 和 T-041 均已完成；A-036 0.1 已确认新工程根构建与路径迁移，A-037 0.1 已完成三套 preset 各 166/166、0 fail、0 skip 的独立工程回归并保留一次未复现 Debug 瞬态失败。用户于同日明确要求 release-engineer-windows-01 接收并执行 T-042；负责人已按会话协议刷新身份、岗位、有效知识、迁移决定和发布基线，开始从 `projects/space-rhythm/workspace/` 重建并验证个人未签名交付包。
-- 成果与验证证据：待负责人形成迁移后发布证据；迁移前基线为 A-033 0.2、A-034 0.1、A-035 0.1。
-- 阻塞与下一位行动人：无计划阻塞；当前行动人为 release-engineer-windows-01，须从新 workspace 实际完成发布包重建和安装事务证据，不得以 T-041 工程测试通过替代。
+- 进展：2026-09-16，负责人从 `projects/space-rhythm/workspace/` 的提交 `24dd28e7c80ea85cb53558592d705f5dbb1c9645` 连续两次重建 `0.1.0-dev-t042`，两个 44,740,452 字节归档的 SHA-256 均为 `52E0BED1C7342995591D5F33335EF059BB6204BDCA4386E98F2A1A5E133C56B4`。包内输入清单、CMake cache、构建、vcpkg、组包和证据路径均指向新 workspace；仓库根旧 `src/tests/tooling/docs/cmake` 及产品 CMake/vcpkg 入口均不存在，相对 T-041 受测提交的产品/核心工作流源差异为空。当前 `TIGER` 实际通过包校验、安装、拒绝未登记 repair、repair、rollback、已安装校验、卸载、根外用户数据保留、无参数正常 GUI 首启、App/Worker smoke、回滚后 App smoke和 Release 核心工作流；SAC 前后均为 0。
+- 成果与验证证据：[A-033 0.3](artifacts/A-033-windows-unsigned-deployment-and-transaction-pipeline.md)、[A-038 0.1](artifacts/A-038-t042-post-migration-personal-unsigned-delivery.md)、[T-042 验证摘要](evidence/T-042/verification-summary.md)及[机器可读证据索引](evidence/T-042/tiger-workspace-delivery-20260916.json)；原始包、清单和日志位于被忽略的 `workspace/out/release/T-042/` 与 `workspace/out/evidence/T-042/`。包保持 `candidateEligible=false`。
+- 阻塞与下一位行动人：T-042 执行范围无阻塞并已完成负责人自查。结论仅为 `pass(personal-unsigned,current-TIGER,SAC-off,post-migration-workspace)`；`sacWdacCompatibilityValidated=false`，不宣称 SAC/WDAC 或其他 Windows 兼容，不批准公开/第三方交付或生产发布。产品效果、自然度、真实 VFR 和正式产品性能继续为 `not-evaluated(deferred-to-personal-use-feedback)`；后续个人使用反馈另立缺陷或任务。
 - 更新日期：2026-09-16。
 
 ## T-041：在新工程根独立复验构建、测试和路径隔离
