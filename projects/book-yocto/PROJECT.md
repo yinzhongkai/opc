@@ -13,7 +13,7 @@
 - 目标：把本项目 `workspace/yocto/` 目录下已有的书稿草稿（task00–task21 共 22 个章节文件，Yocto / meta-tiger 主题）修订、完善至可出版的质量水平。
 - 书稿位置变更：2026-09-13 经用户在 writer 会话确认，书稿从仓库根 `yocto/` 迁入 `projects/book-yocto/yocto/` 并纳入 Git（此前未跟踪）；2026-09-16 经用户在 project-manager 会话指示，再迁入 `projects/book-yocto/workspace/yocto/`。此前台账与成果中"仓库根 yocto/""projects/book-yocto/yocto/"的表述均指迁移前位置，章节内容与行号未变。
 - 范围与非目标：待确认（例如是否包含技术内容重新验证、术语与体例统一、排版与出版渠道对接等，需用户明确）。
-- 交付物与验收要求：待确认。
+- 交付物与验收要求：交付物已确认为 `workspace/yocto/` 的 Markdown 终稿，排版导出与出版渠道对接为非目标（[D-002](DECISIONS.md)，2026-09-18）；验收要求待 D-003 确认。
 - 时间、资源与其他约束：未设定。
 
 未知项保持待确认，已确认的范围变更链接 [DECISIONS.md](DECISIONS.md) 中的决定，不从模板预设业务任务。
