@@ -5,7 +5,7 @@
 | 成果 ID | 名称与正文链接 | 负责人 | 关联任务 | 版本 | 状态 | 批准决定 |
 |---|---|---|---|---|---|---|
 | A-001 | [书稿现状评估](A-001-书稿现状评估.md) | writer | T-001 | 0.1 | draft | 尚无 |
-| A-002 | [书稿打磨计划（草案）](A-002-book-polishing-plan.md) | project-manager | T-002 | 0.1 | draft | 尚无 |
+| A-002 | [书稿打磨计划](A-002-book-polishing-plan.md) | project-manager | T-002 | 0.2 | draft | 范围依据 D-001~D-006（2026-09-18 confirmed）；计划文本待确认 |
 | A-003 | [知识点校验清单](A-003-知识点校验清单.md) | writer | T-003 | 0.1 | draft | 尚无 |
 
 ## 正文元信息样式（不是真实成果）
