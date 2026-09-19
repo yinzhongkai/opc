@@ -1,20 +1,20 @@
 # 项目状态摘要
 
-- 汇总日期与信息截至点：2026-09-18；信息范围为 T-001–T-003 完成、书稿迁移、workspace 约定建立及 D-001 确认后的各台账记录。
+- 汇总日期与信息截至点：2026-09-19；信息范围为 T-004/T-005 完成、A-004 获批、T-006 第 1 轮评审意见到齐及 D-007 确认后的各台账记录。
 - 维护人：project-manager（按 [PROJECT.md](PROJECT.md) 指定的协调记录维护人）。
-- 当前阶段：筹备；目标为使本项目 `workspace/yocto/` 目录书稿草稿达到出版程度，详见 [PROJECT.md](PROJECT.md)。书稿 2026-09-13 迁入 `projects/book-yocto/yocto/` 并纳入 Git，2026-09-16 经用户指示再迁入 `projects/book-yocto/workspace/yocto/`（内容与行号未变）。
+- 当前阶段：P1 基础修复已完成，P2 章节闭环试点进行中；目标与范围见 [PROJECT.md](PROJECT.md) 与 D-001~D-007。书稿位于 `projects/book-yocto/workspace/yocto/`。
 - 任务进展：
   - T-001 书稿现状评估（writer）：completed，产出 [A-001](artifacts/A-001-书稿现状评估.md) v0.1（draft）。
-  - T-002 起草全书打磨计划（project-manager）：completed，产出 [A-002](artifacts/A-002-book-polishing-plan.md)，2026-09-18 按 D-001~D-006 确认结果更新至 v0.2（draft）。
-  - T-003 按章节抽取待校验知识点清单（writer）：completed，产出 [A-003](artifacts/A-003-知识点校验清单.md) v0.1（draft）：86 条注记（🔴 47 / 🟡 19 / 🔵 20）+ 跨章 X 系列 4 条，按章组织可勾选，含校验环境提示（🔵 与对照组项不依赖虚构仓库，可先验）。
-  - T-004 修复 index.md（writer）：todo。
-  - T-005 起草体例约定草案（writer，D-005）：todo。
-  - T-006 chapter 1 试点闭环（writer，P2）：todo。
-- 关键成果：A-001、A-003 为 v0.1 draft，A-002 为 v0.2 draft，均未经批准；范围与验收基线已由 D-001~D-006（2026-09-18 confirmed）确定。
+  - T-002 起草全书打磨计划（project-manager）：completed，[A-002](artifacts/A-002-book-polishing-plan.md) 当前 v0.3（draft，含 D-007 用户通读意见环节）。
+  - T-003 按章节抽取待校验知识点清单（writer）：completed，产出 [A-003](artifacts/A-003-知识点校验清单.md) v0.1（draft）：86 条注记 + 跨章 X 系列 4 条。
+  - T-004 修复 index.md（writer）：completed（2026-09-19，补 6 行章节表、修正失配文件名、移除悬空引用）。
+  - T-005 体例约定草案（writer）：completed，[A-004](artifacts/A-004-体例约定草案.md) v0.2 **approved**（2026-09-19 用户确认，章标题层级方案 A；章节 git tag 事宜用户自行决定）。
+  - T-006 chapter 1 试点闭环（writer）：in_progress——writer 修订稿已提交（b83a631），第 1 轮评审意见到齐：reviewer 技术审校 revise（R-1~R-5，其中 R-2 为机制结论修正、R-3/R-5 需用户口径）、project-manager pass（流程维度）。
+- 关键成果：A-004 体例约定 v0.2 已批准（统稿依据）；A-001/A-003 v0.1、A-002 v0.3 为 draft。
 - 阻塞、待确认事项及下一位行动人：
-  - **用户**：①持 A-003 通读草稿逐条校验（进行中，用户 2026-09-12 声明）；②~~确认 D-001–D-006~~ 六项决定已全部于 2026-09-18 确认完毕；③通读 chapter 8 时顺带裁决 X-1（deploy 路径 ipk/rpm 出入）；④安排四个开发态仓库工程创建与构建环境的责任人（见下）。
-  - **待协调（D-001=A 派生）**：四个开发态仓库与 tiger 平台代码的实际创建、构建环境准备属于真实工程工作，超出 writer / reviewer / project-manager 三个图书岗位的职责；需用户决定由谁承担（用户本人，或请超级管理员增设技术成员）。在此之前，chapter 6–16 的 C-W/V 回填类工作无法排期。
-  - 可并行：~~P1 确定性修复项可随时安排~~ 已登记 **T-004**（修复 workspace/yocto/index.md，负责人 writer，todo，2026-09-13 用户确认）；下一位行动人 writer。
-- 通读期协作约定（2026-09-13 用户确认）：通读中发现的问题按类型分流——清单内结论直接标注在 A-003，清单外内容问题提给 writer，存疑项标 reviewer，范围/计划问题提给 project-manager，配置问题转超级管理员；**拿不准的一律先汇集到 project-manager 会话，由其分类、登记交接并跟踪到关闭**。
+  - **用户**（T-006 当前行动人）：①通读 chapter 1 修订稿（b83a631）按 D-007 提交建议/疑问（汇集到 project-manager 会话）；②确认 R-3 引号口径（全书弯/直引号）与 R-5 章末 git tag 指引去留；③继续全书通读校验（A-003），chapter 8 时顺带裁决 X-1；④安排四个开发态仓库工程创建与构建环境的责任人（P0.5 前置，chapter 6 以后修订依赖）。
+  - **待协调（D-001=A 派生）**：四仓库与构建环境的工程责任超出图书岗位职责，需用户安排（本人或请超级管理员增设技术成员）。
+  - 其后：writer 统一修订 chapter 1 → reviewer 复核 → 用户确认定稿。
+- 通读期协作约定（2026-09-13 用户确认，2026-09-19 D-007 补充）：通读中发现的问题按类型分流，拿不准的一律先汇集到 project-manager 会话分类、登记并跟踪到关闭；**受评章节的用户通读意见在 writer 统一修订前提交，与成员评审意见一并处理**。
 
 本文件是摘要，原始事实以 [TASKS.md](TASKS.md)、[DECISIONS.md](DECISIONS.md)、[HANDOFFS.md](HANDOFFS.md) 和 [成果索引](artifacts/README.md) 为准。汇总后注明实际信息范围，过期摘要不能覆盖原始记录。
