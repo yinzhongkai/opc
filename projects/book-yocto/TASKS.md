@@ -80,6 +80,37 @@
 - 阻塞与下一位行动人：待评审：reviewer 技术审校 + project-manager 项目管理意见（交叉评审，用户依次进入对应会话触发）；按交叉评审约定，本轮全部意见到齐前 writer 不再改动受评正文，意见齐后统一修订并复核。
 - 更新日期：2026-09-19
 
+### 本轮评审：chapter 1 修订稿（workspace/yocto/task02-1-把Yocto跑起来.md，Git b83a631，第 1 轮）
+- 受评正文：workspace/yocto/task02-1-把Yocto跑起来.md（801 行；评审时点工作区干净，即 b83a631 提交内容）
+- 安排来源与日期：2026-09-18 project-manager 按 A-002 v0.2（P2 阶段）在授权范围内安排（见 T-006 任务记录）
+- 参与成员、各自范围与完成条件：reviewer 技术审校（事实依据、技术陈述、跨章一致性、教学视角，命令/配置/代码准确性核查）；project-manager 项目管理意见。意见齐后 writer 统一修订并复核
+- 本轮进度与下一位行动人：reviewer 意见已提交（2026-09-19，结论 revise，R-1~R-5）；project-manager 项目管理意见已提交（2026-09-19，pass，流程维度）。R-3/R-5 口径待用户确认；下一位行动人：用户（确认口径）→ writer（统一修订）→ reviewer（复核）
+
+#### reviewer 的意见
+- 日期、评审依据与未覆盖项：2026-09-19。依据：A-004 体例约定 v0.2（approved）、D-001~D-006、T-006 修订说明；官方来源核查（poky scarthgap 分支 GitHub API 与源码、Yocto 5.0 参考手册变量术语表，2026-09-19）。未覆盖项：①未实机运行任何命令（本会话无 Linux 构建环境），所有来源核查均为静态/资料核查；②输出块中的实测数值（4059 任务数、Poky 5.0.18、内核 6.6.127、磁盘/内存数值等）未复核，属用户通读校验范围；③跨章一致性仅抽查 task04/task05 对本章的 5 处引用，未通读其他章节；④前言/序章未读。
+- 结论：revise（R-1/R-2/R-3 需修订，其中 R-3 需先确认口径；R-4/R-5 为低severity项）
+- 问题：
+  - R-1（中，事实）｜位置：1.2.1 节 L148-160 `ls -1` 输出块｜依据与影响：poky scarthgap 实际顶层还有 `documentation/`、`contrib/`、`README.md`、`README.poky.md`、`README.hardware.md`、`MAINTAINERS.md`、`MEMORIAM`、`SECURITY.md`、`LICENSE*` 等条目（GitHub yoctoproject/poky scarthgap 分支，2026-09-19 核查），该输出块无 `# ... (省略)` 标记，读者照做会看到明显更多的条目，"Poky 顶层目录"认知不完整（`documentation/` 尤其值得一提）｜建议：补省略标记或列全；若只想列目录可改用 `ls -d */`｜原稿责任人：writer
+  - R-2（中，技术因果）｜位置：1.6.2 节 L740-753（踩坑 2）｜依据与影响：叙事称"export 代理在 `source oe-init-build-env` 之后，导致环境变量没被 BitBake 继承"。但 `oe-init-build-env` 经 `scripts/oe-buildenv-internal` 末尾段无条件把 `http_proxy`、`https_proxy`、`no_proxy` 等并入 `BB_ENV_PASSTHROUGH_ADDITIONS` 并 export；BitBake 每次启动时按该白名单从当前 Shell 环境过滤（`bitbake/lib/bb/utils.py` `approved_variables()`，poky scarthgap，2026-09-19 核查）。同一 Shell 内先 source 后 export 代理变量，随后运行的 `bitbake` 同样可以拿到代理——先后顺序不构成该故障的机制。按错误模型讲解会误导读者排查真实代理问题｜建议：改写故障成因（例如：代理只设在浏览器/系统图形界面、在另一个终端 export、或写入 `~/.bashrc` 但当前 Shell 未 source），保留"先 export 再构建"的建议；或提供可复现的反例证据推翻本判断｜原稿责任人：writer
+  - R-3（中，体例）｜位置：全章正文对话与行文引号（直引号 `"`，共 66 处）｜依据与影响：A-004 §7 约定"对话与正文引号用弯引号"，本章全部为直引号；抽查 task00、task03 同样全为直引号，即 A-004 §7"现状基本已如此"与全稿实际不符——这不是本章独有问题，而是约定的事实基础与执行时点问题｜建议：writer 提请用户确认口径——本章按约定机械替换为弯引号（并入本轮修订），或修订 A-004 §7 的现状描述并明确全书统一执行时点；本章评审结论在口径确认前维持 revise 中的本项｜原稿责任人：writer
+  - R-4（低，数字）｜位置：1.5.1 节 L564 💡 提示｜依据与影响：提示称 procps-ng 的 `free -h` 会显示 `234Mi`，但与所引 busybox 输出 232996 KiB 不符（232996 KiB ≈ 227.5 Mi，`free -h` 应显示约 227/228Mi）｜建议：改为与 232996 KiB 一致的数值表述｜原稿责任人：writer
+  - R-5（低，待确认）｜位置：1.7 节 L784-792 章末 `git tag chapter1` 指引｜依据与影响：A-004 v0.2 按用户指示移除了"章末 git tag 约定"（该事宜用户自行决定），正文仍教读者打 tag 并用 `git checkout chapter1` 回退，需确认是有意保留（作为读者操作建议）还是随约定移除｜建议：writer 提请用户确认后处理｜原稿责任人：writer
+  - 改进建议（不阻断，供 writer 斟酌）：①L337"MACHINE 变量（MACHINE）""Machine 配置（Machine）"首释括号与中文名重复；②L581"tmpfs 容量约为 guest 物理内存的一半"与数值（约可用内存 227Mi 的一半）的表述可更精确；③L99 与 L748 的 `no_proxy` 取值不一致（含/不含 `.local`），建议统一。
+- 已核查通过项（结论支撑）：标题层级 1×H1 + 8×H2 + 16×H3 + 0×H4，符合 A-004 §1 方案 A；L417 已改"那是 chapter 3 的事"，无残留旧式"第 N 章"引用；index.md 条目与本章一致；全章零 HTML 待验证注记，与 A-003"已实测干净区"记录一致；71 个代码块全部带语言标记（bash 38 / text 31 / bitbake 2），符合 A-004 §5；输出块标题与括号限定形式符合 §5，提示框三级符合 §6，耗时表述带依据符合 §8；L48 引用的 `Do not use Bitbake as root` 与 scarthgap `meta/classes-global/sanity.bbclass` 原文一致（来源核查通过，实机逐字核对留待 D-001 实测阶段）；`qemuarm64` 机器配置确由 OE-Core `meta/conf/machine/qemuarm64.conf` 提供（GitHub API 核查）；task04/task05 对本章的 5 处引用（show-layers、首次构建任务数、Native recipe、qemu-system-native、downloads 缓存）与本章内容一致。
+- 作者处理回复：待 writer 填写
+- 复核：待复核
+
+#### project-manager 的意见
+- 日期、评审依据与未覆盖项：2026-09-19。依据：T-006 任务记录与修订说明、A-002 v0.2、A-004 v0.2（approved）、D-001~D-006；核对 b83a631 提交 diff——改动为标题层级 1+8+20 处升级与 L417 旧式引用修正，与修订说明一致，改动未超出声明范围。未覆盖项：未逐行通读 chapter 1 正文，技术事实判断以 reviewer 意见为准；本意见限项目管理视角。
+- 结论：pass（流程与记录维度；不覆盖 reviewer 的技术结论 revise，本轮综合结论以问题处理结果为准）
+- 问题：无（项目管理维度无新增问题）。意见与安排：
+  - 流程合规：作者自查修订→提交明确版本（b83a631，工作区干净）→评审者各自署名记录，符合 PROJECT_PROTOCOL 第 4.1 节；意见到齐前 writer 不动受评正文。
+  - R-3（引号口径）与 R-5（章末 git tag 指引去留）属需用户确认的口径问题，按 2026-09-13 通读期协作约定由 project-manager 汇集转达用户；writer 在统一修订前取得口径再动笔。
+  - 覆盖核对：reviewer 意见覆盖事实、技术因果、体例、数字四类；其未覆盖项②（输出块实测数值）属用户通读校验范围（D-003 学习维度），不构成评审缺口；R-2 涉及机制结论反转风险，writer 处理回复中需给出改写依据或反例证据。
+  - 下一位行动人：用户确认 R-3/R-5 口径 → writer 统一修订 → reviewer 复核。
+- 作者处理回复：暂无（PM 意见无需逐条处理，口径项随 R-3/R-5 处理）
+- 复核：随 R-3/R-5 一并在复核阶段确认
+
 ## 记录样式（不是真实任务）
 
 ```text
