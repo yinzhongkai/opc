@@ -8,6 +8,7 @@
 |---|---|---|---|---|---|---|
 | A-001 | [图书设计（读者定位与内容取舍）](book/design.md) | planner | T-001、T-002 | 0.2 | approved | D-001、D-002、D-005 |
 | A-002 | [全书目录与依赖](book/outline.md) | planner | T-001、T-002 | 0.2 | approved | D-003、D-004 |
+| A-003 | [第 1 章蓝图（ch-env-setup）](book/chapters/ch-env-setup/plan.md) | planner | T-003 | 0.1 | approved | D-006 |
 
 ## 正文元信息样式（不是真实成果）
 

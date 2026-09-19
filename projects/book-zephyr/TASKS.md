@@ -30,15 +30,15 @@
 
 ## T-003：起草第 1 章 ch-env-setup 章节蓝图
 - 负责人：planner
-- 状态：todo
+- 状态：completed
 - 授权来源与日期：用户于 2026-09-13 在 project-manager 会话指示“进入 ch-env-setup 蓝图阶段”，由 project-manager 按项目计划登记安排
 - 目标与范围：为第 1 章 ch-env-setup（认识 nRF54L15 DK；搭建 NCS/Zephyr 开发环境；构建并烧录第一个程序上板运行）起草章节蓝图：复制 `templates/book/chapters/ch-001/plan.md` 至 `artifacts/book/chapters/ch-env-setup/plan.md` 并填写实际内容，含学习目标与前提、内容蓝图、示例/实验设计、易错点与交付条件；不含正文草稿、示例工程实现与 environment.md 环境基线确认
 - 输入与依赖：A-001 v0.2 图书设计（approved）；A-002 v0.2 全书目录（approved，ch-env-setup 为建议的首个闭环章，前置 ch-intro）；D-001～D-005（读者画像、内容边界、目录、物料清单、验证基线与节奏）；`nRF54L15_DK_资料/` 官方资料包；根图书成果模板 `templates/book/`
 - 优先级：未设定
 - 完成条件与确认方式：蓝图成文并登记成果索引后提交用户审阅；检查重点为学习目标明确、前置依赖可获得、示例和验证要求有着落；经用户确认前蓝图保持 draft
-- 进展：尚未开始
-- 成果与验证证据：暂无
-- 阻塞与下一位行动人：无阻塞；下一位行动人为 planner（待用户打开 planner 会话后受理本任务）。关注项：最终环境基线 environment.md 尚未确认，蓝图按 D-005 候选基线 NCS v3.4.0 起草，并标注基线确认安排
+- 进展：2026-09-13 planner 会话受理本任务并完成蓝图起草，登记成果索引后提交用户审阅
+- 成果与验证证据：[plan.md](artifacts/book/chapters/ch-env-setup/plan.md)（A-003 v0.1，draft）
+- 阻塞与下一位行动人：无阻塞；下一位行动人为用户（审阅蓝图）。关注项：environment.md 环境基线尚未确认（developer 职责，待立项），蓝图按 D-005 候选基线 NCS v3.4.0 起草并在文中标注
 - 更新日期：2026-09-13
 
 ## T-004：起草第 1 章 ch-env-setup 正文草稿
