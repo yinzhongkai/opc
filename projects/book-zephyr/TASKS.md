@@ -43,29 +43,29 @@
 
 ## T-004：起草第 1 章 ch-env-setup 正文草稿
 - 负责人：writer
-- 状态：todo
-- 授权来源与日期：用户于 2026-09-19 在 project-manager 会话确认登记（“登记吧”），由 project-manager 按项目计划安排
+- 状态：completed
+- 授权来源与日期：用户于 2026-09-19 在 project-manager 会话确认登记（“登记吧”），由 project-manager 按项目计划安排；2026-09-20 用户在 writer 会话指示“受理 T-004”
 - 目标与范围：按已批准的 A-003 v0.1 蓝图起草第 1 章正文：复制 `templates/book/chapters/ch-001/text.md` 至 `artifacts/book/chapters/ch-env-setup/text.md` 并撰写草稿，覆盖蓝图约定的学习目标、内容结构与示例说明；不含示例工程实现（developer 职责）、不含审校与试读安排
 - 输入与依赖：A-003 v0.1 蓝图（approved，D-006）；A-001 v0.2、A-002 v0.2；D-001～D-006；`nRF54L15_DK_资料/` 官方资料包；环境基线以 T-005 确认的 environment.md 为准——基线未确认前按 D-005 候选基线 NCS v3.4.0 撰写并标注待核位置
 - 优先级：未设定
 - 完成条件与确认方式：草稿成文并登记成果索引后提交用户审阅；是否安排任务内评审在受理时按蓝图交付条件明确；经用户确认前保持 draft
-- 进展：尚未开始
-- 成果与验证证据：暂无
-- 阻塞与下一位行动人：无阻塞；下一位行动人为 writer（待用户打开 writer 会话后受理本任务）
-- 更新日期：2026-09-19
+- 进展：2026-09-20 writer 会话受理并完成草稿 v0.1：按 A-003 v0.1 蓝图撰写，覆盖全部学习目标与 4 个实验（现象均标“预期”），按 D-005 候选基线 NCS v3.4.0 撰写并以【待核】标注待核位置；板级目标、blinky/hello_world 命令与烧录方式经 Zephyr 官方板级文档在线核实（2026-09-20）；发现 `nRF54L15_DK_资料/` 不在当前仓库克隆中，硬件事实取自已批准成果记录的核查结论并在正文“读者可见的限制”第 6 条说明。受理时明确：本任务完成条件为草稿成文并提交用户审阅，草稿阶段不安排任务内交叉评审；审校与试读安排按蓝图交付条件另行登记
+- 成果与验证证据：[text.md](artifacts/book/chapters/ch-env-setup/text.md)（A-004 v0.1，draft），已登记成果索引
+- 阻塞与下一位行动人：无阻塞；下一位行动人为用户（审阅 A-004 v0.1 草稿；欢迎顺带反馈是否开始实机照做）
+- 更新日期：2026-09-20
 
 ## T-005：确认 environment.md 开发环境基线
 - 负责人：developer
-- 状态：todo
+- 状态：in_review
 - 授权来源与日期：用户于 2026-09-19 在 project-manager 会话确认登记（“登记吧”），由 project-manager 按项目计划安排
 - 目标与范围：复制 `templates/book/environment.md` 至 `artifacts/book/environment.md`，确认并记录开发环境基线：Windows 主机从零安装路径、NCS 版本（候选 v3.4.0，基于 Zephyr 4.4）、工具链与烧录工具版本、DK 1.0.0（Rev 2 芯片）板卡与固件版本；并安排 D-004 电池 5 V 升压路径的实测验证；不含第 1 章示例工程开发
 - 输入与依赖：D-005（验证基线、开发环境与节奏）、D-004（物料清单与电池验证项）、D-001（读者画像）；`nRF54L15_DK_资料/` 官方资料包；Nordic 与 Zephyr 官方发布信息
 - 优先级：未设定
 - 完成条件与确认方式：environment.md 成文、登记成果索引并经用户确认；确认前保持 draft
-- 进展：尚未开始
-- 成果与验证证据：暂无
-- 阻塞与下一位行动人：无阻塞；下一位行动人为 developer（待用户打开 developer 会话后受理本任务）
-- 更新日期：2026-09-19
+- 进展：2026-09-20 developer 会话受理，完成官方信息核查并起草 environment.md v0.1（A-004，draft），登记成果索引，提交用户审阅。核查发现并处理两处事实：Toolchain Manager 已弃用、不支持 NCS v3.0.0+，安装路径须走 nRF Connect for VS Code 扩展包；任务输入中的 `nRF54L15_DK_资料/` 官方资料包当前不在本仓库内，已在文中标注缺口并请用户确认位置
+- 成果与验证证据：[environment.md](artifacts/book/environment.md)（A-004 v0.1，draft）；核实来源：Nordic 官方博客 LTS 公告（2026-07-02）、Nordic 官方 nRF Connect for Desktop 下载页、Nordic DevZone，均 2026-09-20 核查
+- 阻塞与下一位行动人：无阻塞；下一位行动人为用户（审阅 environment.md；确认资料包存放位置或将其放入项目工作区；后续按基线从零安装并报告结果）
+- 更新日期：2026-09-20
 
 ## 记录样式（不是真实任务）
 
