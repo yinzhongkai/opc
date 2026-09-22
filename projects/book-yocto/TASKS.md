@@ -120,6 +120,7 @@
   - U-4｜位置：1.2.1 节 L124 clone 命令｜内容：`git clone -b scarthgap git://git.yoctoproject.org/poky.git` 的协议改为直接使用 https 开头（`https://git.yoctoproject.org/poky.git`）｜project-manager 核查：L127 💡 提示现以 https 为 git:// 的备选写法，主命令改 https 后该提示需同步翻转口径（https 为默认、git:// 为可选）｜处理：待 writer 统一修订时执行
   - U-5｜位置：1.2.3 节 L265 达哥（原老周，随 D-008 改名）台词｜内容：用户感觉"你把 `meta/`、`meta-poky/`、`meta-yocto-bsp/` 这三个都叫 **层（Layer）**……"不通顺｜project-manager 核查：别脚点在"你把……都叫"的主语错位——术语是达哥在定义，并非阿凯先这么称呼；且破折号后同位语"组织元数据的目录结构，可以叠加复用"与前句衔接生硬｜处理：writer 统一修订时润色该句（如改为"这三个都叫……"句式），保持术语首释功能不变
   - U-6｜位置：1.3 节 L284 🔥 提示（`source` vs `./` 执行 oe-init-build-env）｜内容：用户感觉"用子进程执行的话这些改动不会传回来"讲得不清楚｜project-manager 核查：技术要点本身正确（子进程修改的环境变量不影响父 Shell），但"传回来"的对象不明——没说清是"不会反映到当前 Shell"，也缺少可观察后果（`./` 执行后当前 Shell 的 `PATH` 里没有 bitbake，后续命令直接找不到）｜处理：writer 统一修订时改写该句，点明影响对象与可观察后果
+  - U-7｜位置：1.3.2 节 L327 叙事句｜内容：用户感觉"阿凯打开 `local.conf`，发现默认的 `MACHINE` 是 `qemux86-64`。他想起 tiger 是 ARM 的，但本章目标是 `qemuarm64`，于是跑来问老周"不清楚｜project-manager 核查：逻辑关系混乱——"但"字前后并非对立（qemuarm64 本身也是 ARM64），阿凯真正的纠结（该不该直接设成 tiger-aarch64）要靠下一句台词才补上；"想起 tiger 是 ARM 的"与决策的关系也没说透｜处理：writer 统一修订时改写，让阿凯的疑问在叙事里直接可见（默认 x86 不对→想到自家 tiger→但本章先用官方 qemuarm64 练手，拿不准来问），与后续对话衔接
 - （后续意见随通读追加）
 - 作者处理回复：待 writer 填写
 - 复核：待复核
