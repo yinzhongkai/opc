@@ -246,10 +246,12 @@ ls meta-yocto-bsp/
 
 ```text
 conf
+lib
+README.hardware.md
 recipes-bsp
-recipes-core
+recipes-graphics
 recipes-kernel
-# ... (省略)
+wic
 ```
 
 ```bash
@@ -324,6 +326,8 @@ ls $BUILDDIR/conf/
 
 ```text
 bblayers.conf
+conf-notes.txt
+conf-summary.txt
 local.conf
 templateconf.cfg
 ```
@@ -412,12 +416,14 @@ bitbake-layers show-layers
 输出：
 
 ```text
-layer                 path                                     priority
-==================================================================
-meta                  /home/oops/workspace/poky/meta           5
-meta-poky             /home/oops/workspace/poky/meta-poky      5
-meta-yocto-bsp        /home/oops/workspace/poky/meta-yocto-bsp 5
+layer                 path                                                                    priority
+========================================================================================================
+core                  /home/oops/workspace/poky/meta                                          5
+yocto                 /home/oops/workspace/poky/meta-poky                                     5
+yoctobsp              /home/oops/workspace/poky/meta-yocto-bsp                                5
 ```
+
+第一列是层的集合名（来自各层 `conf/layer.conf`），不是目录名——对应关系：`core` 即 `meta`，`yocto` 即 `meta-poky`，`yoctobsp` 即 `meta-yocto-bsp`。
 
 > **💡 提示**：本书示例中的用户名和路径取自配套的固化构建环境（用户 `oops`、家目录 `/home/oops`、主机名 `tiger`）；你在自己机器上看到的，会是你的实际家目录路径。
 
