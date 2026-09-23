@@ -9,7 +9,7 @@
   - T-003 按章节抽取待校验知识点清单（writer）：completed，产出 [A-003](artifacts/A-003-知识点校验清单.md) v0.1（draft）：86 条注记 + 跨章 X 系列 4 条。
   - T-004 修复 index.md（writer）：completed（2026-09-19，补 6 行章节表、修正失配文件名、移除悬空引用）。
   - T-005 体例约定草案（writer）：completed，[A-004](artifacts/A-004-体例约定草案.md) v0.2 **approved**（2026-09-19 用户确认，章标题层级方案 A；章节 git tag 事宜用户自行决定）。
-  - T-006 chapter 1 试点闭环（writer）：in_progress——统一修订已完成（Git 9772f9c，2026-09-23）：R-1~R-5、U-1~U-16、D-008 改名全部处理（弯引号替换 64 字符、1.1.3 删除并入 1.6.2 改写、环境值按 Dockerfile 回填 oops/home/oops/tiger），逐条处理回复已登记；project-manager 复核通过（提交范围与声明一致、零"老周"残留、akai/占位清零；登记基数 24 处与受评版本实际 23 处差异 1，不影响零残留结论）。reviewer 复核通过（2026-09-23，R-1~R-5、U-1~U-16 逐项有证据）。下一位行动人 writer（修订 E-1~E-3）→ reviewer 有界复核 → 用户确认定稿（含 U-3 删节方案、A-004 v0.3 两项待确认）。
+  - T-006 chapter 1 试点闭环（writer）：in_progress——统一修订已完成（Git 9772f9c，2026-09-23）：R-1~R-5、U-1~U-16、D-008 改名全部处理（弯引号替换 64 字符、1.1.3 删除并入 1.6.2 改写、环境值按 Dockerfile 回填 oops/home/oops/tiger），逐条处理回复已登记；project-manager 复核通过（提交范围与声明一致、零"老周"残留、akai/占位清零；登记基数 24 处与受评版本实际 23 处差异 1，不影响零残留结论）。reviewer 复核通过（2026-09-23，R-1~R-5、U-1~U-16 逐项有证据）；E-1~E-3 定稿前修订完成（89ccb72）且有界复核通过（三处与容器重跑逐字一致、未引入新问题）。**chapter 1 第 1 轮评审全部问题闭环，待用户确认定稿**（含 U-3 删节方案、A-004 v0.3 两项待确认）。
   - T-007 全书人物"老周"更名"达哥"（writer，D-008）：todo，chapter 1 以外 18 个文件 381 处。
   - T-008 真实环境运行核查 chapter 1 环境信息（reviewer）：completed（2026-09-23 容器实测：14 项一致、不符 E-1~E-3、观察 O-1/O-2，[核查记录](workspace/t008-chapter1-env-check.md)；PM 复核通过，E-1~E-3 转 T-006 由 writer 定稿前修订）。
 - 关键成果：A-004 体例约定 v0.2 已批准（统稿依据）；A-001/A-003 v0.1、A-002 v0.3 为 draft。
