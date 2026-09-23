@@ -149,15 +149,15 @@
 
 ## T-008：真实环境运行核查 chapter 1 环境信息（Docker 容器实测）
 - 负责人：reviewer
-- 状态：blocked
-- 授权来源与日期：2026-09-23 用户在 project-manager 会话指示："我想找个成员在真实的环境上运行一下，看看书稿中的环境信息是否能和真实环境对的上"；项目经理按 reviewer 岗位 scope（核查命令、配置与实验步骤准确性）安排。
+- 状态：todo
+- 授权来源与日期：2026-09-23 用户在 project-manager 会话指示："我想找个成员在真实的环境上运行一下，看看书稿中的环境信息是否能和真实环境对的上"；项目经理按 reviewer 岗位 scope（核查命令、配置与实验步骤准确性）安排。同日用户确认 Docker 环境可用并解除阻塞。
 - 目标与范围：以入库的 projects/book-yocto/workspace/docker/dockerfile 构建镜像并启动容器，在容器内按 chapter 1（workspace/yocto/task02-1-把Yocto跑起来.md，统一修订后的最新版本）逐步实际运行命令，核对书稿环境信息与真实环境是否一致：系统依赖包清单与安装结果（1.1.1）、用户名/家目录/主机名提示符（oops、/home/oops、tiger）、`source oe-init-build-env` 行为、目录结构与版本号输出等；如实记录每条一致/不符及证据。只核查与记录，不修改书稿正文。
 - 输入与依赖：workspace/docker/dockerfile；chapter 1 最新版本（建议在 T-006 统一修订完成后执行，使核对对象为回填后的真实值；若提前执行则按当前版本核对并标注）；本机可用的 Docker 环境。
 - 优先级：未设定
 - 完成条件与确认方式：产出逐条核查记录（一致/不符 + 命令与输出证据），不符项按评审问题格式登记位置、依据与影响；记录经 project-manager 复核后，不符项转 writer 处理（随 T-006 修订或另开任务）。
-- 进展：2026-09-23 任务登记。环境核查：本机 Git Bash 与 Windows PATH 均无 docker 命令，无 Docker Desktop 安装与服务（WSL 仅存已卸载残留的 docker-desktop 发行版），暂无法构建容器。
+- 进展：2026-09-23 任务登记。环境核查：本机 Git Bash 与 Windows PATH 均无 docker 命令（CLI 实际位于 C:\Users\YinZh\AppData\Local\Programs\DockerDesktop\resources\bin\docker.exe）。2026-09-23 用户确认环境可用，实测 Docker Client/Server 29.8.0 正常；镜像 embedded:dev 已由该 dockerfile 构建，容器 books 存在（Exited 2 天，`docker start books` 后按用户给出的 `docker exec -it books /bin/bash` 进入）。阻塞解除，转 todo。
 - 成果与验证证据：暂无
-- 阻塞与下一位行动人：阻塞——本机无可用 Docker 环境；解除条件：用户安装 Docker Desktop（或提供等价 Linux/Docker 环境）使 docker CLI 可用。解除后下一位行动人 reviewer（用户进入 reviewer 会话触发）。
+- 阻塞与下一位行动人：无（2026-09-23 环境确认可用，阻塞解除）；下一位行动人 reviewer（用户进入 reviewer 会话触发）。执行前 `docker start books` 恢复容器，或按 dockerfile 注释重新 build/run。
 - 更新日期：2026-09-23
 
 ## 记录样式（不是真实任务）
