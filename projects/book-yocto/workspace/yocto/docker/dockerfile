@@ -1,0 +1,64 @@
+# dockerfile
+# example:
+# 1. docker build --file dockerfile --tag embedded:dev .
+# 2. docker run -it --name books -u oops --hostname tiger --shm-size=15g -v E:/docker/share:/share embedded:dev
+
+FROM ubuntu:24.04
+
+ARG DEBIAN_FRONTEND=noninteractive
+
+# replace apt source
+RUN sed -i 's@//.*archive.ubuntu.com@//mirrors.tuna.tsinghua.edu.cn@g' /etc/apt/sources.list.d/ubuntu.sources
+RUN sed -i 's@//.*security.ubuntu.com@//mirrors.tuna.tsinghua.edu.cn@g' /etc/apt/sources.list.d/ubuntu.sources
+
+RUN apt-get update
+RUN apt-get install -y apt-utils
+RUN apt-get install -y bash-completion
+RUN apt-get install -y build-essential
+RUN apt-get install -y curl
+RUN apt-get install -y git
+RUN apt-get install -y locales
+RUN apt-get install -y net-tools
+RUN apt-get install -y python3
+RUN apt-get install -y python3-dev
+RUN apt-get install -y sudo
+RUN apt-get install -y vim
+RUN apt-get install -y wget
+
+RUN apt-get clean
+RUN rm -rf /var/lib/apt/lists/*
+
+# bash-completion
+RUN sed -i '/^#if ! shopt -oq posix; then$/,/^#fi$/ s/^#//' /etc/bash.bashrc 
+
+# common
+ENV LD_LIBRARY_PATH=""
+
+# locale
+RUN locale-gen en_US.UTF-8
+ENV LANG=en_US.UTF-8
+ENV LC_ALL=en_US.UTF-8
+
+# timezone
+ENV DEBIAN_FRONTEND=noninteractive
+ENV TZ=Asia/Shanghai
+
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime
+RUN echo $TZ > /etc/timezone
+
+# add user
+RUN useradd -m -s /bin/bash oops
+RUN echo "oops ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+
+USER oops
+WORKDIR /home/oops
+ENV PATH="/home/oops/.local/bin:${PATH}"
+
+# pip
+ENV PIP_BREAK_SYSTEM_PACKAGES=1
+# ENV PIP_ROOT_USER_ACTION=ignore
+
+RUN curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+RUN python3 get-pip.py
+RUN rm get-pip.py
+RUN rm -rf /home/oops/.cache/pip /tmp/*
