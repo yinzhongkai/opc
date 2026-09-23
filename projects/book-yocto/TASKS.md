@@ -84,7 +84,7 @@
 - 受评正文：workspace/yocto/task02-1-把Yocto跑起来.md（801 行；评审时点工作区干净，即 b83a631 提交内容）
 - 安排来源与日期：2026-09-18 project-manager 按 A-002 v0.2（P2 阶段）在授权范围内安排（见 T-006 任务记录）
 - 参与成员、各自范围与完成条件：reviewer 技术审校（事实依据、技术陈述、跨章一致性、教学视角，命令/配置/代码准确性核查）；project-manager 项目管理意见；用户通读意见（D-007：建议与疑问，经 project-manager 汇集）。意见齐后 writer 统一修订并复核
-- 本轮进度与下一位行动人：reviewer 意见已提交（2026-09-19，结论 revise，R-1~R-5）；project-manager 项目管理意见已提交（2026-09-19，pass，流程维度）。统一修订输入追加：D-008 改名（本章 24 处）；用户通读意见 U-1、U-3~U-15（2026-09-22 起陆续登记；U-15 已闭环 R-5 口径=移除章末打 tag 动作）。chapter 1 通读已于 2026-09-23 完毕（用户在本会话声明"第1章我已经读完了"，通读意见以已登记的 U-1~U-16 为准，不再追加）。R-3 引号口径已确认（2026-09-23 用户在 project-manager 会话确认："代码块应该需要直引号，但是中文应该使用弯引号"——即正文与对话用弯引号“”，代码块/命令/配置内保持 ASCII 直引号不动；A-004 §7 约定维持弯引号不变，其"现状基本已如此"描述由 writer 在统一修订时一并修正；本章 66 处随本轮统一修订替换，全书其余章节随 P3 各章修订轮逐章统一，不做一次性全书批量替换）。U-2/U-11 口径已闭环（2026-09-23 用户提供 Dockerfile 并指示"放到 workspace 合适位置、提交进仓库"：存放于 projects/book-yocto/workspace/docker/dockerfile（2026-09-23 用户指定：workspace 是项目工作目录，yocto/ 仅存书稿，项目资料放 yocto 同级目录），环境事实为用户名 oops、家目录 /home/oops、容器主机名 tiger、Ubuntu 24.04 + 清华镜像源；全章 `<your-username>` 占位与 `/home/akai/...` 字面路径按该环境真实值回填，全书其余章节同口径随 P3 覆盖；writer 统一修订时同步核对 1.1.1 依赖清单与 Dockerfile 包集合的一致性）。统一修订输入已全部到齐。下一位行动人：**writer**（用户进入 writer 会话触发统一修订：R-1~R-5 + U-1~U-16 + D-008 本章改名 24 处）→ reviewer 复核 → 用户确认定稿。2026-09-23 writer 统一修订完成并提交复核（受评正文：workspace/yocto/task02-1-把Yocto跑起来.md，Git 9772f9c，792 行，工作区干净）：R-1~R-5、U-1~U-16、D-008 本章改名 24 处全部处理，逐条处理回复见下；同步产出 A-004 v0.3（§7 现状修正 + §4 补充条款草案，draft 待用户确认）。下一位行动人：**reviewer**（复核本轮统一修订）→ 用户确认定稿（含 U-3 删节方案、A-004 v0.3 两项待确认）
+- 本轮进度与下一位行动人：reviewer 意见已提交（2026-09-19，结论 revise，R-1~R-5）；project-manager 项目管理意见已提交（2026-09-19，pass，流程维度）。统一修订输入追加：D-008 改名（本章 24 处）；用户通读意见 U-1、U-3~U-15（2026-09-22 起陆续登记；U-15 已闭环 R-5 口径=移除章末打 tag 动作）。chapter 1 通读已于 2026-09-23 完毕（用户在本会话声明"第1章我已经读完了"，通读意见以已登记的 U-1~U-16 为准，不再追加）。R-3 引号口径已确认（2026-09-23 用户在 project-manager 会话确认："代码块应该需要直引号，但是中文应该使用弯引号"——即正文与对话用弯引号“”，代码块/命令/配置内保持 ASCII 直引号不动；A-004 §7 约定维持弯引号不变，其"现状基本已如此"描述由 writer 在统一修订时一并修正；本章 66 处随本轮统一修订替换，全书其余章节随 P3 各章修订轮逐章统一，不做一次性全书批量替换）。U-2/U-11 口径已闭环（2026-09-23 用户提供 Dockerfile 并指示"放到 workspace 合适位置、提交进仓库"：存放于 projects/book-yocto/workspace/docker/dockerfile（2026-09-23 用户指定：workspace 是项目工作目录，yocto/ 仅存书稿，项目资料放 yocto 同级目录），环境事实为用户名 oops、家目录 /home/oops、容器主机名 tiger、Ubuntu 24.04 + 清华镜像源；全章 `<your-username>` 占位与 `/home/akai/...` 字面路径按该环境真实值回填，全书其余章节同口径随 P3 覆盖；writer 统一修订时同步核对 1.1.1 依赖清单与 Dockerfile 包集合的一致性）。统一修订输入已全部到齐。下一位行动人：**writer**（用户进入 writer 会话触发统一修订：R-1~R-5 + U-1~U-16 + D-008 本章改名 24 处）→ reviewer 复核 → 用户确认定稿。2026-09-23 writer 统一修订完成并提交复核（受评正文：workspace/yocto/task02-1-把Yocto跑起来.md，Git 9772f9c，792 行，工作区干净）：R-1~R-5、U-1~U-16、D-008 本章改名 24 处全部处理，逐条处理回复见下；同步产出 A-004 v0.3（§7 现状修正 + §4 补充条款草案，draft 待用户确认）。下一位行动人：**reviewer**（复核本轮统一修订）→ 用户确认定稿（含 U-3 删节方案、A-004 v0.3 两项待确认）。2026-09-23 reviewer 复核完成：R-1~R-5、U-1~U-16 逐项复核通过（证据见两处复核小节，含 T-008 容器实测与 GitHub/源码核查）；T-008 实测另发现 3 个本章不符项 E-1/E-2/E-3（show-layers 层名、meta-yocto-bsp 的 recipes-core、conf/ 清单省略标记），不属本轮评审意见范围，待 project-manager 复核 T-008 记录后转 writer 处理。下一位行动人：**用户**确认定稿（含 U-3 删节方案、A-004 v0.3 两项待确认，以及 E-1~E-3 是否随定稿一并修订）
 
 #### reviewer 的意见
 - 日期、评审依据与未覆盖项：2026-09-19。依据：A-004 体例约定 v0.2（approved）、D-001~D-006、T-006 修订说明；官方来源核查（poky scarthgap 分支 GitHub API 与源码、Yocto 5.0 参考手册变量术语表，2026-09-19）。未覆盖项：①未实机运行任何命令（本会话无 Linux 构建环境），所有来源核查均为静态/资料核查；②输出块中的实测数值（4059 任务数、Poky 5.0.18、内核 6.6.127、磁盘/内存数值等）未复核，属用户通读校验范围；③跨章一致性仅抽查 task04/task05 对本章的 5 处引用，未通读其他章节；④前言/序章未读。
@@ -104,7 +104,14 @@
   - R-4：已处理。`234Mi` 改为"约 `228Mi`"（232996 KiB ≈ 227.5 MiB）。
   - R-5：已处理（口径经 U-15 闭环=移除）。章末打 tag 叙事句、`git tag chapter1` 命令块与 💡 checkout 提示整段移除。
   - 改进建议：①L337 `MACHINE` 冗余首释已随 U-8 同族修正（变量不再给重复括号首释）；②L581 tmpfs 表述已精确化为"guest 内核可用内存的一半"；③L99 与 L748 的 `no_proxy` 不一致随 1.1.3 删除（U-3）自然消除，全章仅余 1.6.2 一处。
-- 复核：待复核（reviewer）
+- 复核：reviewer，2026-09-23，复核版本 Git 9772f9c（792 行，工作区干净；HEAD 5e876db 与该文件 diff 为空）：
+  - R-1：解决。输出块 21 项与 GitHub API（2026-09-23，全量 23 项含隐藏 .gitignore/.templateconf，`ls -1` 不显示）集合一致；T-008 容器实测（en_US.UTF-8）输出与书稿逐字一致、顺序一致；L271 汇报台词已补 `documentation/` 说明。
+  - R-2：解决。1.6.2 故障成因已改写为"另一个终端窗口 export、当前 Shell 无 `http_proxy`"（L749）；L768 白名单机制说明与 scarthgap `scripts/oe-buildenv-internal` L110-114 源码一致（含 HTTP_PROXY http_proxy HTTPS_PROXY https_proxy NO_PROXY no_proxy）；"先 export 再构建"建议保留于同一 Shell 语境，错误先后顺序模型已删除。
+  - R-3：解决。脚本化复核：代码块与行内代码之外正文直引号 0 处；弯引号 32 开 32 闭配对平衡共 64 字符；行内代码 `http_proxy = "http://..."`（L770）保留 ASCII 2 字符，代码块内 ASCII 不动，符合 2026-09-23 用户确认口径。
+  - R-4：解决。L571 已改"约 `228Mi`"，232996 KiB ≈ 227.5 MiB 换算正确。
+  - R-5：解决。章末打 tag 叙事句、`git tag chapter1` 命令块与 checkout 💡 整段移除，全章 grep "git tag" 零残留。
+  - 三条改进建议：①冗余首释已消除（现 L345）；②tmpfs 表述已精确化为"guest 内核可用内存的一半"（L588）；③`no_proxy` 全章仅余 L755 一处，取值不一致已随 1.1.3 删除消除。
+  - 结论：R-1~R-5 全部解决，复核通过；R-1/R-2 有 2026-09-23 GitHub API、源码与容器实测三重证据。U 系列复核见用户意见小节；T-008 容器实测新发现的 E-1/E-2/E-3 不属本轮评审意见范围，登记于 T-008。
 
 #### project-manager 的意见
 - 日期、评审依据与未覆盖项：2026-09-19。依据：T-006 任务记录与修订说明、A-002 v0.2、A-004 v0.2（approved）、D-001~D-006；核对 b83a631 提交 diff——改动为标题层级 1+8+20 处升级与 L417 旧式引用修正，与修订说明一致，改动未超出声明范围。未覆盖项：未逐行通读 chapter 1 正文，技术事实判断以 reviewer 意见为准；本意见限项目管理视角。
@@ -154,7 +161,24 @@
   - U-14：已处理。downloads 示例改为真实版本号 `busybox-1.36.1.tar.bz2`、`curl-8.7.1.tar.xz`、`gcc-13.4.0.tar.xz`（2026-09-23 poky scarthgap 配方核查：busybox_1.36.1.bb、curl_8.7.1.bb、gcc-13.4.inc PV=13.4.0）；保留"版本号随上游更新而变化"的说明，D-001 实测回填时再从固化环境逐字核对。`<时间戳>` 为每次构建必然不同的值，非版本号占位，保留原占位及其 💡 说明。
   - U-15：已处理。章末打 tag 叙事句、命令块、checkout 💡 整段移除（同 R-5）。全书联动项（前言读法承诺、附录 B/C tag 归属表、其余各章章末动作）待你确认范围后由 project-manager 登记批量任务。
   - U-16：无需修订（project-manager 2026-09-22 实测四条链接 HTTP 200 且标题相符）。其余章节链接的逐章核查建议请 project-manager 在 P3 任务中登记。
-- 复核：待复核（reviewer 复核统一修订；用户确认定稿）
+- 复核：reviewer，2026-09-23，复核版本 Git 9772f9c（792 行）。逐项结果：
+  - U-1：解决。24 包逐条独立命令、按包名字母序（程序化核验 sorted 通过）；包集合与受评版 b83a631 完全一致（24/24 无增删）；T-008 容器内逐条安装全部 rc=0。
+  - U-2：解决。`whoami` 输出 akai→oops，全章字面 akai 由 4 处清零（grep 复核）；T-008 实测 whoami=oops、HOME=/home/oops、hostname=tiger，三者一致。
+  - U-3：解决（删节方案按约定待用户随定稿确认）。1.1.3 已删除，全仓 grep "1.1.3" 零残留；1.6.2 自包含改写完成（机制正确性见 R-2 复核）。
+  - U-4：解决。clone 主命令已改 https（L121），💡 口径翻转为 git:// 备选（L124）；T-008 实测该 https 地址克隆成功（1m48s）。
+  - U-5：解决。L273 改为"这三个都是 **层（Layer）**：组织元数据的目录结构，可以叠加复用"，主语错位与衔接问题消除，术语首释功能保留。
+  - U-6：解决。L292 已点明影响对象（当前 Shell）与可观察后果（`PATH` 里没有 `bitbake`，命令找不到）。
+  - U-7：解决。L335 叙事改为"默认 `qemux86-64` 与 tiger 的 ARM 对不上→想改 tiger 机器名→本章先用官方 `qemuarm64`→拿不准来问"，疑问在叙事内可见，与后续台词衔接。
+  - U-8：解决。L349-354 变量列表统一为 **中文名（`变量`）**；全章 grep 无（MACHINE）（BBLAYERS）（Sstate）等旧式冗余/失配括号残留；A-004 v0.3 §4"首释中代码性标识加反引号"补充条款草案已就位（待用户确认）。
+  - U-9：解决。L347 叙事与 L359-360 注释已拆分"原行修改/取消注释"与"末尾追加"两种情况。
+  - U-10：解决。L385 保留"稍多一点"并补磁盘/网络 I/O 理由，内存反向边界单独说明。
+  - U-11：占位回填部分解决。bblayers.conf 示例与 show-layers 路径已回填 `/home/oops`（T-008 实测 bblayers.conf 逐字一致）；但"输出块按真实列宽重新对齐"的声明经 T-008 实测不成立——show-layers 真实输出层名为 `core/yocto/yoctobsp`、列宽亦不同，已登记为 T-008 不符项 E-2 待 writer 处理。U-11 本项（`<your-username>` 占位清零，grep 复核 8→0）复核通过。
+  - U-12：解决。L424 台词已锚定"每行最后那列数字"；T-008 实测优先级列均为 5，锚点成立。
+  - U-13：解决。全章"Sstate"零残留（grep 复核）；首释"共享状态缓存（sstate）"在 L350，L675 改为引用 1.3.2；`SSTATE_DIR` 等代码写法未动；A-004 v0.3 §4 概念名大小写条款草案已就位（待用户确认）。
+  - U-14：解决。busybox-1.36.1 / curl-8.7.1 / gcc-13.4.0 与 poky scarthgap 配方逐一相符（2026-09-23 GitHub 核查：busybox_1.36.1.bb、curl_8.7.1.bb、gcc-13.4.inc PV="13.4.0"）。
+  - U-15：解决。章末 tag 动作整段移除（证据同 R-5 复核）。
+  - U-16：无需修订，复核确认。2026-09-23 reviewer 复测四条链接均 HTTP 200，页面 `<title>` 与文中描述相符（Quick Build / Variables Glossary / Source Directory Structure / BitBake User Manual 2.8）。
+  - 结论：U-1~U-16 全部按处理回复落实，复核通过；U-3 删节方案与 A-004 v0.3 两项补充条款按约定留待用户定稿时确认；U-11 附 T-008 E-2 遗留（不属 U-11 本身）。
 
 ## T-007：全书人物"老周"更名"达哥"（chapter 1 以外章节）
 - 负责人：writer
@@ -171,15 +195,15 @@
 
 ## T-008：真实环境运行核查 chapter 1 环境信息（Docker 容器实测）
 - 负责人：reviewer
-- 状态：todo
+- 状态：in_review
 - 授权来源与日期：2026-09-23 用户在 project-manager 会话指示："我想找个成员在真实的环境上运行一下，看看书稿中的环境信息是否能和真实环境对的上"；项目经理按 reviewer 岗位 scope（核查命令、配置与实验步骤准确性）安排。同日用户确认 Docker 环境可用并解除阻塞。
 - 目标与范围：以入库的 projects/book-yocto/workspace/docker/dockerfile 构建镜像并启动容器，在容器内按 chapter 1（workspace/yocto/task02-1-把Yocto跑起来.md，统一修订后的最新版本）逐步实际运行命令，核对书稿环境信息与真实环境是否一致：系统依赖包清单与安装结果（1.1.1）、用户名/家目录/主机名提示符（oops、/home/oops、tiger）、`source oe-init-build-env` 行为、目录结构与版本号输出等；如实记录每条一致/不符及证据。只核查与记录，不修改书稿正文。
 - 输入与依赖：workspace/docker/dockerfile；chapter 1 最新版本（建议在 T-006 统一修订完成后执行，使核对对象为回填后的真实值；若提前执行则按当前版本核对并标注）；本机可用的 Docker 环境。
 - 优先级：未设定
 - 完成条件与确认方式：产出逐条核查记录（一致/不符 + 命令与输出证据），不符项按评审问题格式登记位置、依据与影响；记录经 project-manager 复核后，不符项转 writer 处理（随 T-006 修订或另开任务）。
-- 进展：2026-09-23 任务登记。环境核查：本机 Git Bash 与 Windows PATH 均无 docker 命令（CLI 实际位于 C:\Users\YinZh\AppData\Local\Programs\DockerDesktop\resources\bin\docker.exe）。2026-09-23 用户确认环境可用，实测 Docker Client/Server 29.8.0 正常；镜像 embedded:dev 已由该 dockerfile 构建，容器 books 存在（Exited 2 天，`docker start books` 后按用户给出的 `docker exec -it books /bin/bash` 进入）。阻塞解除，转 todo。
-- 成果与验证证据：暂无
-- 阻塞与下一位行动人：无（2026-09-23 环境确认可用，阻塞解除）；下一位行动人 reviewer（用户进入 reviewer 会话触发）。执行前 `docker start books` 恢复容器，或按 dockerfile 注释重新 build/run。
+- 进展：2026-09-23 任务登记。环境核查：本机 Git Bash 与 Windows PATH 均无 docker 命令（CLI 实际位于 C:\Users\YinZh\AppData\Local\Programs\DockerDesktop\resources\bin\docker.exe）。2026-09-23 用户确认环境可用，实测 Docker Client/Server 29.8.0 正常；镜像 embedded:dev 已由该 dockerfile 构建，容器 books 存在（Exited 2 天，`docker start books` 后按用户给出的 `docker exec -it books /bin/bash` 进入）。阻塞解除，转 todo。2026-09-23 reviewer 会话执行完毕：`docker start books` 恢复容器后以 `docker exec` 逐条执行 chapter 1 统一修订版（Git 9772f9c）环境相关命令——24 个依赖包逐条 `sudo apt install -y` 全部 rc=0；whoami/HOME/hostname=oops、/home/oops、tiger 与书稿一致；locale 全项 en_US.UTF-8；`git clone -b scarthgap https://...` 成功（1m48s）、`git branch` 为 `* scarthgap`；`ls -1` 顶层 21 项与书稿逐字一致（兼作 T-006 R-1 实测证据）；`source oe-init-build-env` 后 PWD/BUILDDIR/which bitbake 三项与书稿一致；bblayers.conf 逐字一致；默认 `MACHINE ??= "qemux86-64"` 与"保留 debug-tweaks 默认"确认；BitBake 2.8.1。发现 3 个不符项（E-1/E-2/E-3）与 2 个观察项（O-1/O-2），逐条登记于核查记录。未修改书稿正文。
+- 成果与验证证据：[T-008 chapter 1 环境核查记录](workspace/t008-chapter1-env-check.md)——14 项一致（含实测输出证据）、3 项不符（E-1：1.2.3 输出块列出实际不存在的 meta-yocto-bsp/recipes-core；E-2：1.3.3 show-layers 输出层名实为 core/yocto/yoctobsp 且列宽不同；E-3：1.3.1 conf/ 清单漏 conf-notes.txt/conf-summary.txt 且无省略标记）、2 项观察、未执行项（首次构建与 runqemu）已注明理由。
+- 阻塞与下一位行动人：无；下一位行动人 project-manager（按完成条件复核核查记录）→ 不符项 E-1~E-3 转 writer 处理（随 T-006 定稿修订或另开任务，由 project-manager 安排）。
 - 更新日期：2026-09-23
 
 ## 记录样式（不是真实任务）
