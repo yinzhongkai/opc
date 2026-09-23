@@ -62,10 +62,10 @@
 - 输入与依赖：D-005（验证基线、开发环境与节奏）、D-004（物料清单与电池验证项）、D-001（读者画像）；`nRF54L15_DK_资料/` 官方资料包；Nordic 与 Zephyr 官方发布信息
 - 优先级：未设定
 - 完成条件与确认方式：environment.md 成文、登记成果索引并经用户确认；确认前保持 draft
-- 进展：2026-09-20 developer 会话受理，完成官方信息核查并起草 environment.md v0.1（draft），登记成果索引，提交用户审阅。核查发现并处理两处事实：Toolchain Manager 已弃用、不支持 NCS v3.0.0+，安装路径须走 nRF Connect for VS Code 扩展包；任务输入中的 `nRF54L15_DK_资料/` 官方资料包当前不在本仓库内，已在文中标注缺口并请用户确认位置。本成果初登记为 A-004，与 T-004 章节正文草稿（A-004，writer 会话同日提交）撞号，改登记为 A-005
+- 进展：2026-09-20 developer 会话受理，完成官方信息核查并起草 environment.md v0.1（draft），登记成果索引，提交用户审阅。核查发现并处理两处事实：Toolchain Manager 已弃用、不支持 NCS v3.0.0+，安装路径须走 nRF Connect for VS Code 扩展包；任务输入中的 `nRF54L15_DK_资料/` 官方资料包当前不在本仓库内，已在文中标注缺口并请用户确认位置。本成果初登记为 A-004，与 T-004 章节正文草稿（A-004，writer 会话同日提交）撞号，改登记为 A-005。2026-09-23 用户将资料包放入项目工作区，应用户要求目录定名 `workspace/nrf54l15-dk-docs/`（project-manager 抽查：数据手册 940 页、DK 用户指南 31 页、Rev 2 勘误表 27 页均可读；与本书无关的 Altium/Gerber 硬件设计包 zip、ngl_001 硬件设计指南与 PCA10156 原理图保留在本地但不纳入 Git），资料包位置缺口解除，environment.md 中相应缺口标注待 developer 修订时核销
 - 成果与验证证据：[environment.md](artifacts/book/environment.md)（A-005 v0.1，draft）；核实来源：Nordic 官方博客 LTS 公告（2026-07-02）、Nordic 官方 nRF Connect for Desktop 下载页、Nordic DevZone，均 2026-09-20 核查
-- 阻塞与下一位行动人：无阻塞；下一位行动人为用户（审阅 environment.md；确认资料包存放位置或将其放入项目工作区；后续按基线从零安装并报告结果）
-- 更新日期：2026-09-20
+- 阻塞与下一位行动人：无阻塞；下一位行动人为用户（审阅 environment.md；后续按基线从零安装并报告结果）
+- 更新日期：2026-09-23
 
 ## 记录样式（不是真实任务）
 
