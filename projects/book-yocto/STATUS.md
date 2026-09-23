@@ -11,6 +11,7 @@
   - T-005 体例约定草案（writer）：completed，[A-004](artifacts/A-004-体例约定草案.md) v0.2 **approved**（2026-09-19 用户确认，章标题层级方案 A；章节 git tag 事宜用户自行决定）。
   - T-006 chapter 1 试点闭环（writer）：in_progress——writer 修订稿已提交（b83a631），第 1 轮评审意见到齐：reviewer 技术审校 revise（R-1~R-5，其中 R-2 为机制结论修正、R-3 需用户口径、R-5 已由 U-15 闭环）、project-manager pass（流程维度）；用户通读意见 U-1~U-16 已登记且通读完毕（2026-09-23），统一修订输入含 D-008 本章改名（24 处）。
   - T-007 全书人物"老周"更名"达哥"（writer，D-008）：todo，chapter 1 以外 18 个文件 381 处。
+  - T-008 真实环境运行核查 chapter 1 环境信息（reviewer）：blocked——本机无 Docker 环境，待用户安装 Docker Desktop 或提供等价环境；建议排在 T-006 统一修订后执行。
 - 关键成果：A-004 体例约定 v0.2 已批准（统稿依据）；A-001/A-003 v0.1、A-002 v0.3 为 draft。
 - 阻塞、待确认事项及下一位行动人：
   - **用户**：①继续全书通读校验（A-003），chapter 8 时顺带裁决 X-1；②安排四个开发态仓库工程创建与构建环境的责任人（P0.5 前置，chapter 6 以后修订依赖）。T-006 统一修订口径已全部到齐（R-3 引号、U-2/U-11 Dockerfile 均于 2026-09-23 确认，Dockerfile 入库 projects/book-yocto/workspace/docker/dockerfile），下一位行动人 writer。
