@@ -1,12 +1,12 @@
 # 技术与实验环境基线
 
 - 项目 / 成果 ID / 关联任务：book-zephyr / A-005 / T-005
-- 负责人 / 版本 / 更新时间：developer / 0.2 / 2026-09-23
+- 负责人 / 版本 / 更新时间：developer / 0.3 / 2026-09-23
 - 成果状态：draft
 - 适用范围：首本书全部章节的开发主机、NCS/Zephyr 软件基线、工具链与烧录工具、nRF54L15 DK 板卡基线，以及 D-004 电池 5 V 升压路径的实测验证安排；不含各章示例工程特有的配置（在对应示例与记录中补充）
 - 来源及输入版本：T-005 授权（用户 2026-09-19 在 project-manager 会话确认登记）；D-001（读者画像）、D-004（物料清单与电池验证项）、D-005（验证基线、开发环境与节奏）；A-001 v0.2 图书设计（approved）；Nordic 官方发布信息与下载页核实结果（2026-09-20，见文中标注）；`workspace/nrf54l15-dk-docs/` 官方资料包（用户 2026-09-12 下载，2026-09-23 入库项目工作区，见"官方资料包"节）
 - 批准依据：尚无（draft，待用户确认）
-- 版本记录：2026-09-20 v0.1 初版：确认软件与板卡目标基线，登记电池升压实测计划；主机尚未安装任何开发软件，"实际安装结果"列待用户安装后回填。2026-09-23 v0.2：按用户三条反馈修订——① 核销"官方资料包缺口"一节并改按 `workspace/nrf54l15-dk-docs/` 新路径引用（旧名 `nRF54L15_DK_资料/` 不再使用），复核原文引用；② 复核确认安装路径与验证步骤全部保持"未执行/待回填"标注，未以资料核查冒充实测；③ 新增"IDE 路径评估"节：命令行工具链 + Source Insight 可行（官方 `nrfutil sdk-manager` / `west` 路径），建议本书主线仍按 VS Code 扩展路径，最终选择待用户决定
+- 版本记录：2026-09-20 v0.1 初版：确认软件与板卡目标基线，登记电池升压实测计划；主机尚未安装任何开发软件，"实际安装结果"列待用户安装后回填。2026-09-23 v0.2：按用户三条反馈修订——① 核销"官方资料包缺口"一节并改按 `workspace/nrf54l15-dk-docs/` 新路径引用（旧名 `nRF54L15_DK_资料/` 不再使用），复核原文引用；② 复核确认安装路径与验证步骤全部保持"未执行/待回填"标注，未以资料核查冒充实测；③ 新增"IDE 路径评估"节：命令行工具链 + Source Insight 可行（官方 `nrfutil sdk-manager` / `west` 路径），建议本书主线仍按 VS Code 扩展路径，最终选择待用户决定。2026-09-23 v0.3：用户经主机方案（Windows vs Linux / Samba 工作流）讨论后确认主线为 Windows 主机 + VS Code + nRF Connect 扩展，Source Insight 降为个人编辑器附注；评估与讨论过程保留于"IDE 路径评估"节
 
 ## 证据分级说明
 
@@ -20,12 +20,12 @@
 
 | 对象 | 版本、修订号或实际配置 | 核对依据 | 覆盖章节 | 未知与限制 |
 |---|---|---|---|---|
-| 开发主机 | Windows（版本未细分）；尚未安装任何开发软件 | D-005（用户确认，2026-09-13） | 全书，第 1 章从零安装写起 | 安装后的实际 Windows 版本、用户名路径待回填；其他系统最多作附注 |
+| 开发主机 | Windows（版本未细分）；尚未安装任何开发软件 | D-005（用户确认，2026-09-13）；2026-09-23 用户经 Linux 主机方案讨论后确认维持 Windows（见"IDE 路径评估"节） | 全书，第 1 章从零安装写起 | 安装后的实际 Windows 版本、用户名路径待回填；其他系统最多作附注 |
 | nRF Connect SDK（NCS） | **v3.4.0**（目标基线；Nordic 首个 LTS，5 年补丁支持；基于 Zephyr 4.4，含 Mbed TLS 4.1.0、TF-M 2.3.0） | 官方资料核查：Nordic 官方博客（2026-07-02 发布 LTS 公告；2026-07-01 发布） | 全书所有构建与示例 | 实际安装版本待第 1 章安装后回填；若安装前 Nordic 发布 v3.4.x 补丁，是否跟进在基线变更节处理 |
 | Zephyr RTOS | 4.4（随 NCS v3.4.0 锁定，非 Zephyr LTS；API 与 Zephyr 下一 LTS 4.6 兼容） | 官方资料核查：同上 Nordic 官方博客 | 全书 | 不跨版本套用结论；引用 Zephyr 文档时以 NCS v3.4.0 自带文档为准 |
 | 编译工具链 | Zephyr SDK 1.0.1 / GCC 14.3.0（随 NCS v3.4.0 预打包工具链） | 官方资料核查：Nordic DevZone 用户环境报告（NCS 3.4.0 LTS 配套）与公开版本分析一致 | 全书 | 精确版本以安装后 `west sdk-version` 与工具链目录实际内容回填为准 |
 | SDK 安装方式 | **nRF Connect for VS Code 扩展包**（Install SDK，预打包 SDK+工具链，默认安装到 `C:\ncs`）；命令行备选 `nrfutil sdk-manager` | 官方资料核查：Nordic 官方 nRF Connect for Desktop 下载页明确 **Toolchain Manager 已弃用、不支持 NCS v3.0.0 及以后版本**，改用 VS Code 扩展或命令行 | 第 1 章安装路径 | 这是对 A-001 v0.2 中"nRF Connect for Desktop / Toolchain Manager / VS Code 路径"表述的实测前修正：NCS v3.4.0 不能走 Toolchain Manager，正文须按 VS Code 扩展路径写 |
-| IDE | 主线：Visual Studio Code + nRF Connect for VS Code 扩展包（版本随安装时市场最新）；备选：Source Insight 等任意编辑器 + 命令行工具链（可行性评估见"IDE 路径评估"节，最终选择待用户决定） | 官方资料核查：Nordic 官方安装文档路径；备选路径经官方 `nrfutil sdk-manager` / `west` 命令行文档核查 | 第 1 章及全书 | 扩展具体版本号安装后回填；备选路径若成为本书主线将影响 A-004 第 1 章正文写法 |
+| IDE | **Visual Studio Code + nRF Connect for VS Code 扩展包**（主线，用户 2026-09-23 确认；版本随安装时市场最新）；Source Insight 可作为个人代码浏览编辑器直接使用本地 `C:\ncs` 目录（附注，非本书主线） | 官方资料核查：Nordic 官方安装文档路径；备选"命令行工具链 + Source Insight"经评估可行但用户未选用（见"IDE 路径评估"节） | 第 1 章及全书 | 扩展具体版本号安装后回填 |
 | 烧录与桌面工具 | nRF Connect for Desktop（Programmer 应用）；nRF Command Line Tools（含 nrfjprog 与 SEGGER J-Link 驱动） | 官方资料核查：Nordic 官方下载页（2026-09-20） | 第 1 章烧录、后续章节目志与电流测量 | 具体版本安装后回填；J-Link 驱动须随 nRF Command Line Tools 安装，不可跳过 |
 | 开发板 | nRF54L15 DK **1.0.0**（实物丝印 PCA10156 1.0.0）；板上 **Rev 2** 芯片（nRF54L15-QFAAC00）；勘误表对应 Rev 2 Errata v1.1 | 用户已确认实物（D-005，2026-09-13）；与资料包中 DK 用户指南 v1.0.0、Rev 2 勘误表 v1.1 记载一致（2026-09-23 按新路径复核） | 全书硬件实验 | 板上 J-Link OB 调试器固件版本首次连接时核对并回填；早期 PDK（0.8.x）与 DK 0.9.x 不构成本书基线 |
 | 板级构建目标 | `nrf54l15dk/nrf54l15/cpuapp`（Zephyr 板级标识，以 NCS v3.4.0 板级文档为准） | 官方资料核查：Zephyr/NCS 板级命名惯例；最终标识在第 1 章首次构建时以 `west boards` 实际输出回填 | 全书示例构建命令 | 未执行：首次构建前不作最终引用 |
@@ -58,7 +58,9 @@
 - **Source Insight 的角色**：纯代码编辑与导航工具，不参与构建配置；Zephyr 工程由 CMake/west 管理，不依赖任何 IDE 工程文件，因此编辑器可自由替换。
 - **调试手段变化**：扩展的图形化调试（nRF Debug）不再可用；改用 `west debug` 命令行 GDB（经 J-Link GDB Server，Zephyr SDK 自带 arm-zephyr-eabi-gdb），或 SEGGER Ozone 图形调试器（备选，未验证）。
 - **失去的能力**：扩展的构建/烧录 GUI 集成、Kconfig 与 devicetree 可视化辅助、nRF Terminal 串口（可用任意串口工具替代）。对首次接触 MCU/RTOS 的学习曲线，这些辅助有实际价值。
-- **对本书的影响与建议**：Nordic 官方文档、DevAcademy 课程与排错资料均以 VS Code 扩展路径为主，读者（无 MCU/RTOS 经验，D-001）照做时参考资料最多，**建议本书主线仍按 VS Code 扩展路径撰写**；用户个人日常可并行使用 Source Insight 浏览代码，二者不冲突。若用户决定本书改用命令行主线，A-004 第 1 章正文（按 VS Code 路径撰写）的安装、构建、烧录小节需由 writer 改写，影响另行登记。**最终选择待用户决定，确认前本基线主线维持 VS Code 扩展路径不变。**
+- **对本书的影响与建议**：Nordic 官方文档、DevAcademy 课程与排错资料均以 VS Code 扩展路径为主，读者（无 MCU/RTOS 经验，D-001）照做时参考资料最多，**建议本书主线仍按 VS Code 扩展路径撰写**；用户个人日常可并行使用 Source Insight 浏览代码，二者不冲突。若用户决定本书改用命令行主线，A-004 第 1 章正文（按 VS Code 路径撰写）的安装、构建、烧录小节需由 writer 改写，影响另行登记。
+- **主机方案讨论（2026-09-23）**：进一步讨论了 Linux 主机与"Linux 编译 + Samba 映射 + Windows Source Insight 看代码"（用户内核开发日常）方案。结论：NCS 在 Windows 原生构建，不存在内核开发"必须在 Linux 编译"的约束；Source Insight 可直接打开本地 `C:\ncs`，无需 Samba 桥；Linux 主机方案构建更快但收益有限，且需推翻 D-005 并改写第 1 章，不予采用；WSL2 与双机混用不作推荐。量产/CI 场景未来需要 Linux 时按基线变更补充。
+- **用户决定（2026-09-23）**：确认本书主线为 **Windows 主机 + VS Code + nRF Connect 扩展**；Source Insight 作为个人代码浏览编辑器附注保留，不进主线。A-004 第 1 章正文的 VS Code 路径写法无需改动。
 - **执行状态**：以上为官方资料与命令行文档核查结论（2026-09-23），`nrfutil sdk-manager` 安装与 `west debug` 均**未在本机执行**；若用户选定备选路径，相应步骤同样标"未执行/待回填"，由用户照做后回填。
 
 ### 通用机制与厂商扩展的区分
