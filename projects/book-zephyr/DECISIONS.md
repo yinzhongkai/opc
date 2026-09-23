@@ -68,6 +68,17 @@
 - 替代关系：无
 - 记录人及更新日期：project-manager，2026-09-19
 
+## D-007：技术与实验环境基线（A-005 v0.3）批准，含主机与 IDE 主线定案
+- 状态：confirmed
+- 提出者：developer（T-005 完成基线起草并按用户反馈修订至 v0.3，提交确认）
+- 问题与候选方案：A-005 环境基线是否可批准；开发主机用 Windows 还是 Linux（含用户日常"Linux 编译 + Samba + Source Insight"工作流的适用性）；本书 IDE 主线用 VS Code + nRF Connect 扩展还是"命令行工具链 + Source Insight"
+- 确认人：用户（默认最终确认人）
+- 结果：批准 A-005 v0.3；主机维持 Windows（NCS 在 Windows 原生构建，Linux 方案收益有限且需推翻 D-005、改写第 1 章，不采用；WSL2 与双机混用不推荐）；IDE 主线定为 VS Code + nRF Connect 扩展，Source Insight 仅作个人代码浏览编辑器附注；NCS v3.4.0（LTS，Zephyr 4.4）、Zephyr SDK 1.0.1 / GCC 14.3.0、DK 1.0.0（Rev 2 芯片）基线成立；安装与实测项保持"未执行/待回填"，随用户实际安装回填
+- 确认来源与日期：用户 2026-09-23 在 developer 会话讨论后确认主机与 IDE 主线（原话"那算了吧，还是按Windows 主机 + VS Code 这种方式吧"），随后审阅 v0.3 回复"确认"
+- 适用范围与影响：A-005 v0.3 自本决定起为 approved；A-004 第 1 章正文的 VS Code 安装路径写法无需改动，其【待核】位置可依据 A-005 v0.3 核销（writer 职责，另行安排）；Toolchain Manager 已弃用（不支持 NCS v3.0.0+）的事实随本基线生效；电池 5 V 升压实测安排按 A-005 既定计划待物料到货执行
+- 替代关系：无（D-005 中"软件基线候选 NCS v3.4.0、最终基线在 environment.md 确认"的待办由本决定落地，D-005 本身不被替代）
+- 记录人及更新日期：developer，2026-09-23
+
 ## 记录样式（不是真实决定）
 
 ```text

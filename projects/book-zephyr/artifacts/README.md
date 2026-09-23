@@ -10,7 +10,7 @@
 | A-002 | [全书目录与依赖](book/outline.md) | planner | T-001、T-002 | 0.2 | approved | D-003、D-004 |
 | A-003 | [第 1 章蓝图（ch-env-setup）](book/chapters/ch-env-setup/plan.md) | planner | T-003 | 0.1 | approved | D-006 |
 | A-004 | [第 1 章正文草稿（ch-env-setup）](book/chapters/ch-env-setup/text.md) | writer | T-004 | 0.1 | draft | 尚无 |
-| A-005 | [技术与实验环境基线](book/environment.md) | developer | T-005 | 0.3 | draft | 尚无 |
+| A-005 | [技术与实验环境基线](book/environment.md) | developer | T-005 | 0.3 | approved | D-007 |
 
 ## 正文元信息样式（不是真实成果）
 
