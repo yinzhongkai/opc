@@ -1,22 +1,22 @@
 ## 4 让 QEMU 长出 tiger 这块板
 
-周四上午，阿凯工位。昨天刚打完 `chapter3` 的 tag，`meta-tiger` 还是个空壳。老周发来一条消息，只有一个内部 Git 仓库地址和两句话：
+周四上午，阿凯工位。昨天刚打完 `chapter3` 的 tag，`meta-tiger` 还是个空壳。达哥发来一条消息，只有一个内部 Git 仓库地址和两句话：
 
 "这是另一个组同事写的 QEMU patch，tiger 这块虚拟板他们已经能跑了。你的任务不是开发 QEMU，是把它**集成进 Yocto**——让 bitbake 构建出来的 QEMU 能识别 `-M tiger`。"
 
-给 QEMU 动手术——阿凯想起昨天收工时老周撂下的那句话，原来指的就是这个。他把地址抄下来，追问了一句："`tiger-aarch64` 和 `-M tiger` 是什么关系？"
+给 QEMU 动手术——阿凯想起昨天收工时达哥撂下的那句话，原来指的就是这个。他把地址抄下来，追问了一句："`tiger-aarch64` 和 `-M tiger` 是什么关系？"
 
-"命名约定，先记住。"老周说，"Yocto 侧的 MACHINE 叫 `tiger-aarch64`，QEMU 侧的 machine 类型叫 `tiger`，中间的映射由 runqemu 负责。以后你写 MACHINE 配置时会亲手把这个映射接上。"
+"命名约定，先记住。"达哥说，"Yocto 侧的 MACHINE 叫 `tiger-aarch64`，QEMU 侧的 machine 类型叫 `tiger`，中间的映射由 runqemu 负责。以后你写 MACHINE 配置时会亲手把这个映射接上。"
 
 "集成具体做什么？"
 
-"四步。"老周伸出手指，"导出 patch、写 bbappend、喂给 SRC_URI、构建验证。"
+"四步。"达哥伸出手指，"导出 patch、写 bbappend、喂给 SRC_URI、构建验证。"
 
 "那 runqemu 呢？集成完了 `runqemu tiger-aarch64` 就能跑了吧？"
 
-"问到点子上了。"老周说，"那是第五步——也是本章你只能做一半的半步。机制今天能讲透，真正跑通还缺两块拼图，到时候你自己会数出来。"
+"问到点子上了。"达哥说，"那是第五步——也是本章你只能做一半的半步。机制今天能讲透，真正跑通还缺两块拼图，到时候你自己会数出来。"
 
-阿凯翻开本子准备开工，老周临走补了一句："patch 这东西，顺序和版本，总有一个要咬你一口。别问，到时候你就知道了。"
+阿凯翻开本子准备开工，达哥临走补了一句："patch 这东西，顺序和版本，总有一个要咬你一口。别问，到时候你就知道了。"
 
 ### 4.1 从 qemu-tiger 导出 patch
 
@@ -62,7 +62,7 @@ git diff --stat v8.2.7..HEAD
 
 `tiger.c` 新增了近七百行 C。"这些我要读懂吗？"阿凯问。
 
-"不用。"老周头也没抬，"machine 实现是另一组的活，他们负责维护。你用 `git diff --stat` 扫一眼规模是应该的——知道集成的分量，但别陷进去。你的战场在 Yocto 这边。"
+"不用。"达哥头也没抬，"machine 实现是另一组的活，他们负责维护。你用 `git diff --stat` 扫一眼规模是应该的——知道集成的分量，但别陷进去。你的战场在 Yocto 这边。"
 
 #### 4.1.2 确认 base：patch 的"出生证明"
 
@@ -179,21 +179,21 @@ qemu-tiger 仓库（开发态）                meta-tiger（集成态）       
 
 patch 到手了。阿凯的第一反应很直接：打开 `poky/meta/recipes-devtools/qemu/qemu-system-native_8.2.7.bb`，把三个 patch 加进去，完事。
 
-他刚把编辑器打开，老周不知道什么时候站在了身后："你干什么呢？"
+他刚把编辑器打开，达哥不知道什么时候站在了身后："你干什么呢？"
 
 "把 patch 加进配方啊，就加几行……"
 
-"上游仓库，一行都不许动。"老周把话放得很平，但没有商量的余地，"今天你在 poky 里加三行，三个月后升级 Scarthgap 小版本，`git pull` 一拉就是冲突。半年后没人记得 poky 里哪行是你加的。这是你序章就学过的——集成态和开发态的分界线，poky 是上游，跟 qemu-tiger 一样，只读。"
+"上游仓库，一行都不许动。"达哥把话放得很平，但没有商量的余地，"今天你在 poky 里加三行，三个月后升级 Scarthgap 小版本，`git pull` 一拉就是冲突。半年后没人记得 poky 里哪行是你加的。这是你序章就学过的——集成态和开发态的分界线，poky 是上游，跟 qemu-tiger 一样，只读。"
 
 阿凯合上编辑器："那怎么把 patch 喂进去？"
 
-老周没回答，反问他："你昨天写的 `layer.conf`，priority 写的是几？注释里说的预留是干什么用的？"
+达哥没回答，反问他："你昨天写的 `layer.conf`，priority 写的是几？注释里说的预留是干什么用的？"
 
 阿凯翻开 `meta-tiger/conf/layer.conf`——`BBFILE_PRIORITY_meta-tiger = "6"`，注释写着"为后续用 bbappend 覆盖下层配方预留能力（本章还用不上）"。再往下看，`BBFILES` 的通配里赫然写着 `*.bbappend`。
 
 "……bbappend。"阿凯反应过来了，"layer 里可以放一种 `.bbappend` 文件，叠加到下层同名配方上，不用改原配方。"
 
-"priority 6 就是干这个的。"老周点头，"你的 layer 比 OE-Core 的 5 高，你的追加文件会被叠在最后。写吧。"
+"priority 6 就是干这个的。"达哥点头，"你的 layer 比 OE-Core 的 5 高，你的追加文件会被叠在最后。写吧。"
 
 这种 `.bbappend` 文件正式的名字叫 **bbappend 文件（Append file）**：它与某个 `.bb` 配方同名，内容会被 BitBake 追加到该配方的末尾参与解析，效果上等于"在原配方末尾续写几行"，但原配方一个字节都不用改。这是 Yocto 里定制下游行为的标准手段，也是 meta-tiger 存在的核心理由之一。
 
@@ -220,7 +220,7 @@ BPN = "qemu"
 require qemu-native.inc
 ```
 
-"匹配的是 PN。"老周只说了五个字。
+"匹配的是 PN。"达哥只说了五个字。
 
 阿凯把这条记在便签上：**bbappend 文件名按 PN 匹配，与 BPN 无关**。`qemu_%.bbappend` 和 `qemu-system-native_%.bbappend` 是两个不同配方的追加文件——这句话他现在只是抄下来了，4.8 节的一次虚惊会让他真正读懂它的分量。
 
@@ -381,7 +381,7 @@ file://0003-hw-arm-tiger-Register-default-configs-and-docs.patch
 
 #### 4.4.1 base 对齐检查清单
 
-构建之前，老周让阿凯把 4.1.2 做过的检查正式落成一张清单。"这次对上了是运气。以后每次从开发态拿 patch，都按这个单子过一遍。"
+构建之前，达哥让阿凯把 4.1.2 做过的检查正式落成一张清单。"这次对上了是运气。以后每次从开发态拿 patch，都按这个单子过一遍。"
 
 1. **版本对齐**：开发仓库的 base 标签（`git describe` 给出的 `v8.2.7`）与 Yocto 配方锁定的版本（文件名里的 `8.2.7`，即 PV）一致。
 2. **上下文对齐**：开发态 patch 与集成目标已有的 patch 序列（OE-Core 的二十多个）不改同一片代码——`git log` 看改动文件列表，和 `qemu.inc` 里 patch 的目标文件对照，没有重叠。
@@ -439,7 +439,7 @@ grep -c "Upstream-Status" ~/workspace/meta-tiger/recipes-bsp/qemu/qemu-system-na
 
 敲构建命令之前，阿凯先解决一个悬着的问题："`qemu_8.2.7.bb`、`qemu-native_8.2.7.bb`、`qemu-system-native_8.2.7.bb`——三个配方，我们的 patch 为什么喂给 `qemu-system-native`？runqemu 用的到底是哪个？"
 
-老周又一次把问题抛了回来："你自己打开三个文件看头部，再想想 chapter 1 学过的 Native recipe。"
+达哥又一次把问题抛了回来："你自己打开三个文件看头部，再想想 chapter 1 学过的 Native recipe。"
 
 阿凯把三个文件并排翻了。
 
@@ -527,7 +527,7 @@ qemu-system-aarch64: unsupported machine type
 Use -machine help to list supported machines
 ```
 
-到此，老周的四步全部走完：bitbake 构建出来的 QEMU 认识 `-M tiger` 了。
+到此，达哥的四步全部走完：bitbake 构建出来的 QEMU 认识 `-M tiger` 了。
 
 ### 4.6 runqemu 是怎么认出 tiger 的
 
@@ -535,7 +535,7 @@ Use -machine help to list supported machines
 
 "那现在 `runqemu tiger-aarch64` 能跑了吗？"阿凯问。
 
-"你 chapter 1 敲过 `runqemu qemuarm64`。"老周不答，"启动的时候 QEMU 命令行里有个 `-machine virt`——这串参数是谁给的？`qemu-system-aarch64` 自己是不知道什么叫 qemuarm64 的。去 conf 里找。"
+"你 chapter 1 敲过 `runqemu qemuarm64`。"达哥不答，"启动的时候 QEMU 命令行里有个 `-machine virt`——这串参数是谁给的？`qemu-system-aarch64` 自己是不知道什么叫 qemuarm64 的。去 conf 里找。"
 
 阿凯回到 `qemuarm64.conf`，这次不读全文，直接过滤。
 
@@ -563,7 +563,7 @@ QB_TCPSERIAL_OPT = "-device virtio-serial-pci -chardev socket,id=virtcon,port=@P
 
 找到了。这一族 `QB_` 前缀的变量是 **QEMU 启动参数变量族（QB_\* 变量）**，QB 意为 Qemu Boot，专门写给 runqemu 看的。其中两个最关键：**QB_SYSTEM_NAME** 告诉 runqemu 用哪个 QEMU 二进制（`qemu-system-aarch64`），**QB_MACHINE** 告诉它传什么 machine 参数（`-machine virt`）。`runqemu qemuarm64` 的那条 QEMU 命令行，就是从这十几行拼出来的。
 
-那 `tiger-aarch64` 的映射在哪接？答案已经呼之欲出：将来 tiger 的 MACHINE 配置里写一行 `QB_MACHINE = "-machine tiger"`，runqemu 就会把 `tiger-aarch64` 映射到 QEMU 的 `-M tiger`——老周开场说的命名约定，机制上就靠这一行兑现。
+那 `tiger-aarch64` 的映射在哪接？答案已经呼之欲出：将来 tiger 的 MACHINE 配置里写一行 `QB_MACHINE = "-machine tiger"`，runqemu 就会把 `tiger-aarch64` 映射到 QEMU 的 `-M tiger`——达哥开场说的命名约定，机制上就靠这一行兑现。
 
 #### 4.6.2 qemuboot.conf：QB_\* 的运输载体
 
@@ -641,36 +641,36 @@ ERROR: Set qb_system_name with suitable QEMU PC System emulator in .*qemuboot.co
 
 最后它试着从机器名猜 QEMU 二进制——猜测表只认 `qemux86`、`qemuarm64` 这些官方命名，`tiger-aarch64` 不在表里，报错退出。
 
-缺的两块拼图，正好是老周说的"半步"之外的部分：
+缺的两块拼图，正好是达哥说的"半步"之外的部分：
 
 - **MACHINE 配置**：`conf/machine/tiger-aarch64.conf` 还不存在——`QB_SYSTEM_NAME = "qemu-system-aarch64"`、`QB_MACHINE = "-machine tiger"` 都要写在那里。这是下一章（chapter 5）的活。
 - **内核与镜像**：`tmp/deploy/images/tiger-aarch64/` 要等有内核（chapter 8）和镜像构建之后才会有内容。runqemu 完整启动 tiger，属于 phase 4 的事。
 
-"所以现在是什么状态？"老周问。
+"所以现在是什么状态？"达哥问。
 
 阿凯想了想："QEMU 已经认识 `tiger` 这块板了，但 Yocto 还不认识 `tiger-aarch64` 这台机器。中间的路是 qemuboot.conf，路的两端都还没修。"
 
-"这就是那半步。"老周说，"今天机制讲透了，就够了。"
+"这就是那半步。"达哥说，"今天机制讲透了，就够了。"
 
 ### 4.7 为什么不把 QEMU fork 塞进 layer
 
 收工前，阿凯问了一个憋了一下午的问题："三个 patch 要维护 base、维护顺序、补 Upstream-Status——这么麻烦，为什么不把 qemu-tiger 整个仓库塞进 meta-tiger，让配方直接从本地源码编？一劳永逸。"
 
-老周难得地多说了几句。
+达哥难得地多说了几句。
 
 "三句话。第一，layer 是集成清单，不是开发现场——meta-tiger 里的每个文件都应该回答'集成了什么'，而不是'怎么开发的'，近七百行 `tiger.c` 塞进来，这个 layer 就说不清了。第二，patch 序列是两个世界之间的 diff，diff 越小越好审、越好升级——三个 patch，每个我能十分钟读完；一个 fork 的 QEMU 源码树，十万行起步，没人审得动。第三，看远一点：将来 QEMU 从 8.2 升 9.x，你的活是把三个 patch rebase 到新 base 上，大概率一下午；如果维护的是一个 fork，你要面对的是整棵树的合并，工作量不在一个量级。"
 
 "序章说的开发态和集成态，"阿凯接上，"不只是'在哪干活'的规矩，是给未来的维护成本上的保险。"
 
-"今天你踩的两个坑——等下就要讲——本质上都是 diff 管理的问题。"老周拿起杯子，"diff 越小，咬你的地方越少。"
+"今天你踩的两个坑——等下就要讲——本质上都是 diff 管理的问题。"达哥拿起杯子，"diff 越小，咬你的地方越少。"
 
 ### 4.8 踩坑实录
 
-老周上午的预言应验了，两次。先交代时间线：这两件事都发生在 4.3 写完 bbappend、4.5 构建成功之前——你在前面看到的正确文件和一路顺利的构建，都是修正之后的样子。
+达哥上午的预言应验了，两次。先交代时间线：这两件事都发生在 4.3 写完 bbappend、4.5 构建成功之前——你在前面看到的正确文件和一路顺利的构建，都是修正之后的样子。
 
 #### 4.8.1 踩坑 1：bbappend 写成 `qemu_%.bbappend`，patch 喂错了配方
 
-当时阿凯给 bbappend 起名，图"直觉"写成了 `qemu_%.bbappend`——"QEMU 的配方嘛，就叫 qemu"。文件挂上后他也没验证，直接准备构建。幸好老周路过时多问了一句："你 `show-appends` 看过吗？"
+当时阿凯给 bbappend 起名，图"直觉"写成了 `qemu_%.bbappend`——"QEMU 的配方嘛，就叫 qemu"。文件挂上后他也没验证，直接准备构建。幸好达哥路过时多问了一句："你 `show-appends` 看过吗？"
 
 我们来重演这个错误。把 4.3 写好的正确文件改名，回到那个下午。
 
@@ -850,7 +850,7 @@ NOTE: Tasks Summary: Attempted 43 tasks of which 18 didn't need to be rerun and 
 
 ### 4.9 本章小结
 
-一天结束，老周的四步加半步全部落地：
+一天结束，达哥的四步加半步全部落地：
 
 - **4.1**：patch 是开发态到集成态的运输格式。导出前先确认 base（`git describe` 对照配方版本号 PV），再用 `git format-patch` 导出序列。
 - **4.2**：bbappend 文件不动原配方地追加行为；文件名按 PN 匹配（与 BPN 无关），`%` 通配版本；`show-appends` 验证叠加关系。
@@ -884,7 +884,7 @@ git tag chapter4
 - **task 06 / chapter 5**：写 `tiger-aarch64.conf`，把 `QB_MACHINE = "-machine tiger"` 落地，让 Yocto 认识这台机器。
 - 远景：task 07–09 用本章的 bbappend + patch 范式集成 TF-A、U-Boot、linux-tiger；task 11 第一次开机成功，runqemu 的拼图全部归位。
 
-老周下班前看了眼阿凯本子上的 Fig-4-4："QEMU 这关过了。明天写 MACHINE 配置——你那张全景地图上，`conf/machine/` 这个空目录，明天就填上。"
+达哥下班前看了眼阿凯本子上的 Fig-4-4："QEMU 这关过了。明天写 MACHINE 配置——你那张全景地图上，`conf/machine/` 这个空目录，明天就填上。"
 
 ---
 
