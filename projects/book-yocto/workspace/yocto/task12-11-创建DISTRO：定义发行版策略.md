@@ -1,6 +1,6 @@
 ## 11 创建 DISTRO：定义发行版策略
 
-周三早上，阿凯工位。终端里还停着昨晚那行 `tiger-aarch64 login:`——全链开机成功的现场没舍得关。老周端着咖啡路过，就是昨天双赢的那杯。
+周三早上，阿凯工位。终端里还停着昨晚那行 `tiger-aarch64 login:`——全链开机成功的现场没舍得关。达哥端着咖啡路过，就是昨天双赢的那杯。
 
 "先别关。"他在阿凯旁边站住，"把 `local.conf` 和 `tiger-aarch64.conf` 并排打开。给产品定规矩之前，先看看咱们现在按谁的规矩在跑。"
 
@@ -12,15 +12,15 @@ DISTRO ?= "poky"
 
 "这行……从 chapter 1 建构建目录那天就在，我十章没动过。"
 
-"没动过，不等于没在用。"老周说，"昨天开机那套用户空间，init 是谁的？特性清单是谁的？包格式是谁的？全是 poky 的。你骑它的发行版策略骑了十章——这没什么丢人的，本来就是拿它当脚手架。但 tiger 是产品，产品要有自己的发行规矩。"他顿了顿，"还有 local.conf 里那行 debug-tweaks，chapter 1 留的空密码便利——那是发行策略，躺在你的个人配置里躺了十章。"
+"没动过，不等于没在用。"达哥说，"昨天开机那套用户空间，init 是谁的？特性清单是谁的？包格式是谁的？全是 poky 的。你骑它的发行版策略骑了十章——这没什么丢人的，本来就是拿它当脚手架。但 tiger 是产品，产品要有自己的发行规矩。"他顿了顿，"还有 local.conf 里那行 debug-tweaks，chapter 1 留的空密码便利——那是发行策略，躺在你的个人配置里躺了十章。"
 
 "那我把特性裁剪写进 tiger-aarch64.conf——"阿凯手已经放上键盘。
 
-"这行回答的是硬件问题吗？"老周一句话把他按住。
+"这行回答的是硬件问题吗？"达哥一句话把他按住。
 
 阿凯缩回手。这话他自己立的——chapter 5 的 5.1 节，写 machine conf 每一行之前先问这句。"……不是。是软件策略。"
 
-"规矩你立过。"老周点点头，"现在不是破规矩，是给策略盖个正经房子。今天三步：**认账**——看看 poky 替我们定了什么；**归队**——把散在外面的策略收进来；**分家**——开发态和量产态分开。下班前我要看到 tiger 自己的 DISTRO。"
+"规矩你立过。"达哥点点头，"现在不是破规矩，是给策略盖个正经房子。今天三步：**认账**——看看 poky 替我们定了什么；**归队**——把散在外面的策略收进来；**分家**——开发态和量产态分开。下班前我要看到 tiger 自己的 DISTRO。"
 
 ### 11.1 三张桌子，今天只动第二张
 
@@ -45,7 +45,7 @@ IMAGE_INSTALL="packagegroup-core-boot ${CORE_IMAGE_EXTRA_INSTALL}"
 
 `MACHINE_FEATURES` 是 tiger 自己的（chapter 5 写的），`IMAGE_INSTALL` 是 core-image-minimal 的，中间那行长串 `DISTRO_FEATURES`——全是 poky 的。这就是"骑了十章"的物证。
 
-chapter 5 的 5.1.3 节末尾，老周留过一句话："等 chapter 11 做 tiger 自己的 DISTRO 时，才轮到第二张桌子。"今天就是 chapter 11。前十章动的是 MACHINE 这张桌子和 IMAGE 的现成配方，本章全程只动 DISTRO 这一张。
+chapter 5 的 5.1.3 节末尾，达哥留过一句话："等 chapter 11 做 tiger 自己的 DISTRO 时，才轮到第二张桌子。"今天就是 chapter 11。前十章动的是 MACHINE 这张桌子和 IMAGE 的现成配方，本章全程只动 DISTRO 这一张。
 
 ### 11.2 给 DISTRO 盖房子：`conf/distro/tiger-distro.conf`
 
@@ -53,12 +53,12 @@ chapter 5 的 5.1.3 节末尾，老周留过一句话："等 chapter 11 做 tige
 
 动手之前阿凯先拦了自己一下："我在 meta-tiger 里新建一个 `tiger-distro.conf`，BitBake 凭什么知道去读它？machine conf 是 local.conf 里 `MACHINE = "tiger-aarch64"` 点名的，distro conf 的入口在哪？"
 
-"问得好，别问我。"老周指了指屏幕，"bitbake.conf 你读过好几遍了，自己去找。"
+"问得好，别问我。"达哥指了指屏幕，"bitbake.conf 你读过好几遍了，自己去找。"
 
 阿凯 grep 了一行：
 
 ```bash
-# 定位 MACHINE / DISTRO 配置的加载点（829 行与 831-832 行，老周马上要引用）
+# 定位 MACHINE / DISTRO 配置的加载点（829 行与 831-832 行，达哥马上要引用）
 grep -n -E "conf/(machine|distro)/" ~/workspace/poky/meta/conf/bitbake.conf
 
 # 顺便看看 poky 自己的发行版配置：头部身份声明 + require 接入点
@@ -87,7 +87,7 @@ require 一族的位置（关键行）：
 
 阿凯把 `poky.conf` 通读了一遍：开头（前十几行）是 `DISTRO_NAME`、`DISTRO_VERSION`、`DISTRO_CODENAME`、`TARGET_VENDOR` 一组身份声明，中间是 `DISTRO_FEATURES` 的拼接和几条 `PREFERRED_VERSION`，第 68-71 行是一串 `require conf/distro/include/...`——机制全靠 require 接进来，这个写法下午 tiger 要抄。
 
-老周只点拨了一句，是今天最容易被忽略的机理："注意 829 行和 831 行的先后——`include conf/machine/${MACHINE}.conf` 在前，`include conf/distro/${DISTRO}.conf` 在后。**机器配置先解析，发行版配置后解析，同一个变量后写的赢。**记住这个顺序，11.3 收拢纪律的时候要用。"
+达哥只点拨了一句，是今天最容易被忽略的机理："注意 829 行和 831 行的先后——`include conf/machine/${MACHINE}.conf` 在前，`include conf/distro/${DISTRO}.conf` 在后。**机器配置先解析，发行版配置后解析，同一个变量后写的赢。**记住这个顺序，11.3 收拢纪律的时候要用。"
 
 还有一条硬纪律当场立下：**`DISTRO` 的值必须等于文件名**。`DISTRO = "tiger-distro"` 对应的就是某层 `conf/distro/tiger-distro.conf`——名字和文件名是硬绑定的，没有第二套映射。这条纪律的反面教材，本章踩坑实录见。
 
@@ -149,7 +149,7 @@ DISTRO_FEATURES="acl alsa bluetooth debuginfod ext2 ipv4 ipv6 pcmcia usbgadget u
 
 ### 11.3 DISTRO_FEATURES：把发行策略收拢到一张清单
 
-认账环节。老周让阿凯把 11.1 打出的 poky 时代完整清单逐词过堂："tiger 的产品画像你先背一遍。"
+认账环节。达哥让阿凯把 11.1 打出的 poky 时代完整清单逐词过堂："tiger 的产品画像你先背一遍。"
 
 "无屏、无音频、有网络、要安全。"
 
@@ -188,7 +188,7 @@ DISTRO_FEATURES_BACKFILL_CONSIDERED = "pulseaudio"
 
 ### 11.4 PREFERRED_VERSION：哪些版本归 DISTRO 管
 
-裁剪完，老周抛了个新问题："咱们 machine conf 里已经有三个 `PREFERRED_VERSION` 了——linux-tiger、u-boot、trusted-firmware-a。要不要趁盖房子，搬进 distro conf？"
+裁剪完，达哥抛了个新问题："咱们 machine conf 里已经有三个 `PREFERRED_VERSION` 了——linux-tiger、u-boot、trusted-firmware-a。要不要趁盖房子，搬进 distro conf？"
 
 阿凯认真想了一会儿，给的答案是"不搬"，并且把理由摆成了裁决表：
 
@@ -199,7 +199,7 @@ DISTRO_FEATURES_BACKFILL_CONSIDERED = "pulseaudio"
 | `PREFERRED_VERSION_trusted-firmware-a ??= "2.10.%"` | 留在 machine conf | 同上 |
 | 跨组件的用户空间公共库 | 归 distro conf | 换一块板子不该换策略，换一个产品才换策略 |
 
-"对。"老周说，"搬家不是什么都要搬——**边界本身就是知识点**。DISTRO 管的是'这个产品线上所有板子共用'的用户空间版本策略。举个例子落一行，意思到了就行："
+"对。"达哥说，"搬家不是什么都要搬——**边界本身就是知识点**。DISTRO 管的是'这个产品线上所有板子共用'的用户空间版本策略。举个例子落一行，意思到了就行："
 
 ```bitbake
 # 文件路径：~/workspace/meta-tiger/conf/distro/tiger-distro.conf（追加）
@@ -240,7 +240,7 @@ TCLIBCAPPEND = ""
 
 init 系统是两个候选的对台戏。**sysvinit** 就地解释：poky 默认的 init，老派的 System V 风格，`/etc/inittab` 加一排启动脚本——昨天 login 之前跑的就是它，实物证据是 11.1 那张清单里 `sysvinit` 在列、`systemd` 缺席。**systemd** 首次正式引入：init 系统的一种现代实现，内核拉起 1 号进程后，由它并行拉起和管理用户空间的全部服务。选型理由一句话：产品的 OTA、日志、看门狗托管都要长在服务管理器上，systemd 是这条路上的主流选项；内部机制本章一律不展开。
 
-切 systemd 怎么写？阿凯的第一反应是 `DISTRO_FEATURES:append = " systemd"` 加几个虚包认领——被老周拦了："Scarthgap 有现成机制，先去源码里把它挖出来，别手写散件。"
+切 systemd 怎么写？阿凯的第一反应是 `DISTRO_FEATURES:append = " systemd"` 加几个虚包认领——被达哥拦了："Scarthgap 有现成机制，先去源码里把它挖出来，别手写散件。"
 
 挖出来的机制长这样（全部对照本地 poky 源码核实）：`defaultsetup.conf` 第 20-21 行写着 `INIT_MANAGER ??= "none"` 和 `require conf/distro/include/init-manager-${INIT_MANAGER}.inc`——**INIT_MANAGER** 就地解释：init 系统选择变量，发行版配置声明它，`defaultsetup.conf` 按它的值去 require 对应的机制文件。poky 默认的 sysvinit 也不是写死的散件，是 `poky.conf` 第 77-78 行 `POKY_INIT_MANAGER = "sysvinit"` 加 `INIT_MANAGER ?= "${POKY_INIT_MANAGER}"` 两行接进去的。
 
@@ -306,11 +306,11 @@ PACKAGE_CLASSES="package_ipk"
 
 #### 11.6.1 base + delta：一份公共策略，两个变体
 
-下午的戏份从老周的问题开始："空密码登录这条便利，上产线吗？"
+下午的戏份从达哥的问题开始："空密码登录这条便利，上产线吗？"
 
 "肯定不上。"
 
-"那现在就要把它从 local.conf 收进发行版——可收进唯一的发行版，开发态的你天天被登录卡住。"老周在白板上写了两行，"OTA 推补丁要可审计，debug 符号和空密码不能上产线；但开发态没有这些便利，效率减半。**一套产品策略，两种执行态**——开发态和量产态，分家。"
+"那现在就要把它从 local.conf 收进发行版——可收进唯一的发行版，开发态的你天天被登录卡住。"达哥在白板上写了两行，"OTA 推补丁要可审计，debug 符号和空密码不能上产线；但开发态没有这些便利，效率减半。**一套产品策略，两种执行态**——开发态和量产态，分家。"
 
 结构套路是 BitBake 配置的标准招式，**base + delta**：公共部分留在 `tiger-distro.conf`，dev、prod 两个文件各自 `require` 它，再各写各的增量。require 的语义 chapter 5 立过——找不到文件就报错，这半句下午还会咬人。
 
@@ -383,15 +383,15 @@ DISTRO = "tiger-distro-dev"     # 日常开发
 
 阿凯切完 dev 态，盯着屏幕想了想，提出一个真实疑问："等下——TARGET_VENDOR 变了，三元组变了，那切一次 DISTRO，sstate 会失效多少？prod 态首次构建要多久？"
 
-老周没回答："这问题别猜。先把验证做完，踩坑实录里你自己量。"
+达哥没回答："这问题别猜。先把验证做完，踩坑实录里你自己量。"
 
 ### 11.7 license 策略：放进来的门槛
 
-分家落定，老周补了今天最后一个问题："产品要过合规，Yocto 在哪一层拦 license？"
+分家落定，达哥补了今天最后一个问题："产品要过合规，Yocto 在哪一层拦 license？"
 
 阿凯想了想三张桌子："DISTRO 层。拦什么放什么是产品策略。"
 
-"对。先把现行机制摸清——注意是**现行**，网上一半教程写的是废止机制。"老周让他去源码里取证。
+"对。先把现行机制摸清——注意是**现行**，网上一半教程写的是废止机制。"达哥让他去源码里取证。
 
 取证结果（全部对照本地 poky 源码核实）。recipe 侧，一批配方带着商业授权标记——`ffmpeg`、`x264`、`gstreamer1.0-plugins-ugly` 的配方里都有同一行 `LICENSE_FLAGS = "commercial"`；没放行时，该配方在解析期直接被跳过——base.bbclass 第 535-536 行抛出 SkipRecipe，构建任务还没轮到它，它在配方名单里就被除名了；附带的说明原文在第 531 行：`Has a restricted license 'commercial' which is not listed in your LICENSE_FLAGS_ACCEPTED.`。distro 侧就是这两个变量：**LICENSE_FLAGS / LICENSE_FLAGS_ACCEPTED** 首次正式引入——前者是配方给自己挂的门槛标记，后者是发行版的白名单，默认空，即一律不放行。
 
@@ -515,7 +515,7 @@ bitbake core-image-minimal
 bitbake core-image-minimal
 ```
 
-"新构建目录是白板，layer 得重新注册——而且依赖链要整条挂。"老周在旁边补了一句，"只挂 meta-tiger 不挂 meta-arm，`add-layer` 的整配置预校验当场就回滚，chapter 6 注册 meta-arm 时你撞过一回。要是这三步全省了呢？你下一行 `DISTRO = "tiger-distro-dev"` 会直接撞 11.9.1 那张 sanity 体检表——distro conf 沿 BBPATH 找不到，因为 meta-tiger 根本不在路径里。"
+"新构建目录是白板，layer 得重新注册——而且依赖链要整条挂。"达哥在旁边补了一句，"只挂 meta-tiger 不挂 meta-arm，`add-layer` 的整配置预校验当场就回滚，chapter 6 注册 meta-arm 时你撞过一回。要是这三步全省了呢？你下一行 `DISTRO = "tiger-distro-dev"` 会直接撞 11.9.1 那张 sanity 体检表——distro conf 沿 BBPATH 找不到，因为 meta-tiger 根本不在路径里。"
 
 体积对比：
 
@@ -582,7 +582,7 @@ ERROR:  OE-core's config sanity checker detected a potential misconfiguration.
 
 #### 11.9.2 坑 2：切换 DISTRO 后 sstate 大面积失效
 
-老周留了作业的问题，阿凯回主构建目录自己量。先交代口径：基线这行的命中前提，是主目录前十章攒下的正好是 poky + tiger-aarch64 的缓存——同一台机器、同一套调优，命中天然成立；而本章切完 DISTRO 之后，主目录只跑过 `bitbake -e` 的解析级查询，一个构建任务都没攒过（两态的全量构建排在 11.8.2 的对照组里），tiger 态是真空白。poky 态攒下的缓存条目也不会替 tiger 态顶包——三元组的厂商段从 poky 换成了 tiger，任务签名对不上。所以下面两个数字看结构就好，绝对值取决于各机缓存积累，不必逐字复现。干跑两次，不动真格：
+达哥留了作业的问题，阿凯回主构建目录自己量。先交代口径：基线这行的命中前提，是主目录前十章攒下的正好是 poky + tiger-aarch64 的缓存——同一台机器、同一套调优，命中天然成立；而本章切完 DISTRO 之后，主目录只跑过 `bitbake -e` 的解析级查询，一个构建任务都没攒过（两态的全量构建排在 11.8.2 的对照组里），tiger 态是真空白。poky 态攒下的缓存条目也不会替 tiger 态顶包——三元组的厂商段从 poky 换成了 tiger，任务签名对不上。所以下面两个数字看结构就好，绝对值取决于各机缓存积累，不必逐字复现。干跑两次，不动真格：
 
 ```bash
 # 基线：poky 态干跑（local.conf 临时回到 DISTRO ?= "poky"，前十章的缓存全在）
@@ -612,11 +612,11 @@ NOTE: Tasks Summary: Attempted 4xxx tasks of which <很小一个数> didn't need
 - CI 上 dev/prod 各备一份 sstate 缓存，别让两态互相当小偷。
 - 产线构建（prod 态）下班前触发，第二天早上看结果——别在上班时间干等。
 
-"量出来了？"老周路过看了一眼对照输出。
+"量出来了？"达哥路过看了一眼对照输出。
 
 "接近全量。四个小时上下的量级。"阿凯把数字记进本子，"这算不算今天最贵的两行配置？"
 
-"算。"老周说，"发行版策略是项目里最便宜的开头、最贵的回头——所以它排在'做工程'的第一章。"
+"算。"达哥说，"发行版策略是项目里最便宜的开头、最贵的回头——所以它排在'做工程'的第一章。"
 
 ### 11.10 本章小结
 
@@ -624,7 +624,7 @@ NOTE: Tasks Summary: Attempted 4xxx tasks of which <很小一个数> didn't need
 
 - **11.1 认账**：三张桌子回指（chapter 5 的 5.1），`bitbake -e` 三行 grep 亮出物证——`DISTRO_FEATURES` 整行都是 poky 的，前十章骑的是别人的发行策略。
 - **11.2 盖房子**：加载链摸清——local.conf 的 `DISTRO`（模板 `local.conf.sample` 第 94 行带来）→ bitbake.conf 第 831 行 `include conf/distro/${DISTRO}.conf` → 沿 BBPATH 逐层找；`DISTRO` 值与文件名硬绑定；machine 先解析、distro 后解析。骨架落盘：`DISTRO_NAME` / `DISTRO_VERSION` / `DISTRO_CODENAME` / `TARGET_VENDOR = "-tiger"`（三元组变 `aarch64-tiger-linux`，坑 2 的引信）。
-- **11.3 收特性**：`DISTRO_FEATURES` 硬 `=` 裁剪到 7 个词（acl / ext2 / ipv4 / ipv6 / vfat / xattr / seccomp），阿凯自己写清单、漏砍 bluetooth 被老周一句"咱们板子上有蓝牙吗"逮住；回填名单上另外三个词（sysvinit / gobject-introspection-data / ldconfig）不进画像取舍；`DISTRO_FEATURES_BACKFILL_CONSIDERED` 拦下 pulseaudio 回填；⚠️ 框收拢 machine conf 写策略的两种死法（污染 vs 被覆盖）。
+- **11.3 收特性**：`DISTRO_FEATURES` 硬 `=` 裁剪到 7 个词（acl / ext2 / ipv4 / ipv6 / vfat / xattr / seccomp），阿凯自己写清单、漏砍 bluetooth 被达哥一句"咱们板子上有蓝牙吗"逮住；回填名单上另外三个词（sysvinit / gobject-introspection-data / ldconfig）不进画像取舍；`DISTRO_FEATURES_BACKFILL_CONSIDERED` 拦下 pulseaudio 回填；⚠️ 框收拢 machine conf 写策略的两种死法（污染 vs 被覆盖）。
 - **11.4 版本裁决**：启动链三个 `PREFERRED_VERSION` 留在 machine conf（BSP 事实，meta-arm 同款惯例），跨组件用户空间版本归 DISTRO（`PREFERRED_VERSION_openssl ?= "3.%"` 示例）；不是什么都要搬，边界本身就是知识点。
 - **11.5 包格式与 init**：`PACKAGE_CLASSES = "package_ipk"` 显式声明（OE-Core 默认即 ipk、poky 改成了 rpm——防上游默认值漂移）；`TCLIBCAPPEND = ""` 认账 poky 代劳的置空（不置空则 TMPDIR 变 `tmp-glibc`，全部 `tmp/` 路径扑空）；`INIT_MANAGER = "systemd"` 一行接入，`init-manager-systemd.inc` 原文为证做了三件事（append systemd、拦截 sysvinit 回填、认领 `VIRTUAL-RUNTIME_init_manager`）；`security_flags.inc` 随 poky 惯例接入。systemd 内部留给下一章。
 - **11.6 分家**：base + delta——`tiger-distro-dev.conf` / `tiger-distro-prod.conf` 各自 `require` 公共基座再写增量；`EXTRA_IMAGE_FEATURES = "debug-tweaks"` 从 local.conf 正式归队（搬家的另一半：删旧行，💡 框立了 prod 态验收项）；`DEBUG_BUILD = "1"` 切调试档（`-Og`，bitbake.conf 第 668-670 行核实）；prod 态 `-Os`、strip 与 read-only-rootfs 正式引入，后者用 `:pn-core-image-minimal` 限定落点并挂账 chapter 12。
