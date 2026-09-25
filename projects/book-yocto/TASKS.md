@@ -225,17 +225,17 @@
 - 更新日期：2026-09-23
 
 ## T-009：真实环境首次构建与启动核查 chapter 1 主线（Docker 容器实测）
-- 负责人：reviewer（执行人待用户另行安排专人，见进展）
-- 状态：todo
-- 授权来源与日期：2026-09-23 用户在 reviewer 会话指示："我是希望你真正在docker中跑一次"；同日用户决定"先把任务记下来，后面找专人来执行吧"——执行暂缓，任务登记待专人执行。
+- 负责人：reviewer（2026-09-25 用户明确由 reviewer 执行，不再另等专人）
+- 状态：todo（待 reviewer 会话执行，容器断点可续跑）
+- 授权来源与日期：2026-09-23 用户在 reviewer 会话指示："我是希望你真正在docker中跑一次"；同日用户决定"先把任务记下来，后面找专人来执行吧"——执行暂缓，任务登记待专人执行。2026-09-25 用户在 project-manager 会话明确解除暂缓并指定 reviewer 执行："不是让审校在实际环境上跑一遍吗，把跑过的结果记下来，然后再完善书稿"。
 - 目标与范围：在容器 books（镜像 embedded:dev）内按 chapter 1（Git 89ccb72，798 行）书稿步骤实际执行：按 1.3.2 配置 local.conf → `bitbake core-image-minimal` 首次全量构建 → 核对 1.4.3 任务数汇总行与 deploy 产物清单 → `runqemu qemuarm64 nographic slirp` 启动并核对 1.5.1 guest 登录、uname/cpuinfo/free/df/ls /bin 输出 → 1.5.2 构建后 build/ 目录结构。逐条登记一致/不符与实测证据，补 T-008 记录的未执行项；只核查与记录，不修改书稿正文。
 - 输入与依赖：容器 books（环境已就位，见进展）；chapter 1 定稿前修订版（Git 89ccb72）；T-008 核查记录（workspace/t008-chapter1-env-check.md）。
 - 优先级：未设定
 - 完成条件与确认方式：产出逐条核查记录（一致/不符 + 命令与输出证据），不符项按评审问题格式登记；记录经 project-manager 复核后不符项转 writer 处理。
 - 进展：2026-09-23 任务登记。同日 reviewer 会话已完成执行前准备并试起跑：①按书稿 1.3.2 配置 local.conf（MACHINE 原行改 qemuarm64；DL_DIR/SSTATE_DIR/TMPDIR 取消注释按书稿取值；BB_NUMBER_THREADS="8"、PARALLEL_MAKE="-j 8" 末尾追加；EXTRA_IMAGE_FEATURES 保留默认 debug-tweaks），`bitbake-getvar` 逐项验证生效值与书稿一致；②15:40:32 启动 `bitbake core-image-minimal`（容器内后台执行，日志 ~/t009-build.log），实际总任务数 4073（书稿示例 4059，点版本漂移属预期）；起跑即出现 `WARNING: You are running bitbake under WSLv2`（Docker Desktop WSL2 后端提示，不影响构建，应记入核查记录）；15:45 用户决定暂缓执行、改由专人执行，构建经 SIGINT 干净停止于任务 164/4073。**容器现状（专人接手直接可用）**：poky scarthgap 已克隆于 ~/workspace/poky（HEAD cbd62bb2a9，yocto-5.0.20-106）；24 个依赖包已装齐；local.conf 已按书稿配置；已保留 downloads 149M / sstate-cache 4.3M / tmp 579M 断点进度。续跑命令：`docker start books` 后 `docker exec -d books bash -c 'cd ~/workspace/poky && source oe-init-build-env ~/workspace/build/ && bitbake core-image-minimal > ~/t009-build.log 2>&1'`，bitbake 自动从断点续跑；构建完成后按目标与范围逐项核对（任务汇总行、tmp/deploy/images/qemuarm64/ 产物、runqemu 启动与 guest 内命令、build/ 目录结构）。注意宿主机构建负载较高（8 线程，1-3 小时）。
 - 成果与验证证据：local.conf 配置生效值（bitbake-getvar 七项输出）与试起跑日志 ~/t009-build.log（容器内，至任务 164/4073）；正式核查记录待执行后产出。
-- 阻塞与下一位行动人：无；下一位行动人=用户安排的专人（或用户指定 reviewer 继续），接手时按本任务"续跑命令"执行。
-- 更新日期：2026-09-23
+- 阻塞与下一位行动人：无；下一位行动人=reviewer（用户进入 reviewer 会话触发执行：按进展中的续跑命令从断点任务 164/4073 续跑，构建约 1-3 小时，随后按"目标与范围"逐项核对并产出核查记录）→ project-manager 复核记录 → 不符项转 writer 与定稿微调（U-17~U-20）一并处理。2026-09-25 用户明确由 reviewer 执行，"专人"安排不再需要。
+- 更新日期：2026-09-25
 
 ## 记录样式（不是真实任务）
 
