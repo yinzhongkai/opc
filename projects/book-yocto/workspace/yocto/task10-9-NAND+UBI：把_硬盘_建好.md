@@ -2,21 +2,21 @@
 
 周一早上，阿凯工位。白板上启动链图的最右格——Kernel——上周五已经涂实，格子下面那行字还留着：内核报到，启动链三件齐备——差一个能挂的根。今天白板旁边多画了一个空格，上面写着两个字：存储。
 
-"板子有内核了，但还没有'硬盘'。"老周端着杯子站到白板前，"今天搞 rootfs。我们的板子上是 NAND，文件系统用 UBI/UBIFS。这是嵌入式的特色话题——你实习时玩的 Buildroot 打个镜像就完事的日子，到头了。"
+"板子有内核了，但还没有'硬盘'。"达哥端着杯子站到白板前，"今天搞 rootfs。我们的板子上是 NAND，文件系统用 UBI/UBIFS。这是嵌入式的特色话题——你实习时玩的 Buildroot 打个镜像就完事的日子，到头了。"
 
 "上周五您说'建房子'，就是指这个？"
 
-"对。内核已经能跑到 rootfs 门槛了——panic 那行'Unable to mount root fs'是它在喊'给我一块地'。"老周拿起笔，在"存储"格下面列了一串，"今天的活我拆给你：先搞清楚 NAND 的脾气和 UBI 这层是干什么的；让构建系统产出 UBI 镜像；把 mkfs.ubifs 和 ubinize 两头的参数算明白；给 NAND 画分区表——立项时答应客户的 A/B，今天落成字节；产出的配置文件读懂它；内核侧把设备树和 defconfig 补齐；最后想办法挂上去看一眼。七步，顺序走。"
+"对。内核已经能跑到 rootfs 门槛了——panic 那行'Unable to mount root fs'是它在喊'给我一块地'。"达哥拿起笔，在"存储"格下面列了一串，"今天的活我拆给你：先搞清楚 NAND 的脾气和 UBI 这层是干什么的；让构建系统产出 UBI 镜像；把 mkfs.ubifs 和 ubinize 两头的参数算明白；给 NAND 画分区表——立项时答应客户的 A/B，今天落成字节；产出的配置文件读懂它；内核侧把设备树和 defconfig 补齐；最后想办法挂上去看一眼。七步，顺序走。"
 
 阿凯在本子上记下七条，抬头问了一句："最后那步'挂上去看一眼'——rootfs 还没法当根，怎么上去看？"
 
-老周没答，把笔帽扣上："chapter 8 你的笔记里抄过一条边界说明——有个东西能桥接这段路。想起来再动手。"
+达哥没答，把笔帽扣上："chapter 8 你的笔记里抄过一条边界说明——有个东西能桥接这段路。想起来再动手。"
 
 ### 9.1 NAND 与 UBI：为什么不是 ext4
 
 #### 9.1.1 NAND 的脾气
 
-动手之前，老周把阿凯叫到白板前，十分钟速讲。这一段是今天所有算术的地基，省不得。
+动手之前，达哥把阿凯叫到白板前，十分钟速讲。这一段是今天所有算术的地基，省不得。
 
 **NAND Flash** 这种存储介质，chapter 2 读项目时点过名——非易失性存储，嵌入式设备的常客。它便宜、密度高，但脾气和磁盘、SD 卡完全不同，四条：
 
@@ -25,15 +25,15 @@
 3. **不能就地改写**。一个页从 1 写成 0 可以，想从 0 翻回 1，只能把所在的整块擦掉重来。所以"覆盖写"一个文件的实际操作是：把新数据写到别的空页，把旧页标记作废，攒够一个块再擦。
 4. **有坏块，有寿命**。NAND 出厂就可能带 **坏块（Bad Block）**——制造缺陷导致永远不可用的块，用着用着还会新增；每块的擦写次数有上限（SLC——每个存储单元只存 1 bit 的那类 NAND——典型约十万次），擦爆了就变成新的坏块。
 
-"这四条凑一起，就是答案。"老周说，"ext4 假设底下是个能按扇区随机改写的块设备——改一个 4 KiB 块，写回去就完了。NAND 做不到这件事。硬上 ext4，要么靠一层 FTL（闪存翻译层，SD 卡和 SSD 里内置的那种固件）把 NAND 伪装成块设备——咱们的裸 NAND 没有这层固件；要么写入放大的账很快把块擦爆，坏块没人管，文件系统哪天自己烂掉都不知道。"
+"这四条凑一起，就是答案。"达哥说，"ext4 假设底下是个能按扇区随机改写的块设备——改一个 4 KiB 块，写回去就完了。NAND 做不到这件事。硬上 ext4，要么靠一层 FTL（闪存翻译层，SD 卡和 SSD 里内置的那种固件）把 NAND 伪装成块设备——咱们的裸 NAND 没有这层固件；要么写入放大的账很快把块擦爆，坏块没人管，文件系统哪天自己烂掉都不知道。"
 
 "所以 UBI 干的活，相当于把 SSD 主控里那套固件搬进了内核？"阿凯问。
 
-"方向对了。"老周点头，"而且它分得比主控干净。"
+"方向对了。"达哥点头，"而且它分得比主控干净。"
 
 #### 9.1.2 MTD 与 UBI：把坏块和磨损收进一层
 
-老周在白板上画了个分层图，四层：
+达哥在白板上画了个分层图，四层：
 
 ```text
 ┌─────────────────────────────────────┐
@@ -53,7 +53,7 @@
 
 最上面是 UBIFS，UBI 之上的 Flash 文件系统——目录树、权限、日志、压缩，文件系统该管的它管，Flash 的脏活全推给楼下。
 
-"内核里 UBI 这一层也可以直接裸露出来用——比如存放结构化数据但不需要文件系统的场合，那是后话。"老周说，"我们走全栈：MTD 之上 UBI，UBI 之上 UBIFS，rootfs 住 UBIFS。"
+"内核里 UBI 这一层也可以直接裸露出来用——比如存放结构化数据但不需要文件系统的场合，那是后话。"达哥说，"我们走全栈：MTD 之上 UBI，UBI 之上 UBIFS，rootfs 住 UBIFS。"
 
 #### 9.1.3 PEB 与 LEB：一张图，两个块
 
@@ -70,7 +70,7 @@
 UBI 元数据 2 页（4 KiB）    128 KiB - 4 KiB = 124 KiB
 ```
 
-"记住这个图。"老周用笔点了点，"今天后面所有的参数，全围着这两个块转——谁按 PEB 算、谁按 LEB 算，认错了，全盘皆输。"
+"记住这个图。"达哥用笔点了点，"今天后面所有的参数，全围着这两个块转——谁按 PEB 算、谁按 LEB 算，认错了，全盘皆输。"
 
 阿凯把图抄进本子，在"124 KiB"下面画了两道线。他还不知道，这道线下午就要绊他一次。
 
@@ -193,13 +193,13 @@ ERROR: core-image-minimal-1.0-r0 do_image_ubi: ExecutionError('/home/<your-usern
 
 "第二场报错里还附了个网址。"阿凯指着倒数第二行。
 
-"那是 linux-mtd 项目的 UBI/UBIFS FAQ，这个领域的祖师爷文档。"老周说，"网址抄进你的延伸阅读清单——正文别放链接，老规矩。"
+"那是 linux-mtd 项目的 UBI/UBIFS FAQ，这个领域的祖师爷文档。"达哥说，"网址抄进你的延伸阅读清单——正文别放链接，老规矩。"
 
 ### 9.3 MKUBIFS_ARGS 与 UBINIZE_ARGS：围着两个块转
 
 #### 9.3.1 NAND 数据手册摆上桌
 
-两个参数变量，七个数字，全部从 NAND 的几何参数推出来。老周把 tiger 这片 NAND 的数据手册参数写在白板上——立项时硬件组定的料，就三行：
+两个参数变量，七个数字，全部从 NAND 的几何参数推出来。达哥把 tiger 这片 NAND 的数据手册参数写在白板上——立项时硬件组定的料，就三行：
 
 | 参数 | 值 |
 |------|---|
@@ -207,9 +207,9 @@ ERROR: core-image-minimal-1.0-r0 do_image_ubi: ExecutionError('/home/<your-usern
 | 擦除块大小（Erase Block） | 128 KiB（131072 字节 = 64 页） |
 | 总容量 | 512 MiB（4096 个块） |
 
-"参数就这些。"老周放下笔，"MKUBIFS_ARGS 要 -m、-e、-c 三个数，UBINIZE_ARGS 要 -m、-p、-s、-O 四个数。哪个数从哪来，你自己推。推完我看。"
+"参数就这些。"达哥放下笔，"MKUBIFS_ARGS 要 -m、-e、-c 三个数，UBINIZE_ARGS 要 -m、-p、-s、-O 四个数。哪个数从哪来，你自己推。推完我看。"
 
-**老周没有给答案。** 阿凯翻开 mkfs.ubifs 和 ubinize 的手册页，把七个参数的含义抄下来，对着 9.1.3 那张 PEB/LEB 图开始推。
+**达哥没有给答案。** 阿凯翻开 mkfs.ubifs 和 ubinize 的手册页，把七个参数的含义抄下来，对着 9.1.3 那张 PEB/LEB 图开始推。
 
 #### 9.3.2 阿凯的推导：PEB 和 LEB 各就各位
 
@@ -230,17 +230,17 @@ ERROR: core-image-minimal-1.0-r0 do_image_ubi: ExecutionError('/home/<your-usern
 
 推完阿凯自己有点发抖：七个数里五个是 2048，剩下两个一个 131072 一个 126976，差 4096。
 
-老周看完，只问了一句："**你 -e 用的是哪个块？**"
+达哥看完，只问了一句："**你 -e 用的是哪个块？**"
 
 "LEB。"阿凯指着图上那道线，"126976，扣掉 EC 头和 VID 头的两个页。mkfs.ubifs 看见的世界全是 LEB，PEB 是 ubinize 那边 -p 的事。"
 
-"想清楚了就行。"老周说，"**三个参数围着两个块转，块认错一个，全盘皆输。** 今天你只是算——等你敲进配置里、敲错一次，就知道这句话的分量了。"
+"想清楚了就行。"达哥说，"**三个参数围着两个块转，块认错一个，全盘皆输。** 今天你只是算——等你敲进配置里、敲错一次，就知道这句话的分量了。"
 
 这道引信，9.8 坑 1 会烧到头。
 
 #### 9.3.3 参数落盘：machine conf 第九段
 
-推导过了老周的目，落配置。归属没有悬念：这两个参数描述的是"这块板的 NAND 长什么样"，machine conf 是天经地义的家——和 KERNEL_IMAGETYPE、SERIAL_CONSOLES 同桌。追加第九段：
+推导过了达哥的目，落配置。归属没有悬念：这两个参数描述的是"这块板的 NAND 长什么样"，machine conf 是天经地义的家——和 KERNEL_IMAGETYPE、SERIAL_CONSOLES 同桌。追加第九段：
 
 ```bitbake
 # 文件路径：~/workspace/meta-tiger/conf/machine/tiger-aarch64.conf（接 chapter 8 全文追加）
@@ -288,7 +288,7 @@ UBI_VOLNAME="rootfs_a"
 
 （第一行的前导空格，9.2.1 已经认过亲：`+=` 的拼接痕迹。）"七个参数名在我脑子里打转。"阿凯揉了揉眼睛，"下次换料号，这套算术还得重跑一遍。"
 
-"所以我把数据手册那三行钉在白板上了。"老周说，"参数推导的源头是硬件，不是记忆。"
+"所以我把数据手册那三行钉在白板上了。"达哥说，"参数推导的源头是硬件，不是记忆。"
 
 ### 9.4 NAND 分区表：纸面布局 vs 已交付脚本
 
@@ -307,7 +307,7 @@ UBI_VOLNAME="rootfs_a"
 - **kernel/dtb 占独立 MTD 分区**（纸面九段表）：内核和 dtb 各占一块裸 MTD 空间，U-Boot 用 `nand read` 按偏移读。好处：加载不依赖 UBI 驱动就绪，简单粗暴。代价：内核升级时没有文件系统保护，写一半断电就是砖；A/B 切换要管理六个分区的指针；且——**boot.cmd 已经按另一条路交付了**。
 - **kernel/dtb 住 UBIFS 卷内**（boot.cmd 既成事实）：内核和 dtb 作为 `/boot/Image`、`/boot/tiger.dtb` 两个文件住在 rootfs 卷里，U-Boot 用 `ubifsload` 读。UBIFS 有日志、有校验，写一半断电能回滚到旧版本——这正是 OTA 要的安全性；A/B 切换只需要指卷名，`bootpart` 一个变量管全部，boot.cmd 里那个 `if` 已经写好了。代价：U-Boot 必须带 UBI/UBIFS 支持——boot.cmd 里那三族 ubi 命令的前提就是这份能力，但 chapter 7 交付的是**纸面契约**，u-boot-tiger 的 defconfig 里还没核过这笔账；chapter 10 真跑之前要在那里核一遍（记在 chapter 10 的账上）。
 
-"裁决依据不是哪条路更优雅，"老周说，"是**哪条路已经交付**。boot.cmd 是 chapter 7 的产出物，`ubifsload` 那两行是 chapter 8 反复核对的接力棒——内核和 dtb 的 deploy 文件名，就是照着它俩的名字备的货。纸面分区表给已交付的脚本让路。"
+"裁决依据不是哪条路更优雅，"达哥说，"是**哪条路已经交付**。boot.cmd 是 chapter 7 的产出物，`ubifsload` 那两行是 chapter 8 反复核对的接力棒——内核和 dtb 的 deploy 文件名，就是照着它俩的名字备的货。纸面分区表给已交付的脚本让路。"
 
 分区表就此精简：**MTD 分三段，nand0 整段交给 UBI，卷内再分三卷**。
 
@@ -338,7 +338,7 @@ NAND 512 MiB（4096 PEB × 128 KiB）
 
 三卷里，本章只构建 rootfs_a；rootfs_b 和 data 是 chapter 10 总装时的活——本章 9.5 会看到，自动生成的 ubinize 配置只能产单卷，多卷布局需要自写配置，那是总装的一部分。
 
-"和 OTA 的关系收个尾。"老周说，"A/B 双卷 + bootpart 指针 + env 持久化，升级的**物理基础**今天齐了。升级流程本身——怎么写另一套、怎么改指针、起不来怎么回滚——那是产品功能层面的设计，本书不展开，目录里也没有这一章。"
+"和 OTA 的关系收个尾。"达哥说，"A/B 双卷 + bootpart 指针 + env 持久化，升级的**物理基础**今天齐了。升级流程本身——怎么写另一套、怎么改指针、起不来怎么回滚——那是产品功能层面的设计，本书不展开，目录里也没有这一章。"
 
 ### 9.5 ubinize.cfg：先构建，再读懂它
 
@@ -380,7 +380,7 @@ lrwxrwxrwx 2 <your-username> <your-username>       56 ... core-image-minimal-qem
 
 "这个 cfg 哪来的？"阿凯问。
 
-"9.2 读过它的出处，回去找。"老周说。
+"9.2 读过它的出处，回去找。"达哥说。
 
 #### 9.5.2 逐行解读：write_ubi_config 的手笔
 
@@ -444,9 +444,9 @@ CONFIG_MTD_UBI=y
 CONFIG_UBIFS_FS=y
 ```
 
-"'chapter 9 伏笔'——今天就是 chapter 9 了。"阿凯把注释行指给老周，"当时板子上还没有 NAND，为什么先把这三行写进去？"
+"'chapter 9 伏笔'——今天就是 chapter 9 了。"阿凯把注释行指给达哥，"当时板子上还没有 NAND，为什么先把这三行写进去？"
 
-"defconfig 是**平台级清单**。"老周说，"dts 和 defconfig 落笔时，把这块板最终要什么一次备齐；构建系统这边的接线——machine conf、分区表——随后跟上。三行从上周预埋到今天，等的全是今天的东西：MTD 之下要有真实的 NAND 控制器节点（dts），MTD_UBI 之上要有真实的卷（9.5 的镜像），UBIFS 之上要有真实的 rootfs（9.7 挂载）。"
+"defconfig 是**平台级清单**。"达哥说，"dts 和 defconfig 落笔时，把这块板最终要什么一次备齐；构建系统这边的接线——machine conf、分区表——随后跟上。三行从上周预埋到今天，等的全是今天的东西：MTD 之下要有真实的 NAND 控制器节点（dts），MTD_UBI 之上要有真实的卷（9.5 的镜像），UBIFS 之上要有真实的 rootfs（9.7 挂载）。"
 
 但三行还不够——**NAND 控制器驱动**不在其中。chapter 8 当时只有空框节点，驱动符号没处可指；今天 dts 补节点，defconfig 补驱动，两件一起办。
 
@@ -532,7 +532,7 @@ console=ttyAMA0,115200 ubi.mtd=nand0 root=ubi0:rootfs_a rootfstype=ubifs
 
 #### 9.7.1 怎么先上去看一眼：initramfs 登场
 
-回到早上那个被老周挡回来的问题：root 还没切过去，怎么先上去看一眼？阿凯翻回 8.10 的笔记——那天 kernel panic 之后，笔记里落下过两条边界说明，头一条说的是 initramfs："可以桥接'内核起来'到'真根就位'之间的路"，本章不给它上场，chapter 9 见。
+回到早上那个被达哥挡回来的问题：root 还没切过去，怎么先上去看一眼？阿凯翻回 8.10 的笔记——那天 kernel panic 之后，笔记里落下过两条边界说明，头一条说的是 initramfs："可以桥接'内核起来'到'真根就位'之间的路"，本章不给它上场，chapter 9 见。
 
 想起来了。initramfs——chapter 8 边界说明里立过名字的初始内存文件系统——今天让它上场。定位先说死：**它是 bring-up 脚手架，不是量产路径**——tiger 的根文件系统主线在 NAND/UBI（chapter 8 就划过的口径），initramfs 只出场这一次：把内核用 QEMU 的 `-initrd` 顶进内存里的临时根，进去手动 attach、手动 mount，亲眼确认 NAND 上的 rootfs 挂得上，然后收工。
 
@@ -560,7 +560,7 @@ tmp/deploy/images/qemuarm64/core-image-minimal-initramfs-qemuarm64.cpio.gz -> co
 
 > **💡 提示**：对照组的 deploy 目录里，脚手架还顺手产出了自己的 `.ubifs` / `.ubi` / `ubinize-*.cfg`——演示环境的 IMAGE_FSTYPES 含 `ubi`，这个名单对**所有**镜像配方生效，脚手架也不能幸免。这些 UBI 产物对本章没有用，看一眼知道来路就行。
 
-"脚手架里有没有 `ubiattach`，解开看包清单就知道。"老周说。阿凯翻开 manifest——base-passwd、eudev、kmod 一应在列（脚手架的设备管理实现是 eudev：配方清单里写的 `udev`，poky 默认解析到 eudev 配方），但 busybox 一族只有三个包：`busybox`、`busybox-syslog`、`busybox-udhcpc`，没有任何 ubi 打头的。再查 busybox 1.36.1 的 .config：`# CONFIG_UBIATTACH is not set`、`# CONFIG_UBIMKVOL is not set`——**busybox 没带 ubi 系 applet**，脚手架里不会有 ubiattach，要追加 `mtd-utils-ubifs`（mtd-utils 的 target 形态子包，9.2.2 点过名）。
+"脚手架里有没有 `ubiattach`，解开看包清单就知道。"达哥说。阿凯翻开 manifest——base-passwd、eudev、kmod 一应在列（脚手架的设备管理实现是 eudev：配方清单里写的 `udev`，poky 默认解析到 eudev 配方），但 busybox 一族只有三个包：`busybox`、`busybox-syslog`、`busybox-udhcpc`，没有任何 ubi 打头的。再查 busybox 1.36.1 的 .config：`# CONFIG_UBIATTACH is not set`、`# CONFIG_UBIMKVOL is not set`——**busybox 没带 ubi 系 applet**，脚手架里不会有 ubiattach，要追加 `mtd-utils-ubifs`（mtd-utils 的 target 形态子包，9.2.2 点过名）。
 
 `ubiattach` 与 `ubimkvol` 就地介绍一句：UBI 卷的目标侧管理命令，attach 是把 MTD 分区挂进 UBI 子系统，mkvol 是在 UBI 设备上建新卷，都来自 mtd-utils。
 
@@ -616,7 +616,7 @@ dd if=tmp/deploy/images/<machine>/core-image-minimal-<machine>.rootfs.ubi \
 
 tiger 组的脚手架呢？阿凯翻到配方里一行，觉得自己发现了捷径："这份配方自带 `PACKAGE_EXCLUDE = "kernel-image-*"`（第 20-21 行，注释原话 "Don't allow the initramfs to contain a kernel"）——**脚手架的内容物里本就不含内核包**。那它跟 linux-tiger 的占位 SRCREV 就没关系了吧？主构建目录直接能跑。"
 
-"别急着下结论。"老周说，"内容物不含内核，和构建碰不碰内核，是两回事。任务图数一遍再说话——`bitbake -n` 只排任务不执行，全零 SRCREV 不碍事。"
+"别急着下结论。"达哥说，"内容物不含内核，和构建碰不碰内核，是两回事。任务图数一遍再说话——`bitbake -n` 只排任务不执行，全零 SRCREV 不碍事。"
 
 阿凯在主构建目录干跑 `bitbake -n core-image-minimal-initramfs`，数完愣住了：任务清单里 linux-tiger 一家占了 **27 个**——do_fetch、do_unpack、do_patch、do_configure、do_compile、do_install、do_package、do_packagedata、do_package_write_rpm，整条内核编译链都在脚手架的构建链上。
 
@@ -699,7 +699,7 @@ Image  tiger.dtb
 
 "挂上了。"阿凯盯着那行 `mounted UBI device 0`，"上周五 panic 喊'给我一块地'——今天地有了。"
 
-"看一眼就够了，收工。"老周说，"`umount /mnt`，关 QEMU。login 是明天的事——别贪杯，把 chapter 10 的高潮提前喝了。"
+"看一眼就够了，收工。"达哥说，"`umount /mnt`，关 QEMU。login 是明天的事——别贪杯，把 chapter 10 的高潮提前喝了。"
 
 阿凯 `umount` 收工，在今天的日志末尾写："NAND 上有了第一块能挂的根。boot.cmd 纸面上的每一行，从今天起都有实物对应。"
 
@@ -711,7 +711,7 @@ Image  tiger.dtb
 
 #### 9.8.1 坑 1：-e 和 -p 拿错块
 
-9.3.2 老周那句"你 -e 用的是哪个块"不是白问的。阿凯的第一稿参数，把 128 KiB 同时塞给了两个变量：
+9.3.2 达哥那句"你 -e 用的是哪个块"不是白问的。阿凯的第一稿参数，把 128 KiB 同时塞给了两个变量：
 
 ```bitbake
 # 错误示范：~/workspace/meta-tiger/conf/machine/tiger-aarch64.conf 第九段的错误形态
@@ -720,7 +720,7 @@ MKUBIFS_ARGS ?= "-m 2048 -e 131072 -c 3968"
 UBINIZE_ARGS ?= "-m 2048 -p 131072 -s 2048 -O 2048"
 ```
 
-126976 和 131072 只差 4096——两个页。阿凯当时的想法是"UBIFS 不是也要占整个块吗，128 KiB 没错"，忘了 9.1.3 图上 UBI 先吃掉的那两个元数据页。老周问了那句之后，他翻回 mkfs.ubifs 的手册页才反应过来：`-e` 的全称是 LEB size，**mkfs.ubifs 的世界里根本没有 PEB**，它的天花板是 UBI 扣完元数据剩下的 124 KiB。
+126976 和 131072 只差 4096——两个页。阿凯当时的想法是"UBIFS 不是也要占整个块吗，128 KiB 没错"，忘了 9.1.3 图上 UBI 先吃掉的那两个元数据页。达哥问了那句之后，他翻回 mkfs.ubifs 的手册页才反应过来：`-e` 的全称是 LEB size，**mkfs.ubifs 的世界里根本没有 PEB**，它的天花板是 UBI 扣完元数据剩下的 124 KiB。
 
 那这个错如果当时没人问，会走多远？这正是这个坑最阴的地方——**参数错，但工具不拦**。阿凯后来在主机侧用 mtd-utils-native 的工具亲手试了错误组合（本机实测）：
 
@@ -762,7 +762,7 @@ Error: too small LEB size 2048, minimum is 15360
 
 那病什么时候发作？要到 attach 和 mount——UBI 按真实 LEB 126976 把块喂上来，镜像内部却按 131072 排版，两边对不上，挂载时才爆（本章直通挂的是改对参数后的镜像，发作形态留待实测补全）。共同点是：**发作的位置离犯错的思维十万八千里**。错在"把 PEB 当成了 LEB"，表现却是"空间对不上、挂载报错"——没有一行输出会替你喊出"你块认错了"。
 
-"三个参数围着两个块转，块认错一个，全盘皆输。"老周把 9.3 那句话又念了一遍，"这种坑跟'什么都不发生'不是一个族——那个系列是 BitBake 视野之外它不替你知道；这一族是**工具视野之内它照样放行**，因为你的参数语法上完全合法，只是语义上认错了块。防法只有一个：推导时把每个参数属于哪个世界——mkfs.ubifs 的 LEB 世界还是 ubinize 的 PEB 世界——写在旁边，像你今天白板上那样。"
+"三个参数围着两个块转，块认错一个，全盘皆输。"达哥把 9.3 那句话又念了一遍，"这种坑跟'什么都不发生'不是一个族——那个系列是 BitBake 视野之外它不替你知道；这一族是**工具视野之内它照样放行**，因为你的参数语法上完全合法，只是语义上认错了块。防法只有一个：推导时把每个参数属于哪个世界——mkfs.ubifs 的 LEB 世界还是 ubinize 的 PEB 世界——写在旁边，像你今天白板上那样。"
 
 修正就是把 9.3.2 的推导做扎实：`-e 126976`（LEB），`-p 131072`（PEB），两个数字差两个页，差之毫厘谬以千里。
 
@@ -798,9 +798,9 @@ mtd: partition "env" doesn't start on an erase/write block boundary -- force rea
 mtd: partition "nand0" doesn't start on an erase/write block boundary -- force read-only
 ```
 
-阿凯盯着这两行，第一反应是"内核算错了吧"——env 的起点不就是 bootloader 段的结尾吗，bootloader 段给了 4 MiB 还多，怎么会不在块边界上？老周让他把数字全写成十六进制，拿 0x20000 挨个过：0x410000 ÷ 0x20000——**除不尽**，32 余 0x10000，尾巴上那半个块现了原形。十进制里"4 MiB 出头"听起来很整齐的数，十六进制下无处遁形。
+阿凯盯着这两行，第一反应是"内核算错了吧"——env 的起点不就是 bootloader 段的结尾吗，bootloader 段给了 4 MiB 还多，怎么会不在块边界上？达哥让他把数字全写成十六进制，拿 0x20000 挨个过：0x410000 ÷ 0x20000——**除不尽**，32 余 0x10000，尾巴上那半个块现了原形。十进制里"4 MiB 出头"听起来很整齐的数，十六进制下无处遁形。
 
-"教训两条。"老周说，"第一条是算术纪律：**分区表的每个偏移和长度，都用十六进制按擦除块大小过一遍**——128 KiB = 0x20000，整不整，换成块数看：除以 0x20000 得整数才算过。"
+"教训两条。"达哥说，"第一条是算术纪律：**分区表的每个偏移和长度，都用十六进制按擦除块大小过一遍**——128 KiB = 0x20000，整不整，换成块数看：除以 0x20000 得整数才算过。"
 
 "十六进制下也有快检法：末四位是零、且 0x10000 位是偶数——0x410000 末尾正好四个零，可 0x10000 位上是 1，当场出局。十进制的 4259840 除以 131072，谁也口算不出 32.5。"
 
@@ -816,7 +816,7 @@ mtd: partition "nand0" doesn't start on an erase/write block boundary -- force r
 
 - **9.1**：NAND 四条脾气（页写、块擦、不能就地改写、有坏块有寿命）→ 不能直接上 ext4；四层栈：MTD 抽象、UBI 收坏块管理与磨损均衡、UBIFS 管文件系统；PEB/LEB 大图——LEB = PEB − 2 页元数据，本章所有算术的地基。
 - **9.2**：chapter 5 的注释兑现，`IMAGE_FSTYPES += "ubi"`（终值的前导空格是 `+=` 拼接痕迹）；image_types.bbclass 机制——`IMAGE_TYPEDEP:ubi = "${UBI_IMGTYPE}"` 让 `ubi` 自动带出 `ubifs` 产物（所以只写一个词）；两条 IMAGE_CMD 对应 mtd-utils 的 mkfs.ubifs/ubinize（本机 2.1.6）；do_image_ubi 一族的 depends 链拉 mtd-utils-native，报错现场的 sysroot 日志实证兑现；参数未设时是**两道防线**——全不设，mkfs.ubifs 自己的用法检查先在 do_image_ubifs 拦下；设一半，multiubi_mkfs 开头的 bbfatal 在 do_image_ubi 拦下，都拦在正道上。
-- **9.3**：NAND 几何（页 2 KiB / 块 128 KiB / 512 MiB）推出七个参数——MKUBIFS_ARGS `-m 2048 -e 126976 -c 3968`（LEB 世界：-e 是块减两页），UBINIZE_ARGS `-m 2048 -p 131072 -s 2048 -O 2048`（PEB 世界：-p 是原样块）；落 machine conf 第九段，UBI_VOLNAME 覆盖为 rootfs_a 对上 boot.cmd 契约；老周没直接给答案，只问"你 -e 用的是哪个块"。
+- **9.3**：NAND 几何（页 2 KiB / 块 128 KiB / 512 MiB）推出七个参数——MKUBIFS_ARGS `-m 2048 -e 126976 -c 3968`（LEB 世界：-e 是块减两页），UBINIZE_ARGS `-m 2048 -p 131072 -s 2048 -O 2048`（PEB 世界：-p 是原样块）；落 machine conf 第九段，UBI_VOLNAME 覆盖为 rootfs_a 对上 boot.cmd 契约；达哥没直接给答案，只问"你 -e 用的是哪个块"。
 - **9.4**：A/B 分区正式落成字节；纸面九段表 vs 已交付 boot.cmd 的裁决——kernel/dtb 住 UBIFS 卷内（UBIFS 的日志和校验正是 OTA 要的安全性）；MTD 三段（bootloader 4 MiB / env 1 MiB / nand0 507 MiB）+ UBI 三卷（rootfs_a / rootfs_b / data，后两卷 chapter 10 建）；nand0 的 label 对上 `ubi part nand0`。
 - **9.5**：构建出 deploy 三件套（.ubifs / .ubi / ubinize-*.cfg——实体带时间戳、文件名含 .rootfs 段、cfg 无裸名链接）；ubinize.cfg 是 write_ubi_config 自动生成（image_types.bbclass:175-187），逐行读懂——vol_id=0、vol_type=dynamic、vol_name（对照组落在默认 qemuarm64-rootfs，tiger 组落 rootfs_a）、vol_flags=autoresize；autoresize 与 A/B 多卷布局冲突，全布局 cfg 留 chapter 10 自写；multiubi 点名即弃。
 - **9.6**：chapter 8 defconfig 三行伏笔回收（注释行"chapter 9 伏笔"到期；平台级清单一次备齐的道理）；dts 补全 NAND 控制器节点 + fixed-partitions 三段分区表；defconfig 增量走五步闭环——从踩坑教训变成日常纪律的第一回；`ubi.mtd=` / `root=ubi0:rootfs_a` / `rootfstype=ubifs` 命令行形态认脸熟，切 root 留明天；mtdparts 只作对照弃用。
@@ -848,11 +848,11 @@ git tag chapter9
 - **task 11 / chapter 10**：打通启动链——全量 NAND 镜像总装（各分区偏移总表、全布局 ubinize.cfg 自写、rootfs_b 与 data 卷建立）、`ubi part` / `ubifsload` 在 U-Boot 里真跑、TFA_UBOOT=1 旋钮、PSCI 多核唤醒、把 panic 换成 login——第一次开机成功，全书最高潮。
 - 留到 phase 5 的伏笔：rootfs 内容实用化（chapter 12）、模块 system 级 autoload（今天只是第一次肉眼看见 .ko 躺在 NAND 上）。
 
-老周下班前走到白板跟前，把"存储"那格涂实，在下面添了一行：地有了，根挂上了——明天交房，搞不定正常。
+达哥下班前走到白板跟前，把"存储"那格涂实，在下面添了一行：地有了，根挂上了——明天交房，搞不定正常。
 
 "搞不定正常？"阿凯抬头。
 
-"明天你就知道了。"老周拿起外套，"我赌你明天搞不定——串通启动链这事，没人第一回就能成。赌约立在这儿，后天咱们对账。"
+"明天你就知道了。"达哥拿起外套，"我赌你明天搞不定——串通启动链这事，没人第一回就能成。赌约立在这儿，后天咱们对账。"
 
 ---
 
