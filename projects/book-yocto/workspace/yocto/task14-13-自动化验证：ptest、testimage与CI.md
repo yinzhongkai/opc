@@ -1,18 +1,18 @@
 ## 13 自动化验证：ptest、testimage 与 CI
 
-周五上午，工位。阿凯刚到，老周拎着笔记本过来，屏幕上挂着公司内部 GitLab 的 CI 面板——tiger 项目的 job 红着一片。
+周五上午，工位。阿凯刚到，达哥拎着笔记本过来，屏幕上挂着公司内部 GitLab 的 CI 面板——tiger 项目的 job 红着一片。
 
-"QA 昨天手工测出一个回归，倒查回来是咱们周二合进去的改动。"老周把笔记本转过来，"这条流水线从建起来那天就是裸奔——只构建，不验证。红是迟早的事。"
+"QA 昨天手工测出一个回归，倒查回来是咱们周二合进去的改动。"达哥把笔记本转过来，"这条流水线从建起来那天就是裸奔——只构建，不验证。红是迟早的事。"
 
 "我每天不是都在跑镜像吗？"阿凯有点不服气，"上一章那串验收命令我敲过不止一遍。"
 
-"手动跑一次镜像、登录进去敲几个命令，这不算测试。"老周摇头，"IoT 产品要长期推补丁，每次推都必须自动验证没回归。Yocto 自己就带了一套测试框架，你今天把它用起来。"
+"手动跑一次镜像、登录进去敲几个命令，这不算测试。"达哥摇头，"IoT 产品要长期推补丁，每次推都必须自动验证没回归。Yocto 自己就带了一套测试框架，你今天把它用起来。"
 
 他在白板上列了四件事：**包级测试（ptest）、镜像级测试（testimage）、变更追踪（buildhistory）、进流水线（CI）**。
 
 "我补一件。"阿凯举手——上一章他给自己布置过第五件事，今天故技重施，"通用的测试验的是别人家的东西。tiger 自己的服务、主机名、时区，谁验？"
 
-"问得好，这件归你立项。"老周点头，"开工前先翻目录——测试框架长什么样，自己看，别问我。"
+"问得好，这件归你立项。"达哥点头，"开工前先翻目录——测试框架长什么样，自己看，别问我。"
 
 ### 13.1 先把地图摊开：oeqa 一家三兄弟
 
@@ -85,11 +85,11 @@ core-image.bbclass 的注释清单把 `ptest-pkgs` 列进可用特性词；popul
 
 #### 13.2.2 落点裁决与启用：ptest 开在哪张桌子
 
-开关找到了，落到哪张桌子？阿凯自己推了一遍：`DISTRO_FEATURES` 是发行版策略，归 DISTRO 桌；base 还是 delta？prod 出货镜像带不带测试包？——体积是一笔钱（12.7.2 刚交过学费），测试套件还多开攻击面。他把结论说给老周听："落 dev delta，prod 不带，base 不动。"
+开关找到了，落到哪张桌子？阿凯自己推了一遍：`DISTRO_FEATURES` 是发行版策略，归 DISTRO 桌；base 还是 delta？prod 出货镜像带不带测试包？——体积是一笔钱（12.7.2 刚交过学费），测试套件还多开攻击面。他把结论说给达哥听："落 dev delta，prod 不带，base 不动。"
 
 顺嘴认一笔旧账：11.3 的裁剪清单把 ptest 归进过"砍掉"堆，落纸理由是"硬件事实和调试策略都不沾"——那刀砍出的是 base 清单，效果上两态默认都不带；今天 dev delta 把它明确加回，裁剪清单管产品画像，测试姿态是开发态的增量，两笔账不打架。
 
-"对。"老周就补了一句，"**测试的姿态不是出货的姿态。**"
+"对。"达哥就补了一句，"**测试的姿态不是出货的姿态。**"
 
 落盘：
 
@@ -202,7 +202,7 @@ do_install_ptest() {
 
 构建风平浪静，板上 `ptest-runner tiger-sysinfo` 却报 `FAIL: script-mismatch`——三段式行首词后跟的是用例名，正是脚本里 echo 的那个词。阿凯盯着输出愣住——构建期什么都没说。
 
-"ptest 在哪里跑？"老周问了一句。
+"ptest 在哪里跑？"达哥问了一句。
 
 "……板上。"阿凯自己反应过来：`${WORKDIR}` 展开的是构建主机的绝对路径（`build-distrotest/tmp/work/...` 一长串），板上根本没这个文件，`cmp` 打不开参照物，整条用例 FAIL。**ptest 的运行现场是目标板，run-ptest 里只能引用板上存在的文件与命令。** 官方也在擦同一个屁股——ptest.bbclass 第 65-78 行有一段 sed，专门把装进 -ptest 包的 Makefile 里的主机路径（HOSTTOOLS_DIR、WORKDIR）剥掉（PTEST_BUILD_HOST_FILES 机制，认得即可）。
 
@@ -313,7 +313,7 @@ SUMMARY: tiger-image () - Ran 17 tests ... FAILED (failures=1, skipped=15)
 
 先认一笔账再往下走：清单里是七个**模块词**，17 是装载器把模块展开成 `test_` 方法后的用例数——systemd 一个词就带十个方法。数用例不数词，这条 13.4 的 ⚠️ 框还会回来讲。
 
-ping 过了——它从主机侧 ping 目标，不走 SSH（而且 slirp 下目标是 127.0.0.1，用例检测到 localhost 会提前空跑返回，ping.py 里写得明白）；ssh 一倒，date/df/ptest/systemd 一整片跟着 SKIPPED——这些用例都声明了"SSH 先通我才考"，通道不通就跳过不考（这套依赖机制 13.4 讲装饰器时回来认）。伤口都指向同一个地方：SSH 连不上。阿凯第一反应是"系统没起来"，老周拦住他："boot log 看了吗？系统起来没有？"
+ping 过了——它从主机侧 ping 目标，不走 SSH（而且 slirp 下目标是 127.0.0.1，用例检测到 localhost 会提前空跑返回，ping.py 里写得明白）；ssh 一倒，date/df/ptest/systemd 一整片跟着 SKIPPED——这些用例都声明了"SSH 先通我才考"，通道不通就跳过不考（这套依赖机制 13.4 讲装饰器时回来认）。伤口都指向同一个地方：SSH 连不上。阿凯第一反应是"系统没起来"，达哥拦住他："boot log 看了吗？系统起来没有？"
 
 测试结果目录在 `tmp/log/oeqa/`（结果 JSON 加按配方名分的子目录），类里把 boot log 以符号链接收进 `tmp/log/oeqa/tiger-image/`（testimage.bbclass 第 395-399 行）：
 
@@ -411,7 +411,7 @@ OK (skipped=6)
 
 ### 13.4 tiger 自己的考题：自定义 oeqa/runtime 用例
 
-"通用的测试替你验了 ssh 和 systemd。"老周说，"tiger 自己的东西，谁验？"
+"通用的测试替你验了 ssh 和 systemd。"达哥说，"tiger 自己的东西，谁验？"
 
 这正是阿凯早上在白板上给自己立的第五件。素材现成——12.6.2 他在板上手敲的那串验收命令：`systemctl status tiger-sysinfo`、`hostname`、`date`、`ls -l /etc/localtime` 一族。**自动化验证在这一节第一次有了具体含义：把那串手敲的命令，一条条对进测试代码。**（`which` 那条属于工具清点，不进考题；`date` 有官方 DateTest 在清单里罩着，也不自写。）
 
@@ -534,7 +534,7 @@ INHERIT += "buildhistory"
 
 阿凯落完盘叹了口气："13.2 把几百个 ptest 包装进镜像那笔账，记不上了——历史只能从开启那天记起。"
 
-"所以演示换一个素材。"老周说，"把 12.7.2 那颗雷再点一次。"
+"所以演示换一个素材。"达哥说，"把 12.7.2 那颗雷再点一次。"
 
 演示闭环四步：开启后先构建一次留基线；给 tiger-image 临时加回 `python3`（坑 2 的原凶）再构建；diff；撤掉。
 
@@ -594,9 +594,9 @@ devtool check-upgrade-status <配方名>      # 省略配方名则扫全部
 
 ### 13.7 接入 CI：把今天敲的命令排成流水线
 
-回到早上那块报红的面板。老周先定编排思路："别想复杂——**把今天敲过的命令按顺序排一遍，就是流水线。**"对照一下：13.2 重建镜像是"构建"，13.3 的 `-c testimage` 是"测试"，13.5 的 buildhistory-diff 是"报告"，3.4 的 yocto-check-layer 顶在最前当"门禁"。四级流水线，每一级的每条命令今天都已在本机手跑通过。
+回到早上那块报红的面板。达哥先定编排思路："别想复杂——**把今天敲过的命令按顺序排一遍，就是流水线。**"对照一下：13.2 重建镜像是"构建"，13.3 的 `-c testimage` 是"测试"，13.5 的 buildhistory-diff 是"报告"，3.4 的 yocto-check-layer 顶在最前当"门禁"。四级流水线，每一级的每条命令今天都已在本机手跑通过。
 
-场景设定与两处裁决先交代。公司内部 GitLab（`<internal-git-server>` 一族，前文惯例）；CI 配置随 BSP layer 走——`.gitlab-ci.yml` 放 meta-tiger 仓库根，跟代码一起 review、一起打 tag。runner 用 Docker executor，镜像按 chapter 1 的依赖清单烤制（ubuntu:24.04 一族），读者已有心智模型。两态裁决落给老周："**出货镜像没留测试的门，测试镜像不是出货镜像；两个都建，只测有门的那个。**"——dev、prod 都进 build 级（保证 prod 不因测试配置腐坏），test 级只有 dev 一个 job。
+场景设定与两处裁决先交代。公司内部 GitLab（`<internal-git-server>` 一族，前文惯例）；CI 配置随 BSP layer 走——`.gitlab-ci.yml` 放 meta-tiger 仓库根，跟代码一起 review、一起打 tag。runner 用 Docker executor，镜像按 chapter 1 的依赖清单烤制（ubuntu:24.04 一族），读者已有心智模型。两态裁决落给达哥："**出货镜像没留测试的门，测试镜像不是出货镜像；两个都建，只测有门的那个。**"——dev、prod 都进 build 级（保证 prod 不因测试配置腐坏），test 级只有 dev 一个 job。
 
 全文落盘，读者第一次接触 CI YAML，逐段讲：
 
@@ -768,7 +768,7 @@ python3 -c "import yaml; yaml.safe_load(open('$HOME/workspace/meta-tiger/.gitlab
 
 发作过程见 13.3.2，两连击。第一击：挂上 IMAGE_CLASSES 就跑，结果 SSH 用例 FAILED、依赖它的一整片 SKIPPED（Connection refused）——镜像里根本没有 SSH 服务，测试命令进不了板。第二击：装上 dropbear（ssh-server-dropbear 特性词装进镜像的轻量 SSH 服务端）再跑，换成 Permission denied——12.4.4 把空密码退役了，而 oeqa 的 SSH 通道没有任何递密码的机制（sshcontrol.py 第 107-113 行的选项清单为证；qemurunner 那句 "using blank password" 警告是官方出厂假设的旁证）。
 
-两击之间藏着本章最值钱的一个排查动作：老周没有给答案，只问"boot log 看了吗？"阿凯从 `tmp/log/oeqa/tiger-image/qemu_boot_log.*` 里看到 login 提示符端端正正躺在末尾，才把"系统没起来"和"系统起来了但没应门"分开——前者查启动链，后者查门。**超时和失败的第一动作都是看 boot log**；`TEST_QEMUBOOT_TIMEOUT ?= "1000"` 是"没起来"一族的调参位。
+两击之间藏着本章最值钱的一个排查动作：达哥没有给答案，只问"boot log 看了吗？"阿凯从 `tmp/log/oeqa/tiger-image/qemu_boot_log.*` 里看到 login 提示符端端正正躺在末尾，才把"系统没起来"和"系统起来了但没应门"分开——前者查启动链，后者查门。**超时和失败的第一动作都是看 boot log**；`TEST_QEMUBOOT_TIMEOUT ?= "1000"` 是"没起来"一族的调参位。
 
 修正动作的回指链也值得复盘：门（ssh-server-dropbear）与钥匙（tiger-testkey 公钥 + ssh-agent）全部只落 dev 态——**测试的门是 dev 态的明确表态**，prod 镜像无门无钥匙，跟 12.4.4 空密码退役是同一条逻辑的两端。而环境变量透传白名单这条通道，1.6.2 代理变量走过的那条，本章第二次用上——这次连放行动作都免了：oe-init-build-env 的默认名单（oe-buildenv-internal 第 112 行）早就替我们放行了。
 
