@@ -174,11 +174,9 @@ SECURITY.md
 
 Poky 里最关键的三样东西是：
 
-* **BitBake**：Yocto 项目的构建执行引擎，负责解析配方并调度任务。
-
-* **OE-Core**：OpenEmbedded-Core，Poky 中的核心元数据层，对应 `meta/` 目录。
-
-* 发行版与 BSP 元数据：`meta-poky/` 和 `meta-yocto-bsp/`。
+- **BitBake**：Yocto 项目的构建执行引擎，负责解析配方并调度任务。
+- **OE-Core**：OpenEmbedded-Core，Poky 中的核心元数据层，对应 `meta/` 目录。
+- 发行版与 BSP 元数据：`meta-poky/` 和 `meta-yocto-bsp/`。
 
 达哥端着咖啡又晃过来，扫了眼屏幕：“哪些目录最重要，你先自己 `ls` 一遍，再来问我。”
 
@@ -350,19 +348,13 @@ templateconf.cfg
 
 达哥让他打开 `local.conf`：已存在的变量在原行修改，被注释的先取消注释；没有的变量追加到文件末尾。这里涉及的 BitBake 变量先在正文里过一遍：
 
-* **下载目录（`DL_DIR`）** 存放从网络拉取的源码包。
-
-* **共享状态缓存（sstate）** 的落盘位置由 `SSTATE_DIR` 变量指定。
-
-* **临时目录（`TMPDIR`）** 是构建过程中的临时工作目录。
-
-* **并行任务数（`BB_NUMBER_THREADS`）** 控制 BitBake 自身并行调度的任务数。
-
-* **编译并行度（`PARALLEL_MAKE`）** 控制 `make` 编译时的并行 job 数。
-
-* **镜像级特性（`EXTRA_IMAGE_FEATURES`）** 控制镜像级功能的开关。
-
-* `debug-tweaks` 是可加入 `EXTRA_IMAGE_FEATURES` 的特性之一，启用空 root 密码等调试便利。
+- **下载目录（`DL_DIR`）** 存放从网络拉取的源码包。
+- **共享状态缓存（sstate）** 的落盘位置由 `SSTATE_DIR` 变量指定。
+- **临时目录（`TMPDIR`）** 是构建过程中的临时工作目录。
+- **并行任务数（`BB_NUMBER_THREADS`）** 控制 BitBake 自身并行调度的任务数。
+- **编译并行度（`PARALLEL_MAKE`）** 控制 `make` 编译时的并行 job 数。
+- **镜像级特性（`EXTRA_IMAGE_FEATURES`）** 控制镜像级功能的开关。
+- `debug-tweaks` 是可加入 `EXTRA_IMAGE_FEATURES` 的特性之一，启用空 root 密码等调试便利。
 
 ```bitbake
 # 文件路径：~/workspace/build/conf/local.conf
@@ -480,7 +472,7 @@ do_rootfs     # 组装成根文件系统镜像
 NOTE: Tasks Summary: Attempted 4073 tasks of which 0 didn't need to be rerun and all succeeded.
 ```
 
-> **💡 提示**：任务总数会随 scarthgap 点版本更新而小幅漂移，以你本地输出为准；看到结尾的 `all succeeded` 就是构建成功。
+> **💡 提示**：任务总数会随 Scarthgap 点版本更新而小幅漂移，以你本地输出为准；看到结尾的 `all succeeded` 就是构建成功。
 
 这就是构建成功的标志。阿凯松了口气，赶紧去产物目录看结果。构建产物最终落在 `tmp/deploy/images/<MACHINE>/` 下。`$BUILDDIR/tmp/deploy/images/qemuarm64/` 就是 **Deploy 目录（Deploy Directory）**，存放最终镜像、内核等构建产物。
 
@@ -788,17 +780,12 @@ bitbake core-image-minimal
 
 阿凯跑通了人生中第一个 Yocto 项目构建。他回到工位，在本子上把完成的事打勾：
 
-* 在 Ubuntu 24.04 上装好了 Yocto 项目 Scarthgap 5.0 的构建依赖。
-
-* 从上游 clone 了 Poky，认清了 `bitbake/`、`meta/`、`meta-poky/`、`meta-yocto-bsp/`、`scripts/` 等关键目录。
-
-* 用 `oe-init-build-env` 初始化构建目录，配置了 `local.conf` 和 `bblayers.conf`。
-
-* 成功运行 `bitbake core-image-minimal`，为 `qemuarm64` 构建出最小镜像。
-
-* 用 `runqemu` 启动镜像并完成了基本验证。
-
-* 看懂了 `build/` 目录里 `conf/`、`downloads/`、`sstate-cache/`、`tmp/` 这四大区域的作用。
+- 在 Ubuntu 24.04 上装好了 Yocto 项目 Scarthgap 5.0 的构建依赖。
+- 从上游 clone 了 Poky，认清了 `bitbake/`、`meta/`、`meta-poky/`、`meta-yocto-bsp/`、`scripts/` 等关键目录。
+- 用 `oe-init-build-env` 初始化构建目录，配置了 `local.conf` 和 `bblayers.conf`。
+- 成功运行 `bitbake core-image-minimal`，为 `qemuarm64` 构建出最小镜像。
+- 用 `runqemu` 启动镜像并完成了基本验证。
+- 看懂了 `build/` 目录里 `conf/`、`downloads/`、`sstate-cache/`、`tmp/` 这四大区域的作用。
 
 本章严格遵守边界：只跑通官方 Poky 的 `qemuarm64` `core-image-minimal`，没有碰 tiger 硬件、没有创建 `meta-tiger`、没有写自定义 MACHINE。这些工作从下一章开始。
 
@@ -806,11 +793,8 @@ bitbake core-image-minimal
 
 本章涉及的官方文档链接都放在这里，正文中不再出现 URL：
 
-* Yocto Project 5.0 Quick Build 指南：<https://docs.yoctoproject.org/5.0/brief-yoctoprojectqs/index.html>
-
-* Yocto Project 5.0 参考手册 - 变量术语表：<https://docs.yoctoproject.org/5.0/ref-manual/variables.html>
-
-* Yocto Project 5.0 参考手册 - 构建目录结构：<https://docs.yoctoproject.org/5.0/ref-manual/structure.html>
-
-* BitBake 2.8 用户手册：<https://docs.yoctoproject.org/bitbake/2.8/>
+- Yocto Project 5.0 Quick Build 指南：<https://docs.yoctoproject.org/5.0/brief-yoctoprojectqs/index.html>
+- Yocto Project 5.0 参考手册 - 变量术语表：<https://docs.yoctoproject.org/5.0/ref-manual/variables.html>
+- Yocto Project 5.0 参考手册 - 构建目录结构：<https://docs.yoctoproject.org/5.0/ref-manual/structure.html>
+- BitBake 2.8 用户手册：<https://docs.yoctoproject.org/bitbake/2.8/>
 
