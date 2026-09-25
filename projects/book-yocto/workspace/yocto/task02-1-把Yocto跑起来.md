@@ -4,7 +4,7 @@
 
 达哥端着一杯咖啡走过来，没坐下，直接开口。
 
-“开始吧。先别管 tiger，把官方 Poky 跑通。Scarthgap 分支，目标 `qemuarm64`，编一个能开机进 shell 的最小镜像。”
+“开始吧。先别管 tiger，把官方 Poky 跑通。`scarthgap` 分支，目标 `qemuarm64`，编一个能开机进 shell 的最小镜像。”
 
 “我需要先装什么？”阿凯抬头问。
 
@@ -120,8 +120,6 @@ mkdir -p ~/workspace
 cd ~/workspace
 git clone -b scarthgap https://git.yoctoproject.org/poky.git
 ```
-
-> **💡 提示**：如果公司网络只允许 `git://` 协议出口，可以把地址换回 `git://git.yoctoproject.org/poky.git`。两种协议最终拿到的代码完全一致。
 
 克隆完成后，阿凯先确认分支，再看一眼顶层目录。
 
@@ -394,7 +392,7 @@ PARALLEL_MAKE = "-j 8"
 
 保留默认的 **调试调整（debug-tweaks）** 特性，可以让 `core-image-minimal` 允许空密码 root 登录，方便在 QEMU 里验证。后续进入 **Distro 配置（DISTRO）** 阶段时，我们会再谈如何关闭这类调试特性。
 
-> **💡 提示**：`BB_NUMBER_THREADS` 和 `PARALLEL_MAKE` 建议设成你 CPU 物理核心数或稍多一点——编译过程有大量时间花在等磁盘和网络 I/O 上，任务数略多于核心数，才能在这些等待的空隙里把 CPU 填满。阿凯的机器是 8 核，所以都写 8。如果你的机器是 4 核，可以改成 4；反方向的边界是内存：内存不足时宁可设小一点，否则并行编译会把机器卡死。
+> **💡 提示**：`BB_NUMBER_THREADS` 和 `PARALLEL_MAKE` 建议设成你 CPU 物理核心数或稍多一点——编译过程有大量时间花在等磁盘和网络 I/O 上，任务数略多于核心数，才能在这些等待的空隙里把 CPU 填满。阿凯的机器是 8 核，所以都写 8。如果你的机器是 4 核，可以改成 4。但任务数也不能无脑往上加，上限由内存决定：每个并行编译任务都要单独占一份内存，编译大型 C++ 文件时单个任务的峰值可达 1~2 GB 量级；任务数乘以单任务内存一旦超过物理内存，系统就会被迫换页（swap）甚至触发 OOM，外在表现就是整台机器卡死。所以内存不宽裕时，宁可把这两个值设得比核心数还小一点。
 
 > **⚠️ 注意**：`DL_DIR`、`SSTATE_DIR`、`TMPDIR` 默认就在 `${TOPDIR}` 下。显式写出来有两个好处：一是以后想把这些目录挂到外部大容量分区时，只改这几个变量；二是让你对 build 目录里那几个大文件夹心里有数。
 
@@ -479,8 +477,10 @@ do_rootfs     # 组装成根文件系统镜像
 几个小时后，终端不再滚动，阿凯看到这样一行：
 
 ```text
-NOTE: Tasks Summary: Attempted 4059 tasks of which 0 didn't need to be rerun and all succeeded.
+NOTE: Tasks Summary: Attempted 4073 tasks of which 0 didn't need to be rerun and all succeeded.
 ```
+
+> **💡 提示**：任务总数会随 scarthgap 点版本更新而小幅漂移，以你本地输出为准；看到结尾的 `all succeeded` 就是构建成功。
 
 这就是构建成功的标志。阿凯松了口气，赶紧去产物目录看结果。构建产物最终落在 `tmp/deploy/images/<MACHINE>/` 下。`$BUILDDIR/tmp/deploy/images/qemuarm64/` 就是 **Deploy 目录（Deploy Directory）**，存放最终镜像、内核等构建产物。
 
@@ -500,7 +500,7 @@ core-image-minimal-qemuarm64.rootfs-<时间戳>.manifest
 # ... (省略)
 ```
 
-> **💡 提示**：文件名里的 `<时间戳>` 会随构建时间变化，不用跟书里完全一样。关键文件是 `core-image-minimal-qemuarm64.rootfs-<时间戳>.ext4`（根文件系统镜像）、`Image`（Linux 内核镜像）、`.qemuboot.conf`（runqemu 用的启动配置）。
+> **💡 提示**：文件名里的 `<时间戳>` 会随构建时间变化，不用跟书里完全一样。关键文件是 `Image`（Linux 内核镜像）、`core-image-minimal-qemuarm64.rootfs-<时间戳>.ext4`（根文件系统镜像）、`core-image-minimal-qemuarm64.rootfs-<时间戳>.qemuboot.conf`（runqemu 用的启动配置）。
 
 ## 1.5 启动镜像与看懂 build 目录
 
@@ -524,10 +524,12 @@ runqemu qemuarm64 nographic slirp
 ```text
 # ... (省略大量启动日志)
 
-Poky (Yocto Project Reference Distro) 5.0.18 qemuarm64 /dev/ttyAMA0
+Poky (Yocto Project Reference Distro) 5.0.20 qemuarm64 /dev/ttyAMA0
 
 qemuarm64 login:
 ```
+
+> **💡 提示**：横幅里的版本号会随 Scarthgap 点版本更新而变化，以你本地输出为准。
 
 阿凯输入 `root`，直接进了 shell——`core-image-minimal` 默认允许空密码登录 root，方便调试。登录时**不需要密码**，输入 `root` 后直接按回车即可。
 
@@ -640,7 +642,6 @@ ls -1 $BUILDDIR
 
 ```text
 bitbake-cookerdaemon.log
-bitbake.lock
 cache
 conf
 downloads
