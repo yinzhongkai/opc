@@ -2,25 +2,25 @@
 
 周三上午，阿凯工位。昨天画的项目全景地图还贴在显示器边上，图最底下"meta-tiger（集成态）"那一格被他用红笔圈了两圈。
 
-老周端着杯子路过，敲了敲他的桌子："地图看完了，今天开始动手。建一个 `meta-tiger`，先把架子搭起来，里面什么都不放。能让 bitbake 认识它就行。"
+达哥端着杯子路过，敲了敲他的桌子："地图看完了，今天开始动手。建一个 `meta-tiger`，先把架子搭起来，里面什么都不放。能让 bitbake 认识它就行。"
 
 阿凯愣了一下："什么都不放？那验证什么？"
 
-"验证架子本身是合格的。"老周说，"一个 layer 光有目录不行，得让 BitBake 认得它、加载它、不报错。这一步做扎实了，后面往里填东西才不会塌。"
+"验证架子本身是合格的。"达哥说，"一个 layer 光有目录不行，得让 BitBake 认得它、加载它、不报错。这一步做扎实了，后面往里填东西才不会塌。"
 
 "具体做什么？"
 
-"五件事。"老周伸出一只手，"第一，按社区惯例把目录建出来；第二，写 `layer.conf`，这是 layer 的身份证；第三，补 README、许可证、维护者名单——别嫌这三个文件没用，以后接手的人会先看你这三个文件；第四，把 layer 注册进构建，验证 bitbake 真的认识它；第五，进 git，打 tag。"
+"五件事。"达哥伸出一只手，"第一，按社区惯例把目录建出来；第二，写 `layer.conf`，这是 layer 的身份证；第三，补 README、许可证、维护者名单——别嫌这三个文件没用，以后接手的人会先看你这三个文件；第四，把 layer 注册进构建，验证 bitbake 真的认识它；第五，进 git，打 tag。"
 
 阿凯在本子上记下五行："一天能干完？"
 
-"顺利的话一上午。"老周顿了顿，"但你这种人，多半要踩一两个坑。"
+"顺利的话一上午。"达哥顿了顿，"但你这种人，多半要踩一两个坑。"
 
 ### 3.1 BSP layer 的目录约定
 
-阿凯打开终端，第一反应是问老周："layer 里该有哪些目录？"
+阿凯打开终端，第一反应是问达哥："layer 里该有哪些目录？"
 
-老周没回答，朝屏幕努了努嘴："`poky` 就在你机器上。`meta-poky` 是个发行版 layer，`meta-yocto-bsp` 是个 BSP layer，你自己去翻，归纳共同点。"
+达哥没回答，朝屏幕努了努嘴："`poky` 就在你机器上。`meta-poky` 是个发行版 layer，`meta-yocto-bsp` 是个 BSP layer，你自己去翻，归纳共同点。"
 
 阿凯认命地敲命令。
 
@@ -61,15 +61,15 @@ recipes-multimedia  recipes-rt  recipes-sato  recipes-support
 
 第一条，**名字都叫 `meta-<名字>`**。`meta-poky`、`meta-yocto-bsp`，还有以后会遇到的 `meta-arm`（ARM 平台的官方 BSP layer）——全小写、连字符分隔，这是社区雷打不动的命名惯例。
 
-第二条，**都有 `conf/` 目录**。他往里探了一下，每个 layer 的 `conf/` 里必有一个 `layer.conf`。看来这就是老周说的"身份证"。
+第二条，**都有 `conf/` 目录**。他往里探了一下，每个 layer 的 `conf/` 里必有一个 `layer.conf`。看来这就是达哥说的"身份证"。
 
 第三条，**配方按 `recipes-<类别>` 分类**。类别名不是随便起的，是 OE-Core 定下来的一套语义：`recipes-bsp` 放 bootloader、固件这类贴硬件的东西，`recipes-kernel` 放内核和模块，`recipes-core` 放镜像、包组这类基础系统件，`recipes-connectivity`、`recipes-multimedia` 以此类推。类别名即语义，别人扫一眼就知道该去哪找。
 
-"归纳完了？"老周不知什么时候站在他身后。
+"归纳完了？"达哥不知什么时候站在他身后。
 
 "嗯。`meta-tiger` 是 BSP layer，照 `meta-yocto-bsp` 的样子建：`conf/` 加三个 `recipes-*`？"
 
-"对，但别贪多。"老周说，"你现在只需要 `recipes-bsp`、`recipes-core`、`recipes-kernel` 三个。TF-A、U-Boot 以后进 `recipes-bsp`，linux-tiger 进 `recipes-kernel`，镜像配方和包组进 `recipes-core`——按你那张地图，哪一格将来归哪个目录，你心里应该有数。"
+"对，但别贪多。"达哥说，"你现在只需要 `recipes-bsp`、`recipes-core`、`recipes-kernel` 三个。TF-A、U-Boot 以后进 `recipes-bsp`，linux-tiger 进 `recipes-kernel`，镜像配方和包组进 `recipes-core`——按你那张地图，哪一格将来归哪个目录，你心里应该有数。"
 
 阿凯动手建目录。
 
@@ -134,9 +134,9 @@ find ~/workspace/meta-tiger | sort
 
 ### 3.2 编写 layer.conf
 
-"目录是壳，`layer.conf` 才是身份证。"老周说，"BitBake 加载一个 layer 时，第一件事就是找它的 `conf/layer.conf`。这个文件回答四个问题：我是谁、我的文件在哪、我依赖谁、我跟哪个版本的 Yocto 兼容。"
+"目录是壳，`layer.conf` 才是身份证。"达哥说，"BitBake 加载一个 layer 时，第一件事就是找它的 `conf/layer.conf`。这个文件回答四个问题：我是谁、我的文件在哪、我依赖谁、我跟哪个版本的 Yocto 兼容。"
 
-阿凯新建文件，老周让他一个变量一个变量地写，边写边讲。
+阿凯新建文件，达哥让他一个变量一个变量地写，边写边讲。
 
 第一个是 `LAYERDIR`。这是 BitBake 的**层目录变量（LAYERDIR）**，内置变量，加载某个 layer 的 `layer.conf` 时自动指向该 layer 的顶层路径。layer.conf 里所有路径都基于它拼，绝不手写绝对路径——这样 layer 挪到任何机器、任何目录下都能工作。
 
@@ -146,7 +146,7 @@ find ~/workspace/meta-tiger | sort
 
 接下来是三个带 `_meta-tiger` 后缀的变量。阿凯写到这停下了："为什么这三个变量后面要挂 layer 名？"
 
-"因为 BitBake 把所有 layer 的 layer.conf 读进同一个命名空间。"老周说，"不挂后缀，变量就互相覆盖了。挂后缀，每个 layer 的声明各归各。"
+"因为 BitBake 把所有 layer 的 layer.conf 读进同一个命名空间。"达哥说，"不挂后缀，变量就互相覆盖了。挂后缀，每个 layer 的声明各归各。"
 
 - `BBFILE_COLLECTIONS` 是**层集合声明（BBFILE_COLLECTIONS）**，声明本 layer 的集合名。chapter 2 里 `bitbake-layers show-layers` 输出的第一列——`core`、`yocto`、`yoctobsp`——显示的就是这个名字，不是目录名。
 - `BBFILE_PATTERN` 是**层路径模式（BBFILE_PATTERN）**，用正则界定"哪些路径下的文件算本集合的"。
@@ -154,11 +154,11 @@ find ~/workspace/meta-tiger | sort
 
 阿凯又皱眉："`BBFILE_COLLECTIONS` 和 `BBFILE_PATTERN` 感觉是一回事，为什么要写两个？"
 
-"一个声明'我是谁'，一个声明'我的文件在哪'。"老周一句话点破，"名字是名字，地盘是地盘。将来你往一个 layer 里塞多个集合，就知道为什么分开了。"
+"一个声明'我是谁'，一个声明'我的文件在哪'。"达哥一句话点破，"名字是名字，地盘是地盘。将来你往一个 layer 里塞多个集合，就知道为什么分开了。"
 
 最后两个变量：
 
-- `LAYERDEPENDS` 是**层依赖声明（LAYERDEPENDS）**，声明本 layer 依赖哪些其他 layer。meta-tiger 只依赖 OE-Core，集合名 `core`。"以后集成 TF-A 的时候可能要加 `meta-arm`，"老周补了一句，"到那一章再说，现在不加。"
+- `LAYERDEPENDS` 是**层依赖声明（LAYERDEPENDS）**，声明本 layer 依赖哪些其他 layer。meta-tiger 只依赖 OE-Core，集合名 `core`。"以后集成 TF-A 的时候可能要加 `meta-arm`，"达哥补了一句，"到那一章再说，现在不加。"
 - `LAYERSERIES_COMPAT` 是**层兼容系列（LAYERSERIES_COMPAT）**，声明本 layer 兼容哪个 Yocto 发布系列。本书锁定 Scarthgap 5.0，值就是 `scarthgap`。
 
 完整文件如下，逐行注释。
@@ -203,7 +203,7 @@ LAYERSERIES_COMPAT_meta-tiger = "scarthgap"
 | `LAYERDEPENDS_meta-tiger` | 依赖的其他 layer | `core` |
 | `LAYERSERIES_COMPAT_meta-tiger` | 兼容的 Yocto 发布系列 | `scarthgap` |
 
-写完，老周给了阿凯一个自查作业："别急着信我。去把 `meta-poky` 的 layer.conf 打开，逐行对照你写的，看差在哪。"
+写完，达哥给了阿凯一个自查作业："别急着信我。去把 `meta-poky` 的 layer.conf 打开，逐行对照你写的，看差在哪。"
 
 ```bash
 # 对照官方 layer 的写法，检查自己的 layer.conf
@@ -239,13 +239,13 @@ REQUIRED_POKY_BBLAYERS_CONF_VERSION = "2"
 
 "骨架对上了。"阿凯说。
 
-"嗯。但 layer.conf 写对没有，最终要 BitBake 说了算。"老周提醒，"先别急着注册，把文档三件套补齐，一次到位。"
+"嗯。但 layer.conf 写对没有，最终要 BitBake 说了算。"达哥提醒，"先别急着注册，把文档三件套补齐，一次到位。"
 
 ### 3.3 README、COPYING.MIT 与 MAINTAINERS
 
 "三个纯文本文件，技术含量为零，为什么非要现在写？"阿凯问。
 
-老周只说了一句："三年后接手你这个 layer 的人，第一眼看的不是 layer.conf。"
+达哥只说了一句："三年后接手你这个 layer 的人，第一眼看的不是 layer.conf。"
 
 阿凯想了想 chapter 2 里那场"三年后"的讨论，没再追问。第一个文件是 README——这个 layer 是什么、依赖什么、怎么用、补丁往哪提、找谁。
 
@@ -326,7 +326,7 @@ meta-tiger 维护者名单
 =====================
 
 Maintainer: 阿凯 <kai@<your-company>.com>
-Reviewer:   老周 <zhou@<your-company>.com>
+Reviewer:   达哥 <zhou@<your-company>.com>
 
 职责说明：
 - Maintainer 负责 layer 的日常开发与提交
@@ -339,7 +339,7 @@ Reviewer:   老周 <zhou@<your-company>.com>
 
 骨架齐了。阿凯问出今天最关键的问题："怎么证明 bitbake 真的认识它了？"
 
-老周反问："你前两天用什么命令看过 layer 列表？"
+达哥反问："你前两天用什么命令看过 layer 列表？"
 
 阿凯立刻反应过来——`bitbake-layers show-layers`，chapter 1 里查过三个官方层，chapter 2 里又用它追过 `core-image-minimal` 的归属。要让 meta-tiger 出现在那个列表里，得先注册。
 
@@ -473,7 +473,7 @@ bitbake-layers add-layer ~/workspace/meta-tiger
 
 ### 3.5 初始化 git 仓库与首次 commit
 
-老周验收完 `show-layers` 的输出，说了今天最长的一段话："还剩最后一步，也是最容易被新人跳过的一步。`meta-tiger` 从今天起是一个独立 git 仓库——五个仓库里的第五个，跟 `poky` 平级，不归 poky 管。为什么第一天就进 git？因为后面每一章的产物都要用 tag 锚定，读者——包括三个月后的你——要能随时 checkout 回任意一章结束时的状态。裸目录做不到这一点。"
+达哥验收完 `show-layers` 的输出，说了今天最长的一段话："还剩最后一步，也是最容易被新人跳过的一步。`meta-tiger` 从今天起是一个独立 git 仓库——五个仓库里的第五个，跟 `poky` 平级，不归 poky 管。为什么第一天就进 git？因为后面每一章的产物都要用 tag 锚定，读者——包括三个月后的你——要能随时 checkout 回任意一章结束时的状态。裸目录做不到这一点。"
 
 阿凯点头。前两章的 tag 打在 `poky` 仓库，是因为改动都发生在 poky 的构建里；本章起，`meta-tiger` 有了自己的仓库，tag 改打在这里。
 
@@ -506,7 +506,7 @@ a1b2c3d Initial meta-tiger layer skeleton
 
 ### 3.6 踩坑实录
 
-老周上午临走时的预言应验了。两个坑，都不在命令上，在"想当然"上。
+达哥上午临走时的预言应验了。两个坑，都不在命令上，在"想当然"上。
 
 #### 3.6.1 踩坑 1：LAYERSERIES_COMPAT 大小写写错，add-layer 当场拒绝
 
@@ -599,7 +599,7 @@ bitbake-layers show-recipes tiger-probe
 # （完全没有任何输出——连 === Matching recipes: === 的标题都不打印）
 ```
 
-找不到。而且注意这个细节：不是"列出了标题但下面为空"，是命令静默返回，一个字都没有——`=== Matching recipes: ===` 这个标题只在有匹配项要打印时才出现。阿凯把文件翻来覆去检查了三遍，语法没错、路径没拼错。老周路过，没看配方，指了指 layer.conf 里那行 `BBFILES`：
+找不到。而且注意这个细节：不是"列出了标题但下面为空"，是命令静默返回，一个字都没有——`=== Matching recipes: ===` 这个标题只在有匹配项要打印时才出现。阿凯把文件翻来覆去检查了三遍，语法没错、路径没拼错。达哥路过，没看配方，指了指 layer.conf 里那行 `BBFILES`：
 
 "`recipes-*/*/*.bb`。两条斜杠，你数清楚了吗？"
 
@@ -625,7 +625,7 @@ tiger-probe:
 
 找到了。`BBFILES` 的通配结构决定了目录约定的**强制性**——目录层级不是风格问题，是机制问题：不符合 `recipes-*/*/*.bb` 这个模式的文件，BitBake 压根不会去看。刚才那次"一个字都没有"的静默返回，就是"压根没去看"的直接证据。
 
-验证完毕，收尾动作同样重要：探针配方是验证手段，不是交付内容。老周开场的承诺是"里面什么都不放"，这个承诺要兑现。
+验证完毕，收尾动作同样重要：探针配方是验证手段，不是交付内容。达哥开场的承诺是"里面什么都不放"，这个承诺要兑现。
 
 ```bash
 # 删除探针配方，恢复空 layer 的承诺
@@ -663,7 +663,7 @@ nothing to commit, working tree clean
 - **task 06 / chapter 5**：写第一份 MACHINE 配置，填充本章留空的 `conf/machine/`。
 - 远景：task 07–09 将逐个填充 `recipes-bsp/` 和 `recipes-kernel/`。
 
-老周收拾东西下班，在门口留下一句："架子搭好了。下一章我们去给 QEMU 动手术，让它长出 tiger 这块板。"
+达哥收拾东西下班，在门口留下一句："架子搭好了。下一章我们去给 QEMU 动手术，让它长出 tiger 这块板。"
 
 阿凯在 `meta-tiger` 仓库打上本章的 tag。
 
