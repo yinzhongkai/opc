@@ -1,18 +1,18 @@
 ## 14 交付 SDK：从生产到使用
 
-周一上午，工位。晨会刚散，应用组的排期表还贴在老周屏幕边上——"tiger 应用开发"那一栏后面，写着两个鲜红的问号。
+周一上午，工位。晨会刚散，应用组的排期表还贴在达哥屏幕边上——"tiger 应用开发"那一栏后面，写着两个鲜红的问号。
 
-"应用组又来问了：他们什么时候能开始写 tiger 上的应用。"老周在阿凯对面坐下，"总不能让他们一人装一套 Yocto、一人跑一遍 bitbake。"
+"应用组又来问了：他们什么时候能开始写 tiger 上的应用。"达哥在阿凯对面坐下，"总不能让他们一人装一套 Yocto、一人跑一遍 bitbake。"
 
 "那给他们什么？"
 
-"你想想以前芯片厂怎么发的。"老周往后一靠，"一张光盘，一份 PDF，光盘里一个装完就能用的交叉编译环境。那就是 SDK。现在轮到我们发这一天了——**你产出 SDK 给应用组用，自己先要会用，不然有问题你都不知道。**今天你扮演两个角色：先做 BSP 工程师把 SDK 发出去，再扮演应用工程师把它跑通。"
+"你想想以前芯片厂怎么发的。"达哥往后一靠，"一张光盘，一份 PDF，光盘里一个装完就能用的交叉编译环境。那就是 SDK。现在轮到我们发这一天了——**你产出 SDK 给应用组用，自己先要会用，不然有问题你都不知道。**今天你扮演两个角色：先做 BSP 工程师把 SDK 发出去，再扮演应用工程师把它跑通。"
 
 他在白板上列了三件事：**发 SDK、发 eSDK、两个都自己验一遍**。
 
 "我补一件。"阿凯举手——给自己加任务已经成了惯例，"发出去的东西，得知道里面装了什么、是哪一版。SDK 的版本和留痕，谁管？"
 
-"问得好，这件归你立项。"老周点头，"开工。`populate_sdk` 长什么样——自己看，别问我。"
+"问得好，这件归你立项。"达哥点头，"开工。`populate_sdk` 长什么样——自己看，别问我。"
 
 ### 14.1 SDK vs eSDK：什么场景用哪个
 
@@ -42,7 +42,7 @@ ls ~/workspace/poky/meta/classes-recipe/populate_sdk*.bbclass
 
 **系统根（Sysroot）** 本章正式引入：交叉编译环境里为目标硬件提供头文件和库的目录结构——编译 tiger 上的程序，编译器在 x86_64 主机上跑，但它引用的头文件和链接的库必须是 aarch64 的，这套"目标世界的素材"就是 sysroot。`tmp/sysroots-components/` 就是构建系统按配方逐个组件组装 sysroot 的现场（`sysroots-uninative/` 是 uninative 工具的，认得即可）。
 
-老周在白板上画了 SDK 的结构——**一个 SDK 是两半拼起来的**：
+达哥在白板上画了 SDK 的结构——**一个 SDK 是两半拼起来的**：
 
 ```text
 ┌──────────────── SDK（装在一台 x86_64 开发机上）────────────────┐
@@ -153,7 +153,7 @@ ls -lh tmp/deploy/sdk/
 
 阿凯盯着文件名看了三秒："不对——`oecore` 是谁？还有这个 `nodistro.0`——我们的版本号不是 1.0 吗？这串东西哪来的？"
 
-"问得好。"老周说，"11.2.1 你看过 `poky.conf` 的身份声明段；11.8.3 我埋过一句话——SDK 命名模板在 poky.conf 第 25 行。回去对账。"
+"问得好。"达哥说，"11.2.1 你看过 `poky.conf` 的身份声明段；11.8.3 我埋过一句话——SDK 命名模板在 poky.conf 第 25 行。回去对账。"
 
 ```bash
 # 对账：poky 的 SDK 命名是谁给的
@@ -286,7 +286,7 @@ aarch64-tiger-linux-gcc (GCC) 13.x ...
 
 #### 14.3.1 两张清单的分工
 
-默认 SDK 装完，sysroot 里只有 `packagegroup-core-standalone-sdk-target` 带来的 glibc/libstdc++ 一族。够用吗？老周只点拨了一句："SDK 装出来的 sysroot 里有没有你要的头文件，取决于一张清单——12.2 你往镜像里装了 `mtd-utils-ubifs` 和 `i2c-tools`，应用组十有八九要对着它们编程。"
+默认 SDK 装完，sysroot 里只有 `packagegroup-core-standalone-sdk-target` 带来的 glibc/libstdc++ 一族。够用吗？达哥只点拨了一句："SDK 装出来的 sysroot 里有没有你要的头文件，取决于一张清单——12.2 你往镜像里装了 `mtd-utils-ubifs` 和 `i2c-tools`，应用组十有八九要对着它们编程。"
 
 **工具链主机任务 / 工具链目标任务（TOOLCHAIN_HOST_TASK / TOOLCHAIN_TARGET_TASK）** 本章正式引入：两张 BitBake 变量清单，分别声明 SDK 里面向构建主机的工具包（进主机侧 sysroot）和面向目标板的库与头文件包（进目标侧 sysroot）。分工一张表：
 
@@ -333,7 +333,7 @@ find $SDKTARGETSYSROOT/usr/include -name "libmtd.h" -o -name "libubi.h"
 
 顺手澄清一个容易混淆的点：`usr/include/mtd/` 目录其实是在的——你可以当场自查，`ls $SDKTARGETSYSROOT/usr/include/mtd/` 就能看到。里面 `mtd-user.h` 一族是**内核 UAPI 头**（内核暴露给用户空间的接口头文件，认得即可），由 `linux-libc-headers` 配方（把内核头文件导出给 C 库/SDK 用的专用配方，认得即可）随 glibc-dev 的依赖进场，任何默认 SDK 都有；应用组要操作 MTD 设备，缺的是 mtd-utils **自家**的 `libmtd.h`/`libubi.h`——两户人家，别认错门。
 
-他把这条线索拿给老周看。老周没答："sysroot 里有没有，你已经查了。再查一层——`i2c-tools-dev` 这个名字，你自己写过吗？"
+他把这条线索拿给达哥看。达哥没答："sysroot 里有没有，你已经查了。再查一层——`i2c-tools-dev` 这个名字，你自己写过吗？"
 
 没写过。那它是谁装进去的？查装箱清单：
 
@@ -478,7 +478,7 @@ SDK_INCLUDE_BUILDTOOLS ?= '1'
 | 网络假设 | 离线可用 | 假设有网络（或配好 sstate mirror） |
 | 适用 | 内网/离线交付 | 在线环境、有 sstate 镜像服务器的团队 |
 
-一句话：**minimal 省下的体积，是把 sstate 的获取推迟到了使用时**。这个推迟值不值钱，取决于接收方的网络环境——这句话先放着，14.4.3 听老周疼过一次，14.8.2 复盘。表里的 devtool 实物 14.6 才上手——这里只需记住一件事：`devtool build` 要动工具链任务，而工具链任务的快照只在 full 里。
+一句话：**minimal 省下的体积，是把 sstate 的获取推迟到了使用时**。这个推迟值不值钱，取决于接收方的网络环境——这句话先放着，14.4.3 听达哥疼过一次，14.8.2 复盘。表里的 devtool 实物 14.6 才上手——这里只需记住一件事：`devtool build` 要动工具链任务，而工具链任务的快照只在 full 里。
 
 #### 14.4.3 构建、安装，与一次体积诱惑
 
@@ -533,7 +533,7 @@ Run devtool --help for further details.
 
 阿凯盯着那个 1.5G 的安装器看了一会儿："full 这档也太大了。`minimal` 小一个数量级——发 minimal 不行吗？"
 
-"你自己量量看。"老周说，"顺便想清楚它把什么推迟了。"
+"你自己量量看。"达哥说，"顺便想清楚它把什么推迟了。"
 
 阿凯会话级切了一档（演示用，不落仓库）：
 
@@ -558,7 +558,7 @@ ls -lh tmp/deploy/sdk/*toolchain-ext*.sh
 
 > **⚠️ 注意**：minimal 安装器与 full 同名，会**覆盖** deploy 目录里那份 full 产物。这次只构建不安装；验完体积把 local.conf 的 `SDK_EXT_TYPE` 行删掉、重跑一次 `-c populate_sdk_ext` 把 full 产物恢复回来（sstate 兜底，分钟级）。
 
-体积确实诱人。阿凯刚要松口说"发 minimal 也行"，老周按住他："这个坑我替你踩过。上家公司的项目，我图体积小数倍发了 minimal 给一家客户——内网环境，没外网，也没架 sstate 镜像。客户在 eSDK 里第一次 `devtool build`，电话就打回来了。"
+体积确实诱人。阿凯刚要松口说"发 minimal 也行"，达哥按住他："这个坑我替你踩过。上家公司的项目，我图体积小数倍发了 minimal 给一家客户——内网环境，没外网，也没架 sstate 镜像。客户在 eSDK 里第一次 `devtool build`，电话就打回来了。"
 
 发作链条：minimal 的包里没有 sstate 快照，`devtool build` 要用的工具链任务一个都 setscene 不了（setscene：sstate 快照复用的执行形式——快照在就直接解包复用，不在才落回真实执行），全部落回真实执行；真实执行第一步是 `do_fetch` 拉源码包——离线环境拉不到：
 
@@ -568,11 +568,11 @@ ERROR: binutils-cross-aarch64-...: do_fetch: Fetcher failure: Unable to fetch UR
 # ... (连锁失败，省略)
 ```
 
-这是老周的事故复盘，不是现场演示——读者手里能 `devtool add` 的本地源码要到 14.5.1 才出生，断网一节在容器里也做不干净；机理记住即可。有网没镜像的情形也好不到哪去：拉得下源码，就要从源码全量重建工具链——小时级。minimal 推迟的那笔账，在"使用时"连本带利地收。复盘归 14.8.2。
+这是达哥的事故复盘，不是现场演示——读者手里能 `devtool add` 的本地源码要到 14.5.1 才出生，断网一节在容器里也做不干净；机理记住即可。有网没镜像的情形也好不到哪去：拉得下源码，就要从源码全量重建工具链——小时级。minimal 推迟的那笔账，在"使用时"连本带利地收。复盘归 14.8.2。
 
 ### 14.5 自我验证：用 SDK 编一个示例应用，部署上板跑通
 
-"发件人的活干完了。"老周看了眼白板，"换帽子——**从现在起你是应用工程师**，我是旁观的。"
+"发件人的活干完了。"达哥看了眼白板，"换帽子——**从现在起你是应用工程师**，我是旁观的。"
 
 #### 14.5.1 hello-tiger：一个独立目录里的示例应用
 
@@ -874,7 +874,7 @@ files-in-sdk.txt  host/  sdk-files/  sdk-info.txt  target/
 - **14.1 两半结构**：SDK = 主机侧 cross 工具链（x86_64 上跑）+ 目标侧 sysroot（aarch64 素材）；Sysroot 正式引入，chapter 1 的 `sysroots-*` 目录认账；SDK vs eSDK 按接收方分工——只写应用拿 SDK，要改系统拿 eSDK。
 - **14.2 生成 SDK**：populate_sdk 正式引入（长在 tiger-image 上的任务）；populate_sdk_base.bbclass 两张 TASK 清单 + 命名模板实物；**poky 搬家认账又一回**——`SDK_NAME`/`SDK_VERSION`/`SDKPATHINSTALL` 三行从 poky.conf 认领进 tiger-distro.conf，文件名从 `oecore-...-toolchain-nodistro.0.sh`（OE-Core 全局兜底、认别人姓）变成 `tiger-distro-dev-...-toolchain-1.0.sh`，`DISTRO_VERSION = "1.0"` 第一次变成文件名；安装 + environment-setup，`cortexa53-tiger-linux` 脚本名与 `aarch64-tiger-linux-` 前缀把 11.2.2 的 TARGET_VENDOR 伏笔二次回收。
 - **14.3 定制**：TOOLCHAIN_HOST_TASK / TOOLCHAIN_TARGET_TASK 正式引入与分工；`TOOLCHAIN_TARGET_TASK:append = " mtd-utils-dev mtd-utils-staticdev i2c-tools-dev"` 落进 tiger-image.bb（与 12.2 的 IMAGE_INSTALL 清单呼应；头文件归 -dev、.a 静态库归 -staticdev，两条包名纪律）；坑 1 发作——运行包名构建不拦、dev-pkgs 补装只救得了一半；💡 框"要加先量"+ buildhistory 的 SDK 记账。
-- **14.4 eSDK**：populate_sdk_ext / SDK_EXT_TYPE 正式引入；full（默认，含 sstate 快照）vs minimal（体积诱人，把获取推迟到使用时）对照表；eSDK 不能以 root 安装；坑 2 埋雷——老周事故复盘：minimal 离线发作（演示走 local.conf 会话级，主仓库零改动）。
+- **14.4 eSDK**：populate_sdk_ext / SDK_EXT_TYPE 正式引入；full（默认，含 sstate 快照）vs minimal（体积诱人，把获取推迟到使用时）对照表；eSDK 不能以 root 安装；坑 2 埋雷——达哥事故复盘：minimal 离线发作（演示走 local.conf 会话级，主仓库零改动）。
 - **14.5 SDK 自验证**：角色切换扮演应用工程师；hello-tiger 放 `~/workspace/hello-tiger/` 独立目录（开发态/集成态纪律延伸到 SDK 场景，建仓即落初始提交——14.6 的 devtool 要读 HEAD）；Makefile 三段全用环境变量；对照组 qemuarm64 部署跑通（复用 13.3.2 的门与钥匙），PRETTY_NAME 三件套闭环；tiger 组部署挂 C-W29；附录 A 底稿一句。
 - **14.6 eSDK 自验证**：devtool 正式上手（chapter 8 点名、13.6 命令露面，两段前史补登）；`devtool add` 本地源码离线收编（externalsrc 机制，bbappend 里 EXTERNALSRC / EXTERNALSRC_BUILD / initial_rev 三行各认一遍）、`devtool build` 分钟级（full 快照兑现）；modify/finish 主菜归 chapter 15；deploy-target 可选加分项挂 V20。
 - **14.7 分发与版本化**：版本化锚点双份（文件名 1.0 + dev/prod 变体段）+ sha256 归档；buildhistory/sdk 实物认账（SDKSIZE、host/target 双清单子目录、自动 git 提交）；合规意识——SDK 也是分发物，license 清单缺口挂 V19、完整动作归 chapter 16；💡 框 CI 加 sdk job 一句。
