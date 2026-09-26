@@ -9,7 +9,6 @@
       .small { font: 14px "Microsoft YaHei", "Noto Sans CJK SC", sans-serif; fill: #36546d; }
       .tiny { font: 13px "Microsoft YaHei", "Noto Sans CJK SC", sans-serif; fill: #4c667c; }
       .box { fill: #eef6ff; stroke: #2878b5; stroke-width: 2; rx: 10; }
-      .optional { fill: #fffdf6; stroke: #c78925; stroke-width: 2; stroke-dasharray: 7 5; rx: 10; }
       .qemu { fill: #f1fbf4; stroke: #2d8a57; stroke-width: 2; rx: 10; }
       .arrow { stroke: #4d6f8c; stroke-width: 2.2; fill: none; marker-end: url(#arrow); }
     </style>
@@ -23,7 +22,7 @@
 
   <rect x="35" y="82" width="1130" height="292" fill="#f8fbfd" stroke="#c9d8e5" stroke-width="2" rx="16"/>
   <text x="58" y="118" class="lane">tiger 目标路径</text>
-  <text x="58" y="145" class="small">Boot ROM 与可选 BL1 分开表示；蓝色框由平台构建规则接入，具体交付文件待四仓库实测确认。</text>
+  <text x="58" y="145" class="small">目标链已确定；蓝色框由平台构建规则接入，具体交付文件与打包方式待四仓库实测确认。</text>
 
   <rect x="58" y="178" width="130" height="92" class="box"/>
   <text x="123" y="208" class="label" text-anchor="middle">Boot ROM</text>
@@ -31,9 +30,9 @@
   <text x="123" y="256" class="tiny" text-anchor="middle">非 Yocto 产物</text>
   <path d="M188 224 H208" class="arrow"/>
 
-  <rect x="210" y="178" width="130" height="92" class="optional"/>
+  <rect x="210" y="178" width="130" height="92" class="box"/>
   <text x="275" y="208" class="label" text-anchor="middle">TF-A BL1</text>
-  <text x="275" y="235" class="small" text-anchor="middle">平台可选</text>
+  <text x="275" y="235" class="small" text-anchor="middle">可信启动</text>
   <text x="275" y="256" class="tiny" text-anchor="middle">bl1.bin</text>
   <path d="M340 224 H360" class="arrow"/>
 
@@ -65,9 +64,6 @@
   <text x="1052" y="208" class="label" text-anchor="middle">UBI rootfs</text>
   <text x="1052" y="235" class="small" text-anchor="middle">NAND 文件系统</text>
   <text x="1052" y="256" class="tiny" text-anchor="middle">*.ubifs / *.ubi</text>
-
-  <path d="M123 284 C123 315 427 315 427 282" class="arrow" stroke-dasharray="6 5"/>
-  <text x="275" y="340" class="tiny" text-anchor="middle">若平台不采用 BL1，Boot ROM 可直接交给 BL2</text>
 
   <rect x="35" y="397" width="1130" height="168" fill="#f8fbfd" stroke="#c9d8e5" stroke-width="2" rx="16"/>
   <text x="58" y="433" class="lane">qemuarm64 实测路径</text>

@@ -22,7 +22,20 @@
 
 **Fig-2-1 tiger 硬件与启动链映射**
 
-![tiger 的硬件组件及从 Boot ROM 到 UBI rootfs 的启动链映射](images/chapter2-hardware-startup-map.svg)
+```text
++------------------------------------------------------------------------+
+| tiger board hardware                                                   |
++------------------+--------------------------+--------------------------+
+| Compute          | Memory / Storage         | Peripherals              |
+| Cortex-A53 x 4   | DDR | NAND | SPI NOR     | UART | RTC | Watchdog    |
+|                  |                          | I2C EEPROM               |
++------------------+--------------------------+--------------------------+
+
+Boot ROM -> TF-A BL1 -> TF-A BL2 -> TF-A BL31
+         -> U-Boot BL33 -> Linux Kernel -> UBI rootfs
+```
+
+硬件部分把计算、内存与存储、外设列为三个并列功能组，不用树形连线表达不存在的从属关系；下方启动链给出 tiger 已确定的目标顺序。具体产物和打包方式仍以后续四个开发仓库的实现与全链实测为准。
 
 ## 2.1 tiger 硬件全貌的 Yocto 项目映射
 
@@ -74,7 +87,7 @@ QB_CPU = "-cpu cortex-a57"
 
 “`SERIAL_CONSOLES` 呢？”
 
-“串口控制台。`115200;ttyAMA0` 表示波特率 115200，设备节点 `ttyAMA0`。QEMU 的 **PL011** 串口模型会对应这个节点。tiger 的串口也是 PL011，到时候直接复用这个格式。`hvc0` 是 QEMU virtio console 的备用节点。”
+“串口控制台。`115200;ttyAMA0` 表示波特率 115200，设备节点 `ttyAMA0`。QEMU 的 PL011 串口模型会对应这个节点。tiger 的串口也是 PL011，到时候直接复用这个格式。`hvc0` 是 QEMU virtio console 的备用节点。”
 
 “`qemu.inc` 里还有什么？”阿凯又问。
 
@@ -142,7 +155,7 @@ find ~/workspace/poky/meta/recipes-devtools -name "mtd-utils*.bb"
 
 ## 2.2 启动链与构建产物对照
 
-硬件坐标找完了，阿凯顺着 Fig-2-1 看启动链。这里必须先把两个概念拆开：**Boot ROM** 是 SoC 内固化的第一段代码，**TF-A BL1** 则是平台可以选择采用的可信固件阶段。tiger 最终是由 Boot ROM 直接交给 BL2，还是先经过 BL1，要等四个开发仓库的实现和实测定稿。之后的目标路径是 **TF-A BL2** → **TF-A BL31** → **U-Boot BL33** → Linux Kernel → **UBI rootfs**。
+硬件坐标找完了，阿凯顺着 Fig-2-1 看启动链。tiger 的目标启动路径已经确定为 Boot ROM → TF-A BL1 → TF-A BL2 → TF-A BL31 → U-Boot BL33 → Linux Kernel → UBI rootfs。后续四个开发仓库的实现和全链实测，用于验证这条路径并回填具体产物与打包方式。
 
 他先回忆昨天 `qemuarm64` 的 deploy 目录。
 
@@ -161,7 +174,7 @@ core-image-minimal-qemuarm64.rootfs-<时间戳>.ext4
 
 “`qemuarm64` 的关键产物里有 `Image` 和 rootfs，”阿凯自言自语，“却没有 tiger 启动链需要的 TF-A 和 U-Boot 产物。”
 
-“对。”达哥凑过来，“`qemuarm64` 的 `runqemu` 配置让 QEMU 直接加载内核，没有单独构建板级 TF-A 和 U-Boot。tiger 的目标是复现真实板卡从固化启动代码到 TF-A、U-Boot、Linux 的完整流程；Boot ROM 之后是否采用 BL1，由平台方案决定。你现在要关心的是：Yocto 项目怎么选择 provider，又怎样按平台规则部署产物。”
+“对。”达哥凑过来，“`qemuarm64` 的 `runqemu` 配置让 QEMU 直接加载内核，没有单独构建板级 TF-A 和 U-Boot。tiger 的目标启动链已经确定：Boot ROM 加载 TF-A BL1，随后依次进入 BL2、BL31、U-Boot BL33 和 Linux。你现在要关心的是：Yocto 项目怎样为对应阶段接入配方、选择需要仲裁的 provider，并按平台规则部署产物。”
 
 阿凯想起昨天达哥说 BitBake 里有“虚包”机制。他尝试查看当前 MACHINE 下的 kernel 提供者。
 
@@ -197,10 +210,10 @@ PREFERRED_PROVIDER_virtual/kernel="linux-yocto"
 | 启动阶段 | 负责组件 | Yocto 项目产物文件 | qemuarm64 是否有 |
 |---|---|---|---|
 | Boot ROM | SoC 出厂固化 | 不由 Yocto 项目构建 | 不单独产出，由 QEMU 启动流程替代 |
-| TF-A BL1（平台可选） | Trusted Firmware-A | 采用时可能部署 `bl1.bin`，以平台规则为准 | 无 |
-| TF-A BL2 | Trusted Firmware-A | 可能部署 `bl2.bin`，以平台规则为准 | 无 |
-| TF-A BL31 | Trusted Firmware-A | 可能部署 `bl31.bin`，以平台规则为准 | 无 |
-| BL33 (U-Boot) | U-Boot | 可能部署 `u-boot.bin` / `u-boot.dtb`，以平台规则为准 | 无 |
+| TF-A BL1 | Trusted Firmware-A | 目标产物为 `bl1.bin`；实际部署形式待实测 | 无 |
+| TF-A BL2 | Trusted Firmware-A | 目标产物为 `bl2.bin`；实际部署形式待实测 | 无 |
+| TF-A BL31 | Trusted Firmware-A | 目标产物为 `bl31.bin`；实际部署形式待实测 | 无 |
+| BL33 (U-Boot) | U-Boot | 目标产物包括 `u-boot.bin` / `u-boot.dtb`；实际部署形式待实测 | 无 |
 | Linux Kernel | linux-yocto / linux-tiger | `Image`、设备树 `.dtb`；tiger 文件名待实现确认 | 有 `Image` |
 | UBI rootfs | 镜像配方 | 配置后可能部署 `*.ubifs` / `*.ubi` | 实测为 `*.ext4` |
 
@@ -248,11 +261,11 @@ TF-A 常见打包产物还包括 `fip.bin`；`flash.bin` 等整合镜像名称�
 理解了软件栈归属，阿凯回头再看第一章启用的三个 layer。`bitbake-layers show-layers` 输出过：
 
 ```text
-layer                path                                                                   priority
+layer                 path                                                                    priority
 ========================================================================================================
-core                 /home/oops/workspace/poky/meta                                5
-yocto                /home/oops/workspace/poky/meta-poky                          5
-yoctobsp             /home/oops/workspace/poky/meta-yocto-bsp                     5
+core                  /home/oops/workspace/poky/meta                                          5
+yocto                 /home/oops/workspace/poky/meta-poky                                     5
+yoctobsp              /home/oops/workspace/poky/meta-yocto-bsp                                5
 ```
 
 > **💡 提示**：第一列是各 layer 的 `BBFILE_COLLECTIONS` 名称（`core`/`yocto`/`yoctobsp`），不是目录名。这三个名称由对应 layer 的 `layer.conf` 中 `BBFILE_COLLECTIONS` 变量固定声明，不会随本地路径变化。
@@ -320,11 +333,11 @@ MACHINE_FEATURES="alsa bluetooth usbgadget screen vfat rtc qemu-usermode"
 COMBINED_FEATURES="alsa bluetooth usbgadget vfat"
 ```
 
-“注意看，`DISTRO_FEATURES` 比 `MACHINE_FEATURES` 长很多。”达哥指着输出，“`MACHINE_FEATURES` 回答‘这块板子有什么’，`DISTRO_FEATURES` 回答‘这个发行版选择支持什么’。recipe 和 class 会按用途分别检查它们；`COMBINED_FEATURES` 给出两者共同支持的特性，所以实测只有 `alsa bluetooth usbgadget vfat`。它们共同影响构建结果，却不是简单拼成一张列表。”
+“先别比较列表长短，先看两份变量各自回答什么。”达哥指着输出，“`MACHINE_FEATURES` 描述机器具备的硬件能力，`DISTRO_FEATURES` 描述发行版准备启用的软件功能。大多数 recipe 和 class 会按自己的需要检查其中一份；只有同时依赖硬件能力和发行版策略的特性，才通过 `COMBINED_FEATURES` 判断两边是否都已声明。这个环境里，两边共同出现的是 `alsa`、`bluetooth`、`usbgadget` 和 `vfat`，所以 `COMBINED_FEATURES` 只有这四项。它不是把前两份列表拼起来，而是给需要同时满足两边条件的构建逻辑使用。”
 
 “那如果两个 layer 都提供了同名的 recipe，BitBake 选哪个？”
 
-“看 **层优先级变量（`BBFILE_PRIORITY`）**。”达哥打开 `bblayers.conf`，“同名 recipe 出现在不同 layer 时，数值更大的 layer 优先；这个优先级甚至高于 recipe 版本号。`BBLAYERS` 在这里声明启用哪些 layer，不要把它的排列顺序当成同名 recipe 的稳定选择规则。需要覆盖时显式设置层优先级、首选版本或提供者；普通变量和 `.bbappend` 另按各自规则解析。”
+“先分清‘启用了哪些层’和‘同名 recipe 选哪一个’。”达哥打开 `bblayers.conf`，“`BBLAYERS` 只列出参与构建的 layer，它们在文件中的先后顺序不用于决定同名 recipe 的选择。两个 layer 都提供同一个 recipe 时，BitBake 比较各 layer 的 `BBFILE_PRIORITY`，数值较大的优先；这个优先级高于 recipe 版本号。若需要在多个版本或多个 provider 之间选择，再分别使用 `PREFERRED_VERSION` 或 `PREFERRED_PROVIDER`。普通变量和 `.bbappend` 的合并另有规则，不能套用这里的结论。”
 
 ```bitbake
 # 文件路径：~/workspace/build/conf/bblayers.conf（当前内容）
@@ -501,7 +514,14 @@ ERROR: Nothing RPROVIDES 'udev' (but .../packagegroup-core-boot.bb RDEPENDS on o
 ERROR: Required build target 'core-image-minimal' has no buildable providers.
 ```
 
-“这一行语法能进入解析，但它只追加了 `systemd`，没有同步切换 Poky 的 init manager 和设备管理 provider。”达哥说，“结果是 `packagegroup-core-boot` 仍需要 `udev`，当前策略组合却找不到可构建的提供者。MACHINE 越界替 DISTRO 政策做决定，不仅难维护，还可能在 provider 选择阶段直接失败。”
+“这条语句的语法没有问题，错在它只添加了一个 feature，却没有完成 init 系统的整套切换。”达哥把变量关系列了出来：
+
+- Poky 当前仍按 `INIT_MANAGER = "sysvinit"` 加载 SysVinit 配置，`packagegroup-core-boot` 仍通过 `VIRTUAL-RUNTIME_dev_manager` 依赖 `udev`。
+- `DISTRO_FEATURES` 出现 `systemd` 后，`PREFERRED_PROVIDER_udev` 会改选 systemd recipe。
+- systemd recipe 同时要求 `systemd` 和 `usrmerge`；实验只追加了 `systemd`，所以 systemd recipe 因缺少 `usrmerge` 被判定为不可构建。
+- 原来的 eudev 不再是首选 provider，新的 systemd recipe 又不能构建，最终没有 provider 能满足包组对 `udev` 的依赖，`core-image-minimal` 因而在 provider 解析阶段失败。
+
+“所以，错误不在 `+=` 语法，而在于只拨动了 `systemd` 这个标志，留下了一组互相矛盾的策略。”达哥说，“切换 init manager 应在 Distro 配置里设置 `INIT_MANAGER = "systemd"`。Poky 随后加载 `init-manager-systemd.inc`，同时加入 `systemd` 和 `usrmerge`，停止回填 `sysvinit`，并把相关 runtime provider 一起切换。”
 
 阿凯意识到问题，立即用备份恢复，并检查工作树：
 
@@ -548,11 +568,3 @@ DISTRO_FEATURES="acl alsa bluetooth debuginfod ext2 ipv4 ipv6 pcmcia usbgadget u
 ![四个开发态仓库经 meta-tiger 和 BitBake 集成后按 MACHINE 部署产物](images/chapter2-project-overview.svg)
 
 达哥看了一眼：“地图有了。下一步就是动手搭 `meta-tiger` 这个 layer。”
-
-接下来的阅读路线：
-
-- **第 3 章**：创建 `meta-tiger` 的骨架，让 BitBake 认识它。
-- **第 4 章**：让 QEMU 长出 tiger 这块板。
-- **第 5 章**：写第一份 MACHINE 配置。
-
-> **💡 提示**：本章只“看”和“理解”，没有创建 `meta-tiger`、没有写 `tiger-aarch64.conf`、没有集成任何启动链组件。所有动手创建工作从下一章开始。
