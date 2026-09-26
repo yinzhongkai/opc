@@ -268,7 +268,7 @@
 
 ## T-011：chapter 2《读懂这个项目》修订与第 1 轮评审（P3 首章）
 - 负责人：writer（自查修订与统一修订）；reviewer（技术审校与复核）；用户（通读意见与定稿确认）
-- 状态：in_review（U-17 作者修订稳定版 Git `4713576` 已提交；等待 project-manager 复核四图呈现与意见闭环，随后按用户授权直接交 reviewer 做技术复核）
+- 状态：in_review（U-17 作者修订稳定版 Git `4713576` 已提交，project-manager 已复核四图呈现与意见闭环通过；已按用户授权直接交 reviewer 做技术复核）
 - 授权来源与日期：2026-09-26 用户在 project-manager 会话确认启动 P3（"登记吧"）；依据 A-002 v0.3 P3 阶段定义（按依赖序逐章推进，chapter 2→16）与 T-006 定型节奏。
 - 目标与范围：以 chapter 2《读懂这个项目》（workspace/yocto/task03-2-读懂这个项目.md，583 行）走 T-006 定型并由 D-010 补充的完整章节闭环：writer 自查与修订 → 任务内交叉评审（reviewer 技术审校；project-manager 项目管理意见；用户通读意见 D-007 经 project-manager 汇集）+ T-012 真实环境核验 → writer 统一修订 → reviewer 复核 → 用户确认定稿。修订与审校依据：A-004 v0.4 全部条款（含 v0.3 §4 三条款、v0.4 §7 列表记号）+ T-006 口径族——①正文/对话弯引号（R-3 口径，逐章统一）；②`/home/<your-username>` 占位回填固化环境真实值（U-11 口径，本章 8 处含 1 处 💡，回填 `/home/oops` 并移除替换提示）；③概念名大小写（sstate 等）；④scarthgap 分支名/发行版分工（本章 2 处 Scarthgap）；⑤列表记号 `-` 紧凑（D-009）；⑥延伸阅读链接实测核查（U-16 建议，curl 状态码+标题核对）；⑦读者正文不暴露内部 `task NN`，并移除章末 Git tag 流程（D-011）。
 - 输入与依赖：书稿当前版本；A-004 v0.4（approved）；A-003；T-006 全套评审记录（口径族出处）；D-010/T-012；D-011。chapter 2 无既有 C-W/V 挂账且不依赖 P0.5，但这不构成跳过真实环境核验的依据；受评稿现有 4 处读者可见 `task NN` 和 1 组章末 `git tag chapter2` 流程，均已纳入本轮统一修订。
@@ -279,7 +279,7 @@
   - U-17 进展补充：2026-09-27 writer 按用户确认口径将 Fig-2-2~Fig-2-4 改为紧邻图题的 `text` ASCII 图，删除三份已无正文引用的 SVG，并提交 Git `4713576`。Fig-2-2 分开 tiger 目标链与 qemuarm64 实测路径；Fig-2-3 分开 `meta-tiger` 内外边界及 MACHINE/DISTRO 职责；Fig-2-4 分开 Poky 参考输入、四仓库经 `meta-tiger` 集成的目标输入、BitBake 的两条 MACHINE 分支和独立 Application。
   - U-17 成果与验证补充：当前稳定版 Git `4713576`，chapter 2 共 631 行；Fig-2-1~Fig-2-4 均为 `text` ASCII 图，正文图片引用为 0，`chapter2-boot-flow.svg`、`chapter2-software-stack-boundary.svg`、`chapter2-project-overview.svg` 均已删除。三张新图的边框/内容行统一为 96 字符；全章 Tab 与行尾空格均为 0，74 个代码围栏标记成对，`git diff --check` 与提交检查通过。图内未新增平台文件名、产品名或交付承诺。
 - 定稿前一致性与呈现补充：提交 `fe72b37` 后的全图扫描发现 Fig-2-3 仍有旧字样“BL1 可选”；writer 将其改为固定阶段“BL1、BL2、BL31”，完成 1200×620 渲染检查并提交 Git `d9745b0`。project-manager 随后指出 Fig-2-1 分成两行的启动链可能被读成 Boot ROM 的两条分支；writer 按反馈合并为单行顺序并提交 Git `5babfb7`。该版本为 U-17 前的稳定基线；U-17 当前稳定版本已更新为 `4713576`。
-- 阻塞与下一位行动人：无执行阻塞。下一位行动人 project-manager：复核 Git `4713576` 的四图 ASCII 对齐、Markdown 呈现、图片引用清零、SVG 删除和 U-17 意见闭环；通过后按用户既有授权直接通知 reviewer 复核四图技术映射，并连同 U-11/U-13/U-14/U-15 给出结论；通过后由用户确认 chapter 2 定稿与 A-004 v0.5。writer 不代写上述复核结论。
+- 阻塞与下一位行动人：无执行阻塞。project-manager 已复核 Git `4713576` 的四图 ASCII 对齐、Markdown 呈现、图片引用清零、SVG 删除和 U-17 意见闭环通过。下一位行动人 reviewer：按用户既有授权复核四图技术映射，并连同 U-11/U-13/U-14/U-15 给出结论；通过后由用户确认 chapter 2 定稿与 A-004 v0.5。
 - 更新日期：2026-09-27
 
 ### 本轮评审：chapter 2 作者修订稿（Git `0f2c44c`，第 1 轮）
@@ -415,6 +415,12 @@
 - U-17｜**已修订，待 project-manager 与 reviewer 按既定顺序复核**：保留 Fig-2-1~Fig-2-4 图题和 Fig-2-1 现有 ASCII；将 Fig-2-2~Fig-2-4 的 SVG 引用替换为紧邻图题的 `text` ASCII 图。Fig-2-2 用两个独立框区分 tiger 已确定但尚待全链实测的目标链与 qemuarm64 已实测的 `runqemu / QEMU -> Image -> ext4 rootfs` 路径，并把平台交付文件/打包方式继续标为待实现和实测。Fig-2-3 将 Application 放在 `meta-tiger` 外，将 OS/BSP 与 Firmware/Bootloader 放在边界内，并单列 MACHINE 只描述硬件能力、DISTRO 决定发行版策略。Fig-2-4 分开 qemuarm64 的 Poky `meta` 参考输入与四个开发态仓库经 `meta-tiger` 集成的 tiger 目标输入，再由 BitBake 按 MACHINE 分成 qemuarm64 实测结果与 tiger-aarch64 目标；Application 作为独立交付项与 BSP 构建链分离。
 - 文件处理：项目内定向搜索确认三份 SVG 的有效引用各仅有正文一处；替换后删除 `workspace/yocto/images/chapter2-boot-flow.svg`、`chapter2-software-stack-boundary.svg`、`chapter2-project-overview.svg`。TASKS 中保留的文件名只记录旧版本历史，不构成有效图片引用。
 - 作者验证：chapter 2 共 631 行；Fig-2-1~Fig-2-4 四个图题均保留并紧邻 `text` 代码块，正文 Markdown 图片引用为 0，三份 SVG 均不存在。三张新图的边框/内容行均为 96 字符，仅使用 ASCII 字符和空格对齐；全章 Tab 为 0、行尾空格为 0，74 个代码围栏标记成对。目标/实测、`meta-tiger` 内外、MACHINE/DISTRO、两条 MACHINE 分支和 Application 独立交付标签均存在；未新增未经实现或实测确认的文件名、产品名或交付承诺。`git diff --check` 与 Git `4713576` 提交检查通过。
+
+#### project-manager 对 U-17 的呈现复核
+- 日期、版本与范围：2026-09-27；复核正文稳定版 Git `4713576` 及 writer 记录提交 `a6845cc`。范围为 Fig-2-1~Fig-2-4 的 ASCII 呈现、层级与连线可读性、图题和相邻正文承接、图片引用与 SVG 清理、U-17 意见闭环；图内技术事实与 U-11/U-13/U-14/U-15 留给 reviewer。
+- 结论：**pass（project-manager 范围）**。四个图题均紧邻 `text` 图块，图内非 ASCII 字符为 0；Fig-2-1 保持硬件三组并列与单行启动链，Fig-2-2 以独立框分开 tiger 目标链和 qemuarm64 实测路径，Fig-2-3 清楚区分 `meta-tiger` 外的 Application、边界内的 OS/BSP 与 Firmware/Bootloader，并单列 MACHINE/DISTRO 职责，Fig-2-4 将 Poky 参考输入和 tiger 集成输入分开后再汇入 BitBake，并按 MACHINE 分成实测与目标两支，不产生 `qemuarm64` 依赖 `meta-tiger` 的视觉误读。
+- 静态检查：chapter 2 共 631 行，74 个代码围栏标记成对；Markdown 图片引用、Tab、行尾空格均为 0；三份 `chapter2-*.svg` 不存在。Fig-2-1 表格行 74 字符，三张新增图的边框/内容行 96 字符，Fig-2-4 两组连接线各为 48 字符并居中；四图正文承接与图中标签一致。`git diff 5babfb7..4713576` 只涉及三处图形替换、三段相邻解释和三份失去引用的 SVG 删除，工作区干净。
+- 下一步：按用户授权直接交 reviewer 复核四图技术映射，并连同 U-11/U-13/U-14/U-15 给出结论；本结论不替代 reviewer 技术结论或用户定稿确认。
 - 待复核范围：project-manager 先复核四图对齐、Markdown 呈现、图片引用清零、SVG 删除和 U-17 闭环；通过后按用户授权直接通知 reviewer 复核四图技术映射及 U-11/U-13/U-14/U-15。writer 不将本次自查记作上述复核通过。
 
 ## T-012：真实环境核验 chapter 2 命令、配置与输出
