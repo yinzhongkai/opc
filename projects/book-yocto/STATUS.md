@@ -1,6 +1,6 @@
 # 项目状态摘要
 
-- 汇总日期与信息截至点：2026-09-26；信息范围为 T-011 第 1 轮受评稿提交、用户通读意见 U-1~U-2、D-010 确认及 T-012 登记后的各台账记录。
+- 汇总日期与信息截至点：2026-09-26；信息范围为 T-011 第 1 轮受评稿提交、用户通读意见 U-1~U-4、D-010 确认及 T-012 登记后的各台账记录。
 - 维护人：project-manager（按 [PROJECT.md](PROJECT.md) 指定的协调记录维护人）。
 - 当前阶段：P1 基础修复已完成；**P2 章节闭环试点已完成（chapter 1 于 2026-09-25 定稿）**；**P3 已启动，chapter 2 正在第 1 轮评审与真实环境核验准备**（计划见 A-002 v0.4）。目标与范围见 [PROJECT.md](PROJECT.md) 与 D-001~D-010。书稿位于 `projects/book-yocto/workspace/yocto/`。
 - 任务进展：
@@ -14,7 +14,7 @@
   - T-008 真实环境运行核查 chapter 1 环境信息（reviewer）：completed（2026-09-23 容器实测）。
   - T-009 真实环境首次构建与启动核查 chapter 1 主线（reviewer）：completed（2026-09-25）——远程服务器 tiger 实测：local.conf 七项一致、续跑构建成功（4073 tasks 全过）、runqemu guest 逐项核对；[核查记录](workspace/t009-chapter1-build-check.md) 登记 N-1/N-2 不符项与 O-1/O-2 观察项；PM 复核通过，N-1/N-2/O-1 已随 T-006 定稿修订处理。
   - T-010 task02 列表记号归一与顺手修订（writer，D-009）：completed（2026-09-26，PM 复核通过：20 项列表逐字一致归一、L135 输出保留正确、scarthgap 修正落实）。
-  - T-011 chapter 2《读懂这个项目》修订与第 1 轮评审（writer/reviewer/用户）：in_review——作者修订稿 Git `0f2c44c` 已提交；用户通读已登记 U-1（缺少实际架构图）与 U-2（逐章真实环境核验）；等待 reviewer、project-manager 意见及 T-012 结果。
+  - T-011 chapter 2《读懂这个项目》修订与第 1 轮评审（writer/reviewer/用户）：in_review——作者修订稿 Git `0f2c44c` 已提交；用户通读已登记 U-1~U-4（缺图与图表编号对应、逐章真实环境核验、对话措辞）；等待 reviewer、project-manager 意见及 T-012 结果。
   - T-012 chapter 2 命令、配置与输出真实环境核验（reviewer）：todo——依据 D-010 登记，结果为 T-011 统一修订和定稿输入。
 - 关键成果：A-004 体例约定 v0.4 已批准（P3 统稿依据，含 D-009 的 `-` 紧凑列表风格）；A-002 v0.4 已纳入 D-010 逐章真实环境核验要求，仍为 draft；A-001/A-003 v0.1 为 draft；T-008/T-009 两份实测核查记录入 workspace/。
 - 阻塞、待确认事项及下一位行动人：
