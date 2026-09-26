@@ -268,7 +268,7 @@
 
 ## T-011：chapter 2《读懂这个项目》修订与第 1 轮评审（P3 首章）
 - 负责人：writer（自查修订与统一修订）；reviewer（技术审校与复核）；用户（通读意见与定稿确认）
-- 状态：in_review（统一修订稳定版 Git `bc33817` 已提交，等待 reviewer 技术/实测复核、project-manager 流程复核与用户定稿确认）
+- 状态：in_review（统一修订稳定版 Git `bc33817` 已提交，project-manager 流程复核通过；等待 reviewer 技术/实测复核与用户定稿确认）
 - 授权来源与日期：2026-09-26 用户在 project-manager 会话确认启动 P3（"登记吧"）；依据 A-002 v0.3 P3 阶段定义（按依赖序逐章推进，chapter 2→16）与 T-006 定型节奏。
 - 目标与范围：以 chapter 2《读懂这个项目》（workspace/yocto/task03-2-读懂这个项目.md，583 行）走 T-006 定型并由 D-010 补充的完整章节闭环：writer 自查与修订 → 任务内交叉评审（reviewer 技术审校；project-manager 项目管理意见；用户通读意见 D-007 经 project-manager 汇集）+ T-012 真实环境核验 → writer 统一修订 → reviewer 复核 → 用户确认定稿。修订与审校依据：A-004 v0.4 全部条款（含 v0.3 §4 三条款、v0.4 §7 列表记号）+ T-006 口径族——①正文/对话弯引号（R-3 口径，逐章统一）；②`/home/<your-username>` 占位回填固化环境真实值（U-11 口径，本章 8 处含 1 处 💡，回填 `/home/oops` 并移除替换提示）；③概念名大小写（sstate 等）；④scarthgap 分支名/发行版分工（本章 2 处 Scarthgap）；⑤列表记号 `-` 紧凑（D-009）；⑥延伸阅读链接实测核查（U-16 建议，curl 状态码+标题核对）；⑦读者正文不暴露内部 `task NN`，并移除章末 Git tag 流程（D-011）。
 - 输入与依赖：书稿当前版本；A-004 v0.4（approved）；A-003；T-006 全套评审记录（口径族出处）；D-010/T-012；D-011。chapter 2 无既有 C-W/V 挂账且不依赖 P0.5，但这不构成跳过真实环境核验的依据；受评稿现有 4 处读者可见 `task NN` 和 1 组章末 `git tag chapter2` 流程，均已纳入本轮统一修订。
@@ -276,7 +276,7 @@
 - 完成条件与确认方式：本轮评审意见全部处理并复核通过；T-012 逐项核验完成，实测不符项已由 writer 处理并经 reviewer 复核；D-011 的内部流程清理已完成；按 D-003/D-010，章节定稿需用户确认。
 - 进展：2026-09-26 任务登记（P3 首章）。同日 writer 会话按用户指示"执行 T-011"完成作者自查修订并提交第 1 轮受评稿（Git `0f2c44c`，583 行）：①标题层级由 H2/H3/H4 升为 1×H1 + 7×H2 + 2×H3，符合 A-004 v0.4；②正文/对话 86 对 ASCII 直引号改为弯引号，代码块与行内代码保持原样；③`<your-username>` 实际共 10 处（登记时写 8 处，经逐处核对为 9 处路径 + 1 处替换提示）全部回填 `/home/oops`，替换提示改为固化环境说明；④全章原已无 `*` 列表，继续保持 `-` 紧凑风格；2 处 Scarthgap 均指发行版/版本语境，保持官方大写；全章无外部 URL，故本章没有延伸阅读链接可执行状态码/标题核查；⑤按官方 Yocto Project 5.0 / BitBake 2.8 资料修正技术表述：`MACHINE_FEATURES` / `DISTRO_FEATURES` 分别生效且 `COMBINED_FEATURES` 取相关交集、同名 recipe 由 `BBFILE_PRIORITY` 主导而非依赖 `BBLAYERS` 顺序、`IMAGE_INSTALL` 只管 rootfs 软件包而非 TF-A/U-Boot/内核 provider；同时修正增量重构、独立交付合规、QEMU 启动链产物、`core-image` 类继承等表述。未代写 reviewer、project-manager 或用户意见。2026-09-26 本轮全部输入到齐后，writer 按用户指示执行统一修订并提交新稳定版 Git `bc33817`（558 行）：逐项处理 U-1~U-8、R-1~R-6，R 问题引用 T-012 N-1~N-5/O-1 实测证据；新增 4 个本地 SVG，将旧表格/字符图统一为 4 个真实图片与 3 个正式表格；落实 D-010/D-011。逐项回复见本轮评审末尾。
 - 成果与验证证据：①第 1 轮受评稿：`workspace/yocto/task03-2-读懂这个项目.md`，Git `0f2c44c`（583 行，94 增/94 删）；②统一修订稳定版：同一正文，Git `bc33817`（558 行），并新增 `workspace/yocto/images/chapter2-hardware-startup-map.svg`、`chapter2-boot-flow.svg`、`chapter2-software-stack-boundary.svg`、`chapter2-project-overview.svg`。验证：4 个 SVG 均通过 XML 解析并以 1200px 原始画布渲染检查，文字/连线无截断；正文 4 个 Fig 标签与 4 个本地图片引用一一对应，3 个纯表格使用 Table 编号，66 个代码围栏标记成对，图片链接全部存在，`task NN`、章末 `git tag chapter2`、源码块多余 `\"` 均为 0，`git diff --check` 通过。技术变更直接采用 T-012 固化环境结果，不把本次静态校验冒充新的远程实测。
-- 阻塞与下一位行动人：无执行阻塞。下一位行动人 reviewer：复核 Git `bc33817` 对 R-1~R-6/N-1~N-5/O-1 的处理及新增图片的技术映射；project-manager：复核 U-1~U-8、D-010/D-011、图表编号和证据闭环；两方复核到齐后由用户确认 chapter 2 定稿。writer 不把本次修订自查记为上述复核或最终批准。
+- 阻塞与下一位行动人：无执行阻塞。project-manager 已复核 U-1~U-8、D-010/D-011、图表编号和证据闭环并通过。下一位行动人 reviewer：复核 Git `bc33817` 对 R-1~R-6/N-1~N-5/O-1 的处理及新增图片的技术映射；reviewer 复核通过后由用户确认 chapter 2 定稿。writer 自查与 project-manager 流程复核均不替代技术复核或最终批准。
 - 更新日期：2026-09-26
 
 ### 本轮评审：chapter 2 作者修订稿（Git `0f2c44c`，第 1 轮）
@@ -284,7 +284,7 @@
 - 受评成果与稳定版本：`workspace/yocto/task03-2-读懂这个项目.md`，Git `0f2c44c`，583 行。用户保证本轮全部意见提交前正文版本不变；writer 待意见到齐后统一修订。
 - 参与成员、范围与完成条件：reviewer——技术事实、命令/变量/输出、跨章一致性与教学可执行性，重点复核 writer 本轮修正的 feature 关系、layer/recipe 优先级、image/provider 边界；project-manager——任务范围、章节结构、P3 流程与跨章联动，重点核对 D-011 的内部流程清理范围；用户——按 D-007 通读并提交建议/疑问，经 project-manager 汇集。每方须记录实际范围、依据、未覆盖项与结论；本轮意见全部提交后 writer 才统一修订。
 - 作者提交说明：writer，2026-09-26。作者自查结论为可提交评审；本结论不替代独立技术审校、项目管理意见或用户定稿确认。
-- 本轮进度与下一位行动人：2026-09-26 用户完成整章通读，U-1~U-8 为本轮完整意见集；reviewer 完成技术审校（结论 revise，R-1~R-6）与 T-012 实测（N-1~N-5/O-1）；project-manager 完成 T-012 复核及项目管理意见（通过项目管理范围，无新增问题）。全部输入到齐后 writer 已完成统一修订并提交稳定版 Git `bc33817`；下一位行动人 reviewer 与 project-manager 按各自范围复核，复核到齐后由用户确认定稿。
+- 本轮进度与下一位行动人：2026-09-26 用户完成整章通读，U-1~U-8 为本轮完整意见集；reviewer 完成技术审校（结论 revise，R-1~R-6）与 T-012 实测（N-1~N-5/O-1）；project-manager 完成 T-012 复核及项目管理意见。全部输入到齐后 writer 已完成统一修订并提交稳定版 Git `bc33817`；project-manager 对统一修订的流程、用户意见、图表交付及 D-010/D-011 复核通过。下一位行动人 reviewer 做技术与实测复核，通过后由用户确认定稿。
 
 #### 用户的通读意见（D-007）
 - 日期、评审依据与未覆盖项：2026-09-26；受评版本 Git `0f2c44c`。用户已完成整章通读，U-1~U-8 为本轮完整意见集；用户通读范围无未覆盖项。上述意见是统一修订输入，不代表当前受评稿已经定稿。
@@ -336,6 +336,15 @@
 - R-5（对应 N-5）｜**已修订，待 reviewer 复核**：正文、Fig-2-1、Fig-2-2、Table-2-2 与小结均将 Boot ROM 和可选 TF-A BL1 分开；tiger 采用哪条路径明确标为待四仓库实现与实测定稿；`bl1.bin`/`bl2.bin`/`bl31.bin`/U-Boot/DTB/UBI 均改为按平台规则“可能部署”，`fip.bin` 标为常见 TF-A 打包产物，`flash.bin` 标为平台约定；小结收窄为构建系统控制的阶段由 MACHINE/provider/recipe/平台打包规则决定是否及如何部署。
 - R-6（对应 O-1）｜**已修订，待 reviewer 复核**：2.4 节命令新增 `COMBINED_FEATURES` 查询，输出回填固定基线实测值：`MACHINE_FEATURES="alsa bluetooth usbgadget screen vfat rtc qemu-usermode"`、`COMBINED_FEATURES="alsa bluetooth usbgadget vfat"`；`DISTRO_FEATURES` 保留实测完整值，并用交集结果直接解释机制。
 - 作者验证与待复核项：4 个 SVG 均通过 XML 解析及 1200px 原始尺寸渲染检查；正文图片链接全部存在，图/表编号连续且形态一致，66 个代码围栏标记成对，`task NN`、章末 tag 流程、`\"` 均无残留，`git diff --check` 通过。待 reviewer 复核 R-1~R-6/N-1~N-5/O-1 与图片技术映射，待 project-manager 复核 U-1~U-8、D-010/D-011 和流程证据；复核到齐后仍需用户确认定稿。
+
+#### project-manager 对统一修订的复核
+- 日期、复核版本与范围：2026-09-26；复核稳定版 Git `bc33817` 及 writer 处理回复提交 `87f5ab5`。范围为 U-1~U-8 的交付处理、D-010/D-011 落实、图表编号与本地资产、评审证据和后续依赖；不替代 reviewer 对 R-1~R-6/N-1~N-5/O-1 和图片技术映射的专业复核。
+- 结论：**pass（项目管理与用户意见处理范围）**，未发现新增问题。chapter 2 仍处于 `in_review`，须等 reviewer 技术/实测复核通过并由用户确认后才能定稿。
+- U-1/U-4/U-6 与图表交付：正文已删除虚构的内网 wiki 依赖；Fig-2-1~Fig-2-4 均紧邻真实本地 SVG 引用，Table-2-1~Table-2-3 独立编号。4 个 SVG 均可解析并按 1200px 宽度实际渲染查看，文字、连线、边框和说明未见截断或重叠；图片链接全部存在。Fig-2-1 覆盖用户指定硬件和启动阶段，Fig-2-2 明确 tiger/qemuarm64 两条路径，Fig-2-3 呈现三层归属，Fig-2-4 呈现仓库到部署产物的项目全景。
+- U-2/U-3/U-5：T-012 已执行并经 project-manager 复核，writer 明确以其证据修订而未冒充新实测；“按本书设定”和突兀的 API 句均已替换为完整技术因果，处理回复能追溯至对应用户意见。最终技术措辞随 reviewer 复核确认。
+- U-7/U-8 与 D-011：读者正文和 4 个 SVG 中不再出现 `task NN`；章末已改成按第 3/4/5 章组织的阅读路线，`git tag chapter2` 叙事、注释和命令块均已移除。内部文件名继续保留 task 标识，符合 D-011 边界。
+- D-010 与证据闭环：R-1~R-5 分别引用 T-012 N-1~N-5，R-6 引用 O-1；writer 逐项回复未把同一事实重复计数。正文和图片稳定在 Git `bc33817`，当前版本相对该提交无差异；XML、图片链接、66 个代码围栏、图表数量和 `git diff --check` 的静态检查均复核通过。
+- 下一位行动人：reviewer 对 Git `bc33817` 复核 R-1~R-6/N-1~N-5/O-1 及 4 个 SVG 的技术映射；通过后转用户确认 chapter 2 定稿。
 
 ## T-012：真实环境核验 chapter 2 命令、配置与输出
 - 负责人：reviewer
