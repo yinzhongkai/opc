@@ -1,31 +1,32 @@
 # 第 1 章 认识 nRF54L15 DK 与开发环境搭建
 
-> 唯一当前正文。本版为草稿（draft），提交用户审阅；试读、定稿表示交付用途，不另起一套成果状态。
+> 唯一当前正文。本版为技术复核稿（in_review），待 developer 完成本轮复核和问题处理后，再交用户完整通读；尚未最终批准。
 
-- 项目：book-zephyr / 成果 ID：A-004 / 关联任务：T-004
-- 负责人：writer / 版本：0.1 / 更新时间：2026-09-20
-- 成果状态：draft
+- 项目：book-zephyr / 成果 ID：A-004 / 关联任务：T-004（初稿）、T-006（修订、技术复核与通读反馈）
+- 负责人：writer / 版本：0.2 / 更新时间：2026-09-26
+- 成果状态：in_review
 - 适用范围：第 1 章正文草稿，覆盖已批准蓝图 A-003 v0.1 约定的学习目标、内容结构与示例说明；不含示例工程的独立仓库实现（本章直接使用 NCS/Zephyr 自带示例），不含 environment.md 环境基线确认（T-005，developer 职责）
-- 来源及输入版本：[章节蓝图 A-003 v0.1](plan.md)（approved，批准依据 D-006）；[图书设计 A-001 v0.2](../../design.md)（approved）；[全书目录 A-002 v0.2](../../outline.md)（approved）；决定 D-001～D-006；Zephyr 官方板级文档 nRF54L15 DK 页（2026-09-20 由 writer 在线核实，见“来源与延伸阅读”）；Nordic 官方安装文档与 DK 资料包核查结论（资料核查级，经 A-003 蓝图与 A-001 v0.2 记录）
+- 来源及输入版本：[章节蓝图 A-003 v0.1](plan.md)（approved，批准依据 D-006）；[图书设计 A-001 v0.2](../../design.md)（approved）；[全书目录 A-002 v0.2](../../outline.md)（approved）；[环境基线 A-005 v0.3](../../environment.md)（approved，D-007）；决定 D-001～D-008；[官方资料包索引](../../../../workspace/nrf54l15-dk-docs/README.md)；初稿技术来源保留，2026-09-26 补核安装与终端官方文档（见“来源与延伸阅读”）。A-001/A-003 的旧安装表述按 T-006、D-007 和 A-005 v0.3 修正，不修改其原稿。
 - 批准依据：尚无
 - 版本记录：2026-09-20 v0.1 初稿，按 A-003 v0.1 蓝图撰写；软件基线按 D-005 候选基线 NCS v3.4.0 撰写，environment.md 基线确认前，涉及具体版本、路径与界面的位置均标注【待核】
-- 稳定章节标识：ch-env-setup（显示章号“第 1 章”以 [全书目录](../../outline.md) 为准）/ 交付用途：草拟，提交用户审阅
+- 版本记录：2026-09-26 v0.2 按 T-006 修订学习目标、1.2～1.4 节及图示/截图说明：改用 VS Code 扩展安装 SDK、配置终端并衔接构建烧录；核销“基线未确认”“资料包缺失”，更新来源，保留实际版本、安装与上板未执行及图像占位。新增烧录依赖和版本检查命令的待技术复核说明；作者自查后提交 developer 第 1 轮技术复核，尚无复核结论或用户通读反馈。
+- 稳定章节标识：ch-env-setup（显示章号“第 1 章”以 [全书目录](../../outline.md) 为准）/ 交付用途：技术复核，后续通读按 D-008
 
 ## 本章要解决的问题
 
-在导读中，你已经备齐了物料，拿到了 nRF54L15 DK。从这一章开始，我们正式动手。这一章要回答三个问题：这块板子上有什么？开发它的软件环境由哪些部分组成、怎么在 Windows 上从零装起来？以及最重要的——如何把第一个程序真正跑在芯片上？
+本章从 nRF54L15 DK 和一台 Windows 主机开始，不需要后续外设实验的全部物料。导读尚未成文时，可以直接按下面的资源清单准备。这一章要回答三个问题：这块板子上有什么？开发它的软件环境由哪些部分组成、怎么在 Windows 上从零装起来？以及最重要的——如何把第一个程序真正跑在芯片上？你也可以先完整阅读并反馈疑问，再另行安排安装和上板实验。
 
 读完本章并跟着做完实验后，你应该能够：
 
 1. 说出 nRF54L15 SoC 的主要组成——Cortex-M33 应用核、FLPR RISC-V 协处理器、1.5 MB RRAM、256 KB RAM、电源域的概念，以及主要外设各自负责什么——并在 DK 实物上指出主芯片、天线、按键与 LED、USB 口、电流测量头的位置；
-2. 在 Windows 主机上从零安装 nRF Connect 开发环境（nRF Connect for Desktop → Toolchain Manager → NCS v3.4.0 工具链与 SDK → VS Code 与 nRF Connect 扩展），并用命令行验证工具链可用；
+2. 在 Windows 主机上从零安装开发环境（VS Code → nRF Connect 扩展包 → Install SDK 安装 NCS v3.4.0 及配套工具链），准备调试驱动和烧录工具，并从扩展的工具链终端进行检查；
 3. 基于官方示例创建工程，完成“构建 → 烧录 → 上板观察”的完整循环（blinky：LED 闪烁）；
 4. 修改示例参数（闪烁周期）后重新构建烧录，确认自己掌控这个循环；
 5. 说出官方资料——数据手册、DK 用户指南、Rev 2 勘误表、NCS 在线文档、DevZone——各自的用途，并能按板卡版本找到对应的勘误。
 
 **前提**：本书假设你熟练使用 C 语言和系统编程、熟悉驱动与体系结构的概念（例如寄存器、中断、控制器），但此前没有接触过单片机、RTOS 和蓝牙。C 语言与寄存器原理本书不再讲解；遇到 Zephyr 特有的概念（本章会遇到 devicetree、Kconfig 的名字）我们会借助你的 Linux 内核背景作对照——正式讲解在第 2 章，本章只要求“会用”。
 
-**所需资源**：一台尚未安装任何开发软件的 Windows 主机；nRF54L15 DK 1.0.0（板上为 Rev 2 芯片）；一条 USB-C **数据线**；可访问 nordicsemi.com 的网络。安装过程需要下载数 GB 数据并占用较多磁盘空间，请预留稳定的网络与足够的磁盘余量【待核：具体体积以 environment.md 基线确认为准】。
+**所需资源**：一台 Windows 主机（本章按尚未安装开发软件的起点讲解）；nRF54L15 DK 1.0.0（板上为 Rev 2 芯片）；一条 USB-C **数据线**；可访问 Nordic 官网、VS Code 下载页和扩展市场的网络。安装前检查磁盘余量与网络；下载体积、耗时、实际 Windows 版本和安装路径均【待核：用户安装后回填】，基线批准不代表这些数据已经测得。
 
 ## 理解与实践
 
@@ -76,94 +77,101 @@ DK 的 VDD（IO 电平）默认为 1.8 V。本章不连接任何外接模块，�
 
 动手安装之前，先看一张“要装哪些东西、各自管什么”的地图（对照图 1-3）。嵌入式工具链名词繁多，先把角色分清，安装时就不会迷失。
 
-> 【图 1-3 占位】开发环境组成示意图——**自制**，标注四层：nRF Connect for Desktop（图形化管家）→ Toolchain Manager → NCS（SDK 源码 + 工具链）→ VS Code 与 nRF Connect 扩展（日常开发界面）。待绘制。
+图 1-3 开发环境组成示意（作者自制，表示工具职责，不是实机截图）：
+
+```text
+Windows 主机
+├─ VS Code + nRF Connect 扩展包：安装 SDK、编辑、构建与调试入口
+│  ├─ Install SDK → NCS v3.4.0 源码 + 配套工具链
+│  └─ nRF Connect 工具链终端 → west → 构建 / 调用烧录工具
+├─ J-Link 软件与驱动、烧录工具 → 板载调试器 → nRF54L15
+└─ nRF Connect for Desktop → Programmer（独立的设备/烧录界面）
+```
 
 - **Zephyr**：一个开源 RTOS（实时操作系统），由 Linux 基金会托管。它提供内核（线程、调度、同步、中断、定时）、设备驱动模型和大量协议栈。角色上可以对标你熟悉的 Linux 内核——只不过它面向没有 MMU 的微控制器，镜像通常只有几十到几百 KB。
-- **NCS（nRF Connect SDK）**：Nordic 在 Zephyr 之上维护的官方 SDK。它以 Zephyr 为内核，加入 Nordic 芯片的驱动、BLE 协议栈、bootloader（MCUboot）和大量示例。本书的统一软件基线是 **NCS v3.4.0**（2026-07-01 发布，Nordic 首个 LTS 长期支持版本，基于 Zephyr 4.4）【待核：environment.md 基线确认为准】。日常说“装环境”，装的就是 NCS 及其配套工具链。
-- **west**：Zephyr 生态的命令行“大管家”，负责拉取多仓库源码、构建、烧录、调试。角色上有点像 `repo` + `make` 的结合体。本章会用到的只有三条：`west --version`（验证安装）、`west build`（构建）、`west flash`（烧录）。
-- **工具链**：编译器（Arm GCC / LLVM）、调试器、烧录工具等一组命令行程序，与 SDK 源码配套安装。
-- **nRF Connect for Desktop**：Nordic 官方的图形化工具箱，其中的 **Toolchain Manager** 负责一键安装指定版本的 NCS 工具链与 SDK——我们用它来完成最繁琐的一步。
-- **VS Code 与 nRF Connect 扩展**：日常写代码、建工程、构建烧录的图形界面。它本质上是上面那些命令行工具的图形封装；本书两条路都教，但以命令行为主线讲清原理。
+- **NCS（nRF Connect SDK）**：Nordic 在 Zephyr 之上维护的官方 SDK，包含 Nordic 平台支持、协议栈、MCUboot 和示例。本书按已批准的 A-005 v0.3 使用 **NCS v3.4.0**，其中记录的 Zephyr 基线为 4.4；实际安装版本仍待回填。日常说“装环境”，需要同时具备 SDK 源码和与它匹配的工具链。
+- **west**：Zephyr 生态的命令行“大管家”，负责多仓库管理，并通过扩展命令衔接构建、烧录和调试。本章用 `west --version`、`west topdir` 和 `west boards` 检查命令、工作区与板列表，再用 `west build` 构建、`west flash` 调用烧录后端。
+- **工具链**：编译器、链接器和构建工具等配套程序。A-005 v0.3 记录的目标是 Zephyr SDK 1.0.1 / GCC 14.3.0，实际版本待安装后核对；调试驱动和烧录后端还需单独检查，不能从“SDK 已安装”推断它们都能工作。
+- **nRF Connect for Desktop**：独立的图形化工具箱，本章按基线准备其中的 Programmer。它不再承担本书版本的 SDK 安装入口：**Toolchain Manager 从 NCS v3.0.0 起不再提供新版本 SDK 和工具链安装**，不能用它安装 v3.4.0。[官方迁移说明](https://nrfconnectdocs.nordicsemi.com/ncs/latest/nrf/releases_and_maturity/migration/migration_guide_3.0.html)
+- **VS Code 与 nRF Connect 扩展包**：本书的开发主线，负责 SDK 安装及日常编辑、构建和调试。下面的 west 命令在扩展配置的终端中运行，用于说明每一步的输入与产物；它们不要求改用另一套 IDE。Source Insight 可供个人浏览编辑代码，不替代 SDK、工具链或终端环境。
 
-还有两个名词本章只点名、不展开：**devicetree**（硬件描述，Zephyr 借自 Linux 内核的同名机制，你的设备树经验可以直接迁移）和 **Kconfig**（功能配置，同样源自 Linux 内核）。第 2 章剖析 blinky 工程时正式讲解；**DFU**（固件空中升级）则是第 16 章的主题。
+还有两个名词本章只点名、不展开：**devicetree**（硬件描述，可借助你的 Linux 设备树经验理解，但使用方式存在差异）和 **Kconfig**（功能配置，同样源自 Linux 内核）。第 2 章剖析 blinky 工程时正式讲解；**DFU**（固件升级，本书第 16 章介绍 BLE 空中升级）则留到后面。
 
 一个容易混淆的概念是**板级目标**（board target）：构建时告诉 west“为哪块板子的哪个核构建”。本书统一使用 `nrf54l15dk/nrf54l15/cpuapp`——读作“nRF54L15 DK 板 / nRF54L15 芯片 / 应用核”。写错一个字符，构建系统就会报错或生成错误的镜像，这是新手最常见的失败之一（Zephyr 官方板级文档亦以完整板级目标名演示构建，见“来源与延伸阅读”）。
 
 ### 1.3 动手安装（Windows 从零）
 
-现在开始在 Windows 上从零安装。全程分为三大步，每步末尾都给出“成功现象”——确认了再往下走。整体流程为 Nordic 官方安装文档推荐的 VS Code 路线（资料核查级，未经实机执行；界面细节可能随版本微调，以你安装时的实际界面为准，差异请反馈给我们修订）。
+主线为 **VS Code → nRF Connect 扩展包 → SDK 与配套工具链 → 调试/烧录准备 → 终端检查**。以下步骤按 A-005 v0.3 整理，安装入口和终端入口另经官方文档核查；本项目尚未执行安装。各步“预期成功现象”是检查目标，不是已发生的结果。
 
-> 安装前的三个提醒（来自 Nordic 官方安装文档与社区常见问题，资料核查级）：
->
-> 1. **安装路径不要含空格和中文字符**。Windows 上工具链对路径敏感，默认路径（如 `C:\ncs`）是安全的；
-> 2. **保证磁盘空间与网络稳定**。SDK 与工具链下载体积达数 GB，中断后需重下；
-> 3. 安装顺序不要颠倒：先 nRF Connect for Desktop，再 Toolchain Manager 装 NCS，最后 VS Code 扩展。
+安装目录采用不含空格和中文的路径，例如 `C:\ncs`；SDK 的实际路径需在安装时记录。界面可能随扩展版本变化，找不到入口时记录扩展版本与界面，不回退到 Toolchain Manager，也不因列表默认推荐其他 SDK 而自行更换 v3.4.0 基线。
 
-#### 1.3.1 第一步：安装 nRF Connect for Desktop
+#### 1.3.1 第一步：安装 VS Code 与扩展包
 
-1. 打开 Nordic 官网的 nRF Connect for Desktop 下载页（nordicsemi.com → Products → Development tools → nRF Connect for Desktop），下载 Windows 版安装程序；
-2. 运行安装程序，按默认选项完成安装；
-3. 启动 nRF Connect for Desktop。
+1. 从 [VS Code 官方下载页](https://code.visualstudio.com/download) 下载 Windows 安装程序，按主机情况选择用户或系统安装。
+2. 打开扩展市场，安装 Nordic Semiconductor 发布的 **nRF Connect for VS Code Extension Pack**，完成其依赖扩展安装。
+3. 打开左侧 nRF Connect 视图，进入 Welcome 页。
 
-**成功现象**：应用正常启动，主界面列出可安装的工具集合（Toolchain Manager、Programmer 等）。
+**预期成功现象**：扩展视图可以打开，首次安装时可看到 SDK 安装入口。记录 VS Code 与扩展版本；若扩展尚未启用，先处理安装提示，再继续。
 
-> 【截图 1-1 占位】nRF Connect for Desktop 主界面。用户实机照做时以真实截图替换。
+> 【截图 1-1 占位】VS Code 的 nRF Connect Welcome 页及 Install SDK 入口；待用户实机采集，不以示意图冒充截图。
 
-#### 1.3.2 第二步：用 Toolchain Manager 安装 NCS v3.4.0
+#### 1.3.2 第二步：通过 Install SDK 安装 NCS v3.4.0
 
-1. 在 nRF Connect for Desktop 中找到 **Toolchain Manager**，点击安装并打开；
-2. 在 Toolchain Manager 的 SDK 列表中找到 **NCS v3.4.0**，点击安装。这一步会下载并部署该版本对应的**工具链与 SDK 源码**，是全程耗时最长的一步；
-3. 耐心等待安装完成。
+1. 在 Welcome 页选择 **Install SDK**，下载区域按网络条件选择。
+2. 选择 **nRF Connect SDK**，再选择 **v3.4.0** 的 SDK 与工具链组合。仅安装工具链不会自动补齐 SDK 源码。
+3. 按基线使用 `C:\ncs` 作为安装根目录，记录安装器实际显示的 SDK 路径；等待完成通知，并查看 Output 面板中的安装日志。
 
-**成功现象**：Toolchain Manager 中 v3.4.0 条目显示为已安装状态；默认情况下 SDK 位于 `C:\ncs\v3.4.0`【待核：默认安装路径与 Toolchain Manager 界面以实机为准】。
+**预期成功现象**：扩展可管理已安装的 v3.4.0 SDK 与对应工具链，源码目录存在。安装页细节、安装耗时与最终路径【待核：用户安装后回填】。若没有 v3.4.0 或安装失败，保留完整提示交技术核查，不将安装成功写入记录。[SDK 首次安装官方说明](https://docs.nordicsemi.com/r/bundle/nrf-connect-vscode/page/get_started/quick_setup.html/installing-sdk-and-toolchain-for-the-first-time?contentId=El7l02bgw~Jiewa~98anOw)
 
-> 【截图 1-2 占位】Toolchain Manager 中 v3.4.0 安装完成的界面。用户实机照做时以真实截图替换。
-
-安装完成后，`C:\ncs\v3.4.0` 下大致是这样的结构（帮助你在后续章节定位文件）：
+下文以 `C:\ncs\v3.4.0` 为 SDK 路径示例；如果实际路径不同，后续命令和编辑路径要一起替换。目录树为示意，未经本机安装验证：
 
 ```text
-C:\ncs\v3.4.0\
-├── zephyr\          ← Zephyr 内核源码与官方示例（本章的 blinky 就在这里）
-├── nrf\             ← Nordic 的驱动、协议栈与示例
-├── bootloader\      ← MCUboot（第 16 章 DFU 用到）
-└── ...              ← 其他组件仓库
+C:\ncs\
+├── toolchains\     ← 配套工具链（具体子目录名待安装后记录）
+└── v3.4.0\         ← 本文示例中的 west 工作区根目录
+    ├── .west\      ← west 工作区信息
+    ├── zephyr\     ← Zephyr 源码与官方示例
+    ├── nrf\        ← Nordic 组件与示例
+    ├── bootloader\ ← MCUboot 等组件
+    └── ...
 ```
 
-这个“一个基线版本、多个仓库”的布局正是 west 管理的多仓库结构——先有个印象，第 2 章会回头看它。
+SDK 源码目录和工具链目录用途不同；选择终端时两者的版本必须匹配。这个多仓库工作区由 west 管理，第 2 章再展开。
 
-#### 1.3.3 第三步：安装 VS Code 与 nRF Connect 扩展
+> 【截图 1-2 占位】扩展中 v3.4.0 SDK 与配套工具链安装完成的界面；待用户实机采集。
 
-1. 从 code.visualstudio.com 下载安装 Visual Studio Code；
-2. 打开 VS Code，在扩展市场搜索并安装 **nRF Connect for VS Code**（发布者 Nordic Semiconductor）；
-3. 安装完成后按提示完成初始化（扩展会自动发现上一步安装的 NCS v3.4.0 工具链与 SDK）。
+#### 1.3.3 第三步：准备调试与烧录工具
 
-**成功现象**：VS Code 左侧活动栏出现 nRF Connect 图标，扩展面板中能看到已安装的 NCS v3.4.0。
+A-005 v0.3 还列有 nRF Connect for Desktop、其中的 Programmer，以及 nRF Command Line Tools / SEGGER J-Link 驱动。本节保留这些基线信息，同时明确尚待技术复核的依赖差异：
 
-> 【截图 1-3 占位】nRF Connect 扩展识别到 SDK 与工具链的界面。用户实机照做时以真实截图替换。
+1. 从 [Nordic 官方下载页](https://www.nordicsemi.com/Products/Development-tools/nRF-Connect-for-Desktop) 安装 nRF Connect for Desktop，并在其中安装 Programmer。它提供独立的设备识别与烧录界面，不用于安装本章 SDK。
+2. 准备 Windows 的 J-Link 软件与驱动，记录实际安装版本；若安装程序要求重启，完成后重新打开 VS Code 与工具链终端。
+3. 在进入 `west flash` 前检查它需要的烧录后端。Zephyr 板级文档将 **nrfutil** 列为本板默认 flash runner；安装了 Programmer 或 nrfjprog 不等于工具链终端已经能调用 nrfutil。
 
-#### 1.3.4 实验 ex-env-toolchain-check：验证工具链可用
+**待技术复核的前置项**：A-005 v0.3 将 J-Link 驱动安装绑定到 nRF Command Line Tools，而当前 Nordic 安装文档列出独立 J-Link 安装要求，扩展也有自带的部分 nRF Util 命令。developer 须确认本基线下实际应安装哪些组件、扩展终端是否提供所需 nrfutil 功能，以及具体检查方法；本稿不把 nrfjprog 写成本板的默认烧录后端，也不自行替换已批准的基线。此项未澄清前，烧录准备不能判为通过。
 
-> **实验性质**：用户实机执行。下述命令与预期输出为**预期**（资料核查级），实际输出以你的机器为准。
+**预期成功现象**：所需软件和驱动安装完成；连接 DK 后能够识别设备，且后续构建目录对应的烧录后端可调用。当前以上均为**未执行**，具体版本、识别结果和日志待用户回填。
 
-图形界面之外，我们用命令行做最终确认——后续章节大量操作都在命令行完成，这一步同时让你找到“命令行入口”。
+#### 1.3.4 实验 ex-env-toolchain-check：找到正确终端并检查环境
 
-1. 在 Toolchain Manager 中点击 v3.4.0 条目旁的“打开终端”（Open terminal / Open command prompt）按钮——它会打开一个**已配置好全部环境变量**的命令行窗口【待核：按钮的确切名称与位置以实机界面为准】；
-2. 在打开的窗口中执行：
+> **实验性质**：用户实机执行；当前未执行。以下为命令及预期检查点，不能替代后续构建、烧录和上板验证。
 
-   ```text
+1. 在 VS Code 中按 `Ctrl+Shift+P` 打开命令面板，执行 **`nRF Connect: Create Shell Terminal`**；也可从 nRF Connect 的 Welcome 页选择 **Open terminal**。终端可能沿用上次使用的 SDK 和工具链，须通过 **Pick Toolchain and SDK for nRF Connect Terminal** 选择 v3.4.0 及匹配工具链，再核对终端显示的版本。入口名称据当前官方文档，实际界面与扩展版本【待核：用户回填】。[终端入口官方说明](https://docs.nordicsemi.com/r/bundle/nrf-connect-vscode/page/guides/extension_nrfconnect_profile.html/terminal-for-the-last-used-toolchain-and-sdk?contentId=IwzFNwle4i0Ds0KBOspH_A)
+2. 在该终端进入 SDK 工作区根目录。下文命令以 Windows PowerShell 为例；路径不同应先替换，不要在普通终端或串口会话中直接照抄：
+
+   ```powershell
+   cd C:\ncs\v3.4.0
    west --version
-   ```
-
-   **预期现象**：输出 west 的版本号（例如 `West version: v1.x.y`，具体版本以 environment.md 基线为准）。如果提示“不是内部或外部命令”，说明终端不是从 Toolchain Manager 打开的——回到上一步。
-3. 再执行：
-
-   ```text
+   west topdir
    west boards | findstr nrf54l15dk
    ```
 
-   **预期现象**：列出 SDK 支持的 nRF54L15 DK 板级目标，其中应包含 `nrf54l15dk` 相关条目。能看到它，就说明 SDK 源码、west 与板级定义三件套都已就位。
+   **预期检查点**：第一条 west 命令返回版本号；`west topdir` 指向所选 SDK 工作区；板列表出现 `nrf54l15dk` 相关项。列表中有板名不等于完整目标已经构建通过，应用核目标还要在 1.4 节核实。如果 west 找不到，检查扩展安装、终端所选工具链与环境；若扩展命令不可用或工作区不对，先检查当前目录和 SDK 安装是否完整，不直接归因于一种原因。
+3. 记录终端所选 SDK/工具链、以上输出和实际目录。A-005 v0.3 另列 `west sdk-version` 检查，但本次尚未取得其在该基线中可用及输出含义的充分依据，列为**待 developer 技术复核**，不将它写成安装成功的硬性判据。west 自身版本号也不能证明 GCC 或整个 SDK 的版本；精确工具版本须结合安装信息与后续构建日志核对。
 
-到这里，开发环境安装完毕。建议把这一步的实际输出（版本号、界面差异）记录下来反馈给我们——它是 environment.md 环境基线（T-005）的实测输入，也是本书校准安装步骤的第一手证据。
+> 【截图 1-3 占位】nRF Connect 工具链终端、所选版本与实际检查输出；待用户实机采集。这里的 shell 终端用于执行 west；1.4.3 的串口终端用于接收板子输出，二者不同。
+
+只有上述检查实际通过后，才继续构建示例。将真实版本、路径、报错及界面差异反馈给我们，由 developer 按环境基线约定回填；T-005 已完成基线确认，不表示这台主机已安装或实验已通过。
 
 ### 1.4 第一个程序：blinky 上板
 
@@ -173,9 +181,9 @@ C:\ncs\v3.4.0\
 
 > **实验性质**：用户实机执行。下述界面、输出与现象均为**预期**（资料核查级；blinky 对本板级目标的支持经 Zephyr 官方板级文档核实，文档明确列出该板 LED 支持与构建示例）。
 
-**第 1 步：创建工程（命令行方式）**
+**第 1 步：选择 SDK 自带示例并创建构建目录**
 
-在 Toolchain Manager 打开的终端窗口中执行：
+沿用 1.3.4 节的 nRF Connect 工具链终端，确认选择的是 v3.4.0。下列命令使用 SDK 自带源码，不另外复制工程；先进入实际 SDK 根目录，示例路径不同则一并替换：
 
 ```text
 cd C:\ncs\v3.4.0
@@ -191,7 +199,7 @@ west build -b nrf54l15dk/nrf54l15/cpuapp zephyr\samples\basic\blinky -d C:\ncs\b
 
 **预期现象**：命令滚动输出 CMake 配置与编译日志，最终提示构建成功，产物位于 `C:\ncs\build\blinky-first\zephyr\` 下（`zephyr.elf` 等文件）。
 
-> 图形界面等价操作：在 VS Code 的 nRF Connect 面板中 “Create a new application” → “Copy a sample”，搜索 blinky，构建配置选择 `nrf54l15dk/nrf54l15/cpuapp` 后 Build。两条路殊途同归，本书以命令行为主线讲清每一步在做什么。
+> 扩展也可以通过 “Create a new application” → “Copy a sample” 复制 blinky，再添加构建配置。但复制后的源码与构建目录会不同，不能混用本节直接构建 SDK 自带示例的路径。本轮使用扩展配置的终端执行上述命令，保持源码、构建目录与后续改参位置一致；GUI 字段和命令在所选基线中的实际行为仍待验证。
 
 **第 2 步：连接 DK**
 
@@ -204,13 +212,15 @@ west build -b nrf54l15dk/nrf54l15/cpuapp zephyr\samples\basic\blinky -d C:\ncs\b
 
 **第 3 步：烧录**
 
+先确认第 1 步实际构建成功、第 2 步识别到目标板，并已解决 1.3.3 节的烧录后端依赖。继续在同一工具链终端执行；`-d` 必须指向刚才成功构建的目录：
+
 ```text
 west flash -d C:\ncs\build\blinky-first
 ```
 
 **预期现象**：烧录工具擦除 RRAM、写入镜像并复位芯片，日志提示编程完成【待核：烧录日志的具体措辞以实机为准；Zephyr 官方板级文档显示该板默认烧录工具为 nrfutil，亦支持 J-Link】。
 
-> 万一遇到 `readback protection`（读保护）相关报错：Zephyr 官方板级文档给出的解法是执行 `west flash --recover`，它会整片擦除并解除保护。新板正常不会触发，了解即可。
+> 如果出现 `readback protection`（读保护）报错，先保存完整日志核对原因。官方板级文档列有 `--recover` 恢复选项；它会擦除设备内容，不是日常烧录必选项。确需恢复且已确认目标板内容可擦除时，命令还须带本例构建目录：`west flash -d C:\ncs\build\blinky-first --recover`。本项目尚未执行该操作。
 
 **第 4 步：观察**
 
@@ -218,7 +228,7 @@ west flash -d C:\ncs\build\blinky-first
 
 **预期现象**：DK 上的 LED 按固定节奏闪烁（blinky 默认每秒切换一次亮灭，即约亮 1 秒、灭 1 秒）【待核：具体是哪一颗 LED（LED1）以实机观察为准；蓝图预期为 LED1 约 1 Hz】。
 
-看到灯闪，你就完成了嵌入式开发最核心的一次闭环：**源码 → 镜像 → 芯片 → 可观察行为**。此刻你可能还没读一行代码，但工具链的每一环——编译、链接、烧录、运行——都已被你亲手验证过。
+如果实际构建、烧录成功，且观察到符合预期的闪烁，就可以把本次 **源码 → 镜像 → 芯片 → 可观察行为** 记录为用户执行成功。记录对应版本、命令、日志与现象；仅阅读到这里或只看到编译成功，都不代表上板验证已经完成。
 
 #### 1.4.2 实验 ex-blinky-modify：确认你掌控这个循环
 
@@ -228,9 +238,10 @@ west flash -d C:\ncs\build\blinky-first
 
 1. 用 VS Code（或任意编辑器）打开 `C:\ncs\v3.4.0\zephyr\samples\basic\blinky\src\main.c`；
 2. 找到定义闪烁间隔的宏 `SLEEP_TIME_MS`（默认值为 `1000`，单位毫秒），把它改成 `100`；
-3. 重新构建并烧录：
+3. 在 1.3.4 节的工具链终端重新进入 SDK 根目录，再构建并烧录（路径按实际安装位置替换）：
 
    ```text
+   cd C:\ncs\v3.4.0
    west build -b nrf54l15dk/nrf54l15/cpuapp zephyr\samples\basic\blinky -d C:\ncs\build\blinky-first
    west flash -d C:\ncs\build\blinky-first
    ```
@@ -245,14 +256,15 @@ west flash -d C:\ncs\build\blinky-first
 
 板载调试器还提供了一路 USB 虚拟串口——目标芯片的 `printk`/日志经它送到电脑。提前认识它，第 5 章讲日志时就有了直观印象。
 
-1. 构建并烧录 hello_world 示例：
+1. 在 1.3.4 节的工具链终端构建并烧录 hello_world 示例（同样须先完成烧录依赖检查）：
 
    ```text
+   cd C:\ncs\v3.4.0
    west build -b nrf54l15dk/nrf54l15/cpuapp zephyr\samples\hello_world -d C:\ncs\build\hello-uart
    west flash -d C:\ncs\build\hello-uart
    ```
 
-2. 打开任意串口终端（如 PuTTY、Windows Terminal 串口插件或 VS Code 扩展内置终端），选择 DK 枚举出的 COM 口，参数 115200 8N1【待核：默认波特率以实机为准】；
+2. 打开串口终端（例如扩展包中的 nRF Terminal 的串口连接功能），选择 DK 枚举出的 COM 口，参数 115200 8N1【待核：实际 COM 口、波特率及流控设置以基线配置和实机为准】。这里不是执行 west 的 shell 终端；
 3. 按一下 DK 上的复位键（或重新上电）。
 
 **预期现象**：终端输出类似 `Hello World! nrf54l15dk/nrf54l15/cpuapp` 的一行文本——程序名与板级目标名都在里面。
@@ -272,22 +284,25 @@ west flash -d C:\ncs\build\blinky-first
 
 **演示：按板卡版本查勘误。** 勘误表是按芯片修订版（revision）发布的，查错版本可能误导排查。本书的 DK 1.0.0 上焊接的是 **Rev 2** 芯片（丝印 nRF54L15-QFAAC00），对应的勘误表是 **Rev 2 Errata v1.1**。查法：在 Nordic 官网进入 nRF54L15 产品页 → Downloads/文档区 → Errata，选择与你芯片修订版一致的文件。芯片修订版可以从芯片丝印或 DK 用户指南中确认。
 
+本项目已保存的资料见 [workspace/nrf54l15-dk-docs/README.md](../../../../workspace/nrf54l15-dk-docs/README.md)：[数据手册 v1.0](../../../../workspace/nrf54l15-dk-docs/nRF54L15_nRF54L10_nRF54L05_Datasheet_v1.0.pdf)、[DK 用户指南 v1.0.0](../../../../workspace/nrf54l15-dk-docs/nRF54L15_DK_HW_User_Guide_v1.0.0.pdf)、[Rev 2 勘误表 v1.1](../../../../workspace/nrf54l15-dk-docs/nRF54L15_Rev_2_Errata_v1.1.pdf)。查询时先核对文件版本，在线最新版不能自动替代本书基线。
+
 把这张地图存好。从下一章开始，每章的“来源与延伸阅读”都会告诉你该章结论来自哪份资料的哪个位置——这也是本书的写作约定：事实性主张必有可追溯来源。
 
 ## 读者可见的限制
 
-本节如实列出本版草稿的已知限制与证据边界，请在照做前阅读：
+本节列出本版技术复核稿的限制与证据边界。尚待技术复核的问题解决前，本版不作为可照做的实验交付稿：
 
-1. **环境基线尚未最终确认**。本章按候选基线 NCS v3.4.0（D-005）撰写；正式的 environment.md 环境基线由 T-005 任务另行确认。基线一旦变化，本章安装步骤、路径与截图需同步复核。
-2. **安装流程为资料核查级，未经实机执行**。1.3 节的安装步骤来自 Nordic 官方安装文档的核查整理，界面措辞、按钮位置、下载体积与默认安装路径可能与你安装时的实际界面存在差异。凡标注【待核】的位置均属此类。
-3. **截图为占位**。图 1-1、1-2、1-3 为待绘制的自制图（绘制依据已注明），截图 1-1～1-3 需在你实机照做时采集真实截图替换。
+1. **目标基线已批准，实际环境待验证**。A-005 v0.3 已由 D-007 批准，旧“基线未确认”标记核销；具体安装版本、路径和构建烧录结果仍待回填。基线变更时重新评估相关步骤和证据。
+2. **安装与终端步骤尚未实机执行**。本轮查阅的 Nordic 扩展文档及 NCS latest 安装页会持续更新；后者当前标示 3.4.99，不能据此证明 v3.4.0 的全部行为。入口、界面、磁盘占用、工具版本及基线匹配仍需实际核对，具体限制见各处【待核】及 1.3.3～1.3.4。
+3. **图像仍有缺口**。图 1-1、1-2 尚待绘制，图 1-3 已改为自制文本示意；截图 1-1～1-3 待用户实机采集。它们尚未满足最终图文交付要求。
 4. **全部实验现象均为“预期”**。ex-env-toolchain-check、ex-blinky-first、ex-blinky-modify、ex-hello-uart 均未实机执行；预期现象的依据已在各实验处注明（官方文档核查）。你照做后的实际结果将以“用户执行”记录，预期与实际不一致时按反馈流程修订。
 5. **板载调试器固件升级提示未验证**。出厂 DK 连接 NCS v3.4.0 环境时是否提示升级，待实机确认。
-6. **写作资料缺口说明**。规划阶段使用的 `nRF54L15_DK_资料/` 官方资料包不在当前仓库克隆中；本草稿的硬件事实取自已批准成果（A-001 v0.2、A-003 v0.1）中记录的核查结论，板级支持情况由 writer 于 2026-09-20 对照 Zephyr 官方板级文档在线核实。数据手册级别的细节（如个别引脚编号）未在本次写作中重新核对原文。
+6. **资料包已可访问，全文技术审校尚未完成**。资料包现位于项目 `workspace/nrf54l15-dk-docs/`；本轮读取索引并核对相关 PDF 文件存在，核销“资料包缺失”。这不等于逐页重查硬件事实；硬件细节仍沿用 A-001/A-003 的来源记录，本轮未重新核对 PDF 原文、引脚或图号。
+7. **尚待 developer 技术复核**。重点包括 nrfutil/J-Link 与基线所列 nRF Command Line Tools 的依赖关系、`west sdk-version` 的有效性和版本判据，以及本章命令在 NCS v3.4.0 下的适用性。当前没有独立技术复核结论；问题处理及必要复核完成后才进入 D-008 的用户完整通读。通读完成也不等于实验通过或章节获批。
 
 ## 回顾与自检
 
-本章结束时，你应该已经：
+读完后先检查理解；实际完成实验后，再检查操作结果。以下是学习目标，不是本项目已通过的记录：
 
 - 建立了 nRF54L15 的架构地图（M33 应用核 + FLPR 协处理器、RRAM/RAM、电源域、外设清单），并认识了 DK 实物上的关键位置；
 - 分清了 Zephyr、NCS、west、工具链、IDE 扩展各自的角色，并在 Windows 上从零装好了 NCS v3.4.0 环境；
@@ -298,7 +313,7 @@ west flash -d C:\ncs\build\blinky-first
 
 - 解释：不看 1.2 节，说出 NCS 与 Zephyr 是什么关系？west 在其中管什么？`nrf54l15dk/nrf54l15/cpuapp` 三段各指什么？
 - 解释：数据手册、DK 用户指南、勘误表分别回答哪类问题？为什么查勘误要先确认芯片修订版？
-- 操作：从终端验证工具链可用（两条命令），并说出每条命令验证的是哪一环。
+- 操作：从 nRF Connect 工具链终端执行 1.3.4 的检查，说出各命令能验证什么、不能证明什么；未执行就记录未执行。
 - 变式：把 blinky 的闪烁改成“快闪 5 次、停 2 秒”的节奏（提示：需要改动 main.c 里的循环结构而不只是宏）。做不到没关系——第 2 章剖析完工程结构后回来再试。
 - 变式：在不查 1.5 节表格的情况下，回答“LED 不闪”时你会按什么顺序排查？（参考顺序：USB 是否数据线 → 板级目标是否写对 → 构建是否成功 → 烧录日志是否完成 → 勘误表。）
 
@@ -309,8 +324,10 @@ west flash -d C:\ncs\build\blinky-first
 - nRF54L15 SoC 组成（M33 + FLPR、1.5 MB RRAM、256 KB RAM、外设清单）：芯片数据手册 v1.0，经 A-001 v0.2 与 A-003 v0.1 记录核查（资料核查级）；板级硬件特性另经 Zephyr 官方板级文档 nRF54L15 DK 页核实（2026-09-20）：<https://docs.zephyrproject.org/latest/boards/nordic/nrf54l15dk/doc/index.html>。
 - “无 I3C 控制器”：数据手册 v1.0 全文检索（I3C/MIPI 零命中），检索过程与结论记录于决定 D-002。
 - NCS v3.4.0 为 Nordic 首个 LTS、基于 Zephyr 4.4：Nordic 官方博客，经 A-001 v0.2 与 D-005 记录（资料核查级）。
-- 安装流程（nRF Connect for Desktop → Toolchain Manager → NCS → VS Code 扩展）：Nordic 官方安装文档（docs.nordicsemi.com，Installing the nRF Connect SDK），经 A-003 v0.1 记录（资料核查级）；writer 于 2026-09-20 复核官方文档站该推荐路线仍然有效。
-- 板级目标 `nrf54l15dk/nrf54l15/cpuapp`、blinky/hello_world 构建与烧录命令、默认烧录工具 nrfutil、readback protection 与 `west flash --recover`：Zephyr 官方板级文档 nRF54L15 DK 页（2026-09-20 在线核实，链接同上）；hello_world 终端输出格式同页示例。
+- 安装与终端流程：A-005 v0.3、D-007，以及 1.2、1.3 节链接的 Nordic 官方迁移、SDK 首次安装和终端文档（writer 于 2026-09-26 在线读取，资料核查级）。纠正 v0.1 对 Toolchain Manager 旧流程“仍然有效”的表述，历史记录不作为当前安装依据。
+- 工具依赖差异：[Nordic SDK 安装页](https://nrfconnectdocs.nordicsemi.com/ncs/latest/nrf/installation/install_ncs.html) 的 Install prerequisites（2026-09-26 查阅，页面版本 3.4.99，非固定 v3.4.0）列独立 J-Link 要求，扩展捆绑部分 nRF Util 命令；与 A-005 v0.3 差异提交 developer 核查。未把该页当前推荐 SDK、J-Link 版本或命令行安装示例直接替换为本书基线。
+- `west topdir` 的工作区检查用途：[Zephyr west 内置命令文档](https://docs.zephyrproject.org/latest/develop/west/built-in.html#other-built-in-commands)（2026-09-26 查阅）；输出不能证明工作区内所有仓库的版本或构建结果。
+- 板级目标 `nrf54l15dk/nrf54l15/cpuapp`、blinky/hello_world 构建与烧录命令、默认烧录工具 nrfutil、readback protection 与 `west flash --recover`：Zephyr 官方板级文档 nRF54L15 DK 页（初稿记录 2026-09-20 核查；2026-09-26 重查 Programming and Debugging 的目标和 runner 表，链接同上）；hello_world 终端输出格式沿用初稿的同页来源。latest 页面不是 NCS v3.4.0 的版本锁定证据，命令适用性仍交技术复核。
 - DK 部件位置（按键/LED/USB/P6/排座）、勘误表对应关系（Rev 2 Errata v1.1）、板载调试器与 VDD 1.8 V 默认值：DK 硬件用户指南 v1.0.0，经 A-001 v0.2 与 A-003 v0.1 记录核查（资料核查级）。
 - 易错点（安装路径、数据线、调试器固件升级提示）：Nordic 官方安装文档、DK 用户指南与社区常见问题，经 A-003 v0.1 记录（资料核查级）。
 - 延伸阅读：Nordic DevAcademy 免费课程（academy.nordicsemi.com，nRF Connect SDK 基础课程）可作为本章的并行学习材料；本书不复制其课程结构。
