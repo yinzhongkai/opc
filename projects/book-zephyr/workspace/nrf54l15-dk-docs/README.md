@@ -9,9 +9,9 @@
 | `nRF54L15_nRF54L10_nRF54L05_Datasheet_v1.0.pdf` | **芯片数据手册**（Product Specification，940 页），nRF54L15/L10/L05 三合一，寄存器、电气参数、封装引脚全在这里 |
 | `nRF54L15_DK_HW_User_Guide_v1.0.0.pdf` | **开发板用户指南**（31 页），板载资源、供电、按键/LED、电流测量、RF 测量、调试接口说明 |
 | `PCA10156_Schematic_And_PCB.pdf` | **开发板原理图 + PCB 图**（从硬件包中单独抽出，方便直接看） |
-| `PCA10156_nRF54L15-DK_硬件设计文件_1_0_0.zip` | **完整硬件设计包**：Altium 原理图/PCB 源文件、Gerber、BOM、钻孔、装配图 |
+| `PCA10156_nRF54L15-DK_硬件设计文件_1_0_0.zip` | **完整硬件设计包**：39 个文件，含 Altium 原理图/PCB 源文件、Gerber、BOM、钻孔、装配图；已纳入 Git |
 | `nRF54L15_Rev_2_Errata_v1.1.pdf` | **Rev 2 芯片勘误表**。DK 1.0.0 板上焊的是 Rev 2 芯片（nRF54L15-QFAAC00），看这个版本 |
-| `ngl_001.pdf` | nRF54L 系列硬件设计指南（自己画板时的参考设计、RF 布局、电源去耦） |
+| `ngl_001.pdf` | **nRF54L Series Hardware Design**（26 页）：HFXO/LFXO 选型与配置、器件摆放、PCB 叠层、DECRF 走线及 QFN 旁路电容；已纳入 Git |
 | `nan_047.pdf` | nRF54L 系列量产烧录指南（批量生产时用） |
 
 ## 上手建议
