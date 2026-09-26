@@ -202,7 +202,21 @@ PREFERRED_PROVIDER_virtual/kernel="linux-yocto"
 
 **Fig-2-2 tiger 与 qemuarm64 启动路径及构建产物对照**
 
-![tiger 的完整启动路径与 qemuarm64 直接加载内核路径对照](images/chapter2-boot-flow.svg)
+```text
++----------------------------------------------------------------------------------------------+
+| tiger target (design; end-to-end test pending)                                               |
+| Boot ROM -> TF-A BL1 -> TF-A BL2 -> TF-A BL31 -> U-Boot BL33 -> Linux Kernel -> UBI rootfs   |
+| Delivery files and packaging: pending repository implementation and full-chain test          |
++----------------------------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------------------------+
+| qemuarm64 verified path                                                                      |
+| runqemu / QEMU -> Image -> ext4 rootfs                                                       |
+| QEMU loads Image directly; no separate board TF-A or U-Boot build                            |
++----------------------------------------------------------------------------------------------+
+```
+
+上半区只表达 tiger 已确定但尚待全链实测的目标顺序，具体平台交付文件和打包方式仍待四个开发仓库实现后确认；下半区只表达本章已经实测的 qemuarm64 路径与产物，不把两类证据混在一起。
 
 **Table-2-2 启动阶段与候选构建产物对照**
 
@@ -253,7 +267,27 @@ TF-A 常见打包产物还包括 `fip.bin`；`flash.bin` 等整合镜像名称�
 
 **Fig-2-3 软件栈三层归属图**
 
-![应用层位于 meta-tiger 之外，OS BSP 与固件启动层位于 meta-tiger 之内](images/chapter2-software-stack-boundary.svg)
+```text
++----------------------------------------------------------------------------------------------+
+| OUTSIDE meta-tiger                                                                           |
+| Application: gateway app | Web UI | business logic | third-party SDK                         |
+| Independent delivery: test | upgrade | license compliance                                    |
++----------------------------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------------------------+
+| INSIDE meta-tiger                                                                            |
+| OS / BSP: Linux kernel | device tree | base drivers | rootfs skeleton                        |
+| Firmware / Bootloader: TF-A BL1 / BL2 / BL31 | U-Boot BL33                                   |
++----------------------------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------------------------+
+| CONFIG RESPONSIBILITY                                                                        |
+| MACHINE -> hardware capabilities                                                             |
+| DISTRO  -> distribution policy                                                               |
++----------------------------------------------------------------------------------------------+
+```
+
+图中的 `meta-tiger` 边界只包含 OS/BSP 和 Firmware/Bootloader；Application 独立维护与交付。MACHINE 只描述硬件能力，DISTRO 负责发行版策略，两者的职责不能互相替代。
 
 ## 2.4 层（Layer）叠加机制
 
@@ -564,6 +598,34 @@ DISTRO_FEATURES="acl alsa bluetooth debuginfod ext2 ipv4 ipv6 pcmcia usbgadget u
 
 **Fig-2-4 项目全景地图**
 
-![四个开发态仓库经 meta-tiger 和 BitBake 集成后按 MACHINE 部署产物](images/chapter2-project-overview.svg)
+```text
++----------------------------------------------------------------------------------------------+
+| PROJECT INPUTS                                                                               |
+| qemuarm64 reference: Poky meta                                                               |
+| tiger target repositories (implementation pending):                                          |
+| qemu-tiger | tf-a-tiger | u-boot-tiger | linux-tiger -> meta-tiger integration               |
+| meta-tiger: MACHINE config | provider / recipe / bbappend | platform deployment rules        |
++----------------------------------------------------------------------------------------------+
+                                               |
+                                               v
++----------------------------------------------------------------------------------------------+
+| BitBake: resolve and deploy by MACHINE                                                       |
++----------------------------------------------+-----------------------------------------------+
+| MACHINE=qemuarm64                            | MACHINE=tiger-aarch64                         |
+| Source: Poky meta                            | Source: meta-tiger                            |
+| Verified: Image + ext4                       | Target: full boot chain                       |
++----------------------------------------------+-----------------------------------------------+
+                                               |
+                                               v
++----------------------------------------------------------------------------------------------+
+| tmp/deploy/images/<MACHINE>/                                                                 |
++----------------------------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------------------------+
+| Application: independent delivery outside meta-tiger                                         |
++----------------------------------------------------------------------------------------------+
+```
+
+两类输入在进入 BitBake 前彼此独立：qemuarm64 使用 Poky 的参考元数据，tiger-aarch64 由四个待实现仓库经 `meta-tiger` 集成。BitBake 再按 MACHINE 解析和部署；左侧分支标出本章实测结果，右侧分支仍只表示目标。Application 不进入这条 BSP 构建链，继续独立交付。
 
 达哥看了一眼：“地图有了。下一步就是动手搭 `meta-tiger` 这个 layer。”
