@@ -97,7 +97,32 @@
 - 参与成员与范围：developer；检查安装顺序与软件依赖、终端环境入口、板级目标与命令、构建烧录衔接、资料路径及来源、A-005 v0.3 一致性，以及“资料核查/未执行/用户实测”的证据边界；检查主线可操作性与已知技术阻断项。不代替用户通读、实机运行或最终批准。
 - 完成条件：developer 在本任务署名记录日期、受评版本、依据、未覆盖项与 pass/revise/blocked 结论；问题使用本轮唯一编号 R1-001 等，含位置、影响、建议与原稿责任人 writer。证据缺失须明示，不凭资料核查声称构建或上板通过。
 - 修订与后续复核：本轮仅 developer 一名评审者，其意见全部提交后 writer 才统一修订。writer 逐项填写处理回复；developer 按本次授权复核技术问题及后续用户反馈引起的技术改动，逐轮追加明确版本、范围、结果和证据，保留旧轮记录，每轮复核期间正文保持不变。发现超出本任务范围的争议交 project-manager 或用户决定。
-- 本轮进度与下一位行动人：writer 已提交 A-004 v0.2；等待用户进入 developer 原会话触发复核。请在既定范围内重点处理 W-001、W-002；由 developer 实际读取后署名记录意见，不预填其接收或结论。
+- 本轮进度与下一位行动人：developer 已于 2026-09-26 完成第 1 轮技术复核，结论为 `revise`，本轮全部意见已提交；下一位行动人为 writer，统一处理 R1-001、R1-002 并提交明确修订版本。问题处理及 developer 必要复核完成前，不交用户完整通读。
+
+#### developer 的意见
+- 日期、成员、受评版本与内容校验：2026-09-26，`developer`；A-004 v0.2（in_review，writer 于 2026-09-26 提交）。开始复核前重新计算正文 SHA-256 为 `93d7b704f466467ee1dbc3e66975b17f6080bae12763ca57ffbf2064bff5cb44`，与本任务登记值一致；本轮意见仅适用于该内容。
+- 评审范围与依据：按 A-005 v0.3、D-007、D-008 和本任务安排，检查 1.2～1.5 节的安装顺序、软件依赖、nRF Connect 工具链终端入口、`nrf54l15dk/nrf54l15/cpuapp` 板级目标、blinky/hello_world 构建与 `west flash -d` 衔接、来源，以及“资料核查/预期/未执行/用户实测”的边界。主要依据为固定版本的 [NCS v3.4.0 安装文档](https://github.com/nrfconnect/sdk-nrf/blob/v3.4.0/doc/nrf/installation/install_ncs.rst)、[NCS v3.4.0 编程文档](https://github.com/nrfconnect/sdk-nrf/blob/v3.4.0/doc/nrf/app_dev/programming.rst)、[NCS v3.4.0 工具要求](https://github.com/nrfconnect/sdk-nrf/blob/v3.4.0/doc/nrf/installation/recommended_versions.rst)、[NCS v3.4.0 发布说明](https://github.com/nrfconnect/sdk-nrf/blob/v3.4.0/doc/nrf/releases_and_maturity/releases/release-notes-3.4.0.rst)、[NCS v3.4.0 的 west manifest](https://github.com/nrfconnect/sdk-nrf/blob/v3.4.0/west.yml)，以及其锁定的 [Zephyr ncs-v3.4.0 板级文档](https://github.com/nrfconnect/sdk-zephyr/blob/ncs-v3.4.0/boards/nordic/nrf54l15dk/doc/index.rst)、[`board.cmake`](https://github.com/nrfconnect/sdk-zephyr/blob/ncs-v3.4.0/boards/nordic/nrf54l15dk/board.cmake) 和 [`SDK_VERSION`](https://github.com/nrfconnect/sdk-zephyr/blob/ncs-v3.4.0/SDK_VERSION)。
+- 已确认项：VS Code 扩展的 Install SDK 主线、扩展配置的终端、SDK 工作区根目录、板级目标和示例路径关系成立；`west build ... -d C:\ncs\build\...` 与随后 `west flash -d` 指向同一构建目录，衔接正确。NCS v3.4.0 的 manifest 将 Zephyr 锁定为 `ncs-v3.4.0`，其板级文件先载入 `nrfutil` runner、再载入 `jlink` runner，故默认 runner 为 `nrfutil`。正文已把所有安装、构建、烧录、LED/串口现象标为预期、未执行或待用户回填，没有冒充实测。
+- 未覆盖项：本机未安装 NCS v3.4.0，未执行扩展安装、终端命令、构建、设备枚举、烧录、串口或上板观察；未确认安装时的实际扩展 UI、路径、磁盘占用、J-Link/nRF Util 具体安装版本和输出措辞；未重新逐页核查硬件 PDF、绘制图片或检查用户可读性。本文档复核不构成用户通读、实机验证、独立测试或成果批准。
+- 结论：`revise`。板级目标、构建/烧录目录衔接、来源与未实测标记可以保留；R1-001、R1-002 会直接影响读者判断环境是否具备烧录条件及如何核对版本，须由 writer 统一修订后交 developer 复核。当前证据足以给出修改办法，因此不是 `blocked`。
+
+##### R1-001：明确默认烧录栈，移除 nRF Command Line Tools 的主线依赖歧义
+- 对应作者问题：W-001。
+- 位置：1.2 开发环境组成与工具链说明；1.3.3“准备调试与烧录工具”；1.4.1 的烧录前提与预期；“来源与延伸阅读”的工具依赖说明。
+- 依据与判断：NCS v3.4.0 固定版本文档说明，自 NCS v3.0.0 起 Nordic 板卡的 `west flash` 默认 runner 为 nRF Util；自 v3.1.0 起 `nrfutil device` 随 NCS 工具链 bundle 提供。固定版本安装前提仍要求独立安装匹配的 SEGGER J-Link 软件，Windows 还列出 J-Link USB Driver；nRF54L15 DK 的 `board.cmake` 以 `nrfutil` 为默认、`jlink` 为备选。`nRF Command Line Tools/nrfjprog` 仅在显式执行 `west flash -r nrfjprog` 时需要，Programmer 是可选图形界面，不是默认 CLI 烧录链的前置条件。A-005 v0.3 将 nRF Command Line Tools/nrfjprog 写入主线，已与固定版本资料不一致，需另行协调基线后续修订；A-004 本轮应先把当前可操作路径说明准确。
+- 影响：正文当前把 A-005 的旧工具项、J-Link、Programmer 和 nrfutil 并列为“尚待澄清”，读者无法据此完成主线前置检查，也可能误装已归档的 nRF Command Line Tools，或错误地把 Programmer 可用等同于 `west flash` 默认后端可用。
+- 修改建议：原稿责任人 writer。将主线明确为“安装 NCS v3.4.0 SDK+匹配工具链（其中已含锁定的 nRF Util 及 `device` 命令）→ 安装固定版本要求的 SEGGER J-Link 软件/Windows 驱动 → 在工具链终端检查 `nrfutil --version`、`nrfutil device --version` → 连接 DK 后执行 `nrfutil device list` → 构建完成后执行 `west flash -d <构建目录> --context` 核对 available/default runner，再执行 `west flash -d <构建目录>`”。将 Programmer 标为可选图形工具；把 nRF Command Line Tools/nrfjprog 移到“显式选择 `-r nrfjprog` 才需要”的备选说明。J-Link 的确切安装版本与以上输出继续标为用户实机回填，不写成已通过。
+- 作者处理回复：待 writer 填写，注明修订版本及 A-005 v0.3 差异的协调方式。
+- 复核：待 developer 对修订版本及相关命令、来源和边界标记复核。
+
+##### R1-002：删除 `west sdk-version`，按不同对象分别核对版本
+- 对应作者问题：W-002。
+- 位置：1.2 的工具链版本说明；1.3.4 第 3 步；“读者可见的限制”第 7 条；来源说明；同时影响 A-005 v0.3 中原 `west sdk-version` 检查项。
+- 依据与判断：Zephyr 的 west 内置命令清单没有 `sdk-version`，NCS v3.4.0 的 west manifest 只从 Zephyr/NCS 项目导入已声明的扩展命令，本轮亦未在固定版本官方资料中找到该命令；不能把 `west sdk-version` 作为可用命令或保留为读者待试项。NCS v3.4.0 发布说明给出的源码身份是 manifest 仓库标签 `v3.4.0`；该版本锁定的 Zephyr `SDK_VERSION` 文件内容为 `1.0.1`，发布说明确认工具链基于 Zephyr SDK v1.0.1。`west --version` 只检查 west 本身，不能替代 SDK、编译器或烧录工具版本。
+- 影响：若读者照 A-005 的原检查项执行，会遇到未知命令或误解输出；仅记录 VS Code 选择项和 `west --version` 也不足以证明源码、Zephyr SDK、GCC 与 nRF Util 属于同一基线。
+- 修改建议：原稿责任人 writer。删除 `west sdk-version` 待核说法，改为分层记录：① 在 SDK 工作区根目录执行 `git -C nrf describe --tags --exact-match HEAD`，期望源码 manifest 标签为 `v3.4.0`；② `Get-Content zephyr\SDK_VERSION`，期望固定版本文件为 `1.0.1`；③ 在扩展配置的工具链终端执行 `arm-zephyr-eabi-gcc --version`，并结合首次 `west build` 的 CMake“Found toolchain”日志记录实际编译器路径与版本，目标 GCC 为 14.3.0；④ 另行记录 `west --version`、`nrfutil --version` 和 `nrfutil device --version`，不要把任何单条输出扩张为整套环境已匹配。所有期望值标明资料核查级，实际输出仍由用户安装后回填；若 Git 包不含标签或命令输出不同，保存路径和完整输出交技术核查。
+- 作者处理回复：待 writer 填写，注明修订版本及 A-005 v0.3 检查项的协调方式。
+- 复核：待 developer 对修订版本中的命令、预期值、失败分支和证据措辞复核。
 
 ### 用户通读与反馈处理
 - 依据：D-008；技术问题处理并完成必要复核后，writer 提供完整可读稿的路径、版本、修订摘要、已知限制与反馈入口。
