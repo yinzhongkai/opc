@@ -268,15 +268,15 @@
 
 ## T-011：chapter 2《读懂这个项目》修订与第 1 轮评审（P3 首章）
 - 负责人：writer（自查修订与统一修订）；reviewer（技术审校与复核）；用户（通读意见与定稿确认）
-- 状态：in_review（统一修订稳定版 Git `bc33817` 的 project-manager 流程复核与 reviewer 技术/实测复核均已通过；用户在定稿确认前新增 U-9~U-12，等待 writer 修订图表、正文与等宽输出并补充 A-004 规则，随后做针对性复核并再次交用户确认）
+- 状态：in_review（定稿前统一修订稳定版 Git `fe72b37` 已提交；等待 project-manager 对呈现/排版/意见闭环复核、reviewer 对启动链及三处技术关系复核，随后由用户确认定稿）
 - 授权来源与日期：2026-09-26 用户在 project-manager 会话确认启动 P3（"登记吧"）；依据 A-002 v0.3 P3 阶段定义（按依赖序逐章推进，chapter 2→16）与 T-006 定型节奏。
 - 目标与范围：以 chapter 2《读懂这个项目》（workspace/yocto/task03-2-读懂这个项目.md，583 行）走 T-006 定型并由 D-010 补充的完整章节闭环：writer 自查与修订 → 任务内交叉评审（reviewer 技术审校；project-manager 项目管理意见；用户通读意见 D-007 经 project-manager 汇集）+ T-012 真实环境核验 → writer 统一修订 → reviewer 复核 → 用户确认定稿。修订与审校依据：A-004 v0.4 全部条款（含 v0.3 §4 三条款、v0.4 §7 列表记号）+ T-006 口径族——①正文/对话弯引号（R-3 口径，逐章统一）；②`/home/<your-username>` 占位回填固化环境真实值（U-11 口径，本章 8 处含 1 处 💡，回填 `/home/oops` 并移除替换提示）；③概念名大小写（sstate 等）；④scarthgap 分支名/发行版分工（本章 2 处 Scarthgap）；⑤列表记号 `-` 紧凑（D-009）；⑥延伸阅读链接实测核查（U-16 建议，curl 状态码+标题核对）；⑦读者正文不暴露内部 `task NN`，并移除章末 Git tag 流程（D-011）。
 - 输入与依赖：书稿当前版本；A-004 v0.4（approved）；A-003；T-006 全套评审记录（口径族出处）；D-010/T-012；D-011。chapter 2 无既有 C-W/V 挂账且不依赖 P0.5，但这不构成跳过真实环境核验的依据；受评稿现有 4 处读者可见 `task NN` 和 1 组章末 `git tag chapter2` 流程，均已纳入本轮统一修订。
 - 优先级：未设定
-- 完成条件与确认方式：本轮评审意见全部处理并复核通过；T-012 逐项核验完成，实测不符项已由 writer 处理并经 reviewer 复核；D-011 的内部流程清理已完成；定稿确认前新增的 U-9~U-12 完成修订及相应针对性复核；按 D-003/D-010，章节定稿需用户确认。
-- 进展：2026-09-26 任务登记（P3 首章）。同日 writer 会话按用户指示"执行 T-011"完成作者自查修订并提交第 1 轮受评稿（Git `0f2c44c`，583 行）：①标题层级由 H2/H3/H4 升为 1×H1 + 7×H2 + 2×H3，符合 A-004 v0.4；②正文/对话 86 对 ASCII 直引号改为弯引号，代码块与行内代码保持原样；③`<your-username>` 实际共 10 处（登记时写 8 处，经逐处核对为 9 处路径 + 1 处替换提示）全部回填 `/home/oops`，替换提示改为固化环境说明；④全章原已无 `*` 列表，继续保持 `-` 紧凑风格；2 处 Scarthgap 均指发行版/版本语境，保持官方大写；全章无外部 URL，故本章没有延伸阅读链接可执行状态码/标题核查；⑤按官方 Yocto Project 5.0 / BitBake 2.8 资料修正技术表述：`MACHINE_FEATURES` / `DISTRO_FEATURES` 分别生效且 `COMBINED_FEATURES` 取相关交集、同名 recipe 由 `BBFILE_PRIORITY` 主导而非依赖 `BBLAYERS` 顺序、`IMAGE_INSTALL` 只管 rootfs 软件包而非 TF-A/U-Boot/内核 provider；同时修正增量重构、独立交付合规、QEMU 启动链产物、`core-image` 类继承等表述。未代写 reviewer、project-manager 或用户意见。2026-09-26 本轮全部输入到齐后，writer 按用户指示执行统一修订并提交新稳定版 Git `bc33817`（558 行）：逐项处理 U-1~U-8、R-1~R-6，R 问题引用 T-012 N-1~N-5/O-1 实测证据；新增 4 个本地 SVG，将旧表格/字符图统一为 4 个真实图片与 3 个正式表格；落实 D-010/D-011。逐项回复见本轮评审末尾。project-manager 与 reviewer 随后分别复核通过。用户在定稿确认前查看实际渲染图，新增 U-9：Fig-2-1 硬件域把互联关系画成了不合理的父子层级；用户进一步确认该图直接改用 ASCII 图。随后用户新增 U-10：同一段中的 `**PL011**`/PL011 排版不一致，要求制定全书通用准则；project-manager 核查 A-004 v0.4 后确认硬件型号加粗规则尚为空白，已登记 T-013 补充。用户继而新增 U-11：四仓库开发形式和目标启动路径已经确定，不应写成由未来仓库实现决定是否采用 BL1；核查后续 chapter 6/7 草稿确认目标路径明确包含 BL1，须同步修正 chapter 2 正文、Fig-2-1、Fig-2-2 与 Table-2-2。用户随后新增 U-12：`bitbake-layers show-layers` 的终端表格列未对齐，要求同类 ASCII 输出统一等宽对齐；chapter 2 定向检查仅发现该处表格型输出，规则并入 T-013 的 A-004 v0.5 补充范围。
-- 成果与验证证据：①第 1 轮受评稿：`workspace/yocto/task03-2-读懂这个项目.md`，Git `0f2c44c`（583 行，94 增/94 删）；②统一修订稳定版：同一正文，Git `bc33817`（558 行），并新增 `workspace/yocto/images/chapter2-hardware-startup-map.svg`、`chapter2-boot-flow.svg`、`chapter2-software-stack-boundary.svg`、`chapter2-project-overview.svg`。验证：4 个 SVG 均通过 XML 解析并以 1200px 原始画布渲染检查，文字/连线无截断；正文 4 个 Fig 标签与 4 个本地图片引用一一对应，3 个纯表格使用 Table 编号，66 个代码围栏标记成对，图片链接全部存在，`task NN`、章末 `git tag chapter2`、源码块多余 `\"` 均为 0，`git diff --check` 通过。技术变更直接采用 T-012 固化环境结果，不把本次静态校验冒充新的远程实测。
-- 阻塞与下一位行动人：无执行阻塞。project-manager 与 reviewer 对 Git `bc33817` 的既有复核结论仅适用于该版本；用户新增 U-9~U-12 后，chapter 2 尚不能定稿。下一位行动人 writer：①按 U-9/U-11 用 `text` 代码块中的 ASCII 图替换 Fig-2-1 SVG，图中采用已经确定的 Boot ROM → BL1 → BL2 路径并移除失去引用的文件；②按 U-11 同步修订 Fig-2-2、Table-2-2 及两处正文，不再把是否采用 BL1 写成待决定项；③按 U-10 将所指段落两处 PL011 均改为正文体；④按 U-12 对齐 `bitbake-layers show-layers` 文本表格；⑤执行 T-013 补充 A-004 的全书排版规则并提交新的稳定版本与处理回复。随后由 project-manager 复核呈现、排版和意见闭环，reviewer 针对启动链技术关系做复核，再交用户确认定稿及 A-004 新版本。
+- 完成条件与确认方式：本轮评审意见全部处理并复核通过；T-012 逐项核验完成，实测不符项已由 writer 处理并经 reviewer 复核；D-011 的内部流程清理已完成；定稿确认前新增的 U-9~U-16 完成修订及相应针对性复核；按 D-003/D-010，章节定稿需用户确认。
+- 进展：2026-09-26 任务登记（P3 首章）。同日 writer 会话按用户指示"执行 T-011"完成作者自查修订并提交第 1 轮受评稿（Git `0f2c44c`，583 行）：①标题层级由 H2/H3/H4 升为 1×H1 + 7×H2 + 2×H3，符合 A-004 v0.4；②正文/对话 86 对 ASCII 直引号改为弯引号，代码块与行内代码保持原样；③`<your-username>` 实际共 10 处（登记时写 8 处，经逐处核对为 9 处路径 + 1 处替换提示）全部回填 `/home/oops`，替换提示改为固化环境说明；④全章原已无 `*` 列表，继续保持 `-` 紧凑风格；2 处 Scarthgap 均指发行版/版本语境，保持官方大写；全章无外部 URL，故本章没有延伸阅读链接可执行状态码/标题核查；⑤按官方 Yocto Project 5.0 / BitBake 2.8 资料修正技术表述：`MACHINE_FEATURES` / `DISTRO_FEATURES` 分别生效且 `COMBINED_FEATURES` 取相关交集、同名 recipe 由 `BBFILE_PRIORITY` 主导而非依赖 `BBLAYERS` 顺序、`IMAGE_INSTALL` 只管 rootfs 软件包而非 TF-A/U-Boot/内核 provider；同时修正增量重构、独立交付合规、QEMU 启动链产物、`core-image` 类继承等表述。未代写 reviewer、project-manager 或用户意见。2026-09-26 本轮全部输入到齐后，writer 按用户指示执行统一修订并提交新稳定版 Git `bc33817`（558 行）：逐项处理 U-1~U-8、R-1~R-6，R 问题引用 T-012 N-1~N-5/O-1 实测证据；新增 4 个本地 SVG，将旧表格/字符图统一为 4 个真实图片与 3 个正式表格；落实 D-010/D-011。逐项回复见本轮评审末尾。project-manager 与 reviewer 随后分别复核通过。用户在定稿确认前查看实际渲染图，新增 U-9：Fig-2-1 硬件域把互联关系画成了不合理的父子层级；用户进一步确认该图直接改用 ASCII 图。随后用户新增 U-10：同一段中的 `**PL011**`/PL011 排版不一致，要求制定全书通用准则；project-manager 核查 A-004 v0.4 后确认硬件型号加粗规则尚为空白，已登记 T-013 补充。用户继而新增 U-11：四仓库开发形式和目标启动路径已经确定，不应写成由未来仓库实现决定是否采用 BL1；核查后续 chapter 6/7 草稿确认目标路径明确包含 BL1，须同步修正 chapter 2 正文、Fig-2-1、Fig-2-2 与 Table-2-2。用户随后新增 U-12：`bitbake-layers show-layers` 的终端表格列未对齐，要求同类 ASCII 输出统一等宽对齐；chapter 2 定向检查仅发现该处表格型输出，规则并入 T-013 的 A-004 v0.5 补充范围。用户继续完成第二次通读并补充 U-13~U-16 后，writer 同轮完成 U-9~U-16 与 T-013，提交定稿前稳定版 Git `fe72b37`（570 行）：Fig-2-1 改为 ASCII 并列分组，启动路径固定为 Boot ROM → BL1 → BL2 → BL31 → BL33 → Linux → UBI rootfs，重写 feature/layer 选择关系与 systemd/udev 失败链，删除章末路线和提示；逐项回复见追加意见后的作者回复。
+- 成果与验证证据：①第 1 轮受评稿：`workspace/yocto/task03-2-读懂这个项目.md`，Git `0f2c44c`（583 行，94 增/94 删）；②统一修订稳定版：同一正文，Git `bc33817`（558 行），并新增 4 个 SVG；③定稿前统一修订稳定版：同一正文，Git `fe72b37`（570 行），Fig-2-1 改为 `text` ASCII 图，删除失去引用的 `chapter2-hardware-startup-map.svg`，保留并修订其余 3 个 SVG。验证：Fig-2-1 硬件表格 7 行均为 74 字符且不含 Tab/行尾空格；chapter 2 的 `show-layers` 五行与 chapter 1 已验证块逐字一致（行长 102/104/95/95/95）；Fig-2-2 SVG 通过 XML 解析并以 1200×650 渲染检查；正文 68 个代码围栏标记成对，4 个 Fig 中 1 个 ASCII/3 个图片且图片引用全部存在，3 个 Table 连续；可选 BL1/直达 BL2、`**PL011**`、章末阅读路线及失效图片引用均为 0；`git diff --check` 与提交检查通过。技术说明沿用 T-012 和 U-15 已登记源码核查证据，本轮未冒充新的远程实测。
+- 阻塞与下一位行动人：无执行阻塞。Git `bc33817` 上的既有复核不自动覆盖 Git `fe72b37`。下一位行动人 project-manager：复核 U-9/U-10/U-12/U-16、Markdown 呈现、A-004 v0.5 规则与意见闭环；reviewer：复核 U-11 的启动链、U-13 的 feature 关系、U-14 的选择规则及 U-15 的 systemd/udev 失败链；两方复核通过后由用户确认 chapter 2 定稿与 A-004 v0.5。writer 不代写上述复核结论。
 - 更新日期：2026-09-26
 
 ### 本轮评审：chapter 2 作者修订稿（Git `0f2c44c`，第 1 轮）
@@ -381,6 +381,18 @@
 - 用户再次通读状态：2026-09-26 用户声明已经再次读完第 2 章；截至该声明，本轮定稿前追加意见为 U-9~U-16，已全部登记并形成处理口径。该声明表示本轮阅读输入已经到齐，不等同于批准当前 Git `bc33817`，因为上述意见尚未写入正文。
 - 处理与复核安排：**U-9~U-16 均待 writer 修订，用户本轮阅读输入已到齐**。writer 须提交新的 chapter 2 稳定版本和逐项回复；U-10/U-12 的全书规则由 T-013 写入 A-004 新版本，既有后续章节不做脱离 P3 的一次性批量替换，随各章修订逐章执行。project-manager 复核 Markdown 呈现、ASCII 对齐、排版规则、结尾删减、跨章一致性和意见闭环，reviewer 针对 Fig-2-1/2、Table-2-2、U-13 的 feature 关系、U-14 的选择规则及 U-15 的 systemd/udev 失败链做技术复核。Git `bc33817` 上的既有 pass 不自动覆盖修订后的图表和正文；相应复核通过后再交用户确认 chapter 2 定稿及 A-004 新版本。
 
+#### writer 对 U-9~U-16 的定稿前统一修订回复
+- 日期、修订版本与边界：2026-09-26；作者 writer；chapter 2 与 A-004 v0.5 内容稳定版 Git `fe72b37`。以下均为作者处理回复，状态为已修订、待对应成员按既定范围复核；不沿用 Git `bc33817` 的旧复核结论，也不代写 project-manager/reviewer 或用户确认。
+- U-9｜**已修订，待 project-manager 复核**：保留 Fig-2-1 图题，以 `text` 代码块 ASCII 图替换 SVG。硬件区将 Compute、Memory / Storage、Peripherals 作为三列并列功能组；7 条边框/数据行均为 74 字符，不含 Tab 或行尾空格。启动链只使用短英文标签和 `->`。原 `images/chapter2-hardware-startup-map.svg` 全项目仅有正文一处有效引用，替换后已删除；历史任务记录中的文件名作为旧版本事实保留。
+- U-10｜**已修订，待 project-manager 复核**：2.1 节所指句两处 PL011 均改为正文体。T-013 同步将硬件型号正文体、完整概念/结构化强调的粗体边界、代码性硬件标识反引号及代码块/输出例外写入 A-004 v0.5，并给出正反例；未对后续草稿做脱离 P3 的批量替换。
+- U-11｜**已修订，待 reviewer 复核**：正文两处、Fig-2-1、Fig-2-2 和 Table-2-2 统一为 Boot ROM → TF-A BL1 → TF-A BL2 → TF-A BL31 → U-Boot BL33 → Linux Kernel → UBI rootfs；删除“平台可选”、Boot ROM 直达 BL2 旁路及“是否采用 BL1 待定”表述。Table-2-2 将 `bl1.bin` 等写为目标产物并保留“实际部署形式待实测”，Fig-2-2 也明确具体交付文件与打包方式待四仓库实测，未把目标设计写成已验证结果。
+- U-12｜**已修订，待 project-manager 复核**：chapter 2 的 `bitbake-layers show-layers` 输出逐字复用 chapter 1 经 T-008/T-006 E-2 验证的五行块；脚本比较结果为完全相同，五行长度依次为 102/104/95/95/95。T-013 同步将真实输出空白保真、同环境同命令复用已验证块，以及作者 ASCII 图使用空格固定列宽、不用 Tab/行尾空格的规则写入 A-004 v0.5。
+- U-13｜**已修订，待 reviewer 复核**：按登记文本重写 feature 解释，先区分 `MACHINE_FEATURES` 与 `DISTRO_FEATURES` 各自回答的问题，再说明只有同时依赖两侧条件的逻辑才使用 `COMBINED_FEATURES`，最后用实测四项交集解释其用途；原实测输出值未改。
+- U-14｜**已修订，待 reviewer 复核**：按登记文本拆分选择规则：`BBLAYERS` 只决定启用哪些层，`BBFILE_PRIORITY` 决定不同层的同名 recipe 优先级，`PREFERRED_VERSION`/`PREFERRED_PROVIDER` 分别处理多版本/多 provider 选择；明确普通变量和 `.bbappend` 另有合并规则。
+- U-15｜**已修订，待 reviewer 复核**：保留 T-012 实测错误原文，在其后补全四步因果链：当前 SysVinit 配置仍依赖 `udev` → 追加 `systemd` 使 `PREFERRED_PROVIDER_udev` 改选 systemd → systemd recipe 缺少同时必需的 `usrmerge` 而不可构建 → eudev 不再首选且新 provider 不可构建，最终触发 `Nothing RPROVIDES 'udev'`。随后明确正确做法是在 Distro 配置中设置 `INIT_MANAGER = "systemd"`，由 `init-manager-systemd.inc` 完成 feature 和 runtime provider 的一致切换。
+- U-16｜**已修订，待 project-manager 复核**：删除“接下来的阅读路线”、第 3~5 章三项列表及整个提示框，不新增替代段落；章节以“地图有了。下一步就是动手搭 `meta-tiger` 这个 layer。”收束。
+- 作者验证：chapter 2 共 570 行，1×H1 / 7×H2 / 2×H3，68 个代码围栏标记成对；4 个 Fig（1 个 ASCII、3 个本地 SVG）与 3 个 Table 编号连续，3 个图片引用均存在；Fig-2-2 SVG XML 与 1200×650 渲染检查通过；U-9/U-11/U-16 旧措辞及失效图片引用零残留；A-004 v0.5 元信息、版本记录、in_review 状态和成果索引一致；`git diff --check` 与 Git 提交检查通过。
+
 ## T-012：真实环境核验 chapter 2 命令、配置与输出
 - 负责人：reviewer
 - 状态：completed（2026-09-26 project-manager 复核通过；不符项已转入 T-011，验证门槛随 T-011 修订与复核闭环）
@@ -396,15 +408,15 @@
 
 ## T-013：补充硬件型号与等宽文本排版规则（A-004 v0.5）
 - 负责人：writer
-- 状态：todo
+- 状态：in_review（A-004 v0.5 与 chapter 2 应用版本 Git `fe72b37` 已提交，等待 project-manager 核对并由用户确认）
 - 授权来源与日期：2026-09-26 用户在 project-manager 会话指出 chapter 2 同段 `**PL011**`/PL011 加粗不一致，要求确定一般准则；project-manager 依据 A-004 v0.4 和全稿定向搜索登记规则边界与实施任务。
 - 目标与范围：将 T-011 U-10/U-12 的确认口径写入 A-004 新版本：硬件型号在普通叙述中使用正文体；粗体仅用于首次正式定义的完整概念短语或成组结构化强调；代码性标识使用反引号；真实命令输出保持内容与空白原文，同一已验证输出重复出现时逐字复用；作者绘制的 ASCII 图表在 `text` 代码块内使用固定列宽和空格对齐。同步在 chapter 2 落实两处 PL011 正文体，并以 chapter 1 已验证原文修复 `bitbake-layers show-layers` 三列表格。规则适用于全书后续 P3 修订，不在本任务中脱离逐章流程批量改写所有草稿。
 - 输入与依赖：A-004 v0.4（approved）；T-011 U-10/U-12；chapter 2 当前稳定版 Git `bc33817`；全稿 PL011/PL031/Cortex-A53 等型号的定向搜索结果；chapter 2 等宽文本块定向检查结果。
 - 优先级：未设定
 - 完成条件与确认方式：A-004 更新版本、日期、来源、批准状态和版本记录，新增可执行的硬件型号/粗体/反引号边界、真实命令输出空白保真规则、作者 ASCII 图表等宽对齐规则及正反例；chapter 2 所指段和三列表格按规则修订；project-manager 核对规则与 U-10/U-12 一致，chapter 2 五行 `show-layers` 输出与 chapter 1 已验证块逐字一致，未误改实测内容、代码和输出值；A-004 新版本与 chapter 2 一并交用户确认。
-- 进展：2026-09-26 任务登记。现状核查确认 A-004 v0.4 未覆盖硬件型号的粗体边界；chapter 2 L77 同段 `**PL011**`/PL011 混用，全稿同类型号以正文体为主。随后按 U-12 扩围：A-004 v0.4 也未明确等宽文本表格的列对齐规则，chapter 2 `show-layers` 输出的表头与数据列不一致；chapter 1 的同一命令输出已有 T-008 实测和 T-006 E-2 逐字复核，可作为直接修复基线。两项规则内容已在 T-011 U-10/U-12 固化，等待 writer 写入成果并应用。
-- 成果与验证证据：待补充。
-- 阻塞与下一位行动人：无。下一位行动人 writer，与 T-011 U-9~U-16 同轮处理并提交。
+- 进展：2026-09-26 任务登记。现状核查确认 A-004 v0.4 未覆盖硬件型号的粗体边界；chapter 2 L77 同段 `**PL011**`/PL011 混用，全稿同类型号以正文体为主。随后按 U-12 扩围：A-004 v0.4 也未明确等宽文本表格的列对齐规则，chapter 2 `show-layers` 输出的表头与数据列不一致；chapter 1 的同一命令输出已有 T-008 实测和 T-006 E-2 逐字复核，可作为直接修复基线。两项规则内容已在 T-011 U-10/U-12 固化。writer 同轮完成规则写入与 chapter 2 应用，提交 Git `fe72b37`：A-004 版本升至 0.5，当前状态改为 in_review，保留 v0.4 已批准基线并明确 v0.5 不继承批准；§4 新增硬件型号/粗体/代码性标识边界及正反例，§5 新增真实输出空白保真、已验证输出逐字复用和作者 ASCII 图表固定列宽规则及正反例；成果索引同步更新为 v0.5/in_review。chapter 2 两处 PL011 与 `show-layers` 输出已按规则修订。
+- 成果与验证证据：[A-004 体例约定 v0.5](artifacts/A-004-体例约定草案.md)，Git `fe72b37`；[成果索引](artifacts/README.md) 已同步为 T-005/T-013、v0.5、in_review。验证：A-004 元信息、批准依据和版本记录均区分 v0.4 approved 与 v0.5 待确认；新增规则覆盖 T-013 要求的四组边界并含正反例；chapter 2 两处 PL011 均为正文体；`show-layers` 五行与 chapter 1 已验证块逐字一致；Fig-2-1 作者 ASCII 图 7 条表格行固定为 74 字符，无 Tab、无行尾空格；Markdown 围栏成对，`git diff --check` 与提交检查通过。
+- 阻塞与下一位行动人：无执行阻塞。下一位行动人 project-manager：核对 A-004 v0.5 与 U-10/U-12、成果索引和 chapter 2 应用一致；核对通过后由用户确认 A-004 v0.5。writer 不将本次作者自查记为 project-manager 复核或用户批准。
 - 更新日期：2026-09-26
 
 ## 记录样式（不是真实任务）
