@@ -29,7 +29,7 @@
 
   <rect x="70" y="440" width="760" height="90" fill="#f3f0ff" stroke="#7456ad" stroke-width="2" rx="12"/>
   <text x="105" y="475" class="layer">Firmware / Bootloader 层</text>
-  <text x="105" y="508" class="item">TF-A（BL1 可选、BL2、BL31）　/　U-Boot（BL33）</text>
+  <text x="105" y="508" class="item">TF-A（BL1、BL2、BL31）　/　U-Boot（BL33）</text>
 
   <rect x="855" y="350" width="270" height="135" fill="#f5fbf7" stroke="#2d8a57" stroke-width="2" rx="12"/>
   <text x="990" y="389" class="layer" text-anchor="middle">进 meta-tiger</text>
