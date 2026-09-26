@@ -1,30 +1,30 @@
-## 2 读懂这个项目
+# 2 读懂这个项目
 
 周二上午，阿凯一到工位就打开终端。昨天构建的 `core-image-minimal` 还在 `tmp/deploy/images/qemuarm64/` 里躺着。达哥从内网 wiki 上拉了一张图，发到阿凯屏幕上。
 
-"跑起来了？"达哥问。
+“跑起来了？”达哥问。
 
-"嗯，昨晚 `runqemu` 进了 shell。"阿凯回答。
+“嗯，昨晚 `runqemu` 进了 shell。”阿凯回答。
 
-"好。现在你打开 `poky` 仓库，告诉我你看到了什么。"
+“好。现在你打开 `poky` 仓库，告诉我你看到了什么。”
 
-阿凯把窗口切过去，从上到下念："`bitbake/`、`meta/`、`meta-poky/`、`meta-yocto-bsp/`……昨天翻过了。"
+阿凯把窗口切过去，从上到下念：“`bitbake/`、`meta/`、`meta-poky/`、`meta-yocto-bsp/`……昨天翻过了。”
 
-"光看目录没用。"达哥把架构图放大，"你接下来三个月做的所有事，都在这张图上。昨天你跑的是 `qemuarm64`——通用机器。今天我要你在这张图上找到 tiger 的每个零件，然后在 Poky 里指出它对应哪个目录、哪个 recipe。"
+“光看目录没用。”达哥把架构图放大，“你接下来三个月做的所有事，都在这张图上。昨天你跑的是 `qemuarm64`——通用机器。今天我要你在这张图上找到 tiger 的每个零件，然后在 Poky 里指出它对应哪个目录、哪个 recipe。”
 
-阿凯盯着图：**Cortex-A53**、**DDR**、**NAND Flash**、**SPI NOR Flash**、**UART**、**RTC**、**Watchdog**……旁边还挂着启动链的六个阶段。"从哪开始？"
+阿凯盯着图：**Cortex-A53**、**DDR**、**NAND Flash**、**SPI NOR Flash**、**UART**、**RTC**、**Watchdog**……旁边还挂着启动链的六个阶段。“从哪开始？”
 
-"从硬件。CPU、内存、Flash、外设——序章给你讲过了，现在你去 `meta` 里找一个真实 MACHINE 的配置，看看硬件是怎么描述给 Yocto 项目的。然后顺着启动链走，最后告诉我 tiger 的应用程序应该放哪。"
+“从硬件。CPU、内存、Flash、外设——序章给你讲过了，现在你去 `meta` 里找一个真实 MACHINE 的配置，看看硬件是怎么描述给 Yocto 项目的。然后顺着启动链走，最后告诉我 tiger 的应用程序应该放哪。”
 
-阿凯脱口而出："放 `meta-tiger` 里？"
+阿凯脱口而出：“放 `meta-tiger` 里？”
 
 达哥没回答，把椅子转回去了。
 
-### 2.1 tiger 硬件全貌的 Yocto 项目映射
+## 2.1 tiger 硬件全貌的 Yocto 项目映射
 
 阿凯先把达哥发来的架构图存到本地，又打开一个终端。他没有急着敲命令，而是把图上的每个硬件框都标上了序号：CPU、DDR、NAND Flash、SPI NOR Flash、UART、RTC、Watchdog、I2C EEPROM。
 
-"这些框不是装饰，"他在心里提醒自己，"每个框在 Poky 里都得有人负责。"
+“这些框不是装饰，”他在心里提醒自己，“每个框在 Poky 里都得有人负责。”
 
 `tiger` 和 `qemuarm64` 一样都是 ARMv8-A 64 位，先从最接近的参考 MACHINE 看起最省时间。阿凯先定位 `qemuarm64.conf` 的位置。
 
@@ -36,7 +36,7 @@ find ~/workspace/poky -name "qemuarm64.conf"
 输出：
 
 ```text
-/home/<your-username>/workspace/poky/meta/conf/machine/qemuarm64.conf
+/home/oops/workspace/poky/meta/conf/machine/qemuarm64.conf
 ```
 
 ```bash
@@ -66,15 +66,15 @@ QB_CPU = "-cpu cortex-a57"
 
 阿凯把这几行抄在便签上，逐条问达哥。
 
-"`KERNEL_IMAGETYPE = "Image"` 是 **内核镜像类型（KERNEL_IMAGETYPE）**，指定内核编译产物格式。`Image` 是 AArch64 的未压缩内核镜像，tiger 也会用这个格式。"达哥指着屏幕，"`tune-cortexa57.inc` 是体系调优入口，tiger 用 Cortex-A53，后续会换对应的 tune 文件。"
+“`KERNEL_IMAGETYPE = "Image"` 是 **内核镜像类型（`KERNEL_IMAGETYPE`）**，指定内核编译产物格式。`Image` 是 AArch64 的未压缩内核镜像，tiger 也会用这个格式。”达哥指着屏幕，“`tune-cortexa57.inc` 是体系调优入口，tiger 用 Cortex-A53，后续会换对应的 tune 文件。”
 
-"`SERIAL_CONSOLES` 呢？"
+“`SERIAL_CONSOLES` 呢？”
 
-"串口控制台。`115200;ttyAMA0` 表示波特率 115200，设备节点 `ttyAMA0`。QEMU 的 **PL011** 串口模型会对应这个节点。 tiger 的串口也是 PL011，到时候直接复用这个格式。`hvc0` 是 QEMU virtio console 的备用节点。"
+“串口控制台。`115200;ttyAMA0` 表示波特率 115200，设备节点 `ttyAMA0`。QEMU 的 **PL011** 串口模型会对应这个节点。tiger 的串口也是 PL011，到时候直接复用这个格式。`hvc0` 是 QEMU virtio console 的备用节点。”
 
-"`qemu.inc` 里还有什么？"阿凯又问。
+“`qemu.inc` 里还有什么？”阿凯又问。
 
-"`qemu.inc` 是 QEMU 机器的公共包含文件。"达哥打开文件，"里面设了 **机器特性（MACHINE_FEATURES）**、**镜像格式（IMAGE_FSTYPES）** 和内核提供者。注意 `MACHINE_FEATURES` 只描述硬件能力，不替发行版决定软件策略。"
+“`qemu.inc` 是 QEMU 机器的公共包含文件。”达哥打开文件，“里面设了 **机器特性（`MACHINE_FEATURES`）**、**镜像格式（`IMAGE_FSTYPES`）** 和内核提供者。注意 `MACHINE_FEATURES` 只描述硬件能力，不替发行版决定软件策略。”
 
 ```bitbake
 # 文件路径：~/workspace/poky/meta/conf/machine/include/qemu.inc（关键行）
@@ -109,14 +109,14 @@ find ~/workspace/poky/meta/recipes-devtools -name "mtd-utils*.bb"
 输出：
 
 ```text
-/home/<your-username>/workspace/poky/meta/recipes-devtools/mtd/mtd-utils_git.bb
+/home/oops/workspace/poky/meta/recipes-devtools/mtd/mtd-utils_git.bb
 ```
 
 > **💡 提示**：`mtd-utils` 在 Scarthgap 中使用基于 git 的版本命名 `mtd-utils_git.bb`，以你本地文件名为准。
 
-"PL011 UART、**PL031** RTC、SPI NOR 的 **m25p80** 模型、**I2C EEPROM** 的 **at24** 模型，这些通用驱动都随 `linux-yocto` 内核源码一起提供。"达哥说，"NAND 和 **UBI/UBIFS** 相关的工具则由 `mtd-utils` 这个 recipe 提供。"
+“PL011 UART、PL031 RTC、SPI NOR 的 `m25p80` 驱动、I2C EEPROM 的 `at24` 驱动，这些通用驱动都随 `linux-yocto` 内核源码一起提供。”达哥说，“NAND 和 UBI/UBIFS 相关的工具则由 `mtd-utils` 这个 recipe 提供。”
 
-阿凯把结果填进一张表里，作为今天的第一个"地图坐标"。
+阿凯把结果填进一张表里，作为今天的第一个“地图坐标”。
 
 **Fig-2-1 tiger 硬件框图（Yocto 项目映射版）**
 
@@ -125,20 +125,20 @@ find ~/workspace/poky/meta/recipes-devtools -name "mtd-utils*.bb"
 | Cortex-A53 4 核 | `meta/conf/machine/include/arm/armv8a/tune-cortexa57.inc` | 体系调优入口（tiger 后续换 A53 对应 tune） |
 | DDR | TF-A BL2（后续由 `meta-arm` 集成，后续章节引入） | 启动链中初始化内存 |
 | NAND Flash + UBI | `meta/recipes-devtools/mtd/mtd-utils_git.bb` | UBI/UBIFS 工具集 |
-| SPI NOR Flash | `linux-yocto` 内核源码中的 **m25p80** 驱动 | QEMU 设备模型对应 |
-| I2C EEPROM | `linux-yocto` 内核源码中的 **at24** 驱动 | 板载 EEPROM |
+| SPI NOR Flash | `linux-yocto` 内核源码中的 `m25p80` 驱动 | QEMU 设备模型对应 |
+| I2C EEPROM | `linux-yocto` 内核源码中的 `at24` 驱动 | 板载 EEPROM |
 | UART / PL011 | `linux-yocto` 内核源码中的 `pl011` 驱动 | `SERIAL_CONSOLES` 指定节点 |
 | RTC / PL031 | `linux-yocto` 内核源码中的 `pl031` 驱动 | 由设备树绑定 |
 | Watchdog | `linux-yocto` 内核源码中的看门狗驱动 | 板载异常恢复 |
-| 内核设备树 | **内核设备树（KERNEL_DEVICETREE）** 变量（`tiger-aarch64.conf` 中设置） | 指定编译哪些 `.dtb` |
+| 内核设备树 | **内核设备树（`KERNEL_DEVICETREE`）** 变量（`tiger-aarch64.conf` 中设置） | 指定编译哪些 `.dtb` |
 
-"所以 tiger 不需要从零写所有驱动？"阿凯问。
+“所以 tiger 不需要从零写所有驱动？”阿凯问。
 
-"大部分通用外设，Poky 和 `meta-arm` 里已经有了。"达哥说，"我们要做的是：把 tiger 的地址、中断、引脚差异用设备树描述清楚，再用 **内核设备树（KERNEL_DEVICETREE）** 变量告诉内核要编译哪份设备树。"
+“大部分通用外设，Poky 和 `meta-arm` 里已经有了。”达哥说，“我们要做的是：把 tiger 的地址、中断、引脚差异用设备树描述清楚，再用 **内核设备树（`KERNEL_DEVICETREE`）** 变量告诉内核要编译哪份设备树。”
 
-### 2.2 启动链与构建产物对照
+## 2.2 启动链与构建产物对照
 
-硬件坐标找完了，阿凯顺着达哥的架构图往上看启动链。序章已经讲过六个阶段：**BL1** / **Boot ROM** → **BL2 (TF-A)** → **BL31 (TF-A)** → **BL33 (U-Boot)** → Linux Kernel → **UBI rootfs**。他现在想知道："这六个阶段在 Yocto 项目构建产物里长什么样？"
+硬件坐标找完了，阿凯顺着达哥的架构图往上看启动链。序章已经讲过六个阶段：**BL1** / **Boot ROM** → **BL2 (TF-A)** → **BL31 (TF-A)** → **BL33 (U-Boot)** → Linux Kernel → **UBI rootfs**。他现在想知道：“这六个阶段在 Yocto 项目构建产物里长什么样？”
 
 他先回忆昨天 `qemuarm64` 的 deploy 目录。
 
@@ -155,11 +155,11 @@ core-image-minimal-qemuarm64.rootfs-<时间戳>.ext4
 # ... (省略)
 ```
 
-"`qemuarm64` 只有 `Image` 和 rootfs，"阿凯自言自语，"没有 TF-A，没有 U-Boot。"
+“`qemuarm64` 的关键产物里有 `Image` 和 rootfs，”阿凯自言自语，“却没有 tiger 启动链需要的 TF-A 和 U-Boot 产物。”
 
-"对。"达哥凑过来，"QEMU 机器通常由 QEMU 自己模拟固件和 bootloader，直接加载内核。但 tiger 是真板子逻辑，必须走完整启动链。你现在要关心的是：Yocto 项目怎么决定用哪个 bootloader、用哪个 kernel。"
+“对。”达哥凑过来，“`qemuarm64` 的 `runqemu` 配置让 QEMU 直接加载内核，没有单独构建 tiger 所需的板级固件和 bootloader。但 tiger 按本书设定必须走完整启动链。你现在要关心的是：Yocto 项目怎么决定用哪个 bootloader、用哪个 kernel。”
 
-阿凯想起昨天达哥说 BitBake 里有"虚包"机制。他尝试查看当前 MACHINE 下的 kernel 提供者。
+阿凯想起昨天达哥说 BitBake 里有“虚包”机制。他尝试查看当前 MACHINE 下的 kernel 提供者。
 
 ```bash
 # 确保已初始化构建环境
@@ -176,11 +176,11 @@ bitbake -e virtual/kernel | grep PREFERRED_PROVIDER_virtual/kernel
 PREFERRED_PROVIDER_virtual/kernel="linux-yocto"
 ```
 
-"这就是 **优先提供者（PREFERRED_PROVIDER）** 机制。"达哥指着输出，"`virtual/kernel` 是个虚包名，BitBake 允许多个 recipe 声称自己能提供 kernel。`PREFERRED_PROVIDER` 决定最终用谁。`qemuarm64` 的 kernel 由 `linux-yocto` 提供。"
+“这就是 **优先提供者（`PREFERRED_PROVIDER`）** 机制。”达哥指着输出，“`virtual/kernel` 是个虚拟目标，BitBake 允许多个 recipe 声称自己能提供 kernel。`PREFERRED_PROVIDER` 决定最终用谁。`qemuarm64` 的 kernel 由 `linux-yocto` 提供。”
 
-"那 bootloader 呢？"阿凯问。
+“那 bootloader 呢？”阿凯问。
 
-"QEMU 机器通常不设 `PREFERRED_PROVIDER_virtual/bootloader`，因为 QEMU 直接加载内核，不需要真实 bootloader。"达哥说，"但 tiger 会设。以后我们会写 `PREFERRED_PROVIDER_virtual/bootloader = "u-boot-tiger"`，还会加 `PREFERRED_PROVIDER_virtual/trusted-firmware-a = "trusted-firmware-a"`。这些现在只是前瞻，你先知道有这回事。"
+“QEMU 机器通常不设 `PREFERRED_PROVIDER_virtual/bootloader`，因为 QEMU 直接加载内核，不需要真实 bootloader。”达哥说，“但 tiger 会设。以后我们会写 `PREFERRED_PROVIDER_virtual/bootloader = "u-boot-tiger"`，还会加 `PREFERRED_PROVIDER_virtual/trusted-firmware-a = "trusted-firmware-a"`。这些现在只是前瞻，你先知道有这回事。”
 
 阿凯把启动链和产物对应起来，画了第二张表。
 
@@ -188,45 +188,45 @@ PREFERRED_PROVIDER_virtual/kernel="linux-yocto"
 
 | 启动阶段 | 负责组件 | Yocto 项目产物文件 | qemuarm64 是否有 |
 |---|---|---|---|
-| BL1 / Boot ROM | SoC 出厂固化 | 不由 Yocto 项目构建 | 由 QEMU 模拟 |
+| BL1 / Boot ROM | SoC 出厂固化 | 不由 Yocto 项目构建 | 不单独产出，由 QEMU 启动流程替代 |
 | BL2 (TF-A) | Trusted Firmware-A | `bl2.bin` / `flash.bin`（后续集成） | 无 |
 | BL31 (TF-A) | Trusted Firmware-A | `bl31.bin`（后续集成） | 无 |
 | BL33 (U-Boot) | U-Boot | `u-boot.bin` / `u-boot.dtb`（后续集成） | 无 |
 | Linux Kernel | linux-yocto / linux-tiger | `Image`、`tiger-aarch64.dtb` | 有 `Image` |
 | UBI rootfs | 镜像配方 | `*.ubifs` / `*.ubi`（后续配置） | `*.ext4` |
 
-"现在明白为什么 `qemuarm64` 昨天一跑就通了吗？"达哥问，"因为 QEMU 替它吃了前半段启动链。 tiger 不行，前半段得我们自己一片片拼。"
+“现在明白为什么 `qemuarm64` 昨天一跑就通了吗？”达哥问，“因为 QEMU 替它吃了前半段启动链。 tiger 不行，前半段得我们自己一片片拼。”
 
-### 2.3 软件栈分层与归属决策
+## 2.3 软件栈分层与归属决策
 
 硬件和启动链都串起来了，阿凯的注意力落到最上面一层：应用程序。达哥刚才没回答的问题还在他脑子里转。
 
-"达哥，"阿凯转过身，"tiger 的网关应用程序、Web 配置界面——这些也写成 recipe 放进 `meta-tiger` 吗？"
+“达哥，”阿凯转过身，“tiger 的网关应用程序、Web 配置界面——这些也写成 recipe 放进 `meta-tiger` 吗？”
 
-达哥没有正面回答："你昨天构建的 `core-image-minimal` 里有什么？"
+达哥没有正面回答：“你昨天构建的 `core-image-minimal` 里有什么？”
 
-"BusyBox、一些基础工具、内核、根文件系统……没有应用程序。"阿凯说。
+“BusyBox、一些基础工具、内核、根文件系统……没有应用程序。”阿凯说。
 
-"那你想想，如果我把 Web 后端、数据库、业务逻辑全塞进 `meta-tiger`，三个月后应用团队要更新一个功能，怎么办？"
+“那你想想，如果我把 Web 后端、数据库、业务逻辑全塞进 `meta-tiger`，三个月后应用团队要更新一个功能，怎么办？”
 
-阿凯迟疑了一下："重新 `bitbake`？"
+阿凯迟疑了一下：“重新 `bitbake`？”
 
-"重新 `bitbake` 意味着整个 rootfs 重新构建、重新验证、重新出 license 清单。应用团队只是想改一个 API 响应。"达哥顿了顿，"`meta-tiger` 只放 BSP 层的东西——让板子能启动、能跑内核、有基础文件系统。应用程序是另一回事。"
+“重新 `bitbake` 会重跑受影响的软件任务并重新生成 rootfs 镜像，随后还要重做对应验证与 license 清单。应用团队只是想改一个 API 响应。”达哥顿了顿，“`meta-tiger` 只放 BSP 层的东西——让板子能启动、能跑内核、有基础文件系统。应用程序是另一回事。”
 
-阿凯追问："那 OTA 升级怎么做？"
+阿凯追问：“那 OTA 升级怎么做？”
 
-"分成两条线。"达哥在纸上画了两条竖线，"BSP 更新走全量固件升级，周期长、验证重；应用更新走容器或独立包升级，轻量、快速。把它们分开，才能各按各的节奏走。"
+“分成两条线。”达哥在纸上画了两条竖线，“BSP 更新走全量固件升级，周期长、验证重；应用更新走容器或独立包升级，轻量、快速。把它们分开，才能各按各的节奏走。”
 
-"开源合规呢？"
+“开源合规呢？”
 
-"`meta-tiger` 里的组件越少，license 清单越干净。业务应用如果是自研闭源或第三方闭源 **软件开发工具包（SDK）**，本来就不该混进 BSP 的 license 审计范围。"达哥把笔放下，"长期维护也是同理。三年后别人接手 `meta-tiger`，他应该看到的是一块板子的 BSP，而不是你们公司的业务史。"
+“`meta-tiger` 里的组件越聚焦，BSP 的 license 清单越容易审计。自研闭源应用和第三方闭源 **软件开发工具包（SDK）** 即使独立交付，也仍要做各自的许可与合规检查；只是不要把它们混进 BSP 层的职责和清单。”达哥把笔放下，“长期维护也是同理。三年后别人接手 `meta-tiger`，他应该看到的是一块板子的 BSP，而不是你们公司的业务史。”
 
 阿凯挠了挠头，把决策规则记进本子：
 
-- **进 `meta-tiger`**：bootloader、kernel、设备树、基础驱动、根文件系统骨架、工具链配置、Distro 策略。
+- **进 `meta-tiger`**：bootloader、kernel、设备树、基础驱动、根文件系统骨架、板级工具链配置。
 - **不进 `meta-tiger`**：业务应用、Web 服务、UI 逻辑、产品配置、第三方闭源 SDK。
 
-> **💡 提示**：可以把 BSP 想象成"房子的地基和水电"，应用是"装修和家具"。地基出问题整栋房子都危险，但换一盏灯不应该敲承重墙。
+> **💡 提示**：可以把 BSP 想象成“房子的地基和水电”，应用是“装修和家具”。地基出问题整栋房子都危险，但换一盏灯不应该敲承重墙。
 
 **Fig-2-3 软件栈三层归属图**
 
@@ -243,23 +243,23 @@ PREFERRED_PROVIDER_virtual/kernel="linux-yocto"
 └─────────────────────────────────────────────────────────────┘
 ```
 
-### 2.4 层（Layer）叠加机制
+## 2.4 层（Layer）叠加机制
 
 理解了软件栈归属，阿凯回头再看昨天那三个 layer。task 02 里 `bitbake-layers show-layers` 输出过：
 
 ```text
 layer                path                                                                   priority
 ========================================================================================================
-core                 /home/<your-username>/workspace/poky/meta                                5
-yocto                /home/<your-username>/workspace/poky/meta-poky                          5
-yoctobsp             /home/<your-username>/workspace/poky/meta-yocto-bsp                     5
+core                 /home/oops/workspace/poky/meta                                5
+yocto                /home/oops/workspace/poky/meta-poky                          5
+yoctobsp             /home/oops/workspace/poky/meta-yocto-bsp                     5
 ```
 
 > **💡 提示**：第一列是各 layer 的 `BBFILE_COLLECTIONS` 名称（`core`/`yocto`/`yoctobsp`），不是目录名。这三个名称由对应 layer 的 `layer.conf` 中 `BBFILE_COLLECTIONS` 变量固定声明，不会随本地路径变化。
 
-"它们为什么需要三个？"阿凯问。
+“它们为什么需要三个？”阿凯问。
 
-"因为职责不同。"达哥说，"`meta` 是 OE-Core，提供通用 recipe、class 和默认策略；`meta-poky` 是 Poky 发行版，声明 Distro 策略；`meta-yocto-bsp` 是官方参考 BSP，提供 MACHINE 配置。三者叠加，才凑出一个能构建 `qemuarm64` 的环境。"
+“因为职责不同。”达哥说，“`meta` 是 OE-Core，提供通用 recipe、class 和默认策略；`meta-poky` 是 Poky 发行版，声明 Distro 策略；`meta-yocto-bsp` 是官方参考 BSP，提供 MACHINE 配置。三者叠加，才凑出一个能构建 `qemuarm64` 的环境。”
 
 阿凯先验证哪个 recipe 由哪个 layer 提供。
 
@@ -280,7 +280,7 @@ core-image-minimal:
   meta                 1.0
 ```
 
-"默认输出只显示层名和版本号。"达哥说，"想看完整路径，加 `-f`。"
+“默认输出只显示层名和版本号。”达哥说，“想看完整路径，加 `-f`。”
 
 ```bash
 # 查看 core-image-minimal 的完整文件路径
@@ -292,23 +292,23 @@ bitbake-layers show-recipes -f core-image-minimal
 ```text
 === Matching recipes: ===
 core-image-minimal:
-  /home/<your-username>/workspace/poky/meta/recipes-core/images/core-image-minimal.bb
+  /home/oops/workspace/poky/meta/recipes-core/images/core-image-minimal.bb
 ```
 
 > **💡 提示**：`-f` 模式只输出文件路径，不输出层名 + 版本。以你本地实际输出为准。
 
-"`core-image-minimal` 来自 `meta` 层。"阿凯说。
+“`core-image-minimal` 来自 `meta` 层。”阿凯说。
 
-"对。基础镜像、基础包组一般在 OE-Core。`meta-poky` 更多是做发行版微调，比如默认启用哪些特性、用哪个 init 系统。"
+“对。基础镜像、基础包组一般在 OE-Core。`meta-poky` 更多是做发行版微调，比如默认启用哪些特性、用哪个 init 系统。”
 
-达哥让阿凯再看 `DISTRO_FEATURES` 和 `MACHINE_FEATURES` 的叠加结果，解释两者的区别：`DISTRO_FEATURES` 是 **发行版特性（DISTRO_FEATURES）**，由 DISTRO 配置声明系统级策略，回答"这个发行版选择支持什么"。
+达哥让阿凯再看 `DISTRO_FEATURES` 和 `MACHINE_FEATURES` 的当前取值，解释两者的区别：`DISTRO_FEATURES` 是 **发行版特性（`DISTRO_FEATURES`）**，由 DISTRO 配置声明系统级策略，回答“这个发行版选择支持什么”。
 
 ```bash
 # 确保已初始化构建环境
 cd ~/workspace/poky
 source oe-init-build-env ../build
 
-# 查看叠加后的 DISTRO 特性和 MACHINE 特性
+# 查看当前 DISTRO 特性和 MACHINE 特性
 bitbake -e core-image-minimal | grep -E "^(DISTRO_FEATURES|MACHINE_FEATURES)="
 ```
 
@@ -319,39 +319,39 @@ DISTRO_FEATURES="acl alsa bluetooth debuginfod ext2 ipv4 ipv6 pcmcia usbgadget u
 MACHINE_FEATURES="alsa bluetooth usbgadget screen vfat"
 ```
 
-"注意看，`DISTRO_FEATURES` 比 `MACHINE_FEATURES` 长很多。"达哥指着输出，"`MACHINE_FEATURES` 只回答'这块板子有什么'，`DISTRO_FEATURES` 回答'这个发行版选择支持什么'。两者合并起来，才决定最终编译哪些东西。"
+“注意看，`DISTRO_FEATURES` 比 `MACHINE_FEATURES` 长很多。”达哥指着输出，“`MACHINE_FEATURES` 回答‘这块板子有什么’，`DISTRO_FEATURES` 回答‘这个发行版选择支持什么’。recipe 和 class 会按用途分别检查它们；只有同时需要硬件能力和发行版支持的特性，才通过 `COMBINED_FEATURES` 取两者交集。它们共同影响构建结果，却不是简单拼成一张列表。”
 
-"那如果两个 layer 都提供了同名的 recipe，BitBake 选哪个？"
+“那如果两个 layer 都提供了同名的 recipe，BitBake 选哪个？”
 
-"看 **层优先级变量（BBFILE_PRIORITY）** 和 `BBLAYERS` 的顺序。"达哥打开 `bblayers.conf`，"`BBFILE_PRIORITY` 数值越大优先级越高；同优先级时，`BBLAYERS` 中排得越靠后的层优先级越高。这个规则只适用于'同名 recipe 出现在不同层'的场景，普通变量冲突另有规则。"
+“看 **层优先级变量（`BBFILE_PRIORITY`）**。”达哥打开 `bblayers.conf`，“同名 recipe 出现在不同 layer 时，数值更大的 layer 优先；这个优先级甚至高于 recipe 版本号。`BBLAYERS` 在这里声明启用哪些 layer，不要把它的排列顺序当成同名 recipe 的稳定选择规则。需要覆盖时显式设置层优先级、首选版本或提供者；普通变量和 `.bbappend` 另按各自规则解析。”
 
 ```bitbake
 # 文件路径：~/workspace/build/conf/bblayers.conf（当前内容）
 BBLAYERS ?= " \
-  /home/<your-username>/workspace/poky/meta \
-  /home/<your-username>/workspace/poky/meta-poky \
-  /home/<your-username>/workspace/poky/meta-yocto-bsp \
+  /home/oops/workspace/poky/meta \
+  /home/oops/workspace/poky/meta-poky \
+  /home/oops/workspace/poky/meta-yocto-bsp \
   "
 ```
 
-> **💡 提示**：写入 `bblayers.conf` 时，将 `/home/<your-username>` 替换为你主机的真实绝对路径。
+> **💡 提示**：以上 `/home/oops` 路径取自配套固化构建环境（用户 `oops`、家目录 `/home/oops`、主机名 `tiger`）。
 
 阿凯把 layer 叠加画成第四张图。
 
 **Fig-2-4 Layer 叠加示意图**
 
-| 层级（从上到下） | Layer | 主要职责 | 覆盖/扩展对象 |
+| 构成角色 | Layer | 主要职责 | 与其他 layer 的关系 |
 |---|---|---|---|
-| 最底层 | `meta` | OE-Core：通用 recipe、class、默认变量 | 通用基础 |
-| 中间层 | `meta-poky` | Poky 发行版：DISTRO 策略、默认镜像微调 | `meta` 的默认策略 |
-| 中间层 | `meta-yocto-bsp` | 官方参考 BSP：qemuarm64 等 MACHINE 配置 | `meta` 的 MACHINE 默认 |
-| 最上层（待添加） | `meta-tiger` | tiger 专用 BSP：tiger-aarch64 配置、启动链集成 | 覆盖/扩展下层默认 MACHINE |
+| 通用基础 | `meta` | OE-Core：通用 recipe、class、默认变量 | 提供公共基础 |
+| 参考发行版 | `meta-poky` | Poky 发行版：DISTRO 策略、默认镜像微调 | 在 OE-Core 上定义发行版策略 |
+| 参考 BSP | `meta-yocto-bsp` | 官方参考 BSP：参考 MACHINE 配置 | 提供可借鉴的板级实现 |
+| 项目 BSP（待添加） | `meta-tiger` | tiger 专用 BSP：`tiger-aarch64` 配置、启动链集成 | 新增 tiger 支持，按需扩展公共 recipe |
 
-"所以 `meta-tiger` 会加在最上面，专门覆盖下层的默认 MACHINE 配置。"阿凯说。
+“所以要把 `meta-tiger` 加进 `BBLAYERS`，让 BitBake 看见 tiger 的 MACHINE 配置；确实需要替换同名 recipe 时，再显式设置优先级。”阿凯说。
 
-"没错。"达哥点头，"它只负责 tiger 这台机器与众不同的部分， common 的东西留给下层。"
+“没错。”达哥点头，“它只负责 tiger 这台机器与众不同的部分，通用的东西留给公共 layer。”
 
-### 2.5 认识镜像配方与 IMAGE_INSTALL
+## 2.5 认识镜像配方与 `IMAGE_INSTALL`
 
 最后一块拼图是镜像本身。阿凯昨天构建的 `core-image-minimal` 为什么只有 BusyBox 和基础工具？他打开镜像配方的源码。
 
@@ -377,11 +377,11 @@ IMAGE_ROOTFS_SIZE ?= "8192"
 IMAGE_ROOTFS_EXTRA_SPACE:append = "${@bb.utils.contains(\"DISTRO_FEATURES\", \"systemd\", \" + 4096\", \"\", d)}"
 ```
 
-"这就是 **镜像配方（Image Recipe）**。"达哥说，"它和普通 recipe 最大的区别是：普通 recipe 描述怎么编译一个软件包，image recipe 描述'这个镜像里要装哪些包'。它通过继承 `core-image`（来自 `image.bbclass`）获得打包根文件系统的能力。"
+“这就是 **镜像配方（Image Recipe）**。”达哥说，“它和普通 recipe 最大的区别是：普通 recipe 描述怎样构建并打包一个组件，image recipe 描述‘这个镜像里要装哪些包’。这里的 `inherit core-image` 会加载 `core-image.bbclass`，后者再继承 `image` 类，由此获得生成根文件系统镜像的能力。”
 
-"`IMAGE_INSTALL` 就是安装列表？"阿凯问。
+“`IMAGE_INSTALL` 就是安装列表？”阿凯问。
 
-"对。`IMAGE_INSTALL` 是 **镜像安装列表（IMAGE_INSTALL）**，声明最终 rootfs 里要包含哪些包。`packagegroup-core-boot` 不是单个包，而是一个 **包组（Package Group）**。"
+“对。`IMAGE_INSTALL` 是 **镜像安装列表（`IMAGE_INSTALL`）**，声明最终 rootfs 里要直接安装哪些包。`packagegroup-core-boot` 不是单个功能组件，而是一个 **包组（Package Group）**。”
 
 阿凯继续追踪这个包组。
 
@@ -431,7 +431,7 @@ RRECOMMENDS:${PN} = "\
     "
 ```
 
-"包组把一堆相关包组织成一个逻辑组，方便 image recipe 批量引用。"达哥说，"`${VIRTUAL-RUNTIME_base-utils}` 通常指向 `busybox`，`${VIRTUAL-RUNTIME_dev_manager}` 指向设备管理器。注意 Scarthgap 版本用了很多 `VIRTUAL-RUNTIME_*` 虚包和条件依赖——`sysvinit` 相关的脚本只在 `DISTRO_FEATURES` 包含 `sysvinit` 时才加入，`efi` 相关组件只在 `MACHINE_FEATURES` 包含 `efi` 时才加入。"
+“包组把一堆相关包组织成一个逻辑组，方便 image recipe 批量引用。”达哥说，“`${VIRTUAL-RUNTIME_base-utils}` 通常指向 `busybox`，`${VIRTUAL-RUNTIME_dev_manager}` 指向设备管理器。注意 Scarthgap 版本用了很多 `VIRTUAL-RUNTIME_*` 虚包和条件依赖——`sysvinit` 相关的脚本只在 `DISTRO_FEATURES` 包含 `sysvinit` 时才加入，`efi` 相关组件只在 `MACHINE_FEATURES` 包含 `efi` 时才加入。”
 
 阿凯用 `bitbake -e` 查看最终生效的 `IMAGE_INSTALL`。
 
@@ -452,25 +452,25 @@ IMAGE_INSTALL="packagegroup-core-boot "
 
 > **💡 提示**：示例输出以本地 `bitbake -e` 实际结果为准，此处保留尾部空格仅供参考。
 
-"所以 `core-image-minimal` 不是'一个配方编译出所有东西'，而是'声明要安装哪些包，BitBake 自动解决依赖'。"阿凯总结。
+“所以 `core-image-minimal` 不是‘一个配方编译出所有东西’，而是‘声明直接安装哪些包，BitBake 再解析它们的依赖’。”阿凯总结。
 
-"正是。"达哥说，"等你写 `tiger-image-minimal.bb` 的时候，就在 `IMAGE_INSTALL` 里加上 tiger 需要的启动链工具、MTD 工具、调试工具，而不是把所有业务应用都塞进来。"
+“正是。”达哥说，“等你写 `tiger-image-minimal.bb` 的时候，可以在 `IMAGE_INSTALL` 里加入 MTD 用户空间工具和调试工具。TF-A、U-Boot、内核这类启动链组件由 MACHINE 配置和 provider 选择，不是塞进 rootfs 安装列表。业务应用也按前面划定的边界独立管理。”
 
-### 2.6 踩坑实录
+## 2.6 踩坑实录
 
-#### 2.6.1 踩坑 1：把所有东西都塞进 `meta-tiger`
+### 2.6.1 踩坑 1：把所有东西都塞进 `meta-tiger`
 
 阿凯在 2.3 节已经跟达哥讨论过这个问题，但那个教训值得再落一次地。
 
 公司上代 Buildroot 项目就是把所有东西混在一起——bootloader、kernel、Web 应用、配置脚本、产品 logo 全塞在一个 `package/` 目录里。结果是：OTA 升级包体积巨大，每次升级都包含未改动的应用程序；license 审计时手动梳理了据说整整两周。
 
-> **🔥 重要**：`meta-tiger` 不是"项目大杂烩"。它的边界是 BSP：让板子启动、让内核跑起来、提供基础根文件系统。业务应用、Web 服务、第三方闭源 SDK 应该由应用团队独立维护，BSP 只提供运行环境。
+> **🔥 重要**：`meta-tiger` 不是“项目大杂烩”。它的边界是 BSP：让板子启动、让内核跑起来、提供基础根文件系统。业务应用、Web 服务、第三方闭源 SDK 应该由应用团队独立维护，BSP 只提供运行环境。
 
-#### 2.6.2 踩坑 2：混淆 MACHINE 配置和 DISTRO 配置
+### 2.6.2 踩坑 2：混淆 MACHINE 配置和 DISTRO 配置
 
-阿凯在查看 `qemuarm64.conf` 时，发现里面也有 `DISTRO_FEATURES` 相关的引用，误以为 MACHINE 配置可以覆盖发行版策略。他尝试在 MACHINE 配置里写 `DISTRO_FEATURES += "systemd"`，被达哥拦下。
+阿凯回看 MACHINE 与 DISTRO 的区别时，误以为机器配置也可以顺手决定发行版策略。他尝试在 `qemuarm64.conf` 里写 `DISTRO_FEATURES += "systemd"`，被达哥拦下。
 
-"`MACHINE_FEATURES` 描述硬件特性，比如 `apm`、`usbhost`、`screen`。`DISTRO_FEATURES` 描述系统策略，比如 `systemd`、`pulseaudio`、`wayland`。"达哥解释，"两者在 BitBake 中合并为最终生效的 feature 集合，但职责边界清晰：MACHINE 不该替 DISTRO 做策略决定。"
+“`MACHINE_FEATURES` 描述硬件特性，比如 `apm`、`usbhost`、`screen`。`DISTRO_FEATURES` 描述系统策略，比如 `systemd`、`pulseaudio`、`wayland`。”达哥解释，“它们会分别被 recipe 和 class 检查；需要两边同时支持的特性才通过 `COMBINED_FEATURES` 取交集。职责边界很清楚：MACHINE 不该替 DISTRO 做策略决定。”
 
 阿凯不服气，真的在 `qemuarm64.conf` 末尾加了一行：
 
@@ -504,7 +504,7 @@ bitbake -e core-image-minimal | grep ^DISTRO_FEATURES=
 DISTRO_FEATURES="... systemd ..."
 ```
 
-"你看，bitbake 不会报错，变量确实被改了。"达哥说，"但这不是' MACHINE 配置生效'，而是' MACHINE 越界替 DISTRO 做了决定'。三个月后你换了一个 Distro，`systemd` 还在，因为 MACHINE 里硬编码了。"
+“你看，BitBake 不会报错，变量确实被改了。”达哥说，“但这不是‘MACHINE 配置合理生效’，而是‘MACHINE 越界替 DISTRO 做了决定’。三个月后你换了一个 Distro，`systemd` 还在，因为 MACHINE 里硬编码了。”
 
 阿凯意识到问题，赶紧撤销修改：
 
@@ -532,14 +532,14 @@ DISTRO_FEATURES="acl alsa bluetooth debuginfod ext2 ipv4 ipv6 pcmcia usbgadget u
 
 > **⚠️ 注意**：写 `tiger-aarch64.conf` 时，只声明 tiger 这块板子有什么硬件；init 系统、网络策略、显示框架等属于 Distro 策略，留到 `tiger-distro.conf` 里决定。
 
-### 2.7 本章小结
+## 2.7 本章小结
 
 阿凯把今天学到的东西在脑子里过了一遍：
 
-- **2.1**：tiger 的每个硬件组件在 Poky 里都有对应位置，通用外设大多已存在，重点是用 **内核设备树（KERNEL_DEVICETREE）** 把 tiger 的设备树指给内核。
+- **2.1**：tiger 的每个硬件组件在 Poky 里都有对应位置，通用外设大多已存在，重点是用 **内核设备树（`KERNEL_DEVICETREE`）** 把 tiger 的设备树指给内核。
 - **2.2**：启动链的每个阶段都会物化为 `tmp/deploy/images/<MACHINE>/` 下的文件；`PREFERRED_PROVIDER` 决定 BitBake 用哪个 recipe 提供虚包。
 - **2.3**：BSP 层和应用层必须分开，否则 OTA、合规、维护都会失控。
-- **2.4**：Yocto 项目通过 layer 叠加组织元数据，`meta-tiger` 将覆盖/扩展下层默认 MACHINE 配置。
+- **2.4**：Yocto 项目通过 layer 组织元数据，`meta-tiger` 将新增 tiger 的 MACHINE 配置，并按需扩展公共 recipe。
 - **2.5**：镜像配方是声明式的，`IMAGE_INSTALL` 决定 rootfs 内容，包组用于批量组织相关包。
 
 他把这些内容汇总成一张项目全景地图。
@@ -552,7 +552,7 @@ DISTRO_FEATURES="acl alsa bluetooth debuginfod ext2 ipv4 ipv6 pcmcia usbgadget u
 │  网关应用 / Web 配置 / 业务 SDK                               │
 ├─────────────────────────────────────────────────────────────┤
 │  OS / BSP 层（进 meta-tiger）                                 │
-│  Linux Kernel / 设备树 / 根文件系统 / DISTRO 策略             │
+│  Linux Kernel / 设备树 / 根文件系统骨架                        │
 ├─────────────────────────────────────────────────────────────┤
 │  Firmware / Bootloader 层（进 meta-tiger）                    │
 │  TF-A (BL2/BL31) / U-Boot (BL33)                            │
@@ -564,7 +564,7 @@ DISTRO_FEATURES="acl alsa bluetooth debuginfod ext2 ipv4 ipv6 pcmcia usbgadget u
 └─────────────────────────────────────────────────────────────┘
 ```
 
-达哥看了一眼："地图有了。下一步就是动手搭 `meta-tiger` 这个 layer。"
+达哥看了一眼：“地图有了。下一步就是动手搭 `meta-tiger` 这个 layer。”
 
 后续任务清单：
 
@@ -580,4 +580,4 @@ cd ~/workspace/poky
 git tag chapter2
 ```
 
-> **💡 提示**：本章只"看"和"理解"，没有创建 `meta-tiger`、没有写 `tiger-aarch64.conf`、没有集成任何启动链组件。所有动手创建工作从下一章开始。
+> **💡 提示**：本章只“看”和“理解”，没有创建 `meta-tiger`、没有写 `tiger-aarch64.conf`、没有集成任何启动链组件。所有动手创建工作从下一章开始。
