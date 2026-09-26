@@ -367,7 +367,17 @@
 - U-12｜位置：2.4 节 `bitbake-layers show-layers` 的 `text` 输出块，Git `bc33817` L250~L256｜内容：用户指出 `layer`、`path`、`priority` 三列的 ASCII 输出没有对齐，并要求同类格式统一。｜核查：chapter 2 当前表头的 `path`/`priority` 分别位于零基索引 21/92，三条数据行的 priority 值却位于 83/82/82，列边界确实不一致。chapter 1 已保存同一固化环境、同一命令的 T-008 实测原文并经 T-006 E-2 逐字复核：表头 `path`/`priority` 位于零基索引 22/94，三条数据行的值均位于索引 94；表头、分隔线、数据行长度分别为 102/104/95 字符。chapter 2 其余 `text` 块为普通输出或错误摘要，没有第二处同类表格。｜确认的执行口径：本处直接逐字复用 chapter 1 已验证的五行输出，不重新设计列宽或分隔线。全书规则区分两类内容：①真实命令输出的内容、顺序、列间空格和分隔线按实际输出保留；同一环境、同一命令的输出重复出现时复制已验证块，不手工重排；②作者绘制的 ASCII 图表使用带 `text` 标记的等宽代码块，按固定列宽用空格对齐，不使用 Tab，也不依赖行尾空格。这样既满足列对齐，也不把排版整理冒充实测原文。
 - U-13｜位置：2.5 节 `DISTRO_FEATURES`、`MACHINE_FEATURES` 与 `COMBINED_FEATURES` 实测输出后的解释段，Git `bc33817` L323｜内容：用户认为现有表述不够清晰。｜分析：原段以两份列表的长度差开场，却没有说明长度本身不构成判断依据；随后把变量职责、recipe/class 的检查方式、当前实测交集和“不是简单拼接”压在一起，读者不容易看出三者关系。｜确认的修订文本：“先别比较列表长短，先看两份变量各自回答什么。”达哥指着输出，“`MACHINE_FEATURES` 描述机器具备的硬件能力，`DISTRO_FEATURES` 描述发行版准备启用的软件功能。大多数 recipe 和 class 会按自己的需要检查其中一份；只有同时依赖硬件能力和发行版策略的特性，才通过 `COMBINED_FEATURES` 判断两边是否都已声明。这个环境里，两边共同出现的是 `alsa`、`bluetooth`、`usbgadget` 和 `vfat`，所以 `COMBINED_FEATURES` 只有这四项。它不是把前两份列表拼起来，而是给需要同时满足两边条件的构建逻辑使用。”实测输出值保持不变。
 - U-14｜位置：紧接 U-13 的同名 recipe 与 layer 优先级解释段，Git `bc33817` L327｜内容：用户认为该段也存在同样的不清晰问题。｜分析：原段先讲 `BBFILE_PRIORITY`，随后连续引入 `BBLAYERS`、版本、provider、普通变量和 `.bbappend`，其中“需要覆盖时”的对象不明确，也容易让读者误以为这些配置共同决定同一种选择。｜确认的修订文本：“先分清‘启用了哪些层’和‘同名 recipe 选哪一个’。”达哥打开 `bblayers.conf`，“`BBLAYERS` 只列出参与构建的 layer，它们在文件中的先后顺序不用于决定同名 recipe 的选择。两个 layer 都提供同一个 recipe 时，BitBake 比较各 layer 的 `BBFILE_PRIORITY`，数值较大的优先；这个优先级高于 recipe 版本号。若需要在多个版本或多个 provider 之间选择，再分别使用 `PREFERRED_VERSION` 或 `PREFERRED_PROVIDER`。普通变量和 `.bbappend` 的合并另有规则，不能套用这里的结论。”
-- 处理与复核安排：**U-9~U-14 均待 writer 修订**。writer 须提交新的 chapter 2 稳定版本和逐项回复；U-10/U-12 的全书规则由 T-013 写入 A-004 新版本，既有后续章节不做脱离 P3 的一次性批量替换，随各章修订逐章执行。project-manager 复核 Markdown 呈现、ASCII 对齐、排版规则、跨章一致性和意见闭环，reviewer 针对 Fig-2-1/2、Table-2-2、U-13 的 feature 关系及 U-14 的选择规则做技术复核。Git `bc33817` 上的既有 pass 不自动覆盖修订后的图表和正文；相应复核通过后再交用户确认 chapter 2 定稿及 A-004 新版本。
+- U-15｜位置：2.6.2 节实验报错后的解释段，Git `bc33817` L504｜内容：用户看完现有说明后仍不清楚错误原因，要求把示例的因果链进一步说明。｜源码核查：本章固化环境使用 Poky Scarthgap `77d1feb37e`，默认 `INIT_MANAGER` 为 `sysvinit`；`packagegroup-core-boot` 的 `VIRTUAL-RUNTIME_dev_manager` 默认是 `udev`。`default-providers.inc` 在 `DISTRO_FEATURES` 含 `systemd` 时把 `PREFERRED_PROVIDER_udev` 改为 systemd，而 systemd recipe 通过 `features_check` 同时要求 `systemd` 和 `usrmerge`。实验只追加 `systemd`，没有像 `init-manager-systemd.inc` 那样同时加入 `usrmerge`、停止回填 `sysvinit` 并统一 init/device-manager 等 runtime provider，因此 systemd recipe 因缺少 `usrmerge` 被跳过，原 eudev 又不再是 `udev` 的首选 recipe；包组保留的 `udev` 运行时依赖最终没有可构建 provider。｜确认的修订方案：保留实测报错，在其后用四步因果链明确说明：①当前仍是 SysVinit 配置，包组仍依赖 `udev`；②追加 `systemd` 使 `PREFERRED_PROVIDER_udev` 改选 systemd；③systemd recipe 因缺少同时必需的 `usrmerge` 而不可构建；④旧 provider 不再被选、新 provider 又不可构建，故出现 `Nothing RPROVIDES 'udev'`。随后明确正确做法是在 Distro 配置设置 `INIT_MANAGER = "systemd"`，由 Poky 加载 `init-manager-systemd.inc` 完成整套一致配置，而不是手工追加单个 feature。建议替换为：
+
+  “这条语句的语法没有问题，错在它只添加了一个 feature，却没有完成 init 系统的整套切换。”达哥把变量关系列了出来：
+
+  - Poky 当前仍按 `INIT_MANAGER = "sysvinit"` 加载 SysVinit 配置，`packagegroup-core-boot` 仍通过 `VIRTUAL-RUNTIME_dev_manager` 依赖 `udev`。
+  - `DISTRO_FEATURES` 出现 `systemd` 后，`PREFERRED_PROVIDER_udev` 会改选 systemd recipe。
+  - systemd recipe 同时要求 `systemd` 和 `usrmerge`；实验只追加了 `systemd`，所以 systemd recipe 因缺少 `usrmerge` 被判定为不可构建。
+  - 原来的 eudev 不再是首选 provider，新的 systemd recipe 又不能构建，最终没有 provider 能满足包组对 `udev` 的依赖，`core-image-minimal` 因而在 provider 解析阶段失败。
+
+  “所以，错误不在 `+=` 语法，而在于只拨动了 `systemd` 这个标志，留下了一组互相矛盾的策略。”达哥说，“切换 init manager 应在 Distro 配置里设置 `INIT_MANAGER = "systemd"`。Poky 随后加载 `init-manager-systemd.inc`，同时加入 `systemd` 和 `usrmerge`，停止回填 `sysvinit`，并把相关 runtime provider 一起切换。”
+- 处理与复核安排：**U-9~U-15 均待 writer 修订**。writer 须提交新的 chapter 2 稳定版本和逐项回复；U-10/U-12 的全书规则由 T-013 写入 A-004 新版本，既有后续章节不做脱离 P3 的一次性批量替换，随各章修订逐章执行。project-manager 复核 Markdown 呈现、ASCII 对齐、排版规则、跨章一致性和意见闭环，reviewer 针对 Fig-2-1/2、Table-2-2、U-13 的 feature 关系、U-14 的选择规则及 U-15 的 systemd/udev 失败链做技术复核。Git `bc33817` 上的既有 pass 不自动覆盖修订后的图表和正文；相应复核通过后再交用户确认 chapter 2 定稿及 A-004 新版本。
 
 ## T-012：真实环境核验 chapter 2 命令、配置与输出
 - 负责人：reviewer
@@ -392,7 +402,7 @@
 - 完成条件与确认方式：A-004 更新版本、日期、来源、批准状态和版本记录，新增可执行的硬件型号/粗体/反引号边界、真实命令输出空白保真规则、作者 ASCII 图表等宽对齐规则及正反例；chapter 2 所指段和三列表格按规则修订；project-manager 核对规则与 U-10/U-12 一致，chapter 2 五行 `show-layers` 输出与 chapter 1 已验证块逐字一致，未误改实测内容、代码和输出值；A-004 新版本与 chapter 2 一并交用户确认。
 - 进展：2026-09-26 任务登记。现状核查确认 A-004 v0.4 未覆盖硬件型号的粗体边界；chapter 2 L77 同段 `**PL011**`/PL011 混用，全稿同类型号以正文体为主。随后按 U-12 扩围：A-004 v0.4 也未明确等宽文本表格的列对齐规则，chapter 2 `show-layers` 输出的表头与数据列不一致；chapter 1 的同一命令输出已有 T-008 实测和 T-006 E-2 逐字复核，可作为直接修复基线。两项规则内容已在 T-011 U-10/U-12 固化，等待 writer 写入成果并应用。
 - 成果与验证证据：待补充。
-- 阻塞与下一位行动人：无。下一位行动人 writer，与 T-011 U-9~U-12 同轮处理并提交。
+- 阻塞与下一位行动人：无。下一位行动人 writer，与 T-011 U-9~U-15 同轮处理并提交。
 - 更新日期：2026-09-26
 
 ## 记录样式（不是真实任务）
