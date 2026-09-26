@@ -75,9 +75,9 @@
 - 输入与依赖：[A-004 v0.1 正文](artifacts/book/chapters/ch-env-setup/text.md)（draft）；[A-005 v0.3 环境基线](artifacts/book/environment.md)（approved，D-007）；[A-003 v0.1 蓝图](artifacts/book/chapters/ch-env-setup/plan.md)（approved，D-006）；[A-001 v0.2 图书设计](artifacts/book/design.md)、[A-002 v0.2 目录](artifacts/book/outline.md)；D-001～D-008；[官方资料包](workspace/nrf54l15-dk-docs/README.md)。A-001/A-003 的旧安装表述按 D-007 和 A-005 v0.3 对齐；D-007 对旧正文“无需改动”的描述不替代实际正文核对。发现基线自身疑点时记录证据交 developer/project-manager 协调，不以获批代替技术核查，不自行变更已确认基线。
 - 优先级：本章可读稿交付的前置工作；未设日期期限。
 - 完成条件与确认方式：① 修订稿与成果索引版本、关联任务及状态一致，记录改动、来源与剩余限制；② developer 对明确版本完成下述技术复核，问题经 writer 处理并由 developer 对受影响内容复核，无未解决的主线阻断问题；③ 形成明确版本的可读稿并交用户完整通读，记录用户实际通读完成及反馈（无意见也须实际确认）；④ writer 逐项回复并修订，涉及技术内容的改动由 developer 再复核，用户确认通读反馈已处理；全部满足后方可 completed。可读稿交付或本任务完成均不自动把 A-004 标为 approved；实机验证与章节定稿仍按原约定另行满足。
-- 进展：2026-09-26 project-manager 登记任务及技术复核安排；同日用户在 writer 会话明确指示刷新身份与资料并受理 T-006，writer 完成刷新，任务进入 in_progress。随后按 A-005 v0.3 完成 A-004 v0.2 修订与作者自查：替换 Toolchain Manager 安装/终端步骤，同步学习目标、工具职责、图示/截图说明、构建烧录衔接、资料路径与来源；核销已解决缺口，保留未执行项。现提交第 1 轮技术复核，任务与成果转 in_review；developer 尚未评审，用户尚未开始本轮通读。
-- 成果与验证证据：[A-004 v0.2](artifacts/book/chapters/ch-env-setup/text.md)（in_review，尚未批准），输入为 A-004 v0.1、A-005 v0.3 及上述依赖；成果索引同步 T-004、T-006 与 v0.2。准确受评版本及内容摘要见下方复核安排。作者自查与待核事项见下方记录；技术意见、处理回复与用户反馈继续记录在本任务内。
-- 阻塞与下一位行动人：修订稿已具备开评条件；下一位行动人为 developer，由用户进入其原会话触发第 1 轮技术复核。烧录依赖与版本检查命令尚待澄清，阻止作为可照做实验稿交付，不阻止技术评审；问题处理及必要复核完成前不交用户完整通读。A-001/A-003 旧安装表述仍待 project-manager 协调，writer 未修改他人成果；STATUS 尚待其维护人汇总本次进展。
+- 进展：2026-09-26 project-manager 登记任务及技术复核安排；同日 writer 按 A-005 v0.3 完成 A-004 v0.2 修订、自查并提交第 1 轮技术复核。developer 已对哈希匹配的 v0.2 完成复核，结论为 `revise`，提交 R1-001、R1-002 后本轮意见齐备。writer 随后刷新身份与资料，按两条意见统一修订 A-004 为 v0.3：明确默认 nrfutil/device + J-Link 烧录链、Programmer 与 nrfjprog 的边界，补充设备与 runner 检查，删除 `west sdk-version` 待核说法并拆分版本核对；同步成果索引和逐项处理回复。developer 对哈希匹配的 v0.3 完成必要复核，结论为 `pass`，两条问题均关闭。技术问题处理及必要复核完成，writer 现按 D-008 将 v0.3 交用户完整通读；尚未收到用户实际通读结果或反馈。
+- 成果与验证证据：[A-004 v0.3](artifacts/book/chapters/ch-env-setup/text.md)（in_review，尚未批准），输入为 A-004 v0.2、developer 第 1 轮意见、A-005 v0.3 及上述依赖；成果索引同步 T-004、T-006 与 v0.3。v0.2 的受评哈希、developer 意见、v0.3 的处理回复、自查和准确复核版本见下方记录；用户反馈尚未发生。
+- 阻塞与下一位行动人：无技术复核阻塞；下一位行动人为用户，完整通读 A-004 v0.3 并反馈理解、顺序、详略、例子或图示方面的意见，无意见也需明确告知实际读完。writer 收到反馈后按 D-008 逐项记录并修订；若反馈引入技术改动，形成明确版本后再交 developer 复核。安装、构建、设备枚举、烧录与上板仍未执行；A-005 v0.3 的烧录工具与版本检查差异已明确交 developer/project-manager 协调，writer 未修改该已批准成果。A-001/A-003 旧安装表述仍待 project-manager 协调；STATUS 尚待其维护人汇总本次进展。
 - 更新日期：2026-09-26
 
 ### writer 修订与自查记录（2026-09-26，A-004 v0.2）
@@ -112,8 +112,8 @@
 - 依据与判断：NCS v3.4.0 固定版本文档说明，自 NCS v3.0.0 起 Nordic 板卡的 `west flash` 默认 runner 为 nRF Util；自 v3.1.0 起 `nrfutil device` 随 NCS 工具链 bundle 提供。固定版本安装前提仍要求独立安装匹配的 SEGGER J-Link 软件，Windows 还列出 J-Link USB Driver；nRF54L15 DK 的 `board.cmake` 以 `nrfutil` 为默认、`jlink` 为备选。`nRF Command Line Tools/nrfjprog` 仅在显式执行 `west flash -r nrfjprog` 时需要，Programmer 是可选图形界面，不是默认 CLI 烧录链的前置条件。A-005 v0.3 将 nRF Command Line Tools/nrfjprog 写入主线，已与固定版本资料不一致，需另行协调基线后续修订；A-004 本轮应先把当前可操作路径说明准确。
 - 影响：正文当前把 A-005 的旧工具项、J-Link、Programmer 和 nrfutil 并列为“尚待澄清”，读者无法据此完成主线前置检查，也可能误装已归档的 nRF Command Line Tools，或错误地把 Programmer 可用等同于 `west flash` 默认后端可用。
 - 修改建议：原稿责任人 writer。将主线明确为“安装 NCS v3.4.0 SDK+匹配工具链（其中已含锁定的 nRF Util 及 `device` 命令）→ 安装固定版本要求的 SEGGER J-Link 软件/Windows 驱动 → 在工具链终端检查 `nrfutil --version`、`nrfutil device --version` → 连接 DK 后执行 `nrfutil device list` → 构建完成后执行 `west flash -d <构建目录> --context` 核对 available/default runner，再执行 `west flash -d <构建目录>`”。将 Programmer 标为可选图形工具；把 nRF Command Line Tools/nrfjprog 移到“显式选择 `-r nrfjprog` 才需要”的备选说明。J-Link 的确切安装版本与以上输出继续标为用户实机回填，不写成已通过。
-- 作者处理回复：待 writer 填写，注明修订版本及 A-005 v0.3 差异的协调方式。
-- 复核：待 developer 对修订版本及相关命令、来源和边界标记复核。
+- 作者处理回复：writer 于 2026-09-26 已在 **A-004 v0.3** 处理。修改位置：正文元信息与版本记录；1.2 的环境组成图、工具链、默认烧录链、Programmer 与 nrfjprog 说明；1.3 的主线顺序及 1.3.3；1.3.4 的 nRF Util/device 版本与设备枚举；1.4.1 的构建日志、设备复核和 `west flash -d ... --context`；“读者可见的限制”第 2、7 条及“来源与延伸阅读”。来源为本问题列出的 NCS v3.4.0 固定版本安装/编程文档、Zephyr `board.cmake` 和 developer 复核结论。A-005 v0.3 保持 approved 原文不动；其把 Programmer、nRF Command Line Tools/nrfjprog 与 J-Link 驱动写入主线的差异继续保留在本问题与正文协调说明中，交 developer/project-manager 安排 A-005 后续修订，A-004 先采用固定版本可操作路径。仍未实测：J-Link、nRF Util 和 `device` 的实际版本，`nrfutil device list` 输出，构建目录 runner context、默认 runner、烧录日志及板上现象；未写成通过。
+- 复核：2026-09-26，`developer` 对规范化 SHA-256 为 `4240ef1304bbfe64d62ad5a5626be4bb693b07c11b0b68c008348ddf292a67cf` 的 A-004 v0.3 完成必要复核，结果 `pass`，R1-001 关闭。正文已把默认链写为工具链捆绑的 nRF Util / `device` + 独立 J-Link 软件与 Windows 驱动，将 Programmer 标为可选图形工具、nRF Command Line Tools / nrfjprog 限定为显式 `west flash -r nrfjprog` 的备选；已补充 `nrfutil --version`、`nrfutil device --version`、`nrfutil device list`、构建目录 `west flash -d ... --context`、异常时保存输出并停止烧录的分支。A-005 v0.3 的差异继续在正文和本问题中明示并交 developer/project-manager 协调，未静默改写已批准成果。J-Link、nRF Util / `device` 的实际版本、设备枚举、runner context、烧录日志及上板现象仍未实测，不属于本次文档复核的通过声明。
 
 ##### R1-002：删除 `west sdk-version`，按不同对象分别核对版本
 - 对应作者问题：W-002。
@@ -121,14 +121,32 @@
 - 依据与判断：Zephyr 的 west 内置命令清单没有 `sdk-version`，NCS v3.4.0 的 west manifest 只从 Zephyr/NCS 项目导入已声明的扩展命令，本轮亦未在固定版本官方资料中找到该命令；不能把 `west sdk-version` 作为可用命令或保留为读者待试项。NCS v3.4.0 发布说明给出的源码身份是 manifest 仓库标签 `v3.4.0`；该版本锁定的 Zephyr `SDK_VERSION` 文件内容为 `1.0.1`，发布说明确认工具链基于 Zephyr SDK v1.0.1。`west --version` 只检查 west 本身，不能替代 SDK、编译器或烧录工具版本。
 - 影响：若读者照 A-005 的原检查项执行，会遇到未知命令或误解输出；仅记录 VS Code 选择项和 `west --version` 也不足以证明源码、Zephyr SDK、GCC 与 nRF Util 属于同一基线。
 - 修改建议：原稿责任人 writer。删除 `west sdk-version` 待核说法，改为分层记录：① 在 SDK 工作区根目录执行 `git -C nrf describe --tags --exact-match HEAD`，期望源码 manifest 标签为 `v3.4.0`；② `Get-Content zephyr\SDK_VERSION`，期望固定版本文件为 `1.0.1`；③ 在扩展配置的工具链终端执行 `arm-zephyr-eabi-gcc --version`，并结合首次 `west build` 的 CMake“Found toolchain”日志记录实际编译器路径与版本，目标 GCC 为 14.3.0；④ 另行记录 `west --version`、`nrfutil --version` 和 `nrfutil device --version`，不要把任何单条输出扩张为整套环境已匹配。所有期望值标明资料核查级，实际输出仍由用户安装后回填；若 Git 包不含标签或命令输出不同，保存路径和完整输出交技术核查。
-- 作者处理回复：待 writer 填写，注明修订版本及 A-005 v0.3 检查项的协调方式。
-- 复核：待 developer 对修订版本中的命令、预期值、失败分支和证据措辞复核。
+- 作者处理回复：writer 于 2026-09-26 已在 **A-004 v0.3** 处理。修改位置：1.2 的工具链版本职责；1.3.4 第 2～5 步的命令、资料期望值表、实际输出记录与失败分支；1.4.1 的首次构建 `Found toolchain` 记录；“读者可见的限制”第 2、7 条及“来源与延伸阅读”。删除可执行步骤中的 `west sdk-version` 待核说法，改为分别执行 `git -C nrf describe --tags --exact-match HEAD`、`Get-Content zephyr\SDK_VERSION`、`arm-zephyr-eabi-gcc --version`、`west --version`、`nrfutil --version`、`nrfutil device --version`；资料期望值单列为 manifest `v3.4.0`、Zephyr SDK `1.0.1`、GCC `14.3.0`，用户实际输出另行保存，Git 标签缺失或结果不符时保留路径、提交号与完整输出交技术核查。来源为本问题列出的 v3.4.0 发布说明、west manifest、Zephyr `SDK_VERSION`、固定版工具要求和 developer 复核结论。A-005 v0.3 的原检查项不由 writer 改写，差异交 developer/project-manager 协调。上述命令及构建日志均未在用户主机执行，west、GCC、nRF Util、device 的实际版本仍待回填。
+- 复核：2026-09-26，`developer` 对同一 A-004 v0.3 完成必要复核，结果 `pass`，R1-002 关闭。正文已删除 `west sdk-version` 的可执行步骤和待试判据，分别检查 manifest 精确标签、`zephyr\SDK_VERSION`、GCC、west、nRF Util 与 `device`，把 `v3.4.0`、`1.0.1`、`14.3.0` 标为资料期望值，把用户实际输出独立保存；Git 标签缺失或版本不符时追加提交号、保留路径与完整输出并交技术核查。A-005 v0.3 的原检查项只登记差异并交协调，未由 writer 改写。上述命令和首次构建 `Found toolchain` 日志均未在用户主机执行，本次复核不声称环境版本已经实测匹配。
+
+### writer 第 1 轮问题统一修订与自查（2026-09-26，A-004 v0.3）
+- 会话刷新：按 SESSION_PROTOCOL 完整重读根/项目规则、writer 身份与岗位、四项有效知识，刷新 STATUS、成果索引、TASKS、DECISIONS、HANDOFFS，并完整读取 A-001 v0.2、A-002 v0.2、A-003 v0.1、A-004 v0.2、A-005 v0.3 和资料包索引。writer 身份、scope 与知识集合未变，无待接收交接；开始修订前确认 A-004 v0.2 规范化 SHA-256 为 `93d7b704f466467ee1dbc3e66975b17f6080bae12763ca57ffbf2064bff5cb44`，与 developer 受评记录一致。
+- 修订范围与来源：仅修改 writer 负责的 A-004、其成果索引条目及 T-006 作者记录；未修改 A-005 或 A-001/A-003。R1-001 依据 NCS v3.4.0 固定版安装/编程文档和 nRF54L15 DK `board.cmake`；R1-002 依据 v3.4.0 发布说明、west manifest、Zephyr `SDK_VERSION`、固定版工具要求及 developer 评审记录。A-005 v0.3 的差异按两条作者处理回复交 developer/project-manager 协调，不以本次正文修订替代其后续版本流程。
+- 作者自查：逐项对照 R1-001、R1-002 检查 1.2～1.4、限制与来源；确认默认链、可选/备选工具、设备枚举、构建目录 runner context、分层版本命令和失败分支均写入正文，`west sdk-version` 不再作为可执行命令或待试判据；成果元信息与索引均为 v0.3 / in_review。`python scripts/validate_framework.py` 通过，`git diff --check` 无差异格式错误；结构与静态检查不证明命令已运行或硬件已通过。
+- 仍未实测边界：未安装 NCS v3.4.0、VS Code 扩展、J-Link 或任何烧录工具；未执行文中版本命令、`nrfutil device list`、构建、`west flash --context`、烧录、串口或上板观察；实际 UI、路径、版本、输出、日志、设备标识、LED/串口现象和截图仍待用户回填。未代填安装、构建、烧录或上板结果。
+
+### 第 1 轮问题修订后的必要复核：A-004 v0.3（已提交）
+- 受评正文：[A-004 正文](artifacts/book/chapters/ch-env-setup/text.md)；版本 **v0.3**，提交人 writer，日期 **2026-09-26**，状态 in_review。复核范围限定为 R1-001、R1-002 的处理及其直接影响处，不自动重开 v0.2 已确认可保留的其他内容。
+- 内容校验：将正文按 UTF-8 解码、CRLF/CR 统一为 LF，保留其他字符及末尾换行，再编码为 UTF-8 计算 SHA-256：`4240ef1304bbfe64d62ad5a5626be4bb693b07c11b0b68c008348ddf292a67cf`。developer 开始前核对版本与哈希，不把不同内容视为同一复核版本；复核完成前 writer 保持正文不变。
+- 复核重点：① 默认 nrfutil/device + J-Link 链、Programmer 可选定位、nrfjprog 备选条件和 A-005 差异协调是否准确；② nrfutil/device 版本、设备枚举、`west flash -d <构建目录> --context` 的步骤与失败分支；③ manifest、`SDK_VERSION`、GCC、west、nRF Util、device 的分层检查、资料期望值与实际输出边界；④ 未实测标记与来源是否足以支持后续用户照读而不冒充运行结果。
+- 当前进度与下一位行动人：writer 已完成修订、自查和提交；developer 已完成必要复核并在下方记录 `pass`，R1-001、R1-002 均已关闭。下一位行动人为 writer 按 D-008 交付 v0.3 供用户完整通读；若用户反馈引入技术改动，形成新版本并再次复核，不覆盖本轮记录。
+
+#### developer 的必要复核记录
+- 日期、成员、受评版本与内容校验：2026-09-26，`developer`；A-004 v0.3（in_review，writer 于 2026-09-26 提交）。开始复核前按 UTF-8 解码、CRLF/CR 统一为 LF、保留其他字符及末尾换行后重新编码计算 SHA-256，结果为 `4240ef1304bbfe64d62ad5a5626be4bb693b07c11b0b68c008348ddf292a67cf`，与提交记录一致；本结论仅适用于该内容。
+- 复核范围与依据：范围限定为 R1-001、R1-002 及其直接影响处。依据 A-005 v0.3、D-007、D-008、T-006 作者处理回复，以及 NCS v3.4.0 固定版本安装文档、编程文档、工具要求、发布说明和 west manifest，连同其锁定的 Zephyr `ncs-v3.4.0` 板级文档、`board.cmake`、`SDK_VERSION`。核对结果为：默认 nrfutil / `device` + J-Link 链、Programmer 可选定位、nrfjprog 备选条件、版本与设备检查、构建目录 runner context 和失败分支均已写明；版本检查已按 manifest、Zephyr SDK、GCC、west、nRF Util、`device` 分层，并区分资料期望与用户实际输出；A-005 v0.3 的两处差异已登记协调且未静默改写。
+- 未覆盖项：未安装或运行 NCS v3.4.0、VS Code 扩展、J-Link、nRF Util / `device`；未执行版本命令、设备枚举、构建、`west flash --context`、烧录、串口或上板观察；未确认实际 UI、路径、工具版本、输出措辞、日志、设备标识和 LED / 串口现象。未重开 v0.2 已确认可保留的其他正文，也未执行 D-008 的用户完整通读；A-005 v0.3 的后续修订仍由 developer/project-manager 另行协调。
+- 结论：`pass`。R1-001、R1-002 对 A-004 v0.3 的处理均通过并关闭；未发现新的本轮问题。该结论只表示本次限定技术文档复核通过，不表示安装、构建、设备连接、烧录、上板或整章批准已经完成。技术问题处理及必要复核已完成，下一位行动人为 writer，可按 D-008 启动 A-004 v0.3 的用户完整通读；若后续反馈引入技术改动，须形成明确版本并交 developer 再复核。
 
 ### 用户通读与反馈处理
 - 依据：D-008；技术问题处理并完成必要复核后，writer 提供完整可读稿的路径、版本、修订摘要、已知限制与反馈入口。
 - 反馈方式：用户可直接在会话中指出章节/小节、读不懂的地方、顺序或详略问题、希望补充的例子/图示；无需另写正式报告，也不要求同步完成上板实验。
 - 记录方式：writer 按用户实际消息记录日期、所读版本、通读是否完成、反馈原意与位置，并逐项记录处理办法、修订版本及结果；未采纳或有分歧的意见说明理由并交用户确认。重要改动交用户复读，技术改动由 developer 复核；无反馈不能推定已读完或认可。
-- 当前状态：尚未交付可读稿、尚无用户通读反馈；本条仅登记后续流程。
+- 当前状态：2026-09-26，writer 已在当前用户会话交付 A-004 v0.3（规范化 SHA-256：`4240ef1304bbfe64d62ad5a5626be4bb693b07c11b0b68c008348ddf292a67cf`）供完整通读；尚未收到用户实际读完确认或反馈，不推定已读、无意见或认可。
 
 ## 记录样式（不是真实任务）
 
