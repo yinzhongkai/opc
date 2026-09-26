@@ -268,7 +268,7 @@
 
 ## T-011：chapter 2《读懂这个项目》修订与第 1 轮评审（P3 首章）
 - 负责人：writer（自查修订与统一修订）；reviewer（技术审校与复核）；用户（通读意见与定稿确认）
-- 状态：in_review（U-17 作者修订稳定版 Git `4713576` 已完成 project-manager 呈现复核和 reviewer 最终技术复核，结论均为 pass；待 project-manager 汇总后交用户确认 chapter 2 与 A-004 v0.5）
+- 状态：in_review（U-17 作者修订稳定版 Git `4713576` 已完成 project-manager 呈现复核和 reviewer 最终技术复核，结论均为 pass；等待用户确认 chapter 2 与 A-004 v0.5）
 - 授权来源与日期：2026-09-26 用户在 project-manager 会话确认启动 P3（"登记吧"）；依据 A-002 v0.3 P3 阶段定义（按依赖序逐章推进，chapter 2→16）与 T-006 定型节奏。
 - 目标与范围：以 chapter 2《读懂这个项目》（workspace/yocto/task03-2-读懂这个项目.md，583 行）走 T-006 定型并由 D-010 补充的完整章节闭环：writer 自查与修订 → 任务内交叉评审（reviewer 技术审校；project-manager 项目管理意见；用户通读意见 D-007 经 project-manager 汇集）+ T-012 真实环境核验 → writer 统一修订 → reviewer 复核 → 用户确认定稿。修订与审校依据：A-004 v0.4 全部条款（含 v0.3 §4 三条款、v0.4 §7 列表记号）+ T-006 口径族——①正文/对话弯引号（R-3 口径，逐章统一）；②`/home/<your-username>` 占位回填固化环境真实值（U-11 口径，本章 8 处含 1 处 💡，回填 `/home/oops` 并移除替换提示）；③概念名大小写（sstate 等）；④scarthgap 分支名/发行版分工（本章 2 处 Scarthgap）；⑤列表记号 `-` 紧凑（D-009）；⑥延伸阅读链接实测核查（U-16 建议，curl 状态码+标题核对）；⑦读者正文不暴露内部 `task NN`，并移除章末 Git tag 流程（D-011）。
 - 输入与依赖：书稿当前版本；A-004 v0.4（approved）；A-003；T-006 全套评审记录（口径族出处）；D-010/T-012；D-011。chapter 2 无既有 C-W/V 挂账且不依赖 P0.5，但这不构成跳过真实环境核验的依据；受评稿现有 4 处读者可见 `task NN` 和 1 组章末 `git tag chapter2` 流程，均已纳入本轮统一修订。
@@ -279,7 +279,7 @@
   - U-17 进展补充：2026-09-27 writer 按用户确认口径将 Fig-2-2~Fig-2-4 改为紧邻图题的 `text` ASCII 图，删除三份已无正文引用的 SVG，并提交 Git `4713576`。Fig-2-2 分开 tiger 目标链与 qemuarm64 实测路径；Fig-2-3 分开 `meta-tiger` 内外边界及 MACHINE/DISTRO 职责；Fig-2-4 分开 Poky 参考输入、四仓库经 `meta-tiger` 集成的目标输入、BitBake 的两条 MACHINE 分支和独立 Application。
   - U-17 成果与验证补充：当前稳定版 Git `4713576`，chapter 2 共 631 行；Fig-2-1~Fig-2-4 均为 `text` ASCII 图，正文图片引用为 0，`chapter2-boot-flow.svg`、`chapter2-software-stack-boundary.svg`、`chapter2-project-overview.svg` 均已删除。三张新图的边框/内容行统一为 96 字符；全章 Tab 与行尾空格均为 0，74 个代码围栏标记成对，`git diff --check` 与提交检查通过。图内未新增平台文件名、产品名或交付承诺。
 - 定稿前一致性与呈现补充：提交 `fe72b37` 后的全图扫描发现 Fig-2-3 仍有旧字样“BL1 可选”；writer 将其改为固定阶段“BL1、BL2、BL31”，完成 1200×620 渲染检查并提交 Git `d9745b0`。project-manager 随后指出 Fig-2-1 分成两行的启动链可能被读成 Boot ROM 的两条分支；writer 按反馈合并为单行顺序并提交 Git `5babfb7`。该版本为 U-17 前的稳定基线；U-17 当前稳定版本已更新为 `4713576`。
-- 阻塞与下一位行动人：无执行阻塞。project-manager 已复核 Git `4713576` 的四图 ASCII 呈现与 U-17 闭环，reviewer 已复核四图技术映射及 U-11/U-13/U-14/U-15 并给出 pass。下一位行动人 project-manager：汇总两类复核结论后交用户确认 chapter 2 与 A-004 v0.5。
+- 阻塞与下一位行动人：无执行阻塞。project-manager 已复核 Git `4713576` 的四图 ASCII 呈现与 U-17 闭环，reviewer 已复核四图技术映射及 U-11/U-13/U-14/U-15 并给出 pass，project-manager 已完成汇总。下一位行动人用户：确认 chapter 2 定稿与 A-004 v0.5。
 - 更新日期：2026-09-27
 
 ### 本轮评审：chapter 2 作者修订稿（Git `0f2c44c`，第 1 轮）
@@ -437,6 +437,11 @@
 - 未覆盖项：本轮没有重新连接 tiger 服务器执行 T-012，也没有执行尚未实现的 tiger 四仓库全链构建或板级启动；qemuarm64 数值、错误原文和环境输出沿用已完成并经 project-manager 复核的 T-012 证据。A-004 v0.5 的排版规范批准、chapter 2 的读者体验与最终定稿决定不属于 reviewer 技术复核权限，仍由 project-manager 汇总后交用户确认。
 - 下一位行动人：**project-manager** 汇总本次技术 pass 与既有呈现 pass，随后交用户确认 chapter 2 与 A-004 v0.5。
 
+#### project-manager 对 U-17 修订与最终技术复核的汇总
+- 日期与版本：2026-09-27；正文稳定版 Git `4713576`，writer 记录 `a6845cc`，project-manager 呈现复核 `34f49df`，reviewer 最终技术复核 `480400b`。
+- 汇总结论：**可提交用户确认**。U-17 已将 Fig-2-1~Fig-2-4 全部统一为 ASCII，chapter 2 图片引用清零并删除三份 SVG；project-manager 对呈现、层级、连线、空白与意见闭环复核通过，reviewer 对四图技术映射及 U-11/U-13/U-14/U-15 复核通过。T-012 的既有实测与证据边界保持不变，尚未实现的 tiger 四仓库全链仍明确标为目标，不冒充实测。
+- 待用户确认：chapter 2 是否以 Git `4713576` 定稿，以及与本章一并提交的 A-004 v0.5 是否批准。用户确认前 T-011 与 T-013 保持 `in_review`。
+
 ## T-012：真实环境核验 chapter 2 命令、配置与输出
 - 负责人：reviewer
 - 状态：completed（2026-09-26 project-manager 复核通过；不符项已转入 T-011，验证门槛随 T-011 修订与复核闭环）
@@ -447,7 +452,7 @@
 - 完成条件与确认方式：形成逐项核验记录，至少包含执行者、日期、正文版本、环境基线、前置条件、命令/操作、预期、实际输出摘要、通过/失败/阻塞/未执行状态及原始证据位置；覆盖本章全部可执行命令与输出块，未执行/不适用项逐项说明。记录经 project-manager 复核；不符项转入 T-011，由 writer 统一修订并由 reviewer 复核后才可关闭 chapter 2 验证门槛。
 - 进展：2026-09-26 任务登记。同日 reviewer 执行完毕：在远程 `tiger`（Ubuntu 24.04，Poky scarthgap `77d1feb37e`，BitBake 2.8.1，`MACHINE=qemuarm64`，`DISTRO=poky`）逐项执行本章全部查询命令并核对配置、路径、变量/provider、layer/recipe、镜像与包组源码、deploy 输出；对纯机制结论补查 Poky/BitBake/Linux 6.6.151 源码和官方资料。共登记 N-1~N-5 五个不符项与 O-1 一个非阻断观察。2.6.2 的原文反例按可恢复方式实测：追加 `DISTRO_FEATURES += "systemd"` 后，`bitbake -e core-image-minimal` 实际 rc=1（`udev` 无可构建 provider），与正文“不会报错”相反；测试结束自动恢复，Poky 工作树复核干净。章末 `git tag chapter2` 因 D-011 已确认移除，明确列为不适用而未执行。未修改受评正文。2026-09-26 project-manager 复核通过：版本稳定、范围覆盖、记录字段、证据边界和问题流转符合完成条件；远程完整日志在复核时因 SSH 连接拒绝未能二次读取，关键原文已保存在仓库内记录，此项作为后续证据留存改进，不阻断本任务完成。
 - 成果与验证证据：[T-012 chapter 2 命令、配置与输出真实环境核验记录](workspace/t012-chapter2-env-check.md)；记录内含执行者、日期、正文版本、环境基线、逐项命令/预期/实际/状态、问题位置与建议。远程原始解析错误留存于 `tiger:/tmp/t012-machine-policy.log`；关键输出已摘录进核验记录，Poky 最终 `git status --short` 为空。
-- 阻塞与下一位行动人：任务执行与记录复核均无阻塞，T-012 完成；不符项已在 T-011 稳定版 Git `5babfb7` 中处理。下一位行动人 reviewer 按 T-011 的针对性范围复核 U-11/U-13/U-14/U-15。
+- 阻塞与下一位行动人：任务执行与记录复核均无阻塞，T-012 完成；不符项已在 T-011 稳定版 Git `4713576` 中处理并由 reviewer 最终复核通过。T-012 验证门槛闭环，下一位行动人用户按 T-011 确认 chapter 2 定稿。
 - 更新日期：2026-09-26
 
 ## T-013：补充硬件型号与等宽文本排版规则（A-004 v0.5）
