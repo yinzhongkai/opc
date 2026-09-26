@@ -346,6 +346,19 @@
 - D-010 与证据闭环：R-1~R-5 分别引用 T-012 N-1~N-5，R-6 引用 O-1；writer 逐项回复未把同一事实重复计数。正文和图片稳定在 Git `bc33817`，当前版本相对该提交无差异；XML、图片链接、66 个代码围栏、图表数量和 `git diff --check` 的静态检查均复核通过。
 - 下一位行动人：reviewer 对 Git `bc33817` 复核 R-1~R-6/N-1~N-5/O-1 及 4 个 SVG 的技术映射；通过后转用户确认 chapter 2 定稿。
 
+#### reviewer 对统一修订的复核
+- 日期、复核版本与范围：2026-09-26；复核稳定版 Git `bc33817`，当前正文与 4 个 SVG 相对该提交无差异。依据 reviewer 第 1 轮 R-1~R-6、T-012 N-1~N-5/O-1、T-012 固化环境记录、相关官方资料及项目四仓库/集成层边界，逐项核对正文、表格和 SVG 中的技术修订。本次未重新执行远程实验；R-4/R-6 的数值与错误原文按已完成并经 project-manager 复核的 T-012 证据核对。受本地浏览器 `file://` 安全策略和图像查看器不支持 SVG 的限制，本次未独立复查视觉渲染质量；已检查 4 个 SVG 的 XML、画布、全部技术标签、连线/旁路路径及正文引用，视觉布局沿用 project-manager 已完成的渲染复核。
+- 结论：**pass（技术与实测处理范围）**。R-1~R-6 对应的 N-1~N-5/O-1 均已正确处理，未发现阻断 chapter 2 定稿的新技术问题；T-011 下一位行动人为用户，按 D-003/D-010 确认 chapter 2 定稿。
+- R-1/N-1：**通过**。正文搜索说明、解释段和 Table-2-1 均将 PL011、PL031、at24 与 SPI NOR 映射到实际源码/子系统；`m25p80` 仅作为候选芯片或 `compatible` 标识。Fig-2-1 使用“SPI NOR / 具体芯片待定”，没有固化未验证器件。
+- R-2/N-2：**通过**。正文和 Table-2-3 分别说明 `meta` 提供 `qemuarm64` MACHINE 与 `core-image-minimal`、`meta-poky` 提供 DISTRO 策略、`meta-yocto-bsp` 提供其他参考 BSP；已明确 `qemuarm64` 不依赖 `meta-yocto-bsp`。Fig-2-4 在 BitBake 区内分别标注 `qemuarm64` 的 MACHINE 来自 `meta`、`tiger-aarch64` 由 `meta-tiger` 提供，未把默认启用层误写成 MACHINE 来源。
+- R-3/N-3：**通过**。两个 recipe 输出块已恢复普通双引号，只保留 BitBake 行续接反斜杠；全章字面量 `\"` 扫描为 0。
+- R-4/N-4：**通过**。2.6.2 采用 T-012 的可恢复实验与实际 rc=1 结果，保留 `Nothing RPROVIDES 'udev'` 和目标无可构建 provider 两条关键错误；正文解释了仅追加 `systemd` 而未同步 init/device-manager 策略造成的 provider 不一致，并记录恢复后空的 `git status --short`，不再声称 BitBake 成功解析。
+- R-5/N-5：**通过**。正文、Table-2-2、Fig-2-1 和 Fig-2-2 均拆分 SoC Boot ROM 与可选 TF-A BL1；Fig-2-2 还给出 Boot ROM 直达 BL2 的旁路。`bl1.bin`/`bl2.bin`/`bl31.bin`、U-Boot、DTB 和 UBI 文件均标为平台规则下的候选产物，`fip.bin` 与平台约定的 `flash.bin` 已分开，小结也收窄为按 MACHINE/provider/recipe/平台打包规则决定是否及如何部署。
+- R-6/O-1：**通过**。查询命令已加入 `COMBINED_FEATURES`；正文逐字回填固化环境的 `MACHINE_FEATURES="alsa bluetooth usbgadget screen vfat rtc qemu-usermode"` 与 `COMBINED_FEATURES="alsa bluetooth usbgadget vfat"`，并按交集用途解释，没有写成简单拼接。
+- 4 个 SVG 技术映射：**通过**。Fig-2-1 覆盖用户指定的八类硬件、设备树/MACHINE/provider 边界及带不确定性说明的启动链；Fig-2-2 将 tiger 目标链与 qemuarm64 实测路径分泳道，并明确可选 BL1 旁路和候选产物边界；Fig-2-3 的 Application/OS-BSP/Firmware 分层及 MACHINE/DISTRO 职责与正文一致；Fig-2-4 保留四个开发态源码仓库与 `meta-tiger` 集成态的区分，并按 MACHINE 分开 qemuarm64 参考产物与 tiger 完整链目标。共同 deploy 框表示各 MACHINE 实际适用的产物集合，结合分支框内的 `Image + ext4`/“完整启动链目标”标签，不构成 qemuarm64 必有固件或 bootloader 的承诺。
+- 静态验证：4 个 SVG 引用一一对应且文件存在，4 个 XML 均可解析，画布/viewBox 均为 1200px 宽；66 个代码围栏标记成对；`task NN`、`git tag chapter2`、多余 `\"` 均为 0；`git diff --check` 通过。
+- 非阻断跨章联动：后续 chapter 5 草稿 `workspace/yocto/task06-5-写第一份MACHINE配置.md` 仍有“BitBake 不拦你，系统策略被悄悄改了”的旧表述，与本次 R-4 的固定环境 rc=1 结果不一致。该文件不属于 Git `bc33817` 的 T-011 受评成果，不阻断 chapter 2；chapter 5 进入 P3 修订与逐章实测时须按本次证据同步更正。
+
 ## T-012：真实环境核验 chapter 2 命令、配置与输出
 - 负责人：reviewer
 - 状态：completed（2026-09-26 project-manager 复核通过；不符项已转入 T-011，验证门槛随 T-011 修订与复核闭环）
