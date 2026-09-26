@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">tiger 硬件与启动链映射</title>
+  <desc id="desc">左侧展示 Cortex-A53、DDR、NAND、SPI NOR、UART、RTC、Watchdog 和 I2C EEPROM，右侧展示从 Boot ROM 到 UBI 根文件系统的启动链。</desc>
+  <defs>
+    <style>
+      .title { font: 700 30px "Microsoft YaHei", "Noto Sans CJK SC", sans-serif; fill: #17324d; }
+      .subtitle { font: 600 19px "Microsoft YaHei", "Noto Sans CJK SC", sans-serif; fill: #35516d; }
+      .label { font: 600 18px "Microsoft YaHei", "Noto Sans CJK SC", sans-serif; fill: #17324d; }
+      .small { font: 15px "Microsoft YaHei", "Noto Sans CJK SC", sans-serif; fill: #35516d; }
+      .tiny { font: 14px "Microsoft YaHei", "Noto Sans CJK SC", sans-serif; fill: #4a657d; }
+      .stage { fill: #eef6ff; stroke: #2878b5; stroke-width: 2; rx: 10; }
+      .hw { fill: #f2fbf5; stroke: #2d8a57; stroke-width: 2; rx: 12; }
+      .store { fill: #fff8e8; stroke: #c78925; stroke-width: 2; rx: 12; }
+      .io { fill: #faf3ff; stroke: #8352a5; stroke-width: 2; rx: 12; }
+      .note { fill: #fffdf6; stroke: #c78925; stroke-width: 1.5; stroke-dasharray: 7 5; rx: 10; }
+      .arrow { stroke: #4d6f8c; stroke-width: 2.2; fill: none; marker-end: url(#arrow); }
+      .bus { stroke: #83a0b8; stroke-width: 2; fill: none; }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#4d6f8c"/>
+    </marker>
+  </defs>
+
+  <rect width="1200" height="720" fill="#ffffff"/>
+  <text x="50" y="52" class="title">tiger 硬件与启动链映射</text>
+  <text x="50" y="82" class="small">硬件能力由 MACHINE、设备树和内核配置描述；启动组件由 provider 与平台打包规则接入。</text>
+
+  <rect x="45" y="110" width="630" height="540" fill="#f8fbfd" stroke="#c9d8e5" stroke-width="2" rx="18"/>
+  <text x="70" y="146" class="subtitle">硬件域</text>
+
+  <rect x="250" y="175" width="220" height="82" class="hw"/>
+  <text x="360" y="208" class="label" text-anchor="middle">Cortex-A53 × 4</text>
+  <text x="360" y="235" class="small" text-anchor="middle">ARMv8-A / MACHINE tune</text>
+
+  <rect x="75" y="302" width="190" height="76" class="hw"/>
+  <text x="170" y="334" class="label" text-anchor="middle">DDR</text>
+  <text x="170" y="360" class="small" text-anchor="middle">早期固件初始化</text>
+
+  <rect x="300" y="302" width="160" height="76" class="store"/>
+  <text x="380" y="334" class="label" text-anchor="middle">NAND</text>
+  <text x="380" y="360" class="small" text-anchor="middle">UBI / UBIFS</text>
+
+  <rect x="495" y="302" width="150" height="76" class="store"/>
+  <text x="570" y="334" class="label" text-anchor="middle">SPI NOR</text>
+  <text x="570" y="360" class="small" text-anchor="middle">具体芯片待定</text>
+
+  <path d="M360 257 V280 H170 V302 M360 280 H380 V302 M360 280 H570 V302" class="bus"/>
+
+  <rect x="70" y="438" width="125" height="68" class="io"/>
+  <text x="132" y="468" class="label" text-anchor="middle">UART</text>
+  <text x="132" y="492" class="small" text-anchor="middle">PL011</text>
+
+  <rect x="215" y="438" width="125" height="68" class="io"/>
+  <text x="277" y="468" class="label" text-anchor="middle">RTC</text>
+  <text x="277" y="492" class="small" text-anchor="middle">PL031</text>
+
+  <rect x="360" y="438" width="125" height="68" class="io"/>
+  <text x="422" y="468" class="label" text-anchor="middle">Watchdog</text>
+  <text x="422" y="492" class="small" text-anchor="middle">异常恢复</text>
+
+  <rect x="505" y="438" width="140" height="68" class="io"/>
+  <text x="575" y="468" class="label" text-anchor="middle">I2C EEPROM</text>
+  <text x="575" y="492" class="small" text-anchor="middle">at24</text>
+
+  <path d="M360 378 V412 H132 V438 M360 412 H277 V438 M360 412 H422 V438 M360 412 H575 V438" class="bus"/>
+
+  <rect x="82" y="555" width="550" height="68" class="note"/>
+  <text x="357" y="582" class="small" text-anchor="middle">设备树描述地址、中断和连接关系</text>
+  <text x="357" y="607" class="small" text-anchor="middle">MACHINE 选择 KERNEL_DEVICETREE、镜像格式和 provider</text>
+
+  <rect x="715" y="110" width="440" height="540" fill="#f8fbfd" stroke="#c9d8e5" stroke-width="2" rx="18"/>
+  <text x="740" y="146" class="subtitle">启动链</text>
+
+  <rect x="760" y="166" width="350" height="52" class="stage"/>
+  <text x="935" y="198" class="label" text-anchor="middle">Boot ROM（SoC 固化）</text>
+  <path d="M935 218 V238" class="arrow"/>
+
+  <rect x="760" y="240" width="350" height="52" class="note"/>
+  <text x="935" y="272" class="label" text-anchor="middle">TF-A BL1（平台可选）</text>
+  <path d="M935 292 V312" class="arrow"/>
+
+  <rect x="760" y="314" width="350" height="52" class="stage"/>
+  <text x="935" y="346" class="label" text-anchor="middle">TF-A BL2（早期初始化）</text>
+  <path d="M935 366 V386" class="arrow"/>
+
+  <rect x="760" y="388" width="350" height="52" class="stage"/>
+  <text x="935" y="420" class="label" text-anchor="middle">TF-A BL31（EL3 运行时）</text>
+  <path d="M935 440 V460" class="arrow"/>
+
+  <rect x="760" y="462" width="350" height="52" class="stage"/>
+  <text x="935" y="494" class="label" text-anchor="middle">U-Boot / BL33</text>
+  <path d="M935 514 V534" class="arrow"/>
+
+  <rect x="760" y="536" width="168" height="52" class="stage"/>
+  <text x="844" y="568" class="label" text-anchor="middle">Linux</text>
+  <path d="M928 562 H946" class="arrow"/>
+  <rect x="948" y="536" width="162" height="52" class="stage"/>
+  <text x="1029" y="568" class="label" text-anchor="middle">UBI rootfs</text>
+
+  <text x="935" y="620" class="tiny" text-anchor="middle">Boot ROM 直达 BL2 或先经过 BL1，待 tiger 四仓库实现后定稿</text>
+  <text x="600" y="691" class="tiny" text-anchor="middle">本图是设计映射；产物文件名和打包方式以 tiger 平台实现及实测结果为准。</text>
+</svg>
