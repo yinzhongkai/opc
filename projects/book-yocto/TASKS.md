@@ -298,17 +298,30 @@
 - U-8｜位置：章末 L575~L580，`git tag chapter2` 叙事与命令块｜内容：用户确认 tag 不需要再打，并要求后续每章自动处理｜处理口径：移除本章为书稿章节设置 tag 的叙事、注释与命令块；后续各章按 D-011 自动移除同类章末 tag 流程，无需逐章重复确认。实际工程或上游版本识别所必需的 tag 仍按教学语义保留。
 - 处理状态：待 writer 在本轮意见到齐后统一修订；U-1/U-4/U-6 的图片形式、文件路径、图表编号与正文引用，U-2 的实测不符项，U-3/U-5 的最终技术措辞，以及 U-7/U-8 的内部流程清理均须在处理回复中说明，随后由用户与相关评审者复核。
 
+#### reviewer 的意见
+- 日期、评审依据与未覆盖项：2026-09-26。受评版本 Git `0f2c44c`（583 行，当前正文相对该提交无差异）；依据 A-004 v0.4、D-010、T-012 在远程 `tiger` 的 Poky Scarthgap 实测、Poky/BitBake/Linux 6.6.151 源码，以及 BitBake/Yocto Project/TF-A 官方资料。已逐项覆盖本章全部 shell 命令、配置片段、输出块和 writer 本轮重点修正的 feature、layer/recipe 优先级、image/provider 边界。未覆盖项：①四个开发态仓库和 `meta-tiger` 尚未创建，因此 tiger 专属 provider、设备模型和最终产物名只能检查设计边界，不能冒充实测；②U-1/U-4/U-6 所需图片尚不存在，本意见只检查图中技术映射要求，不评价未交付图片的视觉质量；③本章没有重新构建镜像的命令，本次仅检查既有产物，不把 T-009 既有构建冒充本次从零构建。
+- 结论：**revise**。大部分查询命令和 writer 修正后的 feature、layer 优先级、`IMAGE_INSTALL`/provider 机制成立；但 R-1/R-3/R-4/R-5 是可见技术错误，R-2 会造成 layer 职责误解，需与用户 U-1~U-8 及 T-012 结果一起统一修订。
+- 问题：
+  - R-1（中，技术名词）｜位置：2.1 节 L91-117、L128｜事实与依据：Linux 6.6.151 实物中 PL011/PL031/at24 分别有 `amba-pl011.c`、`rtc-pl031.c`、`at24.c`，SPI NOR 当前实现位于 `drivers/mtd/spi-nor/`；不存在正文所称的独立 `m25p80` 驱动文件，`m25p80` 只作为芯片名/兼容标识保留｜影响：读者会按错误驱动名查源码和设备树｜建议：改为 SPI NOR 子系统并注明具体兼容串取决于最终器件/模型；若 tiger 确用 M25P80，只把它写成器件或兼容标识｜原稿责任人：writer。
+  - R-2（中，layer 职责）｜位置：2.4 节 L262、L343-348｜事实与依据：`qemuarm64.conf` 与 `core-image-minimal.bb` 都来自 OE-Core `meta`；`meta-poky` 提供 Poky DISTRO；`meta-yocto-bsp` 虽在默认 `bblayers.conf` 启用，却不提供 qemuarm64 MACHINE｜影响：“三者叠加才凑出 qemuarm64”会把默认启用误写成功能依赖｜建议：按实际提供者分别说明三层职责，明确 `meta-yocto-bsp` 是可参考的其他 BSP，不是当前 qemuarm64 构建的必需 MACHINE 来源｜原稿责任人：writer。
+  - R-3（中，源码准确性）｜位置：2.5 节 L377、L416-418、L429-430｜事实与依据：远程 `cat` 的真实 recipe 使用普通双引号；Markdown 代码围栏内的 `\"` 会直接显示反斜杠｜影响：标为源码输出的文本不可逐字复制｜建议：删除双引号前的多余反斜杠，只保留 BitBake 续行本身的反斜杠｜原稿责任人：writer。
+  - R-4（中，可执行反例）｜位置：2.6.2 节 L471-530，重点 L503-507｜事实与依据：按正文在 `qemuarm64.conf` 追加 `DISTRO_FEATURES += "systemd"` 后执行原命令，`bitbake -e core-image-minimal` 返回 rc=1，实际报 `Nothing RPROVIDES 'udev'` 及目标无可构建 provider；测试后配置已恢复且 Poky 工作树干净｜影响：“BitBake 不会报错”与固定基线的真实行为相反，读者照做会直接失败｜建议：按实测展示越界配置造成 provider 不一致并失败，或重新设计并实测一个无冲突反例；不得保留假定成功输出｜原稿责任人：writer。
+  - R-5（中，启动链模型）｜位置：2.2 节 L141、L189-196 与小结 L540｜事实与依据：正文把 Boot ROM 与 TF-A BL1 合并成一项并称其不由 Yocto 构建；TF-A 官方构建说明则列出平台可能产生的 `bl1.bin`、`bl2.bin`、`bl31.bin`，通用 FIP 名为 `fip.bin`，`flash.bin` 属平台集成命名；小结“每个阶段都会物化为 deploy 文件”还与表中 Boot ROM 无产物、自身 qemuarm64 实测无 TF-A/U-Boot 相矛盾｜影响：混淆不可变 Boot ROM、可选 TF-A BL1 与平台打包物，并把条件性产物说成必然｜建议：先确定 tiger 是 Boot ROM 直入 BL2 还是使用 TF-A BL1，再分项画图；将 FIP/flash 等名称标为平台相关、待四仓库实测定名；收窄小结为构建系统负责的阶段按 MACHINE/provider 与打包规则部署相应产物｜原稿责任人：writer。
+  - R-6（低，实测输出）｜位置：2.4 节 L315-320｜事实与依据：固定基线实测 `MACHINE_FEATURES="alsa bluetooth usbgadget screen vfat rtc qemu-usermode"`，正文示例少 `rtc qemu-usermode`；`DISTRO_FEATURES` 与正文一致，`COMBINED_FEATURES` 实测为两者交集中的 `alsa bluetooth usbgadget vfat`｜影响：已有“具体值因版本略有不同”提示，故不阻断机制理解，但与本项目固化环境仍有出入｜建议：回填当前实测值并可顺带展示 `COMBINED_FEATURES`，让本节的交集说明有直接证据｜原稿责任人：writer。
+- 与用户意见的关系：U-3 建议中的 qemuarm64 直接加载内核、无独立 TF-A/U-Boot 产物已由 V-4 实测支持，但 tiger 完整链措辞须同时按 R-5 收窄；U-5 的“应用小改动不应牵动整套固件流程”作为项目分层原则成立；U-1/U-4/U-6 补图时必须同步落实 R-1/R-2/R-5，避免把当前错误映射固化进图片。
+- 核验记录：[T-012 chapter 2 真实环境核验记录](workspace/t012-chapter2-env-check.md)。
+
 ## T-012：真实环境核验 chapter 2 命令、配置与输出
 - 负责人：reviewer
-- 状态：todo
+- 状态：in_review（2026-09-26 核验执行与记录已完成，待 project-manager 按完成条件复核）
 - 授权来源与日期：2026-09-26 用户在 project-manager 会话明确要求 chapter 2 的信息在真实环境检验，并要求后续各章执行同类操作；项目经理据此登记 D-010 与本任务。
 - 目标与范围：以 T-011 第 1 轮稳定受评版本 Git `0f2c44c` 为对象，盘点并执行 chapter 2 中可在真实环境核验的命令、配置、路径、变量/provider 解析、layer/recipe 查询和输出示例；逐项核对正文预期与实际结果。机制性结论同时核对对应版本官方文档或源码，但不以资料核查代替可执行项目的实测。reviewer 只提交核验记录与问题，不直接修改受评正文。
 - 输入与依赖：T-011 受评稿 Git `0f2c44c`；D-010；A-004 v0.4；T-008/T-009 已使用的 Scarthgap 环境与证据格式。优先复用远程服务器 `tiger` 上既有 Poky Scarthgap 工作区，执行时须重新记录实际主机、系统、Poky/BitBake 提交或版本及构建目录状态；环境不可用时如实标 blocked，不沿用旧结果冒充本次执行。
 - 优先级：未设定
 - 完成条件与确认方式：形成逐项核验记录，至少包含执行者、日期、正文版本、环境基线、前置条件、命令/操作、预期、实际输出摘要、通过/失败/阻塞/未执行状态及原始证据位置；覆盖本章全部可执行命令与输出块，未执行/不适用项逐项说明。记录经 project-manager 复核；不符项转入 T-011，由 writer 统一修订并由 reviewer 复核后才可关闭 chapter 2 验证门槛。
-- 进展：2026-09-26 任务登记。
-- 成果与验证证据：暂无。
-- 阻塞与下一位行动人：无已知阻塞；下一位行动人 reviewer（用户进入 reviewer 会话触发，可表述为“执行 T-012，并提交 T-011 第 1 轮技术审校意见”）。
+- 进展：2026-09-26 任务登记。同日 reviewer 执行完毕：在远程 `tiger`（Ubuntu 24.04，Poky scarthgap `77d1feb37e`，BitBake 2.8.1，`MACHINE=qemuarm64`，`DISTRO=poky`）逐项执行本章全部查询命令并核对配置、路径、变量/provider、layer/recipe、镜像与包组源码、deploy 输出；对纯机制结论补查 Poky/BitBake/Linux 6.6.151 源码和官方资料。共登记 N-1~N-5 五个不符项与 O-1 一个非阻断观察。2.6.2 的原文反例按可恢复方式实测：追加 `DISTRO_FEATURES += "systemd"` 后，`bitbake -e core-image-minimal` 实际 rc=1（`udev` 无可构建 provider），与正文“不会报错”相反；测试结束自动恢复，Poky 工作树复核干净。章末 `git tag chapter2` 因 D-011 已确认移除，明确列为不适用而未执行。未修改受评正文。
+- 成果与验证证据：[T-012 chapter 2 命令、配置与输出真实环境核验记录](workspace/t012-chapter2-env-check.md)；记录内含执行者、日期、正文版本、环境基线、逐项命令/预期/实际/状态、问题位置与建议。远程原始解析错误留存于 `tiger:/tmp/t012-machine-policy.log`；关键输出已摘录进核验记录，Poky 最终 `git status --short` 为空。
+- 阻塞与下一位行动人：执行无阻塞；T-012 记录待 project-manager 复核。T-011 下一位行动人仍需等待 project-manager 第 1 轮意见到齐，随后由 writer 统一修订 U-1~U-8、reviewer R-1~R-6 与 T-012 N-1~N-5/O-1；修订后由 reviewer 复核，T-012 经 project-manager 复核后关闭。
 - 更新日期：2026-09-26
 
 ## 记录样式（不是真实任务）
