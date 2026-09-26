@@ -31,8 +31,7 @@
 |                  |                          | I2C EEPROM               |
 +------------------+--------------------------+--------------------------+
 
-Boot ROM -> TF-A BL1 -> TF-A BL2 -> TF-A BL31
-         -> U-Boot BL33 -> Linux Kernel -> UBI rootfs
+Boot ROM -> TF-A BL1 -> TF-A BL2 -> TF-A BL31 -> U-Boot BL33 -> Linux Kernel -> UBI rootfs
 ```
 
 硬件部分把计算、内存与存储、外设列为三个并列功能组，不用树形连线表达不存在的从属关系；下方启动链给出 tiger 已确定的目标顺序。具体产物和打包方式仍以后续四个开发仓库的实现与全链实测为准。
