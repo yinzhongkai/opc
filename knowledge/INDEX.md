@@ -23,6 +23,7 @@
 | [testing](testing.md) | 测试设计与执行 |
 | [travel-planning](travel-planning.md) | 旅行规划 |
 | [writing](writing.md) | 长篇写作与编辑 |
+| [yocto-engineering](yocto-engineering.md) | Yocto 工程 |
 
 ## 文件约定
 

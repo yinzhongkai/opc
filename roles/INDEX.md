@@ -13,6 +13,7 @@
 | [tester](tester.md) | 测试工程师 |
 | [writer](writer.md) | 作者 |
 | [reviewer](reviewer.md) | 独立评审者 |
+| [yocto-engineer](yocto-engineer.md) | Yocto 工程师 |
 
 ## 使用与维护
 
