@@ -11,6 +11,7 @@
 - 岗位定义共同职责、边界和基础知识，位于 `roles/`。
 - 知识是可复用的工作方法，位于平铺的 `knowledge/`；项目通过 `roleKnowledge` 补充知识。
 - 项目保存目标、成员、任务、决定、交接与成果；TEAM 只登记成员 ID 和项目岗位知识，不重复成员字段。
+- 工作区由项目 `WORKSPACE.yaml` 声明；无受管工作区时使用 `none`，独立产品源码放在 OPC 外部 Git 仓库，多仓库产品可使用 Repo Manifest。
 
 例如前端和后端成员可以同属 `developer`，加载相同的项目岗位知识，以 `scope` 区分工作。读取知识不授予额外职责或工具权限。这些知识文件也不是平台原生 Skills。
 
@@ -56,18 +57,25 @@
 | [roles/INDEX.md](roles/INDEX.md) | 岗位目录及定义 |
 | [knowledge/INDEX.md](knowledge/INDEX.md) | 知识目录及正文 |
 | [templates/README.md](templates/README.md) | 空白项目模板和复制说明 |
-| `projects/<project-id>/` | 用户实际创建的项目；软件源码位置由项目约定 |
+| `projects/<project-id>/` | 用户实际创建的 OPC 项目记录；不要求承载产品源码 |
 | `projects/<project-id>/members/<member-id>.yaml` | 对应成员唯一身份与分工配置：id、role、scope |
+| `projects/<project-id>/WORKSPACE.yaml` | 工作区驱动、默认 checkout、外部仓库或 Manifest 及精确版本基线 |
 | `adapters/` | 不同平台的资料访问与启动说明 |
 | `scripts/` | 只读配置与本地链接检查 |
 
 公共规则分别以配置规范、会话协议和项目运行协议为唯一详细定义；入口与平台说明只做导航，岗位写专业职责，知识写工作方法。
 
+## 工作区与源码仓库
+
+新项目使用工作区配置版本 1。`none` 表示当前没有受 OPC 管理的工作区，不创建隐式目录；`git` 把具有独立构建、测试和发布生命周期的产品源码放在 OPC 同级独立仓库，是代码型项目的默认建议；`submodule` 只用于必须嵌入并精确锁定的少量仓库；`repo` 用于多个 Git 仓库共同组成的系统产品。框架不再提供或兼容 `projects/<project-id>/workspace/`。
+
+WORKSPACE 同时记录可移动的演进分支和不可移动的提交基线。OPC 任务、决定、状态和成果引用该基线，源码提交仍进入产品仓库。框架校验器只检查声明结构和路径边界，不自动 clone、sync、checkout、修改外部目录或验证远端权限；这些动作始终需要用户明确授权。字段和示例见 [配置规范](CONFIG_SCHEMA.md)。
+
 ## 框架版本与项目分支
 
 稳定框架分支只保存公共框架内容，`v<version>` 标签标识不可变的框架发布版本；下一版本在 `opc-v<version>-dev` 集成，项目提出的公共功能先整理并进入框架演进线，再通过 rebase、cherry-pick 或 merge 按项目实际情况同步。具体分支类型、回灌边界、发布步骤及当前仓库收敛方向见 [Git 分支与框架发布策略](BRANCH_STRATEGY.md)。
 
-项目分支应只承载一个业务项目，并在项目资料中记录采用的框架版本和实际提交。项目中的试验实现、正文、配置、成果及 workspace 内容不能随公共功能整体合入稳定框架分支。
+项目分支应只承载一个业务项目，并在项目资料中记录采用的框架版本和实际提交。项目中的试验实现、正文、配置、成果及业务工作内容不能随公共功能整体合入稳定框架分支。
 
 ## 日常协作
 

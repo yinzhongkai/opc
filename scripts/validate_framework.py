@@ -9,7 +9,7 @@ from __future__ import annotations
 
 import argparse
 import os
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 import re
 import sys
 from urllib.parse import unquote
@@ -39,12 +39,24 @@ ROOT_FILES = (
 PROJECT_FILES = (
     "AGENTS.md", "PROJECT.md", "TEAM.yaml", "TASKS.md", "STATUS.md",
     "DECISIONS.md", "HANDOFFS.md", "artifacts/README.md", "members/README.md",
+    "WORKSPACE.yaml",
 )
+WORKSPACE_FILE = "WORKSPACE.yaml"
+PROJECT_RECORD_FILES = PROJECT_FILES
 PROJECT_PLACEHOLDERS = ("{{project_id}}", "{{project_name}}")
 TEAM_FIELDS = {
     "schemaVersion", "project", "members", "roleKnowledge",
 }
 MEMBER_FIELDS = {"id", "role", "scope"}
+WORKSPACE_DRIVERS = {"none", "git", "submodule", "repo"}
+WORKSPACE_COMMON_FIELDS = {"driver"}
+WORKSPACE_DRIVER_FIELDS = {
+    "none": set(),
+    "git": {"repository", "branch", "revision", "checkout"},
+    "submodule": {"repository", "revision", "checkout"},
+    "repo": {"manifestRepository", "manifestRevision", "manifestFile", "checkout"},
+}
+GIT_REVISION_PATTERN = re.compile(r"(?:[0-9a-f]{40}|[0-9a-f]{64})\Z")
 
 
 class UniqueKeyLoader(yaml.SafeLoader):
@@ -301,7 +313,7 @@ class Validator:
 
     def check_project_placeholders(self, folder):
         """Check framework project records, not arbitrary business templates."""
-        for name in PROJECT_FILES:
+        for name in PROJECT_RECORD_FILES:
             path = folder / name
             if not path.is_file():
                 continue
@@ -315,7 +327,7 @@ class Validator:
                         self.error(path, f"第 {line} 行存在未替换的项目占位符：{placeholder}")
 
     def check_team(self, folder, template=False):
-        self.require_files(folder, PROJECT_FILES)
+        self.require_files(folder, PROJECT_RECORD_FILES if template else PROJECT_FILES)
         if not template:
             self.check_project_placeholders(folder)
         path = folder / "TEAM.yaml"
@@ -370,6 +382,76 @@ class Validator:
             self.check_member(folder, identifier)
         self.check_member_inventory(folder, registered, template=template)
 
+    def check_checkout(self, value, path, driver, project, template=False):
+        if not is_text(value):
+            self.error(path, "workspace.checkout 必须是非空字符串")
+            return
+        if "\\" in value or value.startswith("/") or re.match(r"^[A-Za-z]:", value):
+            self.error(path, "workspace.checkout 必须是使用 / 的可移植相对路径")
+            return
+        parts = PurePosixPath(value).parts
+        if not parts or "." in parts or "" in parts:
+            self.error(path, "workspace.checkout 必须是规范化相对路径")
+            return
+        expected_project = "{{project_id}}" if template else project
+        if driver == "submodule":
+            if ".." in parts or parts[:2] != ("projects", expected_project) or len(parts) < 3:
+                self.error(
+                    path,
+                    "submodule 的 workspace.checkout 必须位于当前项目目录内",
+                )
+        elif parts[0] != ".." or ".." in parts[1:] or len(parts) < 2:
+            self.error(
+                path,
+                "git/repo 的 workspace.checkout 必须是框架根目录的同级相对路径",
+            )
+
+    def check_workspace(self, folder, template=False):
+        path = folder / WORKSPACE_FILE
+        if not path.is_file():
+            return
+        data = self.load_yaml(path)
+        if data is None:
+            return
+        allowed_top = {"schemaVersion", "workspace"}
+        for key in data.keys() - allowed_top:
+            self.error(path, f"未定义的 WORKSPACE 顶层字段：{key!r}")
+        if type(data.get("schemaVersion")) is not int or data["schemaVersion"] != 1:
+            self.error(path, "WORKSPACE schemaVersion 必须是整数 1")
+        workspace = data.get("workspace")
+        if not isinstance(workspace, dict):
+            self.error(path, "workspace 必须是映射")
+            return
+        driver = workspace.get("driver")
+        if driver not in WORKSPACE_DRIVERS:
+            self.error(path, "workspace.driver 必须是 none、git、submodule 或 repo")
+            return
+        required = WORKSPACE_COMMON_FIELDS | WORKSPACE_DRIVER_FIELDS[driver]
+        for field in sorted(required - workspace.keys()):
+            self.error(path, f"{driver} 工作区缺少字段 workspace.{field}")
+        for field in sorted(workspace.keys() - required):
+            self.error(path, f"{driver} 工作区不允许字段 workspace.{field}")
+        project = "{{project_id}}" if template else folder.name
+        if "checkout" in required:
+            self.check_checkout(workspace.get("checkout"), path, driver, project, template=template)
+        text_fields = WORKSPACE_DRIVER_FIELDS[driver] - {"revision", "manifestFile"}
+        for field in sorted(text_fields):
+            if not is_text(workspace.get(field)):
+                self.error(path, f"workspace.{field} 必须是非空字符串")
+        if driver in {"git", "submodule"}:
+            revision = workspace.get("revision")
+            if not isinstance(revision, str) or not GIT_REVISION_PATTERN.fullmatch(revision):
+                self.error(path, "workspace.revision 必须是完整的 40 或 64 位小写 Git 提交哈希")
+        if driver == "repo":
+            manifest_file = workspace.get("manifestFile")
+            if not is_text(manifest_file):
+                self.error(path, "workspace.manifestFile 必须是非空字符串")
+            else:
+                parts = PurePosixPath(manifest_file).parts
+                if ("\\" in manifest_file or manifest_file.startswith("/")
+                        or ".." in parts or not manifest_file.endswith(".xml")):
+                    self.error(path, "workspace.manifestFile 必须是 Manifest 仓库内的相对 .xml 路径")
+
     def check_markdown_links(self):
         for folder, dirs, names in os.walk(self.root, followlinks=False):
             dirs[:] = sorted(name for name in dirs if not name.startswith("."))
@@ -408,6 +490,7 @@ class Validator:
                     identifier, path, "knowledge", active=role.get("status") == "active",
                 )
         self.check_team(self.root / "templates" / "project", template=True)
+        self.check_workspace(self.root / "templates" / "project", template=True)
         projects = self.root / "projects"
         if projects.exists() and not projects.is_dir():
             self.error(projects, "projects 必须是目录（可为空或不存在）")
@@ -417,6 +500,7 @@ class Validator:
                     continue
                 self.project_count += 1
                 self.check_team(folder)
+                self.check_workspace(folder)
         self.check_markdown_links()
         return self.errors
 

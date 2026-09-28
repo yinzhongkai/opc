@@ -1,6 +1,6 @@
-# 配置规范（版本 3）
+# 配置规范（TEAM 版本 3；工作区版本 1）
 
-本规范定义配置的结构与引用要求，供 [初始化协议](SESSION_PROTOCOL.md)、[项目运行协议](PROJECT_PROTOCOL.md) 和只读校验器共同使用。使用 UTF-8 编码，YAML 禁止重复键，不通过自定义 YAML 标签执行代码。
+本规范定义成员配置和项目工作区声明的结构与引用要求，供 [初始化协议](SESSION_PROTOCOL.md)、[项目运行协议](PROJECT_PROTOCOL.md) 和只读校验器共同使用。使用 UTF-8 编码，YAML 禁止重复键，不通过自定义 YAML 标签执行代码。
 
 ## 路径与 ID
 
@@ -12,7 +12,7 @@
 
 超级管理员是根 [SUPER_ADMIN.md](SUPER_ADMIN.md) 定义的框架入口，不是项目岗位或成员。项目不配置管理员账号、管理员成员 ID 或 `managedBy`，也不为超级管理员配置 roleKnowledge。
 
-空白模板位于 `templates/project/`。模板中的 `{{project_id}}`、`{{project_name}}` 供复制时替换，不能作为真实项目身份。
+空白模板位于 `templates/project/`。模板中的 `{{project_id}}`、`{{project_name}}` 供复制时替换，不能作为真实项目身份或工作区路径。
 
 ## TEAM.yaml
 
@@ -56,6 +56,80 @@ scope:
 
 复制起点见 [空白 TEAM.yaml](templates/project/TEAM.yaml)。项目占位符仅在模板路径下有效。
 
+## WORKSPACE.yaml
+
+`projects/<project-id>/WORKSPACE.yaml` 声明业务工作区位于何处、由什么工具管理以及项目记录对应的精确源码版本。它是 OPC 的统一声明入口，不是自动执行器；读取配置不授权克隆、联网、切换提交、覆盖本地修改或操作框架目录之外的文件。
+
+所有项目都必须提供该文件并使用工作区配置版本 1。框架不再提供 `projects/<project-id>/workspace/` 内嵌目录，也不为缺失配置建立兼容回退；尚未确定源码或工作资料位置时使用 `driver: none`，不能用隐式目录代替明确边界。
+
+顶层只允许两个字段：
+
+| 字段 | 必需 | 类型与要求 |
+|---|---|---|
+| `schemaVersion` | 是 | 整数 `1` |
+| `workspace` | 是 | 工作区映射 |
+
+`workspace` 的公共字段只有 `driver`。`driver` 必须是 `none`、`git`、`submodule` 或 `repo`；除 `none` 外，各驱动必须提供 `checkout`。checkout 使用 `/` 的可移植相对路径，不接受盘符或绝对路径。`submodule` 必须位于当前 `projects/<project-id>/` 内；`git` 和 `repo` 必须使用框架根目录的同级路径，例如 `../space-rhythm`，不能继续向更高目录逃逸。配置只声明默认位置，本机另有布局时由用户或平台在实际操作中明确指定，不把机器专有绝对路径写回共享配置。
+
+### none
+
+适用于尚无源码仓库，或只使用 OPC 的任务、决定、状态和成果记录而不需要日常工作区的项目：
+
+```yaml
+schemaVersion: 1
+workspace:
+  driver: none
+```
+
+除 `driver` 外不接受其他 workspace 字段。`none` 不创建隐式目录，也不授权把草稿、源码或中间产物直接放进项目记录目录；项目开始需要工作区时，先经用户确认改为 `git`、`submodule` 或 `repo`。
+
+### git
+
+适用于 `space-rhythm` 一类具有独立源码、构建、测试和发布生命周期的产品仓库，是代码型项目的推荐模式：
+
+```yaml
+schemaVersion: 1
+workspace:
+  driver: git
+  repository: git@example.com:team/example.git
+  branch: main
+  revision: 0123456789abcdef0123456789abcdef01234567
+  checkout: ../example
+```
+
+`repository` 和 `branch` 必须是非空字符串；`revision` 必须是完整的 40 或 64 位小写 Git 提交哈希。`branch` 表示日常演进线，`revision` 才是 OPC 项目记录所对应的可复现基线。升级源码基线时先验证目标提交，再在同一项目变更中更新 `revision`、相关任务或状态记录；不能只跟踪可移动分支而宣称版本已锁定。
+
+### submodule
+
+适用于必须嵌入项目目录、又需要由上层 Git 精确锁定少量依赖仓库的场景：
+
+```yaml
+schemaVersion: 1
+workspace:
+  driver: submodule
+  repository: git@example.com:team/dependency.git
+  revision: 0123456789abcdef0123456789abcdef01234567
+  checkout: projects/example/source
+```
+
+`repository` 为非空字符串，`revision` 使用完整提交哈希。配置必须与 `.gitmodules` 和实际 gitlink 一致；只读校验器检查声明结构，不读取 Git 对象或联网验证远端。产品主源码默认不使用该模式，以免把独立产品生命周期重新耦合到 OPC 项目分支。
+
+### repo
+
+适用于内核、Bootloader、Yocto Layer、系统组件和应用等多个 Git 仓库共同组成一个产品的场景：
+
+```yaml
+schemaVersion: 1
+workspace:
+  driver: repo
+  manifestRepository: https://example.com/platform/manifest.git
+  manifestRevision: release-1.0
+  manifestFile: manifests/default.xml
+  checkout: ../example
+```
+
+`manifestRepository`、`manifestRevision` 和 `manifestFile` 均为非空字符串；Manifest 文件必须是仓库内不含 `..` 的相对 `.xml` 路径。项目发布时应把 Manifest 固定到可复核版本，并确保其中各仓库 revision 满足发布可复现要求。校验器不安装或调用 Google Repo，也不验证外部 Manifest 内容。
+
 ## 岗位文件
 
 `roles/<role-id>.md` 使用 YAML 文件头，后接完整职责、边界和主要产出：
@@ -81,7 +155,7 @@ knowledge: [software-engineering]
 
 ## 项目共享文件
 
-实际项目及空白模板均包含 `AGENTS.md`、`PROJECT.md`、`TEAM.yaml`、`members/README.md`、`TASKS.md`、`STATUS.md`、`DECISIONS.md`、`HANDOFFS.md`、`artifacts/README.md` 和 `workspace/README.md`。`workspace/` 是项目的工作目录，成员日常读写与中间产物落在其中，正式成果仍入 `artifacts/`。空白模板使用空 members 列表，不预置真实成员文件。没有任务、决定或交接时明确写“暂无”，不要把格式样例登记为真实记录。
+新建实际项目及空白模板均包含 `AGENTS.md`、`PROJECT.md`、`TEAM.yaml`、`WORKSPACE.yaml`、`members/README.md`、`TASKS.md`、`STATUS.md`、`DECISIONS.md`、`HANDOFFS.md` 和 `artifacts/README.md`。成员日常读写与中间产物落点由 WORKSPACE 声明；正式成果仍入 `artifacts/`。项目模板不再包含 `workspace/` 目录。空白模板使用空 members 列表，不预置真实成员文件。没有任务、决定或交接时明确写“暂无”，不要把格式样例登记为真实记录。
 
 Markdown 记录字段和状态由 [PROJECT_PROTOCOL.md](PROJECT_PROTOCOL.md) 定义。初始化时还须人工核对 PROJECT 中的确认人、协调记录维护人和任务事实；校验器不把 Markdown 的业务语义当作已验证事实。
 
@@ -89,6 +163,6 @@ Markdown 记录字段和状态由 [PROJECT_PROTOCOL.md](PROJECT_PROTOCOL.md) 定
 
 运行 `python scripts/validate_framework.py` 检查当前根目录，或使用 `--root <框架根目录>` 指定另一份框架。只读检查报告路径与问题，不自动修复配置。
 
-校验覆盖文件存在性、YAML 类型和重复键、ID、岗位及知识状态、成员索引与文件对应、岗位/知识引用，以及普通 Markdown 本地链接。外部链接、自然语言理解、业务正确性、授权真实性、任务依赖环和并发写入不在本版自动校验范围内。
+校验覆盖文件存在性、YAML 类型和重复键、ID、岗位及知识状态、成员索引与文件对应、岗位/知识引用、工作区驱动字段和可移植路径，以及普通 Markdown 本地链接。它不读取 Git 对象，不安装或调用 Submodule/Repo，不访问外部仓库，也不验证 checkout 当前提交。外部链接、自然语言理解、业务正确性、授权真实性、任务依赖环和并发写入不在本版自动校验范围内。
 
 修改公共定义先检查当前仓库全部项目的基础和补充引用，以及超级管理员入口对 `team-management` 的引用；修改项目组合检查该项目相应岗位的全部成员。退役定义前迁移在用引用，保留历史定义与工作记录。版本 1、2 不能直接作为版本 3 使用，见 [迁移说明](MIGRATIONS.md)，校验器不自动迁移。

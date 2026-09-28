@@ -18,7 +18,9 @@ import unittest
 from unittest.mock import patch
 
 sys.dont_write_bytecode = True
-from validate_framework import PROJECT_FILES, ROOT_FILES, Validator, main, yaml
+from validate_framework import (
+    PROJECT_FILES, PROJECT_RECORD_FILES, ROOT_FILES, Validator, main, yaml,
+)
 
 
 class FrameworkValidationTests(unittest.TestCase):
@@ -40,6 +42,13 @@ class FrameworkValidationTests(unittest.TestCase):
             "members": [],
         }
         self.save_team(self.team, template=True)
+        self.workspace = {
+            "schemaVersion": 1,
+            "workspace": {
+                "driver": "none",
+            },
+        }
+        self.save_workspace(self.workspace, template=True)
 
     def write(self, name, content):
         path = self.root / name
@@ -62,6 +71,8 @@ class FrameworkValidationTests(unittest.TestCase):
         data = copy.deepcopy(self.team)
         data["project"] = name
         self.save_team(data, project=name)
+        workspace = copy.deepcopy(self.workspace)
+        self.save_workspace(workspace, project=name)
         return data
 
     def save_team(self, data, template=False, project="example"):
@@ -75,6 +86,13 @@ class FrameworkValidationTests(unittest.TestCase):
         return self.write(
             f"projects/{project}/members/{identifier}.yaml",
             yaml.safe_dump(member, sort_keys=False, allow_unicode=True),
+        )
+
+    def save_workspace(self, data, template=False, project="example"):
+        folder = "templates/project" if template else f"projects/{project}"
+        return self.write(
+            f"{folder}/WORKSPACE.yaml",
+            yaml.safe_dump(data, sort_keys=False, allow_unicode=True),
         )
 
     def add_member(self, team, identifier="developer-01", role="developer"):
@@ -139,7 +157,7 @@ class FrameworkValidationTests(unittest.TestCase):
 
     def test_real_project_records_reject_unreplaced_placeholders(self):
         self.project()
-        for name in PROJECT_FILES:
+        for name in PROJECT_RECORD_FILES:
             path = self.root / "projects/example" / name
             original = path.read_text(encoding="utf-8")
             for placeholder in ("{{project_id}}", "{{project_name}}"):
@@ -169,6 +187,114 @@ class FrameworkValidationTests(unittest.TestCase):
         self.write("projects/example/artifacts/template-notes.md", "Example: `{{project_id}}`\n")
         self.write("projects/example/PROJECT.md", "# Project\nBusiness expression: {{page_title}}\n")
         self.assert_valid()
+
+    def test_workspace_supports_all_declared_drivers(self):
+        self.project()
+        configurations = (
+            {
+                "schemaVersion": 1,
+                "workspace": {
+                    "driver": "none",
+                },
+            },
+            {
+                "schemaVersion": 1,
+                "workspace": {
+                    "driver": "git",
+                    "repository": "git@example.invalid:team/example.git",
+                    "branch": "main",
+                    "revision": "a" * 40,
+                    "checkout": "../example",
+                },
+            },
+            {
+                "schemaVersion": 1,
+                "workspace": {
+                    "driver": "submodule",
+                    "repository": "git@example.invalid:team/example.git",
+                    "revision": "b" * 64,
+                    "checkout": "projects/example/source",
+                },
+            },
+            {
+                "schemaVersion": 1,
+                "workspace": {
+                    "driver": "repo",
+                    "manifestRepository": "https://example.invalid/manifests.git",
+                    "manifestRevision": "release-1.0",
+                    "manifestFile": "manifests/default.xml",
+                    "checkout": "../example",
+                },
+            },
+        )
+        for configuration in configurations:
+            with self.subTest(driver=configuration["workspace"]["driver"]):
+                self.save_workspace(configuration)
+                self.assert_valid()
+
+    def test_project_without_workspace_declaration_is_rejected(self):
+        self.project()
+        (self.root / "projects/example/WORKSPACE.yaml").unlink()
+        self.assert_error("projects/example/WORKSPACE.yaml: 缺少必需文件")
+
+    def test_workspace_schema_driver_fields_and_revision_are_strict(self):
+        self.project()
+        candidates = (
+            ({"schemaVersion": 2, "workspace": self.workspace["workspace"]},
+             "WORKSPACE schemaVersion 必须是整数 1"),
+            ({"schemaVersion": 1, "workspace": []}, "workspace 必须是映射"),
+            ({"schemaVersion": 1, "workspace": {"driver": "embedded"}},
+             "workspace.driver 必须是"),
+            ({"schemaVersion": 1, "workspace": {"driver": "none", "checkout": "../example"}},
+             "none 工作区不允许字段 workspace.checkout"),
+            ({"schemaVersion": 1, "workspace": {"driver": "git", "checkout": "../example"}},
+             "git 工作区缺少字段"),
+            ({
+                "schemaVersion": 1,
+                "workspace": {
+                    "driver": "git",
+                    "repository": "git@example.invalid:team/example.git",
+                    "branch": "main",
+                    "revision": "abc123",
+                    "checkout": "../example",
+                    "manifestFile": "default.xml",
+                },
+            }, "git 工作区不允许字段 workspace.manifestFile"),
+        )
+        for configuration, expected in candidates:
+            with self.subTest(expected=expected):
+                self.save_workspace(configuration)
+                self.assert_error(expected)
+
+    def test_workspace_checkout_and_repo_manifest_paths_are_portable_and_bounded(self):
+        self.project()
+        git_workspace = {
+            "schemaVersion": 1,
+            "workspace": {
+                "driver": "git",
+                "repository": "git@example.invalid:team/example.git",
+                "branch": "main",
+                "revision": "a" * 40,
+                "checkout": "../example",
+            },
+        }
+        for checkout in ("C:/src/example", "/src/example", "..\\example", "../../example"):
+            with self.subTest(checkout=checkout):
+                git_workspace["workspace"]["checkout"] = checkout
+                self.save_workspace(git_workspace)
+                self.assert_error("workspace.checkout")
+        repo_workspace = {
+            "schemaVersion": 1,
+            "workspace": {
+                "driver": "repo",
+                "manifestRepository": "https://example.invalid/manifests.git",
+                "manifestRevision": "main",
+                "manifestFile": "../default.xml",
+                "checkout": "../example",
+            },
+        }
+        self.save_workspace(repo_workspace)
+        self.assert_error("workspace.manifestFile 必须是 Manifest 仓库内的相对 .xml 路径")
 
     def test_definition_extensions_must_be_lowercase_on_every_platform(self):
         for directory in ("roles", "knowledge"):
@@ -462,12 +588,14 @@ class FrameworkValidationTests(unittest.TestCase):
         (self.root / "MIGRATIONS.md").unlink()
         (self.root / "templates/project/TASKS.md").unlink()
         (self.root / "templates/project/members/README.md").unlink()
+        (self.root / "templates/project/WORKSPACE.yaml").unlink()
         (self.root / "projects/empty-project").mkdir(parents=True)
         self.assert_error("SESSION_PROTOCOL.md: 缺少必需文件")
         self.assert_error("SUPER_ADMIN.md: 缺少必需文件")
         self.assert_error("MIGRATIONS.md: 缺少必需文件")
         self.assert_error("templates/project/TASKS.md: 缺少必需文件")
         self.assert_error("templates/project/members/README.md: 缺少必需文件")
+        self.assert_error("templates/project/WORKSPACE.yaml: 缺少必需文件")
         self.assert_error("projects/empty-project/TEAM.yaml: 缺少必需文件")
 
     def test_markdown_links_and_ignored_examples(self):
@@ -573,6 +701,11 @@ class RealTemplateIntegrationTests(unittest.TestCase):
             self.assertEqual([], team["members"])
             self.assertNotIn("managedBy", team)
             self.assertEqual([], list((project / "members").glob("*.yaml")))
+            workspace = yaml.safe_load((project / "WORKSPACE.yaml").read_text(encoding="utf-8"))
+            self.assertEqual(1, workspace["schemaVersion"])
+            self.assertEqual("none", workspace["workspace"]["driver"])
+            self.assertNotIn("checkout", workspace["workspace"])
+            self.assertFalse((project / "workspace").exists())
             # First add a directly tasked developer without a project manager,
             # then register a project manager as a separate member document.
             for role in ("developer", "project-manager"):
