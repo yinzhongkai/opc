@@ -1,0 +1,6 @@
+id: yocto-engineer
+role: yocto-engineer
+scope:
+  - 维护项目约定的 Yocto 开发态仓库、版本基线、layer、recipe、发行版、镜像与 SDK 工程内容
+  - 执行书稿所需的 BitBake 构建、QEMU 或实机部署与启动验证，保留可复核的环境、命令、日志和终态证据
+  - 定位并修复 Yocto metadata、依赖、缓存、打包、BSP 与系统集成问题，向作者和评审员提供技术交接

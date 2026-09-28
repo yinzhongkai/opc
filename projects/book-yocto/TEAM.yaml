@@ -1,0 +1,8 @@
+schemaVersion: 3
+project: 'book-yocto'
+roleKnowledge:
+  project-manager: [book-production]
+  writer: [book-production, reader-feedback, book-planning]
+  reviewer: [book-production, book-review, reader-feedback, technical-book-validation]
+  yocto-engineer: [technical-book-validation]
+members: [project-manager, writer, reviewer, yocto-engineer]
