@@ -50,6 +50,7 @@
 | [SUPER_ADMIN.md](SUPER_ADMIN.md) | 当前仓库的超级管理员职责、启动与管理边界 |
 | [SESSION_PROTOCOL.md](SESSION_PROTOCOL.md) | 成员身份、资料加载、回执与刷新 |
 | [PROJECT_PROTOCOL.md](PROJECT_PROTOCOL.md) | 建项、共享文件责任、任务与成果流转 |
+| [BRANCH_STRATEGY.md](BRANCH_STRATEGY.md) | 框架发布、项目分支、功能回灌、版本升级与提交压缩策略 |
 | [CONFIG_SCHEMA.md](CONFIG_SCHEMA.md) | 配置字段、类型、默认值及有效引用 |
 | [MIGRATIONS.md](MIGRATIONS.md) | 旧版内嵌成员配置升级说明 |
 | [roles/INDEX.md](roles/INDEX.md) | 岗位目录及定义 |
@@ -61,6 +62,12 @@
 | `scripts/` | 只读配置与本地链接检查 |
 
 公共规则分别以配置规范、会话协议和项目运行协议为唯一详细定义；入口与平台说明只做导航，岗位写专业职责，知识写工作方法。
+
+## 框架版本与项目分支
+
+稳定框架分支只保存公共框架内容，`v<version>` 标签标识不可变的框架发布版本；下一版本在 `opc-v<version>-dev` 集成，项目提出的公共功能先整理并进入框架演进线，再通过 rebase、cherry-pick 或 merge 按项目实际情况同步。具体分支类型、回灌边界、发布步骤及当前仓库收敛方向见 [Git 分支与框架发布策略](BRANCH_STRATEGY.md)。
+
+项目分支应只承载一个业务项目，并在项目资料中记录采用的框架版本和实际提交。项目中的试验实现、正文、配置、成果及 workspace 内容不能随公共功能整体合入稳定框架分支。
 
 ## 日常协作
 
