@@ -1,0 +1,141 @@
+{
+  "schemaVersion": 1,
+  "taskId": "T-042",
+  "artifactId": "A-038",
+  "artifactVersion": "0.1",
+  "decisionIds": ["D-012", "D-013", "D-015", "D-016"],
+  "result": "pass(personal-unsigned,current-TIGER,SAC-off,post-migration-workspace)",
+  "validationRunnerCommit": "24dd28e7c80ea85cb53558592d705f5dbb1c9645",
+  "evidenceScope": "Exact post-migration personal unsigned delivery on the current TIGER with SAC state 0; not SAC/WDAC, other-Windows, product-effect, public-distribution, or production-release evidence",
+  "host": {
+    "computerName": "TIGER",
+    "architecture": "AMD64",
+    "registryProductName": "Windows 10 Home China",
+    "displayVersion": "25H2",
+    "build": "26200.9457"
+  },
+  "package": {
+    "relativePath": "projects/space-rhythm/workspace/out/release/T-042/unsigned/space-rhythm-0.1.0-dev-t042-unsigned.zip",
+    "version": "0.1.0-dev-t042",
+    "packageKind": "unsigned-engineering",
+    "deliveryScope": "personal-unsigned",
+    "candidateEligible": false,
+    "sourceCommit": "24dd28e7c80ea85cb53558592d705f5dbb1c9645",
+    "sourceWorktreeClean": false,
+    "zipLength": 44740452,
+    "zipSha256": "52E0BED1C7342995591D5F33335EF059BB6204BDCA4386E98F2A1A5E133C56B4",
+    "runtimePeCount": 81,
+    "authenticode": {"notSigned": 78, "validMicrosoft": 3},
+    "appSha256": "2B72E6E18777477D2BDF35C5C972A869AC1A5BBC3A1C4B5B8BBD07BAB68182F4",
+    "workerSha256": "068097EC6CE611DB2A402BF417EE8D1B0580F9864B757C03C9408C33DB907A3F",
+    "matchesCurrentReleaseBuild": true,
+    "sacWdacCompatibilityClaim": "none"
+  },
+  "packagingDeterminism": {
+    "comparison": "same source commit, version, toolchain, and OutputRoot",
+    "runSha256": [
+      "52E0BED1C7342995591D5F33335EF059BB6204BDCA4386E98F2A1A5E133C56B4",
+      "52E0BED1C7342995591D5F33335EF059BB6204BDCA4386E98F2A1A5E133C56B4"
+    ],
+    "summarySha256": [
+      "F8F71822AF3A1EB1A9C4EF81953BAC129BFA6CD0DB3F991A91CB04A54794C895",
+      "F8F71822AF3A1EB1A9C4EF81953BAC129BFA6CD0DB3F991A91CB04A54794C895"
+    ],
+    "result": "pass"
+  },
+  "workspaceIsolation": {
+    "productWorkspaceRelativePath": "projects/space-rhythm/workspace",
+    "allProductBuildPackageAndEvidencePathsUnderWorkspace": true,
+    "cmakeHomeMatchesProductSourceRoot": true,
+    "legacyRepositoryRootProductEntriesPresent": [],
+    "oldRepositoryRootProductDependencyObserved": false,
+    "t041TestedCommit": "616307cfc50cb448915358bf1d2a5e6836346eba",
+    "productionAndWorkflowSourceDeltaAfterT041": []
+  },
+  "execution": {
+    "startedUtc": "2026-09-16T04:01:26.6010225Z",
+    "completedUtc": "2026-09-16T04:03:11.8959332Z",
+    "result": "pass",
+    "firstLaunch": {
+      "mode": "normal-integrated-gui",
+      "arguments": [],
+      "offscreen": false,
+      "aliveAfterMilliseconds": 3000,
+      "qmlRootAndEventLoopObserved": true,
+      "teardown": "harness-controlled process termination after bounded observation",
+      "controlledExitCode": -1
+    },
+    "appSmoke": {"exitCode": 0, "output": "SPACE_RHYTHM_APP_SMOKE_OK Qt=6.11.2 arch=x64"},
+    "workerSmoke": {"exitCode": 0, "output": "SPACE_RHYTHM_WORKER_SMOKE_OK Qt=6.11.2 arch=x64"},
+    "postRollbackAppSmoke": {"exitCode": 0, "output": "SPACE_RHYTHM_APP_SMOKE_OK Qt=6.11.2 arch=x64"},
+    "operations": [
+      "validate", "install", "normal-integrated-first-launch", "app-smoke", "worker-smoke",
+      "reject-unregistered-repair", "repair", "rollback", "validate-installed",
+      "post-rollback-app-smoke", "uninstall", "preserve-external-data"
+    ]
+  },
+  "coreWorkflow": {
+    "testFunction": "realImportAnalysisEditPreviewSaveAndExportPath",
+    "result": "pass",
+    "exitCode": 0,
+    "totals": {"passed": 3, "failed": 0, "skipped": 0, "durationMilliseconds": 906},
+    "t041TestedCommit": "616307cfc50cb448915358bf1d2a5e6836346eba",
+    "productionAndWorkflowSourceDeltaAfterT041": [],
+    "testHarnessOnlyQt6TestIncludedInPackage": false
+  },
+  "postconditions": {
+    "verifiedAndReputablePolicyState": 0,
+    "installRootExists": false,
+    "externalUserDataSentinelExists": true,
+    "auditInstalled": false,
+    "auditLastAction": "uninstall",
+    "auditBackupPath": ""
+  },
+  "policyObservation": {
+    "windowStartUtc": "2026-09-16T04:01:26.6010225Z",
+    "windowEndUtc": "2026-09-16T04:03:11.8959332Z",
+    "queries": [
+      {"log": "Microsoft-Windows-CodeIntegrity/Operational", "status": "queried", "matched": 0},
+      {"log": "Microsoft-Windows-AppLocker/EXE and DLL", "status": "queried", "matched": 0}
+    ],
+    "sacWdacCompatibilityValidated": false,
+    "interpretation": "SAC was off; successful execution and zero matched events do not establish SAC/WDAC compatibility."
+  },
+  "preservedDiagnostics": [],
+  "baselineDiagnosticsReference": "A-035 / T-038",
+  "rawEvidenceSha256": {
+    "workspace/out/evidence/T-042/packaging-first/unsigned-package-summary.json": "F8F71822AF3A1EB1A9C4EF81953BAC129BFA6CD0DB3F991A91CB04A54794C895",
+    "workspace/out/evidence/T-042/packaging-second/unsigned-package-summary.json": "F8F71822AF3A1EB1A9C4EF81953BAC129BFA6CD0DB3F991A91CB04A54794C895",
+    "workspace/out/evidence/T-042/final/result.json": "14DB8FADECB16CE9B6FEC54A9990DCD218692113E2BE3A4C82CCDF4EF0B86C51",
+    "workspace/out/evidence/T-042/final/core-workflow.qt.txt": "C0ED85DD49665AC5255A61E99E4E44FEEFEB9489F9DDBA4407D8FB54DC5D6E61",
+    "workspace/out/evidence/T-042/final/core-workflow.wrapper.log": "9887A4DD0473BCB19102449A2CFF71FCC7A4B64E7CB2F8959A5742523114664F",
+    "payload/manifest/build-inputs.json": "8ADF077DF1E32C92FCFF852952FEE38CFB1521E2F364856EA6EAF313EC3B661D",
+    "payload/manifest/runtime-files.sha256.csv": "D34E1A8D25B5627B018E4B75458C4A1694FC9461748F9A4081C40830F724A70B",
+    "payload/manifest/payload-files.sha256.csv": "85F8D5760A02689C9CF2F1EB5AB27952575DAB556E3228534090F29C5FB73880",
+    "manifest/bundle-files.sha256.csv": "D921E29D7DB9BF7ED15AC192B0F9CBC1D12577B4F9A0EAAAFF92F4C0A6CA68E5",
+    "payload/sbom/space-rhythm.spdx.json": "9B7BACDBC5BEF497E268C07B398D25F7E8A7B7ED9582A43A2A5303D7F0F1F06C"
+  },
+  "evaluationBoundary": {
+    "productEffectEvaluation": "not-evaluated(deferred-to-personal-use-feedback)",
+    "naturalnessEvaluation": "not-evaluated(deferred-to-personal-use-feedback)",
+    "realVfrEvaluation": "not-evaluated(deferred-to-personal-use-feedback)",
+    "formalProductPerformanceEvaluation": "not-evaluated(deferred-to-personal-use-feedback)",
+    "minimumWindowsCompatibility": "not-evaluated",
+    "formalH264AacContainerMatrix": "not-evaluated",
+    "publicDistributionApproved": false,
+    "productionReleaseApproved": false
+  },
+  "repositorySelfCheck": {
+    "frameworkValidation": "pass",
+    "roles": 17,
+    "knowledgeFiles": 24,
+    "projects": 1,
+    "projectTemplates": 1,
+    "localLinks": 769,
+    "unitTestsPassed": 37,
+    "unitTestsFailed": 0,
+    "t042BoundaryJson": "pass",
+    "releasePowerShellParse": "pass",
+    "gitDiffCheck": "pass"
+  }
+}

@@ -1,0 +1,7 @@
+schemaVersion: 1
+workspace:
+  driver: git
+  repository: git@github.com:yinzhongkai/space-rhythm.git
+  branch: main
+  revision: 58144c029091d8390e6e9616233c522c7423ec0e
+  checkout: ../space-rhythm
