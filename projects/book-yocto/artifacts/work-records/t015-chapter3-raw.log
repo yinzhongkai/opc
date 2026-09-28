@@ -1,0 +1,545 @@
+
+===== ENVIRONMENT =====
+2026-09-27T16:57:30+08:00
+tiger
+oops
+PRETTY_NAME=Ubuntu 24.04.4 LTS
+Linux 6.8.0-101-generic x86_64 GNU/Linux
+CPU_COUNT=8
+MemTotal:       32482028 kB
+Filesystem     1024-blocks     Used Available Capacity Mounted on
+/dev/nvme0n1p5   791992400 72163932 679523984      10% /home
+POKY_HEAD=77d1feb37e280733684ae8a9449fb031d5d7ff40
+POKY_DESCRIBE=yocto-5.0.20-82-g77d1feb37e
+POKY_STATUS_BEGIN
+POKY_STATUS_END
+35eb048d12216306217c2304563e9d2e481536e0652063824bd06f201cfe46b2  /home/oops/workspace/build/conf/bblayers.conf
+c4628c9a913df0cf0f3d2f891e0f34af3852664855e28700f42ca57e140f6d20  /home/oops/workspace/build/conf/local.conf
+META_TIGER_PREEXISTING=no
+
+===== OFFICIAL_LAYER_TOP_LEVELS =====
+-- meta-poky --
+README.poky.md
+classes
+conf
+recipes-core
+-- meta-yocto-bsp --
+README.hardware.md
+conf
+lib
+recipes-bsp
+recipes-graphics
+recipes-kernel
+wic
+-- meta --
+COPYING.MIT
+classes
+classes-global
+classes-recipe
+conf
+files
+lib
+recipes-bsp
+recipes-connectivity
+recipes-core
+recipes-devtools
+recipes-extended
+recipes-gnome
+recipes-graphics
+recipes-kernel
+recipes-multimedia
+recipes-rt
+recipes-sato
+recipes-support
+recipes.txt
+site
+
+===== OFFICIAL_LAYER_CONF =====
+-- meta-poky/conf/layer.conf --
+# We have a conf and classes directory, add to BBPATH
+BBPATH =. "${LAYERDIR}:"
+
+# We have recipes-* directories, add to BBFILES
+BBFILES += "${LAYERDIR}/recipes-*/*/*.bb \
+            ${LAYERDIR}/recipes-*/*/*.bbappend"
+
+BBFILE_COLLECTIONS += "yocto"
+BBFILE_PATTERN_yocto = "^${LAYERDIR}/"
+BBFILE_PRIORITY_yocto = "5"
+
+LAYERSERIES_COMPAT_yocto = "scarthgap"
+
+# This should only be incremented on significant changes that will
+# cause compatibility issues with other layers
+LAYERVERSION_yocto = "3"
+
+LAYERDEPENDS_yocto = "core"
+
+REQUIRED_POKY_BBLAYERS_CONF_VERSION = "2"
+-- meta-yocto-bsp/conf/layer.conf --
+# We have a conf and classes directory, add to BBPATH
+BBPATH .= ":${LAYERDIR}"
+
+# We have recipes-* directories, add to BBFILES
+BBFILES += "${LAYERDIR}/recipes-*/*/*.bb \
+            ${LAYERDIR}/recipes-*/*/*.bbappend"
+
+BBFILE_COLLECTIONS += "yoctobsp"
+BBFILE_PATTERN_yoctobsp = "^${LAYERDIR}/"
+BBFILE_PRIORITY_yoctobsp = "5"
+LAYERVERSION_yoctobsp = "4"
+LAYERSERIES_COMPAT_yoctobsp = "scarthgap"
+
+===== CREATE_LAYER_DIRECTORIES =====
+/home/oops/workspace/meta-tiger
+/home/oops/workspace/meta-tiger/conf
+/home/oops/workspace/meta-tiger/conf/distro
+/home/oops/workspace/meta-tiger/conf/distro/.gitkeep
+/home/oops/workspace/meta-tiger/conf/machine
+/home/oops/workspace/meta-tiger/conf/machine/.gitkeep
+/home/oops/workspace/meta-tiger/recipes-bsp
+/home/oops/workspace/meta-tiger/recipes-bsp/.gitkeep
+/home/oops/workspace/meta-tiger/recipes-core
+/home/oops/workspace/meta-tiger/recipes-core/.gitkeep
+/home/oops/workspace/meta-tiger/recipes-kernel
+/home/oops/workspace/meta-tiger/recipes-kernel/.gitkeep
+
+===== WRITE_LAYER_CONF =====
+# We have a conf and classes directory, add to BBPATH
+BBPATH .= ":${LAYERDIR}"
+
+# We have recipes-* directories, add to BBFILES
+BBFILES += "${LAYERDIR}/recipes-*/*/*.bb \
+            ${LAYERDIR}/recipes-*/*/*.bbappend"
+
+BBFILE_COLLECTIONS += "meta-tiger"
+BBFILE_PATTERN_meta-tiger = "^${LAYERDIR}/"
+BBFILE_PRIORITY_meta-tiger = "6"
+
+LAYERDEPENDS_meta-tiger = "core"
+LAYERSERIES_COMPAT_meta-tiger = "scarthgap"
+
+===== WRITE_DOCUMENTATION =====
+-- README --
+meta-tiger
+==========
+
+meta-tiger 是 tiger 开发板（ARM Cortex-A53）的 Yocto BSP layer，
+提供 MACHINE 配置、启动链集成（TF-A / U-Boot / linux-tiger）
+以及 tiger 专用的镜像配方与包组。
+
+当前状态：骨架阶段，仅包含 layer 配置与文档，配方将随后续开发逐步加入。
+
+Dependencies
+============
+
+- OE-Core（Poky 中的 meta 层），scarthgap 分支
+
+Adding the meta-tiger layer to your build
+=========================================
+
+在构建目录下执行：
+
+    bitbake-layers add-layer <path-to-meta-tiger>
+
+或将 meta-tiger 的绝对路径手动加入 build/conf/bblayers.conf 的 BBLAYERS。
+
+Patches
+=======
+
+提交补丁或问题反馈，请发送邮件至维护者邮箱，
+邮件主题请注明 [meta-tiger]。
+
+Maintainer
+==========
+
+阿凯 <kai@<your-company>.com>（职责分工详见 MAINTAINERS 文件）
+-- COPYING.MIT sha256 --
+211196f25e2ef4d6ab73698fe8e2d886b4de906fae84221a543bb4160810d918  /home/oops/workspace/meta-tiger/COPYING.MIT
+-- MAINTAINERS --
+meta-tiger 维护者名单
+=====================
+
+Maintainer: 阿凯 <kai@<your-company>.com>
+Reviewer:   达哥 <zhou@<your-company>.com>
+
+职责说明：
+- Maintainer 负责 layer 的日常开发与提交
+- Reviewer 负责变更审核，重大结构调整需 Reviewer 确认
+
+===== INITIALIZE_BUILD_ENVIRONMENT =====
+BitBake Build Tool Core version 2.8.1
+BUILDDIR=/home/oops/workspace/build
+
+===== ADD_LAYER =====
+NOTE: Starting bitbake server...
+-- bblayers.conf --
+# POKY_BBLAYERS_CONF_VERSION is increased each time build/conf/bblayers.conf
+# changes incompatibly
+POKY_BBLAYERS_CONF_VERSION = "2"
+
+BBPATH = "${TOPDIR}"
+BBFILES ?= ""
+
+BBLAYERS ?= " \
+  /home/oops/workspace/poky/meta \
+  /home/oops/workspace/poky/meta-poky \
+  /home/oops/workspace/poky/meta-yocto-bsp \
+  /home/oops/workspace/meta-tiger \
+  "
+-- show-layers --
+NOTE: Starting bitbake server...
+layer                 path                                                                    priority
+========================================================================================================
+core                  /home/oops/workspace/poky/meta                                          5
+yocto                 /home/oops/workspace/poky/meta-poky                                     5
+yoctobsp              /home/oops/workspace/poky/meta-yocto-bsp                                5
+meta-tiger            /home/oops/workspace/meta-tiger                                         6
+
+===== EMPTY_LAYER_SHOW_RECIPES_PIPELINE =====
+WARNING: No bb files in default matched BBFILE_PATTERN_meta-tiger '^/home/oops/workspace/meta-tiger/'
+EMPTY_SHOW_RECIPES_PIPELINE_RC=0
+
+===== EMPTY_LAYER_SHOW_RECIPES_EXACT =====
+NOTE: Starting bitbake server...
+Loading cache...done.
+Loaded 1878 entries from dependency cache.
+WARNING: No bb files in default matched BBFILE_PATTERN_meta-tiger '^/home/oops/workspace/meta-tiger/'
+
+Summary: There was 1 WARNING message.
+EMPTY_SHOW_RECIPES_EXACT_RC=0
+
+===== BUILD_CORE_IMAGE_MINIMAL =====
+Loading cache...done.
+Loaded 1878 entries from dependency cache.
+WARNING: No bb files in default matched BBFILE_PATTERN_meta-tiger '^/home/oops/workspace/meta-tiger/'
+NOTE: Resolving any missing task queue dependencies
+
+Build Configuration:
+BB_VERSION           = "2.8.1"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "aarch64-poky-linux"
+MACHINE              = "qemuarm64"
+DISTRO               = "poky"
+DISTRO_VERSION       = "5.0.20"
+TUNE_FEATURES        = "aarch64 crc cortexa57"
+TARGET_FPU           = ""
+meta                 
+meta-poky            
+meta-yocto-bsp       = "scarthgap:77d1feb37e280733684ae8a9449fb031d5d7ff40"
+meta-tiger           = "<unknown>:<unknown>"
+
+Initialising tasks...Sstate summary: Wanted 31 Local 31 Mirrors 0 Missed 0 Current 1824 (100% match, 100% complete)
+done.
+NOTE: Executing Tasks
+NOTE: Running setscene task 1825 of 1855 (virtual:native:/home/oops/workspace/poky/meta/recipes-graphics/mesa/mesa_24.0.7.bb:do_populate_lic_setscene)
+NOTE: Running setscene task 1826 of 1855 (/home/oops/workspace/poky/meta/recipes-core/udev/eudev_3.2.14.bb:do_create_runtime_spdx_setscene)
+NOTE: Running setscene task 1827 of 1855 (virtual:native:/home/oops/workspace/poky/meta/recipes-graphics/virglrenderer/virglrenderer_1.0.1.bb:do_populate_lic_setscene)
+NOTE: Running setscene task 1828 of 1855 (/home/oops/workspace/poky/meta/recipes-support/libseccomp/libseccomp_2.5.5.bb:do_create_runtime_spdx_setscene)
+NOTE: Running setscene task 1829 of 1855 (/home/oops/workspace/poky/meta/recipes-core/udev/eudev_3.2.14.bb:do_populate_lic_setscene)
+NOTE: Running setscene task 1831 of 1855 (virtual:native:/home/oops/workspace/poky/meta/recipes-graphics/virglrenderer/virglrenderer_1.0.1.bb:do_populate_sysroot_setscene)
+NOTE: Running setscene task 1832 of 1855 (/home/oops/workspace/poky/meta/recipes-support/libseccomp/libseccomp_2.5.5.bb:do_populate_sysroot_setscene)
+NOTE: Running setscene task 1833 of 1855 (/home/oops/workspace/poky/meta/recipes-support/libseccomp/libseccomp_2.5.5.bb:do_package_qa_setscene)
+NOTE: recipe eudev-3.2.14-r0: task do_create_runtime_spdx_setscene: Started
+NOTE: recipe eudev-3.2.14-r0: task do_populate_lic_setscene: Started
+NOTE: recipe libseccomp-2.5.5-r0: task do_create_runtime_spdx_setscene: Started
+NOTE: recipe libseccomp-2.5.5-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe libseccomp-2.5.5-r0: task do_package_qa_setscene: Started
+NOTE: recipe virglrenderer-native-1.0.1-r0: task do_populate_lic_setscene: Started
+NOTE: recipe virglrenderer-native-1.0.1-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe mesa-native-2_24.0.7-r0: task do_populate_lic_setscene: Started
+NOTE: recipe eudev-3.2.14-r0: task do_populate_lic_setscene: Succeeded
+NOTE: recipe eudev-3.2.14-r0: task do_create_runtime_spdx_setscene: Succeeded
+NOTE: Running setscene task 1834 of 1855 (/home/oops/workspace/poky/meta/recipes-core/udev/eudev_3.2.14.bb:do_package_write_rpm_setscene)
+NOTE: recipe libseccomp-2.5.5-r0: task do_create_runtime_spdx_setscene: Succeeded
+NOTE: recipe libseccomp-2.5.5-r0: task do_package_qa_setscene: Succeeded
+NOTE: recipe libseccomp-2.5.5-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 1835 of 1855 (/home/oops/workspace/poky/meta/recipes-core/udev/eudev_3.2.14.bb:do_package_qa_setscene)
+NOTE: Running setscene task 1836 of 1855 (/home/oops/workspace/poky/meta/recipes-support/libseccomp/libseccomp_2.5.5.bb:do_package_write_rpm_setscene)
+NOTE: Running setscene task 1837 of 1855 (virtual:native:/home/oops/workspace/poky/meta/recipes-graphics/libepoxy/libepoxy_1.5.10.bb:do_populate_lic_setscene)
+NOTE: recipe virglrenderer-native-1.0.1-r0: task do_populate_lic_setscene: Succeeded
+NOTE: recipe virglrenderer-native-1.0.1-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: recipe mesa-native-2_24.0.7-r0: task do_populate_lic_setscene: Succeeded
+NOTE: recipe eudev-3.2.14-r0: task do_package_write_rpm_setscene: Started
+NOTE: Running setscene task 1841 of 1855 (virtual:native:/home/oops/workspace/poky/meta/recipes-graphics/virglrenderer/virglrenderer_1.0.1.bb:do_recipe_qa_setscene)
+NOTE: Running setscene task 1842 of 1855 (virtual:native:/home/oops/workspace/poky/meta/recipes-graphics/libepoxy/libepoxy_1.5.10.bb:do_populate_sysroot_setscene)
+NOTE: recipe libepoxy-native-1.5.10-r0: task do_populate_lic_setscene: Started
+NOTE: recipe eudev-3.2.14-r0: task do_package_qa_setscene: Started
+NOTE: recipe libseccomp-2.5.5-r0: task do_package_write_rpm_setscene: Started
+NOTE: recipe libepoxy-native-1.5.10-r0: task do_populate_lic_setscene: Succeeded
+NOTE: recipe eudev-3.2.14-r0: task do_package_write_rpm_setscene: Succeeded
+NOTE: recipe eudev-3.2.14-r0: task do_package_qa_setscene: Succeeded
+NOTE: Running setscene task 1843 of 1855 (/home/oops/workspace/poky/meta/recipes-core/udev/eudev_3.2.14.bb:do_packagedata_setscene)
+NOTE: recipe libseccomp-2.5.5-r0: task do_package_write_rpm_setscene: Succeeded
+NOTE: Running setscene task 1844 of 1855 (/home/oops/workspace/poky/meta/recipes-support/libseccomp/libseccomp_2.5.5.bb:do_packagedata_setscene)
+NOTE: recipe virglrenderer-native-1.0.1-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe virglrenderer-native-1.0.1-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe libepoxy-native-1.5.10-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe eudev-3.2.14-r0: task do_packagedata_setscene: Started
+NOTE: recipe libseccomp-2.5.5-r0: task do_packagedata_setscene: Started
+NOTE: recipe libepoxy-native-1.5.10-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 1846 of 1855 (virtual:native:/home/oops/workspace/poky/meta/recipes-graphics/mesa/mesa_24.0.7.bb:do_populate_sysroot_setscene)
+NOTE: Running setscene task 1847 of 1855 (virtual:native:/home/oops/workspace/poky/meta/recipes-graphics/libepoxy/libepoxy_1.5.10.bb:do_recipe_qa_setscene)
+NOTE: recipe eudev-3.2.14-r0: task do_packagedata_setscene: Succeeded
+NOTE: Running setscene task 1850 of 1855 (/home/oops/workspace/poky/meta/recipes-core/udev/eudev_3.2.14.bb:do_recipe_qa_setscene)
+NOTE: recipe libseccomp-2.5.5-r0: task do_packagedata_setscene: Succeeded
+NOTE: Running setscene task 1853 of 1855 (/home/oops/workspace/poky/meta/recipes-support/libseccomp/libseccomp_2.5.5.bb:do_recipe_qa_setscene)
+NOTE: recipe eudev-3.2.14-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe mesa-native-2_24.0.7-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe eudev-3.2.14-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe libseccomp-2.5.5-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe libepoxy-native-1.5.10-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe mesa-native-2_24.0.7-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 1855 of 1855 (virtual:native:/home/oops/workspace/poky/meta/recipes-graphics/mesa/mesa_24.0.7.bb:do_recipe_qa_setscene)
+NOTE: recipe libepoxy-native-1.5.10-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe libseccomp-2.5.5-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe mesa-native-2_24.0.7-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe mesa-native-2_24.0.7-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: Tasks Summary: Attempted 4073 tasks of which 4073 didn't need to be rerun and all succeeded.
+
+Summary: There was 1 WARNING message.
+BUILD_RC=0
+
+===== YOCTO_CHECK_LAYER_BEFORE_GIT =====
+NOTE: Starting bitbake server...
+35eb048d12216306217c2304563e9d2e481536e0652063824bd06f201cfe46b2  /home/oops/workspace/build/conf/bblayers.conf
+INFO: Detected layers:
+INFO: meta-tiger: LayerType.SOFTWARE, /home/oops/workspace/meta-tiger
+INFO: 
+INFO: Setting up for meta-tiger(LayerType.SOFTWARE), /home/oops/workspace/meta-tiger
+INFO: Getting initial bitbake variables ...
+INFO: Getting initial signatures ...
+INFO: Adding layer meta-tiger
+INFO: Starting to analyze: meta-tiger
+INFO: ----------------------------------------------------------------------
+INFO: setUpClass (bsp.BSPCheckLayer)
+INFO:  ... skipped "BSPCheckLayer: Layer meta-tiger isn't BSP one."
+INFO: test_layerseries_compat (common.CommonCheckLayer.test_layerseries_compat)
+INFO:  ... ok
+INFO: test_parse (common.CommonCheckLayer.test_parse)
+INFO:  ... ok
+INFO: test_patches_upstream_status (common.CommonCheckLayer.test_patches_upstream_status)
+INFO:  ... unexpected success
+INFO: test_readme (common.CommonCheckLayer.test_readme)
+INFO:  ... ok
+INFO: test_show_environment (common.CommonCheckLayer.test_show_environment)
+INFO:  ... ok
+INFO: test_signatures (common.CommonCheckLayer.test_signatures)
+INFO:  ... ok
+INFO: test_world (common.CommonCheckLayer.test_world)
+INFO:  ... ok
+INFO: test_world_inherit_class (common.CommonCheckLayer.test_world_inherit_class)
+INFO:  ... ok
+INFO: setUpClass (distro.DistroCheckLayer)
+INFO:  ... skipped "DistroCheckLayer: Layer meta-tiger isn't Distro one."
+INFO: ======================================================================
+INFO: UNEXPECTED SUCCESS: test_patches_upstream_status (common.CommonCheckLayer.test_patches_upstream_status)
+INFO: ----------------------------------------------------------------------
+INFO: Ran 8 tests in 230.574s
+INFO: OK
+INFO:  (skipped=2, unexpected successes=1)
+INFO: 
+INFO: Summary of results:
+INFO: 
+INFO: meta-tiger ... PASS
+YOCTO_CHECK_LAYER_BEFORE_GIT_RC=0
+-- bblayers after check --
+# POKY_BBLAYERS_CONF_VERSION is increased each time build/conf/bblayers.conf
+# changes incompatibly
+POKY_BBLAYERS_CONF_VERSION = "2"
+
+BBPATH = "${TOPDIR}"
+BBFILES ?= ""
+
+BBLAYERS ?= " \
+  /home/oops/workspace/poky/meta \
+  /home/oops/workspace/poky/meta-poky \
+  /home/oops/workspace/poky/meta-yocto-bsp \
+  "
+NOTE: Starting bitbake server...
+
+===== INITIALIZE_GIT =====
+Initialized empty Git repository in /home/oops/workspace/meta-tiger/.git/
+On branch main
+
+No commits yet
+
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+	new file:   COPYING.MIT
+	new file:   MAINTAINERS
+	new file:   README
+	new file:   conf/distro/.gitkeep
+	new file:   conf/layer.conf
+	new file:   conf/machine/.gitkeep
+	new file:   recipes-bsp/.gitkeep
+	new file:   recipes-core/.gitkeep
+	new file:   recipes-kernel/.gitkeep
+
+[main (root-commit) 0e3da48] Initial meta-tiger layer skeleton
+ 9 files changed, 76 insertions(+)
+ create mode 100644 COPYING.MIT
+ create mode 100644 MAINTAINERS
+ create mode 100644 README
+ create mode 100644 conf/distro/.gitkeep
+ create mode 100644 conf/layer.conf
+ create mode 100644 conf/machine/.gitkeep
+ create mode 100644 recipes-bsp/.gitkeep
+ create mode 100644 recipes-core/.gitkeep
+ create mode 100644 recipes-kernel/.gitkeep
+0e3da48 Initial meta-tiger layer skeleton
+-- committed files --
+COPYING.MIT
+MAINTAINERS
+README
+conf/distro/.gitkeep
+conf/layer.conf
+conf/machine/.gitkeep
+recipes-bsp/.gitkeep
+recipes-core/.gitkeep
+recipes-kernel/.gitkeep
+
+===== LAYERSERIES_COMPAT_FAILURE =====
+NOTE: Starting bitbake server...
+35eb048d12216306217c2304563e9d2e481536e0652063824bd06f201cfe46b2  /home/oops/workspace/t015-chapter3-validation/bblayers.conf.before-bad-series
+LAYERSERIES_COMPAT_meta-tiger = "Scarthgap"
+NOTE: Starting bitbake server...
+ERROR: Layer meta-tiger is not compatible with the core layer which only supports these series: scarthgap (layer is compatible with Scarthgap)
+ERROR: Parse failure with the specified layer added, exiting.
+BAD_SERIES_ADD_RC=1
+35eb048d12216306217c2304563e9d2e481536e0652063824bd06f201cfe46b2  /home/oops/workspace/build/conf/bblayers.conf
+BAD_SERIES_BBLAYERS_AUTO_ROLLBACK=yes
+NOTE: Starting bitbake server...
+layer                 path                                                                    priority
+========================================================================================================
+core                  /home/oops/workspace/poky/meta                                          5
+yocto                 /home/oops/workspace/poky/meta-poky                                     5
+yoctobsp              /home/oops/workspace/poky/meta-yocto-bsp                                5
+BAD_SERIES_SHOW_LAYERS_RC=0
+NOTE: Starting bitbake server...
+NOTE: Starting bitbake server...
+layer                 path                                                                    priority
+========================================================================================================
+core                  /home/oops/workspace/poky/meta                                          5
+yocto                 /home/oops/workspace/poky/meta-poky                                     5
+yoctobsp              /home/oops/workspace/poky/meta-yocto-bsp                                5
+meta-tiger            /home/oops/workspace/meta-tiger                                         6
+
+===== RECIPE_WRONG_DEPTH =====
+NOTE: Starting bitbake server...
+Loading cache...done.
+Loaded 1878 entries from dependency cache.
+WARNING: No bb files in default matched BBFILE_PATTERN_meta-tiger '^/home/oops/workspace/meta-tiger/'
+
+Summary: There was 1 WARNING message.
+WRONG_DEPTH_SHOW_RECIPES_RC=0
+
+===== RECIPE_CORRECT_DEPTH =====
+NOTE: Starting bitbake server...
+Loading cache...done.
+Loaded 1878 entries from dependency cache.
+Parsing recipes...done.
+Parsing of 921 .bb files complete (920 cached, 1 parsed). 1879 targets, 58 skipped, 0 masked, 0 errors.
+=== Matching recipes: ===
+tiger-probe:
+  meta-tiger           0.1
+CORRECT_DEPTH_SHOW_RECIPES_RC=0
+
+===== PROBE_CLEANUP =====
+On branch main
+nothing to commit, working tree clean
+
+===== YOCTO_CHECK_LAYER_AFTER_GIT =====
+NOTE: Starting bitbake server...
+INFO: Detected layers:
+INFO: meta-tiger: LayerType.SOFTWARE, /home/oops/workspace/meta-tiger
+INFO: 
+INFO: Setting up for meta-tiger(LayerType.SOFTWARE), /home/oops/workspace/meta-tiger
+INFO: Getting initial bitbake variables ...
+INFO: Getting initial signatures ...
+INFO: Adding layer meta-tiger
+INFO: Starting to analyze: meta-tiger
+INFO: ----------------------------------------------------------------------
+INFO: setUpClass (bsp.BSPCheckLayer)
+INFO:  ... skipped "BSPCheckLayer: Layer meta-tiger isn't BSP one."
+INFO: test_layerseries_compat (common.CommonCheckLayer.test_layerseries_compat)
+INFO:  ... ok
+INFO: test_parse (common.CommonCheckLayer.test_parse)
+INFO:  ... ok
+INFO: test_patches_upstream_status (common.CommonCheckLayer.test_patches_upstream_status)
+INFO:  ... unexpected success
+INFO: test_readme (common.CommonCheckLayer.test_readme)
+INFO:  ... ok
+INFO: test_show_environment (common.CommonCheckLayer.test_show_environment)
+INFO:  ... ok
+INFO: test_signatures (common.CommonCheckLayer.test_signatures)
+INFO:  ... ok
+INFO: test_world (common.CommonCheckLayer.test_world)
+INFO:  ... ok
+INFO: test_world_inherit_class (common.CommonCheckLayer.test_world_inherit_class)
+INFO:  ... ok
+INFO: setUpClass (distro.DistroCheckLayer)
+INFO:  ... skipped "DistroCheckLayer: Layer meta-tiger isn't Distro one."
+INFO: ======================================================================
+INFO: UNEXPECTED SUCCESS: test_patches_upstream_status (common.CommonCheckLayer.test_patches_upstream_status)
+INFO: ----------------------------------------------------------------------
+INFO: Ran 8 tests in 156.500s
+INFO: OK
+INFO:  (skipped=2, unexpected successes=1)
+INFO: 
+INFO: Summary of results:
+INFO: 
+INFO: meta-tiger ... PASS
+YOCTO_CHECK_LAYER_AFTER_GIT_RC=0
+NOTE: Starting bitbake server...
+
+===== FINAL_STATE =====
+-- show-layers --
+NOTE: Starting bitbake server...
+layer                 path                                                                    priority
+========================================================================================================
+core                  /home/oops/workspace/poky/meta                                          5
+yocto                 /home/oops/workspace/poky/meta-poky                                     5
+yoctobsp              /home/oops/workspace/poky/meta-yocto-bsp                                5
+meta-tiger            /home/oops/workspace/meta-tiger                                         6
+-- bblayers.conf --
+# POKY_BBLAYERS_CONF_VERSION is increased each time build/conf/bblayers.conf
+# changes incompatibly
+POKY_BBLAYERS_CONF_VERSION = "2"
+
+BBPATH = "${TOPDIR}"
+BBFILES ?= ""
+
+BBLAYERS ?= " \
+  /home/oops/workspace/poky/meta \
+  /home/oops/workspace/poky/meta-poky \
+  /home/oops/workspace/poky/meta-yocto-bsp \
+  /home/oops/workspace/meta-tiger \
+  "
+-- hashes --
+33fb66dc05ed9803e4f5af150fb3642c42ad2bd8b1220428d39ab87320f99e86  /home/oops/workspace/build/conf/bblayers.conf
+c4628c9a913df0cf0f3d2f891e0f34af3852664855e28700f42ca57e140f6d20  /home/oops/workspace/build/conf/local.conf
+-- poky status --
+-- meta-tiger status --
+-- meta-tiger log --
+0e3da48 (HEAD -> main) Initial meta-tiger layer skeleton
+-- meta-tiger tree --
+/home/oops/workspace/meta-tiger
+/home/oops/workspace/meta-tiger/conf
+/home/oops/workspace/meta-tiger/conf/distro
+/home/oops/workspace/meta-tiger/conf/distro/.gitkeep
+/home/oops/workspace/meta-tiger/conf/layer.conf
+/home/oops/workspace/meta-tiger/conf/machine
+/home/oops/workspace/meta-tiger/conf/machine/.gitkeep
+/home/oops/workspace/meta-tiger/COPYING.MIT
+/home/oops/workspace/meta-tiger/MAINTAINERS
+/home/oops/workspace/meta-tiger/README
+/home/oops/workspace/meta-tiger/recipes-bsp
+/home/oops/workspace/meta-tiger/recipes-bsp/.gitkeep
+/home/oops/workspace/meta-tiger/recipes-core
+/home/oops/workspace/meta-tiger/recipes-core/.gitkeep
+/home/oops/workspace/meta-tiger/recipes-kernel
+/home/oops/workspace/meta-tiger/recipes-kernel/.gitkeep
+RESULTS build_rc=0 check_before_git_rc=0 bad_series_add_rc=1 wrong_depth_rc=0 correct_depth_rc=0 check_after_git_rc=0
+T015_REMOTE_RUN_COMPLETE=yes
