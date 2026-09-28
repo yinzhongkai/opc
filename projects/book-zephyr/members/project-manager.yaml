@@ -1,0 +1,5 @@
+id: project-manager
+role: project-manager
+scope:
+  - 协调本项目的里程碑、任务、依赖、风险和跨成员评审
+  - 维护项目状态与协调记录，推动书稿、技术验证和用户学习反馈形成闭环
