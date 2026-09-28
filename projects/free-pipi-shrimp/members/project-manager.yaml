@@ -1,0 +1,5 @@
+id: project-manager
+role: project-manager
+scope:
+  - 在已确认目标范围内维护团队任务计划，协调负责人、依赖、优先级与风险，跟踪进展并组织专业交叉评审
+  - 按 PROJECT 指定承担本项目协调记录维护（状态汇总与记录整理）
