@@ -1,0 +1,240 @@
+{
+  "schemaVersion": 4,
+  "taskId": "T-029",
+  "taskStatus": "blocked",
+  "recordedAt": "2026-09-15",
+  "source": {
+    "artifact": "A-031@0.5",
+    "artifactSha256": "7f139236d71155607aab4d8ea8c5790bd46e39879cfc21fb633a6a8bca71964f",
+    "productEvaluationInputVersion": "0.4.0",
+    "permissionDecision": "D-009",
+    "vfrDecision": "D-011",
+    "singleUserAcceptanceDecision": "D-014",
+    "handoffH017": "closed",
+    "usageBoundary": "internal_test_only",
+    "redistributable": false,
+    "legalRightsConclusion": false
+  },
+  "productRepresentativeDataset": {
+    "status": "structural_pass_human_reference_missing",
+    "manifestFile": "product-dataset-manifest-v2.json",
+    "manifestFileSha256": "2032a00762364e696066298b91534eb2157bedb2f1f2c19b407ba9f628dee68b",
+    "manifestContentSha256": "225e8eafbfaf1ee4624b682ba8700d34ee3e185803bdd775a129a7f027b51959",
+    "datasetVersion": "0.2.0",
+    "mediaRootToken": "out/evaluation/T-029/media",
+    "mediaIgnoredByGit": true,
+    "mediaBytesCommittedToGit": false,
+    "mediaSha256Recheck": {
+      "checked": 40,
+      "passed": 40,
+      "failed": 0
+    },
+    "structuralQuota": {
+      "status": "pass",
+      "clipCount": 40,
+      "partitions": {
+        "calibration": 4,
+        "tuning": 16,
+        "final_evaluation": 20
+      },
+      "categories": {
+        "dance": 10,
+        "game": 10,
+        "travel": 10,
+        "life": 10
+      }
+    },
+    "actualFrameRateModes": {
+      "cfr": 40,
+      "vfr": 0
+    },
+    "semanticSlices": {
+      "status": "not-evaluated",
+      "declaredExpectedCoverage": "pass",
+      "reason": "A-031@0.5 requires a frozen USER-01 single_user_reference; declared source labels are not human truth"
+    }
+  },
+  "vfrTechnicalDataset": {
+    "status": "missing_actual_original_media",
+    "actualClipCount": 0,
+    "actualFinalEvaluationClipCount": 0,
+    "actualDeviceOrSoftwareFamilies": 0,
+    "required": {
+      "minimumClipCount": 3,
+      "minimumFinalEvaluationClipCount": 1,
+      "minimumDeviceOrSoftwareFamilies": 2,
+      "partitions": {
+        "tuning": 2,
+        "final_evaluation": 1
+      }
+    },
+    "forbiddenSubstitutes": [
+      "bilibili_or_other_platform_transcode",
+      "artificial_frame_drop_or_duplication",
+      "timestamp_mutation_or_speed_change",
+      "T-028_synthetic_golden"
+    ],
+    "handoffH013": {
+      "closeConditionSatisfied": false,
+      "statusAfterVerification": "accepted"
+    },
+    "gate": "not-evaluated(reason=missing_actual_original_VFR_media)"
+  },
+  "user01Workflow": {
+    "acceptanceScope": "personal-single-user-acceptance",
+    "reviewerAnonymousId": "USER-01",
+    "workflowVersion": "0.1.0",
+    "tool": {
+      "path": "tests/evaluation/video/prepare_user01_workflow.py",
+      "sha256": "44b0d64f80835483f52d625db7a45c91fcf19550ea90010fc3918868f5d76095",
+      "capabilities": [
+        "prepare_reference_with_exact_source_PTS",
+        "freeze_and_validate_single_user_reference",
+        "randomize_blind_clip_and_A_B_order_with_hidden_answer_key",
+        "freeze_and_validate_blind_ratings",
+        "prepare_manual_correction_after_blind_freeze",
+        "freeze_and_validate_correction_logs"
+      ]
+    },
+    "localInterface": {
+      "indexSha256": "319a6cef591f8631930dc5c61a2115a8f1f5ab07c017613d6624f4fe018b022d",
+      "applicationSha256": "365d170db986978b3d2bbf4fbde6ccd92b0251e9139cc531f40795f59ddc349e",
+      "stylesSha256": "762724b4466dac4462301f2ac79468d528cb18374d0f9fb34568d6562fe93809",
+      "instructionsSha256": "72677ba4a0a4b0af6d238fe508a7a9f252fbb4818bc48d0af355bfbdc351c750",
+      "serverPath": "tests/evaluation/video/serve_user01_app.py",
+      "serverSha256": "868a3e180b127b179b4463d528b411f2e8f1cf5cab1df80e5e8acbf9c3d48b11",
+      "networkBoundary": "read_only_loopback_only_UI_and_out_evaluation_T-029_user01",
+      "unrelatedRepositoryPathProbe": "404",
+      "videoRangeProbe": "206_bytes_0_1023_of_12263137"
+    },
+    "referenceAuthoring": {
+      "status": "session_and_previews_ready_waiting_for_USER-01",
+      "sessionLocationToken": "out/evaluation/T-029/user01/reference-session-v1.json",
+      "sessionFileSha256": "d46e7b21019642bec22c84f68e74736785e0ca11b28d973bf8bff03fd14fa024",
+      "sessionDefinitionSha256": "2c9e91c26dc0facfe537f3b08225706237fbd0a1adff1f349aae6bf2fe8b76bb",
+      "clipCount": 40,
+      "finalEvaluationClipCount": 20,
+      "browserPreviewCount": 40,
+      "browserPreviewTotalBytes": 1663606349,
+      "previewMediaCommittedToGit": false,
+      "sourceMediaSha256Recheck": "pass_40_of_40",
+      "sourceFrameTimesSha256Recheck": "pass_40_of_40",
+      "previewToSourceFrameMapping": {
+        "status": "pass_40_of_40",
+        "method": "presentation_order_ordinal",
+        "frameCountPreserved": true,
+        "maximumPreviewTimestampQuantizationNs": 20449000,
+        "savedAnnotationTimeDomain": "source_true_timeNs_not_preview_currentTime"
+      },
+      "actualSubmission": "missing",
+      "singleUserReferenceSha256": null
+    },
+    "blindRating": {
+      "toolingStatus": "ready",
+      "sessionStatus": "locked",
+      "reason": "single_user_reference, frozen classic result, paired renders, and fixed review environment are missing",
+      "actualValidFinalRatings": 0,
+      "answerKeyCreated": false
+    },
+    "manualCorrection": {
+      "toolingStatus": "ready",
+      "sessionStatus": "locked",
+      "reason": "the matching valid blind trial must be frozen before classic event sources are exposed",
+      "actualCorrectionRecords": 0
+    },
+    "independentReview": "not_applicable(reason=single_user_scope)",
+    "independentAdjudication": "not_applicable(reason=single_user_scope)",
+    "interReviewerAgreement": "unavailable(reason=single_reviewer_scope)"
+  },
+  "tigerT028ReleaseBaseline": {
+    "status": "measured",
+    "scope": "native_host_readiness_only_not_T-029_formal_P_gate",
+    "envelopeFile": "windows-release-baseline-v1.json",
+    "envelopeFileSha256": "79b65628523787de6c743f6aeb3b80d94e600442e91e9f32ba5dae6e1a91f252",
+    "runnerPath": "tests/evaluation/video/Invoke-T029WindowsReleaseBaseline.ps1",
+    "runnerSha256": "ade1a71f13b2eff7061d33491bdddad86c8bcf22ef807cb6066cb440ba522bac",
+    "rawFile": "t028-release-windows-measurement-v1.json",
+    "rawFileSha256": "a19e33d407a619774e4ee270ce77a14c60fea0caf081ccfca3193cb789dd4b5f",
+    "benchmarkPeSha256": "0fc8b1c56687ca76d184a2fd00e7176495a90dfd631320c9a2bb92b9276a0782",
+    "environment": {
+      "benchmarkId": "TIGER",
+      "nativeWindows": true,
+      "activeOverlayAcPowerScheme": "ded574b5-45a0-4f42-8737-46345c09c238",
+      "bestPerformanceOverlay": "pass",
+      "verifiedAndReputablePolicyState": 0,
+      "opencvThreads": 8,
+      "ffmpegDecoderThreads": 2
+    },
+    "validSequence": {
+      "warmupRuns": 1,
+      "measuredRuns": 5,
+      "cancellationRuns": 5,
+      "priorInvalidWrapperAttempts": 4
+    },
+    "durationUsSamples": [201162, 186496, 175500, 174688, 176782],
+    "durationUsMedian": 176782,
+    "durationUsP95": 201162,
+    "analyzedFramesPerSecondSamples": [447, 482, 512, 515, 509],
+    "analyzedFramesPerSecondMedian": 509,
+    "cancellationLatencyUsSamples": [1467, 2004, 1582, 2557, 2189],
+    "cancellationLatencyUsP95": 2557,
+    "analyzerEstimatedPeakWorkingBytes": 359960,
+    "processPeakWorkingSetBytesPolled": 26431488,
+    "processPeakPrivateBytesPolled": 21512192,
+    "processPeakThreadCountPolled": 8,
+    "nativeVideoAnalysisTests": "pass_8_of_8",
+    "formalThresholdEvaluation": "not-evaluated(reason=T-028 synthetic 160x90 2.967s fixture is not the confirmed product/VFR 60s/180s scenario matrix)"
+  },
+  "sequenceGuard": {
+    "referenceAuthoringMayStart": true,
+    "singleUserReferenceHashPresent": false,
+    "formalClassicMayStart": false,
+    "formalClassicStarted": false,
+    "blindRatingMayStart": false,
+    "manualCorrectionMayStart": false,
+    "t028ReleaseHostReadinessRunAuthorized": true,
+    "t028ReleaseHostReadinessRunCompleted": true,
+    "t029FormalPerformanceStarted": false,
+    "reason": "the user authorized the T-028 Release host-readiness run, but A-031@0.5 still requires a frozen USER-01 reference before formal classic; real VFR is also missing"
+  },
+  "handoffs": {
+    "H-013": {
+      "status": "accepted",
+      "closeConditionSatisfied": false,
+      "reason": "actual original VFR quota is 0 of 3"
+    },
+    "H-014": {
+      "status": "open",
+      "windowsReleaseSubcondition": "measured",
+      "user01EvidenceSubcondition": "missing"
+    },
+    "H-017": {
+      "status": "closed",
+      "closeConditionSatisfied": true
+    }
+  },
+  "gates": {
+    "sourceWindows": "pass",
+    "structuralQuota": "pass",
+    "semanticSliceQuota": "not-evaluated",
+    "productEffect": "not-evaluated",
+    "manualCorrection": "not-evaluated",
+    "naturalness": "not-evaluated",
+    "vfrRobustness": "not-evaluated",
+    "t029FormalPerformance": "not-evaluated",
+    "overall": "not-evaluated",
+    "modelEligibility": "not-evaluated"
+  },
+  "model": {
+    "modelEvaluationStarted": false,
+    "modelProposalCreated": false,
+    "onnxIntroduced": false
+  },
+  "nextActions": [
+    "USER-01 completes the prepared 40-clip reference-authoring interface and exports the unmodified submission JSON",
+    "freeze and hash the single_user_reference, then run classic and create hidden randomized blind pairs",
+    "freeze one valid USER-01 blind rating per final clip before opening the corresponding manual-correction session",
+    "H-013 obtains at least three actual original VFR files including at least one final_evaluation clip from at least two device or software families",
+    "run the confirmed native Windows product and VFR formal performance matrix only after its required inputs are frozen; do not mark overall pass while any mandatory gate is unavailable"
+  ]
+}

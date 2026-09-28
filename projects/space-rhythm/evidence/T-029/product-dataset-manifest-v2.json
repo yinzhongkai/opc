@@ -1,0 +1,3280 @@
+{
+  "schemaVersion": 1,
+  "datasetVersion": "0.2.0",
+  "productEvaluationInputVersion": "0.2.0",
+  "sourceArtifact": "A-031@0.3",
+  "sourceArtifactSha256": "4f703ac8b9d6a2e83f0157a9840c431436c619bccd0f3e8656cc628b1efd9d88",
+  "permissionDecision": "D-009",
+  "sourceSelectionDecisions": [
+    "D-009",
+    "D-010"
+  ],
+  "acquisitionTool": {
+    "script": "tests/evaluation/video/acquire_product_evaluation_media.py",
+    "ytDlpVersion": "2026.08.19",
+    "pyAvVersion": "18.1.0",
+    "ffmpegLibraries": {
+      "libavutil": [
+        60,
+        26,
+        102
+      ],
+      "libavcodec": [
+        62,
+        28,
+        102
+      ],
+      "libavformat": [
+        62,
+        12,
+        102
+      ],
+      "libavdevice": [
+        62,
+        3,
+        102
+      ],
+      "libavfilter": [
+        11,
+        14,
+        102
+      ],
+      "libswscale": [
+        9,
+        5,
+        102
+      ],
+      "libswresample": [
+        6,
+        3,
+        102
+      ]
+    },
+    "proxyCodec": "mpeg4",
+    "proxyPixelFormat": "yuv420p",
+    "audioIncluded": false
+  },
+  "mediaRootToken": "out/evaluation/T-029/media",
+  "mediaBytesCommittedToGit": false,
+  "mode": "acquire_proxy_media",
+  "declaredQuotaValidation": {
+    "status": "declared_coverage_ok",
+    "partitionCounts": {
+      "calibration": 4,
+      "tuning": 16,
+      "final_evaluation": 20
+    },
+    "categoryCounts": {
+      "旅行/风景混剪": 10,
+      "游戏/动作高光": 10,
+      "生活 Vlog/长镜头": 10,
+      "舞蹈/运动": 10
+    },
+    "declaredExpectedCoverageCounts": {
+      "ambiguous_action": {
+        "all": 7,
+        "final_evaluation": 3
+      },
+      "fast_cut": {
+        "all": 11,
+        "final_evaluation": 5
+      },
+      "flash_or_exposure_change": {
+        "all": 4,
+        "final_evaluation": 2
+      },
+      "global_camera_motion": {
+        "all": 11,
+        "final_evaluation": 6
+      },
+      "impact": {
+        "all": 7,
+        "final_evaluation": 4
+      },
+      "local_subject_motion": {
+        "all": 8,
+        "final_evaluation": 4
+      },
+      "long_take_or_no_cut": {
+        "all": 11,
+        "final_evaluation": 5
+      },
+      "low_quality_compression": {
+        "all": 4,
+        "final_evaluation": 2
+      },
+      "mixed_global_local": {
+        "all": 8,
+        "final_evaluation": 3
+      },
+      "motion_blur_or_occlusion": {
+        "all": 4,
+        "final_evaluation": 3
+      },
+      "near_static": {
+        "all": 6,
+        "final_evaluation": 2
+      },
+      "repetitive_motion": {
+        "all": 7,
+        "final_evaluation": 3
+      },
+      "reversal": {
+        "all": 4,
+        "final_evaluation": 2
+      },
+      "slow_cut_or_transition": {
+        "all": 8,
+        "final_evaluation": 3
+      },
+      "slow_motion": {
+        "all": 4,
+        "final_evaluation": 4
+      },
+      "sparse_free_rhythm": {
+        "all": 6,
+        "final_evaluation": 3
+      },
+      "stop": {
+        "all": 4,
+        "final_evaluation": 3
+      },
+      "tempo_or_energy_change": {
+        "all": 7,
+        "final_evaluation": 4
+      },
+      "vfr": {
+        "all": 3,
+        "final_evaluation": 1
+      }
+    },
+    "declaredExpectedCoverageShortfalls": {},
+    "probeOrHumanDerivedSlicesNotJudgedHere": [
+      "cfr",
+      "vfr"
+    ]
+  },
+  "requestedClipCount": 40,
+  "auditedClipCount": 0,
+  "acquiredClipCount": 40,
+  "failedClipCount": 0,
+  "clips": [
+    {
+      "clipId": "SR-BILI-DANCE-001",
+      "datasetPartition": "calibration",
+      "productCategory": "舞蹈/运动",
+      "contentCategoriesExpectedPendingHumanReview": [
+        "fast_cut",
+        "local_subject_motion",
+        "repetitive_motion"
+      ],
+      "source": {
+        "provider": "bilibili_public_page",
+        "bvid": "BV1oq4y1E7co",
+        "pageUrl": "https://www.bilibili.com/video/BV1oq4y1E7co/",
+        "pageLabel": "BV1oq4y1E7co",
+        "title": "【舞蹈混剪】每个延伸都是朝着梦想的方向",
+        "uploader": "安渡ANDU",
+        "uploaderId": "401111334",
+        "uploadDate": "20210428",
+        "sourceDurationSeconds": 182.368,
+        "selectedFormatId": "30064",
+        "selectedFormatCodec": "avc1.640028",
+        "selectedFormatWidth": 1280,
+        "selectedFormatHeight": 720,
+        "selectedFormatFps": 29.412
+      },
+      "sourceWindow": {
+        "requestedStartNs": 15000000000,
+        "requestedEndNs": 60000000000
+      },
+      "sourceSelectionDecision": "D-009",
+      "readOnlyLocationToken": "t029-media/SR-BILI-DANCE-001.mkv",
+      "sourceAndUsagePermission": {
+        "scope": "space-rhythm-internal-test-only",
+        "confirmedBy": "project-default-final-confirmer",
+        "decisionId": "D-009",
+        "confirmationDate": "2026-09-14",
+        "legalConclusion": false,
+        "redistributable": false
+      },
+      "privacyAndDistribution": {
+        "containsPeople": "pending_human_review",
+        "sensitiveContent": "pending_human_review",
+        "publicEvidenceMayContainMediaBytes": false
+      },
+      "mediaSha256": "3b4a4d92a528ea8278c25383de6b2e7bc7dfa75476416fd609d3013ad6cf572e",
+      "byteLength": 18442223,
+      "selectedSourceTiming": {
+        "status": "not_redecoded_reused_proxy",
+        "timeDomain": "unavailable",
+        "proxyNormalization": "existing proxy retained and independently re-probed"
+      },
+      "ptsPreservationCheck": {
+        "status": "not-evaluated",
+        "reason": "selected source stream was not re-decoded for this reused proxy"
+      },
+      "probe": {
+        "codecName": "mpeg4",
+        "pixelFormat": "yuv420p",
+        "width": 1280,
+        "height": 720,
+        "timeBase": "1/1000",
+        "averageFrameRate": "9375/313",
+        "frameRateMode": "cfr",
+        "frameCount": 1348,
+        "firstFrameTimeNs": 0,
+        "lastFrameTimeNs": 44972000000,
+        "durationNs": 45005000000,
+        "medianFrameDeltaNs": 33000000,
+        "deviatingDeltaCount": 0,
+        "frameTimesSha256": "dbd2a959bcfb5f39b60b493d5ff5f8487ea07c1fb5eb937149581a7fb5bf7d72",
+        "probeDigestSha256": "bf209878466a03a9614c0aba7d9d769462e70f6d409920eb8d6b5a66694a17cb"
+      }
+    },
+    {
+      "clipId": "SR-BILI-DANCE-002",
+      "datasetPartition": "tuning",
+      "productCategory": "舞蹈/运动",
+      "contentCategoriesExpectedPendingHumanReview": [
+        "fast_cut",
+        "flash_or_exposure_change",
+        "mixed_global_local"
+      ],
+      "source": {
+        "provider": "bilibili_public_page",
+        "bvid": "BV1nE411f7NK",
+        "pageUrl": "https://www.bilibili.com/video/BV1nE411f7NK/",
+        "pageLabel": "BV1nE411f7NK",
+        "title": "史上最强solo一键换装！神仙剪辑无人能敌！Jennie换装特效两开花颠覆你的感官！",
+        "uploader": "Wink眨宝momo",
+        "uploaderId": "25592782",
+        "uploadDate": "20191009",
+        "sourceDurationSeconds": 168.276,
+        "selectedFormatId": "30064",
+        "selectedFormatCodec": "avc1.640028",
+        "selectedFormatWidth": 1280,
+        "selectedFormatHeight": 720,
+        "selectedFormatFps": 29.97
+      },
+      "sourceWindow": {
+        "requestedStartNs": 15000000000,
+        "requestedEndNs": 60000000000
+      },
+      "sourceSelectionDecision": "D-009",
+      "readOnlyLocationToken": "t029-media/SR-BILI-DANCE-002.mkv",
+      "sourceAndUsagePermission": {
+        "scope": "space-rhythm-internal-test-only",
+        "confirmedBy": "project-default-final-confirmer",
+        "decisionId": "D-009",
+        "confirmationDate": "2026-09-14",
+        "legalConclusion": false,
+        "redistributable": false
+      },
+      "privacyAndDistribution": {
+        "containsPeople": "pending_human_review",
+        "sensitiveContent": "pending_human_review",
+        "publicEvidenceMayContainMediaBytes": false
+      },
+      "mediaSha256": "bddfbe2b47330556e3f77ff6859e8e372681450f9789535bf5552fed6a44aeeb",
+      "byteLength": 33637451,
+      "selectedSourceTiming": {
+        "status": "not_redecoded_reused_proxy",
+        "timeDomain": "unavailable",
+        "proxyNormalization": "existing proxy retained and independently re-probed"
+      },
+      "ptsPreservationCheck": {
+        "status": "not-evaluated",
+        "reason": "selected source stream was not re-decoded for this reused proxy"
+      },
+      "probe": {
+        "codecName": "mpeg4",
+        "pixelFormat": "yuv420p",
+        "width": 1280,
+        "height": 720,
+        "timeBase": "1/1000",
+        "averageFrameRate": "30000/1001",
+        "frameRateMode": "cfr",
+        "frameCount": 1349,
+        "firstFrameTimeNs": 0,
+        "lastFrameTimeNs": 44978000000,
+        "durationNs": 45011000000,
+        "medianFrameDeltaNs": 33000000,
+        "deviatingDeltaCount": 0,
+        "frameTimesSha256": "f9cbb018b4244debccde815f5dcc6f4a09a620cb45b08f2a349b4e89d7161053",
+        "probeDigestSha256": "88343552142cad02bdf39804383ec2da5e650e59ff0edd78a118aacca902179a"
+      }
+    },
+    {
+      "clipId": "SR-BILI-DANCE-003",
+      "datasetPartition": "final_evaluation",
+      "productCategory": "舞蹈/运动",
+      "contentCategoriesExpectedPendingHumanReview": [
+        "fast_cut",
+        "impact",
+        "tempo_or_energy_change"
+      ],
+      "source": {
+        "provider": "bilibili_public_page",
+        "bvid": "BV1AE411e7Tb",
+        "pageUrl": "https://www.bilibili.com/video/BV1AE411e7Tb/",
+        "pageLabel": "BV1AE411e7Tb",
+        "title": "【王一博超S狼系混剪 | Animals】野性难驯  烈火燎原 | 疯狂踩点  | 不看后悔系列 |  舞蹈杂志广告综艺混剪",
+        "uploader": "挽豆荚",
+        "uploaderId": "17251282",
+        "uploadDate": "20191111",
+        "sourceDurationSeconds": 231.68,
+        "selectedFormatId": "30064",
+        "selectedFormatCodec": "avc1.640028",
+        "selectedFormatWidth": 1280,
+        "selectedFormatHeight": 720,
+        "selectedFormatFps": 25.0
+      },
+      "sourceWindow": {
+        "requestedStartNs": 15000000000,
+        "requestedEndNs": 60000000000
+      },
+      "sourceSelectionDecision": "D-009",
+      "readOnlyLocationToken": "t029-media/SR-BILI-DANCE-003.mkv",
+      "sourceAndUsagePermission": {
+        "scope": "space-rhythm-internal-test-only",
+        "confirmedBy": "project-default-final-confirmer",
+        "decisionId": "D-009",
+        "confirmationDate": "2026-09-14",
+        "legalConclusion": false,
+        "redistributable": false
+      },
+      "privacyAndDistribution": {
+        "containsPeople": "pending_human_review",
+        "sensitiveContent": "pending_human_review",
+        "publicEvidenceMayContainMediaBytes": false
+      },
+      "mediaSha256": "d5f95208732d434e28ebc6c0ce760bb273b565846d8a9a5e35c4899ddb286df4",
+      "byteLength": 25687094,
+      "selectedSourceTiming": {
+        "status": "not_redecoded_reused_proxy",
+        "timeDomain": "unavailable",
+        "proxyNormalization": "existing proxy retained and independently re-probed"
+      },
+      "ptsPreservationCheck": {
+        "status": "not-evaluated",
+        "reason": "selected source stream was not re-decoded for this reused proxy"
+      },
+      "probe": {
+        "codecName": "mpeg4",
+        "pixelFormat": "yuv420p",
+        "width": 1280,
+        "height": 720,
+        "timeBase": "1/1000",
+        "averageFrameRate": "25",
+        "frameRateMode": "cfr",
+        "frameCount": 1125,
+        "firstFrameTimeNs": 0,
+        "lastFrameTimeNs": 44960000000,
+        "durationNs": 45000000000,
+        "medianFrameDeltaNs": 40000000,
+        "deviatingDeltaCount": 0,
+        "frameTimesSha256": "591f2d15ff50b0f799204e5c16ee6a59dc44575dc7b21e77ee3618ca07110bb4",
+        "probeDigestSha256": "2e8f70979ba90cde8630afdab9fc3139c8f294b624a86ad4b58e3a7206f9f865"
+      }
+    },
+    {
+      "clipId": "SR-BILI-DANCE-004",
+      "datasetPartition": "tuning",
+      "productCategory": "舞蹈/运动",
+      "contentCategoriesExpectedPendingHumanReview": [
+        "local_subject_motion",
+        "repetitive_motion",
+        "ambiguous_action"
+      ],
+      "source": {
+        "provider": "bilibili_public_page",
+        "bvid": "BV1E8VBzWEDv",
+        "pageUrl": "https://www.bilibili.com/video/BV1E8VBzWEDv/",
+        "pageLabel": "BV1E8VBzWEDv",
+        "title": "他很乖｜谁懂他跳双人舞的下位感啊",
+        "uploader": "-万里睽违-",
+        "uploaderId": "274732083",
+        "uploadDate": "20250505",
+        "sourceDurationSeconds": 102.678,
+        "selectedFormatId": "30064",
+        "selectedFormatCodec": "avc1.640028",
+        "selectedFormatWidth": 1152,
+        "selectedFormatHeight": 720,
+        "selectedFormatFps": 30.0
+      },
+      "sourceWindow": {
+        "requestedStartNs": 15000000000,
+        "requestedEndNs": 60000000000
+      },
+      "sourceSelectionDecision": "D-009",
+      "readOnlyLocationToken": "t029-media/SR-BILI-DANCE-004.mkv",
+      "sourceAndUsagePermission": {
+        "scope": "space-rhythm-internal-test-only",
+        "confirmedBy": "project-default-final-confirmer",
+        "decisionId": "D-009",
+        "confirmationDate": "2026-09-14",
+        "legalConclusion": false,
+        "redistributable": false
+      },
+      "privacyAndDistribution": {
+        "containsPeople": "pending_human_review",
+        "sensitiveContent": "pending_human_review",
+        "publicEvidenceMayContainMediaBytes": false
+      },
+      "mediaSha256": "940c491595ef960e0173b405aef724716d3c878597fcd85eda900c0859f238b7",
+      "byteLength": 33812692,
+      "selectedSourceTiming": {
+        "status": "not_redecoded_reused_proxy",
+        "timeDomain": "unavailable",
+        "proxyNormalization": "existing proxy retained and independently re-probed"
+      },
+      "ptsPreservationCheck": {
+        "status": "not-evaluated",
+        "reason": "selected source stream was not re-decoded for this reused proxy"
+      },
+      "probe": {
+        "codecName": "mpeg4",
+        "pixelFormat": "yuv420p",
+        "width": 1152,
+        "height": 720,
+        "timeBase": "1/1000",
+        "averageFrameRate": "30",
+        "frameRateMode": "cfr",
+        "frameCount": 1350,
+        "firstFrameTimeNs": 0,
+        "lastFrameTimeNs": 44967000000,
+        "durationNs": 45000000000,
+        "medianFrameDeltaNs": 33000000,
+        "deviatingDeltaCount": 0,
+        "frameTimesSha256": "3700de6fe999526da64636b4a0f852e1745486aa203239fd5618ff37ae5b4d66",
+        "probeDigestSha256": "8c4602569291403728df57c0b147337e2679d769ae5035783dc271696bba6c43"
+      }
+    },
+    {
+      "clipId": "SR-BILI-DANCE-005",
+      "datasetPartition": "final_evaluation",
+      "productCategory": "舞蹈/运动",
+      "contentCategoriesExpectedPendingHumanReview": [
+        "fast_cut",
+        "impact",
+        "flash_or_exposure_change"
+      ],
+      "source": {
+        "provider": "bilibili_public_page",
+        "bvid": "BV1RE41197xT",
+        "pageUrl": "https://www.bilibili.com/video/BV1RE41197xT/",
+        "pageLabel": "BV1RE41197xT",
+        "title": "【易烊千玺】【踩点】【高燃】慎点！！舞台舞蹈混剪  新粉大型入坑现场 前方高能【believer】提神醒脑 四字弟弟十九岁生日快乐",
+        "uploader": "蘭若生春夏",
+        "uploaderId": "364434986",
+        "uploadDate": "20190928",
+        "sourceDurationSeconds": 215.463,
+        "selectedFormatId": "30064",
+        "selectedFormatCodec": "avc1.64001F",
+        "selectedFormatWidth": 1280,
+        "selectedFormatHeight": 720,
+        "selectedFormatFps": 25.0
+      },
+      "sourceWindow": {
+        "requestedStartNs": 15000000000,
+        "requestedEndNs": 60000000000
+      },
+      "sourceSelectionDecision": "D-009",
+      "readOnlyLocationToken": "t029-media/SR-BILI-DANCE-005.mkv",
+      "sourceAndUsagePermission": {
+        "scope": "space-rhythm-internal-test-only",
+        "confirmedBy": "project-default-final-confirmer",
+        "decisionId": "D-009",
+        "confirmationDate": "2026-09-14",
+        "legalConclusion": false,
+        "redistributable": false
+      },
+      "privacyAndDistribution": {
+        "containsPeople": "pending_human_review",
+        "sensitiveContent": "pending_human_review",
+        "publicEvidenceMayContainMediaBytes": false
+      },
+      "mediaSha256": "f121800a73315935eb2ce515064aec1a3b0baa3f74cf57dcb38801916e2fb5f7",
+      "byteLength": 33829244,
+      "selectedSourceTiming": {
+        "status": "not_redecoded_reused_proxy",
+        "timeDomain": "unavailable",
+        "proxyNormalization": "existing proxy retained and independently re-probed"
+      },
+      "ptsPreservationCheck": {
+        "status": "not-evaluated",
+        "reason": "selected source stream was not re-decoded for this reused proxy"
+      },
+      "probe": {
+        "codecName": "mpeg4",
+        "pixelFormat": "yuv420p",
+        "width": 1280,
+        "height": 720,
+        "timeBase": "1/1000",
+        "averageFrameRate": "25",
+        "frameRateMode": "cfr",
+        "frameCount": 1125,
+        "firstFrameTimeNs": 0,
+        "lastFrameTimeNs": 44960000000,
+        "durationNs": 45000000000,
+        "medianFrameDeltaNs": 40000000,
+        "deviatingDeltaCount": 0,
+        "frameTimesSha256": "591f2d15ff50b0f799204e5c16ee6a59dc44575dc7b21e77ee3618ca07110bb4",
+        "probeDigestSha256": "2e8f70979ba90cde8630afdab9fc3139c8f294b624a86ad4b58e3a7206f9f865"
+      }
+    },
+    {
+      "clipId": "SR-BILI-DANCE-006",
+      "datasetPartition": "tuning",
+      "productCategory": "舞蹈/运动",
+      "contentCategoriesExpectedPendingHumanReview": [
+        "slow_cut_or_transition",
+        "mixed_global_local",
+        "stop"
+      ],
+      "source": {
+        "provider": "bilibili_public_page",
+        "bvid": "BV1qxYd6BEZo",
+        "pageUrl": "https://www.bilibili.com/video/BV1qxYd6BEZo/",
+        "pageLabel": "BV1qxYd6BEZo",
+        "title": "长征主题舞蹈开幕式，剪辑自用",
+        "uploader": "活不了一点ab",
+        "uploaderId": "1433686352",
+        "uploadDate": "20260912",
+        "sourceDurationSeconds": 97.852,
+        "selectedFormatId": "30064",
+        "selectedFormatCodec": "avc1.640028",
+        "selectedFormatWidth": 1280,
+        "selectedFormatHeight": 720,
+        "selectedFormatFps": 27.0
+      },
+      "sourceWindow": {
+        "requestedStartNs": 15000000000,
+        "requestedEndNs": 60000000000
+      },
+      "sourceSelectionDecision": "D-009",
+      "readOnlyLocationToken": "t029-media/SR-BILI-DANCE-006.mkv",
+      "sourceAndUsagePermission": {
+        "scope": "space-rhythm-internal-test-only",
+        "confirmedBy": "project-default-final-confirmer",
+        "decisionId": "D-009",
+        "confirmationDate": "2026-09-14",
+        "legalConclusion": false,
+        "redistributable": false
+      },
+      "privacyAndDistribution": {
+        "containsPeople": "pending_human_review",
+        "sensitiveContent": "pending_human_review",
+        "publicEvidenceMayContainMediaBytes": false
+      },
+      "mediaSha256": "4d8823fd96802574b38b68b26c2d2814024366bb3fd0216a184e68ad997a6351",
+      "byteLength": 31136845,
+      "selectedSourceTiming": {
+        "status": "not_redecoded_reused_proxy",
+        "timeDomain": "unavailable",
+        "proxyNormalization": "existing proxy retained and independently re-probed"
+      },
+      "ptsPreservationCheck": {
+        "status": "not-evaluated",
+        "reason": "selected source stream was not re-decoded for this reused proxy"
+      },
+      "probe": {
+        "codecName": "mpeg4",
+        "pixelFormat": "yuv420p",
+        "width": 1280,
+        "height": 720,
+        "timeBase": "1/1000",
+        "averageFrameRate": "27",
+        "frameRateMode": "cfr",
+        "frameCount": 1216,
+        "firstFrameTimeNs": 0,
+        "lastFrameTimeNs": 45000000000,
+        "durationNs": 45037000000,
+        "medianFrameDeltaNs": 37000000,
+        "deviatingDeltaCount": 0,
+        "frameTimesSha256": "df6b53917d4df9bff8f769369a8580a5c0ba3cc8c927e7d47626736677ebb51b",
+        "probeDigestSha256": "378a5a58c6bb32254615022038679bb955807b6b584262a441667ecf2ee86191"
+      }
+    },
+    {
+      "clipId": "SR-BILI-DANCE-007",
+      "datasetPartition": "final_evaluation",
+      "productCategory": "舞蹈/运动",
+      "contentCategoriesExpectedPendingHumanReview": [
+        "slow_motion",
+        "local_subject_motion",
+        "motion_blur_or_occlusion"
+      ],
+      "source": {
+        "provider": "bilibili_public_page",
+        "bvid": "BV1NwY76rEMH",
+        "pageUrl": "https://www.bilibili.com/video/BV1NwY76rEMH/",
+        "pageLabel": "BV1NwY76rEMH",
+        "title": "【左奇函】适合不适合 2look 4K直拍混剪 ｜皮衣 vs 卫衣",
+        "uploader": "25号底片丨左奇函",
+        "uploaderId": "3690992930654891",
+        "uploadDate": "20260911",
+        "sourceDurationSeconds": 183.3,
+        "selectedFormatId": "30064",
+        "selectedFormatCodec": "avc1.640028",
+        "selectedFormatWidth": 1280,
+        "selectedFormatHeight": 720,
+        "selectedFormatFps": 30.0
+      },
+      "sourceWindow": {
+        "requestedStartNs": 15000000000,
+        "requestedEndNs": 60000000000
+      },
+      "sourceSelectionDecision": "D-009",
+      "readOnlyLocationToken": "t029-media/SR-BILI-DANCE-007.mkv",
+      "sourceAndUsagePermission": {
+        "scope": "space-rhythm-internal-test-only",
+        "confirmedBy": "project-default-final-confirmer",
+        "decisionId": "D-009",
+        "confirmationDate": "2026-09-14",
+        "legalConclusion": false,
+        "redistributable": false
+      },
+      "privacyAndDistribution": {
+        "containsPeople": "pending_human_review",
+        "sensitiveContent": "pending_human_review",
+        "publicEvidenceMayContainMediaBytes": false
+      },
+      "mediaSha256": "d3c24b675e64c2aa37ca387f6419fc3c6abe36ce498b76ccd684ac24059eade3",
+      "byteLength": 33782251,
+      "selectedSourceTiming": {
+        "status": "not_redecoded_reused_proxy",
+        "timeDomain": "unavailable",
+        "proxyNormalization": "existing proxy retained and independently re-probed"
+      },
+      "ptsPreservationCheck": {
+        "status": "not-evaluated",
+        "reason": "selected source stream was not re-decoded for this reused proxy"
+      },
+      "probe": {
+        "codecName": "mpeg4",
+        "pixelFormat": "yuv420p",
+        "width": 1280,
+        "height": 720,
+        "timeBase": "1/1000",
+        "averageFrameRate": "30",
+        "frameRateMode": "cfr",
+        "frameCount": 1350,
+        "firstFrameTimeNs": 0,
+        "lastFrameTimeNs": 44967000000,
+        "durationNs": 45000000000,
+        "medianFrameDeltaNs": 33000000,
+        "deviatingDeltaCount": 0,
+        "frameTimesSha256": "3700de6fe999526da64636b4a0f852e1745486aa203239fd5618ff37ae5b4d66",
+        "probeDigestSha256": "9ae065cf60afdffe343ee36720c60aef634cd8adeac9f7fd80479d4d6a6e42c0"
+      }
+    },
+    {
+      "clipId": "SR-BILI-DANCE-008",
+      "datasetPartition": "tuning",
+      "productCategory": "舞蹈/运动",
+      "contentCategoriesExpectedPendingHumanReview": [
+        "impact",
+        "reversal",
+        "tempo_or_energy_change"
+      ],
+      "source": {
+        "provider": "bilibili_public_page",
+        "bvid": "BV17aYU6HEdh",
+        "pageUrl": "https://www.bilibili.com/video/BV17aYU6HEdh/",
+        "pageLabel": "BV17aYU6HEdh",
+        "title": "起手惊风，落地为赢 吾穿林响【唐诗逸|穿林响】舞蹈混剪-迟来的生贺2",
+        "uploader": "金铃舞楼兰",
+        "uploaderId": "23040559",
+        "uploadDate": "20260912",
+        "sourceDurationSeconds": 163.143,
+        "selectedFormatId": "30064",
+        "selectedFormatCodec": "avc1.640028",
+        "selectedFormatWidth": 1280,
+        "selectedFormatHeight": 720,
+        "selectedFormatFps": 30.0
+      },
+      "sourceWindow": {
+        "requestedStartNs": 15000000000,
+        "requestedEndNs": 60000000000
+      },
+      "sourceSelectionDecision": "D-009",
+      "readOnlyLocationToken": "t029-media/SR-BILI-DANCE-008.mkv",
+      "sourceAndUsagePermission": {
+        "scope": "space-rhythm-internal-test-only",
+        "confirmedBy": "project-default-final-confirmer",
+        "decisionId": "D-009",
+        "confirmationDate": "2026-09-14",
+        "legalConclusion": false,
+        "redistributable": false
+      },
+      "privacyAndDistribution": {
+        "containsPeople": "pending_human_review",
+        "sensitiveContent": "pending_human_review",
+        "publicEvidenceMayContainMediaBytes": false
+      },
+      "mediaSha256": "7edbced5d4721fbbd6a329cf0f8da91f22e9444921a99f66bfc9d86e8c01442e",
+      "byteLength": 33588281,
+      "selectedSourceTiming": {
+        "status": "not_redecoded_reused_proxy",
+        "timeDomain": "unavailable",
+        "proxyNormalization": "existing proxy retained and independently re-probed"
+      },
+      "ptsPreservationCheck": {
+        "status": "not-evaluated",
+        "reason": "selected source stream was not re-decoded for this reused proxy"
+      },
+      "probe": {
+        "codecName": "mpeg4",
+        "pixelFormat": "yuv420p",
+        "width": 1280,
+        "height": 720,
+        "timeBase": "1/1000",
+        "averageFrameRate": "30",
+        "frameRateMode": "cfr",
+        "frameCount": 1350,
+        "firstFrameTimeNs": 0,
+        "lastFrameTimeNs": 44967000000,
+        "durationNs": 45000000000,
+        "medianFrameDeltaNs": 33000000,
+        "deviatingDeltaCount": 0,
+        "frameTimesSha256": "3700de6fe999526da64636b4a0f852e1745486aa203239fd5618ff37ae5b4d66",
+        "probeDigestSha256": "9ae065cf60afdffe343ee36720c60aef634cd8adeac9f7fd80479d4d6a6e42c0"
+      }
+    },
+    {
+      "clipId": "SR-BILI-DANCE-009",
+      "datasetPartition": "final_evaluation",
+      "productCategory": "舞蹈/运动",
+      "contentCategoriesExpectedPendingHumanReview": [
+        "slow_cut_or_transition",
+        "motion_blur_or_occlusion",
+        "mixed_global_local"
+      ],
+      "source": {
+        "provider": "bilibili_public_page",
+        "bvid": "BV12Y4y147Ld",
+        "pageUrl": "https://www.bilibili.com/video/BV12Y4y147Ld/",
+        "pageLabel": "BV12Y4y147Ld",
+        "title": "“你是不食烟火的仙瑶”——国家队舞蹈混剪",
+        "uploader": "未名之名",
+        "uploaderId": "18271384",
+        "uploadDate": "20220512",
+        "sourceDurationSeconds": 216.27,
+        "selectedFormatId": "30064",
+        "selectedFormatCodec": "avc1.640028",
+        "selectedFormatWidth": 1280,
+        "selectedFormatHeight": 720,
+        "selectedFormatFps": 25.0
+      },
+      "sourceWindow": {
+        "requestedStartNs": 15000000000,
+        "requestedEndNs": 60000000000
+      },
+      "sourceSelectionDecision": "D-009",
+      "readOnlyLocationToken": "t029-media/SR-BILI-DANCE-009.mkv",
+      "sourceAndUsagePermission": {
+        "scope": "space-rhythm-internal-test-only",
+        "confirmedBy": "project-default-final-confirmer",
+        "decisionId": "D-009",
+        "confirmationDate": "2026-09-14",
+        "legalConclusion": false,
+        "redistributable": false
+      },
+      "privacyAndDistribution": {
+        "containsPeople": "pending_human_review",
+        "sensitiveContent": "pending_human_review",
+        "publicEvidenceMayContainMediaBytes": false
+      },
+      "mediaSha256": "21e8d7d24c3ab6f2a1b67d1ee415b706fe0b3d4117290c9b08a2c6521733ce96",
+      "byteLength": 32108526,
+      "selectedSourceTiming": {
+        "status": "not_redecoded_reused_proxy",
+        "timeDomain": "unavailable",
+        "proxyNormalization": "existing proxy retained and independently re-probed"
+      },
+      "ptsPreservationCheck": {
+        "status": "not-evaluated",
+        "reason": "selected source stream was not re-decoded for this reused proxy"
+      },
+      "probe": {
+        "codecName": "mpeg4",
+        "pixelFormat": "yuv420p",
+        "width": 1280,
+        "height": 720,
+        "timeBase": "1/1000",
+        "averageFrameRate": "25",
+        "frameRateMode": "cfr",
+        "frameCount": 1125,
+        "firstFrameTimeNs": 0,
+        "lastFrameTimeNs": 44960000000,
+        "durationNs": 45000000000,
+        "medianFrameDeltaNs": 40000000,
+        "deviatingDeltaCount": 0,
+        "frameTimesSha256": "591f2d15ff50b0f799204e5c16ee6a59dc44575dc7b21e77ee3618ca07110bb4",
+        "probeDigestSha256": "2e8f70979ba90cde8630afdab9fc3139c8f294b624a86ad4b58e3a7206f9f865"
+      }
+    },
+    {
+      "clipId": "SR-BILI-DANCE-010",
+      "datasetPartition": "final_evaluation",
+      "productCategory": "舞蹈/运动",
+      "contentCategoriesExpectedPendingHumanReview": [
+        "repetitive_motion",
+        "reversal",
+        "sparse_free_rhythm"
+      ],
+      "source": {
+        "provider": "bilibili_public_page",
+        "bvid": "BV1aT411R77K",
+        "pageUrl": "https://www.bilibili.com/video/BV1aT411R77K/",
+        "pageLabel": "BV1aT411R77K",
+        "title": "长袖善舞［ 水袖舞］ / 混剪",
+        "uploader": "至美不过鲸落",
+        "uploaderId": "1765068177",
+        "uploadDate": "20230211",
+        "sourceDurationSeconds": 72.142,
+        "selectedFormatId": "30064",
+        "selectedFormatCodec": "avc1.640028",
+        "selectedFormatWidth": 1280,
+        "selectedFormatHeight": 720,
+        "selectedFormatFps": 29.412
+      },
+      "sourceWindow": {
+        "requestedStartNs": 10000000000,
+        "requestedEndNs": 55000000000
+      },
+      "sourceSelectionDecision": "D-009",
+      "readOnlyLocationToken": "t029-media/SR-BILI-DANCE-010.mkv",
+      "sourceAndUsagePermission": {
+        "scope": "space-rhythm-internal-test-only",
+        "confirmedBy": "project-default-final-confirmer",
+        "decisionId": "D-009",
+        "confirmationDate": "2026-09-14",
+        "legalConclusion": false,
+        "redistributable": false
+      },
+      "privacyAndDistribution": {
+        "containsPeople": "pending_human_review",
+        "sensitiveContent": "pending_human_review",
+        "publicEvidenceMayContainMediaBytes": false
+      },
+      "mediaSha256": "0cef415cb35a07a0e7f976cfcc11e53cc60dd7df0e22f4685d0f9420e4761486",
+      "byteLength": 33717148,
+      "selectedSourceTiming": {
+        "status": "not_redecoded_reused_proxy",
+        "timeDomain": "unavailable",
+        "proxyNormalization": "existing proxy retained and independently re-probed"
+      },
+      "ptsPreservationCheck": {
+        "status": "not-evaluated",
+        "reason": "selected source stream was not re-decoded for this reused proxy"
+      },
+      "probe": {
+        "codecName": "mpeg4",
+        "pixelFormat": "yuv420p",
+        "width": 1280,
+        "height": 720,
+        "timeBase": "1/1000",
+        "averageFrameRate": "30",
+        "frameRateMode": "cfr",
+        "frameCount": 1350,
+        "firstFrameTimeNs": 0,
+        "lastFrameTimeNs": 44967000000,
+        "durationNs": 45000000000,
+        "medianFrameDeltaNs": 33000000,
+        "deviatingDeltaCount": 0,
+        "frameTimesSha256": "3700de6fe999526da64636b4a0f852e1745486aa203239fd5618ff37ae5b4d66",
+        "probeDigestSha256": "9ae065cf60afdffe343ee36720c60aef634cd8adeac9f7fd80479d4d6a6e42c0"
+      }
+    },
+    {
+      "clipId": "SR-BILI-GAME-001",
+      "datasetPartition": "calibration",
+      "productCategory": "游戏/动作高光",
+      "contentCategoriesExpectedPendingHumanReview": [
+        "fast_cut",
+        "impact",
+        "mixed_global_local"
+      ],
+      "source": {
+        "provider": "bilibili_public_page",
+        "bvid": "BV1bGYE6XEoF",
+        "pageUrl": "https://www.bilibili.com/video/BV1bGYE6XEoF/",
+        "pageLabel": "BV1bGYE6XEoF",
+        "title": "【原神xFire】全程高能！原神战斗高光时刻极限混剪",
+        "uploader": "CambridgeOX",
+        "uploaderId": "1481790328",
+        "uploadDate": "20260911",
+        "sourceDurationSeconds": 226.51,
+        "selectedFormatId": "30064",
+        "selectedFormatCodec": "avc1.640028",
+        "selectedFormatWidth": 1280,
+        "selectedFormatHeight": 720,
+        "selectedFormatFps": 30.0
+      },
+      "sourceWindow": {
+        "requestedStartNs": 15000000000,
+        "requestedEndNs": 60000000000
+      },
+      "sourceSelectionDecision": "D-009",
+      "readOnlyLocationToken": "t029-media/SR-BILI-GAME-001.mkv",
+      "sourceAndUsagePermission": {
+        "scope": "space-rhythm-internal-test-only",
+        "confirmedBy": "project-default-final-confirmer",
+        "decisionId": "D-009",
+        "confirmationDate": "2026-09-14",
+        "legalConclusion": false,
+        "redistributable": false
+      },
+      "privacyAndDistribution": {
+        "containsPeople": "pending_human_review",
+        "sensitiveContent": "pending_human_review",
+        "publicEvidenceMayContainMediaBytes": false
+      },
+      "mediaSha256": "eca4f57327bea94107b77c84e75bb8ec1143f71aea07121ff81abb29948ec1cc",
+      "byteLength": 33755910,
+      "selectedSourceTiming": {
+        "status": "not_redecoded_reused_proxy",
+        "timeDomain": "unavailable",
+        "proxyNormalization": "existing proxy retained and independently re-probed"
+      },
+      "ptsPreservationCheck": {
+        "status": "not-evaluated",
+        "reason": "selected source stream was not re-decoded for this reused proxy"
+      },
+      "probe": {
+        "codecName": "mpeg4",
+        "pixelFormat": "yuv420p",
+        "width": 1280,
+        "height": 720,
+        "timeBase": "1/1000",
+        "averageFrameRate": "30",
+        "frameRateMode": "cfr",
+        "frameCount": 1350,
+        "firstFrameTimeNs": 0,
+        "lastFrameTimeNs": 44967000000,
+        "durationNs": 45000000000,
+        "medianFrameDeltaNs": 33000000,
+        "deviatingDeltaCount": 0,
+        "frameTimesSha256": "3700de6fe999526da64636b4a0f852e1745486aa203239fd5618ff37ae5b4d66",
+        "probeDigestSha256": "9ae065cf60afdffe343ee36720c60aef634cd8adeac9f7fd80479d4d6a6e42c0"
+      }
+    },
+    {
+      "clipId": "SR-BILI-GAME-002",
+      "datasetPartition": "tuning",
+      "productCategory": "游戏/动作高光",
+      "contentCategoriesExpectedPendingHumanReview": [
+        "fast_cut",
+        "impact",
+        "flash_or_exposure_change"
+      ],
+      "source": {
+        "provider": "bilibili_public_page",
+        "bvid": "BV17BT2zbEND",
+        "pageUrl": "https://www.bilibili.com/video/BV17BT2zbEND/",
+        "pageLabel": "BV17BT2zbEND",
+        "title": "带你感受⚡【三角洲极致高光超燃混剪】⚡",
+        "uploader": "GuardianLXY",
+        "uploaderId": "5828291",
+        "uploadDate": "20250607",
+        "sourceDurationSeconds": 148.455,
+        "selectedFormatId": "30064",
+        "selectedFormatCodec": "avc1.640028",
+        "selectedFormatWidth": 1280,
+        "selectedFormatHeight": 720,
+        "selectedFormatFps": 30.0
+      },
+      "sourceWindow": {
+        "requestedStartNs": 15000000000,
+        "requestedEndNs": 60000000000
+      },
+      "sourceSelectionDecision": "D-009",
+      "readOnlyLocationToken": "t029-media/SR-BILI-GAME-002.mkv",
+      "sourceAndUsagePermission": {
+        "scope": "space-rhythm-internal-test-only",
+        "confirmedBy": "project-default-final-confirmer",
+        "decisionId": "D-009",
+        "confirmationDate": "2026-09-14",
+        "legalConclusion": false,
+        "redistributable": false
+      },
+      "privacyAndDistribution": {
+        "containsPeople": "pending_human_review",
+        "sensitiveContent": "pending_human_review",
+        "publicEvidenceMayContainMediaBytes": false
+      },
+      "mediaSha256": "6fad225c97f46310f9a08cac1206fdbf9f66b2e6ac56ea9dcd9088a2ddcd2ee6",
+      "byteLength": 33776798,
+      "selectedSourceTiming": {
+        "status": "not_redecoded_reused_proxy",
+        "timeDomain": "unavailable",
+        "proxyNormalization": "existing proxy retained and independently re-probed"
+      },
+      "ptsPreservationCheck": {
+        "status": "not-evaluated",
+        "reason": "selected source stream was not re-decoded for this reused proxy"
+      },
+      "probe": {
+        "codecName": "mpeg4",
+        "pixelFormat": "yuv420p",
+        "width": 1280,
+        "height": 720,
+        "timeBase": "1/1000",
+        "averageFrameRate": "30",
+        "frameRateMode": "cfr",
+        "frameCount": 1350,
+        "firstFrameTimeNs": 0,
+        "lastFrameTimeNs": 44967000000,
+        "durationNs": 45000000000,
+        "medianFrameDeltaNs": 33000000,
+        "deviatingDeltaCount": 0,
+        "frameTimesSha256": "3700de6fe999526da64636b4a0f852e1745486aa203239fd5618ff37ae5b4d66",
+        "probeDigestSha256": "9ae065cf60afdffe343ee36720c60aef634cd8adeac9f7fd80479d4d6a6e42c0"
+      }
+    },
+    {
+      "clipId": "SR-BILI-GAME-003",
+      "datasetPartition": "final_evaluation",
+      "productCategory": "游戏/动作高光",
+      "contentCategoriesExpectedPendingHumanReview": [
+        "fast_cut",
+        "slow_motion",
+        "tempo_or_energy_change"
+      ],
+      "source": {
+        "provider": "bilibili_public_page",
+        "bvid": "BV14v4y1p7Ki",
+        "pageUrl": "https://www.bilibili.com/video/BV14v4y1p7Ki/",
+        "pageLabel": "BV14v4y1p7Ki",
+        "title": "[1080P60FPS]独属于qiqi的混剪时刻,感受独属于他的高光时刻,",
+        "uploader": "暮咲Master",
+        "uploaderId": "503893388",
+        "uploadDate": "20230404",
+        "sourceDurationSeconds": 224.954,
+        "selectedFormatId": "30064",
+        "selectedFormatCodec": "avc1.640028",
+        "selectedFormatWidth": 1280,
+        "selectedFormatHeight": 720,
+        "selectedFormatFps": 29.412
+      },
+      "sourceWindow": {
+        "requestedStartNs": 15000000000,
+        "requestedEndNs": 60000000000
+      },
+      "sourceSelectionDecision": "D-009",
+      "readOnlyLocationToken": "t029-media/SR-BILI-GAME-003.mkv",
+      "sourceAndUsagePermission": {
+        "scope": "space-rhythm-internal-test-only",
+        "confirmedBy": "project-default-final-confirmer",
+        "decisionId": "D-009",
+        "confirmationDate": "2026-09-14",
+        "legalConclusion": false,
+        "redistributable": false
+      },
+      "privacyAndDistribution": {
+        "containsPeople": "pending_human_review",
+        "sensitiveContent": "pending_human_review",
+        "publicEvidenceMayContainMediaBytes": false
+      },
+      "mediaSha256": "bcbc9b1705242838c3a5ded71da2349f5dfc7de0762828cc8c8910a2a7f98f48",
+      "byteLength": 33793613,
+      "selectedSourceTiming": {
+        "status": "not_redecoded_reused_proxy",
+        "timeDomain": "unavailable",
+        "proxyNormalization": "existing proxy retained and independently re-probed"
+      },
+      "ptsPreservationCheck": {
+        "status": "not-evaluated",
+        "reason": "selected source stream was not re-decoded for this reused proxy"
+      },
+      "probe": {
+        "codecName": "mpeg4",
+        "pixelFormat": "yuv420p",
+        "width": 1280,
+        "height": 720,
+        "timeBase": "1/1000",
+        "averageFrameRate": "30",
+        "frameRateMode": "cfr",
+        "frameCount": 1350,
+        "firstFrameTimeNs": 0,
+        "lastFrameTimeNs": 44967000000,
+        "durationNs": 45000000000,
+        "medianFrameDeltaNs": 33000000,
+        "deviatingDeltaCount": 0,
+        "frameTimesSha256": "3700de6fe999526da64636b4a0f852e1745486aa203239fd5618ff37ae5b4d66",
+        "probeDigestSha256": "9ae065cf60afdffe343ee36720c60aef634cd8adeac9f7fd80479d4d6a6e42c0"
+      }
+    },
+    {
+      "clipId": "SR-BILI-GAME-004",
+      "datasetPartition": "tuning",
+      "productCategory": "游戏/动作高光",
+      "contentCategoriesExpectedPendingHumanReview": [
+        "long_take_or_no_cut",
+        "global_camera_motion",
+        "low_quality_compression",
+        "vfr"
+      ],
+      "source": {
+        "provider": "bilibili_public_page",
+        "bvid": "BV1jeYq6nEC4",
+        "pageUrl": "https://www.bilibili.com/video/BV1jeYq6nEC4/",
+        "pageLabel": "BV1jeYq6nEC4",
+        "title": "异环云移动端赛车跨区长线2号1:55.218  个人极限成绩 牢手机录屏太卡了",
+        "uploader": "时雨故喵offiichhh",
+        "uploaderId": "3546653197863113",
+        "uploadDate": "20260913",
+        "sourceDurationSeconds": 134.966,
+        "selectedFormatId": "30064",
+        "selectedFormatCodec": "avc1.640033",
+        "selectedFormatWidth": 1280,
+        "selectedFormatHeight": 576,
+        "selectedFormatFps": 30.0
+      },
+      "sourceWindow": {
+        "requestedStartNs": 15000000000,
+        "requestedEndNs": 60000000000
+      },
+      "sourceSelectionDecision": "D-010",
+      "readOnlyLocationToken": "t029-media/SR-BILI-GAME-004.mkv",
+      "sourceAndUsagePermission": {
+        "scope": "space-rhythm-internal-test-only",
+        "confirmedBy": "project-default-final-confirmer",
+        "decisionId": "D-009",
+        "confirmationDate": "2026-09-14",
+        "legalConclusion": false,
+        "redistributable": false
+      },
+      "privacyAndDistribution": {
+        "containsPeople": "pending_human_review",
+        "sensitiveContent": "pending_human_review",
+        "publicEvidenceMayContainMediaBytes": false
+      },
+      "mediaSha256": "c17ab74fb81d90ddef30fa4d64cb1185aadb1ec060965394b0449e0cbf2c12ca",
+      "byteLength": 33778460,
+      "selectedSourceTiming": {
+        "frameRateMode": "cfr",
+        "frameCount": 1350,
+        "firstFrameTimeNs": 15000000000,
+        "lastFrameTimeNs": 59966687500,
+        "durationNs": 45000000000,
+        "medianFrameDeltaNs": 33312500,
+        "deviatingDeltaCount": 0,
+        "frameTimesSha256": "a0c5e50e84ca5482894b3492d07f1755e133cb74f82c60a94a6cc22a4031a7c8",
+        "status": "decoded_selected_platform_stream",
+        "timeDomain": "source_stream_absolute_timeNs",
+        "proxyNormalization": "first selected source frame maps to proxy timeNs 0",
+        "probeDigestSha256": "b5e276215bca86267af8ea0ce8cc6b9c97ce3ac990acd9d533ce84f47f53bb36"
+      },
+      "ptsPreservationCheck": {
+        "status": "pass",
+        "frameCountMatch": true,
+        "frameRateModeMatch": true,
+        "durationErrorNs": 0,
+        "medianFrameDeltaErrorNs": 312500,
+        "timingErrorToleranceNs": 1000000
+      },
+      "probe": {
+        "codecName": "mpeg4",
+        "pixelFormat": "yuv420p",
+        "width": 1280,
+        "height": 576,
+        "timeBase": "1/1000",
+        "averageFrameRate": "30",
+        "frameRateMode": "cfr",
+        "frameCount": 1350,
+        "firstFrameTimeNs": 0,
+        "lastFrameTimeNs": 44967000000,
+        "durationNs": 45000000000,
+        "medianFrameDeltaNs": 33000000,
+        "deviatingDeltaCount": 0,
+        "frameTimesSha256": "3700de6fe999526da64636b4a0f852e1745486aa203239fd5618ff37ae5b4d66",
+        "probeDigestSha256": "af80c29a6c2fa669aebddda9c985bb48a4a776919fd520472922ca9f33fc3406"
+      }
+    },
+    {
+      "clipId": "SR-BILI-GAME-005",
+      "datasetPartition": "final_evaluation",
+      "productCategory": "游戏/动作高光",
+      "contentCategoriesExpectedPendingHumanReview": [
+        "fast_cut",
+        "stop",
+        "reversal"
+      ],
+      "source": {
+        "provider": "bilibili_public_page",
+        "bvid": "BV1z4411K7Jx",
+        "pageUrl": "https://www.bilibili.com/video/BV1z4411K7Jx/",
+        "pageLabel": "BV1z4411K7Jx",
+        "title": "前方高能！！！感受这场视觉盛宴吧！【游戏混剪/全程高燃】",
+        "uploader": "赤瞳混剪",
+        "uploaderId": "19783079",
+        "uploadDate": "20190607",
+        "sourceDurationSeconds": 185.265,
+        "selectedFormatId": "30064",
+        "selectedFormatCodec": "avc1.640028",
+        "selectedFormatWidth": 1280,
+        "selectedFormatHeight": 720,
+        "selectedFormatFps": 30.0
+      },
+      "sourceWindow": {
+        "requestedStartNs": 15000000000,
+        "requestedEndNs": 60000000000
+      },
+      "sourceSelectionDecision": "D-009",
+      "readOnlyLocationToken": "t029-media/SR-BILI-GAME-005.mkv",
+      "sourceAndUsagePermission": {
+        "scope": "space-rhythm-internal-test-only",
+        "confirmedBy": "project-default-final-confirmer",
+        "decisionId": "D-009",
+        "confirmationDate": "2026-09-14",
+        "legalConclusion": false,
+        "redistributable": false
+      },
+      "privacyAndDistribution": {
+        "containsPeople": "pending_human_review",
+        "sensitiveContent": "pending_human_review",
+        "publicEvidenceMayContainMediaBytes": false
+      },
+      "mediaSha256": "383e933b9ef28ed0659b0da4fe4eca9f9b985e735ab1fe48ef7760b489cbe5c1",
+      "byteLength": 28423497,
+      "selectedSourceTiming": {
+        "status": "not_redecoded_reused_proxy",
+        "timeDomain": "unavailable",
+        "proxyNormalization": "existing proxy retained and independently re-probed"
+      },
+      "ptsPreservationCheck": {
+        "status": "not-evaluated",
+        "reason": "selected source stream was not re-decoded for this reused proxy"
+      },
+      "probe": {
+        "codecName": "mpeg4",
+        "pixelFormat": "yuv420p",
+        "width": 1280,
+        "height": 720,
+        "timeBase": "1/1000",
+        "averageFrameRate": "30",
+        "frameRateMode": "cfr",
+        "frameCount": 1350,
+        "firstFrameTimeNs": 0,
+        "lastFrameTimeNs": 44967000000,
+        "durationNs": 45000000000,
+        "medianFrameDeltaNs": 33000000,
+        "deviatingDeltaCount": 0,
+        "frameTimesSha256": "3700de6fe999526da64636b4a0f852e1745486aa203239fd5618ff37ae5b4d66",
+        "probeDigestSha256": "9ae065cf60afdffe343ee36720c60aef634cd8adeac9f7fd80479d4d6a6e42c0"
+      }
+    },
+    {
+      "clipId": "SR-BILI-GAME-006",
+      "datasetPartition": "tuning",
+      "productCategory": "游戏/动作高光",
+      "contentCategoriesExpectedPendingHumanReview": [
+        "long_take_or_no_cut",
+        "global_camera_motion",
+        "repetitive_motion"
+      ],
+      "source": {
+        "provider": "bilibili_public_page",
+        "bvid": "BV1akYZ6vEHz",
+        "pageUrl": "https://www.bilibili.com/video/BV1akYZ6vEHz/",
+        "pageLabel": "BV1akYZ6vEHz",
+        "title": "【PS5极限国度】超高画质 [4K HDR 60fps] 游戏实况",
+        "uploader": "哔哩游戏达人",
+        "uploaderId": "589603351",
+        "uploadDate": "20260913",
+        "sourceDurationSeconds": 491.932,
+        "selectedFormatId": "30064",
+        "selectedFormatCodec": "avc1.640028",
+        "selectedFormatWidth": 1280,
+        "selectedFormatHeight": 720,
+        "selectedFormatFps": 29.97
+      },
+      "sourceWindow": {
+        "requestedStartNs": 15000000000,
+        "requestedEndNs": 60000000000
+      },
+      "sourceSelectionDecision": "D-009",
+      "readOnlyLocationToken": "t029-media/SR-BILI-GAME-006.mkv",
+      "sourceAndUsagePermission": {
+        "scope": "space-rhythm-internal-test-only",
+        "confirmedBy": "project-default-final-confirmer",
+        "decisionId": "D-009",
+        "confirmationDate": "2026-09-14",
+        "legalConclusion": false,
+        "redistributable": false
+      },
+      "privacyAndDistribution": {
+        "containsPeople": "pending_human_review",
+        "sensitiveContent": "pending_human_review",
+        "publicEvidenceMayContainMediaBytes": false
+      },
+      "mediaSha256": "2a86566cf479c613b418c2e274cf1f06620ea367cdb669f1874bc8abf7916201",
+      "byteLength": 33673223,
+      "selectedSourceTiming": {
+        "status": "not_redecoded_reused_proxy",
+        "timeDomain": "unavailable",
+        "proxyNormalization": "existing proxy retained and independently re-probed"
+      },
+      "ptsPreservationCheck": {
+        "status": "not-evaluated",
+        "reason": "selected source stream was not re-decoded for this reused proxy"
+      },
+      "probe": {
+        "codecName": "mpeg4",
+        "pixelFormat": "yuv420p",
+        "width": 1280,
+        "height": 720,
+        "timeBase": "1/1000",
+        "averageFrameRate": "30000/1001",
+        "frameRateMode": "cfr",
+        "frameCount": 1349,
+        "firstFrameTimeNs": 0,
+        "lastFrameTimeNs": 44978000000,
+        "durationNs": 45011000000,
+        "medianFrameDeltaNs": 33000000,
+        "deviatingDeltaCount": 0,
+        "frameTimesSha256": "f9cbb018b4244debccde815f5dcc6f4a09a620cb45b08f2a349b4e89d7161053",
+        "probeDigestSha256": "88343552142cad02bdf39804383ec2da5e650e59ff0edd78a118aacca902179a"
+      }
+    },
+    {
+      "clipId": "SR-BILI-GAME-007",
+      "datasetPartition": "final_evaluation",
+      "productCategory": "游戏/动作高光",
+      "contentCategoriesExpectedPendingHumanReview": [
+        "long_take_or_no_cut",
+        "repetitive_motion",
+        "tempo_or_energy_change"
+      ],
+      "source": {
+        "provider": "bilibili_public_page",
+        "bvid": "BV1LkYD6pEVv",
+        "pageUrl": "https://www.bilibili.com/video/BV1LkYD6pEVv/",
+        "pageLabel": "BV1LkYD6pEVv",
+        "title": "Subway Surfers Classic (2026) - Gameplay (PC UHD) [4K60FPS]",
+        "uploader": "TheRomStudio",
+        "uploaderId": "3747510742944667",
+        "uploadDate": "20260912",
+        "sourceDurationSeconds": 123.437,
+        "selectedFormatId": "30064",
+        "selectedFormatCodec": "avc1.640033",
+        "selectedFormatWidth": 1280,
+        "selectedFormatHeight": 720,
+        "selectedFormatFps": 30.0
+      },
+      "sourceWindow": {
+        "requestedStartNs": 15000000000,
+        "requestedEndNs": 60000000000
+      },
+      "sourceSelectionDecision": "D-009",
+      "readOnlyLocationToken": "t029-media/SR-BILI-GAME-007.mkv",
+      "sourceAndUsagePermission": {
+        "scope": "space-rhythm-internal-test-only",
+        "confirmedBy": "project-default-final-confirmer",
+        "decisionId": "D-009",
+        "confirmationDate": "2026-09-14",
+        "legalConclusion": false,
+        "redistributable": false
+      },
+      "privacyAndDistribution": {
+        "containsPeople": "pending_human_review",
+        "sensitiveContent": "pending_human_review",
+        "publicEvidenceMayContainMediaBytes": false
+      },
+      "mediaSha256": "431832aa0c4c8e9f6165e984fd21a093e4b1f580b80393c125df70f0992980ca",
+      "byteLength": 33775346,
+      "selectedSourceTiming": {
+        "status": "not_redecoded_reused_proxy",
+        "timeDomain": "unavailable",
+        "proxyNormalization": "existing proxy retained and independently re-probed"
+      },
+      "ptsPreservationCheck": {
+        "status": "not-evaluated",
+        "reason": "selected source stream was not re-decoded for this reused proxy"
+      },
+      "probe": {
+        "codecName": "mpeg4",
+        "pixelFormat": "yuv420p",
+        "width": 1280,
+        "height": 720,
+        "timeBase": "1/1000",
+        "averageFrameRate": "30",
+        "frameRateMode": "cfr",
+        "frameCount": 1350,
+        "firstFrameTimeNs": 0,
+        "lastFrameTimeNs": 44967000000,
+        "durationNs": 45000000000,
+        "medianFrameDeltaNs": 33000000,
+        "deviatingDeltaCount": 0,
+        "frameTimesSha256": "3700de6fe999526da64636b4a0f852e1745486aa203239fd5618ff37ae5b4d66",
+        "probeDigestSha256": "9ae065cf60afdffe343ee36720c60aef634cd8adeac9f7fd80479d4d6a6e42c0"
+      }
+    },
+    {
+      "clipId": "SR-BILI-GAME-008",
+      "datasetPartition": "tuning",
+      "productCategory": "游戏/动作高光",
+      "contentCategoriesExpectedPendingHumanReview": [
+        "global_camera_motion",
+        "reversal",
+        "motion_blur_or_occlusion"
+      ],
+      "source": {
+        "provider": "bilibili_public_page",
+        "bvid": "BV1Kqbw6oEZE",
+        "pageUrl": "https://www.bilibili.com/video/BV1Kqbw6oEZE/",
+        "pageLabel": "BV1Kqbw6oEZE",
+        "title": "【极速骑行6】铃木隼游戏竞技实况丨PS5 Pro（4K 60FPS HDR）",
+        "uploader": "哔哩游戏达人",
+        "uploaderId": "589603351",
+        "uploadDate": "20260907",
+        "sourceDurationSeconds": 340.508,
+        "selectedFormatId": "30064",
+        "selectedFormatCodec": "avc1.640028",
+        "selectedFormatWidth": 1280,
+        "selectedFormatHeight": 720,
+        "selectedFormatFps": 30.0
+      },
+      "sourceWindow": {
+        "requestedStartNs": 15000000000,
+        "requestedEndNs": 60000000000
+      },
+      "sourceSelectionDecision": "D-009",
+      "readOnlyLocationToken": "t029-media/SR-BILI-GAME-008.mkv",
+      "sourceAndUsagePermission": {
+        "scope": "space-rhythm-internal-test-only",
+        "confirmedBy": "project-default-final-confirmer",
+        "decisionId": "D-009",
+        "confirmationDate": "2026-09-14",
+        "legalConclusion": false,
+        "redistributable": false
+      },
+      "privacyAndDistribution": {
+        "containsPeople": "pending_human_review",
+        "sensitiveContent": "pending_human_review",
+        "publicEvidenceMayContainMediaBytes": false
+      },
+      "mediaSha256": "09be9404270320a09d282fe0afab0e321cdfce11f9f238b7051ece7162eba43f",
+      "byteLength": 33803359,
+      "selectedSourceTiming": {
+        "status": "not_redecoded_reused_proxy",
+        "timeDomain": "unavailable",
+        "proxyNormalization": "existing proxy retained and independently re-probed"
+      },
+      "ptsPreservationCheck": {
+        "status": "not-evaluated",
+        "reason": "selected source stream was not re-decoded for this reused proxy"
+      },
+      "probe": {
+        "codecName": "mpeg4",
+        "pixelFormat": "yuv420p",
+        "width": 1280,
+        "height": 720,
+        "timeBase": "1/1000",
+        "averageFrameRate": "30",
+        "frameRateMode": "cfr",
+        "frameCount": 1350,
+        "firstFrameTimeNs": 0,
+        "lastFrameTimeNs": 44967000000,
+        "durationNs": 45000000000,
+        "medianFrameDeltaNs": 33000000,
+        "deviatingDeltaCount": 0,
+        "frameTimesSha256": "3700de6fe999526da64636b4a0f852e1745486aa203239fd5618ff37ae5b4d66",
+        "probeDigestSha256": "9ae065cf60afdffe343ee36720c60aef634cd8adeac9f7fd80479d4d6a6e42c0"
+      }
+    },
+    {
+      "clipId": "SR-BILI-GAME-009",
+      "datasetPartition": "final_evaluation",
+      "productCategory": "游戏/动作高光",
+      "contentCategoriesExpectedPendingHumanReview": [
+        "long_take_or_no_cut",
+        "mixed_global_local",
+        "impact"
+      ],
+      "source": {
+        "provider": "bilibili_public_page",
+        "bvid": "BV1Zxju6PE2c",
+        "pageUrl": "https://www.bilibili.com/video/BV1Zxju6PE2c/",
+        "pageLabel": "BV1Zxju6PE2c",
+        "title": "《使命召唤：现代战争》IW8 模组 多人对局 M60 机枪实机游玩（无解说）",
+        "uploader": "深夜游戏99",
+        "uploaderId": "97537007",
+        "uploadDate": "20260616",
+        "sourceDurationSeconds": 483.88,
+        "selectedFormatId": "30064",
+        "selectedFormatCodec": "avc1.640028",
+        "selectedFormatWidth": 1280,
+        "selectedFormatHeight": 720,
+        "selectedFormatFps": 29.97
+      },
+      "sourceWindow": {
+        "requestedStartNs": 15000000000,
+        "requestedEndNs": 60000000000
+      },
+      "sourceSelectionDecision": "D-009",
+      "readOnlyLocationToken": "t029-media/SR-BILI-GAME-009.mkv",
+      "sourceAndUsagePermission": {
+        "scope": "space-rhythm-internal-test-only",
+        "confirmedBy": "project-default-final-confirmer",
+        "decisionId": "D-009",
+        "confirmationDate": "2026-09-14",
+        "legalConclusion": false,
+        "redistributable": false
+      },
+      "privacyAndDistribution": {
+        "containsPeople": "pending_human_review",
+        "sensitiveContent": "pending_human_review",
+        "publicEvidenceMayContainMediaBytes": false
+      },
+      "mediaSha256": "b8e91e9ba3337bfcccdaae564a01af95b87936f1ac9f7d787a7e05809991e774",
+      "byteLength": 33789331,
+      "selectedSourceTiming": {
+        "status": "not_redecoded_reused_proxy",
+        "timeDomain": "unavailable",
+        "proxyNormalization": "existing proxy retained and independently re-probed"
+      },
+      "ptsPreservationCheck": {
+        "status": "not-evaluated",
+        "reason": "selected source stream was not re-decoded for this reused proxy"
+      },
+      "probe": {
+        "codecName": "mpeg4",
+        "pixelFormat": "yuv420p",
+        "width": 1280,
+        "height": 720,
+        "timeBase": "1/1000",
+        "averageFrameRate": "30000/1001",
+        "frameRateMode": "cfr",
+        "frameCount": 1348,
+        "firstFrameTimeNs": 0,
+        "lastFrameTimeNs": 44945000000,
+        "durationNs": 44978000000,
+        "medianFrameDeltaNs": 33000000,
+        "deviatingDeltaCount": 0,
+        "frameTimesSha256": "6c460dc3de278caf1d85b24a41c953c06f3504f0f3ce84a219ca29c564da1a65",
+        "probeDigestSha256": "5c6135cf10b41871b7510e74175a197ad56c083d55df118214edbdce9eb66a48"
+      }
+    },
+    {
+      "clipId": "SR-BILI-GAME-010",
+      "datasetPartition": "final_evaluation",
+      "productCategory": "游戏/动作高光",
+      "contentCategoriesExpectedPendingHumanReview": [
+        "global_camera_motion",
+        "stop",
+        "low_quality_compression"
+      ],
+      "source": {
+        "provider": "bilibili_public_page",
+        "bvid": "BV1dJ411q7f8",
+        "pageUrl": "https://www.bilibili.com/video/BV1dJ411q7f8/",
+        "pageLabel": "BV1dJ411q7f8",
+        "title": "[1080/60FPS]战争附言重大更新？国服爆满！画质打击感提升了无数个档次",
+        "uploader": "CurtainMX",
+        "uploaderId": "27432869",
+        "uploadDate": "20191204",
+        "sourceDurationSeconds": 289.531,
+        "selectedFormatId": "30064",
+        "selectedFormatCodec": "avc1.64001F",
+        "selectedFormatWidth": 1280,
+        "selectedFormatHeight": 720,
+        "selectedFormatFps": 30.303
+      },
+      "sourceWindow": {
+        "requestedStartNs": 15000000000,
+        "requestedEndNs": 60000000000
+      },
+      "sourceSelectionDecision": "D-009",
+      "readOnlyLocationToken": "t029-media/SR-BILI-GAME-010.mkv",
+      "sourceAndUsagePermission": {
+        "scope": "space-rhythm-internal-test-only",
+        "confirmedBy": "project-default-final-confirmer",
+        "decisionId": "D-009",
+        "confirmationDate": "2026-09-14",
+        "legalConclusion": false,
+        "redistributable": false
+      },
+      "privacyAndDistribution": {
+        "containsPeople": "pending_human_review",
+        "sensitiveContent": "pending_human_review",
+        "publicEvidenceMayContainMediaBytes": false
+      },
+      "mediaSha256": "e93eb4fb71f2aef0852978c738693543d3542eba1018c2114332f692105a0506",
+      "byteLength": 33738365,
+      "selectedSourceTiming": {
+        "status": "not_redecoded_reused_proxy",
+        "timeDomain": "unavailable",
+        "proxyNormalization": "existing proxy retained and independently re-probed"
+      },
+      "ptsPreservationCheck": {
+        "status": "not-evaluated",
+        "reason": "selected source stream was not re-decoded for this reused proxy"
+      },
+      "probe": {
+        "codecName": "mpeg4",
+        "pixelFormat": "yuv420p",
+        "width": 1280,
+        "height": 720,
+        "timeBase": "1/1000",
+        "averageFrameRate": "30",
+        "frameRateMode": "cfr",
+        "frameCount": 1350,
+        "firstFrameTimeNs": 0,
+        "lastFrameTimeNs": 44967000000,
+        "durationNs": 45000000000,
+        "medianFrameDeltaNs": 33000000,
+        "deviatingDeltaCount": 0,
+        "frameTimesSha256": "3700de6fe999526da64636b4a0f852e1745486aa203239fd5618ff37ae5b4d66",
+        "probeDigestSha256": "9ae065cf60afdffe343ee36720c60aef634cd8adeac9f7fd80479d4d6a6e42c0"
+      }
+    },
+    {
+      "clipId": "SR-BILI-LIFE-001",
+      "datasetPartition": "calibration",
+      "productCategory": "生活 Vlog/长镜头",
+      "contentCategoriesExpectedPendingHumanReview": [
+        "slow_cut_or_transition",
+        "local_subject_motion",
+        "sparse_free_rhythm"
+      ],
+      "source": {
+        "provider": "bilibili_public_page",
+        "bvid": "BV1huYz6LE5J",
+        "pageUrl": "https://www.bilibili.com/video/BV1huYz6LE5J/",
+        "pageLabel": "BV1huYz6LE5J",
+        "title": "英国日常生活VLOG：晚饭做了泰式绿咖喱",
+        "uploader": "蕾姐的海外生活",
+        "uploaderId": "1461188856",
+        "uploadDate": "20260913",
+        "sourceDurationSeconds": 209.118,
+        "selectedFormatId": "30064",
+        "selectedFormatCodec": "avc1.640028",
+        "selectedFormatWidth": 720,
+        "selectedFormatHeight": 1280,
+        "selectedFormatFps": 29.557
+      },
+      "sourceWindow": {
+        "requestedStartNs": 15000000000,
+        "requestedEndNs": 60000000000
+      },
+      "sourceSelectionDecision": "D-009",
+      "readOnlyLocationToken": "t029-media/SR-BILI-LIFE-001.mkv",
+      "sourceAndUsagePermission": {
+        "scope": "space-rhythm-internal-test-only",
+        "confirmedBy": "project-default-final-confirmer",
+        "decisionId": "D-009",
+        "confirmationDate": "2026-09-14",
+        "legalConclusion": false,
+        "redistributable": false
+      },
+      "privacyAndDistribution": {
+        "containsPeople": "pending_human_review",
+        "sensitiveContent": "pending_human_review",
+        "publicEvidenceMayContainMediaBytes": false
+      },
+      "mediaSha256": "af7a82f2a06e68024ea808ab1e08e8671ed0d48291589a249a3609d0f68d450e",
+      "byteLength": 33740651,
+      "selectedSourceTiming": {
+        "status": "not_redecoded_reused_proxy",
+        "timeDomain": "unavailable",
+        "proxyNormalization": "existing proxy retained and independently re-probed"
+      },
+      "ptsPreservationCheck": {
+        "status": "not-evaluated",
+        "reason": "selected source stream was not re-decoded for this reused proxy"
+      },
+      "probe": {
+        "codecName": "mpeg4",
+        "pixelFormat": "yuv420p",
+        "width": 720,
+        "height": 1280,
+        "timeBase": "1/1000",
+        "averageFrameRate": "12800/433",
+        "frameRateMode": "cfr",
+        "frameCount": 1330,
+        "firstFrameTimeNs": 0,
+        "lastFrameTimeNs": 44958000000,
+        "durationNs": 44992000000,
+        "medianFrameDeltaNs": 34000000,
+        "deviatingDeltaCount": 0,
+        "frameTimesSha256": "013040a424afb21a2ee4bf6d6d3d98fb9d2eb037e43bf95524e632b150b248f8",
+        "probeDigestSha256": "926806bc6844fcb7c53b98f50a6eea0e558b23c24d99898c43385bef79296f84"
+      }
+    },
+    {
+      "clipId": "SR-BILI-LIFE-002",
+      "datasetPartition": "tuning",
+      "productCategory": "生活 Vlog/长镜头",
+      "contentCategoriesExpectedPendingHumanReview": [
+        "slow_cut_or_transition",
+        "near_static",
+        "ambiguous_action"
+      ],
+      "source": {
+        "provider": "bilibili_public_page",
+        "bvid": "BV1epYS6jEgn",
+        "pageUrl": "https://www.bilibili.com/video/BV1epYS6jEgn/",
+        "pageLabel": "BV1epYS6jEgn",
+        "title": "Vlog🪟｜晚间日常·下班后也有在好好生活耶✨",
+        "uploader": "JOJO珠儿",
+        "uploaderId": "521172380",
+        "uploadDate": "20260913",
+        "sourceDurationSeconds": 66.037,
+        "selectedFormatId": "30064",
+        "selectedFormatCodec": "avc1.640033",
+        "selectedFormatWidth": 1280,
+        "selectedFormatHeight": 720,
+        "selectedFormatFps": 30.0
+      },
+      "sourceWindow": {
+        "requestedStartNs": 10000000000,
+        "requestedEndNs": 55000000000
+      },
+      "sourceSelectionDecision": "D-009",
+      "readOnlyLocationToken": "t029-media/SR-BILI-LIFE-002.mkv",
+      "sourceAndUsagePermission": {
+        "scope": "space-rhythm-internal-test-only",
+        "confirmedBy": "project-default-final-confirmer",
+        "decisionId": "D-009",
+        "confirmationDate": "2026-09-14",
+        "legalConclusion": false,
+        "redistributable": false
+      },
+      "privacyAndDistribution": {
+        "containsPeople": "pending_human_review",
+        "sensitiveContent": "pending_human_review",
+        "publicEvidenceMayContainMediaBytes": false
+      },
+      "mediaSha256": "eb57952ac90191838c2d185cbc1dceea4ba27abb93c10be43ca6bab0a338d988",
+      "byteLength": 33628709,
+      "selectedSourceTiming": {
+        "status": "not_redecoded_reused_proxy",
+        "timeDomain": "unavailable",
+        "proxyNormalization": "existing proxy retained and independently re-probed"
+      },
+      "ptsPreservationCheck": {
+        "status": "not-evaluated",
+        "reason": "selected source stream was not re-decoded for this reused proxy"
+      },
+      "probe": {
+        "codecName": "mpeg4",
+        "pixelFormat": "yuv420p",
+        "width": 1280,
+        "height": 720,
+        "timeBase": "1/1000",
+        "averageFrameRate": "30",
+        "frameRateMode": "cfr",
+        "frameCount": 1350,
+        "firstFrameTimeNs": 0,
+        "lastFrameTimeNs": 44967000000,
+        "durationNs": 45000000000,
+        "medianFrameDeltaNs": 33000000,
+        "deviatingDeltaCount": 0,
+        "frameTimesSha256": "3700de6fe999526da64636b4a0f852e1745486aa203239fd5618ff37ae5b4d66",
+        "probeDigestSha256": "9ae065cf60afdffe343ee36720c60aef634cd8adeac9f7fd80479d4d6a6e42c0"
+      }
+    },
+    {
+      "clipId": "SR-BILI-LIFE-003",
+      "datasetPartition": "final_evaluation",
+      "productCategory": "生活 Vlog/长镜头",
+      "contentCategoriesExpectedPendingHumanReview": [
+        "mixed_global_local",
+        "sparse_free_rhythm",
+        "tempo_or_energy_change"
+      ],
+      "source": {
+        "provider": "bilibili_public_page",
+        "bvid": "BV1GyYq6CE51",
+        "pageUrl": "https://www.bilibili.com/video/BV1GyYq6CE51/",
+        "pageLabel": "BV1GyYq6CE51",
+        "title": "VLOG｜吉国生活日记",
+        "uploader": "蓉忆雪",
+        "uploaderId": "3546578235165354",
+        "uploadDate": "20260913",
+        "sourceDurationSeconds": 275.767,
+        "selectedFormatId": "30064",
+        "selectedFormatCodec": "avc1.640033",
+        "selectedFormatWidth": 720,
+        "selectedFormatHeight": 1280,
+        "selectedFormatFps": 30.0
+      },
+      "sourceWindow": {
+        "requestedStartNs": 15000000000,
+        "requestedEndNs": 60000000000
+      },
+      "sourceSelectionDecision": "D-009",
+      "readOnlyLocationToken": "t029-media/SR-BILI-LIFE-003.mkv",
+      "sourceAndUsagePermission": {
+        "scope": "space-rhythm-internal-test-only",
+        "confirmedBy": "project-default-final-confirmer",
+        "decisionId": "D-009",
+        "confirmationDate": "2026-09-14",
+        "legalConclusion": false,
+        "redistributable": false
+      },
+      "privacyAndDistribution": {
+        "containsPeople": "pending_human_review",
+        "sensitiveContent": "pending_human_review",
+        "publicEvidenceMayContainMediaBytes": false
+      },
+      "mediaSha256": "957fb526d846d6585d3a2dbc1fcfd6a4319494f1814caf34f7bcbb4ef599f6b3",
+      "byteLength": 32896477,
+      "selectedSourceTiming": {
+        "status": "not_redecoded_reused_proxy",
+        "timeDomain": "unavailable",
+        "proxyNormalization": "existing proxy retained and independently re-probed"
+      },
+      "ptsPreservationCheck": {
+        "status": "not-evaluated",
+        "reason": "selected source stream was not re-decoded for this reused proxy"
+      },
+      "probe": {
+        "codecName": "mpeg4",
+        "pixelFormat": "yuv420p",
+        "width": 720,
+        "height": 1280,
+        "timeBase": "1/1000",
+        "averageFrameRate": "30",
+        "frameRateMode": "cfr",
+        "frameCount": 1350,
+        "firstFrameTimeNs": 0,
+        "lastFrameTimeNs": 44967000000,
+        "durationNs": 45000000000,
+        "medianFrameDeltaNs": 33000000,
+        "deviatingDeltaCount": 0,
+        "frameTimesSha256": "3700de6fe999526da64636b4a0f852e1745486aa203239fd5618ff37ae5b4d66",
+        "probeDigestSha256": "21e7f84e7fab45562cd0f9757fcfe34dcfde3cebd9b9ad882a205d5cdf81337d"
+      }
+    },
+    {
+      "clipId": "SR-BILI-LIFE-004",
+      "datasetPartition": "tuning",
+      "productCategory": "生活 Vlog/长镜头",
+      "contentCategoriesExpectedPendingHumanReview": [
+        "fast_cut",
+        "local_subject_motion",
+        "ambiguous_action"
+      ],
+      "source": {
+        "provider": "bilibili_public_page",
+        "bvid": "BV1kqYi6bEUi",
+        "pageUrl": "https://www.bilibili.com/video/BV1kqYi6bEUi/",
+        "pageLabel": "BV1kqYi6bEUi",
+        "title": "旅居vlog｜自由画师日常生活碎片🧩",
+        "uploader": "伊莱莎_ELIZA",
+        "uploaderId": "320339034",
+        "uploadDate": "20260913",
+        "sourceDurationSeconds": 158.545,
+        "selectedFormatId": "30064",
+        "selectedFormatCodec": "avc1.640028",
+        "selectedFormatWidth": 720,
+        "selectedFormatHeight": 1280,
+        "selectedFormatFps": 30.0
+      },
+      "sourceWindow": {
+        "requestedStartNs": 15000000000,
+        "requestedEndNs": 60000000000
+      },
+      "sourceSelectionDecision": "D-009",
+      "readOnlyLocationToken": "t029-media/SR-BILI-LIFE-004.mkv",
+      "sourceAndUsagePermission": {
+        "scope": "space-rhythm-internal-test-only",
+        "confirmedBy": "project-default-final-confirmer",
+        "decisionId": "D-009",
+        "confirmationDate": "2026-09-14",
+        "legalConclusion": false,
+        "redistributable": false
+      },
+      "privacyAndDistribution": {
+        "containsPeople": "pending_human_review",
+        "sensitiveContent": "pending_human_review",
+        "publicEvidenceMayContainMediaBytes": false
+      },
+      "mediaSha256": "5fb746ea3738ca2832482ad21c73f1c283df023db0da22e98de86ff83b622307",
+      "byteLength": 33752632,
+      "selectedSourceTiming": {
+        "status": "not_redecoded_reused_proxy",
+        "timeDomain": "unavailable",
+        "proxyNormalization": "existing proxy retained and independently re-probed"
+      },
+      "ptsPreservationCheck": {
+        "status": "not-evaluated",
+        "reason": "selected source stream was not re-decoded for this reused proxy"
+      },
+      "probe": {
+        "codecName": "mpeg4",
+        "pixelFormat": "yuv420p",
+        "width": 720,
+        "height": 1280,
+        "timeBase": "1/1000",
+        "averageFrameRate": "30",
+        "frameRateMode": "cfr",
+        "frameCount": 1350,
+        "firstFrameTimeNs": 0,
+        "lastFrameTimeNs": 44967000000,
+        "durationNs": 45000000000,
+        "medianFrameDeltaNs": 33000000,
+        "deviatingDeltaCount": 0,
+        "frameTimesSha256": "3700de6fe999526da64636b4a0f852e1745486aa203239fd5618ff37ae5b4d66",
+        "probeDigestSha256": "21e7f84e7fab45562cd0f9757fcfe34dcfde3cebd9b9ad882a205d5cdf81337d"
+      }
+    },
+    {
+      "clipId": "SR-BILI-LIFE-005",
+      "datasetPartition": "final_evaluation",
+      "productCategory": "生活 Vlog/长镜头",
+      "contentCategoriesExpectedPendingHumanReview": [
+        "near_static",
+        "local_subject_motion",
+        "low_quality_compression"
+      ],
+      "source": {
+        "provider": "bilibili_public_page",
+        "bvid": "BV18nYC6WEKH",
+        "pageUrl": "https://www.bilibili.com/video/BV18nYC6WEKH/",
+        "pageLabel": "BV18nYC6WEKH",
+        "title": "ADHD夯蛋er宅家日常vlog",
+        "uploader": "六百块钱_600",
+        "uploaderId": "1481782765",
+        "uploadDate": "20260914",
+        "sourceDurationSeconds": 316.302,
+        "selectedFormatId": "30064",
+        "selectedFormatCodec": "avc1.640033",
+        "selectedFormatWidth": 720,
+        "selectedFormatHeight": 1280,
+        "selectedFormatFps": 30.0
+      },
+      "sourceWindow": {
+        "requestedStartNs": 15000000000,
+        "requestedEndNs": 60000000000
+      },
+      "sourceSelectionDecision": "D-009",
+      "readOnlyLocationToken": "t029-media/SR-BILI-LIFE-005.mkv",
+      "sourceAndUsagePermission": {
+        "scope": "space-rhythm-internal-test-only",
+        "confirmedBy": "project-default-final-confirmer",
+        "decisionId": "D-009",
+        "confirmationDate": "2026-09-14",
+        "legalConclusion": false,
+        "redistributable": false
+      },
+      "privacyAndDistribution": {
+        "containsPeople": "pending_human_review",
+        "sensitiveContent": "pending_human_review",
+        "publicEvidenceMayContainMediaBytes": false
+      },
+      "mediaSha256": "60a1fa661545845c138af7413faffec1d174394c21aa65447c887a51a340be4a",
+      "byteLength": 33798137,
+      "selectedSourceTiming": {
+        "status": "not_redecoded_reused_proxy",
+        "timeDomain": "unavailable",
+        "proxyNormalization": "existing proxy retained and independently re-probed"
+      },
+      "ptsPreservationCheck": {
+        "status": "not-evaluated",
+        "reason": "selected source stream was not re-decoded for this reused proxy"
+      },
+      "probe": {
+        "codecName": "mpeg4",
+        "pixelFormat": "yuv420p",
+        "width": 720,
+        "height": 1280,
+        "timeBase": "1/1000",
+        "averageFrameRate": "30",
+        "frameRateMode": "cfr",
+        "frameCount": 1350,
+        "firstFrameTimeNs": 0,
+        "lastFrameTimeNs": 44967000000,
+        "durationNs": 45000000000,
+        "medianFrameDeltaNs": 33000000,
+        "deviatingDeltaCount": 0,
+        "frameTimesSha256": "3700de6fe999526da64636b4a0f852e1745486aa203239fd5618ff37ae5b4d66",
+        "probeDigestSha256": "21e7f84e7fab45562cd0f9757fcfe34dcfde3cebd9b9ad882a205d5cdf81337d"
+      }
+    },
+    {
+      "clipId": "SR-BILI-LIFE-006",
+      "datasetPartition": "tuning",
+      "productCategory": "生活 Vlog/长镜头",
+      "contentCategoriesExpectedPendingHumanReview": [
+        "long_take_or_no_cut",
+        "mixed_global_local",
+        "repetitive_motion"
+      ],
+      "source": {
+        "provider": "bilibili_public_page",
+        "bvid": "BV1PEjPzyECh",
+        "pageUrl": "https://www.bilibili.com/video/BV1PEjPzyECh/",
+        "pageLabel": "BV1PEjPzyECh",
+        "title": "【时代少年团】这段长达一分半的一镜到底比小时代还小时代",
+        "uploader": "爆拳张无敌啦啦啦",
+        "uploaderId": "443883427",
+        "uploadDate": "20250427",
+        "sourceDurationSeconds": 89.688,
+        "selectedFormatId": "30064",
+        "selectedFormatCodec": "avc1.640033",
+        "selectedFormatWidth": 1280,
+        "selectedFormatHeight": 716,
+        "selectedFormatFps": 30.0
+      },
+      "sourceWindow": {
+        "requestedStartNs": 15000000000,
+        "requestedEndNs": 60000000000
+      },
+      "sourceSelectionDecision": "D-009",
+      "readOnlyLocationToken": "t029-media/SR-BILI-LIFE-006.mkv",
+      "sourceAndUsagePermission": {
+        "scope": "space-rhythm-internal-test-only",
+        "confirmedBy": "project-default-final-confirmer",
+        "decisionId": "D-009",
+        "confirmationDate": "2026-09-14",
+        "legalConclusion": false,
+        "redistributable": false
+      },
+      "privacyAndDistribution": {
+        "containsPeople": "pending_human_review",
+        "sensitiveContent": "pending_human_review",
+        "publicEvidenceMayContainMediaBytes": false
+      },
+      "mediaSha256": "3d9af75d5778c2c3a9b60883bcd36ccbb8fbc3896d2a94c2ab1376143bace7ef",
+      "byteLength": 33797776,
+      "selectedSourceTiming": {
+        "status": "not_redecoded_reused_proxy",
+        "timeDomain": "unavailable",
+        "proxyNormalization": "existing proxy retained and independently re-probed"
+      },
+      "ptsPreservationCheck": {
+        "status": "not-evaluated",
+        "reason": "selected source stream was not re-decoded for this reused proxy"
+      },
+      "probe": {
+        "codecName": "mpeg4",
+        "pixelFormat": "yuv420p",
+        "width": 1280,
+        "height": 716,
+        "timeBase": "1/1000",
+        "averageFrameRate": "30",
+        "frameRateMode": "cfr",
+        "frameCount": 1350,
+        "firstFrameTimeNs": 0,
+        "lastFrameTimeNs": 44967000000,
+        "durationNs": 45000000000,
+        "medianFrameDeltaNs": 33000000,
+        "deviatingDeltaCount": 0,
+        "frameTimesSha256": "3700de6fe999526da64636b4a0f852e1745486aa203239fd5618ff37ae5b4d66",
+        "probeDigestSha256": "3e8fe3b4225757d7551d3509d603feae2a65dab270a876bb5077cc2b18ad7d35"
+      }
+    },
+    {
+      "clipId": "SR-BILI-LIFE-007",
+      "datasetPartition": "final_evaluation",
+      "productCategory": "生活 Vlog/长镜头",
+      "contentCategoriesExpectedPendingHumanReview": [
+        "slow_motion",
+        "local_subject_motion",
+        "impact",
+        "ambiguous_action"
+      ],
+      "source": {
+        "provider": "bilibili_public_page",
+        "bvid": "BV1Ts41117Hv",
+        "pageUrl": "https://www.bilibili.com/video/BV1Ts41117Hv/",
+        "pageLabel": "BV1Ts41117Hv",
+        "title": "慢镜头下的猫 (1,500fps)",
+        "uploader": "bobbytables",
+        "uploaderId": "29783016",
+        "uploadDate": "20160722",
+        "sourceDurationSeconds": 143.545,
+        "selectedFormatId": "30064",
+        "selectedFormatCodec": "avc1.640028",
+        "selectedFormatWidth": 1280,
+        "selectedFormatHeight": 720,
+        "selectedFormatFps": 24.39
+      },
+      "sourceWindow": {
+        "requestedStartNs": 15000000000,
+        "requestedEndNs": 60000000000
+      },
+      "sourceSelectionDecision": "D-010",
+      "readOnlyLocationToken": "t029-media/SR-BILI-LIFE-007.mkv",
+      "sourceAndUsagePermission": {
+        "scope": "space-rhythm-internal-test-only",
+        "confirmedBy": "project-default-final-confirmer",
+        "decisionId": "D-009",
+        "confirmationDate": "2026-09-14",
+        "legalConclusion": false,
+        "redistributable": false
+      },
+      "privacyAndDistribution": {
+        "containsPeople": "pending_human_review",
+        "sensitiveContent": "pending_human_review",
+        "publicEvidenceMayContainMediaBytes": false
+      },
+      "mediaSha256": "ed4c370a6d73eb1dc228161967b2b47fdf01659522f36fb69486fc9ff2489ea2",
+      "byteLength": 26494006,
+      "selectedSourceTiming": {
+        "frameRateMode": "cfr",
+        "frameCount": 1080,
+        "firstFrameTimeNs": 15000000000,
+        "lastFrameTimeNs": 59958000000,
+        "durationNs": 45000000000,
+        "medianFrameDeltaNs": 42000000,
+        "deviatingDeltaCount": 0,
+        "frameTimesSha256": "e229d5eecba36d08967b5fd7277f1951ffd678db3487c410cba97bdc20c6d3e5",
+        "status": "decoded_selected_platform_stream",
+        "timeDomain": "source_stream_absolute_timeNs",
+        "proxyNormalization": "first selected source frame maps to proxy timeNs 0",
+        "nonMonotonicOrDuplicateFramesDropped": 0,
+        "probeDigestSha256": "d55c2107420a1322c0c967a81f23a701cb8f45a1d16a3af6b426446df0ba1ba4"
+      },
+      "ptsPreservationCheck": {
+        "status": "pass",
+        "frameCountMatch": true,
+        "frameRateModeMatch": true,
+        "durationErrorNs": 0,
+        "medianFrameDeltaErrorNs": 0,
+        "timingErrorToleranceNs": 1000000
+      },
+      "probe": {
+        "codecName": "mpeg4",
+        "pixelFormat": "yuv420p",
+        "width": 1280,
+        "height": 720,
+        "timeBase": "1/1000",
+        "averageFrameRate": "2439/100",
+        "frameRateMode": "cfr",
+        "frameCount": 1080,
+        "firstFrameTimeNs": 0,
+        "lastFrameTimeNs": 44958000000,
+        "durationNs": 45000000000,
+        "medianFrameDeltaNs": 42000000,
+        "deviatingDeltaCount": 0,
+        "frameTimesSha256": "e0dc27def3fc32d6781a4818dd0ea6cf4883afa219549b9c861c646b5029e92d",
+        "probeDigestSha256": "6740c482dd8bdfc08fc5df1cbc99e85fb87d5f0a53a975da7aeee0b0f35e93b3"
+      }
+    },
+    {
+      "clipId": "SR-BILI-LIFE-008",
+      "datasetPartition": "tuning",
+      "productCategory": "生活 Vlog/长镜头",
+      "contentCategoriesExpectedPendingHumanReview": [
+        "long_take_or_no_cut",
+        "near_static",
+        "global_camera_motion"
+      ],
+      "source": {
+        "provider": "bilibili_public_page",
+        "bvid": "BV1KnYX6LEKS",
+        "pageUrl": "https://www.bilibili.com/video/BV1KnYX6LEKS/",
+        "pageLabel": "BV1KnYX6LEKS",
+        "title": "一镜到底‎⊹˚记录阴天的日系古早味房间",
+        "uploader": "雜食犬",
+        "uploaderId": "5388714",
+        "uploadDate": "20260912",
+        "sourceDurationSeconds": 60.58,
+        "selectedFormatId": "30064",
+        "selectedFormatCodec": "avc1.640028",
+        "selectedFormatWidth": 1280,
+        "selectedFormatHeight": 720,
+        "selectedFormatFps": 30.0
+      },
+      "sourceWindow": {
+        "requestedStartNs": 0,
+        "requestedEndNs": 60000000000
+      },
+      "sourceSelectionDecision": "D-009",
+      "readOnlyLocationToken": "t029-media/SR-BILI-LIFE-008.mkv",
+      "sourceAndUsagePermission": {
+        "scope": "space-rhythm-internal-test-only",
+        "confirmedBy": "project-default-final-confirmer",
+        "decisionId": "D-009",
+        "confirmationDate": "2026-09-14",
+        "legalConclusion": false,
+        "redistributable": false
+      },
+      "privacyAndDistribution": {
+        "containsPeople": "pending_human_review",
+        "sensitiveContent": "pending_human_review",
+        "publicEvidenceMayContainMediaBytes": false
+      },
+      "mediaSha256": "b4084b4e7fc5633b550294bc0fd2263e9bb61c663d753da611a0af0462e0341f",
+      "byteLength": 45011673,
+      "selectedSourceTiming": {
+        "status": "not_redecoded_reused_proxy",
+        "timeDomain": "unavailable",
+        "proxyNormalization": "existing proxy retained and independently re-probed"
+      },
+      "ptsPreservationCheck": {
+        "status": "not-evaluated",
+        "reason": "selected source stream was not re-decoded for this reused proxy"
+      },
+      "probe": {
+        "codecName": "mpeg4",
+        "pixelFormat": "yuv420p",
+        "width": 1280,
+        "height": 720,
+        "timeBase": "1/1000",
+        "averageFrameRate": "30",
+        "frameRateMode": "cfr",
+        "frameCount": 1800,
+        "firstFrameTimeNs": 0,
+        "lastFrameTimeNs": 59967000000,
+        "durationNs": 60000000000,
+        "medianFrameDeltaNs": 33000000,
+        "deviatingDeltaCount": 0,
+        "frameTimesSha256": "1c625303483329be58b7322656d2656fc4a23cbe0122dfdf7668b0ef263c0c4f",
+        "probeDigestSha256": "3955e754821394b4d6a3316afb7740de353e6d464148f7a7c408dd2c3da79142"
+      }
+    },
+    {
+      "clipId": "SR-BILI-LIFE-009",
+      "datasetPartition": "final_evaluation",
+      "productCategory": "生活 Vlog/长镜头",
+      "contentCategoriesExpectedPendingHumanReview": [
+        "long_take_or_no_cut",
+        "global_camera_motion",
+        "stop"
+      ],
+      "source": {
+        "provider": "bilibili_public_page",
+        "bvid": "BV1rrYi6oEhQ",
+        "pageUrl": "https://www.bilibili.com/video/BV1rrYi6oEhQ/",
+        "pageLabel": "BV1rrYi6oEhQ",
+        "title": "68平一镜到底roomtour｜小是小了点，但很好住",
+        "uploader": "ooccun",
+        "uploaderId": "24854148",
+        "uploadDate": "20260913",
+        "sourceDurationSeconds": 316.58,
+        "selectedFormatId": "30064",
+        "selectedFormatCodec": "avc1.640033",
+        "selectedFormatWidth": 1280,
+        "selectedFormatHeight": 720,
+        "selectedFormatFps": 30.0
+      },
+      "sourceWindow": {
+        "requestedStartNs": 15000000000,
+        "requestedEndNs": 60000000000
+      },
+      "sourceSelectionDecision": "D-009",
+      "readOnlyLocationToken": "t029-media/SR-BILI-LIFE-009.mkv",
+      "sourceAndUsagePermission": {
+        "scope": "space-rhythm-internal-test-only",
+        "confirmedBy": "project-default-final-confirmer",
+        "decisionId": "D-009",
+        "confirmationDate": "2026-09-14",
+        "legalConclusion": false,
+        "redistributable": false
+      },
+      "privacyAndDistribution": {
+        "containsPeople": "pending_human_review",
+        "sensitiveContent": "pending_human_review",
+        "publicEvidenceMayContainMediaBytes": false
+      },
+      "mediaSha256": "c22d5cc1215bb7408bd67065b19f2252c7dd6cb0a28eb346f470f47215d63861",
+      "byteLength": 31582067,
+      "selectedSourceTiming": {
+        "status": "not_redecoded_reused_proxy",
+        "timeDomain": "unavailable",
+        "proxyNormalization": "existing proxy retained and independently re-probed"
+      },
+      "ptsPreservationCheck": {
+        "status": "not-evaluated",
+        "reason": "selected source stream was not re-decoded for this reused proxy"
+      },
+      "probe": {
+        "codecName": "mpeg4",
+        "pixelFormat": "yuv420p",
+        "width": 1280,
+        "height": 720,
+        "timeBase": "1/1000",
+        "averageFrameRate": "30",
+        "frameRateMode": "cfr",
+        "frameCount": 1350,
+        "firstFrameTimeNs": 0,
+        "lastFrameTimeNs": 44967000000,
+        "durationNs": 45000000000,
+        "medianFrameDeltaNs": 33000000,
+        "deviatingDeltaCount": 0,
+        "frameTimesSha256": "3700de6fe999526da64636b4a0f852e1745486aa203239fd5618ff37ae5b4d66",
+        "probeDigestSha256": "9ae065cf60afdffe343ee36720c60aef634cd8adeac9f7fd80479d4d6a6e42c0"
+      }
+    },
+    {
+      "clipId": "SR-BILI-LIFE-010",
+      "datasetPartition": "final_evaluation",
+      "productCategory": "生活 Vlog/长镜头",
+      "contentCategoriesExpectedPendingHumanReview": [
+        "long_take_or_no_cut",
+        "local_subject_motion",
+        "ambiguous_action"
+      ],
+      "source": {
+        "provider": "bilibili_public_page",
+        "bvid": "BV1d3Yi6jEri",
+        "pageUrl": "https://www.bilibili.com/video/BV1d3Yi6jEri/",
+        "pageLabel": "BV1d3Yi6jEri",
+        "title": "新手村第一视角开箱Vlog(一镜到底）",
+        "uploader": "你的7姨娘",
+        "uploaderId": "17868126",
+        "uploadDate": "20260913",
+        "sourceDurationSeconds": 189.433,
+        "selectedFormatId": "30064",
+        "selectedFormatCodec": "avc1.640033",
+        "selectedFormatWidth": 1280,
+        "selectedFormatHeight": 720,
+        "selectedFormatFps": 30.0
+      },
+      "sourceWindow": {
+        "requestedStartNs": 15000000000,
+        "requestedEndNs": 60000000000
+      },
+      "sourceSelectionDecision": "D-009",
+      "readOnlyLocationToken": "t029-media/SR-BILI-LIFE-010.mkv",
+      "sourceAndUsagePermission": {
+        "scope": "space-rhythm-internal-test-only",
+        "confirmedBy": "project-default-final-confirmer",
+        "decisionId": "D-009",
+        "confirmationDate": "2026-09-14",
+        "legalConclusion": false,
+        "redistributable": false
+      },
+      "privacyAndDistribution": {
+        "containsPeople": "pending_human_review",
+        "sensitiveContent": "pending_human_review",
+        "publicEvidenceMayContainMediaBytes": false
+      },
+      "mediaSha256": "6563988a1755e164efda9ff87a39a72746f8dae5373dd9adde6a5d457d6b5008",
+      "byteLength": 33802027,
+      "selectedSourceTiming": {
+        "status": "not_redecoded_reused_proxy",
+        "timeDomain": "unavailable",
+        "proxyNormalization": "existing proxy retained and independently re-probed"
+      },
+      "ptsPreservationCheck": {
+        "status": "not-evaluated",
+        "reason": "selected source stream was not re-decoded for this reused proxy"
+      },
+      "probe": {
+        "codecName": "mpeg4",
+        "pixelFormat": "yuv420p",
+        "width": 1280,
+        "height": 720,
+        "timeBase": "1/1000",
+        "averageFrameRate": "30",
+        "frameRateMode": "cfr",
+        "frameCount": 1350,
+        "firstFrameTimeNs": 0,
+        "lastFrameTimeNs": 44967000000,
+        "durationNs": 45000000000,
+        "medianFrameDeltaNs": 33000000,
+        "deviatingDeltaCount": 0,
+        "frameTimesSha256": "3700de6fe999526da64636b4a0f852e1745486aa203239fd5618ff37ae5b4d66",
+        "probeDigestSha256": "9ae065cf60afdffe343ee36720c60aef634cd8adeac9f7fd80479d4d6a6e42c0"
+      }
+    },
+    {
+      "clipId": "SR-BILI-TRAVEL-001",
+      "datasetPartition": "calibration",
+      "productCategory": "旅行/风景混剪",
+      "contentCategoriesExpectedPendingHumanReview": [
+        "slow_cut_or_transition",
+        "global_camera_motion",
+        "tempo_or_energy_change",
+        "vfr"
+      ],
+      "source": {
+        "provider": "bilibili_public_page",
+        "bvid": "BV1Ex411H7he",
+        "pageUrl": "https://www.bilibili.com/video/BV1Ex411H7he/",
+        "pageLabel": "BV1Ex411H7he",
+        "title": "手机也能出大片？iPhone7 1080p 60fps录制扫街视频",
+        "uploader": "斯堪的纳维亚半岛岛主",
+        "uploaderId": "36609176",
+        "uploadDate": "20170813",
+        "sourceDurationSeconds": 108.843,
+        "selectedFormatId": "30064",
+        "selectedFormatCodec": "avc1.640028",
+        "selectedFormatWidth": 1280,
+        "selectedFormatHeight": 720,
+        "selectedFormatFps": 29.412
+      },
+      "sourceWindow": {
+        "requestedStartNs": 15000000000,
+        "requestedEndNs": 60000000000
+      },
+      "sourceSelectionDecision": "D-010",
+      "readOnlyLocationToken": "t029-media/SR-BILI-TRAVEL-001.mkv",
+      "sourceAndUsagePermission": {
+        "scope": "space-rhythm-internal-test-only",
+        "confirmedBy": "project-default-final-confirmer",
+        "decisionId": "D-009",
+        "confirmationDate": "2026-09-14",
+        "legalConclusion": false,
+        "redistributable": false
+      },
+      "privacyAndDistribution": {
+        "containsPeople": "pending_human_review",
+        "sensitiveContent": "pending_human_review",
+        "publicEvidenceMayContainMediaBytes": false
+      },
+      "mediaSha256": "1adf3c58944be62f785d3a64e9222b1c0ad0657db34cbb7f732e1c96e33da821",
+      "byteLength": 123708095,
+      "selectedSourceTiming": {
+        "frameRateMode": "cfr",
+        "frameCount": 1350,
+        "firstFrameTimeNs": 15010000000,
+        "lastFrameTimeNs": 59976000000,
+        "durationNs": 44999000000,
+        "medianFrameDeltaNs": 33000000,
+        "deviatingDeltaCount": 0,
+        "frameTimesSha256": "f12c7098de93b8427de3bd9b1028807425c4389ab97193eb4d54ad73ab418a3d",
+        "status": "decoded_selected_platform_stream",
+        "timeDomain": "source_stream_absolute_timeNs",
+        "proxyNormalization": "first selected source frame maps to proxy timeNs 0",
+        "nonMonotonicOrDuplicateFramesDropped": 0,
+        "probeDigestSha256": "efb9dc9dbaecf339beeefcc5fa657c78955a02f4faa1d6562a6a5d5cdde29d83"
+      },
+      "ptsPreservationCheck": {
+        "status": "pass",
+        "frameCountMatch": true,
+        "frameRateModeMatch": true,
+        "durationErrorNs": 0,
+        "medianFrameDeltaErrorNs": 0,
+        "timingErrorToleranceNs": 1000000
+      },
+      "probe": {
+        "codecName": "mpeg4",
+        "pixelFormat": "yuv420p",
+        "width": 1280,
+        "height": 720,
+        "timeBase": "1/1000",
+        "averageFrameRate": "7353/250",
+        "frameRateMode": "cfr",
+        "frameCount": 1350,
+        "firstFrameTimeNs": 0,
+        "lastFrameTimeNs": 44966000000,
+        "durationNs": 44999000000,
+        "medianFrameDeltaNs": 33000000,
+        "deviatingDeltaCount": 0,
+        "frameTimesSha256": "d894c1965cd27e94e9568ee4311b56b43e7fed2dffcf59ea93af4d454f6fec69",
+        "probeDigestSha256": "b218d504d6bed125daf594d636be341c56315368ceed97f2439efc78650c38e5"
+      }
+    },
+    {
+      "clipId": "SR-BILI-TRAVEL-002",
+      "datasetPartition": "tuning",
+      "productCategory": "旅行/风景混剪",
+      "contentCategoriesExpectedPendingHumanReview": [
+        "slow_cut_or_transition",
+        "near_static",
+        "sparse_free_rhythm"
+      ],
+      "source": {
+        "provider": "bilibili_public_page",
+        "bvid": "BV19VYe6MEJs",
+        "pageUrl": "https://www.bilibili.com/video/BV19VYe6MEJs/",
+        "pageLabel": "BV19VYe6MEJs",
+        "title": "“想象一下在这里醒来 这是不是你理想中的梦中情屋”",
+        "uploader": "风景旅行收藏家",
+        "uploaderId": "3494364072380525",
+        "uploadDate": "20260913",
+        "sourceDurationSeconds": 192.563,
+        "selectedFormatId": "30064",
+        "selectedFormatCodec": "avc1.640028",
+        "selectedFormatWidth": 720,
+        "selectedFormatHeight": 1280,
+        "selectedFormatFps": 29.996
+      },
+      "sourceWindow": {
+        "requestedStartNs": 15000000000,
+        "requestedEndNs": 60000000000
+      },
+      "sourceSelectionDecision": "D-009",
+      "readOnlyLocationToken": "t029-media/SR-BILI-TRAVEL-002.mkv",
+      "sourceAndUsagePermission": {
+        "scope": "space-rhythm-internal-test-only",
+        "confirmedBy": "project-default-final-confirmer",
+        "decisionId": "D-009",
+        "confirmationDate": "2026-09-14",
+        "legalConclusion": false,
+        "redistributable": false
+      },
+      "privacyAndDistribution": {
+        "containsPeople": "pending_human_review",
+        "sensitiveContent": "pending_human_review",
+        "publicEvidenceMayContainMediaBytes": false
+      },
+      "mediaSha256": "4d8cb88e9d2d7c2ee654ece01b72499ae43ae5e1514907f54512d9c8b17b2be0",
+      "byteLength": 32370250,
+      "selectedSourceTiming": {
+        "status": "not_redecoded_reused_proxy",
+        "timeDomain": "unavailable",
+        "proxyNormalization": "existing proxy retained and independently re-probed"
+      },
+      "ptsPreservationCheck": {
+        "status": "not-evaluated",
+        "reason": "selected source stream was not re-decoded for this reused proxy"
+      },
+      "probe": {
+        "codecName": "mpeg4",
+        "pixelFormat": "yuv420p",
+        "width": 720,
+        "height": 1280,
+        "timeBase": "1/1000",
+        "averageFrameRate": "30",
+        "frameRateMode": "cfr",
+        "frameCount": 1350,
+        "firstFrameTimeNs": 0,
+        "lastFrameTimeNs": 44967000000,
+        "durationNs": 45000000000,
+        "medianFrameDeltaNs": 33000000,
+        "deviatingDeltaCount": 0,
+        "frameTimesSha256": "3700de6fe999526da64636b4a0f852e1745486aa203239fd5618ff37ae5b4d66",
+        "probeDigestSha256": "21e7f84e7fab45562cd0f9757fcfe34dcfde3cebd9b9ad882a205d5cdf81337d"
+      }
+    },
+    {
+      "clipId": "SR-BILI-TRAVEL-003",
+      "datasetPartition": "final_evaluation",
+      "productCategory": "旅行/风景混剪",
+      "contentCategoriesExpectedPendingHumanReview": [
+        "global_camera_motion",
+        "sparse_free_rhythm",
+        "ambiguous_action"
+      ],
+      "source": {
+        "provider": "bilibili_public_page",
+        "bvid": "BV1TsYR6nEk6",
+        "pageUrl": "https://www.bilibili.com/video/BV1TsYR6nEk6/",
+        "pageLabel": "BV1TsYR6nEk6",
+        "title": "“像旷野的风，肆意且自由~”",
+        "uploader": "柠檬味星河",
+        "uploaderId": "247802676",
+        "uploadDate": "20260912",
+        "sourceDurationSeconds": 87.585,
+        "selectedFormatId": "30064",
+        "selectedFormatCodec": "avc1.640028",
+        "selectedFormatWidth": 1280,
+        "selectedFormatHeight": 720,
+        "selectedFormatFps": 30.0
+      },
+      "sourceWindow": {
+        "requestedStartNs": 15000000000,
+        "requestedEndNs": 60000000000
+      },
+      "sourceSelectionDecision": "D-009",
+      "readOnlyLocationToken": "t029-media/SR-BILI-TRAVEL-003.mkv",
+      "sourceAndUsagePermission": {
+        "scope": "space-rhythm-internal-test-only",
+        "confirmedBy": "project-default-final-confirmer",
+        "decisionId": "D-009",
+        "confirmationDate": "2026-09-14",
+        "legalConclusion": false,
+        "redistributable": false
+      },
+      "privacyAndDistribution": {
+        "containsPeople": "pending_human_review",
+        "sensitiveContent": "pending_human_review",
+        "publicEvidenceMayContainMediaBytes": false
+      },
+      "mediaSha256": "2175ef81465e01db4159c9587d05af3384bcd350261429ed3bc07165574437ac",
+      "byteLength": 33762941,
+      "selectedSourceTiming": {
+        "status": "not_redecoded_reused_proxy",
+        "timeDomain": "unavailable",
+        "proxyNormalization": "existing proxy retained and independently re-probed"
+      },
+      "ptsPreservationCheck": {
+        "status": "not-evaluated",
+        "reason": "selected source stream was not re-decoded for this reused proxy"
+      },
+      "probe": {
+        "codecName": "mpeg4",
+        "pixelFormat": "yuv420p",
+        "width": 1280,
+        "height": 720,
+        "timeBase": "1/1000",
+        "averageFrameRate": "30",
+        "frameRateMode": "cfr",
+        "frameCount": 1350,
+        "firstFrameTimeNs": 0,
+        "lastFrameTimeNs": 44967000000,
+        "durationNs": 45000000000,
+        "medianFrameDeltaNs": 33000000,
+        "deviatingDeltaCount": 0,
+        "frameTimesSha256": "3700de6fe999526da64636b4a0f852e1745486aa203239fd5618ff37ae5b4d66",
+        "probeDigestSha256": "9ae065cf60afdffe343ee36720c60aef634cd8adeac9f7fd80479d4d6a6e42c0"
+      }
+    },
+    {
+      "clipId": "SR-BILI-TRAVEL-004",
+      "datasetPartition": "tuning",
+      "productCategory": "旅行/风景混剪",
+      "contentCategoriesExpectedPendingHumanReview": [
+        "fast_cut",
+        "tempo_or_energy_change",
+        "mixed_global_local"
+      ],
+      "source": {
+        "provider": "bilibili_public_page",
+        "bvid": "BV1u7411P7Vx",
+        "pageUrl": "https://www.bilibili.com/video/BV1u7411P7Vx/",
+        "pageLabel": "BV1u7411P7Vx",
+        "title": "【环球旅行短片】环球旅行高燃短片《世界在我脚下》",
+        "uploader": "YOUAN安",
+        "uploaderId": "22272462",
+        "uploadDate": "20200220",
+        "sourceDurationSeconds": 265.233,
+        "selectedFormatId": "100024",
+        "selectedFormatCodec": "av01.0.00M.10.0.110.01.01.01.0",
+        "selectedFormatWidth": 1280,
+        "selectedFormatHeight": 718,
+        "selectedFormatFps": 30.0
+      },
+      "sourceWindow": {
+        "requestedStartNs": 15000000000,
+        "requestedEndNs": 60000000000
+      },
+      "sourceSelectionDecision": "D-009",
+      "readOnlyLocationToken": "t029-media/SR-BILI-TRAVEL-004.mkv",
+      "sourceAndUsagePermission": {
+        "scope": "space-rhythm-internal-test-only",
+        "confirmedBy": "project-default-final-confirmer",
+        "decisionId": "D-009",
+        "confirmationDate": "2026-09-14",
+        "legalConclusion": false,
+        "redistributable": false
+      },
+      "privacyAndDistribution": {
+        "containsPeople": "pending_human_review",
+        "sensitiveContent": "pending_human_review",
+        "publicEvidenceMayContainMediaBytes": false
+      },
+      "mediaSha256": "658736937752d7832e8864752f7c457d87b40d5b42bb5648197b1d0b85c67602",
+      "byteLength": 23520765,
+      "selectedSourceTiming": {
+        "status": "not_redecoded_reused_proxy",
+        "timeDomain": "unavailable",
+        "proxyNormalization": "existing proxy retained and independently re-probed"
+      },
+      "ptsPreservationCheck": {
+        "status": "not-evaluated",
+        "reason": "selected source stream was not re-decoded for this reused proxy"
+      },
+      "probe": {
+        "codecName": "mpeg4",
+        "pixelFormat": "yuv420p",
+        "width": 1280,
+        "height": 718,
+        "timeBase": "1/1000",
+        "averageFrameRate": "30",
+        "frameRateMode": "cfr",
+        "frameCount": 1350,
+        "firstFrameTimeNs": 0,
+        "lastFrameTimeNs": 44967000000,
+        "durationNs": 45000000000,
+        "medianFrameDeltaNs": 33000000,
+        "deviatingDeltaCount": 0,
+        "frameTimesSha256": "3700de6fe999526da64636b4a0f852e1745486aa203239fd5618ff37ae5b4d66",
+        "probeDigestSha256": "d9a73314c99414b0b89260f367a7cad59997cf8d511ebf9abb12b8bc4dde3390"
+      }
+    },
+    {
+      "clipId": "SR-BILI-TRAVEL-005",
+      "datasetPartition": "final_evaluation",
+      "productCategory": "旅行/风景混剪",
+      "contentCategoriesExpectedPendingHumanReview": [
+        "fast_cut",
+        "global_camera_motion",
+        "motion_blur_or_occlusion"
+      ],
+      "source": {
+        "provider": "bilibili_public_page",
+        "bvid": "BV1va411y7MC",
+        "pageUrl": "https://www.bilibili.com/video/BV1va411y7MC/",
+        "pageLabel": "BV1va411y7MC",
+        "title": "【机车/混剪】——这是一次漫长的旅途。",
+        "uploader": "空守一座心城",
+        "uploaderId": "397668126",
+        "uploadDate": "20220210",
+        "sourceDurationSeconds": 177.121,
+        "selectedFormatId": "30032",
+        "selectedFormatCodec": "avc1.64001F",
+        "selectedFormatWidth": 960,
+        "selectedFormatHeight": 480,
+        "selectedFormatFps": 29.412
+      },
+      "sourceWindow": {
+        "requestedStartNs": 15000000000,
+        "requestedEndNs": 60000000000
+      },
+      "sourceSelectionDecision": "D-009",
+      "readOnlyLocationToken": "t029-media/SR-BILI-TRAVEL-005.mkv",
+      "sourceAndUsagePermission": {
+        "scope": "space-rhythm-internal-test-only",
+        "confirmedBy": "project-default-final-confirmer",
+        "decisionId": "D-009",
+        "confirmationDate": "2026-09-14",
+        "legalConclusion": false,
+        "redistributable": false
+      },
+      "privacyAndDistribution": {
+        "containsPeople": "pending_human_review",
+        "sensitiveContent": "pending_human_review",
+        "publicEvidenceMayContainMediaBytes": false
+      },
+      "mediaSha256": "d9c689c76f5e7f4659c2756a4e534cc8a8dd65828a18de4e63f8b3d444fd3fd0",
+      "byteLength": 21462971,
+      "selectedSourceTiming": {
+        "status": "not_redecoded_reused_proxy",
+        "timeDomain": "unavailable",
+        "proxyNormalization": "existing proxy retained and independently re-probed"
+      },
+      "ptsPreservationCheck": {
+        "status": "not-evaluated",
+        "reason": "selected source stream was not re-decoded for this reused proxy"
+      },
+      "probe": {
+        "codecName": "mpeg4",
+        "pixelFormat": "yuv420p",
+        "width": 960,
+        "height": 480,
+        "timeBase": "1/1000",
+        "averageFrameRate": "30",
+        "frameRateMode": "cfr",
+        "frameCount": 1350,
+        "firstFrameTimeNs": 0,
+        "lastFrameTimeNs": 44967000000,
+        "durationNs": 45000000000,
+        "medianFrameDeltaNs": 33000000,
+        "deviatingDeltaCount": 0,
+        "frameTimesSha256": "3700de6fe999526da64636b4a0f852e1745486aa203239fd5618ff37ae5b4d66",
+        "probeDigestSha256": "b927fc3c913e79cf83eab30c844cd94fd1eef15c038a3c1920fd698039ced4d6"
+      }
+    },
+    {
+      "clipId": "SR-BILI-TRAVEL-006",
+      "datasetPartition": "tuning",
+      "productCategory": "旅行/风景混剪",
+      "contentCategoriesExpectedPendingHumanReview": [
+        "long_take_or_no_cut",
+        "near_static",
+        "sparse_free_rhythm"
+      ],
+      "source": {
+        "provider": "bilibili_public_page",
+        "bvid": "BV1MT411V7Cg",
+        "pageUrl": "https://www.bilibili.com/video/BV1MT411V7Cg/",
+        "pageLabel": "BV1MT411V7Cg",
+        "title": "【园林如梦·夏】夏至「荷」集·航拍·长镜头 / 怡园 艺圃 留园 狮子林 拙政园",
+        "uploader": "白袍慕云",
+        "uploaderId": "7990981",
+        "uploadDate": "20220621",
+        "sourceDurationSeconds": 511.914,
+        "selectedFormatId": "30064",
+        "selectedFormatCodec": "avc1.640028",
+        "selectedFormatWidth": 1280,
+        "selectedFormatHeight": 720,
+        "selectedFormatFps": 29.412
+      },
+      "sourceWindow": {
+        "requestedStartNs": 15000000000,
+        "requestedEndNs": 60000000000
+      },
+      "sourceSelectionDecision": "D-009",
+      "readOnlyLocationToken": "t029-media/SR-BILI-TRAVEL-006.mkv",
+      "sourceAndUsagePermission": {
+        "scope": "space-rhythm-internal-test-only",
+        "confirmedBy": "project-default-final-confirmer",
+        "decisionId": "D-009",
+        "confirmationDate": "2026-09-14",
+        "legalConclusion": false,
+        "redistributable": false
+      },
+      "privacyAndDistribution": {
+        "containsPeople": "pending_human_review",
+        "sensitiveContent": "pending_human_review",
+        "publicEvidenceMayContainMediaBytes": false
+      },
+      "mediaSha256": "e97dee3ff33f589f790362baa134dbe26d52665ac405e659e5d2bc91b52a7480",
+      "byteLength": 33792123,
+      "selectedSourceTiming": {
+        "status": "not_redecoded_reused_proxy",
+        "timeDomain": "unavailable",
+        "proxyNormalization": "existing proxy retained and independently re-probed"
+      },
+      "ptsPreservationCheck": {
+        "status": "not-evaluated",
+        "reason": "selected source stream was not re-decoded for this reused proxy"
+      },
+      "probe": {
+        "codecName": "mpeg4",
+        "pixelFormat": "yuv420p",
+        "width": 1280,
+        "height": 720,
+        "timeBase": "1/1000",
+        "averageFrameRate": "30000/1001",
+        "frameRateMode": "cfr",
+        "frameCount": 1349,
+        "firstFrameTimeNs": 0,
+        "lastFrameTimeNs": 44978000000,
+        "durationNs": 45011000000,
+        "medianFrameDeltaNs": 33000000,
+        "deviatingDeltaCount": 0,
+        "frameTimesSha256": "f9cbb018b4244debccde815f5dcc6f4a09a620cb45b08f2a349b4e89d7161053",
+        "probeDigestSha256": "88343552142cad02bdf39804383ec2da5e650e59ff0edd78a118aacca902179a"
+      }
+    },
+    {
+      "clipId": "SR-BILI-TRAVEL-007",
+      "datasetPartition": "final_evaluation",
+      "productCategory": "旅行/风景混剪",
+      "contentCategoriesExpectedPendingHumanReview": [
+        "slow_cut_or_transition",
+        "near_static",
+        "slow_motion",
+        "vfr"
+      ],
+      "source": {
+        "provider": "bilibili_public_page",
+        "bvid": "BV1F6b86bELD",
+        "pageUrl": "https://www.bilibili.com/video/BV1F6b86bELD/",
+        "pageLabel": "BV1F6b86bELD",
+        "title": "大疆action5Pro混剪一条1080p+60帧+30帧+2.7k视频海边和老家风景测试效果",
+        "uploader": "FunnyUp蛙",
+        "uploaderId": "3493106242554531",
+        "uploadDate": "20260817",
+        "sourceDurationSeconds": 369.066,
+        "selectedFormatId": "30064",
+        "selectedFormatCodec": "avc1.640033",
+        "selectedFormatWidth": 1280,
+        "selectedFormatHeight": 720,
+        "selectedFormatFps": 30.0
+      },
+      "sourceWindow": {
+        "requestedStartNs": 30000000000,
+        "requestedEndNs": 75000000000
+      },
+      "sourceSelectionDecision": "D-010",
+      "readOnlyLocationToken": "t029-media/SR-BILI-TRAVEL-007.mkv",
+      "sourceAndUsagePermission": {
+        "scope": "space-rhythm-internal-test-only",
+        "confirmedBy": "project-default-final-confirmer",
+        "decisionId": "D-009",
+        "confirmationDate": "2026-09-14",
+        "legalConclusion": false,
+        "redistributable": false
+      },
+      "privacyAndDistribution": {
+        "containsPeople": "pending_human_review",
+        "sensitiveContent": "pending_human_review",
+        "publicEvidenceMayContainMediaBytes": false
+      },
+      "mediaSha256": "cf2edd5474f1f42cf76544e1b2887e3ab56737a01ecfc790f2b6d2937e715a79",
+      "byteLength": 33803447,
+      "selectedSourceTiming": {
+        "frameRateMode": "cfr",
+        "frameCount": 1350,
+        "firstFrameTimeNs": 30000000000,
+        "lastFrameTimeNs": 74966687500,
+        "durationNs": 45000000000,
+        "medianFrameDeltaNs": 33312500,
+        "deviatingDeltaCount": 0,
+        "frameTimesSha256": "105c26f08d0313dd45e4a4ecf147e165bef4a4d9ba1fe2a1b843c5fc53eb451e",
+        "status": "decoded_selected_platform_stream",
+        "timeDomain": "source_stream_absolute_timeNs",
+        "proxyNormalization": "first selected source frame maps to proxy timeNs 0",
+        "probeDigestSha256": "e1a7c4f5aec2ec94a5d428c309e9544cfbfa76e43ad67a95cde6dc9a7e8a2a86"
+      },
+      "ptsPreservationCheck": {
+        "status": "pass",
+        "frameCountMatch": true,
+        "frameRateModeMatch": true,
+        "durationErrorNs": 0,
+        "medianFrameDeltaErrorNs": 312500,
+        "timingErrorToleranceNs": 1000000
+      },
+      "probe": {
+        "codecName": "mpeg4",
+        "pixelFormat": "yuv420p",
+        "width": 1280,
+        "height": 720,
+        "timeBase": "1/1000",
+        "averageFrameRate": "30",
+        "frameRateMode": "cfr",
+        "frameCount": 1350,
+        "firstFrameTimeNs": 0,
+        "lastFrameTimeNs": 44967000000,
+        "durationNs": 45000000000,
+        "medianFrameDeltaNs": 33000000,
+        "deviatingDeltaCount": 0,
+        "frameTimesSha256": "3700de6fe999526da64636b4a0f852e1745486aa203239fd5618ff37ae5b4d66",
+        "probeDigestSha256": "9ae065cf60afdffe343ee36720c60aef634cd8adeac9f7fd80479d4d6a6e42c0"
+      }
+    },
+    {
+      "clipId": "SR-BILI-TRAVEL-008",
+      "datasetPartition": "tuning",
+      "productCategory": "旅行/风景混剪",
+      "contentCategoriesExpectedPendingHumanReview": [
+        "long_take_or_no_cut",
+        "ambiguous_action",
+        "low_quality_compression"
+      ],
+      "source": {
+        "provider": "bilibili_public_page",
+        "bvid": "BV1HiYC6VEVC",
+        "pageUrl": "https://www.bilibili.com/video/BV1HiYC6VEVC/",
+        "pageLabel": "BV1HiYC6VEVC",
+        "title": "学着看长镜头（chunshanj）",
+        "uploader": "寻找瞳的人",
+        "uploaderId": "4084495",
+        "uploadDate": "20260914",
+        "sourceDurationSeconds": 84.606,
+        "selectedFormatId": "30064",
+        "selectedFormatCodec": "avc1.640033",
+        "selectedFormatWidth": 1280,
+        "selectedFormatHeight": 720,
+        "selectedFormatFps": 28.0
+      },
+      "sourceWindow": {
+        "requestedStartNs": 15000000000,
+        "requestedEndNs": 60000000000
+      },
+      "sourceSelectionDecision": "D-009",
+      "readOnlyLocationToken": "t029-media/SR-BILI-TRAVEL-008.mkv",
+      "sourceAndUsagePermission": {
+        "scope": "space-rhythm-internal-test-only",
+        "confirmedBy": "project-default-final-confirmer",
+        "decisionId": "D-009",
+        "confirmationDate": "2026-09-14",
+        "legalConclusion": false,
+        "redistributable": false
+      },
+      "privacyAndDistribution": {
+        "containsPeople": "pending_human_review",
+        "sensitiveContent": "pending_human_review",
+        "publicEvidenceMayContainMediaBytes": false
+      },
+      "mediaSha256": "25ff62726d0b05c0bfba1c2735a9aa67ec3de62ea0ffaadca8a533ded141f79d",
+      "byteLength": 13838623,
+      "selectedSourceTiming": {
+        "status": "not_redecoded_reused_proxy",
+        "timeDomain": "unavailable",
+        "proxyNormalization": "existing proxy retained and independently re-probed"
+      },
+      "ptsPreservationCheck": {
+        "status": "not-evaluated",
+        "reason": "selected source stream was not re-decoded for this reused proxy"
+      },
+      "probe": {
+        "codecName": "mpeg4",
+        "pixelFormat": "yuv420p",
+        "width": 1280,
+        "height": 720,
+        "timeBase": "1/1000",
+        "averageFrameRate": "28",
+        "frameRateMode": "cfr",
+        "frameCount": 1260,
+        "firstFrameTimeNs": 0,
+        "lastFrameTimeNs": 44964000000,
+        "durationNs": 45000000000,
+        "medianFrameDeltaNs": 36000000,
+        "deviatingDeltaCount": 0,
+        "frameTimesSha256": "8e31fab4331f793909a803929dc093c9e874f36ad50ac4cd26d4dd552a2f44a1",
+        "probeDigestSha256": "ed44f97c1eb4f67c444286c5535063d256ed1c9b37c0722fb92cecec56231d56"
+      }
+    },
+    {
+      "clipId": "SR-BILI-TRAVEL-009",
+      "datasetPartition": "final_evaluation",
+      "productCategory": "旅行/风景混剪",
+      "contentCategoriesExpectedPendingHumanReview": [
+        "global_camera_motion",
+        "slow_cut_or_transition",
+        "flash_or_exposure_change"
+      ],
+      "source": {
+        "provider": "bilibili_public_page",
+        "bvid": "BV1zDbV62Ea1",
+        "pageUrl": "https://www.bilibili.com/video/BV1zDbV62Ea1/",
+        "pageLabel": "BV1zDbV62Ea1",
+        "title": "【空镜素材】‌4K超清纽约市的日常生活  4K HDR视频素材",
+        "uploader": "觅音素",
+        "uploaderId": "3546850997045534",
+        "uploadDate": "20260912",
+        "sourceDurationSeconds": 337.621,
+        "selectedFormatId": "30064",
+        "selectedFormatCodec": "avc1.640028",
+        "selectedFormatWidth": 1280,
+        "selectedFormatHeight": 720,
+        "selectedFormatFps": 30.0
+      },
+      "sourceWindow": {
+        "requestedStartNs": 15000000000,
+        "requestedEndNs": 60000000000
+      },
+      "sourceSelectionDecision": "D-009",
+      "readOnlyLocationToken": "t029-media/SR-BILI-TRAVEL-009.mkv",
+      "sourceAndUsagePermission": {
+        "scope": "space-rhythm-internal-test-only",
+        "confirmedBy": "project-default-final-confirmer",
+        "decisionId": "D-009",
+        "confirmationDate": "2026-09-14",
+        "legalConclusion": false,
+        "redistributable": false
+      },
+      "privacyAndDistribution": {
+        "containsPeople": "pending_human_review",
+        "sensitiveContent": "pending_human_review",
+        "publicEvidenceMayContainMediaBytes": false
+      },
+      "mediaSha256": "2e8b1e13f8a01580086643ef555adfca7ccd61a268f081b52ae518b9482e40aa",
+      "byteLength": 33795241,
+      "selectedSourceTiming": {
+        "status": "not_redecoded_reused_proxy",
+        "timeDomain": "unavailable",
+        "proxyNormalization": "existing proxy retained and independently re-probed"
+      },
+      "ptsPreservationCheck": {
+        "status": "not-evaluated",
+        "reason": "selected source stream was not re-decoded for this reused proxy"
+      },
+      "probe": {
+        "codecName": "mpeg4",
+        "pixelFormat": "yuv420p",
+        "width": 1280,
+        "height": 720,
+        "timeBase": "1/1000",
+        "averageFrameRate": "30",
+        "frameRateMode": "cfr",
+        "frameCount": 1350,
+        "firstFrameTimeNs": 0,
+        "lastFrameTimeNs": 44967000000,
+        "durationNs": 45000000000,
+        "medianFrameDeltaNs": 33000000,
+        "deviatingDeltaCount": 0,
+        "frameTimesSha256": "3700de6fe999526da64636b4a0f852e1745486aa203239fd5618ff37ae5b4d66",
+        "probeDigestSha256": "9ae065cf60afdffe343ee36720c60aef634cd8adeac9f7fd80479d4d6a6e42c0"
+      }
+    },
+    {
+      "clipId": "SR-BILI-TRAVEL-010",
+      "datasetPartition": "final_evaluation",
+      "productCategory": "旅行/风景混剪",
+      "contentCategoriesExpectedPendingHumanReview": [
+        "long_take_or_no_cut",
+        "global_camera_motion",
+        "repetitive_motion"
+      ],
+      "source": {
+        "provider": "bilibili_public_page",
+        "bvid": "BV1714y1B7ba",
+        "pageUrl": "https://www.bilibili.com/video/BV1714y1B7ba/",
+        "pageLabel": "BV1714y1B7ba",
+        "title": "【免版权 可商用 4K空镜素材】超长镜头|公路之旅",
+        "uploader": "MOGU素材",
+        "uploaderId": "486032117",
+        "uploadDate": "20230803",
+        "sourceDurationSeconds": 230.155,
+        "selectedFormatId": "30064",
+        "selectedFormatCodec": "avc1.640028",
+        "selectedFormatWidth": 1280,
+        "selectedFormatHeight": 718,
+        "selectedFormatFps": 29.412
+      },
+      "sourceWindow": {
+        "requestedStartNs": 15000000000,
+        "requestedEndNs": 60000000000
+      },
+      "sourceSelectionDecision": "D-009",
+      "readOnlyLocationToken": "t029-media/SR-BILI-TRAVEL-010.mkv",
+      "sourceAndUsagePermission": {
+        "scope": "space-rhythm-internal-test-only",
+        "confirmedBy": "project-default-final-confirmer",
+        "decisionId": "D-009",
+        "confirmationDate": "2026-09-14",
+        "legalConclusion": false,
+        "redistributable": false
+      },
+      "privacyAndDistribution": {
+        "containsPeople": "pending_human_review",
+        "sensitiveContent": "pending_human_review",
+        "publicEvidenceMayContainMediaBytes": false
+      },
+      "mediaSha256": "de258a2dbe51fab1ae7dc247132c22a193a4d9140a34b99c53c759402ce6517f",
+      "byteLength": 28829331,
+      "selectedSourceTiming": {
+        "status": "not_redecoded_reused_proxy",
+        "timeDomain": "unavailable",
+        "proxyNormalization": "existing proxy retained and independently re-probed"
+      },
+      "ptsPreservationCheck": {
+        "status": "not-evaluated",
+        "reason": "selected source stream was not re-decoded for this reused proxy"
+      },
+      "probe": {
+        "codecName": "mpeg4",
+        "pixelFormat": "yuv420p",
+        "width": 1280,
+        "height": 718,
+        "timeBase": "1/1000",
+        "averageFrameRate": "30",
+        "frameRateMode": "cfr",
+        "frameCount": 1350,
+        "firstFrameTimeNs": 0,
+        "lastFrameTimeNs": 44967000000,
+        "durationNs": 45000000000,
+        "medianFrameDeltaNs": 33000000,
+        "deviatingDeltaCount": 0,
+        "frameTimesSha256": "3700de6fe999526da64636b4a0f852e1745486aa203239fd5618ff37ae5b4d66",
+        "probeDigestSha256": "d9a73314c99414b0b89260f367a7cad59997cf8d511ebf9abb12b8bc4dde3390"
+      }
+    }
+  ],
+  "failures": [],
+  "actualQuotaValidation": {
+    "status": "fail",
+    "structural": {
+      "status": "pass",
+      "clipCount": 40,
+      "partitionCounts": {
+        "calibration": 4,
+        "tuning": 16,
+        "final_evaluation": 20
+      },
+      "categoryCounts": {
+        "旅行/风景混剪": 10,
+        "游戏/动作高光": 10,
+        "生活 Vlog/长镜头": 10,
+        "舞蹈/运动": 10
+      }
+    },
+    "frameRateMode": {
+      "status": "fail",
+      "proxyCounts": {
+        "cfr": 40,
+        "vfr": 0
+      },
+      "vfrFinalEvaluationCount": 0,
+      "requiredVfrMinimum": 3,
+      "requiredVfrFinalEvaluationMinimum": 1,
+      "replacementProbe": [
+        {
+          "clipId": "SR-BILI-GAME-004",
+          "selectedSourceFrameRateMode": "cfr",
+          "proxyFrameRateMode": "cfr",
+          "ptsPreservationStatus": "pass"
+        },
+        {
+          "clipId": "SR-BILI-TRAVEL-001",
+          "selectedSourceFrameRateMode": "cfr",
+          "proxyFrameRateMode": "cfr",
+          "ptsPreservationStatus": "pass"
+        },
+        {
+          "clipId": "SR-BILI-TRAVEL-007",
+          "selectedSourceFrameRateMode": "cfr",
+          "proxyFrameRateMode": "cfr",
+          "ptsPreservationStatus": "pass"
+        },
+        {
+          "clipId": "SR-BILI-LIFE-007",
+          "selectedSourceFrameRateMode": "cfr",
+          "proxyFrameRateMode": "cfr",
+          "ptsPreservationStatus": "pass"
+        }
+      ]
+    },
+    "semanticSlices": {
+      "status": "not-evaluated",
+      "declaredExpectedCoverageStatus": "declared_coverage_ok",
+      "declaredExpectedCoverageCounts": {
+        "ambiguous_action": {
+          "all": 7,
+          "final_evaluation": 3
+        },
+        "fast_cut": {
+          "all": 11,
+          "final_evaluation": 5
+        },
+        "flash_or_exposure_change": {
+          "all": 4,
+          "final_evaluation": 2
+        },
+        "global_camera_motion": {
+          "all": 11,
+          "final_evaluation": 6
+        },
+        "impact": {
+          "all": 7,
+          "final_evaluation": 4
+        },
+        "local_subject_motion": {
+          "all": 8,
+          "final_evaluation": 4
+        },
+        "long_take_or_no_cut": {
+          "all": 11,
+          "final_evaluation": 5
+        },
+        "low_quality_compression": {
+          "all": 4,
+          "final_evaluation": 2
+        },
+        "mixed_global_local": {
+          "all": 8,
+          "final_evaluation": 3
+        },
+        "motion_blur_or_occlusion": {
+          "all": 4,
+          "final_evaluation": 3
+        },
+        "near_static": {
+          "all": 6,
+          "final_evaluation": 2
+        },
+        "repetitive_motion": {
+          "all": 7,
+          "final_evaluation": 3
+        },
+        "reversal": {
+          "all": 4,
+          "final_evaluation": 2
+        },
+        "slow_cut_or_transition": {
+          "all": 8,
+          "final_evaluation": 3
+        },
+        "slow_motion": {
+          "all": 4,
+          "final_evaluation": 4
+        },
+        "sparse_free_rhythm": {
+          "all": 6,
+          "final_evaluation": 3
+        },
+        "stop": {
+          "all": 4,
+          "final_evaluation": 3
+        },
+        "tempo_or_energy_change": {
+          "all": 7,
+          "final_evaluation": 4
+        },
+        "vfr": {
+          "all": 3,
+          "final_evaluation": 1
+        }
+      },
+      "reason": "slow_motion and other visual or semantic slices require adjudicated human annotation"
+    }
+  },
+  "datasetManifestSha256": "225e8eafbfaf1ee4624b682ba8700d34ee3e185803bdd775a129a7f027b51959"
+}

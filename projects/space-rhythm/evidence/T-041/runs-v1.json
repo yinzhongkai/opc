@@ -1,0 +1,201 @@
+{
+  "schemaVersion": 1,
+  "taskId": "T-041",
+  "executedDate": "2026-09-16",
+  "sourceCommit": "616307cfc50cb448915358bf1d2a5e6836346eba",
+  "workspaceSource": "projects/space-rhythm/workspace",
+  "entryPoint": "tooling/windows/Invoke-HeadlessTests.ps1",
+  "suiteLabel": "t022",
+  "suiteReuse": "T-022 engineering gate (post-migration independent rerun)",
+  "isolatedCheckout": {
+    "kind": "clean local clone at sourceCommit",
+    "physicalLocation": "projects/space-rhythm/workspace/out/y",
+    "executionDrive": "R:",
+    "executionSource": "R:/projects/space-rhythm/workspace",
+    "reasonForDriveMapping": "Keep MSVC-generated paths below the Windows path-length boundary without changing repository contents.",
+    "trackedCleanBeforeEachFinalRun": true,
+    "trackedCleanAfterEachFinalRun": true
+  },
+  "reproducibility": {
+    "randomSeedHex": "0x5350414345524859",
+    "randomSeedDecimal": "6003370060466505817",
+    "clockMode": "manual for contract state machines; bounded real event loop for Qt smoke",
+    "qpaPlatform": "offscreen",
+    "rhiBackend": "software",
+    "temporaryDirectoryRule": "Each run uses its own evidence/<runId>/work directory.",
+    "qtVersion": "6.11.2",
+    "msvcVersion": "19.44.35228",
+    "windowsSdk": "10.0.26100.0",
+    "cmakeVersion": "3.31.6-msvc6",
+    "ninjaVersion": "1.12.1",
+    "vcpkgBaseline": "9e593bb18ea69cc5095e012465dcd675a822ed0d",
+    "ffmpegVersion": "8.1.2#3"
+  },
+  "coverageCounts": {
+    "headless": 166,
+    "unit": 108,
+    "contract": 33,
+    "golden": 70,
+    "integration": 23,
+    "qt": 16,
+    "qml": 4,
+    "ui": 9,
+    "worker": 1,
+    "media": 47,
+    "audio": 43,
+    "video": 10,
+    "recovery": 1,
+    "measured": 5,
+    "notEvaluated": 5,
+    "gateG0": 34,
+    "gateG1": 141,
+    "gateG2": 32,
+    "gateG3": 121,
+    "gateG4": 53
+  },
+  "goldenInputs": [
+    {
+      "kind": "media",
+      "fixtureCount": 13,
+      "source": "FFmpeg lavfi, digital silence, or project-authored fixed bytes",
+      "license": "CC0-1.0",
+      "fixtureManifestSha256": "ff30af091a1200baeff3871cd3df15b085609507eab14eecd021ed0c71301cd3",
+      "generatedManifestSha256": "aaac8ca1582732898821fffb734dd9b9e569240d21022e87df27ece01310797c"
+    },
+    {
+      "kind": "video",
+      "fixtureCount": 10,
+      "source": "project-generated deterministic synthetic frames",
+      "license": "CC0-1.0",
+      "fixtureManifestSha256": "46cedfeebc0158c9baf090103cbeb13ddd7724520e040b51c752c85fa1991073",
+      "generatedManifestSha256": "9e5a2dd8953873c8522c361bada4b23567cf5615e95df4cc9ef908ef359f2354"
+    },
+    {
+      "kind": "audio",
+      "fixtureCount": 10,
+      "source": "project-generated deterministic PCM",
+      "license": "CC0-1.0",
+      "fixtureManifestSha256": "080a83d150727f4a1db4b66da1b6aae37f741f2e0cc61f08fba916ed30ec9bd4",
+      "generatedManifestSha256": "552604abe80a95adab839b9b0c959ea44464cb785e28d007d291777cd6c8e40f"
+    }
+  ],
+  "finalRuns": [
+    {
+      "preset": "windows-msvc-x64-debug",
+      "buildType": "Debug",
+      "runId": "20260916T033437Z-616307cfc50c-windows-msvc-x64-debug-01",
+      "status": "pass(engineering-scope)",
+      "runnerDurationMs": 140763,
+      "junit": { "tests": 166, "failures": 0, "skipped": 0, "timeSeconds": 30 },
+      "pathIsolationPass": true,
+      "hashManifestEntries": 34,
+      "hashManifestMismatches": 0,
+      "hashes": {
+        "resultJson": "b2206c17eadac2e28ae543319c35b1aa6f856eceab6ab35dbacb88fbc595a900",
+        "environmentJson": "2d9dd0bc94330c7024ef7b928e2b2dda17c493f5248199bc9dfe8d0d18e76ba6",
+        "junitXml": "508d718c41a4d79aed92cd39cad7314a50e5b7eba07d5ac3fd5d4670a8e53472",
+        "ctestLog": "ea74bf6ef07dde5b611c5d276513d7249b7e625184689407197697fb874f1d20",
+        "discoveryJson": "a2d895506ec8f626b8d05e3a3d567199038d9b2b280f2412c42b9212c9a8c243",
+        "pathIsolationJson": "623846506eda7f85f6c25c68d62d0eb60375b09209d79d60aa4b8541895279d2",
+        "sha256Json": "29c6b2175279d24b8ed43213553181ba5c9c2c1548ef06c863f55544c2505d52"
+      }
+    },
+    {
+      "preset": "ci-windows-msvc-x64",
+      "buildType": "RelWithDebInfo",
+      "runId": "20260916T032958Z-616307cfc50c-ci-windows-msvc-x64-01",
+      "status": "pass(engineering-scope)",
+      "runnerDurationMs": 122988,
+      "junit": { "tests": 166, "failures": 0, "skipped": 0, "timeSeconds": 23 },
+      "pathIsolationPass": true,
+      "hashManifestEntries": 34,
+      "hashManifestMismatches": 0,
+      "hashes": {
+        "resultJson": "2a4b5b9b36014a2f1ec3a2de40722d4109030a631ae473afd62f89fb54cd910b",
+        "environmentJson": "13ba868726cf7ebebc1660d839a5919d2ed76648144de90376162b080c55c18f",
+        "junitXml": "675aadfe57873ab32100b942f0780bfe574ef062573008d6caac6f7724a199a1",
+        "ctestLog": "b29e12bd0b3412f60cc75d711d8a029a99df6e9cfd4c9ffed277575776c8c55e",
+        "discoveryJson": "e5c3b01b4aab13f8c7bd4940d9e75675a07bae55264384798d058df323c08818",
+        "pathIsolationJson": "d27198d858ed5c617ddf52c1505bf2faab27e00b1e418b3a7f7bf467fce09c60",
+        "sha256Json": "c29f0a9f9c8f3941e6a7542e6c3876acd4638dfbda9027af95226385601fb4aa"
+      }
+    },
+    {
+      "preset": "windows-msvc-x64-release",
+      "buildType": "Release",
+      "runId": "20260916T033222Z-616307cfc50c-windows-msvc-x64-release-01",
+      "status": "pass(engineering-scope)",
+      "runnerDurationMs": 115098,
+      "junit": { "tests": 166, "failures": 0, "skipped": 0, "timeSeconds": 23 },
+      "pathIsolationPass": true,
+      "hashManifestEntries": 34,
+      "hashManifestMismatches": 0,
+      "hashes": {
+        "resultJson": "1e029cf24653501e0c5f464ff738bc29003f796b08fb30d7df7f18f443704794",
+        "environmentJson": "27a60df0631c306589d9aa687c2887314f03ab3ce42fe3cb392aa2d9298cdf9e",
+        "junitXml": "2fd1a549475d1a985537e6088c9be05bb3f9a3aca4265bb5cfbaf8c7077d6baf",
+        "ctestLog": "379cc94c0e3cde6c4536225aed4dbc4bd3856fb34babb51e90676dd603af8762",
+        "discoveryJson": "d07f092606c5ea1f74510e04f70bfb473337296114a43c73ea15c8f00ed77485",
+        "pathIsolationJson": "13073e977a35689246cd4e1315f4d94bdf5508fc5d0b07f0e19324b1ba692875",
+        "sha256Json": "e3c49b46b4848f575eb2817a6e754400a99a3c2d73a77e4ffd28af93efeabfd0"
+      }
+    }
+  ],
+  "preservedDiagnosticRuns": [
+    {
+      "runId": "20260916T031217Z-d198c09221f6-windows-msvc-x64-debug-01",
+      "sourceCommit": "d198c09221f6",
+      "status": "blocked",
+      "reason": "A clean clone did not contain the ignored generated audio timbre required by the build.",
+      "disposition": "Test harness now generates the deterministic audio golden inputs before build in e8448a3; original evidence retained.",
+      "resultJsonSha256": "f0cb5175e197ed21bb4eb679ec75dc2005f8b89c92da3f0ed03507490966c844",
+      "sha256JsonSha256": "4a4a0d47d501074233ee4e0863e789c3426aa521bdfc11b85158689645a5e78d"
+    },
+    {
+      "runId": "20260916T031726Z-e8448a3b4571-windows-msvc-x64-debug-01",
+      "sourceCommit": "e8448a3b4571",
+      "status": "blocked",
+      "reason": "The first clean checkout path exceeded an MSVC generated-object path boundary and produced C1083.",
+      "disposition": "Execution moved to a short subst drive while retaining the physical clone under workspace/out; original evidence retained.",
+      "resultJsonSha256": "48be9ae8e41396101f4b34b27cedb6efcffb49770b4e0b73294d525883810612",
+      "sha256JsonSha256": "e3268d72088141ba8ce27bdd2cbd50b60f87800db9f749da2f5425f1007fa8c9"
+    },
+    {
+      "runId": "20260916T031910Z-e8448a3b4571-windows-msvc-x64-debug-01",
+      "sourceCommit": "e8448a3b4571",
+      "status": "blocked",
+      "ctest": { "tests": 166, "failures": 0, "skipped": 0 },
+      "reason": "CTest passed but the path audit compared the subst path with the physical repository path.",
+      "disposition": "The audit resolves the Git prefix in 616307c; original evidence retained and is not counted as a final run.",
+      "resultJsonSha256": "7aa6885954e4abc739768bdfbdcd44d01f2657ea604f78a44176bf7f7f71b9d3",
+      "junitXmlSha256": "10cdd0b1d37a405e29700f3cf874c05c0e46dc0c53deee51bc8231983b2499e4",
+      "pathIsolationJsonSha256": "00a0016ba405c4df074b2404f42817a79eeaa7caa99fecba197ee8e8312bf7ef"
+    },
+    {
+      "runId": "20260916T032410Z-616307cfc50c-windows-msvc-x64-debug-01",
+      "sourceCommit": "616307cfc50c",
+      "status": "fail",
+      "ctest": { "tests": 166, "failures": 1, "skipped": 0 },
+      "failedTest": "qt.ui_real_workflow.cancelledWorkerJobDoesNotPoisonPreviewAfterReconnect",
+      "observed": "workspaceState=failed after approximately 113 seconds",
+      "expected": "workspaceState=idle",
+      "disposition": "Preserved as a non-reproduced transient observation. The independent final Debug rerun passed in 3.30 seconds with no oracle, test, or product implementation change.",
+      "resultJsonSha256": "78aae244f50d341c3e224fd369b14422c37424fc5bcae49565d92b43f565f6bd",
+      "junitXmlSha256": "414aa979430ac770c426f4898c3b41d50d38ec7d93fd28c8f433c8e5a6288707",
+      "lastTestsFailedSha256": "aec85cc07556cef0a3f2da41a971d0f7d94c365f8576fc5541b82dc8c73628d1",
+      "sha256JsonSha256": "ee11b6d9c508d33b0dbc9863393831bb3b22b25529cbc3278170d9e5527c801b"
+    }
+  ],
+  "deferredEvaluations": {
+    "productEffectEvaluation": "not-evaluated(deferred-to-personal-use-feedback)",
+    "naturalnessEvaluation": "not-evaluated(deferred-to-personal-use-feedback)",
+    "realVfrEvaluation": "not-evaluated(deferred-to-personal-use-feedback)",
+    "formalProductPerformanceEvaluation": "not-evaluated(deferred-to-personal-use-feedback)"
+  },
+  "excludedScopes": [
+    "T-029 product evaluation",
+    "T-042 release rebuild",
+    "package/",
+    "scripts/__pycache__/"
+  ]
+}

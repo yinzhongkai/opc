@@ -1,0 +1,174 @@
+{
+  "schemaVersion": 1,
+  "evidenceVersion": 1,
+  "task": "T-022",
+  "baseCommit": "be61c71e9803",
+  "rawEvidenceRoot": "out/evidence/T-022",
+  "runner": "tooling/windows/Invoke-HeadlessTests.ps1",
+  "runnerArguments": "-Task T-022 -Preset <preset> -Clean -Parallel 4",
+  "reproducibility": {
+    "randomSeedHex": "0x5350414345524859",
+    "randomSeedDecimal": "6003370060466505817",
+    "clock": "manual for contract state machines; bounded real event loop for Qt integration",
+    "timezone": "China Standard Time with UTC run IDs",
+    "qpaPlatform": "offscreen",
+    "rhiBackend": "software",
+    "temporaryDirectory": "one work/ directory below each run ID",
+    "trackedWorktreeDirty": false
+  },
+  "evaluationBoundary": {
+    "productEffectEvaluation": "not-evaluated(deferred-to-personal-use-feedback)",
+    "naturalnessEvaluation": "not-evaluated(deferred-to-personal-use-feedback)",
+    "realVfrEvaluation": "not-evaluated(deferred-to-personal-use-feedback)",
+    "formalProductPerformanceEvaluation": "not-evaluated(deferred-to-personal-use-feedback)"
+  },
+  "finalRuns": [
+    {
+      "preset": "windows-msvc-x64-debug",
+      "runId": "20260915T103339Z-be61c71e9803-windows-msvc-x64-debug-01",
+      "status": "pass",
+      "tests": 166,
+      "passed": 166,
+      "failed": 0,
+      "skipped": 0,
+      "durationMs": 129658,
+      "hashes": {
+        "result.json": "67ac1c3dde983e89fb2e5d7653be91a7056c41b0ecf13d24267cb4bdfca557fe",
+        "environment.json": "1acdd4270d27c9040d68880f91b1a106764a614e579bef7ae030b0cdb52841d5",
+        "ctest-junit.xml": "efa7e96c6f30f16ba2027f782e34a5a3c9f10f693fbe797a671652e0cef3c649",
+        "ctest.log": "387187718deb5349af61f99df8f5b76198758046de0ceecff68699003197afb4",
+        "audio-analysis.json": "57e03389abbabf1c102aaaa7a75642eef328f9e25b5611ec7ddcccfc51715758",
+        "audio-render.json": "9e1b6f1ec92aa5a940ba9c99a1568bb43b42404f4e9cda82ea875deb0c0863b2",
+        "video-analysis.json": "fa6ca60ae4915dc792d5edee74afcb73cb5fd27cb4539b65ded63da25a335435",
+        "sync-recovery.json": "6205da1ea54113e7792bc01dc62037a9f5d597756c8fd6dcf3616990a9bb718e",
+        "sha256.json": "7515290c984ce86ebe64c9ff5128700c3758f4bba602f04cb98f76a3e1042bbb"
+      },
+      "measurements": {
+        "audioAnalysisDurationUsMedian": 100469,
+        "audioAnalysisDurationUsP95": 114572,
+        "audioAnalysisThroughputFramesPerSecondMedian": 951710,
+        "audioAnalysisCancellationLatencyUsP95": 406,
+        "audioRenderMs": 311.833,
+        "audioRenderThroughputFramesPerSecond": 18471431.334,
+        "audioRenderPeakWorkingSetBytes": 326987776,
+        "audioRenderCancellationLatencyMs": 0.114,
+        "videoAnalysisDurationUsMedian": 1666889,
+        "videoAnalysisDurationUsP95": 1733103,
+        "videoAnalysisFramesPerSecondMedian": 53,
+        "videoAnalysisCancellationLatencyUsP95": 17544,
+        "seekCallLatencyUs": 66,
+        "autosaveRecoveryUs": 3667,
+        "primaryFallbackUs": 1239
+      }
+    },
+    {
+      "preset": "ci-windows-msvc-x64",
+      "configuration": "RelWithDebInfo",
+      "runId": "20260915T103555Z-be61c71e9803-ci-windows-msvc-x64-01",
+      "status": "pass",
+      "tests": 166,
+      "passed": 166,
+      "failed": 0,
+      "skipped": 0,
+      "durationMs": 105997,
+      "hashes": {
+        "result.json": "bee3abcf1dd44dc88471469ed6acec2ef2bf8137b0322065d44f836a9e7c22c7",
+        "environment.json": "fd621814b05435c55ba2cca4396b2c5b46dedb6e5da7f6397df3b8242a2f5d56",
+        "ctest-junit.xml": "ba1a8c1e53c03b89623ea83dd86eb78fa7de672af219eb84e7046ed99c627c2e",
+        "ctest.log": "7fded9cbf21a7243d3e75df74a18a05a041627d1a84fd9c35a6e715b1968b2ab",
+        "audio-analysis.json": "1f2c4a35383bb63e45e86a16b35ca7b39bdaceae96b67524291eea9eb316a9a5",
+        "audio-render.json": "962c4943ca8841ad1d1ff4bae6f5fcb8299b038f0e30dbbc1b68d6138aa6b1b4",
+        "video-analysis.json": "b2791e78cfdde424dcd057c69344b56198789ee91ad2a8253849dc2d41cd6d7b",
+        "sync-recovery.json": "e02c7ad408e712343c9266391c34b34ee077c6ef9cf7e59eccc1cfec2525d0f5",
+        "sha256.json": "c2a645b224110e6ed38d1a71ee9f8aab4497752b646e2bb1dd781d294067ed4e"
+      },
+      "measurements": {
+        "audioAnalysisDurationUsMedian": 12742,
+        "audioAnalysisDurationUsP95": 13744,
+        "audioAnalysisThroughputFramesPerSecondMedian": 7514088,
+        "audioAnalysisCancellationLatencyUsP95": 781,
+        "audioRenderMs": 45.856,
+        "audioRenderThroughputFramesPerSecond": 125609237.513,
+        "audioRenderPeakWorkingSetBytes": 243044352,
+        "audioRenderCancellationLatencyMs": 0.121,
+        "videoAnalysisDurationUsMedian": 162971,
+        "videoAnalysisDurationUsP95": 173722,
+        "videoAnalysisFramesPerSecondMedian": 548,
+        "videoAnalysisCancellationLatencyUsP95": 2680,
+        "seekCallLatencyUs": 16,
+        "autosaveRecoveryUs": 1604,
+        "primaryFallbackUs": 911
+      }
+    },
+    {
+      "preset": "windows-msvc-x64-release",
+      "runId": "20260915T103750Z-be61c71e9803-windows-msvc-x64-release-01",
+      "status": "pass",
+      "tests": 166,
+      "passed": 166,
+      "failed": 0,
+      "skipped": 0,
+      "durationMs": 103986,
+      "hashes": {
+        "result.json": "54ac8f9b35f149f25ab2edf2067025f8c080009044991c3aeb5aee18bb07091b",
+        "environment.json": "642b1d08ba60706ab9baca1bf9c65180d152ca9e0b5b737cd4594d7ce6873a7d",
+        "ctest-junit.xml": "042358eb34c2c6f1cde4cd25df7cf7a262762ad83386ce8ed45cf792d8865a7b",
+        "ctest.log": "302413368d91b96145663f259dcaaa13b5ded738bf6df70b446b04f88616365a",
+        "audio-analysis.json": "b1974414c1b4cbd1624fcef8dc096190b839dd1d732a37d4a5d8b0b56febbb69",
+        "audio-render.json": "b70d29a77d8834f3de6508f3619dfd38667b69f78d3f6ab7287669e87abd3512",
+        "video-analysis.json": "a29593016069e4de609e6d2e88060f88e695cbf4718b911998c2fa3da9e76160",
+        "sync-recovery.json": "91ea5d8371c24c34cf26ca00f28a83730d16d08d15c6064784d7f0269d266c7a",
+        "sha256.json": "deaad69c7784b99c7ce919bc616163e612e4cfcc270909ad095d601d8ed550e3"
+      },
+      "measurements": {
+        "audioAnalysisDurationUsMedian": 12735,
+        "audioAnalysisDurationUsP95": 14007,
+        "audioAnalysisThroughputFramesPerSecondMedian": 7522331,
+        "audioAnalysisCancellationLatencyUsP95": 673,
+        "audioRenderMs": 40.802,
+        "audioRenderThroughputFramesPerSecond": 141168166.578,
+        "audioRenderPeakWorkingSetBytes": 242855936,
+        "audioRenderCancellationLatencyMs": 0.168,
+        "videoAnalysisDurationUsMedian": 163340,
+        "videoAnalysisDurationUsP95": 170460,
+        "videoAnalysisFramesPerSecondMedian": 544,
+        "videoAnalysisCancellationLatencyUsP95": 1892,
+        "seekCallLatencyUs": 6,
+        "autosaveRecoveryUs": 1124,
+        "primaryFallbackUs": 1103
+      }
+    }
+  ],
+  "sharedDeterministicMeasurements": {
+    "previewExportOneFrameNs": 33333334,
+    "previewExportMaximumErrorNs": 33000000,
+    "previewExportWithinOneFrame": true,
+    "seekRequestedTimeNs": 200000000,
+    "seekSelectedFrameTimeNs": 180000000,
+    "seekSelectionErrorNs": 20000000,
+    "audioPlayheadTimeNs": 250000000,
+    "selectedVideoTimeNs": 180000000,
+    "videoLatenessNs": 70000000,
+    "audioRenderPcmSha256": "f1f26ab93fe29e58944919a15eca47314f7fc4a638b99e15de0daeb73345d3f8",
+    "thresholdStatus": "not-evaluated"
+  },
+  "fixtureAudit": {
+    "media": {"count": 13, "license": "CC0-1.0", "manifestSha256": "f267c6d2e98d6a35279ff049ec306de3ab13c42c986b8608c033b507a4682704"},
+    "video": {"count": 10, "license": "CC0-1.0", "manifestSha256": "126dc37487809c92710ed969fd432bdadea9dee0f4bf5d904189b2f39fb1a575"},
+    "audio": {"count": 10, "license": "CC0-1.0", "manifestSha256": "400b222482de2b26a747dd33e741c0e7a91b63b238d3157fa7827eb0c0eb5b97"},
+    "mediaAuditSha256": "4b4c7f06112aba87ae66e31c9c59b566e244c4882f0bc35a06d2179bfaeb4cae"
+  },
+  "preservedDiagnostics": [
+    {"runId": "20260915T094851Z-56febef38e6f-windows-msvc-x64-debug-01", "status": "fail", "reason": "initial measurement harness dereferenced an empty optional; corrected before clean final runs"},
+    {"runId": "20260915T095344Z-56febef38e6f-windows-msvc-x64-debug-01", "status": "fail", "reason": "monolithic Qt integration process observed ipc.receive; three isolated repetitions passed, but the observation was retained"},
+    {"runId": "20260915T100726Z-9224beaf77d5-windows-msvc-x64-debug-01", "status": "fail", "reason": "new negative test over-constrained an unpublished message key and generated Qt GUI tests had no capturable stdout"},
+    {"runId": "20260915T101342Z-942f331a8588-windows-msvc-x64-debug-01", "status": "fail", "reason": "monolithic Qt integration process timed out; independent execution passed"},
+    {"runId": "20260915T102852Z-c7ed3b097a36-ci-windows-msvc-x64-01", "status": "fail", "reason": "diagnostic Qt report identified cross-case worker lifecycle contamination; scenarios were registered as independent processes without changing their assertions"}
+  ],
+  "historicalEnvironment": {
+    "id": "T021-ENV-001",
+    "status": "blocked",
+    "note": "The historical T-021 Release result remains blocked and is not rewritten. The T-022 Release result is new evidence after D-015/current personal SAC-off conditions, not a retroactive reclassification or SAC/WDAC compatibility claim."
+  },
+  "excludedFromCommit": ["package/", "scripts/__pycache__/"]
+}
