@@ -1,0 +1,7 @@
+schemaVersion: 1
+workspace:
+  driver: git
+  repository: git@github.com:yinzhongkai/book-yocto.git
+  branch: main
+  revision: 4bc485e940bce6c8bf8978d57ae40d8d26c031a4
+  checkout: ../book-yocto
