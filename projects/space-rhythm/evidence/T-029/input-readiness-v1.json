@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "taskId": "T-029",
+  "checkedDate": "2026-09-14",
+  "sourceCommit": "0513aa332a11f5fbd867d9bea24764b042aa87f3",
+  "taskStatus": "blocked",
+  "inputs": {
+    "startAuthorization": {
+      "status": "confirmed",
+      "source": "User explicitly authorized starting T-029 on 2026-09-14"
+    },
+    "productVideoDataset": {
+      "status": "missing_confirmed_input",
+      "discoveredProductClipCount": 0,
+      "excludedSyntheticContractFixtureCount": 10,
+      "requiredClipFields": [
+        "clipId",
+        "readOnlyLocation",
+        "mediaSha256",
+        "sourceAndUsagePermission",
+        "durationNs",
+        "geometry",
+        "frameRateMode",
+        "streamKey",
+        "contentCategories",
+        "qualityAttributes",
+        "datasetPartition"
+      ]
+    },
+    "humanAnnotations": {
+      "status": "missing_confirmed_input",
+      "discoveredAnnotationSetCount": 0,
+      "requiredEventFields": [
+        "annotationId",
+        "clipId",
+        "kind",
+        "timeNs",
+        "durationNs",
+        "matchWindowBeforeNs",
+        "matchWindowAfterNs",
+        "annotationVersion",
+        "annotatorAnonymousId",
+        "reviewerAnonymousId"
+      ],
+      "requiredEditActions": [
+        "add",
+        "delete",
+        "move",
+        "reclassify",
+        "lock"
+      ]
+    },
+    "naturalnessRubric": {
+      "status": "missing_confirmed_input",
+      "confirmedRubricVersion": null,
+      "candidateDimensions": [
+        "temporalAlignment",
+        "visualSalienceToRhythmicAccent",
+        "densityAndDistractingExtraBeats",
+        "continuity",
+        "manualCorrectionBurden"
+      ],
+      "requiredDecisions": [
+        "ratingScaleOrPairedPreference",
+        "reviewerCountAndComposition",
+        "blindRandomizationAndRepeatRules",
+        "playbackConditions",
+        "aggregationAndMissingVoteRules",
+        "passThreshold"
+      ]
+    },
+    "benchmarkHardware": {
+      "status": "missing_confirmed_input",
+      "confirmedBaselineId": null,
+      "observedHostFacts": {
+        "activePowerScheme": "balanced",
+        "operatingSystem": "unavailable(reason=access_denied)",
+        "cpu": "unavailable(reason=access_denied)",
+        "physicalMemory": "unavailable(reason=access_denied)",
+        "gpuAndDriver": "unavailable(reason=access_denied)"
+      },
+      "wineT028MeasurementsAreApprovedWindowsBaseline": false
+    },
+    "effectThresholds": {
+      "status": "missing_confirmed_input",
+      "requiredMetrics": [
+        "precisionRecallF1ByKindAndSlice",
+        "falsePositivesPerMinute",
+        "absoluteTimeErrorP95Ns",
+        "gradualTransitionIoU",
+        "manualCorrectionsPerMinute",
+        "naturalnessRatingOrPreference"
+      ],
+      "confirmedThresholds": null
+    },
+    "performanceThresholds": {
+      "status": "missing_confirmed_input",
+      "requiredMetrics": [
+        "analyzedFpsOrRealtimeFactor",
+        "wallTimeP95Us",
+        "peakPrivateAndWorkingBytes",
+        "peakThreadCount",
+        "cancellationLatencyP95Us"
+      ],
+      "confirmedThresholds": null
+    }
+  },
+  "gates": {
+    "productEffect": "not-evaluated",
+    "productPerformance": "not-evaluated",
+    "naturalness": "not-evaluated",
+    "optionalModel": "not-evaluated"
+  },
+  "modelEvaluationStarted": false,
+  "nextActionOwner": "user_or_product_owner"
+}

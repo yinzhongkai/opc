@@ -1,0 +1,204 @@
+{
+  "schemaVersion": 1,
+  "measurementContractVersion": "0.1.0",
+  "date": "2026-09-11",
+  "status": "measured/not-evaluated",
+  "thresholds": {
+    "baselineGpu": null,
+    "pixelTolerance": null,
+    "performanceThresholds": null
+  },
+  "environment": {
+    "os": "Windows x64",
+    "configuration": "Debug",
+    "compiler": "MSVC 19.44",
+    "qt": "6.11.2 shared",
+    "screenCaptureScalePolicy": "physical pixel normalization; test target 192x108",
+    "processCpuTimer": "GetProcessTimes; 100 ns representation with host scheduler sampling granularity"
+  },
+  "capability": {
+    "defaultGpu": {
+      "api": "Direct3D 11",
+      "adapter": "NVIDIA GeForce RTX 5060 Laptop GPU",
+      "vendorId": 4318,
+      "deviceId": 11609,
+      "dedicatedVideoMemoryCapacityBytes": 8189378560
+    },
+    "software": {
+      "api": "Qt Quick Software",
+      "paintDevice": "QImage Format_ARGB32_Premultiplied converted to RGBA8888 straight alpha"
+    },
+    "gpuFrameTime": {
+      "availability": "unavailable",
+      "reason": "Qt public API exposes no per-frame GPU timestamp for this redirected path"
+    },
+    "gpuMemoryUsage": {
+      "availability": "unavailable",
+      "reason": "Public capability reports adapter capacity, not live allocation usage; no estimate made"
+    }
+  },
+  "sharedInputs": {
+    "renderRecipeSchemaVersion": 1,
+    "renderContractVersion": "0.1.0",
+    "geometrySchemaVersion": 1,
+    "geometryContractVersion": "0.1.0",
+    "templateVersion": "1.0.0",
+    "widthPx": 192,
+    "heightPx": 108,
+    "frameIndex": 50,
+    "frameTimeNs": 500000000,
+    "deterministicSeed": 14230487856,
+    "eventCount": 12,
+    "seriesCount": 16,
+    "samplesPerSeries": 256
+  },
+  "pixelDifference": [
+    {
+      "backend": "qt-software",
+      "templateId": "space-rhythm.waveform-oscilloscope",
+      "onscreenSha256": "9529f9fbd6df1ce33c7e6ad6925ae1c636edbc62860689a8de7c3220b595d256",
+      "offscreenSha256": "9529f9fbd6df1ce33c7e6ad6925ae1c636edbc62860689a8de7c3220b595d256",
+      "exactHashMatch": true,
+      "maximumChannelDifference": 0,
+      "differentPixelCount": 0,
+      "comparedPixelCount": 20736
+    },
+    {
+      "backend": "qt-software",
+      "templateId": "space-rhythm.spectrum-geometry",
+      "onscreenSha256": "9cc6e4937ddc291ba4a5e18259a869b5b528fe7227f3984facd15aee6b6efbd6",
+      "offscreenSha256": "9cc6e4937ddc291ba4a5e18259a869b5b528fe7227f3984facd15aee6b6efbd6",
+      "exactHashMatch": true,
+      "maximumChannelDifference": 0,
+      "differentPixelCount": 0,
+      "comparedPixelCount": 20736
+    },
+    {
+      "backend": "qt-software",
+      "templateId": "space-rhythm.rhythm-line-pulse",
+      "onscreenSha256": "fe7090a1c16dc23456eefca0bd2c57882a7cb10f0c1f4c0e9c58fd0e208e7384",
+      "offscreenSha256": "fe7090a1c16dc23456eefca0bd2c57882a7cb10f0c1f4c0e9c58fd0e208e7384",
+      "exactHashMatch": true,
+      "maximumChannelDifference": 0,
+      "differentPixelCount": 0,
+      "comparedPixelCount": 20736
+    },
+    {
+      "backend": "default-gpu-d3d11",
+      "templateId": "space-rhythm.waveform-oscilloscope",
+      "onscreenSha256": "49420df492f0fa5fb52ade35c82951ca2cb0be7699629faa45c03ddd0a075f9e",
+      "offscreenSha256": "49420df492f0fa5fb52ade35c82951ca2cb0be7699629faa45c03ddd0a075f9e",
+      "exactHashMatch": true,
+      "maximumChannelDifference": 0,
+      "differentPixelCount": 0,
+      "comparedPixelCount": 20736
+    },
+    {
+      "backend": "default-gpu-d3d11",
+      "templateId": "space-rhythm.spectrum-geometry",
+      "onscreenSha256": "1954cf2b79dec86683d06acf8eed34c2087879e845f5ea82f4244e935c3a5966",
+      "offscreenSha256": "1954cf2b79dec86683d06acf8eed34c2087879e845f5ea82f4244e935c3a5966",
+      "exactHashMatch": true,
+      "maximumChannelDifference": 0,
+      "differentPixelCount": 0,
+      "comparedPixelCount": 20736
+    },
+    {
+      "backend": "default-gpu-d3d11",
+      "templateId": "space-rhythm.rhythm-line-pulse",
+      "onscreenSha256": "3a54ad0ff50e64142692f1b4dcd9cd3fadca22b0efa0706a70f15eb592281a3f",
+      "offscreenSha256": "3a54ad0ff50e64142692f1b4dcd9cd3fadca22b0efa0706a70f15eb592281a3f",
+      "exactHashMatch": true,
+      "maximumChannelDifference": 0,
+      "differentPixelCount": 0,
+      "comparedPixelCount": 20736
+    }
+  ],
+  "frameMeasurements": [
+    {
+      "case": "software-waveform-160x90",
+      "totalFrameNs": 4370400,
+      "processCpuNs": 0,
+      "geometryBuildNs": 2317300,
+      "polishSyncRenderReadbackNs": 2018600,
+      "uploadedVertices": 816,
+      "uploadedBytes": 9792,
+      "processWorkingSetBytes": 46227456
+    },
+    {
+      "case": "software-empty-64x64",
+      "totalFrameNs": 703800,
+      "processCpuNs": 0,
+      "geometryBuildNs": 172400,
+      "polishSyncRenderReadbackNs": 499400,
+      "uploadedVertices": 0,
+      "uploadedBytes": 0,
+      "processWorkingSetBytes": 48857088
+    },
+    {
+      "case": "software-empty-320x180",
+      "totalFrameNs": 2535100,
+      "processCpuNs": 0,
+      "geometryBuildNs": 243500,
+      "polishSyncRenderReadbackNs": 2252700,
+      "uploadedVertices": 0,
+      "uploadedBytes": 0,
+      "processWorkingSetBytes": 50810880
+    },
+    {
+      "case": "software-empty-640x360",
+      "totalFrameNs": 3256700,
+      "processCpuNs": 0,
+      "geometryBuildNs": 343500,
+      "polishSyncRenderReadbackNs": 2868900,
+      "uploadedVertices": 0,
+      "uploadedBytes": 0,
+      "processWorkingSetBytes": 53551104
+    },
+    {
+      "case": "software-dense-128x96-50000-events-100000-samples",
+      "totalFrameNs": 277033100,
+      "processCpuNs": 281250000,
+      "geometryBuildNs": 274632600,
+      "polishSyncRenderReadbackNs": 2322200,
+      "uploadedVertices": 1536,
+      "uploadedBytes": 18432,
+      "processWorkingSetBytes": 141668352
+    },
+    {
+      "case": "default-gpu-waveform-192x108",
+      "totalFrameNs": 12664000,
+      "processCpuNs": 0,
+      "geometryBuildNs": 8170500,
+      "polishSyncRenderReadbackNs": 4435700,
+      "uploadedVertices": 1224,
+      "uploadedBytes": 14688,
+      "processWorkingSetBytes": 79278080
+    },
+    {
+      "case": "default-gpu-spectrum-192x108",
+      "totalFrameNs": 4481000,
+      "processCpuNs": 0,
+      "geometryBuildNs": 295100,
+      "polishSyncRenderReadbackNs": 4135400,
+      "uploadedVertices": 168,
+      "uploadedBytes": 2016,
+      "processWorkingSetBytes": 80502784
+    },
+    {
+      "case": "default-gpu-rhythm-line-pulse-192x108",
+      "totalFrameNs": 4580500,
+      "processCpuNs": 0,
+      "geometryBuildNs": 291800,
+      "polishSyncRenderReadbackNs": 4235600,
+      "uploadedVertices": 216,
+      "uploadedBytes": 2592,
+      "processWorkingSetBytes": 81395712
+    }
+  ],
+  "notes": [
+    "These are single Debug-build observations, not a statistical benchmark.",
+    "A zero processCpuNs means GetProcessTimes did not advance within the short sample; it is not an estimate.",
+    "No pixel or performance pass/fail decision is made because the baseline GPU and thresholds are unconfirmed."
+  ]
+}

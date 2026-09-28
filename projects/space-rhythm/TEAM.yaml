@@ -1,0 +1,37 @@
+schemaVersion: 3
+project: 'space-rhythm'
+roleKnowledge:
+  developer:
+    - reverse-engineering
+  build-engineer:
+    - windows-qt-build-engineering
+  core-systems-engineer:
+    - cpp-core-systems-engineering
+  multimedia-engineer:
+    - ffmpeg-media-engineering
+  tester:
+    - cpp-qt-testing
+  ui-engineer:
+    - qt-quick-ui-engineering
+  video-algorithm-engineer:
+    - opencv-video-rhythm-analysis
+  audio-dsp-engineer:
+    - audio-dsp-rhythm-engineering
+  graphics-engineer:
+    - qt-scene-graph-engineering
+  release-engineer:
+    - windows-release-engineering
+members:
+  - project-manager
+  - developer-reverse
+  - product-manager
+  - architect
+  - build-engineer-windows-qt
+  - core-systems-engineer-cpp
+  - multimedia-engineer-ffmpeg
+  - tester-cpp-qt
+  - ui-engineer-qt-quick
+  - video-algorithm-engineer-cv
+  - audio-dsp-engineer
+  - graphics-engineer-qt-scenegraph
+  - release-engineer-windows
