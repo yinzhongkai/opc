@@ -106,6 +106,19 @@
 - 阻塞与下一位行动人：本任务无阻塞；业务侧下一位行动人仍为 writer（T-003）与 planner（T-004），发布通道 H-003 等待用户
 - 更新日期：2026-09-28
 
+## T-009：采用视觉设计与社交媒体运营能力并重排内容生产职责
+- 负责人：project-manager
+- 状态：in_progress
+- 授权来源与日期：2026-09-29 用户在项目经理会话中确认项目同时需要视觉设计和小红书运营岗位，要求公共 feature 考虑合入主线框架，并明确指示继续执行第 5 步——建立项目任务分支并登记采用任务
+- 目标与范围：在项目任务分支 `feat/free-pipi-shrimp/T-009-content-production-team` 提前采用已进入本地 `opc-v0.0.3-dev` 的视觉设计、通用社交媒体运营和小红书运营知识三项公共能力；由超级管理员创建并登记 `visual-designer` 与 `social-media-operator` 两名成员；随后由 project-manager 重排 T-003、T-005、T-006 的专业责任并新增运营准备任务。公共框架实现、项目成员配置和业务计划分别由各自责任入口维护，不把项目资料反向混入框架提交
+- 输入与依赖：公共功能提交 `ecf5153322afd5e30fecd8673884c0350e768006`（visual-designer）、`2e63d84fcde31e27c5c0993ebbcb361eb246b3dd`（social-media-operator）、`07dd3c37b8d11044b27244454382f3aa39edfa82`（xhs-content-operations），均已进入本地 `opc-v0.0.3-dev` 且通过框架校验和 58 项单元测试；项目输入为 A-001 v0.4、T-003~T-006 及 H-003
+- 优先级：P0（T-003 当前负责人 scope 与视觉产出不匹配，须在内容制作启动前纠正）
+- 完成条件与确认方式：①超级管理员使用 `git cherry-pick -x` 将三项边界完整的公共提交回灌到本项目任务分支；②创建并在 TEAM 登记两名成员，`visual-designer` 有效知识包含 `visual-design` 与项目补充 `ai-character-image-consistency`，`social-media-operator` 有效知识包含 `social-media-operations` 与项目补充 `xhs-content-operations`；③项目成员配置和链接校验通过，并在 PROJECT 记录提前采用来源；④project-manager 完成 T-003、T-005、T-006 与新增运营任务的负责人、依赖和完成条件调整，刷新 STATUS；⑤记录后续正式升级框架发布版时识别已回灌提交、避免重复应用的要求
+- 进展：2026-09-29 已从 `project/free-pipi-shrimp` 创建项目任务分支 `feat/free-pipi-shrimp/T-009-content-production-team`；公共能力已在本地框架集成线完成；已登记 H-005 请求用户转交超级管理员执行项目回灌和成员配置
+- 成果与验证证据：当前项目任务分支；框架集成线 `opc-v0.0.3-dev@07dd3c37b8d11044b27244454382f3aa39edfa82`；H-005
+- 阻塞与下一位行动人：等待用户将 H-005 转交超级管理员；配置完成前不得以当前 writer 身份启动 T-003，避免继续扩大职责错配。下一位行动人为用户及框架超级管理员
+- 更新日期：2026-09-29
+
 ## 记录样式（不是真实任务）
 
 ```text
