@@ -3,4 +3,6 @@ project: 'free-pipi-shrimp'
 roleKnowledge:
   planner: [travel-planning]
   writer: [xhs-plog-creation]
-members: [product-manager, planner, writer, project-manager]
+  visual-designer: [ai-character-image-consistency]
+  social-media-operator: [xhs-content-operations]
+members: [product-manager, planner, writer, project-manager, visual-designer, social-media-operator]
