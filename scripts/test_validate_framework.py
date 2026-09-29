@@ -820,5 +820,54 @@ class SocialMediaOperationsDefinitionTests(unittest.TestCase):
         self.assertIn("[social-media-operations](social-media-operations.md)", knowledge_index)
 
 
+class XhsContentOperationsDefinitionTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.root = Path(__file__).resolve().parents[1]
+
+    def frontmatter(self, relative_path):
+        text = (self.root / relative_path).read_text(encoding="utf-8-sig")
+        self.assertTrue(text.startswith("---\n"), relative_path)
+        _, header, _ = text.split("---", 2)
+        return yaml.safe_load(header), text
+
+    def test_xhs_operations_is_active_project_supplement(self):
+        role, role_text = self.frontmatter("roles/social-media-operator.md")
+        operations, _ = self.frontmatter("knowledge/xhs-content-operations.md")
+
+        self.assertEqual(["social-media-operations"], role["knowledge"])
+        self.assertEqual("xhs-content-operations", operations["id"])
+        self.assertEqual("active", operations["status"])
+        self.assertIn("TEAM.roleKnowledge", role_text)
+        self.assertIn("xhs-content-operations", role_text)
+
+    def test_xhs_creation_and_operations_have_distinct_responsibilities(self):
+        _, operations = self.frontmatter("knowledge/xhs-content-operations.md")
+        _, creation = self.frontmatter("knowledge/xhs-plog-creation.md")
+
+        self.assertIn("本文负责内容创作方法", creation)
+        self.assertIn("不负责内容日历", creation)
+        self.assertIn("负责单条 plog", operations)
+        self.assertIn("本文负责把已批准的稿件和素材纳入内容日历", operations)
+
+    def test_xhs_operations_covers_required_controls_and_rule_refresh(self):
+        _, operations = self.frontmatter("knowledge/xhs-content-operations.md")
+
+        for requirement in (
+            "发布检查",
+            "AI 标注核对",
+            "账号凭据边界",
+            "人工发布协作",
+            "内容日历",
+            "基础数据复盘",
+            "执行时重新核实",
+        ):
+            with self.subTest(requirement=requirement):
+                self.assertIn(requirement, operations)
+
+        knowledge_index = (self.root / "knowledge/INDEX.md").read_text(encoding="utf-8-sig")
+        self.assertIn("[xhs-content-operations](xhs-content-operations.md)", knowledge_index)
+
+
 if __name__ == "__main__":
     unittest.main()
