@@ -719,5 +719,57 @@ class RealTemplateIntegrationTests(unittest.TestCase):
                 self.assertEqual([], Validator(root).run())
 
 
+class VisualDesignDefinitionTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.root = Path(__file__).resolve().parents[1]
+
+    def frontmatter(self, relative_path):
+        text = (self.root / relative_path).read_text(encoding="utf-8-sig")
+        self.assertTrue(text.startswith("---\n"), relative_path)
+        _, header, _ = text.split("---", 2)
+        return yaml.safe_load(header), text
+
+    def test_visual_designer_uses_general_base_knowledge_only(self):
+        role, role_text = self.frontmatter("roles/visual-designer.md")
+        visual, _ = self.frontmatter("knowledge/visual-design.md")
+        ai_consistency, _ = self.frontmatter("knowledge/ai-character-image-consistency.md")
+
+        self.assertEqual("visual-designer", role["id"])
+        self.assertEqual("active", role["status"])
+        self.assertEqual(["visual-design"], role["knowledge"])
+        self.assertEqual("active", visual["status"])
+        self.assertEqual("active", ai_consistency["status"])
+        self.assertIn("TEAM.roleKnowledge", role_text)
+
+    def test_visual_design_guidance_covers_traceability_and_handoff(self):
+        _, role = self.frontmatter("roles/visual-designer.md")
+        _, visual = self.frontmatter("knowledge/visual-design.md")
+        _, ai_consistency = self.frontmatter("knowledge/ai-character-image-consistency.md")
+        combined = "\n".join((role, visual, ai_consistency))
+
+        for requirement in (
+            "角色视觉规范",
+            "参考图",
+            "生成参数与版本记录",
+            "素材来源",
+            "风格与角色一致性检查",
+            "交接边界",
+        ):
+            with self.subTest(requirement=requirement):
+                self.assertIn(requirement, combined)
+
+    def test_indexes_register_visual_design_definitions(self):
+        roles_index = (self.root / "roles/INDEX.md").read_text(encoding="utf-8-sig")
+        knowledge_index = (self.root / "knowledge/INDEX.md").read_text(encoding="utf-8-sig")
+
+        self.assertIn("[visual-designer](visual-designer.md)", roles_index)
+        self.assertIn("[visual-design](visual-design.md)", knowledge_index)
+        self.assertIn(
+            "[ai-character-image-consistency](ai-character-image-consistency.md)",
+            knowledge_index,
+        )
+
+
 if __name__ == "__main__":
     unittest.main()

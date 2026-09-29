@@ -4,6 +4,7 @@
 
 | 知识 ID | 名称 |
 |---|---|
+| [ai-character-image-consistency](ai-character-image-consistency.md) | AI 角色图片一致性 |
 | [backend-development](backend-development.md) | 后端开发 |
 | [audio-dsp-rhythm-engineering](audio-dsp-rhythm-engineering.md) | 音频 DSP 与节奏工程 |
 | [book-planning](book-planning.md) | 图书定位与章节规划 |
@@ -30,6 +31,7 @@
 | [technical-book-validation](technical-book-validation.md) | 技术书示例与实验验证 |
 | [testing](testing.md) | 测试设计与执行 |
 | [travel-planning](travel-planning.md) | 旅行规划 |
+| [visual-design](visual-design.md) | 视觉设计 |
 | [windows-qt-build-engineering](windows-qt-build-engineering.md) | Windows x64 与 Qt 构建工程 |
 | [windows-release-engineering](windows-release-engineering.md) | Windows 发布与供应链工程 |
 | [writing](writing.md) | 长篇写作与编辑 |
@@ -57,6 +59,8 @@ status: active
 共享岗位以 `knowledge` 定义基础要求。项目 TEAM 以 `roleKnowledge` 为相应岗位补充知识，成员文件只记录身份和分工。初始化按[协议](../SESSION_PROTOCOL.md)将二者合并去重，并完整读取对应正文。框架级 [超级管理员](../SUPER_ADMIN.md)直接加载 `team-management`，不使用项目岗位知识组合。
 
 专业知识可以被多个岗位、多个项目复用。同项目同岗位的成员加载相同组合，分工差异放在成员 scope。索引不代替知识正文；这些文档也不负责安装工具或提供执行环境。
+
+visual-design 是视觉设计师的通用基础方法；ai-character-image-consistency 只适用于采用 AI 生成角色图片的项目，应作为 visual-designer 的项目补充知识按需配置。二者分层避免普通视觉设计任务被强制加载特定生成工具流程。
 
 ## 维护
 
