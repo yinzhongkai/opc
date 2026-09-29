@@ -4,6 +4,7 @@
 
 | 知识 ID | 名称 |
 |---|---|
+| [ai-character-image-consistency](ai-character-image-consistency.md) | AI 角色图片一致性 |
 | [backend-development](backend-development.md) | 后端开发 |
 | [audio-dsp-rhythm-engineering](audio-dsp-rhythm-engineering.md) | 音频 DSP 与节奏工程 |
 | [book-planning](book-planning.md) | 图书定位与章节规划 |
@@ -21,6 +22,7 @@
 | [reader-feedback](reader-feedback.md) | 读者学习反馈与修订 |
 | [research](research.md) | 资料研究与事实核查 |
 | [reverse-engineering](reverse-engineering.md) | Linux 与 Windows 可执行文件逆向分析 |
+| [social-media-operations](social-media-operations.md) | 社交媒体运营 |
 | [qt-quick-ui-engineering](qt-quick-ui-engineering.md) | Qt Quick/QML 界面设计与工程 |
 | [qt-scene-graph-engineering](qt-scene-graph-engineering.md) | Qt Scene Graph 实时渲染工程 |
 | [software-development-basics](software-development-basics.md) | 软件研发基础 |
@@ -30,9 +32,11 @@
 | [technical-book-validation](technical-book-validation.md) | 技术书示例与实验验证 |
 | [testing](testing.md) | 测试设计与执行 |
 | [travel-planning](travel-planning.md) | 旅行规划 |
+| [visual-design](visual-design.md) | 视觉设计 |
 | [windows-qt-build-engineering](windows-qt-build-engineering.md) | Windows x64 与 Qt 构建工程 |
 | [windows-release-engineering](windows-release-engineering.md) | Windows 发布与供应链工程 |
 | [writing](writing.md) | 长篇写作与编辑 |
+| [xhs-content-operations](xhs-content-operations.md) | 小红书内容运营 |
 | [xhs-plog-creation](xhs-plog-creation.md) | 小红书 plog 内容创作 |
 | [yocto-engineering](yocto-engineering.md) | Yocto 工程 |
 
@@ -57,6 +61,10 @@ status: active
 共享岗位以 `knowledge` 定义基础要求。项目 TEAM 以 `roleKnowledge` 为相应岗位补充知识，成员文件只记录身份和分工。初始化按[协议](../SESSION_PROTOCOL.md)将二者合并去重，并完整读取对应正文。框架级 [超级管理员](../SUPER_ADMIN.md)直接加载 `team-management`，不使用项目岗位知识组合。
 
 专业知识可以被多个岗位、多个项目复用。同项目同岗位的成员加载相同组合，分工差异放在成员 scope。索引不代替知识正文；这些文档也不负责安装工具或提供执行环境。
+
+visual-design 是视觉设计师的通用基础方法；ai-character-image-consistency 只适用于采用 AI 生成角色图片的项目，应作为 visual-designer 的项目补充知识按需配置。二者分层避免普通视觉设计任务被强制加载特定生成工具流程。
+
+social-media-operations 是社交媒体运营岗位的通用基础知识；xhs-content-operations 是该岗位面向小红书的项目补充知识，负责日历、发布协作和数据反馈。xhs-plog-creation 负责单条 plog 的图文创作，可按项目分配给作者等内容成员；运营知识不取代创作职责。
 
 ## 维护
 
