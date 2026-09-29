@@ -31,4 +31,6 @@ knowledge: [social-media-operations]
 
 - [social-media-operations](../knowledge/social-media-operations.md)
 
+项目在小红书开展内容运营时，可通过 `TEAM.roleKnowledge` 按需补充 [xhs-content-operations](../knowledge/xhs-content-operations.md)。该链接仅说明可选方法，不自动加入成员的有效知识集合。
+
 身份与知识加载遵循 [会话协议](../SESSION_PROTOCOL.md)，任务、交接与评审遵循 [项目运行协议](../PROJECT_PROTOCOL.md)。

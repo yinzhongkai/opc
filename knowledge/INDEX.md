@@ -36,6 +36,7 @@
 | [windows-qt-build-engineering](windows-qt-build-engineering.md) | Windows x64 与 Qt 构建工程 |
 | [windows-release-engineering](windows-release-engineering.md) | Windows 发布与供应链工程 |
 | [writing](writing.md) | 长篇写作与编辑 |
+| [xhs-content-operations](xhs-content-operations.md) | 小红书内容运营 |
 | [xhs-plog-creation](xhs-plog-creation.md) | 小红书 plog 内容创作 |
 | [yocto-engineering](yocto-engineering.md) | Yocto 工程 |
 
@@ -62,6 +63,8 @@ status: active
 专业知识可以被多个岗位、多个项目复用。同项目同岗位的成员加载相同组合，分工差异放在成员 scope。索引不代替知识正文；这些文档也不负责安装工具或提供执行环境。
 
 visual-design 是视觉设计师的通用基础方法；ai-character-image-consistency 只适用于采用 AI 生成角色图片的项目，应作为 visual-designer 的项目补充知识按需配置。二者分层避免普通视觉设计任务被强制加载特定生成工具流程。
+
+social-media-operations 是社交媒体运营岗位的通用基础知识；xhs-content-operations 是该岗位面向小红书的项目补充知识，负责日历、发布协作和数据反馈。xhs-plog-creation 负责单条 plog 的图文创作，可按项目分配给作者等内容成员；运营知识不取代创作职责。
 
 ## 维护
 
