@@ -771,5 +771,54 @@ class VisualDesignDefinitionTests(unittest.TestCase):
         )
 
 
+class SocialMediaOperationsDefinitionTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.root = Path(__file__).resolve().parents[1]
+
+    def frontmatter(self, relative_path):
+        text = (self.root / relative_path).read_text(encoding="utf-8-sig")
+        self.assertTrue(text.startswith("---\n"), relative_path)
+        _, header, _ = text.split("---", 2)
+        return yaml.safe_load(header), text
+
+    def test_social_media_operator_has_active_general_knowledge(self):
+        role, _ = self.frontmatter("roles/social-media-operator.md")
+        knowledge, _ = self.frontmatter("knowledge/social-media-operations.md")
+
+        self.assertEqual("social-media-operator", role["id"])
+        self.assertEqual("active", role["status"])
+        self.assertEqual(["social-media-operations"], role["knowledge"])
+        self.assertEqual("social-media-operations", knowledge["id"])
+        self.assertEqual("active", knowledge["status"])
+
+    def test_social_media_guidance_covers_workflow_and_safety_boundaries(self):
+        _, role = self.frontmatter("roles/social-media-operator.md")
+        _, knowledge = self.frontmatter("knowledge/social-media-operations.md")
+        combined = "\n".join((role, knowledge))
+
+        for requirement in (
+            "内容日历",
+            "发布包检查",
+            "人工发布协作",
+            "平台规则核对",
+            "数据复盘",
+            "用户反馈",
+            "不保存或转述",
+            "不自行获得发布授权",
+            "不把草稿完成",
+            "必须由用户",
+        ):
+            with self.subTest(requirement=requirement):
+                self.assertIn(requirement, combined)
+
+    def test_indexes_register_social_media_definitions(self):
+        roles_index = (self.root / "roles/INDEX.md").read_text(encoding="utf-8-sig")
+        knowledge_index = (self.root / "knowledge/INDEX.md").read_text(encoding="utf-8-sig")
+
+        self.assertIn("[social-media-operator](social-media-operator.md)", roles_index)
+        self.assertIn("[social-media-operations](social-media-operations.md)", knowledge_index)
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -21,6 +21,7 @@
 | [release-engineer](release-engineer.md) | 发布工程师 |
 | [tester](tester.md) | 测试工程师 |
 | [writer](writer.md) | 作者 |
+| [social-media-operator](social-media-operator.md) | 社交媒体运营 |
 | [reviewer](reviewer.md) | 独立评审者 |
 | [yocto-engineer](yocto-engineer.md) | Yocto 工程师 |
 
@@ -33,5 +34,7 @@ reviewer 是可选的独立检查角色；日常专业交叉评审使用现有�
 前后端成员复用 developer；软件与旅行项目经理复用 project-manager；旅行和图书规划成员复用 planner。仅当共同职责、边界或产出确实不同，才考虑新增岗位。
 
 visual-designer 的公共基础知识是 visual-design；只有采用 AI 生成角色图片的项目，才通过 `TEAM.roleKnowledge` 按需补充 ai-character-image-consistency。补充知识提供方法，不扩大岗位职责或工具权限。
+
+writer 负责内容创作与修订；social-media-operator 负责内容日历、发布准备、人工发布协作、规则核对以及数据和反馈闭环。运营岗位不因承担发布协作而自动获得账号或发布权限。
 
 共享定义的维护与影响检查遵循 [超级管理员入口](../SUPER_ADMIN.md)。
