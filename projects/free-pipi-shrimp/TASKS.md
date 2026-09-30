@@ -30,16 +30,16 @@
 
 ## T-003：形象"自由的皮皮虾" AI 形象定型
 - 负责人：visual-designer
-- 状态：todo
-- 授权来源与日期：2026-09-16 用户授权内容筹备团队计划；2026-09-29 用户确认新增视觉设计岗位并授权执行 T-009，project-manager 依据成员实际 scope 将负责人由 writer 调整为 visual-designer
+- 状态：in_progress
+- 授权来源与日期：2026-09-16 用户授权内容筹备团队计划；2026-09-29 用户确认新增视觉设计岗位并授权执行 T-009，project-manager 依据成员实际 scope 将负责人由 writer 调整为 visual-designer；2026-09-30 用户明确授权 visual-designer 正式启动 T-003，并将小红书账号头像纳入候选应用场景
 - 目标与范围：依据 D-002、D-007 与 A-001 v0.4 第 3、9 节，产出"自由的皮皮虾"（日常简称"皮皮虾"，外观按皮皮虾/螳螂虾）的视觉基线包：视觉简报、角色身份锚点与允许变化、参考图及来源、生成提示词与参数版本记录、代表性样张、跨场景一致性检查方法和结果（对应 AC-1）；说明插画兜底素材方向。开工须使用当前名字和螳螂虾外观，不使用旧名"瞎逛"
 - 输入与依赖：A-001 v0.4 第 3、9 节；D-002、D-007（均 confirmed）；visual-designer 有效知识 `visual-design`、`ai-character-image-consistency`
 - 优先级：P0（所有内容产出的前置依赖，返工成本最高）
 - 完成条件与确认方式：视觉基线包登记为成果（draft），完成 AC-1 所需的多场景并排一致性检查并保留输入、版本、参数和来源记录；由 project-manager 在本任务内安排 product-manager 对人设与已确认需求的一致性进行轻量评审，意见处理与必要复核完成后本任务方可 completed
-- 进展：尚未开始；2026-09-29 依据 T-009 从 writer 转交 visual-designer，原分配记录保留于本条授权来源
-- 成果与验证证据：暂无
-- 阻塞与下一位行动人：无业务阻塞；下一位行动人为 visual-designer（先完成成员会话初始化，再启动本任务）
-- 更新日期：2026-09-29
+- 进展：2026-09-30 visual-designer 完成视觉基线包 v0.1 draft、账号头像候选、完整生成记录、两张受控场景样张和 AC-1 多场景自查；项目经理会话提供的两轮图已按探索样张/反例记录，未直接采用为最终头像或角色基准。当前成果等待 product-manager 对人设与已确认需求的一致性进行轻量评审。2026-09-29 依据 T-009 从 writer 转交 visual-designer，原分配记录保留于本条授权来源
+- 成果与验证证据：[A-002 自由的皮皮虾视觉基线包](artifacts/A-002-自由的皮皮虾视觉基线包.md) v0.1（draft）；外部资产固定提交 `d8a7b55ead856505f2f1af3cb886ef2e08d24472`（本地已提交，2026-09-30 远端推送被执行环境安全审查拦截）；头像候选 `deliverables/T-003-ai-character-baseline/v0.1-draft/avatar/xiaohongshu-avatar-candidate-v0.1.png`（SHA-256 `e80f7aa71a2456202518df52936814241d5ed4ec73fb46842209ce41ca0d9e2c`）；三图身份一致性自查在基线层面 `conditional pass`，实际封面仍待 T-005/T-012 后复验
+- 阻塞与下一位行动人：无制作侧阻塞；外部固定提交尚待用户授权重试推送或由用户/project-manager 代执行。下一位业务行动人为 project-manager 在本任务内安排 product-manager 轻量评审。意见处理、必要复核及用户确认完成前保持 in_progress，不得标记 completed
+- 更新日期：2026-09-30
 
 ## T-004：首站目的地连载规划（3–5 篇）
 - 负责人：planner
