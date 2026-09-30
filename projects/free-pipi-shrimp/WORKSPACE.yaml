@@ -1,3 +1,7 @@
 schemaVersion: 1
 workspace:
-  driver: none
+  driver: git
+  repository: git@github.com:yinzhongkai/free-pipi-shrimp.git
+  branch: main
+  revision: 4d023fdcb6190d710512e98d7c03c790c715b234
+  checkout: ../free-pipi-shrimp
