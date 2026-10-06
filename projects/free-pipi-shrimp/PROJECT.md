@@ -32,7 +32,9 @@
 
 ## 交付约定
 
-- 正式成果位于 `artifacts/`。项目当前没有独立软件源码或外部资料工作区，[WORKSPACE.yaml](WORKSPACE.yaml) 明确声明 `driver: none`；后续需要外部 Git、submodule 或 repo 工作区时，先完成实际迁移与验证，再更新声明。
+- [WORKSPACE.yaml](WORKSPACE.yaml) 声明外部独立 Git 工作区：私有远端 `git@github.com:yinzhongkai/free-pipi-shrimp.git`，演进分支 `main`，当前可复现基线 `730429312be85e33b4534b58adad54a207a8b797`，可移植 checkout 为 `../free-pipi-shrimp`；在本次授权执行环境中实际解析为 `C:\Users\YinZh\Documents\workspace\free-pipi-shrimp`。该声明只记录已验证位置与版本，不自动授予后续联网、切换提交、覆盖修改或推送权限。
+- OPC 的 `artifacts/` 保留正式成果登记、批准依据和必要的轻量预览；任务、决定、状态与交接继续保存在 OPC 项目记录中。外部私库保存原始参考、生成批次、高清素材、工程源文件和大型最终交付物，文件进入外部 `deliverables/` 不等于已经批准或发布。
+- OPC 正式成果登记引用外部资产时，必须记录固定 Git 提交、仓库相对路径和文件 SHA-256；不能只引用可移动的 `main`。账号密码、Cookie、验证码、API Key、访问令牌、登录二维码、私钥和恢复信息不得写入任一仓库或项目记录。
 - 用户保证当前仓库每次只有一个会话执行，前一会话完成或停止后再启动下一会话；框架不实现文件锁或自动调度。
 - 每份文档默认维护一个当前版本，记录版本及批准依据；历史通过用户维护的 Git 追溯。
 - 评审与批准要求在任务中明确。专业交叉评审由现有成员在原会话执行，不默认新建评审会话；用户保证受评版本可读取且不变，本轮全部评审者提交意见后作者再统一修订。采用根 [项目运行协议](../../PROJECT_PROTOCOL.md) 的评审、完成与状态规则。
@@ -50,6 +52,11 @@
 - 2026-09-29：用户在当前超级管理员会话中明确授权执行 T-009 第 6 步，在项目任务分支 `feat/free-pipi-shrimp/T-009-content-production-team` 使用 `git cherry-pick -x` 提前采用三项已进入框架集成线的公共能力：原提交 `ecf5153322afd5e30fecd8673884c0350e768006` 对应项目分支提交 `6bfd50be061111f83f300885da6614df5e6924b8`，原提交 `2e63d84fcde31e27c5c0993ebbcb361eb246b3dd` 对应项目分支提交 `f120fd35082baad63de6c7866723f84e543dcfbd`，原提交 `07dd3c37b8d11044b27244454382f3aa39edfa82` 对应项目分支提交 `314a8eaeab85a2c9b2870cd855a922ffe7b27f2b`。项目正式框架基线仍为 `v0.0.2`（`267278b`），本次提前采用不表示 `v0.0.3` 已发布；后续正式升级框架基线时必须识别这些已回灌补丁，避免重复应用。——框架超级管理员
 - 2026-09-29：同上授权。创建成员 `visual-designer`（岗位 visual-designer，首名该岗位成员，使用岗位 ID），scope 为负责角色视觉规范、AI 角色图片与封面视觉，维护素材身份和风格一致性，并记录参考图、生成参数、版本与素材来源；配置文件 `members/visual-designer.yaml`，已登记 TEAM，并为 visual-designer 岗位配置项目补充知识 `ai-character-image-consistency`。——框架超级管理员
 - 2026-09-29：同上授权。创建成员 `social-media-operator`（岗位 social-media-operator，首名该岗位成员，使用岗位 ID），scope 为负责本项目小红书首期内容日历、发布包检查、人工发布协作、平台规则与 AI 标注核对、基础数据复盘和用户反馈整理，并遵守账号凭据边界；配置文件 `members/social-media-operator.yaml`，已登记 TEAM，并为 social-media-operator 岗位配置项目补充知识 `xhs-content-operations`。——框架超级管理员
+
+## 工作区配置记录
+
+- 2026-09-30：用户在当前超级管理员会话中明确授权接入外部私有成果仓库。经核验远端为空且 Git LFS 可用后，将 `git@github.com:yinzhongkai/free-pipi-shrimp.git` 克隆到 OPC 同级目录 `C:\Users\YinZh\Documents\workspace\free-pipi-shrimp`，建立并推送 `main` 初始提交 `4d023fdcb6190d710512e98d7c03c790c715b234`；仓库包含 `references/`、`work/`、`deliverables/`、`manifests/` 的边界说明及常见大型位图和设计源文件的 LFS 规则。随后把 [WORKSPACE.yaml](WORKSPACE.yaml) 从 `driver: none` 更新为外部 `git` 工作区，变更前 OPC 恢复点为当前任务分支基线 `78d4a2b274993906e8bc3919b7b0ee5fdbc81f3d`。本次仅完成工作区接入和存放边界配置，不启动 T-003，也不改变业务任务或状态记录。——框架超级管理员
+- 2026-10-06：用户明确要求将 T-003 feature 按功能压缩后通过 merge commit 合入主线。外部产品仓库已从基线 `b547bd6ba987381400c61c16baca26532c4a7767` 重建两个功能提交，并通过 merge commit `730429312be85e33b4534b58adad54a207a8b797` 合入 `main`；改写前历史由远端标签 `archive/t003-pre-squash-20261006` 保留。经核验，本地 `main`、`origin/main` 与远端 `main` 均指向该 merge commit 且工作树干净，因此同步将 [WORKSPACE.yaml](WORKSPACE.yaml) 的精确 `revision` 更新为该提交，`branch` 保持 `main`。——框架超级管理员
 
 ## 当前资料
 
