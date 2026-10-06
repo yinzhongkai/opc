@@ -37,6 +37,7 @@
 ## 成员配置记录
 
 - 2026-10-05：依据用户在本超级管理员会话中的明确请求，创建 `project-manager` 和 `product-manager` 两名成员，分别写入 `members/project-manager.yaml`、`members/product-manager.yaml` 并登记到 `TEAM.yaml`；首名项目经理同时被指定为协调记录维护人。记录人：框架超级管理员。
+- 2026-10-06：依据用户在“报价系统｜项目经理”会话中的明确授权，创建 `architect` 成员，写入 `members/architect.yaml` 并登记到 `TEAM.yaml`；本次只调整成员配置，不登记业务任务。记录人：框架超级管理员。
 
 ## 当前资料
 
