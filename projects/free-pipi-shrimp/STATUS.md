@@ -24,7 +24,7 @@
 
 - A-001 自由的皮皮虾需求说明 v0.4：approved，批准依据 D-001～D-008。
 - A-002 自由的皮皮虾视觉基线包 v0.4：approved。最终头像位于外部产品仓库 `deliverables/T-003-ai-character-baseline/v0.4-approved/avatar/xiaohongshu-avatar-final-v0.3.png`；批准范围仅限该头像及其作为 T-003 视觉基线的收口，不代表小红书发布、账号运营内容或 T-005/T-012 后续成品批准。
-- 外部产品仓库已把 T-003 整理为生成批次、批准版交付两个功能提交，并通过 merge commit `730429312be85e33b4534b58adad54a207a8b797` 合入 `main`。OPC 的 T-003 feature 已整理为工作区配置、视觉基线记录、状态摘要三个功能提交，等待以 merge commit 合入项目长期分支；整理前历史由对应 `archive/*pre-squash-20261006` 远端标签保留。
+- 外部产品仓库已把 T-003 整理为生成批次、批准版交付两个功能提交，并通过 merge commit `730429312be85e33b4534b58adad54a207a8b797` 合入 `main`。OPC 的 T-003 feature 已整理为工作区配置、视觉基线记录、状态摘要三个功能提交，并通过 `--no-ff` merge commit 合入项目长期分支；两条已合并 feature 的本地与远端分支均已删除，整理前历史由对应 `archive/*pre-squash-20261006` 远端标签保留。
 - WORKSPACE.yaml 已锁定产品仓库 `main@730429312be85e33b4534b58adad54a207a8b797`，并已核验本地 main、跟踪分支和远端 main 一致。
 
 ## 阻塞、风险与下一步
@@ -32,6 +32,6 @@
 - H-003（project-manager → 用户）：open。用户此前已表示小红书专用账号已创建；但手机端测试发布流程和平台当前 AI 内容标注要求尚无完成证据，因此发布通道仍未闭环。账号凭据继续不得写入仓库或项目记录。
 - 当前没有待确认的产品决定；时间和资源约束仍未设定，如需日期承诺须补充排期条件。
 - 推荐并行启动 T-004、T-005、T-010、T-011；待 T-004 与 T-005 完成后执行 T-012，再由 writer 基于 T-010 与 T-012 完成 T-006。该顺序不改变各任务原有负责人和验收边界。
-- Git 下一步是将已压缩的 OPC T-003 feature 通过 `--no-ff` 合入 `project/free-pipi-shrimp` 并核验 merge commit；产品仓库侧已完成。
+- T-003 的产品与 OPC feature 均已完成按功能压缩、merge commit 合入、远端同步和分支清理；当前无待处理的 T-003 评审或合并事项。恢复用归档标签继续保留，如需删除须另行确认。
 
 本文件是摘要，原始事实以 [TASKS.md](TASKS.md)、[DECISIONS.md](DECISIONS.md)、[HANDOFFS.md](HANDOFFS.md) 和 [成果索引](artifacts/README.md) 为准。汇总后注明实际信息范围，过期摘要不能覆盖原始记录。
