@@ -581,6 +581,24 @@
 - 阻塞与下一位行动人：无；T-015 已关闭。N-1/N-2/O-1 已在 T-014 最终修订、复核与用户确认中闭环；2026-10-08 补录时不再存在后续行动。
 - 更新日期：2026-09-27
 
+## T-016：chapter 4《让 QEMU 长出 tiger 这块板》修订与第 1 轮评审（P3 第三章）
+- 负责人：writer（作者自查与统一修订）；reviewer（技术审校与复核）；project-manager（计划、评审安排与意见闭环）；yocto-engineer（真实环境核验）；用户（通读意见与定稿确认）
+- 状态：todo（2026-10-08 已建立并推送双仓库 feature 分支，尚未开始正文修改）
+- 授权来源与日期：2026-10-08 用户在 project-manager 会话要求先读取 OPC v0.0.3 框架，随后明确指示“先创建下feature分支吧”；本次授权覆盖 T-016 登记与开发分支准备，不将尚未发生的正文修订、评审或核验写成进展。
+- 变更类型：feature
+- OPC 开发分支与目标：`feature/book-yocto/t-016-chapter4-revision` → `project/book-yocto`
+- 成果物仓库及开发分支：`git@github.com:yinzhongkai/book-yocto.git`，`feature/t-016-chapter4-revision` → `main`
+- 成果物仓库最终合并提交：尚未产生；启动基线为 `f444790f352b46f699fd3d46198f8b9b9f089a62`
+- 目标与范围：以 `yocto/task05-4-让QEMU长出tiger这块板.md` 为唯一正文对象，按 P3 既定流程完成作者自查与修订、逐章真实环境核验、专业评审、用户通读、统一修订、复核和定稿；同步处理 D-011 的读者正文边界与 A-004 v0.5 体例要求。本轮准备阶段不修改正文，不提前登记尚未执行的验证结论。
+- 输入与依赖：A-002 v0.5、A-003、A-004 v0.5（approved）、D-001、D-007、D-010、D-011、chapter 3 最终 merge commit `f444790f352b46f699fd3d46198f8b9b9f089a62`；P0.5 尚未启动，但当前记录确认其不阻塞 chapter 4 启动。
+- 优先级：未设定
+- 完成条件与确认方式：①writer 提交稳定受评稿；②按 D-010 完成命令、配置、路径、输出和机制结论的真实环境核验并保存证据；③reviewer、project-manager 与用户意见按稳定版本汇集后由 writer 统一修订；④相关成员完成针对性复核，用户确认定稿；⑤先将整理后的成果物分支以 `--no-ff` 合入 `main` 并验证，再回写最终 merge commit、任务证据和 `WORKSPACE.yaml.revision`，将 OPC 分支以 `--no-ff` 合入项目长期分支；⑥两边最终验证通过后安全删除开发分支。
+- 进展：2026-10-08 从最新书稿 `main`（`f444790f...`）创建并推送 `feature/t-016-chapter4-revision`；从最新 OPC `project/book-yocto`（`f3d8c2ff...`）创建并推送 `feature/book-yocto/t-016-chapter4-revision`。两条分支均已设置远端 upstream，创建时工作树干净；尚无正文或验证材料改动。
+- 成果与验证证据：书稿与 OPC 两条远端 feature 分支；正文、评审记录与核验证据尚未产生。
+- 合并与清理状态：两条 feature 分支均未合并、不得清理；待全部完成条件满足后按 v0.0.3 分支策略处理。
+- 阻塞与下一位行动人：无启动阻塞；下一位行动人为 project-manager，按用户后续指示启动 writer 作者自查，并在受评版本稳定后安排真实环境核验与评审。
+- 更新日期：2026-10-08
+
 ## 记录样式（不是真实任务）
 
 ```text
