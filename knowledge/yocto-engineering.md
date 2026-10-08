@@ -6,7 +6,7 @@ status: active
 
 # Yocto 工程
 
-本知识用于基于 Yocto Project、OpenEmbedded 与 BitBake 开发和维护嵌入式 Linux 系统。它提供工程方法和判断依据，不自行授予硬件访问、凭据使用、外部仓库写入、签名或发布权限。
+本技能用于基于 Yocto Project、OpenEmbedded 与 BitBake 开发和维护嵌入式 Linux 系统。它提供工程方法和判断依据，不自行授予硬件访问、凭据使用、外部仓库写入、签名或发布权限。
 
 ## 固定可复现基线
 

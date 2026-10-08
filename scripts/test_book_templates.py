@@ -149,7 +149,7 @@ class BookTemplateIntegrationTests(unittest.TestCase):
         team = self.apply_profiles(project, technical=True)
         for role in ("planner", "writer", "reviewer", "developer", "project-manager"):
             team["members"].append(role)
-            member = {"id": role, "role": role, "scope": ["执行已授权的本岗位图书工作"]}
+            member = {"id": role, "role": role, "scope": ["执行已授权的本角色图书工作"]}
             (project / "members" / f"{role}.yaml").write_text(
                 yaml.safe_dump(member, sort_keys=False, allow_unicode=True), encoding="utf-8",
             )
@@ -172,7 +172,7 @@ class BookTemplateIntegrationTests(unittest.TestCase):
         (self.root / "knowledge/book-planning.md").unlink()
         errors = Validator(self.root).run()
         self.assertTrue(
-            any("roleKnowledge['planner'] 引用了不存在的知识：book-planning" in error
+            any("roleKnowledge['planner'] 引用了不存在的技能：book-planning" in error
                 for error in errors), errors,
         )
         self.assertEqual([], self.read_team(project)["members"])

@@ -25,8 +25,8 @@ knowledge: [system-design]
 - 架构说明、接口契约、数据模型、技术决策、风险记录和架构评审意见。
 
 
-## 基础知识
+## 基础技能
 
 - [system-design](../knowledge/system-design.md)
 
-身份与知识加载遵循 [会话协议](../SESSION_PROTOCOL.md)，任务、交接与评审遵循 [项目运行协议](../PROJECT_PROTOCOL.md)。
+身份与技能加载遵循 [会话协议](../SESSION_PROTOCOL.md)，任务、交接与评审遵循 [项目运行协议](../PROJECT_PROTOCOL.md)。

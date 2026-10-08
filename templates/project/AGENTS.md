@@ -5,7 +5,7 @@
 遵循根目录 [AGENTS.md](../../AGENTS.md)。成员工作先执行 [会话初始化协议](../../SESSION_PROTOCOL.md)，项目运行规则见 [PROJECT_PROTOCOL.md](../../PROJECT_PROTOCOL.md)，配置规范见 [CONFIG_SCHEMA.md](../../CONFIG_SCHEMA.md)。
 
 - 目标、约束和确认责任：[PROJECT.md](PROJECT.md)。
-- 成员索引与项目岗位知识：[TEAM.yaml](TEAM.yaml)；成员身份和分工：[成员文件说明](members/README.md)。
+- 成员索引与项目角色技能：[TEAM.yaml](TEAM.yaml)；成员身份和分工：[成员文件说明](members/README.md)。
 - 工作区位置、驱动和版本基线：[WORKSPACE.yaml](WORKSPACE.yaml)；读取声明不自动授权外部仓库操作。
 - 当前任务与进展：[TASKS.md](TASKS.md)；总体摘要：[STATUS.md](STATUS.md)。
 - 决定：[DECISIONS.md](DECISIONS.md)；行动请求：[HANDOFFS.md](HANDOFFS.md)。

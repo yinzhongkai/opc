@@ -23,8 +23,8 @@ knowledge: [research]
 - 来源清单、研究笔记、事实摘要、方案比较和未知项。
 
 
-## 基础知识
+## 基础技能
 
 - [research](../knowledge/research.md)
 
-身份与知识加载遵循 [会话协议](../SESSION_PROTOCOL.md)，任务、交接与评审遵循 [项目运行协议](../PROJECT_PROTOCOL.md)。
+身份与技能加载遵循 [会话协议](../SESSION_PROTOCOL.md)，任务、交接与评审遵循 [项目运行协议](../PROJECT_PROTOCOL.md)。

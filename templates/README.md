@@ -12,7 +12,7 @@
 |---|---|
 | [AGENTS.md](project/AGENTS.md) | 项目入口 |
 | [PROJECT.md](project/PROJECT.md) | 名称、目标、约束和确认责任 |
-| [TEAM.yaml](project/TEAM.yaml) | 版本 3 的成员 ID 索引与项目岗位知识 |
+| [TEAM.yaml](project/TEAM.yaml) | 版本 3 的成员 ID 索引与项目角色技能 |
 | [WORKSPACE.yaml](project/WORKSPACE.yaml) | 版本 1 的工作区驱动、位置和版本基线声明 |
 | [members/README.md](project/members/README.md) | 成员文件格式与创建、绑定说明 |
 | [TASKS.md](project/TASKS.md) | 任务记录样式 |
@@ -27,4 +27,4 @@
 
 [book/README.md](book/README.md) 提供图书定位、目录、章节蓝图、正文、反馈与验证、配套示例和成书输出的模板。它补充项目的成果目录，不替代 `project/`，不要求普通项目采用，也不预置真实成员、章节或任务。
 
-由超级管理员按授权配置项目岗位知识，业务成员受理工作后按需采用成果模板。书稿、验证与学习分别记录，协作状态和批准仍使用根协议；具体采用方式、复制落点与知识组合见图书模板入口。
+由超级管理员按授权配置项目角色技能，业务成员受理工作后按需采用成果模板。书稿、验证与学习分别记录，协作状态和批准仍使用根协议；具体采用方式、复制落点与技能组合见图书模板入口。

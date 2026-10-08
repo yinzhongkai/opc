@@ -24,8 +24,8 @@ knowledge: [software-engineering]
 
 - 发布基线、部署与安装脚本、SBOM 和许可证清单、签名工程流程、干净环境验证记录及发布交接资料。
 
-## 基础知识
+## 基础技能
 
 - [software-engineering](../knowledge/software-engineering.md)
 
-身份与知识加载遵循 [会话协议](../SESSION_PROTOCOL.md)，任务、交接与评审遵循 [项目运行协议](../PROJECT_PROTOCOL.md)。
+身份与技能加载遵循 [会话协议](../SESSION_PROTOCOL.md)，任务、交接与评审遵循 [项目运行协议](../PROJECT_PROTOCOL.md)。

@@ -375,10 +375,10 @@ class FrameworkValidationTests(unittest.TestCase):
         self.definition("knowledge", "historical-method", status="deprecated")
         data["roleKnowledge"] = {"developer": ["historical-method"]}
         self.save_team(data)
-        self.assert_error("引用的知识必须为 active")
+        self.assert_error("引用的技能必须为 active")
         data["roleKnowledge"] = {"missing-role": []}
         self.save_team(data)
-        self.assert_error("引用了不存在的岗位")
+        self.assert_error("引用了不存在的角色")
 
     def test_all_registered_members_require_active_roles(self):
         data = self.project()
@@ -387,21 +387,21 @@ class FrameworkValidationTests(unittest.TestCase):
         for status in ("draft", "deprecated"):
             with self.subTest(role_status=status):
                 self.definition("roles", "developer", status=status, knowledge=["software-engineering"])
-                self.assert_error("role 引用的岗位必须为 active")
+                self.assert_error("role 引用的角色必须为 active")
         data["roleKnowledge"] = {"developer": []}
         self.save_team(data)
-        self.assert_error("引用的岗位必须为 active")
+        self.assert_error("引用的角色必须为 active")
 
     def test_active_role_requires_active_base_knowledge_even_without_members(self):
         self.definition("knowledge", "software-engineering", status="draft")
-        self.assert_error("knowledge 引用的知识必须为 active")
+        self.assert_error("knowledge 引用的技能必须为 active")
 
     def test_definition_and_member_references_still_need_files(self):
         self.definition("roles", "retired-role", status="deprecated", knowledge=["missing-knowledge"])
-        self.assert_error("引用了不存在的知识：missing-knowledge")
+        self.assert_error("引用了不存在的技能：missing-knowledge")
         data = self.project()
         self.add_member(data, "developer-01", "missing-role")
-        self.assert_error("引用了不存在的岗位：missing-role")
+        self.assert_error("引用了不存在的角色：missing-role")
 
     def test_managed_by_is_rejected_with_migration_message(self):
         data = self.project()
@@ -423,15 +423,15 @@ class FrameworkValidationTests(unittest.TestCase):
         data = self.project()
         data["roleKnowledge"] = {"super-admin": []}
         self.save_team(data)
-        self.assert_error("不能配置框架入口 super-admin 的项目岗位补充知识")
+        self.assert_error("不能配置框架入口 super-admin 的项目角色补充技能")
         self.definition("roles", "super-admin", knowledge=["team-management"])
-        self.assert_error("不能配置框架入口 super-admin 的项目岗位补充知识")
+        self.assert_error("不能配置框架入口 super-admin 的项目角色补充技能")
 
     def test_framework_admin_requires_active_team_management_knowledge(self):
         self.definition("knowledge", "team-management", status="draft")
-        self.assert_error("SUPER_ADMIN.md: 框架入口基础知识 引用的知识必须为 active")
+        self.assert_error("SUPER_ADMIN.md: 框架入口基础技能 引用的技能必须为 active")
         (self.root / "knowledge/team-management.md").unlink()
-        self.assert_error("SUPER_ADMIN.md: 框架入口基础知识 引用了不存在的知识")
+        self.assert_error("SUPER_ADMIN.md: 框架入口基础技能 引用了不存在的技能")
 
     def test_reject_invalid_scope_member_override_and_unknown_team_fields(self):
         data = self.project()
@@ -586,6 +586,7 @@ class FrameworkValidationTests(unittest.TestCase):
         (self.root / "SESSION_PROTOCOL.md").unlink()
         (self.root / "SUPER_ADMIN.md").unlink()
         (self.root / "MIGRATIONS.md").unlink()
+        (self.root / "BRANCH_STRATEGY.md").unlink()
         (self.root / "templates/project/TASKS.md").unlink()
         (self.root / "templates/project/members/README.md").unlink()
         (self.root / "templates/project/WORKSPACE.yaml").unlink()
@@ -593,6 +594,7 @@ class FrameworkValidationTests(unittest.TestCase):
         self.assert_error("SESSION_PROTOCOL.md: 缺少必需文件")
         self.assert_error("SUPER_ADMIN.md: 缺少必需文件")
         self.assert_error("MIGRATIONS.md: 缺少必需文件")
+        self.assert_error("BRANCH_STRATEGY.md: 缺少必需文件")
         self.assert_error("templates/project/TASKS.md: 缺少必需文件")
         self.assert_error("templates/project/members/README.md: 缺少必需文件")
         self.assert_error("templates/project/WORKSPACE.yaml: 缺少必需文件")

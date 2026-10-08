@@ -25,8 +25,8 @@ knowledge: [testing]
 - 测试计划、测试代码与用例、结果证据、测试报告、缺陷清单和文档可验证性评审意见。
 
 
-## 基础知识
+## 基础技能
 
 - [testing](../knowledge/testing.md)
 
-身份与知识加载遵循 [会话协议](../SESSION_PROTOCOL.md)，任务、交接与评审遵循 [项目运行协议](../PROJECT_PROTOCOL.md)。
+身份与技能加载遵循 [会话协议](../SESSION_PROTOCOL.md)，任务、交接与评审遵循 [项目运行协议](../PROJECT_PROTOCOL.md)。
