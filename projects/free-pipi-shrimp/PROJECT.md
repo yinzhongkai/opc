@@ -2,7 +2,7 @@
 
 项目 ID：`free-pipi-shrimp`
 
-- 框架基线：`v0.0.2`（提交 `267278b`）；框架校验与 49 项单元测试通过。
+- 框架基线：`v0.0.3`（提交 `6f79b98e219e0bbf8f7de45dd35ec54c2a6f1f07`）。2026-10-08 将项目提交 rebase 到重新发布的正式标签之上；先前提前采用的视觉设计、社交媒体运营和小红书内容运营三项公共能力已由正式基线接管，重放时未重复应用。项目同时采用角色/技能术语、项目历史工作流、会话消息边界和项目升级 rebase 规则，底层配置字段继续使用 `knowledge`。
 
 ## 建项信息
 
@@ -28,7 +28,7 @@
 - 协调记录维护人：成员 `project-manager`（2026-09-15 创建首名项目经理，按建员约定指定）；用户可另行指定其他在册成员。
 - 框架与成员配置维护：由根目录超级管理员入口负责，不属于本项目成员或长期协调记录职责。
 - 计划协调：由成员 `project-manager` 按项目运行协议维护团队任务计划并协调跨成员变化；超出已确认范围的变化由用户确认。
-- 专业职责与成员分工：以 [TEAM.yaml](TEAM.yaml) 登记的[成员文件](members/README.md)和共享岗位为准；记录整理不授予其他岗位职责。
+- 专业职责与成员分工：以 [TEAM.yaml](TEAM.yaml) 登记的[成员文件](members/README.md)和共享角色为准；记录整理不授予其他角色职责。
 
 ## 交付约定
 
@@ -44,14 +44,14 @@
 
 成员当前字段以各成员文件与 [TEAM.yaml](TEAM.yaml) 为准，此处只记录配置变更事实。
 
-- 2026-09-15：用户在超级管理员会话中要求创建产品经理、规划师、作者三名成员并分别提交。创建成员 `product-manager`（岗位 product-manager，首名该岗位成员，使用岗位 ID），配置文件 `members/product-manager.yaml`，已登记 TEAM。——框架超级管理员
-- 2026-09-15：同上授权。创建成员 `planner`（岗位 planner，首名该岗位成员，使用岗位 ID），配置文件 `members/planner.yaml`，已登记 TEAM，并为 planner 岗位配置项目补充知识 `travel-planning`。——框架超级管理员
-- 2026-09-15：同上授权。创建成员 `writer`（岗位 writer，首名该岗位成员，使用岗位 ID），配置文件 `members/writer.yaml`，已登记 TEAM。——框架超级管理员
-- 2026-09-15：用户在超级管理员会话中指出团队缺少项目经理。创建成员 `project-manager`（岗位 project-manager，首名该岗位成员，使用岗位 ID），配置文件 `members/project-manager.yaml`，已登记 TEAM；按建员约定将其指定为协调记录维护人（承担记录整理，不因此获得其他岗位职责或自行批准权）。——框架超级管理员
-- 2026-09-15：用户在超级管理员会话中要求新建小红书相关创作知识，并指出可参考平台的小红书技能。新增 active 知识 `xhs-plog-creation`（`knowledge/xhs-plog-creation.md`，已登记知识目录），配置为 writer 岗位项目补充知识。——框架超级管理员
-- 2026-09-29：用户在当前超级管理员会话中明确授权执行 T-009 第 6 步，在项目任务分支 `feat/free-pipi-shrimp/T-009-content-production-team` 使用 `git cherry-pick -x` 提前采用三项已进入框架集成线的公共能力：原提交 `ecf5153322afd5e30fecd8673884c0350e768006` 对应项目分支提交 `6bfd50be061111f83f300885da6614df5e6924b8`，原提交 `2e63d84fcde31e27c5c0993ebbcb361eb246b3dd` 对应项目分支提交 `f120fd35082baad63de6c7866723f84e543dcfbd`，原提交 `07dd3c37b8d11044b27244454382f3aa39edfa82` 对应项目分支提交 `314a8eaeab85a2c9b2870cd855a922ffe7b27f2b`。项目正式框架基线仍为 `v0.0.2`（`267278b`），本次提前采用不表示 `v0.0.3` 已发布；后续正式升级框架基线时必须识别这些已回灌补丁，避免重复应用。——框架超级管理员
-- 2026-09-29：同上授权。创建成员 `visual-designer`（岗位 visual-designer，首名该岗位成员，使用岗位 ID），scope 为负责角色视觉规范、AI 角色图片与封面视觉，维护素材身份和风格一致性，并记录参考图、生成参数、版本与素材来源；配置文件 `members/visual-designer.yaml`，已登记 TEAM，并为 visual-designer 岗位配置项目补充知识 `ai-character-image-consistency`。——框架超级管理员
-- 2026-09-29：同上授权。创建成员 `social-media-operator`（岗位 social-media-operator，首名该岗位成员，使用岗位 ID），scope 为负责本项目小红书首期内容日历、发布包检查、人工发布协作、平台规则与 AI 标注核对、基础数据复盘和用户反馈整理，并遵守账号凭据边界；配置文件 `members/social-media-operator.yaml`，已登记 TEAM，并为 social-media-operator 岗位配置项目补充知识 `xhs-content-operations`。——框架超级管理员
+- 2026-09-15：用户在超级管理员会话中要求创建产品经理、规划师、作者三名成员并分别提交。创建成员 `product-manager`（角色 product-manager，首名该角色成员，使用角色 ID），配置文件 `members/product-manager.yaml`，已登记 TEAM。——框架超级管理员
+- 2026-09-15：同上授权。创建成员 `planner`（角色 planner，首名该角色成员，使用角色 ID），配置文件 `members/planner.yaml`，已登记 TEAM，并为 planner 角色配置项目补充技能 `travel-planning`。——框架超级管理员
+- 2026-09-15：同上授权。创建成员 `writer`（角色 writer，首名该角色成员，使用角色 ID），配置文件 `members/writer.yaml`，已登记 TEAM。——框架超级管理员
+- 2026-09-15：用户在超级管理员会话中指出团队缺少项目经理。创建成员 `project-manager`（角色 project-manager，首名该角色成员，使用角色 ID），配置文件 `members/project-manager.yaml`，已登记 TEAM；按建员约定将其指定为协调记录维护人（承担记录整理，不因此获得其他角色职责或自行批准权）。——框架超级管理员
+- 2026-09-15：用户在超级管理员会话中要求新建小红书相关创作技能，并指出可参考平台的小红书技能。新增 active 技能 `xhs-plog-creation`（`knowledge/xhs-plog-creation.md`，已登记技能目录），配置为 writer 角色项目补充技能。——框架超级管理员
+- 2026-09-29：用户在当前超级管理员会话中明确授权执行 T-009 第 6 步，在项目任务分支 `feat/free-pipi-shrimp/T-009-content-production-team` 使用 `git cherry-pick -x` 提前采用三项已进入框架集成线的公共能力：原提交 `ecf5153322afd5e30fecd8673884c0350e768006` 对应项目分支提交 `6bfd50be061111f83f300885da6614df5e6924b8`，原提交 `2e63d84fcde31e27c5c0993ebbcb361eb246b3dd` 对应项目分支提交 `f120fd35082baad63de6c7866723f84e543dcfbd`，原提交 `07dd3c37b8d11044b27244454382f3aa39edfa82` 对应项目分支提交 `314a8eaeab85a2c9b2870cd855a922ffe7b27f2b`。2026-10-08 正式升级到 `v0.0.3` 时已核对并去重，这三项能力现由正式框架基线接管；提前采用提交继续作为历史证据保留。——框架超级管理员
+- 2026-09-29：同上授权。创建成员 `visual-designer`（角色 visual-designer，首名该角色成员，使用角色 ID），scope 为负责角色视觉规范、AI 角色图片与封面视觉，维护素材身份和风格一致性，并记录参考图、生成参数、版本与素材来源；配置文件 `members/visual-designer.yaml`，已登记 TEAM，并为 visual-designer 角色配置项目补充技能 `ai-character-image-consistency`。——框架超级管理员
+- 2026-09-29：同上授权。创建成员 `social-media-operator`（角色 social-media-operator，首名该角色成员，使用角色 ID），scope 为负责本项目小红书首期内容日历、发布包检查、人工发布协作、平台规则与 AI 标注核对、基础数据复盘和用户反馈整理，并遵守账号凭据边界；配置文件 `members/social-media-operator.yaml`，已登记 TEAM，并为 social-media-operator 角色配置项目补充技能 `xhs-content-operations`。——框架超级管理员
 
 ## 工作区配置记录
 
