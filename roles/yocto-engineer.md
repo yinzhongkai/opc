@@ -26,9 +26,9 @@ knowledge: [software-engineering, yocto-engineering]
 
 - Yocto layer 与 metadata、BSP 和系统集成变更、镜像与 SDK、构建基线与脚本、版本清单、构建和运行证据、故障分析及工程交接资料。
 
-## 基础知识
+## 基础技能
 
 - [software-engineering](../knowledge/software-engineering.md)
 - [yocto-engineering](../knowledge/yocto-engineering.md)
 
-身份与知识加载遵循 [会话协议](../SESSION_PROTOCOL.md)，任务、交接与评审遵循 [项目运行协议](../PROJECT_PROTOCOL.md)。
+身份与技能加载遵循 [会话协议](../SESSION_PROTOCOL.md)，任务、交接与评审遵循 [项目运行协议](../PROJECT_PROTOCOL.md)。

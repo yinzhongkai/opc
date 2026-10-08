@@ -34,7 +34,8 @@ ID_PATTERN = re.compile(r"[a-z][a-z0-9-]*\Z")
 DEFINITION_STATES = {"draft", "active", "deprecated"}
 ROOT_FILES = (
     "README.md", "AGENTS.md", "SESSION_PROTOCOL.md", "PROJECT_PROTOCOL.md",
-    "CONFIG_SCHEMA.md", "SUPER_ADMIN.md", "MIGRATIONS.md",
+    "CONFIG_SCHEMA.md", "SUPER_ADMIN.md", "MIGRATIONS.md", "BRANCH_STRATEGY.md",
+    "SESSION_MESSAGING.md",
 )
 PROJECT_FILES = (
     "AGENTS.md", "PROJECT.md", "TEAM.yaml", "TASKS.md", "STATUS.md",
@@ -243,9 +244,9 @@ class Validator:
     def check_knowledge_ref(self, identifier, path, field, active):
         entry = self.knowledge.get(identifier)
         if entry is None:
-            self.error(path, f"{field} 引用了不存在的知识：{identifier}")
+            self.error(path, f"{field} 引用了不存在的技能：{identifier}")
         elif active and entry[0].get("status") != "active":
-            self.error(path, f"{field} 引用的知识必须为 active：{identifier}")
+            self.error(path, f"{field} 引用的技能必须为 active：{identifier}")
 
     def member_path_is_safe(self, path, folder):
         """Reject escaped member references before reading their contents."""
@@ -283,15 +284,15 @@ class Validator:
             self.error(path, "scope 必须是非空字符串列表，每项不得留空")
         role_id = member.get("role")
         if not is_id(role_id):
-            self.error(path, "role 必须是有效岗位 ID")
+            self.error(path, "role 必须是有效角色 ID")
             return
         if role_id == "super-admin":
-            self.error(path, "super-admin 是框架入口，不能绑定为项目成员岗位")
+            self.error(path, "super-admin 是框架入口，不能绑定为项目成员角色")
         entry = self.roles.get(role_id)
         if entry is None:
-            self.error(path, f"role 引用了不存在的岗位：{role_id}")
+            self.error(path, f"role 引用了不存在的角色：{role_id}")
         elif entry[0].get("status") != "active":
-            self.error(path, f"role 引用的岗位必须为 active：{role_id}")
+            self.error(path, f"role 引用的角色必须为 active：{role_id}")
 
     def check_member_inventory(self, folder, registered, template=False):
         members_folder = folder / "members"
@@ -359,15 +360,15 @@ class Validator:
             for role_id, knowledge_ids in role_knowledge.items():
                 field = f"roleKnowledge[{role_id!r}]"
                 if not is_id(role_id):
-                    self.error(path, f"{field} 的岗位键必须是有效 ID")
+                    self.error(path, f"{field} 的角色键必须是有效 ID")
                 else:
                     if role_id == "super-admin":
-                        self.error(path, f"{field} 不能配置框架入口 super-admin 的项目岗位补充知识")
+                        self.error(path, f"{field} 不能配置框架入口 super-admin 的项目角色补充技能")
                     entry = self.roles.get(role_id)
                     if entry is None:
-                        self.error(path, f"{field} 引用了不存在的岗位")
+                        self.error(path, f"{field} 引用了不存在的角色")
                     elif entry[0].get("status") != "active":
-                        self.error(path, f"{field} 引用的岗位必须为 active")
+                        self.error(path, f"{field} 引用的角色必须为 active")
                 for identifier in self.id_list(knowledge_ids, path, field):
                     self.check_knowledge_ref(identifier, path, field, active=True)
         if template and data.get("members") != []:
@@ -482,7 +483,7 @@ class Validator:
         self.knowledge = self.load_definitions("knowledge")
         self.roles = self.load_definitions("roles", role=True)
         self.check_knowledge_ref(
-            "team-management", self.root / "SUPER_ADMIN.md", "框架入口基础知识", active=True,
+            "team-management", self.root / "SUPER_ADMIN.md", "框架入口基础技能", active=True,
         )
         for role, path in self.roles.values():
             for identifier in role["knowledge"]:
@@ -522,7 +523,7 @@ def main(argv=None):
             print(f"- {error}")
     else:
         print(
-            f"校验通过：{len(validator.roles)} 个岗位、{len(validator.knowledge)} 份知识、"
+            f"校验通过：{len(validator.roles)} 个角色、{len(validator.knowledge)} 份技能、"
             f"{validator.project_count} 个实际项目、1 套项目模板、"
             f"{validator.link_count} 处本地链接。"
         )

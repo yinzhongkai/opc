@@ -375,10 +375,10 @@ class FrameworkValidationTests(unittest.TestCase):
         self.definition("knowledge", "historical-method", status="deprecated")
         data["roleKnowledge"] = {"developer": ["historical-method"]}
         self.save_team(data)
-        self.assert_error("引用的知识必须为 active")
+        self.assert_error("引用的技能必须为 active")
         data["roleKnowledge"] = {"missing-role": []}
         self.save_team(data)
-        self.assert_error("引用了不存在的岗位")
+        self.assert_error("引用了不存在的角色")
 
     def test_all_registered_members_require_active_roles(self):
         data = self.project()
@@ -387,21 +387,21 @@ class FrameworkValidationTests(unittest.TestCase):
         for status in ("draft", "deprecated"):
             with self.subTest(role_status=status):
                 self.definition("roles", "developer", status=status, knowledge=["software-engineering"])
-                self.assert_error("role 引用的岗位必须为 active")
+                self.assert_error("role 引用的角色必须为 active")
         data["roleKnowledge"] = {"developer": []}
         self.save_team(data)
-        self.assert_error("引用的岗位必须为 active")
+        self.assert_error("引用的角色必须为 active")
 
     def test_active_role_requires_active_base_knowledge_even_without_members(self):
         self.definition("knowledge", "software-engineering", status="draft")
-        self.assert_error("knowledge 引用的知识必须为 active")
+        self.assert_error("knowledge 引用的技能必须为 active")
 
     def test_definition_and_member_references_still_need_files(self):
         self.definition("roles", "retired-role", status="deprecated", knowledge=["missing-knowledge"])
-        self.assert_error("引用了不存在的知识：missing-knowledge")
+        self.assert_error("引用了不存在的技能：missing-knowledge")
         data = self.project()
         self.add_member(data, "developer-01", "missing-role")
-        self.assert_error("引用了不存在的岗位：missing-role")
+        self.assert_error("引用了不存在的角色：missing-role")
 
     def test_managed_by_is_rejected_with_migration_message(self):
         data = self.project()
@@ -423,15 +423,15 @@ class FrameworkValidationTests(unittest.TestCase):
         data = self.project()
         data["roleKnowledge"] = {"super-admin": []}
         self.save_team(data)
-        self.assert_error("不能配置框架入口 super-admin 的项目岗位补充知识")
+        self.assert_error("不能配置框架入口 super-admin 的项目角色补充技能")
         self.definition("roles", "super-admin", knowledge=["team-management"])
-        self.assert_error("不能配置框架入口 super-admin 的项目岗位补充知识")
+        self.assert_error("不能配置框架入口 super-admin 的项目角色补充技能")
 
     def test_framework_admin_requires_active_team_management_knowledge(self):
         self.definition("knowledge", "team-management", status="draft")
-        self.assert_error("SUPER_ADMIN.md: 框架入口基础知识 引用的知识必须为 active")
+        self.assert_error("SUPER_ADMIN.md: 框架入口基础技能 引用的技能必须为 active")
         (self.root / "knowledge/team-management.md").unlink()
-        self.assert_error("SUPER_ADMIN.md: 框架入口基础知识 引用了不存在的知识")
+        self.assert_error("SUPER_ADMIN.md: 框架入口基础技能 引用了不存在的技能")
 
     def test_reject_invalid_scope_member_override_and_unknown_team_fields(self):
         data = self.project()
@@ -586,6 +586,8 @@ class FrameworkValidationTests(unittest.TestCase):
         (self.root / "SESSION_PROTOCOL.md").unlink()
         (self.root / "SUPER_ADMIN.md").unlink()
         (self.root / "MIGRATIONS.md").unlink()
+        (self.root / "BRANCH_STRATEGY.md").unlink()
+        (self.root / "SESSION_MESSAGING.md").unlink()
         (self.root / "templates/project/TASKS.md").unlink()
         (self.root / "templates/project/members/README.md").unlink()
         (self.root / "templates/project/WORKSPACE.yaml").unlink()
@@ -593,6 +595,8 @@ class FrameworkValidationTests(unittest.TestCase):
         self.assert_error("SESSION_PROTOCOL.md: 缺少必需文件")
         self.assert_error("SUPER_ADMIN.md: 缺少必需文件")
         self.assert_error("MIGRATIONS.md: 缺少必需文件")
+        self.assert_error("BRANCH_STRATEGY.md: 缺少必需文件")
+        self.assert_error("SESSION_MESSAGING.md: 缺少必需文件")
         self.assert_error("templates/project/TASKS.md: 缺少必需文件")
         self.assert_error("templates/project/members/README.md: 缺少必需文件")
         self.assert_error("templates/project/WORKSPACE.yaml: 缺少必需文件")
@@ -717,6 +721,156 @@ class RealTemplateIntegrationTests(unittest.TestCase):
                 )
                 team_path.write_text(yaml.safe_dump(team, sort_keys=False, allow_unicode=True), encoding="utf-8")
                 self.assertEqual([], Validator(root).run())
+
+
+class VisualDesignDefinitionTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.root = Path(__file__).resolve().parents[1]
+
+    def frontmatter(self, relative_path):
+        text = (self.root / relative_path).read_text(encoding="utf-8-sig")
+        self.assertTrue(text.startswith("---\n"), relative_path)
+        _, header, _ = text.split("---", 2)
+        return yaml.safe_load(header), text
+
+    def test_visual_designer_uses_general_base_knowledge_only(self):
+        role, role_text = self.frontmatter("roles/visual-designer.md")
+        visual, _ = self.frontmatter("knowledge/visual-design.md")
+        ai_consistency, _ = self.frontmatter("knowledge/ai-character-image-consistency.md")
+
+        self.assertEqual("visual-designer", role["id"])
+        self.assertEqual("active", role["status"])
+        self.assertEqual(["visual-design"], role["knowledge"])
+        self.assertEqual("active", visual["status"])
+        self.assertEqual("active", ai_consistency["status"])
+        self.assertIn("TEAM.roleKnowledge", role_text)
+
+    def test_visual_design_guidance_covers_traceability_and_handoff(self):
+        _, role = self.frontmatter("roles/visual-designer.md")
+        _, visual = self.frontmatter("knowledge/visual-design.md")
+        _, ai_consistency = self.frontmatter("knowledge/ai-character-image-consistency.md")
+        combined = "\n".join((role, visual, ai_consistency))
+
+        for requirement in (
+            "角色视觉规范",
+            "参考图",
+            "生成参数与版本记录",
+            "素材来源",
+            "风格与角色一致性检查",
+            "交接边界",
+        ):
+            with self.subTest(requirement=requirement):
+                self.assertIn(requirement, combined)
+
+    def test_indexes_register_visual_design_definitions(self):
+        roles_index = (self.root / "roles/INDEX.md").read_text(encoding="utf-8-sig")
+        knowledge_index = (self.root / "knowledge/INDEX.md").read_text(encoding="utf-8-sig")
+
+        self.assertIn("[visual-designer](visual-designer.md)", roles_index)
+        self.assertIn("[visual-design](visual-design.md)", knowledge_index)
+        self.assertIn(
+            "[ai-character-image-consistency](ai-character-image-consistency.md)",
+            knowledge_index,
+        )
+
+
+class SocialMediaOperationsDefinitionTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.root = Path(__file__).resolve().parents[1]
+
+    def frontmatter(self, relative_path):
+        text = (self.root / relative_path).read_text(encoding="utf-8-sig")
+        self.assertTrue(text.startswith("---\n"), relative_path)
+        _, header, _ = text.split("---", 2)
+        return yaml.safe_load(header), text
+
+    def test_social_media_operator_has_active_general_knowledge(self):
+        role, _ = self.frontmatter("roles/social-media-operator.md")
+        knowledge, _ = self.frontmatter("knowledge/social-media-operations.md")
+
+        self.assertEqual("social-media-operator", role["id"])
+        self.assertEqual("active", role["status"])
+        self.assertEqual(["social-media-operations"], role["knowledge"])
+        self.assertEqual("social-media-operations", knowledge["id"])
+        self.assertEqual("active", knowledge["status"])
+
+    def test_social_media_guidance_covers_workflow_and_safety_boundaries(self):
+        _, role = self.frontmatter("roles/social-media-operator.md")
+        _, knowledge = self.frontmatter("knowledge/social-media-operations.md")
+        combined = "\n".join((role, knowledge))
+
+        for requirement in (
+            "内容日历",
+            "发布包检查",
+            "人工发布协作",
+            "平台规则核对",
+            "数据复盘",
+            "用户反馈",
+            "不保存或转述",
+            "不自行获得发布授权",
+            "不把草稿完成",
+            "必须由用户",
+        ):
+            with self.subTest(requirement=requirement):
+                self.assertIn(requirement, combined)
+
+    def test_indexes_register_social_media_definitions(self):
+        roles_index = (self.root / "roles/INDEX.md").read_text(encoding="utf-8-sig")
+        knowledge_index = (self.root / "knowledge/INDEX.md").read_text(encoding="utf-8-sig")
+
+        self.assertIn("[social-media-operator](social-media-operator.md)", roles_index)
+        self.assertIn("[social-media-operations](social-media-operations.md)", knowledge_index)
+
+
+class XhsContentOperationsDefinitionTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.root = Path(__file__).resolve().parents[1]
+
+    def frontmatter(self, relative_path):
+        text = (self.root / relative_path).read_text(encoding="utf-8-sig")
+        self.assertTrue(text.startswith("---\n"), relative_path)
+        _, header, _ = text.split("---", 2)
+        return yaml.safe_load(header), text
+
+    def test_xhs_operations_is_active_project_supplement(self):
+        role, role_text = self.frontmatter("roles/social-media-operator.md")
+        operations, _ = self.frontmatter("knowledge/xhs-content-operations.md")
+
+        self.assertEqual(["social-media-operations"], role["knowledge"])
+        self.assertEqual("xhs-content-operations", operations["id"])
+        self.assertEqual("active", operations["status"])
+        self.assertIn("TEAM.roleKnowledge", role_text)
+        self.assertIn("xhs-content-operations", role_text)
+
+    def test_xhs_creation_and_operations_have_distinct_responsibilities(self):
+        _, operations = self.frontmatter("knowledge/xhs-content-operations.md")
+        _, creation = self.frontmatter("knowledge/xhs-plog-creation.md")
+
+        self.assertIn("本文负责内容创作方法", creation)
+        self.assertIn("不负责内容日历", creation)
+        self.assertIn("负责单条 plog", operations)
+        self.assertIn("本文负责把已批准的稿件和素材纳入内容日历", operations)
+
+    def test_xhs_operations_covers_required_controls_and_rule_refresh(self):
+        _, operations = self.frontmatter("knowledge/xhs-content-operations.md")
+
+        for requirement in (
+            "发布检查",
+            "AI 标注核对",
+            "账号凭据边界",
+            "人工发布协作",
+            "内容日历",
+            "基础数据复盘",
+            "执行时重新核实",
+        ):
+            with self.subTest(requirement=requirement):
+                self.assertIn(requirement, operations)
+
+        knowledge_index = (self.root / "knowledge/INDEX.md").read_text(encoding="utf-8-sig")
+        self.assertIn("[xhs-content-operations](xhs-content-operations.md)", knowledge_index)
 
 
 if __name__ == "__main__":

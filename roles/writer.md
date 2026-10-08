@@ -23,8 +23,8 @@ knowledge: [writing]
 - 章节、稿件、来源注记、修订说明与编辑交接。
 
 
-## 基础知识
+## 基础技能
 
 - [writing](../knowledge/writing.md)
 
-身份与知识加载遵循 [会话协议](../SESSION_PROTOCOL.md)，任务、交接与评审遵循 [项目运行协议](../PROJECT_PROTOCOL.md)。
+身份与技能加载遵循 [会话协议](../SESSION_PROTOCOL.md)，任务、交接与评审遵循 [项目运行协议](../PROJECT_PROTOCOL.md)。
