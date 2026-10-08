@@ -2,7 +2,7 @@
 
 项目 ID：`book-yocto`
 
-- 框架基线：`v0.0.2`（提交 `267278b`）。2026-09-28 在发布标签纳入声明式工作区功能后重新升级；项目分支中等价的提前回灌提交已在重放时去重，Yocto 工程岗位与知识、分支治理策略及声明式工作区功能均由正式发布基线接管。首次升级前分支头由 `archive/2026-09-28/pre-v0.0.2-project-book-yocto` 保存，本次重放前分支头由 `archive/2026-09-28/project-book-yocto-before-v0.0.2-retag-upgrade` 保存。
+- 框架基线：`v0.0.3`（提交 `6f79b98e219e0bbf8f7de45dd35ec54c2a6f1f07`）。2026-10-08 将项目提交 rebase 到重新发布的正式标签之上，采用角色/技能术语、项目历史工作流、会话消息边界和项目升级 rebase 规则；底层配置字段继续使用 `knowledge`。此前 `v0.0.2` 升级及归档记录继续有效。
 - 分支迁移：2026-09-28 从原 `book-yocto` 历史收敛为 `project/book-yocto` 的干净项目基线；迁移前完整历史由 `archive/2026-09-28/book-yocto` 保存，项目线中原有的重复 Yocto 框架提交不再作为权威来源。
 
 ## 建项信息
@@ -27,7 +27,7 @@
 - 协调记录维护人：`project-manager`（2026-09-12 按建员约定指定；首名且唯一项目经理，用户无其他安排。用户可改指定其他在册成员）。
 - 框架与成员配置维护：由根目录超级管理员入口负责，不属于本项目成员或长期协调记录职责。
 - 计划协调：未配置项目经理时，跨成员计划变化由用户确认；配置后按项目运行协议明确负责的项目经理及记录维护人。
-- 专业职责与成员分工：以 [TEAM.yaml](TEAM.yaml) 登记的[成员文件](members/README.md)和共享岗位为准；记录整理不授予其他岗位职责。
+- 专业职责与成员分工：以 [TEAM.yaml](TEAM.yaml) 登记的[成员文件](members/README.md)和共享角色为准；记录整理不授予其他角色职责。
 
 ## 交付约定
 
@@ -41,10 +41,10 @@
 
 超级管理员建员或调整时记录实际日期、用户授权来源、涉及成员 ID、变更内容及配置路径；此处不重复维护成员当前字段。
 
-- 2026-09-12：用户在本超级管理员会话确认按建议的 3 人方案创建成员。新建 `project-manager`（岗位 project-manager），配置路径 [members/project-manager.yaml](members/project-manager.yaml)；TEAM 登记成员索引并为该岗位补充知识 `book-production`；按建员约定指定其为协调记录维护人。记录人：框架超级管理员。
-- 2026-09-12：同一授权下新建 `writer`（岗位 writer），配置路径 [members/writer.yaml](members/writer.yaml)；TEAM 登记成员索引并为该岗位补充知识 `book-production, reader-feedback, book-planning`。记录人：框架超级管理员。
-- 2026-09-12：同一授权下新建 `reviewer`（岗位 reviewer），配置路径 [members/reviewer.yaml](members/reviewer.yaml)；TEAM 登记成员索引并为该岗位补充知识 `book-production, book-review, reader-feedback, technical-book-validation`。记录人：框架超级管理员。
-- 2026-09-27：用户在本超级管理员会话要求增加一名专门进行 Yocto 开发的成员，并在 OPC 框架中增加相应知识和岗位。新增公共知识 `yocto-engineering`、公共岗位 `yocto-engineer`，新建成员 `yocto-engineer`，配置路径 [members/yocto-engineer.yaml](members/yocto-engineer.yaml)；TEAM 登记成员索引并为该岗位补充知识 `technical-book-validation`。记录人：框架超级管理员。
+- 2026-09-12：用户在本超级管理员会话确认按建议的 3 人方案创建成员。新建 `project-manager`（角色 project-manager），配置路径 [members/project-manager.yaml](members/project-manager.yaml)；TEAM 登记成员索引并为该角色补充技能 `book-production`；按建员约定指定其为协调记录维护人。记录人：框架超级管理员。
+- 2026-09-12：同一授权下新建 `writer`（角色 writer），配置路径 [members/writer.yaml](members/writer.yaml)；TEAM 登记成员索引并为该角色补充技能 `book-production, reader-feedback, book-planning`。记录人：框架超级管理员。
+- 2026-09-12：同一授权下新建 `reviewer`（角色 reviewer），配置路径 [members/reviewer.yaml](members/reviewer.yaml)；TEAM 登记成员索引并为该角色补充技能 `book-production, book-review, reader-feedback, technical-book-validation`。记录人：框架超级管理员。
+- 2026-09-27：用户在本超级管理员会话要求增加一名专门进行 Yocto 开发的成员，并在 OPC 框架中增加相应技能和角色。新增公共技能 `yocto-engineering`、公共角色 `yocto-engineer`，新建成员 `yocto-engineer`，配置路径 [members/yocto-engineer.yaml](members/yocto-engineer.yaml)；TEAM 登记成员索引并为该角色补充技能 `technical-book-validation`。记录人：框架超级管理员。
 
 ## 当前资料
 
