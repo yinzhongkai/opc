@@ -19,6 +19,7 @@
 - [T-012 chapter 2 核验记录](work-records/t012-chapter2-env-check.md)
 - [T-015 chapter 3 核验记录](work-records/t015-chapter3-env-check.md)
 - [T-015 原始执行日志](work-records/t015-chapter3-raw.log)
+- [T-014 chapter 3 最终 Docker 复验报告](work-records/t014-chapter3-final-revalidation/report.md)（2026-10-03 执行、2026-10-04 补证，2026-10-08 从源码历史提交 `f5d5fffd972845bb52e6f2a2e9ef36986d3667e1` 补录到 OPC；同目录保存两份原始日志与三份执行脚本）
 
 ## 正文元信息样式（不是真实成果）
 
