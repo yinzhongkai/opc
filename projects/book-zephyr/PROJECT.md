@@ -2,7 +2,7 @@
 
 项目 ID：`book-zephyr`
 
-- 框架基线：`v0.0.2`（提交 `267278b`）。2026-09-28 在发布标签纳入声明式工作区功能后重新升级；此前回灌的分支治理策略与工作区声明均由正式发布基线接管。首次升级前分支头由 `archive/2026-09-28/pre-v0.0.2-project-book-zephyr` 保存，本次重放前分支头由 `archive/2026-09-28/project-book-zephyr-before-workspace-upgrade` 保存。升级后框架校验与 49 项单元测试通过。
+- 框架基线：`v0.0.3`（提交 `6f79b98e219e0bbf8f7de45dd35ec54c2a6f1f07`）。2026-10-08 将项目提交 rebase 到重新发布的正式标签之上，采用角色/技能术语、项目历史工作流、会话消息边界和项目升级 rebase 规则；底层配置字段继续使用 `knowledge`。此前 `v0.0.2` 升级及归档记录继续有效。
 - 分支迁移：2026-09-28 从原 `book-zephyr` 历史收敛为 `project/book-zephyr` 的干净项目基线；迁移前完整历史由 `archive/2026-09-28/book-zephyr` 保存。
 
 ## 建项信息
@@ -31,7 +31,7 @@
 - 书稿、技术验证证据与用户学习反馈分别记录，不能用预期现象替代实测结果，也不能把 AI 生成内容写成用户亲历。
 - 用户逐章通读（[D-008](DECISIONS.md)）：每章完成约定的必要审校与修订、形成明确版本的完整可读稿后，交用户完整读一遍；用户可直接在会话中反馈理解障碍、内容顺序、详略及例子/图示需求，无需正式报告。writer 记录所读版本、实际反馈、处理回复与修订版本，重要改动交用户复读，技术改动按影响由相应成员复核。第 1 章由 [T-006](TASKS.md) 落实。
 - 通读与实机学习/实验分别记录，用户不必边读边完成全部实验；未经实际确认不记为通读完成，通读完成不等于实测通过或章节获批。章节定稿仍须满足既定验证与确认条件；具体反馈和验收证据在各章任务内记录。
-- 岗位补充知识在实际创建成员时按其岗位与 scope 配置，不因采用模板而预置成员或虚构分工。
+- 角色补充技能在实际创建成员时按其角色与 scope 配置，不因采用模板而预置成员或虚构分工。
 
 ## 确认与记录责任
 
@@ -39,7 +39,7 @@
 - 协调记录维护人：`project-manager`；作为首名项目经理，按建员约定负责协调记录维护，用户可另行指定其他在册成员。
 - 框架与成员配置维护：由根目录超级管理员入口负责，不属于本项目成员或长期协调记录职责。
 - 计划协调：未配置项目经理时，跨成员计划变化由用户确认；配置后按项目运行协议明确负责的项目经理及记录维护人。
-- 专业职责与成员分工：以 [TEAM.yaml](TEAM.yaml) 登记的[成员文件](members/README.md)和共享岗位为准；记录整理不授予其他岗位职责。
+- 专业职责与成员分工：以 [TEAM.yaml](TEAM.yaml) 登记的[成员文件](members/README.md)和共享角色为准；记录整理不授予其他角色职责。
 
 ## 交付约定
 
@@ -52,10 +52,10 @@
 ## 成员配置记录
 
 - 2026-09-11，框架超级管理员按建项用户请求建立版本 3 空团队，未创建或初始化成员会话。
-- 2026-09-11，框架超级管理员按用户“创建首批成员且每名成员单独提交”的请求创建 `project-manager`，配置见 [members/project-manager.yaml](members/project-manager.yaml)，并为其补充 `book-production` 知识。由于其是首名项目经理且原维护人待指定，将协调记录维护人指定为该成员；成员尚未在新会话初始化。
-- 2026-09-11，框架超级管理员按同一请求创建 `planner`，配置见 [members/planner.yaml](members/planner.yaml)，为其补充 `writing`、`book-production`、`book-planning` 和 `technical-book-validation` 知识；成员尚未在新会话初始化。
-- 2026-09-11，框架超级管理员按同一请求创建 `writer`，配置见 [members/writer.yaml](members/writer.yaml)，为其补充 `book-production`、`reader-feedback` 和 `technical-book-validation` 知识；成员尚未在新会话初始化。
-- 2026-09-11，框架超级管理员按同一请求创建 `developer`，配置见 [members/developer.yaml](members/developer.yaml)，为其补充 `book-production` 和 `technical-book-validation` 知识；至此本次请求的四名首批成员均已在册，但尚未在各自新会话初始化。
+- 2026-09-11，框架超级管理员按用户“创建首批成员且每名成员单独提交”的请求创建 `project-manager`，配置见 [members/project-manager.yaml](members/project-manager.yaml)，并为其补充 `book-production` 技能。由于其是首名项目经理且原维护人待指定，将协调记录维护人指定为该成员；成员尚未在新会话初始化。
+- 2026-09-11，框架超级管理员按同一请求创建 `planner`，配置见 [members/planner.yaml](members/planner.yaml)，为其补充 `writing`、`book-production`、`book-planning` 和 `technical-book-validation` 技能；成员尚未在新会话初始化。
+- 2026-09-11，框架超级管理员按同一请求创建 `writer`，配置见 [members/writer.yaml](members/writer.yaml)，为其补充 `book-production`、`reader-feedback` 和 `technical-book-validation` 技能；成员尚未在新会话初始化。
+- 2026-09-11，框架超级管理员按同一请求创建 `developer`，配置见 [members/developer.yaml](members/developer.yaml)，为其补充 `book-production` 和 `technical-book-validation` 技能；至此本次请求的四名首批成员均已在册，但尚未在各自新会话初始化。
 
 ## 当前资料
 
