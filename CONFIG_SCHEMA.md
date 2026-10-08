@@ -2,7 +2,7 @@
 
 面向用户时统一使用“角色”和“技能”。为保持现有配置和引用稳定，底层仍使用 `roles`、`knowledge` 目录，角色文件仍使用 `knowledge` 字段，TEAM 仍使用 `roleKnowledge` 字段；本次术语统一不构成字段迁移。这里的 OPC 技能也不等同于运行平台自身可能提供的原生 Skill。
 
-本规范定义成员配置和项目工作区声明的结构与引用要求，供 [初始化协议](SESSION_PROTOCOL.md)、[项目运行协议](PROJECT_PROTOCOL.md) 和只读校验器共同使用。使用 UTF-8 编码，YAML 禁止重复键，不通过自定义 YAML 标签执行代码。
+本规范定义成员配置和项目工作区声明的结构与引用要求，供 [初始化协议](SESSION_PROTOCOL.md)、[会话消息协议](SESSION_MESSAGING.md)、[项目运行协议](PROJECT_PROTOCOL.md) 和只读校验器共同使用。使用 UTF-8 编码，YAML 禁止重复键，不通过自定义 YAML 标签执行代码。
 
 ## 路径与 ID
 
@@ -39,7 +39,7 @@ TEAM 是在册成员索引。成员文件是身份与分工的唯一事实来源
 | `role` | 单个角色 ID |
 | `scope` | 至少包含一个非空字符串的列表，描述具体职责范围或产出 |
 
-成员文件不配置个人技能、平台会话 ID 或会话标题，也不接受上述三个字段之外的配置。在册成员必须引用 active 项目角色；不能绑定框架入口 `super-admin`。角色或技能的状态属于公共定义有效性，与成员配置分开。
+成员文件不配置个人技能、平台会话 ID、会话标题或当前有效会话状态，也不接受上述三个字段之外的配置。在册成员必须引用 active 项目角色；不能绑定框架入口 `super-admin`。角色或技能的状态属于公共定义有效性，与成员配置分开。`project-id + member-id` 到平台会话的映射由平台适配层在运行时维护，不写入共享 Git 配置。
 
 例如 TEAM 的 `members: [project-manager]` 对应文件 `members/project-manager.yaml`，其内容形如：
 

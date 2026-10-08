@@ -35,6 +35,7 @@ DEFINITION_STATES = {"draft", "active", "deprecated"}
 ROOT_FILES = (
     "README.md", "AGENTS.md", "SESSION_PROTOCOL.md", "PROJECT_PROTOCOL.md",
     "CONFIG_SCHEMA.md", "SUPER_ADMIN.md", "MIGRATIONS.md", "BRANCH_STRATEGY.md",
+    "SESSION_MESSAGING.md",
 )
 PROJECT_FILES = (
     "AGENTS.md", "PROJECT.md", "TEAM.yaml", "TASKS.md", "STATUS.md",

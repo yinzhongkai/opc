@@ -4,6 +4,7 @@
 
 - [SUPER_ADMIN.md](../../SUPER_ADMIN.md)：超级管理员的建项和配置工作。
 - [SESSION_PROTOCOL.md](../../SESSION_PROTOCOL.md)：成员身份解析、技能加载、项目资料分层读取与刷新。
+- [SESSION_MESSAGING.md](../../SESSION_MESSAGING.md)：会话创建权、运行时身份映射与跨会话消息边界。
 - [PROJECT_PROTOCOL.md](../../PROJECT_PROTOCOL.md)：任务、评审、交接及成果流程。
 - [CONFIG_SCHEMA.md](../../CONFIG_SCHEMA.md)：需要核对的配置结构。
 
