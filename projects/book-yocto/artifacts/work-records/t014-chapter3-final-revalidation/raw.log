@@ -1,0 +1,688 @@
+
+################################################################
+## RUN METADATA
+################################################################
+
+===== BEGIN RUN-01 date =====
+$ date -Is
+2026-10-03T20:50:07+08:00
+RC=0
+===== END RUN-01 date =====
+
+===== BEGIN RUN-02 uname =====
+$ uname -a
+Linux tiger 6.18.33.2-microsoft-standard-WSL2 #1 SMP PREEMPT_DYNAMIC Thu Jun 18 21:54:43 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
+RC=0
+===== END RUN-02 uname =====
+
+===== BEGIN RUN-03 container-user =====
+$ id
+uid=1001(oops) gid=1001(oops) groups=1001(oops)
+RC=0
+===== END RUN-03 container-user =====
+
+################################################################
+## ENVIRONMENT SETUP
+################################################################
+
+===== BEGIN ENV-01 source oe-init-build-env =====
+$ source /home/oops/workspace/poky/oe-init-build-env /home/oops/workspace/build
+This is the default build configuration for the Poky reference distribution.
+
+### Shell environment set up for builds. ###
+
+You can now run 'bitbake <target>'
+
+Common targets are:
+    core-image-minimal
+    core-image-full-cmdline
+    core-image-sato
+    core-image-weston
+    meta-toolchain
+    meta-ide-support
+
+You can also run generated qemu images with a command like 'runqemu qemux86-64'.
+
+Other commonly useful commands are:
+ - 'devtool' and 'recipetool' handle common recipe tasks
+ - 'bitbake-layers' handles common layer tasks
+ - 'oe-pkgdata-util' handles common target package tasks
+RC=0
+===== END ENV-01 source oe-init-build-env =====
+
+################################################################
+## BASELINE INSPECTION AND RESTORATION DECISION
+################################################################
+
+===== BEGIN BASE-01 poky-head =====
+$ git -C /home/oops/workspace/poky rev-parse HEAD
+cbd62bb2a9f2ab3466a0f72f4289bc86ca20a019
+RC=0
+===== END BASE-01 poky-head =====
+
+===== BEGIN BASE-02 poky-status =====
+$ git -C /home/oops/workspace/poky status --porcelain=v1
+RC=0
+===== END BASE-02 poky-status =====
+
+===== BEGIN BASE-03 meta-head =====
+$ git -C /home/oops/workspace/meta-tiger rev-parse HEAD
+586f0d7b507e782ca54e8e3ef0685c4a14333c98
+RC=0
+===== END BASE-03 meta-head =====
+
+===== BEGIN BASE-04 meta-branch =====
+$ git -C /home/oops/workspace/meta-tiger branch --show-current
+main
+RC=0
+===== END BASE-04 meta-branch =====
+
+===== BEGIN BASE-05 meta-status =====
+$ git -C /home/oops/workspace/meta-tiger status --porcelain=v1
+RC=0
+===== END BASE-05 meta-status =====
+
+===== BEGIN BASE-06 bblayers-hash =====
+$ sha256sum /home/oops/workspace/build/conf/bblayers.conf
+33fb66dc05ed9803e4f5af150fb3642c42ad2bd8b1220428d39ab87320f99e86  /home/oops/workspace/build/conf/bblayers.conf
+RC=0
+===== END BASE-06 bblayers-hash =====
+
+===== BEGIN BASE-07 localconf-hash =====
+$ sha256sum /home/oops/workspace/build/conf/local.conf
+44e5057ac0c35c469e23bf29681655ce855a9c61abf3151aa30afeed008f8c25  /home/oops/workspace/build/conf/local.conf
+RC=0
+===== END BASE-07 localconf-hash =====
+
+===== BEGIN BASE-08 layer-conf =====
+$ nl -ba /home/oops/workspace/meta-tiger/conf/layer.conf
+     1	BBPATH .= ":${LAYERDIR}"
+     2	
+     3	BBFILES += "${LAYERDIR}/recipes-*/*/*.bb \
+     4	            ${LAYERDIR}/recipes-*/*/*.bbappend"
+     5	
+     6	BBFILE_COLLECTIONS += "tiger"
+     7	BBFILE_PATTERN_tiger = "^${LAYERDIR}/"
+     8	BBFILE_PRIORITY_tiger = "6"
+     9	
+    10	LAYERDEPENDS_tiger = "core"
+    11	LAYERSERIES_COMPAT_tiger = "scarthgap"
+RC=0
+===== END BASE-08 layer-conf =====
+
+===== BEGIN BASE-09 residue-scan =====
+$ find '/home/oops/workspace/meta-tiger' -path '/home/oops/workspace/meta-tiger/.git' -prune -o -name '*tiger-probe*' -print
+RC=0
+===== END BASE-09 residue-scan =====
+
+===== BEGIN BASE-10 registration-count =====
+$ grep -Fxc '  /home/oops/workspace/meta-tiger \' '/home/oops/workspace/build/conf/bblayers.conf'
+1
+RC=0
+===== END BASE-10 registration-count =====
+
+################################################################
+## 1. DIRECTORY SKELETON
+################################################################
+
+===== BEGIN T1-01 skeleton =====
+$ find '/home/oops/workspace/meta-tiger' -path '/home/oops/workspace/meta-tiger/.git' -prune -o -mindepth 1 -maxdepth 3 -printf '%y %P\n' | sort
+d conf
+d conf/distro
+d conf/machine
+d recipes-bsp
+d recipes-core
+d recipes-kernel
+f conf/distro/.gitkeep
+f conf/layer.conf
+f conf/machine/.gitkeep
+f COPYING.MIT
+f MAINTAINERS
+f README
+f recipes-bsp/.gitkeep
+f recipes-core/.gitkeep
+f recipes-kernel/.gitkeep
+RC=0
+===== END T1-01 skeleton =====
+
+################################################################
+## 2. COLLECTION TIGER: REMOVE, ADD, BBLAYERS, SHOW-LAYERS
+################################################################
+
+===== BEGIN T2-01 remove-layer =====
+$ bitbake-layers remove-layer /home/oops/workspace/meta-tiger
+NOTE: Starting bitbake server...
+RC=0
+===== END T2-01 remove-layer =====
+
+===== BEGIN T2-02 bblayers-after-remove =====
+$ nl -ba '/home/oops/workspace/build/conf/bblayers.conf'; sha256sum '/home/oops/workspace/build/conf/bblayers.conf'
+     1	# POKY_BBLAYERS_CONF_VERSION is increased each time build/conf/bblayers.conf
+     2	# changes incompatibly
+     3	POKY_BBLAYERS_CONF_VERSION = "2"
+     4	
+     5	BBPATH = "${TOPDIR}"
+     6	BBFILES ?= ""
+     7	
+     8	BBLAYERS ?= " \
+     9	  /home/oops/workspace/poky/meta \
+    10	  /home/oops/workspace/poky/meta-poky \
+    11	  /home/oops/workspace/poky/meta-yocto-bsp \
+    12	  "
+35eb048d12216306217c2304563e9d2e481536e0652063824bd06f201cfe46b2  /home/oops/workspace/build/conf/bblayers.conf
+RC=0
+===== END T2-02 bblayers-after-remove =====
+
+===== BEGIN T2-03 add-layer =====
+$ bitbake-layers add-layer /home/oops/workspace/meta-tiger
+NOTE: Starting bitbake server...
+RC=0
+===== END T2-03 add-layer =====
+
+===== BEGIN T2-04 bblayers-after-add =====
+$ nl -ba '/home/oops/workspace/build/conf/bblayers.conf'; sha256sum '/home/oops/workspace/build/conf/bblayers.conf'
+     1	# POKY_BBLAYERS_CONF_VERSION is increased each time build/conf/bblayers.conf
+     2	# changes incompatibly
+     3	POKY_BBLAYERS_CONF_VERSION = "2"
+     4	
+     5	BBPATH = "${TOPDIR}"
+     6	BBFILES ?= ""
+     7	
+     8	BBLAYERS ?= " \
+     9	  /home/oops/workspace/poky/meta \
+    10	  /home/oops/workspace/poky/meta-poky \
+    11	  /home/oops/workspace/poky/meta-yocto-bsp \
+    12	  /home/oops/workspace/meta-tiger \
+    13	  "
+33fb66dc05ed9803e4f5af150fb3642c42ad2bd8b1220428d39ab87320f99e86  /home/oops/workspace/build/conf/bblayers.conf
+RC=0
+===== END T2-04 bblayers-after-add =====
+
+===== BEGIN T2-05 show-layers =====
+$ bitbake-layers show-layers
+NOTE: Starting bitbake server...
+layer                 path                                                                    priority
+========================================================================================================
+core                  /home/oops/workspace/poky/meta                                          5
+yocto                 /home/oops/workspace/poky/meta-poky                                     5
+yoctobsp              /home/oops/workspace/poky/meta-yocto-bsp                                5
+tiger                 /home/oops/workspace/meta-tiger                                         6
+RC=0
+===== END T2-05 show-layers =====
+
+===== BEGIN T2-06 expanded-collections =====
+$ bitbake -e core-image-minimal | sed -n 's/^BBFILE_COLLECTIONS=//p'
+" core yocto yoctobsp tiger"
+RC=0
+===== END T2-06 expanded-collections =====
+
+################################################################
+## 3. EMPTY LAYER SHOW-RECIPES
+################################################################
+
+===== BEGIN T3-01 show-recipes-filtered =====
+$ bitbake-layers show-recipes 2>&1 | grep -i tiger
+WARNING: No bb files in default matched BBFILE_PATTERN_tiger '^/home/oops/workspace/meta-tiger/'
+RC=0
+===== END T3-01 show-recipes-filtered =====
+
+===== BEGIN T3-02 show-recipes-tiger-probe-empty =====
+$ bitbake-layers show-recipes tiger-probe
+NOTE: Starting bitbake server...
+Loading cache...done.
+Loaded 1879 entries from dependency cache.
+WARNING: No bb files in default matched BBFILE_PATTERN_tiger '^/home/oops/workspace/meta-tiger/'
+
+Summary: There was 1 WARNING message.
+RC=0
+===== END T3-02 show-recipes-tiger-probe-empty =====
+
+################################################################
+## 4. UNREGISTERED/REGISTERED BUILD COMPARISON
+################################################################
+
+===== BEGIN T4-01 remove-layer =====
+$ bitbake-layers remove-layer /home/oops/workspace/meta-tiger
+NOTE: Starting bitbake server...
+RC=0
+===== END T4-01 remove-layer =====
+
+===== BEGIN T4-02 unregistered-bblayers =====
+$ sha256sum '/home/oops/workspace/build/conf/bblayers.conf'; grep -F '/home/oops/workspace/meta-tiger' '/home/oops/workspace/build/conf/bblayers.conf'
+35eb048d12216306217c2304563e9d2e481536e0652063824bd06f201cfe46b2  /home/oops/workspace/build/conf/bblayers.conf
+RC=1
+===== END T4-02 unregistered-bblayers =====
+
+===== BEGIN T4-03 unregistered-build =====
+$ bitbake core-image-minimal
+Loading cache...done.
+Loaded 1878 entries from dependency cache.
+NOTE: Resolving any missing task queue dependencies
+
+Build Configuration:
+BB_VERSION           = "2.8.1"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "aarch64-poky-linux"
+MACHINE              = "qemuarm64"
+DISTRO               = "poky"
+DISTRO_VERSION       = "5.0.20"
+TUNE_FEATURES        = "aarch64 crc cortexa57"
+TARGET_FPU           = ""
+meta                 
+meta-poky            
+meta-yocto-bsp       = "scarthgap:cbd62bb2a9f2ab3466a0f72f4289bc86ca20a019"
+
+Initialising tasks...Sstate summary: Wanted 728 Local 727 Mirrors 0 Missed 1 Current 1127 (99% match, 99% complete)
+done.
+NOTE: Executing Tasks
+NOTE: Tasks Summary: Attempted 4073 tasks of which 4073 didn't need to be rerun and all succeeded.
+RC=0
+===== END T4-03 unregistered-build =====
+
+===== BEGIN T4-04 add-layer =====
+$ bitbake-layers add-layer /home/oops/workspace/meta-tiger
+NOTE: Starting bitbake server...
+RC=0
+===== END T4-04 add-layer =====
+
+===== BEGIN T4-05 registered-bblayers =====
+$ sha256sum '/home/oops/workspace/build/conf/bblayers.conf'; grep -F '/home/oops/workspace/meta-tiger' '/home/oops/workspace/build/conf/bblayers.conf'
+33fb66dc05ed9803e4f5af150fb3642c42ad2bd8b1220428d39ab87320f99e86  /home/oops/workspace/build/conf/bblayers.conf
+  /home/oops/workspace/meta-tiger \
+RC=0
+===== END T4-05 registered-bblayers =====
+
+===== BEGIN T4-06 registered-build =====
+$ bitbake core-image-minimal
+Loading cache...done.
+Loaded 1879 entries from dependency cache.
+WARNING: No bb files in default matched BBFILE_PATTERN_tiger '^/home/oops/workspace/meta-tiger/'
+NOTE: Resolving any missing task queue dependencies
+
+Build Configuration:
+BB_VERSION           = "2.8.1"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "aarch64-poky-linux"
+MACHINE              = "qemuarm64"
+DISTRO               = "poky"
+DISTRO_VERSION       = "5.0.20"
+TUNE_FEATURES        = "aarch64 crc cortexa57"
+TARGET_FPU           = ""
+meta                 
+meta-poky            
+meta-yocto-bsp       = "scarthgap:cbd62bb2a9f2ab3466a0f72f4289bc86ca20a019"
+meta-tiger           = "main:586f0d7b507e782ca54e8e3ef0685c4a14333c98"
+
+Initialising tasks...Sstate summary: Wanted 728 Local 727 Mirrors 0 Missed 1 Current 1127 (99% match, 99% complete)
+done.
+NOTE: Executing Tasks
+NOTE: Tasks Summary: Attempted 4073 tasks of which 4073 didn't need to be rerun and all succeeded.
+
+Summary: There was 1 WARNING message.
+RC=0
+===== END T4-06 registered-build =====
+
+################################################################
+## 5. FULL YOCTO-CHECK-LAYER
+################################################################
+
+===== BEGIN T5-01 yocto-check-layer =====
+$ yocto-check-layer /home/oops/workspace/meta-tiger
+INFO: Detected layers:
+INFO: meta-tiger: LayerType.SOFTWARE, /home/oops/workspace/meta-tiger
+INFO: meta-tiger already in /home/oops/workspace/build/conf/bblayers.conf. To capture initial signatures, layer under test should not present in BBLAYERS. Please remove meta-tiger from BBLAYERS.
+RC=0
+===== END T5-01 yocto-check-layer =====
+
+################################################################
+## 6. INDEPENDENT GIT INIT, COMMIT, STATUS
+################################################################
+
+===== BEGIN T6-01 git-init =====
+$ git -C /home/oops/workspace/meta-tiger init -b main
+warning: re-init: ignored --initial-branch=main
+Reinitialized existing Git repository in /home/oops/workspace/meta-tiger/.git/
+RC=0
+===== END T6-01 git-init =====
+
+===== BEGIN T6-02 git-add =====
+$ git -C /home/oops/workspace/meta-tiger add .
+RC=0
+===== END T6-02 git-add =====
+
+===== BEGIN T6-03 git-commit =====
+$ git -C /home/oops/workspace/meta-tiger commit --allow-empty -m Revalidate\ meta-tiger\ layer\ skeleton
+[main 75ce208] Revalidate meta-tiger layer skeleton
+RC=0
+===== END T6-03 git-commit =====
+
+===== BEGIN T6-04 git-log =====
+$ git -C /home/oops/workspace/meta-tiger log --oneline --decorate -3
+75ce208 (HEAD -> main) Revalidate meta-tiger layer skeleton
+586f0d7 Initial meta-tiger layer skeleton
+RC=0
+===== END T6-04 git-log =====
+
+===== BEGIN T6-05 git-status =====
+$ git -C /home/oops/workspace/meta-tiger status --porcelain=v1 --branch
+## main
+RC=0
+===== END T6-05 git-status =====
+
+################################################################
+## 7. LAYERSERIES_COMPAT CASE ERROR AND BBLAYERS ROLLBACK
+################################################################
+
+===== BEGIN T7-01 remove-layer-valid =====
+$ bitbake-layers remove-layer /home/oops/workspace/meta-tiger
+NOTE: Starting bitbake server...
+RC=0
+===== END T7-01 remove-layer-valid =====
+
+===== BEGIN T7-02 bblayers-before-bad-add =====
+$ sha256sum '/home/oops/workspace/build/conf/bblayers.conf'; nl -ba '/home/oops/workspace/build/conf/bblayers.conf'
+35eb048d12216306217c2304563e9d2e481536e0652063824bd06f201cfe46b2  /home/oops/workspace/build/conf/bblayers.conf
+     1	# POKY_BBLAYERS_CONF_VERSION is increased each time build/conf/bblayers.conf
+     2	# changes incompatibly
+     3	POKY_BBLAYERS_CONF_VERSION = "2"
+     4	
+     5	BBPATH = "${TOPDIR}"
+     6	BBFILES ?= ""
+     7	
+     8	BBLAYERS ?= " \
+     9	  /home/oops/workspace/poky/meta \
+    10	  /home/oops/workspace/poky/meta-poky \
+    11	  /home/oops/workspace/poky/meta-yocto-bsp \
+    12	  "
+RC=0
+===== END T7-02 bblayers-before-bad-add =====
+
+===== BEGIN T7-03 set-bad-compat =====
+$ sed -i s/\^LAYERSERIES_COMPAT_tiger\ =\ \"scarthgap\"\$/LAYERSERIES_COMPAT_tiger\ =\ \"Scarthgap\"/ /home/oops/workspace/meta-tiger/conf/layer.conf
+RC=0
+===== END T7-03 set-bad-compat =====
+
+===== BEGIN T7-04 bad-layer-conf =====
+$ grep -n '^LAYERSERIES_COMPAT_tiger' '/home/oops/workspace/meta-tiger/conf/layer.conf'
+11:LAYERSERIES_COMPAT_tiger = "Scarthgap"
+RC=0
+===== END T7-04 bad-layer-conf =====
+
+===== BEGIN T7-05 add-layer-bad-compat =====
+$ bitbake-layers add-layer /home/oops/workspace/meta-tiger
+NOTE: Starting bitbake server...
+ERROR: Layer tiger is not compatible with the core layer which only supports these series: scarthgap (layer is compatible with Scarthgap)
+ERROR: Parse failure with the specified layer added, exiting.
+RC=1
+===== END T7-05 add-layer-bad-compat =====
+
+===== BEGIN T7-06 bblayers-after-bad-add =====
+$ sha256sum '/home/oops/workspace/build/conf/bblayers.conf'; nl -ba '/home/oops/workspace/build/conf/bblayers.conf'
+35eb048d12216306217c2304563e9d2e481536e0652063824bd06f201cfe46b2  /home/oops/workspace/build/conf/bblayers.conf
+     1	# POKY_BBLAYERS_CONF_VERSION is increased each time build/conf/bblayers.conf
+     2	# changes incompatibly
+     3	POKY_BBLAYERS_CONF_VERSION = "2"
+     4	
+     5	BBPATH = "${TOPDIR}"
+     6	BBFILES ?= ""
+     7	
+     8	BBLAYERS ?= " \
+     9	  /home/oops/workspace/poky/meta \
+    10	  /home/oops/workspace/poky/meta-poky \
+    11	  /home/oops/workspace/poky/meta-yocto-bsp \
+    12	  "
+RC=0
+===== END T7-06 bblayers-after-bad-add =====
+
+===== BEGIN T7-07 rollback-hash-and-content =====
+$ echo PRE; sha256sum '/tmp/chapter3-revalidation/bblayers.before-bad-add'; echo POST; sha256sum '/tmp/chapter3-revalidation/bblayers.after-bad-add'; cmp -s '/tmp/chapter3-revalidation/bblayers.before-bad-add' '/tmp/chapter3-revalidation/bblayers.after-bad-add'; rc=$?; echo CMP_RC=$rc; diff -u '/tmp/chapter3-revalidation/bblayers.before-bad-add' '/tmp/chapter3-revalidation/bblayers.after-bad-add'; diff_rc=$?; echo DIFF_RC=$diff_rc; exit $rc
+PRE
+35eb048d12216306217c2304563e9d2e481536e0652063824bd06f201cfe46b2  /tmp/chapter3-revalidation/bblayers.before-bad-add
+POST
+35eb048d12216306217c2304563e9d2e481536e0652063824bd06f201cfe46b2  /tmp/chapter3-revalidation/bblayers.after-bad-add
+CMP_RC=0
+DIFF_RC=0
+RC=0
+===== END T7-07 rollback-hash-and-content =====
+
+===== BEGIN T7-08 restore-good-layer-conf =====
+$ cp /tmp/chapter3-revalidation/layer.conf.initial /home/oops/workspace/meta-tiger/conf/layer.conf
+RC=0
+===== END T7-08 restore-good-layer-conf =====
+
+===== BEGIN T7-09 add-layer-restored =====
+$ bitbake-layers add-layer /home/oops/workspace/meta-tiger
+NOTE: Starting bitbake server...
+RC=0
+===== END T7-09 add-layer-restored =====
+
+===== BEGIN T7-10 show-layers-restored =====
+$ bitbake-layers show-layers
+NOTE: Starting bitbake server...
+layer                 path                                                                    priority
+========================================================================================================
+core                  /home/oops/workspace/poky/meta                                          5
+yocto                 /home/oops/workspace/poky/meta-poky                                     5
+yoctobsp              /home/oops/workspace/poky/meta-yocto-bsp                                5
+tiger                 /home/oops/workspace/meta-tiger                                         6
+RC=0
+===== END T7-10 show-layers-restored =====
+
+################################################################
+## 8. PROBE RECIPE WRONG DEPTH AND CORRECT DEPTH
+################################################################
+
+===== BEGIN T8-01 wrong-depth-file =====
+$ find '/home/oops/workspace/meta-tiger/recipes-core' -maxdepth 2 -type f -printf '%P\n' | sort
+.gitkeep
+tiger-probe_0.1.bb
+RC=0
+===== END T8-01 wrong-depth-file =====
+
+===== BEGIN T8-02 wrong-depth-show-recipes-filtered =====
+$ bitbake-layers show-recipes 2>&1 | grep -i tiger
+WARNING: No bb files in default matched BBFILE_PATTERN_tiger '^/home/oops/workspace/meta-tiger/'
+RC=0
+===== END T8-02 wrong-depth-show-recipes-filtered =====
+
+===== BEGIN T8-03 wrong-depth-show-recipes-name =====
+$ bitbake-layers show-recipes tiger-probe
+NOTE: Starting bitbake server...
+Loading cache...done.
+Loaded 1879 entries from dependency cache.
+WARNING: No bb files in default matched BBFILE_PATTERN_tiger '^/home/oops/workspace/meta-tiger/'
+
+Summary: There was 1 WARNING message.
+RC=0
+===== END T8-03 wrong-depth-show-recipes-name =====
+
+===== BEGIN T8-04 correct-depth-file =====
+$ find '/home/oops/workspace/meta-tiger/recipes-core' -maxdepth 3 -type f -printf '%P\n' | sort
+.gitkeep
+tiger-probe/tiger-probe_0.1.bb
+RC=0
+===== END T8-04 correct-depth-file =====
+
+===== BEGIN T8-05 correct-depth-show-recipes =====
+$ bitbake-layers show-recipes tiger-probe
+NOTE: Starting bitbake server...
+Loading cache...done.
+Loaded 1879 entries from dependency cache.
+Parsing recipes...done.
+Parsing of 921 .bb files complete (920 cached, 1 parsed). 1879 targets, 58 skipped, 0 masked, 0 errors.
+=== Matching recipes: ===
+tiger-probe:
+  meta-tiger           0.1
+RC=0
+===== END T8-05 correct-depth-show-recipes =====
+
+################################################################
+## 9. CLEANUP AND FINAL STATE
+################################################################
+
+===== BEGIN T9-01 probe-cleanup-check =====
+$ find '/home/oops/workspace/meta-tiger' -path '/home/oops/workspace/meta-tiger/.git' -prune -o -name '*tiger-probe*' -print
+RC=0
+===== END T9-01 probe-cleanup-check =====
+
+===== BEGIN T9-02 final-registration =====
+$ grep -n -F '/home/oops/workspace/meta-tiger' '/home/oops/workspace/build/conf/bblayers.conf'; bitbake-layers show-layers
+12:  /home/oops/workspace/meta-tiger \
+NOTE: Reconnecting to bitbake server...
+NOTE: Retrying server connection (#1)... (20:50:37.483694)
+NOTE: Reconnecting to bitbake server...
+NOTE: Reconnecting to bitbake server...
+NOTE: Retrying server connection (#1)... (20:50:37.483694)
+NOTE: Retrying server connection (#1)... (20:50:37.483694)
+NOTE: Starting bitbake server...
+layer                 path                                                                    priority
+========================================================================================================
+core                  /home/oops/workspace/poky/meta                                          5
+yocto                 /home/oops/workspace/poky/meta-poky                                     5
+yoctobsp              /home/oops/workspace/poky/meta-yocto-bsp                                5
+tiger                 /home/oops/workspace/meta-tiger                                         6
+RC=0
+===== END T9-02 final-registration =====
+
+===== BEGIN T9-03 final-layer-conf =====
+$ nl -ba '/home/oops/workspace/meta-tiger/conf/layer.conf'
+     1	BBPATH .= ":${LAYERDIR}"
+     2	
+     3	BBFILES += "${LAYERDIR}/recipes-*/*/*.bb \
+     4	            ${LAYERDIR}/recipes-*/*/*.bbappend"
+     5	
+     6	BBFILE_COLLECTIONS += "tiger"
+     7	BBFILE_PATTERN_tiger = "^${LAYERDIR}/"
+     8	BBFILE_PRIORITY_tiger = "6"
+     9	
+    10	LAYERDEPENDS_tiger = "core"
+    11	LAYERSERIES_COMPAT_tiger = "scarthgap"
+RC=0
+===== END T9-03 final-layer-conf =====
+
+===== BEGIN T9-04 final-meta-head =====
+$ git -C /home/oops/workspace/meta-tiger rev-parse HEAD
+75ce208a2477a5bcab1f61fbe2d1b4345d5ffdfe
+RC=0
+===== END T9-04 final-meta-head =====
+
+===== BEGIN T9-05 final-meta-status =====
+$ git -C /home/oops/workspace/meta-tiger status --porcelain=v1 --branch
+## main
+RC=0
+===== END T9-05 final-meta-status =====
+
+===== BEGIN T9-06 final-poky-status =====
+$ git -C /home/oops/workspace/poky status --porcelain=v1
+RC=0
+===== END T9-06 final-poky-status =====
+
+===== BEGIN T9-07 final-config-hashes =====
+$ echo INITIAL_BBLAYERS; cat '/tmp/chapter3-revalidation/bblayers.initial.sha256'; echo FINAL_BBLAYERS; sha256sum '/home/oops/workspace/build/conf/bblayers.conf'; echo INITIAL_LOCALCONF; cat '/tmp/chapter3-revalidation/localconf.initial.sha256'; echo FINAL_LOCALCONF; sha256sum '/home/oops/workspace/build/conf/local.conf'
+INITIAL_BBLAYERS
+33fb66dc05ed9803e4f5af150fb3642c42ad2bd8b1220428d39ab87320f99e86  /home/oops/workspace/build/conf/bblayers.conf
+FINAL_BBLAYERS
+33fb66dc05ed9803e4f5af150fb3642c42ad2bd8b1220428d39ab87320f99e86  /home/oops/workspace/build/conf/bblayers.conf
+INITIAL_LOCALCONF
+44e5057ac0c35c469e23bf29681655ce855a9c61abf3151aa30afeed008f8c25  /home/oops/workspace/build/conf/local.conf
+FINAL_LOCALCONF
+44e5057ac0c35c469e23bf29681655ce855a9c61abf3151aa30afeed008f8c25  /home/oops/workspace/build/conf/local.conf
+RC=0
+===== END T9-07 final-config-hashes =====
+
+===== BEGIN T9-08 final-show-recipes-empty =====
+$ bitbake-layers show-recipes tiger-probe
+NOTE: Starting bitbake server...
+Loading cache...done.
+Loaded 1880 entries from dependency cache.
+WARNING: No bb files in default matched BBFILE_PATTERN_tiger '^/home/oops/workspace/meta-tiger/'
+
+Summary: There was 1 WARNING message.
+RC=0
+===== END T9-08 final-show-recipes-empty =====
+
+RAW_LOG=/tmp/chapter3-revalidation/raw.log
+
+################################################################
+## 5B. FULL YOCTO-CHECK-LAYER WITH TEST LAYER UNREGISTERED
+################################################################
+
+===== BEGIN T5B-01 remove-layer-before-check =====
+$ bitbake-layers remove-layer /home/oops/workspace/meta-tiger
+NOTE: Starting bitbake server...
+RC=0
+===== END T5B-01 remove-layer-before-check =====
+
+===== BEGIN T5B-02 verify-unregistered =====
+$ sha256sum '/home/oops/workspace/build/conf/bblayers.conf'; grep -F '/home/oops/workspace/meta-tiger' '/home/oops/workspace/build/conf/bblayers.conf'
+35eb048d12216306217c2304563e9d2e481536e0652063824bd06f201cfe46b2  /home/oops/workspace/build/conf/bblayers.conf
+RC=1
+===== END T5B-02 verify-unregistered =====
+
+===== BEGIN T5B-03 yocto-check-layer-full =====
+$ yocto-check-layer /home/oops/workspace/meta-tiger
+INFO: Detected layers:
+INFO: meta-tiger: LayerType.SOFTWARE, /home/oops/workspace/meta-tiger
+INFO: 
+INFO: Setting up for meta-tiger(LayerType.SOFTWARE), /home/oops/workspace/meta-tiger
+INFO: Getting initial bitbake variables ...
+INFO: Getting initial signatures ...
+INFO: Adding layer meta-tiger
+INFO: Starting to analyze: meta-tiger
+INFO: ----------------------------------------------------------------------
+INFO: setUpClass (bsp.BSPCheckLayer)
+INFO:  ... skipped "BSPCheckLayer: Layer meta-tiger isn't BSP one."
+INFO: test_layerseries_compat (common.CommonCheckLayer.test_layerseries_compat)
+INFO:  ... ok
+INFO: test_parse (common.CommonCheckLayer.test_parse)
+INFO:  ... ok
+INFO: test_patches_upstream_status (common.CommonCheckLayer.test_patches_upstream_status)
+INFO:  ... unexpected success
+INFO: test_readme (common.CommonCheckLayer.test_readme)
+INFO:  ... ok
+INFO: test_show_environment (common.CommonCheckLayer.test_show_environment)
+INFO:  ... ok
+INFO: test_signatures (common.CommonCheckLayer.test_signatures)
+INFO:  ... ok
+INFO: test_world (common.CommonCheckLayer.test_world)
+INFO:  ... ok
+INFO: test_world_inherit_class (common.CommonCheckLayer.test_world_inherit_class)
+INFO:  ... ok
+INFO: setUpClass (distro.DistroCheckLayer)
+INFO:  ... skipped "DistroCheckLayer: Layer meta-tiger isn't Distro one."
+INFO: ======================================================================
+INFO: UNEXPECTED SUCCESS: test_patches_upstream_status (common.CommonCheckLayer.test_patches_upstream_status)
+INFO: ----------------------------------------------------------------------
+INFO: Ran 8 tests in 85.637s
+INFO: OK
+INFO:  (skipped=2, unexpected successes=1)
+INFO: 
+INFO: Summary of results:
+INFO: 
+INFO: meta-tiger ... PASS
+RC=0
+===== END T5B-03 yocto-check-layer-full =====
+
+===== BEGIN T5B-04 restore-registration =====
+$ bitbake-layers add-layer /home/oops/workspace/meta-tiger
+NOTE: Starting bitbake server...
+RC=0
+===== END T5B-04 restore-registration =====
+
+===== BEGIN T5B-05 final-checks =====
+$ grep -n -F '/home/oops/workspace/meta-tiger' '/home/oops/workspace/build/conf/bblayers.conf'; bitbake-layers show-layers; sha256sum '/home/oops/workspace/build/conf/bblayers.conf' '/home/oops/workspace/build/conf/local.conf'; git -C '/home/oops/workspace/poky' status --porcelain=v1; git -C '/home/oops/workspace/meta-tiger' status --porcelain=v1 --branch
+12:  /home/oops/workspace/meta-tiger \
+NOTE: Starting bitbake server...
+layer                 path                                                                    priority
+========================================================================================================
+core                  /home/oops/workspace/poky/meta                                          5
+yocto                 /home/oops/workspace/poky/meta-poky                                     5
+yoctobsp              /home/oops/workspace/poky/meta-yocto-bsp                                5
+tiger                 /home/oops/workspace/meta-tiger                                         6
+33fb66dc05ed9803e4f5af150fb3642c42ad2bd8b1220428d39ab87320f99e86  /home/oops/workspace/build/conf/bblayers.conf
+44e5057ac0c35c469e23bf29681655ce855a9c61abf3151aa30afeed008f8c25  /home/oops/workspace/build/conf/local.conf
+## main
+RC=0
+===== END T5B-05 final-checks =====

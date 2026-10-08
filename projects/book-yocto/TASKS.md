@@ -496,8 +496,8 @@
 - 更新日期：2026-09-27
 
 ## T-014：chapter 3《搭起 meta-tiger 的骨架》修订与第 1 轮评审（P3 第二章）
-- 负责人：writer（自查修订与统一修订）；reviewer（技术审校与复核）；project-manager（流程、呈现与意见闭环）；用户（通读意见与定稿确认）
-- 状态：in_review（writer 第 1 轮稳定受评稿与 reviewer 技术审校均已提交；等待 project-manager/用户完成同一版本第 1 轮评审）
+- 负责人：writer（自查修订与统一修订）；reviewer（技术审校与复核）；project-manager（流程、呈现与意见闭环）；yocto-engineer（Docker 复验与补证）；用户（通读意见与定稿确认）
+- 状态：completed（2026-10-08 用户最终确认；同日补录 OPC 收尾记录）
 - 授权来源与日期：2026-09-27 用户批准 A-004 v0.5；project-manager 在批准前已明确“随后关闭 T-013，并登记、启动第 3 章的修订与真实环境核验流程”，用户批准构成按该次序继续执行的授权。依据 A-002 v0.5 P3、D-007、D-010、D-011。
 - 目标与范围：以 `workspace/yocto/task04-3-搭起meta-tiger的骨架.md` 当前草稿（676 行）为对象，按 chapter 1/2 已定型流程完成 writer 自查修订、T-015 真实环境核验、reviewer 技术审校、project-manager 呈现/流程复核、用户通读意见、writer 统一修订、reviewer 针对性复核及用户定稿确认。内容覆盖 `meta-tiger` 目录骨架、`layer.conf`、README/COPYING.MIT/MAINTAINERS、layer 注册、`yocto-check-layer`、Git 初始化及两组错误实验。
 - 输入与依赖：A-004 v0.5（approved，Git `36c5e35`）；A-002 v0.5；A-003（chapter 1~5 无挂账注记，但不免除 D-010 逐章实测）；D-007/D-010/D-011；T-008~T-012 的实测证据格式；chapter 2 定稿 Git `cf9a71c`。本章不依赖 P0.5 四个 tiger 开发仓库，但会在真实环境创建并验证 `meta-tiger` 集成仓库。
@@ -510,15 +510,19 @@
   - T-012 N-1~N-5/O-1 证据应用：N-2 用于避免把 layer 优先级和职责写成全局覆盖；N-3 用于保持代码/输出的原始引号与空白；N-4 用于把错误注入、返回码、自动恢复和最终工作区状态列为一组验证链；O-1 用于给环境相关输出保留漂移边界。N-1 的 Linux 驱动归属与 N-5 的启动阶段映射不直接进入本章技术范围，未外推为 chapter 3 事实。六项历史证据均不替代 T-015 的本章实测。
   - 作者检查结果：`git diff --check` 通过；代码围栏 76 个、成对闭合；正文标题计数符合 A-004；正文剔除行内代码后的 ASCII 直引号 0；`<your-username>`、读者可见 `task NN`、`git tag`、`Fig-3-2`、Unicode 树线、5.0.18 与 4059 均为 0；两个 `show-layers` 块的官方三层五行均与 chapter 1 已验证文本逐字一致。未决项仅为 T-015 范围内的真实命令输出、失败/回滚、构建副作用和清理状态，不阻塞提交稳定受评稿。
   - reviewer 技术审校与 T-015 实测（2026-09-27）：以 Git `37116d9` 为不变受评基线，完成全文技术审校及 12 组真实环境核验；9 组通过、3 组局部不符，构建与两次 `yocto-check-layer` 均成功，大小写兼容值错误按预期失败并自动回滚，探针配方清理后两个远程 Git 工作树均干净。提交 R-1～R-6；结论为 `revise`，不直接修改受评正文。
-- 成果与验证证据：[chapter 3 第 1 轮稳定受评稿](https://github.com/yinzhongkai/book-yocto/blob/4bc485e940bce6c8bf8978d57ae40d8d26c031a4/yocto/task04-3-搭起meta-tiger的骨架.md)，Git `37116d9`；[T-015 核验记录](artifacts/work-records/t015-chapter3-env-check.md)；[T-015 原始日志](artifacts/work-records/t015-chapter3-raw.log)。作者逐项检查及 T-012 N-1~N-5/O-1 应用边界见本任务进展。受评正文在 reviewer 审校期间无修改。
-- 阻塞与下一位行动人：无执行阻塞。project-manager 已完成同一 Git `37116d9` 的第 1 轮呈现/流程复核；下一位行动人用户，继续通读并提交本轮意见。用户确认意见到齐后，由 writer 统一处理 R-1～R-6、T-015 N-1/N-2/O-1 与 PM-1，并提交针对性复核版本。
+  - 2026-10-03 至 2026-10-04 Docker 复验与补证：`yocto-engineer` 在容器 `books`、Poky 5.0.20 / BitBake 2.8.1 环境中完成 9 项必测范围及补证。实测确认 collection ID 为 `tiger`，`show-recipes` provider 为目录层名 `meta-tiger`；空 layer 查询会输出 `BBFILE_PATTERN_tiger` 警告但 rc=0；完整 `yocto-check-layer` 运行 8 项测试、跳过 2 类检查、出现 1 项 `unexpected success`，最终 `OK` / `PASS` / rc=0；错误 `Scarthgap` 被拒绝且 `bblayers.conf` 自动回滚；正文使用的 `recipes-bsp` 错误/正确层级对照成立；隔离副本完成首次 Git 初始化与 root commit。原始报告、日志和脚本于 2026-10-08 从源码历史提交 `f5d5fffd972845bb52e6f2a2e9ef36986d3667e1` 补录到 OPC 工作记录，未重新放入书稿仓库。
+  - 2026-10-03 至 2026-10-08 统一修订与逐项审校：用户围绕命名与机制边界、验证输出呈现、Git 教程顺序、失败路径说明、LTS/点版本表述及冗余旁注持续逐项审校；writer 只修改 chapter 3，并在每轮修改前后执行差异检查；reviewer 对每轮实际 diff 做针对性复核，`yocto-engineer` 对涉及 Yocto 机制与验证证据的条目补充核对。所有必须修正项均已处理，最终审校结论为 `pass`。
+  - 用户定稿确认与源码集成（2026-10-08）：用户再次通读后明确表示“这次没有问题了”，完成 D-007/D-003 所需最终确认。短期分支过程提交随后被整理为精简功能提交 `9c74596591728c0f2d614e357059034551a42dca`，并以 `--no-ff` 合入 `main` 形成 merge commit `f444790f352b46f699fd3d46198f8b9b9f089a62`；父提交为 `4bc485e940bce6c8bf8978d57ae40d8d26c031a4` 与 `9c74596591728c0f2d614e357059034551a42dca`。最终净差异仅 `yocto/task04-3-搭起meta-tiger的骨架.md`，215 insertions / 123 deletions；验证材料未进入 `main` 可达文件树。`origin/main` 已实时核对为 `f444790f...`。
+  - OPC 补录说明（2026-10-08）：上述 2026-10-03 至 2026-10-08 的工作此前未形成 OPC 阶段提交；本次按真实发生日期与源码证据补录并收尾，不声称期间已经存在 OPC 提交。
+- 成果与验证证据：[chapter 3 最终定稿](https://github.com/yinzhongkai/book-yocto/blob/f444790f352b46f699fd3d46198f8b9b9f089a62/yocto/task04-3-%E6%90%AD%E8%B5%B7meta-tiger%E7%9A%84%E9%AA%A8%E6%9E%B6.md)，源码 merge Git `f444790f352b46f699fd3d46198f8b9b9f089a62`；[T-014 最终 Docker 复验报告](artifacts/work-records/t014-chapter3-final-revalidation/report.md)及同目录原始/补充日志与脚本；[T-015 核验记录](artifacts/work-records/t015-chapter3-env-check.md)；[T-015 原始日志](artifacts/work-records/t015-chapter3-raw.log)。
+- 阻塞与下一位行动人：无；T-014 已完成。chapter 3 后续仅在发现新的已证实问题时另行登记任务；当前可由 project-manager 按既定 P3 节奏安排 chapter 4。
 
 ### 本轮评审：chapter 3 第 1 轮稳定受评稿，Git `37116d9`
 
 - 受评正文：`workspace/yocto/task04-3-搭起meta-tiger的骨架.md`
 - 安排来源与日期：T-014 已登记 reviewer 技术审校职责；2026-09-27 用户明确指示“你叫 review 执行吧”，同时授权 T-015 远程实测。
 - 参与成员、各自范围与完成条件：writer 负责稳定受评稿与统一修订；reviewer 负责技术审校、T-015 实测及修订后针对性复核；project-manager 负责呈现、流程与意见闭环；用户负责通读意见和定稿确认。
-- 本轮进度与下一位行动人：reviewer 与 project-manager 意见已提交；用户已提交 U-1～U-4，继续对 Git `37116d9` 通读并提交本轮意见，随后 writer 统一修订。U-4 已由用户点名的 `yocto-engineer` 完成只读核查并给出保留现名的结论。
+- 本轮进度与下一位行动人：本轮已完成。reviewer、project-manager 与用户意见均已提交并经 writer 统一修订；Docker 复验及补证完成，reviewer 最终复核 `pass`，用户于 2026-10-08 确认定稿，源码已合并并推送。
 
 #### reviewer 的意见
 
@@ -548,8 +552,17 @@
 - U-2（L33、L50 等全章同类位置，读者可见的内部注记）：用户指出“输出（预期关键行，待本章实测核对）”中的“待本章实测核对”像编辑注释。判断成立：A-004 v0.5 要求示意输出标注保留至实测回填完成，而 T-015 已完成，因此这些验证前标记已经到达移除时点。writer 统一修订时与 PM-1 合并处理：完整实测输出使用“输出：”，节选使用“输出（关键行）：”；只有确实仍未执行或随环境变化的内容才保留明确边界，不能继续笼统写“待本章实测核对”。
 - U-3（L72，指代与逻辑关系）：原句“按你那张地图，哪一格将来归哪个目录”中的“格”指代不够明确，而且容易读成图中方框从属于目录。修订时直接说明组件落入对应目录，再承接项目全景图；建议整句改为：“对，但别贪多。”达哥说，“你现在只需要 `recipes-bsp`、`recipes-core`、`recipes-kernel` 三个。TF-A 和 U-Boot 后续放进 `recipes-bsp`，linux-tiger 放进 `recipes-kernel`，镜像配方和包组放进 `recipes-core`。这样就能和昨天那张项目全景图对应上。”
 - U-4（L181-L195、Table-3-1 及相关输出，collection 命名）：用户提出 `BBFILE_COLLECTIONS += "meta-tiger"` 是否直接使用 `tiger` 更好，并点名请 `yocto-engineer` 确认。`yocto-engineer` 对固定 Poky `77d1feb37e` 的创建工具、模板、BitBake 解析与查询实现以及公开仓库做了只读核查，结论为保留 `meta-tiger`：两种名称在 BitBake 中均合法，collection 是可独立于目录名的逻辑标识；Scarthgap 的 `bitbake-layers create-layer meta-tiger` 默认使用目录基名，只有显式指定 `--layerid tiger` 才会改成短名。公开仓库 `https://github.com/yinzhongkai/meta-tiger` 的 HEAD `0e3da48` 与 T-015 实测配置均已使用 `meta-tiger`。改名没有功能收益，却必须同步重命名 `BBFILE_PATTERN_*`、`BBFILE_PRIORITY_*`、`LAYERDEPENDS_*`、`LAYERSERIES_COMPAT_*` 等变量，更新 `show-layers`、警告文本和未来依赖声明，并重跑相关实测。处理结论：不改 collection ID；writer 随 R-2 修订时可补充“collection 是逻辑标识，不要求与目录名相同；本项目选择同名以减少映射负担”。
-- 当前状态：已登记，等待用户继续通读；本轮意见到齐后由 writer 统一修订。
-- 更新日期：2026-09-27
+- 当前状态：该条是 Git `37116d9` 中间稿的历史意见。2026-10-03 复验与最终修订改用 collection `tiger`，并明确 `show-recipes` provider 仍显示目录层名 `meta-tiger`；两者含义不同。最终稿已通过 reviewer 复核并由用户确认，条目关闭。
+- 更新日期：2026-10-08
+
+#### 统一修订、复核与定稿（2026-10-03 至 2026-10-08）
+
+- 用户逐项审校：用户围绕教程叙事、目录与 collection/provider 命名、真实输出、Git 初始化流程、错误实验、LTS 基线表述和验证报告式旁注连续提出具体意见，并在每轮作者修改后继续通读；这些意见均由 project-manager 分流给 writer、reviewer 或 `yocto-engineer`，未由项目经理代替专业成员直接改稿。
+- writer 统一修订：writer 仅修改 `yocto/task04-3-搭起meta-tiger的骨架.md`，把 R-1～R-6、T-015 N-1/N-2/O-1、PM-1、U-1～U-4 及后续逐项意见落实到正文；内部验证材料与审计旁注从书稿中清除，真实输出、机制边界和读者所需提示保留。
+- reviewer 与 Yocto 复核：reviewer 对每轮实际差异执行针对性复核，最终结论为 `pass`；`yocto-engineer` 在 Docker 中完成最终复验与补证，关键裁决及可审计证据见本任务进展和工作记录。
+- 用户最终确认：2026-10-08 用户再次通读 chapter 3 后明确表示“这次没有问题了”，满足本任务完成条件中的用户定稿确认。
+- 源码收口：最终内容整理为 `9c74596591728c0f2d614e357059034551a42dca`，再以 merge commit `f444790f352b46f699fd3d46198f8b9b9f089a62` 合入并推送 `main`；最终净差异仅 chapter 3 正文。过程验证资料没有进入书稿主线，按 D-012 保存于 OPC 工作记录。
+- 记录边界：本节于 2026-10-08 事后补录真实过程与证据；不伪造 2026-10-03 至 2026-10-07 的 OPC 提交。
 
 ## T-015：真实环境核验 chapter 3 命令、配置与输出
 - 负责人：reviewer
@@ -565,7 +578,7 @@
   - 最终状态：远程 `/home/oops/workspace/meta-tiger` 已建立独立 `main` 仓库，提交 `0e3da48 Initial meta-tiger layer skeleton`；该 layer 正确注册且 priority 为 6。Poky 与 `meta-tiger` 工作树均干净，`local.conf` 哈希保持 `c4628c9a913df0cf0f3d2f891e0f34af3852664855e28700f42ca57e140f6d20`，未残留探针配方。
   - project-manager 复核（2026-09-27）：通过。核验记录覆盖 T-015 的全部完成条件；12 组结果均包含正文位置、前置、操作、预期、实际、状态与恢复信息。原始日志实测为 545 行，SHA-256 与记录值 `89097abc9c4f9199fd6a634ecb5edfe209bec852020fc7a3e3dfbf52cb8266b7` 一致；Git `37116d9..62116ba` 未修改受评正文。N-1/N-2/O-1 已流转到 T-014，远端干净终态有日志 L497-L545 支撑。成功执行完成后的附加 SSH 复查被拒绝，不覆盖或冒充已经保存的终态证据，不阻断任务关闭。
 - 成果与验证证据：[T-015 真实环境核验记录](artifacts/work-records/t015-chapter3-env-check.md)；[545 行原始执行日志](artifacts/work-records/t015-chapter3-raw.log)，SHA-256 `89097abc9c4f9199fd6a634ecb5edfe209bec852020fc7a3e3dfbf52cb8266b7`；远程 `meta-tiger` 提交 `0e3da48`。
-- 阻塞与下一位行动人：无；T-015 已关闭。实测不符项和观察项继续由 T-014 跟踪；待用户通读意见到齐后，writer 统一修订，reviewer 再做针对性复核。
+- 阻塞与下一位行动人：无；T-015 已关闭。N-1/N-2/O-1 已在 T-014 最终修订、复核与用户确认中闭环；2026-10-08 补录时不再存在后续行动。
 - 更新日期：2026-09-27
 
 ## 记录样式（不是真实任务）

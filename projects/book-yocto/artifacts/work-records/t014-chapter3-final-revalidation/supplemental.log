@@ -1,0 +1,378 @@
+
+################################################################
+## SUPPLEMENTAL VALIDATION METADATA
+################################################################
+
+===== BEGIN S0-01 date =====
+$ date -Is
+2026-10-04T08:55:33+08:00
+RC=0
+===== END S0-01 date =====
+
+===== BEGIN S0-02 user =====
+$ id
+uid=1001(oops) gid=1001(oops) groups=1001(oops)
+RC=0
+===== END S0-02 user =====
+
+===== BEGIN S0-03 source oe-init-build-env =====
+$ source /home/oops/workspace/poky/oe-init-build-env /home/oops/workspace/build
+This is the default build configuration for the Poky reference distribution.
+
+### Shell environment set up for builds. ###
+
+You can now run 'bitbake <target>'
+
+Common targets are:
+    core-image-minimal
+    core-image-full-cmdline
+    core-image-sato
+    core-image-weston
+    meta-toolchain
+    meta-ide-support
+
+You can also run generated qemu images with a command like 'runqemu qemux86-64'.
+
+Other commonly useful commands are:
+ - 'devtool' and 'recipetool' handle common recipe tasks
+ - 'bitbake-layers' handles common layer tasks
+ - 'oe-pkgdata-util' handles common target package tasks
+RC=0
+===== END S0-03 source oe-init-build-env =====
+
+################################################################
+## S1. CHAPTER 3.1 OFFICIAL LAYER DIRECTORY COMMANDS
+################################################################
+
+===== BEGIN S1-01 ls-meta-poky =====
+$ ls /home/oops/workspace/poky/meta-poky/
+classes
+conf
+README.poky.md
+recipes-core
+RC=0
+===== END S1-01 ls-meta-poky =====
+
+===== BEGIN S1-02 ls-meta-yocto-bsp =====
+$ ls /home/oops/workspace/poky/meta-yocto-bsp/
+conf
+lib
+README.hardware.md
+recipes-bsp
+recipes-graphics
+recipes-kernel
+wic
+RC=0
+===== END S1-02 ls-meta-yocto-bsp =====
+
+===== BEGIN S1-03 ls-meta =====
+$ ls /home/oops/workspace/poky/meta/
+classes
+classes-global
+classes-recipe
+conf
+COPYING.MIT
+files
+lib
+recipes-bsp
+recipes-connectivity
+recipes-core
+recipes-devtools
+recipes-extended
+recipes-gnome
+recipes-graphics
+recipes-kernel
+recipes-multimedia
+recipes-rt
+recipes-sato
+recipes-support
+recipes.txt
+site
+RC=0
+===== END S1-03 ls-meta =====
+
+===== BEGIN S1-04 meta-poky-layer-conf =====
+$ cat /home/oops/workspace/poky/meta-poky/conf/layer.conf
+# We have a conf and classes directory, add to BBPATH
+BBPATH =. "${LAYERDIR}:"
+
+# We have recipes-* directories, add to BBFILES
+BBFILES += "${LAYERDIR}/recipes-*/*/*.bb \
+            ${LAYERDIR}/recipes-*/*/*.bbappend"
+
+BBFILE_COLLECTIONS += "yocto"
+BBFILE_PATTERN_yocto = "^${LAYERDIR}/"
+BBFILE_PRIORITY_yocto = "5"
+
+LAYERSERIES_COMPAT_yocto = "scarthgap"
+
+# This should only be incremented on significant changes that will
+# cause compatibility issues with other layers
+LAYERVERSION_yocto = "3"
+
+LAYERDEPENDS_yocto = "core"
+
+REQUIRED_POKY_BBLAYERS_CONF_VERSION = "2"
+RC=0
+===== END S1-04 meta-poky-layer-conf =====
+
+===== BEGIN S1-05 meta-poky-relevant-lines =====
+$ grep -nE '^(BBPATH|BBFILES|BBFILE_COLLECTIONS|BBFILE_PATTERN|BBFILE_PRIORITY|LAYERDEPENDS|LAYERSERIES_COMPAT)' '/home/oops/workspace/poky/meta-poky/conf/layer.conf'
+2:BBPATH =. "${LAYERDIR}:"
+5:BBFILES += "${LAYERDIR}/recipes-*/*/*.bb \
+8:BBFILE_COLLECTIONS += "yocto"
+9:BBFILE_PATTERN_yocto = "^${LAYERDIR}/"
+10:BBFILE_PRIORITY_yocto = "5"
+12:LAYERSERIES_COMPAT_yocto = "scarthgap"
+18:LAYERDEPENDS_yocto = "core"
+RC=0
+===== END S1-05 meta-poky-relevant-lines =====
+
+################################################################
+## S2. RECIPES-BSP PROBE: WRONG AND CORRECT DEPTH
+################################################################
+
+===== BEGIN S2-01 baseline-registration =====
+$ grep -n -F '/home/oops/workspace/meta-tiger' '/home/oops/workspace/build/conf/bblayers.conf'; bitbake-layers show-layers
+12:  /home/oops/workspace/meta-tiger \
+NOTE: Starting bitbake server...
+layer                 path                                                                    priority
+========================================================================================================
+core                  /home/oops/workspace/poky/meta                                          5
+yocto                 /home/oops/workspace/poky/meta-poky                                     5
+yoctobsp              /home/oops/workspace/poky/meta-yocto-bsp                                5
+tiger                 /home/oops/workspace/meta-tiger                                         6
+RC=0
+===== END S2-01 baseline-registration =====
+
+===== BEGIN S2-02 wrong-depth-path =====
+$ find '/home/oops/workspace/meta-tiger/recipes-bsp' -maxdepth 2 -type f -printf '%P\n' | sort
+.gitkeep
+tiger-probe_0.1.bb
+RC=0
+===== END S2-02 wrong-depth-path =====
+
+===== BEGIN S2-03 wrong-depth-query =====
+$ bitbake-layers show-recipes tiger-probe
+NOTE: Starting bitbake server...
+Loading cache...done.
+Loaded 1880 entries from dependency cache.
+WARNING: No bb files in default matched BBFILE_PATTERN_tiger '^/home/oops/workspace/meta-tiger/'
+
+Summary: There was 1 WARNING message.
+RC=0
+===== END S2-03 wrong-depth-query =====
+
+===== BEGIN S2-04 correct-depth-path =====
+$ find '/home/oops/workspace/meta-tiger/recipes-bsp' -maxdepth 3 -type f -printf '%P\n' | sort
+.gitkeep
+tiger-probe/tiger-probe_0.1.bb
+RC=0
+===== END S2-04 correct-depth-path =====
+
+===== BEGIN S2-05 correct-depth-query =====
+$ bitbake-layers show-recipes tiger-probe
+NOTE: Starting bitbake server...
+Loading cache...done.
+Loaded 1880 entries from dependency cache.
+Parsing recipes...done.
+Parsing of 921 .bb files complete (920 cached, 1 parsed). 1879 targets, 58 skipped, 0 masked, 0 errors.
+=== Matching recipes: ===
+tiger-probe:
+  meta-tiger           0.1
+RC=0
+===== END S2-05 correct-depth-query =====
+
+===== BEGIN S2-06 probe-cleanup-and-meta-status =====
+$ find '/home/oops/workspace/meta-tiger/recipes-bsp' -name '*tiger-probe*' -print; git -C '/home/oops/workspace/meta-tiger' status --porcelain=v1 --branch
+## main
+RC=0
+===== END S2-06 probe-cleanup-and-meta-status =====
+
+################################################################
+## S3. FRESH GIT INITIALIZATION IN ISOLATED COPY
+################################################################
+
+===== BEGIN S3-01 copy-skeleton-without-git =====
+$ cd '/home/oops/workspace/meta-tiger' && tar --exclude=.git -cf - . | tar -C '/tmp/chapter3-revalidation-supplemental/meta-tiger-fresh' -xf -
+RC=0
+===== END S3-01 copy-skeleton-without-git =====
+
+===== BEGIN S3-02 verify-no-git-before-init =====
+$ test ! -e '/tmp/chapter3-revalidation-supplemental/meta-tiger-fresh/.git'; rc=$?; echo NO_GIT_RC=$rc; find '/tmp/chapter3-revalidation-supplemental/meta-tiger-fresh' -maxdepth 2 -mindepth 1 -printf '%P\n' | sort; exit $rc
+NO_GIT_RC=0
+conf
+conf/distro
+conf/layer.conf
+conf/machine
+COPYING.MIT
+MAINTAINERS
+README
+recipes-bsp
+recipes-bsp/.gitkeep
+recipes-core
+recipes-core/.gitkeep
+recipes-kernel
+recipes-kernel/.gitkeep
+RC=0
+===== END S3-02 verify-no-git-before-init =====
+
+===== BEGIN S3-03 fresh-git-init =====
+$ git -C /tmp/chapter3-revalidation-supplemental/meta-tiger-fresh init -b main
+Initialized empty Git repository in /tmp/chapter3-revalidation-supplemental/meta-tiger-fresh/.git/
+RC=0
+===== END S3-03 fresh-git-init =====
+
+===== BEGIN S3-04 set-local-author-name =====
+$ git -C /tmp/chapter3-revalidation-supplemental/meta-tiger-fresh config --local user.name Chapter\ 3\ Validation
+RC=0
+===== END S3-04 set-local-author-name =====
+
+===== BEGIN S3-05 set-local-author-email =====
+$ git -C /tmp/chapter3-revalidation-supplemental/meta-tiger-fresh config --local user.email chapter3-validation@example.invalid
+RC=0
+===== END S3-05 set-local-author-email =====
+
+===== BEGIN S3-06 show-local-author =====
+$ printf 'user.name='; git -C '/tmp/chapter3-revalidation-supplemental/meta-tiger-fresh' config --local --get user.name; printf 'user.email='; git -C '/tmp/chapter3-revalidation-supplemental/meta-tiger-fresh' config --local --get user.email
+user.name=Chapter 3 Validation
+user.email=chapter3-validation@example.invalid
+RC=0
+===== END S3-06 show-local-author =====
+
+===== BEGIN S3-07 git-add =====
+$ git -C /tmp/chapter3-revalidation-supplemental/meta-tiger-fresh add .
+RC=0
+===== END S3-07 git-add =====
+
+===== BEGIN S3-08 status-before-commit =====
+$ git -C /tmp/chapter3-revalidation-supplemental/meta-tiger-fresh status --short --branch
+## No commits yet on main
+A  COPYING.MIT
+A  MAINTAINERS
+A  README
+A  conf/distro/.gitkeep
+A  conf/layer.conf
+A  conf/machine/.gitkeep
+A  recipes-bsp/.gitkeep
+A  recipes-core/.gitkeep
+A  recipes-kernel/.gitkeep
+RC=0
+===== END S3-08 status-before-commit =====
+
+===== BEGIN S3-09 initial-commit =====
+$ git -C /tmp/chapter3-revalidation-supplemental/meta-tiger-fresh commit -m Initial\ meta-tiger\ layer\ skeleton
+[main (root-commit) 35d7803] Initial meta-tiger layer skeleton
+ 9 files changed, 70 insertions(+)
+ create mode 100644 COPYING.MIT
+ create mode 100755 MAINTAINERS
+ create mode 100755 README
+ create mode 100644 conf/distro/.gitkeep
+ create mode 100755 conf/layer.conf
+ create mode 100644 conf/machine/.gitkeep
+ create mode 100644 recipes-bsp/.gitkeep
+ create mode 100644 recipes-core/.gitkeep
+ create mode 100644 recipes-kernel/.gitkeep
+RC=0
+===== END S3-09 initial-commit =====
+
+===== BEGIN S3-10 log-author-committer =====
+$ git -C /tmp/chapter3-revalidation-supplemental/meta-tiger-fresh log -1 --format=fuller
+commit 35d7803f65478fabe4c3725a1d803258d78d9497
+Author:     Chapter 3 Validation <chapter3-validation@example.invalid>
+AuthorDate: Sun Oct 4 08:55:38 2026 +0800
+Commit:     Chapter 3 Validation <chapter3-validation@example.invalid>
+CommitDate: Sun Oct 4 08:55:38 2026 +0800
+
+    Initial meta-tiger layer skeleton
+RC=0
+===== END S3-10 log-author-committer =====
+
+===== BEGIN S3-11 status-after-commit =====
+$ git -C /tmp/chapter3-revalidation-supplemental/meta-tiger-fresh status --short --branch
+## main
+RC=0
+===== END S3-11 status-after-commit =====
+
+################################################################
+## S4. ACTUAL CURRENT META-TIGER AUTHOR IDENTITY
+################################################################
+
+===== BEGIN S4-01 current-meta-head =====
+$ git -C /home/oops/workspace/meta-tiger rev-parse HEAD
+75ce208a2477a5bcab1f61fbe2d1b4345d5ffdfe
+RC=0
+===== END S4-01 current-meta-head =====
+
+===== BEGIN S4-02 current-meta-author-committer =====
+$ git -C /home/oops/workspace/meta-tiger show -s --format=fuller HEAD
+commit 75ce208a2477a5bcab1f61fbe2d1b4345d5ffdfe
+Author:     Validation Bot <validator@fruitpie.example>
+AuthorDate: Sat Oct 3 20:50:28 2026 +0800
+Commit:     Validation Bot <validator@fruitpie.example>
+CommitDate: Sat Oct 3 20:50:28 2026 +0800
+
+    Revalidate meta-tiger layer skeleton
+RC=0
+===== END S4-02 current-meta-author-committer =====
+
+===== BEGIN S4-03 current-meta-local-identity =====
+$ printf 'user.name='; git -C '/home/oops/workspace/meta-tiger' config --local --get user.name; printf 'user.email='; git -C '/home/oops/workspace/meta-tiger' config --local --get user.email
+user.name=Validation Bot
+user.email=validator@fruitpie.example
+RC=0
+===== END S4-03 current-meta-local-identity =====
+
+################################################################
+## S5. CLEANUP AND FINAL STATE
+################################################################
+
+===== BEGIN S5-01 temp-copy-deleted =====
+$ test ! -e '/tmp/chapter3-revalidation-supplemental/meta-tiger-fresh'; rc=$?; echo TEMP_COPY_ABSENT_RC=$rc; exit $rc
+TEMP_COPY_ABSENT_RC=0
+RC=0
+===== END S5-01 temp-copy-deleted =====
+
+===== BEGIN S5-02 final-registration =====
+$ grep -n -F '/home/oops/workspace/meta-tiger' '/home/oops/workspace/build/conf/bblayers.conf'; bitbake-layers show-layers
+12:  /home/oops/workspace/meta-tiger \
+NOTE: Starting bitbake server...
+layer                 path                                                                    priority
+========================================================================================================
+core                  /home/oops/workspace/poky/meta                                          5
+yocto                 /home/oops/workspace/poky/meta-poky                                     5
+yoctobsp              /home/oops/workspace/poky/meta-yocto-bsp                                5
+tiger                 /home/oops/workspace/meta-tiger                                         6
+RC=0
+===== END S5-02 final-registration =====
+
+===== BEGIN S5-03 final-probe-check =====
+$ find '/home/oops/workspace/meta-tiger/recipes-bsp' -name '*tiger-probe*' -print
+RC=0
+===== END S5-03 final-probe-check =====
+
+===== BEGIN S5-04 final-meta-status =====
+$ git -C /home/oops/workspace/meta-tiger status --porcelain=v1 --branch
+## main
+RC=0
+===== END S5-04 final-meta-status =====
+
+===== BEGIN S5-05 final-poky-status =====
+$ git -C /home/oops/workspace/poky status --porcelain=v1
+RC=0
+===== END S5-05 final-poky-status =====
+
+===== BEGIN S5-06 final-config-hashes =====
+$ echo INITIAL_BBLAYERS; cat '/tmp/chapter3-revalidation-supplemental/bblayers.initial.sha256'; echo FINAL_BBLAYERS; sha256sum '/home/oops/workspace/build/conf/bblayers.conf'; echo INITIAL_LOCALCONF; cat '/tmp/chapter3-revalidation-supplemental/localconf.initial.sha256'; echo FINAL_LOCALCONF; sha256sum '/home/oops/workspace/build/conf/local.conf'
+INITIAL_BBLAYERS
+33fb66dc05ed9803e4f5af150fb3642c42ad2bd8b1220428d39ab87320f99e86  /home/oops/workspace/build/conf/bblayers.conf
+FINAL_BBLAYERS
+33fb66dc05ed9803e4f5af150fb3642c42ad2bd8b1220428d39ab87320f99e86  /home/oops/workspace/build/conf/bblayers.conf
+INITIAL_LOCALCONF
+44e5057ac0c35c469e23bf29681655ce855a9c61abf3151aa30afeed008f8c25  /home/oops/workspace/build/conf/local.conf
+FINAL_LOCALCONF
+44e5057ac0c35c469e23bf29681655ce855a9c61abf3151aa30afeed008f8c25  /home/oops/workspace/build/conf/local.conf
+RC=0
+===== END S5-06 final-config-hashes =====
+
+SUPPLEMENTAL_LOG=/tmp/chapter3-revalidation-supplemental/supplemental.log
