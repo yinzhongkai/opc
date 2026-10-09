@@ -71,7 +71,7 @@ scope:
 | `schemaVersion` | 是 | 整数 `1` |
 | `workspace` | 是 | 工作区映射 |
 
-`workspace` 的公共字段只有 `driver`。`driver` 必须是 `none`、`git`、`submodule` 或 `repo`；除 `none` 外，各驱动必须提供 `checkout`。checkout 使用 `/` 的可移植相对路径，不接受盘符或绝对路径。`submodule` 必须位于当前 `projects/<project-id>/` 内；`git` 和 `repo` 必须使用框架根目录的同级路径，例如 `../space-rhythm`，不能继续向更高目录逃逸。配置只声明默认位置，本机另有布局时由用户或平台在实际操作中明确指定，不把机器专有绝对路径写回共享配置。
+`workspace` 的公共字段只有 `driver`。`driver` 必须是 `none`、`git`、`submodule`、`multi-git` 或 `repo`。`git`、`submodule` 和 `repo` 在 workspace 层提供 `checkout`；`multi-git` 在每个仓库条目内提供 `checkout`。checkout 使用 `/` 的可移植相对路径，不接受盘符或绝对路径。`submodule` 必须位于当前 `projects/<project-id>/` 内；`git`、`multi-git` 和 `repo` 必须使用框架根目录的同级路径，例如 `../space-rhythm`，不能继续向更高目录逃逸。配置只声明默认位置，本机另有布局时由用户或平台在实际操作中明确指定，不把机器专有绝对路径写回共享配置。
 
 ### none
 
@@ -83,7 +83,7 @@ workspace:
   driver: none
 ```
 
-除 `driver` 外不接受其他 workspace 字段。`none` 不创建隐式目录，也不授权把草稿、源码或中间产物直接放进项目记录目录；项目开始需要工作区时，先经用户确认改为 `git`、`submodule` 或 `repo`。
+除 `driver` 外不接受其他 workspace 字段。`none` 不创建隐式目录，也不授权把草稿、源码或中间产物直接放进项目记录目录；项目开始需要工作区时，先经用户确认改为 `git`、`submodule`、`multi-git` 或 `repo`。
 
 ### git
 
@@ -115,6 +115,31 @@ workspace:
 ```
 
 `repository` 为非空字符串，`revision` 使用完整提交哈希。配置必须与 `.gitmodules` 和实际 gitlink 一致；只读校验器检查声明结构，不读取 Git 对象或联网验证远端。产品主源码默认不使用该模式，以免把独立产品生命周期重新耦合到 OPC 项目分支。
+
+### multi-git
+
+适用于同一项目包含多个彼此独立、各自拥有分支和发布生命周期的外部 Git 成果物仓库，但不使用统一 Manifest 的场景：
+
+```yaml
+schemaVersion: 1
+workspace:
+  driver: multi-git
+  repositories:
+    application:
+      repository: git@example.com:team/application.git
+      branch: main
+      revision: 0123456789abcdef0123456789abcdef01234567
+      checkout: ../application
+    firmware:
+      repository: git@example.com:team/firmware.git
+      branch: stable
+      revision: 89abcdef0123456789abcdef0123456789abcdef
+      checkout: ../firmware
+```
+
+`repositories` 必须是至少包含一个条目的映射；仓库 ID 遵循本规范的 ID 规则。每个条目只接受 `repository`、`branch`、`revision` 和 `checkout`，含义与 `git` 驱动相同；`revision` 必须分别使用完整的 40 或 64 位小写提交哈希。各 checkout 必须是框架根目录的同级相对路径，且不得相同或相互嵌套。项目变更只影响部分成果物时，未变仓库仍保留既有精确 revision；受影响仓库在最终合并和验证后单独更新。配置不授予任何仓库的读取、写入或推送权限。
+
+多个仓库若由同一 Manifest 定义并作为统一产品版本发布，使用 `repo`；不要把临时源码展开目录、构建缓存或可丢弃的开发 workspace 登记为长期 `multi-git` 成果物。
 
 ### repo
 

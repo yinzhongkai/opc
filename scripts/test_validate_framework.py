@@ -219,6 +219,26 @@ class FrameworkValidationTests(unittest.TestCase):
             {
                 "schemaVersion": 1,
                 "workspace": {
+                    "driver": "multi-git",
+                    "repositories": {
+                        "application": {
+                            "repository": "git@example.invalid:team/application.git",
+                            "branch": "main",
+                            "revision": "c" * 40,
+                            "checkout": "../application",
+                        },
+                        "firmware": {
+                            "repository": "git@example.invalid:team/firmware.git",
+                            "branch": "stable",
+                            "revision": "d" * 64,
+                            "checkout": "../firmware",
+                        },
+                    },
+                },
+            },
+            {
+                "schemaVersion": 1,
+                "workspace": {
                     "driver": "repo",
                     "manifestRepository": "https://example.invalid/manifests.git",
                     "manifestRevision": "release-1.0",
@@ -295,6 +315,37 @@ class FrameworkValidationTests(unittest.TestCase):
         }
         self.save_workspace(repo_workspace)
         self.assert_error("workspace.manifestFile 必须是 Manifest 仓库内的相对 .xml 路径")
+
+    def test_multi_git_repositories_are_strict_and_non_overlapping(self):
+        self.project()
+        valid_repository = {
+            "repository": "git@example.invalid:team/example.git",
+            "branch": "main",
+            "revision": "a" * 40,
+            "checkout": "../example",
+        }
+        candidates = (
+            ({}, "workspace.repositories 必须是至少包含一个仓库的映射"),
+            ([], "workspace.repositories 必须是至少包含一个仓库的映射"),
+            ({"Bad-ID": valid_repository}, "仓库 ID 必须是有效 ID"),
+            ({"source": {"repository": "git@example.invalid:team/example.git"}},
+             "workspace.repositories['source'] 缺少字段"),
+            ({"source": {**valid_repository, "revision": "abc123"}},
+             "workspace.repositories['source'].revision 必须是完整的"),
+            ({"source": {**valid_repository, "checkout": "../../example"}},
+             "workspace.repositories['source'].checkout"),
+            ({
+                "source": valid_repository,
+                "nested": {**valid_repository, "checkout": "../example/nested"},
+            }, "checkout 不得相同或相互嵌套"),
+        )
+        for repositories, expected in candidates:
+            with self.subTest(expected=expected):
+                self.save_workspace({
+                    "schemaVersion": 1,
+                    "workspace": {"driver": "multi-git", "repositories": repositories},
+                })
+                self.assert_error(expected)
 
     def test_definition_extensions_must_be_lowercase_on_every_platform(self):
         for directory in ("roles", "knowledge"):

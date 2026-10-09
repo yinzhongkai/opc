@@ -49,14 +49,16 @@ TEAM_FIELDS = {
     "schemaVersion", "project", "members", "roleKnowledge",
 }
 MEMBER_FIELDS = {"id", "role", "scope"}
-WORKSPACE_DRIVERS = {"none", "git", "submodule", "repo"}
+WORKSPACE_DRIVERS = {"none", "git", "submodule", "multi-git", "repo"}
 WORKSPACE_COMMON_FIELDS = {"driver"}
 WORKSPACE_DRIVER_FIELDS = {
     "none": set(),
     "git": {"repository", "branch", "revision", "checkout"},
     "submodule": {"repository", "revision", "checkout"},
+    "multi-git": {"repositories"},
     "repo": {"manifestRepository", "manifestRevision", "manifestFile", "checkout"},
 }
+MULTI_GIT_REPOSITORY_FIELDS = {"repository", "branch", "revision", "checkout"}
 GIT_REVISION_PATTERN = re.compile(r"(?:[0-9a-f]{40}|[0-9a-f]{64})\Z")
 
 
@@ -383,29 +385,71 @@ class Validator:
             self.check_member(folder, identifier)
         self.check_member_inventory(folder, registered, template=template)
 
-    def check_checkout(self, value, path, driver, project, template=False):
+    def check_checkout(
+            self, value, path, driver, project, template=False,
+            field="workspace.checkout"):
         if not is_text(value):
-            self.error(path, "workspace.checkout 必须是非空字符串")
+            self.error(path, f"{field} 必须是非空字符串")
             return
         if "\\" in value or value.startswith("/") or re.match(r"^[A-Za-z]:", value):
-            self.error(path, "workspace.checkout 必须是使用 / 的可移植相对路径")
+            self.error(path, f"{field} 必须是使用 / 的可移植相对路径")
             return
         parts = PurePosixPath(value).parts
         if not parts or "." in parts or "" in parts:
-            self.error(path, "workspace.checkout 必须是规范化相对路径")
+            self.error(path, f"{field} 必须是规范化相对路径")
             return
         expected_project = "{{project_id}}" if template else project
         if driver == "submodule":
             if ".." in parts or parts[:2] != ("projects", expected_project) or len(parts) < 3:
                 self.error(
                     path,
-                    "submodule 的 workspace.checkout 必须位于当前项目目录内",
+                    f"submodule 的 {field} 必须位于当前项目目录内",
                 )
         elif parts[0] != ".." or ".." in parts[1:] or len(parts) < 2:
             self.error(
                 path,
-                "git/repo 的 workspace.checkout 必须是框架根目录的同级相对路径",
+                f"git/multi-git/repo 的 {field} 必须是框架根目录的同级相对路径",
             )
+
+    def check_multi_git(self, repositories, path, project, template=False):
+        field = "workspace.repositories"
+        if not isinstance(repositories, dict) or not repositories:
+            self.error(path, f"{field} 必须是至少包含一个仓库的映射")
+            return
+        checkouts = []
+        for identifier, repository in repositories.items():
+            prefix = f"{field}[{identifier!r}]"
+            if not is_id(identifier):
+                self.error(path, f"{prefix} 的仓库 ID 必须是有效 ID")
+            if not isinstance(repository, dict):
+                self.error(path, f"{prefix} 必须是映射")
+                continue
+            for key in sorted(MULTI_GIT_REPOSITORY_FIELDS - repository.keys()):
+                self.error(path, f"{prefix} 缺少字段 {key}")
+            for key in sorted(repository.keys() - MULTI_GIT_REPOSITORY_FIELDS):
+                self.error(path, f"{prefix} 不允许字段 {key}")
+            for key in ("repository", "branch"):
+                if not is_text(repository.get(key)):
+                    self.error(path, f"{prefix}.{key} 必须是非空字符串")
+            revision = repository.get("revision")
+            if not isinstance(revision, str) or not GIT_REVISION_PATTERN.fullmatch(revision):
+                self.error(path, f"{prefix}.revision 必须是完整的 40 或 64 位小写 Git 提交哈希")
+            checkout = repository.get("checkout")
+            self.check_checkout(
+                checkout, path, "multi-git", project, template=template,
+                field=f"{prefix}.checkout",
+            )
+            if isinstance(checkout, str):
+                checkouts.append((identifier, PurePosixPath(checkout).parts))
+        for index, (left_id, left) in enumerate(checkouts):
+            for right_id, right in checkouts[index + 1:]:
+                common = min(len(left), len(right))
+                if left[:common] == right[:common]:
+                    self.error(
+                        path,
+                        "multi-git 仓库 checkout 不得相同或相互嵌套："
+                        f"{left_id!r} 与 {right_id!r}",
+                    )
 
     def check_workspace(self, folder, template=False):
         path = folder / WORKSPACE_FILE
@@ -425,7 +469,7 @@ class Validator:
             return
         driver = workspace.get("driver")
         if driver not in WORKSPACE_DRIVERS:
-            self.error(path, "workspace.driver 必须是 none、git、submodule 或 repo")
+            self.error(path, "workspace.driver 必须是 none、git、submodule、multi-git 或 repo")
             return
         required = WORKSPACE_COMMON_FIELDS | WORKSPACE_DRIVER_FIELDS[driver]
         for field in sorted(required - workspace.keys()):
@@ -433,6 +477,11 @@ class Validator:
         for field in sorted(workspace.keys() - required):
             self.error(path, f"{driver} 工作区不允许字段 workspace.{field}")
         project = "{{project_id}}" if template else folder.name
+        if driver == "multi-git":
+            self.check_multi_git(
+                workspace.get("repositories"), path, project, template=template,
+            )
+            return
         if "checkout" in required:
             self.check_checkout(workspace.get("checkout"), path, driver, project, template=template)
         text_fields = WORKSPACE_DRIVER_FIELDS[driver] - {"revision", "manifestFile"}
