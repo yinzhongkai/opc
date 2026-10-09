@@ -4,6 +4,7 @@
 
 - 框架基线：`v0.0.4`（远端发布提交 `464ca52aafc6c73ff780a7120acd3bf63c9d31dd`，注释标签对象 `21d803d34cbd2f83daef822afe8bb0ef13f1b0d2`）。本次升级来源、恢复点和执行口径见下文“框架升级记录”。
 - 历史框架基线：2026-10-08 将项目提交 rebase 到 `v0.0.3`（`6f79b98e219e0bbf8f7de45dd35ec54c2a6f1f07`）正式标签之上，采用角色/技能术语、项目历史工作流、会话消息边界和项目升级 rebase 规则；底层配置字段继续使用 `knowledge`。此前 `v0.0.2` 升级及归档记录继续有效。
+- 未发布公共能力提前采用：2026-10-09 为处理 H-001，从框架集成分支 `opc-v0.0.4-dev` 提前采用 `multi-git` 独立成果物声明（原提交 `5a4f6137048ef195f473ddd05caef751e8b508f9`，集成 merge `23bdd9b442e89e47e49515b58ea8be54670b62cb`）及 SSH 主机 checkout 扩展（原提交 `60a30bb889b1b7b42b1644d685738fb1e444a62f`，集成 merge `921a11952946f21f1fbbb5392a5f44a61040192e`）；本项目采用提交为 `c62d87d4ebccae8200f413fba838cad4af7131d8`、`71af3dec61165a1123d81b5ac6760a9796ab8a63`。采用原因为书稿与 `tiger` 服务器上的 `meta-tiger` 是两个独立 Git 成果物，现行 `v0.0.3` 单仓库声明无法同时锁定；兼容风险是该能力尚未正式发布、集成线与项目提交尚未推送，后续升级正式版本时必须核对等价提交并去重。60 项框架测试、框架结构校验和差异检查均通过。
 - 分支迁移：2026-09-28 从原 `book-yocto` 历史收敛为 `project/book-yocto` 的干净项目基线；迁移前完整历史由 `archive/2026-09-28/book-yocto` 保存，项目线中原有的重复 Yocto 框架提交不再作为权威来源。
 
 ## 建项信息
@@ -18,7 +19,7 @@
 - 书稿位置变更：2026-09-13 经用户在 writer 会话确认，书稿从仓库根 `yocto/` 迁入 `projects/book-yocto/yocto/` 并纳入 Git（此前未跟踪）；2026-09-16 经用户在 project-manager 会话指示，再迁入 `projects/book-yocto/workspace/yocto/`。2026-09-28 经用户授权，将当前书稿和 Docker 环境以单一内容基线迁入独立仓库 `git@github.com:yinzhongkai/book-yocto.git`，书稿现位于其根目录下的 `yocto/`，初始基线为 `4bc485e`。旧修订历史、任务过程和核验证据仍由 OPC 管理；此前台账与成果中的旧路径均按迁移前位置理解。
 - 范围与非目标：范围包含技术内容的完整实测验证——实现 tiger 平台代码并全链构建，回填全部 C-W/V 待验证项（[D-001](DECISIONS.md)，2026-09-18）；按 [D-013](DECISIONS.md)（2026-10-09）不再创建四个长期 fork，而以 Poky 配方锁定的上游源码为基线，在临时 devtool/BitBake workspace 中开发，最终 patch、`.bbappend`、`SRC_URI` 和配置进入 `meta-tiger`，并在清理 workspace 后从干净状态复验。从 chapter 2 起，每章均须对命令、配置、路径、构建/运行输出及依赖实际环境的技术结论执行逐章真实环境核验并保存证据（[D-010](DECISIONS.md)，2026-09-26）；术语与体例统一纳入范围（[D-005](DECISIONS.md)）。非目标：PDF/EPUB 等排版导出与出版渠道对接（[D-002](DECISIONS.md)）。
 - 交付物与验收要求：主交付物为独立书稿仓库 `yocto/` 下的 Markdown 终稿（[D-002](DECISIONS.md)，2026-09-18）；`meta-tiger` 保存支撑书稿复现的长期工程 patch 与集成元数据，不以四个上游源码 fork 作为交付物。验收标准为书稿逐章评审通过、验证按 D-001/D-010/D-013 执行完毕、学习维度以建项用户通读校验代替外部试读（[D-003](DECISIONS.md)，2026-09-18）。
-- 时间、资源与其他约束：无硬性截稿日期，按"先闭环一章"节奏推进（[D-004](DECISIONS.md)，2026-09-18）；完整实测需要可用构建环境、配方对应的上游源码版本和可写的 `meta-tiger` 工程工作区。`yocto-engineer` 已于 2026-09-27 加入团队；实际写入 `meta-tiger` 前须由用户转交超级管理员补齐 WORKSPACE 声明与精确版本边界。
+- 时间、资源与其他约束：无硬性截稿日期，按"先闭环一章"节奏推进（[D-004](DECISIONS.md)，2026-09-18）；完整实测需要可用构建环境、配方对应的上游源码版本和可写的 `meta-tiger` 工程工作区。`yocto-engineer` 已于 2026-09-27 加入团队；2026-10-09 已按 H-001 将 `tiger:/home/oops/workspace/meta-tiger` 纳入 WORKSPACE 并锁定完整基线，实际工作仍须逐次核对远端工作树、分支与 revision，声明本身不授予写入、切换或推送权限。
 
 未知项保持待确认，已确认的范围变更链接 [DECISIONS.md](DECISIONS.md) 中的决定，不从模板预设业务任务。
 
@@ -32,7 +33,7 @@
 
 ## 交付约定
 
-- 正式治理成果位于 `artifacts/`；书稿位于 [WORKSPACE.yaml](WORKSPACE.yaml) 当前声明的独立 Git 仓库，修订脚本和核验证据位于 OPC 的 `artifacts/work-records/`。D-013 新增的长期工程资产落在 `meta-tiger`；在实际写入前须先由超级管理员按用户授权把该仓库纳入合规工作区边界。各成果物仓库均先提交并验证源码修改，再更新 OPC 中的精确 revision、任务和索引证据。
+- 正式治理成果位于 `artifacts/`；书稿位于 [WORKSPACE.yaml](WORKSPACE.yaml) 声明的 `book-manuscript` 仓库，修订脚本和核验证据位于 OPC 的 `artifacts/work-records/`。D-013 新增的长期工程资产落在同一声明中的远程 `meta-tiger` 仓库；各成果物仓库均先提交并验证源码修改，再更新 OPC 中各自的精确 revision、任务和索引证据。
 - 用户保证当前仓库每次只有一个会话执行，前一会话完成或停止后再启动下一会话；框架不实现文件锁或自动调度。
 - 每份文档默认维护一个当前版本，记录版本及批准依据；历史通过用户维护的 Git 追溯。
 - 评审与批准要求在任务中明确。专业交叉评审由现有成员在原会话执行，不默认新建评审会话；用户保证受评版本可读取且不变，本轮全部评审者提交意见后作者再统一修订。采用根 [项目运行协议](../../PROJECT_PROTOCOL.md) 的评审、完成与状态规则。
