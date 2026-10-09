@@ -21,12 +21,12 @@
   - T-015 chapter 3 命令、配置与输出真实环境核验（reviewer）：completed（2026-09-27 project-manager 复核通过）——12 组核验 9 组通过、3 组局部不符；构建和两次 `yocto-check-layer` 成功，错误实验均恢复，远端 `meta-tiger` 提交为 `0e3da48`；N-1/N-2/O-1 已流转至 T-014。
   - T-016 chapter 4《让 QEMU 长出 tiger 这块板》修订与第 1 轮评审：todo（2026-10-08 已创建并推送 OPC `feature/book-yocto/t-016-chapter4-revision` 与书稿 `feature/t-016-chapter4-revision`；2026-10-09 已按 D-013 重定义为“最少 devtool → 真实 QEMU patch → `meta-tiger` 集成 → 清理 workspace → 干净重构建 → `runqemu`”，正文、工程实现、核验和评审尚未开始）。
   - T-017 全书四仓库叙事迁移为 `meta-tiger` patch-only 模型：todo（2026-10-09 已登记；全文扫描命中前言、chapter 2–16、尾声、附录 B/C 共 19 个文件；等待 T-016 收口后再建立配对分支，不并行启动）。
-- 团队状态：现有 `project-manager`、`writer`、`reviewer`、`yocto-engineer` 四名成员，四个成员会话均已创建并完成身份绑定；本轮 chapter 3 审校与验证协作已完成。H-001 当前为 accepted，待发起人 project-manager 核对配置结果后关闭。
+- 团队状态：现有 `project-manager`、`writer`、`reviewer`、`yocto-engineer` 四名成员，相关历史会话均已建立；会话按用户控制的串行约定在需要时进入并刷新，不要求与 project-manager 同时活跃。本轮 chapter 3 审校与验证协作已完成。H-001 已由 project-manager 复核并关闭。
 - 开发仓库状态：书稿仓库 `origin/main` 已核对为 `f444790f352b46f699fd3d46198f8b9b9f089a62`，WORKSPACE 锁定该精确提交；书稿 feature 分支仍在同一基线上且工作树干净。2026-10-09 经用户指定的 `ssh tiger` 只读核对，`/home/oops/workspace/meta-tiger` 为 `git@github.com:yinzhongkai/meta-tiger.git` 的干净 `master...github/master` checkout，完整 HEAD 为 `0e3da48b34ef772532535a730a21878cc30ccf67`，现已写入 WORKSPACE；T-016 工程任务分支尚未建立。D-013 已明确不再创建 `qemu-tiger`、`tf-a-tiger`、`u-boot-tiger`、`linux-tiger` 四个长期仓库。
 - 关键成果：A-004 体例约定 v0.5 为 approved。A-002 已更新到 v0.6（draft），纳入 D-013、T-016 和 T-017；A-001/A-003 v0.1 仍为 draft，其中 A-003 的四仓库依赖表述待 writer 随新模型修订。T-008/T-009/T-012/T-015 及 T-014 最终复验记录均保存在 OPC `artifacts/work-records/`。
 - 阻塞、待确认事项及下一位行动人：
   - **chapter 3 无未完成阻塞**：用户确认、专业复核、真实环境验证、源码合并和远端推送均已完成。
-  - **chapter 4 正文启动条件已具备**：T-016、书稿/OPC 配对 feature 分支、D-013 方案、H-001 工作区声明和已绑定 writer 会话均已准备。下一位行动人为用户，启动或继续 `book-yocto / writer` 会话执行章节蓝图与作者修订。
+  - **chapter 4 无启动阻塞**：T-016、书稿/OPC 配对 feature 分支、D-013 方案、H-001 工作区声明和既有 writer 会话均已准备。下一位行动人为用户，进入 `book-yocto / writer` 会话，完成身份刷新后执行章节蓝图与作者修订。
   - **chapter 4 工程边界已声明、实施仍待串行启动**：`meta-tiger` 的远程 checkout、默认分支与完整 revision 已锁定；声明不自动授权写入或切换。writer 交付可实施蓝图后，由用户启动已绑定的 `yocto-engineer` 会话，开始前再次核对远端洁净状态并建立任务分支。
   - **跨章一致性已登记、不并行启动**：T-017 覆盖 19 个受影响文件，依赖 T-016 的真实 QEMU patch 范式和最终章节版本；T-016 完成前不建立下一轮 feature 分支。
   - **用户持续事项**：继续全书通读校验；A-003 中原四仓库依赖和 chapter 8 的 X-1 将在对应修订轮统一处理。

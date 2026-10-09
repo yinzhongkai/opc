@@ -597,7 +597,7 @@
 - 进展：2026-10-08 从最新书稿 `main`（`f444790f...`）创建并推送 `feature/t-016-chapter4-revision`；从最新 OPC `project/book-yocto`（`f3d8c2ff...`）创建并推送 `feature/book-yocto/t-016-chapter4-revision`。2026-10-09 用户确认 D-013，项目经理已将 chapter 4 改为“最少 devtool → 真实 QEMU patch → `meta-tiger` 集成 → 清理 workspace → 干净重构建 → `runqemu`”主线，并登记 T-017 处理全书一致性。2026-10-09 超级管理员完成 H-001：将书稿与 `tiger` 上的 `meta-tiger` 声明为两个独立、精确锁定的 Git 成果物；尚无正文、QEMU patch 或验证材料改动。
 - 成果与验证证据：书稿与 OPC 两条远端 feature 分支；D-013；H-001；[WORKSPACE.yaml](WORKSPACE.yaml)；2026-10-09 SSH 只读核对的 `meta-tiger master@0e3da48b34ef772532535a730a21878cc30ccf67` 洁净状态。正文、`meta-tiger` 工程提交、评审记录和核验证据尚未产生。
 - 合并与清理状态：两条 feature 分支均未合并、不得清理；待全部完成条件满足后按 v0.0.3 分支策略处理。
-- 阻塞与下一位行动人：H-001 的工作区边界阻塞已解除，writer 与 yocto-engineer 的已绑定会话均存在；正文和工程实现仍须按单会话约定串行推进。下一位行动人为用户：先启动或继续 `book-yocto / writer` 会话；writer 形成章节技术蓝图后，再串行启动 `yocto-engineer` 建立 `meta-tiger` 任务分支、实施和核验。
+- 阻塞与下一位行动人：H-001 已关闭，工作区边界和成员会话条件均已具备，无启动阻塞。正文和工程实现须按单会话约定串行推进。下一位行动人为用户：进入已有的 `book-yocto / writer` 会话并让其按 SESSION_PROTOCOL 刷新后执行 T-016；writer 形成章节技术蓝图后，再串行进入 `yocto-engineer` 会话建立 `meta-tiger` 任务分支、实施和核验。
 - 更新日期：2026-10-09
 
 ## T-017：全书四仓库叙事迁移为 `meta-tiger` patch-only 模型
