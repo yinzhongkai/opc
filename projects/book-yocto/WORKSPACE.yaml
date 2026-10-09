@@ -1,7 +1,15 @@
 schemaVersion: 1
 workspace:
-  driver: git
-  repository: git@github.com:yinzhongkai/book-yocto.git
-  branch: main
-  revision: f444790f352b46f699fd3d46198f8b9b9f089a62
-  checkout: ../book-yocto
+  driver: multi-git
+  repositories:
+    book-manuscript:
+      repository: git@github.com:yinzhongkai/book-yocto.git
+      branch: main
+      revision: f444790f352b46f699fd3d46198f8b9b9f089a62
+      checkout: ../book-yocto
+    meta-tiger:
+      repository: git@github.com:yinzhongkai/meta-tiger.git
+      branch: master
+      revision: 0e3da48b34ef772532535a730a21878cc30ccf67
+      host: tiger
+      checkout: /home/oops/workspace/meta-tiger
