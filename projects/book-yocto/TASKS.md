@@ -583,21 +583,39 @@
 
 ## T-016：chapter 4《让 QEMU 长出 tiger 这块板》修订与第 1 轮评审（P3 第三章）
 - 负责人：writer（作者自查与统一修订）；reviewer（技术审校与复核）；project-manager（计划、评审安排与意见闭环）；yocto-engineer（真实环境核验）；用户（通读意见与定稿确认）
-- 状态：todo（2026-10-08 已建立并推送双仓库 feature 分支，尚未开始正文修改）
-- 授权来源与日期：2026-10-08 用户在 project-manager 会话要求先读取 OPC v0.0.3 框架，随后明确指示“先创建下feature分支吧”；本次授权覆盖 T-016 登记与开发分支准备，不将尚未发生的正文修订、评审或核验写成进展。
+- 状态：todo（2026-10-08 已建立并推送双仓库 feature 分支；2026-10-09 已确认工程资产模型和 chapter 4 教学方案，尚未开始正文修改或技术实现）
+- 授权来源与日期：2026-10-08 用户在 project-manager 会话要求创建 feature 分支；2026-10-09 用户确认 D-013 的“上游源码 + 临时 devtool workspace + `meta-tiger` patch”模型，并明确指示按该方案执行。授权覆盖 T-016 范围调整、作者修订、QEMU 实际实现与验证、评审和跨章影响登记；不将尚未发生的正文修订、工程实现、评审或核验写成进展。
 - 变更类型：feature
 - OPC 开发分支与目标：`feature/book-yocto/t-016-chapter4-revision` → `project/book-yocto`
 - 成果物仓库及开发分支：`git@github.com:yinzhongkai/book-yocto.git`，`feature/t-016-chapter4-revision` → `main`
 - 成果物仓库最终合并提交：尚未产生；启动基线为 `f444790f352b46f699fd3d46198f8b9b9f089a62`
-- 目标与范围：以 `yocto/task05-4-让QEMU长出tiger这块板.md` 为唯一正文对象，按 P3 既定流程完成作者自查与修订、逐章真实环境核验、专业评审、用户通读、统一修订、复核和定稿；同步处理 D-011 的读者正文边界与 A-004 v0.5 体例要求。本轮准备阶段不修改正文，不提前登记尚未执行的验证结论。
-- 输入与依赖：A-002 v0.5、A-003、A-004 v0.5（approved）、D-001、D-007、D-010、D-011、chapter 3 最终 merge commit `f444790f352b46f699fd3d46198f8b9b9f089a62`；P0.5 尚未启动，但当前记录确认其不阻塞 chapter 4 启动。
+- 目标与范围：以 `yocto/task05-4-让QEMU长出tiger这块板.md` 为本轮唯一正文对象，按 P3 流程完成作者自查与修订、逐章真实环境核验、专业评审、用户通读、统一修订、复核和定稿。正文不再假设或克隆 `qemu-tiger` 仓库：只用最少量 `devtool` 命令取得可修改的 QEMU 上游源码工作区并完成真实 tiger machine 修改，不在本章系统讲解 workspace 内部机制或把 `devtool finish` 作为主线；重点展示真实 QEMU patch 的可读内容、`meta-tiger` 中 `.bbappend`/`SRC_URI` 集成、清理临时 workspace 后的干净重构建，以及 `runqemu` 启动验证。同步处理 D-011 与 A-004 v0.5；后续 19 个受影响书稿文件的统一改写由 T-017 跟踪，本任务只登记必要的前后章衔接要求。
+- 输入与依赖：A-002 v0.6、A-003、A-004 v0.5（approved）、D-001、D-007、D-010、D-011、D-013、chapter 3 最终 merge commit `f444790f352b46f699fd3d46198f8b9b9f089a62`。书稿修改使用现有配对 feature 分支；QEMU patch 的实际写入和验证依赖 `meta-tiger` 工作区获得符合框架规则的声明、授权、精确基线与任务分支，不能在未声明的外部目录中落盘。
 - 优先级：未设定
-- 完成条件与确认方式：①writer 提交稳定受评稿；②按 D-010 完成命令、配置、路径、输出和机制结论的真实环境核验并保存证据；③reviewer、project-manager 与用户意见按稳定版本汇集后由 writer 统一修订；④相关成员完成针对性复核，用户确认定稿；⑤先将整理后的成果物分支以 `--no-ff` 合入 `main` 并验证，再回写最终 merge commit、任务证据和 `WORKSPACE.yaml.revision`，将 OPC 分支以 `--no-ff` 合入项目长期分支；⑥两边最终验证通过后安全删除开发分支。
-- 进展：2026-10-08 从最新书稿 `main`（`f444790f...`）创建并推送 `feature/t-016-chapter4-revision`；从最新 OPC `project/book-yocto`（`f3d8c2ff...`）创建并推送 `feature/book-yocto/t-016-chapter4-revision`。两条分支均已设置远端 upstream，创建时工作树干净；尚无正文或验证材料改动。
-- 成果与验证证据：书稿与 OPC 两条远端 feature 分支；正文、评审记录与核验证据尚未产生。
+- 完成条件与确认方式：①writer 提交稳定受评稿，正确区分 chapter 4 的 `devtool` 最少使用和 chapter 15 的系统讲解；②yocto-engineer 基于正文锁定的 Poky/Scarthgap 配方与上游版本实现 tiger QEMU 修改，将真实 patch、`.bbappend`、`SRC_URI` 和必要配置提交到 `meta-tiger`；③清理/reset devtool workspace 后，仅依靠 Poky + `meta-tiger` 从干净状态重新构建，并以 `runqemu` 验证正文主线，按 D-010 保存命令、配置、路径、输出和原始证据；④reviewer、project-manager 与用户意见按稳定版本汇集后由 writer 统一修订，相关成员完成针对性复核，用户确认定稿；⑤按各成果物仓库实际配置分别整理提交、验证并以 `--no-ff` 合入长期分支，再回写最终 merge commit、任务证据和工作区精确版本；⑥全部最终验证通过后才安全删除开发分支。
+- 进展：2026-10-08 从最新书稿 `main`（`f444790f...`）创建并推送 `feature/t-016-chapter4-revision`；从最新 OPC `project/book-yocto`（`f3d8c2ff...`）创建并推送 `feature/book-yocto/t-016-chapter4-revision`。2026-10-09 用户确认 D-013，项目经理已将 chapter 4 改为“最少 devtool → 真实 QEMU patch → `meta-tiger` 集成 → 清理 workspace → 干净重构建 → `runqemu`”主线，并登记 T-017 处理全书一致性；尚无正文、QEMU patch 或验证材料改动。
+- 成果与验证证据：书稿与 OPC 两条远端 feature 分支；D-013 与本任务更新。正文、`meta-tiger` 工程提交、评审记录和核验证据尚未产生。
 - 合并与清理状态：两条 feature 分支均未合并、不得清理；待全部完成条件满足后按 v0.0.3 分支策略处理。
-- 阻塞与下一位行动人：无启动阻塞；下一位行动人为 project-manager，按用户后续指示启动 writer 作者自查，并在受评版本稳定后安排真实环境核验与评审。
-- 更新日期：2026-10-08
+- 阻塞与下一位行动人：书稿作者自查无内容依赖阻塞，但当前没有可唯一定位的 writer 会话，项目成员不能代用户创建会话；QEMU patch 实施另受 `meta-tiger` 尚未纳入 WORKSPACE 声明的写入边界阻塞。下一位行动人为用户：按 H-001 先请超级管理员补齐工作区声明，再创建或启动 `book-yocto / writer` 会话；writer 形成章节技术蓝图后，由用户串行启动 `yocto-engineer` 实施和核验。
+- 更新日期：2026-10-09
+
+## T-017：全书四仓库叙事迁移为 `meta-tiger` patch-only 模型
+- 负责人：writer（跨章改写与统稿）；reviewer（技术与首次讲解次序复核）；project-manager（范围、依赖和意见闭环）；yocto-engineer（工程事实复核）；用户（通读意见与最终确认）
+- 状态：todo（已登记影响范围；按单会话与短期分支串行规则，须等待 T-016 完成后再创建分支并开始）
+- 授权来源与日期：2026-10-09 用户确认 D-013 并指示按方案执行；project-manager 根据实际全文检索登记跨章一致性任务。
+- 变更类型：feature
+- OPC 开发分支与目标：计划使用 `feature/book-yocto/t-017-patch-only-alignment` → `project/book-yocto`；尚未创建，不与 T-016 并行启动。
+- 成果物仓库及开发分支：`git@github.com:yinzhongkai/book-yocto.git`，计划使用 `feature/t-017-patch-only-alignment` → `main`；尚未创建。
+- 成果物仓库最终合并提交：尚未产生；实际启动基线以 T-016 最终合并并写入 WORKSPACE 的 revision 为准。
+- 目标与范围：不改变章节编号和阅读顺序，把全书长期工程资产模型统一为“Poky 配方锁定并获取上游源码 → devtool/BitBake 临时开发工作区 → 生成可审阅 patch → `meta-tiger` 通过 `.bbappend`/`SRC_URI` 集成 → 清理 workspace 后干净重构建与运行验证”。2026-10-09 全文检索确认 19 个 Markdown 文件含四仓库相关口径：前言、chapter 2–16、尾声、附录 B/C；重点重写 chapter 2 架构图与仓库边界、chapter 6/7 的 TF-A/U-Boot 来源和集成、chapter 8 的 `linux-tiger` 独立配方模型、chapter 14/15 的 `devtool` 首次讲解与完整讲解关系、chapter 16 的源码交付及附录 B/C 的终态结构。保留真实平台代码和全链实测目标，不把 patch-only 降级为概念示意。
+- 输入与依赖：D-013；T-016 最终章节与 QEMU 工程证据；各组件后续实际 patch、配方和验证记录；A-003 待 writer 按新模型修订的验证清单；A-004 v0.5。
+- 优先级：未设定
+- 完成条件与确认方式：①19 个命中文件逐一判定并修订所有错误的长期 fork、内部仓库地址、虚构提交和交付结构，不要求删除作为历史解释或明确反例出现的词；②chapter 4/15 的 `devtool` 渐进教学边界清楚，chapter 14 的 eSDK 使用场景不被破坏；③chapter 6/7/8 及其下游章节的 recipe、patch、构建和源代码交付描述与真实 `meta-tiger` 实现一致；④全文检索、链接与体例检查通过；⑤reviewer、yocto-engineer、project-manager 和用户按稳定版本完成意见、统一修订、复核与确认；⑥按分支策略合并并更新工作区 revision 后清理分支。
+- 进展：2026-10-09 完成只读影响扫描，确认 19 个书稿文件含 `qemu-tiger`、`tf-a-tiger`、`u-boot-tiger`、`linux-tiger`、“四个开发态仓库”或“4+1”相关表述；尚未创建分支或修改正文。
+- 成果与验证证据：D-013；2026-10-09 全文影响扫描结论。后续正文提交、复核和实测证据尚未产生。
+- 合并与清理状态：未创建开发分支、未合并；等待 T-016 收口。
+- 阻塞与下一位行动人：依赖 T-016 先确定 QEMU 的实际 patch-only 范式和最终书稿版本；T-016 完成前不启动。下一位行动人为 project-manager，在 T-016 完成后按最新长期分支建立配对 feature 分支并启动 writer。
+- 更新日期：2026-10-09
 
 ## 记录样式（不是真实任务）
 
