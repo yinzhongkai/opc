@@ -135,6 +135,17 @@
 - 替代关系：更新 D-002 的交付物物理位置，不改变交付内容和验收标准；补充 D-008、D-009、D-011 中旧路径的迁移后解释。
 - 记录人及更新日期：框架超级管理员，2026-09-28
 
+## D-013：tiger 平台源码采用上游基线加 `meta-tiger` patch 的长期维护模型
+- 状态：confirmed
+- 提出者：用户
+- 问题与候选方案：D-001 原方案要求创建 `qemu-tiger`、`tf-a-tiger`、`u-boot-tiger`、`linux-tiger` 四个长期开发仓库。用户指出这些仓库会重复保存 Poky 配方已经能够获取的上游源码，并增加 GitHub 空间和长期维护成本；建议开发时使用 BitBake/`devtool` 展开的上游源码工作区，最终只把真实修改以 patch、`.bbappend`、`SRC_URI` 和必要配置的形式保存在 `meta-tiger`。chapter 4 同时面临教学次序问题：是否提前完整讲解 `devtool`，或仅使用最少命令完成 QEMU 修改，把重点放在 patch 内容、`meta-tiger` 集成和 `runqemu` 验证。
+- 确认人：建项用户（PROJECT 默认最终确认人）
+- 结果：**确认采用“上游源码基线 + 临时开发工作区 + `meta-tiger` patch”模型**——①不再创建或维护四个长期 GitHub fork；QEMU、TF-A、U-Boot、Linux 均以对应 Poky/BitBake 配方锁定和获取的上游版本为开发基线；②`devtool` workspace 只作为可丢弃的本地开发环境，不是交付物或长期源码仓库；③所有 tiger 专属修改最终以可审阅 patch、`.bbappend`、`SRC_URI`、配置片段及必要说明进入 `meta-tiger`；④每个组件必须在清理或 reset 临时 workspace 后，仅依靠 Poky + `meta-tiger` 从干净状态重新构建和运行验证，继续兑现 D-001/D-010 的完整实测要求；⑤chapter 4 只首次、简要使用 `devtool` 的最少命令完成 QEMU 源码修改，不展开 workspace 机制或以 `devtool finish` 为教学主线，章节重点调整为真实 QEMU patch、`meta-tiger` 集成和 `runqemu`；chapter 15 保留为 `devtool` 生命周期、workspace 机制和 `finish` 的系统讲解。
+- 确认来源与日期：2026-10-09 用户在 project-manager 会话说明不希望创建四个仓库，希望将修改以 patch 集成到 `meta-tiger`；在讨论 chapter 4 的 `devtool` 教学层次及全书影响后明确指示“那就按这个方案执行吧”。
+- 适用范围与影响：工程资产模型覆盖 QEMU、TF-A、U-Boot、Linux 和 `meta-tiger`；不改变现有章节编号与阅读顺序，但须逐步统一前言、chapter 2–16、尾声及附录 B/C 中四仓库、源码来源、patch 集成、验证和交付表述。chapter 4 由 T-016 先落地该模型；跨章受影响文件由后续一致性任务跟踪。`meta-tiger` 成为书稿仓库之外唯一需要长期维护的 tiger 工程代码仓库；在实际写入该仓库前，须由用户转交超级管理员更新 WORKSPACE 声明或提供符合框架规则的工作区边界和精确版本。
+- 替代关系：**部分替代 D-001**——仅替代“创建四个长期开发态仓库”这一实现载体和相应 P0.5 前置条件；D-001 的真实平台代码、完整构建、全链运行验证、C-W/V 回填和前言实测承诺继续有效。同步更新 D-010 中“依赖四仓库”的解释为“依赖对应上游基线、`meta-tiger` patch 与干净环境复验”，不追改历史决定原文。
+- 记录人及更新日期：project-manager，2026-10-09
+
 ## 记录样式（不是真实决定）
 
 ```text

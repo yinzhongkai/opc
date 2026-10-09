@@ -1,8 +1,19 @@
 # 行动请求与交接
 
-暂无需要其他成员行动的交接。普通进展直接写 [TASKS.md](TASKS.md)，接收和关闭规则见根 [项目运行协议](../../PROJECT_PROTOCOL.md)。
+普通进展直接写 [TASKS.md](TASKS.md)，接收和关闭规则见根 [项目运行协议](../../PROJECT_PROTOCOL.md)。已在任务内明确安排的轻量评审或复核无需重复建立交接；另有补充输入、协调或责任转交请求时再登记。
 
-已在任务内明确安排的轻量评审或复核无需重复建立交接；另有补充输入、协调或责任转交请求时再登记。
+## H-001：补齐 `meta-tiger` 工作区边界并启动 T-016 执行会话
+- 发起人：project-manager
+- 目标：用户
+- 关联任务：T-016；后续 T-017
+- 期望结果：①请用户转交超级管理员，根据 D-013 和现有独立书稿仓库事实，为 `meta-tiger` 补齐符合框架规则的 WORKSPACE/多成果物边界、checkout、默认分支和完整精确 revision；不得覆盖现有书稿基线，也不得在未声明目录中开始工程写入。②超级管理员完成并校验配置、当前 project-manager 会话停止后，由用户创建或启动已登记成员 `book-yocto / writer` 的当前有效会话，先执行 T-016 的章节蓝图与作者修订；writer 交付可实施蓝图后，再由用户按串行约定启动 `book-yocto / yocto-engineer` 完成 QEMU patch、`meta-tiger` 集成和真实环境核验。
+- 输入与证据：D-013；T-016；A-002 v0.6；当前 `WORKSPACE.yaml` 仅声明书稿仓库 `git@github.com:yinzhongkai/book-yocto.git`、revision `f444790f352b46f699fd3d46198f8b9b9f089a62`；公开 `meta-tiger` 只在 T-015/STATUS 留有短哈希 `0e3da48`，尚无本项目合规 checkout 与完整 revision；当前平台线程列表没有可唯一定位的 writer 或 yocto-engineer 会话。
+- 未完成事项：超级管理员尚未处理工作区声明；writer 与 yocto-engineer 会话尚未由用户启动；T-016 正文、QEMU patch、干净重构建和 `runqemu` 证据均尚未产生。
+- 状态：open
+- 创建日期：2026-10-09
+- 接收反馈：尚未接收
+- 处理结果与证据：暂无
+- 关闭或取消依据：暂无
 
 ## 记录样式（不是真实交接）
 
