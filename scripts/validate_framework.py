@@ -58,8 +58,12 @@ WORKSPACE_DRIVER_FIELDS = {
     "multi-git": {"repositories"},
     "repo": {"manifestRepository", "manifestRevision", "manifestFile", "checkout"},
 }
-MULTI_GIT_REPOSITORY_FIELDS = {"repository", "branch", "revision", "checkout"}
+MULTI_GIT_REPOSITORY_REQUIRED_FIELDS = {"repository", "branch", "revision", "checkout"}
+MULTI_GIT_REPOSITORY_FIELDS = MULTI_GIT_REPOSITORY_REQUIRED_FIELDS | {"host"}
 GIT_REVISION_PATTERN = re.compile(r"(?:[0-9a-f]{40}|[0-9a-f]{64})\Z")
+SSH_HOST_PATTERN = re.compile(
+    r"(?:[A-Za-z0-9._-]+@)?[A-Za-z0-9][A-Za-z0-9._-]*\Z"
+)
 
 
 class UniqueKeyLoader(yaml.SafeLoader):
@@ -424,7 +428,7 @@ class Validator:
             if not isinstance(repository, dict):
                 self.error(path, f"{prefix} 必须是映射")
                 continue
-            for key in sorted(MULTI_GIT_REPOSITORY_FIELDS - repository.keys()):
+            for key in sorted(MULTI_GIT_REPOSITORY_REQUIRED_FIELDS - repository.keys()):
                 self.error(path, f"{prefix} 缺少字段 {key}")
             for key in sorted(repository.keys() - MULTI_GIT_REPOSITORY_FIELDS):
                 self.error(path, f"{prefix} 不允许字段 {key}")
@@ -434,15 +438,29 @@ class Validator:
             revision = repository.get("revision")
             if not isinstance(revision, str) or not GIT_REVISION_PATTERN.fullmatch(revision):
                 self.error(path, f"{prefix}.revision 必须是完整的 40 或 64 位小写 Git 提交哈希")
+            host = repository.get("host")
+            remote = "host" in repository
+            if remote and (
+                    not isinstance(host, str) or not SSH_HOST_PATTERN.fullmatch(host)):
+                self.error(
+                    path,
+                    f"{prefix}.host 必须是主机别名、主机名或 user@host 形式的 SSH 目标",
+                )
             checkout = repository.get("checkout")
-            self.check_checkout(
-                checkout, path, "multi-git", project, template=template,
-                field=f"{prefix}.checkout",
-            )
+            if remote:
+                self.check_remote_checkout(checkout, path, field=f"{prefix}.checkout")
+            else:
+                self.check_checkout(
+                    checkout, path, "multi-git", project, template=template,
+                    field=f"{prefix}.checkout",
+                )
             if isinstance(checkout, str):
-                checkouts.append((identifier, PurePosixPath(checkout).parts))
-        for index, (left_id, left) in enumerate(checkouts):
-            for right_id, right in checkouts[index + 1:]:
+                checkouts.append((host if remote else None, identifier,
+                                  PurePosixPath(checkout).parts))
+        for index, (left_host, left_id, left) in enumerate(checkouts):
+            for right_host, right_id, right in checkouts[index + 1:]:
+                if left_host != right_host:
+                    continue
                 common = min(len(left), len(right))
                 if left[:common] == right[:common]:
                     self.error(
@@ -450,6 +468,16 @@ class Validator:
                         "multi-git 仓库 checkout 不得相同或相互嵌套："
                         f"{left_id!r} 与 {right_id!r}",
                     )
+
+    def check_remote_checkout(self, value, path, field):
+        if not is_text(value):
+            self.error(path, f"{field} 必须是非空字符串")
+            return
+        checkout = PurePosixPath(value)
+        if (
+                "\\" in value or not value.startswith("/") or value.startswith("//")
+                or value == "/" or str(checkout) != value or ".." in checkout.parts):
+            self.error(path, f"SSH 主机上的 {field} 必须是规范化的 POSIX 绝对路径")
 
     def check_workspace(self, folder, template=False):
         path = folder / WORKSPACE_FILE

@@ -231,7 +231,8 @@ class FrameworkValidationTests(unittest.TestCase):
                             "repository": "git@example.invalid:team/firmware.git",
                             "branch": "stable",
                             "revision": "d" * 64,
-                            "checkout": "../firmware",
+                            "host": "builder@example-host",
+                            "checkout": "/srv/work/firmware",
                         },
                     },
                 },
@@ -332,6 +333,15 @@ class FrameworkValidationTests(unittest.TestCase):
              "workspace.repositories['source'] 缺少字段"),
             ({"source": {**valid_repository, "revision": "abc123"}},
              "workspace.repositories['source'].revision 必须是完整的"),
+            ({"source": {**valid_repository, "host": "bad host"}},
+             "workspace.repositories['source'].host 必须是"),
+            ({"source": {**valid_repository, "host": "builder"}},
+             "SSH 主机上的 workspace.repositories['source'].checkout"),
+            ({"source": {
+                **valid_repository,
+                "host": "builder",
+                "checkout": "/srv/work/../example",
+            }}, "SSH 主机上的 workspace.repositories['source'].checkout"),
             ({"source": {**valid_repository, "checkout": "../../example"}},
              "workspace.repositories['source'].checkout"),
             ({
@@ -346,6 +356,42 @@ class FrameworkValidationTests(unittest.TestCase):
                     "workspace": {"driver": "multi-git", "repositories": repositories},
                 })
                 self.assert_error(expected)
+
+    def test_multi_git_remote_checkout_overlap_is_scoped_by_host(self):
+        self.project()
+        remote_repository = {
+            "repository": "git@example.invalid:team/example.git",
+            "branch": "main",
+            "revision": "a" * 40,
+            "host": "builder-a",
+            "checkout": "/srv/work/example",
+        }
+        self.save_workspace({
+            "schemaVersion": 1,
+            "workspace": {
+                "driver": "multi-git",
+                "repositories": {
+                    "source": remote_repository,
+                    "mirror": {**remote_repository, "host": "builder-b"},
+                },
+            },
+        })
+        self.assert_valid()
+
+        self.save_workspace({
+            "schemaVersion": 1,
+            "workspace": {
+                "driver": "multi-git",
+                "repositories": {
+                    "source": remote_repository,
+                    "nested": {
+                        **remote_repository,
+                        "checkout": "/srv/work/example/nested",
+                    },
+                },
+            },
+        })
+        self.assert_error("checkout 不得相同或相互嵌套")
 
     def test_definition_extensions_must_be_lowercase_on_every_platform(self):
         for directory in ("roles", "knowledge"):

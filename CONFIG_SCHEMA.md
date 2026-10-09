@@ -71,7 +71,7 @@ scope:
 | `schemaVersion` | 是 | 整数 `1` |
 | `workspace` | 是 | 工作区映射 |
 
-`workspace` 的公共字段只有 `driver`。`driver` 必须是 `none`、`git`、`submodule`、`multi-git` 或 `repo`。`git`、`submodule` 和 `repo` 在 workspace 层提供 `checkout`；`multi-git` 在每个仓库条目内提供 `checkout`。checkout 使用 `/` 的可移植相对路径，不接受盘符或绝对路径。`submodule` 必须位于当前 `projects/<project-id>/` 内；`git`、`multi-git` 和 `repo` 必须使用框架根目录的同级路径，例如 `../space-rhythm`，不能继续向更高目录逃逸。配置只声明默认位置，本机另有布局时由用户或平台在实际操作中明确指定，不把机器专有绝对路径写回共享配置。
+`workspace` 的公共字段只有 `driver`。`driver` 必须是 `none`、`git`、`submodule`、`multi-git` 或 `repo`。`git`、`submodule` 和 `repo` 在 workspace 层提供 `checkout`；`multi-git` 在每个仓库条目内提供 `checkout`。本机 checkout 使用 `/` 的可移植相对路径，不接受盘符或绝对路径。`submodule` 必须位于当前 `projects/<project-id>/` 内；本机的 `git`、`multi-git` 和 `repo` 必须使用框架根目录的同级路径，例如 `../space-rhythm`，不能继续向更高目录逃逸。`multi-git` 条目可用可选 `host` 声明由 SSH 访问的主机，此时 checkout 是该主机上的规范化 POSIX 绝对路径。配置只声明位置，不内嵌口令、私钥或 SSH 选项；认证和主机连接参数由运行环境管理。
 
 ### none
 
@@ -134,10 +134,11 @@ workspace:
       repository: git@example.com:team/firmware.git
       branch: stable
       revision: 89abcdef0123456789abcdef0123456789abcdef
-      checkout: ../firmware
+      host: builder@example-host
+      checkout: /srv/work/firmware
 ```
 
-`repositories` 必须是至少包含一个条目的映射；仓库 ID 遵循本规范的 ID 规则。每个条目只接受 `repository`、`branch`、`revision` 和 `checkout`，含义与 `git` 驱动相同；`revision` 必须分别使用完整的 40 或 64 位小写提交哈希。各 checkout 必须是框架根目录的同级相对路径，且不得相同或相互嵌套。项目变更只影响部分成果物时，未变仓库仍保留既有精确 revision；受影响仓库在最终合并和验证后单独更新。配置不授予任何仓库的读取、写入或推送权限。
+`repositories` 必须是至少包含一个条目的映射；仓库 ID 遵循本规范的 ID 规则。每个条目必须提供 `repository`、`branch`、`revision` 和 `checkout`，并可选提供 `host`；`revision` 必须分别使用完整的 40 或 64 位小写提交哈希。没有 `host` 时，checkout 必须是框架根目录的同级相对路径；有 `host` 时，`host` 只接受主机别名、主机名或 `user@host` 形式的 SSH 目标，checkout 必须是该主机上的规范化 POSIX 绝对路径。相同主机上下文（含本机）的 checkout 不得相同或相互嵌套；不同主机可以使用相同路径。项目变更只影响部分成果物时，未变仓库仍保留既有精确 revision；受影响仓库在最终合并和验证后单独更新。配置不授予仓库或 SSH 主机的读取、写入、联网、切换提交或推送权限。
 
 多个仓库若由同一 Manifest 定义并作为统一产品版本发布，使用 `repo`；不要把临时源码展开目录、构建缓存或可丢弃的开发 workspace 登记为长期 `multi-git` 成果物。
 
