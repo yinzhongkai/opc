@@ -5,4 +5,5 @@ roleKnowledge:
   writer: [xhs-plog-creation]
   visual-designer: [ai-character-image-consistency]
   social-media-operator: [xhs-content-operations]
-members: [product-manager, planner, writer, project-manager, visual-designer, social-media-operator]
+  reviewer: [research, xhs-plog-creation, ai-character-image-consistency, social-media-operations, xhs-content-operations]
+members: [product-manager, planner, writer, project-manager, visual-designer, social-media-operator, reviewer]
