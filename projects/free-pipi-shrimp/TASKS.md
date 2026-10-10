@@ -97,7 +97,7 @@
 - 变更类型：feature
 - OPC 开发分支：`feature/free-pipi-shrimp/t-005-cover-visual-template`（从 `project/free-pipi-shrimp@0a2a6862987261864b31be53adfead2ac7d91359` 创建）
 - 成果物仓库及开发分支：`git@github.com:yinzhongkai/free-pipi-shrimp.git`，`feature/t-005-cover-visual-template`（从 `main@730429312be85e33b4534b58adad54a207a8b797` 创建）
-- 成果物仓库最终合并提交：未合入 `main`（遵守用户本轮不合并长期分支的指示）；当前产品 feature 固定提交 `7ba8921f5aa23e5bf9d0d282008d6285e81f8add`，本地、跟踪分支与远端一致；A-004 模板原受检版本仍为 `eca9ea0e1114e03f0874396103edb6b8477a4d1c`
+- 成果物仓库最终合并提交：未合入 `main`（遵守用户本轮不合并长期分支的指示）；当前产品 feature 固定提交 `fa4bd5f14c2db431607096dd8b722665284fab4f`，本地、跟踪分支与远端一致；A-004 v0.2 套版候选见下方交付，v0.1 原受检版本 `eca9ea0e1114e03f0874396103edb6b8477a4d1c` 保留
 - 授权来源与日期：2026-09-16 用户授权内容筹备团队计划；2026-09-29 用户授权执行 T-009，project-manager 将原任务中的视觉模板与文字结构拆分，本任务由 writer 转交 visual-designer，文字结构另建 T-010；2026-10-10 用户明确中文文案初稿由 Kimi K3 提供、ChatGPT 审核并记录来源链，图像与其他工作由 ChatGPT 执行；同日用户确认新增专业评审者并要求找对应成员执行与提交，project-manager 安排 writer 承担 T-013 文案输入、reviewer 承担后续独立审校，视觉模板负责人不变
 - 目标与范围：依据 D-003、D-007 与 A-001 v0.4 第 4、9 节，落地可复用的 3:4 封面视觉模板，固定"皮皮虾·第 N 站"标识，使用 T-003 已确认的角色基线或插画兜底资产，明确构图、安全区、文字层级、色彩、导出规格、素材来源和版本；候选中文文案由 Kimi K3 初稿并记录来源，ChatGPT 审核及记录修改
 - 输入与依赖：A-001 v0.4 第 4、9 节（AC-3）；T-003（角色基线与兜底资产方向）；A-003 v0.3 三星堆第 1 篇；T-013（Kimi K3 封面文案初稿与来源链）
@@ -109,8 +109,9 @@
 - 修订交付核对：2026-10-10 用户明确要求核对作者修改并交评审者复核；project-manager 完整读取 A-005 v0.2、三份产品修订文件和两项作者回复，核对产品 `7ba8921f5aa23e5bf9d0d282008d6285e81f8add`、OPC `e5fd1454881974b675d8120d8cfb1a145380cf84` 均已同步远端，八份文件哈希与 A-005 登记一致。九个候选字段、K3 原始五文件、模板及 reviewer 原始意见均保留，产品仅新增三份 v0.2 文件；字段用途、第一人称自检范围和推荐依据已有对应修订，来源明确为 K3 初稿／ChatGPT 编辑。本核对只确认交付与追溯可供复核，不代替 reviewer 判断问题通过或关闭；任务推进为 in_review
 - 文案复核后进展：2026-10-10 用户要求核对复核完成情况，通过后交 visual-designer 套版；project-manager 核对 reviewer 复核提交 `7034729d05b6b7b9d69514506002a3ee599e60ce` 已同步远端，受检 A-005 v0.2 的 RV-COPY-001／002 均为 `pass / closed`，整体限定范围结论 `pass`，未新增问题。产品仍为 `7ba8921f5aa23e5bf9d0d282008d6285e81f8add`，八份登记文件哈希匹配，原模板与来源归档未变化；进入实际套版阶段，按下方安排以候选 A 做本轮验证，任务回到 in_progress。文案问题关闭不等于最终采用、完整封面通过或成果批准
 - 成果与验证证据：[A-004 封面视觉模板](artifacts/A-004-封面视觉模板.md) v0.1 draft；产品仓库 feature `feature/t-005-cover-visual-template@eca9ea0e1114e03f0874396103edb6b8477a4d1c` 已推送并核对远端；模板 `deliverables/T-005-cover-visual-template/v0.1-draft/cover-template.svg`（SHA-256 `a2513dcd5b7e41cea0e8f209608179be6fcfce3167de5e8384492015d483e947`）；使用说明 `deliverables/T-005-cover-visual-template/v0.1-draft/usage-guide.md`（SHA-256 `b9b0d0a758e29cf2634749a8dea1016a11525b0531dc59f434ec6d4a6885d2f8`）；版式验证 PNG `deliverables/T-005-cover-visual-template/v0.1-draft/example/cover-sanxingdui-station-1.png`（1080×1440 RGB/sRGB，SHA-256 `2b56dba4085115480c297cc37da72576eba0dde17709831226e8173f16af705e`）；模板初稿提交时 Kimi K3 输入尚缺，后由 [A-005 文案初稿](artifacts/A-005-三星堆第1站封面文案初稿.md) v0.1 在产品 `28ba1b3053dce11950aa00502ca5fad011afcbf2` 交付模型可见标签、提示词、原文和时间/版本记录。当前 A-005 v0.2 产品固定提交 `7ba8921f5aa23e5bf9d0d282008d6285e81f8add`、作者登记/回复 `e5fd1454881974b675d8120d8cfb1a145380cf84` 与 reviewer 复核 `7034729d05b6b7b9d69514506002a3ee599e60ce` 已同步，八份登记文件哈希匹配，两项文案问题 pass / closed；实际套版、完整封面复核与最终采用/批准仍待完成
-- 合并与清理状态：产品 feature 已提交并推送，当前 tip `7ba8921f5aa23e5bf9d0d282008d6285e81f8add`；未合入成果物 `main` 或 OPC 项目长期分支，未删除两边 feature，遵守用户本轮指示
-- 阻塞与下一位行动人：原文案输入及 RV-COPY-001／002 已闭环；下一位行动人为 visual-designer，使用 A-005 v0.2 候选 A 实际套版、导出、自查并提交固定版本。完整封面独立复核尚未启动，交付后由 project-manager 固定版本再单独通知 reviewer；不发布、不将 T-005 标记 completed，不重开 T-013 或提前启动 T-012
+- 套版交付进展：2026-10-10 visual-designer 按下方安排交付 A-004 v0.2 draft；候选 A“到了。我先站一会儿。”原字句/标点进入 main-title，旧眉题/待补占位删除，原背景和独立站点/目的地不变。实际字体/强制回退、排版盒/像素字形安全区、100%/270×360、RGB/sRGB 和保留输入检查完成，产品 `fa4bd5f14c2db431607096dd8b722665284fab4f` 已先提交/推送并核对远端；本轮交付与证据见下方本人记录。上方 v0.1 与文案阶段证据保留为前序历史，不以其“实际套版待完成”覆盖本次；完整封面评审/采用/批准仍未完成
+- 合并与清理状态：产品 feature 已提交并推送，当前 tip `fa4bd5f14c2db431607096dd8b722665284fab4f`；未合入成果物 `main` 或 OPC 项目长期分支，未删除两边 feature，遵守用户本轮指示
+- 阻塞与下一位行动人：原文案输入及 RV-COPY-001／002 已闭环，本轮实际套版候选/自查已交付；下一位 project-manager 核对并固定完整封面的产品/OPC 版本，再单独安排 reviewer 完整封面复核。必要修订/复核后由用户最终确认；不发布、不将 T-005 标记 completed、不关闭尚缺最终采用确认的 H-007，不重开 T-013 或提前启动 T-012/T-010/T-006
 - 更新日期：2026-10-10
 
 ### 独立审校总体安排
@@ -195,6 +196,18 @@
 - 交付与保存：在现有双仓库 feature 上制作 A-004 下一版 draft，保留原 v0.1 占位交付及 K3 v0.1／文案 v0.2 不变。产品 `deliverables/T-005-cover-visual-template/` 保存新版模板、示例 SVG/PNG、更新使用说明，`work/` 与 `manifests/` 保存本轮来源/参数/自查及哈希；先提交并推送产品，再更新本人 OPC A-004 登记/索引和 T-005 交付证据，引用产品精确提交、仓库相对路径及 SHA-256。不修改 A-005、他人意见/回复/复核、配置或 STATUS
 - 交接与边界：visual-designer 作为 H-007 发起人可核对已交付的 K3 来源、ChatGPT 修订与复核，按实际期望结果更新本人处理记录；最终采用稿及负责人确认未满足时保持 accepted，不以候选 A 的试用或文案 pass 自动关闭。T-013 保持 completed；不启动 T-012/T-010/T-006，不合并、不删除分支、不发布
 - 完成与下一步：本轮完成指可供复核的完整封面候选、源文件、实际渲染/自查、双仓库固定提交与哈希交付，不是 T-005 最终完成。设计师交付后由 project-manager 核对并固定完整封面版本，再按既有安排单独交 reviewer 评审；必要修订/复核后由用户最终确认。当前等待 visual-designer 执行，尚无套版或视觉通过结论
+
+### visual-designer 套版交付与自查（2026-10-10，A-004 v0.2）
+- 输入/执行依据：OPC 套版安排 `58125945c68e5f03a58c0ef5b9db2d5a146cff5a`；A-005 v0.2 产品 `7ba8921f5aa23e5bf9d0d282008d6285e81f8add`、作者回复 `e5fd1454881974b675d8120d8cfb1a145380cf84`、文案复核 `7034729d05b6b7b9d69514506002a3ee599e60ce`。本轮仅候选 A 套版，不改文案、来源档案、他人意见/回复/复核、配置或 STATUS；独立评审安排与历史记录原文保留。
+- 本轮固定输出：[A-004 封面视觉模板](artifacts/A-004-封面视觉模板.md) v0.2 draft；产品 `feature/t-005-cover-visual-template@fa4bd5f14c2db431607096dd8b722665284fab4f`（本地、跟踪、远端一致；工作树干净，LFS fsck 通过）。先产品提交/推送并核验，再登记 OPC；未合并/清理分支。当前正文/索引及下述完整封面等待项目经理固定 OPC 提交后另行安排评审。
+- 源与成品：`deliverables/T-005-cover-visual-template/v0.2-draft/cover-template.svg` SHA-256 `460f3619bcb683336ceae41e7b4e7390aa47694acb2c3a8a6d113c6ea54e68e7`；实际示例 `example/cover-sanxingdui-station-1.svg` SHA-256 `24ad4489cfaa77f2bd2a08defc4e75588b3445e466945e108e9d26b93a46064f`；同目录 PNG SHA-256 `0bdde0e1f8953a285313d1909a62040224f12a1f6449b5c8d8e72ea0e5e8efe0`（1080×1440，3:4，3 channels RGB/sRGB，480-byte sRGB ICC）。使用说明同版 usage-guide.md；全部路径与 13 份哈希见 `manifests/T-005-cover-visual-template/manifest-v0.2-draft.md`，上述 example 路径均相对该 v0.2 deliverables 目录。
+- 文本/参数：main-title 原文“到了。我先站一会儿。”，79 px / CSS weight 650 / 字距 1 px / 单行；站点“皮皮虾·第 1 站”40 px，目的地“三星堆”31 px 独立。笔记标题和内部说明不套版，恰好三个文字元素，无新文案槽位；仅去旧英文眉题/待补提示。原背景 SHA-256 `8783205c1b9122d52c361d7191b5e999dccad9205a1e056a44b98ce662a5d21e` 逐字节复制，未再调用图像生成、修图或裁切。
+- 渲染与测量：独立后台 Edge 154.0.4258.62 + Playwright 1.62.1 + sharp 0.35.5，deviceScaleFactor=1，内存加载确切本机 Noto 字体、输出不分发字体。CDP 确认主短句 Noto Serif SC 10 glyphs、辅助 Noto Sans SC 9 / 3 glyphs；故意强制 SimSun / Microsoft YaHei 回退另测，不声称自动回退已发生。主/回退短句排版宽 800 / 815.4375 px，实际字形 x=93–837/y=253–328 与 x=96–856/y=254–329（排他右/下）；三组排版盒和字形均在 x=82–998/y=72–430，字形与横线至少间隔 27.5 px，无文字/角色遮挡或画布裁切。79 px 安全判断基于此次实测，不以字数代替像素证明。
+- 自查与复算：`work/T-005-cover-visual-template/batch-20261010-candidate-a-typeset/` 内保存 render-and-check.cjs、layout-metrics.json（SHA-256 `85d8da032706da2af53f3e9067e11aaf94ebdf807f3d6ac2928dc12595c2bd2d`）、self-check.md（SHA-256 `5fef9868d3f441fc35b066aece57d3e4f66247192f91c20ed063f024aafb825c`）、两张 270×360 缩略图、回退原尺寸图、保留输入复算程序/JSON。原尺寸 100% 和明确 25% 缩略图已实际查看：短句/标点可读、站点清晰、目的地辅助可辨；四张 PNG 重渲染哈希相同。17 份旧输入（K3 五份、A-005 v0.2 三份、原 A-004 八份、C 头像）全部哈希匹配，新背景复制件一致；原占位包/文案归档未改。
+- 角色/场景检查：沙米帽、两眼柄、珊瑚宽头盾、三甲片、海沫尾扇、细窄收拢捕捉肢可辨，低伏斜向抬头、非人形站立；未为“站一会儿”改变姿态。角色视角、眼柄集中度、外轮廓宽高/前肢位置与 C 母版仍有差异，需 reviewer 专项复核，作者自查不称零漂移。泛化原创入口无文物/青铜面具、可读标牌/Logo，不是实际三星堆建筑或用户到访证据。
+- H-007：原发起人已核对归档/修订/文案复核链，更新本人处理记录；K3 标签依据继承用户核实，后台模型/系统提示词/采样参数 unknown，本轮未再核实原 Kimi 平台消息。候选 A 仅试用，最终采用/负责人确认未满足，保持 accepted。
+- OPC 登记检查：仅修改本人 A-004、其索引行、T-005 与 H-007；从安排提交逐段比对，其他任务以及独立审校总体安排、reviewer 原始意见、writer 回复、reviewer 复核和项目经理套版安排全文均保留，H-007 writer 接收/处理记录不变。使用现有 Python 3.12 执行 validate_framework.py 通过（20 角色、35 技能、1 项目、1 模板、391 本地链接）及 58 项测试 OK，git diff --check 通过；没有新增/安装依赖。此结构检查不代替视觉评审或成果批准。
+- 结论/未覆盖/下一位：本轮作者套版与上述自查交付完成，不是独立完整封面 pass 或批准。未覆盖最终采用/负责人确认、完整封面评审及必要修订/复核、用户批准、B/C、更小尺寸/其他设备、整篇图数/落款、任意 5 篇 AC-2、发布前 AC-6、T-011 实时规则/平台压缩上传/AI 标注/账号通道；T-005 保持 in_progress。下一位 project-manager 核对固定版并单独安排 reviewer，必要修订/复核后用户确认；本轮不通知其他成员、不启动其他任务、不发布。
 
 ## T-006：首批 2 篇缓冲存量制作
 - 负责人：writer

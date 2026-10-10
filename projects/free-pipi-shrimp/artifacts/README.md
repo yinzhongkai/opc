@@ -7,7 +7,7 @@
 | A-001 | [自由的皮皮虾需求说明](A-001-需求说明.md) | product-manager | T-001、T-002、T-007、T-008 | 0.4 | approved | D-001 ~ D-008（2026-09-16、2026-09-28 确认） |
 | A-002 | [自由的皮皮虾视觉基线包](A-002-自由的皮皮虾视觉基线包.md) | visual-designer | T-003 | 0.4 | approved | 2026-10-06 用户确认头像“我觉这个头像可以”；product-manager 已关闭 PM-001～PM-004；外部 `main` merge commit `730429312be85e33b4534b58adad54a207a8b797` |
 | A-003 | [三星堆首站连载规划](A-003-三星堆首站连载规划.md) | planner | T-004 | 0.3 | draft | D-009（仅确认首站目的地；方案正文仍将在 T-012 与 T-006 中验证） |
-| A-004 | [皮皮虾 3:4 封面视觉模板](A-004-封面视觉模板.md) | visual-designer | T-005 | 0.1 | draft | 产品 feature `feature/t-005-cover-visual-template@eca9ea0e1114e03f0874396103edb6b8477a4d1c`；Kimi K3 文案与来源链待外部输入，未批准、未合入 `main` |
+| A-004 | [皮皮虾 3:4 封面视觉模板](A-004-封面视觉模板.md) | visual-designer | T-005 | 0.2 | draft | 尚无；产品 feature `feature/t-005-cover-visual-template@fa4bd5f14c2db431607096dd8b722665284fab4f`；候选 A 实际套版及字体/回退/100%/270×360 自查交付，待完整封面复核、最终采用和用户确认；未合入 `main` |
 | A-005 | [三星堆第1站封面文案](A-005-三星堆第1站封面文案初稿.md) | writer | T-013、T-005 文案修订 | 0.2 | draft | 尚无；产品 feature `feature/t-005-cover-visual-template@7ba8921f5aa23e5bf9d0d282008d6285e81f8add`；K3 原稿保留、ChatGPT 作者已修订 RV-COPY-001／002，待 reviewer 复核与负责人确认，未批准、未合入 `main` |
 
 ## 正文元信息样式（不是真实成果）

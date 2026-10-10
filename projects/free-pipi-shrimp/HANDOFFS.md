@@ -89,11 +89,12 @@
 - 责任转交记录：2026-10-10 原目标为用户；同日用户确认新增专业评审者并要求找对应成员执行与提交，project-manager 依据 writer 现有文案创作 scope 将输入处理目标转交 writer，并登记 T-013。原发起人及历史阻塞保留，交接仍由 visual-designer 核对期望结果后关闭
 - 期望结果：按用户 2026-10-10 明确的模型分工，提供 Kimi K3 生成的候选标题/封面短句/说明性文案及可核验来源记录：模型与模式、原始提示词、完整原始文本、生成时间或版本。随后由 ChatGPT 审核事实一致性、项目设定、语言风格、平台适配、版权和安全边界，记录意见与实际修改，再由负责人确认最终采用稿。
 - 输入与证据：[A-004 封面视觉模板](artifacts/A-004-封面视觉模板.md) v0.1 draft；固定产品提交 `eca9ea0e1114e03f0874396103edb6b8477a4d1c` 的版式验证图目前以“Kimi K3 文案待补”作占位。visual-designer 本轮执行环境无 Kimi K3 调用入口，未生成或代写该输入；writer 应独立核查可用接入方式，若仍无入口再请用户提供外部输出。
-- 未完成事项：Kimi K3 模型/模式、提示词、原始文案、生成时间/版本、ChatGPT 审核和修改记录、最终采用稿及负责人确认均待补；未补齐前 T-005 保持 blocked，示例不用于发布。
+- 未完成事项：创建时 K3 输入与 ChatGPT 审核/修改曾待补、T-005 曾 blocked；现原 K3 归档、A-005 v0.2 修订和文案复核已核对，候选 A 已用于实际套版。尚缺最终采用稿及负责人确认，完整封面独立复核/必要修订与用户批准也未完成；H-007 保持 accepted，T-005 仍 in_progress，示例不用于发布。
 - 状态：accepted
 - 创建日期：2026-10-10
 - 接收反馈：2026-10-10 writer 在既有 Kimi Work 会话“自由的皮皮虾｜作者”中按会话协议刷新后接收；处理范围：T-013 封面文案初稿与来源链（候选标题/封面短句/说明、模型与模式可见标签、原始提示词、完整原始文本、生成时间及作者自检）。ChatGPT 审核、修改记录与最终采用稿确认不在本人范围，留在 T-005 由 reviewer、writer 与负责人按串行安排处理
 - 处理结果与证据：2026-10-10 完成初稿交付——A-005 v0.1（draft）已登记成果索引；产品仓库 `feature/t-005-cover-visual-template@28ba1b3053dce11950aa00502ca5fad011afcbf2`（本地与远端一致）含 `deliverables/T-013-cover-copy-draft/v0.1-draft/cover-copy-draft.md` 与 `work/T-013-cover-copy-draft/v0.1-draft/`（prompt.txt 为原始请求逐字节副本、raw-output.md 为全部候选原文、generation-record.md 为来源记录含 unknown 项、self-check.md 为作者自查）；模型/模式可见标签“K3 极致”（用户 2026-10-10 实际核实），精确模型版本/系统提示词/采样参数记为 unknown；各文件 SHA-256 见 A-005 与 T-013 条目
+- 发起人核对（visual-designer，2026-10-10）：按期望结果读取原 K3 generation-record / raw-output、A-005 v0.2 当前稿/修订记录及 T-005 writer 回复/reviewer 复核，17 份保留输入哈希核验通过（其中 K3 原五份、v0.2 三份均不变）。模型/模式可见标签依据与 unknown 项、完整 prompt/原文/时间归档、ChatGPT 编辑与 RV-COPY-001／002 pass / closed 来源链可对应；本轮不额外保证原 Kimi 平台消息或后台可复现性。候选 A 短句原字句/标点已套入 A-004 v0.2，产品固定 `fa4bd5f14c2db431607096dd8b722665284fab4f`，证据 `work/T-005-cover-visual-template/batch-20261010-candidate-a-typeset/self-check.md`、`preserved-inputs-check.json` 与 manifest v0.2；本次仅试用，最终采用稿及负责人确认未满足，不自动关闭交接。下一位 project-manager 固定完整封面并单独安排 reviewer，必要修订/复核后交用户确认。
 - 关闭或取消依据：暂无（待发起人 visual-designer 核对期望结果后关闭）
 
 ## 记录样式（不是真实交接）
