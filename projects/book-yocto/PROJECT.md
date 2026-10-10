@@ -6,6 +6,7 @@
 - 历史框架基线：2026-10-08 将项目提交 rebase 到 `v0.0.3`（`6f79b98e219e0bbf8f7de45dd35ec54c2a6f1f07`）正式标签之上，采用角色/技能术语、项目历史工作流、会话消息边界和项目升级 rebase 规则；底层配置字段继续使用 `knowledge`。此前 `v0.0.2` 升级及归档记录继续有效。
 - 未发布公共能力提前采用：2026-10-09 为处理 H-001，从框架集成分支 `opc-v0.0.4-dev` 提前采用 `multi-git` 独立成果物声明（原提交 `5a4f6137048ef195f473ddd05caef751e8b508f9`，集成 merge `23bdd9b442e89e47e49515b58ea8be54670b62cb`）及 SSH 主机 checkout 扩展（原提交 `60a30bb889b1b7b42b1644d685738fb1e444a62f`，集成 merge `921a11952946f21f1fbbb5392a5f44a61040192e`）；本项目采用提交为 `c62d87d4ebccae8200f413fba838cad4af7131d8`、`71af3dec61165a1123d81b5ac6760a9796ab8a63`。采用原因为书稿与 `tiger` 服务器上的 `meta-tiger` 是两个独立 Git 成果物，现行 `v0.0.3` 单仓库声明无法同时锁定；兼容风险是该能力尚未正式发布、集成线与项目提交尚未推送，后续升级正式版本时必须核对等价提交并去重。60 项框架测试、框架结构校验和差异检查均通过。
 - 分支迁移：2026-09-28 从原 `book-yocto` 历史收敛为 `project/book-yocto` 的干净项目基线；迁移前完整历史由 `archive/2026-09-28/book-yocto` 保存，项目线中原有的重复 Yocto 框架提交不再作为权威来源。
+- 未发布公共角色与技能提前采用：2026-10-11 按用户新增 QEMU 工程师的请求，从 `opc-v0.0.4-dev` 采用公共角色 `qemu-engineer` 与技能 `qemu-engineering`。原提交 `ea967cce2402517d7ee6027c1506ddb269710cf7` 已以 `--no-ff` 合入框架集成线（merge `846270fe2d67a87a01b8ad417e9c27da02a79e01`），项目采用提交为 `cb38bbf459b59df30d46c62c69ec4481ddf7d244`；采用原因是虚拟板和设备模型正确性需要独立专业分工。该能力尚未正式发布，本轮集成及项目提交仅保存在本机；后续升级正式框架版本时核对等价提交并去重。框架合并前后结构校验、60 项测试及差异检查通过，公共提交仅含角色、技能和索引。当前 T-016 开发分支继续保留，建员属于其工程启动准备，不另开下一轮项目开发。
 
 ## 建项信息
 
@@ -47,6 +48,7 @@
 - 2026-09-12：同一授权下新建 `writer`（角色 writer），配置路径 [members/writer.yaml](members/writer.yaml)；TEAM 登记成员索引并为该角色补充技能 `book-production, reader-feedback, book-planning`。记录人：框架超级管理员。
 - 2026-09-12：同一授权下新建 `reviewer`（角色 reviewer），配置路径 [members/reviewer.yaml](members/reviewer.yaml)；TEAM 登记成员索引并为该角色补充技能 `book-production, book-review, reader-feedback, technical-book-validation`。记录人：框架超级管理员。
 - 2026-09-27：用户在本超级管理员会话要求增加一名专门进行 Yocto 开发的成员，并在 OPC 框架中增加相应技能和角色。新增公共技能 `yocto-engineering`、公共角色 `yocto-engineer`，新建成员 `yocto-engineer`，配置路径 [members/yocto-engineer.yaml](members/yocto-engineer.yaml)；TEAM 登记成员索引并为该角色补充技能 `technical-book-validation`。记录人：框架超级管理员。
+- 2026-10-11：用户在本超级管理员会话明确要求新增 QEMU 工程师并创建会话、完成只读初始化，主责 tiger 模型代码与正确性，现有 Yocto 工程师继续承担 patch 集成、BitBake 构建和系统验证。新建 `qemu-engineer`（角色 qemu-engineer），配置路径 [members/qemu-engineer.yaml](members/qemu-engineer.yaml)；TEAM 登记成员并补充 `technical-book-validation`，有效技能为 `software-engineering, qemu-engineering, technical-book-validation`。同步细化 [members/yocto-engineer.yaml](members/yocto-engineer.yaml) 的 QEMU 集成与模型问题交接边界，角色和技能集合不变。遵循 D-013，上游版本由 Poky 配方锁定，长期 patch 进入既有 `meta-tiger`；WORKSPACE 及成果物基线不变。T-016 的具体任务分工交由项目经理后续调整，见 [H-002](HANDOFFS.md)；本次配置不代表业务开发已启动。记录人：框架超级管理员。
 
 ## 框架升级记录
 
