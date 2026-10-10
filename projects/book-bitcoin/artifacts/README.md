@@ -7,6 +7,17 @@
 
 OPC 治理与协作成果使用当前项目 `artifacts/` 内的正文链接；产品代码和直接业务交付物使用“成果物仓库 + 仓库内路径”，并记录其最终合并提交。可移动分支名不能代替精确提交。
 
+## 工作区当前输入位置
+
+依据 [D-001 至 D-003](../DECISIONS.md) 和 [WORKSPACE.yaml](../WORKSPACE.yaml)，本节登记管理员配置工作引入的用户原稿与当前导航。具体审核任务、成果 ID、负责人及批准记录由后续获授权成员按项目协议登记。
+
+| 输入 | 仓库 | 仓库内位置 | 精确提交 | 当前事实 |
+|---|---|---|---|---|
+| 用户原稿 task00–task12，共 13 篇 | `git@github.com:yinzhongkai/book-bitcoin.git` | `bitcoin/`；文件索引 `bitcoin/index.md` | `0811b23eb19d79ceb55a3c64a81944312eec0f2c` | 已推送 main；与原输入逐字节一致，尚未审校或批准 |
+| 仓库说明与文件导航 | 同上 | `README.md`、`bitcoin/index.md` | `0811b23eb19d79ceb55a3c64a81944312eec0f2c` | 已推送 main；目录清理说明及导航链接核对通过 |
+
+当前版本已推送并核对远端。初始提交 `b3e147f539c3ba298e6be6fcaf0d16c3e79b7bdd` 中的 `docker/dockerfile` 与 `.gitattributes` 已按 D-002 删除；本地历史整理后早期版本仅在本机 Git 恢复记录中，远端采用上表的现有 main 版本。原稿来源与指纹、默认本机位置及配置授权见 [PROJECT.md](../PROJECT.md)。
+
 ## 正文元信息样式（不是真实成果）
 
 ```text

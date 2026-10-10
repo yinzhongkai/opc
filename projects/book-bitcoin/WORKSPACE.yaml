@@ -1,3 +1,7 @@
 schemaVersion: 1
 workspace:
-  driver: none
+  driver: git
+  repository: git@github.com:yinzhongkai/book-bitcoin.git
+  branch: main
+  revision: 0811b23eb19d79ceb55a3c64a81944312eec0f2c
+  checkout: ../book-bitcoin
