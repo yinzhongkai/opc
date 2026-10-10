@@ -5,7 +5,7 @@
 | 成果 ID | 名称与正文链接 | 负责人 | 关联任务 | 版本 | 状态 | 批准决定 |
 |---|---|---|---|---|---|---|
 | A-001 | [真实报价场景需求说明](A-001-real-quotation-requirements.md) | `product-manager` | T-001 | 0.6 | draft | D-001（MVP 范围）、D-002（效率目标）、D-003（计费方式） |
-| A-002 | [MVP 架构候选方案与验证计划](A-002-mvp-architecture-candidate.md) | `architect` | T-002 | 0.1 | draft | D-004（架构基线） |
+| A-002 | [MVP 架构候选方案与验证计划](A-002-mvp-architecture-candidate.md) | `architect` | T-002 | 0.2 | draft | D-004（架构基线）、D-005（长期客户端形态）、D-006（业务数据域边界）、D-007（容量设计假设）、D-008（客户端安全升级） |
 
 ## 正文元信息样式（不是真实成果）
 
