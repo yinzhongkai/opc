@@ -15,6 +15,19 @@
 - 处理结果与证据：`WORKSPACE.yaml` 已改为 `multi-git`，保留书稿 `main@f444790f352b46f699fd3d46198f8b9b9f089a62`，新增 `meta-tiger` 的 `host: tiger`、`master@0e3da48b34ef772532535a730a21878cc30ccf67` 和 `/home/oops/workspace/meta-tiger`。为使远程绝对 checkout 合规，项目提前采用 `opc-v0.0.4-dev` 的 multi-git 与 SSH checkout 公共能力；来源、风险和验证见 PROJECT。2026-10-09 project-manager 复核：结构校验通过（421 处本地链接），从 `scripts/` 运行 60 项测试全部通过；SSH 终态仍为干净 `master...github/master`、完整 HEAD `0e3da48b34ef772532535a730a21878cc30ccf67`、远端 `git@github.com:yinzhongkai/meta-tiger.git`。writer `01a0f27d-a698-7690-ba93-08b74425bd3f` 与 yocto-engineer `01a0f286-a9e6-7633-9b80-8bfb6d34c782` 的会话均可定位；当前归档状态符合项目由用户控制的单会话串行执行方式，不要求在 project-manager 会话运行时同时激活。
 - 关闭或取消依据：2026-10-09 发起人 project-manager 已核对 WORKSPACE、框架校验、60 项测试、SSH 终态和成员会话存在性；用户确认 H-001 已执行完成且 writer 会话存在。期望的工作区边界与可继续执行的成员会话条件均已满足，H-001 关闭。
 
+## H-002：新增 QEMU 成员后的 T-016 分工刷新
+- 发起人：框架超级管理员；授权来源为 2026-10-11 用户在本管理员会话新增 QEMU 工程师的明确请求
+- 目标：project-manager
+- 关联任务：T-016；后续章节依赖及 T-017 按实际影响核对
+- 期望结果：在用户后续按串行约定启动项目经理会话时，刷新 TEAM 与两个工程成员配置，调整 T-016 的具体任务分工、输入、完成条件和交接次序，使 qemu-engineer 主责 QEMU 模型代码与正确性，yocto-engineer 主责 patch 集成、BitBake 构建和系统验证；核对相关计划和摘要中的旧口径。保持 D-013 的上游基线与 meta-tiger patch 模型，业务开发另行串行启动。
+- 输入与证据：[TEAM.yaml](TEAM.yaml)、[QEMU 成员配置](members/qemu-engineer.yaml)、[Yocto 成员配置](members/yocto-engineer.yaml)、[PROJECT 成员配置及公共定义采用记录](PROJECT.md)、[公共 QEMU 角色](../../roles/qemu-engineer.md)、[公共 QEMU 技能](../../knowledge/qemu-engineering.md)、D-013 与现有 T-016。用户已确认职责分界；新成员的具体任务安排须由项目经理写回任务记录，不把 scope 当作已开始执行的任务。
+- 未完成事项：project-manager 尚未实际接收或调整 T-016；Yocto 成员开始后续工作前须按 SESSION_PROTOCOL 刷新已调整的 scope。本管理员本轮仅完成建员与新会话只读初始化，不唤醒其他成员开展业务工作。
+- 状态：open
+- 创建日期：2026-10-11
+- 接收反馈：尚未接收
+- 处理结果与证据：暂无
+- 关闭或取消依据：暂无
+
 ## 记录样式（不是真实交接）
 
 ```text
