@@ -24,6 +24,7 @@
 | [social-media-operator](social-media-operator.md) | 社交媒体运营 |
 | [reviewer](reviewer.md) | 独立评审者 |
 | [yocto-engineer](yocto-engineer.md) | Yocto 工程师 |
+| [qemu-engineer](qemu-engineer.md) | QEMU 工程师 |
 
 ## 使用与维护
 

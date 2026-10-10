@@ -18,6 +18,7 @@
 | [opencv-video-rhythm-analysis](opencv-video-rhythm-analysis.md) | OpenCV 视频节奏分析 |
 | [planning](planning.md) | 方案规划 |
 | [project-management](project-management.md) | 项目管理 |
+| [qemu-engineering](qemu-engineering.md) | QEMU 模型开发与验证 |
 | [requirements-analysis](requirements-analysis.md) | 需求分析 |
 | [reader-feedback](reader-feedback.md) | 读者学习反馈与修订 |
 | [research](research.md) | 资料研究与事实核查 |
