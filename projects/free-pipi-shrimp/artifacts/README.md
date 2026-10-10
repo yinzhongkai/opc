@@ -8,6 +8,7 @@
 | A-002 | [自由的皮皮虾视觉基线包](A-002-自由的皮皮虾视觉基线包.md) | visual-designer | T-003 | 0.4 | approved | 2026-10-06 用户确认头像“我觉这个头像可以”；product-manager 已关闭 PM-001～PM-004；外部 `main` merge commit `730429312be85e33b4534b58adad54a207a8b797` |
 | A-003 | [三星堆首站连载规划](A-003-三星堆首站连载规划.md) | planner | T-004 | 0.3 | draft | D-009（仅确认首站目的地；方案正文仍将在 T-012 与 T-006 中验证） |
 | A-004 | [皮皮虾 3:4 封面视觉模板](A-004-封面视觉模板.md) | visual-designer | T-005 | 0.1 | draft | 产品 feature `feature/t-005-cover-visual-template@eca9ea0e1114e03f0874396103edb6b8477a4d1c`；Kimi K3 文案与来源链待外部输入，未批准、未合入 `main` |
+| A-005 | [三星堆第1站封面文案初稿](A-005-三星堆第1站封面文案初稿.md) | writer | T-013 | 0.1 | draft | 尚无；产品 feature `feature/t-005-cover-visual-template@28ba1b3053dce11950aa00502ca5fad011afcbf2`；Kimi K3 初稿待 reviewer 使用 ChatGPT 独立审校与负责人确认，未批准、未合入 `main` |
 
 ## 正文元信息样式（不是真实成果）
 

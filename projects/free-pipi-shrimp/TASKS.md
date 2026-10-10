@@ -209,7 +209,7 @@
 
 ## T-013：补齐 T-005 的 Kimi K3 封面文案初稿与来源链
 - 负责人：writer
-- 状态：todo
+- 状态：completed
 - 变更类型：feature（当前 T-005 的配套输入，不另开开发轮次）
 - OPC 开发分支：沿用 `feature/free-pipi-shrimp/t-005-cover-visual-template`
 - 成果物仓库及开发分支：沿用 `git@github.com:yinzhongkai/free-pipi-shrimp.git` 的 `feature/t-005-cover-visual-template`，当前输入固定提交 `eca9ea0e1114e03f0874396103edb6b8477a4d1c`；核对 checkout 后局部追加，不切换或覆盖无关改动
@@ -219,9 +219,9 @@
 - 优先级：P1（解除当前 T-005 文案输入阻塞）
 - 完成条件与确认方式：实际 K3 初稿、完整来源记录与作者自检形成可复核的 draft 并提交、推送至现有产品 feature；在 OPC 成果索引登记路径与精确产品提交，更新本任务和 H-007 的实际接收/处理记录后可完成“初稿交付”任务。独立审校、作者修订与封面最终采用在 T-005 内继续追踪，初稿交付不等于评审通过或批准；仅有提示词准备包而无实际 K3 输出不得标记 completed
 - 产物落点与提交顺序：可交付文案与原始模型记录放在已声明产品工作区的 `deliverables/T-013-cover-copy-draft/`、`work/T-013-cover-copy-draft/`；治理与评审索引保存在 OPC `projects/free-pipi-shrimp/artifacts/`。先提交产品文案与来源，再提交本人负责的 OPC 任务、交接及成果引用，分别核对远端；不提交账号凭据或用户无关文件
-- 进展：尚未开始；writer 接收后先刷新身份、有效技能及当前工作区基线，核查实际可用的 K3 接入方式；若无入口，可先准备需求/提示词/输入包并记录具体缺口，请用户提供外部生成结果，不用 ChatGPT 代写后宣称 K3 来源
-- 成果与验证证据：暂无
-- 阻塞与下一位行动人：下一位行动人为 writer；K3 可用性待该成员实际核查，视觉设计师环境无入口不等于作者环境也无入口。初稿提交后由 project-manager 固定受评版本并安排 reviewer 审校
+- 进展：2026-10-10 writer 在既有 Kimi Work 会话“自由的皮皮虾｜作者”中接收 H-007 并执行：按会话协议第 6 节刷新身份、scope、角色与有效技能（交接提交后无变化）；核对两仓库 checkout、远端分支头、main 基线祖先与脏改动（全部符合任务声明）；完整读取 A-001 v0.4、A-003 v0.3、A-004 v0.1 与产品模板使用说明；随后在本会话直接生成 3 组候选笔记标题/封面短句/说明（作者推荐候选 A），完成作者自检；全部产物已提交并推送产品 feature，OPC 登记与本条记录随后同提交完成。模型/模式可见标签为“K3 极致”（用户 2026-10-10 实际核实输入栏显示）；精确模型版本、系统提示词与采样参数如实记为 unknown，未伪造来源
+- 成果与验证证据：[A-005 三星堆第1站封面文案初稿](artifacts/A-005-三星堆第1站封面文案初稿.md) v0.1（draft，已登记成果索引）；产品仓库 `feature/t-005-cover-visual-template@28ba1b3053dce11950aa00502ca5fad011afcbf2`（本地与远端一致）：`deliverables/T-013-cover-copy-draft/v0.1-draft/cover-copy-draft.md`（SHA-256 `711253489d019dfa0d156be285e67ff604d3491b945ead1c6fea28a883bcdf7a`）、`work/T-013-cover-copy-draft/v0.1-draft/prompt.txt`（`34a010e4d16fe787bae46d483519c64268ff235d884c727b0d5ada0b268c2710`）、`raw-output.md`（`5d7426ad618db3099ee6f60203e90a2af0b10ce1451d938a710b2ac6444046a9`）、`generation-record.md`（`46df1f69a1454be6c8496f957009b46dfcdbe2f2d63a5d15ab88fec857db5a89`）、`self-check.md`（`7a979eef6dd0a8635d6a49b0ad558b557a4d71322ad388511e911b7d7067d0f7`）；两仓库 `git diff --check` 通过，两边提交均仅含本任务文件（OPC 侧 `temp/` 未纳入）
+- 阻塞与下一位行动人：无阻塞；下一位行动人为 project-manager——固定受评版本（产品提交 `28ba1b3053dce11950aa00502ca5fad011afcbf2` 与本条 OPC 登记提交）并通知 reviewer 使用 ChatGPT 独立审校文案；随后 writer 按本轮意见修订、visual-designer 套版提交完整封面候选、reviewer 复核、用户确认（见 T-005 串行安排）
 - 更新日期：2026-10-10
 
 ## 记录样式（不是真实任务）
