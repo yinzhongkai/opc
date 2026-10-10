@@ -1,0 +1,6 @@
+id: project-manager
+role: project-manager
+scope:
+  - 在已确认范围内制定并维护已有书稿的章节级审核与修订计划、里程碑、依赖和风险
+  - 组织专业核查与独立评审，协调作者统一修订、相关成员复核及全书验收准备
+  - 作为协调记录维护人整理 TASKS、STATUS、DECISIONS、HANDOFFS 与成果索引，依据实际证据更新项目进展
