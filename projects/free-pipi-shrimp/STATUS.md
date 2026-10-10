@@ -3,7 +3,7 @@
 - 汇总日期与信息截至点：2026-10-10；信息覆盖 TASKS.md T-001～T-012、DECISIONS.md D-001～D-009、HANDOFFS.md H-001～H-006、成果索引及 A-001～A-003 当前状态。
 - 维护人：project-manager（按 [PROJECT.md](PROJECT.md) 指定的协调记录维护人）。
 - 当前项目：自由的皮皮虾（项目 ID `free-pipi-shrimp`，目录 `projects/free-pipi-shrimp/`）。
-- 当前阶段：内容筹备。需求基线和角色视觉基线均已批准，三星堆首站候选连载规划已经形成；下一阶段重点是完成 T-004 分支收口、封面模板、文字结构、运营准备和首批 2 篇图文缓冲。
+- 当前阶段：内容筹备。需求基线和角色视觉基线均已批准，三星堆首站候选连载规划及 T-004 分支收口已经完成；下一阶段重点是封面模板、文字结构、运营准备和首批 2 篇图文缓冲。
 - 当前统一表述：角色名“自由的皮皮虾”，日常简称“皮皮虾”，外观按皮皮虾／螳螂虾；主题视觉名称为“低饱和温暖手绘动画电影风”。封面标识“皮皮虾·第 N 站”、落款“—— 皮皮虾，于 XX”，以 A-001 v0.4 与 A-002 v0.4 为准。
 
 ## 任务进展
@@ -27,13 +27,13 @@
 - A-003 三星堆首站连载规划 v0.3：draft。D-009 仅确认首站目的地，方案正文尚未获正式批准，将在 T-012 视觉制作和 T-006 成稿制作中继续验证；前 2 篇为“出发／抵达”和“青铜面具凝望”。
 - 外部产品仓库已把 T-003 整理为生成批次、批准版交付两个功能提交，并通过 merge commit `730429312be85e33b4534b58adad54a207a8b797` 合入 `main`。OPC 的 T-003 feature 已整理为工作区配置、视觉基线记录、状态摘要三个功能提交，并通过 `--no-ff` merge commit 合入项目长期分支；两条已合并 feature 的本地与远端分支均已删除，整理前历史由对应 `archive/*pre-squash-20261006` 远端标签保留。
 - WORKSPACE.yaml 已锁定产品仓库 `main@730429312be85e33b4534b58adad54a207a8b797`，并已核验本地 main、跟踪分支和远端 main 一致。
-- T-004 已从 OPC 分支 `feature/free-pipi-shrimp/t-004-first-destination-plan` 通过 `--no-ff` merge commit `b810b521db6c9efeb3d00ff34ade9a82729adb7c` 合入 `project/free-pipi-shrimp`；成果提交为 `ef84a159c2ac74c22bc3c9b93c2a70cbec1e040e`，项目经理核对提交为 `1c597ee34c4f414c809bfe5af7bf78bb076f5011`。feature 本地与远端分支暂保留，等待目标分支验证和后续明确清理。
+- T-004 已从 OPC 分支 `feature/free-pipi-shrimp/t-004-first-destination-plan` 通过 `--no-ff` merge commit `b810b521db6c9efeb3d00ff34ade9a82729adb7c` 合入 `project/free-pipi-shrimp`；成果提交为 `ef84a159c2ac74c22bc3c9b93c2a70cbec1e040e`，项目经理核对提交为 `1c597ee34c4f414c809bfe5af7bf78bb076f5011`。目标分支验证和远端同步通过，本地及远端 feature 分支均已删除。
 
 ## 阻塞、风险与下一步
 
 - H-003（project-manager → 用户）：open。用户此前已表示小红书专用账号已创建；但手机端测试发布流程和平台当前 AI 内容标注要求尚无完成证据，因此发布通道仍未闭环。账号凭据继续不得写入仓库或项目记录。
 - 当前没有待确认的产品决定；时间和资源约束仍未设定，如需日期承诺须补充排期条件。
-- T-004 已完成提交整理和 `--no-ff` 合并；当前须完成目标分支验证、远端同步和 feature 分支清理，之后再启动下一轮 feature。收口后优先执行 T-005，再依据 A-003 前 2 篇执行 T-012，同时可依资源安排 T-010、T-011，最后由 writer 基于 T-010 与 T-012 完成 T-006。该顺序不改变各任务原有负责人和验收边界。
+- T-004 已完成提交整理、`--no-ff` 合并、目标分支验证、远端同步和 feature 分支清理，可以开始下一轮 feature。下一步优先执行 T-005，再依据 A-003 前 2 篇执行 T-012，同时可依资源安排 T-010、T-011，最后由 writer 基于 T-010 与 T-012 完成 T-006。该顺序不改变各任务原有负责人和验收边界。
 - T-003 的产品与 OPC feature 均已完成按功能压缩、merge commit 合入、远端同步和分支清理；当前无待处理的 T-003 评审或合并事项。恢复用归档标签继续保留，如需删除须另行确认。
 
 本文件是摘要，原始事实以 [TASKS.md](TASKS.md)、[DECISIONS.md](DECISIONS.md)、[HANDOFFS.md](HANDOFFS.md) 和 [成果索引](artifacts/README.md) 为准。汇总后注明实际信息范围，过期摘要不能覆盖原始记录。
