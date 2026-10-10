@@ -93,20 +93,20 @@
 
 ## T-005：封面视觉模板落地
 - 负责人：visual-designer
-- 状态：todo
+- 状态：blocked
 - 变更类型：feature
 - OPC 开发分支：`feature/free-pipi-shrimp/t-005-cover-visual-template`（从 `project/free-pipi-shrimp@0a2a6862987261864b31be53adfead2ac7d91359` 创建）
 - 成果物仓库及开发分支：`git@github.com:yinzhongkai/free-pipi-shrimp.git`，`feature/t-005-cover-visual-template`（从 `main@730429312be85e33b4534b58adad54a207a8b797` 创建）
-- 成果物仓库最终合并提交：待 T-005 完成、验证并合入 `main` 后登记
-- 授权来源与日期：2026-09-16 用户授权内容筹备团队计划；2026-09-29 用户授权执行 T-009，project-manager 将原任务中的视觉模板与文字结构拆分，本任务由 writer 转交 visual-designer，文字结构另建 T-010
-- 目标与范围：依据 D-003、D-007 与 A-001 v0.4 第 4、9 节，落地可复用的 3:4 封面视觉模板，固定"皮皮虾·第 N 站"标识，使用 T-003 已确认的角色基线或插画兜底资产，明确构图、安全区、文字层级、色彩、导出规格、素材来源和版本
+- 成果物仓库最终合并提交：未合入 `main`（遵守用户本轮不合并长期分支的指示）；当前产品 feature 固定提交 `eca9ea0e1114e03f0874396103edb6b8477a4d1c`，本地、跟踪分支与远端一致
+- 授权来源与日期：2026-09-16 用户授权内容筹备团队计划；2026-09-29 用户授权执行 T-009，project-manager 将原任务中的视觉模板与文字结构拆分，本任务由 writer 转交 visual-designer，文字结构另建 T-010；2026-10-10 用户明确中文文案初稿由 Kimi K3 提供、ChatGPT 审核并记录来源链，图像与其他工作由 ChatGPT 执行
+- 目标与范围：依据 D-003、D-007 与 A-001 v0.4 第 4、9 节，落地可复用的 3:4 封面视觉模板，固定"皮皮虾·第 N 站"标识，使用 T-003 已确认的角色基线或插画兜底资产，明确构图、安全区、文字层级、色彩、导出规格、素材来源和版本；候选中文文案由 Kimi K3 初稿并记录来源，ChatGPT 审核及记录修改
 - 输入与依赖：A-001 v0.4 第 4、9 节（AC-3）；T-003（角色基线与兜底资产方向）
 - 优先级：P1
 - 完成条件与确认方式：封面模板及使用说明登记为成果（draft），以至少一份示例验证角色、固定标识、文字层级和 3:4 导出效果，完成 AC-3 的封面部分自查并保留来源、版本和导出证据
-- 进展：尚未开始；2026-09-29 依据 T-009 拆分责任并转交 visual-designer；2026-10-10 已按用户授权建立同后缀的 OPC 与成果物仓库 feature 分支，等待 visual-designer 在现有会话刷新后启动
-- 成果与验证证据：暂无
-- 合并与清理状态：双仓库 feature 已创建，尚未产生业务提交、合并或清理；须先合并并验证成果物仓库，再把最终提交写回 OPC，之后合并 OPC 分支
-- 阻塞与下一位行动人：T-003 已完成，无前置阻塞；下一位行动人为 visual-designer
+- 进展：2026-10-10 visual-designer 完成可复用 SVG 模板、使用说明、3:4 三星堆抵达场景版式验证图及来源/哈希记录；按用户新增模型分工，移除非 Kimi 的创意标题，改为“Kimi K3 文案待补”占位。当前环境无 Kimi K3 调用入口，故不伪造文案来源，任务转为 blocked；不启动 T-012
+- 成果与验证证据：[A-004 封面视觉模板](artifacts/A-004-封面视觉模板.md) v0.1 draft；产品仓库 feature `feature/t-005-cover-visual-template@eca9ea0e1114e03f0874396103edb6b8477a4d1c` 已推送并核对远端；模板 `deliverables/T-005-cover-visual-template/v0.1-draft/cover-template.svg`（SHA-256 `a2513dcd5b7e41cea0e8f209608179be6fcfce3167de5e8384492015d483e947`）；使用说明 `deliverables/T-005-cover-visual-template/v0.1-draft/usage-guide.md`（SHA-256 `b9b0d0a758e29cf2634749a8dea1016a11525b0531dc59f434ec6d4a6885d2f8`）；版式验证 PNG `deliverables/T-005-cover-visual-template/v0.1-draft/example/cover-sanxingdui-station-1.png`（1080×1440 RGB/sRGB，SHA-256 `2b56dba4085115480c297cc37da72576eba0dde17709831226e8173f16af705e`）；Kimi K3 模型/模式、提示词、原始文案、生成时间/版本、ChatGPT 审核/修改与负责人确认均待补
+- 合并与清理状态：产品 feature 已提交并推送，最终 tip `eca9ea0e1114e03f0874396103edb6b8477a4d1c`；未合入成果物 `main` 或 OPC 项目长期分支，未删除两边 feature，遵守用户本轮指示
+- 阻塞与下一位行动人：阻塞于 Kimi K3 外部中文初稿及可核验来源链，详见 H-007；解除条件为提供模型/模式、提示词、原文、时间/版本后，由 ChatGPT 审核并记录修改与最终采用稿、负责人确认；下一位行动人为用户（提供 Kimi K3 输出）后 visual-designer 继续
 - 更新日期：2026-10-10
 
 ## T-006：首批 2 篇缓冲存量制作
