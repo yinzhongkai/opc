@@ -93,28 +93,38 @@
 
 ## T-005：封面视觉模板落地
 - 负责人：visual-designer
-- 状态：blocked
+- 状态：in_review
 - 变更类型：feature
 - OPC 开发分支：`feature/free-pipi-shrimp/t-005-cover-visual-template`（从 `project/free-pipi-shrimp@0a2a6862987261864b31be53adfead2ac7d91359` 创建）
 - 成果物仓库及开发分支：`git@github.com:yinzhongkai/free-pipi-shrimp.git`，`feature/t-005-cover-visual-template`（从 `main@730429312be85e33b4534b58adad54a207a8b797` 创建）
-- 成果物仓库最终合并提交：未合入 `main`（遵守用户本轮不合并长期分支的指示）；当前产品 feature 固定提交 `eca9ea0e1114e03f0874396103edb6b8477a4d1c`，本地、跟踪分支与远端一致
+- 成果物仓库最终合并提交：未合入 `main`（遵守用户本轮不合并长期分支的指示）；当前产品 feature 固定提交 `28ba1b3053dce11950aa00502ca5fad011afcbf2`，本地、跟踪分支与远端一致；A-004 模板原受检版本仍为 `eca9ea0e1114e03f0874396103edb6b8477a4d1c`
 - 授权来源与日期：2026-09-16 用户授权内容筹备团队计划；2026-09-29 用户授权执行 T-009，project-manager 将原任务中的视觉模板与文字结构拆分，本任务由 writer 转交 visual-designer，文字结构另建 T-010；2026-10-10 用户明确中文文案初稿由 Kimi K3 提供、ChatGPT 审核并记录来源链，图像与其他工作由 ChatGPT 执行；同日用户确认新增专业评审者并要求找对应成员执行与提交，project-manager 安排 writer 承担 T-013 文案输入、reviewer 承担后续独立审校，视觉模板负责人不变
 - 目标与范围：依据 D-003、D-007 与 A-001 v0.4 第 4、9 节，落地可复用的 3:4 封面视觉模板，固定"皮皮虾·第 N 站"标识，使用 T-003 已确认的角色基线或插画兜底资产，明确构图、安全区、文字层级、色彩、导出规格、素材来源和版本；候选中文文案由 Kimi K3 初稿并记录来源，ChatGPT 审核及记录修改
 - 输入与依赖：A-001 v0.4 第 4、9 节（AC-3）；T-003（角色基线与兜底资产方向）；A-003 v0.3 三星堆第 1 篇；T-013（Kimi K3 封面文案初稿与来源链）
 - 优先级：P1
 - 完成条件与确认方式：封面模板及使用说明登记为成果（draft），以至少一份示例验证角色、固定标识、文字层级和 3:4 导出效果，完成 AC-3 的封面部分自查并保留来源、版本和导出证据；补齐实际 Kimi K3 文案及来源链、ChatGPT 独立审校与作者修订记录，替换占位并完成 reviewer 对完整封面候选的评审、必要修订及复核后，方可 completed。任务完成与评审通过不等于成果批准或允许发布，最终批准仍由用户确认
 - 进展：2026-10-10 visual-designer 完成可复用 SVG 模板、使用说明、3:4 三星堆抵达场景版式验证图及来源/哈希记录；按用户新增模型分工，移除非 Kimi 的创意标题，改为“Kimi K3 文案待补”占位。当前环境无 Kimi K3 调用入口，故不伪造文案来源，任务转为 blocked；不启动 T-012
-- 成果与验证证据：[A-004 封面视觉模板](artifacts/A-004-封面视觉模板.md) v0.1 draft；产品仓库 feature `feature/t-005-cover-visual-template@eca9ea0e1114e03f0874396103edb6b8477a4d1c` 已推送并核对远端；模板 `deliverables/T-005-cover-visual-template/v0.1-draft/cover-template.svg`（SHA-256 `a2513dcd5b7e41cea0e8f209608179be6fcfce3167de5e8384492015d483e947`）；使用说明 `deliverables/T-005-cover-visual-template/v0.1-draft/usage-guide.md`（SHA-256 `b9b0d0a758e29cf2634749a8dea1016a11525b0531dc59f434ec6d4a6885d2f8`）；版式验证 PNG `deliverables/T-005-cover-visual-template/v0.1-draft/example/cover-sanxingdui-station-1.png`（1080×1440 RGB/sRGB，SHA-256 `2b56dba4085115480c297cc37da72576eba0dde17709831226e8173f16af705e`）；Kimi K3 模型/模式、提示词、原始文案、生成时间/版本、ChatGPT 审核/修改与负责人确认均待补
-- 合并与清理状态：产品 feature 已提交并推送，最终 tip `eca9ea0e1114e03f0874396103edb6b8477a4d1c`；未合入成果物 `main` 或 OPC 项目长期分支，未删除两边 feature，遵守用户本轮指示
-- 阻塞与下一位行动人：阻塞于 Kimi K3 外部中文初稿及可核验来源链，详见 H-007、T-013；下一位行动人为 writer，先核查实际可用接入方式并提交初稿与来源记录。文案固定版本登记后由 project-manager 安排 reviewer 使用 ChatGPT 独立审校，作者按意见修订，再由 visual-designer 套入模板并提交完整封面候选供 reviewer 复核；若 writer 无 K3 入口，则留存具体阻塞并请用户提供外部生成结果，不得冒充 K3 来源
+- 后续进展：2026-10-10 用户告知初稿已完成；project-manager 核对 T-013 completed、A-005 v0.1 draft、H-007 accepted，产品初稿提交 `28ba1b3053dce11950aa00502ca5fad011afcbf2` 与 OPC 登记提交 `2493bd81ff3f3169552756c3d0146610904cd9c9` 均已同步远端，五份文案/来源/自检文件实际 SHA-256 与 A-005 登记一致。原 K3 输入缺失阻塞已解除，项目经理按已登记串行安排将任务推进为 in_review，先启动文案独立审校；尚未套版、完成整张封面评审或批准
+- 成果与验证证据：[A-004 封面视觉模板](artifacts/A-004-封面视觉模板.md) v0.1 draft；产品仓库 feature `feature/t-005-cover-visual-template@eca9ea0e1114e03f0874396103edb6b8477a4d1c` 已推送并核对远端；模板 `deliverables/T-005-cover-visual-template/v0.1-draft/cover-template.svg`（SHA-256 `a2513dcd5b7e41cea0e8f209608179be6fcfce3167de5e8384492015d483e947`）；使用说明 `deliverables/T-005-cover-visual-template/v0.1-draft/usage-guide.md`（SHA-256 `b9b0d0a758e29cf2634749a8dea1016a11525b0531dc59f434ec6d4a6885d2f8`）；版式验证 PNG `deliverables/T-005-cover-visual-template/v0.1-draft/example/cover-sanxingdui-station-1.png`（1080×1440 RGB/sRGB，SHA-256 `2b56dba4085115480c297cc37da72576eba0dde17709831226e8173f16af705e`）；模板初稿提交时 Kimi K3 输入尚缺，现已由 [A-005 文案初稿](artifacts/A-005-三星堆第1站封面文案初稿.md) v0.1 在产品 `28ba1b3053dce11950aa00502ca5fad011afcbf2` 交付模型可见标签、提示词、原文和时间/版本记录，五份文件哈希已核对；ChatGPT 独立审校/修订、实际套版、完整封面复核与负责人确认仍待完成
+- 合并与清理状态：产品 feature 已提交并推送，当前 tip `28ba1b3053dce11950aa00502ca5fad011afcbf2`；未合入成果物 `main` 或 OPC 项目长期分支，未删除两边 feature，遵守用户本轮指示
+- 阻塞与下一位行动人：K3 初稿及来源记录已交付，原输入缺失阻塞解除；下一位行动人为 reviewer，按下方 A-005 v0.1 第 1 轮安排使用 ChatGPT 独立审校。审校结束后 writer 按意见修订，visual-designer 套版并提交完整封面，reviewer 再复核；当前仍不得发布或将 T-005 标记 completed
 - 更新日期：2026-10-10
 
-### 后续独立审校安排（尚未启动）
+### 独立审校总体安排
 - 安排来源与日期：2026-10-10 用户确认新增专业评审者并要求对应成员执行与提交；project-manager 在本任务内登记串行审校安排
 - 参与成员与范围：reviewer；先审 T-013 的中文初稿、实际模型来源、人设与三星堆第一人称口吻，后审 A-004 完整封面候选的图文一致性、角色/风格锚点、可读性、3:4 导出、素材来源链及 AC-3 封面部分；依据不足的事实或平台规则明确列为待确认，不替代运营成员的发布通道验证
 - 受评版本与启动条件：文案审校在 writer 提交 T-013 初稿后启动；完整封面审校在文案审校/修订结束、visual-designer 套版提交候选后启动。每阶段均由 project-manager 登记成果路径、版本和产品/OPC 精确提交再通知 reviewer；当前 A-004 v0.1 占位示例未作为完整封面进入评审，不预写意见或结论
 - 修订与确认方式：本轮全部指定评审意见提交后，writer 只修订文案、visual-designer 只修订视觉与版式；保留原始 K3 输出、问题编号、处理回复、新版本及复核证据；评审通过后再由用户最终确认
-- 当前进度与下一位行动人：尚未评审；writer 先执行 T-013，reviewer 等待固定受评版本
+- 当前进度与下一位行动人：T-013 初稿交付已完成；本轮文案受评版本已固定，下一位行动人为 reviewer。完整封面审校仍未启动，待文案审校/修订及 visual-designer 套版完成后另行固定版本
+
+### 本轮评审：A-005 v0.1 文案独立审校（第 1 轮）
+- 安排来源与日期：2026-10-10 用户已确认专业评审者与模型分工、要求对应成员执行及提交，并告知初稿已完成；project-manager 按本任务既有串行审校安排固定版本并启动本轮
+- 受评正文：[A-005 三星堆第1站封面文案初稿](artifacts/A-005-三星堆第1站封面文案初稿.md) v0.1（draft）；产品 `deliverables/T-013-cover-copy-draft/v0.1-draft/cover-copy-draft.md`；配套 `work/T-013-cover-copy-draft/v0.1-draft/` 下 prompt.txt、raw-output.md、generation-record.md、self-check.md
+- 受评固定版本：OPC `feature/free-pipi-shrimp/t-005-cover-visual-template@2493bd81ff3f3169552756c3d0146610904cd9c9`；产品 `feature/t-005-cover-visual-template@28ba1b3053dce11950aa00502ca5fad011afcbf2`。本轮安排仅追加任务与摘要，未修改上述受评正文；五份产品文件 SHA-256 见 A-005，项目经理已逐项核对一致
+- 参与成员、范围与完成条件：本轮仅 reviewer，使用 ChatGPT。逐项核对三组候选的角色第一人称、性格与治愈基调（AC-2/AC-6 方向）、三星堆第 1 篇情绪与场景、候选标题/短句/说明各字段的用途、虚构与事实边界、图文语义和模板文字槽位适配依据；验证完整请求/原文/交付稿/作者自检的来源与版本对应、K3 可见标签证据及 unknown 项，检查推荐理由与字数等可验证陈述，不以作者自查代替独立判断
+- 输入与范围边界：A-001 v0.4、A-003 v0.3 第一篇及仅第一人称约束、A-004 v0.1 和固定模板/使用说明；必要时查看既有版式示例以核对语义，但实际套版、缩略图可读性、完整封面复核、任意 5 篇 AC-2 验收和发布时平台规则不属于本轮完成证明，应列明未覆盖项；不批准最终采用稿或发布
+- 记录与修订规则：reviewer 在本小节追加本人意见，使用 `RV-COPY-001` 起的本轮唯一问题编号，注明位置、依据、影响、建议与原稿责任人 writer（视觉问题归 visual-designer）；记录实际模型/工具及可见性限制、结论 pass/revise/blocked 和未覆盖项。原作者本轮结束前不修改受评正文；本轮全部意见完成后再统一修订，原始 K3 输出保留，复核另记版本。本轮不另建评审成果或重复交接
+- 本轮进度与下一位行动人：已安排，尚未评审；reviewer 在原会话执行并提交本人意见。本轮意见完成后由 project-manager 统筹 writer 修订或 visual-designer 套版；消息发送、评审完成或 pass 均不构成果批准
 
 ## T-006：首批 2 篇缓冲存量制作
 - 负责人：writer
