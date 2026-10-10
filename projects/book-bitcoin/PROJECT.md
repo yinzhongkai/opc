@@ -9,19 +9,54 @@
 
 - 建立日期：2026-10-11。
 - 用户请求来源：建项用户在本超级管理员会话指定管理目标为 book-bitcoin；2026-10-11 说明该项目类似 book-yocto，书稿已经完成，需要进一步审核达到可出版的标准，并明确选择“先创建空团队，稍后指定成员”。
-- 当前阶段：出版前审核筹备，首批成员已配置，待明确书稿位置、受评版本与审核安排。
+- 当前阶段：出版前审核筹备，首批成员与独立工作区已配置，原稿 Git 基线已建立，审核安排待明确。
 - 建项参考：读取本克隆 `origin/project/book-yocto` 的项目入口配置与成员分工（参考提交 `f3d8c2ff882e0542f86650829d99feb0dc523729`），采用独立项目记录与工作区声明的组织方式；本项目范围、验收要求与工作区另行确认。
 
 ## 目标与约束
 
 - 目标：对已完成的 book-bitcoin 书稿进一步审核，并在必要修订与复核后达到可出版的质量水平。
-- 现有书稿：用户说明已经完成；超级管理员尚未读取书稿，当前不作内容质量或出版就绪结论。
+- 现有书稿：用户说明已经完成；2026-10-11 超级管理员核对了输入目录、文件数量及内容指纹，尚未进行内容审校，当前不作内容质量或出版就绪结论。
 - 范围与非目标：已明确以现有书稿的出版前审核为工作方向；读者定位、具体审校范围、修订安排、排版导出与出版渠道工作待确认。
-- 书稿位置与版本：待用户提供 book-bitcoin 书稿的本地路径或仓库信息及受评版本；[WORKSPACE.yaml](WORKSPACE.yaml) 暂使用 `none`，配置工作区后再执行依赖书稿的工作。
+- 书稿位置与版本：依据 [D-001 至 D-003](DECISIONS.md)，原稿从本机输入目录 `C:\Users\YinZh\Downloads\books-bitcoin\content\bitcoin` 复制到独立仓库 `git@github.com:yinzhongkai/book-bitcoin.git` 的 `bitcoin/`；默认本机检出为 `D:\book-bitcoin`，日常分支为 `main`，当前提交为 `0811b23eb19d79ceb55a3c64a81944312eec0f2c`。[WORKSPACE.yaml](WORKSPACE.yaml) 已声明 `git` 工作区与精确版本，该版本已推送并核对远端 `main`。
 - 交付物与验收要求：质量目标为可出版；具体交付格式、审校覆盖、验收条件和出版方要求待用户或后续获授权成员明确。最终批准按本项目确认责任执行。
 - 时间、资源与其他约束：未设定。
 
 未知项保持待确认，已确认的范围变更链接 [DECISIONS.md](DECISIONS.md) 中的决定，不从模板预设业务任务。
+
+## 工作区来源登记
+
+- 2026-10-11 首次来源登记：建项用户在本超级管理员会话提供上述书稿目录和 Git 仓库地址；首次登记仅完成只读核对与项目记录登记。
+- 输入目录核对：包含 13 个 Markdown 文件，编号 task00–task12，总计 649322 字节。下载目录 `books-bitcoin` 无 Git 元数据；导入前的原稿通过下述指纹定位，导入后采用 WORKSPACE 中的精确 Git 提交。
+- 输入指纹：`f2e40d8709796b61912171b10401ae07a6892c90c83cd7fa1c3b81f0c7679087`（SHA-256）。按完整路径排序，每行以相对路径、TAB、文件 SHA-256 小写组成，行尾 LF，整份清单采用 UTF-8 后计算摘要；仅用于核对本次输入，不代替 Git revision 或审校结论。
+- 初次仓库核对：只读查询 `git ls-remote --symref git@github.com:yinzhongkai/book-bitcoin.git HEAD refs/heads/*` 成功，未返回 HEAD 或分支；当时本机默认候选检出 `D:\book-bitcoin` 尚不存在。后续克隆确认目标为空仓库。
+- 早期候选：原先提出将原稿放在 `content/bitcoin/`；后续用户要求目录结构参考 book-yocto，按 [D-001](DECISIONS.md) 初始采用根目录 `bitcoin/` 和 `docker/`，保留原下载目录；现按 [D-002](DECISIONS.md) 移除 `docker/` 和 `.gitattributes`，保留书稿与导航。
+- 当前恢复点：用户提供的原稿目录保持原状；独立仓库当前 `main` 及远端 `main` 均为整理后的提交 `0811b23eb19d79ceb55a3c64a81944312eec0f2c`，OPC 的 WORKSPACE 锁定该版本；早期初始与目录清理提交仅保留于本机 Git 恢复记录，不属于当前远端分支历史。
+
+## 工作区配置记录
+
+### 初始导入
+
+- 2026-10-11 用户授权：建项用户在本会话明确要求“克隆到 D:\book-bitcoin，目录结构参考 book-yocto”，承接此前建立本地 main 初始提交和配置工作区的方案，确认结果见 [D-001](DECISIONS.md)。记录人：框架超级管理员。
+- 实施范围：克隆用户指定仓库，复制 13 篇原稿至 `bitcoin/`，从原输入包的 `resource/dockerfile` 复制环境定义至 `docker/dockerfile`，新增 `README.md`、`bitcoin/index.md` 和保持原稿字节的 `.gitattributes`；未复制输入包中的其他项目资料。
+- 内容基线：本地 `main` 初始提交 `b3e147f539c3ba298e6be6fcaf0d16c3e79b7bdd`；WORKSPACE 从 `none` 改为 `git`，默认检出声明为可移植路径 `../book-bitcoin`。工作区输入位置见 [成果索引](artifacts/README.md)。
+- 验证证据：13 篇原稿及原始 Dockerfile 的源文件、本地副本与 Git 暂存内容逐字节一致；共 17 个预期文件，新增导航中的 15 处本地链接有效；环境定义未执行构建或书稿实验验证。
+- OPC 提交方式：本轮开发分支为 `feature/book-bitcoin/workspace-bootstrap`，按本会话已采用的线性提交偏好快进合入 `project/book-bitcoin`，不增加 merge commit。
+- 初始导入完成时状态：原稿基线已就绪，书稿质量、实验结果及出版批准仍待获授权成员按任务处理；当时只建立本地版本，尚未推送。
+
+### 按用户要求精简仓库
+
+- 2026-10-11 用户授权：建项用户在本会话要求“docker目录不需要啊”，随后补充“gitattributes 也直接去掉吧”，确认结果见 [D-002](DECISIONS.md)。记录人：框架超级管理员。
+- 实施范围：从独立仓库删除 `docker/dockerfile` 与 `.gitattributes`，移除空 `docker/` 目录，更新仓库说明；原稿、原下载目录与文件索引保留。
+- 目录清理完成时基线：本地 `main` 提交 `2f47631c7f41d3585bf25242b037cb92e988d0f1`，当时 WORKSPACE 和[工作区输入索引](artifacts/README.md)同步引用该精确版本；后续版本整理见下节。
+- 验证证据：13 篇原稿的源文件、本地副本与 Git 内容逐字节一致；剩余 15 个预期文件，导航中的 14 处本地链接有效；两个删除目标已不存在。
+- 提交方式与状态：成果物仓库使用 `bugfix/remove-docker`，OPC 使用 `bugfix/book-bitcoin/remove-docker`，分别快进更新 `main` 和 `project/book-bitcoin`，不增加 merge commit；本轮仅保存本地版本，尚未推送，不构成内容审校或出版批准。
+
+### 远端同步与版本核对
+
+- 2026-10-11 用户授权：建项用户在本会话要求“同步到远程仓库吧”，范围为书稿仓库 `main` 与 OPC 的 `project/book-bitcoin`；确认记录见 [D-003](DECISIONS.md)。记录人：框架超级管理员。
+- 推送前事实：现有书稿 `main` 已经通过本地 reset/amend 整理为 `0811b23eb19d79ceb55a3c64a81944312eec0f2c`；本轮未执行该历史整理。与原声明版本 `2f47631c7f41d3585bf25242b037cb92e988d0f1` 的文件树完全一致，均为 `2f173ea03ae48e07accc2542fb60c7aaa82b574f`；两个目标远端分支当时均不存在。
+- 书稿同步证据：已将现有 `main` 普通推送至 `git@github.com:yinzhongkai/book-bitcoin.git`，重新读取远端 `refs/heads/main` 确认提交为 `0811b23eb19d79ceb55a3c64a81944312eec0f2c`，并建立本地跟踪关系。
+- 配置与项目记录同步：WORKSPACE、状态摘要及当前输入索引改为引用现有精确提交；在 `bugfix/book-bitcoin/remote-sync` 更新本轮记录，按本会话线性提交偏好快进更新 `project/book-bitcoin`，再按用户授权推送该项目分支。无成果物内容修改，不创建成果物开发分支；不推送框架主线或其他项目分支。
 
 ## 工作方法
 
