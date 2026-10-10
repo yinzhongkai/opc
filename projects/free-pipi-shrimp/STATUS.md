@@ -14,7 +14,7 @@
   - T-004（planner，P1）：completed。依据 D-009 将首站确定为三星堆，A-003 v0.3（draft）规划 5 篇第一人称连载，前 2 篇为缓冲存量优先输入；规划提交为 `ef84a159c2ac74c22bc3c9b93c2a70cbec1e040e`。project-manager 于 2026-10-10 完成范围、依赖、结构、来源与下游可执行性核对，未发现阻断问题；随后按用户授权通过 merge commit `b810b521db6c9efeb3d00ff34ade9a82729adb7c` 合入项目主分支。本核对与合并均不等于成果批准。
   - T-009（project-manager，P0）：内容生产职责重排和视觉设计、小红书运营能力接入完成；框架校验及 58 项测试通过。
 - 待开始 5 项：
-  - T-005 封面视觉模板落地（visual-designer，P1）：todo；T-003 前置依赖已满足，可启动。
+  - T-005 封面视觉模板落地（visual-designer，P1）：todo；T-003 前置依赖已满足。2026-10-10 已建立 OPC `feature/free-pipi-shrimp/t-005-cover-visual-template` 与成果物仓库 `feature/t-005-cover-visual-template`，等待 visual-designer 启动。
   - T-010 单篇 plog 文字结构与文案槽位规范（writer，P1）：todo，无阻塞。
   - T-011 首期小红书运营准备与发布包检查（social-media-operator，P1）：todo；运营材料可先启动，最终发布包检查依赖 T-006，实际发布通道依赖 H-003。
   - T-012 首批 2 篇视觉素材制作（visual-designer，P1）：todo；T-003 已满足，仍依赖 T-004、T-005。
@@ -33,7 +33,7 @@
 
 - H-003（project-manager → 用户）：open。用户此前已表示小红书专用账号已创建；但手机端测试发布流程和平台当前 AI 内容标注要求尚无完成证据，因此发布通道仍未闭环。账号凭据继续不得写入仓库或项目记录。
 - 当前没有待确认的产品决定；时间和资源约束仍未设定，如需日期承诺须补充排期条件。
-- T-004 已完成提交整理、`--no-ff` 合并、目标分支验证、远端同步和 feature 分支清理，可以开始下一轮 feature。下一步优先执行 T-005，再依据 A-003 前 2 篇执行 T-012，同时可依资源安排 T-010、T-011，最后由 writer 基于 T-010 与 T-012 完成 T-006。该顺序不改变各任务原有负责人和验收边界。
+- T-004 已完成提交整理、`--no-ff` 合并、目标分支验证、远端同步和 feature 分支清理。T-005 双仓库 feature 已创建，下一步由 visual-designer 执行封面视觉模板；完成后再依据 A-003 前 2 篇执行 T-012，同时可依资源安排 T-010、T-011，最后由 writer 基于 T-010 与 T-012 完成 T-006。该顺序不改变各任务原有负责人和验收边界。
 - T-003 的产品与 OPC feature 均已完成按功能压缩、merge commit 合入、远端同步和分支清理；当前无待处理的 T-003 评审或合并事项。恢复用归档标签继续保留，如需删除须另行确认。
 
 本文件是摘要，原始事实以 [TASKS.md](TASKS.md)、[DECISIONS.md](DECISIONS.md)、[HANDOFFS.md](HANDOFFS.md) 和 [成果索引](artifacts/README.md) 为准。汇总后注明实际信息范围，过期摘要不能覆盖原始记录。
