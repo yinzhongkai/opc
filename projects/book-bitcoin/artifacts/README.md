@@ -5,7 +5,8 @@
 | 成果 ID | 名称与位置 | 存储位置 | 负责人 | 关联任务 | 版本/精确提交 | 状态 | 批准决定 |
 |---|---|---|---|---|---|---|---|
 | A-001 | [全书内容与配套资料盘点](book/content-inventory.md)；[扫描证据](book/inventory-evidence.json) | OPC artifacts/book/ | project-manager | [T-001](../TASKS.md) | 0.1；书稿输入 0811b23eb19d79ceb55a3c64a81944312eec0f2c | draft | 尚无 |
-| A-002 | [全书审核与修订计划](book/review-plan.md) | OPC artifacts/book/ | project-manager | [T-001](../TASKS.md) | 0.1；输入 A-001 0.1 及上述书稿提交 | draft | 尚无；D-005 待确认 |
+| A-002 | [全书审核与修订计划](book/review-plan.md) | OPC artifacts/book/ | project-manager | [T-001、T-002](../TASKS.md) | 0.2；输入 A-001 0.1、A-003 1.0 与 D-005 | draft | 具体标准 / 边界已由 D-005 确认；书稿最终批准尚无 |
+| A-003 | [审校标准与配套交付边界](book/review-criteria.md) | OPC artifacts/book/ | project-manager | [T-002](../TASKS.md) | 1.0；获确认草案 0.1 位于 OPC 提交 07e2bdcc23625d2e7f2499d7bdcc7242a50d995f | approved | D-005；2026-10-11 用户采用整体建议，范围仅标准与交付边界 |
 
 OPC 治理与协作成果使用当前项目 `artifacts/` 内的正文链接；产品代码和直接业务交付物使用“成果物仓库 + 仓库内路径”，并记录其最终合并提交。可移动分支名不能代替精确提交。
 
