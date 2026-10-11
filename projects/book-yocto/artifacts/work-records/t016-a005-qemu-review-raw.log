@@ -1,0 +1,2768 @@
+# T-016 A-005 v0.1 qemu-engineer readonly evidence
+Date: 2026-10-11 Asia/Shanghai
+Fixed review: 69ce591cd9e4ee310b80cff4663c20c776364cfd / d7d474e4de48ad8e05ffd4d9893594214843f9be
+Source excerpts and existing records are static evidence, not model execution.
+Initial oversized C output was truncated and is excluded; C2/E/F replace the needed excerpts.
+
+===== A =====
+COMMAND:
+ssh -F C:/Users/YinZh/.ssh/config -o BatchMode=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile=C:/Users/YinZh/.ssh/known_hosts -o ConnectTimeout=10 tiger 'set -e; date --iso-8601=seconds; hostname; id -un; git -C /home/oops/workspace/meta-tiger status --porcelain=v1 --branch; git -C /home/oops/workspace/meta-tiger rev-parse HEAD; git -C /home/oops/workspace/meta-tiger remote -v; git -C /home/oops/workspace/poky status --porcelain=v1 --branch; git -C /home/oops/workspace/poky rev-parse HEAD; sha256sum /home/oops/workspace/build/downloads/qemu-8.2.7.tar.xz /home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/.pc/applied-patches; cat /home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/.pc/applied-patches'
+EXIT_CODE: 0
+OUTPUT:
+2026-10-11T20:24:18+08:00
+tiger
+oops
+## master...github/master
+0e3da48b34ef772532535a730a21878cc30ccf67
+github	git@github.com:yinzhongkai/meta-tiger.git (fetch)
+github	git@github.com:yinzhongkai/meta-tiger.git (push)
+## scarthgap...origin/scarthgap
+77d1feb37e280733684ae8a9449fb031d5d7ff40
+1f0604f296ab9acb4854c054764a1ba408643fc299bd54a6500cccfaaca65b55  /home/oops/workspace/build/downloads/qemu-8.2.7.tar.xz
+3b7c0560451d78d8eae6512a4c21d77129eb3b0e1106512949709e8ef0eb8430  /home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/.pc/applied-patches
+0001-qemu-Add-addition-environment-space-to-boot-loader-q.patch
+0003-apic-fixup-fallthrough-to-PIC.patch
+0004-configure-Add-pkg-config-handling-for-libgcrypt.patch
+0005-qemu-Do-not-include-file-if-not-exists.patch
+0006-qemu-Add-some-user-space-mmap-tweaks-to-address-musl.patch
+0007-qemu-Determinism-fixes.patch
+0008-tests-meson.build-use-relative-path-to-refer-to-file.patch
+0009-Define-MAP_SYNC-and-MAP_SHARED_VALIDATE-on-needed-li.patch
+0010-hw-pvrdma-Protect-against-buggy-or-malicious-guest-d.patch
+0002-linux-user-Replace-use-of-lfs64-related-functions-an.patch
+fixedmeson.patch
+no-pip.patch
+4a8579ad8629b57a43daa62e46cc7af6e1078116.patch
+0002-linux-user-loongarch64-Remove-TARGET_FORCE_SHMLBA.patch
+0003-linux-user-Add-strace-for-shmat.patch
+0004-linux-user-Rewrite-target_shmat.patch
+0005-tests-tcg-Check-that-shmat-does-not-break-proc-self-.patch
+0001-sched_attr-Do-not-define-for-glibc-2.41.patch
+CVE-2024-8354.patch
+CVE-2025-12464.patch
+0001-python-backport-Remove-deprecated-get_event_loop-cal.patch
+0002-python-backport-avoid-creating-additional-event-loop.patch
+CVE-2025-11234-01.patch
+CVE-2025-11234-02.patch
+CVE-2024-6519.patch
+CVE-2025-14876_p1.patch
+CVE-2025-14876_p2.patch
+CVE-2026-0665.patch
+CVE-2026-2243.patch
+0011-linux-user-workaround-for-missing-MAP_FIXED_NOREPLAC.patch
+0012-linux-user-workaround-for-missing-MAP_SHARED_VALIDAT.patch
+
+===== B =====
+COMMAND:
+$qeScript = @'
+import pathlib,re,hashlib,tarfile,json
+root=pathlib.Path('/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7')
+files=['hw/arm/virt.c','hw/arm/boot.c','hw/arm/sbsa-ref.c','target/arm/cpu.c','target/arm/cpu64.c','include/hw/arm/boot.h','hw/char/pl011.c','hw/ssi/pl022.c','hw/ssi/ssi.c','include/hw/ssi/ssi.h','hw/block/nand.c','hw/block/m25p80.c','hw/arm/stellaris.c','hw/arm/realview.c','hw/watchdog/wdt_sp805.c']
+tar=tarfile.open('/home/oops/workspace/build/downloads/qemu-8.2.7.tar.xz','r:xz')
+for f in files:
+ p=root/f
+ if not p.exists(): print('MISSING',f); continue
+ b=p.read_bytes(); orig=tar.extractfile('qemu-8.2.7/'+f).read()
+ print('HASH',f,hashlib.sha256(b).hexdigest(),'EQUAL_ARCHIVE',b==orig)
+pattern=re.compile(r'load_image|load_elf|firmware_loaded|arm_load_kernel|arm_cpu_reset|reset-cbar|reset-rvbar|rvbar|start-powered-off|has_el[23]|aarch64|qdev_prop_set_chr|serial_hd|sysbus_create_simple|pl011|create_uart|create_gic|virt_cpu|ARM_CPU_IRQ|gic_version|cntfrq|reset_pc|rom_add')
+for f in ['hw/arm/virt.c','hw/arm/boot.c','hw/arm/sbsa-ref.c','target/arm/cpu.c','target/arm/cpu64.c','hw/char/pl011.c','include/hw/arm/boot.h']:
+ print('MATCHES',f)
+ for n,line in enumerate((root/f).read_text().splitlines(),1):
+  if pattern.search(line): print(str(n)+':'+line)
+print('PATCH_FILES')
+poky=pathlib.Path('/home/oops/workspace/poky/meta/recipes-devtools/qemu')
+for p in sorted(poky.rglob('*.patch')):
+ s=p.read_text(errors='replace')
+ touched=[m for m in re.findall(r'^diff --git a/(\S+) b/\S+',s,re.M) if m in files]
+ if touched: print(p.name,repr(touched))
+
+'@
+$qeScript | ssh -F C:/Users/YinZh/.ssh/config -o BatchMode=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile=C:/Users/YinZh/.ssh/known_hosts -o ConnectTimeout=10 tiger 'python3 -B -'
+EXIT_CODE: 0
+OUTPUT:
+HASH hw/arm/virt.c 013ed362d72b07b90ff255c088c2f76a48998d5275b92e6f0e1abd5f4129740c EQUAL_ARCHIVE True
+HASH hw/arm/boot.c ee1936b55f50f295c458b9de1e40827227c501190dcfa1eb8c6c4cf6192f75ee EQUAL_ARCHIVE True
+HASH hw/arm/sbsa-ref.c 655608b18d21e19f343ad22a90246d3002898e3bf5ce4f9e45b378a5262ab6a1 EQUAL_ARCHIVE True
+HASH target/arm/cpu.c b72631fe4956aa1a88978988d94c5b2548d4dc7acaed088e0b80f5439690c866 EQUAL_ARCHIVE True
+HASH target/arm/cpu64.c 2b6bde3f25da32e3b3eaa13150b09ed94e618347c7ab7be7df13499d3e02ce6e EQUAL_ARCHIVE True
+HASH include/hw/arm/boot.h 21f633ee1e88db4f053c90f8a712493947e0ec4bf129d879c417bf345770fc8f EQUAL_ARCHIVE True
+HASH hw/char/pl011.c f6ff8574bf5165a00a01467c821f1a2365e58667484786f4334f9f76a42c4723 EQUAL_ARCHIVE True
+HASH hw/ssi/pl022.c ec7946bf40de500d635875072b5d54b18cf789eda688a6c757d353e0ae0f5f53 EQUAL_ARCHIVE True
+HASH hw/ssi/ssi.c 7bdec7155695c60bf933b0f274e2dd400539577dc04c50dfb869c33eb0d2446d EQUAL_ARCHIVE True
+HASH include/hw/ssi/ssi.h ee3fd77c524486a277c313b92fc51a007b9509c0a1e84ccb044b97dd4f49f44d EQUAL_ARCHIVE True
+HASH hw/block/nand.c 92e870a4d6103c836128aae3b55f62fb47ffa755d65f92fe5cb060999993c00f EQUAL_ARCHIVE True
+HASH hw/block/m25p80.c e7d41385d34bc541b9a522f4a554c15bf4603f829eea66ad49a83e99398cd1a7 EQUAL_ARCHIVE True
+HASH hw/arm/stellaris.c 06ac9875a1b91f51e5ffe734cdba2458d99aceeb529dbcbeb03bff0e67ef3266 EQUAL_ARCHIVE True
+HASH hw/arm/realview.c a30599546d709ecb5e301882439ac2aabaa3ea965bcfe282fc7b9fa04916143e EQUAL_ARCHIVE True
+MISSING hw/watchdog/wdt_sp805.c
+MATCHES hw/arm/virt.c
+82:#include "hw/char/pl011.h"
+352:    if (vms->gic_version == VIRT_GIC_VERSION_2) {
+552:    if (vms->gic_version != VIRT_GIC_VERSION_2) {
+625:    if (vms->gic_version == VIRT_GIC_VERSION_2) {
+716:static void create_gic(VirtMachineState *vms, MemoryRegion *mem)
+727:    if (vms->gic_version == VIRT_GIC_VERSION_2) {
+733:    switch (vms->gic_version) {
+757:    if (vms->gic_version != VIRT_GIC_VERSION_2) {
+792:    if (vms->gic_version != VIRT_GIC_VERSION_2) {
+829:        if (vms->gic_version != VIRT_GIC_VERSION_2) {
+844:        sysbus_connect_irq(gicbusdev, i, qdev_get_gpio_in(cpudev, ARM_CPU_IRQ));
+855:    if (vms->gic_version != VIRT_GIC_VERSION_2 && vms->its) {
+857:    } else if (vms->gic_version == VIRT_GIC_VERSION_2) {
+862:static void create_uart(const VirtMachineState *vms, int uart,
+869:    const char compat[] = "arm,pl011\0arm,primecell";
+875:    qdev_prop_set_chr(dev, "chardev", chr);
+881:    nodename = g_strdup_printf("/pl011@%" PRIx64, base);
+919:    sysbus_create_simple("pl031", base, qdev_get_gpio_in(vms->gic, irq));
+950:    gpio_key_dev = sysbus_create_simple("gpio-key", -1,
+974:    gpio_pwr_dev = sysbus_create_simple("gpio-pwr", -1, NULL);
+1089:        sysbus_create_simple("virtio-mmio", base,
+1272:        image_size = load_image_mr(fname, mr);
+1691:static uint64_t virt_cpu_mp_affinity(VirtMachineState *vms, int idx)
+1705:        if (vms->gic_version == VIRT_GIC_VERSION_2) {
+1828:static VirtGICType finalize_gic_version_do(const char *accel_name,
+1829:                                           VirtGICType gic_version,
+1834:    switch (gic_version) {
+1842:        return finalize_gic_version_do(accel_name, VIRT_GIC_VERSION_MAX,
+1846:            gic_version = VIRT_GIC_VERSION_4;
+1848:            gic_version = VIRT_GIC_VERSION_3;
+1850:            gic_version = VIRT_GIC_VERSION_2;
+1856:            gic_version = VIRT_GIC_VERSION_2;
+1863:            gic_version = VIRT_GIC_VERSION_3;
+1877:    switch (gic_version) {
+1898:        error_report("logic error in finalize_gic_version");
+1903:    return gic_version;
+1907: * finalize_gic_version - Determines the final gic_version
+1912:static void finalize_gic_version(VirtMachineState *vms)
+1955:    vms->gic_version = finalize_gic_version_do(accel_name, vms->gic_version,
+1960: * virt_cpu_post_init() must be called after the CPUs have
+1963:static void virt_cpu_post_init(VirtMachineState *vms, MemoryRegion *sysmem)
+1966:    bool aarch64, pmu, steal_time;
+1969:    aarch64 = object_property_get_bool(OBJECT(first_cpu), "aarch64", NULL);
+2011:        if (aarch64 && vms->highmem) {
+2036:    bool firmware_loaded;
+2037:    bool aarch64 = true;
+2076:    finalize_gic_version(vms);
+2091:    firmware_loaded = virt_firmware_init(vms, sysmem,
+2104:    if (vms->secure && firmware_loaded) {
+2117:    if (vms->gic_version == VIRT_GIC_VERSION_2) {
+2130:        if (vms->gic_version != VIRT_GIC_VERSION_2 && !vms->highmem_redists) {
+2179:        aarch64 &= object_property_get_bool(cpuobj, "aarch64", NULL);
+2182:            object_property_set_bool(cpuobj, "has_el3", false, NULL);
+2185:        if (!vms->virt && object_property_find(cpuobj, "has_el2")) {
+2186:            object_property_set_bool(cpuobj, "has_el2", false, NULL);
+2207:        if (object_property_find(cpuobj, "reset-cbar")) {
+2208:            object_property_set_int(cpuobj, "reset-cbar",
+2268:    create_gic(vms, sysmem);
+2270:    virt_cpu_post_init(vms, sysmem);
+2274:    create_uart(vms, VIRT_UART, sysmem, serial_hd(0));
+2278:        create_uart(vms, VIRT_SECURE_UART, secure_sysmem, serial_hd(1));
+2286:    vms->highmem_ecam &= (!firmware_loaded || aarch64);
+2292:    if (has_ged && aarch64 && firmware_loaded && virt_is_acpi_enabled(vms)) {
+2334:    vms->bootinfo.firmware_loaded = firmware_loaded;
+2336:    arm_load_kernel(ARM_CPU(first_cpu), machine, &vms->bootinfo);
+2565:static char *virt_get_gic_version(Object *obj, Error **errp)
+2570:    switch (vms->gic_version) {
+2584:static void virt_set_gic_version(Object *obj, const char *value, Error **errp)
+2589:        vms->gic_version = VIRT_GIC_VERSION_4;
+2591:        vms->gic_version = VIRT_GIC_VERSION_3;
+2593:        vms->gic_version = VIRT_GIC_VERSION_2;
+2595:        vms->gic_version = VIRT_GIC_VERSION_HOST; /* Will probe later */
+2597:        vms->gic_version = VIRT_GIC_VERSION_MAX; /* Will probe later */
+2648:virt_cpu_index_to_props(MachineState *ms, unsigned cpu_index)
+2682:            virt_cpu_mp_affinity(vms, n);
+2960:    mc->cpu_index_to_instance_props = virt_cpu_index_to_props;
+3036:    object_class_property_add_str(oc, "gic-version", virt_get_gic_version,
+3037:                                  virt_set_gic_version);
+3121:    vms->gic_version = VIRT_GIC_VERSION_NOSEL;
+MATCHES hw/arm/boot.c
+63:static const ARMInsnFixup bootloader_aarch64[] = {
+139:     * guest memory using rom_add_blob_fixed(). fixupcontext is
+179:    rom_add_blob_fixed_as(name, code, len * sizeof(uint32_t), addr, as);
+247:    rom_add_blob_fixed_as("board-setup-mvbar", mvbar_blob, sizeof(mvbar_blob),
+253:    rom_add_blob_fixed_as("board-setup", board_setup_blob,
+669:    rom_add_blob_fixed_as("dtb", fdt, size, addr, as);
+736:            if (env->aarch64) {
+791:static ssize_t arm_load_elf(struct arm_boot_info *info, uint64_t *pentry,
+806:    load_elf_hdr(info->kernel_filename, &elf_header, &elf_is64, &err);
+837:    ret = load_elf_as(info->kernel_filename, NULL, NULL, NULL,
+848:static uint64_t load_aarch64_image(const char *filename, hwaddr mem_base,
+856:    /* On aarch64, it's the bootloader's job to uncompress the kernel. */
+857:    size = load_image_gzipped_buffer(filename, LOAD_IMAGE_MAX_GUNZIP_BYTES,
+917:    rom_add_blob_fixed_as(filename, buffer, size, *entry, as);
+942:        primary_loader = bootloader_aarch64;
+953:    kernel_size = arm_load_elf(info, &elf_entry, &image_low_addr,
+984:        kernel_size = load_aarch64_image(info->kernel_filename,
+994:        kernel_size = load_image_targphys_as(info->kernel_filename, entry,
+1052:                initrd_size = load_image_targphys_as(info->initrd_filename,
+1181:        load_image_to_fw_cfg(fw_cfg,
+1185:        load_image_to_fw_cfg(fw_cfg,
+1204:void arm_load_kernel(ARMCPU *cpu, MachineState *ms, struct arm_boot_info *info)
+1236:    if (!info->kernel_filename || info->firmware_loaded) {
+1290:                object_property_set_bool(cpuobj, "start-powered-off", true,
+MATCHES hw/arm/sbsa-ref.c
+48:#include "hw/char/pl011.h"
+399:        image_size = load_image_mr(fname, mr);
+435:static void create_gic(SBSAMachineState *sms, MemoryRegion *mem)
+510:        sysbus_connect_irq(gicbusdev, i, qdev_get_gpio_in(cpudev, ARM_CPU_IRQ));
+521:static void create_uart(const SBSAMachineState *sms, int uart,
+529:    qdev_prop_set_chr(dev, "chardev", chr);
+541:    sysbus_create_simple("pl031", base, qdev_get_gpio_in(sms->gic, irq));
+575:    pl061_dev = sysbus_create_simple("pl061", base,
+578:    gpio_key_dev = sysbus_create_simple("gpio-key", -1,
+732:    bool firmware_loaded;
+756:    firmware_loaded = sbsa_firmware_init(sms, sysmem, secure_sysmem);
+799:        if (object_property_find(cpuobj, "reset-cbar")) {
+800:            object_property_set_int(cpuobj, "reset-cbar",
+822:    create_gic(sms, sysmem);
+824:    create_uart(sms, SBSA_UART, sysmem, serial_hd(0));
+825:    create_uart(sms, SBSA_SECURE_UART, secure_sysmem, serial_hd(1));
+827:    create_uart(sms, SBSA_SECURE_UART_MM, secure_sysmem, serial_hd(2));
+847:    sms->bootinfo.firmware_loaded = firmware_loaded;
+848:    arm_load_kernel(ARM_CPU(first_cpu), machine, &sms->bootinfo);
+MATCHES target/arm/cpu.c
+208:static void arm_cpu_reset_hold(Object *obj)
+237:        env->aarch64 = true;
+311:        /* Sample rvbar at reset.  */
+312:        env->cp15.rvbar = cpu->rvbar_prop;
+313:        env->pc = env->cp15.rvbar;
+324:            env->cp15.rvbar = cpu->rvbar_prop;
+325:            env->regs[15] = cpu->rvbar_prop;
+595:        if (env->aarch64) {
+633:        if (env->aarch64) {
+639:    if (env->aarch64) {
+640:        env->pstate = aarch64_pstate_mode(target_el, true);
+922:        [ARM_CPU_IRQ] = CPU_INTERRUPT_HARD,
+951:    case ARM_CPU_IRQ:
+974:    case ARM_CPU_IRQ:
+1055:static void aarch64_cpu_dump_state(CPUState *cs, FILE *f, int flags)
+1209:static inline void aarch64_cpu_dump_state(CPUState *cs, FILE *f, int flags)
+1223:        aarch64_cpu_dump_state(cs, f, flags);
+1367:static Property arm_cpu_gt_cntfrq_property =
+1368:            DEFINE_PROP_UINT64("cntfrq", ARMCPU, gt_cntfrq_hz,
+1371:static Property arm_cpu_reset_cbar_property =
+1372:            DEFINE_PROP_UINT64("reset-cbar", ARMCPU, reset_cbar, 0);
+1374:static Property arm_cpu_reset_hivecs_property =
+1378:static Property arm_cpu_has_el2_property =
+1379:            DEFINE_PROP_BOOL("has_el2", ARMCPU, has_el2, true);
+1381:static Property arm_cpu_has_el3_property =
+1382:            DEFINE_PROP_BOOL("has_el3", ARMCPU, has_el3, true);
+1436:unsigned int gt_cntfrq_period_ns(ARMCPU *cpu)
+1441:     *     muldiv64(qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL), cpu->gt_cntfrq_hz,
+1449:     * `(NANOSECONDS_PER_SECOND % cpu->gt_cntfrq) > 0` holds. Failing to
+1456:    return NANOSECONDS_PER_SECOND > cpu->gt_cntfrq_hz ?
+1457:      NANOSECONDS_PER_SECOND / cpu->gt_cntfrq_hz : 1;
+1565:        qdev_property_add_static(DEVICE(obj), &arm_cpu_reset_cbar_property);
+1569:        qdev_property_add_static(DEVICE(obj), &arm_cpu_reset_hivecs_property);
+1573:        object_property_add_uint64_ptr(obj, "rvbar",
+1574:                                       &cpu->rvbar_prop,
+1580:        /* Add the has_el3 state CPU property only if EL3 is allowed.  This will
+1581:         * prevent "has_el3" from existing on CPUs which cannot support EL3.
+1583:        qdev_property_add_static(DEVICE(obj), &arm_cpu_has_el3_property);
+1593:        qdev_property_add_static(DEVICE(obj), &arm_cpu_has_el2_property);
+1689:        qdev_property_add_static(DEVICE(cpu), &arm_cpu_gt_cntfrq_property);
+1849:        if (cpu->has_el3) {
+1867:            if (!cpu->gt_cntfrq_hz) {
+1869:                           cpu->gt_cntfrq_hz);
+1872:            scale = gt_cntfrq_period_ns(cpu);
+2131:    if (!arm_feature(env, ARM_FEATURE_M) && !cpu->has_el3) {
+2132:        /* If the has_el3 CPU property is disabled then we need to disable the
+2151:    if (!cpu->has_el2) {
+2330:    bool has_secure = cpu->has_el3 || arm_feature(env, ARM_FEATURE_M_SECURITY);
+2492:    resettable_class_set_parent_phases(rc, NULL, arm_cpu_reset_hold, NULL,
+MATCHES target/arm/cpu64.c
+431:void aarch64_add_sve_properties(Object *obj)
+454:void aarch64_add_sme_properties(Object *obj)
+556:void aarch64_add_pauth_properties(Object *obj)
+598:static void aarch64_a57_initfn(Object *obj)
+655:static void aarch64_a53_initfn(Object *obj)
+712:static void aarch64_host_initfn(Object *obj)
+718:        aarch64_add_sve_properties(obj);
+719:        aarch64_add_pauth_properties(obj);
+724:    aarch64_add_pauth_properties(obj);
+730:static void aarch64_max_initfn(Object *obj)
+734:        aarch64_host_initfn(obj);
+739:        aarch64_a57_initfn(obj);
+744:        aarch64_max_tcg_initfn(obj);
+748:static const ARMCPUInfo aarch64_cpus[] = {
+749:    { .name = "cortex-a57",         .initfn = aarch64_a57_initfn },
+750:    { .name = "cortex-a53",         .initfn = aarch64_a53_initfn },
+751:    { .name = "max",                .initfn = aarch64_max_initfn },
+753:    { .name = "host",               .initfn = aarch64_host_initfn },
+757:static bool aarch64_cpu_get_aarch64(Object *obj, Error **errp)
+764:static void aarch64_cpu_set_aarch64(Object *obj, bool value, Error **errp)
+774:            error_setg(errp, "'aarch64' feature cannot be disabled "
+785:static void aarch64_cpu_finalizefn(Object *obj)
+789:static const gchar *aarch64_gdb_arch_name(CPUState *cs)
+791:    return "aarch64";
+794:static void aarch64_cpu_class_init(ObjectClass *oc, void *data)
+798:    cc->gdb_read_register = aarch64_cpu_gdb_read_register;
+799:    cc->gdb_write_register = aarch64_cpu_gdb_write_register;
+801:    cc->gdb_core_xml_file = "aarch64-core.xml";
+802:    cc->gdb_arch_name = aarch64_gdb_arch_name;
+804:    object_class_property_add_bool(oc, "aarch64", aarch64_cpu_get_aarch64,
+805:                                   aarch64_cpu_set_aarch64);
+806:    object_class_property_set_description(oc, "aarch64",
+807:                                          "Set on/off to enable/disable aarch64 "
+811:static void aarch64_cpu_instance_init(Object *obj)
+826:void aarch64_cpu_register(const ARMCPUInfo *info)
+830:        .instance_init = aarch64_cpu_instance_init,
+840:static const TypeInfo aarch64_cpu_type_info = {
+843:    .instance_finalize = aarch64_cpu_finalizefn,
+845:    .class_init = aarch64_cpu_class_init,
+848:static void aarch64_cpu_register_types(void)
+852:    type_register_static(&aarch64_cpu_type_info);
+854:    for (i = 0; i < ARRAY_SIZE(aarch64_cpus); ++i) {
+855:        aarch64_cpu_register(&aarch64_cpus[i]);
+859:type_init(aarch64_cpu_register_types)
+MATCHES hw/char/pl011.c
+23:#include "hw/char/pl011.h"
+36:DeviceState *pl011_create(hwaddr addr, qemu_irq irq, Chardev *chr)
+41:    dev = qdev_new("pl011");
+43:    qdev_prop_set_chr(dev, "chardev", chr);
+79:static const unsigned char pl011_id_arm[8] =
+81:static const unsigned char pl011_id_luminary[8] =
+84:static const char *pl011_regname(hwaddr offset)
+112:static void pl011_update(PL011State *s)
+118:    trace_pl011_irq_state(flags != 0);
+124:static bool pl011_is_fifo_enabled(PL011State *s)
+129:static inline unsigned pl011_get_fifo_depth(PL011State *s)
+132:    return pl011_is_fifo_enabled(s) ? PL011_FIFO_DEPTH : 1;
+135:static inline void pl011_reset_fifo(PL011State *s)
+145:static uint64_t pl011_read(void *opaque, hwaddr offset,
+158:            s->read_pos = (s->read_pos + 1) & (pl011_get_fifo_depth(s) - 1);
+165:        trace_pl011_read_fifo(s->read_count);
+167:        pl011_update(s);
+212:                      "pl011_read: Bad offset 0x%x\n", (int)offset);
+217:    trace_pl011_read(offset, r, pl011_regname(offset));
+221:static void pl011_set_read_trigger(PL011State *s)
+235:static unsigned int pl011_get_baudrate(const PL011State *s)
+247:static void pl011_trace_baudrate_change(const PL011State *s)
+249:    trace_pl011_baudrate_change(pl011_get_baudrate(s),
+254:static void pl011_write(void *opaque, hwaddr offset,
+260:    trace_pl011_write(offset, value, pl011_regname(offset));
+270:        pl011_update(s);
+283:        pl011_trace_baudrate_change(s);
+287:        pl011_trace_baudrate_change(s);
+292:            pl011_reset_fifo(s);
+300:        pl011_set_read_trigger(s);
+308:        pl011_set_read_trigger(s);
+312:        pl011_update(s);
+316:        pl011_update(s);
+321:            qemu_log_mask(LOG_UNIMP, "pl011: DMA not implemented\n");
+326:                      "pl011_write: Bad offset 0x%x\n", (int)offset);
+330:static int pl011_can_receive(void *opaque)
+335:    r = s->read_count < pl011_get_fifo_depth(s);
+336:    trace_pl011_can_receive(s->lcr, s->read_count, r);
+340:static void pl011_put_fifo(void *opaque, uint32_t value)
+346:    pipe_depth = pl011_get_fifo_depth(s);
+351:    trace_pl011_put_fifo(value, s->read_count);
+353:        trace_pl011_put_fifo_full();
+358:        pl011_update(s);
+362:static void pl011_receive(void *opaque, const uint8_t *buf, int size)
+364:    pl011_put_fifo(opaque, *buf);
+367:static void pl011_event(void *opaque, QEMUChrEvent event)
+370:        pl011_put_fifo(opaque, DR_BE);
+374:static void pl011_clock_update(void *opaque, ClockEvent event)
+378:    pl011_trace_baudrate_change(s);
+381:static const MemoryRegionOps pl011_ops = {
+382:    .read = pl011_read,
+383:    .write = pl011_write,
+389:static bool pl011_clock_needed(void *opaque)
+396:static const VMStateDescription vmstate_pl011_clock = {
+397:    .name = "pl011/clock",
+400:    .needed = pl011_clock_needed,
+407:static int pl011_post_load(void *opaque, int version_id)
+417:    if (!pl011_is_fifo_enabled(s) && s->read_count > 0 && s->read_pos > 0) {
+431:static const VMStateDescription vmstate_pl011 = {
+432:    .name = "pl011",
+435:    .post_load = pl011_post_load,
+456:        &vmstate_pl011_clock,
+461:static Property pl011_properties[] = {
+467:static void pl011_init(Object *obj)
+473:    memory_region_init_io(&s->iomem, OBJECT(s), &pl011_ops, s, "pl011", 0x1000);
+479:    s->clk = qdev_init_clock_in(DEVICE(obj), "clk", pl011_clock_update, s,
+482:    s->id = pl011_id_arm;
+485:static void pl011_realize(DeviceState *dev, Error **errp)
+489:    qemu_chr_fe_set_handlers(&s->chr, pl011_can_receive, pl011_receive,
+490:                             pl011_event, NULL, s, NULL, true);
+493:static void pl011_reset(DeviceState *dev)
+509:    pl011_reset_fifo(s);
+512:static void pl011_class_init(ObjectClass *oc, void *data)
+516:    dc->realize = pl011_realize;
+517:    dc->reset = pl011_reset;
+518:    dc->vmsd = &vmstate_pl011;
+519:    device_class_set_props(dc, pl011_properties);
+522:static const TypeInfo pl011_arm_info = {
+526:    .instance_init = pl011_init,
+527:    .class_init    = pl011_class_init,
+530:static void pl011_luminary_init(Object *obj)
+534:    s->id = pl011_id_luminary;
+537:static const TypeInfo pl011_luminary_info = {
+540:    .instance_init = pl011_luminary_init,
+543:static void pl011_register_types(void)
+545:    type_register_static(&pl011_arm_info);
+546:    type_register_static(&pl011_luminary_info);
+549:type_init(pl011_register_types)
+MATCHES include/hw/arm/boot.h
+49:    /* If set to True, arm_load_kernel() will not load DTB.
+97:     * as appropriate. arm_load_kernel() will set the psci-conduit and
+98:     * start-powered-off properties on the CPUs accordingly.
+113:    bool firmware_loaded;
+138: * arm_load_kernel - Loads memory with everything needed to boot
+152:void arm_load_kernel(ARMCPU *cpu, MachineState *ms, struct arm_boot_info *info);
+PATCH_FILES
+
+===== C2 =====
+COMMAND:
+$qeScript = @'
+import pathlib
+r=pathlib.Path('/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7')
+ranges={'hw/arm/boot.c':[(1150,1202),(1204,1240),(1260,1317)],'hw/arm/virt.c':[(862,881),(1250,1285),(2150,2240)],'hw/char/pl011.c':[(36,50),(112,121),(235,245),(381,387),(461,510)],'hw/core/loader.c':[(143,163)]}
+for f,segs in ranges.items():
+ lines=(r/f).read_text().splitlines()
+ for a,b in segs:
+  print('SOURCE',f,str(a)+'-'+str(b))
+  for n in range(a,min(b,len(lines))+1): print(str(n)+':'+lines[n-1])
+
+'@
+$qeScript | ssh -F C:/Users/YinZh/.ssh/config -o BatchMode=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile=C:/Users/YinZh/.ssh/known_hosts -o ConnectTimeout=10 tiger 'python3 -B -'
+EXIT_CODE: 0
+OUTPUT:
+SOURCE hw/arm/boot.c 1150-1202
+1150:    if (have_dtb(info)) {
+1151:        /*
+1152:         * If we have a device tree blob, but no kernel to supply it to (or
+1153:         * the kernel is supposed to be loaded by the bootloader), copy the
+1154:         * DTB to the base of RAM for the bootloader to pick up.
+1155:         */
+1156:        info->dtb_start = info->loader_start;
+1157:    }
+1158:
+1159:    if (info->kernel_filename) {
+1160:        FWCfgState *fw_cfg;
+1161:        bool try_decompressing_kernel;
+1162:
+1163:        fw_cfg = fw_cfg_find();
+1164:
+1165:        if (!fw_cfg) {
+1166:            error_report("This machine type does not support loading both "
+1167:                         "a guest firmware/BIOS image and a guest kernel at "
+1168:                         "the same time. You should change your QEMU command "
+1169:                         "line to specify one or the other, but not both.");
+1170:            exit(1);
+1171:        }
+1172:
+1173:        try_decompressing_kernel = arm_feature(&cpu->env,
+1174:                                               ARM_FEATURE_AARCH64);
+1175:
+1176:        /*
+1177:         * Expose the kernel, the command line, and the initrd in fw_cfg.
+1178:         * We don't process them here at all, it's all left to the
+1179:         * firmware.
+1180:         */
+1181:        load_image_to_fw_cfg(fw_cfg,
+1182:                             FW_CFG_KERNEL_SIZE, FW_CFG_KERNEL_DATA,
+1183:                             info->kernel_filename,
+1184:                             try_decompressing_kernel);
+1185:        load_image_to_fw_cfg(fw_cfg,
+1186:                             FW_CFG_INITRD_SIZE, FW_CFG_INITRD_DATA,
+1187:                             info->initrd_filename, false);
+1188:
+1189:        if (info->kernel_cmdline) {
+1190:            fw_cfg_add_i32(fw_cfg, FW_CFG_CMDLINE_SIZE,
+1191:                           strlen(info->kernel_cmdline) + 1);
+1192:            fw_cfg_add_string(fw_cfg, FW_CFG_CMDLINE_DATA,
+1193:                              info->kernel_cmdline);
+1194:        }
+1195:    }
+1196:
+1197:    /*
+1198:     * We will start from address 0 (typically a boot ROM image) in the
+1199:     * same way as hardware. Leave env->boot_info NULL, so that
+1200:     * do_cpu_reset() knows it does not need to alter the PC on reset.
+1201:     */
+1202:}
+SOURCE hw/arm/boot.c 1204-1240
+1204:void arm_load_kernel(ARMCPU *cpu, MachineState *ms, struct arm_boot_info *info)
+1205:{
+1206:    CPUState *cs;
+1207:    AddressSpace *as = arm_boot_address_space(cpu, info);
+1208:    int boot_el;
+1209:    CPUARMState *env = &cpu->env;
+1210:    int nb_cpus = 0;
+1211:
+1212:    /*
+1213:     * CPU objects (unlike devices) are not automatically reset on system
+1214:     * reset, so we must always register a handler to do so. If we're
+1215:     * actually loading a kernel, the handler is also responsible for
+1216:     * arranging that we start it correctly.
+1217:     */
+1218:    for (cs = first_cpu; cs; cs = CPU_NEXT(cs)) {
+1219:        qemu_register_reset(do_cpu_reset, ARM_CPU(cs));
+1220:        nb_cpus++;
+1221:    }
+1222:
+1223:    /*
+1224:     * The board code is not supposed to set secure_board_setup unless
+1225:     * running its code in secure mode is actually possible, and KVM
+1226:     * doesn't support secure.
+1227:     */
+1228:    assert(!(info->secure_board_setup && kvm_enabled()));
+1229:    info->kernel_filename = ms->kernel_filename;
+1230:    info->kernel_cmdline = ms->kernel_cmdline;
+1231:    info->initrd_filename = ms->initrd_filename;
+1232:    info->dtb_filename = ms->dtb;
+1233:    info->dtb_limit = 0;
+1234:
+1235:    /* Load the kernel.  */
+1236:    if (!info->kernel_filename || info->firmware_loaded) {
+1237:        arm_setup_firmware_boot(cpu, info);
+1238:    } else {
+1239:        arm_setup_direct_kernel_boot(cpu, info);
+1240:    }
+SOURCE hw/arm/boot.c 1260-1317
+1260:    /* Boot into highest supported EL ... */
+1261:    if (arm_feature(env, ARM_FEATURE_EL3)) {
+1262:        boot_el = 3;
+1263:    } else if (arm_feature(env, ARM_FEATURE_EL2)) {
+1264:        boot_el = 2;
+1265:    } else {
+1266:        boot_el = 1;
+1267:    }
+1268:    /* ...except that if we're booting Linux we adjust the EL we boot into */
+1269:    if (info->is_linux && !info->secure_boot) {
+1270:        boot_el = arm_feature(env, ARM_FEATURE_EL2) ? 2 : 1;
+1271:    }
+1272:
+1273:    if ((info->psci_conduit == QEMU_PSCI_CONDUIT_HVC && boot_el >= 2) ||
+1274:        (info->psci_conduit == QEMU_PSCI_CONDUIT_SMC && boot_el == 3)) {
+1275:        info->psci_conduit = QEMU_PSCI_CONDUIT_DISABLED;
+1276:    }
+1277:
+1278:    if (info->psci_conduit != QEMU_PSCI_CONDUIT_DISABLED) {
+1279:        for (cs = first_cpu; cs; cs = CPU_NEXT(cs)) {
+1280:            Object *cpuobj = OBJECT(cs);
+1281:
+1282:            object_property_set_int(cpuobj, "psci-conduit", info->psci_conduit,
+1283:                                    &error_abort);
+1284:            /*
+1285:             * Secondary CPUs start in PSCI powered-down state. Like the
+1286:             * code in do_cpu_reset(), we assume first_cpu is the primary
+1287:             * CPU.
+1288:             */
+1289:            if (cs != first_cpu) {
+1290:                object_property_set_bool(cpuobj, "start-powered-off", true,
+1291:                                         &error_abort);
+1292:            }
+1293:        }
+1294:    }
+1295:
+1296:    if (info->psci_conduit == QEMU_PSCI_CONDUIT_DISABLED &&
+1297:        info->is_linux && nb_cpus > 1) {
+1298:        /*
+1299:         * We're booting Linux but not using PSCI, so for SMP we need
+1300:         * to write a custom secondary CPU boot loader stub, and arrange
+1301:         * for the secondary CPU reset to make the accompanying initialization.
+1302:         */
+1303:        if (!info->secondary_cpu_reset_hook) {
+1304:            info->secondary_cpu_reset_hook = default_reset_secondary;
+1305:        }
+1306:        if (!info->write_secondary_boot) {
+1307:            info->write_secondary_boot = default_write_secondary;
+1308:        }
+1309:        info->write_secondary_boot(cpu, info);
+1310:    } else {
+1311:        /*
+1312:         * No secondary boot stub; don't use the reset hook that would
+1313:         * have set the CPU up to call it
+1314:         */
+1315:        info->write_secondary_boot = NULL;
+1316:        info->secondary_cpu_reset_hook = NULL;
+1317:    }
+SOURCE hw/arm/virt.c 862-881
+862:static void create_uart(const VirtMachineState *vms, int uart,
+863:                        MemoryRegion *mem, Chardev *chr)
+864:{
+865:    char *nodename;
+866:    hwaddr base = vms->memmap[uart].base;
+867:    hwaddr size = vms->memmap[uart].size;
+868:    int irq = vms->irqmap[uart];
+869:    const char compat[] = "arm,pl011\0arm,primecell";
+870:    const char clocknames[] = "uartclk\0apb_pclk";
+871:    DeviceState *dev = qdev_new(TYPE_PL011);
+872:    SysBusDevice *s = SYS_BUS_DEVICE(dev);
+873:    MachineState *ms = MACHINE(vms);
+874:
+875:    qdev_prop_set_chr(dev, "chardev", chr);
+876:    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
+877:    memory_region_add_subregion(mem, base,
+878:                                sysbus_mmio_get_region(s, 0));
+879:    sysbus_connect_irq(s, 0, qdev_get_gpio_in(vms->gic, irq));
+880:
+881:    nodename = g_strdup_printf("/pl011@%" PRIx64, base);
+SOURCE hw/arm/virt.c 1250-1285
+1250:
+1251:    bios_name = MACHINE(vms)->firmware;
+1252:    if (bios_name) {
+1253:        char *fname;
+1254:        MemoryRegion *mr;
+1255:        int image_size;
+1256:
+1257:        if (pflash_blk0) {
+1258:            error_report("The contents of the first flash device may be "
+1259:                         "specified with -bios or with -drive if=pflash... "
+1260:                         "but you cannot use both options at once");
+1261:            exit(1);
+1262:        }
+1263:
+1264:        /* Fall back to -bios */
+1265:
+1266:        fname = qemu_find_file(QEMU_FILE_TYPE_BIOS, bios_name);
+1267:        if (!fname) {
+1268:            error_report("Could not find ROM image '%s'", bios_name);
+1269:            exit(1);
+1270:        }
+1271:        mr = sysbus_mmio_get_region(SYS_BUS_DEVICE(vms->flash[0]), 0);
+1272:        image_size = load_image_mr(fname, mr);
+1273:        g_free(fname);
+1274:        if (image_size < 0) {
+1275:            error_report("Could not load ROM image '%s'", bios_name);
+1276:            exit(1);
+1277:        }
+1278:    }
+1279:
+1280:    return pflash_blk0 || bios_name;
+1281:}
+1282:
+1283:static FWCfgState *create_fw_cfg(const VirtMachineState *vms, AddressSpace *as)
+1284:{
+1285:    MachineState *ms = MACHINE(vms);
+SOURCE hw/arm/virt.c 2150-2240
+2150:
+2151:    if (vms->mte && (kvm_enabled() || hvf_enabled())) {
+2152:        error_report("mach-virt: %s does not support providing "
+2153:                     "MTE to the guest CPU",
+2154:                     current_accel_name());
+2155:        exit(1);
+2156:    }
+2157:
+2158:    create_fdt(vms);
+2159:
+2160:    assert(possible_cpus->len == max_cpus);
+2161:    for (n = 0; n < possible_cpus->len; n++) {
+2162:        Object *cpuobj;
+2163:        CPUState *cs;
+2164:
+2165:        if (n >= smp_cpus) {
+2166:            break;
+2167:        }
+2168:
+2169:        cpuobj = object_new(possible_cpus->cpus[n].type);
+2170:        object_property_set_int(cpuobj, "mp-affinity",
+2171:                                possible_cpus->cpus[n].arch_id, NULL);
+2172:
+2173:        cs = CPU(cpuobj);
+2174:        cs->cpu_index = n;
+2175:
+2176:        numa_cpu_pre_plug(&possible_cpus->cpus[cs->cpu_index], DEVICE(cpuobj),
+2177:                          &error_fatal);
+2178:
+2179:        aarch64 &= object_property_get_bool(cpuobj, "aarch64", NULL);
+2180:
+2181:        if (!vms->secure) {
+2182:            object_property_set_bool(cpuobj, "has_el3", false, NULL);
+2183:        }
+2184:
+2185:        if (!vms->virt && object_property_find(cpuobj, "has_el2")) {
+2186:            object_property_set_bool(cpuobj, "has_el2", false, NULL);
+2187:        }
+2188:
+2189:        if (vmc->kvm_no_adjvtime &&
+2190:            object_property_find(cpuobj, "kvm-no-adjvtime")) {
+2191:            object_property_set_bool(cpuobj, "kvm-no-adjvtime", true, NULL);
+2192:        }
+2193:
+2194:        if (vmc->no_kvm_steal_time &&
+2195:            object_property_find(cpuobj, "kvm-steal-time")) {
+2196:            object_property_set_bool(cpuobj, "kvm-steal-time", false, NULL);
+2197:        }
+2198:
+2199:        if (vmc->no_pmu && object_property_find(cpuobj, "pmu")) {
+2200:            object_property_set_bool(cpuobj, "pmu", false, NULL);
+2201:        }
+2202:
+2203:        if (vmc->no_tcg_lpa2 && object_property_find(cpuobj, "lpa2")) {
+2204:            object_property_set_bool(cpuobj, "lpa2", false, NULL);
+2205:        }
+2206:
+2207:        if (object_property_find(cpuobj, "reset-cbar")) {
+2208:            object_property_set_int(cpuobj, "reset-cbar",
+2209:                                    vms->memmap[VIRT_CPUPERIPHS].base,
+2210:                                    &error_abort);
+2211:        }
+2212:
+2213:        object_property_set_link(cpuobj, "memory", OBJECT(sysmem),
+2214:                                 &error_abort);
+2215:        if (vms->secure) {
+2216:            object_property_set_link(cpuobj, "secure-memory",
+2217:                                     OBJECT(secure_sysmem), &error_abort);
+2218:        }
+2219:
+2220:        if (vms->mte) {
+2221:            /* Create the memory region only once, but link to all cpus. */
+2222:            if (!tag_sysmem) {
+2223:                /*
+2224:                 * The property exists only if MemTag is supported.
+2225:                 * If it is, we must allocate the ram to back that up.
+2226:                 */
+2227:                if (!object_property_find(cpuobj, "tag-memory")) {
+2228:                    error_report("MTE requested, but not supported "
+2229:                                 "by the guest CPU");
+2230:                    exit(1);
+2231:                }
+2232:
+2233:                tag_sysmem = g_new(MemoryRegion, 1);
+2234:                memory_region_init(tag_sysmem, OBJECT(machine),
+2235:                                   "tag-memory", UINT64_MAX / 32);
+2236:
+2237:                if (vms->secure) {
+2238:                    secure_tag_sysmem = g_new(MemoryRegion, 1);
+2239:                    memory_region_init(secure_tag_sysmem, OBJECT(machine),
+2240:                                       "secure-tag-memory", UINT64_MAX / 32);
+SOURCE hw/char/pl011.c 36-50
+36:DeviceState *pl011_create(hwaddr addr, qemu_irq irq, Chardev *chr)
+37:{
+38:    DeviceState *dev;
+39:    SysBusDevice *s;
+40:
+41:    dev = qdev_new("pl011");
+42:    s = SYS_BUS_DEVICE(dev);
+43:    qdev_prop_set_chr(dev, "chardev", chr);
+44:    sysbus_realize_and_unref(s, &error_fatal);
+45:    sysbus_mmio_map(s, 0, addr);
+46:    sysbus_connect_irq(s, 0, irq);
+47:
+48:    return dev;
+49:}
+50:
+SOURCE hw/char/pl011.c 112-121
+112:static void pl011_update(PL011State *s)
+113:{
+114:    uint32_t flags;
+115:    int i;
+116:
+117:    flags = s->int_level & s->int_enabled;
+118:    trace_pl011_irq_state(flags != 0);
+119:    for (i = 0; i < ARRAY_SIZE(s->irq); i++) {
+120:        qemu_set_irq(s->irq[i], (flags & irqmask[i]) != 0);
+121:    }
+SOURCE hw/char/pl011.c 235-245
+235:static unsigned int pl011_get_baudrate(const PL011State *s)
+236:{
+237:    uint64_t clk;
+238:
+239:    if (s->ibrd == 0) {
+240:        return 0;
+241:    }
+242:
+243:    clk = clock_get_hz(s->clk);
+244:    return (clk / ((s->ibrd << 6) + s->fbrd)) << 2;
+245:}
+SOURCE hw/char/pl011.c 381-387
+381:static const MemoryRegionOps pl011_ops = {
+382:    .read = pl011_read,
+383:    .write = pl011_write,
+384:    .endianness = DEVICE_NATIVE_ENDIAN,
+385:    .impl.min_access_size = 4,
+386:    .impl.max_access_size = 4,
+387:};
+SOURCE hw/char/pl011.c 461-510
+461:static Property pl011_properties[] = {
+462:    DEFINE_PROP_CHR("chardev", PL011State, chr),
+463:    DEFINE_PROP_BOOL("migrate-clk", PL011State, migrate_clk, true),
+464:    DEFINE_PROP_END_OF_LIST(),
+465:};
+466:
+467:static void pl011_init(Object *obj)
+468:{
+469:    SysBusDevice *sbd = SYS_BUS_DEVICE(obj);
+470:    PL011State *s = PL011(obj);
+471:    int i;
+472:
+473:    memory_region_init_io(&s->iomem, OBJECT(s), &pl011_ops, s, "pl011", 0x1000);
+474:    sysbus_init_mmio(sbd, &s->iomem);
+475:    for (i = 0; i < ARRAY_SIZE(s->irq); i++) {
+476:        sysbus_init_irq(sbd, &s->irq[i]);
+477:    }
+478:
+479:    s->clk = qdev_init_clock_in(DEVICE(obj), "clk", pl011_clock_update, s,
+480:                                ClockUpdate);
+481:
+482:    s->id = pl011_id_arm;
+483:}
+484:
+485:static void pl011_realize(DeviceState *dev, Error **errp)
+486:{
+487:    PL011State *s = PL011(dev);
+488:
+489:    qemu_chr_fe_set_handlers(&s->chr, pl011_can_receive, pl011_receive,
+490:                             pl011_event, NULL, s, NULL, true);
+491:}
+492:
+493:static void pl011_reset(DeviceState *dev)
+494:{
+495:    PL011State *s = PL011(dev);
+496:
+497:    s->lcr = 0;
+498:    s->rsr = 0;
+499:    s->dmacr = 0;
+500:    s->int_enabled = 0;
+501:    s->int_level = 0;
+502:    s->ilpr = 0;
+503:    s->ibrd = 0;
+504:    s->fbrd = 0;
+505:    s->read_trigger = 1;
+506:    s->ifl = 0x12;
+507:    s->cr = 0x300;
+508:    s->flags = 0;
+509:    pl011_reset_fifo(s);
+510:}
+SOURCE hw/core/loader.c 143-163
+143:ssize_t load_image_mr(const char *filename, MemoryRegion *mr)
+144:{
+145:    ssize_t size;
+146:
+147:    if (!memory_access_is_direct(mr, false)) {
+148:        /* Can only load an image into RAM or ROM */
+149:        return -1;
+150:    }
+151:
+152:    size = get_image_size(filename);
+153:
+154:    if (size < 0 || size > memory_region_size(mr)) {
+155:        return -1;
+156:    }
+157:    if (size > 0) {
+158:        if (rom_add_file_mr(filename, mr, -1) < 0) {
+159:            return -1;
+160:        }
+161:    }
+162:    return size;
+163:}
+
+===== D1 =====
+COMMAND:
+$qeScript = @'
+import pathlib
+r=pathlib.Path('/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7')
+ranges={'hw/ssi/pl022.c':[(1,318)],'include/hw/ssi/ssi.h':[(1,155)],'hw/ssi/ssi.c':[(25,130)]}
+for f,segs in ranges.items():
+ lines=(r/f).read_text().splitlines()
+ for a,b in segs:
+  print('SOURCE',f,str(a)+'-'+str(b))
+  for n in range(a,min(b,len(lines))+1): print(str(n)+':'+lines[n-1])
+
+'@
+$qeScript | ssh -F C:/Users/YinZh/.ssh/config -o BatchMode=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile=C:/Users/YinZh/.ssh/known_hosts -o ConnectTimeout=10 tiger 'python3 -B -'
+EXIT_CODE: 0
+OUTPUT:
+SOURCE hw/ssi/pl022.c 1-318
+1:/*
+2: * Arm PrimeCell PL022 Synchronous Serial Port
+3: *
+4: * Copyright (c) 2007 CodeSourcery.
+5: * Written by Paul Brook
+6: *
+7: * This code is licensed under the GPL.
+8: */
+9:
+10:#include "qemu/osdep.h"
+11:#include "hw/sysbus.h"
+12:#include "migration/vmstate.h"
+13:#include "hw/irq.h"
+14:#include "hw/ssi/pl022.h"
+15:#include "hw/ssi/ssi.h"
+16:#include "qemu/log.h"
+17:#include "qemu/module.h"
+18:
+19://#define DEBUG_PL022 1
+20:
+21:#ifdef DEBUG_PL022
+22:#define DPRINTF(fmt, ...) \
+23:do { printf("pl022: " fmt , ## __VA_ARGS__); } while (0)
+24:#define BADF(fmt, ...) \
+25:do { fprintf(stderr, "pl022: error: " fmt , ## __VA_ARGS__); exit(1);} while (0)
+26:#else
+27:#define DPRINTF(fmt, ...) do {} while(0)
+28:#define BADF(fmt, ...) \
+29:do { fprintf(stderr, "pl022: error: " fmt , ## __VA_ARGS__);} while (0)
+30:#endif
+31:
+32:#define PL022_CR1_LBM 0x01
+33:#define PL022_CR1_SSE 0x02
+34:#define PL022_CR1_MS  0x04
+35:#define PL022_CR1_SDO 0x08
+36:
+37:#define PL022_SR_TFE  0x01
+38:#define PL022_SR_TNF  0x02
+39:#define PL022_SR_RNE  0x04
+40:#define PL022_SR_RFF  0x08
+41:#define PL022_SR_BSY  0x10
+42:
+43:#define PL022_INT_ROR 0x01
+44:#define PL022_INT_RT  0x02
+45:#define PL022_INT_RX  0x04
+46:#define PL022_INT_TX  0x08
+47:
+48:static const unsigned char pl022_id[8] =
+49:  { 0x22, 0x10, 0x04, 0x00, 0x0d, 0xf0, 0x05, 0xb1 };
+50:
+51:static void pl022_update(PL022State *s)
+52:{
+53:    s->sr = 0;
+54:    if (s->tx_fifo_len == 0)
+55:        s->sr |= PL022_SR_TFE;
+56:    if (s->tx_fifo_len != 8)
+57:        s->sr |= PL022_SR_TNF;
+58:    if (s->rx_fifo_len != 0)
+59:        s->sr |= PL022_SR_RNE;
+60:    if (s->rx_fifo_len == 8)
+61:        s->sr |= PL022_SR_RFF;
+62:    if (s->tx_fifo_len)
+63:        s->sr |= PL022_SR_BSY;
+64:    s->is = 0;
+65:    if (s->rx_fifo_len >= 4)
+66:        s->is |= PL022_INT_RX;
+67:    if (s->tx_fifo_len <= 4)
+68:        s->is |= PL022_INT_TX;
+69:
+70:    qemu_set_irq(s->irq, (s->is & s->im) != 0);
+71:}
+72:
+73:static void pl022_xfer(PL022State *s)
+74:{
+75:    int i;
+76:    int o;
+77:    int val;
+78:
+79:    if ((s->cr1 & PL022_CR1_SSE) == 0) {
+80:        pl022_update(s);
+81:        DPRINTF("Disabled\n");
+82:        return;
+83:    }
+84:
+85:    DPRINTF("Maybe xfer %d/%d\n", s->tx_fifo_len, s->rx_fifo_len);
+86:    i = (s->tx_fifo_head - s->tx_fifo_len) & 7;
+87:    o = s->rx_fifo_head;
+88:    /* ??? We do not emulate the line speed.
+89:       This may break some applications.  The are two problematic cases:
+90:        (a) A driver feeds data into the TX FIFO until it is full,
+91:         and only then drains the RX FIFO.  On real hardware the CPU can
+92:         feed data fast enough that the RX fifo never gets chance to overflow.
+93:        (b) A driver transmits data, deliberately allowing the RX FIFO to
+94:         overflow because it ignores the RX data anyway.
+95:
+96:       We choose to support (a) by stalling the transmit engine if it would
+97:       cause the RX FIFO to overflow.  In practice much transmit-only code
+98:       falls into (a) because it flushes the RX FIFO to determine when
+99:       the transfer has completed.  */
+100:    while (s->tx_fifo_len && s->rx_fifo_len < 8) {
+101:        DPRINTF("xfer\n");
+102:        val = s->tx_fifo[i];
+103:        if (s->cr1 & PL022_CR1_LBM) {
+104:            /* Loopback mode.  */
+105:        } else {
+106:            val = ssi_transfer(s->ssi, val);
+107:        }
+108:        s->rx_fifo[o] = val & s->bitmask;
+109:        i = (i + 1) & 7;
+110:        o = (o + 1) & 7;
+111:        s->tx_fifo_len--;
+112:        s->rx_fifo_len++;
+113:    }
+114:    s->rx_fifo_head = o;
+115:    pl022_update(s);
+116:}
+117:
+118:static uint64_t pl022_read(void *opaque, hwaddr offset,
+119:                           unsigned size)
+120:{
+121:    PL022State *s = (PL022State *)opaque;
+122:    int val;
+123:
+124:    if (offset >= 0xfe0 && offset < 0x1000) {
+125:        return pl022_id[(offset - 0xfe0) >> 2];
+126:    }
+127:    switch (offset) {
+128:    case 0x00: /* CR0 */
+129:      return s->cr0;
+130:    case 0x04: /* CR1 */
+131:      return s->cr1;
+132:    case 0x08: /* DR */
+133:        if (s->rx_fifo_len) {
+134:            val = s->rx_fifo[(s->rx_fifo_head - s->rx_fifo_len) & 7];
+135:            DPRINTF("RX %02x\n", val);
+136:            s->rx_fifo_len--;
+137:            pl022_xfer(s);
+138:        } else {
+139:            val = 0;
+140:        }
+141:        return val;
+142:    case 0x0c: /* SR */
+143:        return s->sr;
+144:    case 0x10: /* CPSR */
+145:        return s->cpsr;
+146:    case 0x14: /* IMSC */
+147:        return s->im;
+148:    case 0x18: /* RIS */
+149:        return s->is;
+150:    case 0x1c: /* MIS */
+151:        return s->im & s->is;
+152:    case 0x24: /* DMACR */
+153:        /* Not implemented.  */
+154:        return 0;
+155:    default:
+156:        qemu_log_mask(LOG_GUEST_ERROR,
+157:                      "pl022_read: Bad offset %x\n", (int)offset);
+158:        return 0;
+159:    }
+160:}
+161:
+162:static void pl022_write(void *opaque, hwaddr offset,
+163:                        uint64_t value, unsigned size)
+164:{
+165:    PL022State *s = (PL022State *)opaque;
+166:
+167:    switch (offset) {
+168:    case 0x00: /* CR0 */
+169:        s->cr0 = value;
+170:        /* Clock rate and format are ignored.  */
+171:        s->bitmask = (1 << ((value & 15) + 1)) - 1;
+172:        break;
+173:    case 0x04: /* CR1 */
+174:        s->cr1 = value;
+175:        if ((s->cr1 & (PL022_CR1_MS | PL022_CR1_SSE))
+176:                   == (PL022_CR1_MS | PL022_CR1_SSE)) {
+177:            BADF("SPI peripheral mode not implemented\n");
+178:        }
+179:        pl022_xfer(s);
+180:        break;
+181:    case 0x08: /* DR */
+182:        if (s->tx_fifo_len < 8) {
+183:            DPRINTF("TX %02x\n", (unsigned)value);
+184:            s->tx_fifo[s->tx_fifo_head] = value & s->bitmask;
+185:            s->tx_fifo_head = (s->tx_fifo_head + 1) & 7;
+186:            s->tx_fifo_len++;
+187:            pl022_xfer(s);
+188:        }
+189:        break;
+190:    case 0x10: /* CPSR */
+191:        /* Prescaler.  Ignored.  */
+192:        s->cpsr = value & 0xff;
+193:        break;
+194:    case 0x14: /* IMSC */
+195:        s->im = value;
+196:        pl022_update(s);
+197:        break;
+198:    case 0x20: /* ICR */
+199:        /*
+200:         * write-1-to-clear: bit 0 clears ROR, bit 1 clears RT;
+201:         * RX and TX interrupts cannot be cleared this way.
+202:         */
+203:        value &= PL022_INT_ROR | PL022_INT_RT;
+204:        s->is &= ~value;
+205:        break;
+206:    case 0x24: /* DMACR */
+207:        if (value) {
+208:            qemu_log_mask(LOG_UNIMP, "pl022: DMA not implemented\n");
+209:        }
+210:        break;
+211:    default:
+212:        qemu_log_mask(LOG_GUEST_ERROR,
+213:                      "pl022_write: Bad offset %x\n", (int)offset);
+214:    }
+215:}
+216:
+217:static void pl022_reset(DeviceState *dev)
+218:{
+219:    PL022State *s = PL022(dev);
+220:
+221:    s->rx_fifo_len = 0;
+222:    s->tx_fifo_len = 0;
+223:    s->im = 0;
+224:    s->is = PL022_INT_TX;
+225:    s->sr = PL022_SR_TFE | PL022_SR_TNF;
+226:}
+227:
+228:static const MemoryRegionOps pl022_ops = {
+229:    .read = pl022_read,
+230:    .write = pl022_write,
+231:    .endianness = DEVICE_NATIVE_ENDIAN,
+232:};
+233:
+234:static int pl022_post_load(void *opaque, int version_id)
+235:{
+236:    PL022State *s = opaque;
+237:
+238:    if (s->tx_fifo_head < 0 ||
+239:        s->tx_fifo_head >= ARRAY_SIZE(s->tx_fifo) ||
+240:        s->rx_fifo_head < 0 ||
+241:        s->rx_fifo_head >= ARRAY_SIZE(s->rx_fifo)) {
+242:        return -1;
+243:    }
+244:    return 0;
+245:}
+246:
+247:static const VMStateDescription vmstate_pl022 = {
+248:    .name = "pl022_ssp",
+249:    .version_id = 1,
+250:    .minimum_version_id = 1,
+251:    .post_load = pl022_post_load,
+252:    .fields = (VMStateField[]) {
+253:        VMSTATE_UINT32(cr0, PL022State),
+254:        VMSTATE_UINT32(cr1, PL022State),
+255:        VMSTATE_UINT32(bitmask, PL022State),
+256:        VMSTATE_UINT32(sr, PL022State),
+257:        VMSTATE_UINT32(cpsr, PL022State),
+258:        VMSTATE_UINT32(is, PL022State),
+259:        VMSTATE_UINT32(im, PL022State),
+260:        VMSTATE_INT32(tx_fifo_head, PL022State),
+261:        VMSTATE_INT32(rx_fifo_head, PL022State),
+262:        VMSTATE_INT32(tx_fifo_len, PL022State),
+263:        VMSTATE_INT32(rx_fifo_len, PL022State),
+264:        VMSTATE_UINT16(tx_fifo[0], PL022State),
+265:        VMSTATE_UINT16(rx_fifo[0], PL022State),
+266:        VMSTATE_UINT16(tx_fifo[1], PL022State),
+267:        VMSTATE_UINT16(rx_fifo[1], PL022State),
+268:        VMSTATE_UINT16(tx_fifo[2], PL022State),
+269:        VMSTATE_UINT16(rx_fifo[2], PL022State),
+270:        VMSTATE_UINT16(tx_fifo[3], PL022State),
+271:        VMSTATE_UINT16(rx_fifo[3], PL022State),
+272:        VMSTATE_UINT16(tx_fifo[4], PL022State),
+273:        VMSTATE_UINT16(rx_fifo[4], PL022State),
+274:        VMSTATE_UINT16(tx_fifo[5], PL022State),
+275:        VMSTATE_UINT16(rx_fifo[5], PL022State),
+276:        VMSTATE_UINT16(tx_fifo[6], PL022State),
+277:        VMSTATE_UINT16(rx_fifo[6], PL022State),
+278:        VMSTATE_UINT16(tx_fifo[7], PL022State),
+279:        VMSTATE_UINT16(rx_fifo[7], PL022State),
+280:        VMSTATE_END_OF_LIST()
+281:    }
+282:};
+283:
+284:static void pl022_realize(DeviceState *dev, Error **errp)
+285:{
+286:    SysBusDevice *sbd = SYS_BUS_DEVICE(dev);
+287:    PL022State *s = PL022(dev);
+288:
+289:    memory_region_init_io(&s->iomem, OBJECT(s), &pl022_ops, s, "pl022", 0x1000);
+290:    sysbus_init_mmio(sbd, &s->iomem);
+291:    sysbus_init_irq(sbd, &s->irq);
+292:    s->ssi = ssi_create_bus(dev, "ssi");
+293:}
+294:
+295:static void pl022_class_init(ObjectClass *klass, void *data)
+296:{
+297:    DeviceClass *dc = DEVICE_CLASS(klass);
+298:
+299:    dc->reset = pl022_reset;
+300:    dc->vmsd = &vmstate_pl022;
+301:    dc->realize = pl022_realize;
+302:}
+303:
+304:static const TypeInfo pl022_info = {
+305:    .name          = TYPE_PL022,
+306:    .parent        = TYPE_SYS_BUS_DEVICE,
+307:    .instance_size = sizeof(PL022State),
+308:    .class_init    = pl022_class_init,
+309:};
+310:
+311:static void pl022_register_types(void)
+312:{
+313:    type_register_static(&pl022_info);
+314:}
+315:
+316:type_init(pl022_register_types)
+SOURCE include/hw/ssi/ssi.h 1-155
+1:/* QEMU Synchronous Serial Interface support.  */
+2:
+3:/*
+4: * In principle SSI is a point-point interface.  As such the qemu
+5: * implementation has a single peripheral on a "bus".
+6: * However it is fairly common for boards to have multiple peripherals
+7: * connected to a single master, and select devices with an external
+8: * chip select.  This is implemented in qemu by having an explicit mux device.
+9: * It is assumed that master and peripheral are both using the same transfer
+10: * width.
+11: */
+12:
+13:#ifndef QEMU_SSI_H
+14:#define QEMU_SSI_H
+15:
+16:#include "hw/qdev-core.h"
+17:#include "qom/object.h"
+18:
+19:typedef enum SSICSMode SSICSMode;
+20:
+21:#define TYPE_SSI_PERIPHERAL "ssi-peripheral"
+22:OBJECT_DECLARE_TYPE(SSIPeripheral, SSIPeripheralClass,
+23:                    SSI_PERIPHERAL)
+24:
+25:#define SSI_GPIO_CS "ssi-gpio-cs"
+26:
+27:enum SSICSMode {
+28:    SSI_CS_NONE = 0,
+29:    SSI_CS_LOW,
+30:    SSI_CS_HIGH,
+31:};
+32:
+33:/* Peripherals.  */
+34:struct SSIPeripheralClass {
+35:    DeviceClass parent_class;
+36:
+37:    void (*realize)(SSIPeripheral *dev, Error **errp);
+38:
+39:    /* if you have standard or no CS behaviour, just override transfer.
+40:     * This is called when the device cs is active (true by default).
+41:     */
+42:    uint32_t (*transfer)(SSIPeripheral *dev, uint32_t val);
+43:    /* called when the CS line changes. Optional, devices only need to implement
+44:     * this if they have side effects associated with the cs line (beyond
+45:     * tristating the txrx lines).
+46:     */
+47:    int (*set_cs)(SSIPeripheral *dev, bool select);
+48:    /* define whether or not CS exists and is active low/high */
+49:    SSICSMode cs_polarity;
+50:
+51:    /* if you have non-standard CS behaviour override this to take control
+52:     * of the CS behaviour at the device level. transfer, set_cs, and
+53:     * cs_polarity are unused if this is overwritten. Transfer_raw will
+54:     * always be called for the device for every txrx access to the parent bus
+55:     */
+56:    uint32_t (*transfer_raw)(SSIPeripheral *dev, uint32_t val);
+57:};
+58:
+59:struct SSIPeripheral {
+60:    DeviceState parent_obj;
+61:
+62:    /* cache the class */
+63:    SSIPeripheralClass *spc;
+64:
+65:    /* Chip select state */
+66:    bool cs;
+67:
+68:    /* Chip select index */
+69:    uint8_t cs_index;
+70:};
+71:
+72:extern const VMStateDescription vmstate_ssi_peripheral;
+73:
+74:#define VMSTATE_SSI_PERIPHERAL(_field, _state) {                     \
+75:    .name       = (stringify(_field)),                               \
+76:    .size       = sizeof(SSIPeripheral),                             \
+77:    .vmsd       = &vmstate_ssi_peripheral,                           \
+78:    .flags      = VMS_STRUCT,                                        \
+79:    .offset     = vmstate_offset_value(_state, _field, SSIPeripheral), \
+80:}
+81:
+82:DeviceState *ssi_create_peripheral(SSIBus *bus, const char *name);
+83:/**
+84: * ssi_realize_and_unref: realize and unref an SSI peripheral
+85: * @dev: SSI peripheral to realize
+86: * @bus: SSI bus to put it on
+87: * @errp: error pointer
+88: *
+89: * Call 'realize' on @dev, put it on the specified @bus, and drop the
+90: * reference to it. Errors are reported via @errp and by returning
+91: * false.
+92: *
+93: * This function is useful if you have created @dev via qdev_new()
+94: * (which takes a reference to the device it returns to you), so that
+95: * you can set properties on it before realizing it. If you don't need
+96: * to set properties then ssi_create_peripheral() is probably better (as it
+97: * does the create, init and realize in one step).
+98: *
+99: * If you are embedding the SSI peripheral into another QOM device and
+100: * initialized it via some variant on object_initialize_child() then
+101: * do not use this function, because that family of functions arrange
+102: * for the only reference to the child device to be held by the parent
+103: * via the child<> property, and so the reference-count-drop done here
+104: * would be incorrect.  (Instead you would want ssi_realize(), which
+105: * doesn't currently exist but would be trivial to create if we had
+106: * any code that wanted it.)
+107: */
+108:bool ssi_realize_and_unref(DeviceState *dev, SSIBus *bus, Error **errp);
+109:
+110:/* Master interface.  */
+111:SSIBus *ssi_create_bus(DeviceState *parent, const char *name);
+112:
+113:uint32_t ssi_transfer(SSIBus *bus, uint32_t val);
+114:
+115:DeviceState *ssi_get_cs(SSIBus *bus, uint8_t cs_index);
+116:
+117:#endif
+SOURCE hw/ssi/ssi.c 25-130
+25:};
+26:
+27:#define TYPE_SSI_BUS "SSI"
+28:OBJECT_DECLARE_SIMPLE_TYPE(SSIBus, SSI_BUS)
+29:
+30:DeviceState *ssi_get_cs(SSIBus *bus, uint8_t cs_index)
+31:{
+32:    BusState *b = BUS(bus);
+33:    BusChild *kid;
+34:
+35:    QTAILQ_FOREACH(kid, &b->children, sibling) {
+36:        SSIPeripheral *kid_ssi = SSI_PERIPHERAL(kid->child);
+37:        if (kid_ssi->cs_index == cs_index) {
+38:            return kid->child;
+39:        }
+40:    }
+41:
+42:    return NULL;
+43:}
+44:
+45:static bool ssi_bus_check_address(BusState *b, DeviceState *dev, Error **errp)
+46:{
+47:    SSIPeripheral *s = SSI_PERIPHERAL(dev);
+48:
+49:    if (ssi_get_cs(SSI_BUS(b), s->cs_index)) {
+50:        error_setg(errp, "CS index '0x%x' in use by a %s device", s->cs_index,
+51:                   object_get_typename(OBJECT(dev)));
+52:        return false;
+53:    }
+54:
+55:    return true;
+56:}
+57:
+58:static void ssi_bus_class_init(ObjectClass *klass, void *data)
+59:{
+60:    BusClass *k = BUS_CLASS(klass);
+61:
+62:    k->check_address = ssi_bus_check_address;
+63:}
+64:
+65:static const TypeInfo ssi_bus_info = {
+66:    .name = TYPE_SSI_BUS,
+67:    .parent = TYPE_BUS,
+68:    .instance_size = sizeof(SSIBus),
+69:    .class_init = ssi_bus_class_init,
+70:};
+71:
+72:static void ssi_cs_default(void *opaque, int n, int level)
+73:{
+74:    SSIPeripheral *s = SSI_PERIPHERAL(opaque);
+75:    bool cs = !!level;
+76:    assert(n == 0);
+77:    if (s->cs != cs) {
+78:        if (s->spc->set_cs) {
+79:            s->spc->set_cs(s, cs);
+80:        }
+81:    }
+82:    s->cs = cs;
+83:}
+84:
+85:static uint32_t ssi_transfer_raw_default(SSIPeripheral *dev, uint32_t val)
+86:{
+87:    SSIPeripheralClass *ssc = dev->spc;
+88:
+89:    if ((dev->cs && ssc->cs_polarity == SSI_CS_HIGH) ||
+90:        (!dev->cs && ssc->cs_polarity == SSI_CS_LOW) ||
+91:        ssc->cs_polarity == SSI_CS_NONE) {
+92:        return ssc->transfer(dev, val);
+93:    }
+94:    return 0;
+95:}
+96:
+97:static void ssi_peripheral_realize(DeviceState *dev, Error **errp)
+98:{
+99:    SSIPeripheral *s = SSI_PERIPHERAL(dev);
+100:    SSIPeripheralClass *ssc = SSI_PERIPHERAL_GET_CLASS(s);
+101:
+102:    if (ssc->transfer_raw == ssi_transfer_raw_default &&
+103:            ssc->cs_polarity != SSI_CS_NONE) {
+104:        qdev_init_gpio_in_named(dev, ssi_cs_default, SSI_GPIO_CS, 1);
+105:    }
+106:    s->spc = ssc;
+107:
+108:    ssc->realize(s, errp);
+109:}
+110:
+111:static Property ssi_peripheral_properties[] = {
+112:    DEFINE_PROP_UINT8("cs", SSIPeripheral, cs_index, 0),
+113:    DEFINE_PROP_END_OF_LIST(),
+114:};
+115:
+116:static void ssi_peripheral_class_init(ObjectClass *klass, void *data)
+117:{
+118:    SSIPeripheralClass *ssc = SSI_PERIPHERAL_CLASS(klass);
+119:    DeviceClass *dc = DEVICE_CLASS(klass);
+120:
+121:    dc->realize = ssi_peripheral_realize;
+122:    dc->bus_type = TYPE_SSI_BUS;
+123:    if (!ssc->transfer_raw) {
+124:        ssc->transfer_raw = ssi_transfer_raw_default;
+125:    }
+126:    device_class_set_props(dc, ssi_peripheral_properties);
+127:}
+128:
+129:static const TypeInfo ssi_peripheral_info = {
+130:    .name = TYPE_SSI_PERIPHERAL,
+
+===== D2 =====
+COMMAND:
+$qeScript = @'
+import pathlib,re
+r=pathlib.Path('/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7')
+ranges={'hw/arm/stellaris.c':[(1,100)],'hw/block/m25p80.c':[(1730,1818)],'hw/block/nand.c':[(480,516),(610,626)]}
+print('SSI_FILES')
+for p in sorted((r/'hw/ssi').glob('*.c')): print(p.relative_to(r))
+for f in ['hw/arm/stellaris.c','hw/arm/realview.c']:
+ lines=(r/f).read_text().splitlines()
+ for i,l in enumerate(lines):
+  if re.search(r'pl022|SSI_GPIO_CS|ssi_auto_connect|ssi-gpio|gpio.*(cs|spi)',l,re.I):
+   a=max(1,i-7);b=min(len(lines),i+12);ranges.setdefault(f,[]).append((a,b))
+for f,segs in ranges.items():
+ lines=(r/f).read_text().splitlines()
+ for a,b in segs:
+  print('SOURCE',f,str(a)+'-'+str(b))
+  for n in range(a,min(b,len(lines))+1): print(str(n)+':'+lines[n-1])
+hits=[]
+for d in ['hw','include/hw']:
+ for p in (r/d).rglob('*'):
+  if p.is_file() and p.suffix in ('.c','.h'):
+   for n,l in enumerate(p.read_text(errors='replace').splitlines(),1):
+    if re.search(r'spi.?nand|spinand',l,re.I):hits.append((str(p.relative_to(r)),n,l))
+print('SPINAND_SEARCH',repr(hits))
+print('WATCHDOG_FILES',[str(p.relative_to(r)) for p in (r/'hw').rglob('*805*')])
+
+'@
+$qeScript | ssh -F C:/Users/YinZh/.ssh/config -o BatchMode=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile=C:/Users/YinZh/.ssh/known_hosts -o ConnectTimeout=10 tiger 'python3 -B -'
+EXIT_CODE: 0
+OUTPUT:
+SSI_FILES
+hw/ssi/aspeed_smc.c
+hw/ssi/ibex_spi_host.c
+hw/ssi/imx_spi.c
+hw/ssi/mss-spi.c
+hw/ssi/npcm7xx_fiu.c
+hw/ssi/npcm_pspi.c
+hw/ssi/omap_spi.c
+hw/ssi/pl022.c
+hw/ssi/sifive_spi.c
+hw/ssi/ssi.c
+hw/ssi/stm32f2xx_spi.c
+hw/ssi/xilinx_spi.c
+hw/ssi/xilinx_spips.c
+hw/ssi/xlnx-versal-ospi.c
+SOURCE hw/arm/stellaris.c 1-100
+1:/*
+2: * Luminary Micro Stellaris peripherals
+3: *
+4: * Copyright (c) 2006 CodeSourcery.
+5: * Written by Paul Brook
+6: *
+7: * This code is licensed under the GPL.
+8: */
+9:
+10:#include "qemu/osdep.h"
+11:#include "qapi/error.h"
+12:#include "hw/core/split-irq.h"
+13:#include "hw/sysbus.h"
+14:#include "hw/sd/sd.h"
+15:#include "hw/ssi/ssi.h"
+16:#include "hw/arm/boot.h"
+17:#include "qemu/timer.h"
+18:#include "hw/i2c/i2c.h"
+19:#include "net/net.h"
+20:#include "hw/boards.h"
+21:#include "qemu/log.h"
+22:#include "exec/address-spaces.h"
+23:#include "sysemu/sysemu.h"
+24:#include "hw/arm/armv7m.h"
+25:#include "hw/char/pl011.h"
+26:#include "hw/input/stellaris_gamepad.h"
+27:#include "hw/irq.h"
+28:#include "hw/watchdog/cmsdk-apb-watchdog.h"
+29:#include "migration/vmstate.h"
+30:#include "hw/misc/unimp.h"
+31:#include "hw/timer/stellaris-gptm.h"
+32:#include "hw/qdev-clock.h"
+33:#include "qom/object.h"
+34:#include "qapi/qmp/qlist.h"
+35:#include "ui/input.h"
+36:
+37:#define GPIO_A 0
+38:#define GPIO_B 1
+39:#define GPIO_C 2
+40:#define GPIO_D 3
+41:#define GPIO_E 4
+42:#define GPIO_F 5
+43:#define GPIO_G 6
+44:
+45:#define BP_OLED_I2C  0x01
+46:#define BP_OLED_SSI  0x02
+47:#define BP_GAMEPAD   0x04
+48:
+49:#define NUM_IRQ_LINES 64
+50:
+51:typedef const struct {
+52:    const char *name;
+53:    uint32_t did0;
+54:    uint32_t did1;
+55:    uint32_t dc0;
+56:    uint32_t dc1;
+57:    uint32_t dc2;
+58:    uint32_t dc3;
+59:    uint32_t dc4;
+60:    uint32_t peripherals;
+61:} stellaris_board_info;
+62:
+63:/* System controller.  */
+64:
+65:#define TYPE_STELLARIS_SYS "stellaris-sys"
+66:OBJECT_DECLARE_SIMPLE_TYPE(ssys_state, STELLARIS_SYS)
+67:
+68:struct ssys_state {
+69:    SysBusDevice parent_obj;
+70:
+71:    MemoryRegion iomem;
+72:    uint32_t pborctl;
+73:    uint32_t ldopctl;
+74:    uint32_t int_status;
+75:    uint32_t int_mask;
+76:    uint32_t resc;
+77:    uint32_t rcc;
+78:    uint32_t rcc2;
+79:    uint32_t rcgc[3];
+80:    uint32_t scgc[3];
+81:    uint32_t dcgc[3];
+82:    uint32_t clkvclr;
+83:    uint32_t ldoarst;
+84:    qemu_irq irq;
+85:    Clock *sysclk;
+86:    /* Properties (all read-only registers) */
+87:    uint32_t user0;
+88:    uint32_t user1;
+89:    uint32_t did0;
+90:    uint32_t did1;
+91:    uint32_t dc0;
+92:    uint32_t dc1;
+93:    uint32_t dc2;
+94:    uint32_t dc3;
+95:    uint32_t dc4;
+96:};
+97:
+98:static void ssys_update(ssys_state *s)
+99:{
+100:  qemu_set_irq(s->irq, (s->int_status & s->int_mask) != 0);
+SOURCE hw/arm/stellaris.c 1154-1173
+1154:            sbd = SYS_BUS_DEVICE(dev);
+1155:            qdev_prop_set_chr(dev, "chardev", serial_hd(i));
+1156:            sysbus_realize_and_unref(sbd, &error_fatal);
+1157:            sysbus_mmio_map(sbd, 0, 0x4000c000 + i * 0x1000);
+1158:            sysbus_connect_irq(sbd, 0, qdev_get_gpio_in(nvic, uart_irq[i]));
+1159:        }
+1160:    }
+1161:    if (board->dc2 & (1 << 4)) {
+1162:        dev = sysbus_create_simple("pl022", 0x40008000,
+1163:                                   qdev_get_gpio_in(nvic, 7));
+1164:        if (board->peripherals & BP_OLED_SSI) {
+1165:            void *bus;
+1166:            DeviceState *sddev;
+1167:            DeviceState *ssddev;
+1168:            DriveInfo *dinfo;
+1169:            DeviceState *carddev;
+1170:            DeviceState *gpio_d_splitter;
+1171:            BlockBackend *blk;
+1172:
+1173:            /*
+SOURCE hw/arm/stellaris.c 1247-1266
+1247:            qdev_prop_set_uint8(ssddev, "cs", 1);
+1248:            qdev_realize_and_unref(ssddev, bus, &error_fatal);
+1249:
+1250:            gpio_d_splitter = qdev_new(TYPE_SPLIT_IRQ);
+1251:            qdev_prop_set_uint32(gpio_d_splitter, "num-lines", 2);
+1252:            qdev_realize_and_unref(gpio_d_splitter, NULL, &error_fatal);
+1253:            qdev_connect_gpio_out(
+1254:                    gpio_d_splitter, 0,
+1255:                    qdev_get_gpio_in_named(sddev, SSI_GPIO_CS, 0));
+1256:            qdev_connect_gpio_out(
+1257:                    gpio_d_splitter, 1,
+1258:                    qdev_get_gpio_in_named(ssddev, SSI_GPIO_CS, 0));
+1259:            gpio_out[GPIO_D][0] = qdev_get_gpio_in(gpio_d_splitter, 0);
+1260:
+1261:            gpio_out[GPIO_C][7] = qdev_get_gpio_in(ssddev, 0);
+1262:
+1263:            /* Make sure the select pin is high.  */
+1264:            qemu_irq_raise(gpio_out[GPIO_D][0]);
+1265:        }
+1266:    }
+SOURCE hw/arm/stellaris.c 1250-1269
+1250:            gpio_d_splitter = qdev_new(TYPE_SPLIT_IRQ);
+1251:            qdev_prop_set_uint32(gpio_d_splitter, "num-lines", 2);
+1252:            qdev_realize_and_unref(gpio_d_splitter, NULL, &error_fatal);
+1253:            qdev_connect_gpio_out(
+1254:                    gpio_d_splitter, 0,
+1255:                    qdev_get_gpio_in_named(sddev, SSI_GPIO_CS, 0));
+1256:            qdev_connect_gpio_out(
+1257:                    gpio_d_splitter, 1,
+1258:                    qdev_get_gpio_in_named(ssddev, SSI_GPIO_CS, 0));
+1259:            gpio_out[GPIO_D][0] = qdev_get_gpio_in(gpio_d_splitter, 0);
+1260:
+1261:            gpio_out[GPIO_C][7] = qdev_get_gpio_in(ssddev, 0);
+1262:
+1263:            /* Make sure the select pin is high.  */
+1264:            qemu_irq_raise(gpio_out[GPIO_D][0]);
+1265:        }
+1266:    }
+1267:    if (board->dc4 & (1 << 28)) {
+1268:        DeviceState *enet;
+1269:
+SOURCE hw/block/m25p80.c 1730-1818
+1730:static bool m25p80_block_protect_needed(void *opaque)
+1731:{
+1732:    Flash *s = (Flash *)opaque;
+1733:
+1734:    return s->block_protect0 ||
+1735:           s->block_protect1 ||
+1736:           s->block_protect2 ||
+1737:           s->block_protect3 ||
+1738:           s->top_bottom_bit;
+1739:}
+1740:
+1741:static const VMStateDescription vmstate_m25p80_block_protect = {
+1742:    .name = "m25p80/block_protect",
+1743:    .version_id = 1,
+1744:    .minimum_version_id = 1,
+1745:    .needed = m25p80_block_protect_needed,
+1746:    .fields = (VMStateField[]) {
+1747:        VMSTATE_BOOL(block_protect0, Flash),
+1748:        VMSTATE_BOOL(block_protect1, Flash),
+1749:        VMSTATE_BOOL(block_protect2, Flash),
+1750:        VMSTATE_BOOL(block_protect3, Flash),
+1751:        VMSTATE_BOOL(top_bottom_bit, Flash),
+1752:        VMSTATE_END_OF_LIST()
+1753:    }
+1754:};
+1755:
+1756:static const VMStateDescription vmstate_m25p80 = {
+1757:    .name = "m25p80",
+1758:    .version_id = 0,
+1759:    .minimum_version_id = 0,
+1760:    .pre_save = m25p80_pre_save,
+1761:    .pre_load = m25p80_pre_load,
+1762:    .fields = (VMStateField[]) {
+1763:        VMSTATE_UINT8(state, Flash),
+1764:        VMSTATE_UINT8_ARRAY(data, Flash, M25P80_INTERNAL_DATA_BUFFER_SZ),
+1765:        VMSTATE_UINT32(len, Flash),
+1766:        VMSTATE_UINT32(pos, Flash),
+1767:        VMSTATE_UINT8(needed_bytes, Flash),
+1768:        VMSTATE_UINT8(cmd_in_progress, Flash),
+1769:        VMSTATE_UINT32(cur_addr, Flash),
+1770:        VMSTATE_BOOL(write_enable, Flash),
+1771:        VMSTATE_BOOL(reset_enable, Flash),
+1772:        VMSTATE_UINT8(ear, Flash),
+1773:        VMSTATE_BOOL(four_bytes_address_mode, Flash),
+1774:        VMSTATE_UINT32(nonvolatile_cfg, Flash),
+1775:        VMSTATE_UINT32(volatile_cfg, Flash),
+1776:        VMSTATE_UINT32(enh_volatile_cfg, Flash),
+1777:        VMSTATE_BOOL(quad_enable, Flash),
+1778:        VMSTATE_UINT8(spansion_cr1nv, Flash),
+1779:        VMSTATE_UINT8(spansion_cr2nv, Flash),
+1780:        VMSTATE_UINT8(spansion_cr3nv, Flash),
+1781:        VMSTATE_UINT8(spansion_cr4nv, Flash),
+1782:        VMSTATE_END_OF_LIST()
+1783:    },
+1784:    .subsections = (const VMStateDescription * []) {
+1785:        &vmstate_m25p80_data_read_loop,
+1786:        &vmstate_m25p80_aai_enable,
+1787:        &vmstate_m25p80_write_protect,
+1788:        &vmstate_m25p80_block_protect,
+1789:        NULL
+1790:    }
+1791:};
+1792:
+1793:static void m25p80_class_init(ObjectClass *klass, void *data)
+1794:{
+1795:    DeviceClass *dc = DEVICE_CLASS(klass);
+1796:    SSIPeripheralClass *k = SSI_PERIPHERAL_CLASS(klass);
+1797:    M25P80Class *mc = M25P80_CLASS(klass);
+1798:
+1799:    k->realize = m25p80_realize;
+1800:    k->transfer = m25p80_transfer8;
+1801:    k->set_cs = m25p80_cs;
+1802:    k->cs_polarity = SSI_CS_LOW;
+1803:    dc->vmsd = &vmstate_m25p80;
+1804:    device_class_set_props(dc, m25p80_properties);
+1805:    dc->reset = m25p80_reset;
+1806:    mc->pi = data;
+1807:}
+1808:
+1809:static const TypeInfo m25p80_info = {
+1810:    .name           = TYPE_M25P80,
+1811:    .parent         = TYPE_SSI_PERIPHERAL,
+1812:    .instance_size  = sizeof(Flash),
+1813:    .class_size     = sizeof(M25P80Class),
+1814:    .abstract       = true,
+1815:};
+1816:
+1817:static void m25p80_register_types(void)
+1818:{
+SOURCE hw/block/nand.c 480-516
+480: * outputs are R/B and eight I/O pins.
+481: *
+482: * CE, WP and R/B are active low.
+483: */
+484:void nand_setpins(DeviceState *dev, uint8_t cle, uint8_t ale,
+485:                  uint8_t ce, uint8_t wp, uint8_t gnd)
+486:{
+487:    NANDFlashState *s = NAND(dev);
+488:
+489:    s->cle = cle;
+490:    s->ale = ale;
+491:    s->ce = ce;
+492:    s->wp = wp;
+493:    s->gnd = gnd;
+494:    if (wp) {
+495:        s->status |= NAND_IOSTATUS_UNPROTCT;
+496:    } else {
+497:        s->status &= ~NAND_IOSTATUS_UNPROTCT;
+498:    }
+499:}
+500:
+501:void nand_getpins(DeviceState *dev, int *rb)
+502:{
+503:    *rb = 1;
+504:}
+505:
+506:void nand_setio(DeviceState *dev, uint32_t value)
+507:{
+508:    int i;
+509:    NANDFlashState *s = NAND(dev);
+510:
+511:    if (!s->ce && s->cle) {
+512:        if (nand_flash_ids[s->chip_id].options & NAND_SAMSUNG_LP) {
+513:            if (s->cmd == NAND_CMD_READ0 && value == NAND_CMD_LPREAD2)
+514:                return;
+515:            if (value == NAND_CMD_RANDOMREAD1) {
+516:                s->addr &= ~((1 << s->addr_shift) - 1);
+SOURCE hw/block/nand.c 610-626
+610:uint32_t nand_getio(DeviceState *dev)
+611:{
+612:    int offset;
+613:    uint32_t x = 0;
+614:    NANDFlashState *s = NAND(dev);
+615:
+616:    /* Allow sequential reading */
+617:    if (!s->iolen && s->cmd == NAND_CMD_READ0) {
+618:        offset = (int) (s->addr & ((1 << s->addr_shift) - 1)) + s->offset;
+619:        s->offset = 0;
+620:        s->iolen = nand_load_block(s, offset);
+621:    }
+622:
+623:    if (s->ce || s->iolen <= 0) {
+624:        return 0;
+625:    }
+626:
+SPINAND_SEARCH []
+WATCHDOG_FILES []
+
+===== E =====
+COMMAND:
+$qeScript = @'
+from pathlib import Path
+import hashlib, tarfile, re
+root=Path('/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7')
+archive=Path('/home/oops/workspace/build/downloads/qemu-8.2.7.tar.xz')
+files=['hw/core/loader.c','hw/core/irq.c','include/hw/qdev-clock.h','hw/core/clock.c']
+with tarfile.open(archive,'r:xz') as tf:
+    for f in files:
+        data=(root/f).read_bytes()
+        upstream=tf.extractfile('qemu-8.2.7/'+f).read()
+        print('PROVENANCE',f,'SHA256',hashlib.sha256(data).hexdigest(),'ARCHIVE_EQUAL',data==upstream)
+ranges={
+'target/arm/cpu.c':[(208,242),(300,318),(1568,1590)],
+'hw/arm/boot.c':[(685,726),(1148,1222),(1234,1246),(1256,1295)],
+'hw/core/loader.c':[(138,166)],
+'hw/core/irq.c':[(32,48)],
+'include/hw/qdev-clock.h':[(32,64),(85,118)],
+}
+for f, rs in ranges.items():
+    lines=(root/f).read_text().splitlines()
+    for a,b in rs:
+        print('SOURCE',f,str(a)+'-'+str(b))
+        for i in range(a-1,min(b,len(lines))): print(str(i+1)+':'+lines[i])
+print('WATCHDOG_DIRECTORY',[p.name for p in sorted((root/'hw/watchdog').glob('*')) if p.is_file()])
+hits=[]
+for base in ['hw','include']:
+    for p in sorted((root/base).rglob('*')):
+        if p.is_file() and p.suffix in ['.c','.h']:
+            for n,line in enumerate(p.read_text(errors='replace').splitlines(),1):
+                if re.search(r'sp805',line,re.I): hits.append((str(p.relative_to(root)),n,line))
+print('SP805_SEARCH',hits)
+run=Path('/home/oops/workspace/poky/scripts/runqemu')
+lines=run.read_text().splitlines()
+print('SOURCE poky/scripts/runqemu 1481-1505')
+for i in range(1480,1505): print(str(i+1)+':'+lines[i])
+
+'@
+$qeScript | ssh -F C:/Users/YinZh/.ssh/config -o BatchMode=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile=C:/Users/YinZh/.ssh/known_hosts -o ConnectTimeout=10 tiger 'python3 -B -'
+EXIT_CODE: 0
+OUTPUT:
+PROVENANCE hw/core/loader.c SHA256 946afd246e5682361ee306303fc8afb7ec1a126dbac501b29080c24b7d7d696a ARCHIVE_EQUAL True
+PROVENANCE hw/core/irq.c SHA256 3091b297a0b26e2104507863bcd279a9fa41f40cea891db30aa04a9ec185c864 ARCHIVE_EQUAL True
+PROVENANCE include/hw/qdev-clock.h SHA256 80d64c3299ab84aa191742152f31dd646840eb8e659be87647ad22452dee8023 ARCHIVE_EQUAL True
+PROVENANCE hw/core/clock.c SHA256 c8b9967a81a1ea088a72b03e0e0de8b8d2746f0a5190ce0b430ef0dc04889321 ARCHIVE_EQUAL True
+SOURCE target/arm/cpu.c 208-242
+208:static void arm_cpu_reset_hold(Object *obj)
+209:{
+210:    CPUState *s = CPU(obj);
+211:    ARMCPU *cpu = ARM_CPU(s);
+212:    ARMCPUClass *acc = ARM_CPU_GET_CLASS(cpu);
+213:    CPUARMState *env = &cpu->env;
+214:
+215:    if (acc->parent_phases.hold) {
+216:        acc->parent_phases.hold(obj);
+217:    }
+218:
+219:    memset(env, 0, offsetof(CPUARMState, end_reset_fields));
+220:
+221:    g_hash_table_foreach(cpu->cp_regs, cp_reg_reset, cpu);
+222:    g_hash_table_foreach(cpu->cp_regs, cp_reg_check_reset, cpu);
+223:
+224:    env->vfp.xregs[ARM_VFP_FPSID] = cpu->reset_fpsid;
+225:    env->vfp.xregs[ARM_VFP_MVFR0] = cpu->isar.mvfr0;
+226:    env->vfp.xregs[ARM_VFP_MVFR1] = cpu->isar.mvfr1;
+227:    env->vfp.xregs[ARM_VFP_MVFR2] = cpu->isar.mvfr2;
+228:
+229:    cpu->power_state = s->start_powered_off ? PSCI_OFF : PSCI_ON;
+230:
+231:    if (arm_feature(env, ARM_FEATURE_IWMMXT)) {
+232:        env->iwmmxt.cregs[ARM_IWMMXT_wCID] = 0x69051000 | 'Q';
+233:    }
+234:
+235:    if (arm_feature(env, ARM_FEATURE_AARCH64)) {
+236:        /* 64 bit CPUs always start in 64 bit mode */
+237:        env->aarch64 = true;
+238:#if defined(CONFIG_USER_ONLY)
+239:        env->pstate = PSTATE_MODE_EL0t;
+240:        /* Userspace expects access to DC ZVA, CTL_EL0 and the cache ops */
+241:        env->cp15.sctlr_el[1] |= SCTLR_UCT | SCTLR_UCI | SCTLR_DZE;
+242:        /* Enable all PAC keys.  */
+SOURCE target/arm/cpu.c 300-318
+300:        env->cp15.sctlr_el[1] |= SCTLR_MSCEN;
+301:#else
+302:        /* Reset into the highest available EL */
+303:        if (arm_feature(env, ARM_FEATURE_EL3)) {
+304:            env->pstate = PSTATE_MODE_EL3h;
+305:        } else if (arm_feature(env, ARM_FEATURE_EL2)) {
+306:            env->pstate = PSTATE_MODE_EL2h;
+307:        } else {
+308:            env->pstate = PSTATE_MODE_EL1h;
+309:        }
+310:
+311:        /* Sample rvbar at reset.  */
+312:        env->cp15.rvbar = cpu->rvbar_prop;
+313:        env->pc = env->cp15.rvbar;
+314:#endif
+315:    } else {
+316:#if defined(CONFIG_USER_ONLY)
+317:        /* Userspace expects access to cp10 and cp11 for FP/Neon */
+318:        env->cp15.cpacr_el1 = FIELD_DP64(env->cp15.cpacr_el1,
+SOURCE target/arm/cpu.c 1568-1590
+1568:    if (!arm_feature(&cpu->env, ARM_FEATURE_M)) {
+1569:        qdev_property_add_static(DEVICE(obj), &arm_cpu_reset_hivecs_property);
+1570:    }
+1571:
+1572:    if (arm_feature(&cpu->env, ARM_FEATURE_V8)) {
+1573:        object_property_add_uint64_ptr(obj, "rvbar",
+1574:                                       &cpu->rvbar_prop,
+1575:                                       OBJ_PROP_FLAG_READWRITE);
+1576:    }
+1577:
+1578:#ifndef CONFIG_USER_ONLY
+1579:    if (arm_feature(&cpu->env, ARM_FEATURE_EL3)) {
+1580:        /* Add the has_el3 state CPU property only if EL3 is allowed.  This will
+1581:         * prevent "has_el3" from existing on CPUs which cannot support EL3.
+1582:         */
+1583:        qdev_property_add_static(DEVICE(obj), &arm_cpu_has_el3_property);
+1584:
+1585:        object_property_add_link(obj, "secure-memory",
+1586:                                 TYPE_MEMORY_REGION,
+1587:                                 (Object **)&cpu->secure_memory,
+1588:                                 qdev_prop_allow_set_link_before_realize,
+1589:                                 OBJ_PROP_LINK_STRONG);
+1590:    }
+SOURCE hw/arm/boot.c 685-726
+685:static void do_cpu_reset(void *opaque)
+686:{
+687:    ARMCPU *cpu = opaque;
+688:    CPUState *cs = CPU(cpu);
+689:    CPUARMState *env = &cpu->env;
+690:    const struct arm_boot_info *info = env->boot_info;
+691:
+692:    cpu_reset(cs);
+693:    if (info) {
+694:        if (!info->is_linux) {
+695:            int i;
+696:            /* Jump to the entry point.  */
+697:            uint64_t entry = info->entry;
+698:
+699:            switch (info->endianness) {
+700:            case ARM_ENDIANNESS_LE:
+701:                env->cp15.sctlr_el[1] &= ~SCTLR_E0E;
+702:                for (i = 1; i < 4; ++i) {
+703:                    env->cp15.sctlr_el[i] &= ~SCTLR_EE;
+704:                }
+705:                env->uncached_cpsr &= ~CPSR_E;
+706:                break;
+707:            case ARM_ENDIANNESS_BE8:
+708:                env->cp15.sctlr_el[1] |= SCTLR_E0E;
+709:                for (i = 1; i < 4; ++i) {
+710:                    env->cp15.sctlr_el[i] |= SCTLR_EE;
+711:                }
+712:                env->uncached_cpsr |= CPSR_E;
+713:                break;
+714:            case ARM_ENDIANNESS_BE32:
+715:                env->cp15.sctlr_el[1] |= SCTLR_B;
+716:                break;
+717:            case ARM_ENDIANNESS_UNKNOWN:
+718:                break; /* Board's decision */
+719:            default:
+720:                g_assert_not_reached();
+721:            }
+722:
+723:            cpu_set_pc(cs, entry);
+724:        } else {
+725:            /*
+726:             * If we are booting Linux then we might need to do so at:
+SOURCE hw/arm/boot.c 1148-1222
+1148:    /* Set up for booting firmware (which might load a kernel via fw_cfg) */
+1149:
+1150:    if (have_dtb(info)) {
+1151:        /*
+1152:         * If we have a device tree blob, but no kernel to supply it to (or
+1153:         * the kernel is supposed to be loaded by the bootloader), copy the
+1154:         * DTB to the base of RAM for the bootloader to pick up.
+1155:         */
+1156:        info->dtb_start = info->loader_start;
+1157:    }
+1158:
+1159:    if (info->kernel_filename) {
+1160:        FWCfgState *fw_cfg;
+1161:        bool try_decompressing_kernel;
+1162:
+1163:        fw_cfg = fw_cfg_find();
+1164:
+1165:        if (!fw_cfg) {
+1166:            error_report("This machine type does not support loading both "
+1167:                         "a guest firmware/BIOS image and a guest kernel at "
+1168:                         "the same time. You should change your QEMU command "
+1169:                         "line to specify one or the other, but not both.");
+1170:            exit(1);
+1171:        }
+1172:
+1173:        try_decompressing_kernel = arm_feature(&cpu->env,
+1174:                                               ARM_FEATURE_AARCH64);
+1175:
+1176:        /*
+1177:         * Expose the kernel, the command line, and the initrd in fw_cfg.
+1178:         * We don't process them here at all, it's all left to the
+1179:         * firmware.
+1180:         */
+1181:        load_image_to_fw_cfg(fw_cfg,
+1182:                             FW_CFG_KERNEL_SIZE, FW_CFG_KERNEL_DATA,
+1183:                             info->kernel_filename,
+1184:                             try_decompressing_kernel);
+1185:        load_image_to_fw_cfg(fw_cfg,
+1186:                             FW_CFG_INITRD_SIZE, FW_CFG_INITRD_DATA,
+1187:                             info->initrd_filename, false);
+1188:
+1189:        if (info->kernel_cmdline) {
+1190:            fw_cfg_add_i32(fw_cfg, FW_CFG_CMDLINE_SIZE,
+1191:                           strlen(info->kernel_cmdline) + 1);
+1192:            fw_cfg_add_string(fw_cfg, FW_CFG_CMDLINE_DATA,
+1193:                              info->kernel_cmdline);
+1194:        }
+1195:    }
+1196:
+1197:    /*
+1198:     * We will start from address 0 (typically a boot ROM image) in the
+1199:     * same way as hardware. Leave env->boot_info NULL, so that
+1200:     * do_cpu_reset() knows it does not need to alter the PC on reset.
+1201:     */
+1202:}
+1203:
+1204:void arm_load_kernel(ARMCPU *cpu, MachineState *ms, struct arm_boot_info *info)
+1205:{
+1206:    CPUState *cs;
+1207:    AddressSpace *as = arm_boot_address_space(cpu, info);
+1208:    int boot_el;
+1209:    CPUARMState *env = &cpu->env;
+1210:    int nb_cpus = 0;
+1211:
+1212:    /*
+1213:     * CPU objects (unlike devices) are not automatically reset on system
+1214:     * reset, so we must always register a handler to do so. If we're
+1215:     * actually loading a kernel, the handler is also responsible for
+1216:     * arranging that we start it correctly.
+1217:     */
+1218:    for (cs = first_cpu; cs; cs = CPU_NEXT(cs)) {
+1219:        qemu_register_reset(do_cpu_reset, ARM_CPU(cs));
+1220:        nb_cpus++;
+1221:    }
+1222:
+SOURCE hw/arm/boot.c 1234-1246
+1234:
+1235:    /* Load the kernel.  */
+1236:    if (!info->kernel_filename || info->firmware_loaded) {
+1237:        arm_setup_firmware_boot(cpu, info);
+1238:    } else {
+1239:        arm_setup_direct_kernel_boot(cpu, info);
+1240:    }
+1241:
+1242:    /*
+1243:     * Disable the PSCI conduit if it is set up to target the same
+1244:     * or a lower EL than the one we're going to start the guest code in.
+1245:     * This logic needs to agree with the code in do_cpu_reset() which
+1246:     * decides whether we're going to boot the guest in the highest
+SOURCE hw/arm/boot.c 1256-1295
+1256:     */
+1257:    assert(info->psci_conduit == QEMU_PSCI_CONDUIT_DISABLED ||
+1258:           !info->secure_board_setup);
+1259:
+1260:    /* Boot into highest supported EL ... */
+1261:    if (arm_feature(env, ARM_FEATURE_EL3)) {
+1262:        boot_el = 3;
+1263:    } else if (arm_feature(env, ARM_FEATURE_EL2)) {
+1264:        boot_el = 2;
+1265:    } else {
+1266:        boot_el = 1;
+1267:    }
+1268:    /* ...except that if we're booting Linux we adjust the EL we boot into */
+1269:    if (info->is_linux && !info->secure_boot) {
+1270:        boot_el = arm_feature(env, ARM_FEATURE_EL2) ? 2 : 1;
+1271:    }
+1272:
+1273:    if ((info->psci_conduit == QEMU_PSCI_CONDUIT_HVC && boot_el >= 2) ||
+1274:        (info->psci_conduit == QEMU_PSCI_CONDUIT_SMC && boot_el == 3)) {
+1275:        info->psci_conduit = QEMU_PSCI_CONDUIT_DISABLED;
+1276:    }
+1277:
+1278:    if (info->psci_conduit != QEMU_PSCI_CONDUIT_DISABLED) {
+1279:        for (cs = first_cpu; cs; cs = CPU_NEXT(cs)) {
+1280:            Object *cpuobj = OBJECT(cs);
+1281:
+1282:            object_property_set_int(cpuobj, "psci-conduit", info->psci_conduit,
+1283:                                    &error_abort);
+1284:            /*
+1285:             * Secondary CPUs start in PSCI powered-down state. Like the
+1286:             * code in do_cpu_reset(), we assume first_cpu is the primary
+1287:             * CPU.
+1288:             */
+1289:            if (cs != first_cpu) {
+1290:                object_property_set_bool(cpuobj, "start-powered-off", true,
+1291:                                         &error_abort);
+1292:            }
+1293:        }
+1294:    }
+1295:
+SOURCE hw/core/loader.c 138-166
+138:        }
+139:    }
+140:    return size;
+141:}
+142:
+143:ssize_t load_image_mr(const char *filename, MemoryRegion *mr)
+144:{
+145:    ssize_t size;
+146:
+147:    if (!memory_access_is_direct(mr, false)) {
+148:        /* Can only load an image into RAM or ROM */
+149:        return -1;
+150:    }
+151:
+152:    size = get_image_size(filename);
+153:
+154:    if (size < 0 || size > memory_region_size(mr)) {
+155:        return -1;
+156:    }
+157:    if (size > 0) {
+158:        if (rom_add_file_mr(filename, mr, -1) < 0) {
+159:            return -1;
+160:        }
+161:    }
+162:    return size;
+163:}
+164:
+165:void pstrcpy_targphys(const char *name, hwaddr dest, int buf_size,
+166:                      const char *source)
+SOURCE hw/core/irq.c 32-48
+32:    Object parent_obj;
+33:
+34:    qemu_irq_handler handler;
+35:    void *opaque;
+36:    int n;
+37:};
+38:
+39:void qemu_set_irq(qemu_irq irq, int level)
+40:{
+41:    if (!irq)
+42:        return;
+43:
+44:    irq->handler(irq->opaque, irq->n, level);
+45:}
+46:
+47:qemu_irq *qemu_extend_irqs(qemu_irq *old, int n_old, qemu_irq_handler handler,
+48:                           void *opaque, int n)
+SOURCE include/hw/qdev-clock.h 32-64
+32: */
+33:Clock *qdev_init_clock_in(DeviceState *dev, const char *name,
+34:                          ClockCallback *callback, void *opaque,
+35:                          unsigned int events);
+36:
+37:/**
+38: * qdev_init_clock_out:
+39: * @dev: the device to add an output clock to
+40: * @name: the name of the clock (can't be NULL).
+41: * @returns: a pointer to the newly added clock
+42: *
+43: * Add an output clock to device @dev as a clock named @name.
+44: * This adds a child<> property.
+45: */
+46:Clock *qdev_init_clock_out(DeviceState *dev, const char *name);
+47:
+48:/**
+49: * qdev_get_clock_in:
+50: * @dev: the device which has the clock
+51: * @name: the name of the clock (can't be NULL).
+52: * @returns: a pointer to the clock
+53: *
+54: * Get the input clock @name from @dev or NULL if does not exist.
+55: */
+56:Clock *qdev_get_clock_in(DeviceState *dev, const char *name);
+57:
+58:/**
+59: * qdev_get_clock_out:
+60: * @dev: the device which has the clock
+61: * @name: the name of the clock (can't be NULL).
+62: * @returns: a pointer to the clock
+63: *
+64: * Get the output clock @name from @dev or NULL if does not exist.
+SOURCE include/hw/qdev-clock.h 85-118
+85: * @alias_dev: the device to add the clock
+86: * @alias_name: the name of the clock in @container
+87: * @returns: a pointer to the clock
+88: *
+89: * Add a clock @alias_name in @alias_dev which is an alias of the clock @name
+90: * in @dev. The direction _in_ or _out_ will the same as the original.
+91: * An alias clock must not be modified or used by @alias_dev and should
+92: * typically be only only for device composition purpose.
+93: */
+94:Clock *qdev_alias_clock(DeviceState *dev, const char *name,
+95:                        DeviceState *alias_dev, const char *alias_name);
+96:
+97:/**
+98: * qdev_finalize_clocklist:
+99: * @dev: the device being finalized
+100: *
+101: * Clear the clocklist from @dev. Only used internally in qdev.
+102: */
+103:void qdev_finalize_clocklist(DeviceState *dev);
+104:
+105:/**
+106: * ClockPortInitElem:
+107: * @name: name of the clock (can't be NULL)
+108: * @output: indicates whether the clock is input or output
+109: * @callback: for inputs, optional callback to be called on clock's update
+110: * with device as opaque
+111: * @callback_events: mask of ClockEvent values for when callback is called
+112: * @offset: optional offset to store the ClockIn or ClockOut pointer in device
+113: * state structure (0 means unused)
+114: */
+115:struct ClockPortInitElem {
+116:    const char *name;
+117:    bool is_output;
+118:    ClockCallback *callback;
+WATCHDOG_DIRECTORY ['Kconfig', 'allwinner-wdt.c', 'cmsdk-apb-watchdog.c', 'meson.build', 'sbsa_gwdt.c', 'spapr_watchdog.c', 'trace-events', 'trace.h', 'watchdog.c', 'wdt_aspeed.c', 'wdt_diag288.c', 'wdt_i6300esb.c', 'wdt_ib700.c', 'wdt_imx2.c']
+SP805_SEARCH [('hw/arm/vexpress.c', 308, '    /* 0x100e5000 SP805 Watchdog module */'), ('hw/arm/vexpress.c', 383, '    /* 0x2b060000: SP805 watchdog: not modelled */')]
+SOURCE poky/scripts/runqemu 1481-1505
+1481:    def setup_serial(self):
+1482:        # Setup correct kernel command line for serial
+1483:        if self.get('SERIAL_CONSOLES') and (self.serialstdio == True or self.serialconsole == True or self.nographic == True or self.tcpserial_portnum):
+1484:            for entry in self.get('SERIAL_CONSOLES').split(' '):
+1485:                self.kernel_cmdline_script += ' console=%s' %entry.split(';')[1]
+1486:
+1487:        # We always wants ttyS0 and ttyS1 in qemu machines (see SERIAL_CONSOLES).
+1488:        # If no serial or serialtcp options were specified, only ttyS0 is created
+1489:        # and sysvinit shows an error trying to enable ttyS1:
+1490:        #     INIT: Id "S1" respawning too fast: disabled for 5 minutes
+1491:        serial_num = len(re.findall("(^| )-serial ", self.qemu_opt))
+1492:
+1493:        # Assume if the user passed serial options, they know what they want
+1494:        # and pad to two devices
+1495:        if serial_num == 1:
+1496:            self.qemu_opt += " -serial null"
+1497:        elif serial_num >= 2:
+1498:            return
+1499:
+1500:        if self.serialstdio == True or self.nographic == True:
+1501:            self.qemu_opt += " -serial mon:stdio"
+1502:        else:
+1503:            self.qemu_opt += " -serial mon:vc"
+1504:            if self.serialconsole:
+1505:                if sys.stdin.isatty():
+
+===== F =====
+COMMAND:
+$qeScript = @'
+from pathlib import Path
+import re
+root=Path('/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7')
+ranges={
+'target/arm/cpu64.c':[(655,710),(746,753)],
+'target/arm/cpu.c':[(1365,1383)],
+'hw/arm/virt.c':[(716,756),(789,851),(2247,2255),(2267,2278)],
+'hw/char/pl011.c':[(254,275),(511,522)],
+'include/hw/qdev-clock.h':[(66,81)],
+}
+for f,rs in ranges.items():
+ lines=(root/f).read_text().splitlines()
+ for a,b in rs:
+  print('SOURCE',f,str(a)+'-'+str(b))
+  for i in range(a-1,min(b,len(lines))): print(str(i+1)+':'+lines[i])
+for f in ['hw/arm/vexpress.c','hw/watchdog/cmsdk-apb-watchdog.c','hw/watchdog/sbsa_gwdt.c']:
+ lines=(root/f).read_text().splitlines()
+ print('WATCHDOG_KEY_LINES',f)
+ for n,line in enumerate(lines,1):
+  if re.search(r'SP805|TYPE_.*WATCHDOG|TYPE_.*GWDT|qdev_init_clock_in|watchdog_perform_action|reset\(|CMSDK|DEFINE_PROP',line):
+   print(str(n)+':'+line)
+
+'@
+$qeScript | ssh -F C:/Users/YinZh/.ssh/config -o BatchMode=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile=C:/Users/YinZh/.ssh/known_hosts -o ConnectTimeout=10 tiger 'python3 -B -'
+EXIT_CODE: 0
+OUTPUT:
+SOURCE target/arm/cpu64.c 655-710
+655:static void aarch64_a53_initfn(Object *obj)
+656:{
+657:    ARMCPU *cpu = ARM_CPU(obj);
+658:
+659:    cpu->dtb_compatible = "arm,cortex-a53";
+660:    set_feature(&cpu->env, ARM_FEATURE_V8);
+661:    set_feature(&cpu->env, ARM_FEATURE_NEON);
+662:    set_feature(&cpu->env, ARM_FEATURE_GENERIC_TIMER);
+663:    set_feature(&cpu->env, ARM_FEATURE_AARCH64);
+664:    set_feature(&cpu->env, ARM_FEATURE_CBAR_RO);
+665:    set_feature(&cpu->env, ARM_FEATURE_EL2);
+666:    set_feature(&cpu->env, ARM_FEATURE_EL3);
+667:    set_feature(&cpu->env, ARM_FEATURE_PMU);
+668:    cpu->kvm_target = QEMU_KVM_ARM_TARGET_CORTEX_A53;
+669:    cpu->midr = 0x410fd034;
+670:    cpu->revidr = 0x00000000;
+671:    cpu->reset_fpsid = 0x41034070;
+672:    cpu->isar.mvfr0 = 0x10110222;
+673:    cpu->isar.mvfr1 = 0x12111111;
+674:    cpu->isar.mvfr2 = 0x00000043;
+675:    cpu->ctr = 0x84448004; /* L1Ip = VIPT */
+676:    cpu->reset_sctlr = 0x00c50838;
+677:    cpu->isar.id_pfr0 = 0x00000131;
+678:    cpu->isar.id_pfr1 = 0x00011011;
+679:    cpu->isar.id_dfr0 = 0x03010066;
+680:    cpu->id_afr0 = 0x00000000;
+681:    cpu->isar.id_mmfr0 = 0x10101105;
+682:    cpu->isar.id_mmfr1 = 0x40000000;
+683:    cpu->isar.id_mmfr2 = 0x01260000;
+684:    cpu->isar.id_mmfr3 = 0x02102211;
+685:    cpu->isar.id_isar0 = 0x02101110;
+686:    cpu->isar.id_isar1 = 0x13112111;
+687:    cpu->isar.id_isar2 = 0x21232042;
+688:    cpu->isar.id_isar3 = 0x01112131;
+689:    cpu->isar.id_isar4 = 0x00011142;
+690:    cpu->isar.id_isar5 = 0x00011121;
+691:    cpu->isar.id_isar6 = 0;
+692:    cpu->isar.id_aa64pfr0 = 0x00002222;
+693:    cpu->isar.id_aa64dfr0 = 0x10305106;
+694:    cpu->isar.id_aa64isar0 = 0x00011120;
+695:    cpu->isar.id_aa64mmfr0 = 0x00001122; /* 40 bit physical addr */
+696:    cpu->isar.dbgdidr = 0x3516d000;
+697:    cpu->isar.dbgdevid = 0x00110f13;
+698:    cpu->isar.dbgdevid1 = 0x1;
+699:    cpu->isar.reset_pmcr_el0 = 0x41033000;
+700:    cpu->clidr = 0x0a200023;
+701:    cpu->ccsidr[0] = 0x700fe01a; /* 32KB L1 dcache */
+702:    cpu->ccsidr[1] = 0x201fe00a; /* 32KB L1 icache */
+703:    cpu->ccsidr[2] = 0x707fe07a; /* 1024KB L2 cache */
+704:    cpu->dcz_blocksize = 4; /* 64 bytes */
+705:    cpu->gic_num_lrs = 4;
+706:    cpu->gic_vpribits = 5;
+707:    cpu->gic_vprebits = 5;
+708:    cpu->gic_pribits = 5;
+709:    define_cortex_a72_a57_a53_cp_reginfo(cpu);
+710:}
+SOURCE target/arm/cpu64.c 746-753
+746:}
+747:
+748:static const ARMCPUInfo aarch64_cpus[] = {
+749:    { .name = "cortex-a57",         .initfn = aarch64_a57_initfn },
+750:    { .name = "cortex-a53",         .initfn = aarch64_a53_initfn },
+751:    { .name = "max",                .initfn = aarch64_max_initfn },
+752:#if defined(CONFIG_KVM) || defined(CONFIG_HVF)
+753:    { .name = "host",               .initfn = aarch64_host_initfn },
+SOURCE target/arm/cpu.c 1365-1383
+1365:}
+1366:
+1367:static Property arm_cpu_gt_cntfrq_property =
+1368:            DEFINE_PROP_UINT64("cntfrq", ARMCPU, gt_cntfrq_hz,
+1369:                               NANOSECONDS_PER_SECOND / GTIMER_SCALE);
+1370:
+1371:static Property arm_cpu_reset_cbar_property =
+1372:            DEFINE_PROP_UINT64("reset-cbar", ARMCPU, reset_cbar, 0);
+1373:
+1374:static Property arm_cpu_reset_hivecs_property =
+1375:            DEFINE_PROP_BOOL("reset-hivecs", ARMCPU, reset_hivecs, false);
+1376:
+1377:#ifndef CONFIG_USER_ONLY
+1378:static Property arm_cpu_has_el2_property =
+1379:            DEFINE_PROP_BOOL("has_el2", ARMCPU, has_el2, true);
+1380:
+1381:static Property arm_cpu_has_el3_property =
+1382:            DEFINE_PROP_BOOL("has_el3", ARMCPU, has_el3, true);
+1383:#endif
+SOURCE hw/arm/virt.c 716-756
+716:static void create_gic(VirtMachineState *vms, MemoryRegion *mem)
+717:{
+718:    MachineState *ms = MACHINE(vms);
+719:    /* We create a standalone GIC */
+720:    SysBusDevice *gicbusdev;
+721:    const char *gictype;
+722:    int i;
+723:    unsigned int smp_cpus = ms->smp.cpus;
+724:    uint32_t nb_redist_regions = 0;
+725:    int revision;
+726:
+727:    if (vms->gic_version == VIRT_GIC_VERSION_2) {
+728:        gictype = gic_class_name();
+729:    } else {
+730:        gictype = gicv3_class_name();
+731:    }
+732:
+733:    switch (vms->gic_version) {
+734:    case VIRT_GIC_VERSION_2:
+735:        revision = 2;
+736:        break;
+737:    case VIRT_GIC_VERSION_3:
+738:        revision = 3;
+739:        break;
+740:    case VIRT_GIC_VERSION_4:
+741:        revision = 4;
+742:        break;
+743:    default:
+744:        g_assert_not_reached();
+745:    }
+746:    vms->gic = qdev_new(gictype);
+747:    qdev_prop_set_uint32(vms->gic, "revision", revision);
+748:    qdev_prop_set_uint32(vms->gic, "num-cpu", smp_cpus);
+749:    /* Note that the num-irq property counts both internal and external
+750:     * interrupts; there are always 32 of the former (mandated by GIC spec).
+751:     */
+752:    qdev_prop_set_uint32(vms->gic, "num-irq", NUM_IRQS + 32);
+753:    if (!kvm_irqchip_in_kernel()) {
+754:        qdev_prop_set_bit(vms->gic, "has-security-extensions", vms->secure);
+755:    }
+756:
+SOURCE hw/arm/virt.c 789-851
+789:    gicbusdev = SYS_BUS_DEVICE(vms->gic);
+790:    sysbus_realize_and_unref(gicbusdev, &error_fatal);
+791:    sysbus_mmio_map(gicbusdev, 0, vms->memmap[VIRT_GIC_DIST].base);
+792:    if (vms->gic_version != VIRT_GIC_VERSION_2) {
+793:        sysbus_mmio_map(gicbusdev, 1, vms->memmap[VIRT_GIC_REDIST].base);
+794:        if (nb_redist_regions == 2) {
+795:            sysbus_mmio_map(gicbusdev, 2,
+796:                            vms->memmap[VIRT_HIGH_GIC_REDIST2].base);
+797:        }
+798:    } else {
+799:        sysbus_mmio_map(gicbusdev, 1, vms->memmap[VIRT_GIC_CPU].base);
+800:        if (vms->virt) {
+801:            sysbus_mmio_map(gicbusdev, 2, vms->memmap[VIRT_GIC_HYP].base);
+802:            sysbus_mmio_map(gicbusdev, 3, vms->memmap[VIRT_GIC_VCPU].base);
+803:        }
+804:    }
+805:
+806:    /* Wire the outputs from each CPU's generic timer and the GICv3
+807:     * maintenance interrupt signal to the appropriate GIC PPI inputs,
+808:     * and the GIC's IRQ/FIQ/VIRQ/VFIQ interrupt outputs to the CPU's inputs.
+809:     */
+810:    for (i = 0; i < smp_cpus; i++) {
+811:        DeviceState *cpudev = DEVICE(qemu_get_cpu(i));
+812:        int intidbase = NUM_IRQS + i * GIC_INTERNAL;
+813:        /* Mapping from the output timer irq lines from the CPU to the
+814:         * GIC PPI inputs we use for the virt board.
+815:         */
+816:        const int timer_irq[] = {
+817:            [GTIMER_PHYS] = ARCH_TIMER_NS_EL1_IRQ,
+818:            [GTIMER_VIRT] = ARCH_TIMER_VIRT_IRQ,
+819:            [GTIMER_HYP]  = ARCH_TIMER_NS_EL2_IRQ,
+820:            [GTIMER_SEC]  = ARCH_TIMER_S_EL1_IRQ,
+821:        };
+822:
+823:        for (unsigned irq = 0; irq < ARRAY_SIZE(timer_irq); irq++) {
+824:            qdev_connect_gpio_out(cpudev, irq,
+825:                                  qdev_get_gpio_in(vms->gic,
+826:                                                   intidbase + timer_irq[irq]));
+827:        }
+828:
+829:        if (vms->gic_version != VIRT_GIC_VERSION_2) {
+830:            qemu_irq irq = qdev_get_gpio_in(vms->gic,
+831:                                            intidbase + ARCH_GIC_MAINT_IRQ);
+832:            qdev_connect_gpio_out_named(cpudev, "gicv3-maintenance-interrupt",
+833:                                        0, irq);
+834:        } else if (vms->virt) {
+835:            qemu_irq irq = qdev_get_gpio_in(vms->gic,
+836:                                            intidbase + ARCH_GIC_MAINT_IRQ);
+837:            sysbus_connect_irq(gicbusdev, i + 4 * smp_cpus, irq);
+838:        }
+839:
+840:        qdev_connect_gpio_out_named(cpudev, "pmu-interrupt", 0,
+841:                                    qdev_get_gpio_in(vms->gic, intidbase
+842:                                                     + VIRTUAL_PMU_IRQ));
+843:
+844:        sysbus_connect_irq(gicbusdev, i, qdev_get_gpio_in(cpudev, ARM_CPU_IRQ));
+845:        sysbus_connect_irq(gicbusdev, i + smp_cpus,
+846:                           qdev_get_gpio_in(cpudev, ARM_CPU_FIQ));
+847:        sysbus_connect_irq(gicbusdev, i + 2 * smp_cpus,
+848:                           qdev_get_gpio_in(cpudev, ARM_CPU_VIRQ));
+849:        sysbus_connect_irq(gicbusdev, i + 3 * smp_cpus,
+850:                           qdev_get_gpio_in(cpudev, ARM_CPU_VFIQ));
+851:    }
+SOURCE hw/arm/virt.c 2247-2255
+2247:
+2248:            object_property_set_link(cpuobj, "tag-memory", OBJECT(tag_sysmem),
+2249:                                     &error_abort);
+2250:            if (vms->secure) {
+2251:                object_property_set_link(cpuobj, "secure-tag-memory",
+2252:                                         OBJECT(secure_tag_sysmem),
+2253:                                         &error_abort);
+2254:            }
+2255:        }
+SOURCE hw/arm/virt.c 2267-2278
+2267:
+2268:    create_gic(vms, sysmem);
+2269:
+2270:    virt_cpu_post_init(vms, sysmem);
+2271:
+2272:    fdt_add_pmu_nodes(vms);
+2273:
+2274:    create_uart(vms, VIRT_UART, sysmem, serial_hd(0));
+2275:
+2276:    if (vms->secure) {
+2277:        create_secure_ram(vms, secure_sysmem, secure_tag_sysmem);
+2278:        create_uart(vms, VIRT_SECURE_UART, secure_sysmem, serial_hd(1));
+SOURCE hw/char/pl011.c 254-275
+254:static void pl011_write(void *opaque, hwaddr offset,
+255:                        uint64_t value, unsigned size)
+256:{
+257:    PL011State *s = (PL011State *)opaque;
+258:    unsigned char ch;
+259:
+260:    trace_pl011_write(offset, value, pl011_regname(offset));
+261:
+262:    switch (offset >> 2) {
+263:    case 0: /* UARTDR */
+264:        /* ??? Check if transmitter is enabled.  */
+265:        ch = value;
+266:        /* XXX this blocks entire thread. Rewrite to use
+267:         * qemu_chr_fe_write and background I/O callbacks */
+268:        qemu_chr_fe_write_all(&s->chr, &ch, 1);
+269:        s->int_level |= INT_TX;
+270:        pl011_update(s);
+271:        break;
+272:    case 1: /* UARTRSR/UARTECR */
+273:        s->rsr = 0;
+274:        break;
+275:    case 6: /* UARTFR */
+SOURCE hw/char/pl011.c 511-522
+511:
+512:static void pl011_class_init(ObjectClass *oc, void *data)
+513:{
+514:    DeviceClass *dc = DEVICE_CLASS(oc);
+515:
+516:    dc->realize = pl011_realize;
+517:    dc->reset = pl011_reset;
+518:    dc->vmsd = &vmstate_pl011;
+519:    device_class_set_props(dc, pl011_properties);
+520:}
+521:
+522:static const TypeInfo pl011_arm_info = {
+SOURCE include/hw/qdev-clock.h 66-81
+66:Clock *qdev_get_clock_out(DeviceState *dev, const char *name);
+67:
+68:/**
+69: * qdev_connect_clock_in:
+70: * @dev: a device
+71: * @name: the name of an input clock in @dev
+72: * @source: the source clock (an output clock of another device for example)
+73: *
+74: * Set the source clock of input clock @name of device @dev to @source.
+75: * @source period update will be propagated to @name clock.
+76: *
+77: * Must be called before @dev is realized.
+78: */
+79:void qdev_connect_clock_in(DeviceState *dev, const char *name, Clock *source);
+80:
+81:/**
+WATCHDOG_KEY_LINES hw/arm/vexpress.c
+308:    /* 0x100e5000 SP805 Watchdog module */
+383:    /* 0x2b060000: SP805 watchdog: not modelled */
+WATCHDOG_KEY_LINES hw/watchdog/cmsdk-apb-watchdog.c
+2: * ARM CMSDK APB watchdog emulation
+14: * System Design Kit (CMSDK) and documented in the Cortex-M System
+85:static bool cmsdk_apb_watchdog_intstatus(CMSDKAPBWatchdog *s)
+91:static bool cmsdk_apb_watchdog_resetstatus(CMSDKAPBWatchdog *s)
+97:static void cmsdk_apb_watchdog_update(CMSDKAPBWatchdog *s)
+116:        watchdog_perform_action();
+123:    CMSDKAPBWatchdog *s = CMSDK_APB_WATCHDOG(opaque);
+160:                      "CMSDK APB watchdog read: read of WO offset %x\n",
+175:                      "CMSDK APB watchdog read: bad offset %x\n", (int)offset);
+186:    CMSDKAPBWatchdog *s = CMSDK_APB_WATCHDOG(opaque);
+193:                      "CMSDK APB watchdog write: write to locked watchdog\n");
+250:                      "CMSDK APB watchdog write: write to RO offset 0x%x\n",
+263:                      "CMSDK APB watchdog write: bad offset 0x%x\n",
+282:    CMSDKAPBWatchdog *s = CMSDK_APB_WATCHDOG(opaque);
+295:static void cmsdk_apb_watchdog_reset(DeviceState *dev)
+297:    CMSDKAPBWatchdog *s = CMSDK_APB_WATCHDOG(dev);
+299:    trace_cmsdk_apb_watchdog_reset();
+315:    CMSDKAPBWatchdog *s = CMSDK_APB_WATCHDOG(opaque);
+325:    CMSDKAPBWatchdog *s = CMSDK_APB_WATCHDOG(obj);
+331:    s->wdogclk = qdev_init_clock_in(DEVICE(s), "WDOGCLK",
+341:    CMSDKAPBWatchdog *s = CMSDK_APB_WATCHDOG(dev);
+345:                   "CMSDK APB watchdog: WDOGCLK clock must be connected");
+365:        VMSTATE_CLOCK(wdogclk, CMSDKAPBWatchdog),
+366:        VMSTATE_PTIMER(timer, CMSDKAPBWatchdog),
+367:        VMSTATE_UINT32(control, CMSDKAPBWatchdog),
+368:        VMSTATE_UINT32(intstatus, CMSDKAPBWatchdog),
+369:        VMSTATE_UINT32(lock, CMSDKAPBWatchdog),
+370:        VMSTATE_UINT32(itcr, CMSDKAPBWatchdog),
+371:        VMSTATE_UINT32(itop, CMSDKAPBWatchdog),
+372:        VMSTATE_UINT32(resetstatus, CMSDKAPBWatchdog),
+387:    .name = TYPE_CMSDK_APB_WATCHDOG,
+389:    .instance_size = sizeof(CMSDKAPBWatchdog),
+396:    CMSDKAPBWatchdog *s = CMSDK_APB_WATCHDOG(obj);
+403:    .name = TYPE_LUMINARY_WATCHDOG,
+404:    .parent = TYPE_CMSDK_APB_WATCHDOG,
+WATCHDOG_KEY_LINES hw/watchdog/sbsa_gwdt.c
+179:static void wdt_sbsa_gwdt_reset(DeviceState *dev)
+206:         * expiry. watchdog_perform_action() may temporarily relinquish
+216:            wdt_sbsa_gwdt_reset(DEVICE(s));
+218:        watchdog_perform_action();
+
+===== G =====
+COMMAND:
+$qeScript = @'
+from pathlib import Path
+import hashlib, tarfile, subprocess, re
+root=Path('/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7')
+archive=Path('/home/oops/workspace/build/downloads/qemu-8.2.7.tar.xz')
+files=['hw/arm/vexpress.c','hw/watchdog/cmsdk-apb-watchdog.c','hw/watchdog/sbsa_gwdt.c']
+with tarfile.open(archive,'r:xz') as tf:
+ for f in files:
+  data=(root/f).read_bytes()
+  upstream=tf.extractfile('qemu-8.2.7/'+f).read()
+  print('PROVENANCE',f,'SHA256',hashlib.sha256(data).hexdigest(),'ARCHIVE_EQUAL',data==upstream)
+lines=(root/'hw/arm/virt.c').read_text().splitlines()
+print('SOURCE hw/arm/virt.c 2256-2266')
+for i in range(2255,2266): print(str(i+1)+':'+lines[i])
+for p in sorted((root/'include').rglob('*.h')):
+ lines=p.read_text(errors='replace').splitlines()
+ hits=[(n,l) for n,l in enumerate(lines,1) if re.search(r'#define ARCH_TIMER_(NS_EL1|VIRT|NS_EL2|S_EL1)_IRQ',l)]
+ if hits:
+  f=str(p.relative_to(root))
+  with tarfile.open(archive,'r:xz') as tf:
+   upstream=tf.extractfile('qemu-8.2.7/'+f).read()
+   print('PROVENANCE',f,'SHA256',hashlib.sha256(p.read_bytes()).hexdigest(),'ARCHIVE_EQUAL',p.read_bytes()==upstream)
+  print('TIMER_INTID',f)
+  for n,l in hits: print(str(n)+':'+l)
+print('FINAL_REMOTE_BASELINE')
+for repo in ['/home/oops/workspace/meta-tiger','/home/oops/workspace/poky']:
+ print('REPO',repo)
+ for args in [['git','-C',repo,'rev-parse','HEAD'],['git','-C',repo,'status','--short','--branch']]:
+  r=subprocess.run(args,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,text=True)
+  print('COMMAND',args,'RC',r.returncode)
+  print(r.stdout,end='')
+
+'@
+$qeScript | ssh -F C:/Users/YinZh/.ssh/config -o BatchMode=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile=C:/Users/YinZh/.ssh/known_hosts -o ConnectTimeout=10 tiger 'python3 -B -'
+EXIT_CODE: 0
+OUTPUT:
+PROVENANCE hw/arm/vexpress.c SHA256 843675374fc120545e3a9e58e349ab587bdc20a653a2d2a02b7e55b9d76cd659 ARCHIVE_EQUAL True
+PROVENANCE hw/watchdog/cmsdk-apb-watchdog.c SHA256 dbed6f7c458d00392c448da75223deeecbc4898f483919a085e4add31c1292d4 ARCHIVE_EQUAL True
+PROVENANCE hw/watchdog/sbsa_gwdt.c SHA256 0fe9be1fd644dd7c3fd119122fee65f87be4b239f0bc2f0f254e12f9c3b0307c ARCHIVE_EQUAL True
+SOURCE hw/arm/virt.c 2256-2266
+2256:
+2257:        qdev_realize(DEVICE(cpuobj), NULL, &error_fatal);
+2258:        object_unref(cpuobj);
+2259:    }
+2260:    fdt_add_timer_nodes(vms);
+2261:    fdt_add_cpu_nodes(vms);
+2262:
+2263:    memory_region_add_subregion(sysmem, vms->memmap[VIRT_MEM].base,
+2264:                                machine->ram);
+2265:
+2266:    virt_flash_fdt(vms, sysmem, secure_sysmem ?: sysmem);
+PROVENANCE include/hw/arm/bsa.h SHA256 4141d58347e6c1ef37cf546b2d4eeaabc95ce0c841b116bfb7cb26a7ac81e725 ARCHIVE_EQUAL True
+TIMER_INTID include/hw/arm/bsa.h
+27:#define ARCH_TIMER_NS_EL2_IRQ      26
+28:#define ARCH_TIMER_VIRT_IRQ        27
+30:#define ARCH_TIMER_S_EL1_IRQ       29
+31:#define ARCH_TIMER_NS_EL1_IRQ      30
+FINAL_REMOTE_BASELINE
+REPO /home/oops/workspace/meta-tiger
+COMMAND ['git', '-C', '/home/oops/workspace/meta-tiger', 'rev-parse', 'HEAD'] RC 0
+0e3da48b34ef772532535a730a21878cc30ccf67
+COMMAND ['git', '-C', '/home/oops/workspace/meta-tiger', 'status', '--short', '--branch'] RC 0
+## master...github/master
+REPO /home/oops/workspace/poky
+COMMAND ['git', '-C', '/home/oops/workspace/poky', 'rev-parse', 'HEAD'] RC 0
+77d1feb37e280733684ae8a9449fb031d5d7ff40
+COMMAND ['git', '-C', '/home/oops/workspace/poky', 'status', '--short', '--branch'] RC 0
+## scarthgap...origin/scarthgap
+
+
+===== V: LOCAL GOVERNANCE CHECKS (before commit) =====
+Commands executed in D:/opc-book-yocto except book-specific checks below.
+
+COMMAND:
+python -B scripts/validate_framework.py
+EXIT_CODE: 0
+OUTPUT:
+校验通过：21 个角色、36 份技能、1 个实际项目、1 套项目模板、475 处本地链接。
+本工具只读；不验证业务语义、任务验收、会话身份或执行权限。
+
+COMMAND:
+$qeProof = @'
+from pathlib import Path
+import subprocess,hashlib
+def git(*args,cwd=None):
+ r=subprocess.run(['git',*args],cwd=cwd,stdout=subprocess.PIPE,stderr=subprocess.PIPE,check=True)
+ return r.stdout
+head=git('rev-parse','HEAD').decode().strip()
+assert head=='e92399c65f93900ca801c459d297c713ac9a980d',head
+fixed='69ce591cd9e4ee310b80cff4663c20c776364cfd'
+ap='projects/book-yocto/artifacts/A-005-tiger-platform-design.md'
+blob=git('rev-parse',fixed+':'+ap).decode().strip()
+assert blob=='d7d474e4de48ad8e05ffd4d9893594214843f9be'
+assert Path(ap).read_bytes().replace(b'\r\n',b'\n')==git('show',fixed+':'+ap).replace(b'\r\n',b'\n')
+task='projects/book-yocto/TASKS.md'
+old=git('show',head+':'+task).replace(b'\r\n',b'\n')
+new=Path(task).read_bytes().replace(b'\r\n',b'\n')
+start='#### qemu-engineer 的意见'.encode('utf-8'); end=b'## T-017'
+assert old[:old.index(start)]==new[:new.index(start)]
+assert old[old.index(end,old.index(start)):]==new[new.index(end,new.index(start)):]
+print('OPC_HEAD',head)
+print('FIXED_A005_BLOB',blob,'UNCHANGED')
+print('TASKS_PREFIX_AND_SUFFIX_UNCHANGED True')
+for p in ['projects/book-yocto/artifacts/work-records/t016-a005-qemu-review.md','projects/book-yocto/artifacts/work-records/t016-a005-qemu-review-raw.log']:
+ d=Path(p).read_bytes()
+ print('FILE',p,'BYTES',len(d),'SHA256',hashlib.sha256(d).hexdigest())
+print('BOOK_HEAD',git('-C','D:/book-yocto','rev-parse','HEAD').decode().strip())
+print('BOOK_STATUS')
+print(git('-C','D:/book-yocto','status','--short','--branch').decode(),end='')
+
+'@
+$qeProof | python -X utf8 -B -
+EXIT_CODE: 1
+OUTPUT:
+OPC_HEAD e92399c65f93900ca801c459d297c713ac9a980d
+FIXED_A005_BLOB d7d474e4de48ad8e05ffd4d9893594214843f9be UNCHANGED
+TASKS_PREFIX_AND_SUFFIX_UNCHANGED True
+FILE projects/book-yocto/artifacts/work-records/t016-a005-qemu-review.md BYTES 16494 SHA256 f1eb93e67b99c342fd0a9a37d24154b15a0bf673ffbb5f155ea95a800a3974dd
+FILE projects/book-yocto/artifacts/work-records/t016-a005-qemu-review-raw.log BYTES 107327 SHA256 ff987781b8dd72e827de110ac81304f1ef297fd1e515a18c33cb53d48fdc3a12
+Traceback (most recent call last):
+  File "<stdin>", line 25, in <module>
+  File "<stdin>", line 4, in git
+  File "C:\Users\YinZh\AppData\Local\Programs\Python\Python312\Lib\subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['git', '-C', 'D:/book-yocto', 'rev-parse', 'HEAD']' returned non-zero exit status 128.
+
+COMMAND:
+git diff --check
+EXIT_CODE: 0
+OUTPUT:
+
+The first proof script completed the fixed-blob/section checks, then failed on cross-directory git -C ownership context. No global Git configuration was changed. Book checks were repeated using D:/book-yocto as the tool working directory; the OPC-only proof then returned 0.
+
+WORKDIR: D:/book-yocto
+COMMAND:
+git rev-parse HEAD
+EXIT_CODE: 0
+OUTPUT:
+f444790f352b46f699fd3d46198f8b9b9f089a62
+
+WORKDIR: D:/book-yocto
+COMMAND:
+git status --short --branch
+EXIT_CODE: 0
+OUTPUT:
+warning: unable to access 'C:\Users\YinZh/.config/git/ignore': Permission denied
+warning: unable to access 'C:\Users\YinZh/.config/git/ignore': Permission denied
+## feature/t-016-chapter4-revision...origin/feature/t-016-chapter4-revision
+
+COMMAND:
+$qeProof = @'
+from pathlib import Path
+import subprocess,hashlib
+def git(*args,cwd=None):
+ r=subprocess.run(['git',*args],cwd=cwd,stdout=subprocess.PIPE,stderr=subprocess.PIPE,check=True)
+ return r.stdout
+head=git('rev-parse','HEAD').decode().strip()
+assert head=='e92399c65f93900ca801c459d297c713ac9a980d',head
+fixed='69ce591cd9e4ee310b80cff4663c20c776364cfd'
+ap='projects/book-yocto/artifacts/A-005-tiger-platform-design.md'
+blob=git('rev-parse',fixed+':'+ap).decode().strip()
+assert blob=='d7d474e4de48ad8e05ffd4d9893594214843f9be'
+assert Path(ap).read_bytes().replace(b'\r\n',b'\n')==git('show',fixed+':'+ap).replace(b'\r\n',b'\n')
+task='projects/book-yocto/TASKS.md'
+old=git('show',head+':'+task).replace(b'\r\n',b'\n')
+new=Path(task).read_bytes().replace(b'\r\n',b'\n')
+start='#### qemu-engineer 的意见'.encode('utf-8'); end=b'## T-017'
+assert old[:old.index(start)]==new[:new.index(start)]
+assert old[old.index(end,old.index(start)):]==new[new.index(end,new.index(start)):]
+print('OPC_HEAD',head)
+print('FIXED_A005_BLOB',blob,'UNCHANGED')
+print('TASKS_PREFIX_AND_SUFFIX_UNCHANGED True')
+for p in ['projects/book-yocto/artifacts/work-records/t016-a005-qemu-review.md','projects/book-yocto/artifacts/work-records/t016-a005-qemu-review-raw.log']:
+ d=Path(p).read_bytes()
+ print('FILE',p,'BYTES',len(d),'SHA256',hashlib.sha256(d).hexdigest())
+'@
+$qeProof | python -X utf8 -B -
+EXIT_CODE: 0
+OUTPUT:
+OPC_HEAD e92399c65f93900ca801c459d297c713ac9a980d
+FIXED_A005_BLOB d7d474e4de48ad8e05ffd4d9893594214843f9be UNCHANGED
+TASKS_PREFIX_AND_SUFFIX_UNCHANGED True
+FILE projects/book-yocto/artifacts/work-records/t016-a005-qemu-review.md BYTES 16494 SHA256 f1eb93e67b99c342fd0a9a37d24154b15a0bf673ffbb5f155ea95a800a3974dd
+FILE projects/book-yocto/artifacts/work-records/t016-a005-qemu-review-raw.log BYTES 107327 SHA256 ff987781b8dd72e827de110ac81304f1ef297fd1e515a18c33cb53d48fdc3a12
+
+COMMAND:
+git diff --cached --check
+EXIT_CODE: 1
+OUTPUT:
+warning: unable to access 'C:\Users\YinZh/.config/git/ignore': Permission denied
+projects/book-yocto/artifacts/work-records/t016-a005-qemu-review.md:102: new blank line at EOF.
+
+The extra Markdown EOF blank line was removed before the final check. Hashes above refer to that pre-validation snapshot, not the later appended evidence file.
+
+FINAL CHECK:
+COMMAND:
+git diff --cached --check
+EXIT_CODE: 0
+OUTPUT:
+warning: unable to access 'C:\Users\YinZh/.config/git/ignore': Permission denied
+
+COMMAND:
+python -B scripts/validate_framework.py
+EXIT_CODE: 0
+OUTPUT:
+校验通过：21 个角色、36 份技能、1 个实际项目、1 套项目模板、475 处本地链接。
+本工具只读；不验证业务语义、任务验收、会话身份或执行权限。

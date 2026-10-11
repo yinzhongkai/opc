@@ -641,8 +641,17 @@
 - 复核：尚未进行；本人成果已提交后停止，等待 project-manager 串行衔接 QEMU 专业核对及后续统一修订，不代写他人结论或批准。
 
 #### qemu-engineer 的意见
-- 日期、依据、未覆盖项及结论：尚未评审；由本人按上述范围记录。
-- 问题、作者处理回复及复核：待实际评审后填写，不代写结论。
+- 日期、评审依据与实际覆盖：2026-10-11；固定受评正文为 OPC `69ce591cd9e4ee310b80cff4663c20c776364cfd` 的 A-005 v0.1，依据本轮安排、U-A005-01/U-A005-02、Y-A005-01～05、D-010/D-013 及本人当前 scope。只读核对已授权 `ssh tiger`：meta-tiger `master@0e3da48b34ef772532535a730a21878cc30ccf67` 与 WORKSPACE 一致，Poky `scarthgap@77d1feb37e280733684ae8a9449fb031d5d7ff40`，均干净；复核 QEMU 8.2.7 源码包 hash/31 项 OE patches，将 22 个选定 CPU/boot/UART/SSI/loader/clock/watchdog 等源码/API 文件与锁定包逐字节比较，均相同。详见 [核对报告](artifacts/work-records/t016-a005-qemu-review.md) 与 [只读命令/完整输出](artifacts/work-records/t016-a005-qemu-review-raw.log)。
+- 结论：**revise**。单核 A53、ROM/RAM、轮询 PL011 的测试固件路线有准确源码依据；须收敛第 4 章范围并补足加载、reset、串口证据和后续 SPI NAND 门槛。不表示模型已运行、设计获批或实施已开始。
+- QE-A005-01（§3/§4/§10/Q-02，最小资源）：建议第 4 章只实现 TCG AArch64 CPU0、ROM `[0,0x100000)`、DDR `[0x40000000,0x80000000)` 和 UART0 `[0x09000000,0x09001000)`，`-smp 1` 与实际允许 CPU 数一致；1 GiB 为布局兼容选择，不是技术最低量。轮询 PL011 的 IRQ 可以不接 GIC；SRAM/GIC/RTC、四核上线、timer IRQ、SPI/NAND/watchdog 依章节演进，预留地址与已实现设备分开。A53 自带 generic timer/EL2/EL3 不等于板级中断或 PSCI 服务已成立。原稿责任人：architect。
+- QE-A005-02（§5.1/§5.2/Q-03，无 kernel 固件加载）：`-bios` 不自动映射新 machine 的 ROM；选定 MachineState.firmware→路径解析→实际 ROM MemoryRegion→load_image_mr 的路线，明确 raw 入口 0、ELF/map/链接脚本与 binary 对应、RAM 内栈/data/BSS。loader 拒绝超长但接受空文件，tiger 应明确要求 `0 < 长度 ≤ 1 MiB`，缺失/不可读/空/超长在 CPU 运行前报错。ARM 属性名为 `rvbar`，保留 A53 has_el3 时 reset 进入 EL3h、PC=rvbar=0；realize 前核对 memory/secure-memory/EL 属性，不直接复制 virt 关闭 EL3 的代码。standalone U-Boot/direct-linux 留待后续，不假定 BL31/PSCI。原稿责任人：architect。
+- QE-A005-03（§4.4/§5.1/§10 V-06/Q-03/Q-06，reset 与阶段拆分）：锁定 boot.c 明确 CPU 不会仅因创建对象就自动参加系统 reset，须选择 arm_load_kernel 的纯 firmware reset 注册路线或等效显式 handler。本章可由宿主 QMP/HMP system_reset 验证回到同一入口/EL、UART 状态复位及固件再次执行；不默认 RAM 全部清零。guest 请求 reset、timer IRQ 与四核唤醒各有独立前提，不合并进最小启动。EL3 firmware 会禁用 SMC emulated PSCI，secondary 自动 start-powered-off 只在该 PSCI 启用时设置；若保留四核，须显式规定/测试停车、affinity、reset 与后续唤醒责任，不能假定 CPU_ON 已可用。原稿责任人：architect。
+- QE-A005-04（§4.4/§5.2/§10 V-06/V-07，UART/证据）：UART0 绑定 serial_hd(0)，与 runqemu nographic 的实际第一 serial backend 对齐，清除继承/重复 stdio 参数；固件采用对齐 32 位 PL011 访问及轮询。模型只有一个 clk 输入，若保留 24 MHz 须在 realize 前接实际时钟源，不能将 DTS uartclk/apb_pclk 当成两个模型输入或自动推得 cntfrq。DR 输出路径未强制检查 TX enable，字符输出不证明波特率/控制位/IRQ。验收关联固件源/ELF/map/raw hash、tiger patch/metadata、native QEMU 路径/hash、最终参数、CPU 入口/EL及 guest MMIO 产生的确定标记、日志/终态，并保留 D-013 干净重构建；枚举、-S、对象创建或宿主打印均不算 CPU 启动。原稿责任人：architect。
+- QE-A005-05（§4.1/§4.3/§6/§7/Q-07，SPI NAND）：采用 SPI master→实际 CS→SPI NAND，移除独立并行 NAND 控制器窗口/IRQ。PL022 有 SSI bus/MMIO/IRQ，但全文件没有 CS 输出；SSI 的 cs 属性只编号，须另定 guest 可控片选来源及 reset 未选中电平，或核对另一 master。未识别可直接使用的 SPI NAND 模型；m25p80 是 NOR，nand_setpins 是并行 NAND，仅能评估其基础设施/后端复用，不能改名替代芯片协议。后续需补芯片实现或审查外部实现，锁定型号/ID/命令/缓存/busy/reset/OOB/ECC/坏块及后端布局；主控、CS、最小读取模型、TF-A IO 与镜像一致性门槛在首次 SPI NAND 读 BL2/FIP 前满足，可能早于 chapter 9/10。完整 program/erase/UBI/A/B/持久化仍分阶段，不阻塞本章无 NAND 固件。原稿责任人：architect。
+- QE-A005-06（§6/§8/§9 Q-05～Q-10，后续兼容边界）：锁定 virt/bsa 源码支持 GICv2 与 timer INTID 26/27/29/30 的接线参考，后续须区分 SPI INTID/GPIO 下标、每核 PPI、安全分组、cntfrq、handler 与 PSCI provider；未作完整 GIC 审核。SP805 检索仅命中 vexpress 注释（含 not modelled），未找到可直接实例化的 SP805 模型；现有 CMSDK/SBSA watchdog 须另审兼容或适配，不能假定 LOAD=0 停止或制造上游 bug 结论。TF-A/U-Boot/Linux 入口/驱动、存储几何/UBI/A/B、SPI NOR/EEPROM 和 guest 网卡留在首次使用前锁定/验证，slirp 不替代网卡模型。原稿责任人：architect。
+- 未覆盖：全源码树一致性、BitBake 选择展开、模型/固件/metadata/qemuboot 实现与构建、QEMU/runqemu 或 CPU/UART/reset/IRQ/SMP 实测；具体 SPI NAND 型号/数据手册与模型、TF-A/U-Boot/Linux 虎板驱动/全链、存储/watchdog 运行核验。静态来源和旧 work 产物不能代替新 tiger 结果；后续 gate 不因本次范围收敛而取消。
+- 作者处理回复：待本轮意见到齐后由 architect 按 QE-A005-01～06 填写修订版本和处理结果。
+- 复核：尚未进行；本人成果提交后停止，等待 project-manager 串行衔接 architect 统一修订及必要复核，不代写批准。
 
 ## T-017：全书四仓库叙事迁移为 `meta-tiger` patch-only 模型
 - 负责人：writer（跨章改写与统稿）；reviewer（技术与首次讲解次序复核）；project-manager（范围、依赖和意见闭环）；architect（平台设计与跨组件契约一致性核对）；qemu-engineer（QEMU 模型接口与下游依赖事实核对）；yocto-engineer（metadata、构建与系统验证事实复核）；用户（通读意见与最终确认）
