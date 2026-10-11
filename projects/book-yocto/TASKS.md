@@ -678,7 +678,16 @@
 - 当前进度与下一位：architect 已提交并停止，OPC 工作树干净；qemu-engineer 和 yocto-engineer 尚未复核。project-manager 先通知 qemu-engineer，完成提交并停止后再通知 yocto-engineer；成员执行期间协调方仅观察，不写仓库或启动第二位成员。
 
 #### qemu-engineer 的针对性复核
-- 尚未执行；由本人填写固定版本、原问题处理结果、来源/覆盖/未覆盖及结论，不代写。
+- 日期、固定版本与依据：2026-10-11；按本轮针对性安排复核 A-005 v0.2 draft，OPC `08bdf9c08d6d8cbd8836df3771ffd28231470059`，正文 Git blob `26c5fdca1103f37ac3e752208c429231b8191eee`；当前文件与固定稿一致。身份仍为 book-yocto / qemu-engineer，scope 及有效技能未变；依据 U-A005-01/02、QE-A005-01～06 的作者回复、D-010/D-013 和本人已提交的 [锁定源码核对报告](artifacts/work-records/t016-a005-qemu-review.md)及[原始证据](artifacts/work-records/t016-a005-qemu-review-raw.log)（`1c8304446f8bf82fd46a56413a5fa5787e271ae6`，本轮核对未变）。来源仍为 QEMU 8.2.7 包加 31 项 OE patches；本轮按需重读保存的 C2/E/F 中 CPU/loader/reset/PL011/clock 摘录，未重新 SSH 或扩展源码检索。
+- QE-A005-01：**已解决（设计层面）**。§1/§3/§4.1 限 CPU0/A53/TCG、ROM/UART/RAM 三段，默认/最大 CPU=1，输入 CPU/SMP/RAM/加速器与实际固定布局一致；§4.1a/§4.3 的后续设备仅预留，轮询 UART 不接 GIC/IRQ。与报告 §2 的 A53 能力和空 IRQ 接法一致；四核/GIC/timer/RTC 等按首次使用演进，落实 U-A005-02。
+- QE-A005-02：**已解决（设计层面）**。§5.1 选择 MachineState.firmware→解析→实际 ROM→load_image_mr，明确缺失/不可读/空/超长/装载失败先报错，`0 < raw ≤ 1 MiB`，合法长度与启动成功分开；§4.2/§5.3 的 ROM LMA、RAM data/BSS、独立对齐栈和 ELF/map/raw 对账补齐入口契约。§5.1 的 has_el2/has_el3、rvbar=0、memory/secure-memory 同一视图与 EL3 入口对应保存的 loader.c:143–163、cpu.c:302–313/1572–1589；同一视图未宣称安全隔离，未假定 BL31/PSCI。
+- QE-A005-03：**已解决（设计层面）**。§5.2 选定 arm_load_kernel 纯 firmware 路线，machine 持有零初始化 boot_info；CPU/ROM/UART 和 BIOS 成功后初始化调用一次，firmware_loaded=true、is_linux=false、PSCI disabled，无 DTB/secondary hook，并在调用前拒绝 MachineState 的 kernel/initrd/DTB。与保存的 boot.c:1150–1202/1204–1239/1260–1317 一致：注册 do_cpu_reset，纯 firmware 保持 env->boot_info=NULL，reset 由 cpu_reset/rvbar 确定入口；未另注册 handler，也不在每次 reset 重调 loader。对象/boot_info/clock 全程有效及不支持运行中重建/热插拔消除了本轮生命周期歧义。§5.2/§10 V-06R 的暂停→宿主 system_reset→入口/EL/UART 状态→cont→第二标记及 data/BSS 再初始化可检验模型 reset；RAM 不全清零，guest reset/timer IRQ/四核各留真实接口前提。
+- QE-A005-04：**已解决（设计层面）**。§4.4 固定单 clk 24 MHz 并在 realize 前连接，cntfrq 独立配置；§5.3/§5.4 的 UART0=serial_hd(0)、唯一第一 serial backend、32 位轮询配置/读回与字符输出分别验收，符合保存的 pl011.c:36–48/254–270/381–387/479–517 和 qdev-clock.h:69–79。§5.3/§10 用入口/CurrentEL、ELF/map/raw/版本、guest MMIO trace/调试与确定标记证明执行，并关联 native 工具/hash/最终参数和正式干净复验；不将枚举/-S/宿主打印或 DR 输出当作控制位/线速/IRQ 证明。具体 deploy/任务图/路径与 runqemu 集成由随后 Yocto 复核及实施验证。
+- QE-A005-05：**已解决（阶段依赖处理）**。§4.1a/§4.3/§6/§7.1 删除独立并行 NAND MMIO/IRQ，统一 SPI master→实际 CS→SPI NAND，落实 U-A005-01。明确 PL022 无 CS 输出、SSI cs 编号不等于电平，后续选真实片选来源或另一 master，且每次 reset 恢复未选中；没有把 NOR/并行 NAND 当现成 SPI NAND。缺失芯片实现/外部审查、TF-A IO、ECC/坏块/后端和读取字节一致性已置于首次 SPI NAND 读 BL2/FIP 前；本章无需选定或实现未知芯片。与既存 D1/D2、报告 §5 一致；后续功能尚未提供不构成本章新增阻断。
+- QE-A005-06：**已解决（阶段依赖处理）**。§4.3/§6/§8/§9 保留后续 GIC 输入/INTID/每核 PPI/安全分组/cntfrq 与 PSCI provider 约束；§8.1 撤回“已有可复用 SP805”假设，CMSDK/SBSA 只作待审候选，型号/手册/模型/driver/LOAD=0/正常行为与教学实验在首次使用前确认。未来组件、存储和其他设备仍待锁定/实测，slirp 不代替 guest 网卡；与既存 F/G 和报告 §6 的覆盖边界一致，无须本轮选定未来模型。
+- 实际覆盖与结论：已读取固定新稿、原六项及作者回复、针对性安排和相关保存证据，逐项检查本章契约及后续门槛；**pass**。QE-A005-01～06 的设计问题处理均已解决，此次范围内未发现新增实质阻断或矛盾；无新增问题。仅表示本人针对性设计复核通过，原 v0.1 revise 记录保留，不代表工程验收或用户批准。
+- 未覆盖：新 tiger patch/固件/metadata 实现，BitBake 最终选择/任务图/部署与 native 路径实际展开，构建、runqemu、CPU/UART/reset/IRQ/SMP 运行测试；未来 SPI NAND 型号/数据手册/CS/芯片、TF-A/U-Boot/Linux、存储/watchdog 实现与全链实测。本轮没有新远端事实、书稿修改或工程操作，既有证据不冒充本轮运行结果。
+- 后续：本次仅写本节；校验并提交后停止，由 project-manager 串行衔接 yocto-engineer 的针对性复核，再按全部结果协调修订或用户确认。
 
 #### yocto-engineer 的针对性复核
 - 尚未执行；由本人填写固定版本、原问题处理结果、来源/覆盖/未覆盖及结论，不代写。
