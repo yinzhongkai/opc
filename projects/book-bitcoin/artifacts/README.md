@@ -1,9 +1,11 @@
 # 项目成果索引
 
-暂无已登记成果。每位成果负责人维护自己的条目，协调记录维护人检查索引一致性。元信息与批准规则见根 [项目运行协议](../../../PROJECT_PROTOCOL.md)。
+每位成果负责人维护自己的条目，协调记录维护人检查索引一致性。元信息与批准规则见根 [项目运行协议](../../../PROJECT_PROTOCOL.md)。
 
 | 成果 ID | 名称与位置 | 存储位置 | 负责人 | 关联任务 | 版本/精确提交 | 状态 | 批准决定 |
 |---|---|---|---|---|---|---|---|
+| A-001 | [全书内容与配套资料盘点](book/content-inventory.md)；[扫描证据](book/inventory-evidence.json) | OPC artifacts/book/ | project-manager | [T-001](../TASKS.md) | 0.1；书稿输入 0811b23eb19d79ceb55a3c64a81944312eec0f2c | draft | 尚无 |
+| A-002 | [全书审核与修订计划](book/review-plan.md) | OPC artifacts/book/ | project-manager | [T-001](../TASKS.md) | 0.1；输入 A-001 0.1 及上述书稿提交 | draft | 尚无；D-005 待确认 |
 
 OPC 治理与协作成果使用当前项目 `artifacts/` 内的正文链接；产品代码和直接业务交付物使用“成果物仓库 + 仓库内路径”，并记录其最终合并提交。可移动分支名不能代替精确提交。
 
