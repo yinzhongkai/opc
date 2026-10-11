@@ -1,5 +1,7 @@
 # 项目状态摘要
 
+> 成员配置更新（2026-10-11）：按用户明确建员授权新增 `architect`，TEAM 当前为 6 名成员，配置事实见 PROJECT。任务、计划及下一位行动人待 project-manager 按 H-003 刷新；下文五人团队及 writer 先行的安排是本次增员前摘要，不能替代最新配置与用户授权。平台设计和新成员会话初始化尚未开始。
+
 - 汇总日期与信息截至点：2026-10-11；chapter 3 最终定稿与 2026-10-08 的合并、推送事实不变。T-016 已建立并推送 chapter 4 配对 feature 分支；D-013 确认上游源码与 `meta-tiger` patch 模型，H-001 已完成两个独立成果物的 WORKSPACE 声明和精确基线。超级管理员已登记 qemu-engineer 并调整 Yocto scope；project-manager 本日接收 H-002、完成任务分工刷新，交接待发起人核对关闭。正文与工程实现尚未开始。
 - 维护人：project-manager（按 [PROJECT.md](PROJECT.md) 指定的协调记录维护人）。
 - 当前阶段：P1 基础修复、P2 章节闭环试点均已完成；**P3 正在推进，chapter 1、chapter 2、chapter 3 均已定稿；T-016 chapter 4 已完成任务、双仓库 feature 分支、D-013 方案、工作区边界及工程分工准备，当前状态为 todo**（计划见 A-002 v0.7）。目标与范围见 [PROJECT.md](PROJECT.md) 与 D-001~D-013。WORKSPACE 现以 `multi-git` 分别锁定书稿 `main@f444790f352b46f699fd3d46198f8b9b9f089a62` 和 `tiger:/home/oops/workspace/meta-tiger` 的 `master@0e3da48b34ef772532535a730a21878cc30ccf67`；两个成果物均尚未产生 T-016 的新最终合并提交。
