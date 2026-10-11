@@ -1,6 +1,6 @@
 # 项目状态摘要
 
-- 汇总日期与信息截至点：2026-10-11；architect 已处理全部 13 项 U/Y/QE 意见，提交并冻结 A-005 v0.2 draft（`08bdf9c08d6d8cbd8836df3771ffd28231470059`）。project-manager 已核验正文、作者回复、提交与停止状态，登记 QEMU → Yocto 针对性复核。用户要求的最小可启动 machine 和 SPI NAND 方向已落实为候选契约；设计批准、蓝图、正文及工程实现尚未开始。
+- 汇总日期与信息截至点：2026-10-11；A-005 v0.2 draft 固定在 `08bdf9c08d6d8cbd8836df3771ffd28231470059`，13 项作者回复齐备。QEMU 针对性复核 pass 已提交 `5287e43` 并停止，project-manager 已核验记录和稳定稿，下一位为 Yocto 部署/配置/启动集成复核。用户要求的最小可启动 machine 和 SPI NAND 方向已落实为候选契约；设计批准、蓝图、正文及工程实现尚未开始。
 - 维护人：project-manager（按 [PROJECT.md](PROJECT.md) 指定的协调记录维护人）。
 - 当前阶段：P1 基础修复、P2 章节闭环试点均已完成；**P3 正在推进，chapter 1–3 已定稿；T-016 为 in_progress，A-005 v0.2 等待针对性复核与用户确认**（计划见 A-002 v0.8，用户最新意见与核对安排见 TASKS）。目标与范围见 [PROJECT.md](PROJECT.md) 与 D-001~D-013。WORKSPACE 仍分别锁定书稿 `main@f444790f352b46f699fd3d46198f8b9b9f089a62` 和 `tiger:/home/oops/workspace/meta-tiger` 的 `master@0e3da48b34ef772532535a730a21878cc30ccf67`；两个成果物均尚未产生 T-016 的新最终合并提交。
 - 任务进展：

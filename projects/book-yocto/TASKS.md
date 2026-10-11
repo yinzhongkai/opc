@@ -675,7 +675,7 @@
 - 固定受评版本：[A-005 v0.2 draft](artifacts/A-005-tiger-platform-design.md)，OPC `08bdf9c08d6d8cbd8836df3771ffd28231470059`。两名工程成员全部提交复核结果前保持该稿不变；原 v0.1 意见/证据与作者处理回复保留。
 - 串行次序与范围：qemu-engineer 先复核 QE-A005-01～06，重点 §3～5 的最小 CPU/ROM/RAM/UART、加载/入口/EL、已选 ARM loader reset 注册与生命周期、执行及 reset 验收；仅检查 §7/8 的 SPI NAND/CS/watchdog 缺口是否正确设为后续门槛。yocto-engineer 随后复核 Y-A005-01～05，重点准确来源、§5.3/5.4 的 fixture 编译/生成/部署任务、helper 依赖/路径、none 字段、参数和正式干净 runqemu 判据。共同确认 U-A005-01/02 的范围与接入方向；不要求提前选定/实现未来芯片，不重做与修订无关的全面源码核对或运行测试。
 - 完成条件：各自对原问题记录已解决/未解决、依据、实际覆盖、未覆盖及 pass/revise/blocked 结论，只写自己的复核区；pass 仅表示设计问题处理通过，不代表模型实现/运行或用户批准。发现新实质问题给出具体位置与证据；全部结果齐备后再由 architect 集中修订，或由 project-manager 交用户确认。
-- 当前进度与下一位：architect 已提交并停止，OPC 工作树干净；qemu-engineer 和 yocto-engineer 尚未复核。project-manager 先通知 qemu-engineer，完成提交并停止后再通知 yocto-engineer；成员执行期间协调方仅观察，不写仓库或启动第二位成员。
+- 当前进度与下一位：qemu-engineer 已完成针对性复核并提交 `5287e43f824dfe63d6a3e3371b5882a4944d9c48`，结论 pass，原六项问题在设计或阶段依赖层面解决，无新增实质阻断；project-manager 已核验记录、固定稿未变、提交/干净及停止状态。yocto-engineer 尚未复核，现由 project-manager 串行衔接；成员执行期间协调方仅观察，不写仓库或启动第二位成员。
 
 #### qemu-engineer 的针对性复核
 - 日期、固定版本与依据：2026-10-11；按本轮针对性安排复核 A-005 v0.2 draft，OPC `08bdf9c08d6d8cbd8836df3771ffd28231470059`，正文 Git blob `26c5fdca1103f37ac3e752208c429231b8191eee`；当前文件与固定稿一致。身份仍为 book-yocto / qemu-engineer，scope 及有效技能未变；依据 U-A005-01/02、QE-A005-01～06 的作者回复、D-010/D-013 和本人已提交的 [锁定源码核对报告](artifacts/work-records/t016-a005-qemu-review.md)及[原始证据](artifacts/work-records/t016-a005-qemu-review-raw.log)（`1c8304446f8bf82fd46a56413a5fa5787e271ae6`，本轮核对未变）。来源仍为 QEMU 8.2.7 包加 31 项 OE patches；本轮按需重读保存的 C2/E/F 中 CPU/loader/reset/PL011/clock 摘录，未重新 SSH 或扩展源码检索。
