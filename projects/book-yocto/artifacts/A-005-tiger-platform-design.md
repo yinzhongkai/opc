@@ -5,36 +5,49 @@
 成果 ID：A-005
 负责人：architect
 关联任务：T-016；跨章影响供 T-017 使用，T-017 尚未启动
-版本：0.1
+版本：0.2
 更新日期：2026-10-11
 状态：draft
-适用范围：chapter 4 最小平台设计候选；chapter 2、6–10、15 的接口与后续能力约束
-来源及输入版本：T-016 平台设计前置安排（OPC ba4e22e7854dcb0fa09adeb688af9c0a14b45a07）；A-002 v0.8、A-003 v0.1、A-004 v0.5；D-001/D-007/D-010/D-011/D-013；书稿 f444790f352b46f699fd3d46198f8b9b9f089a62 的相关章节；自身及两个工程成员的当前 scope
-批准依据：尚无；设计任务已授权，本文候选值、接口选择和验证路线尚待专业核对及用户确认
-版本记录：2026-10-11 v0.1 首次候选稿，整理书稿约定、提出最小布局与启动路线、登记缺口和验证条件
+适用范围：chapter 4 最小启动候选设计；chapter 2、6–10、15 的接口与后续门槛
+来源及输入版本：T-016 统一修订安排（869929b5d4b5e0ff39f10c2fe1ddf6853f9a0445）；固定 A-005 v0.1（69ce591cd9e4ee310b80cff4663c20c776364cfd）；U-A005-01/02、Y-A005-01～05（dd15379ebea54b36dab7b5cc2638fd345e71553f）、QE-A005-01～06（1c8304446f8bf82fd46a56413a5fa5787e271ae6）及两份报告/选定原始证据；A-002 v0.8、A-003 v0.1、A-004 v0.5；D-001/D-007/D-010/D-011/D-013；书稿 f444790f352b46f699fd3d46198f8b9b9f089a62；当前成员 scope
+批准依据：尚无；两项 revise 核对和用户意见已齐备，本版为统一修订稿，待针对性复核与用户确认；实施/运行未执行
+版本记录：2026-10-11 v0.1 首次候选稿；同日 v0.2 统一处理 13 项 U/Y/QE 意见，收敛单核启动、固定固件/reset/部署契约、回填来源、调整 SPI NAND/watchdog 门槛。v0.1 由固定提交保留。
 ```
 
 ## 1. 本版结论与使用条件
 
-建议先实现一个可执行最小测试固件的 tiger ARMv8-A 平台：Cortex-A53 四核、1 GiB RAM、固件装载区、启动 SRAM、GIC、通用定时器、PL011 串口；PL031 RTC 可作为同阶段的复用设备核对。chapter 4 交付真实 machine patch、模型证据、Yocto 正式集成及清理临时 workspace 后的干净复验。NAND、完整 TF-A 启动链、U-Boot、Linux、watchdog、SPI NOR 和 EEPROM 分阶段接入，提前明确接口和保留地址。
+第 4 章只交付能实际启动的最小 tiger machine：**TCG、AArch64 小端 Cortex-A53 CPU0、1 MiB ROM、1 GiB RAM、轮询 PL011 UART0**。固件从 ROM 地址 0 的 secure EL3h 入口执行，在 RAM 建立栈、初始化 data/BSS，经 UART0 输出可追溯标记；宿主 system_reset 后回到同一入口并再次执行。1 GiB 是与后续布局衔接的选择，不是串口启动的技术最低量。
 
-本文的地址、中断编号、时钟与启动模式是 **architect 提出的候选设计**，不是从现有 tiger 实现提取的事实，也不是已经批准的实施基线。书稿中“已跑通”“已交付”的叙事和示意日志不能证明工程能力存在。本文实际完成的是资料定位、checkout 核对、设计整理和静态算术检查，未执行 QEMU、BitBake、固件或 guest 测试。
+本章不实例化 SRAM/GIC/RTC/SPI/NAND/watchdog，不提供 timer IRQ、guest 请求 reset、四核唤醒、BL31/PSCI、U-Boot 或 Linux 启动。预留布局服务后续演进，未启用窗口保持未映射，不建立假设备。四核及完整平台仍是全书最终目标，按首次使用章节补齐并实测。
 
-本章主要确认门槛是：实际配方与上游基线、最小地址/中断/时钟契约、固件执行及复位模式、可实际执行的 runqemu 输入。chapter 4 旧稿只有 machine 列表与 `-S` 暂停实例化，并明确把完整运行留给以后；这不足以直接满足当前 T-016/D-013 的 runqemu 验证要求。§5 给出补齐路线，不能未经核对就把启动要求降为静态参数展示。
+选定 §5 的 raw 固件装载和 ARM loader 纯 firmware reset 注册路线，独立测试资产配方部署固件并生成 runqemu 输入。源码静态依据不等于新 tiger 实现或启动通过。本版仍待复核与用户确认；本章交付真实 patch、正式 meta-tiger 集成、清理临时 workspace 后干净重构建及 runqemu 运行证据，保留 D-001/D-010/D-013 和最终 C-W/V 回填目标。
 
 ## 2. 资料与版本证据
 
-### 2.1 本轮实际核对
+### 2.1 直接读取与引用的工程证据
 
-- OPC：`D:/opc-book-yocto`，当前为 `feature/book-yocto/t-016-chapter4-revision`，开始时 HEAD 为 `ba4e22e7854dcb0fa09adeb688af9c0a14b45a07`；工作树无未提交项，`project/book-yocto` 是其祖先。本轮未联网刷新远端引用。
-- 书稿：`D:/book-yocto`，远端为 `git@github.com:yinzhongkai/book-yocto.git`，当前分支为 `feature/t-016-chapter4-revision`，HEAD 与本机 `main` 均为 `f444790f352b46f699fd3d46198f8b9b9f089a62`，与 WORKSPACE 锁定版本一致；工作树无未提交项。读取正文前已核对，未修改该仓库。
-- `meta-tiger`：只读取 WORKSPACE 声明，`host: tiger`，checkout `/home/oops/workspace/meta-tiger`，目标 `master`，声明 revision 为 `0e3da48b34ef772532535a730a21878cc30ccf67`。本轮未 SSH、读取其文件或核对当前工作树；历史核对不能冒充本轮核对。
-- 本机书稿仓库的文件扫描未取得 Poky 配方、`runqemu`、QEMU machine 源码、TF-A 平台源码或 tiger DTS。未取得资料保持待核实，不从书稿中的源码节选推导真实 checkout。
-- 身份、角色与有效技能已刷新；与初始化时 OPC `737d1d78fdc858c60e81b8eace9f8c1ede59a804` 比较，根规则、角色、四项有效技能、DECISIONS、A-003/A-004 未变，复用已完整读取的正文。
+architect 本轮直接完成：刷新协议/身份/角色/四项有效技能、WORKSPACE、T-016 和决定；读取固定 v0.1、全部 U/Y/QE 意见、两份报告和选定原始摘录；核对本机 OPC 在 feature/book-yocto/t-016-chapter4-revision、开始 HEAD `869929b5d4b5e0ff39f10c2fe1ddf6853f9a0445` 且干净、目标分支为祖先，v0.1 blob 为 `d7d474e4de48ad8e05ffd4d9893594214843f9be`；书稿在对应 feature 分支、HEAD `f444790f352b46f699fd3d46198f8b9b9f089a62` 与 WORKSPACE 一致且干净。本轮不 SSH、联网、展开 BitBake、构建或运行。根规则/角色/依赖未变正文经 Git 内容比较复用，有效技能完整重读。
+
+以下远端事实由 **两位工程师于 2026-10-11 只读实查**，architect 读取其保存证据，未重做远端核验。引用版本分别为 Yocto `dd15379ebea54b36dab7b5cc2638fd345e71553f`、QEMU `1c8304446f8bf82fd46a56413a5fa5787e271ae6`。
+
+| 证据 ID | 来源 | 支持范围与限制 |
+|---|---|---|
+| E-Y | [Yocto 报告](work-records/t016-a005-yocto-review.md)及[原始日志](work-records/t016-a005-yocto-review-raw.log) A/B/C | meta-tiger master@0e3da48b34ef772532535a730a21878cc30ccf67 干净且只有骨架；Poky scarthgap@77d1feb37e280733684ae8a9449fb031d5d7ff40 干净；build 仍为 qemuarm64，未展开 tiger provider/override |
+| E-Q | [QEMU 报告](work-records/t016-a005-qemu-review.md)及[原始日志](work-records/t016-a005-qemu-review-raw.log) B/C2/E/F/G | 22 个选定源码/API 文件与锁定包逐字节相同；CPU/loader/reset/PL011/SSI 静态依据；未核全树、未重应用 OE patches、未运行 |
+| E-P | E-Y §1/§2、日志 A/C；E-Q §1 | qemu-helper-native_1.0.bb → qemu-system-native_8.2.7.bb → qemu-native.inc → qemu.inc；源码包加 31 项 OE patches |
+| E-R | E-Y §3、日志 C；E-Q §4、日志 E | runqemu/qemuboot 的 BIOS/none/native sysroot/nographic/路径规则；不是部署或启动实测 |
+
+Poky 精确来源为 `scarthgap@77d1feb37e280733684ae8a9449fb031d5d7ff40`；辅助源码路径 `tiger:/home/oops/workspace/poky`，不自动更新 WORKSPACE 或授权写入。QEMU 来源为 `https://download.qemu.org/qemu-8.2.7.tar.xz`，实际包 SHA-256 **`1f0604f296ab9acb4854c054764a1ba408643fc299bd54a6500cccfaaca65b55`**，与配方一致。work 源码位于 `tiger:/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7`，没有独立 QEMU Git HEAD。
+
+31 项 patch 的完整顺序引用 E-Y 日志 A：前 29 项为公共 SRC_URI，末两项为 class-native 追加；`.pc/applied-patches` SHA-256 为 `3b7c0560451d78d8eae6512a4c21d77129eb3b0e1106512949709e8ef0eb8430`。tiger patch 基于包加这组 OE 补丁，接在已有序列之后；不得覆盖 SRC_URI、漏掉 native 追加或以裸上游包替代基线。正式集成时保存实际展开顺序与 patch 应用结果。
+
+Poky runqemu SHA-256 为 `d644b4763b968414649f948151d51ff84b1663218ffd4abae3b58d19e4ba7861`，qemuboot.bbclass 为 `87d8cc1bcb8db862ae9a80f53c685e61b750867060fb563804a92bf1dedde01f`。旧 log.do_patch/work/helper binary 只证明既有身份，不作为新 tiger 的干净构建或启动证据。
+
+本轮按需直接读取原始日志的配方/patch 顺序、qemuboot 任务/字段、runqemu BIOS/none/native/serial 分支，以及 CPU reset/rvbar、ARM loader 注册、PL011 reset/clk、watchdog 可用性摘录。其余审查结论引用报告，不声称 architect 全文读取 22 份源码或所有日志。
 
 ### 2.2 书稿定位与读取范围
 
-下表路径均为 `book-manuscript` 仓库内路径，统一对应提交 `f444790f352b46f699fd3d46198f8b9b9f089a62`。本轮先扫描章节标题与平台关键字，再读取下列相关正文区间；未声称全文审校全部章节。
+下表路径均为 `book-manuscript` 仓库内路径，统一对应提交 `f444790f352b46f699fd3d46198f8b9b9f089a62`。下列区间为 architect 在 v0.1 形成时实际读取，本轮保留定位，未重新全文审校这些章节。
 
 | 来源 ID | 仓库内路径 | 已读取的相关区间 | 提取内容 |
 |---|---|---|---|
@@ -47,55 +60,69 @@
 | S-10 | `yocto/task11-10-打通启动链：第一次开机成功.md` | L1–335、L392–437 | 原始 NAND 总装、BL2/FIP 偏移、装载地址、runqemu 全链和 PSCI |
 | S-15 | `yocto/task16-15-修一个上游bug.md` | L1–55、L183–345 | watchdog 地址/时钟、示意寄存器、人为简化驱动及待核行为 |
 
+
 ### 2.3 依据的效力
 
-| 内容 | 现有依据 | 本版处理 |
+| 内容 | 依据 | 本版处理 |
 |---|---|---|
-| 真实代码、全链构建与运行、C-W/V 回填 | D-001、D-010、D-013 confirmed | 保持验收目标；设计说明不能替代运行证据 |
-| 上游版本由配方锁定，长期修改进入 `meta-tiger` | D-013 confirmed | 不创建四个长期 fork；临时 workspace 不是交付物 |
-| Cortex-A53 四核、1 GiB RAM、PL011/PL031、目标启动链 | S-02/S-07 的文本要求 | 用作候选输入；章节定稿不证明设备已实现 |
-| QEMU 8.2.7、TF-A 2.10.4、U-Boot 2024.04、Linux 6.6 | 相关草稿与 A-001 的版本描述 | 不是实际选中配方的证据；精确源码版本、已有 patch 与展开结果待工程核对 |
-| NAND 2 KiB/128 KiB/512 MiB，watchdog 32768 Hz | S-09/S-15 与 A-003 C-W19/C-W30 | 条件性设计输入；不存在本轮芯片手册、模型或实测背书 |
-| 文中“D5 拍板”、原 blueprint、四个 fork 的提交示例 | 草稿叙事/未取得的原工作流资料 | 不当作本项目已确认决定或真实提交；当前决定编号以 DECISIONS 为准 |
+| 本章最小启动/按章补功能；NAND 走 SPI | T-016 U-A005-01/02 | 采用范围及接入方向，不等于用户批准全部候选值 |
+| 真实代码、全链运行、C-W/V、正式 patch/干净复验 | D-001/D-010/D-013 confirmed | 保留最终目标与本章启动证据 |
+| 最终四核 A53/后续设备 | S-02/S-07 | 本章仅 CPU0，首次使用前扩充 |
+| Poky/QEMU hash/31 patches | E-P | 已有静态来源；新 tiger 最终 provider/override 尚未展开 |
+| 未来 TF-A/meta-arm/U-Boot/Linux | E-Y §1/§5 | 当前未启用 meta-arm/TF-A；可读 U-Boot 2024.01 配方和 qemuarm64 Linux 6.6.151 不是 tiger 已选基线；不采用草稿 TF-A 2.10.4/U-Boot 2024.04 为工程事实 |
+| NAND 几何/watchdog 32768 Hz | S-09/S-15、A-003 | 条件性后续输入，型号/手册/模型/实测未确认 |
+| 原 glossary/blueprint、“D5”和 fork 示例提交 | 未取得旧资料/草稿叙事 | 不当作项目决定或真实提交，以 DECISIONS 为准 |
 
 ## 3. 能力阶段与最小资源
 
-| 阶段 | 应具备的能力 | 本版实现/验证事实 |
+| 阶段 | 交付与首次使用门槛 | 当前状态 |
 |---|---|---|
-| chapter 4 最小 machine | 注册 `tiger`；A53 四核对象、1 GiB RAM、ROM/SRAM、GIC、timer、PL011；可执行受控固件并复位再执行 | 未读取 tiger 工程源码，未验证；本版只是候选 |
-| chapter 4 RTC 扩展 | 复用 PL031，确认时钟、IRQ、reset；若纳入 patch 则补模型验证 | 未实现/未测试；是否同阶段纳入待确认 |
-| chapter 6/7 | TF-A 逐级装载与 standalone U-Boot；阶段边界及缺失 BL33 的真实终态 | 未验证；须补启动模式和 IO 契约 |
-| chapter 8/9 | Image/DTB 直通、NAND 控制器与 guest 驱动、UBI/UBIFS 测试 | 未验证；按对应阶段接入 |
-| chapter 10 | 固件启动、FIP/BL33、PSCI 多核、完整 NAND 布局至 rootfs | 未验证；不是 chapter 4 的完成声明 |
-| 后续设备/教学实验 | watchdog、SPI NOR、I2C EEPROM；网络相关能力另核 A-003 C-W26/C-W29 | 未验证；不因保留地址就宣称具备能力 |
+| chapter 4 | CPU0/A53/TCG、ROM/RAM、轮询 PL011；raw 固件冷启动/宿主 reset；正式 patch/fixture/qemuboot/runqemu/干净复验 | 本版设计已收敛，实施/运行未执行，待复核与确认 |
+| chapter 6 首次逐级装载前 | BL1/BL2/BL31 来源/linker/IO，按需要加 SRAM；若首次 SPI NAND 读 BL2/FIP，先满足 §7.1 | 后续依赖，不要求 chapter 4 先实现 |
+| chapter 7/8 首次 U-Boot/Linux 前 | 入口/EL/DTS/boot 参数，按首次使用加入 GIC/timer IRQ、PSCI/guest reset/多核唤醒 | 尚未选定/实现/实测，各自形成契约 |
+| chapter 9/10 | SPI NAND 写擦/持久化、MTD/UBI/UBIFS/镜像/全链/A-B；四核目标在实际需要前形成停车/affinity/唤醒/reset 方案 | 纸面布局仍候选 |
+| RTC/SPI NOR/I2C/网络/watchdog 首次使用前 | 模型/驱动/binding/clock/IRQ/reset、正常行为与教学实验 | 后续未实现，依对应章节确认 |
 
-默认资源候选：TCG 执行，AArch64 Cortex-A53，四核，RAM 1024 MiB。首个实现只接受这组资源，其他 CPU、核数、RAM 大小及 KVM 支持须明确拒绝或另有经过测试的能力声明，不能静默接受后使用固定地址表。CPU0 执行，其余核在固件模式下保持待唤醒状态；具体 reset/power 状态由目标 QEMU 版本的 CPU 接口核对。
+chapter 4 只允许 `-accel tcg -cpu cortex-a53 -smp 1 -m 1024`；machine 默认/最大 CPU 数为 1，RAM 对应 1024 MiB。其他 CPU/核数/RAM/加速器、kernel/initrd/DTB 输入明确报错，不静默接受固定布局之外的值。没有 CPU1–3 对象，不暗示 secondary 停车或 CPU_ON 服务。
 
-## 4. 候选地址、中断与时钟契约
+A53 自带 EL2/EL3/generic timer 是 E-Q 源码事实，不等于已接 GIC/PPI 或提供 PSCI。本章异常/中断保持禁用，UART IRQ 未接线，仅覆盖轮询字符功能，不需要 DTS，也不把预留设备写成已存在节点。
 
-### 4.1 物理地址表
+## 4. 本章实例化与后续预留契约
 
-以下统一使用字节地址与半开区间 `[base, end)`。未启用的保留窗口不得伪造设备寄存器响应。所有数值为本版新提案，只有 S-10 的三处 U-Boot 地址与 S-15 的 watchdog 基址具有现有草稿来源。
+### 4.1 本章要实现的地址窗口
 
-| 区域/设备 | base | end（不包含） | 大小/用途 | 阶段与来源 |
-|---|---|---|---|---|
-| 启动 ROM | `0x00000000` | `0x00100000` | 1 MiB，测试固件/BL1 装载窗口 | chapter 4，候选；镜像超过窗口必须报错 |
-| GIC distributor | `0x08000000` | `0x08010000` | 64 KiB，候选 GICv2 地址窗口 | chapter 4，实际模型映射长度待核 |
-| GIC CPU interface | `0x08010000` | `0x08020000` | 64 KiB，CPU 中断接口窗口 | chapter 4，候选 |
-| PL011 UART0 | `0x09000000` | `0x09001000` | 4 KiB，主串口 | chapter 4，候选 |
-| PL031 RTC | `0x09010000` | `0x09011000` | 4 KiB | 候选同阶段复用 |
-| SPI controller | `0x09020000` | `0x09021000` | 4 KiB 保留；控制器型号未选定 | 后续；不等同 NOR 芯片本身地址 |
-| watchdog | `0x09030000` | `0x09031000` | 4 KiB 保留 | 后续；基址取 S-15，长度候选 |
-| I2C controller | `0x09040000` | `0x09041000` | 4 KiB 保留；总线/EEPROM 地址待定 | 后续 |
-| NAND controller | `0x09050000` | `0x09060000` | 64 KiB 保留；具体寄存器契约待选型 | chapter 9；不得据此填写虚构 compatible |
-| 启动 SRAM | `0x0e000000` | `0x0e100000` | 1 MiB，BL2/早期栈工作空间候选 | 为 TF-A 保留；实际 linker 布局待核 |
-| DDR RAM | `0x40000000` | `0x80000000` | 1 GiB，四核共享主存 | chapter 4，基址为候选，容量取 S-07 |
+统一用半开区间。下表是待复核的实施契约，尚不是已实现状态。
 
-选择 GICv2 是减少首轮平台组合的候选取舍；不复制 qemuarm64 的 `virt`/GICv3/KVM 配置来证明 tiger 兼容。两名工程成员须核对锁定版本模型、CPU timer 接线和 guest 驱动是否支持该组合。
+| 区域/设备 | base | end（不包含） | 大小/行为 |
+|---|---|---|---|
+| 启动 ROM | `0x00000000` | `0x00100000` | 1 MiB，可执行只读 MemoryRegion；raw 偏移 0 |
+| PL011 UART0 | `0x09000000` | `0x09001000` | 4 KiB；上游模型；32 位对齐访问，轮询，IRQ 未接 |
+| DDR RAM | `0x40000000` | `0x80000000` | 1 GiB；栈/data/BSS 可写，不模拟 DDR 训练 |
 
-QEMU 中 RAM 从创建时可访问是模拟平台行为；TF-A 后续可准备映射和软件状态，不能据此声称真实 DDR 训练或硬件时序经过模拟/验证。低地址 ROM 与 SRAM 并非具备实际 SoC Boot ROM 算法的承诺。
+### 4.1a 后续预留（本章不实例化）
+
+| 区域/设备 | base | end（不包含） | 首次使用前确认 |
+|---|---|---|---|
+| GIC distributor | `0x08000000` | `0x08010000` | GICv2 候选映射/安全分组/binding |
+| GIC CPU interface | `0x08010000` | `0x08020000` | CPU/中断接线 |
+| PL031 RTC | `0x09010000` | `0x09011000` | 计时源/IRQ/reset，移出本章 |
+| SPI master | `0x09020000` | `0x09021000` | 主控与实际 CS 未选；芯片不另占 NAND MMIO |
+| watchdog | `0x09030000` | `0x09031000` | S-15 基址输入，长度候选；模型/手册/驱动 |
+| I2C master | `0x09040000` | `0x09041000` | 主控/EEPROM/地址/IRQ |
+| 启动 SRAM | `0x0e000000` | `0x0e100000` | TF-A linker/BL2/早期栈 |
+
+删除 v0.1 独立并行 NAND MMIO/IRQ，SPI NAND 走 SPI master 的真实 CS，见 §7.1。若 CS 需新板级 GPIO/寄存器，其地址/驱动/reset 随后续选型登记，不能暗藏成已实现接口。未启用窗口保持未映射。ROM 仅外部装载固件，不证明模拟 SoC 从 SPI NAND 读 BL1 的 Boot ROM 算法。
 
 ### 4.2 RAM 使用与镜像边界
+
+本章测试固件运行预算：
+
+| 用途 | 范围 | 约束 |
+|---|---|---|
+| data/BSS | `[0x40000000, 0x40010000)`，64 KiB | .data VMA 在 RAM、LMA 在 ROM；每次入口复制 data/清 BSS，链接 ASSERT 防溢出 |
+| 栈 | `[0x40010000, 0x40020000)`，64 KiB | SP_EL3=`0x40020000`，16 字节对齐、向下增长，与 data/BSS 分开 |
+
+测试固件临时占用不形成未来 Linux 保留区。输出标记后改变测试 data/BSS 哨兵并进入循环，便于 reset 后检验再初始化；不要求 RAM 全清零。下面只保留后续组件的候选预算，本章不加载这些镜像，生命周期不与测试固件同时：
 
 | 用途 | 候选范围 | 契约 |
 |---|---|---|
@@ -107,71 +134,151 @@ QEMU 中 RAM 从创建时可访问是模拟平台行为；TF-A 后续可准备�
 
 这些是分阶段装载预算，不是 Linux 永久划分的内存分区。U-Boot relocation、栈、malloc、内核输入及最终运行范围须有按阶段的占用图；不能仅靠“几个入口地址不同”证明不会覆盖。BL31 常驻区必须从普通世界可用 RAM 中排除。DTS `reserved-memory` 只表达软件保留，不能单独证明 QEMU 已实现安全世界访问隔离；若后续宣称隔离，须核对 address space 与安全访问控制。
 
-### 4.3 中断拓扑
 
-候选 GIC INTID 分配：UART0=32、RTC=33、watchdog=34、SPI controller=35、I2C controller=36、NAND controller=37。保留项尚不接线。设备外部中断拟用 level-high，须由实际模型核对 assert/deassert、屏蔽/清除语义；不能把这个拟定触发方式套到模型的所有内部事件。
+### 4.3 后续中断候选
 
-通用定时器候选保留 INTID 26/27/29/30，具体 timer 输出、PPI 与安全/非安全世界对应关系须回到锁定 QEMU 和 guest binding 核对。INTID、QEMU 接口编号与 DTS 编号分开记录：例如候选 UART INTID 32 对应 GIC SPI 索引 0，而不是在 DTS 的 SPI 索引字段再写 32。最终 DTS 还须明确类型与 flags，经过模型核对后才生成。
+本章 UART 轮询，不实例化 GIC、不接 UART IRQ/timer PPI。未来候选 INTID：UART0=32、RTC=33、watchdog=34、SPI master=35、I2C master=36；没有独立 NAND IRQ或虚构芯片中断脚。level-high 仅候选，随实际模型确认。
 
-四核分别连接 GIC CPU 接口和各自 timer PPI；设备 SPI 接到共同 distributor。验证须观察 GIC 待决/撤销和 guest handler，QTest 寄存器读写不能代替 CPU 实际进入中断处理。
+E-Q §6 给出 GICv2 和 timer INTID 26/27/29/30 的源码参考，未完成逐寄存器审查。后续分别记录 INTID、GIC GPIO 下标、DTS SPI/PPI 索引/flags、安全分组与每核接线。UART INTID 32 的 DTS SPI 索引候选为 0，不能再加 32；PPI 与外部 SPI 转换分开核对。实际 handler/清除/撤销/reset 需 guest 测试，QTest 不替代。
 
-### 4.4 时钟与复位
+### 4.4 时钟与复位职责
 
-候选固定时钟：系统/通用 timer 24 MHz；PL011 UART 时钟与 APB 时钟各 24 MHz；watchdog 后续独立 32768 Hz（S-15 文本输入）。PL031 的计时源/宿主与虚拟时间选择依据上游模型核对，不把“秒计时”误填成未经核对的模型输入接口。SPI/I2C/NAND 控制器时钟待选型，不复制 UART 值充数。TF-A timer 初始化、DTS clock provider 和模型输入必须引用同一份最终数值。
+PL011 **只有一个模型输入 clk**：固定 24 MHz 源在 realize 前通过 qdev_connect_clock_in 连接，由 machine 持有，生命周期覆盖 reset。后续 DTS uartclk/apb_pclk 名称不等于两个模型输入。
 
-chapter 4 的系统复位契约候选：停止并清理本轮 timer/IRQ 状态，设备进入对应上游模型 reset 值，CPU0 重新进入启动入口，其余核回到待唤醒状态；ROM 保持，RAM 在 warm reset 时不承诺清零，测试固件必须自行初始化。冷启动与 warm reset 分别验证，不能以重新启动 QEMU 进程替代 guest 请求的系统复位。后续 NAND 数据应在普通复位后保留，watchdog 复位须进入相同系统复位链。复位原因寄存器尚未设计，不宣称可读取原因。
+CPU cntfrq 独立设为候选 24 MHz，在 realize 前配置，不能由 UART 时钟推导；本章不使用 timer IRQ。后续固件计时/PPI/handler 另核。watchdog 32768 Hz 仍仅 S-15 输入，RTC/SPI/I2C 时钟随模型确认。
 
-## 5. 启动模式及 chapter 4 的 runqemu 缺口
+系统 reset 按 §5.2 已选 ARM loader 注册路线：CPU 回 rvbar=0/secure EL3h，PL011 设备回调复位 FIFO/寄存器/屏蔽，ROM 保持，固件重新初始化自身 RAM；RAM 整体不承诺清零。宿主 system_reset 属本章验证，guest 请求 reset 留待真实 PSCI/板级接口/watchdog 具备后另测。后续 SPI NAND 持久数据、CS reset 未选中/芯片状态与 watchdog 复位传播另设门槛；本章没有复位原因寄存器。
 
-### 5.1 显式启动模式候选
+## 5. 固件、reset 与 runqemu 实施契约
 
-建议把装载模式作为显式 machine 契约，避免根据文件名猜 `bl1.bin` 和 `u-boot.bin` 的入口。以下 `firmware`、`standalone-uboot`、`direct-linux` 是设计名称，**不是已经存在的 QEMU 属性或可复制执行的命令**；属性拼写、默认值、错误信息及 `-bios`/`-kernel` 行为由模型实现核对后确定。
+### 5.1 唯一装载路线与 CPU 入口
 
-| 模式 | 输入/装载 | 初始执行状态候选 | 后续服务与验证范围 |
-|---|---|---|---|
-| `firmware`（建议默认） | `-bios` 对应启动 ROM base `0x0`；chapter 4 用最小测试固件，chapter 6 起可用 BL1 | CPU0 AArch64 secure EL3，reset PC `0x0`；其余核待唤醒 | chapter 4 测固件执行、UART、reset；TF-A 后续提供 PSCI，QEMU 不同时假扮另一份 PSCI |
-| `standalone-uboot` | 原始 U-Boot binary 装入候选 `0x48000000`；固件 link 地址及内嵌控制 DTS须匹配 | CPU0 non-secure EL2；secondary 不自动进入任意镜像入口 | 验 U-Boot 命令行；不证明 TF-A handoff、完整 SMP 或 NAND 启动 |
-| `direct-linux` | Image、显式 DTB、bootargs；装载位置/寄存器协议按锁定版本 ARM loader 与 Linux 入口核对 | 推荐 non-secure EL2 路线，具体寄存器、MMU/cache 状态待版本依据 | chapter 8/9 可用；若启用 QEMU 提供的 PSCI，须与 DTS 匹配并区别于固件模式的 BL31 PSCI |
+本章仅接受 raw 测试固件 BIOS：**MachineState.firmware → BIOS 路径解析 → tiger 实际 ROM MemoryRegion → load_image_mr**。优先传显式部署绝对路径；若支持 BIOS 搜索路径，按锁定 API 解析并记录最终文件。先建立 ROM，再装载到偏移 0，入口为 0；不猜 ELF 入口或根据文件名选择 BL1/U-Boot，不建立三种 boot-mode 属性。kernel/initrd/DTB 输入事先拒绝。
 
-不同模式输入混用应明确报错；无镜像的 `-S` 只用于实例化，恢复执行前必须具备有效入口内容。不要让未装载的 ROM/RAM 零内容表现成成功启动。固件模式与直接内核模式中 secondary CPU 的唤醒提供者分别核对；S-07/S-08 的“没有 BL31 所以一定单核”只是旧稿假设，不能覆盖实际 QEMU loader/PSCI 行为。
+E-Q §3/原始 E 的 loader.c:143–163 表明 loader 可接受空文件，因此 tiger 额外要求 **0 < raw 长度 ≤ 0x100000**。缺少 BIOS、不可读、空文件、超长或实际装载失败均在 CPU 执行前报错。恰好 1 MiB 合法，1 MiB+1 拒绝；长度合法只支持边界判据，不证明内容或启动有效，负向用例在实施时生成并留返回码。
 
-### 5.2 runqemu 候选路线
+CPU0 保留 has_el2=true/has_el3=true，rvbar=0、start-powered-off=false；realize 前接 memory 与 secure-memory 到同一 system-memory 视图，并配置 CPU/频率属性。reset 初态为 AArch64 小端 secure EL3h/PC=0，依据 E-Q cpu.c:302–313/1572–1589 及 A53 属性，不复制 virt 关闭 EL3 的设置。同一视图不承诺安全隔离；本章没有 BL31，PSCI disabled，不调用 SMC/HVC 作 guest reset 或唤醒。
 
-首选候选 A：给 chapter 4 提供 **最小测试固件及测试启动元数据**，通过实际 `qemu-system-native` 产物和 runqemu 执行 CPU0 UART 标记/复位测试。该固件是模型验证输入，不冒充 TF-A、Linux 或量产 rootfs；将来由工程成员按已确认契约制作，长期测试资产随 `meta-tiger` 管理。本轮只设计其用途。
+### 5.2 已选系统 reset 路线与生命周期
 
-Yocto 成员须先从锁定版本确认 runqemu 能消费的 qemuboot 配置、部署输入与固件路径：禁用默认 `-kernel` 的方式、是否要求 rootfs、`QB_DEFAULT_BIOS` 或追加参数的实际路径处理、helper sysroot 中使用的二进制，以及普通 `QB_*` 默认 virtio/PCI/网络参数是否会误注入 tiger。S-10 的 `QB_DEFAULT_KERNEL="none"` 也明确待验证，不能照抄即认为路线成立。不能仅手写一份无法被 runqemu 接受的 INI 文件充作验证。
+**选用锁定 arm_load_kernel 的纯 firmware 路线，不另注册板级 CPU reset handler。** tiger machine state 持有零初始化 arm_boot_info，生命周期覆盖整个 machine，禁止传栈上临时结构。ROM/CPU/UART 建立、BIOS 装载成功后只调用一次：
 
-备选候选 B：若 A 在锁定 runqemu 中不成立，使用明确版本的最小 Linux/DTB 测试输入。须先评估是否需要提前形成 chapter 5/8 的部分支持、编译和设备树工作；不能用 `virt` DTB 或 qemuarm64 的启动日志代替 tiger 的系统运行。此路线对阶段范围和教学次序有影响，交用户确认后才能采用。
+- firmware_loaded=true；psci_conduit=QEMU_PSCI_CONDUIT_DISABLED、is_linux=false；无 DTB 回调/生成物、无 secondary hook。ram_size/loader_start 记录本版 RAM，入口由 ROM/rvbar 决定。
+- MachineState 的 kernel/initrd/DTB 输入已经拒绝。函数会复制这些字段，不能仅清 boot_info 来掩盖命令行输入。
+- E-Q 原始 C2/E 的 boot.c:1204–1239 为 CPU 注册 do_cpu_reset，进入 arm_setup_firmware_boot；无 kernel/DTB 时 env->boot_info 保持 NULL，reset 先 cpu_reset，再使用 rvbar，不另改 PC。
+- 注册责任归 machine 初始化；冷启动与后续 system_reset 由 QEMU reset 链执行，每次 reset 不重建对象、不重调 arm_load_kernel、不重复注册。machine/boot_info/ROM/clock 全程有效；本章不支持 CPU 热插拔、运行中销毁/重建 machine，未来扩充该生命周期时再审取消注册/释放。
+- PL011 用设备 reset 回调，不通过 CPU handler 代清 UART。guest 自己“再打印一次”不能替代模型系统 reset 验证。
 
-本版推荐先核对 A，避免 chapter 4 同时承担后续全链实现。A/B 均未通过可行性核对；若都不能满足既有任务条件，则保持启动缺口并协调范围，不能只以 `-machine help`、`-S` 或 runqemu 报错将本章标为完成。`nographic` 所指的 chardev 接线必须绑定 UART0；尚无 NIC 的 tiger 不自动承诺 `slirp` 可用。
+实施时暂停 CPU，再发宿主 QMP/HMP system_reset，在固件恢复前读取 PC/EL、UART FIFO/屏蔽/寄存器 reset 值并对照锁定源码，再 cont 取得第二标记和 data/BSS 初始化成功。保存完整控制顺序、状态和日志。guest 请求 reset、四核停车/CPU_ON、timer IRQ 以后分别给出真实触发接口再测。
 
-## 6. 跨组件契约
+### 5.3 raw 测试固件资产
 
-| 交接面 | 候选契约及必须补齐的内容 | 证据/影响 |
+计划资产 tiger-minboot，首版固件候选 0.1，独立于设计 v0.2。QEMU 工程师主责启动汇编/最小轮询代码/链接脚本及模型交接、guest 证据；Yocto 工程师主责编译/部署配方/qemuboot/正式集成验证。以下文件是实施方案，**目前未创建**：
+
+- meta-tiger/recipes-test/tiger-minboot/files/ 下的 start.S、main.c、tiger-minboot.ld 和许可；上层配方 tiger-minboot_0.1.bb。AArch64 freestanding，无 libc/动态链接/Linux ABI 依赖；工具链 flags 核对禁用 builtin、栈保护、PIE 等隐式要求。
+- ELF _start/入口与 ROM VMA=0，text/rodata 在 ROM；data 初值 LMA 紧随 ROM 内容，VMA/BSS 在 §4.2 RAM。链接 ASSERT 防 ROM/data-BSS 溢出；objcopy 按装载布局生成 raw，避免 RAM VMA 造成巨大空洞；保留 ELF/map/脚本/raw 对账。
+- 入口屏蔽异常/中断，建立 16 字节对齐 SP_EL3；每次复制 data、清 BSS 并验证初值；保持 MMU/cache 未开启，不依赖未定义通用寄存器、DTS、PSCI 或宿主预填 RAM。
+- UART 使用 32 位对齐 MMIO：关闭 UART、关闭中断屏蔽并清待决，配置 8N1/轮询发送分频及控制位，再使能 UART/TX，检查 UARTFR.TXFF 后写 UARTDR。24 MHz/115200 的候选整数/小数分频为 13/1，寄存器位和顺序在实现时对照锁定 PL011 并读回；不据字符输出宣布波特率时序或控制位已经验证。
+- guest 输出确定标记，预期格式示例（非实测日志）：`TIGER-CH4 FW=<source-build-id> CPU0 EL3 INIT=OK UART0`。build-id 来源于版本化输入，不编造提交、不递归嵌入 raw 自身 hash；部署 manifest 另记源/配方提交及 ELF/map/raw SHA-256。成功后改变测试 data/BSS 哨兵并循环，使 warm reset 的再初始化可观察。
+
+E-Q 表明 PL011 DR 输出未强制检查 TX enable，因此字符输出不能单独证明正确 UART 配置、IRQ 或线速。结合入口/CurrentEL、链接关系和真实 guest MMIO trace/调试证据判定执行，本章没有中断或性能验收。
+
+### 5.4 独立部署配方、任务图与字段
+
+独立 target fixture 配方 **inherit deploy，自行实现版本化配置生成任务**；不继承需要 image/rootfs 上下文的 qemuboot 类。E-Y 原始 C 的类任务位于 do_rootfs/do_image 之间，使用 IMAGE_NAME/IMGDEPLOYDIR，本章不为它创建 Linux image。
+
+计划任务图，未解析/运行：
+
+```text
+版本化源/许可 → do_fetch/unpack → do_compile（ELF/map/raw、链接/长度检查）
+                                      ↓
+qemu-helper-native:do_addto_recipe_sysroot → do_generate_qemuboot
+   ↑ DEPENDS 含 qemu-system-native 等          ↓
+                                  do_deploy（整套资产） → do_build
+```
+
+do_generate_qemuboot 在 do_compile 后、do_deploy 前，显式依赖 qemu-helper-native:do_addto_recipe_sysroot；helper 的 DEPENDS 获取 qemu-system-native 等工具并形成持久 sysroot。do_deploy 在 do_build 前发布 raw、ELF/map、manifest、conf。Yocto 工程师用 bitbake -e/-g 及任务日志核对实际依赖图，不能把 RDEPENDS 当成全部构建依赖或保留旧 native QEMU。
+
+生成任务用 ConfigParser 写 [config_bsp]，按已展开变量生成下表字段，字段与生成器输入纳入 vardeps，源/配方纳入签名。先写 DEPLOYDIR，由 deploy class/sstate 发布到 DEPLOY_DIR_IMAGE；不临时手写公共 deploy INI，不依赖工作目录残留。raw/conf 共用版本名 tiger-minboot-0.1-tiger，分别后缀 .bin/.qemuboot.conf，版本调整同步 manifest。
+
+路径策略：发布后 conf 与 BIOS 同目录，DEPLOY_DIR_IMAGE 为 "."，BIOS 仅填 basename。从**最终 deploy 位置**计算 helper sysroot 的相对路径，使以 "../" 开头并匹配 runqemu 展开规则；不能从临时 DEPLOYDIR 计算错层级。若采用绝对路径，明确绑定该构建树、检查存在，不宣称跨机器可搬移。实施前复核 validate_paths 所需全部字段，配置/路径缺失不通过，不用隐式 bitbake 回退掩盖部署错误。
+
+| 字段 | 计划值/生成要求 |
+|---|---|
+| MACHINE / TUNE_ARCH | tiger / aarch64；machine 独立 tuning，不整份继承 qemuarm64/virt |
+| QB_SYSTEM_NAME | qemu-system-aarch64 |
+| QB_MACHINE / QB_CPU / QB_SMP / QB_MEM | -machine tiger -accel tcg / -cpu cortex-a53 / -smp 1 / -m 1024 |
+| QB_DEFAULT_KERNEL / QB_DEFAULT_FSTYPE / QB_ROOTFS | 三者均字面 none，不由 image/kernel 变量替代 |
+| QB_DEFAULT_BIOS | tiger-minboot-0.1-tiger.bin，实际同目录发布文件 |
+| DEPLOY_DIR_IMAGE | "."，按 conf 位置展开，部署后检查 |
+| STAGING_BINDIR_NATIVE | 按 BASE_WORKDIR/BUILD_SYS/qemu-helper-native/1.0/recipe-sysroot-native/usr/bin 计算，helper 任务已完成 |
+| STAGING_DIR_NATIVE / STAGING_DIR_HOST | native 为 helper sysroot 根；host 为实际 target recipe sysroot；按最终 conf 位置编码并检查存在/validate_paths，不虚构目录 |
+| QB_NET | none，运行参数同时 nonetwork |
+| QB_RNG / QB_GRAPHICS / QB_OPT_APPEND | 空，不注入 virtio RNG/GPU、USB、PCI 或额外 device |
+| QB_ROOTFS_OPT / QB_NETWORK_DEVICE / QB_TAP_OPT / QB_TCPSERIAL_OPT | 空，不注入磁盘/网卡/virtio console |
+| QB_SERIAL_OPT / SERIAL_CONSOLES | 空，由 nographic 提供唯一第一 serial backend，无额外 stdio |
+| QB_CPU_KVM / QB_KERNEL_CMDLINE_APPEND | 空，不选择 KVM 或额外 kernel 参数 |
+| QB_KERNEL_CMDLINE | none，无 kernel 时不生成 -append，仍核对最终参数 |
+
+E-R 分支：runqemu:757 跳过 kernel，679–683/1258 跳过 rootfs；800–815 将 BIOS basename 拼到 deploy 目录并检查存在，1585–1586 加 -bios；934–942 展开 "../"/"."；nographic 的 setup_serial 添加 -serial mon:stdio。tiger UART0 接 serial_hd(0)，此前没有其他 -serial/chardev stdio；不再追加 QEMU -nographic 导致重复 stdio。显示/monitor 参数以真实展开记录为准。
+
+计划命令（授权/checkout 重核后才执行，本轮未执行）：
+
+```sh
+bitbake -e qemu-system-native
+bitbake -e tiger-minboot
+bitbake -g tiger-minboot
+bitbake tiger-minboot
+runqemu /home/oops/workspace/build/tmp/deploy/images/tiger/tiger-minboot-0.1-tiger.qemuboot.conf nographic nonetwork
+```
+
+deploy 路径按既有 build 默认 TMPDIR 给出计划值，实施保存实际展开值，不因本文出现就认为文件存在。runqemu 位置参数 .bin 会当 kernel，故只传生成 .qemuboot.conf。
+
+启动前检查 STAGING_BINDIR_NATIVE/qemu-system-aarch64 存在且可执行，记录绝对路径/hash和最终进程参数；若退到宿主 PATH QEMU，集成失败。旧 helper 路径/hash见 E-Y §3，不作新 tiger 证据。最终参数须包含本版 CPU/TCG/内存/BIOS/serial、-nic none，不含 kernel/rootfs/virt/virtio/PCI/USB/网络设备或重复串口。
+
+锁定 runqemu 在 nonetwork 处理前仍查 /dev/net/tun；E-Y 记录当时存在且可写，本人未重查。实施前重核，失败按宿主条件记录，不靠 slirp 伪称板上有网卡。
+
+清理/reset 临时 devtool workspace 后，仅用锁定 Poky + 正式 meta-tiger patch/metadata 重构建、重生成资产/helper sysroot并重复 runqemu/模型证据。保存 provider/override、已有/新增 patch 顺序、任务图、命令/返回码、各 hash、完整日志/退出终态；缓存、旧 work 或手工启动不代替干净复验。
+
+## 6. 跨组件契约与后续启动阶段
+
+| 交接面 | 契约/首次使用门槛 | 阶段与依据 |
 |---|---|---|
-| QEMU → 测试固件/BL1 | ROM 入口、初始 EL/security、CPU0/secondary 状态、UART、timer、reset；镜像长度检查 | S-04/S-06；chapter 4/6；实际模型接口待核 |
-| BL1 → BL2 | BL2 来源、NAND/备用介质、偏移、加载 SRAM 地址、入口、镜像大小和读取失败终态 | S-06/S-10；`-bios bl1.bin` 只提供 BL1，不能凭此得到 BL2 |
-| BL2 → BL31/BL33 | 读取 FIP、校验及实际包内容；BL31 常驻地址、BL33 link/load/entry、参数/EL；不得额外加载一份已在 FIP 中的 U-Boot | S-06/S-07/S-10；TF-A IO driver、linker 和生成物待核 |
-| 无 BL33 的阶段运行 | 明确缺少 BL33 时允许的构建配置、真实终态与成功条件 | S-06 `NEED_BL33=no` 及“准备移交后停住”未实测；不能要求虚构日志 |
-| BL31 → U-Boot/内核 PSCI | PSCI 版本、conduit、CPU affinity、CPU_ON/复位入口；固件模式只认 BL31 服务；DTS 同步 | S-10；启动四核对象不等于四核 Linux online |
-| U-Boot → Linux | Image/DTB 实际部署名和 `/boot/` 路径；booti 参数；输入镜像不覆盖 U-Boot runtime/BL31；`console=ttyAMA0,115200` | S-07/S-08/S-10；S-10 的 `ttyS0` 是故障示例，不能作为最终契约 |
-| U-Boot DTS ↔ Linux DTS ↔ QEMU | 分别维护组件 DTS，但 CPU affinity、地址、IRQ、clock、RAM/保留区来自同一平台表；各自校验 binding | S-07/S-08；`tigersemicon,tiger` 和 vendor 目录为候选，未验证已有 binding |
-| Linux → NAND/UBI rootfs | 控制器驱动内建、真实兼容串、三段 MTD 名称、UBI 卷名、root 参数；不能用空框 DTS 替代驱动 | S-09/S-10；C-W17–C-W21 |
-| 工程 → Yocto 集成 | 实际配方基线+已带 patch+新增 patch 顺序、相关 `.bbappend`/`SRC_URI` 与配置、清理 workspace 后复验 | D-013；配方文件名/PV 不能代替下载校验和或源码提交 |
+| QEMU → 本章固件 | CPU0/ROM/EL3/rvbar、RAM 运行区、PL011/clk、ARM loader reset；source/ELF/map/raw 对账 | chapter 4，§4/§5、E-Q；无 TF-A/BL31/PSCI |
+| 工程 → Yocto | 锁定包+31 OE patches+tiger patches，真实 bbappend/SRC_URI/fixture 配方、任务图、干净重验 | chapter 4，E-P/E-R/D-013；实施展开 provider/override |
+| QEMU → BL1 → BL2 | BL1 入口/secure memory、SRAM linker、介质/offset/load/entry/长度及失败终态 | chapter 6 前；-bios BL1 只供 BL1，不能自动得到 BL2 |
+| SPI master/CS/芯片 → TF-A IO | §7.1 主控/片选/读取字节/镜像/ECC/坏块、初始化/IO | 首次 SPI NAND 读 BL2/FIP 前，可能 chapter 6 |
+| BL2 → BL31/BL33 | FIP 内容/link/load/entry/参数/EL，无 BL33 的真实终态；不重复装已有 FIP 的 U-Boot | chapter 6/7，TF-A/meta-arm/NEED_BL33 未锁定 |
+| BL31/loader → 多核/guest reset | provider/版本/conduit/affinity、停车/reset/唤醒，BL31 与 direct-linux QEMU 服务分开 | 首次使用前，不能假定 EL3 firmware 自动停车或有 CPU_ON |
+| U-Boot → Linux | Image/DTB/路径/booti、阶段内存占用、console=ttyAMA0,115200、root 卷 | chapter 7–10，linker/relocation 待核 |
+| QEMU ↔ 两份 DTS | CPU/内存/GIC/PPI/SPI/CS/clock/保留区来自最终表，各自校验 binding | chapter 7/8，候选 vendor/compatible 不证明已有驱动 |
+| Linux → SPI NAND/UBI | SPI master/CS、SPI_MEM/MTD_SPI_NAND/芯片与内建驱动、三段 MTD/三卷/参数 | 首次使用前，qemuarm64 Linux 只是接口依据 |
 
-BL2/FIP IO 候选：沿用 S-10 的 NAND 启动介质，由真实控制器访问约定偏移，并由 TF-A 平台 IO 实现读取；不让 QEMU 把 BL2/FIP 自动塞进 RAM 来伪装固件加载成功。chapter 6 的验证若先使用其他明确测试介质，须标注仅覆盖分段启动，并与后续 NAND 全链区分；具体介质/参数尚未选定。
+后续可扩充 BL1、standalone U-Boot 或 direct-linux，本章不实现三种模式。每次先锁来源、模式/EL/入口/装载/测试边界，再改模型/组件/DTS；不根据同一个 -bios 文件名猜入口，不把 QEMU 预塞 BL2/FIP 到 RAM 当 TF-A IO 成功。
 
-TF-A 的 BL1 位置、SRAM、EL3 常驻区和 BL33 load/entry 必须由最终平台 linker 配置对账。U-Boot standalone 的控制 DTS 是否内嵌、是否另需 DTS输入，应以真实 `OF_EMBED`/`OF_SEPARATE` 和 binary 布局核对；只出现 `u-boot.bin` 文件不能证明 `-bios` 可跑。
+chapter 6 若先用其他明确测试介质，记录仅覆盖该介质，全书 SPI NAND 链仍补齐 §7.1。U-Boot OF_EMBED/OF_SEPARATE/控制 DTS/binary，TF-A linker/BL31 常驻区，以及 direct-linux 参数/PSCI 在首次使用前核对。缺少 BL31 不必然等于实际 QEMU direct-linux 单核，结论取决于真实模式和服务。
 
-## 7. NAND、分区与镜像约束
+## 7. SPI NAND、分区与镜像约束
 
-### 7.1 几何与控制器
+### 7.1 接入、选型责任及首次读取门槛
 
-沿用 S-09 的候选几何：页数据 2048 B、64 页/块、擦除块 131072 B、数据容量 536870912 B（512 MiB、4096 块）。页 OOB 大小、ECC、子页、芯片 ID、坏块标记及 QEMU 后端数据格式均未核实。控制器地址窗口见 §4，仅是保留空间；控制器型号/寄存器/中断、QEMU NAND 芯片模型与 TF-A/U-Boot/Linux 驱动组合待选型。
+接入方向为 **SPI master → 实际 CS 电平 → SPI NAND**，不设独立并行 NAND MMIO/IRQ。master/片选来源/芯片仍为后续候选，用户无需在本章批准未知型号。qemu-engineer 主责主控复用/CS/芯片实现或外部实现审查；yocto-engineer 主责 guest driver/binding、TF-A/U-Boot/Linux IO 与镜像/构建集成；architect 汇总接口契约，project-manager 按首次使用阶段安排。本轮不启动这些实现。
 
-优先核对锁定上游中能复用的 NAND 芯片模型与有 guest 驱动的控制器组合。只有芯片模型不等于有可访问的板级 NAND 控制器。若没有可复用组合，新增控制器及 guest driver 是明确的后续工程依赖，需用户/项目经理在相应阶段安排，不能用一个占位 compatible 或始终返回成功的 MMIO 桩解决。
+| 锁定源码对象 | 已知可复用范围 | 尚缺内容 |
+|---|---|---|
+| PL022 | SSI bus/MMIO/IRQ/FIFO/ssi_transfer | 没有实际 CS 输出；DMA/单双四线/线速能力须分别核对 |
+| SSI API | cs 为 bus 地址；GPIO 电平/极性/set_cs 表达事务边界 | cs=0 不等于选中电平或释放事务 |
+| m25p80 | SPI NOR，可参考 SSI/后端结构 | 改名不能得到 SPI NAND 页缓存/OOB/ECC 协议 |
+| nand.c | 并行 setpins/setio/getio，可评估后端复用 | 不能直接挂 SSI 或声称已有 SPI NAND |
+| SPI NAND 模型 | E-Q/E-Y 在选定锁定树检索未找到可直接用模型 | 需补充实现或取得外部实现并审查；不宣称世界上没有模型 |
 
-逻辑数据容量与后端文件长度分别记录。512 MiB 纯数据镜像直接 `dd` 的流程，仅在后端确实接受不含 OOB 的线性数据布局时成立；若存储页包含 OOB/ECC 或需要专门转换，必须改总装格式和长度检查。擦除态 `0xFF`、编程/擦除/坏块行为须实测，不从镜像大小推导几何正确。
+若选 PL022，同时选 guest 可控制 GPIO/片选来源，明确 CS index、active-low、reset 初态未选中及 assert/transfer/deassert 的驱动路径；否则另选有真实 CS 的 master 并核对。CS 提供者每次 reset 都要恢复未选中，不能只在进程启动时设置一次。新增 GPIO/MMIO/IRQ/clock/binding 随后续选型版本登记，必要时调整 §4 SPI 窗口，不作为本章隐藏实现。
+
+芯片需审查许可/版本/正式 patch，按最终手册锁定 ID/容量、opcode/地址/dummy/单双四线、reset/get-set-feature/status、page-read/cache-read、write-enable/program-load-execute/erase、busy/error、CS 边界、ECC/OOB/坏块/后端持久化；不以固定返回成功的桩通过。现有 Linux 接口依赖 SPI_MASTER、SPI_MEM、MTD_SPI_NAND；PL022 driver 的 AMBA/DT/clock/CS 和 spi-mem 组合需实查，驱动文件存在不等于 tiger 已配置。
+
+**首次从 SPI NAND 读 BL2/FIP 前**，至少具备 master/真实 CS、芯片 reset/status/最小读取模型、后端数据/镜像布局与所需 ECC/坏块处理、TF-A SPI 初始化/IO，并实测读出字节等于输入镜像。此门槛可能早于 chapter 9。完整写擦/UBI/A-B/持久化继续分阶段，最小只读成功不代表完整芯片完成。若先用其他测试介质，记录有限覆盖。
+
+候选几何仍为页数据 2048 B、64 页/块、擦除块 131072 B、数据容量 536870912 B（512 MiB/4096 块）；OOB/ECC/ID/坏块及后端格式未知。下述布局只在这些几何/工具条件成立时保留，选型变化重算。逻辑容量不等于后端长度，512 MiB 纯数据 dd 仅在后端确实接受此线性格式时采用，否则定义 OOB/ECC 转换；擦除态/错误/持久化实测。
 
 ### 7.2 候选逻辑数据偏移表
 
@@ -180,7 +287,7 @@ TF-A 的 BL1 位置、SRAM、EL3 常驻区和 BL33 load/entry 必须由最终平
 | 区域 | `[offset, end)` | 容量 | 接口要求 |
 |---|---|---|---|
 | bootloader 总区 | `[0x00000000, 0x00400000)` | 4 MiB / 32 块 | 固件布局与下面子区一致 |
-| BL1 子区 | `[0x00000000, 0x00040000)` | 256 KiB / 2 块 | QEMU 外部装入的 BL1 与镜像内 BL1须为同一版本；当前不能据此声称模拟了 Boot ROM 从 NAND 读取 BL1 |
+| BL1 子区 | `[0x00000000, 0x00040000)` | 256 KiB / 2 块 | QEMU 外部装入的 BL1 与镜像内 BL1 须为同一版本；当前不能据此声称模拟了 Boot ROM 从 NAND 读取 BL1 |
 | BL2 子区 | `[0x00040000, 0x00080000)` | 256 KiB / 2 块 | BL1 实际读取偏移及长度检查 |
 | 保留子区 | `[0x00080000, 0x00100000)` | 512 KiB / 4 块 | 不作为未知镜像的隐式落点 |
 | FIP 子区 | `[0x00100000, 0x00400000)` | 3 MiB / 24 块 | 检查 FIP 长度，明确包含 BL31/BL33 的阶段版本 |
@@ -191,7 +298,7 @@ TF-A 的 BL1 位置、SRAM、EL3 常驻区和 BL33 load/entry 必须由最终平
 
 ### 7.3 UBI/UBIFS 与 A/B
 
-在“页 2048、VID offset 2048、数据 offset 4096”的条件下，候选 LEB 为 `131072 - 4096 = 126976 B`。S-09 的 `-m 2048 -p 131072 -s 2048 -O 2048` 与 `mkfs.ubifs -e 126976` 保持为待模型和工具验证的组合。可用块数不能直接把 S-09 的 `4056 - 2 - 80 = 3974` 当成实际终态：坏块、UBI内部预留和配置会改变结果，须使用真实 attach 日志与工具结果对账；`-c 3968` 同样待核。
+在“页 2048、VID offset 2048、数据 offset 4096”的条件下，候选 LEB 为 `131072 - 4096 = 126976 B`。S-09 的 `-m 2048 -p 131072 -s 2048 -O 2048` 与 `mkfs.ubifs -e 126976` 保持为待模型和工具验证的组合。可用块数不能直接把 S-09 的 `4056 - 2 - 80 = 3974` 当成实际终态：坏块、UBI 内部预留和配置会改变结果，须使用真实 attach 日志与工具结果对账；`-c 3968` 同样待核。
 
 S-10 候选 `rootfs_a`/`rootfs_b` 各 64 MiB，按 126976 B/LEB 向上取整各为 529 LEB；`data` 使用剩余空间，只有它拟带 autoresize。镜像需实际包含 `/boot/Image`、`/boot/tiger.dtb`、`/boot/boot.scr`，并核对文件系统余量及镜像最小需求；529 LEB 的算术成立不证明文件能装下。
 
@@ -205,7 +312,7 @@ S-10 固定先从 `rootfs_a` 读取 boot.scr，仅对“两卷工厂内容一致
 
 S-15 输入为 MMIO `0x09030000`、32768 Hz、32 位计数器、`arm,sp805`、`/dev/watchdog`；草稿同时规定“load=0 即停用”、使用简化驱动换算，并留下真实 SP805 TRM 待查项。寄存器地址接近 SP805 不足以证明行为兼容。
 
-推荐候选：优先复用锁定 QEMU 中的 SP805 模型，并以同版本 Linux 驱动和手册核对装载、计数、喂狗、锁、使能、IRQ及系统复位语义。S-15 列出的偏移 `0x000/0x004/0x008/0x00c/0xc00` 与解锁值只是待核清单，不作为已核硬件规范。特别核对 timeout 与实际计数周期的换算，是否分多阶段，以及 load=0 的真实行为；不为复现草稿故事而更改正常模型使其无条件“兼容”。
+E-Q §6/F/G 的锁定树检索只找到 vexpress 注释（含 not modelled），未找到可直接实例化的 SP805。v0.1 的“优先复用 SP805 模型”缺少依据，本版撤回。已有 CMSDK APB/SBSA generic watchdog 仅是后续审查候选，由 qemu-engineer 核对兼容/适配或新建模型、yocto-engineer 核对驱动/配置、architect 汇总后在首次使用前确认。型号、寄存器、时钟、LOAD=0、两级超时/IRQ/reset、喂狗/锁/使能与系统复位传播均按选定手册/模型/驱动对账。S-15 列出的偏移 `0x000/0x004/0x008/0x00c/0xc00` 与解锁值只是待核清单，不作为已核硬件规范。特别核对 timeout 与实际计数周期的换算，是否分多阶段，以及 load=0 的真实行为；不为复现草稿故事而更改正常模型使其无条件“兼容”。
 
 静态算术：`60 × 32768 = 0x001e0000`、`131072 × 32768 = 0x1_0000_0000`，u32 截断确为 0，但这里只证明草稿的简化表达式会溢出，不证明真实驱动使用此表达式。S-15 两个示意读数的差 `0x001df2c0 - 0x001d6e40 = 0x8480 = 33920`，对应 32768 Hz 下 1.03515625 秒，不能当作精确一秒减少 32768 tick 的测量证据。
 
@@ -213,52 +320,55 @@ chapter 15 的教学 bug 若保留，应作为有明确注入点、独立版本�
 
 ### 8.2 SPI NOR / I2C EEPROM
 
-S-02 将 M25P80 留为候选芯片，S-04 旧 patch 清单与 S-08 却已有 `m25p80`/at24 叙述。本版仅保留控制器窗口，不确认具体 NOR 容量、chip-select、JEDEC ID 或 EEPROM 型号、容量、I2C slave 地址。先核对上游控制器、芯片模型与 guest binding，再同步 QEMU 装配、DTS 和驱动配置；不能从驱动名称推断板上芯片存在，也不能照抄未核的 Kconfig 符号。它们不阻塞最小 UART 固件路线，但若进入本章 patch，就成为本章必须验证的设备。
+S-02 将 M25P80 留为候选芯片，S-04 旧 patch 清单与 S-08 却已有 `m25p80`/at24 叙述。本版仅保留控制器窗口，不确认具体 NOR 容量、chip-select、JEDEC ID 或 EEPROM 型号、容量、I2C slave 地址。先核对上游控制器、芯片模型与 guest binding，再同步 QEMU 装配、DTS 和驱动配置；不能从驱动名称推断板上芯片存在，也不能照抄未核的 Kconfig 符号。它们在首次使用前形成设备/驱动/接线契约和实测证据，本章不实例化，不阻塞最小 UART 固件路线。
 
-## 9. 待确认问题与风险
 
-以下是候选稿问题清单，不是新 confirmed 决定、已安排评审或已启动的新任务。核对责任说明用于 project-manager 后续登记实际安排。
+## 9. 问题状态与后续门槛
 
-| ID | 待确认内容/推荐方向 | 影响与确认门槛 |
+本表是候选设计的确认入口，不代写专业复核或 confirmed 决定；“已修订”只表示作者处理，运行仍未执行。
+
+| ID | 本版处理/下一步 | 阶段与责任 |
 |---|---|---|
-| Q-01 | QEMU/Poky/meta-arm、TF-A/U-Boot/Linux 实际选中版本、源码校验/提交、已有 patch；由 Yocto 核对 | chapter 4 gate；不能以 PV 8.2.7/移动分支替代来源锁定 |
-| Q-02 | §4 的 CPU、地址窗口、GICv2、INTID/PPI、24 MHz、UART/reset 契约；由 QEMU 核对模型接口 | chapter 4 gate；实际模型范围/接线与 DTS 不符须修订提案 |
-| Q-03 | §5 显式 boot 模式、secure EL3 入口、secondary 初态、无镜像错误及 reset | chapter 4 gate；QEMU 核对锁定版本 ARM API；用户确认最终模式边界 |
-| Q-04 | runqemu 候选 A 的真实部署输入/二进制/固件传递是否成立；必要时评估 B | chapter 4 gate；Yocto 核对及用户选择；不得用 `-S` 替代运行 |
-| Q-05 | BL2/FIP IO、SRAM/linker、缺少 BL33 的真实终态、U-Boot standalone DTS/入口 | chapter 6/7 前 gate；影响 chapter 4 的 ROM及保留内存规划须本章先核兼容性 |
-| Q-06 | firmware 与 direct-linux 的 PSCI 提供者/版本/conduit/affinity及多核、复位实现 | chapter 8/10；不得以旧稿的“单核”叙述约束实际证据 |
-| Q-07 | NAND 控制器/guest驱动组合、ID/几何/OOB/ECC/坏块及后端格式 | chapter 9/10 前 gate；C-W17/C-W19，失败会重算全部布局/UBI参数 |
-| Q-08 | 正常 SP805 模型与教学简化驱动分离；零装载/周期/复位契约 | chapter 15 前 gate；C-W30/V23/V32，不能制造假的上游 bug 结论 |
-| Q-09 | 64 MiB 两卷预算、boot.scr 选卷、env 持久化/坏块/冗余、镜像长度防覆盖 | chapter 9/10；仅有静态表，回滚与实测能力待补 |
-| Q-10 | SPI/I2C具体设备及网络依赖；本章是否纳入 RTC | 相应章节；A-003 C-W26/C-W29 的网络路径未解决，不能假设 slirp 等于有网卡 |
+| Q-01 | 已回填 Poky/package hash/31 patches，新 tiger provider/override/正式 patch 顺序待展开 | 本章实施 Yocto；未来 TF-A/meta-arm/U-Boot/Linux 首次使用前另锁 |
+| Q-02 | CPU0/A53/TCG、ROM/RAM/PL011/单 clk；GIC/PPI/四核移出 | 本章 QEMU 针对性复核/用户确认；后续中断另核 |
+| Q-03 | 唯一 raw/rvbar/EL3/ARM loader reset 注册及生命周期 | 本章 QEMU 复核、冷启动/边界/宿主 reset 实测；guest reset 后续 |
+| Q-04 | 独立 fixture deploy/生成任务、none/helper sysroot/serial/路径 | 本章 Yocto 复核；实施解析任务图、干净 runqemu |
+| Q-05 | BL1/BL2/FIP IO/linker、缺 BL33 终态/U-Boot 入口 | chapter 6/7 前工程锁定/IO，architect 汇总 |
+| Q-06 | BL31 与 direct-linux PSCI 分开，停车/affinity/PPI/guest reset 各有前提 | 首次四核/中断/guest reset 前，各成员按 scope |
+| Q-07 | 移除并行接口；SPI master/真实 CS/芯片选型或实现审查 | 首次 SPI NAND 读 BL2/FIP 前，§7.1，不阻塞本章 |
+| Q-08 | 撤回已有 SP805 假设，正常模型/手册/驱动与教学实验另选 | watchdog 首次使用前，C-W30/V23/V32，不制造上游 bug |
+| Q-09 | 纸面布局/卷/env/回滚仍候选，型号/OOB 变化重算 | chapter 9/10，读取所需镜像边界提前满足 |
+| Q-10 | RTC/SPI NOR/I2C/网络在首次使用前；slirp 不提供网卡 | 对应章节，C-W26/C-W29 保留 |
 
-未取得的原 glossary/blueprint、“D5”来源及 A-003 的旧四仓库口径按项目记录追踪；本文不恢复旧仓库任务、不修订这些成果。平台取舍经专业核对和用户确认后，由实际记录人登记决定/批准依据；本版不新增或代写决定。
+本章确认仅覆盖最小启动，不要求先批准未知 SPI NAND 型号或完成后续平台；最终真实工程/完整实测没有取消。原 glossary/blueprint、“D5”、A-003 旧四仓库口径保持追踪，本轮不代改；批准由实际记录人注明版本/依据，不自标 approved。
 
-## 10. 验证办法与当前覆盖
+## 10. 设计覆盖与实施验收计划
 
-所有运行步骤都是后续验证计划。每项证据须记录实际执行者、日期、环境/源码/patch/二进制版本、输入、命令、预期、实际、返回码、原始日志及终态；模型测试与系统验证分开。
+分开记录 architect 文档/静态检查、工程师锁定源码只读核对、后续真实构建/运行。证据须有执行者/日期/环境、源/patch/metadata/二进制版本、输入/命令/预期/实际/返回码/日志/终态，不以 qemuarm64 旧产物替代 tiger。
 
-| ID | 对象/方法 | 判据 | 本轮状态 |
-|---|---|---|---|
-| V-01 | 本机 checkout/远端地址/branch/HEAD/祖先/工作树只读核对 | 与 WORKSPACE、T-016一致；不访问未授权远程 checkout | 通过；仅 OPC 和书稿本机范围 |
-| V-02 | 章节来源/决定/成员 scope 核对 | 每条事实有来源，候选值不冒充已确认，未取得源码明确列出 | 通过；文档核对，不是专业评审 |
-| V-03 | 静态地址/分区/容量与 watchdog 算术 | MMIO/RAM 主窗口不重叠；子区边界/容量自洽；明确阶段占用 | 通过；候选数字静态检查，不证明实际模型映射或运行安全 |
-| V-04 | 锁定配方与源码核查 | 取得 Q-01 基线、选择链、已有 patch、API和 binding；回填精确证据 | 未执行；本轮未取得工程源码/配方 |
-| V-05 | 模型注册/QTest与边界 | machine可枚举；访问宽度、端序、保留位、边界和IRQ assert/deassert符合最终契约；未启用窗口无假设备 | 未执行；QEMU 工程验证计划 |
-| V-06 | CPU测试固件执行/中断/reset | CPU0真实执行并输出标记；timer IRQ进入guest handler；warm reset后重新执行，secondary状态符合模式 | 未执行；暂停实例化不能替代 |
-| V-07 | 正式集成/清理workspace/干净构建 | 仅Poky+meta-tiger得到同版patch和二进制；runqemu实际命令选中`tiger`且测试输入执行 | 未执行；Yocto系统验证计划，Q-04 gate待解除 |
-| V-08 | TF-A/U-Boot/Linux分段与全链 | 每个装载/入口/参数面有证据；PSCI、DTB、console、rootfs分别覆盖 | 未执行；按chapter 6–10阶段开展 |
-| V-09 | NAND/UBI/镜像和负向用例 | 页/块/OOB/读写擦除/越界/坏块、两卷内容与attach、超大FIP阻断及恢复 | 未执行；不从对照组推断tiger结果 |
-| V-10 | watchdog虚拟时间与系统复位 | 真实模型周期、喂狗/使能/临界/复位后状态和guest驱动一致 | 未执行；只完成简化算术核对 |
+| ID | 判据 | 当前覆盖 |
+|---|---|---|
+| V-01 | 本机版本/分支/祖先/干净与固定 v0.1 blob | architect 本轮直接核对通过；远端引用 E-Y/E-Q，不是本人 SSH |
+| V-02 | 13 项 U/Y/QE 回复及来源/阶段边界 | 作者文档检查，待专业复核和用户确认，不等于评审通过 |
+| V-03 | 主/预留窗口、测试 RAM/后续预算分别不重叠；条件性分区/UBI/watchdog/分频算术 | 静态核对，不证明映射、运行安全、波特率或真实几何 |
+| V-04 | 锁定来源/31 patches/API、新 tiger 展开 | E-Y/E-Q 覆盖现有文件及局部接口；新 provider/override/重应用/构建未执行 |
+| V-05 | 注册/ROM 只读/参数拒绝，缺失/不可读/空/1MiB/1MiB+1 BIOS 边界 | 本章 QEMU 验收计划，未执行；合法长度与有效启动分开 |
+| V-06 | source/link/ELF/map/raw、CPU0 PC=0/secure EL3h、RAM 初始化/栈、guest MMIO 确定标记 | 本章执行验收，未执行；枚举/-S/对象/宿主打印不能通过 |
+| V-06R | 同进程暂停→宿主 system_reset→入口/EL/UART reset→cont→第二标记/data-BSS 再初始化 | 本章模型 reset，未执行；不要求 RAM 全零，不代表 guest reset |
+| V-07 | fixture 任务图/生成部署/helper路径-hash/参数；正式 patch 清理 workspace 干净构建和 runqemu | 本章 Yocto 系统验收，未执行；宿主 PATH 回退不能通过 |
+| V-08 | SRAM/GIC/timer IRQ/四核/PSCI、U-Boot/Linux/DTB/rootfs 分段/全链 | 首次使用阶段分别实施，本章未做 |
+| V-09R | SPI master/CS reset/芯片读取/TF-A IO、BL2/FIP 字节相等/ECC/坏块/镜像边界 | 首次 SPI NAND 读取前，未执行 |
+| V-09 | program/erase/持久化/OOB/ECC/UBI/两卷/env、超大 FIP 阻断/回滚/恢复 | chapter 9/10 完整验收，未执行 |
+| V-10 | watchdog 模型/真实周期/喂狗/IRQ/reset/driver 与实验版本分开 | 首次使用前，未执行，只保留简化算术 |
 
-V-01/V-03 的实际命令为本机 `git status`、`rev-parse`、`remote -v`、`merge-base --is-ancestor` 与 Python 整数运算；本轮未生成或运行业务代码。基于本机缓存的远端跟踪引用不代表服务器当前头。远程 `meta-tiger`、实际 Poky checkout 及上游组件均无本轮核验覆盖。
+UART 配置/读回与字符输出分别验收，本章不验证真实线速/IRQ/性能。reset 值在 CPU 恢复前读，避免固件重写掩盖设备 reset 错误。QEMU 主责模型/负向/guest 执行，Yocto 主责正式集成/任务图/干净 runqemu，证据关联同版资产。
 
 ## 11. 本次交付与后续衔接
 
-本轮按 T-016 授权仅交付 A-005 v0.1 draft，并登记自身实际进展和成果索引；未修改书稿、工程代码、WORKSPACE 或他人成果。候选稿形成后停止改稿，保留本版本供后续组织核对。
+本轮交付 A-005 **v0.2 draft**，在 T-016 对 U-A005-01/02、Y-A005-01～05、QE-A005-01～06 共 13 项逐项填写作者回复并更新自身进展/索引。原意见/revise 结论/报告/日志保留，v0.1 在固定提交留存。本版不是工程复核结论或获批基线；未实现固件/模型/metadata、未构建/运行、未 SSH、未改书稿/工作区配置。
 
-下一位行动人为 project-manager：按此实际版本登记 QEMU 模型/接口核对、Yocto 配方/集成/启动核对及用户意见。当前没有代写任一工程成员的接收或评审结论。意见到齐后 architect 统一修订，必要复核与用户确认形成 chapter 4 实施基线；再由 writer 编制章节蓝图，并依既有串行顺序开展工程。
+稳定提交后停止改稿。下一位 project-manager 按新版本串行安排必要针对性复核，再交用户确认本章实施基线；未代写通过/接收/批准，不自行发跨会话消息。确认后 writer 编制蓝图，工程按既有次序实施/实测。
 
-跨章影响已定位：chapter 2 的四仓库地图/平台能力状态；chapter 4 的源码与真实patch、最小启动输入；chapter 6/7 的固件IO与standalone入口；chapter 8 的DTS/直通/PSCI；chapter 9/10 的NAND后端、分区、镜像、卷与装载生命周期；chapter 15 的正常watchdog模型与教学实验。均留给对应任务和章节阶段处理，不在本轮提前改稿。
+跨章影响：chapter 2 资产地图/能力状态；chapter 4 真实 patch/测试固件/启动；chapter 6 SPI NAND 首次读取/TF-A IO；chapter 7/8 入口/DTS/PSCI/阶段设备；chapter 9/10 芯片/后端/分区/卷/镜像/全链；chapter 15 watchdog 可用性/正常行为/教学实验。留对应章节及 T-017，本轮不提前改稿。
 
 关联正式记录：[T-016](../TASKS.md)、[项目决定](../DECISIONS.md)、[工作区声明](../WORKSPACE.yaml)、[A-002计划](A-002-book-polishing-plan.md)、[A-003校验清单](A-003-知识点校验清单.md)、[成果索引](README.md)。
