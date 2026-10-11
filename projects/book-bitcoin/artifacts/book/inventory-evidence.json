@@ -1,0 +1,4038 @@
+{
+  "project": "book-bitcoin",
+  "artifact": "A-001",
+  "version": "0.1",
+  "date": "2026-10-11",
+  "input": {
+    "repository": "git@github.com:yinzhongkai/book-bitcoin.git",
+    "revision": "0811b23eb19d79ceb55a3c64a81944312eec0f2c",
+    "local_checkout": "D:\\book-bitcoin"
+  },
+  "method": "Full-file structural and resource-reference scan; key-passage reading as described in content-inventory.md; no manuscript command execution or professional claim validation.",
+  "totals": {
+    "manuscript_files": 13,
+    "bytes": 649322,
+    "lines": 8139,
+    "fenced_code_blocks": 229,
+    "distinct_code_ids": 170,
+    "code_ids_contiguous": true,
+    "distinct_bpftrace_refs": 18,
+    "distinct_diagram_refs": 10,
+    "distinct_prompt_refs": 10
+  },
+  "files": [
+    {
+      "path": "bitcoin/task00-前言.md",
+      "bytes": 3981,
+      "lines": 31,
+      "sha256": "f81e195be13b6e8bfa3ce905a0ecfd0a29906651c21a7dffa1d23ef4b0591488",
+      "fenced_code_blocks": 0,
+      "code_ids": [],
+      "bpftrace_refs": [],
+      "diagram_refs": [],
+      "prompt_refs": [],
+      "headings": [
+        {
+          "line": 1,
+          "text": "# 前言"
+        },
+        {
+          "line": 5,
+          "text": "## 1. 为什么写这本书"
+        },
+        {
+          "line": 13,
+          "text": "## 2. 适合谁"
+        },
+        {
+          "line": 17,
+          "text": "## 3. 怎么用本书"
+        },
+        {
+          "line": 29,
+          "text": "## 4. 收束"
+        }
+      ]
+    },
+    {
+      "path": "bitcoin/task01-序章-把地图摊开.md",
+      "bytes": 19118,
+      "lines": 321,
+      "sha256": "2a3edd8c4b226662f76b1678c91b65578e2ad1fcb328da6d064a5b25fda94e23",
+      "fenced_code_blocks": 16,
+      "code_ids": [],
+      "bpftrace_refs": [],
+      "diagram_refs": [],
+      "prompt_refs": [],
+      "headings": [
+        {
+          "line": 1,
+          "text": "# 序章　把地图摊开——Bitcoin 全景与开发环境"
+        },
+        {
+          "line": 12,
+          "text": "## 1. Bitcoin 是什么——5 分钟全景鸟瞰"
+        },
+        {
+          "line": 16,
+          "text": "### 1.1 节点（node）"
+        },
+        {
+          "line": 20,
+          "text": "### 1.2 交易（Transaction）"
+        },
+        {
+          "line": 24,
+          "text": "### 1.3 区块（Block）"
+        },
+        {
+          "line": 28,
+          "text": "### 1.4 共识（Consensus）"
+        },
+        {
+          "line": 32,
+          "text": "### 1.5 四个概念如何咬合成一个运行中的系统"
+        },
+        {
+          "line": 42,
+          "text": "## 2. 三轨预告——原理·源码·eBPF 追踪"
+        },
+        {
+          "line": 58,
+          "text": "## 3. 全书路线图"
+        },
+        {
+          "line": 84,
+          "text": "## 4. Bitcoin Core 源码目录结构速览"
+        },
+        {
+          "line": 135,
+          "text": "## 5. 环境搭建"
+        },
+        {
+          "line": 139,
+          "text": "### 5.1 环境前置确认"
+        },
+        {
+          "line": 142,
+          "text": "# 确认宿主系统版本"
+        },
+        {
+          "line": 151,
+          "text": "### 5.2 安装编译依赖并获取源码"
+        },
+        {
+          "line": 154,
+          "text": "# 安装 Bitcoin Core v31.0 编译依赖（CMake 构建）"
+        },
+        {
+          "line": 164,
+          "text": "# 确认 CMake 版本"
+        },
+        {
+          "line": 172,
+          "text": "# 创建工作目录并克隆 Bitcoin Core 源码（只读对照，耗时约 5–15 分钟，取决于网速）"
+        },
+        {
+          "line": 187,
+          "text": "### 5.3 编译安装 Bitcoin Core"
+        },
+        {
+          "line": 192,
+          "text": "# CMake 三步：配置 → 编译 → 安装"
+        },
+        {
+          "line": 202,
+          "text": "# 确认安装结果"
+        },
+        {
+          "line": 211,
+          "text": "### 5.4 获取配套实验仓库"
+        },
+        {
+          "line": 216,
+          "text": "# 克隆配套实验仓库并检出序章参考快照"
+        },
+        {
+          "line": 217,
+          "text": "# 将 <本书配套仓库地址> 替换为本书官网公布的实际 URL"
+        },
+        {
+          "line": 225,
+          "text": "### 5.5 安装 bpftrace 并验证可用"
+        },
+        {
+          "line": 228,
+          "text": "# 安装 bpftrace（0.20.x，eBPF 默认观测工具）"
+        },
+        {
+          "line": 239,
+          "text": "# 最简 bpftrace 探针：开机即打印一行后退出"
+        },
+        {
+          "line": 247,
+          "text": "### 5.6 启动 regtest 节点并验证"
+        },
+        {
+          "line": 252,
+          "text": "# 启动 regtest 节点（后台运行）"
+        },
+        {
+          "line": 262,
+          "text": "# 验证 regtest 链已起来"
+        },
+        {
+          "line": 276,
+          "text": "# 创建一个 regtest 钱包（v31.0 默认不会自动加载钱包；若已创建过，可跳过此步）"
+        },
+        {
+          "line": 279,
+          "text": "# 生成一个 regtest 地址（regtest 地址以 bcrt 开头）"
+        },
+        {
+          "line": 284,
+          "text": "# 用该地址挖 101 个块，验证可出块（regtest 秒级出块）"
+        },
+        {
+          "line": 298,
+          "text": "# 确认链高度"
+        },
+        {
+          "line": 302,
+          "text": "# 停止 regtest 节点"
+        },
+        {
+          "line": 309,
+          "text": "## 6. 收束"
+        }
+      ]
+    },
+    {
+      "path": "bitcoin/task02-1-解码Bitcoin的数据模型.md",
+      "bytes": 59767,
+      "lines": 770,
+      "sha256": "2497a88be59b0d224b6c0171e759ca01ede1bd066dafbd5477e36da42623f6c8",
+      "fenced_code_blocks": 19,
+      "code_ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+      ],
+      "bpftrace_refs": [
+        "serialize_count.bt"
+      ],
+      "diagram_refs": [
+        "ch1-data-model.drawio"
+      ],
+      "prompt_refs": [
+        "ch1-data-model-prompt.md"
+      ],
+      "headings": [
+        {
+          "line": 1,
+          "text": "# 解码 Bitcoin 的数据模型"
+        },
+        {
+          "line": 9,
+          "text": "## 1. 开场"
+        },
+        {
+          "line": 11,
+          "text": "### 1.1 对话引子"
+        },
+        {
+          "line": 17,
+          "text": "### 1.2 本章概览"
+        },
+        {
+          "line": 31,
+          "text": "## 2. 原理线"
+        },
+        {
+          "line": 33,
+          "text": "### 2.1 序列化机制：Bitcoin 为什么自己定一套字节格式"
+        },
+        {
+          "line": 92,
+          "text": "### 2.2 拆解交易结构：逐字段读 `raw hex`"
+        },
+        {
+          "line": 101,
+          "text": "# C-1 启动 regtest 节点并确认链状态（沿用序章 §5.6 命令，本章复用）"
+        },
+        {
+          "line": 102,
+          "text": "# 0) 启动节点（若已在前一次实验中启动，跳过本步；Windows 不支持 -daemon）"
+        },
+        {
+          "line": 106,
+          "text": "# 1) 等待 RPC 就绪：-daemon 返回时 RPC 服务可能尚未监听，用 -rpcwait 循环等待"
+        },
+        {
+          "line": 111,
+          "text": "# 2) 确认钱包 test 已加载（v31.0 默认钱包行为以你本机为准；"
+        },
+        {
+          "line": 112,
+          "text": "#    若 listwallets 返回空，先 bitcoin-cli -regtest createwallet test）"
+        },
+        {
+          "line": 117,
+          "text": "# 若返回 []，则创建 test 钱包；若 `listwallets` 已返回 `[\"test\"]`，则跳过 `createwallet`"
+        },
+        {
+          "line": 122,
+          "text": "# C-2 用 sendtoaddress 构造一笔非 coinbase 交易并取 txid"
+        },
+        {
+          "line": 123,
+          "text": "# v31.0 regtest 默认 -fallbackfee=0，必须显式指定 fee_rate"
+        },
+        {
+          "line": 134,
+          "text": "# C-3 getrawtransaction <txid> 取真实交易 `raw hex`（正文 hex 来源）"
+        },
+        {
+          "line": 135,
+          "text": "# sendtoaddress 后交易先进入交易池（mempool），此时可直接 getrawtransaction 取 hex；"
+        },
+        {
+          "line": 136,
+          "text": "# 默认 verbose=false 返回 hex，已含 SegWit 见证数据序列化字节；"
+        },
+        {
+          "line": 137,
+          "text": "# 若交易已上链且未启用 -txindex，才需要提供 blockhash"
+        },
+        {
+          "line": 141,
+          "text": "# 为了让交易上链（后续章节需要块环境），再出一块"
+        },
+        {
+          "line": 256,
+          "text": "### 2.3 拆解区块结构：80 字节头、默克尔根、难度目标"
+        },
+        {
+          "line": 298,
+          "text": "# C-4 取最新区块 hash 并 getblockheader <hash> false 取真实区块头 `raw hex`"
+        },
+        {
+          "line": 299,
+          "text": "# 1) 取当前最佳区块哈希"
+        },
+        {
+          "line": 303,
+          "text": "# 2) 取区块头（verbose=false 返回 80 字节头的 hex）"
+        },
+        {
+          "line": 329,
+          "text": "### 2.4 区块体与默克尔根的\"代表\"含义"
+        },
+        {
+          "line": 337,
+          "text": "### 2.5 三轨咬合的原理面"
+        },
+        {
+          "line": 343,
+          "text": "## 3. 源码线"
+        },
+        {
+          "line": 345,
+          "text": "### 3.1 serialize.h 模板体系：一份字段声明，两条读写路径"
+        },
+        {
+          "line": 407,
+          "text": "### 3.2 交易结构体定位：COutPoint / CTxIn / CTxOut / CTransaction"
+        },
+        {
+          "line": 518,
+          "text": "### 3.3 区块结构体定位：CBlockHeader / CBlock + 默克尔根位置"
+        },
+        {
+          "line": 569,
+          "text": "### 3.4 字段↔源码对照表：三轨在此首次合流"
+        },
+        {
+          "line": 594,
+          "text": "## 4. eBPF 追踪线"
+        },
+        {
+          "line": 596,
+          "text": "### 4.1 工具选型：为什么用 uprobe 起手"
+        },
+        {
+          "line": 602,
+          "text": "### 4.2 确认探针目标：列出 v31.0 序列化符号"
+        },
+        {
+          "line": 607,
+          "text": "# C-12 bpftrace -l 列出 bitcoind 导出的序列化相关符号（实机核实，不能臆造）"
+        },
+        {
+          "line": 622,
+          "text": "### 4.3 运行追踪脚本与解读输出"
+        },
+        {
+          "line": 629,
+          "text": "# C-13 bitcoin-tools/bpf/bpftrace/serialize_count.bt"
+        },
+        {
+          "line": 630,
+          "text": "# 目标版本：Bitcoin Core v31.0 / bpftrace 0.20.x"
+        },
+        {
+          "line": 631,
+          "text": "# 探针说明：uprobe 挂 bitcoind 的 Serialize 与 Unserialize 两类符号，"
+        },
+        {
+          "line": 632,
+          "text": "#           按探针名（probe）聚合 count()，每 5 秒打印并清零。"
+        },
+        {
+          "line": 633,
+          "text": "#           关键：Itanium ABI（C++ 名称修饰规范）把源码标识符按 <长度><名字>"
+        },
+        {
+          "line": 634,
+          "text": "#           编码进 mangled name（如 9Serialize、11Unserialize），长度前缀刚好"
+        },
+        {
+          "line": 635,
+          "text": "#           把两类符号的字面边界标出来，故用 *9Serialize* / *11Unserialize* 精确"
+        },
+        {
+          "line": 636,
+          "text": "#           区分，互不重叠。"
+        },
+        {
+          "line": 637,
+          "text": "# 预期输出：每 5 秒一张聚合表，列出本周期内每个序列化/反序列化符号被调次数。"
+        },
+        {
+          "line": 638,
+          "text": "#           出块/发交易时计数明显上升，静止时几乎为零。"
+        },
+        {
+          "line": 664,
+          "text": "# C-14 终端 A：启动 bpftrace（需 sudo）"
+        },
+        {
+          "line": 665,
+          "text": "# 脚本位于 ~/workspace/bitcoin-tools/bpf/bpftrace/serialize_count.bt"
+        },
+        {
+          "line": 666,
+          "text": "# （与序章配套仓库路径一致），使用绝对路径避免当前目录歧义"
+        },
+        {
+          "line": 670,
+          "text": "# C-14 终端 B：在 regtest 上触发序列化——发一笔交易 + 出一块"
+        },
+        {
+          "line": 673,
+          "text": "# 1) 发一笔交易，触发交易序列化路径（v31.0 regtest 必须显式指定 fee_rate）"
+        },
+        {
+          "line": 677,
+          "text": "# 2) 再触发一次出块（更高频序列化路径——打包整个区块）"
+        },
+        {
+          "line": 711,
+          "text": "### 4.4 如何按需调整探针"
+        },
+        {
+          "line": 724,
+          "text": "## 5. 收束"
+        },
+        {
+          "line": 726,
+          "text": "### 5.1 本章要点回顾"
+        },
+        {
+          "line": 734,
+          "text": "### 5.2 数据模型结构图交付说明"
+        },
+        {
+          "line": 745,
+          "text": "### 5.3 AI 提示词"
+        },
+        {
+          "line": 757,
+          "text": "### 5.4 git tag 检出指引"
+        },
+        {
+          "line": 762,
+          "text": "# 回到本章末尾的配套仓库参考实现快照（卡住时可对照参考）"
+        },
+        {
+          "line": 768,
+          "text": "### 5.5 承上启下"
+        }
+      ]
+    },
+    {
+      "path": "bitcoin/task03-2-验证共识规则.md",
+      "bytes": 65340,
+      "lines": 822,
+      "sha256": "869031c9284bb703460e6b079b5c8155387c993615244bdaf2ca8606084e910f",
+      "fenced_code_blocks": 20,
+      "code_ids": [
+        4,
+        11,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28
+      ],
+      "bpftrace_refs": [
+        "pow_duration.bt",
+        "validation_ustack.bt"
+      ],
+      "diagram_refs": [
+        "ch2-consensus-validation.drawio"
+      ],
+      "prompt_refs": [
+        "ch2-consensus-validation-prompt.md"
+      ],
+      "headings": [
+        {
+          "line": 1,
+          "text": "# 验证共识规则"
+        },
+        {
+          "line": 9,
+          "text": "## 1. 开场"
+        },
+        {
+          "line": 11,
+          "text": "### 1.1 对话引子"
+        },
+        {
+          "line": 23,
+          "text": "### 1.2 本章概览"
+        },
+        {
+          "line": 46,
+          "text": "## 2. 原理线"
+        },
+        {
+          "line": 48,
+          "text": "### 2.1 从\"长得对\"到\"算合法\"：共识规则体系"
+        },
+        {
+          "line": 78,
+          "text": "### 2.2 交易合法性：CheckTransaction 的逐条规则"
+        },
+        {
+          "line": 113,
+          "text": "# C-15 启动 regtest 节点并确认链状态（沿用 chapter 1 §2.2.1，复用 test 钱包）"
+        },
+        {
+          "line": 114,
+          "text": "# 0) 启动节点（若已在运行，跳过）"
+        },
+        {
+          "line": 118,
+          "text": "# 1) 等待 RPC 就绪"
+        },
+        {
+          "line": 121,
+          "text": "# 2) 确认链有一定高度（继续用 chapter 1 的链即可）与 test 钱包已加载"
+        },
+        {
+          "line": 130,
+          "text": "# 3) 取一个收款地址备用（重开 shell 必须重新取 $ADDR）"
+        },
+        {
+          "line": 137,
+          "text": "# C-16 构造重复输入交易并观察节点拒绝"
+        },
+        {
+          "line": 138,
+          "text": "# 1) 列出一个可用 UTXO，记下它的 txid 和 vout（vout 通常是 0 或 1，以本地输出为准）"
+        },
+        {
+          "line": 151,
+          "text": "# 2) 存进变量，方便引用"
+        },
+        {
+          "line": 155,
+          "text": "# 3) 构造一笔 raw 交易：两个输入引用同一个 COutPoint"
+        },
+        {
+          "line": 156,
+          "text": "#    createrawtransaction 只负责拼字节、不做合法性判定，所以会照单全收"
+        },
+        {
+          "line": 163,
+          "text": "# 4) 不签名、直接送判定：testmempoolaccept 只验证不入池"
+        },
+        {
+          "line": 164,
+          "text": "#    （签名属于状态依赖层，在结构检查之后才轮到它；结构都过不了，签名无所谓）"
+        },
+        {
+          "line": 184,
+          "text": "### 2.3 区块合法性：CheckBlock 与 ContextualCheckBlock"
+        },
+        {
+          "line": 231,
+          "text": "### 2.4 PoW 验证：从 nBits 到目标值比对"
+        },
+        {
+          "line": 259,
+          "text": "### 2.5 难度调整：2016 块的自我校准"
+        },
+        {
+          "line": 283,
+          "text": "### 2.6 三轨咬合的原理面"
+        },
+        {
+          "line": 289,
+          "text": "## 3. 源码线"
+        },
+        {
+          "line": 291,
+          "text": "### 3.1 验证函数链总览：入口与调用关系"
+        },
+        {
+          "line": 320,
+          "text": "### 3.2 tx_check.cpp：CheckTransaction 逐条对照"
+        },
+        {
+          "line": 383,
+          "text": "### 3.3 merkle.cpp：BlockMerkleRoot 与 mutated 检测"
+        },
+        {
+          "line": 427,
+          "text": "### 3.4 validation.cpp：CheckBlock / ContextualCheckBlock"
+        },
+        {
+          "line": 502,
+          "text": "### 3.5 pow.cpp：CheckProofOfWork 与 GetNextWorkRequired"
+        },
+        {
+          "line": 583,
+          "text": "### 3.6 规则↔源码对照表：三轨在此合流"
+        },
+        {
+          "line": 608,
+          "text": "## 4. eBPF 追踪线"
+        },
+        {
+          "line": 610,
+          "text": "### 4.1 探针目标确认：列出 v31.0 验证符号"
+        },
+        {
+          "line": 615,
+          "text": "# C-24 bpftrace -l 列出 bitcoind 导出的验证相关符号（实机核实，不能臆造）"
+        },
+        {
+          "line": 624,
+          "text": "# 顺带确认难度调整函数也在"
+        },
+        {
+          "line": 632,
+          "text": "### 4.2 validation_ustack.bt：用 ustack 看验证调用链"
+        },
+        {
+          "line": 639,
+          "text": "# C-25 bitcoin-tools/bpf/bpftrace/validation_ustack.bt"
+        },
+        {
+          "line": 640,
+          "text": "# 目标版本：Bitcoin Core v31.0 / bpftrace 0.20.x"
+        },
+        {
+          "line": 641,
+          "text": "# 探针说明：uprobe 挂 CheckTransaction 与 CheckBlock 两个验证函数，"
+        },
+        {
+          "line": 642,
+          "text": "#           命中时打印进程名/tid 与用户态调用栈（ustack，6 帧）。"
+        },
+        {
+          "line": 643,
+          "text": "#           期望看到：sendtoaddress 触发 CheckTransaction ← AcceptToMemoryPool 链；"
+        },
+        {
+          "line": 644,
+          "text": "#           generatetoaddress 触发 CheckBlock ← AcceptBlock ← ProcessNewBlock ← GenerateBlock 链"
+        },
+        {
+          "line": 645,
+          "text": "#           （v31.0 挖矿 RPC 重构后出块不再经 TestBlockValidity）。"
+        },
+        {
+          "line": 646,
+          "text": "# 预期输出：每次命中打印一段栈帧列表，帧名与 §3.1 函数链一致。"
+        },
+        {
+          "line": 666,
+          "text": "# C-26 终端 A：启动 ustack 追踪（需 sudo）"
+        },
+        {
+          "line": 670,
+          "text": "# C-26 终端 B：触发两条验证路径"
+        },
+        {
+          "line": 673,
+          "text": "# 1) 发一笔交易：走 AcceptToMemoryPool → CheckTransaction"
+        },
+        {
+          "line": 677,
+          "text": "# 2) 出一个块：走 ProcessNewBlock → AcceptBlock → CheckBlock / ContextualCheckBlock"
+        },
+        {
+          "line": 710,
+          "text": "### 4.3 pow_duration.bt：测量 PoW 验证耗时"
+        },
+        {
+          "line": 717,
+          "text": "# C-27 bitcoin-tools/bpf/bpftrace/pow_duration.bt"
+        },
+        {
+          "line": 718,
+          "text": "# 目标版本：Bitcoin Core v31.0 / bpftrace 0.20.x"
+        },
+        {
+          "line": 719,
+          "text": "# 探针说明：uprobe 进 CheckProofOfWork 时按 tid 记录入口 nsecs；"
+        },
+        {
+          "line": 720,
+          "text": "#           uretprobe 返回时计算耗时（纳秒）并 printf 单次数值，随后删除 map 项。"
+        },
+        {
+          "line": 721,
+          "text": "#           本章不引入新聚合函数——单次耗时直接打印；hist() 分布统计留给 chapter 3。"
+        },
+        {
+          "line": 722,
+          "text": "# 预期输出：generatetoaddress 出块时打印一行，量级为数百至数千纳秒。"
+        },
+        {
+          "line": 741,
+          "text": "# C-28 终端 A：启动耗时测量（需 sudo）"
+        },
+        {
+          "line": 745,
+          "text": "# C-28 终端 B：出一个块触发 PoW 验证"
+        },
+        {
+          "line": 763,
+          "text": "### 4.4 三轨咬合的追踪面与探针调整指引"
+        },
+        {
+          "line": 776,
+          "text": "## 5. 收束"
+        },
+        {
+          "line": 778,
+          "text": "### 5.1 本章要点回顾"
+        },
+        {
+          "line": 786,
+          "text": "### 5.2 共识验证流程图交付说明"
+        },
+        {
+          "line": 797,
+          "text": "### 5.3 AI 提示词"
+        },
+        {
+          "line": 807,
+          "text": "### 5.4 git tag 检出指引"
+        },
+        {
+          "line": 812,
+          "text": "# 回到本章末尾的配套仓库参考实现快照（卡住时可对照参考）"
+        },
+        {
+          "line": 818,
+          "text": "### 5.5 承上启下"
+        }
+      ]
+    },
+    {
+      "path": "bitcoin/task04-3-拆解脚本引擎.md",
+      "bytes": 73568,
+      "lines": 971,
+      "sha256": "d167845d7701a47f44b397466378b7a99b13621ebf49c483d7deab9e81b06be4",
+      "fenced_code_blocks": 28,
+      "code_ids": [
+        7,
+        15,
+        17,
+        20,
+        21,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47
+      ],
+      "bpftrace_refs": [
+        "pow_duration.bt",
+        "script_exec_count.bt",
+        "sigverify_hist.bt"
+      ],
+      "diagram_refs": [
+        "ch3-script-engine.drawio"
+      ],
+      "prompt_refs": [
+        "ch3-script-engine-prompt.md"
+      ],
+      "headings": [
+        {
+          "line": 1,
+          "text": "# 拆解脚本引擎"
+        },
+        {
+          "line": 9,
+          "text": "## 1. 开场"
+        },
+        {
+          "line": 11,
+          "text": "### 1.1 对话引子"
+        },
+        {
+          "line": 23,
+          "text": "### 1.2 本章概览"
+        },
+        {
+          "line": 37,
+          "text": "## 2. 原理线"
+        },
+        {
+          "line": 39,
+          "text": "### 2.1 脚本是什么：锁定与解锁"
+        },
+        {
+          "line": 57,
+          "text": "### 2.2 一台栈机器：操作码与执行模型"
+        },
+        {
+          "line": 98,
+          "text": "### 2.3 P2PKH：第一条验证路径"
+        },
+        {
+          "line": 134,
+          "text": "# C-29 启动 regtest 并确认链状态（沿用前两章模式，复用 test 钱包）"
+        },
+        {
+          "line": 142,
+          "text": "# C-30 P2PKH 实验：向 legacy 地址发币并解码 scriptPubKey"
+        },
+        {
+          "line": 143,
+          "text": "# 1) 生成 legacy（P2PKH）地址——regtest 上以 m 或 n 开头"
+        },
+        {
+          "line": 148,
+          "text": "# 2) 发币（v31.0 regtest 无 fallbackfee，必须显式 fee_rate）"
+        },
+        {
+          "line": 151,
+          "text": "# 3) 解码交易，在 vout 里找到指向该地址的输出"
+        },
+        {
+          "line": 169,
+          "text": "# 4) 把 scriptPubKey 的 hex 单独喂给 decodescript 看脚本结构"
+        },
+        {
+          "line": 182,
+          "text": "### 2.4 P2SH：把复杂度藏进哈希"
+        },
+        {
+          "line": 219,
+          "text": "# C-31 P2SH 实验：2-of-3 多签 + HASH160 手工实锤"
+        },
+        {
+          "line": 220,
+          "text": "# 1) 造三个地址并取出各自公钥（压缩公钥 = 1 字节前缀 + 32 字节 x 坐标，共 33 字节；"
+        },
+        {
+          "line": 221,
+          "text": "#    \"压缩\"的含义与 §2.6.1 的 x-only 公钥相呼应）"
+        },
+        {
+          "line": 226,
+          "text": "#   （无 jq 则手工复制：先 getaddressinfo \"$A1\" | grep '\"pubkey\"'，再 P1=<粘贴 33 字节 hex>）"
+        },
+        {
+          "line": 227,
+          "text": "#   （对 A2、A3 同样操作，把公钥存入 P2/P3）"
+        },
+        {
+          "line": 229,
+          "text": "# 2) 生成 2-of-3 P2SH 地址与赎回脚本"
+        },
+        {
+          "line": 238,
+          "text": "# 3) 手工对 redeemScript 分别算单层 SHA-256 与 HASH160"
+        },
+        {
+          "line": 247,
+          "text": "# 4) 发币到 2... 地址并解码，看锁定脚本里的 20 字节与上面哪个一致"
+        },
+        {
+          "line": 258,
+          "text": "### 2.5 SegWit：见证数据与 P2WPKH/P2WSH"
+        },
+        {
+          "line": 318,
+          "text": "# C-32 SegWit 实验：bech32 地址发币 + 看 txinwitness + 手工验算 weight/vsize"
+        },
+        {
+          "line": 319,
+          "text": "# 1) witness 在输入上、不在输出上——发到 bech32 地址只是创建输出；要看到 txinwitness，"
+        },
+        {
+          "line": 320,
+          "text": "#    交易必须花掉一个 SegWit UTXO。本书环境里挖矿资金本就是 SegWit 输出（序章"
+        },
+        {
+          "line": 321,
+          "text": "#    generatetoaddress 的收款地址就是 bech32），这里仍先自转一笔并确认——保证手里"
+        },
+        {
+          "line": 322,
+          "text": "#    有一笔确定类型、确定可用的 SegWit UTXO，不依赖对存量 UTXO 的假设"
+        },
+        {
+          "line": 328,
+          "text": "# 2) 再发一笔并解码——这次花费的是第 1 步产出的 bech32 UTXO，witness 区出现"
+        },
+        {
+          "line": 341,
+          "text": "# 3) 手工验算（§2.5.4）：先验 weight = size×4 − witness字节数×3（§3.7 的合并同类项形态）。"
+        },
+        {
+          "line": 342,
+          "text": "#    witness 字节数 = 2（marker+flag）+ 各输入 witness 区字节（1 字节项数计数 +"
+        },
+        {
+          "line": 343,
+          "text": "#    每项\"1 字节长度 + 数据\"，从第 2 步 txinwitness 数组逐项累加）；"
+        },
+        {
+          "line": 344,
+          "text": "#    再算 vsize = ⌈weight / 4⌉——与第 2 步两个字段逐一核对"
+        },
+        {
+          "line": 351,
+          "text": "### 2.6 Taproot：Schnorr 与双路径花费"
+        },
+        {
+          "line": 388,
+          "text": "# C-33 Taproot 实验：bech32m 地址发币并解码 v1 witness program"
+        },
+        {
+          "line": 389,
+          "text": "# 1) 生成 bech32m（v1 Taproot）地址——regtest 上以 bcrt1p 开头"
+        },
+        {
+          "line": 394,
+          "text": "# 2) 发币并解码"
+        },
+        {
+          "line": 407,
+          "text": "### 2.7 三轨咬合的原理面：四条路径一张表"
+        },
+        {
+          "line": 420,
+          "text": "## 3. 源码线"
+        },
+        {
+          "line": 422,
+          "text": "### 3.1 脚本验证函数链总览"
+        },
+        {
+          "line": 446,
+          "text": "### 3.2 script.h：操作码枚举与 CScript"
+        },
+        {
+          "line": 483,
+          "text": "### 3.3 interpreter.cpp：EvalScript 主循环"
+        },
+        {
+          "line": 526,
+          "text": "### 3.4 interpreter.cpp：VerifyScript 与 P2SH 二段"
+        },
+        {
+          "line": 573,
+          "text": "### 3.5 solver.cpp：Solver 模板分派"
+        },
+        {
+          "line": 606,
+          "text": "### 3.6 见证侧：CScriptWitness 与 VerifyWitnessProgram"
+        },
+        {
+          "line": 662,
+          "text": "### 3.7 重量与折扣：GetTransactionWeight / WITNESS_SCALE_FACTOR"
+        },
+        {
+          "line": 682,
+          "text": "### 3.8 Taproot 路径与 VerifySchnorr 薄封装"
+        },
+        {
+          "line": 727,
+          "text": "### 3.9 路径↔源码对照表：三轨在此合流"
+        },
+        {
+          "line": 748,
+          "text": "## 4. eBPF 追踪线"
+        },
+        {
+          "line": 750,
+          "text": "### 4.1 探针目标确认：脚本引擎与 secp256k1 符号"
+        },
+        {
+          "line": 755,
+          "text": "# C-43 bpftrace -l 列脚本引擎与 secp256k1 相关符号（实机核实，不能臆造）"
+        },
+        {
+          "line": 770,
+          "text": "### 4.2 sigverify_hist.bt：签名验证延迟分布"
+        },
+        {
+          "line": 779,
+          "text": "# C-44 bitcoin-tools/bpf/bpftrace/sigverify_hist.bt"
+        },
+        {
+          "line": 780,
+          "text": "# 目标版本：Bitcoin Core v31.0 / bpftrace 0.20.x"
+        },
+        {
+          "line": 781,
+          "text": "# 探针说明：uprobe/uretprobe 按 tid 配对，分别计 ECDSA 与 Schnorr 验签耗时，"
+        },
+        {
+          "line": 782,
+          "text": "#           hist() 绘 2 的幂直方图。Schnorr 探针挂旧名 secp256k1_schnorrsig_verify——"
+        },
+        {
+          "line": 783,
+          "text": "#           上游新名 verify32 尚未同步进 v31.0 捆绑的库，挂它会直接 attach 失败"
+        },
+        {
+          "line": 784,
+          "text": "#           （§3.8）。探针目标按 C-43 实机结果定；若 secp256k1 符号不可见，退到"
+        },
+        {
+          "line": 785,
+          "text": "#           *12VerifyScript* 层计时（口径见 §4.1 ⚠️）。"
+        },
+        {
+          "line": 786,
+          "text": "# 预期输出：Ctrl-C 退出时打印 @ecdsa_ns 与 @schnorr_ns 两张直方图。"
+        },
+        {
+          "line": 816,
+          "text": "# C-45 终端 A：启动直方图追踪（需 sudo）"
+        },
+        {
+          "line": 820,
+          "text": "# C-45 终端 B：造 ECDSA 与 Schnorr 两种验签流量"
+        },
+        {
+          "line": 821,
+          "text": "# 1) ECDSA：钱包默认 bech32（P2WPKH）UTXO 被花费即触发——普通发一笔即可"
+        },
+        {
+          "line": 825,
+          "text": "# 2) Schnorr：先存一笔 P2TR 输出并确认，再花掉它（sendall 会花含 P2TR 的全部 UTXO）"
+        },
+        {
+          "line": 831,
+          "text": "# 3) 放大样本就多发几笔。注意：出块通常带不来新样本——ConnectBlock 对刚入池的交易"
+        },
+        {
+          "line": 832,
+          "text": "#    命中脚本执行缓存、不再调 VerifyScript（机制见 §4.3.2）"
+        },
+        {
+          "line": 835,
+          "text": "# 4) 回终端 A 按 Ctrl-C，打印两张直方图"
+        },
+        {
+          "line": 856,
+          "text": "### 4.3 script_exec_count.bt：脚本执行计数与归因"
+        },
+        {
+          "line": 865,
+          "text": "# C-46 bitcoin-tools/bpf/bpftrace/script_exec_count.bt"
+        },
+        {
+          "line": 866,
+          "text": "# 目标版本：Bitcoin Core v31.0 / bpftrace 0.20.x"
+        },
+        {
+          "line": 867,
+          "text": "# 探针说明：VerifyScript 命中时，以 4 帧调用栈为 key 计数。"
+        },
+        {
+          "line": 868,
+          "text": "#           期望看到入池路径（AcceptToMemoryPool 链，chapter 2 §4.2.2 已实测）；"
+        },
+        {
+          "line": 869,
+          "text": "#           出块路径（ConnectBlock 链，chapter 2 §1.2/§2.1.2 点名）因脚本执行缓存"
+        },
+        {
+          "line": 870,
+          "text": "#           通常不命中——缓存的存在性本身就是本实验的观测点（§4.3.2）。"
+        },
+        {
+          "line": 871,
+          "text": "# 预期输出：Ctrl-C 时按调用栈分组的计数表。"
+        },
+        {
+          "line": 880,
+          "text": "# C-47 终端 A：以 -par=1 重启节点——脚本校验线程数为 0 时，校验内联到提交线程执行，"
+        },
+        {
+          "line": 881,
+          "text": "#             ustack 才能区分两条链（默认多线程下校验都跑在 b-scriptch.* 工作线程上）"
+        },
+        {
+          "line": 886,
+          "text": "# C-47 终端 A：启动计数追踪（需 sudo）"
+        },
+        {
+          "line": 890,
+          "text": "# C-47 终端 B：触发入池与出块"
+        },
+        {
+          "line": 894,
+          "text": "# 回终端 A 按 Ctrl-C 查看按栈分组的计数"
+        },
+        {
+          "line": 912,
+          "text": "### 4.4 三轨咬合的追踪面与探针调整指引"
+        },
+        {
+          "line": 925,
+          "text": "## 5. 收束"
+        },
+        {
+          "line": 927,
+          "text": "### 5.1 本章要点回顾"
+        },
+        {
+          "line": 935,
+          "text": "### 5.2 脚本引擎执行图交付说明"
+        },
+        {
+          "line": 945,
+          "text": "### 5.3 AI 提示词"
+        },
+        {
+          "line": 956,
+          "text": "### 5.4 git tag 检出指引"
+        },
+        {
+          "line": 961,
+          "text": "# 回到本章末尾的配套仓库参考实现快照（卡住时可对照参考）"
+        },
+        {
+          "line": 967,
+          "text": "### 5.5 承上启下"
+        }
+      ]
+    },
+    {
+      "path": "bitcoin/task05-4-追踪UTXO与链状态.md",
+      "bytes": 58263,
+      "lines": 690,
+      "sha256": "ebd2af4d77140c0a1b496c433b3912bdc0e3c7b7f0c14cd1dc00ff7242d60711",
+      "fenced_code_blocks": 19,
+      "code_ids": [
+        1,
+        15,
+        27,
+        29,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63
+      ],
+      "bpftrace_refs": [
+        "chainstate_window.bt",
+        "utxo_cache_hit.bt"
+      ],
+      "diagram_refs": [
+        "ch4-utxo-chainstate.drawio"
+      ],
+      "prompt_refs": [
+        "ch4-utxo-chainstate-prompt.md"
+      ],
+      "headings": [
+        {
+          "line": 1,
+          "text": "# 追踪 UTXO 与链状态"
+        },
+        {
+          "line": 9,
+          "text": "## 1. 开场"
+        },
+        {
+          "line": 11,
+          "text": "### 1.1 对话引子"
+        },
+        {
+          "line": 22,
+          "text": "### 1.2 本章概览"
+        },
+        {
+          "line": 36,
+          "text": "## 2. 原理线"
+        },
+        {
+          "line": 38,
+          "text": "### 2.1 账本的形状：UTXO 集"
+        },
+        {
+          "line": 71,
+          "text": "# C-48 启动 regtest 并确认链状态（沿用 chapter 1 C-1 / chapter 2 C-15 / chapter 3 C-29 模式，复用 test 钱包）"
+        },
+        {
+          "line": 80,
+          "text": "# C-49 gettxout 观察一笔 UTXO 全生命周期：产出 → 查到 → 花费后返回空"
+        },
+        {
+          "line": 81,
+          "text": "# 1) 产出一笔 UTXO：向自己发 0.5 BTC 并确认上链（UTXO 集变动：新增）"
+        },
+        {
+          "line": 86,
+          "text": "# 2) 查询：输出在集合里，返回 JSON 详情（金额、锁定脚本、高度、coinbase 标记）"
+        },
+        {
+          "line": 96,
+          "text": "# 3) 花掉它：send RPC 的 inputs 选项显式指定只花这个输出（UTXO 集变动：花费=删除）"
+        },
+        {
+          "line": 102,
+          "text": "# 4) 再查：返回空——不是\"已花费\"标记，是查无此项（UTXO 集变动：删除的实锤）"
+        },
+        {
+          "line": 109,
+          "text": "### 2.2 分层视图：CoinsView 体系"
+        },
+        {
+          "line": 116,
+          "text": "# C-50 观察 chainstate 目录结构与 UTXO 全集合统计"
+        },
+        {
+          "line": 117,
+          "text": "# 1) chainstate 是一个 LevelDB 库：.ldb 为落盘数据文件，.log 为当前写入日志，CURRENT 指清单"
+        },
+        {
+          "line": 121,
+          "text": "# 2) gettxoutsetinfo 遍历整个 UTXO 集给出统计——regtest 秒回；主网上要扫 GB 级数据，"
+        },
+        {
+          "line": 122,
+          "text": "#    耗时分钟级（这是\"磁盘层有多大\"的直接体感）"
+        },
+        {
+          "line": 147,
+          "text": "### 2.3 连接区块：批量结算"
+        },
+        {
+          "line": 179,
+          "text": "### 2.4 断开与重组：往回走"
+        },
+        {
+          "line": 208,
+          "text": "### 2.5 三轨咬合的原理面"
+        },
+        {
+          "line": 214,
+          "text": "## 3. 源码线"
+        },
+        {
+          "line": 216,
+          "text": "### 3.1 链状态文件地图"
+        },
+        {
+          "line": 228,
+          "text": "### 3.2 coins.h：Coin 与 CCoinsView 抽象"
+        },
+        {
+          "line": 256,
+          "text": "### 3.3 缓存层实现：FetchCoin / SpendCoin / AddCoin"
+        },
+        {
+          "line": 282,
+          "text": "### 3.4 txdb：CCoinsViewDB 与磁盘格式"
+        },
+        {
+          "line": 300,
+          "text": "### 3.5 ConnectBlock：结算主循环"
+        },
+        {
+          "line": 358,
+          "text": "### 3.6 ConnectTip：临时视图与 FlushStateToDisk"
+        },
+        {
+          "line": 385,
+          "text": "### 3.7 DisconnectBlock 与撤销数据结构"
+        },
+        {
+          "line": 417,
+          "text": "### 3.8 重组循环：断开 → 连接"
+        },
+        {
+          "line": 439,
+          "text": "### 3.9 概念↔源码对照表：三轨在此合流"
+        },
+        {
+          "line": 456,
+          "text": "## 4. eBPF 追踪线"
+        },
+        {
+          "line": 458,
+          "text": "### 4.1 探针目标确认：链状态符号"
+        },
+        {
+          "line": 465,
+          "text": "# C-59 bpftrace -l 列链状态相关符号（实机核实，输出以本机 v31.0 编译结果为准，不臆造修饰名）"
+        },
+        {
+          "line": 480,
+          "text": "### 4.2 utxo_cache_hit.bt：缓存命中/未命中计数"
+        },
+        {
+          "line": 489,
+          "text": "# C-60 bitcoin-tools/bpf/bpftrace/utxo_cache_hit.bt"
+        },
+        {
+          "line": 490,
+          "text": "# 目标版本：Bitcoin Core v31.0 / bpftrace 0.20.x"
+        },
+        {
+          "line": 491,
+          "text": "# 探针说明：双探针 count 聚合。FetchCoin 计\"顶层总查找数\"，CCoinsViewDB::GetCoin"
+        },
+        {
+          "line": 492,
+          "text": "#           计\"穿透到磁盘层的次数\"，两者之差即缓存拦下的部分。"
+        },
+        {
+          "line": 493,
+          "text": "#           分层放大效应：一次逻辑查找 = 每层各一次 FetchCoin + 至多一次 DB 穿透，"
+        },
+        {
+          "line": 494,
+          "text": "#           解读看比例形态不看绝对次数（§4.2.1）。"
+        },
+        {
+          "line": 495,
+          "text": "#           备选：FetchCoin 可能被内联（C-59 实机核实）；挂不上时退"
+        },
+        {
+          "line": 496,
+          "text": "#           CCoinsViewCache::GetCoin/HaveCoin——写路径内部调用不再计入、口径更干净，"
+        },
+        {
+          "line": 497,
+          "text": "#           但该符号各层共用，临时视图 miss 经 base->GetCoin 会再触发一次，"
+        },
+        {
+          "line": 498,
+          "text": "#           分层放大仍在，看比例形态的读法不变（§4.1）。"
+        },
+        {
+          "line": 499,
+          "text": "#           计数来源含入池验证与出块连接两侧——两者都会查 UTXO 集（§4.2.2 解读）。"
+        },
+        {
+          "line": 500,
+          "text": "#           注意：gettxoutsetinfo 的全库统计走 Cursor() 游标直迭代、不经 GetCoin，"
+        },
+        {
+          "line": 501,
+          "text": "#           对本探针不可见——游标与点查是两条读取路径（§3.4）。"
+        },
+        {
+          "line": 502,
+          "text": "# 预期输出：Ctrl-C 时打印 @fetch_total 与 @db_penetration 两个计数。"
+        },
+        {
+          "line": 520,
+          "text": "# C-61 终端 A：冷启动重启节点（停 → 启 → 立即追踪，抢在缓存变热之前；追踪需 sudo）"
+        },
+        {
+          "line": 527,
+          "text": "# C-61 终端 B：立即制造一批 UTXO 查询流量（入池与出块两侧都会查，冷缓存下自然穿透）"
+        },
+        {
+          "line": 534,
+          "text": "# 回终端 A 按 Ctrl-C 查看两个计数"
+        },
+        {
+          "line": 546,
+          "text": "### 4.3 chainstate_window.bt：链状态更新窗口分布"
+        },
+        {
+          "line": 553,
+          "text": "# C-62 bitcoin-tools/bpf/bpftrace/chainstate_window.bt"
+        },
+        {
+          "line": 554,
+          "text": "# 目标版本：Bitcoin Core v31.0 / bpftrace 0.20.x"
+        },
+        {
+          "line": 555,
+          "text": "# 探针说明：三组 uprobe/uretprobe 按 tid 配对、nsecs 差值计时 + hist() 直方图"
+        },
+        {
+          "line": 556,
+          "text": "#           （配对计时复用 chapter 2 §4.3.1，hist() 复用 chapter 3 §4.2.1）。"
+        },
+        {
+          "line": 557,
+          "text": "#           ConnectTip/DisconnectTip 的分布即 UTXO 集排他更新窗口的分布——"
+        },
+        {
+          "line": 558,
+          "text": "#           CCoinsViewCache 无独立锁，窗口即 cs_main 保护段（§3.3）。"
+        },
+        {
+          "line": 559,
+          "text": "#           FlushStateToDisk 预期分两档：空转调用（纳秒–微秒档）与真实写盘"
+        },
+        {
+          "line": 560,
+          "text": "#           （毫秒档以上），印证\"调用 ≠ 写盘\"（§2.3.3）。符号以 C-59 实机结果为准。"
+        },
+        {
+          "line": 561,
+          "text": "# 预期输出：Ctrl-C 时打印 @connect_ns / @disconnect_ns / @flush_ns 三张直方图。"
+        },
+        {
+          "line": 601,
+          "text": "# C-63 终端 A：启动窗口分布追踪（需 sudo）"
+        },
+        {
+          "line": 605,
+          "text": "# C-63 终端 B：造连接流量"
+        },
+        {
+          "line": 609,
+          "text": "# C-63 终端 B：造断开/重组流量——把链尖标无效（断开段），再撤销标记（连接段）"
+        },
+        {
+          "line": 614,
+          "text": "# 回终端 A 按 Ctrl-C，打印三张直方图"
+        },
+        {
+          "line": 632,
+          "text": "### 4.4 三轨咬合的追踪面与探针调整指引"
+        },
+        {
+          "line": 645,
+          "text": "## 5. 收束"
+        },
+        {
+          "line": 647,
+          "text": "### 5.1 本章要点回顾"
+        },
+        {
+          "line": 655,
+          "text": "### 5.2 UTXO 与链状态图交付说明"
+        },
+        {
+          "line": 665,
+          "text": "### 5.3 AI 提示词"
+        },
+        {
+          "line": 675,
+          "text": "### 5.4 git tag 检出指引"
+        },
+        {
+          "line": 680,
+          "text": "# 回到本章末尾的配套仓库参考实现快照（卡住时可对照参考）"
+        },
+        {
+          "line": 686,
+          "text": "### 5.5 承上启下"
+        }
+      ]
+    },
+    {
+      "path": "bitcoin/task06-5-潜入交易池.md",
+      "bytes": 55490,
+      "lines": 686,
+      "sha256": "2b14f58922f966c323754c8b4162b83d6b3419f248c520c7b4106ba92ab29766",
+      "fenced_code_blocks": 17,
+      "code_ids": [
+        1,
+        15,
+        29,
+        48,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76
+      ],
+      "bpftrace_refs": [
+        "mempool_events.bt",
+        "mempool_feerate_hist.bt"
+      ],
+      "diagram_refs": [
+        "ch5-mempool.drawio"
+      ],
+      "prompt_refs": [
+        "ch5-mempool-prompt.md"
+      ],
+      "headings": [
+        {
+          "line": 1,
+          "text": "# 潜入交易池"
+        },
+        {
+          "line": 9,
+          "text": "## 1. 开场"
+        },
+        {
+          "line": 11,
+          "text": "### 1.1 对话引子"
+        },
+        {
+          "line": 23,
+          "text": "### 1.2 本章概览"
+        },
+        {
+          "line": 37,
+          "text": "## 2. 原理线"
+        },
+        {
+          "line": 39,
+          "text": "### 2.1 候车室的规则：交易池的定位"
+        },
+        {
+          "line": 44,
+          "text": "# C-64 启动 regtest 并确认链状态（沿用 chapter 1 C-1 / chapter 2 C-15 / chapter 3 C-29 / chapter 4 C-48 模式，复用 test 钱包）"
+        },
+        {
+          "line": 52,
+          "text": "# 看一眼池子现状：size 为池内交易笔数，bytes 为占用字节数"
+        },
+        {
+          "line": 69,
+          "text": "### 2.2 入场券长什么样：条目字段先睹为快"
+        },
+        {
+          "line": 74,
+          "text": "# C-65 造一笔交易并用 getmempoolentry 读真实条目字段"
+        },
+        {
+          "line": 75,
+          "text": "# 1) 造交易：向自己发一笔，交易进入池子等待打包（fee_rate 显式指定，单位 sat/vB）"
+        },
+        {
+          "line": 79,
+          "text": "# 2) 读条目：这笔交易在池子里的\"入场券\"全字段"
+        },
+        {
+          "line": 103,
+          "text": "# 3) 全池概貌：getrawmempool verbose 模式，每个 txid 展开同样的条目字段"
+        },
+        {
+          "line": 117,
+          "text": "### 2.3 排队的秩序：费率排序与祖先/后代记账"
+        },
+        {
+          "line": 127,
+          "text": "### 2.4 进站安检：入池验证链全景——视角翻转"
+        },
+        {
+          "line": 146,
+          "text": "### 2.5 加钱改签：RBF 替换规则"
+        },
+        {
+          "line": 164,
+          "text": "### 2.6 客满请出：驱逐策略与费率门槛"
+        },
+        {
+          "line": 190,
+          "text": "### 2.7 拖家带口：包验证与 TxGraph"
+        },
+        {
+          "line": 204,
+          "text": "### 2.8 三轨咬合的原理面"
+        },
+        {
+          "line": 210,
+          "text": "## 3. 源码线"
+        },
+        {
+          "line": 212,
+          "text": "### 3.1 交易池文件地图"
+        },
+        {
+          "line": 227,
+          "text": "### 3.2 mempool_entry.h 与 txmempool.h：条目、池子、依赖图"
+        },
+        {
+          "line": 303,
+          "text": "### 3.3 AcceptToMemoryPool 与 MemPoolAccept 阶段链"
+        },
+        {
+          "line": 337,
+          "text": "### 3.4 RBF 判定的代码落点"
+        },
+        {
+          "line": 358,
+          "text": "### 3.5 驱逐执行体：TrimToSize / Expire"
+        },
+        {
+          "line": 392,
+          "text": "### 3.6 包验证入口"
+        },
+        {
+          "line": 408,
+          "text": "### 3.7 概念↔源码对照表：三轨在此合流"
+        },
+        {
+          "line": 427,
+          "text": "## 4. eBPF 追踪线"
+        },
+        {
+          "line": 429,
+          "text": "### 4.1 探针目标确认：交易池符号与挂载层纪律"
+        },
+        {
+          "line": 436,
+          "text": "# C-72 bpftrace -l 列交易池符号（实机核实，输出以本机 v31.0 编译结果为准）"
+        },
+        {
+          "line": 453,
+          "text": "### 4.2 mempool_events.bt：入池/驱逐事件流"
+        },
+        {
+          "line": 460,
+          "text": "# C-73 bitcoin-tools/bpf/bpftrace/mempool_events.bt"
+        },
+        {
+          "line": 461,
+          "text": "# 目标版本：Bitcoin Core v31.0 / bpftrace 0.20.x"
+        },
+        {
+          "line": 462,
+          "text": "# 探针说明：入池/驱逐事件流——纯时间戳事件流（nsecs/comm/tid + 事件类型）。"
+        },
+        {
+          "line": 463,
+          "text": "#           addNewTransaction uprobe 打入池事件（v31.0 入池写点："
+        },
+        {
+          "line": 464,
+          "text": "#           ChangeSet::Apply 逐笔调它收尾）；TrimToSize / Expire 入口 uprobe"
+        },
+        {
+          "line": 465,
+          "text": "#           打驱逐事件并计数。"
+        },
+        {
+          "line": 466,
+          "text": "#           分流理由：打包/替换/驱逐的出池都汇入 removeUnchecked 同族原语"
+        },
+        {
+          "line": 467,
+          "text": "#           （§3.5 交汇），只挂移除原语分不清\"被驱逐\"与\"被打包\"，"
+        },
+        {
+          "line": 468,
+          "text": "#           故用驱逐函数入口探针分流。"
+        },
+        {
+          "line": 469,
+          "text": "#           comm 口径：regtest 单节点下 RPC 流量归 b-http_pool_N，"
+        },
+        {
+          "line": 470,
+          "text": "#           P2P 来源入池归 b-msghand（v31.0 线程名新口径；§4.1）。"
+        },
+        {
+          "line": 471,
+          "text": "#           符号以 C-72 实机列表为准；addNewTransaction 若被内联，"
+        },
+        {
+          "line": 472,
+          "text": "#           改挂 ChangeSet 的 Apply（§4.1 降级口径）。"
+        },
+        {
+          "line": 473,
+          "text": "# 预期输出：逐行事件流（入池/驱逐），Ctrl-C 时打印 @evict_trim 与 @evict_expire 计数。"
+        },
+        {
+          "line": 502,
+          "text": "# C-74 终端 A：以缩容参数重启节点（制造容量驱逐的前提），随后启动事件流追踪（需 sudo）"
+        },
+        {
+          "line": 509,
+          "text": "# C-74 终端 B：造入池事件（每笔一笔 ENTER）"
+        },
+        {
+          "line": 513,
+          "text": "# C-74 终端 B：标定——先发 50 笔普通交易，量出每笔内存开销（usage 增量 ÷ 50）"
+        },
+        {
+          "line": 514,
+          "text": "#              前提：本实验合计消耗约 10 BTC 以上 regtest 余额（不足先 generatetoaddress"
+        },
+        {
+          "line": 515,
+          "text": "#              补矿，注意 coinbase 需 100 块成熟才可花）"
+        },
+        {
+          "line": 523,
+          "text": "# 判读：每笔开销 ≈ usage 增量 ÷ 50（普通转账约 1 KB 量级）；"
+        },
+        {
+          "line": 524,
+          "text": "#       (maxmempool − usage) ÷ 每笔开销 = 还差多少笔；用 sendmany 放大单笔可少跑很多趟（下一步）"
+        },
+        {
+          "line": 526,
+          "text": "# C-74 终端 B：放大单笔体积——sendmany 一笔带 100 个输出（单笔开销数千字节），"
+        },
+        {
+          "line": 527,
+          "text": "#              循环笔数按上一步标定外推（量级参考：每笔约 5 KB 时约需一千笔；"
+        },
+        {
+          "line": 528,
+          "text": "#              预计耗时数分钟到十几分钟，以实机为准）"
+        },
+        {
+          "line": 540,
+          "text": "# 回终端 A 观察事件流，Ctrl-C 查看计数"
+        },
+        {
+          "line": 557,
+          "text": "### 4.3 mempool_feerate_hist.bt：费率分布直方图"
+        },
+        {
+          "line": 564,
+          "text": "# C-75 bitcoin-tools/bpf/bpftrace/mempool_feerate_hist.bt"
+        },
+        {
+          "line": 565,
+          "text": "# 目标版本：Bitcoin Core v31.0 / bpftrace 0.20.x"
+        },
+        {
+          "line": 566,
+          "text": "# 探针说明：入池流量观测，挂 addNewTransaction（v31.0 入池写点的逐笔收尾）。"
+        },
+        {
+          "line": 567,
+          "text": "#           默认口径：按触发线程归因入池计数（任何构建可跑）。"
+        },
+        {
+          "line": 568,
+          "text": "#           进阶口径：解引用条目迭代器直读 nFee/nTxWeight 算费率进 hist()"
+        },
+        {
+          "line": 569,
+          "text": "#           （hist 复用 chapter 3 §4.2.1 首引）——依赖编译产物类型信息，"
+        },
+        {
+          "line": 570,
+          "text": "#           实机确认可读后取消注释启用；读数口径见本节正文末段。"
+        },
+        {
+          "line": 571,
+          "text": "#           符号以 C-72 实机列表为准；addNewTransaction 若被内联按 §4.1 降级。"
+        },
+        {
+          "line": 572,
+          "text": "# 预期输出：Ctrl-C 时打印 @enters 计数（默认）或 @feerate 直方图（进阶）。"
+        },
+        {
+          "line": 603,
+          "text": "### 4.4 依赖图对照与三轨咬合的追踪面"
+        },
+        {
+          "line": 608,
+          "text": "# C-76 包验证依赖图对照：构造父-子链式交易，对照 getrawmempool 快照字段"
+        },
+        {
+          "line": 609,
+          "text": "# 1) 造父交易（不广播打包，留在池里）"
+        },
+        {
+          "line": 613,
+          "text": "# 2) 造子交易：显式指定花父交易的输出（未确认输出作输入——CCoinsViewMemPool 作答的场景）"
+        },
+        {
+          "line": 618,
+          "text": "# 3) 快照对照：子交易的 depends 应指向父交易；父交易的 descendantcount 应变为 2（含自身+子）"
+        },
+        {
+          "line": 627,
+          "text": "# 4) 对照实验：打包父交易所在块，两笔一起上链——依赖约束的实锤（父不先入块子不能入块）"
+        },
+        {
+          "line": 645,
+          "text": "## 5. 收束"
+        },
+        {
+          "line": 647,
+          "text": "### 5.1 本章要点回顾"
+        },
+        {
+          "line": 655,
+          "text": "### 5.2 交易池工作图交付说明"
+        },
+        {
+          "line": 659,
+          "text": "### 5.3 AI 提示词"
+        },
+        {
+          "line": 671,
+          "text": "### 5.4 git tag 检出指引"
+        },
+        {
+          "line": 676,
+          "text": "# 回到本章末尾的配套仓库参考实现快照（卡住时可对照参考）"
+        },
+        {
+          "line": 682,
+          "text": "### 5.5 承上启下"
+        }
+      ]
+    },
+    {
+      "path": "bitcoin/task07-6-接入P2P网络.md",
+      "bytes": 51524,
+      "lines": 589,
+      "sha256": "fa9d3f67ea33b8d32d7d6b36dbd5f61e256dd9f1c79c70deed51984b4bbd097d",
+      "fenced_code_blocks": 18,
+      "code_ids": [
+        68,
+        73,
+        75,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83,
+        84,
+        85,
+        86,
+        87,
+        88,
+        89,
+        90,
+        91
+      ],
+      "bpftrace_refs": [
+        "p2p_messages.bt",
+        "p2p_sendmsg.bt"
+      ],
+      "diagram_refs": [
+        "ch6-p2p.drawio"
+      ],
+      "prompt_refs": [
+        "ch6-p2p-prompt.md"
+      ],
+      "headings": [
+        {
+          "line": 1,
+          "text": "# 接入 P2P 网络"
+        },
+        {
+          "line": 9,
+          "text": "## 1. 开场"
+        },
+        {
+          "line": 11,
+          "text": "### 1.1 对话引子"
+        },
+        {
+          "line": 23,
+          "text": "### 1.2 本章概览"
+        },
+        {
+          "line": 37,
+          "text": "## 2. 原理线"
+        },
+        {
+          "line": 39,
+          "text": "### 2.1 先把两个节点连起来：实验拓扑与 gossip 定位"
+        },
+        {
+          "line": 44,
+          "text": "# C-77 同机双 regtest 节点：分立 datadir/port/rpcport，addnode 互联"
+        },
+        {
+          "line": 45,
+          "text": "# 节点 A：沿用前五章的默认 datadir 与 test 钱包（先停掉旧实例再以显式端口重启）"
+        },
+        {
+          "line": 50,
+          "text": "# 节点 B：独立 datadir，分立 P2P/RPC 端口（regtest 默认端口 18444/18443 已被 A 占用）"
+        },
+        {
+          "line": 55,
+          "text": "# A 主动连 B（addnode 叠加模式；独占模式 -connect 的区别见踩坑实录 1）"
+        },
+        {
+          "line": 58,
+          "text": "# 各看一眼连接概览：A 侧应有一条出站到 18445，B 侧应有一条对应入站"
+        },
+        {
+          "line": 74,
+          "text": "### 2.2 节点怎么找到彼此：发现机制与地址账本"
+        },
+        {
+          "line": 81,
+          "text": "# C-78 getpeerinfo 深读 + getnodeaddresses 看地址账本"
+        },
+        {
+          "line": 82,
+          "text": "# 1) 连接逐字段深读（A 侧）：对号入座 §2.3 的连接类型与 §2.6 的传输协议"
+        },
+        {
+          "line": 96,
+          "text": "# 2) 地址账本一瞥：AddrMan 里已知的对端地址（regtest 下条目寥寥，主网节点可达数千条）"
+        },
+        {
+          "line": 117,
+          "text": "### 2.3 连上之后怎么管：连接类型七型与配额"
+        },
+        {
+          "line": 137,
+          "text": "### 2.4 一条消息长什么样：v1 消息头与握手序列"
+        },
+        {
+          "line": 166,
+          "text": "# C-79 -debug=net 观察握手与消息流（节点 A 以调试开关重启；日志在 $HOME/.bitcoin/regtest/debug.log）"
+        },
+        {
+          "line": 172,
+          "text": "# 握手段：version 互发 → wtxidrelay/sendaddrv2 协商（BIP 339/155 要求在 verack 之前）→"
+        },
+        {
+          "line": 173,
+          "text": "#   verack 互回收口 → sendheaders（grep 模式已收紧，输出不含启动横幅等无关行）"
+        },
+        {
+          "line": 184,
+          "text": "# 触发一笔交易（A 发给自己），看它飞出去的消息序列：inv 公告 → 对方 getdata → tx 交付"
+        },
+        {
+          "line": 205,
+          "text": "### 2.5 公告-取货三段式：inv → getdata → 数据本体"
+        },
+        {
+          "line": 227,
+          "text": "### 2.6 路上要不要加密：BIP 324 v2 传输"
+        },
+        {
+          "line": 236,
+          "text": "# C-80 v2/v1 传输对照实验（在双节点互联状态下执行）"
+        },
+        {
+          "line": 237,
+          "text": "# 1) 默认状态：getpeerinfo 的传输字段是权威判据"
+        },
+        {
+          "line": 241,
+          "text": "# 2) 关掉 v2 重启节点 A，重连后回落 v1"
+        },
+        {
+          "line": 258,
+          "text": "## 3. 源码线"
+        },
+        {
+          "line": 260,
+          "text": "### 3.1 分层地图：net / net_processing / protocol / bip324"
+        },
+        {
+          "line": 274,
+          "text": "### 3.2 连接层：ConnectionType 与 CNode/CConnman"
+        },
+        {
+          "line": 299,
+          "text": "### 3.3 协议层：CMessageHeader 与 NetMsgType"
+        },
+        {
+          "line": 322,
+          "text": "### 3.4 语义层：ProcessMessage 分派与接力棒①的兑现"
+        },
+        {
+          "line": 355,
+          "text": "### 3.5 发送侧：InitiateTxBroadcastToAll → PushMessage"
+        },
+        {
+          "line": 378,
+          "text": "### 3.6 传输层：v1 与 v2 的代码对照"
+        },
+        {
+          "line": 399,
+          "text": "### 3.7 地址账本一笔带过：AddrMan"
+        },
+        {
+          "line": 416,
+          "text": "## 4. eBPF 追踪线"
+        },
+        {
+          "line": 418,
+          "text": "### 4.1 符号盘点与挂点设计：三层纪律"
+        },
+        {
+          "line": 423,
+          "text": "# C-87 bpftrace -l 列 P2P 符号（实机核实，输出以本机 v31.0 编译结果为准）"
+        },
+        {
+          "line": 444,
+          "text": "### 4.2 p2p_messages.bt：消息处理计数——真实流量对照自导自演"
+        },
+        {
+          "line": 449,
+          "text": "# C-88 bitcoin-tools/bpf/bpftrace/p2p_messages.bt"
+        },
+        {
+          "line": 450,
+          "text": "# 目标版本：Bitcoin Core v31.0 / bpftrace 0.20.x"
+        },
+        {
+          "line": 451,
+          "text": "# 探针说明：P2P 消息处理计数，两级口径。"
+        },
+        {
+          "line": 452,
+          "text": "#   默认口径：uprobe *ProcessMessage* 按 comm 归因计数——实锤接收语义"
+        },
+        {
+          "line": 453,
+          "text": "#   跑在 b-msghand（分派是 if-else 链、无按类型独立函数，见踩坑实录 6；"
+        },
+        {
+          "line": 454,
+          "text": "#   通配可能同时命中 ProcessMessage/ProcessMessages 单复数，按 C-87 实列收紧）。"
+        },
+        {
+          "line": 455,
+          "text": "#   进阶口径：从参数直读消息类型做 @[nodeid, command] 多维聚合——依赖"
+        },
+        {
+          "line": 456,
+          "text": "#   编译产物类型信息，实机确认可读后取消注释（沿用 chapter 5 C-75 两级口径模式）。"
+        },
+        {
+          "line": 457,
+          "text": "#   探针非空保证：C-89 双节点触发序列先行；双节点同机共享二进制，"
+        },
+        {
+          "line": 458,
+          "text": "#   探针对两个进程同时生效，用 pid 谓词只留观测目标（下方 <节点B的pid> 实取替换）。"
+        },
+        {
+          "line": 459,
+          "text": "# 预期输出：Ctrl-C 时打印 @msgs[comm] 计数（进阶：@by_type[...] 多维键）。"
+        },
+        {
+          "line": 474,
+          "text": "# C-89 终端 A/B 触发序列：挂探针 → 节点 A 造交易 → 节点 B 侧观察 inv/getdata/tx 到达"
+        },
+        {
+          "line": 475,
+          "text": "# 前提：双节点按 C-77 互联且 B 已同步链；C-79 已演示日志侧，本实验看线程侧"
+        },
+        {
+          "line": 476,
+          "text": "# 终端 A：取节点 B 的 pid 填进 C-88 的谓词，启动追踪（需 sudo；配套仓库克隆于 ~/workspace/bitcoin-tools）"
+        },
+        {
+          "line": 481,
+          "text": "# 终端 B：节点 A 发一笔交易（向自己的地址，fee_rate 显式指定）"
+        },
+        {
+          "line": 485,
+          "text": "# 终端 B：确认交易已飞抵节点 B 的池子——b-msghand 入池流量的 RPC 侧印证"
+        },
+        {
+          "line": 489,
+          "text": "# 回终端 A 观察，Ctrl-C 查看计数"
+        },
+        {
+          "line": 500,
+          "text": "### 4.3 p2p_sendmsg.bt：发送侧观测——公告是推、数据是应请求而送"
+        },
+        {
+          "line": 505,
+          "text": "# C-90 bitcoin-tools/bpf/bpftrace/p2p_sendmsg.bt"
+        },
+        {
+          "line": 506,
+          "text": "# 目标版本：Bitcoin Core v31.0 / bpftrace 0.20.x"
+        },
+        {
+          "line": 507,
+          "text": "# 探针说明：发送侧递交计数，uprobe *PushMessage* 按 comm 归因。"
+        },
+        {
+          "line": 508,
+          "text": "#   中间层纪律：PushMessage 挂的是\"递交出站队列\"不是\"socket 发出\""
+        },
+        {
+          "line": 509,
+          "text": "#   （实际写网由 b-net 随后完成，§3.5/§4.1）；comm 多来源是设计行为"
+        },
+        {
+          "line": 510,
+          "text": "#   （谁要发谁递交），不是探针异常。"
+        },
+        {
+          "line": 511,
+          "text": "#   与 C-88 接收侧对照读：\"公告是推、数据是应请求而送\"的两半各自显形。"
+        },
+        {
+          "line": 512,
+          "text": "#   pid 隔离口径与 C-88 相同：双节点同机共享二进制，探针对两个进程同时生效，"
+        },
+        {
+          "line": 513,
+          "text": "#   用 pid 谓词只留节点 A（下方 <节点A的pid> 实取替换，取法同 C-89 的 pgrep，"
+        },
+        {
+          "line": 514,
+          "text": "#   模式换成 \"port=18444\"——A 以 -port=18444 启动，B 的命令行不含此子串）。"
+        },
+        {
+          "line": 515,
+          "text": "# 预期输出：Ctrl-C 时打印 @pushes[comm] 计数。"
+        },
+        {
+          "line": 531,
+          "text": "### 4.4 探针按需调整方向"
+        },
+        {
+          "line": 540,
+          "text": "# C-91 可选进阶（需人工确认后启用）：-v2transport=0 下用 nc + xxd 观察原始 version 消息"
+        },
+        {
+          "line": 541,
+          "text": "# 1) 节点 A 以 v1 模式重启（C-80 已演示）；2) nc 连上监听端口，xxd 转储首条消息；"
+        },
+        {
+          "line": 542,
+          "text": "# 3) 前 4 字节应为 regtest magic（值见本地 kernel/chainparams.cpp），随后 12 字节"
+        },
+        {
+          "line": 543,
+          "text": "#    是 \"version\" + NUL 填充——按 §2.4 字段表逐段对号"
+        },
+        {
+          "line": 550,
+          "text": "## 5. 收束"
+        },
+        {
+          "line": 552,
+          "text": "### 5.1 本章要点回顾"
+        },
+        {
+          "line": 560,
+          "text": "### 5.2 P2P 网络消息流图交付说明"
+        },
+        {
+          "line": 564,
+          "text": "### 5.3 AI 提示词"
+        },
+        {
+          "line": 574,
+          "text": "### 5.4 git tag 检出指引"
+        },
+        {
+          "line": 579,
+          "text": "# 回到本章末尾的配套仓库参考实现快照（卡住时可对照参考）"
+        },
+        {
+          "line": 585,
+          "text": "### 5.5 承上启下"
+        }
+      ]
+    },
+    {
+      "path": "bitcoin/task08-7-构建区块模板.md",
+      "bytes": 59816,
+      "lines": 715,
+      "sha256": "e1de98698a7bec0f33f95d5929617c667d88bf0442ff58a5415e2ab797c5e528",
+      "fenced_code_blocks": 21,
+      "code_ids": [
+        1,
+        23,
+        27,
+        28,
+        65,
+        74,
+        76,
+        77,
+        92,
+        93,
+        94,
+        95,
+        96,
+        97,
+        98,
+        99,
+        100,
+        101,
+        102,
+        103,
+        104,
+        105,
+        106,
+        107,
+        108,
+        109
+      ],
+      "bpftrace_refs": [
+        "blocktemplate_timing.bt",
+        "miner_ustack.bt"
+      ],
+      "diagram_refs": [
+        "ch7-blocktemplate.drawio"
+      ],
+      "prompt_refs": [
+        "ch7-blocktemplate-prompt.md"
+      ],
+      "headings": [
+        {
+          "line": 1,
+          "text": "# 构建区块模板——出块与挖矿"
+        },
+        {
+          "line": 9,
+          "text": "## 1. 开场"
+        },
+        {
+          "line": 11,
+          "text": "### 1.1 对话引子"
+        },
+        {
+          "line": 23,
+          "text": "### 1.2 本章概览"
+        },
+        {
+          "line": 35,
+          "text": "## 2. 原理线"
+        },
+        {
+          "line": 37,
+          "text": "### 2.1 挖矿分工：Core 造模板，矿工找哈希"
+        },
+        {
+          "line": 42,
+          "text": "# C-92 启动 regtest 并确认链状态（沿用链回指 chapter 1 C-1 → chapter 6 C-77 模式，复用 test 钱包）"
+        },
+        {
+          "line": 52,
+          "text": "# 挖矿视角的仪表盘：getmininginfo 首读"
+        },
+        {
+          "line": 81,
+          "text": "### 2.2 区块模板与 getblocktemplate 字段对号"
+        },
+        {
+          "line": 88,
+          "text": "# C-93 getblocktemplate 取真实模板 + 精选字段逐项对号"
+        },
+        {
+          "line": 89,
+          "text": "# 前提：池子里有交易（先用 sendtoaddress 造两三笔，手法同 chapter 5 C-65）"
+        },
+        {
+          "line": 141,
+          "text": "### 2.3 交易选择：祖先包费率与权重背包"
+        },
+        {
+          "line": 152,
+          "text": "# C-94 选币对照实验：独立费率排序 vs CPFP 打包排序"
+        },
+        {
+          "line": 153,
+          "text": "# 场景 A：两笔独立交易——高费率 HI 与低费率 LO"
+        },
+        {
+          "line": 158,
+          "text": "# 模板一：看排序——HI 应在 LO 之前（grep 顺序即 transactions[] 数组顺序）"
+        },
+        {
+          "line": 167,
+          "text": "# 场景 B：低费率父 P + 高费率子 C（显式指定输入花 P 的输出，手法同 chapter 5 C-76；"
+        },
+        {
+          "line": 168,
+          "text": "#         vout 序号以 P 的实际输出顺序为准，查不到先 getrawtransaction \"$P\" true 核对）"
+        },
+        {
+          "line": 173,
+          "text": "# 模板二：P 的单笔费率与 LO 一样是 5，但它排到了前面——且 C 的 depends 指向 P 的 1-based 下标"
+        },
+        {
+          "line": 195,
+          "text": "### 2.4 coinbase 构造：高度承诺、补贴与成熟度"
+        },
+        {
+          "line": 208,
+          "text": "# C-95 generatetoaddress 出块 + coinbase 对号 + 成熟度撞墙"
+        },
+        {
+          "line": 209,
+          "text": "# 1) 出一个块，取块哈希（generatetoaddress 返回块哈希数组）"
+        },
+        {
+          "line": 213,
+          "text": "# 2) verbosity=2 展开块内交易：第一笔即 coinbase——vin 里是 \"coinbase\" 字段而非 prevout，"
+        },
+        {
+          "line": 214,
+          "text": "#    其 hex 开头就是 BIP 34 的高度前缀；vout 金额 = 补贴 + 手续费合计"
+        },
+        {
+          "line": 230,
+          "text": "# 3) 撞墙：立刻花这个新块的奖励——新块落地即有 1 个确认，"
+        },
+        {
+          "line": 231,
+          "text": "#    用 listunspent 1 99 圈出\"已确认但未满 100 成熟期\"的 UTXO（或直接复用第 2 步的 coinbase txid）"
+        },
+        {
+          "line": 250,
+          "text": "### 2.5 求解与 regtest 挖矿入口"
+        },
+        {
+          "line": 268,
+          "text": "### 2.6 新块广播、紧凑区块中继（BIP 152）与提案验证"
+        },
+        {
+          "line": 279,
+          "text": "# C-96 双节点 -debug=net 观察新块公告：sendcmpct 协商 → cmpctblock 交付"
+        },
+        {
+          "line": 280,
+          "text": "# 前提：节点 B 在线且已同步（chapter 6 C-77 拓扑）；节点 A 以调试开关重启并重连"
+        },
+        {
+          "line": 286,
+          "text": "# 1) 握手段新增 sendcmpct：落在 verack 之后；sendheaders 要等 headers 同步完成才发，"
+        },
+        {
+          "line": 287,
+          "text": "#    两者未必同批——相对次序以实机日志为准"
+        },
+        {
+          "line": 293,
+          "text": "# 2) A 出一个块：经 §2.6 双路径之一交付到 B。注意协商方向——高带宽直推只对"
+        },
+        {
+          "line": 294,
+          "text": "#    \"自己请求过对方直推\"的方向生效：本拓扑 A 经 addnode 出站连 B，A 请求了 B 直推（B→A），"
+        },
+        {
+          "line": 295,
+          "text": "#    而 A→B 默认走\"公告 + 应请求交付\"：先见 headers 公告，再见 sending cmpctblock"
+        },
+        {
+          "line": 296,
+          "text": "#    （应答 B 的 getdata）。若实机协商出直推（cmpctblock 先行），同样是设计行为。"
+        },
+        {
+          "line": 297,
+          "text": "#    本章实验块内只有 coinbase 或 B 池子已有的交易，重建无需补要——"
+        },
+        {
+          "line": 298,
+          "text": "#    getblocktxn 回退路径的造法见本节末"
+        },
+        {
+          "line": 316,
+          "text": "# C-97 GBT 提案模式实验：验证回路的最小闭环"
+        },
+        {
+          "line": 317,
+          "text": "# 前提：C-96 拓扑，B 已同步至与 A 同高"
+        },
+        {
+          "line": 318,
+          "text": "# 1) A 主动断开 B（节点 id 取法与 disconnectnode 参数形态以本地 help 为准）"
+        },
+        {
+          "line": 322,
+          "text": "# 2) B 出一个块 X（奖励发给 A 的地址即可——generatetoaddress 不需要 B 有钱包）；"
+        },
+        {
+          "line": 323,
+          "text": "#    A 不知道 X——它就是\"外部矿工按模板造出的块\""
+        },
+        {
+          "line": 328,
+          "text": "# 3) A 侧提案模式：只验证不上链——通过返回 null"
+        },
+        {
+          "line": 332,
+          "text": "# 4) 篡改一字节再提案：块 hex 的前 160 个字符是 80 字节区块头，其后才是交易区——"
+        },
+        {
+          "line": 333,
+          "text": "#    在偏移 200 处覆盖两个字符（coinbase 区域内的任意偶数偏移均可），"
+        },
+        {
+          "line": 334,
+          "text": "#    预期拒绝——改动 coinbase 内容会连带撞 txid 与默克尔根比对（chapter 2 §2.3.2 的拒绝码家族）"
+        },
+        {
+          "line": 339,
+          "text": "# 5) submitblock 正式交付：A 接受 X，链尖前进一格"
+        },
+        {
+          "line": 345,
+          "text": "# 收尾：B 的使命完成，停掉它（重连则两节点在同高度分叉上按重组语义收敛，chapter 4 §2.4.2，本实验不展开）"
+        },
+        {
+          "line": 355,
+          "text": "## 3. 源码线"
+        },
+        {
+          "line": 357,
+          "text": "### 3.1 地图：node/miner.* 与 rpc/mining.cpp 的分工"
+        },
+        {
+          "line": 373,
+          "text": "### 3.2 BlockAssembler 与 Options"
+        },
+        {
+          "line": 403,
+          "text": "### 3.3 CreateNewBlock() 全流程与选币循环"
+        },
+        {
+          "line": 462,
+          "text": "### 3.4 RPC 入口与验证回路"
+        },
+        {
+          "line": 504,
+          "text": "### 3.5 紧凑区块重建骨架"
+        },
+        {
+          "line": 528,
+          "text": "## 4. eBPF 追踪线"
+        },
+        {
+          "line": 530,
+          "text": "### 4.1 符号盘点与三层挂载纪律"
+        },
+        {
+          "line": 535,
+          "text": "# C-105 bpftrace -l 列出块/挖矿符号（实机核实，输出以本机 v31.0 编译结果为准）"
+        },
+        {
+          "line": 550,
+          "text": "### 4.2 blocktemplate_timing.bt：模板构建耗时分解"
+        },
+        {
+          "line": 555,
+          "text": "# C-106 bitcoin-tools/bpf/bpftrace/blocktemplate_timing.bt"
+        },
+        {
+          "line": 556,
+          "text": "# 目标版本：Bitcoin Core v31.0 / bpftrace 0.20.x"
+        },
+        {
+          "line": 557,
+          "text": "# 探针说明：出块路径多探针联合——同一次 generatetoaddress 里三段同框："
+        },
+        {
+          "line": 558,
+          "text": "#   CreateNewBlock（造模板）uprobe/uretprobe 按 tid 配对计时进 hist()"
+        },
+        {
+          "line": 559,
+          "text": "#   （配对计时复用 chapter 2 §4.3.1、hist() 复用 chapter 3 §4.2.1）；"
+        },
+        {
+          "line": 560,
+          "text": "#   GenerateBlock / ProcessNewBlock 入口计数，分键进 @stage。"
+        },
+        {
+          "line": 561,
+          "text": "#   tid 配对纪律：三段同在 b-http_pool_N 单线程串行（§4.1 第一条）。"
+        },
+        {
+          "line": 562,
+          "text": "#   符号以 C-105 实列为准；CreateNewBlock 若被内联按 §4.1 降级。"
+        },
+        {
+          "line": 563,
+          "text": "# 预期输出：Ctrl-C 时打印 @stage 分键计数与 @cnb_ns 直方图。"
+        },
+        {
+          "line": 591,
+          "text": "# C-107 终端 A/B：挂 C-106（需 sudo），generatetoaddress 造样本，读分键计数与直方图"
+        },
+        {
+          "line": 592,
+          "text": "# 终端 A："
+        },
+        {
+          "line": 596,
+          "text": "# 终端 B：连出 5 块——每块一轮\"造模板 → 求解 → 上链\""
+        },
+        {
+          "line": 600,
+          "text": "# 回终端 A，Ctrl-C 查看输出"
+        },
+        {
+          "line": 616,
+          "text": "### 4.3 miner_ustack.bt：调用链归因与出块侧/收块侧对照"
+        },
+        {
+          "line": 621,
+          "text": "# C-108 bitcoin-tools/bpf/bpftrace/miner_ustack.bt"
+        },
+        {
+          "line": 622,
+          "text": "# 目标版本：Bitcoin Core v31.0 / bpftrace 0.20.x"
+        },
+        {
+          "line": 623,
+          "text": "# 探针说明：CreateNewBlock 命中时打印 comm/tid + ustack(6) 调用链，"
+        },
+        {
+          "line": 624,
+          "text": "#   并按 comm 计数归因线程。"
+        },
+        {
+          "line": 625,
+          "text": "#   预期栈帧：CreateNewBlock ←（MinerImpl::createNewBlock 中间层，是否出现以实机为准）←"
+        },
+        {
+          "line": 626,
+          "text": "#   generateBlocks ← RPCHelpMan generatetoaddress——与 chapter 2 §4.2.2 的区块侧栈帧合拢。"
+        },
+        {
+          "line": 627,
+          "text": "#   可选进阶：加挂选币供料接口探针（TxGraph 线性化消费端，如 *GetBlockBuilderChunk*）"
+        },
+        {
+          "line": 628,
+          "text": "#   做计数——符号名按 C-105 同法实列，列不到符号不降级主口径（§4.1）。"
+        },
+        {
+          "line": 629,
+          "text": "# 预期输出：每块一段栈帧，Ctrl-C 打印 @by_comm 计数。"
+        },
+        {
+          "line": 644,
+          "text": "# C-109 出块侧 vs 收块侧自然对照：双节点拓扑（沿用 chapter 6 C-77），B 为纯收块方"
+        },
+        {
+          "line": 645,
+          "text": "# 终端 A：单行探针指向 B 的 pid（取法：pgrep -af \"datadir=$HOME/.bitcoin-nodeB\" | awk '{print $1}'）"
+        },
+        {
+          "line": 651,
+          "text": "# 终端 B：节点 A 出一个块——经 cmpctblock/headers 飞到 B（§2.6 的双路径）"
+        },
+        {
+          "line": 654,
+          "text": "# 回终端 A，Ctrl-C 查看计数"
+        },
+        {
+          "line": 675,
+          "text": "## 5. 收束"
+        },
+        {
+          "line": 677,
+          "text": "### 5.1 本章要点回顾"
+        },
+        {
+          "line": 685,
+          "text": "### 5.2 出块流程图交付说明"
+        },
+        {
+          "line": 689,
+          "text": "### 5.3 AI 提示词"
+        },
+        {
+          "line": 700,
+          "text": "### 5.4 git tag 检出指引"
+        },
+        {
+          "line": 705,
+          "text": "# 回到本章末尾的配套仓库参考实现快照（卡住时可对照参考）"
+        },
+        {
+          "line": 711,
+          "text": "### 5.5 承上启下"
+        }
+      ]
+    },
+    {
+      "path": "bitcoin/task09-8-发起一笔交易.md",
+      "bytes": 55276,
+      "lines": 707,
+      "sha256": "491450a386859ee14d1be29cb876f63f122e9593d656bc4a39577de117c2b6f6",
+      "fenced_code_blocks": 24,
+      "code_ids": [
+        1,
+        2,
+        49,
+        77,
+        88,
+        92,
+        110,
+        111,
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119,
+        120,
+        121,
+        122,
+        123,
+        124,
+        125,
+        126,
+        127,
+        128
+      ],
+      "bpftrace_refs": [
+        "wallet_coinselect.bt",
+        "wallet_sign.bt"
+      ],
+      "diagram_refs": [
+        "ch8-wallet-tx.drawio"
+      ],
+      "prompt_refs": [
+        "ch8-wallet-tx-prompt.md"
+      ],
+      "headings": [
+        {
+          "line": 1,
+          "text": "# 发起一笔交易——钱包"
+        },
+        {
+          "line": 9,
+          "text": "## 1. 开场"
+        },
+        {
+          "line": 11,
+          "text": "### 1.1 对话引子"
+        },
+        {
+          "line": 23,
+          "text": "### 1.2 本章概览"
+        },
+        {
+          "line": 55,
+          "text": "## 2. 原理线"
+        },
+        {
+          "line": 57,
+          "text": "### 2.1 钱包是什么：私钥保管员 + 交易装配车间"
+        },
+        {
+          "line": 62,
+          "text": "# C-110 启动 regtest 并确认链状态（沿用链回指 chapter 1 C-1 → chapter 7 C-92 模式，复用 test 钱包）"
+        },
+        {
+          "line": 70,
+          "text": "# 节点上加载了哪些钱包"
+        },
+        {
+          "line": 76,
+          "text": "# 钱包视角的仪表盘：getwalletinfo 全字段首读"
+        },
+        {
+          "line": 90,
+          "text": "# 余额不在 getwalletinfo 里——v30.0 起余额字段族已从该 RPC 移除，单独走 getbalances"
+        },
+        {
+          "line": 111,
+          "text": "### 2.2 钱包数据库：SQLite 里的钥匙与账本"
+        },
+        {
+          "line": 116,
+          "text": "# C-111 sqlite3 只读打开 wallet.dat 看表结构（节点保持运行；-readonly 保证零写入）"
+        },
+        {
+          "line": 120,
+          "text": "# 表结构：一张 key-value 表"
+        },
+        {
+          "line": 124,
+          "text": "# 键的形态：每条记录以一个类型标签字节开头（仅数行数与键长，不打印私钥内容）"
+        },
+        {
+          "line": 135,
+          "text": "### 2.3 钥匙从哪来：HD 钱包与 descriptor"
+        },
+        {
+          "line": 142,
+          "text": "# C-112 listdescriptors 实列默认 descriptor 族（新建 descriptor 钱包预期 8 条）"
+        },
+        {
+          "line": 167,
+          "text": "# C-113 取两种新地址 + getaddressinfo 读身世"
+        },
+        {
+          "line": 168,
+          "text": "# 默认类型 bech32（P2WPKH，与 chapter 1 §2.2.1 注记一致）；bech32m 产出 Taproot 地址"
+        },
+        {
+          "line": 189,
+          "text": "# C-114 getdescriptorinfo 看校验和 + deriveaddresses 手工派生前 3 个地址"
+        },
+        {
+          "line": 190,
+          "text": "# 校验 checksum 并补全规范形态"
+        },
+        {
+          "line": 199,
+          "text": "# 从同一条 descriptor 派生索引 0–2 的地址——应能逐一对上钱包里已发放的前几枚"
+        },
+        {
+          "line": 216,
+          "text": "### 2.4 地址发放与密钥池"
+        },
+        {
+          "line": 228,
+          "text": "### 2.5 发起一笔交易的五步：CreateTransaction → CommitTransaction"
+        },
+        {
+          "line": 235,
+          "text": "# C-115 sendtoaddress fee_rate=25 发起交易 + getrawtransaction（verbose）找零识别实验"
+        },
+        {
+          "line": 236,
+          "text": "# 1) 向自己发一笔（fee_rate 惯例自 chapter 1 C-2 起沿用，§2.7 讲清它）"
+        },
+        {
+          "line": 240,
+          "text": "# 2) 解码看输入输出：regtest 下输入多半是单枚 50 BTC 的 coinbase UTXO"
+        },
+        {
+          "line": 252,
+          "text": "# 3) 认找零：第二个输出的地址不在收款地址簿里，但 ismine 为 true"
+        },
+        {
+          "line": 264,
+          "text": "### 2.6 选币：刚好够付的艺术"
+        },
+        {
+          "line": 283,
+          "text": "# C-116 选币对照实验：多面额 UTXO 场景下数输入集合"
+        },
+        {
+          "line": 284,
+          "text": "# 1) 造多枚不同面额 UTXO：向自己连发三笔（1 / 0.5 / 0.05 BTC 各一），上一块确认"
+        },
+        {
+          "line": 291,
+          "text": "# 2) 发一笔 0.54994 BTC：0.5 + 0.05 的溢出（0.00006 BTC = 6000 sat）扣掉手续费"
+        },
+        {
+          "line": 292,
+          "text": "#    （2 输入 1 输出 P2WPKH 约 178 vB × 25 sat/vB ≈ 4450 sat）后余约 1550 sat，"
+        },
+        {
+          "line": 293,
+          "text": "#    低于找零成本（约 2500 sat）——落在免找零窗口内，是 BnB 的目标组合（窗口推导见 §2.7 恒等式）"
+        },
+        {
+          "line": 297,
+          "text": "# 3) 数输入输出：命中免找零解时 vin 应为两枚、vout 只有一个（无找零）"
+        },
+        {
+          "line": 302,
+          "text": "# 4) 对照组：options.inputs 显式指定输入（沿 chapter 4 C-49 先例），跳过算法"
+        },
+        {
+          "line": 311,
+          "text": "### 2.7 费率与找零恒等式"
+        },
+        {
+          "line": 328,
+          "text": "### 2.8 签名与提交：私钥不出签名器体系"
+        },
+        {
+          "line": 337,
+          "text": "# C-117 可选进阶：bumpfee 演示钱包侧 RBF（回收 chapter 5 BIP 125）"
+        },
+        {
+          "line": 338,
+          "text": "# 1) 低费率发一笔（v31.0 钱包默认给交易打 RBF 信令——-walletrbf 默认 true，以实机为准）"
+        },
+        {
+          "line": 341,
+          "text": "# 2) 看 sequence：信令位由钱包构造侧写入（chapter 5 §2.5 的规则，构造者在此）"
+        },
+        {
+          "line": 344,
+          "text": "# 3) 抬费率替换：钱包侧重选费率、重签、重提交的一站式入口"
+        },
+        {
+          "line": 348,
+          "text": "### 2.9 PSBT：把签名搬到离线侧"
+        },
+        {
+          "line": 364,
+          "text": "# C-118 PSBT 四步实验：watch-only 钱包筹资 → 持钥钱包签名"
+        },
+        {
+          "line": 365,
+          "text": "# 注释 1/2 是环境准备；上表工作流四步对应注释 3（筹资）→ 4（签名）→ 5（定稿+广播合并）"
+        },
+        {
+          "line": 366,
+          "text": "# 1) 建 watch-only 钱包：无私钥、空白"
+        },
+        {
+          "line": 369,
+          "text": "# 2) 从 test 钱包导出 wpkh 一族的外部+内部两条 descriptor，导入 watch："
+        },
+        {
+          "line": 370,
+          "text": "#    active=true——成为 watch 的活跃支链，筹资与找零地址都要走它们；"
+        },
+        {
+          "line": 371,
+          "text": "#    timestamp=0——从创世纪块起 rescan，watch 才看得见 test 的既有 UTXO（regtest 秒级）；"
+        },
+        {
+          "line": 372,
+          "text": "#    过滤式锚定前缀 startswith('wpkh(')——'wpkh' 子串会误配 sh(wpkh(...)) 一族"
+        },
+        {
+          "line": 381,
+          "text": "# 3) 热侧筹资：watch 钱包能看到 UTXO（ismine）但没有私钥——产出未签名 PSBT"
+        },
+        {
+          "line": 386,
+          "text": "# 4) 冷侧签名：test 钱包持私钥，补签各输入"
+        },
+        {
+          "line": 389,
+          "text": "# 5) 定稿 + 广播"
+        },
+        {
+          "line": 401,
+          "text": "## 3. 源码线"
+        },
+        {
+          "line": 403,
+          "text": "### 3.1 CWallet 与 ScriptPubKeyMan 体系"
+        },
+        {
+          "line": 439,
+          "text": "### 3.2 spend.cpp：从 RPC 到递交的函数链"
+        },
+        {
+          "line": 491,
+          "text": "### 3.3 选币入口与算法名录"
+        },
+        {
+          "line": 517,
+          "text": "## 4. eBPF 追踪线"
+        },
+        {
+          "line": 519,
+          "text": "### 4.1 符号盘点与三层挂载纪律"
+        },
+        {
+          "line": 524,
+          "text": "# C-124 bpftrace -l 列钱包符号（输出以本机 v31.0 编译结果为准，不臆造修饰名）"
+        },
+        {
+          "line": 539,
+          "text": "### 4.2 wallet_sign.bt：构造侧签名耗时直方图"
+        },
+        {
+          "line": 565,
+          "text": "# C-126 终端 A/B：挂签名计时（需 sudo）+ 造签名流量"
+        },
+        {
+          "line": 566,
+          "text": "# 终端 A："
+        },
+        {
+          "line": 570,
+          "text": "# 终端 B：造几笔签名流量（每笔输入一个签名）"
+        },
+        {
+          "line": 576,
+          "text": "# 回终端 A，Ctrl-C 看直方图；期间探针命中的 comm 应为 b-http_pool_N（纪律一实锤）"
+        },
+        {
+          "line": 589,
+          "text": "### 4.3 wallet_coinselect.bt：选币入口观测与口径降级"
+        },
+        {
+          "line": 630,
+          "text": "### 4.4 发送侧 vs 接收侧：全链三段同框"
+        },
+        {
+          "line": 635,
+          "text": "# C-128 全链对照触发序列（双节点拓扑沿用 chapter 6 C-77，pid 谓词口径沿 chapter 6 §4.2/§4.3）"
+        },
+        {
+          "line": 636,
+          "text": "# 终端 A：四族探针同框——A 侧钱包构建提交 + B 侧入池 + 双侧公告"
+        },
+        {
+          "line": 637,
+          "text": "#   -e 串用双引号，shell 会展开 $BPID（双节点拓扑搭建见 chapter 6 §2.1，C-77）"
+        },
+        {
+          "line": 646,
+          "text": "# 终端 B：节点 A 发一笔交易"
+        },
+        {
+          "line": 650,
+          "text": "# 回终端 A，Ctrl-C 读五键计数"
+        },
+        {
+          "line": 667,
+          "text": "## 5. 收束"
+        },
+        {
+          "line": 669,
+          "text": "### 5.1 本章要点回顾"
+        },
+        {
+          "line": 677,
+          "text": "### 5.2 钱包交易构建图交付说明"
+        },
+        {
+          "line": 681,
+          "text": "### 5.3 AI 提示词"
+        },
+        {
+          "line": 692,
+          "text": "### 5.4 git tag 检出指引"
+        },
+        {
+          "line": 697,
+          "text": "# 回到本章末尾的配套仓库参考实现快照（卡住时可对照参考）"
+        },
+        {
+          "line": 703,
+          "text": "### 5.5 承上启下"
+        }
+      ]
+    },
+    {
+      "path": "bitcoin/task10-9-查询与监听——RPC与索引.md",
+      "bytes": 61693,
+      "lines": 844,
+      "sha256": "9cf7918a935efec984c9fa97de637503d8e8235eb4acdfc005703481a4d2e1e5",
+      "fenced_code_blocks": 26,
+      "code_ids": [
+        1,
+        50,
+        75,
+        79,
+        110,
+        112,
+        115,
+        129,
+        130,
+        131,
+        132,
+        133,
+        134,
+        135,
+        136,
+        137,
+        138,
+        139,
+        140,
+        141,
+        142,
+        143,
+        144,
+        145,
+        146,
+        147,
+        148,
+        149,
+        150,
+        151
+      ],
+      "bpftrace_refs": [
+        "index_sync.bt",
+        "rpc_handler_latency.bt",
+        "zmq_notify_count.bt"
+      ],
+      "diagram_refs": [
+        "ch9-rpc-index.drawio"
+      ],
+      "prompt_refs": [
+        "ch9-rpc-index-prompt.md"
+      ],
+      "headings": [
+        {
+          "line": 1,
+          "text": "# 查询与监听——RPC 与索引"
+        },
+        {
+          "line": 9,
+          "text": "## 1. 开场"
+        },
+        {
+          "line": 11,
+          "text": "### 1.1 对话引子"
+        },
+        {
+          "line": 24,
+          "text": "### 1.2 本章概览"
+        },
+        {
+          "line": 57,
+          "text": "## 2. 原理线"
+        },
+        {
+          "line": 59,
+          "text": "### 2.1 节点的对外窗口：问与听四通道"
+        },
+        {
+          "line": 74,
+          "text": "### 2.2 HTTP 层与线程模型：b-http 事件循环 → 工作线程"
+        },
+        {
+          "line": 85,
+          "text": "### 2.3 JSON-RPC 协议与客户端面孔"
+        },
+        {
+          "line": 90,
+          "text": "# C-129 curl 手工 JSON-RPC 全链路：读 cookie → POST → JSON 响应"
+        },
+        {
+          "line": 91,
+          "text": "# 1) 启动节点（沿用链回指 chapter 1 C-1 → chapter 8 C-110 模式）"
+        },
+        {
+          "line": 96,
+          "text": "# 2) 读同机认证凭据：datadir 下的 .cookie 文件，内容形如 __cookie__:<随机串>"
+        },
+        {
+          "line": 100,
+          "text": "# 3) 手工 POST 一个 JSON-RPC 请求（--user 直接命令替换读 cookie，免手工转抄）"
+        },
+        {
+          "line": 115,
+          "text": "# 4) 对照：bitcoin-cli 同命令——只是替你把上面三步打包了"
+        },
+        {
+          "line": 129,
+          "text": "# C-130 批量请求 + 命名参数 + getrpcinfo"
+        },
+        {
+          "line": 130,
+          "text": "# 1) 批量请求：params 数组外面再套一层 JSON 数组，一次拿回两条响应"
+        },
+        {
+          "line": 137,
+          "text": "# 2) 命名参数形态的请求体：params 从数组变对象"
+        },
+        {
+          "line": 142,
+          "text": "# 3) 节点视角看正在执行的命令"
+        },
+        {
+          "line": 157,
+          "text": "# C-131 -debug=http / -debug=rpc 观察请求进出（沿用 chapter 6 C-79 日志观察手法）"
+        },
+        {
+          "line": 158,
+          "text": "# 带调试类别重启节点"
+        },
+        {
+          "line": 162,
+          "text": "# 触发几条查询后到 debug.log 里捞现场"
+        },
+        {
+          "line": 170,
+          "text": "### 2.4 认证与暴露面"
+        },
+        {
+          "line": 180,
+          "text": "# C-132 rpcauth 生成 + 401 对照 + REST 一锤"
+        },
+        {
+          "line": 181,
+          "text": "# 1) 生成 rpcauth 配置行（脚本路径以本地源码树为准；输出行形如 rpcauth=user:salt$hash）"
+        },
+        {
+          "line": 186,
+          "text": "# 2) 错误密码的现场：HTTP 401"
+        },
+        {
+          "line": 191,
+          "text": "# 3) REST 对照：同一节点、同一 HTTP 栈，换个路径与格式（REST 默认关，需带 -rest 重启）"
+        },
+        {
+          "line": 217,
+          "text": "### 2.5 注册与分派：一个字符串怎么找到 handler"
+        },
+        {
+          "line": 229,
+          "text": "### 2.6 核心查询 RPC 怎么读：getrawtransaction 三态"
+        },
+        {
+          "line": 234,
+          "text": "# C-133 getrawtransaction 三态实验（复用 chapter 8 C-115 的交易 txid）"
+        },
+        {
+          "line": 235,
+          "text": "# 状态一：交易还在交易池——可查"
+        },
+        {
+          "line": 239,
+          "text": "# 出一个块让它上链"
+        },
+        {
+          "line": 242,
+          "text": "# 状态二：上链之后、无索引——查不到！"
+        },
+        {
+          "line": 248,
+          "text": "# 状态三：给它块哈希提示——救回"
+        },
+        {
+          "line": 261,
+          "text": "### 2.7 费率估算器：estimatesmartfee 内部一瞥"
+        },
+        {
+          "line": 268,
+          "text": "# C-134 estimatesmartfee 观察：空数据 → 造数据 → 再查"
+        },
+        {
+          "line": 269,
+          "text": "# 1) 干净的 regtest 上直接问——数据不足"
+        },
+        {
+          "line": 276,
+          "text": "# 2) 造一批带不同费率的交易并出块（估算器靠\"交易进池→上链\"的配对样本学习）"
+        },
+        {
+          "line": 284,
+          "text": "# 3) 再查——仍可能报数据不足（regtest 样本稀薄），字段与行为以实机 v31.0 为准"
+        },
+        {
+          "line": 293,
+          "text": "### 2.8 索引子系统：回答\"历史\"的旁路设施"
+        },
+        {
+          "line": 314,
+          "text": "# C-135 开启 txindex 并观察同步进度"
+        },
+        {
+          "line": 315,
+          "text": "# 1) 带索引重启"
+        },
+        {
+          "line": 319,
+          "text": "# 2) 数据目录里多出独立索引库"
+        },
+        {
+          "line": 323,
+          "text": "# 3) 索引进度仪表盘：synced 转 true 才算追平"
+        },
+        {
+          "line": 332,
+          "text": "# 4) 追平后，C-133 状态二的报错消失——无块哈希提示也能查历史交易"
+        },
+        {
+          "line": 344,
+          "text": "# C-136 blockfilterindex + scanblocks：按内容找块"
+        },
+        {
+          "line": 345,
+          "text": "# 1) 带基本过滤器索引重启（type=basic；已同步完成的索引跨重启保持有效，"
+        },
+        {
+          "line": 346,
+          "text": "#    后续重启不再复述 -txindex=1——行为以实机 v31.0 为准）"
+        },
+        {
+          "line": 350,
+          "text": "# 2) 读一个块的过滤器本体"
+        },
+        {
+          "line": 357,
+          "text": "# 3) 用 chapter 8 §2.3（C-112）的 wpkh descriptor 扫整条链——含该钱包交易的块被筛出来"
+        },
+        {
+          "line": 358,
+          "text": "#    （scanblocks 依赖 blockfilterindex，无索引直接报错拒绝）"
+        },
+        {
+          "line": 379,
+          "text": "# C-137 coinstatsindex 对照：直迭代 vs 快路径"
+        },
+        {
+          "line": 380,
+          "text": "# 1) 无索引口径（chapter 4 C-50 同款）：直迭代全 UTXO 集，主网分钟级"
+        },
+        {
+          "line": 384,
+          "text": "# 2) 带索引重启后走 muhash 快路径（索引跨重启保持，无需复述 -txindex=1）"
+        },
+        {
+          "line": 393,
+          "text": "### 2.9 事件通知：从轮询到推送"
+        },
+        {
+          "line": 400,
+          "text": "# C-138 ZMQ 订阅实验：节点 PUB + python3-zmq 订阅端"
+        },
+        {
+          "line": 401,
+          "text": "# 1) 带通知端点重启（两个端口分别发块哈希与裸交易；需 libzmq 编译支持，python3-zmq 另行 apt 安装）"
+        },
+        {
+          "line": 407,
+          "text": "# 2) 订阅端：先启动再出块（顺序的讲究见踩坑实录 4）"
+        },
+        {
+          "line": 418,
+          "text": "# 3) 另一个终端出块触发"
+        },
+        {
+          "line": 422,
+          "text": "# 订阅端输出："
+        },
+        {
+          "line": 437,
+          "text": "# C-139 notify 钩子对照：块连上时把块哈希追加进日志文件"
+        },
+        {
+          "line": 438,
+          "text": "# 1) 带钩子重启（%s 被替换为块哈希）"
+        },
+        {
+          "line": 442,
+          "text": "# 2) 出两个块"
+        },
+        {
+          "line": 446,
+          "text": "# 3) 钩子已跑过（钩子异步执行，若文件暂空稍候再 cat）"
+        },
+        {
+          "line": 456,
+          "text": "## 3. 源码线"
+        },
+        {
+          "line": 458,
+          "text": "### 3.1 HTTP/REST 栈：`httpserver.cpp` 与 `httprpc.cpp`"
+        },
+        {
+          "line": 501,
+          "text": "### 3.2 分派链：`CRPCTable::execute` → `ExecuteCommand` → handler"
+        },
+        {
+          "line": 545,
+          "text": "### 3.3 一个 handler 的长相：getblockchaininfo 与 RPCArg"
+        },
+        {
+          "line": 579,
+          "text": "### 3.4 BaseIndex 与三个实现"
+        },
+        {
+          "line": 630,
+          "text": "### 3.5 ZMQ 通知与 blocknotify 注册点"
+        },
+        {
+          "line": 660,
+          "text": "## 4. eBPF 追踪线"
+        },
+        {
+          "line": 662,
+          "text": "### 4.1 符号盘点与三层挂载纪律"
+        },
+        {
+          "line": 667,
+          "text": "# C-146 bpftrace -l 列 RPC/索引/通知符号（输出以本机 v31.0 编译结果为准，不臆造修饰名）"
+        },
+        {
+          "line": 690,
+          "text": "### 4.2 rpc_handler_latency.bt：RPC handler 延迟直方图"
+        },
+        {
+          "line": 718,
+          "text": "# C-148 终端 A/B：挂延迟直方图（需 sudo）+ 造查询流量"
+        },
+        {
+          "line": 719,
+          "text": "# 终端 A："
+        },
+        {
+          "line": 723,
+          "text": "# 终端 B：连发三种典型查询（轻/中/重）"
+        },
+        {
+          "line": 730,
+          "text": "# 回终端 A，Ctrl-C 读直方图与 comm 计数"
+        },
+        {
+          "line": 745,
+          "text": "### 4.3 index_sync.bt：索引同步进度观测"
+        },
+        {
+          "line": 767,
+          "text": "# C-150 终端 A/B：重建观测（与 C-135 同一次 -txindex=1 重启窗口复用，不再重复重启）"
+        },
+        {
+          "line": 768,
+          "text": "# 时序：终端 A 先于 C-135 的 stop 挂好探针——uprobe 按二进制挂载，节点随后启动即生效"
+        },
+        {
+          "line": 769,
+          "text": "# 终端 A（在 §2.8 动手之前执行）："
+        },
+        {
+          "line": 773,
+          "text": "# 终端 B：执行 C-135 step 1 的 stop + 带 -txindex=1 启动（命令见 §2.8，此处不再重复）"
+        },
+        {
+          "line": 775,
+          "text": "# 终端 A 每秒看到 @commits[b-txindex<...>] 累计增长；链尖追平后打印停止"
+        },
+        {
+          "line": 776,
+          "text": "# 终端 B 收口：getindexinfo 的 synced 转 true"
+        },
+        {
+          "line": 784,
+          "text": "### 4.4 zmq_notify_count.bt：ZMQ 通知计数"
+        },
+        {
+          "line": 805,
+          "text": "## 5. 收束"
+        },
+        {
+          "line": 807,
+          "text": "### 5.1 本章要点回顾"
+        },
+        {
+          "line": 815,
+          "text": "### 5.2 RPC 与索引架构图交付说明"
+        },
+        {
+          "line": 819,
+          "text": "### 5.3 AI 提示词"
+        },
+        {
+          "line": 829,
+          "text": "### 5.4 git tag 检出指引"
+        },
+        {
+          "line": 834,
+          "text": "# 回到本章末尾的配套仓库参考实现快照（卡住时可对照参考）"
+        },
+        {
+          "line": 840,
+          "text": "### 5.5 承上启下"
+        }
+      ]
+    },
+    {
+      "path": "bitcoin/task11-尾声-拼合全景.md",
+      "bytes": 14800,
+      "lines": 174,
+      "sha256": "1eee9df1d3ec56073ddae4e79158aad15d9b3656dfa7246a3cadcdf9504c192f",
+      "fenced_code_blocks": 1,
+      "code_ids": [],
+      "bpftrace_refs": [
+        "blocktemplate_timing.bt",
+        "chainstate_window.bt",
+        "index_sync.bt",
+        "mempool_events.bt",
+        "mempool_feerate_hist.bt",
+        "miner_ustack.bt",
+        "p2p_messages.bt",
+        "p2p_sendmsg.bt",
+        "pow_duration.bt",
+        "rpc_handler_latency.bt",
+        "script_exec_count.bt",
+        "serialize_count.bt",
+        "sigverify_hist.bt",
+        "utxo_cache_hit.bt",
+        "validation_ustack.bt",
+        "wallet_coinselect.bt",
+        "wallet_sign.bt",
+        "zmq_notify_count.bt"
+      ],
+      "diagram_refs": [
+        "ch1-data-model.drawio",
+        "ch2-consensus-validation.drawio",
+        "ch3-script-engine.drawio",
+        "ch4-utxo-chainstate.drawio",
+        "ch5-mempool.drawio",
+        "ch6-p2p.drawio",
+        "ch7-blocktemplate.drawio",
+        "ch8-wallet-tx.drawio",
+        "ch9-rpc-index.drawio",
+        "epilogue-panorama.drawio"
+      ],
+      "prompt_refs": [
+        "epilogue-panorama-prompt.md"
+      ],
+      "headings": [
+        {
+          "line": 1,
+          "text": "# 尾声　拼合全景——三轨收束与下一步"
+        },
+        {
+          "line": 8,
+          "text": "## 1. 开场"
+        },
+        {
+          "line": 10,
+          "text": "### 1.1 对话引子"
+        },
+        {
+          "line": 18,
+          "text": "### 1.2 本章三件事"
+        },
+        {
+          "line": 28,
+          "text": "## 2. 全景拼合：九张分图 → 一张全景"
+        },
+        {
+          "line": 30,
+          "text": "### 2.1 拼合的骨架"
+        },
+        {
+          "line": 43,
+          "text": "### 2.2 逐章归位"
+        },
+        {
+          "line": 74,
+          "text": "### 2.3 全景图交付说明与 AI 提示词"
+        },
+        {
+          "line": 82,
+          "text": "## 3. 三轨交付清点"
+        },
+        {
+          "line": 86,
+          "text": "### 3.1 原理线：九个模块的概念理解"
+        },
+        {
+          "line": 102,
+          "text": "### 3.2 源码线：从源码树定位问题的能力"
+        },
+        {
+          "line": 108,
+          "text": "### 3.3 动态观测线：十九个观测点"
+        },
+        {
+          "line": 126,
+          "text": "### 3.4 工具选择回顾"
+        },
+        {
+          "line": 132,
+          "text": "## 4. 下一步路线"
+        },
+        {
+          "line": 136,
+          "text": "### 4.1 深入什么源码"
+        },
+        {
+          "line": 143,
+          "text": "### 4.2 读什么资料"
+        },
+        {
+          "line": 149,
+          "text": "### 4.3 能做什么项目"
+        },
+        {
+          "line": 155,
+          "text": "## 5. git tag 检出指引"
+        },
+        {
+          "line": 160,
+          "text": "# 回到尾声的配套仓库参考快照（含全部脚本与全景图资源）"
+        },
+        {
+          "line": 166,
+          "text": "## 6. 承上启下：从积累到变现"
+        }
+      ]
+    },
+    {
+      "path": "bitcoin/task12-附录A-BTC金融数据分析工具.md",
+      "bytes": 70686,
+      "lines": 819,
+      "sha256": "3bf03ec608969649d1e60f22148b03e574a239577bab02da16f7552356b99548",
+      "fenced_code_blocks": 20,
+      "code_ids": [
+        37,
+        49,
+        50,
+        51,
+        55,
+        129,
+        130,
+        136,
+        137,
+        147,
+        152,
+        153,
+        154,
+        155,
+        156,
+        157,
+        158,
+        159,
+        160,
+        161,
+        162,
+        163,
+        164,
+        165,
+        166,
+        167,
+        168,
+        169,
+        170
+      ],
+      "bpftrace_refs": [
+        "rpc_handler_latency.bt"
+      ],
+      "diagram_refs": [],
+      "prompt_refs": [],
+      "headings": [
+        {
+          "line": 1,
+          "text": "# 附录 A　BTC 金融数据分析工具"
+        },
+        {
+          "line": 9,
+          "text": "## 1. 开场与工具总体设计"
+        },
+        {
+          "line": 11,
+          "text": "### 1.1 对话引子"
+        },
+        {
+          "line": 17,
+          "text": "### 1.2 本章概览：四子任务与知识映射"
+        },
+        {
+          "line": 36,
+          "text": "### 1.3 数据源三层策略：regtest / testnet / mainnet"
+        },
+        {
+          "line": 46,
+          "text": "### 1.4 取数路径选型：N+1 问题与 verbosity=3 主路径"
+        },
+        {
+          "line": 60,
+          "text": "### 1.5 脚手架：依赖、目录与首次编译"
+        },
+        {
+          "line": 65,
+          "text": "# C-152 安装依赖 + 建立 onchain/ 目录骨架 + CMake 首次空编译"
+        },
+        {
+          "line": 66,
+          "text": "# 两个依赖包在 Ubuntu 24.04 仓库的名称与版本以 apt 实查为准"
+        },
+        {
+          "line": 72,
+          "text": "# CMakeLists.txt：C++20、libcurl、nlohmann-json，六个源文件对应 §1.5 的模块划分"
+        },
+        {
+          "line": 90,
+          "text": "# 六个源文件先落占位：main.cpp 放最小 main()（子命令分派骨架，四个分支留空），"
+        },
+        {
+          "line": 91,
+          "text": "# 其余五个 .cpp 为空翻译单元——首次编译就能过，实现随 §1.6/§1.7 逐步填入"
+        },
+        {
+          "line": 110,
+          "text": "### 1.6 RPC 客户端：同一个协议，换 C++ 来拼"
+        },
+        {
+          "line": 158,
+          "text": "# C-154 冒烟测试：onchain 版 getblockchaininfo 与 chapter 9 C-129 的 curl 输出并排"
+        },
+        {
+          "line": 159,
+          "text": "# 节点在此启动后保持运行——同一 datadir 贯穿 §1–§5，后续段落一律复用"
+        },
+        {
+          "line": 164,
+          "text": "# 脚手架自检口子命令 rpc：透传一个 RPC 方法名并打印 result"
+        },
+        {
+          "line": 172,
+          "text": "# 对照组：chapter 9 C-129 的 curl 手工请求——同一份 JSON"
+        },
+        {
+          "line": 184,
+          "text": "### 1.7 区间区块遍历器：批量、进度与失败口径"
+        },
+        {
+          "line": 229,
+          "text": "## 2. A.1 区块节奏与矿工经济分析"
+        },
+        {
+          "line": 231,
+          "text": "### 2.1 分析问题与三个指标口径"
+        },
+        {
+          "line": 239,
+          "text": "### 2.2 取数路径：getblockstats 一把取数"
+        },
+        {
+          "line": 245,
+          "text": "### 2.3 实现骨架"
+        },
+        {
+          "line": 283,
+          "text": "### 2.4 regtest 首跑：能跑但无义"
+        },
+        {
+          "line": 288,
+          "text": "# C-157 A.1 regtest 首跑：造 500 块后跑 stats——失真现场"
+        },
+        {
+          "line": 289,
+          "text": "# 复用 C-154 仍在运行的 regtest 节点（同一 datadir 贯穿 §1–§5，勿重复启动）"
+        },
+        {
+          "line": 291,
+          "text": "# 造 500 个空块（只有 coinbase），秒级完成（regtest 秒出的原因见 chapter 7 §2.5）"
+        },
+        {
+          "line": 313,
+          "text": "### 2.5 testnet 真实分布"
+        },
+        {
+          "line": 318,
+          "text": "# C-158 A.1 testnet 跑：节点 -testnet 启动与同步确认 → 同命令换网络参数"
+        },
+        {
+          "line": 319,
+          "text": "# testnet3 同步约数十 GB、数小时级（体积与耗时以实机为准）；"
+        },
+        {
+          "line": 320,
+          "text": "# v31.0 已弃用 testnet3、推荐 testnet4——版本口径与沿用理由见 §1.3"
+        },
+        {
+          "line": 324,
+          "text": "# 等同步追平：blocks==headers 且 initialblockdownload 转 false 才算数（每分钟查一次）"
+        },
+        {
+          "line": 330,
+          "text": "# 分析窗口：链尖向前 2016 块（一个难度调整周期，chapter 2 §2.5.1）；分钟级跑完"
+        },
+        {
+          "line": 342,
+          "text": "### 2.6 解读：矿工靠补贴还是靠手续费"
+        },
+        {
+          "line": 354,
+          "text": "## 3. A.2 脚本演进追踪"
+        },
+        {
+          "line": 356,
+          "text": "### 3.1 分析问题：Taproot 上线后真的有人用吗"
+        },
+        {
+          "line": 360,
+          "text": "### 3.2 取数路径与分类口径：type 是 Solver 的 RPC 投影"
+        },
+        {
+          "line": 366,
+          "text": "### 3.3 实现骨架"
+        },
+        {
+          "line": 405,
+          "text": "### 3.4 运行：regtest 造样本与 testnet 全史"
+        },
+        {
+          "line": 410,
+          "text": "# C-160 A.2 运行：regtest 造多类型样本 + testnet 全史演进（本块含两段："
+        },
+        {
+          "line": 411,
+          "text": "# regtest 验收分桶器、testnet 出演进史）"
+        },
+        {
+          "line": 412,
+          "text": "# 前提：沿用 C-157 的 500 块链与 test 钱包，节点运行中——发币花的是已成熟"
+        },
+        {
+          "line": 413,
+          "text": "#       UTXO（coinbase 满 100 确认，C-157 的造块量已满足，chapter 7 §2.4）"
+        },
+        {
+          "line": 414,
+          "text": "# 1) regtest 造样本：四类地址各收一笔（对号 chapter 3 的 P2PKH/P2SH/P2WPKH/P2TR 手法）"
+        },
+        {
+          "line": 428,
+          "text": "# 2) testnet 全史：从创世起演进链完整可演——早期 coinbase 的 P2PK 遗迹在历史数据里"
+        },
+        {
+          "line": 439,
+          "text": "### 3.5 解读：演进链五站"
+        },
+        {
+          "line": 451,
+          "text": "## 4. A.3 UTXO 生命周期分析"
+        },
+        {
+          "line": 453,
+          "text": "### 4.1 分析问题：链上的币都躺了多久"
+        },
+        {
+          "line": 457,
+          "text": "### 4.2 在应用层造一个迷你 CoinsTip"
+        },
+        {
+          "line": 461,
+          "text": "### 4.3 自建集实现"
+        },
+        {
+          "line": 500,
+          "text": "### 4.4 对账验证闭环"
+        },
+        {
+          "line": 507,
+          "text": "# C-162 对账实验：遍历高度 1..链尖 → 自建集条目数/总金额 vs gettxoutsetinfo"
+        },
+        {
+          "line": 508,
+          "text": "# 前提：--from 1（创世块不走 ConnectBlock，其 coinbase 不入 UTXO 集——见正文）；"
+        },
+        {
+          "line": 509,
+          "text": "#       --to 必须 == 当前链尖（gettxoutsetinfo 只对链尖求值）"
+        },
+        {
+          "line": 521,
+          "text": "### 4.5 年龄分布与 hodl wave"
+        },
+        {
+          "line": 562,
+          "text": "### 4.6 testnet 运行与已实现市值"
+        },
+        {
+          "line": 565,
+          "text": "# C-164 A.3 testnet 运行 + hodl wave 展示 + 已实现市值形式演示（合成价格）"
+        },
+        {
+          "line": 566,
+          "text": "# warmup：从分析窗口再向前 50000 块静默喂集，消残集口径（§4.2）；"
+        },
+        {
+          "line": 567,
+          "text": "# TIP 不足十万时把 100000 调小（算术为负即越界）"
+        },
+        {
+          "line": 584,
+          "text": "# 已实现市值：--price-csv 外部喂价接口——mainnet 读者喂真实历史价格；"
+        },
+        {
+          "line": 585,
+          "text": "# 此处演示用合成价格 CSV（plot/synthetic_prices.csv），输出只作形式演示"
+        },
+        {
+          "line": 602,
+          "text": "## 5. A.4 交易图谱与地址聚类"
+        },
+        {
+          "line": 604,
+          "text": "### 5.1 分析问题：\"巨鲸\"的技术翻译"
+        },
+        {
+          "line": 608,
+          "text": "### 5.2 共同输入所有权启发式"
+        },
+        {
+          "line": 612,
+          "text": "### 5.3 union-find 聚类实现"
+        },
+        {
+          "line": 657,
+          "text": "### 5.4 运行：regtest 正样本与 testnet 聚类"
+        },
+        {
+          "line": 662,
+          "text": "# C-166 A.4 运行：regtest 手工造\"同钱包多输入交易\"正样本 + testnet 聚类分布"
+        },
+        {
+          "line": 663,
+          "text": "# 前提：沿用 C-157 的链与 test 钱包，节点运行中——test 钱包持有 ≥2 个"
+        },
+        {
+          "line": 664,
+          "text": "#       已成熟 UTXO（coinbase 满 100 确认，C-157 的 500 块已满足，chapter 7 §2.4）"
+        },
+        {
+          "line": 665,
+          "text": "# 正样本：send 的 options.inputs 显式圈定两枚 UTXO（选币指定手法回收"
+        },
+        {
+          "line": 666,
+          "text": "#       chapter 4 C-49 的 options.inputs 实证（chapter 8 §2.5 的 send/sendall"
+        },
+        {
+          "line": 667,
+          "text": "#       分岔口径）；指定 inputs 后不再自动"
+        },
+        {
+          "line": 668,
+          "text": "#       补币，所列 UTXO 须覆盖金额 + 手续费——0.02 BTC 对两枚 50 BTC 毫无压力）"
+        },
+        {
+          "line": 685,
+          "text": "# testnet 聚类分布（窗口遍历，分钟级；全史小时级）"
+        },
+        {
+          "line": 693,
+          "text": "### 5.5 CoinJoin 嫌疑判据"
+        },
+        {
+          "line": 732,
+          "text": "## 6. 收束"
+        },
+        {
+          "line": 734,
+          "text": "### 6.1 本章要点回顾"
+        },
+        {
+          "line": 742,
+          "text": "### 6.2 交付物说明与四连跑交付序列"
+        },
+        {
+          "line": 747,
+          "text": "# C-168 章末交付序列：四子命令连跑全量输出 + ls out/ 交付清单 + 配套仓库提交"
+        },
+        {
+          "line": 748,
+          "text": "# 交付物即仓库内容——本节起进入 bitcoin-tools/ 仓库根目录运行，out/ 落在仓库内"
+        },
+        {
+          "line": 755,
+          "text": "# 注：这里不挂 --reconcile——对账只在链尖恰为 --to 的静态链上成立（闭环已在"
+        },
+        {
+          "line": 756,
+          "text": "#     C-162 的 regtest 上验过）；活 testnet 的链尖随时前移，对账永远差最近几块"
+        },
+        {
+          "line": 764,
+          "text": "# 把自己的实现提交进配套仓库"
+        },
+        {
+          "line": 769,
+          "text": "### 6.3 可选配件：可视化与观测彩蛋"
+        },
+        {
+          "line": 776,
+          "text": "# C-169 可选：gnuplot 一步出图（CSV → PNG；脚本随仓库 plot/ 附带）"
+        },
+        {
+          "line": 785,
+          "text": "# C-170 彩蛋（可选）：复用 chapter 9 C-147 的 rpc_handler_latency.bt，"
+        },
+        {
+          "line": 786,
+          "text": "# 从节点侧观测本工具遍历造成的 RPC 延迟分布——零新增探针"
+        },
+        {
+          "line": 787,
+          "text": "# 终端 A（需 sudo）："
+        },
+        {
+          "line": 791,
+          "text": "# 终端 B：先补足区间高度（regtest 两万块分钟级造完；复用 §1 起持续运行的节点），"
+        },
+        {
+          "line": 792,
+          "text": "# 再跑大区间遍历"
+        },
+        {
+          "line": 797,
+          "text": "# 回终端 A，Ctrl-C：@rpc_ns 高位桶（整块反序列化）显著增厚，@hits 清一色 b-http_pool_N"
+        },
+        {
+          "line": 803,
+          "text": "### 6.4 git tag 指引：给自己的进度打标记"
+        },
+        {
+          "line": 808,
+          "text": "# 附录 A 为读者开发场：仓库不预置本章实现，"
+        },
+        {
+          "line": 809,
+          "text": "# 你随 §1–§5 从零开发到这里——章末为自己的进度打下标记"
+        },
+        {
+          "line": 815,
+          "text": "### 6.5 封笔：从积累到变现"
+        }
+      ]
+    }
+  ],
+  "server_discovery": {
+    "host_alias": "tiger",
+    "base": "/home/oops/workspace",
+    "authorization": "User requested ssh tiger and workspace location search on 2026-10-11. Read-only paths, file sizes and Git metadata; no script-content read, hashes or execution.",
+    "core": {
+      "path": "/home/oops/workspace/bitcoin",
+      "origin": "https://github.com/bitcoin/bitcoin.git",
+      "branch": "tag-v31.0",
+      "head": "6574cb40869b96b9ffc79c19dc8f4e467d60f321",
+      "tag_v31_commit": "6574cb40869b96b9ffc79c19dc8f4e467d60f321",
+      "status_porcelain": ""
+    },
+    "tools": {
+      "path": "/home/oops/workspace/bitcoin-tools",
+      "git_metadata": false,
+      "files": [
+        {
+          "path": "bpf/bpftrace/pow_verify_hist.bt",
+          "bytes": 1422
+        },
+        {
+          "path": "bpf/bpftrace/serialize_count.bt",
+          "bytes": 1128
+        },
+        {
+          "path": "bpf/bpftrace/validation_count.bt",
+          "bytes": 1909
+        },
+        {
+          "path": "bpf/bpftrace/validation_ustack.bt",
+          "bytes": 1390
+        }
+      ]
+    },
+    "workspace_search": {
+      "max_directory_depth": 8,
+      "omitted_directories": [
+        ".git",
+        "node_modules",
+        "sstate-cache",
+        "downloads",
+        "tmp",
+        "build"
+      ],
+      "book_diagram_matches": [],
+      "book_prompt_matches": [],
+      "book_versions_manifest_matches": [],
+      "experiment_record_candidates_outside_core": [],
+      "nonbook_versions_match": "bitcoin/src/ipc/libmultiprocess/doc/versions.md",
+      "limitation": "Not exhaustive of other server paths, excluded directories, contents or prior execution history."
+    }
+  },
+  "verification": {
+    "date": "2026-10-11",
+    "framework_validator": {
+      "command": "python -B scripts/validate_framework.py",
+      "result": "pass",
+      "roles": 20,
+      "knowledge_files": 35,
+      "actual_projects": 1,
+      "project_templates": 1,
+      "local_links": 417,
+      "scope": "Structural and local-link checks only; not professional review, business acceptance or execution authorization."
+    },
+    "manuscript_bytes_match_git_head": true,
+    "product_worktree_clean": true,
+    "chapter_statistics_match_artifact_table": true,
+    "task_records": {
+      "count": 11,
+      "unique_ids": true,
+      "required_fields_present": true,
+      "owners_valid": true,
+      "T-001": "completed",
+      "T-002_to_T-011": "todo"
+    },
+    "changes_confined_to_project_governance": true,
+    "git_diff_check": "pass",
+    "markdown_whitespace_check": "pass"
+  }
+}
