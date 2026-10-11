@@ -1,6 +1,6 @@
 # 项目状态摘要
 
-- 汇总日期与信息截至点：2026-10-11；chapter 3 最终定稿与 2026-10-08 的合并、推送事实不变。architect 初始化回执已核对，已交付并冻结 A-005 v0.1 draft（提交 `69ce591`）；project-manager 已登记第 1 轮设计专业核对及用户意见 U-A005-01/U-A005-02。用户明确本轮仅两条建议：NAND 走 SPI 接入，chapter 4 只做最小可启动 machine、功能随章节演进补充。两名工程成员尚未核对，设计批准、章节蓝图、正文及工程实现尚未开始。
+- 汇总日期与信息截至点：2026-10-11；A-005 v0.1 draft 保持冻结（提交 `69ce591`），用户 U-A005-01/U-A005-02 已提交完毕。yocto-engineer 已完成第 1 轮核对并提交 `dd15379`，结论 revise；project-manager 已核验其意见、提交和停止状态，下一位为 qemu-engineer。用户明确 NAND 走 SPI 接入，chapter 4 只做最小可启动 machine、功能随章节演进补充；设计批准、章节蓝图、正文及工程实现尚未开始。
 - 维护人：project-manager（按 [PROJECT.md](PROJECT.md) 指定的协调记录维护人）。
 - 当前阶段：P1 基础修复、P2 章节闭环试点均已完成；**P3 正在推进，chapter 1–3 已定稿；T-016 为 in_progress，A-005 v0.1 等待第 1 轮工程核对**（计划见 A-002 v0.8，用户最新意见与核对安排见 TASKS）。目标与范围见 [PROJECT.md](PROJECT.md) 与 D-001~D-013。WORKSPACE 仍分别锁定书稿 `main@f444790f352b46f699fd3d46198f8b9b9f089a62` 和 `tiger:/home/oops/workspace/meta-tiger` 的 `master@0e3da48b34ef772532535a730a21878cc30ccf67`；两个成果物均尚未产生 T-016 的新最终合并提交。
 - 任务进展：
@@ -22,7 +22,7 @@
   - T-016 chapter 4《让 QEMU 长出 tiger 这块板》修订与第 1 轮评审：in_progress（A-005 v0.1 draft 已交付，用户两条意见已提交完毕，第 1 轮专业核对已登记。先由 yocto-engineer 核对实际配方/源码基线及最小启动输入，再由 qemu-engineer 核对最小模型与 SPI NAND 后续约束；全部意见提交后 architect 统一修订，经必要复核和用户确认后推进 writer 蓝图及工程。实现、构建及运行核验尚未开始）。
   - T-017 全书四仓库叙事迁移为 `meta-tiger` patch-only 模型：todo（2026-10-09 已登记；全文扫描命中前言、chapter 2–16、尾声、附录 B/C 共 19 个文件；等待 T-016 收口后再建立配对分支，不并行启动）。
 - 团队状态：现有 `project-manager`、`writer`、`reviewer`、`yocto-engineer`、`qemu-engineer`、`architect` 六名登记成员。architect 初始化完成及本次设计交付已实际核对，目前已停止改稿；其他会话有效性仍须按各自回执及运行时映射确认。会话由用户控制串行进入并刷新；H-001 已关闭，H-002/H-003 协调结果已提供，待发起人核对关闭。
-- 开发仓库状态：2026-10-11 本机只读核对，书稿仍处于本任务 feature 分支、HEAD 为 `f444790f352b46f699fd3d46198f8b9b9f089a62` 且工作树干净；OPC 处于对应 feature 分支，协调更新前工作树干净，两仓库目标长期分支均为当前 HEAD 的祖先。本日未联网刷新远端引用或执行 SSH。`meta-tiger` 的最后实际核对仍为 2026-10-09：`tiger:/home/oops/workspace/meta-tiger` 是干净的 `master...github/master` checkout，完整 HEAD 为 WORKSPACE 锁定的 `0e3da48b34ef772532535a730a21878cc30ccf67`；T-016 工程任务分支尚未建立，实际实施前须重新核对。D-013 已明确不再创建四个长期组件 fork。
+- 开发仓库状态：2026-10-11 yocto-engineer 只读核对证据见 [核对报告](artifacts/work-records/t016-a005-yocto-review.md)：书稿处于本任务 feature 分支、`f444790f352b46f699fd3d46198f8b9b9f089a62` 且干净；远端 meta-tiger 为干净的 `master@0e3da48b34ef772532535a730a21878cc30ccf67`，与 WORKSPACE 一致。辅助 Poky 为 `scarthgap@77d1feb37e280733684ae8a9449fb031d5d7ff40`，核得 QEMU 8.2.7 源码包及已有 31 项补丁；旧源码和任务产物不代表本轮干净构建或 tiger 已实现。OPC 对应 feature 分支在本次协调更新前干净。工程任务分支尚未建立，实施前仍须重新核对；D-013 不变。
 - 关键成果：A-004 v0.5 为 approved；A-002 v0.8 为 draft。A-005《tiger 平台设计说明》v0.1 draft 已登记成果索引并固定在 `69ce591cd9e4ee310b80cff4663c20c776364cfd`，本轮只覆盖文档和静态检查，未获批准；用户两条意见及工程核对安排保存在 T-016，原稿待全部意见提交后由 architect 统一修订。A-001/A-003 v0.1 仍为 draft；既有实测与复验记录仍保存在 OPC `artifacts/work-records/`。
 - 阻塞、待确认事项及下一位行动人：
   - **chapter 3 无未完成阻塞**：用户确认、专业复核、真实环境验证、源码合并和远端推送均已完成。
