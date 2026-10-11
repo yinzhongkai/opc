@@ -583,7 +583,7 @@
 
 ## T-016：chapter 4《让 QEMU 长出 tiger 这块板》修订与第 1 轮评审（P3 第三章）
 - 负责人：architect（平台设计前置阶段、接口契约及设计问题修订）；writer（章节蓝图、作者自查与统一修订）；qemu-engineer（设计可实现性核对、tiger QEMU 模型代码、正确性、模型测试与 patch 交付）；yocto-engineer（设计集成约束核对、patch 与 metadata 集成、BitBake 构建、逐章真实环境核验和系统验证）；reviewer（独立技术审校与复核）；project-manager（计划、评审安排与意见闭环）；用户（平台设计基线与章节定稿确认）
-- 状态：in_progress（2026-10-11 A-005 v0.1 第 1 轮设计专业核对进行中；用户两条意见已提交完毕，两名工程成员均已提交 revise 意见并停止，下一位为 architect 统一修订；设计批准、章节蓝图、正文、模型实现和集成核验尚未开始）
+- 状态：in_progress（2026-10-11 architect 已按齐备的 U/Y/QE 意见统一修订并交付 A-005 v0.2 draft，逐项填写作者回复；下一位为 project-manager 组织必要针对性复核及用户确认；设计批准、章节蓝图、正文、模型实现和集成核验尚未开始）
 - 授权来源与日期：2026-10-08 用户在 project-manager 会话要求创建 feature 分支；2026-10-09 用户确认 D-013 的“上游源码 + 临时 devtool workspace + `meta-tiger` patch”模型，并明确指示按该方案执行。授权覆盖 T-016 范围调整、作者修订、QEMU 实际实现与验证、评审和跨章影响登记；不将尚未发生的正文修订、工程实现、评审或核验写成进展。
   - 2026-10-11 分工刷新依据：用户明确要求新增 QEMU 工程师，已由超级管理员登记到 TEAM 并细化两个工程成员的 scope（PROJECT 成员配置记录、H-002）；同日用户在 project-manager 会话报告创建完成并询问下一步。project-manager 在既有 T-016 授权范围内安排模型开发与集成验证的职责和串行次序，不改变 D-013 或章节验收标准。
   - 2026-10-11 平台设计前置安排依据：用户采纳优先新增 tiger 系统架构师的建议并明确要求建员，配置已提交为 `737d1d78fdc858c60e81b8eace9f8c1ede59a804`；随后用户报告架构师会话已经创建。project-manager 接收 H-003，在既有范围内将平台设计、必要的专业核对与用户确认置于章节蓝图和模型实施之前；会话创建不等于初始化或设计完成。
@@ -602,18 +602,20 @@
   - 2026-10-11 project-manager 接收 H-002，实际读取新 QEMU 成员、更新后的 Yocto 成员、角色和相关技能，完成模型开发与集成验证分工，更新 A-002 v0.7、STATUS 和成果索引。协调更新前两个本机仓库均处于本任务的配对 feature 分支、工作树无未提交项；书稿 HEAD 仍为上述基线，两个本机目标分支均为当前 HEAD 的祖先。此记录仅表示协调准备已完成，未执行 SSH、模型实现、构建、正文修订或评审。
   - 2026-10-11 project-manager 接收 H-003，依据用户采用增员建议及报告架构师会话创建的事实，登记本任务内的平台设计前置阶段，更新 A-002 v0.8、STATUS、PROJECT 当前阶段与成果索引。初始化回执尚未核对，设计稿、设计专业核对、用户设计确认及工程操作均尚未开始；本轮只完成协调安排，不创建或唤醒其他会话。
   - 2026-10-11 architect 完成只读初始化并在收到项目经理的本阶段指派后刷新协议、身份、角色、有效技能及关联记录。核对本机 OPC 与书稿的分支、HEAD、目标分支祖先及洁净状态后，读取书稿 `f444790f352b46f699fd3d46198f8b9b9f089a62` 的 chapter 2、4、6–10、15 相关区间，形成 [A-005 v0.1](artifacts/A-005-tiger-platform-design.md)（draft）。候选稿覆盖最小地址/中断/时钟/启动/复位契约、跨组件接口、NAND/镜像/卷布局、watchdog 约束及分阶段验证；列出 Q-01～Q-10 待核项，实际覆盖限于本机版本、文档依据和静态算术。未修改书稿或工程代码，未 SSH、联网、构建、运行 QEMU 或安排评审；候选稿提交后停止改稿，等待后续按稳定版本组织意见。
+  - 2026-10-11 architect 按 `869929b5d4b5e0ff39f10c2fe1ddf6853f9a0445` 的统一修订安排刷新身份/角色/scope/有效技能、WORKSPACE、相关记录，读取固定 v0.1、全部 13 项 U/Y/QE 意见、两份报告及选定原始摘录，交付 [A-005 v0.2 draft](artifacts/A-005-tiger-platform-design.md)。第 4 章收敛为 CPU0/A53/TCG、ROM/RAM、轮询 PL011，固定 raw/EL3/rvbar/ARM loader 纯 firmware reset 注册及独立 fixture 部署/qemuboot/runqemu 契约；回填精确 Poky/包 hash/31 OE patches，删除独立并行 NAND 窗口/IRQ，登记 SPI master/真实 CS/芯片及首次读 BL2/FIP 门槛，撤回已有 SP805 模型假设。本机书稿与固定受评 blob 已核对，远端来源区分工程师只读实查与本轮证据读取；逐项作者回复见下文。原意见/结论/报告保留，运行与实施未执行，提交稳定版本后停止改稿。
 - 成果与验证证据：书稿与 OPC 两条远端 feature 分支；D-013；H-001；[WORKSPACE.yaml](WORKSPACE.yaml)；[A-005 v0.1 平台设计候选稿](artifacts/A-005-tiger-platform-design.md)，稳定版本为 `69ce591cd9e4ee310b80cff4663c20c776364cfd`（来源区间及 V-01～V-03 静态覆盖见正文）；用户意见 U-A005-01/U-A005-02；yocto-engineer 第 1 轮意见 Y-A005-01～05、[核对报告](artifacts/work-records/t016-a005-yocto-review.md) 与原始日志（提交 `dd15379ebea54b36dab7b5cc2638fd345e71553f`，含 2026-10-11 远端只读基线证据）。qemu-engineer 第 1 轮意见 QE-A005-01～06、[核对报告](artifacts/work-records/t016-a005-qemu-review.md) 与原始日志（提交 `1c8304446f8bf82fd46a56413a5fa5787e271ae6`）。两项均为静态专业核对；正文修订、`meta-tiger` 工程提交和运行核验证据尚未产生。
+  - 本轮作者交付：[A-005 v0.2 draft](artifacts/A-005-tiger-platform-design.md)、下文 13 项作者处理回复及成果索引。校验通过：3 个最小窗口与 7 个预留窗口、测试固件/后续 RAM 分阶段占用、条件性 NAND/UBI/watchdog/UART 分频算术、8 份来源区间、13 项唯一作者回复；原评审内容及其他任务一致。`python -B scripts/validate_framework.py` 返回 0（482 处本地链接），差异空白检查通过。未代写工程复核或运行结果；v0.1 按上述固定提交追溯，当前路径为 v0.2。
 - 合并与清理状态：两条 feature 分支均未合并、不得清理；待全部完成条件满足后按 v0.0.3 分支策略处理。
-- 阻塞与下一位行动人：H-001 已关闭，H-002/H-003 已提供协调结果、待发起人核对关闭，行政收尾不阻塞设计阶段。A-005 v0.1 第 1 轮设计专业核对已登记，用户意见已提交完毕；2026-10-11 用户明确委托 project-manager“你直接协调各个成员开始工作吧”。由 project-manager 核对当前有效会话后依次通知 yocto-engineer、qemu-engineer，并在前一成员结束后衔接下一成员；工程意见齐全后通知 architect 统一修订。协调方在执行成员工作期间停止仓库写入，只观察进展，不同时启动其他成员。尚未形成 chapter 4 实施基线，必要复核及用户确认后 writer 才编制蓝图，再依既有次序实施、验证与修订正文。实际远程访问或工程操作前仍核对已有访问授权和 checkout；本次协调授权不扩大业务范围、访问权限或批准权。
+- 阻塞与下一位行动人：H-001 已关闭，H-002/H-003 已提供协调结果、待发起人核对关闭，行政收尾不阻塞设计阶段。本轮全部 U/Y/QE 意见已统一处理为 A-005 v0.2 draft，下一位为 project-manager，按实际稳定新版本串行组织必要针对性复核，再交用户确认 chapter 4 最小实施基线。用户 2026-10-11 的直接协调授权和单会话串行约定继续有效；未确认前不开始 writer 蓝图或工程。实际远程访问/工程操作前重核授权和 checkout，不扩大业务范围或批准权。
 - 更新日期：2026-10-11
 
 ### T-016 前置阶段：tiger 平台设计
 - 主责与授权：architect；由 project-manager 根据 2026-10-11 用户采纳增员建议、PROJECT 配置记录及 H-003 在本任务内安排，不新增一轮 feature 或扩大正文修订范围。
-- 当前状态：in_progress；A-005 v0.1 draft 保持冻结；用户本轮两条意见已提交完毕，两名工程成员的专业核对均已完成并提交 revise，用户和工程意见已齐备，等待 architect 统一修订，设计尚未批准。
+- 当前状态：in_progress；architect 已完成本轮统一修订，A-005 v0.2 draft 已形成并停止改稿，待必要针对性复核和用户确认；v0.1 与原 revise 意见保留，设计尚未批准。
 - 首次行动：完成或刷新自身成员初始化，读取本任务、D-001/D-010/D-013、A-003 v0.1，以及书稿 chapter 2、4、6–10、15 中的平台约定；按实际可访问资料核对源码和配方依据，缺失或尚未取得的基线明确待核实，不自动 SSH 或切换远程仓库。
-- 本阶段交付：[A-005《tiger 平台设计说明》v0.1](artifacts/A-005-tiger-platform-design.md)，状态 draft，2026-10-11 由 architect 创建并登记成果索引。已覆盖本章最小 CPU/内存/设备/中断/时钟/启动/复位契约、跨 QEMU/TF-A/U-Boot/Linux 的接口依赖，以及 NAND 几何、镜像与存储布局、watchdog 地址和时钟等后续约束；逐项区分已有依据、候选取舍、待确认问题、实际实现与实测覆盖，给出验证办法和影响章节。未取得实际工程源码/配方，未实现后续功能或修改已定稿章节及工程代码。
+- 本阶段交付：[A-005《tiger 平台设计说明》v0.2](artifacts/A-005-tiger-platform-design.md)，状态 draft，2026-10-11 由 architect 统一修订并更新索引。本章仅单核/ROM/RAM/轮询串口和宿主 reset；SRAM/GIC/timer IRQ/四核/guest reset/其他设备及完整链在首次使用前扩充。已引用两位工程师的锁定来源/源码证据，明确固件/部署/任务图/运行判据、后续 SPI NAND/CS/几何/镜像与 watchdog 门槛，13 项作者回复见下文。尚无模型/固件/metadata 实现、构建或运行证据，未改书稿/工程代码。
 - 设计阶段出口：提交明确版本的候选稿后停止改稿；project-manager 再按实际受评版本登记 qemu-engineer 的模型能力/接口核对和 yocto-engineer 的配方/集成/启动约束核对，用户同期提出意见。意见到齐后由 architect 统一修订，必要的专业复核及用户确认形成 chapter 4 实施基线；候选稿不能自行标 approved，后续未验证能力保持明确。
-- 当前下一步：architect 按 U-A005-01/02、Y-A005-01～05、QE-A005-01～06 统一修订 A-005 为下一版本 draft，逐项记录处理结果并冻结；project-manager 再安排必要的针对性复核，用户确认后 writer 编制章节蓝图。
+- 当前下一步：project-manager 按 A-005 v0.2 稳定版本安排必要针对性复核及用户确认；architect 本轮交付后停止，待后续实际安排，不代写复核或批准。确认后 writer 编制蓝图。
 
 ### 本轮评审：A-005 v0.1 平台设计候选稿，第 1 轮设计专业核对
 - 受评正文：[A-005 v0.1](artifacts/A-005-tiger-platform-design.md)，固定读取 Git `69ce591cd9e4ee310b80cff4663c20c776364cfd` 中的正文。本轮全部意见提交前 architect 保持候选稿不变；后续任务意见提交不改变受评正文版本。
@@ -621,12 +623,15 @@
 - 参与成员、各自范围与完成条件：yocto-engineer 先核对 Q-01/Q-04 的实际配方、源码与已有 patch 基线、最小固件部署输入及 `runqemu` 路线，并检查 SPI NAND 对后续固件/驱动/镜像集成的影响；qemu-engineer 随后基于实际取得的准确源码版本核对 Q-02/Q-03 的最小模型、CPU/内存/串口及启动/复位接口，并检查 SPI 主控与 SPI NAND 芯片模型的后续可用性和接口约束。Q-05～Q-10 区分本章兼容约束与后续功能，不要求本轮实现或验证全平台。两名成员各自记录有来源的意见、未覆盖项及 pass/revise/blocked 结论；未取得资料如实说明，不以草稿版本号或最新上游代替锁定基线。
 - 本轮进度与下一位行动人：用户 U-A005-01/U-A005-02 已提交完毕；yocto-engineer 已完成核对，提交 `dd15379ebea54b36dab7b5cc2638fd345e71553f`，结论 revise，意见及证据见下文。qemu-engineer 已提交 `1c8304446f8bf82fd46a56413a5fa5787e271ae6`，结论 revise，意见及证据见下文。project-manager 已核验双方提交、受评稿未变、工作树干净和两位成员完成停止；本轮全部意见齐备，下一位为 architect 统一修订。2026-10-11 用户直接授权 project-manager 协调各成员开始工作，通知顺序为 yocto-engineer → qemu-engineer → architect，每次等待前一成员完成并停止后再继续；执行成员工作期间协调方仅观察，不写仓库或启动第二个成员。本轮全部意见提交后 architect 统一修订并回复问题，必要的专业复核及用户确认形成 chapter 4 最小实施基线。本次实际发送仍须逐一核对身份、有效会话和平台权限，不扩大访问权限、创建工程分支或启动实现。
 - 作者统一修订安排：2026-10-11 project-manager 依用户的直接协调授权衔接 architect。保持两名工程成员原意见及证据，通过作者处理回复记录 U/Y/QE 的采纳、变更位置或理由；收敛 chapter 4 最小资源、测试固件加载/部署/runqemu/模型复位契约，回填准确源码及补丁来源，将 SPI NAND/CS、watchdog 等未实现依赖放在首次使用前的后续门槛。交付明确新版本及稳定提交后停止改稿，必要复核前不标 approved，不开始蓝图、工程实现或新增分支。
+- 作者统一修订交付：2026-10-11 architect 已交付 A-005 v0.2 draft；本轮 13 项均采纳并逐项说明变更位置，见各意见下的作者回复。修改后待新版本针对性复核，保留 v0.1 原评审结论及未覆盖项，不代写通过。
 
 #### 用户的意见
 - 日期与依据：2026-10-11，本 project-manager 会话，针对 A-005 v0.1；用户意见已提交完毕，专业评审与成果批准尚未发生。
 - U-A005-01（SPI NAND 接入；A-005 §4.1/§7.1/Q-07）：用户原话“NAND直接走spi吧，应该不需要控制器啊”。修订方向为 SPI NAND，通过 SPI 主控的片选接入，不另建专用并行 NAND 控制器。SPI 主控仍需存在；[Linux SPI 文档](https://www.kernel.org/doc/html/latest/spi/spi-summary.html) 和 [Linux v6.6 SPI NAND 核心](https://github.com/torvalds/linux/blob/v6.6/drivers/mtd/nand/spi/core.c)说明通用接口关系，不能证明项目 QEMU 或固件已支持所选组合。请工程成员核对具体主控/芯片模型、CS、驱动、TF-A 读取路径、几何/ECC/OOB/坏块及后端格式；architect 统一修订时调整独立 NAND 控制器窗口及相关契约，不把 SPI NAND 与 SPI NOR 当作同一设备。原稿责任人：architect。
 - U-A005-02（第 4 章最小启动与章节演进；A-005 §1/§3/§5/§10）：用户原话“针对第4章，只需要最小的能启动的machine就可以，不需要实现全部功能，功能随着书目章节的演进再进行补充”。请 architect 明确本章最小可启动资源、固件/入口与启动证据，将 SPI NAND、完整固件/内核启动链、watchdog 等安排到对应章节；将预留布局与本章实际实现分开。两名工程成员核对最小路线，不把 machine 枚举、`-S` 暂停或仅创建对象作为 CPU 已启动的证据，也不要求本章先完成全平台功能。D-013 的真实 patch、正式集成、干净复验及本章启动证据保留。原稿责任人：architect。
-- 作者处理回复：待本轮两名工程成员意见到齐后，由 architect 统一填写处理结果及修订版本。
+- 作者处理回复（architect，2026-10-11，A-005 v0.2 draft）：
+  - U-A005-01：采纳；§4.1a/§4.3 删除独立并行 NAND MMIO/IRQ，§6/§7.1 统一为 SPI master→实际 CS→SPI NAND。具体主控/芯片/CS 由工程成员在首次读取 BL2/FIP 前核对或补充实现；几何/OOB/ECC/坏块/后端仍候选，不要求本章批准未知型号。
+  - U-A005-02：采纳；§1/§3/§4.1/§5/§10 收敛 CPU0/A53/TCG、ROM/RAM、轮询 PL011 与最小固件实际执行。四核/SRAM/GIC/timer IRQ/guest reset/RTC/SPI/NAND/watchdog/完整链在首次使用前扩充；本章保留正式 patch/干净构建/runqemu 与宿主模型 reset，未声称已运行。
 - 复核与批准：尚未进行；用户提交建议不等于批准 A-005 v0.1。
 
 #### yocto-engineer 的意见
@@ -638,7 +643,12 @@
 - Y-A005-04（§4.1/§4.3/§4.4/§6/§7/Q-07，SPI NAND）：落实 U-A005-01，移除专用并行 NAND 控制器窗口/IRQ，保留 SPI 主控→CS→SPI NAND 的接口。锁定源码有 PL022、SPI NOR m25p80 和并行 nand 接口；在 hw/include/hw 范围未检索到 SPI NAND，不可将前两种芯片模型混用。明确主控/芯片/CS、guest SPI master 与 SPI_MEM/MTD_SPI_NAND、TF-A BL2/FIP 读取、几何/OOB/ECC/坏块及后端格式的后续依赖。若 chapter 6 首次采用 SPI NAND 读固件，相关最小读取门槛应前移到该读取前；采用其他阶段测试介质则注明有限覆盖。完整存储/UBI/A/B 保留后续阶段，候选 512MiB/LEB/总装参数待芯片确定后重核。原稿责任人：architect；芯片模型可用性和实现量由 qemu-engineer 核对。
 - Y-A005-05（§3/§5/§10 V-06/V-07，最小启动验收）：落实 U-A005-02，明确本章必须观察 CPU0 执行选定固件并输出可追溯 UART 标记，关联固件/hash、真实 tiger 参数、正式 patch 集成及清理 workspace 后构建证据。将四核上线、timer IRQ、guest 请求 reset 的测试前提与最低启动门槛分别说明；如保留本章 guest reset，须明确实际触发接口及测试固件增量，固件模式不能仅假定已有 BL31/PSCI。模型 reset 正确性仍由 QEMU 核对，后续完整启动链/存储/watchdog 不提前实施；枚举 machine、`-S` 或对象创建不算 CPU 启动。原稿责任人：architect。
 - 未覆盖：未执行 BitBake 解析/构建、patch 重应用、固件或 qemuboot 生成、QEMU/runqemu、CPU/IRQ/reset、SPI NAND/UBI/镜像或全链实测；Q-02/Q-03 模型 API 与正确性由下一位 qemu-engineer 核对。旧 work 源码未做全树差异核验，历史 do_patch 和现有二进制不冒充本轮重构建；具体芯片/数据手册、TF-A 及 tiger 的 U-Boot/Linux 配置仍待后续阶段取得。
-- 作者处理回复：待本轮全部意见到齐后由 architect 按 Y-A005-01～05 填写修订版本和处理结果。
+- 作者处理回复（architect，2026-10-11，A-005 v0.2 draft；均采纳，待必要复核）：
+  - Y-A005-01：§2.1/§2.3/§6 回填 Poky 完整 SHA、配方链、QEMU 包 SHA-256、31 项已有 patch 顺序证据与来源边界；区分工程师远端只读实查/本轮读取报告，新 tiger provider/override 未展开，未来组件在首次使用前另锁。
+  - Y-A005-02：§5.3/§5.4 给出 raw 固件源/入口/link/ELF/map、独立 target fixture 配方、deploy 与生成任务、[config_bsp]/vardeps 和 helper sysroot 依赖；不继承 image qemuboot、不临时手写 INI，实施核对实际任务图。
+  - Y-A005-03：§5.4 明确三项 none、同目录 BIOS basename/-bios、helper native 路径/hash要求、清理默认 virt/virtio/PCI/USB/网络/磁盘/多余串口、UART0 对应 nographic 第一 backend；宿主 PATH 回退不通过，保留 TUN 宿主前置条件，未运行。
+  - Y-A005-04：§4.1a/§4.3/§6/§7.1/§9 将 SPI master/实际 CS/芯片、SPI_MASTER/SPI_MEM/MTD_SPI_NAND、TF-A IO/驱动/镜像/OOB/ECC/坏块门槛放到首次 SPI NAND 读 BL2/FIP 前，完整存储后续分阶段；不把 NOR/并行 NAND 当 SPI NAND。
+  - Y-A005-05：§3/§5.2/§5.3/§10 分离真实 CPU0/UART 标记、宿主 system_reset、后续 guest reset/timer IRQ/多核；入口/EL和资产/patch/工具/conf hash与干净 runqemu关联，枚举/-S/对象创建不能作启动证据。
 - 复核：尚未进行；本人成果已提交后停止，等待 project-manager 串行衔接 QEMU 专业核对及后续统一修订，不代写他人结论或批准。
 
 #### qemu-engineer 的意见
@@ -651,7 +661,13 @@
 - QE-A005-05（§4.1/§4.3/§6/§7/Q-07，SPI NAND）：采用 SPI master→实际 CS→SPI NAND，移除独立并行 NAND 控制器窗口/IRQ。PL022 有 SSI bus/MMIO/IRQ，但全文件没有 CS 输出；SSI 的 cs 属性只编号，须另定 guest 可控片选来源及 reset 未选中电平，或核对另一 master。未识别可直接使用的 SPI NAND 模型；m25p80 是 NOR，nand_setpins 是并行 NAND，仅能评估其基础设施/后端复用，不能改名替代芯片协议。后续需补芯片实现或审查外部实现，锁定型号/ID/命令/缓存/busy/reset/OOB/ECC/坏块及后端布局；主控、CS、最小读取模型、TF-A IO 与镜像一致性门槛在首次 SPI NAND 读 BL2/FIP 前满足，可能早于 chapter 9/10。完整 program/erase/UBI/A/B/持久化仍分阶段，不阻塞本章无 NAND 固件。原稿责任人：architect。
 - QE-A005-06（§6/§8/§9 Q-05～Q-10，后续兼容边界）：锁定 virt/bsa 源码支持 GICv2 与 timer INTID 26/27/29/30 的接线参考，后续须区分 SPI INTID/GPIO 下标、每核 PPI、安全分组、cntfrq、handler 与 PSCI provider；未作完整 GIC 审核。SP805 检索仅命中 vexpress 注释（含 not modelled），未找到可直接实例化的 SP805 模型；现有 CMSDK/SBSA watchdog 须另审兼容或适配，不能假定 LOAD=0 停止或制造上游 bug 结论。TF-A/U-Boot/Linux 入口/驱动、存储几何/UBI/A/B、SPI NOR/EEPROM 和 guest 网卡留在首次使用前锁定/验证，slirp 不替代网卡模型。原稿责任人：architect。
 - 未覆盖：全源码树一致性、BitBake 选择展开、模型/固件/metadata/qemuboot 实现与构建、QEMU/runqemu 或 CPU/UART/reset/IRQ/SMP 实测；具体 SPI NAND 型号/数据手册与模型、TF-A/U-Boot/Linux 虎板驱动/全链、存储/watchdog 运行核验。静态来源和旧 work 产物不能代替新 tiger 结果；后续 gate 不因本次范围收敛而取消。
-- 作者处理回复：待本轮意见到齐后由 architect 按 QE-A005-01～06 填写修订版本和处理结果。
+- 作者处理回复（architect，2026-10-11，A-005 v0.2 draft；均采纳，待必要复核）：
+  - QE-A005-01：§1/§3/§4.1 收敛单核 A53/TCG、三段 ROM/UART/RAM，默认/最大 CPU 为 1，1 GiB 为布局选择；轮询不接 GIC/IRQ，§4.1a/§4.3 的后续预留不实例化，按首次使用扩充。
+  - QE-A005-02：§5.1/§5.3 选 MachineState.firmware→路径解析→实际 ROM→load_image_mr，0<raw≤1MiB，缺失/不可读/空/超长在执行前报错；入口/link=0、rvbar/EL3、memory/secure-memory 和 RAM 栈/data/BSS 明确，保留 ELF/map/raw 对账。
+  - QE-A005-03：§5.2 选定 arm_load_kernel 纯 firmware reset 注册，machine 持有 boot_info且仅初始化调用一次，不另注册 handler；明确输入拒绝、PSCI disabled、生命周期/不重复注册、宿主暂停→system_reset→状态→cont→再次标记；RAM 不全清零、guest reset/四核另设前提。
+  - QE-A005-04：§4.4/§5.3/§5.4/§10 固定 PL011 单 clk 24MHz、realize前连接，cntfrq独立；UART0=serial_hd(0)，32位轮询初始化/读回与字符输出分开验收，原生工具/资产/hash/最终参数/入口/EL/guest MMIO证据完整，未宣称波特率或IRQ实测。
+  - QE-A005-05：§7.1 明确 PL022 无 CS输出、SSI cs编号不等于电平，后续选实际GPIO/片选或另一master及reset未选中；芯片实现/外部审查、TF-A读取、ECC/OOB/坏块/镜像门槛前移首次读BL2/FIP；不阻塞无NAND本章。
+  - QE-A005-06：§2.3/§4.3/§6/§8.1/§9 保留后续GIC/PPI/安全分组/cntfrq/PSCI约束但不扩大本章；撤回已有SP805假设，CMSDK/SBSA仅候选，手册/模型/driver/教学实验另核；未来组件/存储/其他设备首次使用前锁定和实测，slirp不代网卡。
 - 复核：尚未进行；本人成果提交后停止，等待 project-manager 串行衔接 architect 统一修订及必要复核，不代写批准。
 
 ## T-017：全书四仓库叙事迁移为 `meta-tiger` patch-only 模型
