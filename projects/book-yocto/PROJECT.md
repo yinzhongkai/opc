@@ -50,6 +50,8 @@
 - 2026-09-27：用户在本超级管理员会话要求增加一名专门进行 Yocto 开发的成员，并在 OPC 框架中增加相应技能和角色。新增公共技能 `yocto-engineering`、公共角色 `yocto-engineer`，新建成员 `yocto-engineer`，配置路径 [members/yocto-engineer.yaml](members/yocto-engineer.yaml)；TEAM 登记成员索引并为该角色补充技能 `technical-book-validation`。记录人：框架超级管理员。
 - 2026-10-11：用户在本超级管理员会话明确要求新增 QEMU 工程师并创建会话、完成只读初始化，主责 tiger 模型代码与正确性，现有 Yocto 工程师继续承担 patch 集成、BitBake 构建和系统验证。新建 `qemu-engineer`（角色 qemu-engineer），配置路径 [members/qemu-engineer.yaml](members/qemu-engineer.yaml)；TEAM 登记成员并补充 `technical-book-validation`，有效技能为 `software-engineering, qemu-engineering, technical-book-validation`。同步细化 [members/yocto-engineer.yaml](members/yocto-engineer.yaml) 的 QEMU 集成与模型问题交接边界，角色和技能集合不变。遵循 D-013，上游版本由 Poky 配方锁定，长期 patch 进入既有 `meta-tiger`；WORKSPACE 及成果物基线不变。T-016 的具体任务分工交由项目经理后续调整，见 [H-002](HANDOFFS.md)；本次配置不代表业务开发已启动。记录人：框架超级管理员。
 
+- 2026-10-11：用户在 project-manager 会话明确要求“按你的建议新增加成员吧”，授权新增负责 tiger 平台设计的系统架构师。本轮按超级管理员入口处理有界成员配置维护，原 project-manager 成员身份不变。复用已有 active 角色 `architect`，新建首名该角色成员 `architect`，配置路径 [members/architect.yaml](members/architect.yaml)；TEAM 登记并补充 `qemu-engineering, yocto-engineering, technical-book-validation`，有效技能为 `system-design, qemu-engineering, yocto-engineering, technical-book-validation`。主责跨 QEMU/TF-A/U-Boot/Linux 的平台设计、接口与启动链契约及设计风险；writer 保持章节教学设计和写作职责，两个工程成员保持模型开发与集成验证职责。公共角色、技能正文和 WORKSPACE 基线均未修改；建员属于 T-016 启动准备，不开始下一轮开发。本次完成成员配置，不创建或唤醒平台会话、不代写初始化或专业设计成果；任务和计划衔接见 [H-003](HANDOFFS.md)。记录人：框架超级管理员（本轮用户明确授权的有界配置维护）。
+
 ## 框架升级记录
 
 - 2026-10-12：用户在超级管理员会话要求“先同步下最新代码，然后将项目升级到 v0.0.4 框架”。OPC、独立书稿及 SSH 主机 `tiger` 上的 `meta-tiger` 已刷新远端引用；升级前两个本机仓库及远程工程仓库工作树均干净。书稿保持 `feature/t-016-chapter4-revision`、`main@f444790f352b46f699fd3d46198f8b9b9f089a62`，工程保持 `master@0e3da48b34ef772532535a730a21878cc30ccf67`；本次框架升级不推进成果物版本。

@@ -6,4 +6,5 @@ roleKnowledge:
   reviewer: [book-production, book-review, reader-feedback, technical-book-validation]
   yocto-engineer: [technical-book-validation]
   qemu-engineer: [technical-book-validation]
-members: [project-manager, writer, reviewer, yocto-engineer, qemu-engineer]
+  architect: [qemu-engineering, yocto-engineering, technical-book-validation]
+members: [project-manager, writer, reviewer, yocto-engineer, qemu-engineer, architect]
