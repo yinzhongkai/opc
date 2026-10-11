@@ -1,0 +1,765 @@
+# T-016 / A-005 v0.1 Yocto design review — read-only evidence
+# Reviewer: book-yocto / yocto-engineer
+# Review date: 2026-10-11 (Asia/Shanghai)
+# Reviewed OPC commit: 69ce591cd9e4ee310b80cff4663c20c776364cfd
+# Authorization: T-016 review arrangement + H-001 ssh tiger environment
+# These commands read existing files/checkouts/artifacts. No build or QEMU run occurred.
+# Existing log.do_patch is historical evidence, not a task executed by this review.
+# The three captured command outputs below are complete (no tool truncation).
+
+=== A. Repository, configuration, hashes, patch order, host prerequisite ===
+COMMAND (PowerShell):
+ssh -F C:/Users/YinZh/.ssh/config -o BatchMode=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile=C:/Users/YinZh/.ssh/known_hosts -o ConnectTimeout=10 tiger 'set -e; date --iso-8601=seconds; hostname; id -un; git -C /home/oops/workspace/meta-tiger status --porcelain=v1 --branch; git -C /home/oops/workspace/meta-tiger rev-parse HEAD; git -C /home/oops/workspace/meta-tiger remote -v; git -C /home/oops/workspace/meta-tiger ls-files; git -C /home/oops/workspace/poky status --porcelain=v1 --branch; git -C /home/oops/workspace/poky rev-parse HEAD; git -C /home/oops/workspace/poky remote -v; cat /home/oops/workspace/build/conf/bblayers.conf; grep -nE "^[[:space:]]*(MACHINE|DISTRO|DL_DIR|SSTATE_DIR|TMPDIR)" /home/oops/workspace/build/conf/local.conf; if test -e /home/oops/workspace/meta-arm; then ls -ld /home/oops/workspace/meta-arm; else printf "DECLARED_PATH_META_ARM_ABSENT\n"; fi; find /home/oops/workspace/poky/meta /home/oops/workspace/poky/meta-poky /home/oops/workspace/poky/meta-yocto-bsp /home/oops/workspace/meta-tiger -name "*qemu*.bbappend" -o -name "*trusted-firmware*.bb" -o -name "*tf-a*.bb"; sha256sum /home/oops/workspace/build/downloads/qemu-8.2.7.tar.xz /home/oops/workspace/poky/meta/recipes-devtools/qemu/qemu.inc /home/oops/workspace/poky/scripts/runqemu /home/oops/workspace/poky/meta/classes-recipe/qemuboot.bbclass /home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/.pc/applied-patches; cat /home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/.pc/applied-patches; readlink -f /home/oops/workspace/build/tmp/work/x86_64-linux/qemu-helper-native/1.0/recipe-sysroot-native/usr/bin/qemu-system-aarch64; sha256sum /home/oops/workspace/build/tmp/work/x86_64-linux/qemu-helper-native/1.0/recipe-sysroot-native/usr/bin/qemu-system-aarch64; nl -ba /home/oops/workspace/poky/scripts/runqemu | sed -n "113,135p"; nl -ba /home/oops/workspace/poky/meta/recipes-bsp/u-boot/u-boot_2024.01.bb; grep -nA16 -B2 "^config SPI_PL022" /home/oops/workspace/build/tmp/work-shared/qemuarm64/kernel-source/drivers/spi/Kconfig; grep -nE "config MTD_SPI_NAND|depends on|select" /home/oops/workspace/build/tmp/work-shared/qemuarm64/kernel-source/drivers/mtd/nand/spi/Kconfig; grep -nE "spi_controller_get|transfer_one|transfer_one_message|of_match|of_get|chip_select|mem_ops|ssp.*clk|compatible" /home/oops/workspace/build/tmp/work-shared/qemuarm64/kernel-source/drivers/spi/spi-pl022.c | tail -18; grep -nE "TYPE_SSI_PERIPHERAL|TYPE_SYS_BUS_DEVICE|SPI_NOR|nand_setpins|nand_setio|nand_getio|TYPE_NAND|ssi_create|sysbus_init|pl022" /home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/hw/block/nand.c /home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/hw/block/m25p80.c /home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/hw/ssi/pl022.c | tail -30; if grep -RniE "spi.?nand|spinand" /home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/hw /home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/include/hw; then true; else printf "NO_SPINAND_TEXT_MATCH_IN_HW_INCLUDE_HW\n"; fi'
+EXIT CODE: 0
+OUTPUT:
+2026-10-11T20:08:58+08:00
+tiger
+oops
+## master...github/master
+0e3da48b34ef772532535a730a21878cc30ccf67
+github	git@github.com:yinzhongkai/meta-tiger.git (fetch)
+github	git@github.com:yinzhongkai/meta-tiger.git (push)
+COPYING.MIT
+MAINTAINERS
+README
+conf/distro/.gitkeep
+conf/layer.conf
+conf/machine/.gitkeep
+recipes-bsp/.gitkeep
+recipes-core/.gitkeep
+recipes-kernel/.gitkeep
+## scarthgap...origin/scarthgap
+77d1feb37e280733684ae8a9449fb031d5d7ff40
+origin	https://git.yoctoproject.org/poky.git (fetch)
+origin	https://git.yoctoproject.org/poky.git (push)
+# POKY_BBLAYERS_CONF_VERSION is increased each time build/conf/bblayers.conf
+# changes incompatibly
+POKY_BBLAYERS_CONF_VERSION = "2"
+
+BBPATH = "${TOPDIR}"
+BBFILES ?= ""
+
+BBLAYERS ?= " \
+  /home/oops/workspace/poky/meta \
+  /home/oops/workspace/poky/meta-poky \
+  /home/oops/workspace/poky/meta-yocto-bsp \
+  /home/oops/workspace/meta-tiger \
+  "
+23:MACHINE = "qemuarm64"
+56:DL_DIR = "${TOPDIR}/downloads"
+72:SSTATE_DIR = "${TOPDIR}/sstate-cache"
+84:TMPDIR = "${TOPDIR}/tmp"
+94:DISTRO ?= "poky"
+DECLARED_PATH_META_ARM_ABSENT
+1f0604f296ab9acb4854c054764a1ba408643fc299bd54a6500cccfaaca65b55  /home/oops/workspace/build/downloads/qemu-8.2.7.tar.xz
+ce75d5fccd7c588b0063408fd0c3f51ccd7e00f94029eea605964076b57edc33  /home/oops/workspace/poky/meta/recipes-devtools/qemu/qemu.inc
+d644b4763b968414649f948151d51ff84b1663218ffd4abae3b58d19e4ba7861  /home/oops/workspace/poky/scripts/runqemu
+87d8cc1bcb8db862ae9a80f53c685e61b750867060fb563804a92bf1dedde01f  /home/oops/workspace/poky/meta/classes-recipe/qemuboot.bbclass
+3b7c0560451d78d8eae6512a4c21d77129eb3b0e1106512949709e8ef0eb8430  /home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/.pc/applied-patches
+0001-qemu-Add-addition-environment-space-to-boot-loader-q.patch
+0003-apic-fixup-fallthrough-to-PIC.patch
+0004-configure-Add-pkg-config-handling-for-libgcrypt.patch
+0005-qemu-Do-not-include-file-if-not-exists.patch
+0006-qemu-Add-some-user-space-mmap-tweaks-to-address-musl.patch
+0007-qemu-Determinism-fixes.patch
+0008-tests-meson.build-use-relative-path-to-refer-to-file.patch
+0009-Define-MAP_SYNC-and-MAP_SHARED_VALIDATE-on-needed-li.patch
+0010-hw-pvrdma-Protect-against-buggy-or-malicious-guest-d.patch
+0002-linux-user-Replace-use-of-lfs64-related-functions-an.patch
+fixedmeson.patch
+no-pip.patch
+4a8579ad8629b57a43daa62e46cc7af6e1078116.patch
+0002-linux-user-loongarch64-Remove-TARGET_FORCE_SHMLBA.patch
+0003-linux-user-Add-strace-for-shmat.patch
+0004-linux-user-Rewrite-target_shmat.patch
+0005-tests-tcg-Check-that-shmat-does-not-break-proc-self-.patch
+0001-sched_attr-Do-not-define-for-glibc-2.41.patch
+CVE-2024-8354.patch
+CVE-2025-12464.patch
+0001-python-backport-Remove-deprecated-get_event_loop-cal.patch
+0002-python-backport-avoid-creating-additional-event-loop.patch
+CVE-2025-11234-01.patch
+CVE-2025-11234-02.patch
+CVE-2024-6519.patch
+CVE-2025-14876_p1.patch
+CVE-2025-14876_p2.patch
+CVE-2026-0665.patch
+CVE-2026-2243.patch
+0011-linux-user-workaround-for-missing-MAP_FIXED_NOREPLAC.patch
+0012-linux-user-workaround-for-missing-MAP_SHARED_VALIDAT.patch
+/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-helper-native/1.0/recipe-sysroot-native/usr/bin/qemu-system-aarch64
+d77b1af41dd5b8107e343f4a0893797b1754e8d2f98656af142805bd4f546534  /home/oops/workspace/build/tmp/work/x86_64-linux/qemu-helper-native/1.0/recipe-sysroot-native/usr/bin/qemu-system-aarch64
+   113	def check_tun():
+   114	    """Check /dev/net/tun"""
+   115	    dev_tun = '/dev/net/tun'
+   116	    if not os.path.exists(dev_tun):
+   117	        raise RunQemuError("TUN control device %s is unavailable; you may need to enable TUN (e.g. sudo modprobe tun)" % dev_tun)
+   118	
+   119	    if not os.access(dev_tun, os.W_OK):
+   120	        raise RunQemuError("TUN control device %s is not writable, please fix (e.g. sudo chmod 666 %s)" % (dev_tun, dev_tun))
+   121	
+   122	def get_first_file(globs):
+   123	    """Return first file found in wildcard globs"""
+   124	    for g in globs:
+   125	        all_files = glob.glob(g)
+   126	        if all_files:
+   127	            for f in all_files:
+   128	                if not os.path.isdir(f):
+   129	                    return f
+   130	    return ''
+   131	
+   132	class BaseConfig(object):
+   133	    def __init__(self):
+   134	        # The self.d saved vars from self.set(), part of them are from qemuboot.conf
+   135	        self.d = {'QB_KERNEL_ROOT': '/dev/vda'}
+     1	require u-boot-common.inc
+     2	require u-boot.inc
+     3	
+     4	DEPENDS += "bc-native dtc-native python3-pyelftools-native"
+     5	
+     6	SRC_URI += "file://CVE-2024-57254.patch \
+     7	            file://CVE-2024-57255.patch \
+     8	            file://CVE-2024-57256.patch \
+     9	            file://CVE-2024-57257.patch \
+    10	            file://CVE-2024-57258-1.patch \
+    11	            file://CVE-2024-57258-2.patch \
+    12	            file://CVE-2024-57258-3.patch \
+    13	            file://CVE-2024-57259.patch \
+    14	            file://CVE-2024-42040.patch \
+    15	"
+787-	  SPI driver for PIC32 Quad SPI controller.
+788-
+789:config SPI_PL022
+790-	tristate "ARM AMBA PL022 SSP controller"
+791-	depends on ARM_AMBA
+792-	default y if ARCH_REALVIEW
+793-	default y if INTEGRATOR_IMPD1
+794-	default y if ARCH_VERSATILE
+795-	help
+796-	  This selects the ARM(R) AMBA(R) PrimeCell PL022 SSP
+797-	  controller. If you have an embedded system with an AMBA(R)
+798-	  bus and a PL022 controller, say Y or M here.
+799-
+800-config SPI_PPC4xx
+801-	tristate "PPC4xx SPI Controller"
+802-	depends on PPC32 && 4xx
+803-	select SPI_BITBANG
+804-	help
+805-	  This selects a driver for the PPC4xx SPI Controller.
+2:menuconfig MTD_SPI_NAND
+4:	select MTD_NAND_CORE
+5:	select MTD_NAND_ECC
+6:	depends on SPI_MASTER
+7:	select SPI_MEM
+1576:static int pl022_transfer_one_message(struct spi_controller *host,
+1579:	struct pl022 *pl022 = spi_controller_get_devdata(host);
+1607:	struct pl022 *pl022 = spi_controller_get_devdata(host);
+1737:				    ssp_clock_params * clk_freq)
+1845:	struct ssp_clock_params clk_freq = { .cpsdvsr = 0, .scr = 0};
+1847:	struct pl022 *pl022 = spi_controller_get_devdata(spi->controller);
+2127:	pl022 = spi_controller_get_devdata(host);
+2141:	host->transfer_one_message = pl022_transfer_one_message;
+/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/hw/ssi/pl022.c:157:                      "pl022_read: Bad offset %x\n", (int)offset);
+/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/hw/ssi/pl022.c:162:static void pl022_write(void *opaque, hwaddr offset,
+/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/hw/ssi/pl022.c:179:        pl022_xfer(s);
+/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/hw/ssi/pl022.c:187:            pl022_xfer(s);
+/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/hw/ssi/pl022.c:196:        pl022_update(s);
+/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/hw/ssi/pl022.c:208:            qemu_log_mask(LOG_UNIMP, "pl022: DMA not implemented\n");
+/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/hw/ssi/pl022.c:213:                      "pl022_write: Bad offset %x\n", (int)offset);
+/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/hw/ssi/pl022.c:217:static void pl022_reset(DeviceState *dev)
+/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/hw/ssi/pl022.c:228:static const MemoryRegionOps pl022_ops = {
+/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/hw/ssi/pl022.c:229:    .read = pl022_read,
+/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/hw/ssi/pl022.c:230:    .write = pl022_write,
+/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/hw/ssi/pl022.c:234:static int pl022_post_load(void *opaque, int version_id)
+/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/hw/ssi/pl022.c:247:static const VMStateDescription vmstate_pl022 = {
+/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/hw/ssi/pl022.c:248:    .name = "pl022_ssp",
+/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/hw/ssi/pl022.c:251:    .post_load = pl022_post_load,
+/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/hw/ssi/pl022.c:284:static void pl022_realize(DeviceState *dev, Error **errp)
+/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/hw/ssi/pl022.c:289:    memory_region_init_io(&s->iomem, OBJECT(s), &pl022_ops, s, "pl022", 0x1000);
+/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/hw/ssi/pl022.c:290:    sysbus_init_mmio(sbd, &s->iomem);
+/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/hw/ssi/pl022.c:291:    sysbus_init_irq(sbd, &s->irq);
+/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/hw/ssi/pl022.c:292:    s->ssi = ssi_create_bus(dev, "ssi");
+/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/hw/ssi/pl022.c:295:static void pl022_class_init(ObjectClass *klass, void *data)
+/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/hw/ssi/pl022.c:299:    dc->reset = pl022_reset;
+/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/hw/ssi/pl022.c:300:    dc->vmsd = &vmstate_pl022;
+/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/hw/ssi/pl022.c:301:    dc->realize = pl022_realize;
+/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/hw/ssi/pl022.c:304:static const TypeInfo pl022_info = {
+/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/hw/ssi/pl022.c:306:    .parent        = TYPE_SYS_BUS_DEVICE,
+/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/hw/ssi/pl022.c:308:    .class_init    = pl022_class_init,
+/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/hw/ssi/pl022.c:311:static void pl022_register_types(void)
+/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/hw/ssi/pl022.c:313:    type_register_static(&pl022_info);
+/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/hw/ssi/pl022.c:316:type_init(pl022_register_types)
+NO_SPINAND_TEXT_MATCH_IN_HW_INCLUDE_HW
+
+=== B. U-Boot source revision, existing kernel checkout, SPI interfaces ===
+COMMAND (PowerShell):
+ssh -F C:/Users/YinZh/.ssh/config -o BatchMode=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile=C:/Users/YinZh/.ssh/known_hosts -o ConnectTimeout=10 tiger 'set -e; hostname; id -un; git -C /home/oops/workspace/meta-tiger status --short --branch; git -C /home/oops/workspace/meta-tiger rev-parse HEAD; git -C /home/oops/workspace/poky status --short --branch; git -C /home/oops/workspace/poky rev-parse HEAD; cat /home/oops/workspace/poky/meta/recipes-bsp/u-boot/u-boot-common.inc; if test -d /home/oops/workspace/build/tmp/work-shared/qemuarm64/kernel-source; then git -C /home/oops/workspace/build/tmp/work-shared/qemuarm64/kernel-source rev-parse HEAD; git -C /home/oops/workspace/build/tmp/work-shared/qemuarm64/kernel-source status --short --branch; grep -nE "spi_mem_exec_op|spi_mem_supports_op" /home/oops/workspace/build/tmp/work-shared/qemuarm64/kernel-source/drivers/mtd/nand/spi/core.c | head -20; grep -nE "config SPI_PL022|select|depends" /home/oops/workspace/build/tmp/work-shared/qemuarm64/kernel-source/drivers/spi/Kconfig | head -45; fi; grep -nE "def check_tun|tun device|/dev/net/tun|tunctl" /home/oops/workspace/poky/scripts/runqemu; ls -l /dev/net/tun; find /home/oops/workspace/build/tmp/work/x86_64-linux/qemu-helper-native/1.0/recipe-sysroot-native/usr/bin -maxdepth 1 -name "qemu-system-aarch64" -o -name "*tunctl*" 2>/dev/null; nl -ba /home/oops/workspace/poky/scripts/runqemu | sed -n "990,1045p"; sha256sum /home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/hw/ssi/pl022.c /home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/hw/block/m25p80.c /home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/hw/block/nand.c'
+EXIT CODE: 0
+OUTPUT:
+tiger
+oops
+## master...github/master
+0e3da48b34ef772532535a730a21878cc30ccf67
+## scarthgap...origin/scarthgap
+77d1feb37e280733684ae8a9449fb031d5d7ff40
+HOMEPAGE = "http://www.denx.de/wiki/U-Boot/WebHome"
+DESCRIPTION = "U-Boot, a boot loader for Embedded boards based on PowerPC, \
+ARM, MIPS and several other processors, which can be installed in a boot \
+ROM and used to initialize and test the hardware or to download and run \
+application code."
+SECTION = "bootloaders"
+DEPENDS += "flex-native bison-native python3-setuptools-native"
+
+LICENSE = "GPL-2.0-or-later"
+LIC_FILES_CHKSUM = "file://Licenses/README;md5=2ca5f2c35c8cc335f0a19756634782f1"
+PE = "1"
+
+# We use the revision in order to avoid having to fetch it from the
+# repo during parse
+SRCREV = "866ca972d6c3cabeaf6dbac431e8e08bb30b3c8e"
+
+SRC_URI = "git://source.denx.de/u-boot/u-boot.git;protocol=https;branch=master \
+           file://CVE-2025-24857.patch \
+"
+
+S = "${WORKDIR}/git"
+B = "${WORKDIR}/build"
+
+inherit pkgconfig
+
+do_configure[cleandirs] = "${B}"
+b96d2d770cab02b84c46606fa538ce027bee6b08
+## v6.6/standard/qemuarm64...origin/v6.6/standard/qemuarm64 [behind 1911]
+29:	ret = spi_mem_exec_op(spinand->spimem, &op);
+43:	return spi_mem_exec_op(spinand->spimem, &op);
+346:	return spi_mem_exec_op(spinand->spimem, &op);
+356:	return spi_mem_exec_op(spinand->spimem, &op);
+486:	return spi_mem_exec_op(spinand->spimem, &op);
+496:	return spi_mem_exec_op(spinand->spimem, &op);
+542:	ret = spi_mem_exec_op(spinand->spimem, &op);
+554:	ret = spi_mem_exec_op(spinand->spimem, &op);
+1049:			if (!spi_mem_supports_op(spinand->spimem, &op))
+7:	depends on HAS_IOMEM
+12:	  controller and a chipselect.  Most SPI slaves don't support
+22:	  interface (select, clock, data in, data out) including Microwire
+30:	depends on DEBUG_KERNEL
+45:	  provides the clock and chipselect), you can enable that
+62:	select SPI_ALTERA_CORE
+63:	select REGMAP_MMIO
+69:	select REGMAP
+75:	depends on FPGA_DFL
+76:	select SPI_ALTERA_CORE
+84:	depends on ARCH_MESON || COMPILE_TEST
+91:	depends on ATH79 || COMPILE_TEST
+98:	depends on ATH79 || COMPILE_TEST
+99:	select SPI_BITBANG
+106:	depends on (ARCH_MVEBU && OF) || COMPILE_TEST
+113:	depends on ARCH_ASPEED || COMPILE_TEST
+114:	depends on OF
+124:	depends on ARCH_AT91 || COMPILE_TEST
+125:	depends on OF
+127:	  This selects a driver for the Atmel SPI Controller, present on
+132:	depends on (ARCH_AT91 || COMPILE_TEST)
+133:	depends on MFD_AT91_USART
+135:	  This selects a driver for the AT91 USART Controller as SPI Master,
+140:	depends on ARCH_AT91 || COMPILE_TEST
+141:	depends on OF && HAS_IOMEM
+149:	depends on MIPS_ALCHEMY
+150:	select SPI_BITBANG
+157:	depends on HAS_IOMEM
+165:	depends on GPIOLIB
+166:	depends on ARCH_BCM2835 || ARCH_BRCMSTB || COMPILE_TEST
+168:	  This selects a driver for the Broadcom BCM2835 SPI master.
+177:	depends on ((ARCH_BCM2835 || ARCH_BRCMSTB) && GPIOLIB) || COMPILE_TEST
+179:	  This selects a driver for the Broadcom BCM2835 SPI aux master.
+187:	depends on BCM63XX || BMIPS_GENERIC || COMPILE_TEST
+193:	depends on BCM63XX || BMIPS_GENERIC || ARCH_BCMBCA || COMPILE_TEST
+200:	depends on ARCH_BRCMSTB || ARCH_BCM || ARCH_BCM_IPROC || \
+211:	depends on ARCH_BCMBCA || COMPILE_TEST
+215:	  that adds the capability to allow the driver to control chip select
+227:	  This is library code, and is automatically selected by drivers that
+228:	  need it.  You only need to select this explicitly to support driver
+233:	depends on PARPORT
+234:	select SPI_BITBANG
+244:	  This selects the Cadence SPI controller master driver
+249:	depends on OF && (ARM || ARM64 || X86 || RISCV || COMPILE_TEST)
+260:	depends on OF && HAS_IOMEM
+113:def check_tun():
+114:    """Check /dev/net/tun"""
+115:    dev_tun = '/dev/net/tun'
+crw-rw-rw- 1 root root 10, 200 10月  9 23:33 /dev/net/tun
+/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-helper-native/1.0/recipe-sysroot-native/usr/bin/qemu-system-aarch64
+   990	                    staging_bindir_native = '%s/usr/bin' % self.get('STAGING_DIR_NATIVE')
+   991	                    logger.info('Setting STAGING_BINDIR_NATIVE to %s' % staging_bindir_native)
+   992	                    self.set('STAGING_BINDIR_NATIVE', '%s/usr/bin' % self.get('STAGING_DIR_NATIVE'))
+   993	
+   994	    def print_config(self):
+   995	        logoutput = ['Continuing with the following parameters:']
+   996	        if not self.fstype in self.vmtypes:
+   997	            logoutput.append('KERNEL: [%s]' % self.kernel)
+   998	            if self.bios:
+   999	                logoutput.append('BIOS: [%s]' % self.bios)
+  1000	            if self.dtb:
+  1001	                logoutput.append('DTB: [%s]' % self.dtb)
+  1002	        logoutput.append('MACHINE: [%s]' % self.get('MACHINE'))
+  1003	        try:
+  1004	            fstype_flags = ' (' + ', '.join(self.fsinfo[self.fstype]) + ')'
+  1005	        except KeyError:
+  1006	            fstype_flags = ''
+  1007	        logoutput.append('FSTYPE: [%s%s]' % (self.fstype, fstype_flags))
+  1008	        if self.fstype  == 'nfs':
+  1009	            logoutput.append('NFS_DIR: [%s]' % self.rootfs)
+  1010	        else:
+  1011	            logoutput.append('ROOTFS: [%s]' % self.rootfs)
+  1012	        if self.ovmf_bios:
+  1013	            logoutput.append('OVMF: %s' % self.ovmf_bios)
+  1014	        if (self.ovmf_secboot_pkkek1):
+  1015	            logoutput.append('SECBOOT PKKEK1: [%s...]' % self.ovmf_secboot_pkkek1[0:100])
+  1016	        logoutput.append('CONFFILE: [%s]' % self.qemuboot)
+  1017	        logoutput.append('')
+  1018	        logger.info('\n'.join(logoutput))
+  1019	
+  1020	    def setup_nfs(self):
+  1021	        if not self.nfs_server:
+  1022	            if self.slirp_enabled:
+  1023	                self.nfs_server = '10.0.2.2'
+  1024	            else:
+  1025	                self.nfs_server = '192.168.7.@GATEWAY@'
+  1026	
+  1027	        nfsd_port = 3048 + self.nfs_instance
+  1028	        lockdir = "/tmp/qemu-port-locks"
+  1029	        self.make_lock_dir(lockdir)
+  1030	        while not self.check_free_port('localhost', nfsd_port, lockdir):
+  1031	            self.nfs_instance += 1
+  1032	            nfsd_port += 1
+  1033	
+  1034	        mountd_port = nfsd_port
+  1035	        # Export vars for runqemu-export-rootfs
+  1036	        export_dict = {
+  1037	            'NFS_INSTANCE': self.nfs_instance,
+  1038	            'NFSD_PORT': nfsd_port,
+  1039	            'MOUNTD_PORT': mountd_port,
+  1040	        }
+  1041	        for k, v in export_dict.items():
+  1042	            # Use '%s' since they are integers
+  1043	            os.putenv(k, '%s' % v)
+  1044	
+  1045	        qb_nfsrootfs_extra_opt = self.get("QB_NFSROOTFS_EXTRA_OPT")
+ec7946bf40de500d635875072b5d54b18cf789eda688a6c757d353e0ae0f5f53  /home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/hw/ssi/pl022.c
+e7d41385d34bc541b9a522f4a554c15bf4603f829eea66ad49a83e99398cd1a7  /home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/hw/block/m25p80.c
+92e870a4d6103c836128aae3b55f62fb47ffa755d65f92fe5cb060999993c00f  /home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/hw/block/nand.c
+
+=== C. Locked recipe and runqemu source excerpts ===
+COMMAND (PowerShell):
+ssh -F C:/Users/YinZh/.ssh/config -o BatchMode=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile=C:/Users/YinZh/.ssh/known_hosts -o ConnectTimeout=10 tiger 'set -e; nl -ba /home/oops/workspace/poky/meta/recipes-devtools/qemu/qemu-system-native_8.2.7.bb | head -18; cat /home/oops/workspace/poky/meta/recipes-devtools/qemu/qemu-native.inc; nl -ba /home/oops/workspace/poky/meta/recipes-devtools/qemu/qemu.inc | sed -n "21,71p"; nl -ba /home/oops/workspace/poky/meta/recipes-devtools/qemu/qemu-helper-native_1.0.bb; grep -E "Applying patch|patch_do_patch finished" /home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/temp/log.do_patch | tail -4; nl -ba /home/oops/workspace/poky/meta/classes-recipe/qemuboot.bbclass | sed -n "93,103p;123,143p;153,160p;170,190p"; nl -ba /home/oops/workspace/poky/scripts/runqemu | sed -n "363,378p;753,758p;800,816p;855,867p;932,944p;1241,1249p;1254,1262p;1329,1336p;1515,1534p;1540,1556p;1570,1587p;1710,1734p"; grep -nE "QB_GRAPHICS|setup_serial|serial mon:stdio|display none|QB_MACHINE|QB_CPU|QB_SMP" /home/oops/workspace/poky/scripts/runqemu | head -28; nl -ba /home/oops/workspace/poky/meta/conf/machine/qemuarm64.conf | sed -n "15,38p"; grep -nE "KBRANCH.*qemuarm64|SRCREV_machine.*qemuarm64|^SRCREV_meta|^SRCREV_machine =|^LINUX_VERSION|^SRC_URI|^COMPATIBLE_MACHINE" /home/oops/workspace/poky/meta/recipes-kernel/linux/linux-yocto_6.6.bb; grep -nE "PREFERRED_VERSION.*linux-yocto|PREFERRED_PROVIDER.*kernel" /home/oops/workspace/poky/meta-poky/conf/distro/poky.conf /home/oops/workspace/poky/meta/conf/machine/include/qemu.inc; grep -nE "TYPE_SSI_PERIPHERAL|SPI_NOR_MAX|CS_LOW" /home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/hw/block/m25p80.c; grep -nE "nand_setpins|nand_setio|nand_getio|TYPE_NAND|TYPE_SYS_BUS_DEVICE" /home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/hw/block/nand.c | head -14; sha256sum /home/oops/workspace/build/tmp/work-shared/qemuarm64/kernel-source/drivers/mtd/nand/spi/core.c /home/oops/workspace/build/tmp/work-shared/qemuarm64/kernel-source/drivers/spi/spi-pl022.c'
+EXIT CODE: 0
+OUTPUT:
+     1	BPN = "qemu"
+     2	
+     3	require qemu-native.inc
+     4	
+     5	# As some of the files installed by qemu-native and qemu-system-native
+     6	# are the same, we depend on qemu-native to get the full installation set
+     7	# and avoid file clashes
+     8	DEPENDS += "glib-2.0-native zlib-native pixman-native qemu-native"
+     9	
+    10	EXTRA_OECONF:append = " --target-list=${@get_qemu_system_target_list(d)}"
+    11	
+    12	PACKAGECONFIG ??= "fdt alsa kvm pie slirp png \
+    13	    ${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'virglrenderer epoxy', '', d)} \
+    14	"
+    15	
+    16	# Handle distros such as CentOS 5 32-bit that do not have kvm support
+    17	PACKAGECONFIG:remove = "${@'kvm' if not os.path.exists('/usr/include/linux/kvm.h') else ''}"
+    18	
+require qemu.inc
+
+inherit_defer native
+
+EXTRA_OEMAKE:append = " LD='${LD}' AR='${AR}' OBJCOPY='${OBJCOPY}' LDFLAGS='${LDFLAGS}'"
+
+LDFLAGS:append = " -fuse-ld=bfd"
+    21	SRC_URI = "https://download.qemu.org/${BPN}-${PV}.tar.xz \
+    22	           file://powerpc_rom.bin \
+    23	           file://run-ptest \
+    24	           file://0001-qemu-Add-addition-environment-space-to-boot-loader-q.patch \
+    25	           file://0003-apic-fixup-fallthrough-to-PIC.patch \
+    26	           file://0004-configure-Add-pkg-config-handling-for-libgcrypt.patch \
+    27	           file://0005-qemu-Do-not-include-file-if-not-exists.patch \
+    28	           file://0006-qemu-Add-some-user-space-mmap-tweaks-to-address-musl.patch \
+    29	           file://0007-qemu-Determinism-fixes.patch \
+    30	           file://0008-tests-meson.build-use-relative-path-to-refer-to-file.patch \
+    31	           file://0009-Define-MAP_SYNC-and-MAP_SHARED_VALIDATE-on-needed-li.patch \
+    32	           file://0010-hw-pvrdma-Protect-against-buggy-or-malicious-guest-d.patch \
+    33	           file://0002-linux-user-Replace-use-of-lfs64-related-functions-an.patch \
+    34	           file://fixedmeson.patch \
+    35	           file://no-pip.patch \
+    36	           file://4a8579ad8629b57a43daa62e46cc7af6e1078116.patch \
+    37	           file://0002-linux-user-loongarch64-Remove-TARGET_FORCE_SHMLBA.patch \
+    38	           file://0003-linux-user-Add-strace-for-shmat.patch \
+    39	           file://0004-linux-user-Rewrite-target_shmat.patch \
+    40	           file://0005-tests-tcg-Check-that-shmat-does-not-break-proc-self-.patch \
+    41	           file://0001-sched_attr-Do-not-define-for-glibc-2.41.patch \
+    42	           file://qemu-guest-agent.init \
+    43	           file://qemu-guest-agent.udev \
+    44	           file://CVE-2024-8354.patch \
+    45	           file://CVE-2025-12464.patch \
+    46	           file://0001-python-backport-Remove-deprecated-get_event_loop-cal.patch \
+    47	           file://0002-python-backport-avoid-creating-additional-event-loop.patch \
+    48	           file://CVE-2025-11234-01.patch \
+    49	           file://CVE-2025-11234-02.patch \
+    50	           file://CVE-2024-6519.patch \
+    51	           file://CVE-2025-14876_p1.patch \
+    52	           file://CVE-2025-14876_p2.patch \
+    53	           file://CVE-2026-0665.patch \
+    54	           file://CVE-2026-2243.patch \
+    55	           "
+    56	UPSTREAM_CHECK_REGEX = "qemu-(?P<pver>\d+(\.\d+)+)\.tar"
+    57	
+    58	# SDK_OLDEST_KERNEL is set below 4.17, which is the minimum version required by QEMU >= 8.1
+    59	# This is due to two MMAP flags being used at certain points
+    60	SRC_URI:append:class-nativesdk = " \
+    61		file://0011-linux-user-workaround-for-missing-MAP_FIXED_NOREPLAC.patch \
+    62		file://0012-linux-user-workaround-for-missing-MAP_SHARED_VALIDAT.patch \
+    63	        "
+    64	
+    65	# Support building and using native version on pre 4.17 kernels
+    66	SRC_URI:append:class-native = " \
+    67		file://0011-linux-user-workaround-for-missing-MAP_FIXED_NOREPLAC.patch \
+    68		file://0012-linux-user-workaround-for-missing-MAP_SHARED_VALIDAT.patch \
+    69	        "
+    70	
+    71	SRC_URI[sha256sum] = "1f0604f296ab9acb4854c054764a1ba408643fc299bd54a6500cccfaaca65b55"
+     1	SUMMARY = "Helper utilities needed by the runqemu script"
+     2	LICENSE = "GPL-2.0-only"
+     3	RDEPENDS:${PN} = "qemu-system-native"
+     4	
+     5	LIC_FILES_CHKSUM = "file://${WORKDIR}/qemu-oe-bridge-helper.c;endline=4;md5=ae00a3bab86f2caaa8462eacda77f4d7"
+     6	
+     7	SRC_URI = "file://qemu-oe-bridge-helper.c"
+     8	
+     9	S = "${WORKDIR}"
+    10	
+    11	inherit native
+    12	
+    13	do_compile() {
+    14		${CC} ${CFLAGS} ${LDFLAGS} -Wall qemu-oe-bridge-helper.c -o qemu-oe-bridge-helper
+    15	}
+    16	
+    17	do_install() {
+    18		install -d ${D}${bindir}
+    19		install qemu-oe-bridge-helper ${D}${bindir}/
+    20	}
+    21	
+    22	DEPENDS += "qemu-system-native unfs3-native pseudo-native"
+    23	addtask addto_recipe_sysroot after do_populate_sysroot before do_build
+NOTE: Applying patch 'CVE-2026-2243.patch' (../poky/meta/recipes-devtools/qemu/qemu/CVE-2026-2243.patch)
+NOTE: Applying patch '0011-linux-user-workaround-for-missing-MAP_FIXED_NOREPLAC.patch' (../poky/meta/recipes-devtools/qemu/qemu/0011-linux-user-workaround-for-missing-MAP_FIXED_NOREPLAC.patch)
+NOTE: Applying patch '0012-linux-user-workaround-for-missing-MAP_SHARED_VALIDAT.patch' (../poky/meta/recipes-devtools/qemu/qemu/0012-linux-user-workaround-for-missing-MAP_SHARED_VALIDAT.patch)
+DEBUG: Python function patch_do_patch finished
+    93	# IMAGE_CLASSES += "qemuboot"
+    94	# See "runqemu help" for more info
+    95	
+    96	QB_MEM ?= "-m 256"
+    97	QB_SMP ?= ""
+    98	QB_SERIAL_OPT ?= "-serial mon:stdio -serial null"
+    99	QB_DEFAULT_KERNEL ?= "${@bb.utils.contains("INITRAMFS_IMAGE_BUNDLE", "1", "${KERNEL_IMAGETYPE}-${INITRAMFS_LINK_NAME}.bin", "${KERNEL_IMAGETYPE}", d)}"
+   100	QB_DEFAULT_FSTYPE ?= "ext4"
+   101	QB_RNG ?= "-object rng-random,filename=/dev/urandom,id=rng0 -device virtio-rng-pci,rng=rng0"
+   102	QB_OPT_APPEND ?= ""
+   103	QB_NETWORK_DEVICE ?= "-device virtio-net-pci,netdev=net0,mac=@MAC@"
+   123	QB_DRIVE_TYPE ?= "/dev/sd"
+   124	
+   125	inherit image-artifact-names
+   126	
+   127	# Create qemuboot.conf
+   128	addtask do_write_qemuboot_conf after do_rootfs before do_image
+   129	
+   130	def qemuboot_vars(d):
+   131	    build_vars = ['MACHINE', 'TUNE_ARCH', 'DEPLOY_DIR_IMAGE',
+   132	                'KERNEL_IMAGETYPE', 'KERNEL_IMAGE_NAME',
+   133	                'KERNEL_IMAGE_BIN_EXT', 'IMAGE_NAME', 'IMAGE_LINK_NAME',
+   134	                'STAGING_DIR_NATIVE', 'STAGING_BINDIR_NATIVE',
+   135	                'STAGING_DIR_HOST', 'SERIAL_CONSOLES', 'UNINATIVE_LOADER']
+   136	    return build_vars + [k for k in d.keys() if k.startswith('QB_')]
+   137	
+   138	do_write_qemuboot_conf[vardeps] += "${@' '.join(qemuboot_vars(d))}"
+   139	do_write_qemuboot_conf[vardepsexclude] += "TOPDIR"
+   140	python do_write_qemuboot_conf() {
+   141	    import configparser
+   142	
+   143	    qemuboot = "%s/%s.qemuboot.conf" % (d.getVar('IMGDEPLOYDIR'), d.getVar('IMAGE_NAME'))
+   153	        if ":" in k:
+   154	            continue
+   155	        # qemu-helper-native sysroot is not removed by rm_work and
+   156	        # contains all tools required by runqemu
+   157	        if k == 'STAGING_BINDIR_NATIVE':
+   158	            val = os.path.join(d.getVar('BASE_WORKDIR'), d.getVar('BUILD_SYS'),
+   159	                               'qemu-helper-native/1.0/recipe-sysroot-native/usr/bin/')
+   160	        else:
+   170	    # QB_DEFAULT_KERNEL's value of KERNEL_IMAGETYPE is the name of a symlink
+   171	    # to the kernel file, which hinders relocatability of the qb conf.
+   172	    # Read the link and replace it with the full filename of the target.
+   173	    kernel_link = os.path.join(d.getVar('DEPLOY_DIR_IMAGE'), d.getVar('QB_DEFAULT_KERNEL'))
+   174	    kernel = os.path.realpath(kernel_link)
+   175	    # we only want to write out relative paths so that we can relocate images
+   176	    # and still run them
+   177	    kernel = os.path.relpath(kernel, finalpath)
+   178	    cf.set('config_bsp', 'QB_DEFAULT_KERNEL', kernel)
+   179	
+   180	    bb.utils.mkdirhier(os.path.dirname(qemuboot))
+   181	    with open(qemuboot, 'w') as f:
+   182	        cf.write(f)
+   183	
+   184	    if qemuboot_link and qemuboot_link != qemuboot:
+   185	        if os.path.lexists(qemuboot_link):
+   186	           os.remove(qemuboot_link)
+   187	        os.symlink(os.path.basename(qemuboot), qemuboot_link)
+   188	}
+   189	
+   190	EXTRA_IMAGEDEPENDS += "qemu-system-native qemu-helper-native:do_addto_recipe_sysroot"
+   363	    def check_arg_path(self, p):
+   364	        """
+   365	        - Check whether it is <image>.qemuboot.conf or contains <image>.qemuboot.conf
+   366	        - Check whether it is a kernel file
+   367	        - Check whether it is an image file
+   368	        - Check whether it is an NFS dir
+   369	        - Check whether it is an OVMF flash file
+   370	        """
+   371	        n = os.path.basename(p)
+   372	        if p.endswith('.qemuboot.conf'):
+   373	            self.qemuboot = p
+   374	            self.qbconfload = True
+   375	        elif re.search('\\.bin$', n) or re.search('bzImage', n) or \
+   376	             re.search('zImage', n) or re.search('vmlinux', n) or \
+   377	             re.search('fitImage', n) or re.search('uImage', n):
+   378	            self.kernel =  p
+   753	        # QB_DEFAULT_KERNEL is always a full file path
+   754	        kernel_name = os.path.basename(self.get('QB_DEFAULT_KERNEL'))
+   755	
+   756	        # The user didn't want a kernel to be loaded
+   757	        if kernel_name == "none" and not self.kernel:
+   758	            return
+   800	        # QB_DEFAULT_BIOS is always a full file path
+   801	        bios_name = os.path.basename(self.get('QB_DEFAULT_BIOS'))
+   802	
+   803	        # The user didn't want a bios to be loaded
+   804	        if (bios_name == "" or bios_name == "none") and not self.bios:
+   805	            return
+   806	
+   807	        if not self.bios:
+   808	            deploy_dir_image = self.get('DEPLOY_DIR_IMAGE')
+   809	            self.bios = "%s/%s" % (deploy_dir_image, bios_name)
+   810	
+   811	            if not self.bios:
+   812	                raise RunQemuError('BIOS not found: %s' % bios_match_name)
+   813	
+   814	        if not os.path.exists(self.bios):
+   815	            raise RunQemuError("BIOS %s not found" % self.bios)
+   816	
+   855	
+   856	            if len(ports) > 1:
+   857	                for port in ports[1:]:
+   858	                    self.qemu_opt_script += ' -serial tcp:127.0.0.1:%s,nodelay=on' % port
+   859	
+   860	    def check_and_set(self):
+   861	        """Check configs sanity and set when needed"""
+   862	        self.validate_paths()
+   863	        if not self.slirp_enabled and not self.net_bridge:
+   864	            check_tun()
+   865	        # Check audio
+   866	        if self.audio_enabled:
+   867	            if not self.get('QB_AUDIO_DRV'):
+   932	        logger.debug('CONFFILE: %s' % self.qemuboot)
+   933	
+   934	        cf = configparser.ConfigParser()
+   935	        cf.read(self.qemuboot)
+   936	        for k, v in cf.items('config_bsp'):
+   937	            k_upper = k.upper()
+   938	            if v.startswith("../"):
+   939	                v = os.path.abspath(os.path.dirname(self.qemuboot) + "/" + v)
+   940	            elif v == ".":
+   941	                v = os.path.dirname(self.qemuboot)
+   942	            self.set(k_upper, v)
+   943	
+   944	    def validate_paths(self):
+  1241	    def setup_network(self):
+  1242	        if self.nonetwork or self.get('QB_NET') == 'none':
+  1243	            self.set('NETWORK_CMD', '-nic none')
+  1244	            return
+  1245	        if sys.stdin.isatty():
+  1246	            self.saved_stty = subprocess.check_output(("stty", "-g")).decode('utf-8').strip()
+  1247	        self.network_device = self.get('QB_NETWORK_DEVICE') or self.network_device
+  1248	        if self.net_bridge:
+  1249	            self.setup_net_bridge()
+  1254	            self.cmdline_ip_tap = self.get('QB_CMDLINE_IP_TAP') or self.cmdline_ip_tap
+  1255	            self.setup_tap()
+  1256	
+  1257	    def setup_rootfs(self):
+  1258	        if self.get('QB_ROOTFS') == 'none':
+  1259	            return
+  1260	        if 'wic.' in self.fstype:
+  1261	            self.fstype = self.fstype[4:]
+  1262	        rootfs_format = self.fstype if self.fstype in ('vmdk', 'vhd', 'vhdx', 'qcow2', 'vdi') else 'raw'
+  1329	            self.rootfs_options = ''
+  1330	            k_root = '/dev/nfs nfsroot=%s:%s,%s' % (self.nfs_server, os.path.abspath(self.rootfs), self.unfs_opts)
+  1331	            self.kernel_cmdline = 'root=%s rw' % k_root
+  1332	
+  1333	        if self.fstype == 'none':
+  1334	            self.rootfs_options = ''
+  1335	
+  1336	        self.set('ROOTFS_OPTIONS', self.rootfs_options)
+  1515	    def find_qemu(self):
+  1516	        qemu_bin = os.path.join(self.bindir_native, self.qemu_system)
+  1517	
+  1518	        # It is possible to have qemu-native in ASSUME_PROVIDED, and it won't
+  1519	        # find QEMU in sysroot, it needs to use host's qemu.
+  1520	        if not os.path.exists(qemu_bin):
+  1521	            logger.info("QEMU binary not found in %s, trying host's QEMU" % qemu_bin)
+  1522	            for path in (os.environ['PATH'] or '').split(':'):
+  1523	                qemu_bin_tmp = os.path.join(path, self.qemu_system)
+  1524	                logger.info("Trying: %s" % qemu_bin_tmp)
+  1525	                if os.path.exists(qemu_bin_tmp):
+  1526	                    qemu_bin = qemu_bin_tmp
+  1527	                    if not os.path.isabs(qemu_bin):
+  1528	                        qemu_bin = os.path.abspath(qemu_bin)
+  1529	                    logger.info("Using host's QEMU: %s" % qemu_bin)
+  1530	                    break
+  1531	
+  1532	        if not os.access(qemu_bin, os.X_OK):
+  1533	            raise OEPathError("No QEMU binary '%s' could be found" % qemu_bin)
+  1534	        self.qemu_bin = qemu_bin
+  1540	        self.qemu_opt = "%s %s %s %s %s" % (self.qemu_bin, self.get('NETWORK_CMD'), self.get('QB_RNG'), self.get('ROOTFS_OPTIONS'), self.get('QB_OPT_APPEND').replace('@DEPLOY_DIR_IMAGE@', self.get('DEPLOY_DIR_IMAGE')))
+  1541	
+  1542	        for ovmf in self.ovmf_bios:
+  1543	            format = ovmf.rsplit('.', 1)[-1]
+  1544	            if format == "bin":
+  1545	                format = "raw"
+  1546	            self.qemu_opt += ' -drive if=pflash,format=%s,file=%s' % (format, ovmf)
+  1547	
+  1548	        self.qemu_opt += ' ' + self.qemu_opt_script
+  1549	
+  1550	        if self.ovmf_secboot_pkkek1:
+  1551				# Provide the Platform Key and first Key Exchange Key certificate as an
+  1552				# OEM string in the SMBIOS Type 11 table. Prepend the certificate string
+  1553				# with "application prefix" of the EnrollDefaultKeys.efi application
+  1554	            self.qemu_opt += ' -smbios type=11,value=4e32566d-8e9e-4f52-81d3-5bb9715f9727:' \
+  1555	                             + self.ovmf_secboot_pkkek1
+  1556	
+  1570	        import shlex
+  1571	        if self.kernel:
+  1572	            kernel_opts = "-kernel %s" % (self.kernel)
+  1573	            if self.get('QB_KERNEL_CMDLINE') == "none":
+  1574	                if self.bootparams:
+  1575	                    kernel_opts += " -append '%s'" % (self.bootparams)
+  1576	            else:
+  1577	                kernel_opts += " -append '%s %s %s %s'" % (self.kernel_cmdline,
+  1578	                                                                self.kernel_cmdline_script, self.get('QB_KERNEL_CMDLINE_APPEND'),
+  1579	                                                                self.bootparams)
+  1580	            if self.dtb:
+  1581	                kernel_opts += " -dtb %s" % self.dtb
+  1582	        else:
+  1583	            kernel_opts = ""
+  1584	
+  1585	        if self.bios:
+  1586	            self.qemu_opt += " -bios %s" % self.bios
+  1587	
+  1710	    @property
+  1711	    def bindir_native(self):
+  1712	        result = self.get('STAGING_BINDIR_NATIVE')
+  1713	        if result and os.path.exists(result):
+  1714	            return result
+  1715	
+  1716	        cmd = ['bitbake', '-e']
+  1717	        multiconfig = self.get('MULTICONFIG')
+  1718	        if multiconfig:
+  1719	            cmd.append('mc:%s:qemu-helper-native' % multiconfig)
+  1720	        else:
+  1721	            cmd.append('qemu-helper-native')
+  1722	
+  1723	        logger.info('Running %s...' % str(cmd))
+  1724	        out = subprocess.check_output(cmd).decode('utf-8')
+  1725	
+  1726	        match = re.search('^STAGING_BINDIR_NATIVE="(.*)"', out, re.M)
+  1727	        if match:
+  1728	            result = match.group(1)
+  1729	            if os.path.exists(result):
+  1730	                self.set('STAGING_BINDIR_NATIVE', result)
+  1731	                return result
+  1732	            raise RunQemuError("Native sysroot directory %s doesn't exist" % result)
+  1733	        else:
+  1734	            raise RunQemuError("Can't find STAGING_BINDIR_NATIVE in '%s' output" % str(cmd))
+594:            self.qemu_opt_script += ' %s %s %s' % (self.get('QB_MACHINE'), self.get('QB_CPU'), self.get('QB_SMP'))
+597:        if not self.get('QB_CPU_KVM'):
+598:            raise RunQemuError("QB_CPU_KVM is NULL, this board doesn't support kvm")
+600:        self.qemu_opt_script += ' %s %s %s' % (self.get('QB_MACHINE'), self.get('QB_CPU_KVM'), self.get('QB_SMP'))
+1449:                self.qemu_opt += ' -display none'
+1479:        self.qemu_opt += ' %s' %self.get('QB_GRAPHICS')
+1481:    def setup_serial(self):
+1501:            self.qemu_opt += " -serial mon:stdio"
+1566:        self.setup_serial()
+    15	QB_SYSTEM_NAME = "qemu-system-aarch64"
+    16	QB_MACHINE = "-machine virt"
+    17	QB_CPU = "-cpu cortex-a57"
+    18	QB_SMP ?= "-smp 4"
+    19	QB_CPU_KVM = "-cpu host -machine gic-version=3"
+    20	# For graphics to work we need to define the VGA device as well as the necessary USB devices
+    21	QB_GRAPHICS = "-device virtio-gpu-pci"
+    22	QB_OPT_APPEND = "-device qemu-xhci -device usb-tablet -device usb-kbd"
+    23	# Virtio Networking support
+    24	QB_TAP_OPT = "-netdev tap,id=net0,ifname=@TAP@,script=no,downscript=no"
+    25	QB_NETWORK_DEVICE = "-device virtio-net-pci,netdev=net0,mac=@MAC@"
+    26	# Virtio block device
+    27	QB_ROOTFS_OPT = "-drive id=disk0,file=@ROOTFS@,if=none,format=raw -device virtio-blk-pci,drive=disk0"
+    28	# Virtio serial console
+    29	QB_SERIAL_OPT = "-device virtio-serial-pci -chardev null,id=virtcon -device virtconsole,chardev=virtcon"
+    30	QB_TCPSERIAL_OPT = "-device virtio-serial-pci -chardev socket,id=virtcon,port=@PORT@,host=127.0.0.1,nodelay=on -device virtconsole,chardev=virtcon"
+11:KBRANCH:qemuarm64 ?= "v6.6/standard/qemuarm64"
+22:SRCREV_machine:qemuarm64 ?= "b96d2d770cab02b84c46606fa538ce027bee6b08"
+32:SRCREV_meta ?= "dd201eb6ec53179f45836d41610ca68c725d28e2"
+43:SRC_URI = "git://git.yoctoproject.org/linux-yocto.git;name=machine;branch=${KBRANCH};protocol=https \
+47:LINUX_VERSION ?= "6.6.151"
+56:COMPATIBLE_MACHINE = "^(qemuarm|qemuarmv5|qemuarm64|qemux86|qemuppc|qemuppc64|qemumips|qemumips64|qemux86-64|qemuriscv64|qemuriscv32|qemuloongarch64)$"
+/home/oops/workspace/poky/meta-poky/conf/distro/poky.conf:22:PREFERRED_VERSION_linux-yocto ?= "6.6%"
+/home/oops/workspace/poky/meta-poky/conf/distro/poky.conf:23:PREFERRED_VERSION_linux-yocto-rt ?= "6.6%"
+/home/oops/workspace/poky/meta/conf/machine/include/qemu.inc:24:PREFERRED_PROVIDER_virtual/kernel ??= "linux-yocto"
+44:#define SPI_NOR_MAX_ID_LEN 6
+62:    uint8_t id[SPI_NOR_MAX_ID_LEN];
+1315:            for (; i < SPI_NOR_MAX_ID_LEN; i++) {
+1319:            s->len = SPI_NOR_MAX_ID_LEN;
+1802:    k->cs_polarity = SSI_CS_LOW;
+1811:    .parent         = TYPE_SSI_PERIPHERAL,
+96:#define TYPE_NAND "nand"
+467:    .name          = TYPE_NAND,
+484:void nand_setpins(DeviceState *dev, uint8_t cle, uint8_t ale,
+506:void nand_setio(DeviceState *dev, uint32_t value)
+610:uint32_t nand_getio(DeviceState *dev)
+654:    dev = qdev_new(TYPE_NAND);
+9f7ed72297997fd01fbdea56bc59120502545c9b53e9e77064354b0ec4374bcd  /home/oops/workspace/build/tmp/work-shared/qemuarm64/kernel-source/drivers/mtd/nand/spi/core.c
+427545b979c691c44b73bbfb90880402a91b2b6a27853568b6dd522a4bb019f0  /home/oops/workspace/build/tmp/work-shared/qemuarm64/kernel-source/drivers/spi/spi-pl022.c
+
+=== D. Local governance validation ===
+WORKDIR: D:/opc-book-yocto
+COMMAND:
+python -B scripts/validate_framework.py
+EXIT CODE: 0
+OUTPUT:
+校验通过：21 个角色、36 份技能、1 个实际项目、1 套项目模板、467 处本地链接。
+本工具只读；不验证业务语义、任务验收、会话身份或执行权限。
+
+COMMAND:
+python -B -c 'import pathlib,subprocess; p=pathlib.Path("projects/book-yocto/TASKS.md"); old=subprocess.check_output(["git","show","HEAD:projects/book-yocto/TASKS.md"],text=True,encoding="utf-8"); new=p.read_text(encoding="utf-8"); a="#### yocto-engineer 的意见\n"; b="#### qemu-engineer 的意见\n"; assert old.split(a,1)[0]==new.split(a,1)[0]; assert old.split(b,1)[1]==new.split(b,1)[1]; assert b in old.split(a,1)[1] and b in new.split(a,1)[1]; fixed=subprocess.check_output(["git","rev-parse","69ce591cd9e4ee310b80cff4663c20c776364cfd:projects/book-yocto/artifacts/A-005-tiger-platform-design.md"],text=True).strip(); actual=subprocess.check_output(["git","hash-object","projects/book-yocto/artifacts/A-005-tiger-platform-design.md"],text=True).strip(); assert fixed==actual=="d7d474e4de48ad8e05ffd4d9893594214843f9be"; print("PASS: TASKS changes confined to own review subsection; fixed A-005 blob unchanged")'
+EXIT CODE: 0
+OUTPUT:
+PASS: TASKS changes confined to own review subsection; fixed A-005 blob unchanged
+
+COMMAND:
+git diff --cached --check
+EXIT CODE: 0
+OUTPUT:
+warning: unable to access 'C:\Users\YinZh/.config/git/ignore': Permission denied
+
+NOTE: Git warning is configuration-read-only access; check itself passed. Existing .gitattributes marks *.log -diff.
+
+
+

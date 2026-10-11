@@ -629,8 +629,16 @@
 - 复核与批准：尚未进行；用户提交建议不等于批准 A-005 v0.1。
 
 #### yocto-engineer 的意见
-- 日期、依据、未覆盖项及结论：尚未评审；由本人按上述范围记录。
-- 问题、作者处理回复及复核：待实际评审后填写，不代写结论。
+- 日期、评审依据与实际覆盖：2026-10-11；固定受评正文为 OPC `69ce591cd9e4ee310b80cff4663c20c776364cfd` 的 A-005 v0.1，依据本轮安排、U-A005-01/U-A005-02、D-010/D-013 及本人当前 scope。完成已授权 `ssh tiger` 环境的只读核对：meta-tiger `master@0e3da48b34ef772532535a730a21878cc30ccf67` 与 WORKSPACE 一致且干净；Poky `scarthgap@77d1feb37e280733684ae8a9449fb031d5d7ff40` 干净；取得 QEMU 8.2.7 配方/源码包 hash、已有 31 项 patch 顺序、runqemu/qemuboot 源码及已有 Linux SPI 接口依据。详见 [核对报告](artifacts/work-records/t016-a005-yocto-review.md) 与 [完整只读命令/输出](artifacts/work-records/t016-a005-yocto-review-raw.log)。
+- 结论：**revise**。候选 A 的无 Linux kernel/无 rootfs 测试固件路线有锁定源码依据，可继续细化；准确基线、部署契约、最小验收范围和 SPI NAND 阶段依赖仍须回填设计。本结论不表示路线已运行、模型通过或设计获批。
+- Y-A005-01（§2/§6/Q-01/V-04，来源锁定）：补入实际 Poky 全 SHA、`qemu-system-native_8.2.7.bb → qemu-native.inc → qemu.inc` 选择链、源码包 SHA-256 `1f0604f296ab9acb4854c054764a1ba408643fc299bd54a6500cccfaaca65b55` 和已有 31 项 patch 顺序；新增 tiger patch 以带 OE 补丁的基线为对象。当前启用层没有 meta-arm/TF-A，build 的 MACHINE 仍为 qemuarm64，meta-tiger 只有骨架；区分已取得配方/历史产物与尚未展开的 tiger 选择，不将草稿组件版本当成已选事实。后续 TF-A/U-Boot/Linux 来源和配置在首次使用前锁定，不单独阻塞本章测试固件。原稿责任人：architect。
+- Y-A005-02（§5.2/§6/Q-04，固件部署）：候选 A 须明确最小固件的源/入口/链接及版本化 raw binary、deploy 任务、生成 `[config_bsp]` qemuboot 文件和 qemu-helper-native sysroot 依赖；使用部署配置作为 runqemu 显式输入。`qemuboot.bbclass` 依赖 image/do_rootfs/do_image 上下文，独立固件配方不能只继承它就假定部署成立；`runqemu` 会把位置参数 `.bin` 当 kernel。建议独立测试资产配方按锁定源码的格式和路径规则生成配置，具体任务图待实施验证，不能临时手写 INI 充作正式集成。原稿责任人：architect。
+- Y-A005-03（§5.2/Q-04，启动参数与工具）：设计同时列明 `QB_DEFAULT_KERNEL=none`、`QB_DEFAULT_FSTYPE=none`、`QB_ROOTFS=none`；固件由 deploy 目录中的 `QB_DEFAULT_BIOS` 经 `-bios` 传入。去除 qemuarm64/类默认的 virtio、PCI、USB、网络、磁盘和 virtio serial 参数，明确 UART0 与 nographic chardev 接线。记录最终实际 native QEMU 路径/hash，不能接受宿主 PATH 回退。此版 nonetwork 仍先检查 TUN，现有主机静态条件满足，应说明该宿主约束；本轮未运行 runqemu。原稿责任人：architect；模型接线由 qemu-engineer 核对。
+- Y-A005-04（§4.1/§4.3/§4.4/§6/§7/Q-07，SPI NAND）：落实 U-A005-01，移除专用并行 NAND 控制器窗口/IRQ，保留 SPI 主控→CS→SPI NAND 的接口。锁定源码有 PL022、SPI NOR m25p80 和并行 nand 接口；在 hw/include/hw 范围未检索到 SPI NAND，不可将前两种芯片模型混用。明确主控/芯片/CS、guest SPI master 与 SPI_MEM/MTD_SPI_NAND、TF-A BL2/FIP 读取、几何/OOB/ECC/坏块及后端格式的后续依赖。若 chapter 6 首次采用 SPI NAND 读固件，相关最小读取门槛应前移到该读取前；采用其他阶段测试介质则注明有限覆盖。完整存储/UBI/A/B 保留后续阶段，候选 512MiB/LEB/总装参数待芯片确定后重核。原稿责任人：architect；芯片模型可用性和实现量由 qemu-engineer 核对。
+- Y-A005-05（§3/§5/§10 V-06/V-07，最小启动验收）：落实 U-A005-02，明确本章必须观察 CPU0 执行选定固件并输出可追溯 UART 标记，关联固件/hash、真实 tiger 参数、正式 patch 集成及清理 workspace 后构建证据。将四核上线、timer IRQ、guest 请求 reset 的测试前提与最低启动门槛分别说明；如保留本章 guest reset，须明确实际触发接口及测试固件增量，固件模式不能仅假定已有 BL31/PSCI。模型 reset 正确性仍由 QEMU 核对，后续完整启动链/存储/watchdog 不提前实施；枚举 machine、`-S` 或对象创建不算 CPU 启动。原稿责任人：architect。
+- 未覆盖：未执行 BitBake 解析/构建、patch 重应用、固件或 qemuboot 生成、QEMU/runqemu、CPU/IRQ/reset、SPI NAND/UBI/镜像或全链实测；Q-02/Q-03 模型 API 与正确性由下一位 qemu-engineer 核对。旧 work 源码未做全树差异核验，历史 do_patch 和现有二进制不冒充本轮重构建；具体芯片/数据手册、TF-A 及 tiger 的 U-Boot/Linux 配置仍待后续阶段取得。
+- 作者处理回复：待本轮全部意见到齐后由 architect 按 Y-A005-01～05 填写修订版本和处理结果。
+- 复核：尚未进行；本人成果已提交后停止，等待 project-manager 串行衔接 QEMU 专业核对及后续统一修订，不代写他人结论或批准。
 
 #### qemu-engineer 的意见
 - 日期、依据、未覆盖项及结论：尚未评审；由本人按上述范围记录。
