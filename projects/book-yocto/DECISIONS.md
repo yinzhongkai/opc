@@ -146,6 +146,17 @@
 - 替代关系：**部分替代 D-001**——仅替代“创建四个长期开发态仓库”这一实现载体和相应 P0.5 前置条件；D-001 的真实平台代码、完整构建、全链运行验证、C-W/V 回填和前言实测承诺继续有效。同步更新 D-010 中“依赖四仓库”的解释为“依赖对应上游基线、`meta-tiger` patch 与干净环境复验”，不追改历史决定原文。
 - 记录人及更新日期：project-manager，2026-10-09
 
+## D-014：批准 A-005 v0.2 作为 chapter 4 最小平台设计基线
+- 状态：confirmed
+- 提出者：architect（设计成果负责人）
+- 问题与候选方案：A-005 v0.2 已统一处理 13 项 U/Y/QE 意见，QEMU 与 Yocto 针对性复核均 pass，需要由用户确认该明确版本后进入章节蓝图与工程实施。
+- 确认人：建项用户（PROJECT 默认最终确认人）
+- 结果：**批准 A-005 v0.2**。被批准正文固定于 OPC 提交 `08bdf9c08d6d8cbd8836df3771ffd28231470059`，Git blob `26c5fdca1103f37ac3e752208c429231b8191eee`，路径 [A-005-tiger-platform-design.md](artifacts/A-005-tiger-platform-design.md)。chapter 4 按单核 A53/TCG、ROM/RAM、轮询 PL011、raw 固件实际执行及宿主 reset 契约实施；writer 据此编制章节蓝图，再按 T-016 既有次序推进工程与书稿。
+- 确认来源与日期：2026-10-11 用户在当前 project-manager 会话明确回复“批准 v0.2”；此前 QEMU 复核提交 `5287e43f824dfe63d6a3e3371b5882a4944d9c48`、Yocto 复核提交 `b3fbff33ee4ee7332cd123d3eef008879e3c3ac1` 均为 pass，批准时正文与固定 blob 一致。
+- 适用范围与影响：T-016 和 A-005 v0.2 的设计基线。文档中的后续 SPI master→实际 CS→SPI NAND、watchdog、SMP 及完整启动链仍按首次使用前的选型、契约补齐与实测门槛演进；候选型号、条件性几何及未验证能力保持原有边界。本次是设计批准，模型/固件/metadata 实现、构建运行、章节定稿尚未完成。architect 据实更新自身元信息与成果索引，project-manager 串行衔接 writer 蓝图；远程访问、写入或切换仍须核对已有授权和实际 checkout。
+- 替代关系：无；补充 D-013 的 chapter 4 实施输入，不改变 D-001/D-003/D-010/D-013 的全书目标与验收要求。
+- 记录人及更新日期：project-manager，2026-10-11
+
 ## 记录样式（不是真实决定）
 
 ```text
