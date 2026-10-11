@@ -621,9 +621,12 @@
 
 ### T-016 章节蓝图阶段：基于 A-005 v0.2 的 chapter 4 教学与工程交接
 - 主责与安排：writer；2026-10-11 project-manager 依据用户直接协调授权、T-016 既定章节流程及 D-014 安排。architect 批准回写完成并停止、project-manager 核验后才开始；不新增 feature 分支或启动 T-017。
-- 当前状态：todo（开始条件已满足，待 writer 接收通知后实际执行并更新本人阶段记录）；project-manager 已核验 architect 在 `28bdc2bd0aea4c575dd286f7c71f3a5793dd5f0c` 完成批准回写与停止，技术正文与被批准 `08bdf9c` 相同。本阶段输入为已批准 A-005 v0.2、D-014、A-002 v0.8、A-003 v0.1、A-004 v0.5、D-010/D-011/D-013 及书稿基线 `f444790f352b46f699fd3d46198f8b9b9f089a62` 的 chapter 3/4 和必要衔接章节。
+- 当前状态：completed（writer 本人蓝图编制及静态自查完成，A-006 v0.1 draft；本地提交后停止，待 project-manager 核对交接。本阶段不代表蓝图已批准或 T-016 整体完成）；project-manager 已核验 architect 在 `28bdc2bd0aea4c575dd286f7c71f3a5793dd5f0c` 完成批准回写与停止，技术正文与被批准 `08bdf9c` 相同。本阶段输入为已批准 A-005 v0.2、D-014、A-002 v0.8、A-003 v0.1、A-004 v0.5、D-010/D-011/D-013 及书稿基线 `f444790f352b46f699fd3d46198f8b9b9f089a62` 的 chapter 3/4 和必要衔接章节。
 - 交付与完成条件：在 OPC artifacts 内形成版本化 chapter 4 蓝图并维护自己的索引/本阶段交付记录；明确读者前置、学习目标、章节结构、最少 devtool→真实 patch→meta-tiger→清理 workspace→干净重构建→runqemu 主线，列出交给 QEMU/Yocto 工程成员的实施资产、证据需求、待实施命令与输出回填位置、验收映射和后续功能衔接。本章以 CPU 实际执行最小固件及串口/宿主 reset 证据为目标，枚举/-S/宿主打印不能替代启动；SPI NAND、完整链与 watchdog 留后续门槛。
 - 本阶段边界：只编制蓝图，不提前制作或声称已有稳定受评正文、真实 patch、工程产物或运行结果；工程事实形成后再校准正文。治理资料落 OPC，不把产品代码或中间工程资产写入 OPC。本地校验与提交完成后停止，由 project-manager 核对交接完整性再衔接工程成员；发现与批准设计冲突先列明并协调，writer 不自行修改架构契约或代写专业结论。
+- 本阶段实际交付（writer，2026-10-11）：[A-006《chapter 4 章节蓝图》v0.1 draft](artifacts/A-006-chapter4-blueprint.md) 及本人索引；起始 OPC `2fcec08417fbfb2362b6649dfd78c98571b46cbf`、书稿 `f444790f352b46f699fd3d46198f8b9b9f089a62`，配对分支与本机工作树已核对。刷新身份/角色/scope/四项有效技能/WORKSPACE，完整读取 A-005 v0.2 与相关安排，复用未变 chapter 3/4 和 A-003/A-004，补读必要前后章，工程资料引用已有报告/选定原始摘录，未重新远端访问。蓝图覆盖读者前提/目标、4.1–4.9 教学、最少 devtool→真实 patch→bbappend/SRC_URI→清理 workspace→干净重构建→runqemu/宿主 reset；列明模型/固件源与编译部署/fixture/helper/参数分工、P-01～P-09 命令回填、E-01～E-10 对 A-005 验收映射和后续首次使用门槛。明确本章测试 MACHINE=tiger 与后续完整 tiger-aarch64 的衔接，不静默改名；没有需要 writer 自行改动获批设计的冲突，实施命令/路径/flags/状态读取等留工程核定。
+- 本阶段校验（writer，2026-10-11）：`python -B scripts/validate_framework.py` 返回 0（21 个角色、36 份技能、1 个实际项目、1 套项目模板、495 处本地链接）；差异空白检查通过。只读自查确认九节/P-01～P-09/E-01～E-10 唯一且完整、draft/批准边界与引用版本一致，本地 Git 对象按所属仓库核对、远端基线与 hash 仅与已有证据比对；T-016 本人蓝图段外、原成果索引条目及 A-005 保持一致，A-005 技术正文仍与获批 `08bdf9c` 一致。书稿 HEAD/工作树未变；这些是文档静态检查，不是工程验收。
+- 本阶段下一步：本地校验与提交完成后 writer 停止；project-manager 核对 A-006 稳定版本和交接完整性，再按既定次序衔接 qemu-engineer。本次不改书稿、工程资产、A-005、原意见/复核或其他任务/PM 状态，不发送跨会话消息、不新建分支、不启动 T-017。
 
 ### 本轮评审：A-005 v0.1 平台设计候选稿，第 1 轮设计专业核对
 - 受评正文：[A-005 v0.1](artifacts/A-005-tiger-platform-design.md)，固定读取 Git `69ce591cd9e4ee310b80cff4663c20c776364cfd` 中的正文。本轮全部意见提交前 architect 保持候选稿不变；后续任务意见提交不改变受评正文版本。
