@@ -612,11 +612,12 @@
 
 ### T-016 前置阶段：tiger 平台设计
 - 主责与授权：architect；由 project-manager 根据 2026-10-11 用户采纳增员建议、PROJECT 配置记录及 H-003 在本任务内安排，不新增一轮 feature 或扩大正文修订范围。
-- 当前状态：in_progress（批准回写待完成）；A-005 v0.2 已获用户批准（D-014），13 项作者回复和两名工程师 pass 复核齐备；v0.1 原 revise 记录保留，工程验收尚未进行。
+- 当前状态：completed（本人平台设计及批准回写完成）；A-005 v0.2 approved，依据 D-014 及两名工程师 pass 复核；v0.1 原 revise 记录保留，工程验收尚未进行，T-016 整体尚未完成。
 - 首次行动：完成或刷新自身成员初始化，读取本任务、D-001/D-010/D-013、A-003 v0.1，以及书稿 chapter 2、4、6–10、15 中的平台约定；按实际可访问资料核对源码和配方依据，缺失或尚未取得的基线明确待核实，不自动 SSH 或切换远程仓库。
-- 本阶段交付：[A-005《tiger 平台设计说明》v0.2](artifacts/A-005-tiger-platform-design.md)，状态 draft，2026-10-11 由 architect 统一修订并更新索引。本章仅单核/ROM/RAM/轮询串口和宿主 reset；SRAM/GIC/timer IRQ/四核/guest reset/其他设备及完整链在首次使用前扩充。已引用两位工程师的锁定来源/源码证据，明确固件/部署/任务图/运行判据、后续 SPI NAND/CS/几何/镜像与 watchdog 门槛，13 项作者回复见下文。尚无模型/固件/metadata 实现、构建或运行证据，未改书稿/工程代码。
+- 本阶段交付：[A-005《tiger 平台设计说明》v0.2](artifacts/A-005-tiger-platform-design.md)，状态 approved（D-014），2026-10-11 由 architect 统一修订并据实回写批准元信息/索引。本章仅单核/ROM/RAM/轮询串口和宿主 reset；SRAM/GIC/timer IRQ/四核/guest reset/其他设备及完整链在首次使用前扩充。已引用两位工程师的锁定来源/源码证据，明确固件/部署/任务图/运行判据、后续 SPI NAND/CS/几何/镜像与 watchdog 门槛，13 项作者回复见下文。尚无模型/固件/metadata 实现、构建或运行证据，未改书稿/工程代码。
+- 批准回写记录（architect，2026-10-11）：按 `b849259ebd3473fda6bec00cb358321105f18d08` 的安排完成 v0.2 approved 元信息与本人索引回写，引用 D-014、QEMU `5287e43f824dfe63d6a3e3371b5882a4944d9c48` 和 Yocto `b3fbff33ee4ee7332cd123d3eef008879e3c3ac1` 的 pass。获批版本为 `08bdf9c08d6d8cbd8836df3771ffd28231470059`、原 blob `26c5fdca1103f37ac3e752208c429231b8191eee`；元信息块之后技术正文保持一致，仅状态/批准依据与本阶段事实更新，不升技术版本，不代改意见/复核或 PM 整体状态。校验及本地提交后停止，后续由 project-manager 核验衔接。
 - 设计阶段出口：提交明确版本的候选稿后停止改稿；project-manager 再按实际受评版本登记 qemu-engineer 的模型能力/接口核对和 yocto-engineer 的配方/集成/启动约束核对，用户同期提出意见。意见到齐后由 architect 统一修订，必要的专业复核及用户确认形成 chapter 4 实施基线；候选稿不能自行标 approved，后续未验证能力保持明确。
-- 当前下一步：architect 按 D-014 将自身元信息/索引更新为 v0.2 approved，引用实际批准版本与两项 pass 复核，保留技术正文及未验证边界；只作批准状态回写、校验、本地提交并停止，不升为新技术版本。project-manager 核验完成后衔接 writer 蓝图，不同时启动工程成员。
+- 当前下一步：project-manager 核验本次批准回写完成后按既定安排串行衔接 writer 蓝图；architect 提交后停止，不启动下一成员或工程。
 
 ### T-016 章节蓝图阶段：基于 A-005 v0.2 的 chapter 4 教学与工程交接
 - 主责与安排：writer；2026-10-11 project-manager 依据用户直接协调授权、T-016 既定章节流程及 D-014 安排。architect 批准回写完成并停止、project-manager 核验后才开始；不新增 feature 分支或启动 T-017。

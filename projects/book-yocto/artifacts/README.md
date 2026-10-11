@@ -8,7 +8,7 @@
 | A-002 | [书稿打磨计划](A-002-book-polishing-plan.md) | project-manager | T-002、T-016、T-017 | 0.8 | draft | 范围与验收依据 D-001~D-013（confirmed）；v0.8 依据用户采用增员建议、PROJECT 配置记录及 H-003，在 T-016 内前置 architect 平台设计、专业核对与用户确认，保留 QEMU/Yocto 分工及 `meta-tiger` patch 模型；计划文本待确认 |
 | A-003 | [知识点校验清单](A-003-知识点校验清单.md) | writer | T-003 | 0.1 | draft | 尚无 |
 | A-004 | [体例约定](A-004-体例约定草案.md) | writer | T-005、T-013 | 0.5 | approved | v0.5 于 2026-09-27 经用户明确批准（“批准 A-004 v0.5”）；新增硬件型号、粗体/反引号边界及等宽文本规则正式生效 |
-| A-005 | [tiger 平台设计说明](A-005-tiger-platform-design.md) | architect | T-016；跨章影响供 T-017 使用 | 0.2 | draft | 尚无；2026-10-11 统一处理 U/Y/QE 共 13 项意见，收敛本章最小启动并回填来源/部署/reset及后续 SPI NAND/watchdog 门槛，提交后停止；待针对性复核及用户确认，实现/运行未执行 |
+| A-005 | [tiger 平台设计说明](A-005-tiger-platform-design.md) | architect | T-016；跨章影响供 T-017 使用 | 0.2 | approved | [D-014](../DECISIONS.md)（confirmed）；2026-10-11 用户明确“批准 v0.2”，固定获批提交 `08bdf9c08d6d8cbd8836df3771ffd28231470059`、原 blob `26c5fdca1103f37ac3e752208c429231b8191eee`；QEMU `5287e43`、Yocto `b3fbff3` 均 pass。本次仅元信息回写，技术正文不变；后续候选与未验证边界保留，实现/运行未执行 |
 
 ## 工作记录与核验证据（非独立成果）
 
