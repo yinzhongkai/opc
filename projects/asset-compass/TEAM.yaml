@@ -3,3 +3,4 @@ project: 'asset-compass'
 roleKnowledge: {}
 members:
   - project-manager
+  - investment-advisor
