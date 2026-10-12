@@ -3,5 +3,5 @@ workspace:
   driver: git
   repository: git@github.com:yinzhongkai/book-zephyr.git
   branch: main
-  revision: 695ec76e54639c9faf9462b7b043c644b2db9ec2
+  revision: 08092e0a5af5d2895e44911b7282bb3b29d3b64e
   checkout: ../book-zephyr
