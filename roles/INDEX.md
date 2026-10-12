@@ -7,6 +7,7 @@
 | [project-manager](project-manager.md) | 项目经理 |
 | [product-manager](product-manager.md) | 产品经理 |
 | [researcher](researcher.md) | 研究员 |
+| [investment-advisor](investment-advisor.md) | 投资顾问 |
 | [planner](planner.md) | 规划师 |
 | [architect](architect.md) | 系统架构师 |
 | [core-systems-engineer](core-systems-engineer.md) | 核心系统工程师 |
