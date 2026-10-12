@@ -8,7 +8,9 @@
 | A-002 | [全书审核与修订计划](book/review-plan.md) | OPC artifacts/book/ | project-manager | [T-001、T-002](../TASKS.md) | 0.2；输入 A-001 0.1、A-003 1.0 与 D-005 | draft | 具体标准 / 边界已由 D-005 确认；书稿最终批准尚无 |
 | A-003 | [审校标准与配套交付边界](book/review-criteria.md) | OPC artifacts/book/ | project-manager | [T-002](../TASKS.md) | 1.0；获确认草案 0.1 位于 OPC 提交 07e2bdcc23625d2e7f2499d7bdcc7242a50d995f | approved | D-005；2026-10-11 用户采用整体建议，范围仅标准与交付边界 |
 
-OPC 治理与协作成果使用当前项目 `artifacts/` 内的正文链接；产品代码和直接业务交付物使用“成果物仓库 + 仓库内路径”，并记录其最终合并提交。可移动分支名不能代替精确提交。
+OPC 治理与协作成果使用当前项目 `artifacts/` 内的正文链接；产品代码和直接业务交付物使用“成果物仓库 + 仓库内路径”，并记录其合入后的最终提交，可以是快进合并后的普通功能提交。可移动分支名不能代替精确提交。
+
+2026-10-12 按 [D-006](../DECISIONS.md) 升级到 v0.0.4，A-001 至 A-003 正文及批准依据保持不变。历史精确提交通过恢复标签 `archive/book-bitcoin-pre-v0.0.4-20261012` 保留；框架基线与迁移证据见 [PROJECT.md](../PROJECT.md)。
 
 ## 工作区当前输入位置
 
@@ -16,7 +18,7 @@ OPC 治理与协作成果使用当前项目 `artifacts/` 内的正文链接；�
 
 | 输入 | 仓库 | 仓库内位置 | 精确提交 | 当前事实 |
 |---|---|---|---|---|
-| 用户原稿 task00–task12，共 13 篇 | `git@github.com:yinzhongkai/book-bitcoin.git` | `bitcoin/`；文件索引 `bitcoin/index.md` | `0811b23eb19d79ceb55a3c64a81944312eec0f2c` | 已推送 main；与原输入逐字节一致，尚未审校或批准 |
+| 用户原稿 task00–task12，共 13 篇 | `git@github.com:yinzhongkai/book-bitcoin.git` | `bitcoin/`；文件索引 `bitcoin/index.md` | `0811b23eb19d79ceb55a3c64a81944312eec0f2c` | 已推送 main；与 Git 内容及已登记原稿摘要一致，尚未审校或批准 |
 | 仓库说明与文件导航 | 同上 | `README.md`、`bitcoin/index.md` | `0811b23eb19d79ceb55a3c64a81944312eec0f2c` | 已推送 main；目录清理说明及导航链接核对通过 |
 
 当前版本已推送并核对远端。初始提交 `b3e147f539c3ba298e6be6fcaf0d16c3e79b7bdd` 中的 `docker/dockerfile` 与 `.gitattributes` 已按 D-002 删除；本地历史整理后早期版本仅在本机 Git 恢复记录中，远端采用上表的现有 main 版本。原稿来源与指纹、默认本机位置及配置授权见 [PROJECT.md](../PROJECT.md)。
@@ -33,7 +35,7 @@ OPC 治理与协作成果使用当前项目 `artifacts/` 内的正文链接；�
 状态：draft
 适用范围：<本成果覆盖的内容和边界>
 来源及输入版本：<授权来源、所依赖成果及版本>
-存储位置：<OPC artifacts 路径 | 成果物仓库、仓库内路径与最终合并提交>
+存储位置：<OPC artifacts 路径 | 成果物仓库、仓库内路径与合入后的最终提交>
 批准依据：尚无
 版本记录：<日期、版本、主要变化和替代关系>
 ```

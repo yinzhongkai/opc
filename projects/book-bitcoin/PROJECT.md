@@ -2,7 +2,7 @@
 
 项目 ID：`book-bitcoin`
 
-- 框架基线：`v0.0.3`（发布提交 `6f79b98e219e0bbf8f7de45dd35ec54c2a6f1f07`）。
+- 框架基线：`v0.0.4`（发布提交 `464ca52aafc6c73ff780a7120acd3bf63c9d31dd`）。
 - 项目长期分支：`project/book-bitcoin`；建项开发分支：`feature/book-bitcoin/project-bootstrap`。
 
 ## 建项信息
@@ -30,7 +30,7 @@
 - 输入指纹：`f2e40d8709796b61912171b10401ae07a6892c90c83cd7fa1c3b81f0c7679087`（SHA-256）。按完整路径排序，每行以相对路径、TAB、文件 SHA-256 小写组成，行尾 LF，整份清单采用 UTF-8 后计算摘要；仅用于核对本次输入，不代替 Git revision 或审校结论。
 - 初次仓库核对：只读查询 `git ls-remote --symref git@github.com:yinzhongkai/book-bitcoin.git HEAD refs/heads/*` 成功，未返回 HEAD 或分支；当时本机默认候选检出 `D:\book-bitcoin` 尚不存在。后续克隆确认目标为空仓库。
 - 早期候选：原先提出将原稿放在 `content/bitcoin/`；后续用户要求目录结构参考 book-yocto，按 [D-001](DECISIONS.md) 初始采用根目录 `bitcoin/` 和 `docker/`，保留原下载目录；现按 [D-002](DECISIONS.md) 移除 `docker/` 和 `.gitattributes`，保留书稿与导航。
-- 当前恢复点：用户提供的原稿目录保持原状；独立仓库当前 `main` 及远端 `main` 均为整理后的提交 `0811b23eb19d79ceb55a3c64a81944312eec0f2c`，OPC 的 WORKSPACE 锁定该版本；早期初始与目录清理提交仅保留于本机 Git 恢复记录，不属于当前远端分支历史。
+- 当前恢复点：独立仓库当前 `main` 及远端 `main` 均为整理后的提交 `0811b23eb19d79ceb55a3c64a81944312eec0f2c`，OPC 的 WORKSPACE 锁定该版本。原下载目录在初始导入时保留，2026-10-12 本轮核对时该路径已不存在；现有 13 篇书稿与 Git 内容、A-001 盘点摘要及上述原稿指纹一致。早期初始与目录清理提交仅保留于本机 Git 恢复记录，不属于当前远端分支历史。
 
 ## 工作区配置记录
 
@@ -57,6 +57,17 @@
 - 推送前事实：现有书稿 `main` 已经通过本地 reset/amend 整理为 `0811b23eb19d79ceb55a3c64a81944312eec0f2c`；本轮未执行该历史整理。与原声明版本 `2f47631c7f41d3585bf25242b037cb92e988d0f1` 的文件树完全一致，均为 `2f173ea03ae48e07accc2542fb60c7aaa82b574f`；两个目标远端分支当时均不存在。
 - 书稿同步证据：已将现有 `main` 普通推送至 `git@github.com:yinzhongkai/book-bitcoin.git`，重新读取远端 `refs/heads/main` 确认提交为 `0811b23eb19d79ceb55a3c64a81944312eec0f2c`，并建立本地跟踪关系。
 - 配置与项目记录同步：WORKSPACE、状态摘要及当前输入索引改为引用现有精确提交；在 `bugfix/book-bitcoin/remote-sync` 更新本轮记录，按本会话线性提交偏好快进更新 `project/book-bitcoin`，再按用户授权推送该项目分支。无成果物内容修改，不创建成果物开发分支；不推送框架主线或其他项目分支。
+
+## 框架升级记录
+
+- 2026-10-12 用户授权：建项用户在本超级管理员会话要求“先同步下最新代码，然后将项目升级到v0.0.4框架”，见 [D-006](DECISIONS.md)。记录人：框架超级管理员。
+- 同步与基线：先获取 OPC 与书稿仓库的最新远程引用，核对两仓库工作树干净；OPC `main` 已为 `v0.0.4` 发布提交，书稿本地 / 远端 `main` 与 WORKSPACE 均为 `0811b23eb19d79ceb55a3c64a81944312eec0f2c`。
+- 升级前项目远程头：`a16c646edafcf8924f3347671c032104524d3baa`；原框架基线为 `v0.0.3`（`6f79b98e219e0bbf8f7de45dd35ec54c2a6f1f07`）。恢复标签 `archive/book-bitcoin-pre-v0.0.4-20261012` 保留旧项目线及审批记录所引用的精确提交，随新项目线一同推送。
+- 迁移方式：按根 [分支策略](../../BRANCH_STRATEGY.md) 第 6 节，将 10 笔项目独有提交 rebase 到 `v0.0.4`；迁移无冲突，逐笔核对项目目录树完全一致。基线更新前的新项目头为 `491ce2cb9a5775c36396b9ee3009d941a41f0e03`；本次以普通基线提交收口，不新增升级 merge commit。没有实际存在的活动 feature / bugfix 分支；TASKS 中尚未创建的计划分支及任务状态保持原记录。
+- 配置与兼容性：保留四名成员、角色、scope、有效技能和 WORKSPACE 配置；版本 3 TEAM 与版本 1 git 工作区兼容新版。本项目后续开发使用新版 `--ff-only` 流程；历史任务证据按 [迁移说明](../../MIGRATIONS.md) 保留，开发任务启动时再登记实际 OPC 合入前目标提交。
+- 验证证据：`v0.0.4` 发布版与升级项目分别通过全部 60 项回归测试（`python -B -m unittest discover -s scripts -p 'test_*.py'`）；升级项目通过 `python -B scripts/validate_framework.py`，核对 22 个角色、37 份技能、1 个实际项目、1 套模板和 449 处本地链接。目录边界、双仓库版本与 `git diff --check` 均通过；仅更新本项目四份治理记录，A-001 至 A-003 正文、TASKS、成员及 WORKSPACE 内容保持不变。13 篇书稿共 649322 字节，与 Git 基线、已登记原稿摘要和输入指纹一致；原下载目录本轮不可读取，不作新的源目录逐字节核对声明。
+- 推送保护：推送前重新获取远程引用，确认项目旧远程头及不可变发布标签未变化；仅以显式旧 SHA 的 `--force-with-lease` 原子更新本项目分支与恢复标签，不更新框架主线或书稿历史。
+- 后续会话：成员开始下一项工作前按会话协议刷新 `v0.0.4` 规则、项目基线和关联资料；其他克隆须显式切换到新项目历史，不把旧项目头再次合回。本轮不触发成员会话或分配业务任务。
 
 ## 工作方法
 
