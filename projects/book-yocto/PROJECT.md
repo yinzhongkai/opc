@@ -2,7 +2,8 @@
 
 项目 ID：`book-yocto`
 
-- 框架基线：`v0.0.3`（提交 `6f79b98e219e0bbf8f7de45dd35ec54c2a6f1f07`）。2026-10-08 将项目提交 rebase 到重新发布的正式标签之上，采用角色/技能术语、项目历史工作流、会话消息边界和项目升级 rebase 规则；底层配置字段继续使用 `knowledge`。此前 `v0.0.2` 升级及归档记录继续有效。
+- 框架基线：`v0.0.4`（远端发布提交 `464ca52aafc6c73ff780a7120acd3bf63c9d31dd`，注释标签对象 `21d803d34cbd2f83daef822afe8bb0ef13f1b0d2`）。本次升级来源、恢复点和执行口径见下文“框架升级记录”。
+- 历史框架基线：2026-10-08 将项目提交 rebase 到 `v0.0.3`（`6f79b98e219e0bbf8f7de45dd35ec54c2a6f1f07`）正式标签之上，采用角色/技能术语、项目历史工作流、会话消息边界和项目升级 rebase 规则；底层配置字段继续使用 `knowledge`。此前 `v0.0.2` 升级及归档记录继续有效。
 - 分支迁移：2026-09-28 从原 `book-yocto` 历史收敛为 `project/book-yocto` 的干净项目基线；迁移前完整历史由 `archive/2026-09-28/book-yocto` 保存，项目线中原有的重复 Yocto 框架提交不再作为权威来源。
 
 ## 建项信息
@@ -45,6 +46,14 @@
 - 2026-09-12：同一授权下新建 `writer`（角色 writer），配置路径 [members/writer.yaml](members/writer.yaml)；TEAM 登记成员索引并为该角色补充技能 `book-production, reader-feedback, book-planning`。记录人：框架超级管理员。
 - 2026-09-12：同一授权下新建 `reviewer`（角色 reviewer），配置路径 [members/reviewer.yaml](members/reviewer.yaml)；TEAM 登记成员索引并为该角色补充技能 `book-production, book-review, reader-feedback, technical-book-validation`。记录人：框架超级管理员。
 - 2026-09-27：用户在本超级管理员会话要求增加一名专门进行 Yocto 开发的成员，并在 OPC 框架中增加相应技能和角色。新增公共技能 `yocto-engineering`、公共角色 `yocto-engineer`，新建成员 `yocto-engineer`，配置路径 [members/yocto-engineer.yaml](members/yocto-engineer.yaml)；TEAM 登记成员索引并为该角色补充技能 `technical-book-validation`。记录人：框架超级管理员。
+
+## 框架升级记录
+
+- 2026-10-12：用户在超级管理员会话要求“先同步下最新代码，然后将项目升级到 v0.0.4 框架”。OPC、独立书稿及 SSH 主机 `tiger` 上的 `meta-tiger` 已刷新远端引用；升级前两个本机仓库及远程工程仓库工作树均干净。书稿保持 `feature/t-016-chapter4-revision`、`main@f444790f352b46f699fd3d46198f8b9b9f089a62`，工程保持 `master@0e3da48b34ef772532535a730a21878cc30ccf67`；本次框架升级不推进成果物版本。
+- 发布来源：远端 `origin` 的 `refs/tags/v0.0.4` 指向上述发布提交，第一父提交为 `v0.0.3`，发布文件树与远端 `main` 一致。本机此前同名注释标签对象 `f529a7a3b0249a1d0abe658f5908b56910a66e65` 指向 `869f04626d0110185c508e9cc46759375df24f9e`，文件树与远端发布相同；旧对象保存在 `refs/tags/archive/2026-10-12/v0.0.4-before-sync`，不改写远端发布标签。
+- 恢复点与旧远程头：`project/book-yocto@f3d8c2ff882e0542f86650829d99feb0dc523729` 保存为 `archive/2026-10-12/book-yocto-before-v0.0.4`；活动分支 `feature/book-yocto/t-016-chapter4-revision@b262ea9c0935d662a42ec0e4ded0c8cb4d24fa58` 保存为 `archive/2026-10-12/book-yocto-t-016-before-v0.0.4`。项目独有提交使用 rebase 迁移；T-016 活动提交继续基于新项目基线，不合入长期分支，不改变任务状态、成员分工或成果批准。
+- 重放与流程口径：已提前采用的 `multi-git`、SSH checkout 和 QEMU 角色/技能属于 `v0.0.4` 正式框架，活动分支重放时按等价内容去重；此前采用记录及旧 SHA 保留为历史依据。后续 feature/bugfix 按当前根 [分支策略](../../BRANCH_STRATEGY.md) 使用 `--ff-only` 合入并记录合入前目标提交与合入后的最终提交；框架发布继续使用 `--no-ff` 发布合并。已完成任务的旧合并证据不追改。
+- 记录人：框架超级管理员。本次为用户授权的框架基线迁移，不构成专业业务任务安排。
 
 ## 当前资料
 
