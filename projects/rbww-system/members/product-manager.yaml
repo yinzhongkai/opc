@@ -1,0 +1,5 @@
+id: product-manager
+role: product-manager
+scope:
+  - 澄清报价系统的目标用户、业务场景、范围、优先级和非目标
+  - 维护需求、验收标准、待决定事项及面向研发和测试的需求交接

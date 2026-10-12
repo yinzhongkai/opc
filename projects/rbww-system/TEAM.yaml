@@ -1,0 +1,7 @@
+schemaVersion: 3
+project: 'rbww-system'
+roleKnowledge: {}
+members:
+  - project-manager
+  - product-manager
+  - architect
