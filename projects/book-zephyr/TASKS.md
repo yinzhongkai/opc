@@ -71,6 +71,12 @@
 - 负责人：writer
 - 状态：in_review
 - 授权来源与日期：用户于 2026-09-26 在 project-manager 会话明确要求登记第 1 章正文修订任务，由 writer 按 A-005 v0.3 修正安装流程及过时说明，安排 developer 对修订稿技术复核，形成可读稿后交用户完整通读并按反馈修订；由 project-manager 据此登记。
+- 变更类型：feature（正文修订）；当前等待用户通读，没有活动开发分支。2026-10-12 框架升级仅补记以下追踪字段。
+- OPC 开发分支：历史修订未登记；当前无活动分支。下次修订从升级后的 project/book-zephyr 新建 feature/book-zephyr/<name>，不复用已关闭的 T-007 分支。
+- OPC 合入前目标提交：历史修订未登记，现有记录无法确认；下一轮同步目标分支后记录实际完整 SHA，不以框架升级头推测旧轮目标。
+- 成果物仓库与开发分支：git@github.com:yinzhongkai/book-zephyr.git；历史修订分支未登记，当前无活动分支，后续与 OPC 使用相同 <name>。
+- 成果物仓库合入后的最终提交：当前内容已按 D-012 重建并锁定于 `08092e0a5af5d2895e44911b7282bb3b29d3b64e`；该提交是现行内容基线，不代替历史修订的合入证据，旧版本按 D-012 恢复包追溯。
+- 合并与清理状态：当前成果基线已合入并验证，T-007 的分支已清理；T-006 仍等待用户通读。后续修订按 v0.0.4 使用 --ff-only，成果物先合入并验证后再更新 OPC 引用；不得由本次升级宣告任务完成。
 - 目标与范围：在 A-004 v0.1 上修订唯一当前正文，覆盖全章涉及的安装顺序、工具职责、工具链终端入口、构建烧录衔接、相关图示/截图说明与来源；按 A-005 v0.3 和 D-007 对齐 Windows + VS Code + nRF Connect 扩展主线，替换 Toolchain Manager 旧步骤。更新资料包路径并核销已解决的“资料包缺失”“基线未确认”说明，逐项区分可核销与仍需实测的【待核】项；完成技术复核、用户通读及反馈修订。本任务不含独立示例工程开发、替用户上板实验或全章最终定稿批准，也不授权 writer 改写 planner/developer 的成果。
 - 输入与依赖：[A-004 v0.1 正文](https://github.com/yinzhongkai/book-zephyr/blob/695ec76e54639c9faf9462b7b043c644b2db9ec2/book/chapters/ch-env-setup/text.md)（draft）；[A-005 v0.3 环境基线](https://github.com/yinzhongkai/book-zephyr/blob/695ec76e54639c9faf9462b7b043c644b2db9ec2/book/environment.md)（approved，D-007）；[A-003 v0.1 蓝图](https://github.com/yinzhongkai/book-zephyr/blob/695ec76e54639c9faf9462b7b043c644b2db9ec2/book/chapters/ch-env-setup/plan.md)（approved，D-006）；[A-001 v0.2 图书设计](https://github.com/yinzhongkai/book-zephyr/blob/695ec76e54639c9faf9462b7b043c644b2db9ec2/book/design.md)、[A-002 v0.2 目录](https://github.com/yinzhongkai/book-zephyr/blob/695ec76e54639c9faf9462b7b043c644b2db9ec2/book/outline.md)；D-001～D-010；[官方资料包](https://github.com/yinzhongkai/book-zephyr/blob/695ec76e54639c9faf9462b7b043c644b2db9ec2/references/nrf54l15-dk-docs/README.md)。A-001/A-003 的旧安装表述按 D-007 和 A-005 v0.3 对齐；D-007 对旧正文“无需改动”的描述不替代实际正文核对。发现基线自身疑点时记录证据交 developer/project-manager 协调，不以获批代替技术核查，不自行变更已确认基线。
 - 优先级：本章可读稿交付的前置工作；未设日期期限。
@@ -79,7 +85,7 @@
 - 成果与验证证据：[A-004 v0.6](https://github.com/yinzhongkai/book-zephyr/blob/695ec76e54639c9faf9462b7b043c644b2db9ec2/book/chapters/ch-env-setup/text.md)（in_review，尚未批准），输入为 A-004 v0.5、F2R-001、Nordic《nRF54L15 DK Hardware User Guide v1.0.0》Figure 2 及既有依赖；正式图片位于外部仓库 `book/chapters/ch-env-setup/images/figure-1-1-nrf54l15-dk-front.png`，成果索引已同步为 v0.6。v0.5 的限定复核与 v0.6 的 F2R-001 必要复核均已记录；v0.6 规范化 SHA-256 为 `bd96f197a3a36e0a5decb6c4fdf1f8c9389e1868dbff1f0f1c2d08b5cb0e3fc5`。
 - 阻塞与下一位行动人：无输入或技术复核阻塞；下一位行动人为用户，继续完整通读 A-004 v0.6 并反馈。尚未记录用户已读完或认可。安装、构建、设备枚举、烧录与上板仍未执行；截图用于当前内部稿件不表示已取得正式出版转载许可，出版前须确认许可或替换为自有实物照片；A-005 v0.3 的差异继续交 developer/project-manager 协调。
 - 当前正文位置（2026-10-11，T-007 / H-001 配置收口）：[A-004 v0.6 编号正文](https://github.com/yinzhongkai/book-zephyr/blob/08092e0a5af5d2895e44911b7282bb3b29d3b64e/zephyr/01-认识nRF54L15-DK与开发环境搭建.md)，配图位于 `zephyr/images/ch-env-setup/figure-1-1-nrf54l15-dk-front.png`；精确基线见 WORKSPACE。上述输入、受评版本、历史路径和 SHA 保留，按 D-012 的恢复包追溯；本轮只同步位置，不改变 T-006 状态、完成条件、专业版本或原复核结论。
-- 更新日期：2026-09-27（专业进展）；2026-10-11（仅补充当前正文位置）。
+- 更新日期：2026-09-27（专业进展）；2026-10-11（仅补充当前正文位置）；2026-10-12（仅补记框架迁移追踪字段）。
 
 ### writer 修订与自查记录（2026-09-26，A-004 v0.2）
 - 刷新范围：重读根规则与协议、TEAM 自身登记、writer 成员文件、岗位、全部四项有效知识；重读项目入口、PROJECT、STATUS、成果索引、TASKS、DECISIONS（D-001～D-008）、HANDOFFS；完整读取 A-001 v0.2、A-002 v0.2、A-003 v0.1、A-004 v0.1、A-005 v0.3 和资料包 README。身份、scope、知识集合未变；无未结交接。资料包目录已核对，未重新读取 PDF 原文或 Git 历史正文。
@@ -251,12 +257,18 @@
 - 负责人：<member-id>
 - 状态：todo
 - 授权来源与日期：<用户直接指派或项目经理安排的可核对依据>
+- 变更类型：<feature | bugfix | governance-only>
+- OPC 开发分支：<feature/book-zephyr/<name> | bugfix/book-zephyr/<name> | 不适用>
+- OPC 合入前目标提交：<完整 commit hash；同步最新目标分支后记录 | 不适用>
+- 成果物仓库与开发分支：<repository；feature/<name> | bugfix/<name> | 不适用>
+- 成果物仓库合入后的最终提交：<完整 commit hash；快进合并并验证后填写，可以是普通功能提交 | 不适用>
 - 目标与范围：<实际授权的结果和边界>
 - 输入与依赖：<任务、决定、资料版本；无则写无>
 - 优先级：未设定
 - 完成条件与确认方式：<可检查的条件；是否需评审，实际确认人>
 - 进展：尚未开始
 - 成果与验证证据：暂无
+- 合并与清理状态：<待合并 | 已合并待验证 | 已验证待清理 | 已完成；使用 --ff-only；OPC 提交范围由任务 ID、来源分支、合入前目标提交和 Git 历史定位，不写入自身哈希>
 - 阻塞与下一位行动人：无
 - 更新日期：<实际日期>
 ```
