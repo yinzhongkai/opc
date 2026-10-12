@@ -48,3 +48,9 @@
 - T-003 的产品与 OPC feature 均已完成按功能压缩、merge commit 合入、远端同步和分支清理；当前无待处理的 T-003 评审或合并事项。恢复用归档标签继续保留，如需删除须另行确认。
 
 本文件是摘要，原始事实以 [TASKS.md](TASKS.md)、[DECISIONS.md](DECISIONS.md)、[HANDOFFS.md](HANDOFFS.md) 和 [成果索引](artifacts/README.md) 为准。汇总后注明实际信息范围，过期摘要不能覆盖原始记录。
+
+## 当前线性历史定位（2026-10-13，T-014）
+
+用户本轮授权按功能整理历史并移除 merge commit。成果物当前 main 为 `5404a33758b83fd5aff00ced55a4d893bf700c08`，T-003 视觉基线功能提交为 `b7e90ac756f996cc35d5e7e9186b52e6f2cdedbd`；内容、原路径、SHA-256、生成/作者/评审/批准记录与业务状态不变。正文中的旧集成/feature 提交保留为历史证据，当前定位以本段和 WORKSPACE 为准；对应恢复点及功能映射见 [T-014 历史整理记录](artifacts/T-014-history-consolidation.md).
+
+- T-014：completed；双仓库线性历史、恢复标签与远端分支均已核对。

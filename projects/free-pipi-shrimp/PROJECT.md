@@ -2,7 +2,7 @@
 
 项目 ID：`free-pipi-shrimp`
 
-- 框架基线：`v0.0.4`（提交 `464ca52aafc6c73ff780a7120acd3bf63c9d31dd`）。2026-10-12 按用户授权将项目独有历史 rebase 到正式发布标签之上，保留旧流程的 4 个功能合并结构；后续 feature/bugfix 使用 `--ff-only`，框架发布仍保留发布 merge commit。项目继续使用外部单 Git 工作区，TEAM 版本 3、WORKSPACE 版本 1 和底层 `knowledge` 字段不变。
+- 框架基线：`v0.0.4`（提交 `464ca52aafc6c73ff780a7120acd3bf63c9d31dd`）。当前项目历史已按 T-014 功能归并为线性提交，不保留项目 merge commit；框架发布标签及其发布合并历史保持不变。项目继续使用外部单 Git 工作区，TEAM 版本 3、WORKSPACE 版本 1。
 
 ## 框架升级记录
 
@@ -40,7 +40,7 @@
 
 ## 交付约定
 
-- [WORKSPACE.yaml](WORKSPACE.yaml) 声明外部独立 Git 工作区：私有远端 `git@github.com:yinzhongkai/free-pipi-shrimp.git`，演进分支 `main`，当前可复现基线 `607c571ce84c5f125173906949656fb29beba4d8`（T-005 最终产品 merge commit），可移植 checkout 为 `../free-pipi-shrimp`；本机位置按框架根目录同级解析，旧环境的绝对路径仅保留在历史配置记录中。该声明只记录已验证位置与版本，不自动授予后续联网、切换提交、覆盖修改或推送权限。
+- [WORKSPACE.yaml](WORKSPACE.yaml) 声明外部独立 Git 工作区：私有远端 `git@github.com:yinzhongkai/free-pipi-shrimp.git`，演进分支 `main`，当前可复现基线 `5404a33758b83fd5aff00ced55a4d893bf700c08`（T-005 封面功能提交），可移植 checkout 为 `../free-pipi-shrimp`；本机位置按框架根目录同级解析，旧环境的绝对路径仅保留在历史配置记录中。该声明只记录已验证位置与版本，不自动授予后续联网、切换提交、覆盖修改或推送权限。
 - OPC 的 `artifacts/` 保留正式成果登记、批准依据和必要的轻量预览；任务、决定、状态与交接继续保存在 OPC 项目记录中。外部私库保存原始参考、生成批次、高清素材、工程源文件和大型最终交付物，文件进入外部 `deliverables/` 不等于已经批准或发布。
 - OPC 正式成果登记引用外部资产时，必须记录固定 Git 提交、仓库相对路径和文件 SHA-256；不能只引用可移动的 `main`。账号密码、Cookie、验证码、API Key、访问令牌、登录二维码、私钥和恢复信息不得写入任一仓库或项目记录。
 - 用户保证当前仓库每次只有一个会话执行，前一会话完成或停止后再启动下一会话；框架不实现文件锁或自动调度。
@@ -73,3 +73,7 @@
 ## 当前资料
 
 成员见 [TEAM.yaml](TEAM.yaml)，任务见 [TASKS.md](TASKS.md)，摘要见 [STATUS.md](STATUS.md)，交接见 [HANDOFFS.md](HANDOFFS.md)，成果见 [索引](artifacts/README.md)。
+
+## 当前线性历史定位（2026-10-13，T-014）
+
+用户本轮授权按功能整理历史并移除 merge commit。成果物当前 main 为 `5404a33758b83fd5aff00ced55a4d893bf700c08`，T-003 视觉基线功能提交为 `b7e90ac756f996cc35d5e7e9186b52e6f2cdedbd`；内容、原路径、SHA-256、生成/作者/评审/批准记录与业务状态不变。正文中的旧集成/feature 提交保留为历史证据，当前定位以本段和 WORKSPACE 为准；对应恢复点及功能映射见 [T-014 历史整理记录](artifacts/T-014-history-consolidation.md).

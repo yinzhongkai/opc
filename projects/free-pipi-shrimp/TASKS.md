@@ -359,6 +359,24 @@
 - 阻塞与下一位行动人：无阻塞；下一位行动人为 project-manager——固定受评版本（产品提交 `28ba1b3053dce11950aa00502ca5fad011afcbf2` 与本条 OPC 登记提交）并通知 reviewer 使用 ChatGPT 独立审校文案；随后 writer 按本轮意见修订、visual-designer 套版提交完整封面候选、reviewer 复核、用户确认（见 T-005 串行安排）
 - 更新日期：2026-10-10
 
+## T-014：整理 v0.0.4 项目与成果物线性历史
+- 负责人：project-manager
+- 状态：completed
+- 授权来源与日期：2026-10-12，用户在本会话明确要求“将项目基于v0.0.4的所有提交整理下，功能能合到一起的则一起提交，merge commit直接去掉不保留，成果物仓库也一并处理下”。
+- 变更类型：既有双仓库历史维护；用户明确授权的历史改写，不另起业务 feature 轮次。
+- OPC 开发分支：不新增业务开发分支；整理 `project/free-pipi-shrimp` 并迁移既有 `feature/free-pipi-shrimp/t-012-first-two-visual-assets`。
+- 成果物仓库及开发分支：`git@github.com:yinzhongkai/free-pipi-shrimp.git` 的 main 及既有 `feature/t-012-first-two-visual-assets`。
+- 成果物仓库合入后的最终提交：`5404a33758b83fd5aff00ced55a4d893bf700c08`；T-012 draft `cf96f969a4e0ba6fbb95c3d518e0c82fee471047` 尚未合入 main。
+- 目标与范围：按功能归并既有提交，移除项目与成果物新增范围中的 merge commit，保留内容与恢复点，同步当前版本引用；不合入 T-012 或变更业务授权。
+- 输入/依赖：v0.0.4、当前 WORKSPACE、两个仓库精确旧头与 4 个已推送恢复标签；映射见 [历史整理记录](artifacts/T-014-history-consolidation.md)。
+- 优先级：用户本轮指定。
+- 完成条件与确认方式：功能归并和零 merge 检查通过；成果物两条线新旧树完全一致；OPC 公共框架不变、原业务/评审/批准记录保留、当前版本引用一致；框架校验和既有测试通过；使用显式旧 SHA 的 force-with-lease 原子推送并核对远端。
+- 进展：本地与远端第一轮同步和核验已完成，本次回写完成状态；最终治理提交及 T-012 父提交通过同样的旧头保护同步，最终 SHA 以 Git 历史和执行回执定位。
+- 成果/证据：[T-014 历史整理记录](artifacts/T-014-history-consolidation.md)；原路径与素材哈希不变，原始生成/作者/评审/批准证据可由归档读取。
+- 合并与清理状态：整理后的范围为线性历史；两边 T-012 分支保留且不合入 main，旧恢复标签及既有档案不删除。
+- 阻塞与下一位行动人：无；后续 T-012 按其原任务范围继续。
+- 更新日期：2026-10-13
+
 ## 记录样式（不是真实任务）
 
 ```text
