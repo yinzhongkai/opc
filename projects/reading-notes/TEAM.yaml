@@ -3,3 +3,4 @@ project: 'reading-notes'
 roleKnowledge: {}
 members:
   - project-manager
+  - book-recommender
