@@ -1,5 +1,11 @@
 # 配置迁移
 
+## 切换到快进合并流程
+
+新一轮 feature/bugfix 按 [Git 分支与框架发布策略](BRANCH_STRATEGY.md) 使用 `--ff-only`，不新增 merge commit；框架集成分支发布到稳定分支仍使用 `--no-ff` 保留发布 merge commit。既有合并提交、发布标签及已锁定的成果物 revision 保持有效，不因流程切换批量改写历史或改变基线。
+
+旧任务中的“成果物仓库最终合并提交”仍表示当时已合入并验证的提交；后续更新时使用“成果物仓库合入后的最终提交”，允许引用快进合并后的普通功能提交。尚在开发的任务按 [TASKS 模板](templates/project/TASKS.md) 补记实际的 OPC 合入前目标提交；无法复核的历史事实标明缺口，不推测提交。字段和任务追踪以 [项目运行协议](PROJECT_PROTOCOL.md) 为准，不改变 YAML 配置版本。
+
 ## 旧配置升级到版本 3
 
 当前结构以 [CONFIG_SCHEMA.md](CONFIG_SCHEMA.md) 为准：TEAM 保存成员 ID 索引与项目角色技能，每个成员文件仅含 id、role、scope。超级管理员使用根 [框架入口](SUPER_ADMIN.md)，不是项目角色。

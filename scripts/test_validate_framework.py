@@ -219,6 +219,27 @@ class FrameworkValidationTests(unittest.TestCase):
             {
                 "schemaVersion": 1,
                 "workspace": {
+                    "driver": "multi-git",
+                    "repositories": {
+                        "application": {
+                            "repository": "git@example.invalid:team/application.git",
+                            "branch": "main",
+                            "revision": "c" * 40,
+                            "checkout": "../application",
+                        },
+                        "firmware": {
+                            "repository": "git@example.invalid:team/firmware.git",
+                            "branch": "stable",
+                            "revision": "d" * 64,
+                            "host": "builder@example-host",
+                            "checkout": "/srv/work/firmware",
+                        },
+                    },
+                },
+            },
+            {
+                "schemaVersion": 1,
+                "workspace": {
                     "driver": "repo",
                     "manifestRepository": "https://example.invalid/manifests.git",
                     "manifestRevision": "release-1.0",
@@ -295,6 +316,82 @@ class FrameworkValidationTests(unittest.TestCase):
         }
         self.save_workspace(repo_workspace)
         self.assert_error("workspace.manifestFile 必须是 Manifest 仓库内的相对 .xml 路径")
+
+    def test_multi_git_repositories_are_strict_and_non_overlapping(self):
+        self.project()
+        valid_repository = {
+            "repository": "git@example.invalid:team/example.git",
+            "branch": "main",
+            "revision": "a" * 40,
+            "checkout": "../example",
+        }
+        candidates = (
+            ({}, "workspace.repositories 必须是至少包含一个仓库的映射"),
+            ([], "workspace.repositories 必须是至少包含一个仓库的映射"),
+            ({"Bad-ID": valid_repository}, "仓库 ID 必须是有效 ID"),
+            ({"source": {"repository": "git@example.invalid:team/example.git"}},
+             "workspace.repositories['source'] 缺少字段"),
+            ({"source": {**valid_repository, "revision": "abc123"}},
+             "workspace.repositories['source'].revision 必须是完整的"),
+            ({"source": {**valid_repository, "host": "bad host"}},
+             "workspace.repositories['source'].host 必须是"),
+            ({"source": {**valid_repository, "host": "builder"}},
+             "SSH 主机上的 workspace.repositories['source'].checkout"),
+            ({"source": {
+                **valid_repository,
+                "host": "builder",
+                "checkout": "/srv/work/../example",
+            }}, "SSH 主机上的 workspace.repositories['source'].checkout"),
+            ({"source": {**valid_repository, "checkout": "../../example"}},
+             "workspace.repositories['source'].checkout"),
+            ({
+                "source": valid_repository,
+                "nested": {**valid_repository, "checkout": "../example/nested"},
+            }, "checkout 不得相同或相互嵌套"),
+        )
+        for repositories, expected in candidates:
+            with self.subTest(expected=expected):
+                self.save_workspace({
+                    "schemaVersion": 1,
+                    "workspace": {"driver": "multi-git", "repositories": repositories},
+                })
+                self.assert_error(expected)
+
+    def test_multi_git_remote_checkout_overlap_is_scoped_by_host(self):
+        self.project()
+        remote_repository = {
+            "repository": "git@example.invalid:team/example.git",
+            "branch": "main",
+            "revision": "a" * 40,
+            "host": "builder-a",
+            "checkout": "/srv/work/example",
+        }
+        self.save_workspace({
+            "schemaVersion": 1,
+            "workspace": {
+                "driver": "multi-git",
+                "repositories": {
+                    "source": remote_repository,
+                    "mirror": {**remote_repository, "host": "builder-b"},
+                },
+            },
+        })
+        self.assert_valid()
+
+        self.save_workspace({
+            "schemaVersion": 1,
+            "workspace": {
+                "driver": "multi-git",
+                "repositories": {
+                    "source": remote_repository,
+                    "nested": {
+                        **remote_repository,
+                        "checkout": "/srv/work/example/nested",
+                    },
+                },
+            },
+        })
+        self.assert_error("checkout 不得相同或相互嵌套")
 
     def test_definition_extensions_must_be_lowercase_on_every_platform(self):
         for directory in ("roles", "knowledge"):
