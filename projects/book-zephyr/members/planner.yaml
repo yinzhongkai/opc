@@ -1,0 +1,5 @@
+id: planner
+role: planner
+scope:
+  - 负责首本书的读者定位、内容边界、全书结构、章节顺序和章节蓝图
+  - 将 Zephyr 学习路线、nRF54L15 DK 实践和技术依赖组织为可验证的写作方案

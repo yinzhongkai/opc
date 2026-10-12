@@ -1,0 +1,7 @@
+schemaVersion: 1
+workspace:
+  driver: git
+  repository: git@github.com:yinzhongkai/book-zephyr.git
+  branch: main
+  revision: 695ec76e54639c9faf9462b7b043c644b2db9ec2
+  checkout: ../book-zephyr
