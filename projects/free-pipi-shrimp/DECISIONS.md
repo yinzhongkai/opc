@@ -101,6 +101,23 @@
 - 替代关系：替代 A-003 v0.1 中的厦门候选首站，不替代 D-001～D-008
 - 记录人及更新日期：planner，2026-10-08（依据用户直接确认写回）
 
+## D-010：采用 A-004 v0.2 封面模板和三星堆第 1 站示例
+
+- 状态：confirmed
+- 提出者：project-manager（完整封面复核通过后请用户最终确认）
+- 问题与候选方案：采用已复核的 A-004 v0.2 模板及三星堆示例，或继续修订。reviewer 在 OPC 提交 `acf7d3b45cfab78bf69afec8549343fb957d22c8` 的 T-005 完整封面第 1 轮记录中给出限定范围 `pass`，问题清单为空；RV-COPY-001／002 已 `pass / closed`
+- 确认人：建项用户（PROJECT 默认最终确认人）
+- 结果：采用 [A-004 封面视觉模板](artifacts/A-004-封面视觉模板.md) v0.2 及三星堆第 1 站示例；示例中的最终封面短句为“到了。我先站一会儿。”，固定站点“皮皮虾·第 1 站”、独立目的地“三星堆”不变。该批准对应既有内容，不重新生成、改字、改变版式或建立新的角色母版
+- 确认来源与日期：2026-10-12 用户在项目经理会话明确答复“可以，就采用这版封面模板和三星堆示例吧。”；project-manager 据实际确认记录，不代用户作决定
+- 批准版本与固定证据：OPC A-004 v0.2 登记提交 `bdb2c1d394db74eebe1759c48c7a6ed0194f425f`；产品仓库 `git@github.com:yinzhongkai/free-pipi-shrimp.git`，固定 feature 提交 `fa4bd5f14c2db431607096dd8b722665284fab4f`。批准包位于 `deliverables/T-005-cover-visual-template/v0.2-draft/`，沿用原路径，路径中的 draft 不覆盖本决定的批准事实；尚无产品最终合并提交
+  - `cover-template.svg`，SHA-256 `460f3619bcb683336ceae41e7b4e7390aa47694acb2c3a8a6d113c6ea54e68e7`；`usage-guide.md`，SHA-256 `d109119b45ae37d81ab4288114b1acadc376c1970abb12e6dee37dbbcef13528`
+  - `example/cover-sanxingdui-station-1.svg`，SHA-256 `24ad4489cfaa77f2bd2a08defc4e75588b3445e466945e108e9d26b93a46064f`；同目录 PNG，SHA-256 `0bdde0e1f8953a285313d1909a62040224f12a1f6449b5c8d8e72ea0e5e8efe0`
+  - 完整资产/证据清单 `manifests/T-005-cover-visual-template/manifest-v0.2-draft.md`，SHA-256 `a64ff9e503de07033b9a13c971c28db0acfae2a45470ce50236825a93941c6a5`；project-manager 于本次登记前核对上述五份文件哈希一致，产品 checkout 无本地改动
+- 适用范围与影响：A-004 v0.2 模板、使用说明和这份完整封面示例获得用户批准，可作为后续封面制作输入；A-005 v0.2 仅画面中采用的候选 A 短句被选定，不据此批准全部候选、笔记标题、内部说明、整篇 plog 或 A-003 全部规划。T-005 的独立评审及本次用户确认已完成，成果负责人按 H-008 回写本人正文/索引、任务结项及 H-007 最终采用确认；记录人不代写负责人反馈或关闭交接
+- 未授权与未覆盖范围：不授权合并或删除 feature、不启动 T-012/T-010/T-011/T-006 或下一轮开发、不授权发布；WORKSPACE 的 main 基线保持不变。完整单篇验收、更多场景/任意字体设备/平台压缩上传、T-011 实时规则及 AI 标注、H-003 发布通道仍须分别核验。后续改动受批内容须另记录版本并按变更影响复核
+- 替代关系：本次 v0.2 作为采用版，v0.1 占位交付和既有 K3/修订/评审归档保留；不替代 D-001～D-009 或 A-002 的批准 C 母版
+- 记录人及更新日期：project-manager，2026-10-12
+
 ## 记录样式（不是真实决定）
 
 ```text

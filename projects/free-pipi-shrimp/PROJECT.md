@@ -2,7 +2,14 @@
 
 项目 ID：`free-pipi-shrimp`
 
-- 框架基线：`v0.0.3`（提交 `6f79b98e219e0bbf8f7de45dd35ec54c2a6f1f07`）。2026-10-08 将项目提交 rebase 到重新发布的正式标签之上；先前提前采用的视觉设计、社交媒体运营和小红书内容运营三项公共能力已由正式基线接管，重放时未重复应用。项目同时采用角色/技能术语、项目历史工作流、会话消息边界和项目升级 rebase 规则，底层配置字段继续使用 `knowledge`。
+- 框架基线：`v0.0.4`（提交 `464ca52aafc6c73ff780a7120acd3bf63c9d31dd`）。2026-10-12 按用户授权将项目独有历史 rebase 到正式发布标签之上，保留旧流程的 4 个功能合并结构；后续 feature/bugfix 使用 `--ff-only`，框架发布仍保留发布 merge commit。项目继续使用外部单 Git 工作区，TEAM 版本 3、WORKSPACE 版本 1 和底层 `knowledge` 字段不变。
+
+## 框架升级记录
+
+- 2026-10-08：升级至 `v0.0.3@6f79b98e219e0bbf8f7de45dd35ec54c2a6f1f07`，将项目提交 rebase 到重新发布的正式标签之上；先前提前采用的视觉设计、社交媒体运营和小红书内容运营三项公共能力由正式基线接管，重放时未重复应用。项目采用角色/技能术语、项目历史工作流、会话消息边界和项目升级 rebase 规则。
+- 2026-10-12：用户在本超级管理员会话要求“先同步下最新代码，然后将项目升级到 v0.0.4 框架”，并在默认成果工作区缺失后明确要求按 WORKSPACE 从远端拉取。OPC 同步后项目旧远程头为 `dcb01a07fda75f20fe2393258f53e8b04c2eda5c`，T-012 活动分支旧远程头为 `3422a5da839d7c2d3fb24b66b38ea52d7a4a1746`；恢复标签分别为 `archive/free-pipi-shrimp-pre-v0.0.4-20261012`、`archive/free-pipi-shrimp-t012-pre-v0.0.4-20261012`。项目历史使用 `--rebase-merges` 重放至当前框架基线；T-012 的两个项目提交随后重放到升级后的项目头，不合入项目主线、不改变其业务状态。成果仓库默认同级 checkout 已建立，远端、main 与锁定提交 `607c571ce84c5f125173906949656fb29beba4d8` 一致；本轮 Git 检出保留 LFS 指针，素材实体下载结果另行报告，不将指针核验等同于素材字节核验。升级通过普通项目基线提交追踪，不新增升级 merge commit；推送使用记录的旧 SHA 保护两个项目引用。——框架超级管理员
+
+- 升级验证：v0.0.4 发布树结构与 60 项测试通过；重放后公共框架文件树与发布标签一致，项目正文在基线记录更新前与旧项目头完全一致。当前项目结构及 418 处本地链接校验、60 项测试通过；活动分支的最终迁移核对与远端同步以本轮回执和 Git 历史定位。
 
 ## 建项信息
 
@@ -33,7 +40,7 @@
 
 ## 交付约定
 
-- [WORKSPACE.yaml](WORKSPACE.yaml) 声明外部独立 Git 工作区：私有远端 `git@github.com:yinzhongkai/free-pipi-shrimp.git`，演进分支 `main`，当前可复现基线 `730429312be85e33b4534b58adad54a207a8b797`，可移植 checkout 为 `../free-pipi-shrimp`；在本次授权执行环境中实际解析为 `C:\Users\YinZh\Documents\workspace\free-pipi-shrimp`。该声明只记录已验证位置与版本，不自动授予后续联网、切换提交、覆盖修改或推送权限。
+- [WORKSPACE.yaml](WORKSPACE.yaml) 声明外部独立 Git 工作区：私有远端 `git@github.com:yinzhongkai/free-pipi-shrimp.git`，演进分支 `main`，当前可复现基线 `607c571ce84c5f125173906949656fb29beba4d8`（T-005 最终产品 merge commit），可移植 checkout 为 `../free-pipi-shrimp`；本机位置按框架根目录同级解析，旧环境的绝对路径仅保留在历史配置记录中。该声明只记录已验证位置与版本，不自动授予后续联网、切换提交、覆盖修改或推送权限。
 - OPC 的 `artifacts/` 保留正式成果登记、批准依据和必要的轻量预览；任务、决定、状态与交接继续保存在 OPC 项目记录中。外部私库保存原始参考、生成批次、高清素材、工程源文件和大型最终交付物，文件进入外部 `deliverables/` 不等于已经批准或发布。
 - OPC 正式成果登记引用外部资产时，必须记录固定 Git 提交、仓库相对路径和文件 SHA-256；不能只引用可移动的 `main`。账号密码、Cookie、验证码、API Key、访问令牌、登录二维码、私钥和恢复信息不得写入任一仓库或项目记录。
 - 用户保证当前仓库每次只有一个会话执行，前一会话完成或停止后再启动下一会话；框架不实现文件锁或自动调度。
@@ -60,6 +67,8 @@
 
 - 2026-09-30：用户在当前超级管理员会话中明确授权接入外部私有成果仓库。经核验远端为空且 Git LFS 可用后，将 `git@github.com:yinzhongkai/free-pipi-shrimp.git` 克隆到 OPC 同级目录 `C:\Users\YinZh\Documents\workspace\free-pipi-shrimp`，建立并推送 `main` 初始提交 `4d023fdcb6190d710512e98d7c03c790c715b234`；仓库包含 `references/`、`work/`、`deliverables/`、`manifests/` 的边界说明及常见大型位图和设计源文件的 LFS 规则。随后把 [WORKSPACE.yaml](WORKSPACE.yaml) 从 `driver: none` 更新为外部 `git` 工作区，变更前 OPC 恢复点为当前任务分支基线 `78d4a2b274993906e8bc3919b7b0ee5fdbc81f3d`。本次仅完成工作区接入和存放边界配置，不启动 T-003，也不改变业务任务或状态记录。——框架超级管理员
 - 2026-10-06：用户明确要求将 T-003 feature 按功能压缩后通过 merge commit 合入主线。外部产品仓库已从基线 `b547bd6ba987381400c61c16baca26532c4a7767` 重建两个功能提交，并通过 merge commit `730429312be85e33b4534b58adad54a207a8b797` 合入 `main`；改写前历史由远端标签 `archive/t003-pre-squash-20261006` 保留。经核验，本地 `main`、`origin/main` 与远端 `main` 均指向该 merge commit 且工作树干净，因此同步将 [WORKSPACE.yaml](WORKSPACE.yaml) 的精确 `revision` 更新为该提交，`branch` 保持 `main`。——框架超级管理员
+
+- 2026-10-12：用户要求核对设计师收尾后，将两个仓库的 T-005 feature 按功能压缩并保留 merge commit 合入各自主线；随后明确答复“授权本轮仅更新 revision，继续合并”，有界授权 project-manager 仅推进本次已验证的产品版本字段。产品 5 个原提交经 rebase/fixup 整理为模板/来源、K3 与 ChatGPT 文案链、完整套版/导出三个功能提交，以 `--no-ff` 合入 `main@607c571ce84c5f125173906949656fb29beba4d8`，本地/跟踪/远端一致；文件树与受批 `fa4bd5f14c2db431607096dd8b722665284fab4f` 完全相同，manifest/13 份资产与 17 份保留输入哈希及 LFS 验证通过、工作树干净。仅将 WORKSPACE.revision 从 `730429312be85e33b4534b58adad54a207a8b797` 推进到该最终合并提交，不改地址、driver、分支、checkout、团队或共享定义。两仓库的原始历史均由远端标签 `archive/t005-pre-squash-20261012` 保留；详细集成与验证见 T-005。——project-manager（本轮明确版本推进授权，不接任其他配置维护职责）
 
 ## 当前资料
 
