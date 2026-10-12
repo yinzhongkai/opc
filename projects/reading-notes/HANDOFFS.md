@@ -1,8 +1,22 @@
 # 行动请求与交接
 
-暂无需要其他成员行动的交接。普通进展直接写 [TASKS.md](TASKS.md)，接收和关闭规则见根 [项目运行协议](../../PROJECT_PROTOCOL.md)。
+当前工作区配置交接见 H-001。普通进展直接写 [TASKS.md](TASKS.md)，接收和关闭规则见根 [项目运行协议](../../PROJECT_PROTOCOL.md)。
 
 已在任务内明确安排的轻量评审或复核无需重复建立交接；另有补充输入、协调或责任转交请求时再登记。
+
+## H-001：成果物仓库初始化与工作区配置
+
+- 发起人：project-manager。
+- 目标：用户。
+- 关联任务：无；本条转交 D-006 引出的管理员配置事项，T-002 仅交付候选方案，已完成。
+- 期望结果：请用户将本条转交框架超级管理员，由其在授权范围内落实成果物仓库的初始化和外部 Git 工作区配置；完成后提供实际本地路径、分支、完整提交 SHA 及 WORKSPACE 配置证据。
+- 输入与证据：用户指定的 SSH 地址为 `git@github.com:yinzhongkai/reading-notes.git`，确认来源见 [D-006](DECISIONS.md#d-006github-成果物仓库地址)。2026-10-12 只读远端查询成功，全部引用为空；同级 `reading-notes-content` 和 `reading-notes` 目录当时均不存在。原候选 [A-002](artifacts/A-002-reading-workflow-and-book-partners.md) 版本 0.1 建议 Git 工作区、本地路径 `C:\Users\YinZh\Documents\workspace\reading-notes-content`、主线 `main`，以及 recommendations/books/topics/templates/exports 目录布局；这些细节仍为候选。
+- 未完成事项：实际本地路径及外部目录操作授权、初始分支、初始目录内容与首个提交尚待落实；远端暂无基线，不得填入猜测的 revision。配置前按根协议核对当前 checkout，并在初始化后记录真实版本。WORKSPACE 当前仍为 none，具体业务笔记尚未开始。
+- 状态：open
+- 创建日期：2026-10-12（Asia/Shanghai）。
+- 接收反馈：尚未接收；未发送跨会话消息。
+- 处理结果与证据：暂无；本会话仅完成地址记录、只读核对与交接说明，未修改 WORKSPACE 或外部仓库。
+- 关闭或取消依据：暂无。
 
 ## 记录样式（不是真实交接）
 
