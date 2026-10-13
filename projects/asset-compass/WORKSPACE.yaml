@@ -3,5 +3,5 @@ workspace:
   driver: git
   repository: git@github.com:yinzhongkai/asset-compass.git
   branch: main
-  revision: ddb67eefa59a12cbd2bc1824a0fbb4f0a0ac71e3
+  revision: 4d19e7cf6c90b0e73672e91e9bf39fa3175a60d8
   checkout: ../asset-compass
