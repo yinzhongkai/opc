@@ -4,11 +4,11 @@
 
 | 成果 ID | 名称与位置 | 存储位置 | 负责人 | 关联任务 | 版本/精确提交 | 状态 | 批准决定 |
 |---|---|---|---|---|---|---|---|
-| A-001 | [投资组合跟踪基线与复盘约定](A-001-tracking-baseline.md) | OPC 治理成果 | investment-advisor | [T-006](../TASKS.md#t-006建立投资组合跟踪基线与复盘约定) | v0.8；初始核查与拆分起点保留，当前报价及期中复盘见 A-004，月度执行指南见 A-005 | draft | 尚无整体批准；已确认部分见 D-002、D-003、D-005、D-006、D-007 |
+| A-001 | [投资组合跟踪基线与复盘约定](A-001-tracking-baseline.md) | OPC 治理成果 | investment-advisor | [T-006](../TASKS.md#t-006建立投资组合跟踪基线与复盘约定) | v0.9；初始核查与拆分起点保留，当前报价及期中复盘见 A-004，月度执行指南见 A-005；历史整理的引用迁移见 T-016 | draft | 尚无整体批准；已确认部分见 D-002、D-003、D-005、D-006、D-007 |
 | A-002 | [长期投资执行准则](A-002-investment-rules.md) | OPC 治理成果 | investment-advisor | [T-008](../TASKS.md#t-008固化长期投资执行准则) | v1.0；正文及 D-004 定位批准范围；治理提交由 [T-009](../TASKS.md#t-009提交长期投资准则与治理记录)、A-002 路径及 Git 历史定位 | approved | [D-004](../DECISIONS.md#d-004确认长期投资执行准则) |
 | A-003 | [投资计划表拆分与Git版本管理](A-003-portfolio-versioning.md) | OPC 版本说明；asset-compass 成果物仓库：`portfolio/实操记录.xlsx`、`portfolio/定投组合蒙特卡洛模拟_2026-2036.xlsx`；本机路径见正文 | investment-advisor | [T-011](../TASKS.md#t-011拆分实操记录并改用git版本管理) | v2.0；成果物 main 最终提交 `4d19e7cf6c90b0e73672e91e9bf39fa3175a60d8`，文件 SHA-256 见正文 | approved（结构及版本管理安排） | [D-007](../DECISIONS.md#d-007确认拆分实操记录并仅用git保存版本) |
-| A-004 | [10月期中投资复盘核查记录](A-004-current-review.md) | OPC 结论与口径；asset-compass 成果物仓库 `portfolio/analysis/latest.json` 为唯一当前详细复盘 | investment-advisor | [T-012](../TASKS.md#t-012核对10月期中投入并查询btc和usdt报价)、[T-013](../TASKS.md#t-013更新实操表当前价格与汇率) | v0.2；成果物 main 最终提交 `8a9a052f70f5a57ab768041aa42e0b04209c3a60`，价格写回后的输入哈希见正文 | draft（期中核查及授权报价更新已完成，真实月度收益尚未验证） | 尚无整体批准；跟踪与留存授权见 D-005、D-007，本次价格写回见 T-013 |
-| A-005 | [投资组合月度更新与复盘流程](A-005-monthly-review-workflow.md) | OPC 治理流程；实操表及详细结果入口见正文，沿用成果物仓库精确版本 `8a9a052f70f5a57ab768041aa42e0b04209c3a60`，本轮无成果物修改 | investment-advisor | [T-014](../TASKS.md#t-014整理月度更新与投资复盘流程文档) | v1.0；整理用户更新清单、收益口径、ETF 检查、交付结构及 Git 留存 | draft（执行指南已形成，沿用已有确认） | 尚无单独整体批准；生成文档授权见 T-014，既定分工与规则见 D-005、A-002 v1.0 |
+| A-004 | [10月期中投资复盘核查记录](A-004-current-review.md) | OPC 结论与口径；asset-compass 成果物仓库 `portfolio/analysis/latest.json` 为唯一当前详细复盘 | investment-advisor | [T-012](../TASKS.md#t-012核对10月期中投入并查询btc和usdt报价)、[T-013](../TASKS.md#t-013更新实操表当前价格与汇率) | v0.3；当前成果物 main `7ca3f68d6608637868125ce9c037c2ddaaf0e251`，仅迁移 Git 引用，价格及分析内容未变 | draft（期中核查及授权报价更新已完成，真实月度收益尚未验证） | 尚无整体批准；跟踪与留存授权见 D-005、D-007，本次价格写回见 T-013 |
+| A-005 | [投资组合月度更新与复盘流程](A-005-monthly-review-workflow.md) | OPC 治理流程；实操表及详细结果入口见正文，当前成果物精确版本 `7ca3f68d6608637868125ce9c037c2ddaaf0e251`；T-014 原核对版本保留在成果物恢复标签中 | investment-advisor | [T-014](../TASKS.md#t-014整理月度更新与投资复盘流程文档) | v1.0；整理用户更新清单、收益口径、ETF 检查、交付结构及 Git 留存 | draft（执行指南已形成，沿用已有确认） | 尚无单独整体批准；生成文档授权见 T-014，既定分工与规则见 D-005、A-002 v1.0 |
 
 OPC 治理与协作成果使用当前项目 `artifacts/` 内的正文链接；产品代码和直接业务交付物使用“成果物仓库 + 仓库内路径”，并记录其最终合并提交。可移动分支名不能代替精确提交。
 
