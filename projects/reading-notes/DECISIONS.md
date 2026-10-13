@@ -109,7 +109,7 @@
 
 ## D-009：当前会话再次确认成果物路径及访问差异
 
-- 状态：confirmed
+- 状态：superseded
 - 提出者：用户。
 - 问题与候选方案：当前 OPC 根目录已实际位于 `C:/Users/YinZh/Documents/workspace/opc-reading-notes`，WORKSPACE 为 none；D-007 中的 D 盘 OPC 根目录与同级 checkout 属于此前环境，需要明确本轮希望启用的成果物位置。
 - 确认人：本会话用户，PROJECT 默认最终确认人。
@@ -117,8 +117,22 @@
 - 确认来源与日期：2026-10-13（Asia/Shanghai），本会话询问“请确认要由超级管理员启用的成果物仓库本机路径。当前 OPC 位于 C:\Users\YinZh\Documents\workspace\opc-reading-notes，现有 WORKSPACE.yaml 为 none；记录中的 D:\reading-notes 仅是历史路径。”，用户答复“D:\reading-notes”。
 - 适用范围与影响：T-007 的目标路径按本条执行，不擅自改用 C 盘目录。当前 C 盘 OPC 根目录的 `../reading-notes` 不指向 D 盘；CONFIG_SCHEMA 要求本机 checkout 为框架根目录同级的可移植相对路径，因此环境与合法声明方式须由超级管理员落实，不直接把 D 盘绝对路径填入 WORKSPACE。本条不授权自动迁移 OPC、创建盘符映射、改写公共配置规范、初始化提交或推送。
 - 关联任务与成果：T-007；D-006、D-007；既有 H-001 与本轮补充请求 H-003。
-- 替代关系：无；保留 D-007 的历史克隆证据，补充本轮路径确认与实际环境差异，不能以历史路径推导当前可访问性或版本。
+- 替代关系：本条当前目标路径由 D-010 替代；原 D 盘确认与访问差异保留为历史事实，D-007 的历史克隆证据不变。
 - 记录人及更新日期：book-recommender；2026-10-13（Asia/Shanghai）。
+- 维护注记：框架超级管理员于 2026-10-13 依据本管理会话用户的新路径确认登记替代关系，保留原结果及确认来源。
+
+## D-010：启用 C 盘同级成果物工作区
+
+- 状态：confirmed
+- 提出者：用户；框架超级管理员根据 H-003 的环境核查说明同级目录方案。
+- 问题与候选方案：当前主机在受限环境内外均没有 D 盘，原 D:/reading-notes 不可核查；在保持 OPC 根目录不变的情况下，需要可访问且满足同级相对路径规则的成果物 checkout。
+- 确认人：本管理会话用户，PROJECT 默认最终确认人。
+- 结果：采用 checkout `../reading-notes`，实际路径为 `C:/Users/YinZh/Documents/workspace/reading-notes`；仓库为 D-006 指定的 `git@github.com:yinzhongkai/reading-notes.git`，目标分支为 `main`。允许按本次 H-003 处理授权完成克隆、必要 Git 初始化及工作区声明，不迁移 OPC，不修改公共路径规范。
+- 确认来源与日期：用户于 2026-10-13（Asia/Shanghai）先要求按 H-003 核对仓库、保留内容并完成必要初始化和工作区声明，在比较同级与内嵌目录后明确回复“那就 `../reading-notes` 路径吧”。
+- 适用范围与影响：替代 D-009 的当前目标路径，解除 T-007 的路径选择限制。原 D 盘资料未访问、迁移或删除，不宣称已将其中内容复制到 C 盘。原治理记录完整保留；本次克隆确认远端无引用、checkout 只有 .git，必要初始化仅创建空 Git 基线。T-007 继续由 book-recommender 按 D-008 收录七本投资书目；本次未授权推送。
+- 关联任务与成果：T-007；H-003、H-001；WORKSPACE.yaml；PROJECT 工作区配置记录。
+- 替代关系：替代 D-009 的当前路径决定；保留 D-006 的仓库身份、D-007 的历史克隆事实及 D-008 的结构和收录范围。
+- 记录人及更新日期：框架超级管理员；2026-10-13（Asia/Shanghai）。
 
 ## 记录样式（不是真实决定）
 

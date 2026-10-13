@@ -1,3 +1,7 @@
 schemaVersion: 1
 workspace:
-  driver: none
+  driver: git
+  repository: git@github.com:yinzhongkai/reading-notes.git
+  branch: main
+  revision: a3bf768f62a87e1f31dc6702497b2ab5b40989c5
+  checkout: ../reading-notes
