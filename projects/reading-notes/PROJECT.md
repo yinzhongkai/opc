@@ -8,7 +8,7 @@
 - 精确框架提交：`464ca52aafc6c73ff780a7120acd3bf63c9d31dd`。
 - OPC 项目长期分支：`project/reading-notes`。
 - 建项开发分支：`feature/reading-notes/project-bootstrap`；建项提交及合并边界通过 Git 历史定位。
-- 工作区版本基线：尚未建立，当前 `driver: none`。成果物仓库为 `git@github.com:yinzhongkai/reading-notes.git`（D-006）；用户于 2026-10-13 确认本地目录 `D:/reading-notes` 并授权克隆（D-007），相对 checkout 为 `../reading-notes`。T-003 已完成克隆并核对为空仓库；本地 HEAD 名为 main，但尚无分支引用或提交。初始内容、精确提交及正式工作区配置仍待落实，见 H-001。
+- 工作区版本基线：`driver: git`，仓库 `git@github.com:yinzhongkai/reading-notes.git`（D-006），目标分支 `main`，精确 revision 为 `a3bf768f62a87e1f31dc6702497b2ab5b40989c5`。当前 OPC 位于 `C:/Users/YinZh/Documents/workspace/opc-reading-notes`，checkout `../reading-notes` 对应 `C:/Users/YinZh/Documents/workspace/reading-notes`（D-010）。该 revision 为本次必要初始化的空 Git 基线，业务书目尚未保存；成员环境验证及 H-003 后续核对见下方工作区配置记录。D-007、T-003、T-004 中的 D 盘位置保留为历史事实。
 
 ## 框架升级记录
 
@@ -117,6 +117,21 @@
 - `python -B -m unittest discover -s scripts -p "test_*.py"`：58 项测试全部通过。
 - 范围核对：完整采用 10 份空白项目模板文件，项目名称与 ID 占位符已替换；空团队、`none` 工作区和空任务、决定、交接及成果索引均与当前授权一致。
 - 本次仅完成建项与配置验证；读书笔记内容、业务验收和成员初始化尚未开始。
+
+## 工作区配置记录
+
+### 2026-10-13：按 H-003 启用同级 Git 工作区
+
+- 用户授权来源：本管理会话用户要求按 H-003 核对成果物仓库、保留内容、完成必要初始化及工作区声明并确认书目推荐官可以访问；随后明确确认 checkout 为 `../reading-notes`，见 D-010。
+- 访问核查：受限环境内外均仅识别 C、Z 盘，无法读取 D:/reading-notes。常见本机与已挂载候选位置未发现现有成果物 checkout；新 C 盘目标在克隆前不存在。原 D 盘资料未访问、修改或迁移，不以此前空仓库记录推断其现状。
+- 仓库核查：本轮 SSH 只读查询成功，指定 GitHub 仓库无引用；克隆后 origin 的 fetch/push 地址均为 `git@github.com:yinzhongkai/reading-notes.git`，目标目录只有 .git，没有业务文件或提交。
+- 必要初始化：在成果物 `feature/next-iteration` 创建一个空根提交，再从未初始化的 main 使用 `--ff-only` 接入该基线；main 最终提交为 `a3bf768f62a87e1f31dc6702497b2ab5b40989c5`，文件树为空、工作树干净。未生成书目内容，未推送。
+- 配置：WORKSPACE 由 none 改为 git，checkout 为 `../reading-notes`，目标分支 main，revision 锁定上述提交；没有更改公共规范、TEAM、成员身份或业务范围。
+- OPC 开发分支与合入前目标：复用本轮既有 `feature/reading-notes/next-iteration`，目标为 `project/reading-notes`，合入前目标提交为 `4365a6df6610d815ac25a70f4b5cd8e88408e4e3`。既有 T-005 至 T-007、D-008/D-009 和 H-003 未提交记录已按原内容保存为独立治理提交，配置变更另行提交；本轮范围通过来源分支与 Git 历史定位，不在正文写入自身提交哈希。
+- 保留与恢复依据：修改前的 PROJECT、WORKSPACE 和三份治理记录已备份至本机 `C:/Users/YinZh/AppData/Local/Temp/reading-notes-h003-818a23379dfd4405ab39ad24bb951b23`；原配置及旧路径决定同时保留在 Git 历史中。原 D 盘未作任何变更。
+- 当前验证证据：origin、main、完整 SHA、空文件树和干净工作树已实际核对；结构校验通过（22 个角色、37 份技能、1 个项目、429 处本地链接），git diff --check 通过，T-005 至 T-007 的任务正文 SHA256 与修改前一致。默认受限执行读取同级成果物目录仍被平台拒绝，使用本次用户授权的 require_escalated 执行后完成仓库与声明一致性核对；本次没有修改沙箱或系统权限。成员自身环境中的实际读写结论由 book-recommender 核对后提供。
+- 后续责任：book-recommender 实际核对访问与版本后反馈 H-003 并继续已授权的 T-007；H-001 的整体请求仍由原发起人 project-manager 核对，管理员不代写关闭。首批范围保持 D-008 的七本投资书目。
+- 记录人：框架超级管理员，2026-10-13（Asia/Shanghai）。
 
 ## 当前资料
 
