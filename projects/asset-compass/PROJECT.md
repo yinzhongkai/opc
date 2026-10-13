@@ -8,7 +8,16 @@
 - 精确框架提交：`464ca52aafc6c73ff780a7120acd3bf63c9d31dd`。
 - OPC 项目长期分支：`project/asset-compass`。
 - 建项开发分支：`feature/asset-compass/project-bootstrap`；建项提交及合并边界通过 Git 历史定位。
-- 工作区版本基线：当前 `driver: none`。2026-10-13，用户指定成果物仓库为 `git@github.com:yinzhongkai/asset-compass.git`、本地位置为 `D:/asset-compass`；已克隆并核对为空仓库，尚无可锁定的分支提交，待首笔业务提交后登记有效的工作区版本基线。
+- 工作区版本基线：当前 `driver: git`；成果物仓库为 `git@github.com:yinzhongkai/asset-compass.git`，本地 checkout 为 OPC 同级 `../asset-compass`（`C:/Users/YinZh/Documents/workspace/asset-compass`），演进线为 `main`，精确提交见 [WORKSPACE.yaml](WORKSPACE.yaml)。原 `D:/asset-compass` 记录保留在下述 Git 历史整理回执；2026-10-13 的实际环境无法访问该路径，本次按用户的投资表归档要求启用上述同级目录，配置依据见 D-006。
+
+## 工作区配置记录
+
+### 2026-10-13：启用投资计划表成果物工作区
+
+- 操作范围与授权：用户要求将指定投资计划表放入项目或成果物仓库，由投资顾问判断保存位置并保留每月历史，见 [D-006](DECISIONS.md#d-006确认投资计划表纳入成果物仓库并保留月度历史) 与 [T-010](TASKS.md#t-010归档投资计划表并建立月度历史版本)。为落实该要求，本会话按 SUPER_ADMIN 允许的有界配置维护处理本项目 WORKSPACE 登记及本节配置事实；原 investment-advisor 身份、TEAM、成员 scope 和公共框架定义不变，不接任项目经理摘要维护。
+- 位置选择：实际只读核对确认当前主机没有 D 盘，旧路径不可访问；新目录此前不存在。选择符合配置规范的同级成果物仓库，不推断旧 D 盘资料被删除。远端地址沿用既有用户指定，仅登记地址，没有联网克隆或推送。
+- 初始化及恢复点：原 WORKSPACE 为 `none`，原配置可由修改前提交 `3748b48630075cc667e9181b082ac92770adabc1` 恢复。新成果物仓库先建立不含文件的 main 根提交 `3e8b8f87328bd306dcc372e0a75ad1897dd78aef`，登记为有效初始基线后，再在 feature/status-sync 归档业务资料；桌面源文件保留，旧历史记录不改写。
+- 最终版本：投资表归档合入 main 并验证后，WORKSPACE.revision、T-010 和成果索引共同引用最终提交。本节仅登记配置事实，不声称更新 STATUS 或批准原工作簿的模型结果。
 
 ## 框架升级记录
 
