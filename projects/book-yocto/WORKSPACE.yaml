@@ -5,7 +5,7 @@ workspace:
     book-manuscript:
       repository: git@github.com:yinzhongkai/book-yocto.git
       branch: main
-      revision: f444790f352b46f699fd3d46198f8b9b9f089a62
+      revision: 9c74596591728c0f2d614e357059034551a42dca
       checkout: ../book-yocto
     meta-tiger:
       repository: git@github.com:yinzhongkai/meta-tiger.git
