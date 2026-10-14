@@ -11,6 +11,7 @@
 | A-005 | [三星堆第1站封面文案](A-005-三星堆第1站封面文案初稿.md) | writer | T-013、T-005 文案修订 | 0.2 | draft | 全文未批准；产品最终 `main@5404a33758b83fd5aff00ced55a4d893bf700c08`；RV-COPY-001／002 pass / closed、K3 原稿保留；D-010 仅采用示例中的候选 A 短句 |
 | A-006 | [三星堆首批两篇视觉资源](A-006-三星堆首批两篇视觉资源.md) | visual-designer | T-012 | 0.2 | draft | 产品 `feature/t-012-first-two-visual-assets@d1f42cea3230374640d8f2efdc7329d0f2c7fff5` 不变，fixed-git-lfs-1 清单196项匹配；reviewer `4f283652…` 第2轮限定17项视觉／现有文字 pass，RV-VIS-001／002关闭；writer `a908fdf9…` 实际接收可用，发起人核对后 H-009 closed、负责人登记 T-012 completed（draft资源交付）；未合入main，填词／完整稿／全部AC／批准及发布未覆盖 |
 | A-007 | [plog 文字结构与文案槽位规范](A-007-plog文字结构与文案槽位规范.md) | writer | T-010 | 0.1 | draft | 草拟及 SC-01～SC-05 作者自查完成，仅覆盖 AC-2／AC-3 文字结构部分及 AC-6 骨架自查；首篇八图、17 SVG／18 种实际节点映射可对接已合入视觉资源。没有新 K3 原稿、整篇／填词后验收或批准 |
+| A-008 | [三星堆前两篇文案与来源包](A-008-三星堆前两篇文案与来源包.md) | writer | T-006 | 0.3 | draft | 第 1 轮意见收齐后，ChatGPT 作者已补证／处理 001～004 待复核：产品 `feature/t-006-first-two-buffer-plogs@db7e1d2d3132d03394472897c8391efb51752728`，9 新文件（manifest SHA-256 `35c077360530c2168b3b38ce2308d3bb62ac2d8da240c1f96f1c3fc1e334079f`）；两篇各 8 页、16 必填有值、新候选／映射／阅读稿逐字对应。原准备 19 文件、K3 七文件及评审原判保留，全部采用字段 null；待原 reviewer 复核，全文未批准 |
 
 ## T-005 工作区集成定位（2026-10-12）
 
@@ -23,6 +24,22 @@
 产品仓库 `git@github.com:yinzhongkai/free-pipi-shrimp.git` 已按用户本轮授权快进合入、验证并推送 `main@d1f42cea3230374640d8f2efdc7329d0f2c7fff5`，WORKSPACE 仅 revision 同步到该版本。A-006 视觉包位于 `deliverables/T-012-first-two-visual-assets/v0.2-draft/`，完整清单位于 `manifests/T-012-first-two-visual-assets/manifest-v0.2-draft.json`，原批次及修订／核验来源位于 `work/T-012-first-two-visual-assets/`；原路径及 A-006 登记哈希不变，仍 v0.2 draft。
 
 上表／作者正文的 feature 与尚未合入描述保存其受评和负责人收尾时点，当前集成位置以本段、WORKSPACE 及 T-012 最新项目经理记录为准。OPC 最终项目版本为 `5ee097df6252272ed786b9915d185da750e29d60`，两仓快进合入、目标验证与远端同步通过，本地／远端 T-012 feature 已安全删除，原标签及全部已合入来源可追溯。合入不批准 A-006 全文或完整稿件，也不授予发布权限。
+
+## T-010 治理集成定位（2026-10-14）
+
+A-007 v0.1 draft 的作者交付为 `2973f0691d91b64e7cde6502a864952b23da379a`，正文原字节已进入 OPC 项目主线 `project/free-pipi-shrimp@25421a5d2a8b3df3e9f95780fcc82d221b5fffe0`。本轮只有 OPC 治理交付，产品 main／WORKSPACE 保持 `d1f42cea3230374640d8f2efdc7329d0f2c7fff5`；快进集成、目标验证及本地／远端 T-010 feature 清理完成，原标签和来源提交保留。A-007 作为 T-006 结构输入使用，不等于新 K3 文案、完整稿件、独立审校或成果批准。
+
+## T-006 输入包远端同步与阶段交接（2026-10-14）
+
+用户已明确要求先推送两仓本地提交，再由用户转交 Kimi 作者的执行指令。产品输入包已正常推送至 `feature/t-006-first-two-buffer-plogs@db81ecb78c1e3430cc30e7b7cfad4c091dd3ffbb`，19 文件的大小／SHA-256 与原清单匹配，远端／跟踪头一致，main／WORKSPACE 不变。OPC 本人成果登记及后续协调记录沿 `feature/free-pipi-shrimp/t-006-first-two-buffer-plogs` 同步，实际固定入口见本轮执行回执；任务最新阶段安排已登记。
+
+A-008 上表和正文中的“本机、未推送、待外传授权”保留作者登记时点，不覆盖本轮用户授权和已验证的产品远端位置。原 v0.1-prepared 的全部输入、哈希和历史拒绝记录不变；A-008 仍 v0.1 draft，尚无新 K3 原稿或两篇候选。后续业务原稿及候选在产品新批次／版本保存，Kimi 作者交回后再串行进行 ChatGPT 审核修订及独立审校。
+
+## T-006 K3 初稿交付定位（2026-10-14）
+
+用户在既有 Kimi 作者会话明确指示执行 K3 原稿与两篇文案候选阶段，writer 已完成生成、归档与双仓交付。产品 `feature/t-006-first-two-buffer-plogs@5c5c934ce419c206120a258027dfabb4620eef0e` 已推送并核对远端一致，含批次目录 `work/T-006-first-two-buffer-plogs/batch-20261014-k3-draft/`（5 文件）、`deliverables/T-006-first-two-buffer-plogs/v0.1-draft/copy-candidates.md` 及 `manifests/T-006-first-two-buffer-plogs/manifest-v0.1-draft.json`，共 7 文件，各文件 SHA-256 见 A-008 v0.2 末节；原 v0.1-prepared 19 文件与产品 main／WORKSPACE 不变。
+
+A-008 升 v0.2 仍 draft，T-006 保持 in_progress；本交付不等于 ChatGPT 作者审核修订、reviewer 独立审校、暂定采用、套版、整篇复核或成果批准。下一位 project-manager 固定受评版本并安排 reviewer 审校。OPC 治理记录沿本任务原 feature 同步，不合入主线、不删除分支、不发布。
 
 ## 正文元信息样式（不是真实成果）
 
