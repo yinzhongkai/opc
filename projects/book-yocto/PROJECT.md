@@ -12,7 +12,7 @@
 
 - 建立日期：2026-09-12。
 - 用户请求来源：2026-09-12 超级管理员会话中，建项用户请求"创建一个名叫 book-yocto 的项目"，说明 `yocto/` 目录是其撰写的草稿，希望通过本项目使草稿达到出版程度。
-- 当前阶段：P3 逐章修订与逐章真实环境核验（chapter 1–3 已定稿；A-005 v0.2 的 QEMU 与 Yocto 针对性复核均 pass，2026-10-11 用户明确批准，见 D-014；设计批准回写已提交并经 project-manager 核验，T-016 当前衔接 writer 的 chapter 4 蓝图。chapter 4 只做最小可启动 machine，功能随章节补充；工程实现与构建运行尚未开始）。
+- 当前阶段：P3 逐章修订与逐章真实环境核验（chapter 1–3 已定稿；A-005 v0.2 approved / D-014；writer 已交付 A-006 v0.1 draft，2026-10-14 用户同意继续执行，project-manager 已完成蓝图交接核对，当前衔接 qemu-engineer 实施最小模型与固件源。chapter 4 只做最小可启动 machine，功能随章节补充；模型/固件/metadata 的实际进展和验证由执行成员据实记录）。
 
 ## 目标与约束
 
@@ -59,6 +59,13 @@
 - 恢复点与旧远程头：`project/book-yocto@f3d8c2ff882e0542f86650829d99feb0dc523729` 保存为 `archive/2026-10-12/book-yocto-before-v0.0.4`；活动分支 `feature/book-yocto/t-016-chapter4-revision@b262ea9c0935d662a42ec0e4ded0c8cb4d24fa58` 保存为 `archive/2026-10-12/book-yocto-t-016-before-v0.0.4`。项目独有提交使用 rebase 迁移；T-016 活动提交继续基于新项目基线，不合入长期分支，不改变任务状态、成员分工或成果批准。
 - 重放与流程口径：已提前采用的 `multi-git`、SSH checkout 和 QEMU 角色/技能属于 `v0.0.4` 正式框架，活动分支重放时按等价内容去重；此前采用记录及旧 SHA 保留为历史依据。后续 feature/bugfix 按当前根 [分支策略](../../BRANCH_STRATEGY.md) 使用 `--ff-only` 合入并记录合入前目标提交与合入后的最终提交；框架发布继续使用 `--no-ff` 发布合并。已完成任务的旧合并证据不追改。
 - 记录人：框架超级管理员。本次为用户授权的框架基线迁移，不构成专业业务任务安排。
+
+## 2026-10-14 书稿版本引用对齐
+
+- 授权与原因：项目经理在当前状态汇报中说明 OPC 恢复后书稿版本引用差异及继续前需对齐版本记录；用户随后确认“我大致看了下A-006可以继续执行”。本轮结合既有成果物历史整理授权，按框架入口完成继续 T-016 所需的有界配置修复，原 project-manager 身份不变。
+- 变更：WORKSPACE 的 book-manuscript revision 从 `f444790f352b46f699fd3d46198f8b9b9f089a62` 对齐实际本机/远端 main 与 T-016 分支的 `9c74596591728c0f2d614e357059034551a42dca`。已逐 Git tree 核对两提交文件内容完全一致，书稿工作树干净；这是历史整理后的引用对齐，不推进书稿业务内容。
+- 恢复与边界：旧书稿提交由成果物标签 `archive/book-yocto-before-consolidation-20261013` 保存。OPC 2026-10-13 已恢复的原始提交链继续保留，本轮只追加普通 T-016 协调提交；不重新压缩或改写旧历史。仓库地址、driver、checkout、分支、成员及 meta-tiger 基线不变。历史评审/批准/交付 SHA 不批量替换。
+- 记录人：框架入口（本轮有界配置修复）；业务阶段衔接由 project-manager 按 TASKS 执行。
 
 ## 当前资料
 
