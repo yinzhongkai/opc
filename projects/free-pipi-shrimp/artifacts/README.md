@@ -10,6 +10,7 @@
 | A-004 | [皮皮虾 3:4 封面视觉模板](A-004-封面视觉模板.md) | visual-designer | T-005 | 0.2 | approved | D-010（2026-10-12 批准模板及三星堆示例）；产品最终 `main@5404a33758b83fd5aff00ced55a4d893bf700c08`，原路径/哈希不变；完整封面 pass、问题为空；非发布授权 |
 | A-005 | [三星堆第1站封面文案](A-005-三星堆第1站封面文案初稿.md) | writer | T-013、T-005 文案修订 | 0.2 | draft | 全文未批准；产品最终 `main@5404a33758b83fd5aff00ced55a4d893bf700c08`；RV-COPY-001／002 pass / closed、K3 原稿保留；D-010 仅采用示例中的候选 A 短句 |
 | A-006 | [三星堆首批两篇视觉资源](A-006-三星堆首批两篇视觉资源.md) | visual-designer | T-012 | 0.2 | draft | 产品 `feature/t-012-first-two-visual-assets@d1f42cea3230374640d8f2efdc7329d0f2c7fff5` 不变，fixed-git-lfs-1 清单196项匹配；reviewer `4f283652…` 第2轮限定17项视觉／现有文字 pass，RV-VIS-001／002关闭；writer `a908fdf9…` 实际接收可用，发起人核对后 H-009 closed、负责人登记 T-012 completed（draft资源交付）；未合入main，填词／完整稿／全部AC／批准及发布未覆盖 |
+| A-007 | [plog 文字结构与文案槽位规范](A-007-plog文字结构与文案槽位规范.md) | writer | T-010 | 0.1 | draft | 草拟及 SC-01～SC-05 作者自查完成，仅覆盖 AC-2／AC-3 文字结构部分及 AC-6 骨架自查；首篇八图、17 SVG／18 种实际节点映射可对接已合入视觉资源。没有新 K3 原稿、整篇／填词后验收或批准 |
 
 ## T-005 工作区集成定位（2026-10-12）
 
@@ -21,7 +22,7 @@
 
 产品仓库 `git@github.com:yinzhongkai/free-pipi-shrimp.git` 已按用户本轮授权快进合入、验证并推送 `main@d1f42cea3230374640d8f2efdc7329d0f2c7fff5`，WORKSPACE 仅 revision 同步到该版本。A-006 视觉包位于 `deliverables/T-012-first-two-visual-assets/v0.2-draft/`，完整清单位于 `manifests/T-012-first-two-visual-assets/manifest-v0.2-draft.json`，原批次及修订／核验来源位于 `work/T-012-first-two-visual-assets/`；原路径及 A-006 登记哈希不变，仍 v0.2 draft。
 
-上表／作者正文的 feature 与尚未合入描述保存其受评和负责人收尾时点，当前产品集成位置以本段、WORKSPACE 及 T-012 最新项目经理记录为准。原审核、作者、批准和交接事实不改写；当前 OPC 正进行快进集成／目标验证，两边 feature 待最终验证后清理。合入不批准 A-006 全文或完整稿件，也不授予发布权限。
+上表／作者正文的 feature 与尚未合入描述保存其受评和负责人收尾时点，当前集成位置以本段、WORKSPACE 及 T-012 最新项目经理记录为准。OPC 最终项目版本为 `5ee097df6252272ed786b9915d185da750e29d60`，两仓快进合入、目标验证与远端同步通过，本地／远端 T-012 feature 已安全删除，原标签及全部已合入来源可追溯。合入不批准 A-006 全文或完整稿件，也不授予发布权限。
 
 ## 正文元信息样式（不是真实成果）
 
