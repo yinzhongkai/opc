@@ -3,15 +3,19 @@
 - 项目：asset-compass
 - 成果 ID：A-006
 - 负责人：investment-advisor
-- 关联任务：[T-019](../TASKS.md#t-019回测etf底仓与止盈回补策略)
-- 版本：1.0
+- 关联任务：[T-019](../TASKS.md#t-019回测etf底仓与止盈回补策略)、[T-020](../TASKS.md#t-020记录回测结论并同步双仓库远程)
+- 版本：1.1
 - 更新日期：2026-10-15（Asia/Shanghai）
-- 状态：draft；历史数据及计算核查完成，不代表候选策略已批准。
+- 状态：draft（历史研究及作者验证）；暂不启用候选的用户决定已确认，见 D-008，不表示研究整体获批或策略获准启用。
 - 适用范围：513500 每月投入人民币 1 万元，比较只定投和 80% 底仓加 20% 机动仓的 30% 止盈、5%/10% 回补及六个月到期候选；不含真实存款或 BTC 账户。
 - 来源及输入版本：本会话用户请求、A-002 v1.0 与前文候选规则；公开行情、净值及拆分公告，精确 URL、时间和 SHA-256 在成果物 `sources.json`。
-- 存储位置：成果物仓库 `git@github.com:yinzhongkai/asset-compass.git`，本机 `C:/Users/YinZh/Documents/workspace/asset-compass`，`research/etf-exit-backtest/`；main 最终提交 `3042b530a4ae4bd4d1005aa4386d853b8c7339e5`。详细报告 `report.md`，引擎 `backtest.py`，原始响应 `raw/`，数据 `data.json`，每日曲线和交易流水 `results.json`，图表 `comparison.png`/`comparison.svg`，核查 `validation.json`。
-- 批准依据：用户授权历史研究与结果保存，没有批准正式替换 A-002 或执行交易。
-- 版本记录：2026-10-15，v1.0，形成主样本、长样本、93 个滚动窗口及预设敏感性比较，保存可离线复现的数据和代码。
+- 存储位置：成果物仓库 `git@github.com:yinzhongkai/asset-compass.git`，本机 `C:/Users/YinZh/Documents/workspace/asset-compass`，`research/etf-exit-backtest/`；main 最终提交 `6a42b987dbbea912e9a7f6de47741580cea4e3f0`。详细报告 `report.md`，执行决定 `decision.md`，引擎 `backtest.py`，原始响应 `raw/`，数据 `data.json`，每日曲线和交易流水 `results.json`，图表 `comparison.png`/`comparison.svg`，核查 `validation.json`。计算输入及结果沿用 v1.0 的 `3042b530a4ae4bd4d1005aa4386d853b8c7339e5`，本次只补充结论及报告生成模板。
+- 批准依据：[D-008](../DECISIONS.md#d-008维持现行准则并暂不启用etf止盈回补) 确认维持现行准则、暂不启用止盈回补；不批准正式替换 A-002、研究整体或交易执行。
+- 版本记录：2026-10-15，v1.0，形成主样本、长样本、93 个滚动窗口及预设敏感性比较，保存可离线复现的数据和代码；同日 v1.1，记录用户暂不启用的确认及远程同步授权，计算结果不变。
+
+## 当前执行结论
+
+用户已确认继续执行 A-002 v1.0 的定投、溢价分档和逐笔六个月到期准则；暂不增加 80/20 实际分仓、30% 止盈或 5%/10% 回补。候选保留为研究备选，没有自动启用日期；以后需另行评估并由用户明确确认。确认来源、判断依据及边界见 D-008，成果物报告和 `decision.md` 保存同一结论。
 
 ## 历史比较
 
