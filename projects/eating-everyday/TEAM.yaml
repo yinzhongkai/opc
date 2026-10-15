@@ -1,4 +1,7 @@
 schemaVersion: 3
 project: 'eating-everyday'
 roleKnowledge: {}
-members: []
+members:
+  - project-manager
+  - product-manager
+  - architect
