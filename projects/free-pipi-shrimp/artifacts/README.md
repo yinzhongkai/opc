@@ -13,6 +13,7 @@
 | A-007 | [plog 文字结构与文案槽位规范](A-007-plog文字结构与文案槽位规范.md) | writer | T-010 | 0.1 | draft | 草拟及 SC-01～SC-05 作者自查完成，仅覆盖 AC-2／AC-3 文字结构部分及 AC-6 骨架自查；首篇八图、17 SVG／18 种实际节点映射可对接已合入视觉资源。没有新 K3 原稿、整篇／填词后验收或批准 |
 | A-008 | [三星堆前两篇文案与来源包](A-008-三星堆前两篇文案与来源包.md) | writer | T-006 | 0.4 | draft | 原 reviewer 第 2 轮文案／来源限定 pass、001～004 closed；writer 已选套版草稿并交付输入包，产品 `feature/t-006-first-two-buffer-plogs@5f58227db0b340056f1dbbab8752039a72740be2`，10 新文件（manifest SHA-256 `3db1705b35eb98fbcdb491f4d75b006d39bb0b3bf10655a215596c54923e45cd`）；两篇 16 页／60 节点、15 启用必填有值、2 可选有值、11 可选留空，备用未启用。新选择值仅供套版，旧 35 文件／315 blob 及评审历史保持；待设计师实际套版及整篇验证，全文未批准 |
 | A-009 | [三星堆前两篇文字套版视觉包](A-009-三星堆前两篇文字套版视觉包.md) | visual-designer | T-006 专业协作 | 0.1 | draft | 产品 `feature/t-006-first-two-buffer-plogs@5af5615d83b59fff85bdbdb50583f825cb5f82ba`，16 SVG／16 PNG（14 新导出、首封／事实卡 2 原字节复用），60 节点对应、逐页原尺寸／270 拼版自查和工程重开完成；96 文件固定核验，manifest SHA-256 `cbcc02ab8848a24b9ad9151baa8f126ddb02aab3c8db56f08a71337e52804266`。系统650字重的3页文字像素差异已披露，以固定PNG为成品；待完整图文独立复核／作者整合，未批准或发布 |
+| A-010 | [三星堆前两篇完整稿件](A-010-三星堆前两篇完整稿件.md) | writer | T-006 | 0.1 | draft | 完整两篇／16图及2 note原字节整合，逐篇AC-2／AC-3／AC-6作者自查与T-011输入齐备；产品 `feature/t-006-first-two-buffer-plogs@104b533b4bd66825918e2f32871268f31179d876`，29新文件／421旧blob保持，manifest SHA-256 `e136e3c44496604adc761e9be04a5021240645197a90146e363680553ee8b6e5`。原第3轮固定两篇完整图文限定pass保留，T-006 draft交付completed；受控字体复现／跨设备与平台压缩边界保持，尚无用户批准、T-011检查完成或发布 |
 
 ## T-005 工作区集成定位（2026-10-12）
 
@@ -41,6 +42,12 @@ A-008 上表和正文中的“本机、未推送、待外传授权”保留作�
 用户在既有 Kimi 作者会话明确指示执行 K3 原稿与两篇文案候选阶段，writer 已完成生成、归档与双仓交付。产品 `feature/t-006-first-two-buffer-plogs@5c5c934ce419c206120a258027dfabb4620eef0e` 已推送并核对远端一致，含批次目录 `work/T-006-first-two-buffer-plogs/batch-20261014-k3-draft/`（5 文件）、`deliverables/T-006-first-two-buffer-plogs/v0.1-draft/copy-candidates.md` 及 `manifests/T-006-first-two-buffer-plogs/manifest-v0.1-draft.json`，共 7 文件，各文件 SHA-256 见 A-008 v0.2 末节；原 v0.1-prepared 19 文件与产品 main／WORKSPACE 不变。
 
 A-008 升 v0.2 仍 draft，T-006 保持 in_progress；本交付不等于 ChatGPT 作者审核修订、reviewer 独立审校、暂定采用、套版、整篇复核或成果批准。下一位 project-manager 固定受评版本并安排 reviewer 审校。OPC 治理记录沿本任务原 feature 同步，不合入主线、不删除分支、不发布。
+
+## T-006 工作区集成定位（2026-10-15）
+
+按用户本轮明确授权，产品六个功能提交已快进合入、目标验证并正常推送至`main@104b533b4bd66825918e2f32871268f31179d876`，WORKSPACE仅revision同步，配置独立提交`14e7a51ba72912e614be73e6f96387010cae4bfb`。A-010完整稿入口为`deliverables/T-006-first-two-buffer-plogs/v0.1-integrated-draft/README.md`，清单`manifests/T-006-first-two-buffer-plogs/manifest-v0.1-integrated-draft.json`的Git SHA-256仍为`e136e3c44496604adc761e9be04a5021240645197a90146e363680553ee8b6e5`；A-008／A-009原输入、套版工程及所有来源路径、字节和固定提交不变。
+
+上表及负责人正文的feature／未合入描述保留各自登记时点，当前集成依据本段、WORKSPACE及TASKS最新项目经理记录。产品六清单170文件／63唯一LFS实体合并前后匹配，18读者文件保持第3轮已评原字节；OPC本轮证据随后快进合入并在目标最终验证，清理须在两仓全部确认后执行，实际结果由后续收尾定位。A-008 v0.4／A-009 v0.1／A-010 v0.1均保留draft及原评审范围，不新增成果批准或发布权限。
 
 ## 正文元信息样式（不是真实成果）
 
