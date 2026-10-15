@@ -23,6 +23,12 @@
 - [T-015 原始执行日志](work-records/t015-chapter3-raw.log)
 - [T-014 chapter 3 最终 Docker 复验报告](work-records/t014-chapter3-final-revalidation/report.md)（2026-10-03 执行、2026-10-04 补证，2026-10-08 从源码历史提交 `f5d5fffd972845bb52e6f2a2e9ef36986d3667e1` 补录到 OPC；同目录保存两份原始日志与三份执行脚本）
 
+## T-016 QEMU 工程阶段交付（qemu-engineer）
+
+- [模型、固件与作者模型验证报告](work-records/t016-qemu-model-validation.md)及[原始证据目录](work-records/t016-qemu-model-raw/README.md)：2026-10-15 本阶段最终矩阵 16/16 通过，含冷启动、同进程两次宿主 reset、ROM/参数/BIOS 边界；保留失败和修复。正式 metadata/清理后干净构建/runqemu 系统验收待 Yocto，章节和 T-016 整体未完成。
+- 工程仓库：ssh tiger:/home/oops/workspace/meta-tiger，git@github.com:yinzhongkai/meta-tiger.git；feature/t-016-chapter4-revision。模块提交 0e73cd7faacff219fa5de0a7365743ce31402d73 为 recipes-devtools/qemu/files/0001-arm-add-minimal-tiger-machine.patch；阶段交接头 b303ae6d614f067e11d4cbba57feacaf84ee7e8e 同时含 recipes-test/tiger-minboot/files/ 的 start.S/main.c/tiger-minboot.ld/COPYING.MIT 和 tests/model/ 的构建/测试工具及交接说明。来源/应用基点/顺序/hash与覆盖见报告。
+- 状态：阶段开发提交已保存、模型作者自测通过；尚未推送或合入 master，不作 WORKSPACE 最终 revision。未删除任务分支或清理 devtool source，下一阶段由 project-manager 核对后串行衔接 Yocto。
+
 ## 正文元信息样式（不是真实成果）
 
 ```text

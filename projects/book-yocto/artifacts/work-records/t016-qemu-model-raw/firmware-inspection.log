@@ -1,0 +1,459 @@
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/fixture-1/commands.json", "bytes": 14575, "sha256": "3c2eab442ca696717bfc9012b6e4132f07c8c1871760b239b8ba084f7ce12256", "bundle": "firmware-inspection.log"} =====
+[
+  {
+    "argv": [
+      "/home/oops/workspace/build/tmp/work/cortexa57-poky-linux/libedit/20230828-3.1/recipe-sysroot-native/usr/bin/aarch64-poky-linux/aarch64-poky-linux-gcc",
+      "--version"
+    ],
+    "rc": 0,
+    "output": "aarch64-poky-linux-gcc (GCC) 13.4.0\nCopyright (C) 2023 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n"
+  },
+  {
+    "argv": [
+      "/home/oops/workspace/build/tmp/work/cortexa57-poky-linux/libedit/20230828-3.1/recipe-sysroot-native/usr/bin/aarch64-poky-linux/aarch64-poky-linux-gcc",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-march=armv8-a",
+      "-mgeneral-regs-only",
+      "-mstrict-align",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-fno-stack-protector",
+      "-fno-pie",
+      "-fno-pic",
+      "-fno-unwind-tables",
+      "-fno-asynchronous-unwind-tables",
+      "-nostdlib",
+      "-nostartfiles",
+      "-static",
+      "-no-pie",
+      "-DTIGER_BUILD_ID=\"sha256:7fbb005bd53a3f3fa2ed0a933181e50db7a6bff97cab78ce9429557ccb9818d7\"",
+      "/home/oops/workspace/meta-tiger/recipes-test/tiger-minboot/files/start.S",
+      "/home/oops/workspace/meta-tiger/recipes-test/tiger-minboot/files/main.c",
+      "-Wl,--build-id=none",
+      "-Wl,-T,/home/oops/workspace/meta-tiger/recipes-test/tiger-minboot/files/tiger-minboot.ld",
+      "-Wl,-Map,/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.map",
+      "-o",
+      "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.elf"
+    ],
+    "rc": 0,
+    "output": ""
+  },
+  {
+    "argv": [
+      "/home/oops/workspace/build/tmp/work/cortexa57-poky-linux/libedit/20230828-3.1/recipe-sysroot-native/usr/bin/aarch64-poky-linux/aarch64-poky-linux-objcopy",
+      "-O",
+      "binary",
+      "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.elf",
+      "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.bin"
+    ],
+    "rc": 0,
+    "output": ""
+  },
+  {
+    "argv": [
+      "/home/oops/workspace/build/tmp/work/cortexa57-poky-linux/libedit/20230828-3.1/recipe-sysroot-native/usr/bin/aarch64-poky-linux/aarch64-poky-linux-readelf",
+      "-h",
+      "-l",
+      "-S",
+      "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.elf"
+    ],
+    "rc": 0,
+    "output": "ELF Header:\n  Magic:   7f 45 4c 46 02 01 01 00 00 00 00 00 00 00 00 00 \n  Class:                             ELF64\n  Data:                              2's complement, little endian\n  Version:                           1 (current)\n  OS/ABI:                            UNIX - System V\n  ABI Version:                       0\n  Type:                              EXEC (Executable file)\n  Machine:                           AArch64\n  Version:                           0x1\n  Entry point address:               0x0\n  Start of program headers:          64 (bytes into file)\n  Start of section headers:          132000 (bytes into file)\n  Flags:                             0x0\n  Size of this header:               64 (bytes)\n  Size of program headers:           56 (bytes)\n  Number of program headers:         3\n  Size of section headers:           64 (bytes)\n  Number of section headers:         7\n  Section header string table index: 6\n\nSection Headers:\n  [Nr] Name              Type             Address           Offset\n       Size              EntSize          Flags  Link  Info  Align\n  [ 0]                   NULL             0000000000000000  00000000\n       0000000000000000  0000000000000000           0     0     0\n  [ 1] .text             PROGBITS         0000000000000000  00010000\n       00000000000002e8  0000000000000000  AX       0     0     16\n  [ 2] .data             PROGBITS         0000000040000000  00020000\n       0000000000000008  0000000000000000  WA       0     0     8\n  [ 3] .bss              NOBITS           0000000040000008  00020008\n       0000000000000028  0000000000000000  WA       0     0     8\n  [ 4] .symtab           SYMTAB           0000000000000000  00020008\n       00000000000002a0  0000000000000018           5    13     8\n  [ 5] .strtab           STRTAB           0000000000000000  000202a8\n       00000000000000ca  0000000000000000           0     0     1\n  [ 6] .shstrtab         STRTAB           0000000000000000  00020372\n       000000000000002c  0000000000000000           0     0     1\nKey to Flags:\n  W (write), A (alloc), X (execute), M (merge), S (strings), I (info),\n  L (link order), O (extra OS processing required), G (group), T (TLS),\n  C (compressed), x (unknown), o (OS specific), E (exclude),\n  D (mbind), p (processor specific)\n\nProgram Headers:\n  Type           Offset             VirtAddr           PhysAddr\n                 FileSiz            MemSiz              Flags  Align\n  LOAD           0x0000000000010000 0x0000000000000000 0x0000000000000000\n                 0x00000000000002e8 0x00000000000002e8  R E    0x10000\n  LOAD           0x0000000000020000 0x0000000040000000 0x00000000000002e8\n                 0x0000000000000008 0x0000000000000030  RW     0x10000\n  GNU_STACK      0x0000000000000000 0x0000000000000000 0x0000000000000000\n                 0x0000000000000000 0x0000000000000000  RW     0x10\n\n Section to Segment mapping:\n  Segment Sections...\n   00     .text \n   01     .data .bss \n   02     \n"
+  },
+  {
+    "argv": [
+      "/home/oops/workspace/build/tmp/work/cortexa57-poky-linux/libedit/20230828-3.1/recipe-sysroot-native/usr/bin/aarch64-poky-linux/aarch64-poky-linux-nm",
+      "-n",
+      "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.elf"
+    ],
+    "rc": 0,
+    "output": "0000000000000000 T _start\n0000000000000080 t puts\n00000000000000c0 T firmware_main\n00000000000002e8 A __data_load\n0000000040000000 D __data_start\n0000000040000000 D test_data\n0000000040000008 B __bss_start\n0000000040000008 D __data_end\n0000000040000008 B test_bss\n0000000040000010 B observed_el\n0000000040000018 B observed_sp\n0000000040000020 B observed_mpidr\n0000000040000028 B observed_sctlr\n0000000040000030 B __bss_end\n0000000040010000 A __stack_bottom\n0000000040020000 A __stack_top\n"
+  },
+  {
+    "argv": [
+      "/home/oops/workspace/build/tmp/work/cortexa57-poky-linux/libedit/20230828-3.1/recipe-sysroot-native/usr/bin/aarch64-poky-linux/aarch64-poky-linux-nm",
+      "-u",
+      "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.elf"
+    ],
+    "rc": 0,
+    "output": ""
+  },
+  {
+    "argv": [
+      "/home/oops/workspace/build/tmp/work/cortexa57-poky-linux/libedit/20230828-3.1/recipe-sysroot-native/usr/bin/aarch64-poky-linux/aarch64-poky-linux-objdump",
+      "-d",
+      "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.elf"
+    ],
+    "rc": 0,
+    "output": "\n/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.elf:     file format elf64-littleaarch64\n\n\nDisassembly of section .text:\n\n0000000000000000 <_start>:\n   0:\td5034fdf \tmsr\tdaifset, #0xf\n   4:\t58000260 \tldr\tx0, 50 <_start+0x50>\n   8:\t9100001f \tmov\tsp, x0\n   c:\t58000260 \tldr\tx0, 58 <_start+0x58>\n  10:\t58000281 \tldr\tx1, 60 <_start+0x60>\n  14:\t580002a2 \tldr\tx2, 68 <_start+0x68>\n  18:\teb02003f \tcmp\tx1, x2\n  1c:\t54000082 \tb.cs\t2c <_start+0x2c>  // b.hs, b.nlast\n  20:\tf8408403 \tldr\tx3, [x0], #8\n  24:\tf8008423 \tstr\tx3, [x1], #8\n  28:\t17fffffc \tb\t18 <_start+0x18>\n  2c:\t58000221 \tldr\tx1, 70 <_start+0x70>\n  30:\t58000242 \tldr\tx2, 78 <_start+0x78>\n  34:\teb02003f \tcmp\tx1, x2\n  38:\t54000062 \tb.cs\t44 <_start+0x44>  // b.hs, b.nlast\n  3c:\tf800843f \tstr\txzr, [x1], #8\n  40:\t17fffffd \tb\t34 <_start+0x34>\n  44:\t9400001f \tbl\tc0 <firmware_main>\n  48:\td503205f \twfe\n  4c:\t17ffffff \tb\t48 <_start+0x48>\n  50:\t40020000 \t.word\t0x40020000\n  54:\t00000000 \t.word\t0x00000000\n  58:\t000002e8 \t.word\t0x000002e8\n  5c:\t00000000 \t.word\t0x00000000\n  60:\t40000000 \t.word\t0x40000000\n  64:\t00000000 \t.word\t0x00000000\n  68:\t40000008 \t.word\t0x40000008\n  6c:\t00000000 \t.word\t0x00000000\n  70:\t40000008 \t.word\t0x40000008\n  74:\t00000000 \t.word\t0x00000000\n  78:\t40000030 \t.word\t0x40000030\n  7c:\t00000000 \t.word\t0x00000000\n\n0000000000000080 <puts>:\n  80:\t39400003 \tldrb\tw3, [x0]\n  84:\t34000183 \tcbz\tw3, b4 <puts+0x34>\n  88:\td2800302 \tmov\tx2, #0x18                  \t// #24\n  8c:\tf2a12002 \tmovk\tx2, #0x900, lsl #16\n  90:\td1006044 \tsub\tx4, x2, #0x18\n  94:\td503201f \tnop\n  98:\t91000400 \tadd\tx0, x0, #0x1\n  9c:\td503201f \tnop\n  a0:\tb9400041 \tldr\tw1, [x2]\n  a4:\t372fffe1 \ttbnz\tw1, #5, a0 <puts+0x20>\n  a8:\tb9000083 \tstr\tw3, [x4]\n  ac:\t39400003 \tldrb\tw3, [x0]\n  b0:\t35ffff43 \tcbnz\tw3, 98 <puts+0x18>\n  b4:\td65f03c0 \tret\n  b8:\td503201f \tnop\n  bc:\td503201f \tnop\n\n00000000000000c0 <firmware_main>:\n  c0:\ta9bf7bfd \tstp\tx29, x30, [sp, #-16]!\n  c4:\t9020000e \tadrp\tx14, 40000000 <test_data>\n  c8:\td28ef100 \tmov\tx0, #0x7788                \t// #30600\n  cc:\t910003fd \tmov\tx29, sp\n  d0:\tf94001c1 \tldr\tx1, [x14]\n  d4:\tf2aaacc0 \tmovk\tx0, #0x5566, lsl #16\n  d8:\tf2c66880 \tmovk\tx0, #0x3344, lsl #32\n  dc:\t90200007 \tadrp\tx7, 40000000 <test_data>\n  e0:\tf2e22440 \tmovk\tx0, #0x1122, lsl #48\n  e4:\t52800002 \tmov\tw2, #0x0                   \t// #0\n  e8:\teb00003f \tcmp\tx1, x0\n  ec:\t54000081 \tb.ne\tfc <firmware_main+0x3c>  // b.any\n  f0:\tf94004e0 \tldr\tx0, [x7, #8]\n  f4:\tf100001f \tcmp\tx0, #0x0\n  f8:\t1a9f17e2 \tcset\tw2, eq\t// eq = none\n  fc:\td5384246 \tmrs\tx6, currentel\n 100:\t910003e5 \tmov\tx5, sp\n 104:\td53800a8 \tmrs\tx8, mpidr_el1\n 108:\td53e100d \tmrs\tx13, sctlr_el3\n 10c:\taa1f03e9 \tmov\tx9, xzr\n 110:\tb940012a \tldr\tw10, [x9]\n 114:\t2a2a03eb \tmvn\tw11, w10\n 118:\tb900012b \tstr\tw11, [x9]\n 11c:\td5033f9f \tdsb\tsy\n 120:\tb940012c \tldr\tw12, [x9]\n 124:\t6b0c015f \tcmp\tw10, w12\n 128:\t1a9f17ef \tcset\tw15, eq\t// eq = none\n 12c:\td2800603 \tmov\tx3, #0x30                  \t// #48\n 130:\t5280ffec \tmov\tw12, #0x7ff                 \t// #2047\n 134:\tf2a12003 \tmovk\tx3, #0x900, lsl #16\n 138:\taa0303e0 \tmov\tx0, x3\n 13c:\t528001ab \tmov\tw11, #0xd                   \t// #13\n 140:\t910020e1 \tadd\tx1, x7, #0x8\n 144:\t52800024 \tmov\tw4, #0x1                   \t// #1\n 148:\t52800c0a \tmov\tw10, #0x60                  \t// #96\n 14c:\tb800841f \tstr\twzr, [x0], #8\n 150:\t52802029 \tmov\tw9, #0x101                 \t// #257\n 154:\tb900087f \tstr\twzr, [x3, #8]\n 158:\tf10030df \tcmp\tx6, #0xc\n 15c:\tb9000c0c \tstr\tw12, [x0, #12]\n 160:\t4a040042 \teor\tw2, w2, w4\n 164:\tb81ec00b \tstur\tw11, [x0, #-20]\n 168:\tb81f0004 \tstur\tw4, [x0, #-16]\n 16c:\t1a9f07e4 \tcset\tw4, ne\t// ne = any\n 170:\tb81f400a \tstur\tw10, [x0, #-12]\n 174:\t2a020082 \torr\tw2, w4, w2\n 178:\tb9000069 \tstr\tw9, [x3]\n 17c:\tf9000426 \tstr\tx6, [x1, #8]\n 180:\tf9000825 \tstr\tx5, [x1, #16]\n 184:\tf9000c28 \tstr\tx8, [x1, #24]\n 188:\tf900102d \tstr\tx13, [x1, #32]\n 18c:\t350000c2 \tcbnz\tw2, 1a4 <firmware_main+0xe4>\n 190:\t929fffe1 \tmov\tx1, #0xffffffffffff0000    \t// #-65536\n 194:\tf2b7ffe1 \tmovk\tx1, #0xbfff, lsl #16\n 198:\t8b0100a1 \tadd\tx1, x5, x1\n 19c:\tf140403f \tcmp\tx1, #0x10, lsl #12\n 1a0:\t540000e9 \tb.ls\t1bc <firmware_main+0xfc>  // b.plast\n 1a4:\t90000000 \tadrp\tx0, 0 <_start>\n 1a8:\t91096000 \tadd\tx0, x0, #0x258\n 1ac:\t97ffffb5 \tbl\t80 <puts>\n 1b0:\td503205f \twfe\n 1b4:\td503205f \twfe\n 1b8:\t17fffffe \tb\t1b0 <firmware_main+0xf0>\n 1bc:\t92400ca1 \tand\tx1, x5, #0xf\n 1c0:\td28200a2 \tmov\tx2, #0x1005                \t// #4101\n 1c4:\t8a0201ad \tand\tx13, x13, x2\n 1c8:\t92405d08 \tand\tx8, x8, #0xffffff\n 1cc:\taa0d0021 \torr\tx1, x1, x13\n 1d0:\taa080021 \torr\tx1, x1, x8\n 1d4:\tf100003f \tcmp\tx1, #0x0\n 1d8:\t7a4009e4 \tccmp\tw15, #0x0, #0x4, eq\t// eq = none\n 1dc:\t54fffe40 \tb.eq\t1a4 <firmware_main+0xe4>  // b.none\n 1e0:\tb85ec001 \tldur\tw1, [x0, #-20]\n 1e4:\t6b0b003f \tcmp\tw1, w11\n 1e8:\t54fffde1 \tb.ne\t1a4 <firmware_main+0xe4>  // b.any\n 1ec:\tb85f0001 \tldur\tw1, [x0, #-16]\n 1f0:\t7100043f \tcmp\tw1, #0x1\n 1f4:\t54fffd81 \tb.ne\t1a4 <firmware_main+0xe4>  // b.any\n 1f8:\tb85f4000 \tldur\tw0, [x0, #-12]\n 1fc:\t6b0a001f \tcmp\tw0, w10\n 200:\t54fffd21 \tb.ne\t1a4 <firmware_main+0xe4>  // b.any\n 204:\tb9400060 \tldr\tw0, [x3]\n 208:\t6b09001f \tcmp\tw0, w9\n 20c:\t54fffcc1 \tb.ne\t1a4 <firmware_main+0xe4>  // b.any\n 210:\tb9400860 \tldr\tw0, [x3, #8]\n 214:\t35fffc80 \tcbnz\tw0, 1a4 <firmware_main+0xe4>\n 218:\td29b5b40 \tmov\tx0, #0xdada                \t// #56026\n 21c:\tf2bb5b40 \tmovk\tx0, #0xdada, lsl #16\n 220:\tf2db5b40 \tmovk\tx0, #0xdada, lsl #32\n 224:\tf2fb5b40 \tmovk\tx0, #0xdada, lsl #48\n 228:\tf90001c0 \tstr\tx0, [x14]\n 22c:\td2961600 \tmov\tx0, #0xb0b0                \t// #45232\n 230:\tf2b61600 \tmovk\tx0, #0xb0b0, lsl #16\n 234:\tf2d61600 \tmovk\tx0, #0xb0b0, lsl #32\n 238:\tf2f61600 \tmovk\tx0, #0xb0b0, lsl #48\n 23c:\tf90004e0 \tstr\tx0, [x7, #8]\n 240:\td5033f9f \tdsb\tsy\n 244:\t90000000 \tadrp\tx0, 0 <_start>\n 248:\t9109a000 \tadd\tx0, x0, #0x268\n 24c:\t97ffff8d \tbl\t80 <puts>\n 250:\td503205f \twfe\n 254:\t17ffffd8 \tb\t1b4 <firmware_main+0xf4>\n 258:\t45474954 \t.word\t0x45474954\n 25c:\t48432d52 \t.word\t0x48432d52\n 260:\t41462034 \t.word\t0x41462034\n 264:\t000a4c49 \t.word\t0x000a4c49\n 268:\t45474954 \t.word\t0x45474954\n 26c:\t48432d52 \t.word\t0x48432d52\n 270:\t57462034 \t.word\t0x57462034\n 274:\t6168733d \t.word\t0x6168733d\n 278:\t3a363532 \t.word\t0x3a363532\n 27c:\t62626637 \t.word\t0x62626637\n 280:\t62353030 \t.word\t0x62353030\n 284:\t61333564 \t.word\t0x61333564\n 288:\t66336633 \t.word\t0x66336633\n 28c:\t64653261 \t.word\t0x64653261\n 290:\t33396130 \t.word\t0x33396130\n 294:\t31383133 \t.word\t0x31383133\n 298:\t64303565 \t.word\t0x64303565\n 29c:\t36613762 \t.word\t0x36613762\n 2a0:\t39666662 \t.word\t0x39666662\n 2a4:\t62616337 \t.word\t0x62616337\n 2a8:\t65633837 \t.word\t0x65633837\n 2ac:\t39323439 \t.word\t0x39323439\n 2b0:\t63373535 \t.word\t0x63373535\n 2b4:\t38396263 \t.word\t0x38396263\n 2b8:\t37643831 \t.word\t0x37643831\n 2bc:\t55504320 \t.word\t0x55504320\n 2c0:\t4c452030 \t.word\t0x4c452030\n 2c4:\t4e492033 \t.word\t0x4e492033\n 2c8:\t4f3d5449 \t.word\t0x4f3d5449\n 2cc:\t4155204b \t.word\t0x4155204b\n 2d0:\t20305452 \t.word\t0x20305452\n 2d4:\t3d474643 \t.word\t0x3d474643\n 2d8:\t52204b4f \t.word\t0x52204b4f\n 2dc:\t523d4d4f \t.word\t0x523d4d4f\n 2e0:\t00000a4f \t.word\t0x00000a4f\n 2e4:\t00000000 \t.word\t0x00000000\n"
+  }
+]
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/fixture-1/disassembly.txt", "bytes": 6979, "sha256": "3c88fc6c710d9f78ba4f8dde765135e65429ef9dde285ad97fb08dbe3f969abb", "bundle": "firmware-inspection.log"} =====
+
+/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.elf:     file format elf64-littleaarch64
+
+
+Disassembly of section .text:
+
+0000000000000000 <_start>:
+   0:	d5034fdf 	msr	daifset, #0xf
+   4:	58000260 	ldr	x0, 50 <_start+0x50>
+   8:	9100001f 	mov	sp, x0
+   c:	58000260 	ldr	x0, 58 <_start+0x58>
+  10:	58000281 	ldr	x1, 60 <_start+0x60>
+  14:	580002a2 	ldr	x2, 68 <_start+0x68>
+  18:	eb02003f 	cmp	x1, x2
+  1c:	54000082 	b.cs	2c <_start+0x2c>  // b.hs, b.nlast
+  20:	f8408403 	ldr	x3, [x0], #8
+  24:	f8008423 	str	x3, [x1], #8
+  28:	17fffffc 	b	18 <_start+0x18>
+  2c:	58000221 	ldr	x1, 70 <_start+0x70>
+  30:	58000242 	ldr	x2, 78 <_start+0x78>
+  34:	eb02003f 	cmp	x1, x2
+  38:	54000062 	b.cs	44 <_start+0x44>  // b.hs, b.nlast
+  3c:	f800843f 	str	xzr, [x1], #8
+  40:	17fffffd 	b	34 <_start+0x34>
+  44:	9400001f 	bl	c0 <firmware_main>
+  48:	d503205f 	wfe
+  4c:	17ffffff 	b	48 <_start+0x48>
+  50:	40020000 	.word	0x40020000
+  54:	00000000 	.word	0x00000000
+  58:	000002e8 	.word	0x000002e8
+  5c:	00000000 	.word	0x00000000
+  60:	40000000 	.word	0x40000000
+  64:	00000000 	.word	0x00000000
+  68:	40000008 	.word	0x40000008
+  6c:	00000000 	.word	0x00000000
+  70:	40000008 	.word	0x40000008
+  74:	00000000 	.word	0x00000000
+  78:	40000030 	.word	0x40000030
+  7c:	00000000 	.word	0x00000000
+
+0000000000000080 <puts>:
+  80:	39400003 	ldrb	w3, [x0]
+  84:	34000183 	cbz	w3, b4 <puts+0x34>
+  88:	d2800302 	mov	x2, #0x18                  	// #24
+  8c:	f2a12002 	movk	x2, #0x900, lsl #16
+  90:	d1006044 	sub	x4, x2, #0x18
+  94:	d503201f 	nop
+  98:	91000400 	add	x0, x0, #0x1
+  9c:	d503201f 	nop
+  a0:	b9400041 	ldr	w1, [x2]
+  a4:	372fffe1 	tbnz	w1, #5, a0 <puts+0x20>
+  a8:	b9000083 	str	w3, [x4]
+  ac:	39400003 	ldrb	w3, [x0]
+  b0:	35ffff43 	cbnz	w3, 98 <puts+0x18>
+  b4:	d65f03c0 	ret
+  b8:	d503201f 	nop
+  bc:	d503201f 	nop
+
+00000000000000c0 <firmware_main>:
+  c0:	a9bf7bfd 	stp	x29, x30, [sp, #-16]!
+  c4:	9020000e 	adrp	x14, 40000000 <test_data>
+  c8:	d28ef100 	mov	x0, #0x7788                	// #30600
+  cc:	910003fd 	mov	x29, sp
+  d0:	f94001c1 	ldr	x1, [x14]
+  d4:	f2aaacc0 	movk	x0, #0x5566, lsl #16
+  d8:	f2c66880 	movk	x0, #0x3344, lsl #32
+  dc:	90200007 	adrp	x7, 40000000 <test_data>
+  e0:	f2e22440 	movk	x0, #0x1122, lsl #48
+  e4:	52800002 	mov	w2, #0x0                   	// #0
+  e8:	eb00003f 	cmp	x1, x0
+  ec:	54000081 	b.ne	fc <firmware_main+0x3c>  // b.any
+  f0:	f94004e0 	ldr	x0, [x7, #8]
+  f4:	f100001f 	cmp	x0, #0x0
+  f8:	1a9f17e2 	cset	w2, eq	// eq = none
+  fc:	d5384246 	mrs	x6, currentel
+ 100:	910003e5 	mov	x5, sp
+ 104:	d53800a8 	mrs	x8, mpidr_el1
+ 108:	d53e100d 	mrs	x13, sctlr_el3
+ 10c:	aa1f03e9 	mov	x9, xzr
+ 110:	b940012a 	ldr	w10, [x9]
+ 114:	2a2a03eb 	mvn	w11, w10
+ 118:	b900012b 	str	w11, [x9]
+ 11c:	d5033f9f 	dsb	sy
+ 120:	b940012c 	ldr	w12, [x9]
+ 124:	6b0c015f 	cmp	w10, w12
+ 128:	1a9f17ef 	cset	w15, eq	// eq = none
+ 12c:	d2800603 	mov	x3, #0x30                  	// #48
+ 130:	5280ffec 	mov	w12, #0x7ff                 	// #2047
+ 134:	f2a12003 	movk	x3, #0x900, lsl #16
+ 138:	aa0303e0 	mov	x0, x3
+ 13c:	528001ab 	mov	w11, #0xd                   	// #13
+ 140:	910020e1 	add	x1, x7, #0x8
+ 144:	52800024 	mov	w4, #0x1                   	// #1
+ 148:	52800c0a 	mov	w10, #0x60                  	// #96
+ 14c:	b800841f 	str	wzr, [x0], #8
+ 150:	52802029 	mov	w9, #0x101                 	// #257
+ 154:	b900087f 	str	wzr, [x3, #8]
+ 158:	f10030df 	cmp	x6, #0xc
+ 15c:	b9000c0c 	str	w12, [x0, #12]
+ 160:	4a040042 	eor	w2, w2, w4
+ 164:	b81ec00b 	stur	w11, [x0, #-20]
+ 168:	b81f0004 	stur	w4, [x0, #-16]
+ 16c:	1a9f07e4 	cset	w4, ne	// ne = any
+ 170:	b81f400a 	stur	w10, [x0, #-12]
+ 174:	2a020082 	orr	w2, w4, w2
+ 178:	b9000069 	str	w9, [x3]
+ 17c:	f9000426 	str	x6, [x1, #8]
+ 180:	f9000825 	str	x5, [x1, #16]
+ 184:	f9000c28 	str	x8, [x1, #24]
+ 188:	f900102d 	str	x13, [x1, #32]
+ 18c:	350000c2 	cbnz	w2, 1a4 <firmware_main+0xe4>
+ 190:	929fffe1 	mov	x1, #0xffffffffffff0000    	// #-65536
+ 194:	f2b7ffe1 	movk	x1, #0xbfff, lsl #16
+ 198:	8b0100a1 	add	x1, x5, x1
+ 19c:	f140403f 	cmp	x1, #0x10, lsl #12
+ 1a0:	540000e9 	b.ls	1bc <firmware_main+0xfc>  // b.plast
+ 1a4:	90000000 	adrp	x0, 0 <_start>
+ 1a8:	91096000 	add	x0, x0, #0x258
+ 1ac:	97ffffb5 	bl	80 <puts>
+ 1b0:	d503205f 	wfe
+ 1b4:	d503205f 	wfe
+ 1b8:	17fffffe 	b	1b0 <firmware_main+0xf0>
+ 1bc:	92400ca1 	and	x1, x5, #0xf
+ 1c0:	d28200a2 	mov	x2, #0x1005                	// #4101
+ 1c4:	8a0201ad 	and	x13, x13, x2
+ 1c8:	92405d08 	and	x8, x8, #0xffffff
+ 1cc:	aa0d0021 	orr	x1, x1, x13
+ 1d0:	aa080021 	orr	x1, x1, x8
+ 1d4:	f100003f 	cmp	x1, #0x0
+ 1d8:	7a4009e4 	ccmp	w15, #0x0, #0x4, eq	// eq = none
+ 1dc:	54fffe40 	b.eq	1a4 <firmware_main+0xe4>  // b.none
+ 1e0:	b85ec001 	ldur	w1, [x0, #-20]
+ 1e4:	6b0b003f 	cmp	w1, w11
+ 1e8:	54fffde1 	b.ne	1a4 <firmware_main+0xe4>  // b.any
+ 1ec:	b85f0001 	ldur	w1, [x0, #-16]
+ 1f0:	7100043f 	cmp	w1, #0x1
+ 1f4:	54fffd81 	b.ne	1a4 <firmware_main+0xe4>  // b.any
+ 1f8:	b85f4000 	ldur	w0, [x0, #-12]
+ 1fc:	6b0a001f 	cmp	w0, w10
+ 200:	54fffd21 	b.ne	1a4 <firmware_main+0xe4>  // b.any
+ 204:	b9400060 	ldr	w0, [x3]
+ 208:	6b09001f 	cmp	w0, w9
+ 20c:	54fffcc1 	b.ne	1a4 <firmware_main+0xe4>  // b.any
+ 210:	b9400860 	ldr	w0, [x3, #8]
+ 214:	35fffc80 	cbnz	w0, 1a4 <firmware_main+0xe4>
+ 218:	d29b5b40 	mov	x0, #0xdada                	// #56026
+ 21c:	f2bb5b40 	movk	x0, #0xdada, lsl #16
+ 220:	f2db5b40 	movk	x0, #0xdada, lsl #32
+ 224:	f2fb5b40 	movk	x0, #0xdada, lsl #48
+ 228:	f90001c0 	str	x0, [x14]
+ 22c:	d2961600 	mov	x0, #0xb0b0                	// #45232
+ 230:	f2b61600 	movk	x0, #0xb0b0, lsl #16
+ 234:	f2d61600 	movk	x0, #0xb0b0, lsl #32
+ 238:	f2f61600 	movk	x0, #0xb0b0, lsl #48
+ 23c:	f90004e0 	str	x0, [x7, #8]
+ 240:	d5033f9f 	dsb	sy
+ 244:	90000000 	adrp	x0, 0 <_start>
+ 248:	9109a000 	add	x0, x0, #0x268
+ 24c:	97ffff8d 	bl	80 <puts>
+ 250:	d503205f 	wfe
+ 254:	17ffffd8 	b	1b4 <firmware_main+0xf4>
+ 258:	45474954 	.word	0x45474954
+ 25c:	48432d52 	.word	0x48432d52
+ 260:	41462034 	.word	0x41462034
+ 264:	000a4c49 	.word	0x000a4c49
+ 268:	45474954 	.word	0x45474954
+ 26c:	48432d52 	.word	0x48432d52
+ 270:	57462034 	.word	0x57462034
+ 274:	6168733d 	.word	0x6168733d
+ 278:	3a363532 	.word	0x3a363532
+ 27c:	62626637 	.word	0x62626637
+ 280:	62353030 	.word	0x62353030
+ 284:	61333564 	.word	0x61333564
+ 288:	66336633 	.word	0x66336633
+ 28c:	64653261 	.word	0x64653261
+ 290:	33396130 	.word	0x33396130
+ 294:	31383133 	.word	0x31383133
+ 298:	64303565 	.word	0x64303565
+ 29c:	36613762 	.word	0x36613762
+ 2a0:	39666662 	.word	0x39666662
+ 2a4:	62616337 	.word	0x62616337
+ 2a8:	65633837 	.word	0x65633837
+ 2ac:	39323439 	.word	0x39323439
+ 2b0:	63373535 	.word	0x63373535
+ 2b4:	38396263 	.word	0x38396263
+ 2b8:	37643831 	.word	0x37643831
+ 2bc:	55504320 	.word	0x55504320
+ 2c0:	4c452030 	.word	0x4c452030
+ 2c4:	4e492033 	.word	0x4e492033
+ 2c8:	4f3d5449 	.word	0x4f3d5449
+ 2cc:	4155204b 	.word	0x4155204b
+ 2d0:	20305452 	.word	0x20305452
+ 2d4:	3d474643 	.word	0x3d474643
+ 2d8:	52204b4f 	.word	0x52204b4f
+ 2dc:	523d4d4f 	.word	0x523d4d4f
+ 2e0:	00000a4f 	.word	0x00000a4f
+ 2e4:	00000000 	.word	0x00000000
+
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/fixture-1/manifest.json", "bytes": 2667, "sha256": "e8e70e40ba10f828d3be575725f42c3b9279c16c44392f9dec39cc69ee73884b", "bundle": "firmware-inspection.log"} =====
+{
+  "build_id": "sha256:7fbb005bd53a3f3fa2ed0a933181e50db7a6bff97cab78ce9429557ccb9818d7",
+  "compiler": "/home/oops/workspace/build/tmp/work/cortexa57-poky-linux/libedit/20230828-3.1/recipe-sysroot-native/usr/bin/aarch64-poky-linux/aarch64-poky-linux-gcc",
+  "compiler_sha256": "7848a1aa5883d8a9c7d61f11f664f918226b94cd25894cfe4ef7d8b99ef64474",
+  "compiler_version": "aarch64-poky-linux-gcc (GCC) 13.4.0\nCopyright (C) 2023 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+  "flags": [
+    "-O2",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-march=armv8-a",
+    "-mgeneral-regs-only",
+    "-mstrict-align",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-fno-stack-protector",
+    "-fno-pie",
+    "-fno-pic",
+    "-fno-unwind-tables",
+    "-fno-asynchronous-unwind-tables",
+    "-nostdlib",
+    "-nostartfiles",
+    "-static",
+    "-no-pie"
+  ],
+  "source_files": {
+    "start.S": "4e04d7a7f24a93963681c23f223a2e5b8023773b0138f3a4886c6c74ab49fd50",
+    "main.c": "aca3ed3a16e00f7f24c1617eea83b6a413eda707e896a885becc82fafa624ac1",
+    "tiger-minboot.ld": "3b24e7bb31a41271e8d0a682b0eb509b61cc5ab0a92aca5d0df03cc355627640",
+    "COPYING.MIT": "314a2ef2e4e48871ebdae4aad8c9e598041458abbab3a3f9accef0b74e9b09e5"
+  },
+  "symbols": {
+    "_start": 0,
+    "puts": 128,
+    "firmware_main": 192,
+    "__data_load": 744,
+    "__data_start": 1073741824,
+    "test_data": 1073741824,
+    "__bss_start": 1073741832,
+    "__data_end": 1073741832,
+    "test_bss": 1073741832,
+    "observed_el": 1073741840,
+    "observed_sp": 1073741848,
+    "observed_mpidr": 1073741856,
+    "observed_sctlr": 1073741864,
+    "__bss_end": 1073741872,
+    "__stack_bottom": 1073807360,
+    "__stack_top": 1073872896
+  },
+  "outputs": {
+    "tiger-minboot.elf": {
+      "sha256": "b80e02248b16f19121e123beae2aee26f74454fdaaf54bac9cb45e2de76edf57",
+      "bytes": 132448
+    },
+    "tiger-minboot.bin": {
+      "sha256": "2b67c2bfb9d2fcbf3fd1880a1c1bf3ff09ece73b8bcbf5235116477fd2714376",
+      "bytes": 752
+    },
+    "tiger-minboot.map": {
+      "sha256": "63daf43f04104354e42c4090fb73e43370479fc40bd6a5241b3f0f52c610fa3d",
+      "bytes": 3649
+    },
+    "readelf.txt": {
+      "sha256": "e7ced196248f6f01daa00fbec2c726b14086271bd9766cea9f4b421fdac0c0df",
+      "bytes": 2969
+    },
+    "nm.txt": {
+      "sha256": "95cba225fdd9ce26231d786e8de030afa3fe2bc23c3d317b5db1848184ae2c9a",
+      "bytes": 488
+    },
+    "disassembly.txt": {
+      "sha256": "3c88fc6c710d9f78ba4f8dde765135e65429ef9dde285ad97fb08dbe3f969abb",
+      "bytes": 6979
+    }
+  }
+}
+
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/fixture-1/nm.txt", "bytes": 488, "sha256": "95cba225fdd9ce26231d786e8de030afa3fe2bc23c3d317b5db1848184ae2c9a", "bundle": "firmware-inspection.log"} =====
+0000000000000000 T _start
+0000000000000080 t puts
+00000000000000c0 T firmware_main
+00000000000002e8 A __data_load
+0000000040000000 D __data_start
+0000000040000000 D test_data
+0000000040000008 B __bss_start
+0000000040000008 D __data_end
+0000000040000008 B test_bss
+0000000040000010 B observed_el
+0000000040000018 B observed_sp
+0000000040000020 B observed_mpidr
+0000000040000028 B observed_sctlr
+0000000040000030 B __bss_end
+0000000040010000 A __stack_bottom
+0000000040020000 A __stack_top
+
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/fixture-1/readelf.txt", "bytes": 2969, "sha256": "e7ced196248f6f01daa00fbec2c726b14086271bd9766cea9f4b421fdac0c0df", "bundle": "firmware-inspection.log"} =====
+ELF Header:
+  Magic:   7f 45 4c 46 02 01 01 00 00 00 00 00 00 00 00 00 
+  Class:                             ELF64
+  Data:                              2's complement, little endian
+  Version:                           1 (current)
+  OS/ABI:                            UNIX - System V
+  ABI Version:                       0
+  Type:                              EXEC (Executable file)
+  Machine:                           AArch64
+  Version:                           0x1
+  Entry point address:               0x0
+  Start of program headers:          64 (bytes into file)
+  Start of section headers:          132000 (bytes into file)
+  Flags:                             0x0
+  Size of this header:               64 (bytes)
+  Size of program headers:           56 (bytes)
+  Number of program headers:         3
+  Size of section headers:           64 (bytes)
+  Number of section headers:         7
+  Section header string table index: 6
+
+Section Headers:
+  [Nr] Name              Type             Address           Offset
+       Size              EntSize          Flags  Link  Info  Align
+  [ 0]                   NULL             0000000000000000  00000000
+       0000000000000000  0000000000000000           0     0     0
+  [ 1] .text             PROGBITS         0000000000000000  00010000
+       00000000000002e8  0000000000000000  AX       0     0     16
+  [ 2] .data             PROGBITS         0000000040000000  00020000
+       0000000000000008  0000000000000000  WA       0     0     8
+  [ 3] .bss              NOBITS           0000000040000008  00020008
+       0000000000000028  0000000000000000  WA       0     0     8
+  [ 4] .symtab           SYMTAB           0000000000000000  00020008
+       00000000000002a0  0000000000000018           5    13     8
+  [ 5] .strtab           STRTAB           0000000000000000  000202a8
+       00000000000000ca  0000000000000000           0     0     1
+  [ 6] .shstrtab         STRTAB           0000000000000000  00020372
+       000000000000002c  0000000000000000           0     0     1
+Key to Flags:
+  W (write), A (alloc), X (execute), M (merge), S (strings), I (info),
+  L (link order), O (extra OS processing required), G (group), T (TLS),
+  C (compressed), x (unknown), o (OS specific), E (exclude),
+  D (mbind), p (processor specific)
+
+Program Headers:
+  Type           Offset             VirtAddr           PhysAddr
+                 FileSiz            MemSiz              Flags  Align
+  LOAD           0x0000000000010000 0x0000000000000000 0x0000000000000000
+                 0x00000000000002e8 0x00000000000002e8  R E    0x10000
+  LOAD           0x0000000000020000 0x0000000040000000 0x00000000000002e8
+                 0x0000000000000008 0x0000000000000030  RW     0x10000
+  GNU_STACK      0x0000000000000000 0x0000000000000000 0x0000000000000000
+                 0x0000000000000000 0x0000000000000000  RW     0x10
+
+ Section to Segment mapping:
+  Segment Sections...
+   00     .text 
+   01     .data .bss 
+   02     
+
+===== END FILE =====
