@@ -9,8 +9,7 @@
 | A-003 | [投资计划表拆分与Git版本管理](A-003-portfolio-versioning.md) | OPC 版本说明；asset-compass 成果物仓库：`portfolio/实操记录.xlsx`、`portfolio/定投组合蒙特卡洛模拟_2026-2036.xlsx`；本机路径见正文 | investment-advisor | [T-011](../TASKS.md#t-011拆分实操记录并改用git版本管理) | v2.0；成果物 main 最终提交 `4d19e7cf6c90b0e73672e91e9bf39fa3175a60d8`，文件 SHA-256 见正文 | approved（结构及版本管理安排） | [D-007](../DECISIONS.md#d-007确认拆分实操记录并仅用git保存版本) |
 | A-004 | [10月期中投资复盘核查记录](A-004-current-review.md) | OPC 结论与口径；asset-compass 成果物仓库 `portfolio/analysis/latest.json` 为唯一当前详细复盘 | investment-advisor | [T-012](../TASKS.md#t-012核对10月期中投入并查询btc和usdt报价)、[T-013](../TASKS.md#t-013更新实操表当前价格与汇率) | v0.5；本期文件版本 `3ca8ac65e834f5fe64d7da663a0ff4c0d01d4042`，价格及分析内容未变；仓库当前基线另见 WORKSPACE | draft（期中核查及授权报价更新已完成，真实月度收益尚未验证） | 尚无整体批准；跟踪与留存授权见 D-005、D-007，本次价格写回见 T-013 |
 | A-005 | [投资组合月度更新与复盘流程](A-005-monthly-review-workflow.md) | OPC 治理流程；实操表及详细结果入口见正文，本期文件版本 `3ca8ac65e834f5fe64d7da663a0ff4c0d01d4042`；仓库当前基线另见 WORKSPACE，T-014 原核对版本保留在成果物恢复标签中 | investment-advisor | [T-014](../TASKS.md#t-014整理月度更新与投资复盘流程文档) | v1.0；整理用户更新清单、收益口径、ETF 检查、交付结构及 Git 留存 | draft（执行指南已形成，沿用已有确认） | 尚无单独整体批准；生成文档授权见 T-014，既定分工与规则见 D-005、A-002 v1.0 |
-
-| A-006 | [ETF底仓与止盈回补策略历史回测记录](A-006-etf-exit-backtest.md) | OPC 核查摘要；成果物仓库 `research/etf-exit-backtest/` 保存报告、数据、脚本和图表 | investment-advisor | [T-019](../TASKS.md#t-019回测etf底仓与止盈回补策略) | v1.0；成果物 main `3042b530a4ae4bd4d1005aa4386d853b8c7339e5` | draft（历史研究及作者验证完成） | 用户授权回测，未批准策略替换 |
+| A-006 | [ETF底仓与止盈回补策略历史回测记录](A-006-etf-exit-backtest.md) | OPC 核查摘要；成果物仓库 `research/etf-exit-backtest/` 保存报告、决定、数据、脚本和图表 | investment-advisor | [T-019](../TASKS.md#t-019回测etf底仓与止盈回补策略)、[T-020](../TASKS.md#t-020记录回测结论并同步双仓库远程) | v1.1；成果物 main `6a42b987dbbea912e9a7f6de47741580cea4e3f0`，原计算结果不变 | draft（历史研究及作者验证）；暂不启用决定已确认 | [D-008](../DECISIONS.md#d-008维持现行准则并暂不启用etf止盈回补) 仅确认维持现行准则、暂不启用候选 |
 
 OPC 治理与协作成果使用当前项目 `artifacts/` 内的正文链接；产品代码和直接业务交付物使用“成果物仓库 + 仓库内路径”，并记录其最终合并提交。可移动分支名不能代替精确提交。
 
