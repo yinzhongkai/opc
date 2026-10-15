@@ -4,17 +4,18 @@
 - 成果 ID：A-004
 - 负责人：investment-advisor
 - 关联任务：[T-012](../TASKS.md#t-012核对10月期中投入并查询btc和usdt报价)、[T-013](../TASKS.md#t-013更新实操表当前价格与汇率)
-- 版本：0.4
-- 更新日期：2026-10-13（Asia/Shanghai）
+- 版本：0.5
+- 更新日期：2026-10-15（Asia/Shanghai）
 - 状态：draft；本期核查已完成，收益口径及风险条件仍有待补输入。
 - 适用范围：2026 年 10 月期中投入核对、当前报价参考估值、投资纪律与口径检查；个人持仓、余额和详细计算保存在成果物仓库。
 - 来源及输入版本：用户在 T-012 明确 USDT 兑人民币含义，随后要求将最新价格写回实操表；更新后 `portfolio/实操记录.xlsx` 为 28556 字节，SHA-256 `1fa0e1a9603837b2c7c6bc63025ee9e15ce1cea475917c2bbb704a1639267963`，表格提交 `6bda784c9d825d13eec30ed85f2b048116dff973`；A-001 v0.7、A-002 v1.0、D-005/D-007。
-- 存储位置：本记录在 OPC；详细复盘为 `git@github.com:yinzhongkai/asset-compass.git` 的 `portfolio/analysis/latest.json`，本机 `C:/Users/YinZh/Documents/workspace/asset-compass`，当前 main 提交 `3ca8ac65e834f5fe64d7da663a0ff4c0d01d4042`；T-013 原最终提交 `8a9a052f70f5a57ab768041aa42e0b04209c3a60` 保留在成果物恢复标签中。
+- 存储位置：本记录在 OPC；详细复盘为 `git@github.com:yinzhongkai/asset-compass.git` 的 `portfolio/analysis/latest.json`，本机 `C:/Users/YinZh/Documents/workspace/asset-compass`，本期文件版本为 `3ca8ac65e834f5fe64d7da663a0ff4c0d01d4042`；整个仓库当前基线另见 WORKSPACE。T-013 原最终提交 `8a9a052f70f5a57ab768041aa42e0b04209c3a60` 保留在成果物恢复标签中。
 - 批准依据：没有分析成果整体批准。本次请求明确授权价格写回及对应估值更新，不改变已确认投资准则。
 - 版本记录：2026-10-13，v0.1，首次期中复盘，原表未修改；治理版本在 OPC `8b4c040a3d370367eab8bcf5c3aa00f07b250e0e`、详细结果在成果物 `09a2ea6e839cab902a2c5d78699bfd2fa0fa61d3` 可定位。
 - 版本记录：同日 v0.2，按 T-013 写回最新报价，区分美元和 USDT 汇率并更新相关估值。当前记录覆盖更新，历史由 Git 追溯，不另建逐月副本。
 - 版本记录：同日 v0.3，T-016 根据用户明确授权压缩 Git 功能历史，仅调整当前精确版本定位；原始输入及报告内旧提交引用仍由不可移动成果物标签 `archive/asset-compass-pre-functional-20261013` 追溯，原 OPC 回执由标签 `archive/asset-compass-opc-pre-functional-20261013` 追溯。两份工作簿和详细报告与整理前逐字节相同，没有重新查询价格、计算新月份或改变结论。
 - 版本记录：同日 v0.4，T-017 将成果物主线说明改为单行，仅迁移当前提交引用；T-016 的成果物头保留在标签 `archive/asset-compass-pre-one-line-messages-20261013`，各提交文件树及作者、时间未变，分析内容与原始输入引用保留。
+- 版本记录：2026-10-15，v0.5，T-019 仅增加独立历史回测研究；本期文件字节未改，明确文件版本与仓库当前基线分别定位，避免把新增研究误记为实操或报价更新。
 
 ## 投入与持仓结论
 
