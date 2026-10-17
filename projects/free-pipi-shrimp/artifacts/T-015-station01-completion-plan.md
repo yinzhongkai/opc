@@ -48,3 +48,7 @@
 - 产品保留已分为文字AI说明、运营流程/检查、实际定时接收的3条单行功能提交；由main@b46e262f0abc34cd19044342668b33d17d3ebcb4以--ff-only合到ef5399b0ec6dc89bc657a65968346f62ad3e4434，目标再次验证、远端完整SHA一致。WORKSPACE仅revision以独立配置提交推进。
 - OPC将历史作者/运营/审校登记和实际接收整理为功能提交f231b37ed46d2109906f9d89926f0f329bb9c82a，将本轮后续计划整理为32a711d5694d9e873f92fadf6b1e5f4003747f88；二者最终文件树与整理前761af95057ffec0d7db8273358dd4b31feb2c6ad完全一致，原意见及归因保持。合入前目标a010b34b6e23dae989561edb834c76c0acc422d9；本轮没有merge commit，全部message一行。完整旧历史bundle及功能映射保存在本机.git/asset-archives/station01-complete-20261018，不写入共享Git。
 - 本记录提交后仍需OPC候选/目标最终验证、快进和远端核对、两仓T-011分支清理；全部通过再从各自最新主线建立T-015同后缀分支，逐名派发。当前不代写planner接收或后三篇任何完成结论。
+
+## T-015派发前最终门槛回执（2026-10-18）
+
+T-011两仓主线目标检查、远端完整SHA及原开发分支本地/远程清理已全部完成：OPC project/free-pipi-shrimp@1249099d3836da0ecd489bcdfd34aeb5bbac3c75，产品main@ef5399b0ec6dc89bc657a65968346f62ad3e4434，WORKSPACE一致，工作树干净，本轮无merge/message均一行。OPC候选及目标框架验证均520本地链接通过，原产品33图像路径/31个对象大小保持；历史完整备份及集成映射留本机。由上述主线建立feature/free-pipi-shrimp/t-015-station01-completion与产品feature/t-015-station01-completion，尚无planner成果。PM完成本次登记、检查与推送后仅派发planner/T-015，其他成员继续等待；T-016～T-020及24张成品均未开始。实际接收和专业结论由执行者写入原任务，不预填。
