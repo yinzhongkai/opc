@@ -91,3 +91,7 @@
 | `92a2a77e74c846d10eda954de18c575bc5d5c50a` | T-011 operations and verification | `4501fad6c07030b885d1a8d107499c049cfebdcc` |
 | `b1587cee657ff494dfc081f005e7ff496020533e` | T-011 operations and verification | `4501fad6c07030b885d1a8d107499c049cfebdcc` |
 | `d39a76cb117791cc609ce2951d9eb7fa8768586e` | T-011 operations and verification | `4501fad6c07030b885d1a8d107499c049cfebdcc` |
+
+## 2026-10-18：过程图与LFS资产清退
+
+用户已明确授权约81MB保留方案并要求同步远程。产品当前main `ee79bd840a361e806cb0371c603a40dafdd3fb2d`，T-011 `696ac1d4c372101da875b3297e2431395d042809`；本轮会移出过程位图及历史LFS引用，原先各轮“树完全相同”只描述当时维护，不覆盖此次明确的图片清退。完整备份、当前物料范围、提交映射和GitHub服务端待办见 [LFS素材清退记录](T-014-lfs-asset-retention.md)。

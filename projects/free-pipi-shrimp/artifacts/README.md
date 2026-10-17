@@ -1,5 +1,12 @@
 # 项目成果索引
 
+## 当前素材存储定位（2026-10-18，过程图清退）
+
+产品当前主线 `main@ee79bd840a361e806cb0371c603a40dafdd3fb2d`，与WORKSPACE一致；T-011仍在 `feature/t-011-first-publication-package@696ac1d4c372101da875b3297e2431395d042809`，未合入。保留成品/已批准头像/封面模板/当前SVG依赖共33图片路径、31唯一对象、80802395字节，原路径和内容哈希保持。
+
+当前物料入口：产品 `ASSET_STORAGE.md`、`manifests/asset-retention-20261018.json`。以下作者条目及既有阶段SHA保留历史时点；已清退图像和老版本来源由本机完整备份读取，当前物料集合与恢复定位以 [LFS素材清退记录](T-014-lfs-asset-retention.md) 为准。GitHub旧LFS对象实际回收待办理，不把引用集合大小当作账户实测占用。
+
+
 ## 成果物当前版本定位（2026-10-18，T-014 续）
 
 成果物仓库 `git@github.com:yinzhongkai/free-pipi-shrimp.git`，主线为 `main@5313c0d67854b02316c47854c55039009adc63e7`，与 WORKSPACE.revision 一致。以下原负责人条目及阶段小节保留其登记时点；当前固定版本以本节和 [历史整理记录](T-014-history-consolidation.md) 为准。所有原路径、内容哈希和评审／批准范围保持。

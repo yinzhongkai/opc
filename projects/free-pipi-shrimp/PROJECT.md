@@ -40,7 +40,7 @@
 
 ## 交付约定
 
-- [WORKSPACE.yaml](WORKSPACE.yaml) 声明外部独立 Git 工作区：私有远端 `git@github.com:yinzhongkai/free-pipi-shrimp.git`，演进分支 `main`，当前可复现基线 `5313c0d67854b02316c47854c55039009adc63e7`（2026-10-18 按功能整理历史后，文件树与原 `104b533b4bd66825918e2f32871268f31179d876` 完全一致），可移植 checkout 为 `../free-pipi-shrimp`；具体映射和恢复点见 [T-014 历史整理记录](artifacts/T-014-history-consolidation.md)。该声明只记录已验证位置与版本，不自动授予后续联网、切换提交、覆盖修改或推送权限。
+- [WORKSPACE.yaml](WORKSPACE.yaml) 声明外部独立 Git 工作区：私有远端 `git@github.com:yinzhongkai/free-pipi-shrimp.git`，演进分支 `main`，当前可复现基线 `ee79bd840a361e806cb0371c603a40dafdd3fb2d`（2026-10-18 过程图清退后的精简版，成品和必要SVG依赖原字节保持；完整旧资产见T-014备份记录），可移植 checkout 为 `../free-pipi-shrimp`；具体映射和恢复点见 [T-014 历史整理记录](artifacts/T-014-history-consolidation.md)。该声明只记录已验证位置与版本，不自动授予后续联网、切换提交、覆盖修改或推送权限。
 - OPC 的 `artifacts/` 保留正式成果登记、批准依据和必要的轻量预览；任务、决定、状态与交接继续保存在 OPC 项目记录中。外部私库保存原始参考、生成批次、高清素材、工程源文件和大型最终交付物，文件进入外部 `deliverables/` 不等于已经批准或发布。
 - OPC 正式成果登记引用外部资产时，必须记录固定 Git 提交、仓库相对路径和文件 SHA-256；不能只引用可移动的 `main`。账号密码、Cookie、验证码、API Key、访问令牌、登录二维码、私钥和恢复信息不得写入任一仓库或项目记录。
 - 用户保证当前仓库每次只有一个会话执行，前一会话完成或停止后再启动下一会话；框架不实现文件锁或自动调度。
