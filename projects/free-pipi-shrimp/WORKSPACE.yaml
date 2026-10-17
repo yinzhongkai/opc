@@ -3,5 +3,5 @@ workspace:
   driver: git
   repository: git@github.com:yinzhongkai/free-pipi-shrimp.git
   branch: main
-  revision: b46e262f0abc34cd19044342668b33d17d3ebcb4
+  revision: ef5399b0ec6dc89bc657a65968346f62ad3e4434
   checkout: ../free-pipi-shrimp
