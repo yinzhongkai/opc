@@ -1,5 +1,7 @@
 # 项目状态摘要
 
+- Git 历史维护定位（2026-10-18，T-014 续）：成果物当前 `main@5313c0d67854b02316c47854c55039009adc63e7`，WORKSPACE.revision 已对应本次功能归并；T-011 产品分支为 `4501fad6c07030b885d1a8d107499c049cfebdcc`，仍独立保留。仅整理历史，业务事实保留以下原摘要的信息截至点；当前版本与旧 SHA 映射见 [历史整理记录](artifacts/T-014-history-consolidation.md)。
+
 - 汇总日期与信息截至点：2026-10-15；覆盖T-001～T-014、D-001～D-010、H-001～H-009及A-001～A-010。T-006两篇完整稿件draft已接收，产品六个功能提交已快进集成、目标验证并推送main@104b533b4bd66825918e2f32871268f31179d876。按用户本轮有界授权，WORKSPACE仅revision同步，独立提交14e7a51ba72912e614be73e6f96387010cae4bfb；OPC集成及最终验证正在执行，feature保留至两仓全部确认。
 - 维护人：project-manager（按 [PROJECT.md](PROJECT.md) 指定的协调记录维护人）。
 - 当前项目：自由的皮皮虾（项目 ID `free-pipi-shrimp`，目录 `projects/free-pipi-shrimp/`）。

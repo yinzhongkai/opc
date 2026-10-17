@@ -54,3 +54,40 @@
 | `dc4673367017c3b100dc4c3bbe9921ceae3312b5` | T-005 封面模板 | `5404a33758b83fd5aff00ced55a4d893bf700c08` |
 | `2ebbb013396ccdace268e3475678410f5699f62e` | T-005 封面模板 | `5404a33758b83fd5aff00ced55a4d893bf700c08` |
 | `607c571ce84c5f125173906949656fb29beba4d8` | T-005 封面模板 | `5404a33758b83fd5aff00ced55a4d893bf700c08` |
+
+## 2026-10-18：成果物仓库按功能再次整理
+
+- 授权来源：用户在本会话要求“成果物仓库也给我整理一上，要求提交按功能整理压缩下，commit message只有一行”。本轮为既有历史维护，不新增业务功能轮次。
+- 成果物仓库：`git@github.com:yinzhongkai/free-pipi-shrimp.git`，本机 `D:\free-pipi-shrimp`；OPC 为 `D:\opc-free-pipi-shrimp`。
+- 改写前 main：`104b533b4bd66825918e2f32871268f31179d876`；整理后 main：`5313c0d67854b02316c47854c55039009adc63e7`。主线 13 条压缩为 8 条，前四条已独立成模块的初始化、T-003、T-013、T-005 提交原样保留。
+- 改写前 `feature/t-011-first-publication-package`：`d39a76cb117791cc609ce2951d9eb7fa8768586e`；整理后：`4501fad6c07030b885d1a8d107499c049cfebdcc`，独有提交 4 条压缩为 2 条，按 AI 文字说明、完整运营与发布检查包划分；先放入说明模块，再放入使用该说明的运营模块。T-011 仍为开发分支，本轮不合入 main、不删除开发分支。
+- OPC 整理前项目头 `f27160750f0a5c7c4e212631afe3c7140e272139`，T-011 头 `e6cabcd6c6f0042bb8e77a8360a98c814a31b6fd`；仅添加版本定位、维护追踪及 WORKSPACE.revision，同步迁移原 16 条 T-011 治理提交到新的项目头，保留每条原说明与专业记录。OPC 当前维护提交及迁移后的分支头由 Git 历史和执行回执定位。
+- 内容验证：成果物两个最终 Git 树分别与整理前完全相同；主线各功能边界与对应旧阶段树相同；路径、Git blob、全部清单与哈希、图片和工程文件均保持。522 个最终文件中 253 个 LFS 文件对应 162 个唯一对象，共 269324901 字节，实体大小和 SHA-256 全部匹配；80 个 JSON 文件可解析。整理后的全部成果物提交严格只有一行 message，完整新历史零 merge commit。
+- 引用原则：本节和 WORKSPACE 是本轮后的当前定位。原作者、生成、受评、批准和阶段集成 SHA 保留为历史来源，不批量改写受评正文或产品 manifest；归并提交覆盖对应文件，原路径与 SHA-256 不变。旧中间阶段可由下述完整 Git 恢复包精确读取；中间阶段归并不代表各旧中间树与新功能树相同。
+- 业务边界：本轮仅整理 Git 历史和当前版本引用，不借本次维护改写任务、评审、批准或实际发布结论；账号、浏览器草稿、定时发布和手机核验事实不在此轮变更中。
+- 恢复包：删除或改写任何引用前均已创建并通过 `git bundle verify`；不新增远程归档标签，不清理 LFS 对象。
+  - `D:\free-pipi-shrimp\.git\history-backups\pipi-functional-squash-20261018-1isiu76z.bundle`（同名 `.json` 保存原头、功能映射与验证结果）。
+  - `D:\opc-free-pipi-shrimp\.git\history-backups\pipi-functional-squash-20261018-1isiu76z.bundle`（同名 `.json` 保存原头、功能映射与验证结果）。
+- 同步保护：成果物 main 与 T-011 使用显式旧 SHA 的 `--force-with-lease` 原子推送；OPC 项目头与迁移后的 T-011 同样使用两个原头保护、原子同步。任一远程头变化即停止，不覆盖并发修改。框架校验、测试及最终远端核对以本轮执行回执为准。
+
+### 本轮成果物提交映射
+
+| 原提交 | 整理后的功能 | 新提交 |
+|---|---|---|
+| `4d023fdcb6190d710512e98d7c03c790c715b234` | 保留原功能提交 | `4d023fdcb6190d710512e98d7c03c790c715b234` |
+| `b7e90ac756f996cc35d5e7e9186b52e6f2cdedbd` | 保留原功能提交 | `b7e90ac756f996cc35d5e7e9186b52e6f2cdedbd` |
+| `9f5cb8e8a50a161583bc72b5f321e4875aed6fc0` | 保留原功能提交 | `9f5cb8e8a50a161583bc72b5f321e4875aed6fc0` |
+| `5404a33758b83fd5aff00ced55a4d893bf700c08` | 保留原功能提交 | `5404a33758b83fd5aff00ced55a4d893bf700c08` |
+| `cf96f969a4e0ba6fbb95c3d518e0c82fee471047` | feat(T-012): consolidate Sanxingdui visual assets and fixed Git LFS verification | `b915bd69586cddf992cbb6e6a4220bcb3d9184b5` |
+| `974a630c4814be74cd02f812dd5cb49f9f0d5c2d` | feat(T-012): consolidate Sanxingdui visual assets and fixed Git LFS verification | `b915bd69586cddf992cbb6e6a4220bcb3d9184b5` |
+| `d1f42cea3230374640d8f2efdc7329d0f2c7fff5` | feat(T-012): consolidate Sanxingdui visual assets and fixed Git LFS verification | `b915bd69586cddf992cbb6e6a4220bcb3d9184b5` |
+| `db81ecb78c1e3430cc30e7b7cfad4c091dd3ffbb` | feat(T-006): consolidate K3 copy, provenance review and typesetting inputs | `fc68e731eed685a0c36073d3b23fd44449e48e35` |
+| `5c5c934ce419c206120a258027dfabb4620eef0e` | feat(T-006): consolidate K3 copy, provenance review and typesetting inputs | `fc68e731eed685a0c36073d3b23fd44449e48e35` |
+| `db7e1d2d3132d03394472897c8391efb51752728` | feat(T-006): consolidate K3 copy, provenance review and typesetting inputs | `fc68e731eed685a0c36073d3b23fd44449e48e35` |
+| `5f58227db0b340056f1dbbab8752039a72740be2` | feat(T-006): consolidate K3 copy, provenance review and typesetting inputs | `fc68e731eed685a0c36073d3b23fd44449e48e35` |
+| `5af5615d83b59fff85bdbdb50583f825cb5f82ba` | feat(T-006): typeset selected copy across 16 visual pages | `433391754589c43cb9f81e55360bcef958a7374c` |
+| `104b533b4bd66825918e2f32871268f31179d876` | feat(T-006): integrate two complete drafts and operations handoff | `5313c0d67854b02316c47854c55039009adc63e7` |
+| `c589870894cc379ad98689f7e8e79d94dfb6a2e3` | T-011 AI disclosure | `1fa6a4078116a41b8b3090a600244d110c193066` |
+| `92a2a77e74c846d10eda954de18c575bc5d5c50a` | T-011 operations and verification | `4501fad6c07030b885d1a8d107499c049cfebdcc` |
+| `b1587cee657ff494dfc081f005e7ff496020533e` | T-011 operations and verification | `4501fad6c07030b885d1a8d107499c049cfebdcc` |
+| `d39a76cb117791cc609ce2951d9eb7fa8768586e` | T-011 operations and verification | `4501fad6c07030b885d1a8d107499c049cfebdcc` |

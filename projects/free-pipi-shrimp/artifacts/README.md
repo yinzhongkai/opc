@@ -1,5 +1,19 @@
 # 项目成果索引
 
+## 成果物当前版本定位（2026-10-18，T-014 续）
+
+成果物仓库 `git@github.com:yinzhongkai/free-pipi-shrimp.git`，主线为 `main@5313c0d67854b02316c47854c55039009adc63e7`，与 WORKSPACE.revision 一致。以下原负责人条目及阶段小节保留其登记时点；当前固定版本以本节和 [历史整理记录](T-014-history-consolidation.md) 为准。所有原路径、内容哈希和评审／批准范围保持。
+
+| 模块 | 当前固定提交 | 范围 |
+|---|---|---|
+| A-006 视觉资源 | `b915bd69586cddf992cbb6e6a4220bcb3d9184b5` | 已进入 main；原路径 `deliverables/T-012-first-two-visual-assets/v0.2-draft/` |
+| A-008 文案与来源／套版输入 | `fc68e731eed685a0c36073d3b23fd44449e48e35` | 已进入 main；原 T-006 文案及来源路径 |
+| A-009 文字套版 | `433391754589c43cb9f81e55360bcef958a7374c` | 已进入 main；原 `deliverables/T-006-first-two-buffer-plogs/v0.1-typeset-draft/` |
+| A-010 v0.1 完整稿 | `5313c0d67854b02316c47854c55039009adc63e7` | 已进入 main；原 `deliverables/T-006-first-two-buffer-plogs/v0.1-integrated-draft/` |
+| T-011 的 A-010 v0.2 AI 说明 | `1fa6a4078116a41b8b3090a600244d110c193066` | 仍在 `feature/t-011-first-publication-package`；`deliverables/T-011-first-publication-package/v0.2-copy-disclosure-draft/` |
+| T-011 的 A-011 运营与检查包 | `4501fad6c07030b885d1a8d107499c049cfebdcc` | 同一 T-011 分支，未合入 main；`deliverables/T-011-first-publication-package/` |
+
+
 每位成果负责人维护自己的条目，协调记录维护人检查索引一致性。元信息与批准规则见根 [项目运行协议](../../../PROJECT_PROTOCOL.md)。
 
 | 成果 ID | 名称与正文链接 | 负责人 | 关联任务 | 版本 | 状态 | 批准决定 |
