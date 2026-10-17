@@ -32,8 +32,8 @@
 
 - 33个保留图像路径的原始Git指针及实体哈希、31个唯一对象总量、18份当前SVG依赖、未清退的专业/来源文本保持；两个分支全部可达历史均无清退对象的LFS指针，message一行、零merge commit。框架/链接、测试及实际远端核对见本次执行回执。
 - 推送使用主线及T-011各自显式旧SHA保护，两条引用原子更新；其他项目、分支、标签和权限不变。产品先同步并验证，再同步OPC引用。
-- GitHub服务端遗留对象清退尚待完成。改写Git引用、删文件或本地prune不会自动回收其实际计量空间；本轮80.8MB是当前引用集合，不冒充账户后台实测占用。
-- 待清退131个对象和必须保留31个对象的精确OID已放入本机 `support-cleanup-request.txt`，供GitHub Support核对；如走删除/重建路线，须先核实GitHub登录、仓库元数据保全及最终删除动作，不以本轮Git push冒充已重建仓库。
+- 后续处理：GitHub Support工单[#4870933](https://help.github.com/ticket/personal/0/4870933)已提交，但因账号仅提供自助支持而关闭。2026-10-18用户明确要求删除重建并在最终按钮处确认，远端已删除并按原名称重建为私有仓库；仅上传31个保留对象，并从空缓存重新下载、逐项核对大小/SHA-256通过。重建恢复时main和T-011原SHA保持，GitHub后台显示LFS存储`0.1 GB used / 10 GB included`（账户汇总舍入显示），131个旧对象未重新上传。
+- 精确OID清单仍在本机 `support-cleanup-request.txt`；已校验的当前Git恢复包为 `product-cleaned-before-recreate.bundle`，重建和后台用量回执为 `recreate-receipt.json`，均位于上列完整备份目录。仓库元数据已核查，无Issues、PR、Stars、Forks、Releases、协作者、部署密钥、Webhook或Actions记录需要迁移。
 
 ## 原成果物功能提交映射
 
@@ -49,3 +49,11 @@
 | `5313c0d67854b02316c47854c55039009adc63e7` | `b93ffbfd4d99d2e956641cbc85fc876322743ff9` |
 | `1fa6a4078116a41b8b3090a600244d110c193066` | `604fbc8abaf0be0e92a1813115533728b4b51a68` |
 | `4501fad6c07030b885d1a8d107499c049cfebdcc` | `696ac1d4c372101da875b3297e2431395d042809` |
+
+## 后续过程文档不进入LFS（2026-10-18）
+
+- 用户要求：“后续过程文档也不要进入lfs了”。LFS改为按33个成品及必要图像依赖的精确路径列出，取消按图片/设计文件后缀自动跟踪；当前31个对象/80802395字节及其原始内容不变。
+- 提示词、参数、生成/选择、评审、自查和其他轻量文字由普通Git保存；过程图片、设计文件以及`work/`、`qa/`中的PDF/Office等二进制过程文档和压缩包仅留授权本地工作区，不进入LFS，也不把过程图片改存普通Git绕过约束。
+- 新增成品/必要依赖须同步产品保留清单、`.gitattributes`精确路径和`.gitignore`例外。`python tools/verify_asset_retention.py --staged`验证待提交内容与有效过滤规则，拒绝清单外的任意LFS指针和意外过滤；已验证误入LFS的Markdown指针和泛化Markdown过滤规则都会失败。
+- 当前产品main `b46e262f0abc34cd19044342668b33d17d3ebcb4`、T-011 `dfc2ddfa606dfc44a63308bef955b30c5a16d5f5`；两条分支均仅追加一条单行维护提交，不新增merge、不重放原业务提交。T-011未合入，业务/专业评审/批准状态不变。
+- 本轮变更前的双仓库Git恢复包和执行记录在 `D:\free-pipi-shrimp\.git\asset-archives\process-docs-no-lfs-20261018`；完整旧素材仍在上一节原归档，不再重复上传。
