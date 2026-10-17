@@ -1,0 +1,30 @@
+{
+  "date": "2026-10-17",
+  "old_path": "/home/oops/workspace/build/workspace/sources/qemu-system-native",
+  "new_path": "/home/oops/workspace/sources/qemu-system-native",
+  "head": "7ed31149ac01a9d6bb3a682b9d768936c4315ed3",
+  "tree": "1270be61f9ee6f1132a8bcadfb2e0e800ff055a5",
+  "branch": "devtool",
+  "archive_tag": "archive/t016-minimal-model-20261017",
+  "bundle_relative": ".git/opc-retention/20261017/qemu-system-native-all-refs.bundle",
+  "bundle_bytes": 163966544,
+  "bundle_sha256": "c1561b554b272d0a6b847fab6fb5bbcd3707bcc5060d5353713f55279878fd6e",
+  "original_refs_preserved": true,
+  "source_content_changed": false,
+  "phase": "verified",
+  "compatibility_alias": "/home/oops/workspace/build/workspace/sources/qemu-system-native",
+  "devtool_append_sha256": "41a3f512176a941d9f634865969c8eb871f481550380183b0455b5ec9b05ec36",
+  "devtool_md5_entry": "af7b7aff1bf7d4730ecbea3faf6a6c7e",
+  "effective_variables": {
+    "PN": "qemu-system-native",
+    "PV": "8.2.7",
+    "S": "/home/oops/workspace/sources/qemu-system-native",
+    "B": "/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7",
+    "EXTERNALSRC": "/home/oops/workspace/sources/qemu-system-native"
+  },
+  "filespath_uses_new_source": true,
+  "parsed_environment_sha256": "e682fc3d4c2afa4ee8f6197a4ee56f69e26f0b0bfe38b3426677c45bcf7ce359",
+  "devtool_status": "NOTE: Starting bitbake server...\nqemu-system-native: /home/oops/workspace/sources/qemu-system-native",
+  "source_worktree_clean": true,
+  "validation_note": "Initial nounset shell mismatch retained in attempt1; retry used supported initialization options. No code/build/model tests were changed or rerun."
+}
