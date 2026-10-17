@@ -29,6 +29,10 @@
 - 工程仓库：ssh tiger:/home/oops/workspace/meta-tiger，git@github.com:yinzhongkai/meta-tiger.git；feature/t-016-chapter4-revision。模块提交 0e73cd7faacff219fa5de0a7365743ce31402d73 为 recipes-devtools/qemu/files/0001-arm-add-minimal-tiger-machine.patch；阶段交接头 b303ae6d614f067e11d4cbba57feacaf84ee7e8e 同时含 recipes-test/tiger-minboot/files/ 的 start.S/main.c/tiger-minboot.ld/COPYING.MIT 和 tests/model/ 的构建/测试工具及交接说明。来源/应用基点/顺序/hash与覆盖见报告。
 - 状态：阶段开发提交已保存、模型作者自测通过；尚未推送或合入 master，不作 WORKSPACE 最终 revision。未删除任务分支或清理 devtool source，下一阶段由 project-manager 核对后串行衔接 Yocto。
 
+## T-016 源码目录维护（project-manager）
+
+- [QEMU 源码迁移与长期保存记录](work-records/t016-qemu-source-retention-20261017.md)及[原始回执](work-records/t016-qemu-source-retention-20261017.json)：2026-10-17 按用户请求迁入 `tiger:/home/oops/workspace/sources/qemu-system-native`，保留 `devtool@7ed31149ac01a9d6bb3a682b9d768936c4315ed3` 及全部原 refs，增加恢复标签/bundle；devtool 与 BitBake 新路径解析通过。长期保存与后续可读提交约定见 [D-015](../DECISIONS.md)，正式交付继续位于 meta-tiger。
+
 ## 正文元信息样式（不是真实成果）
 
 ```text

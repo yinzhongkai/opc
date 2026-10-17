@@ -12,7 +12,7 @@
 
 - 建立日期：2026-09-12。
 - 用户请求来源：2026-09-12 超级管理员会话中，建项用户请求"创建一个名叫 book-yocto 的项目"，说明 `yocto/` 目录是其撰写的草稿，希望通过本项目使草稿达到出版程度。
-- 当前阶段：P3 逐章修订与逐章真实环境核验（chapter 1–3 已定稿；A-005 v0.2 approved / D-014；writer 已交付 A-006 v0.1 draft，2026-10-14 用户同意继续执行，project-manager 已完成蓝图交接核对，当前衔接 qemu-engineer 实施最小模型与固件源。chapter 4 只做最小可启动 machine，功能随章节补充；模型/固件/metadata 的实际进展和验证由执行成员据实记录）。
+- 当前阶段：P3 逐章修订与逐章真实环境核验（chapter 1–3 已定稿；A-005 v0.2 approved / D-014，A-006 v0.1 已获继续实施授权。QEMU 工程师完成模型/最小固件源及作者模型自测 16/16，2026-10-16 已提交治理交付并停止；2026-10-17 按用户要求迁移并长期保留学习源码，见 D-015。当前待 project-manager 核对工程交接后衔接 Yocto 正式集成、干净构建和 runqemu 系统复验，随后 writer 校准正文）。
 
 ## 目标与约束
 
@@ -66,6 +66,12 @@
 - 变更：WORKSPACE 的 book-manuscript revision 从 `f444790f352b46f699fd3d46198f8b9b9f089a62` 对齐实际本机/远端 main 与 T-016 分支的 `9c74596591728c0f2d614e357059034551a42dca`。已逐 Git tree 核对两提交文件内容完全一致，书稿工作树干净；这是历史整理后的引用对齐，不推进书稿业务内容。
 - 恢复与边界：旧书稿提交由成果物标签 `archive/book-yocto-before-consolidation-20261013` 保存。OPC 2026-10-13 已恢复的原始提交链继续保留，本轮只追加普通 T-016 协调提交；不重新压缩或改写旧历史。仓库地址、driver、checkout、分支、成员及 meta-tiger 基线不变。历史评审/批准/交付 SHA 不批量替换。
 - 记录人：框架入口（本轮有界配置修复）；业务阶段衔接由 project-manager 按 TASKS 执行。
+
+## QEMU 持久辅助源码工作区
+
+- 2026-10-17 用户明确指定并授权 `tiger:/home/oops/workspace/sources/qemu-system-native` 长期保存 QEMU 开发和学习源码，见 [D-015](DECISIONS.md)。它与 WORKSPACE 的正式成果物仓库配套使用；正式交付继续遵循 D-013，patch/metadata 在 meta-tiger 中维护。
+- 原 devtool 源码及完整 Git 历史已迁入该目录；起始 `devtool@7ed31149ac01a9d6bb3a682b9d768936c4315ed3`，源码内容与原验收版本相同。devtool 和 BitBake 的 EXTERNALSRC/S 已指向新目录，旧路径软链接用于兼容已有构建/调试记录。
+- 长期保留：未来修改保留可阅读的功能提交及版本映射；清理 workspace、解除 externalsrc 和正式干净重构建时保留本目录与 Git 历史，删除或覆盖须由用户明确授权。恢复标签/bundle、实际路径与验证见 [源码保存记录](artifacts/work-records/t016-qemu-source-retention-20261017.md)。历史批准、报告和原始日志不批量改写路径。
 
 ## 当前资料
 

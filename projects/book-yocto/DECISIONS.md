@@ -157,6 +157,17 @@
 - 替代关系：无；补充 D-013 的 chapter 4 实施输入，不改变 D-001/D-003/D-010/D-013 的全书目标与验收要求。
 - 记录人及更新日期：project-manager，2026-10-11
 
+## D-015：持久保留 QEMU 开发与学习源码
+- 状态：confirmed
+- 提出者及确认人：建项用户（PROJECT 默认最终确认人）
+- 问题与候选方案：用户希望固定 QEMU 开发源码位置，长期查看当前 tiger 增量和后续修改历史。
+- 结果：SSH 主机 `tiger` 的 `/home/oops/workspace/sources/qemu-system-native` 为用户明确指定并授权的持久辅助源码工作区；迁入原 devtool 源码和完整 Git 历史。后续功能修改在此检出中保留可阅读的 Git 提交/版本与 patch 映射，未经用户明确同意不得删除、覆盖或以清理临时 workspace 为由回收该目录。
+- 确认来源与日期：2026-10-17，用户在 project-manager 会话明确“能改到/home/oops/workspace/sources/qemu-system-native目录下吗，并长期保存，后面的修改可能我也需要看看怎么修改的”。
+- 适用范围与影响：T-016 及后续 QEMU 开发、源码学习和环境清理。细化 D-013 的源码目录生命周期；正式工程 patch/metadata 仍交付 meta-tiger，WORKSPACE 的两个成果物仓库及其基线保持原声明。新目录不作为新增上游产品 fork。devtool reset/干净构建验证只解除 externalsrc 等临时覆盖并清理必要构建产物，保留此源码与 Git 历史；再次纳管已有检出时使用经当前版本核对的 `devtool modify -n qemu-system-native <持久源码目录>`。
+- 实施与恢复：完整目录已迁移，HEAD `7ed31149ac01a9d6bb3a682b9d768936c4315ed3` 与 tree 保持不变；原路径软链接至新路径。Git 归档标签/恢复 bundle、devtool/BitBake 引用及校验结果见 [迁移记录](artifacts/work-records/t016-qemu-source-retention-20261017.md)。历史工程报告按原执行时点保留旧路径。
+- 替代关系：补充 D-013 的保存和清理策略，不改变平台设计、模型测试结论或正式成果物验收要求。
+- 记录人及更新日期：project-manager（本轮用户明确指定的目录维护与协调），2026-10-17。
+
 ## 记录样式（不是真实决定）
 
 ```text
