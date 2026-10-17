@@ -710,9 +710,9 @@
 - 状态：completed
 - 变更类型：feature
 - OPC开发分支：`feature/free-pipi-shrimp/t-011-first-publication-package`
-- OPC合入前目标提交：a010b34b6e23dae989561edb834c76c0acc422d9（2026-10-18当前项目主线；本轮不合入）
+- OPC合入前目标提交：a010b34b6e23dae989561edb834c76c0acc422d9（本轮快进合入前目标；本任务准备范围completed）
 - 成果物仓库及开发分支：WORKSPACE声明git@github.com:yinzhongkai/free-pipi-shrimp.git，feature/t-011-first-publication-package；已同步目标main@b46e262f0abc34cd19044342668b33d17d3ebcb4，本轮交付ef5399b0ec6dc89bc657a65968346f62ad3e4434
-- 成果物仓库合入后的最终提交：尚未T-011合入；feature交付ef5399b0ec6dc89bc657a65968346f62ad3e4434已正常推送，main/WORKSPACE仍b46e262f0abc34cd19044342668b33d17d3ebcb4，待PM验证/推进
+- 成果物仓库合入后的最终提交：ef5399b0ec6dc89bc657a65968346f62ad3e4434；从main@b46e262f0abc34cd19044342668b33d17d3ebcb4快进合入，目标验证、远端完整SHA核对通过，WORKSPACE.revision已单独推进；原16图及31个LFS对象字节不变
 - 授权来源与日期：2026-09-29 用户确认项目需要小红书运营岗位并授权执行 T-009，project-manager 在新成员配置完成后登记本任务
 - 目标与范围：依据 A-001 v0.4、D-004、D-005 建立首期内容日历、发布包检查表、AI 内容标注与平台规则核对记录、人工手机端发布协作步骤、基础数据与用户反馈记录模板；在 T-006 两篇缓冲稿完成后执行发布前检查。不得保存或转述账号凭据，不自行获得发布授权，不代替用户完成必须由用户执行的手机端操作
 - 输入与依赖：A-001/有效决定，A-010 v0.2两note/16PNG，原A-011 v0.3及第3轮限定pass/RV003 closed；OPC接收89420233799bdefea3656a623938dc8a6e4c9611、产品输入56dae24a7388b39292113f06c5575c1f3854d5ef；[实际操作记录](artifacts/T-011-publication-observation-20261018.md)、串行计划阶段0、两份运营知识及现行素材清单；原来源/H-003责任保留
@@ -720,7 +720,7 @@
 - 完成条件与确认方式：运营准备材料登记为成果（draft）；发布前重新核实当前适用平台规则并记录来源与日期；对 T-006 两篇稿件完成发布包检查并记录问题或通过结论。账号注册、凭据管理、最终发布确认和手机端发布仍由用户负责
 - 进展：2026-10-18实际接收用户网页原图上传/暂存/定时与PM观察，交付A-011 v0.4接收、OP分阶段复核、5篇日历/数据空表；据原三条件completed（仅运营准备范围）。两篇仍scheduled，非已公开/审核通过；手机特有字段不适用，逐页平台展示等未覆盖明列
 - 成果与验证证据：[A-011](artifacts/A-011-首期运营准备与发布包检查.md) v0.4 draft；产品ef5399b0ec6dc89bc657a65968346f62ad3e4434；入口deliverables/T-011-first-publication-package/v0.4-scheduling-receipt/README.md；清单manifests/T-011-first-publication-package/manifest-v0.4-scheduling-receipt.json SHA-256 4d401638e2b09bfa1b12a19d6829ec3a94702d6988b955752bc0a8db13403826；13新文本/305旧路径保持、2note/16PNG/3证据/JSON/16链接/空表/素材及Git字节校验通过；原意见不改
-- 阻塞与下一位行动人：准备范围无阻塞；下一位project-manager核对固定交付/原条件后，负责WORKSPACE推进/快进集成/验证/清理及H-003。真实公开/审核/可见范围、保存后16页/标识和24h/72h/7d数据仍待实际观察；后3篇/T-020待后续串行派发，不改定时/发消息
+- 阻塞与下一位行动人：准备范围无阻塞；PM已接收并独立核验，成果物集成和WORKSPACE推进完成，OPC快进/目标核对及两仓T-011分支清理通过后派发planner/T-015。真实公开/审核/可见范围、保存后16页/标识和24h/72h/7d数据待实际观察；不改变两条既有定时，不授予后三篇上传/定时/发布权限
 - 更新日期：2026-10-18
 
 ### 本轮运营执行安排（project-manager，2026-10-15）
