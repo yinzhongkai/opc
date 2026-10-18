@@ -27,11 +27,16 @@
 
 - [模型、固件与作者模型验证报告](work-records/t016-qemu-model-validation.md)及[原始证据目录](work-records/t016-qemu-model-raw/README.md)：2026-10-15 本阶段最终矩阵 16/16 通过，含冷启动、同进程两次宿主 reset、ROM/参数/BIOS 边界；保留失败和修复。正式 metadata/清理后干净构建/runqemu 系统验收待 Yocto，章节和 T-016 整体未完成。
 - 工程仓库：ssh tiger:/home/oops/workspace/meta-tiger，git@github.com:yinzhongkai/meta-tiger.git；feature/t-016-chapter4-revision。模块提交 0e73cd7faacff219fa5de0a7365743ce31402d73 为 recipes-devtools/qemu/files/0001-arm-add-minimal-tiger-machine.patch；阶段交接头 b303ae6d614f067e11d4cbba57feacaf84ee7e8e 同时含 recipes-test/tiger-minboot/files/ 的 start.S/main.c/tiger-minboot.ld/COPYING.MIT 和 tests/model/ 的构建/测试工具及交接说明。来源/应用基点/顺序/hash与覆盖见报告。
-- 状态：阶段开发提交已保存、模型作者自测通过；尚未推送或合入 master，不作 WORKSPACE 最终 revision。未删除任务分支或清理 devtool source，下一阶段由 project-manager 核对后串行衔接 Yocto。
+- 状态：阶段开发提交已保存、模型作者自测通过；尚未推送或合入 master，不作 WORKSPACE 最终 revision。未删除任务分支或清理 devtool source；2026-10-18 project-manager 工程交接核对通过，下一阶段 Yocto 正式集成已安排待接收。
 
 ## T-016 源码目录维护（project-manager）
 
 - [QEMU 源码迁移与长期保存记录](work-records/t016-qemu-source-retention-20261017.md)及[原始回执](work-records/t016-qemu-source-retention-20261017.json)：2026-10-17 按用户请求迁入 `tiger:/home/oops/workspace/sources/qemu-system-native`，保留 `devtool@7ed31149ac01a9d6bb3a682b9d768936c4315ed3` 及全部原 refs，增加恢复标签/bundle；devtool 与 BitBake 新路径解析通过。长期保存与后续可读提交约定见 [D-015](../DECISIONS.md)，正式交付继续位于 meta-tiger。
+
+## T-016 工程交接核对（project-manager）
+
+- [结构化核对回执](work-records/t016-qemu-pm-handoff-20261018.json)：2026-10-18 校验 9 个日志包及 263 份内嵌原始文本的字节数/hash、最终 16 项作者测试记录和远端工程/源码/实际二进制/固件身份，结果一致；patch 隔离重应用与持久源码保护核对通过。结论为可交接，无发现的交接阻断项；本轮未重跑模型测试，不代表独立审查、系统验收或章节批准。
+- Yocto 阶段范围、精确输入版本、D-015 保留约束及出口见 [T-016 正式集成安排](../TASKS.md)。本轮提交后串行通知本人接收，正式系统集成与运行尚待执行，WORKSPACE 最终 revision 不变。
 
 ## 正文元信息样式（不是真实成果）
 
