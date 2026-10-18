@@ -38,6 +38,12 @@
 - [结构化核对回执](work-records/t016-qemu-pm-handoff-20261018.json)：2026-10-18 校验 9 个日志包及 263 份内嵌原始文本的字节数/hash、最终 16 项作者测试记录和远端工程/源码/实际二进制/固件身份，结果一致；patch 隔离重应用与持久源码保护核对通过。结论为可交接，无发现的交接阻断项；本轮未重跑模型测试，不代表独立审查、系统验收或章节批准。
 - Yocto 阶段范围、精确输入版本、D-015 保留约束及出口见 [T-016 正式集成安排](../TASKS.md)。本轮提交后串行通知本人接收，正式系统集成与运行尚待执行，WORKSPACE 最终 revision 不变。
 
+## T-016 Yocto 正式集成与系统验证（yocto-engineer）
+
+- [本阶段报告](work-records/t016-yocto-system-validation.md)及[完整原始证据目录](work-records/t016-yocto-system-raw/README.md)：2026-10-18 正式 append、独立 tiger machine、target fixture/helper/生成/deploy 集成完成；新构建树脱离 override，真实 runqemu 冷启动/同进程两次 reset、正式二进制模型矩阵 16/16、三项部署诊断及恢复主线通过。E-01～E-10 覆盖、完整失败/告警、启动器返回码局限和未覆盖项见报告。
+- 工程仓库 ssh tiger:/home/oops/workspace/meta-tiger，feature/t-016-chapter4-revision 最终 `4dd7dfda8f2af2d59bdcfe6585418cf43eaa73e8`；六个普通模块提交在报告列明。实际构建 metadata 为 `cd6c348836346004e801cb13f32ad3fcb12c1dfd`，后续只修改部署测试/README；工程干净，未推送/合并。原 QEMU patch、固件源、模型工具、持久 source/全部 refs/归档 bundle 与输入不变，master 和 WORKSPACE 正式 revision 未推进。
+- [归档清单](work-records/t016-yocto-system-raw/handoff-2/manifest.json)及[本地核验回执](work-records/t016-yocto-system-raw/verification.json)：9 包、291 份原始文本按字节数/SHA-256 全部通过。本人阶段记录与治理提交完成后停止，待 project-manager 核对后衔接 writer；T-016 整体、独立审校及章节批准尚未完成。
+
 ## 正文元信息样式（不是真实成果）
 
 ```text
