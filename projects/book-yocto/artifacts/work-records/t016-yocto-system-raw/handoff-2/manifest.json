@@ -1,0 +1,1507 @@
+{
+  "format": "utf8-text-records-v1",
+  "groups": {
+    "configuration-and-control.log": {
+      "records": 76,
+      "bytes": 13605771,
+      "sha256": "a30ebd2e32b9901a6a132a49d8a055980aa9f902b144e02f7079c5b399da9c51"
+    },
+    "critical-task-logs.log": {
+      "records": 90,
+      "bytes": 1155945,
+      "sha256": "9f99e19fc34281369a981116b37f203f9758bb9f51d655b232fe1d362a65a872"
+    },
+    "deployed-text-identities.log": {
+      "records": 7,
+      "bytes": 33958,
+      "sha256": "22df6d3f210225995de5f6ad8bf268b2ed966524fb61d7c735266e59c470f8c6"
+    },
+    "deployment-2.log": {
+      "records": 5,
+      "bytes": 6827,
+      "sha256": "b173ba311dc94a74e917ba1330b44e25e44ba91da0ba2902a36bf66dc07233e2"
+    },
+    "deployment-3.log": {
+      "records": 9,
+      "bytes": 14854,
+      "sha256": "f2c5cef1fc31310ed037869a619d53cb69de8bb43ca6a78241373ee1ffe24140"
+    },
+    "interrupted-dependency.log": {
+      "records": 2,
+      "bytes": 1471440,
+      "sha256": "bbb203ba792e86567ff2df5d5cffd45436c3d0ead76f7bce4f0ad2cc93fcf6a6"
+    },
+    "model-2.log": {
+      "records": 76,
+      "bytes": 229748,
+      "sha256": "3aa9693dadb60c2e85f5b9a4bd3261718926c845bc43611ac1f8b7b77d0a7c93"
+    },
+    "runqemu-2.log": {
+      "records": 13,
+      "bytes": 125320,
+      "sha256": "a984b88b4d211c2499a0f00ca70494b2a077ea9214387b55872cef9a62f5f8d3"
+    },
+    "runqemu-recovery-3.log": {
+      "records": 13,
+      "bytes": 125536,
+      "sha256": "961160d2f72c8d255bd6c15c683e143723baf2212f37b9ed979cda0e97d9b2f2"
+    }
+  },
+  "files": [
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/audit-assets.py",
+      "bytes": 4537,
+      "sha256": "bfd067acb31d0a341c82939ea945640f7b435dd0a5d794faf72916f2da5ee29e"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/build-1.sh",
+      "bytes": 778,
+      "sha256": "f6dd159e25f4dd40a1e97a7246566bc99a66cac86b324f20bfa95133e1ac3d9e"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/build-2.sh",
+      "bytes": 585,
+      "sha256": "886ce2863e1bc4a4b8f942c241b00aea9c60f55e87de75270c6694fdbf15c21b"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/close-stage.py",
+      "bytes": 7702,
+      "sha256": "8822d799af5a4eb50bd0c634a185a761464c3fd61d072c5f43595fccdd30fd6a"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/collect-evidence.py",
+      "bytes": 3072,
+      "sha256": "0ada417f864cd18b1fccb0254cb3236561d739913b4526796aaeb5c9357e0562"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/conf/bblayers.conf",
+      "bytes": 346,
+      "sha256": "33fb66dc05ed9803e4f5af150fb3642c42ad2bd8b1220428d39ab87320f99e86"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/conf/conf-notes.txt",
+      "bytes": 516,
+      "sha256": "8d47bf423a3a841d975fb1e8c53a283be186825c1069fcee70532c326369b79d"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/conf/conf-summary.txt",
+      "bytes": 77,
+      "sha256": "9ce9d03c8e52428e4506c007557672f662f80fd9a568235224ab72160a8316d7"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/conf/local.conf",
+      "bytes": 12938,
+      "sha256": "37914dfde28b39d73628f9db1a1a61202f198c7a2aad8a5728ff595297cf54db"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/conf/templateconf.cfg",
+      "bytes": 33,
+      "sha256": "855ef5c490982d10b3ea1737afba18e504f63bac7e4d88946735a9d04d3a13ac"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/asset-audit-run-2.log",
+      "bytes": 9628,
+      "sha256": "2c787c646c1afd33fa67784039715bda216fe510f7834b25a6298925445a4d4f"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/asset-audit.json",
+      "bytes": 9628,
+      "sha256": "2c787c646c1afd33fa67784039715bda216fe510f7834b25a6298925445a4d4f"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/build-1-stop.json",
+      "bytes": 422,
+      "sha256": "0a784b680fb7a9e198f6a27ec31037a950428267d382deb4eb29d53582e680ca"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/build-1.log",
+      "bytes": 417016,
+      "sha256": "0c40270e217e33bafb6384d7435531742bcba400d6b6671341b3c3ffa6d6aa10"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/build-1.rc",
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/build-2.log",
+      "bytes": 6400,
+      "sha256": "a9b660c7af1b8c4476c7267f6dee48119af38bdf57975191f17f0c8d8b35077a"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/build-2.pid",
+      "bytes": 7,
+      "sha256": "25609bc866997f8385190d67561a8db11f91963f2a5161fdd14cd15da09523d9"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/build-2.rc",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/build-controller-1.log",
+      "bytes": 417016,
+      "sha256": "0c40270e217e33bafb6384d7435531742bcba400d6b6671341b3c3ffa6d6aa10"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/build-controller-2.log",
+      "bytes": 6400,
+      "sha256": "a9b660c7af1b8c4476c7267f6dee48119af38bdf57975191f17f0c8d8b35077a"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/build.pid",
+      "bytes": 7,
+      "sha256": "39a022f15ff90a2bb7de5904e3a11b3553ce1872d826adbeb2e6df6966e69ad9"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/config-host.mak.txt",
+      "bytes": 573,
+      "sha256": "f491240903f2089b0b3363b0e8453749e3bd3bf7827667e4f2d0bb638902ee33"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/deployment-controller-2.log",
+      "bytes": 4432,
+      "sha256": "01995cfcf0260fff87f31b9e09894ae2155e86b166e074889642656932318961"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/deployment-controller-3.log",
+      "bytes": 3494,
+      "sha256": "ab2525405629684ae65cd35007633db333df87a291c14f368e8ae343f36451bc"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/devtool-reset-source.txt",
+      "bytes": 5254,
+      "sha256": "093a4cb199108a51fe747122c7d3e1f646563c98533e6ba29c0169ee4717f29c"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/fixture-env-1.log",
+      "bytes": 1706346,
+      "sha256": "a42d5a70192ae2341bb5f58516edb53162af54075dd43fb51097c3e73f358350"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/fixture-env-2.log",
+      "bytes": 1706477,
+      "sha256": "6b033918ef2bfb7b10792dbbdd3a173c087f1539d87995f4cfa1d06a34d46677"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/formal-patch-check.json",
+      "bytes": 2194,
+      "sha256": "df6c51a57481c024b5df2ca8eaf977386dbe58f8f801df195e82863ade3f474e"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/generate-signature-2.log",
+      "bytes": 8697,
+      "sha256": "287c48739742c2b8483b652763800bdec3d46c263338b70be4181e14fa06ffa3"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/graph-2.log",
+      "bytes": 213,
+      "sha256": "881837b3c05feea624fe927520462ba7e034a74128a500cac225cf2f36934128"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/helper-machine-help.log",
+      "bytes": 6586,
+      "sha256": "96fa972e76d6e3f0aa0c57c2db4f5a468f13e6fe423a740ecf2b113b350691fb"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/metadata-commits-final.log",
+      "bytes": 597,
+      "sha256": "ee5a4e3707c659ceebc0fe7f92d9fb4637d8c08ff8f2d0bb9c5546f0a505afe4"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/metadata-commits.log",
+      "bytes": 1145,
+      "sha256": "1e8434fe8f6ba9261645d58a2063341fe8a59a467006b920b007f92ca79539b3"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/model-controller-2.log",
+      "bytes": 26073,
+      "sha256": "f888652130239b54e42afa618719bb0cb2e9cb2e428a4dd4fc2e290db1cbb628"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/override-after.log",
+      "bytes": 1983377,
+      "sha256": "4af19847ef34b7c66eca2b003dd915aa3d53cf1c23bc813737ca80fd975a0345"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/override-and-dependency-check.json",
+      "bytes": 1163,
+      "sha256": "2cf4534f0da9ebc9d0e257f5e203ce238c0e0ef7c52b2d98c8ebb938e74288b9"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/override-backup/conf/bblayers.conf",
+      "bytes": 387,
+      "sha256": "511f6e952d65a6eae018a40932040911843bd30f9fb674172fa05ab1be30591d"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/override-backup/conf/local.conf",
+      "bytes": 12619,
+      "sha256": "c4628c9a913df0cf0f3d2f891e0f34af3852664855e28700f42ca57e140f6d20"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/override-backup/workspace/.devtool_md5",
+      "bytes": 94,
+      "sha256": "57ed540cd0de836cb393bdab8d49f0f486f9f6e01761d787913002eee9a2ad39"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/override-backup/workspace/appends/qemu-system-native_8.2.7.bbappend",
+      "bytes": 2212,
+      "sha256": "41a3f512176a941d9f634865969c8eb871f481550380183b0455b5ec9b05ec36"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/override-before.log",
+      "bytes": 2000403,
+      "sha256": "43696f1526f8d369fca07235eee3cba3ec12f16470f75c109b345d2ada75de5b"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/parse-1.rc",
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/parse-2.log",
+      "bytes": 2194,
+      "sha256": "eb3288bd6e017b01fa8973b5b2b102efaf0efa29f49e96f92aad62272d1651b8"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/parse-2.rc",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/parse-controller-2.log",
+      "bytes": 2787,
+      "sha256": "5b1ebbdee99af9cea753b6d117e55927c59465a7d08d30e6ae548c1d27b48421"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/parse-controller.log",
+      "bytes": 81,
+      "sha256": "1fd936acf2e226fd8ae9d956230033f720f94b5b04333e1cf20d4e26ab80a7d0"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/parse-summary.json",
+      "bytes": 7099,
+      "sha256": "ccf7a28c05476db4e4aaf74155cd88cdb67984df44800978f52cd31286bc17aa"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/parse.pid",
+      "bytes": 7,
+      "sha256": "c79e8ae0eaf22b3533796f8e0cc7c951b95a4fa7e93d0b77ff25154df7fa70c1"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/pn-buildlist-2.txt",
+      "bytes": 1456,
+      "sha256": "7f39795ef4ea540831ba49b2f6ee47109423a081faf8adc74b5627df81a45274"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/qemu-env-1.log",
+      "bytes": 1961240,
+      "sha256": "1e9512a487c77892ad593629dab2f9b3713927a8cb3c7354a155e821107e619a"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/qemu-env-2.log",
+      "bytes": 1961211,
+      "sha256": "045e7a627ebc910f74c95ea7b4b7f617fc2a8810329f3b57661194f52ea5e06e"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/runqemu-controller-2.log",
+      "bytes": 10434,
+      "sha256": "85a92813a48bc2c0a82aa2cc797586040155ae0c01163b2ab191c084491afdb0"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/runqemu-recovery-controller-3.log",
+      "bytes": 10470,
+      "sha256": "3585068a7a445e9d9ed594fa49542ddccc13b7d92bd81f050b3fdcde9445e09d"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/show-appends-2.log",
+      "bytes": 1266,
+      "sha256": "852d72f6fee3e158888659e4161f24dc29b2ae55bc42d808736bc9380d609ea6"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/source-before.json",
+      "bytes": 834,
+      "sha256": "02fc4c6877a9071f3dd9c73c4201d8267acec1636c9a0d7c7e2c9982ac62cd25"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/stage-final-check-run.log",
+      "bytes": 3847,
+      "sha256": "f0ba8c7f9eb66c16dc80641d3339a9738a227eafb7b5195102be590684f0aa6a"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/stage-final-check.json",
+      "bytes": 64141,
+      "sha256": "37d95d8da75d9173947fc162ed79c81ad796eb3c39145a58de7340d2cefe4b09"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/system-1.rc",
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/system-2.pid",
+      "bytes": 7,
+      "sha256": "d01c8d2edc2c560dfb5eba773506070989e4e553449094e5963f4572178363e8"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/system-2.rc",
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/system-3.pid",
+      "bytes": 7,
+      "sha256": "5e0d30bf32d8b9a6a748f95b05826c4400304c00c24cdc09aa6b8d45f4b83902"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/system-3.rc",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/system-controller-1.log",
+      "bytes": 26,
+      "sha256": "fa5a27fd4a452405262cc472174b85541096bc1f4d9f282f41a07af9eb363083"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/system-controller-2.log",
+      "bytes": 682,
+      "sha256": "29eb92d999f78e269cca5ef3e21c3768c57e566dc41358c11e2baa02c6b364a2"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/system-controller-3.log",
+      "bytes": 693,
+      "sha256": "1da808aa313f61b7904e1ff4e327541b0ba06e65fcc89cf0eedb5ea7f732253e"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/system-pipeline-1.log",
+      "bytes": 26,
+      "sha256": "fa5a27fd4a452405262cc472174b85541096bc1f4d9f282f41a07af9eb363083"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/system-pipeline-2.log",
+      "bytes": 682,
+      "sha256": "29eb92d999f78e269cca5ef3e21c3768c57e566dc41358c11e2baa02c6b364a2"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/system-pipeline-3.log",
+      "bytes": 693,
+      "sha256": "1da808aa313f61b7904e1ff4e327541b0ba06e65fcc89cf0eedb5ea7f732253e"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/system.pid",
+      "bytes": 7,
+      "sha256": "2728c336addaeb77fcd78947ed7dbfb09bebf4ffec85d982a3c4d7e06e2b0393"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/task-depends-2.dot",
+      "bytes": 320426,
+      "sha256": "bce7bdbd141254a84e9758d2675bf19539d63de35d7316e166a0d94c3936f1e0"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/task-depends.dot",
+      "bytes": 491655,
+      "sha256": "1e8032e2fa1b571ccb7f821574a08bed8a1b11bcb801e56b247987c64f2f6e36"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/parse-2.sh",
+      "bytes": 495,
+      "sha256": "3fde585b3753b32085380caa0bc68f8ed399ebe4f1257e014f6dc8762f1ec10f"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/parse.sh",
+      "bytes": 496,
+      "sha256": "1cb32e7bca83251277b34f5382df9ce544dc6259043b8f8498805653ba134b7f"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/system-1.sh",
+      "bytes": 2283,
+      "sha256": "423c590d2cc975127abf8f5262186b918b8d57e23b9e11d97b51b035590ab961"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/system-2.sh",
+      "bytes": 2285,
+      "sha256": "b97daa85dc473da64ef83340401f212afd700c0b5b21338f242d20c7a480fd9b"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/system-3.sh",
+      "bytes": 1046,
+      "sha256": "639f53f3ea70d0833830d90aa344202909f85a1e99cb5af1ba6d3c01c58dfa74"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/log.do_collect_spdx_deps.981559",
+      "bytes": 646,
+      "sha256": "0b25e886ab6124ec11f28bd2ad181243a1bfb72a1ecb6b84402e9a14e06be531"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/log.do_compile.768686",
+      "bytes": 16314,
+      "sha256": "dcd623604a14647f11372e4984bd70f3962c4a8a0febdf0157743718eeb898b1"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/log.do_create_runtime_spdx.981616",
+      "bytes": 2917,
+      "sha256": "f3349a1f671d184aa7dc6aedb6433b6a455e8af1bf1fb2af8dae1ff85ea612a0"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/log.do_create_spdx.981574",
+      "bytes": 9731,
+      "sha256": "362424f4bf7e3f06ca8ce7d9bcd0386394ac8fd0fce856d8e9f48373ff30e9f3"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/log.do_deploy.997373",
+      "bytes": 2747,
+      "sha256": "7d45453566583469fc73197c5afee369cf2dca1e2beb8a42965ef79fdede86e4"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/log.do_deploy_source_date_epoch.497041",
+      "bytes": 2614,
+      "sha256": "5ff5e823af11e1744eb0fb8bc41aaeb60e72b0754b3d2f2f97d908d074a2f210"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/log.do_fetch.144015",
+      "bytes": 7134,
+      "sha256": "52f27df7b1e0df405d8a2ae5c0345b382efe356fe5d819ded9921aa1c15e0b0b"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/log.do_generate_qemuboot.997363",
+      "bytes": 955,
+      "sha256": "99ca7837f672a3593a74ed9b3aeeff0a81fa7fd607b25e44730fdd7aadde5c8b"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/log.do_package.768904",
+      "bytes": 3787,
+      "sha256": "e801edd6e6fb3987b4d6fcb19d0419370351c00bb32f70eea28a5358bdb6fd8a"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/log.do_package_qa.769104",
+      "bytes": 2921,
+      "sha256": "6b481fede5825c19f3477d9f602e01ae4044333e60de3e10941274431feca5ad"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/log.do_package_write_rpm.769103",
+      "bytes": 3012,
+      "sha256": "7594367ca1ebeefbba37d65028793e5ea6060ae438ed580c5c19bd763c86c6aa"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/log.do_packagedata.769050",
+      "bytes": 3102,
+      "sha256": "fa5a0138a029d6208325e9ea4275dd6845bc50de868541bd6ad5a3a90eb98762"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/log.do_patch.479060",
+      "bytes": 8889,
+      "sha256": "2b54fa5165df0e8f70d8329b76ffbaf1ca7f3a93ace323fbabaa3cf2a2251b88"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/log.do_populate_lic.566395",
+      "bytes": 2977,
+      "sha256": "7966986d10c27018b66896453bedf6afe0a2832a1367b3ab1dbadfe8b7396fcc"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/log.do_populate_sysroot.768908",
+      "bytes": 4571,
+      "sha256": "6feda87df5b930e76169d641517a2fabe3589a76d1f44b68ae022b827b52597f"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/log.do_prepare_recipe_sysroot.768673",
+      "bytes": 2909,
+      "sha256": "1733944bda00376a8188d465bee027a7fd4cf89d4909a01fa8260e5a78417c7d"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/log.do_recipe_qa.143780",
+      "bytes": 2548,
+      "sha256": "335804a43f5e4ed990c1f99edf51200e5730a613426853de4d988f4382b6b5f2"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/log.do_unpack.144784",
+      "bytes": 8281,
+      "sha256": "896107139c950c8f3fa231a77df737ef4dd20f933ce3e2f22d992e2dd34c19be"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/run.do_collect_spdx_deps.981559",
+      "bytes": 1284,
+      "sha256": "ffc5f62b3b96fe00316a36e3cd475b7f069900c5675bb670ae136b93b7f120ae"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/run.do_compile.768686",
+      "bytes": 13535,
+      "sha256": "e7790867de4f419f6ea7f686b8c816df8542ec436cbe33f7e781861894b92259"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/run.do_create_runtime_spdx.981616",
+      "bytes": 8968,
+      "sha256": "92e533076c6e531cb15e6d06fd8aceb398802274ea598ac3dc5848eb43708a5d"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/run.do_create_spdx.981574",
+      "bytes": 29730,
+      "sha256": "f94f62530b4f8c5bb4045f096e0215e783a2b005245d89b66f372dc6f6c3c25f"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/run.do_deploy.997373",
+      "bytes": 13371,
+      "sha256": "b688194803d37ff6a423f4c9dd5501eb3f1e18575a5e37b1c9db74582ae368f3"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/run.do_deploy_source_date_epoch.497041",
+      "bytes": 13330,
+      "sha256": "a8ccc8fc9ae55a003d6770f569f400975c4ab3fd000b763df56f6efbb4bae850"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/run.do_fetch.144015",
+      "bytes": 390,
+      "sha256": "cdf6c25c7df05c7cda266571a016e4462a7eb5bf660a7332c61ad75012789158"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/run.do_generate_qemuboot.997363",
+      "bytes": 2276,
+      "sha256": "5172a5b755ce706a0f2f95672ab741b1f9e6d590110d49a343246d8b8d2f49e0"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/run.do_package.768904",
+      "bytes": 33821,
+      "sha256": "8cb74d1bc1362e016808789275371ec3ff332e4c66d55a8ee28049b79b8c22d0"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/run.do_package_qa.769104",
+      "bytes": 17007,
+      "sha256": "eafd423e507dbdd23b5f10ef917d27633e2cefbb8ef979e4fe7787d701d91fe2"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/run.do_package_rpm.769103",
+      "bytes": 31411,
+      "sha256": "5fe5585d26c8fa354da997a4f53adfe97a019706658ff0eef0f46caf81408f96"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/run.do_package_write_rpm.769103",
+      "bytes": 33133,
+      "sha256": "6b1c7d24386bfef11c34d9b5e21e024798f3deee84854059724ed9498371afe3"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/run.do_packagedata.769050",
+      "bytes": 2954,
+      "sha256": "e8d7eb8b6ac3e4cee354f66a13ef6905b141441eb146135f89b03cb0a3cb46b5"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/run.do_patch.479060",
+      "bytes": 2488,
+      "sha256": "63c1799a01c50fca890c851f24d3a0483fac19a16227aae43b72806a935cadb1"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/run.do_populate_lic.566395",
+      "bytes": 8870,
+      "sha256": "33118f6619efe9163e3c8bce67f6f49cfbe3c3a48c01482b01aeac0a72a761e6"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/run.do_populate_sysroot.768908",
+      "bytes": 1283,
+      "sha256": "7bb9adcf15d432d27871564da564dd5a06d5621d646fe68024d9fd390558e1d7"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/run.do_prepare_recipe_sysroot.768673",
+      "bytes": 27426,
+      "sha256": "a4ebaaae4c7d95b6f54ea7605d150016f1bf00a85005b960a59296a0e6842076"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/run.do_qa_patch.479060",
+      "bytes": 5483,
+      "sha256": "990ffce272b04e27739e1ed22fb087d5cfeba011dd548d3462f45f0699412c25"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/run.do_qa_sysroot.768908",
+      "bytes": 3877,
+      "sha256": "907d34726ca6f9bf1f3e971800f2a1021af8d6a02ef12ea8c465a4a56cc3d39c"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/run.do_qa_unpack.144784",
+      "bytes": 365,
+      "sha256": "526a0a7e232be64fcc0479808841f754f7efcac9697f2c8735b1abbbe29ed741"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/run.do_recipe_qa.143780",
+      "bytes": 2194,
+      "sha256": "370e96b9b98c0dd6309b5d42dde7ed92d9cea764b30e70d6f82f00bcb7f7a0cb"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/run.do_unpack.144784",
+      "bytes": 410,
+      "sha256": "ffdf5944932b23b8bb4bdae9bc8a2309880d45788428a57d61ac5f85fdecd0fd"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-helper-native/1.0/temp/log.do_addto_recipe_sysroot.997354",
+      "bytes": 1464,
+      "sha256": "f1b4a5103093ee01ff3440a8bf3da4df18f021d941aa13e5b8fde757b1f2d93e"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-helper-native/1.0/temp/log.do_compile.997256",
+      "bytes": 85,
+      "sha256": "cdc7b8c1c7fd21281ea1c9db708205e76d16b51f7ed05671910fb0fe987a6a21"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-helper-native/1.0/temp/log.do_configure.997243",
+      "bytes": 1529,
+      "sha256": "99234e797e2669c5d84872ac02d4e9d0d61cc2770ebfeb10c5ac0edc04ecbc44"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-helper-native/1.0/temp/log.do_deploy_source_date_epoch.152707",
+      "bytes": 2707,
+      "sha256": "8a0729f1bb93aa521d100fa7a201168422dd43c23e3017c62523bb0b1b35b515"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-helper-native/1.0/temp/log.do_fetch.151506",
+      "bytes": 1338,
+      "sha256": "0493ca328c4bf23a988577c5331a6e8bc4751b5788c26abe21e1d041d7a35c57"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-helper-native/1.0/temp/log.do_install.997271",
+      "bytes": 184,
+      "sha256": "95be51a435eb53ff2b7c6bf423a498ccdd08274f7f1a2da946b770175aded57a"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-helper-native/1.0/temp/log.do_patch.152228",
+      "bytes": 2674,
+      "sha256": "fe115e2771a49686ac7bf993a85ab4d35afd4018cdb5537cd6a2f6d331ba4b90"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-helper-native/1.0/temp/log.do_populate_sysroot.997286",
+      "bytes": 5772,
+      "sha256": "0c72e3dc117b2cb102cdef2185711d9bd193559fc5f616c128807d6fb9672bf9"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-helper-native/1.0/temp/log.do_prepare_recipe_sysroot.997230",
+      "bytes": 3320,
+      "sha256": "6f7b784efdf360f7bd5abeba06683657e9ee01a4493037e0d4fdaaa17bb23d15"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-helper-native/1.0/temp/log.do_recipe_qa.151236",
+      "bytes": 2393,
+      "sha256": "9e10937d49cf8b3d408265f0c1ca23618a92187f39a061f92a1d3ae2c3ebcb8d"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-helper-native/1.0/temp/log.do_unpack.152105",
+      "bytes": 1781,
+      "sha256": "4ded562de22a0f9a04fe6cdf68a7ef13248b58d4f203ba8db5382f19d901c680"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-helper-native/1.0/temp/run.do_addto_recipe_sysroot.997354",
+      "bytes": 27422,
+      "sha256": "ca6e20b5e6b4e93f661ee66dc9aba02d73dc1899d7288c3361e2badbde8026c5"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-helper-native/1.0/temp/run.do_compile.997256",
+      "bytes": 12038,
+      "sha256": "32906307f2f610fac2e3b4061d660e83f39cda3a7e9df1e69ed7e1083b91ae95"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-helper-native/1.0/temp/run.do_configure.997243",
+      "bytes": 13461,
+      "sha256": "147e27390fb85a4b7d95735e50065649e5d66238f6c8d8ccc526c0b5ed7f1348"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-helper-native/1.0/temp/run.do_deploy_source_date_epoch.152707",
+      "bytes": 11934,
+      "sha256": "6df7c86c1e4c6b165c2c7b7b70338d4cddaace3cf2d0a4327616778c5a5f9748"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-helper-native/1.0/temp/run.do_fetch.151506",
+      "bytes": 390,
+      "sha256": "cdf6c25c7df05c7cda266571a016e4462a7eb5bf660a7332c61ad75012789158"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-helper-native/1.0/temp/run.do_install.997271",
+      "bytes": 11365,
+      "sha256": "e9f19609ddd17699b951cdd1567da6648c9d052e300a96f59af08be0f273065b"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-helper-native/1.0/temp/run.do_patch.152228",
+      "bytes": 2488,
+      "sha256": "63c1799a01c50fca890c851f24d3a0483fac19a16227aae43b72806a935cadb1"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-helper-native/1.0/temp/run.do_populate_sysroot.997286",
+      "bytes": 3419,
+      "sha256": "a3dd4d70c480331c0d3cd136997082a674404a773d79cb55e21a88b8aa0e0de5"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-helper-native/1.0/temp/run.do_prepare_recipe_sysroot.997230",
+      "bytes": 27426,
+      "sha256": "31f1ff69f0436a6300deda4c7f1f9bc0fa12ca22a6f817769873fe05e91adedc"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-helper-native/1.0/temp/run.do_qa_configure.997243",
+      "bytes": 4381,
+      "sha256": "040f5ee6ebff05dea3a4254b52a5526d74a7ad6a39974cebda9e954206c45cb2"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-helper-native/1.0/temp/run.do_qa_patch.152228",
+      "bytes": 5483,
+      "sha256": "990ffce272b04e27739e1ed22fb087d5cfeba011dd548d3462f45f0699412c25"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-helper-native/1.0/temp/run.do_qa_sysroot.997286",
+      "bytes": 3877,
+      "sha256": "907d34726ca6f9bf1f3e971800f2a1021af8d6a02ef12ea8c465a4a56cc3d39c"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-helper-native/1.0/temp/run.do_qa_unpack.152105",
+      "bytes": 365,
+      "sha256": "526a0a7e232be64fcc0479808841f754f7efcac9697f2c8735b1abbbe29ed741"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-helper-native/1.0/temp/run.do_recipe_qa.151236",
+      "bytes": 2194,
+      "sha256": "370e96b9b98c0dd6309b5d42dde7ed92d9cea764b30e70d6f82f00bcb7f7a0cb"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-helper-native/1.0/temp/run.do_unpack.152105",
+      "bytes": 410,
+      "sha256": "ffdf5944932b23b8bb4bdae9bc8a2309880d45788428a57d61ac5f85fdecd0fd"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-system-native/8.2.7/temp/log.do_compile.985665",
+      "bytes": 235232,
+      "sha256": "36444d72a871cab8bffcf130b240f3300721c261ab19e213265bb670fe7fac67"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-system-native/8.2.7/temp/log.do_configure.984086",
+      "bytes": 42237,
+      "sha256": "9a2ff7b6dc11c18e074dad9150a9d3ecea6ca54c8105b3ce4ec34442d0b1221e"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-system-native/8.2.7/temp/log.do_deploy_source_date_epoch.541636",
+      "bytes": 2723,
+      "sha256": "e598da3414fe0b2e1a1e722b3458c50f5cb2771fe8b26c8bc1631030f473de0f"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-system-native/8.2.7/temp/log.do_fetch.147338",
+      "bytes": 47769,
+      "sha256": "73ad81f47fdfd4d271b6029729c43089302db868c3f773cb149a858b7dbe033c"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-system-native/8.2.7/temp/log.do_install.996976",
+      "bytes": 44273,
+      "sha256": "4b6d616cfb72a8035a8069754329eddece69b5bf0e5e378a718099c7eb37ca11"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-system-native/8.2.7/temp/log.do_patch.531929",
+      "bytes": 53956,
+      "sha256": "87d5b8b3c947a86f9e5e7683db9519ac762b3b06c19cb4eb579aff670ed28a77"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-system-native/8.2.7/temp/log.do_populate_sysroot.997037",
+      "bytes": 9772,
+      "sha256": "4025164f3eed7243f5416984e918ab1819c603ea85c0b8a45ed39cf769adb8a9"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-system-native/8.2.7/temp/log.do_prepare_recipe_sysroot.984073",
+      "bytes": 4636,
+      "sha256": "141c6346a55abffd98cfef9cf411789e44d1e7ff38988a723976a5371c16c49e"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-system-native/8.2.7/temp/log.do_recipe_qa.147031",
+      "bytes": 2405,
+      "sha256": "6b40659527352c57a184472c2f1447a6d18b885f1b67995dbfb3bf0b03b3a1dd"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-system-native/8.2.7/temp/log.do_unpack.509775",
+      "bytes": 56845,
+      "sha256": "930bad29f2a763c9bddcf3a14aa60a2e0464593fe6c29197ad710e2a31b611a8"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-system-native/8.2.7/temp/run.do_compile.985665",
+      "bytes": 15316,
+      "sha256": "04ce5dc847e3ce75a3db62d0f77bae151d037ab14dd8902e7bc7b546f15bd220"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-system-native/8.2.7/temp/run.do_configure.984086",
+      "bytes": 15991,
+      "sha256": "ba909ee6ecf051afe982b7bb6ea02395cd27d5d6bb8d4c6f9675b58b5bb02ed6"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-system-native/8.2.7/temp/run.do_deploy_source_date_epoch.541636",
+      "bytes": 12981,
+      "sha256": "69c9435dcc884e227f7a1537fb92cdf14f557b3679cc891772606ec12758d5bc"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-system-native/8.2.7/temp/run.do_fetch.147338",
+      "bytes": 390,
+      "sha256": "cdf6c25c7df05c7cda266571a016e4462a7eb5bf660a7332c61ad75012789158"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-system-native/8.2.7/temp/run.do_install.996976",
+      "bytes": 22959,
+      "sha256": "408abf47a17651a9930b8703c128e34c6dc4056617c8d413f29a5dacbb230efa"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-system-native/8.2.7/temp/run.do_patch.531929",
+      "bytes": 2488,
+      "sha256": "63c1799a01c50fca890c851f24d3a0483fac19a16227aae43b72806a935cadb1"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-system-native/8.2.7/temp/run.do_populate_sysroot.997037",
+      "bytes": 3419,
+      "sha256": "a3dd4d70c480331c0d3cd136997082a674404a773d79cb55e21a88b8aa0e0de5"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-system-native/8.2.7/temp/run.do_prepare_recipe_sysroot.984073",
+      "bytes": 27426,
+      "sha256": "31f1ff69f0436a6300deda4c7f1f9bc0fa12ca22a6f817769873fe05e91adedc"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-system-native/8.2.7/temp/run.do_qa_configure.984086",
+      "bytes": 4381,
+      "sha256": "040f5ee6ebff05dea3a4254b52a5526d74a7ad6a39974cebda9e954206c45cb2"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-system-native/8.2.7/temp/run.do_qa_patch.531929",
+      "bytes": 5483,
+      "sha256": "990ffce272b04e27739e1ed22fb087d5cfeba011dd548d3462f45f0699412c25"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-system-native/8.2.7/temp/run.do_qa_sysroot.997037",
+      "bytes": 3877,
+      "sha256": "907d34726ca6f9bf1f3e971800f2a1021af8d6a02ef12ea8c465a4a56cc3d39c"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-system-native/8.2.7/temp/run.do_qa_unpack.509775",
+      "bytes": 365,
+      "sha256": "526a0a7e232be64fcc0479808841f754f7efcac9697f2c8735b1abbbe29ed741"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-system-native/8.2.7/temp/run.do_recipe_qa.147031",
+      "bytes": 2194,
+      "sha256": "370e96b9b98c0dd6309b5d42dde7ed92d9cea764b30e70d6f82f00bcb7f7a0cb"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-system-native/8.2.7/temp/run.do_unpack.509775",
+      "bytes": 410,
+      "sha256": "ffdf5944932b23b8bb4bdae9bc8a2309880d45788428a57d61ac5f85fdecd0fd"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/deploy/images/tiger/tiger-minboot-0.1-tiger-commands.json",
+      "bytes": 14847,
+      "sha256": "b1fdd19d1f08439b203b719216f8841cd0b3a0aae87abec901e851c1e5113857"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/deploy/images/tiger/tiger-minboot-0.1-tiger-disassembly.txt",
+      "bytes": 7069,
+      "sha256": "0fecb6853e0f000af6295b4acbc8d8efced89ce228aa1bfa24f9912603051f88"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/deploy/images/tiger/tiger-minboot-0.1-tiger-manifest.json",
+      "bytes": 2981,
+      "sha256": "1a478c87019ffc1eb89ba1473864bc6fd61c50094f6672fb04d0f3b8669fda07"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/deploy/images/tiger/tiger-minboot-0.1-tiger-native-identity.json",
+      "bytes": 753,
+      "sha256": "cac2b83fc012de09701ed3c62ad93dd32c0b4f2e86e75d49fd197a75d340aaa2"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/deploy/images/tiger/tiger-minboot-0.1-tiger-nm.txt",
+      "bytes": 488,
+      "sha256": "400edf7384a2a1e8dd2499d0973ac9484efcdcff308bcbdbec4e1f76a777d976"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/deploy/images/tiger/tiger-minboot-0.1-tiger-readelf.txt",
+      "bytes": 2969,
+      "sha256": "73a4856a59ec32d79e4616119b231d68271a3ee7fa2feaf88debc9e452da3ad6"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/deploy/images/tiger/tiger-minboot-0.1-tiger.qemuboot.conf",
+      "bytes": 829,
+      "sha256": "b1218db0a43435e2893340cb5f7117f90d20b51435e2964fe3b232d1996508c0"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/deployment-2/missing-bios/output.log",
+      "bytes": 240,
+      "sha256": "62796c7a8b5db187bc831c01c0875c492e46bc14e6d176c2daced507809c755f"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/deployment-2/missing-bios/tiger-minboot-0.1-tiger.qemuboot.conf",
+      "bytes": 919,
+      "sha256": "796ebb48100c7350b7e127fa400dfaaf50e96bbdc2c855f1b3ba4d22433eb6f6"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/deployment-2/missing-kernel/output.log",
+      "bytes": 1234,
+      "sha256": "61d105ac58c4ac392b96e33e6baf707f8adc4fee43f15294ef6ecbe27b980db8"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/deployment-2/missing-kernel/tiger-minboot-0.1-tiger.qemuboot.conf",
+      "bytes": 942,
+      "sha256": "7e01aaa3f29b9adc9dffac1f1f825dc3336c5145fb5103aeb0fe028859aa6b7a"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/deployment-2/results.json",
+      "bytes": 2149,
+      "sha256": "8453e2b44def726508583061a4fe76e9cde5321bc3a66e0b49556057f55df675"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/deployment-3/missing-bios/output.log",
+      "bytes": 240,
+      "sha256": "0ba1504527c7a20398a6445973b81ea66da0475a7cd12032bf0be99550351aaf"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/deployment-3/missing-bios/tiger-minboot-0.1-tiger.qemuboot.conf",
+      "bytes": 958,
+      "sha256": "2a11c0d995fcc4cb61c81e39591ad55a380d6373392c07a09b9ddae943497bff"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/deployment-3/missing-kernel/output.log",
+      "bytes": 440,
+      "sha256": "d63e612c728c596bbfed203c6ae8ab5db4fe97cd7db3bb1c43ffd224b712b14c"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/deployment-3/missing-kernel/tiger-minboot-0.1-tiger.qemuboot.conf",
+      "bytes": 981,
+      "sha256": "afe46faa3b515fc104c412cabdb5e32140b073b497d1d95bf1f7dc35d6622a65"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/deployment-3/results.json",
+      "bytes": 3714,
+      "sha256": "6901c8f579ede36430b36d4a2d71643bbb18cc6b91318ed83bca1863ae0e878d"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/deployment-3/test-script.py",
+      "bytes": 3623,
+      "sha256": "6b96ac2f3349b1e77a173dd4c4a928f10be3f88f424745e2b3c50d17aa7909c2"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/deployment-3/unexpected-kernel/instructions.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/deployment-3/unexpected-kernel/output.log",
+      "bytes": 1338,
+      "sha256": "81d02f3939b82dd5605371e5821af3849456658020988312d35f04880058b69b"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/deployment-3/unexpected-kernel/tiger-minboot-0.1-tiger.qemuboot.conf",
+      "bytes": 990,
+      "sha256": "a76d9cbf838ac0d65870a4eb24db73fdd9f26da75593513de161c2629c5f1378"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/llvm-native/18.1.8/temp/log.do_compile.849624",
+      "bytes": 1458046,
+      "sha256": "7c3289c783af973e894dd6e31faa69c0f8346a58dfbd49b8dee2081056083f24"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/llvm-native/18.1.8/temp/run.do_compile.849624",
+      "bytes": 10817,
+      "sha256": "f5f38b184699b47872a00f0ee42147d3bb2a74870b6f51551f1f69090a48dec2"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/model-2/cold-and-two-warm-resets/argv.json",
+      "bytes": 858,
+      "sha256": "67adafb82c76bea7108cc86d66455b173b03878ca3e1ce3331f57d33146abc0d"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/model-2/cold-and-two-warm-resets/cold-gdb-argv.json",
+      "bytes": 590,
+      "sha256": "b5f9db480f3856f6f5e14ac8b0699310a7d32fdead5f1bfdf775f92388a6053a"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/model-2/cold-and-two-warm-resets/cold-gdb.log",
+      "bytes": 251,
+      "sha256": "0ef64655d6cfb7d56a7ad44cb035eb8ebd922501345a3824dd33ae3a69773441"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/model-2/cold-and-two-warm-resets/instructions.log",
+      "bytes": 63576,
+      "sha256": "6cfea908cad859898aa2ad7315442f7ee6479e3e408650c8ee3fb24c49219009"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/model-2/cold-and-two-warm-resets/mtree.txt",
+      "bytes": 414,
+      "sha256": "4c31965b836b09c8811731465d4373f24efaadf664ec190234009b690ac8b0d1"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/model-2/cold-and-two-warm-resets/qmp.log",
+      "bytes": 25973,
+      "sha256": "bd4120d3ed80e7cbc3927d799eb32a96a79186b8622673e077439820d5d532df"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/model-2/cold-and-two-warm-resets/state.json",
+      "bytes": 11006,
+      "sha256": "20262cf63db99ab03e619b05b28cb0122fca7b9872fc401656c660208120361d"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/model-2/cold-and-two-warm-resets/uart.log",
+      "bytes": 366,
+      "sha256": "87188cef7159ed17f178b86658b0ad0e4b1717bb4b5777aebe02a62c2e92d50d"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/model-2/cold-and-two-warm-resets/warm-1-gdb-argv.json",
+      "bytes": 590,
+      "sha256": "b5f9db480f3856f6f5e14ac8b0699310a7d32fdead5f1bfdf775f92388a6053a"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/model-2/cold-and-two-warm-resets/warm-1-gdb.log",
+      "bytes": 251,
+      "sha256": "0ef64655d6cfb7d56a7ad44cb035eb8ebd922501345a3824dd33ae3a69773441"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/model-2/cold-and-two-warm-resets/warm-2-gdb-argv.json",
+      "bytes": 590,
+      "sha256": "b5f9db480f3856f6f5e14ac8b0699310a7d32fdead5f1bfdf775f92388a6053a"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/model-2/cold-and-two-warm-resets/warm-2-gdb.log",
+      "bytes": 251,
+      "sha256": "0ef64655d6cfb7d56a7ad44cb035eb8ebd922501345a3824dd33ae3a69773441"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/model-2/dtb-input/argv.json",
+      "bytes": 696,
+      "sha256": "15c5591b4251991dce29c0e3bd916cc445dd390755ecb237ca2f819fa695e485"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/model-2/dtb-input/instructions.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/model-2/dtb-input/output.log",
+      "bytes": 74,
+      "sha256": "fa735e9bd4b9ff3c95f70f32b800e0fd6fc4c1b9ab8bf6906e0b3b45e6ce8318"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/model-2/dtb-input/uart.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/model-2/empty-bios/argv.json",
+      "bytes": 610,
+      "sha256": "b03558d96125364026d6aa292a25e31068bd1c44deb4d7edb5e9ee44191adcd4"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/model-2/empty-bios/instructions.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/model-2/empty-bios/output.log",
+      "bytes": 150,
+      "sha256": "0ec9378990fb4ff3d868f9d94dcb6da8292e5915e9d4f3db18ee4719d58c3ef4"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/model-2/empty-bios/uart.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/model-2/exact-1MiB/argv.json",
+      "bytes": 817,
+      "sha256": "673ee4c16849c0b85c6b8d143056c50fd791fa89693385a89709684ef12e2944"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/model-2/exact-1MiB/cold-gdb-argv.json",
+      "bytes": 590,
+      "sha256": "c112a74cd13887cdcb50bee91b76f35aeab10525a315f0f15d79aac03f4c9fb0"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/model-2/exact-1MiB/cold-gdb.log",
+      "bytes": 251,
+      "sha256": "0ef64655d6cfb7d56a7ad44cb035eb8ebd922501345a3824dd33ae3a69773441"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/model-2/exact-1MiB/instructions.log",
+      "bytes": 21192,
+      "sha256": "2cdcc9faed8f9f5049424f2d4e216bc78af90df35de1eed957409a328449b59f"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/model-2/exact-1MiB/mtree.txt",
+      "bytes": 414,
+      "sha256": "4c31965b836b09c8811731465d4373f24efaadf664ec190234009b690ac8b0d1"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/model-2/exact-1MiB/qmp.log",
+      "bytes": 8654,
+      "sha256": "61886dc7a1aceef31e26a0e1db3af27cb07f149e40003dca9ea9c49e53c55d72"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/model-2/exact-1MiB/state.json",
+      "bytes": 4381,
+      "sha256": "24101c7cf405e8834082b26f7400615548a1e193858dac7b69489f9537f3d973"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/model-2/exact-1MiB/uart.log",
+      "bytes": 122,
+      "sha256": "f421d182b24048b9ef50e03e5a03af9195eabf417a0b93eef2f9238fd75fb318"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/model-2/identity.json",
+      "bytes": 590,
+      "sha256": "1e0dd1bc150fbbb13016e78523ec955d12496a83d4c180cc91e382587eaf7652"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/model-2/initrd-input/argv.json",
+      "bytes": 705,
+      "sha256": "7c656056e417ebb3ed61ac56ad6639153d2ae43dc5f43942f15ed2bfddfcec08"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/model-2/initrd-input/output.log",
+      "bytes": 62,
+      "sha256": "7475dd7bbf5fd1a3e80984aa3dc631cc6b0c3b235a6e180e9e488eee579036cf"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/model-2/kernel-input/argv.json",
+      "bytes": 705,
+      "sha256": "c5ddf3bf3f0946077948ab83f313f44b955e72303d7251fd2b2690502522e81a"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/model-2/kernel-input/instructions.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/model-2/kernel-input/output.log",
+      "bytes": 74,
+      "sha256": "fa735e9bd4b9ff3c95f70f32b800e0fd6fc4c1b9ab8bf6906e0b3b45e6ce8318"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/model-2/kernel-input/uart.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/model-2/load-failure-directory/argv.json",
+      "bytes": 639,
+      "sha256": "095e66b4aab110b589f05a596f8383de6f72ae8ab2af439abc9714a7b2c2d19d"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/model-2/load-failure-directory/instructions.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/model-2/load-failure-directory/output.log",
+      "bytes": 155,
+      "sha256": "0c113e9bc786a956bf0e2ffeced09c240d6ac2e9f965798623bd4c820b943736"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/model-2/load-failure-directory/uart.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/model-2/missing-bios-option/argv.json",
+      "bytes": 547,
+      "sha256": "8ceb7caecab7ad7b23c338a0109c0fc9537d0ded3e43cb595ef3cb10f0e7bdbc"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/model-2/missing-bios-option/instructions.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/model-2/missing-bios-option/output.log",
+      "bytes": 68,
+      "sha256": "97188aa8cb287daa67a64eceeda458d594930b24db07492d2481e302eeef7318"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/model-2/missing-bios-option/uart.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/model-2/nonexistent-bios/argv.json",
+      "bytes": 623,
+      "sha256": "bdb2be55981767d4016dc6a9c527fe15a4afa204e63f87cfe4336e7d9ec02608"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/model-2/nonexistent-bios/instructions.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/model-2/nonexistent-bios/output.log",
+      "bytes": 113,
+      "sha256": "11a7686fea7faac07d41f2bc216c25665a36b1e519988c60e3cfa559571a9e5e"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/model-2/nonexistent-bios/uart.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/model-2/ram-hotplug/argv.json",
+      "bytes": 634,
+      "sha256": "efcef9ec3140b2b5950d200c899f7566eeca9a4bcb887462b95f3ca29ee945a2"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/model-2/ram-hotplug/instructions.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/model-2/ram-hotplug/output.log",
+      "bytes": 73,
+      "sha256": "43a90248fded2787b294db19b234beed6a2dfd86dc8099ee42726d1340ef6d00"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/model-2/ram-hotplug/uart.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/model-2/results.json",
+      "bytes": 31311,
+      "sha256": "d665c80877a0878a04b74ce21b94a36d08d9dd4a5f132e1495471a6fff3d1fb8"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/model-2/test-script.py",
+      "bytes": 16474,
+      "sha256": "5f3cb82d80e99e3ed4b7efca704f16dbfb95ef26ac8fcd9aa13db6b29b5f1b73"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/model-2/too-large-bios/argv.json",
+      "bytes": 622,
+      "sha256": "8f9d4e0565972dfa4d0fa5a31c2108748a4e3f276187d42ff0c8fcf06659a353"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/model-2/too-large-bios/instructions.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/model-2/too-large-bios/output.log",
+      "bytes": 154,
+      "sha256": "3c75820ed75e21714c7307d16c9da2c0b1748364fc7ccfe8187c897d3e9db613"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/model-2/too-large-bios/uart.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/model-2/unreadable-bios/argv.json",
+      "bytes": 625,
+      "sha256": "dc9d032aca4088f224da9b138cbc21522f0e4c652dd33587aa087538a45bbc61"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/model-2/unreadable-bios/instructions.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/model-2/unreadable-bios/output.log",
+      "bytes": 117,
+      "sha256": "1793044118ee2e8e6db279d303761b2df6af89dae69595bdcfb29f3104ab7a84"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/model-2/unreadable-bios/uart.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/model-2/wrong-accelerator/argv.json",
+      "bytes": 630,
+      "sha256": "7bfd5bfdda8431a50c625b17fe2fc4b40f7309fd39922c81d11da97bb6192e85"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/model-2/wrong-accelerator/instructions.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/model-2/wrong-accelerator/output.log",
+      "bytes": 66,
+      "sha256": "87bfe41b09f35714b0894e8df3fed8910fc309c52fb27f81a9137be23d386970"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/model-2/wrong-accelerator/uart.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/model-2/wrong-cpu/argv.json",
+      "bytes": 612,
+      "sha256": "5294cef0098387c13d45a3ddc7f303ef3aefb6367a9d0baa8fb1582bac6a655e"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/model-2/wrong-cpu/instructions.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/model-2/wrong-cpu/output.log",
+      "bytes": 98,
+      "sha256": "911461a17d14cd3706d984af078b487c063de2f9f1483b6f97da27c53f24c481"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/model-2/wrong-cpu/uart.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/model-2/wrong-ram/argv.json",
+      "bytes": 611,
+      "sha256": "86c935b2f0bc7a9fce9f9a4e1a2bd0305a46475c7647edc088b29b69678e20b7"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/model-2/wrong-ram/instructions.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/model-2/wrong-ram/output.log",
+      "bytes": 73,
+      "sha256": "43a90248fded2787b294db19b234beed6a2dfd86dc8099ee42726d1340ef6d00"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/model-2/wrong-ram/uart.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/model-2/wrong-smp/argv.json",
+      "bytes": 612,
+      "sha256": "f3ca248a9bcdf69537d684ba5ff4131ab038b91f7e12d91049c9fdbcedf878f1"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/model-2/wrong-smp/instructions.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/model-2/wrong-smp/output.log",
+      "bytes": 88,
+      "sha256": "7494bf7050c4be571a585fabd29f1bb6b1762691a2b119aef4b921c8f4099f79"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/runqemu-2/cold-gdb-argv.json",
+      "bytes": 611,
+      "sha256": "f541353b7e730007c66aa7e2d1273e9217e6096c64c3bae57bb3fe9157758b22"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/runqemu-2/cold-gdb.log",
+      "bytes": 251,
+      "sha256": "0ef64655d6cfb7d56a7ad44cb035eb8ebd922501345a3824dd33ae3a69773441"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/runqemu-2/instructions.log",
+      "bytes": 63576,
+      "sha256": "6cfea908cad859898aa2ad7315442f7ee6479e3e408650c8ee3fb24c49219009"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/runqemu-2/launcher-argv.json",
+      "bytes": 446,
+      "sha256": "c6d45e8a9b5e46d3570db6ced86818c6a2d3ffc3397f884d2fb833b16e88ace9"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/runqemu-2/mtree.txt",
+      "bytes": 414,
+      "sha256": "4c31965b836b09c8811731465d4373f24efaadf664ec190234009b690ac8b0d1"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/runqemu-2/qmp.log",
+      "bytes": 25377,
+      "sha256": "e78aa2345fb1cbf0b982fe6de5226cd381cfda3629f7f5889bc1daf379d11181"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/runqemu-2/runqemu.log",
+      "bytes": 1462,
+      "sha256": "864868a6c6215659d15daab8600cf9a69bef8dad0597e594ca54bec1919d525c"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/runqemu-2/state.json",
+      "bytes": 11338,
+      "sha256": "6aa679251c3e326db176de98b1d655ce049def2e0718920acb3c334a05a123a9"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/runqemu-2/test-script.py",
+      "bytes": 10533,
+      "sha256": "6dafe8744bd12e82001f879090996e86e199c34bf0cf192b795b0a3a906995e8"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/runqemu-2/warm-1-gdb-argv.json",
+      "bytes": 611,
+      "sha256": "f541353b7e730007c66aa7e2d1273e9217e6096c64c3bae57bb3fe9157758b22"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/runqemu-2/warm-1-gdb.log",
+      "bytes": 251,
+      "sha256": "0ef64655d6cfb7d56a7ad44cb035eb8ebd922501345a3824dd33ae3a69773441"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/runqemu-2/warm-2-gdb-argv.json",
+      "bytes": 611,
+      "sha256": "f541353b7e730007c66aa7e2d1273e9217e6096c64c3bae57bb3fe9157758b22"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/runqemu-2/warm-2-gdb.log",
+      "bytes": 251,
+      "sha256": "0ef64655d6cfb7d56a7ad44cb035eb8ebd922501345a3824dd33ae3a69773441"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/runqemu-recovery-3/cold-gdb-argv.json",
+      "bytes": 611,
+      "sha256": "321b76a2917f310c4b43b6e42d91f49f6913817d32b8950960263f24de173b90"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/runqemu-recovery-3/cold-gdb.log",
+      "bytes": 251,
+      "sha256": "0ef64655d6cfb7d56a7ad44cb035eb8ebd922501345a3824dd33ae3a69773441"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/runqemu-recovery-3/instructions.log",
+      "bytes": 63576,
+      "sha256": "6cfea908cad859898aa2ad7315442f7ee6479e3e408650c8ee3fb24c49219009"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/runqemu-recovery-3/launcher-argv.json",
+      "bytes": 464,
+      "sha256": "bc85b1e1039cab5135cd74261388c086589a27871b4b393cb1422f99eaa3262c"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/runqemu-recovery-3/mtree.txt",
+      "bytes": 414,
+      "sha256": "4c31965b836b09c8811731465d4373f24efaadf664ec190234009b690ac8b0d1"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/runqemu-recovery-3/qmp.log",
+      "bytes": 25404,
+      "sha256": "3d238ecb0ee9ba7c0f8c5430671c038726399293abdbe14ec161296c621ca16f"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/runqemu-recovery-3/runqemu.log",
+      "bytes": 1480,
+      "sha256": "7d822c8e90fd61435d9c2518c7fb27eace8f71e6928cc709c351fff9ab99c1a0"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/runqemu-recovery-3/state.json",
+      "bytes": 11374,
+      "sha256": "f0ee4f0788f333c84fef14e5bee17723adee4e310bfe91fdced2f9ac3f2a1124"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/runqemu-recovery-3/test-script.py",
+      "bytes": 10533,
+      "sha256": "6dafe8744bd12e82001f879090996e86e199c34bf0cf192b795b0a3a906995e8"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/runqemu-recovery-3/warm-1-gdb-argv.json",
+      "bytes": 611,
+      "sha256": "321b76a2917f310c4b43b6e42d91f49f6913817d32b8950960263f24de173b90"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/runqemu-recovery-3/warm-1-gdb.log",
+      "bytes": 251,
+      "sha256": "0ef64655d6cfb7d56a7ad44cb035eb8ebd922501345a3824dd33ae3a69773441"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/runqemu-recovery-3/warm-2-gdb-argv.json",
+      "bytes": 611,
+      "sha256": "321b76a2917f310c4b43b6e42d91f49f6913817d32b8950960263f24de173b90"
+    },
+    {
+      "path": "/home/oops/workspace/build-t016-yocto/evidence/runqemu-recovery-3/warm-2-gdb.log",
+      "bytes": 251,
+      "sha256": "0ef64655d6cfb7d56a7ad44cb035eb8ebd922501345a3824dd33ae3a69773441"
+    }
+  ]
+}
