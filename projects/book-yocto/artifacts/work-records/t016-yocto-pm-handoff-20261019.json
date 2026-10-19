@@ -1,0 +1,625 @@
+{
+  "date": "2026-10-19",
+  "author": "project-manager",
+  "input_opc_commit": "d7983c3f0ee9f21e3a36e8990eaf8b59dddc4acc",
+  "local_evidence": {
+    "manifest_sha256": "5f3e6190d3193963c3a676f945fd3f7b39998b7e45d7d4b95c8e832ddc270708",
+    "groups_verified": 9,
+    "embedded_payloads_verified": 291,
+    "exact_bytes_and_sha256": true,
+    "author_receipt_matches_manifest": true,
+    "recorded_source_before_after_identical": true,
+    "formal_patch_sequence_count": 32,
+    "actual_task_graph_edges_verified": 3,
+    "required_signature_variables_present": true,
+    "no_nonempty_externalsrc_in_final_recipe_environment": true,
+    "runqemu_record_checks": [
+      {
+        "name": "runqemu-2",
+        "qemu_pid": 997465,
+        "snapshots": 6,
+        "gdb_entries": 3,
+        "guest_markers": 3,
+        "launcher_exit_code": 0,
+        "reset_events_in_raw_qmp": 2,
+        "guest_markers_in_raw_launcher_log": 3,
+        "raw_instruction_trace_nonempty": true
+      },
+      {
+        "name": "runqemu-recovery-3",
+        "qemu_pid": 997810,
+        "snapshots": 6,
+        "gdb_entries": 3,
+        "guest_markers": 3,
+        "launcher_exit_code": 0,
+        "reset_events_in_raw_qmp": 2,
+        "guest_markers_in_raw_launcher_log": 3,
+        "raw_instruction_trace_nonempty": true
+      }
+    ],
+    "formal_model_cases_passed": 16,
+    "negative_model_cases_exit_one_and_zero_instruction_trace": 14,
+    "deployment_expected_diagnostics": 3,
+    "prior_failed_deployment_preserved": true,
+    "runqemu_zero_exit_on_child_failure_limitation_verified": true,
+    "recorded_returncodes": {
+      "parse-1.rc": "1",
+      "parse-2.rc": "0",
+      "build-1.rc": "1",
+      "build-2.rc": "0",
+      "system-1.rc": "1",
+      "system-2.rc": "1",
+      "system-3.rc": "0"
+    }
+  },
+  "remote_observation": {
+    "meta": {
+      "head": "4dd7dfda8f2af2d59bdcfe6585418cf43eaa73e8",
+      "branch": "feature/t-016-chapter4-revision",
+      "status": "",
+      "master": "0e3da48b34ef772532535a730a21878cc30ccf67",
+      "remote": "git@github.com:yinzhongkai/meta-tiger.git",
+      "commits": [
+        "4dd7dfda8f2af2d59bdcfe6585418cf43eaa73e8",
+        "cd6c348836346004e801cb13f32ad3fcb12c1dfd",
+        "4178e8dff3682ac6b53c9b35fc7adcc71ce27bfd",
+        "a9fc4e3e9610c961d4f8b2425dd2406f367f290e",
+        "baff3bcb5b441e2be0ea4db89214589ff4520d26",
+        "fa5e5b03ac8e88810c442b73ea7e10bdc221e495",
+        "b303ae6d614f067e11d4cbba57feacaf84ee7e8e",
+        "0e73cd7faacff219fa5de0a7365743ce31402d73"
+      ],
+      "merge_commits": [],
+      "head_parent": "cd6c348836346004e801cb13f32ad3fcb12c1dfd",
+      "head_delta": [
+        "tests/integration/README.md",
+        "tests/integration/test-deployment.py"
+      ]
+    },
+    "poky": {
+      "head": "77d1feb37e280733684ae8a9449fb031d5d7ff40",
+      "branch": "scarthgap",
+      "status": ""
+    },
+    "source": {
+      "head": "7ed31149ac01a9d6bb3a682b9d768936c4315ed3",
+      "branch": "devtool",
+      "status": "",
+      "refs": "7ed31149ac01a9d6bb3a682b9d768936c4315ed3 refs/heads/devtool\na1d3a120027fa3800b115dad4a97c01d14f360d4 refs/heads/devtool-no-overrides\n3a261f929a6154bdc315aabf4cb6c79c57f73652 refs/heads/devtool-override-class-native\n20319f9055a566a426661231f220362cc82028bd refs/heads/devtool-override-class-nativesdk\n041c1c65762b96bce77da424335150d654bf144a refs/heads/master\n19e983791184ebbf30e74b128bd991b106002ca7 refs/notes/devtool\n7ed31149ac01a9d6bb3a682b9d768936c4315ed3 refs/tags/archive/t016-minimal-model-20261017\n041c1c65762b96bce77da424335150d654bf144a refs/tags/devtool-base\n3a261f929a6154bdc315aabf4cb6c79c57f73652 refs/tags/devtool-patched",
+      "protection_marker": true,
+      "bundle_sha256": "c1561b554b272d0a6b847fab6fb5bbcd3707bcc5060d5353713f55279878fd6e"
+    },
+    "compatibility_alias": "/home/oops/workspace/sources/qemu-system-native",
+    "old_workspace_append_exists": false,
+    "new_bblayers": "# POKY_BBLAYERS_CONF_VERSION is increased each time build/conf/bblayers.conf\n# changes incompatibly\nPOKY_BBLAYERS_CONF_VERSION = \"2\"\n\nBBPATH = \"${TOPDIR}\"\nBBFILES ?= \"\"\n\nBBLAYERS ?= \" \\\n  /home/oops/workspace/poky/meta \\\n  /home/oops/workspace/poky/meta-poky \\\n  /home/oops/workspace/poky/meta-yocto-bsp \\\n  /home/oops/workspace/meta-tiger \\\n  \"\n",
+    "source_path": "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7",
+    "formal_applied_patches": [
+      "0001-qemu-Add-addition-environment-space-to-boot-loader-q.patch",
+      "0003-apic-fixup-fallthrough-to-PIC.patch",
+      "0004-configure-Add-pkg-config-handling-for-libgcrypt.patch",
+      "0005-qemu-Do-not-include-file-if-not-exists.patch",
+      "0006-qemu-Add-some-user-space-mmap-tweaks-to-address-musl.patch",
+      "0007-qemu-Determinism-fixes.patch",
+      "0008-tests-meson.build-use-relative-path-to-refer-to-file.patch",
+      "0009-Define-MAP_SYNC-and-MAP_SHARED_VALIDATE-on-needed-li.patch",
+      "0010-hw-pvrdma-Protect-against-buggy-or-malicious-guest-d.patch",
+      "0002-linux-user-Replace-use-of-lfs64-related-functions-an.patch",
+      "fixedmeson.patch",
+      "no-pip.patch",
+      "4a8579ad8629b57a43daa62e46cc7af6e1078116.patch",
+      "0002-linux-user-loongarch64-Remove-TARGET_FORCE_SHMLBA.patch",
+      "0003-linux-user-Add-strace-for-shmat.patch",
+      "0004-linux-user-Rewrite-target_shmat.patch",
+      "0005-tests-tcg-Check-that-shmat-does-not-break-proc-self-.patch",
+      "0001-sched_attr-Do-not-define-for-glibc-2.41.patch",
+      "CVE-2024-8354.patch",
+      "CVE-2025-12464.patch",
+      "0001-python-backport-Remove-deprecated-get_event_loop-cal.patch",
+      "0002-python-backport-avoid-creating-additional-event-loop.patch",
+      "CVE-2025-11234-01.patch",
+      "CVE-2025-11234-02.patch",
+      "CVE-2024-6519.patch",
+      "CVE-2025-14876_p1.patch",
+      "CVE-2025-14876_p2.patch",
+      "CVE-2026-0665.patch",
+      "CVE-2026-2243.patch",
+      "0011-linux-user-workaround-for-missing-MAP_FIXED_NOREPLAC.patch",
+      "0012-linux-user-workaround-for-missing-MAP_SHARED_VALIDAT.patch",
+      "0001-arm-add-minimal-tiger-machine.patch"
+    ],
+    "formal_source": {
+      "hw/arm/tiger.c": {
+        "sha256": "89b25e7f0aa17dd5689641f426277db0caa8b3a7e37c8baf4b6d9c4b8954bc45",
+        "matches_persistent": true
+      },
+      "hw/arm/Kconfig": {
+        "sha256": "3e6e97208ea4c90916ce53107dc54d6129ec4e59706b52c8e008f7deccea6a7f",
+        "matches_persistent": true
+      },
+      "hw/arm/meson.build": {
+        "sha256": "362c3b75dd84711cc9684e2729853575306f05f737903f0b3c896b02d1611c6e",
+        "matches_persistent": true
+      }
+    },
+    "identities": {
+      "/home/oops/workspace/build-t016-yocto/tmp/deploy/images/tiger/tiger-minboot-0.1-tiger.bin": {
+        "bytes": 760,
+        "sha256": "092517d50dfac35b0697f3ec4819e3a3cac351d433a6e537ca4ffea52e7210cb"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/deploy/images/tiger/tiger-minboot-0.1-tiger.elf": {
+        "bytes": 132448,
+        "sha256": "560a718b0c4275fa74bc46f68aa1395368e3961b2d9a2a9665b927f0d67ae901"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/deploy/images/tiger/tiger-minboot-0.1-tiger.map": {
+        "bytes": 3939,
+        "sha256": "fac70c4e94d999a427f093e42535562352320a4f02dcba8876ea95af21be885b"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/deploy/images/tiger/tiger-minboot-0.1-tiger-readelf.txt": {
+        "bytes": 2969,
+        "sha256": "73a4856a59ec32d79e4616119b231d68271a3ee7fa2feaf88debc9e452da3ad6"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/deploy/images/tiger/tiger-minboot-0.1-tiger-nm.txt": {
+        "bytes": 488,
+        "sha256": "400edf7384a2a1e8dd2499d0973ac9484efcdcff308bcbdbec4e1f76a777d976"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/deploy/images/tiger/tiger-minboot-0.1-tiger-disassembly.txt": {
+        "bytes": 7069,
+        "sha256": "0fecb6853e0f000af6295b4acbc8d8efced89ce228aa1bfa24f9912603051f88"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/deploy/images/tiger/tiger-minboot-0.1-tiger-commands.json": {
+        "bytes": 14847,
+        "sha256": "b1fdd19d1f08439b203b719216f8841cd0b3a0aae87abec901e851c1e5113857"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/deploy/images/tiger/tiger-minboot-0.1-tiger-manifest.json": {
+        "bytes": 2981,
+        "sha256": "1a478c87019ffc1eb89ba1473864bc6fd61c50094f6672fb04d0f3b8669fda07"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/deploy/images/tiger/tiger-minboot-0.1-tiger.qemuboot.conf": {
+        "bytes": 829,
+        "sha256": "b1218db0a43435e2893340cb5f7117f90d20b51435e2964fe3b232d1996508c0"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/deploy/images/tiger/tiger-minboot-0.1-tiger-native-identity.json": {
+        "bytes": 753,
+        "sha256": "cac2b83fc012de09701ed3c62ad93dd32c0b4f2e86e75d49fd197a75d340aaa2"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-helper-native/1.0/recipe-sysroot-native/usr/bin/qemu-system-aarch64": {
+        "bytes": 28545544,
+        "sha256": "1f05c31da60eb777e59b07f5075a143a07281b0d5b5473fac2b763a93bfdb002"
+      },
+      "/home/oops/workspace/poky/scripts/runqemu": {
+        "bytes": 75259,
+        "sha256": "d644b4763b968414649f948151d51ff84b1663218ffd4abae3b58d19e4ba7861"
+      }
+    },
+    "tools": {
+      "aarch64-poky-linux-gcc": "3234173045d548835cce7550f86434620cdb9dfe6ce2d08f4ce9d97186364d0c",
+      "aarch64-poky-linux-objcopy": "e46ca5354dfba822aff05a626d90728ca8a29b33bc6a31f34e9d3e20f31c0e6b",
+      "aarch64-poky-linux-readelf": "aec1c334c6c06ecb4039d9fb09e2a40d64426bdc8ae5a294a199a7d699db151b",
+      "aarch64-poky-linux-gcc-nm": "0fb539c9f8f8414905f01c8f87df37c4f15c04e1ca826834dc626e8747b65e35",
+      "aarch64-poky-linux-objdump": "457fa08e1f50290a8c95a6ca00d29cd44a2681e059ec90bf96e07c163e1191ba"
+    },
+    "engineering_file_sha256": {
+      "conf/machine/tiger.conf": "59ab599130de09ed096f8a3a017cc387f2caafe7ca0c686be46f8922e1ca6ee0",
+      "recipes-devtools/qemu/files/0001-arm-add-minimal-tiger-machine.patch": "5437db1b7a95d656840d3ef0e590b84c889a891aed378b0813e1d4b989b94797",
+      "recipes-devtools/qemu/qemu-system-native_8.2.7.bbappend": "c1df6398178eea9d488ef43d0729b2fdd6bb97bcd232fa0c8afcc1435bbb4771",
+      "recipes-test/tiger-minboot/files/COPYING.MIT": "314a2ef2e4e48871ebdae4aad8c9e598041458abbab3a3f9accef0b74e9b09e5",
+      "recipes-test/tiger-minboot/files/build-fixture.py": "21e0fe738af7a159bfa563a163203f33a96d8b8258586569b9ee1da3b70e8991",
+      "recipes-test/tiger-minboot/files/main.c": "aca3ed3a16e00f7f24c1617eea83b6a413eda707e896a885becc82fafa624ac1",
+      "recipes-test/tiger-minboot/files/start.S": "4e04d7a7f24a93963681c23f223a2e5b8023773b0138f3a4886c6c74ab49fd50",
+      "recipes-test/tiger-minboot/files/tiger-minboot.ld": "3b24e7bb31a41271e8d0a682b0eb509b61cc5ab0a92aca5d0df03cc355627640",
+      "recipes-test/tiger-minboot/tiger-minboot_0.1.bb": "a035d638b1d47269d6750cf1e5ce6d3c26daf9f0e4e4c9ddf5257b199f7069d1",
+      "tests/integration/README.md": "ec4b9f60ca41a9e9cbe58f43bf51f9671800018b9685df0c33556c08776c9516",
+      "tests/integration/test-deployment.py": "6b96ac2f3349b1e77a173dd4c4a928f10be3f88f424745e2b3c50d17aa7909c2",
+      "tests/integration/test-runqemu.py": "6dafe8744bd12e82001f879090996e86e199c34bf0cf192b795b0a3a906995e8",
+      "tests/model/README.md": "913c5fb1b328eb0ba894f616d5fe944a27ed5badb403949321dcd3ae70f5fa47",
+      "tests/model/build-minboot.py": "d13bc2ba577e63164ee7e0ba74b88cf330fc618541c0a06580e9500e7cc3fca8",
+      "tests/model/test-tiger.py": "5f3cb82d80e99e3ed4b7efca704f16dbfb95ef26ac8fcd9aa13db6b29b5f1b73"
+    },
+    "task_logs": {
+      "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/run.do_package_rpm.769103": {
+        "bytes": 31411,
+        "sha256": "5fe5585d26c8fa354da997a4f53adfe97a019706658ff0eef0f46caf81408f96"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/run.do_package.768904": {
+        "bytes": 33821,
+        "sha256": "8cb74d1bc1362e016808789275371ec3ff332e4c66d55a8ee28049b79b8c22d0"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/log.do_package_write_rpm.769103": {
+        "bytes": 3012,
+        "sha256": "7594367ca1ebeefbba37d65028793e5ea6060ae438ed580c5c19bd763c86c6aa"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/log.do_generate_qemuboot.997363": {
+        "bytes": 955,
+        "sha256": "99ca7837f672a3593a74ed9b3aeeff0a81fa7fd607b25e44730fdd7aadde5c8b"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/run.do_create_runtime_spdx.981616": {
+        "bytes": 8968,
+        "sha256": "92e533076c6e531cb15e6d06fd8aceb398802274ea598ac3dc5848eb43708a5d"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/run.do_populate_sysroot.768908": {
+        "bytes": 1283,
+        "sha256": "7bb9adcf15d432d27871564da564dd5a06d5621d646fe68024d9fd390558e1d7"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/log.do_create_spdx.981574": {
+        "bytes": 9731,
+        "sha256": "362424f4bf7e3f06ca8ce7d9bcd0386394ac8fd0fce856d8e9f48373ff30e9f3"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/run.do_create_spdx.981574": {
+        "bytes": 29730,
+        "sha256": "f94f62530b4f8c5bb4045f096e0215e783a2b005245d89b66f372dc6f6c3c25f"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/log.do_prepare_recipe_sysroot.768673": {
+        "bytes": 2909,
+        "sha256": "1733944bda00376a8188d465bee027a7fd4cf89d4909a01fa8260e5a78417c7d"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/run.do_recipe_qa.143780": {
+        "bytes": 2194,
+        "sha256": "370e96b9b98c0dd6309b5d42dde7ed92d9cea764b30e70d6f82f00bcb7f7a0cb"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/run.do_qa_unpack.144784": {
+        "bytes": 365,
+        "sha256": "526a0a7e232be64fcc0479808841f754f7efcac9697f2c8735b1abbbe29ed741"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/run.do_deploy_source_date_epoch.497041": {
+        "bytes": 13330,
+        "sha256": "a8ccc8fc9ae55a003d6770f569f400975c4ab3fd000b763df56f6efbb4bae850"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/log.do_recipe_qa.143780": {
+        "bytes": 2548,
+        "sha256": "335804a43f5e4ed990c1f99edf51200e5730a613426853de4d988f4382b6b5f2"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/log.do_packagedata.769050": {
+        "bytes": 3102,
+        "sha256": "fa5a0138a029d6208325e9ea4275dd6845bc50de868541bd6ad5a3a90eb98762"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/run.do_populate_lic.566395": {
+        "bytes": 8870,
+        "sha256": "33118f6619efe9163e3c8bce67f6f49cfbe3c3a48c01482b01aeac0a72a761e6"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/log.do_patch.479060": {
+        "bytes": 8889,
+        "sha256": "2b54fa5165df0e8f70d8329b76ffbaf1ca7f3a93ace323fbabaa3cf2a2251b88"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/log.do_unpack.144784": {
+        "bytes": 8281,
+        "sha256": "896107139c950c8f3fa231a77df737ef4dd20f933ce3e2f22d992e2dd34c19be"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/run.do_qa_sysroot.768908": {
+        "bytes": 3877,
+        "sha256": "907d34726ca6f9bf1f3e971800f2a1021af8d6a02ef12ea8c465a4a56cc3d39c"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/log.do_package_qa.769104": {
+        "bytes": 2921,
+        "sha256": "6b481fede5825c19f3477d9f602e01ae4044333e60de3e10941274431feca5ad"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/log.do_deploy.997373": {
+        "bytes": 2747,
+        "sha256": "7d45453566583469fc73197c5afee369cf2dca1e2beb8a42965ef79fdede86e4"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/run.do_qa_patch.479060": {
+        "bytes": 5483,
+        "sha256": "990ffce272b04e27739e1ed22fb087d5cfeba011dd548d3462f45f0699412c25"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/log.do_package.768904": {
+        "bytes": 3787,
+        "sha256": "e801edd6e6fb3987b4d6fcb19d0419370351c00bb32f70eea28a5358bdb6fd8a"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/run.do_compile.768686": {
+        "bytes": 13535,
+        "sha256": "e7790867de4f419f6ea7f686b8c816df8542ec436cbe33f7e781861894b92259"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/log.do_collect_spdx_deps.981559": {
+        "bytes": 646,
+        "sha256": "0b25e886ab6124ec11f28bd2ad181243a1bfb72a1ecb6b84402e9a14e06be531"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/run.do_generate_qemuboot.997363": {
+        "bytes": 2276,
+        "sha256": "5172a5b755ce706a0f2f95672ab741b1f9e6d590110d49a343246d8b8d2f49e0"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/run.do_package_write_rpm.769103": {
+        "bytes": 33133,
+        "sha256": "6b1c7d24386bfef11c34d9b5e21e024798f3deee84854059724ed9498371afe3"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/log.do_compile.768686": {
+        "bytes": 16314,
+        "sha256": "dcd623604a14647f11372e4984bd70f3962c4a8a0febdf0157743718eeb898b1"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/run.do_packagedata.769050": {
+        "bytes": 2954,
+        "sha256": "e8d7eb8b6ac3e4cee354f66a13ef6905b141441eb146135f89b03cb0a3cb46b5"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/run.do_collect_spdx_deps.981559": {
+        "bytes": 1284,
+        "sha256": "ffc5f62b3b96fe00316a36e3cd475b7f069900c5675bb670ae136b93b7f120ae"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/log.do_fetch.144015": {
+        "bytes": 7134,
+        "sha256": "52f27df7b1e0df405d8a2ae5c0345b382efe356fe5d819ded9921aa1c15e0b0b"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/run.do_fetch.144015": {
+        "bytes": 390,
+        "sha256": "cdf6c25c7df05c7cda266571a016e4462a7eb5bf660a7332c61ad75012789158"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/run.do_prepare_recipe_sysroot.768673": {
+        "bytes": 27426,
+        "sha256": "a4ebaaae4c7d95b6f54ea7605d150016f1bf00a85005b960a59296a0e6842076"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/run.do_package_qa.769104": {
+        "bytes": 17007,
+        "sha256": "eafd423e507dbdd23b5f10ef917d27633e2cefbb8ef979e4fe7787d701d91fe2"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/log.do_create_runtime_spdx.981616": {
+        "bytes": 2917,
+        "sha256": "f3349a1f671d184aa7dc6aedb6433b6a455e8af1bf1fb2af8dae1ff85ea612a0"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/log.do_populate_lic.566395": {
+        "bytes": 2977,
+        "sha256": "7966986d10c27018b66896453bedf6afe0a2832a1367b3ab1dbadfe8b7396fcc"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/run.do_unpack.144784": {
+        "bytes": 410,
+        "sha256": "ffdf5944932b23b8bb4bdae9bc8a2309880d45788428a57d61ac5f85fdecd0fd"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/run.do_deploy.997373": {
+        "bytes": 13371,
+        "sha256": "b688194803d37ff6a423f4c9dd5501eb3f1e18575a5e37b1c9db74582ae368f3"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/run.do_patch.479060": {
+        "bytes": 2488,
+        "sha256": "63c1799a01c50fca890c851f24d3a0483fac19a16227aae43b72806a935cadb1"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/log.do_populate_sysroot.768908": {
+        "bytes": 4571,
+        "sha256": "6feda87df5b930e76169d641517a2fabe3589a76d1f44b68ae022b827b52597f"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/tiger-poky-linux/tiger-minboot/0.1/temp/log.do_deploy_source_date_epoch.497041": {
+        "bytes": 2614,
+        "sha256": "5ff5e823af11e1744eb0fb8bc41aaeb60e72b0754b3d2f2f97d908d074a2f210"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-helper-native/1.0/temp/run.do_recipe_qa.151236": {
+        "bytes": 2194,
+        "sha256": "370e96b9b98c0dd6309b5d42dde7ed92d9cea764b30e70d6f82f00bcb7f7a0cb"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-helper-native/1.0/temp/log.do_recipe_qa.151236": {
+        "bytes": 2393,
+        "sha256": "9e10937d49cf8b3d408265f0c1ca23618a92187f39a061f92a1d3ae2c3ebcb8d"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-helper-native/1.0/temp/log.do_compile.997256": {
+        "bytes": 85,
+        "sha256": "cdc7b8c1c7fd21281ea1c9db708205e76d16b51f7ed05671910fb0fe987a6a21"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-helper-native/1.0/temp/run.do_qa_unpack.152105": {
+        "bytes": 365,
+        "sha256": "526a0a7e232be64fcc0479808841f754f7efcac9697f2c8735b1abbbe29ed741"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-helper-native/1.0/temp/run.do_qa_sysroot.997286": {
+        "bytes": 3877,
+        "sha256": "907d34726ca6f9bf1f3e971800f2a1021af8d6a02ef12ea8c465a4a56cc3d39c"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-helper-native/1.0/temp/run.do_unpack.152105": {
+        "bytes": 410,
+        "sha256": "ffdf5944932b23b8bb4bdae9bc8a2309880d45788428a57d61ac5f85fdecd0fd"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-helper-native/1.0/temp/run.do_qa_configure.997243": {
+        "bytes": 4381,
+        "sha256": "040f5ee6ebff05dea3a4254b52a5526d74a7ad6a39974cebda9e954206c45cb2"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-helper-native/1.0/temp/run.do_deploy_source_date_epoch.152707": {
+        "bytes": 11934,
+        "sha256": "6df7c86c1e4c6b165c2c7b7b70338d4cddaace3cf2d0a4327616778c5a5f9748"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-helper-native/1.0/temp/run.do_addto_recipe_sysroot.997354": {
+        "bytes": 27422,
+        "sha256": "ca6e20b5e6b4e93f661ee66dc9aba02d73dc1899d7288c3361e2badbde8026c5"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-helper-native/1.0/temp/run.do_compile.997256": {
+        "bytes": 12038,
+        "sha256": "32906307f2f610fac2e3b4061d660e83f39cda3a7e9df1e69ed7e1083b91ae95"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-helper-native/1.0/temp/log.do_unpack.152105": {
+        "bytes": 1781,
+        "sha256": "4ded562de22a0f9a04fe6cdf68a7ef13248b58d4f203ba8db5382f19d901c680"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-helper-native/1.0/temp/run.do_prepare_recipe_sysroot.997230": {
+        "bytes": 27426,
+        "sha256": "31f1ff69f0436a6300deda4c7f1f9bc0fa12ca22a6f817769873fe05e91adedc"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-helper-native/1.0/temp/log.do_fetch.151506": {
+        "bytes": 1338,
+        "sha256": "0493ca328c4bf23a988577c5331a6e8bc4751b5788c26abe21e1d041d7a35c57"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-helper-native/1.0/temp/log.do_deploy_source_date_epoch.152707": {
+        "bytes": 2707,
+        "sha256": "8a0729f1bb93aa521d100fa7a201168422dd43c23e3017c62523bb0b1b35b515"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-helper-native/1.0/temp/run.do_install.997271": {
+        "bytes": 11365,
+        "sha256": "e9f19609ddd17699b951cdd1567da6648c9d052e300a96f59af08be0f273065b"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-helper-native/1.0/temp/run.do_configure.997243": {
+        "bytes": 13461,
+        "sha256": "147e27390fb85a4b7d95735e50065649e5d66238f6c8d8ccc526c0b5ed7f1348"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-helper-native/1.0/temp/run.do_populate_sysroot.997286": {
+        "bytes": 3419,
+        "sha256": "a3dd4d70c480331c0d3cd136997082a674404a773d79cb55e21a88b8aa0e0de5"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-helper-native/1.0/temp/log.do_patch.152228": {
+        "bytes": 2674,
+        "sha256": "fe115e2771a49686ac7bf993a85ab4d35afd4018cdb5537cd6a2f6d331ba4b90"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-helper-native/1.0/temp/log.do_addto_recipe_sysroot.997354": {
+        "bytes": 1464,
+        "sha256": "f1b4a5103093ee01ff3440a8bf3da4df18f021d941aa13e5b8fde757b1f2d93e"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-helper-native/1.0/temp/log.do_install.997271": {
+        "bytes": 184,
+        "sha256": "95be51a435eb53ff2b7c6bf423a498ccdd08274f7f1a2da946b770175aded57a"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-helper-native/1.0/temp/log.do_configure.997243": {
+        "bytes": 1529,
+        "sha256": "99234e797e2669c5d84872ac02d4e9d0d61cc2770ebfeb10c5ac0edc04ecbc44"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-helper-native/1.0/temp/log.do_prepare_recipe_sysroot.997230": {
+        "bytes": 3320,
+        "sha256": "6f7b784efdf360f7bd5abeba06683657e9ee01a4493037e0d4fdaaa17bb23d15"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-helper-native/1.0/temp/run.do_patch.152228": {
+        "bytes": 2488,
+        "sha256": "63c1799a01c50fca890c851f24d3a0483fac19a16227aae43b72806a935cadb1"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-helper-native/1.0/temp/run.do_fetch.151506": {
+        "bytes": 390,
+        "sha256": "cdf6c25c7df05c7cda266571a016e4462a7eb5bf660a7332c61ad75012789158"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-helper-native/1.0/temp/run.do_qa_patch.152228": {
+        "bytes": 5483,
+        "sha256": "990ffce272b04e27739e1ed22fb087d5cfeba011dd548d3462f45f0699412c25"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-helper-native/1.0/temp/log.do_populate_sysroot.997286": {
+        "bytes": 5772,
+        "sha256": "0c72e3dc117b2cb102cdef2185711d9bd193559fc5f616c128807d6fb9672bf9"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-system-native/8.2.7/temp/run.do_patch.531929": {
+        "bytes": 2488,
+        "sha256": "63c1799a01c50fca890c851f24d3a0483fac19a16227aae43b72806a935cadb1"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-system-native/8.2.7/temp/log.do_compile.985665": {
+        "bytes": 235232,
+        "sha256": "36444d72a871cab8bffcf130b240f3300721c261ab19e213265bb670fe7fac67"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-system-native/8.2.7/temp/run.do_recipe_qa.147031": {
+        "bytes": 2194,
+        "sha256": "370e96b9b98c0dd6309b5d42dde7ed92d9cea764b30e70d6f82f00bcb7f7a0cb"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-system-native/8.2.7/temp/log.do_fetch.147338": {
+        "bytes": 47769,
+        "sha256": "73ad81f47fdfd4d271b6029729c43089302db868c3f773cb149a858b7dbe033c"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-system-native/8.2.7/temp/run.do_qa_sysroot.997037": {
+        "bytes": 3877,
+        "sha256": "907d34726ca6f9bf1f3e971800f2a1021af8d6a02ef12ea8c465a4a56cc3d39c"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-system-native/8.2.7/temp/log.do_configure.984086": {
+        "bytes": 42237,
+        "sha256": "9a2ff7b6dc11c18e074dad9150a9d3ecea6ca54c8105b3ce4ec34442d0b1221e"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-system-native/8.2.7/temp/log.do_prepare_recipe_sysroot.984073": {
+        "bytes": 4636,
+        "sha256": "141c6346a55abffd98cfef9cf411789e44d1e7ff38988a723976a5371c16c49e"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-system-native/8.2.7/temp/run.do_install.996976": {
+        "bytes": 22959,
+        "sha256": "408abf47a17651a9930b8703c128e34c6dc4056617c8d413f29a5dacbb230efa"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-system-native/8.2.7/temp/run.do_deploy_source_date_epoch.541636": {
+        "bytes": 12981,
+        "sha256": "69c9435dcc884e227f7a1537fb92cdf14f557b3679cc891772606ec12758d5bc"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-system-native/8.2.7/temp/run.do_qa_patch.531929": {
+        "bytes": 5483,
+        "sha256": "990ffce272b04e27739e1ed22fb087d5cfeba011dd548d3462f45f0699412c25"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-system-native/8.2.7/temp/run.do_configure.984086": {
+        "bytes": 15991,
+        "sha256": "ba909ee6ecf051afe982b7bb6ea02395cd27d5d6bb8d4c6f9675b58b5bb02ed6"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-system-native/8.2.7/temp/log.do_patch.531929": {
+        "bytes": 53956,
+        "sha256": "87d5b8b3c947a86f9e5e7683db9519ac762b3b06c19cb4eb579aff670ed28a77"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-system-native/8.2.7/temp/run.do_qa_configure.984086": {
+        "bytes": 4381,
+        "sha256": "040f5ee6ebff05dea3a4254b52a5526d74a7ad6a39974cebda9e954206c45cb2"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-system-native/8.2.7/temp/log.do_populate_sysroot.997037": {
+        "bytes": 9772,
+        "sha256": "4025164f3eed7243f5416984e918ab1819c603ea85c0b8a45ed39cf769adb8a9"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-system-native/8.2.7/temp/run.do_fetch.147338": {
+        "bytes": 390,
+        "sha256": "cdf6c25c7df05c7cda266571a016e4462a7eb5bf660a7332c61ad75012789158"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-system-native/8.2.7/temp/log.do_install.996976": {
+        "bytes": 44273,
+        "sha256": "4b6d616cfb72a8035a8069754329eddece69b5bf0e5e378a718099c7eb37ca11"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-system-native/8.2.7/temp/log.do_deploy_source_date_epoch.541636": {
+        "bytes": 2723,
+        "sha256": "e598da3414fe0b2e1a1e722b3458c50f5cb2771fe8b26c8bc1631030f473de0f"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-system-native/8.2.7/temp/run.do_prepare_recipe_sysroot.984073": {
+        "bytes": 27426,
+        "sha256": "31f1ff69f0436a6300deda4c7f1f9bc0fa12ca22a6f817769873fe05e91adedc"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-system-native/8.2.7/temp/log.do_unpack.509775": {
+        "bytes": 56845,
+        "sha256": "930bad29f2a763c9bddcf3a14aa60a2e0464593fe6c29197ad710e2a31b611a8"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-system-native/8.2.7/temp/run.do_qa_unpack.509775": {
+        "bytes": 365,
+        "sha256": "526a0a7e232be64fcc0479808841f754f7efcac9697f2c8735b1abbbe29ed741"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-system-native/8.2.7/temp/log.do_recipe_qa.147031": {
+        "bytes": 2405,
+        "sha256": "6b40659527352c57a184472c2f1447a6d18b885f1b67995dbfb3bf0b03b3a1dd"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-system-native/8.2.7/temp/run.do_unpack.509775": {
+        "bytes": 410,
+        "sha256": "ffdf5944932b23b8bb4bdae9bc8a2309880d45788428a57d61ac5f85fdecd0fd"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-system-native/8.2.7/temp/run.do_compile.985665": {
+        "bytes": 15316,
+        "sha256": "04ce5dc847e3ce75a3db62d0f77bae151d037ab14dd8902e7bc7b546f15bd220"
+      },
+      "/home/oops/workspace/build-t016-yocto/tmp/work/x86_64-linux/qemu-system-native/8.2.7/temp/run.do_populate_sysroot.997037": {
+        "bytes": 3419,
+        "sha256": "a3dd4d70c480331c0d3cd136997082a674404a773d79cb55e21a88b8aa0e0de5"
+      }
+    },
+    "qemu_pids_alive": [],
+    "active_processes": [],
+    "disk_free_gib": 626.2
+  },
+  "remote_verification": {
+    "status": "pass",
+    "metadata_unchanged_since_actual_build": true,
+    "original_model_patch_firmware_and_test_files_unchanged": true,
+    "source_refs_bundle_and_protection_verified": true,
+    "formal_source_and_patch_sequence_verified": true,
+    "workspace_override_removed": true,
+    "deployment_hashes_match": true,
+    "tool_hashes_verified": 5,
+    "critical_task_logs_verified": 90,
+    "recorded_qemu_pids_exited": true
+  },
+  "conclusion": "ready_for_writer_handoff",
+  "blockers": [],
+  "limitations": [
+    "PM handoff evidence and physical versions only; no runtime tests rerun or independent model/code review",
+    "Recorded uninative disabled warnings retained; no claim of cross-host cache or relocation verification",
+    "Locked runqemu can return zero after child QEMU rejection; guest execution evidence and diagnostics required",
+    "T-016 independent review and user chapter approval remain pending"
+  ],
+  "audit_execution_notes": [
+    "Initial SSH request carrying local evidence metadata was rejected by automatic approval review; not executed",
+    "Verified existing tiger SSH configuration and used StrictHostKeyChecking with read-only remote observations; all comparisons performed locally",
+    "First local remote-comparison attempt used an overly broad workspace substring check; corrected to the build/workspace layer path, without changing engineering assets"
+  ],
+  "governance_validation": {
+    "framework_validator_exit_code": 0,
+    "roles": 22,
+    "skills": 37,
+    "projects": 1,
+    "project_template_sets": 1,
+    "local_links_checked": 577,
+    "diff_check_exit_code": 0,
+    "original_professional_stages_reviews_and_other_tasks_unchanged": true,
+    "original_index_entries_unchanged": true,
+    "frozen_design_blueprint_workspace_members_decisions_handoffs_unchanged": true,
+    "original_raw_reports_and_receipts_unchanged": true,
+    "manuscript_commit": "9c74596591728c0f2d614e357059034551a42dca",
+    "manuscript_branch": "feature/t-016-chapter4-revision",
+    "manuscript_clean": true
+  }
+}
