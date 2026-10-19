@@ -4,12 +4,13 @@
 
 | 成果 ID | 名称与位置 | 存储位置 | 负责人 | 关联任务 | 版本/精确提交 | 状态 | 批准决定 |
 |---|---|---|---|---|---|---|---|
-| A-001 | [今天吃什么首版产品需求草案](product-requirements.md) | OPC artifacts；截图参考位于 references/meal-wheel-reference.png | product-manager | [T-001](../TASKS.md#t-001产品需求首轮澄清)、[T-003](../TASKS.md#t-003整理首版需求与架构师交接) | 0.7，2026-10-19；交接指纹见 H-002 | draft | 功能及偏好依据 D-001 至 D-009；D-010、D-011 为阶段与分工依据；数据源与覆盖仍待验证，整份版本未新增批准 |
+| A-001 | [今天吃什么首版产品需求草案](product-requirements.md) | OPC artifacts；截图参考位于 references/meal-wheel-reference.png | product-manager | [T-001](../TASKS.md#t-001产品需求首轮澄清)、[T-003](../TASKS.md#t-003整理首版需求与架构师交接)、[T-006](../TASKS.md#t-006写回用户确认的七项规则) | 0.8，2026-10-19；当前指纹见 H-003，v0.7 输入历史见 H-002 | draft | D-012 至 D-015 确认七项业务选择；现为 15/13/35，具体来源、平台、许可与真实覆盖仍待验证，未新增整份版本批准 |
 | A-002 | [高德接口免费额度与本机菜单保存授权核实](amap-usage-assessment.md) | OPC artifacts | product-manager | [T-001](../TASKS.md#t-001产品需求首轮澄清) | 0.2，2026-10-16 | draft | 尚无；已按 D-009 补充长期免费判断，未批准最终选型 |
 | A-003 | [首版餐厅数据源可行性比较](data-source-feasibility.md) | OPC artifacts | product-manager | [T-002](../TASKS.md#t-002数据源可行性验证与首版界面方案) | 0.1，2026-10-16 | draft | 尚无；林萃桥真实覆盖及最终选型未确认 |
 | A-004 | [首版页面与交互方案](interface-plan.md) | OPC artifacts；治理附件 meal-wheel-preview.html | product-manager | [T-002](../TASKS.md#t-002数据源可行性验证与首版界面方案) | 0.1，2026-10-16 | draft | D-011 记录用户同意先沿用界面方向；保留为参考，后续设计由架构师负责 |
-| A-005 | [数据源与林萃桥覆盖验证记录](architecture-data-verification.md) | OPC artifacts；官方条件及实际查询失败证据 | architect | [T-002](../TASKS.md#t-002数据源可行性验证与首版界面方案) | 0.1，2026-10-19 | draft | 尚无；V-03 及项目许可、平台条件未验证通过，新增 Private.coffee 候选未选定 |
-| A-006 | [首版系统架构与交互设计](system-architecture.md) | OPC artifacts；系统、模型、接口、状态及 15/9/26 追溯 | architect | [T-002](../TASKS.md#t-002数据源可行性验证与首版界面方案) | 0.1，2026-10-19 | draft | 尚无；TBD-03 至 TBD-06 与 AR-01 至 AR-11 交 H-003 整理，未改写已确认需求 |
+| A-005 | [数据源与林萃桥覆盖验证记录](architecture-data-verification.md) | OPC artifacts；官方中心补证及实际查询记录 | architect | [T-002](../TASKS.md#t-002数据源可行性验证与首版界面方案) | 0.2，2026-10-19 | draft | 按 D-012/D-013 验证开放数据及成功样本；OSM 站点中心核验通过，餐厅样本、项目许可、平台与运行条件仍未通过，未选定服务 |
+| A-006 | [首版系统架构与交互设计](system-architecture.md) | OPC artifacts；系统、模型、接口、状态及 15/13/35 追溯 | architect | [T-002](../TASKS.md#t-002数据源可行性验证与首版界面方案) | 0.2，2026-10-19 | draft | 已按 A-001 v0.8、D-012 至 D-015 同步七项业务选择；H-003 整理范围已关闭，未获整份架构或实现批准 |
+| A-007 | [首版业务规则与数据源推进选项](product-decision-options.md) | OPC artifacts；7 项已确认选择、5 项外部待补条件及架构反馈对应 | product-manager | [T-005](../TASKS.md#t-005整理架构反馈中的用户确认选项)、[T-006](../TASKS.md#t-006写回用户确认的七项规则) | 0.2，2026-10-19；原选项输入提交 048a30563eaacfcf1c5cfc0337ae1a40d7dc8a5e | draft | D-012 至 D-015 确认 1A、2B、3A 至 7A；业务规则已写回 A-001 v0.8，外部技术和许可条件继续待验证 |
 
 OPC 治理与协作成果使用当前项目 `artifacts/` 内的正文链接；产品代码和直接业务交付物使用“成果物仓库 + 仓库内路径”，并记录其合入后的最终提交。快进合并后可直接引用通过最终验证的普通功能提交，可移动分支名不能代替精确提交。
 
