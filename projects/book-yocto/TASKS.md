@@ -729,7 +729,19 @@
 
 #### reviewer 的正文审校意见
 
-- 待本人接收并提交；此处为安排占位，不代表已开始或给出结论。
+- 接收、署名与日期：book-yocto / reviewer；2026-10-19 接收，2026-10-20 完成本轮独立全文技术/教学审校（Asia/Shanghai）。接收起点为 OPC `3413664cace6b270ec241abde292d25845921699`；已重新读取实际 TEAM 登记、自身配置、active reviewer 角色/scope、全部五项有效技能及当前规则/工作区/关联记录。两本机仓库均在本任务配对 feature 且开始干净，目标长期分支为祖先；未启动其他成员。
+- 唯一受评版本：`D:/book-yocto` 的 `feature/t-016-chapter4-revision`，`yocto/task05-4-让QEMU长出tiger这块板.md`，v0.1，固定提交 `003910bf2971e10702019940535c690957740431`、blob `394494f1f7cb078b197d562ff376f6ef8d76e9af`，全文 792 行。开始时同时核对工作文件 hash 与该 blob，结束时再次核对；书稿 main 仍为 WORKSPACE 的 `9c74596591728c0f2d614e357059034551a42dca`，本轮未改正文。
+- 结论：**pass，限本轮固定版本的正文技术/教学审校及与已有实测证据的对应范围；未发现新增必须修订项，无需新增 R-C4 问题编号。** 这不是本成员重新运行整章实验、后续三位专业成员已完成核对、配套工程已对外可取或章节已获批准的结论。PM-C4-01、用户通读及其余专业意见继续按原安排处理。
+- 依据与阅读范围：完整读取受评章、chapter 3 前置正文、A-004 v0.5 approved、[A-005 v0.2](artifacts/A-005-tiger-platform-design.md) approved / D-014、[A-006 v0.1](artifacts/A-006-chapter4-blueprint.md) 及其继续实施授权、D-001～D-015、T-016 本轮及相关阶段、两份[模型报告](artifacts/work-records/t016-qemu-model-validation.md)/[系统报告](artifacts/work-records/t016-yocto-system-validation.md)、[作者交付记录](artifacts/work-records/t016-chapter4-writer-revision.md)；解析两次 PM 工程交接回执，核对其版本、证据范围和限制；刷新 A-002 v0.8、A-003 的本章/跨章相关区间、T-017 及必要前后章衔接。已关闭的其他章节评审正文和无关历史未遍读。
+- 固定工程实查：只读重核 SSH tiger 的 `meta-tiger` 任务 feature `4dd7dfda8f2af2d59bdcfe6585418cf43eaa73e8`、master `0e3da48b34ef772532535a730a21878cc30ccf67`、Poky `77d1feb37e280733684ae8a9449fb031d5d7ff40` 和持久 source `7ed31149ac01a9d6bb3a682b9d768936c4315ed3`，均干净。直接读取完整 `tiger.c`、固件启动/C/链接文件、精确 append、machine、fixture 配方/生成器及两个集成测试脚本，并补核锁定 ARM loader/reset、ROM owner、PL011 reset、devtool reset 源码区间；不只采纳作者或工程师报告的结论。
+- 源码/配置对应：正文 13 组 Kconfig/Meson/C/汇编/链接/BitBake 节选与固定源按行序逐行比对通过（仅忽略节选的行首缩进/行尾空白及空行）；只读 `format-patch -1 --stdout HEAD` 与既有正式 patch 逐字节相同，SHA-256 `5437db1b7a95d656840d3ef0e590b84c889a891aed378b0813e1d4b989b94797`。正式源码确为 31+1 项应用，三个模型文件与持久源逐字节相同；实际构建 metadata `cd6c348836346004e801cb13f32ad3fcb12c1dfd` 到交接头只改变部署测试/README，不把该交接头说成另一次构建来源。
+- 原始证据对应：重新校验模型 9 包/263 份内嵌原文和系统 9 包/291 份内嵌原文的字节数及 SHA-256，全部一致。人工重点读取实际开发/构建/控制脚本、最终变量、任务图/签名、正式发布身份、两轮 runqemu 的 QMP/GDB/state/串口和指令/PL011 trace、最终模型矩阵、部署失败/修正/恢复记录；机器完整性检查不冒充逐行人工审查全部编译输出。正文六组真实输出/配置节选均能在原始文本找到保持空白和空行的逐字原文。
+- 主线核对结果：system-native 与 user-mode 目标、三窗口/单核 TCG、raw/ELF 和 data-LMA/RAM-VMA、一次性 firmware loader/reset、轮询 PL011/24 MHz、精确 append/32 项应用、fixture compile→generate→deploy/helper 依赖、none 字段和最终相对路径相互对应。真实任务图三条关键依赖边及实际 sigdata 均有原文；正式 raw 为 760 字节，当前 raw/ELF/map/conf/manifest/helper 的 hash 与原始证据一致，未混用旧 752 字节模型固件或把 source-build-id 当 binary 唯一身份。
+- 启动与排障判据：逐项核对 PID 997465 与恢复轮 997810 的原始记录；各自同进程两次 RESET event、六份状态、三次 GDB 初始化观察、三条完整 guest 标记及非空指令/PL011 trace 对应。PC/EL/UART reset、RAM 哨兵保留后由固件再初始化、ROM 保持和 QMP quit 终态有明确证据；正式模型 16 项及三项部署诊断/恢复与正文对应。unexpected-kernel 的 launcher=0 明确伴随拒绝/零执行，不是启动成功；uninative 禁用、首轮中断和同树续跑、非 TCG 仅以 qtest 拒绝及后续未实现能力的限制均已保留。
+- 教学与体例：九节主线、第一次开发/已取得完整工程的路线说明、前置工具/TUN 条件、代码节选而非完整文件、源码与正式配套资产的职责、输出目录不得覆盖及排障后恢复的说明可衔接。H1/H2/H3、44 个成对带语言围栏、引号/列表及三个作者图的列位置已静态核对；图 4-2 对应边框在 CJK 双列宽计算下均为 71 列，无 Tab，不声称已测试所有字体/渲染器。未发现新增的内部 task/tag 收口流程或把预留设备写成已实现的表述。
+- 新步骤与 D-010 边界：本轮未重跑 devtool/BitBake/QEMU、未 reset 或注入故障；对 mkdir/导出重定向等读者串联动作只做静态核对，patch 导出只比对 stdout，未写远端文件。无调试 runqemu 入口在正文 L624 已明确没有另作一次独立实测，正式主线由已留证的调试脚本实现；换新输出目录/构建树属于复现条件，不冒充新一轮运行。当前未发现必须先新增实测才能判断的新增主线行为；本结论不授权免除修订后受影响步骤的复验。
+- 未覆盖及继续事项：未重新构建/运行、未进行独立读者学习效果测试，未验收其他宿主/跨树搬移、uninative 正常与跨宿主缓存、物理线速/IRQ/SMP/guest reset/SPI NAND/完整启动链/watchdog。配套工程同版可获取条件仍为 PM-C4-01；chapter 5 旧暂停/tag 开场及旧 4.6 节义等跨章旧叙事继续由 T-017 跟踪，不在本轮修改或启动。其余专业成员及用户按原稳定版本提交意见后再由 PM 汇总，writer 统一修订；本成员完成本地文档校验和普通提交后停止，不转发或唤醒下一成员。
+- 工具边界记录：自动审批曾拒绝一项将本地未发布书稿节选发送到 tiger 的自动比对，理由为未授权向该目的地导出书稿内容；该命令未执行。已改为只读接收远端既有工程文件，在本机内存比对，未外传书稿、未生成工程副本，所需比对均完成，无因此遗留的审校阻塞。
 
 #### qemu-engineer 的正文专业意见
 
