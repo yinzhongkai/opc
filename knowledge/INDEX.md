@@ -13,6 +13,7 @@
 | [cpp-core-systems-engineering](cpp-core-systems-engineering.md) | C++ 核心系统工程 |
 | [cpp-qt-testing](cpp-qt-testing.md) | C++ 与 Qt 测试工程 |
 | [critical-review](critical-review.md) | 独立评审 |
+| [critical-reading](critical-reading.md) | 阅读讨论与读后归纳 |
 | [ffmpeg-media-engineering](ffmpeg-media-engineering.md) | FFmpeg 多媒体工程 |
 | [frontend-development](frontend-development.md) | 前端开发 |
 | [investment-analysis](investment-analysis.md) | 投资组合分析与跟踪 |
