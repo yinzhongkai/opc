@@ -1,0 +1,172 @@
+<div id="eating-wheel-draft" class="viz-dotted-background">
+  <style>
+    #eating-wheel-draft{padding:20px 12px 28px;display:grid;justify-items:center;background:transparent}
+    #eating-wheel-draft .ew-phone{--ew-paper:#f5efdf;--ew-ink:#2c4d57;--ew-muted:#687d7f;--ew-line:#d5d9cc;--ew-orange:#f5a05d;--ew-gold:#ebc96b;--ew-blue:#a7d7d9;--ew-beige:#e7ddc3;--ew-white:#fffdf5;color-scheme:light;width:min(100%,410px);position:relative;overflow:hidden;border-radius:28px;background:var(--ew-paper);color:var(--ew-ink);box-shadow:0 12px 36px #163b3c19;font:16px/1.5 "Microsoft YaHei","PingFang SC",sans-serif}
+    #eating-wheel-draft .ew-texture{background-image:radial-gradient(#72867612 .6px,transparent .7px);background-size:3px 3px}
+    #eating-wheel-draft *{box-sizing:border-box}
+    #eating-wheel-draft .ew-nav{display:flex;align-items:center;justify-content:space-between;padding:17px 22px 10px;font-size:13px;letter-spacing:.04em}
+    #eating-wheel-draft .ew-sample{font-size:12px;color:var(--ew-muted)}
+    #eating-wheel-draft .ew-main{padding:0 22px 24px}
+    #eating-wheel-draft .ew-hero{text-align:center;padding:10px 0 15px}
+    #eating-wheel-draft h1{font-size:32px;font-weight:500;line-height:1.3;margin:0 0 8px}
+    #eating-wheel-draft h1 span{color:var(--ew-orange)}
+    #eating-wheel-draft p{margin:0}
+    #eating-wheel-draft .ew-subtitle{font-size:13px;color:var(--ew-muted)}
+    #eating-wheel-draft button,#eating-wheel-draft input,#eating-wheel-draft select{font:inherit}
+    #eating-wheel-draft button{min-height:44px;border:1px solid var(--ew-line);border-radius:16px;background:var(--ew-white);color:var(--ew-ink);padding:8px 13px}
+    #eating-wheel-draft button:disabled{opacity:.5;cursor:default}
+    #eating-wheel-draft .ew-primary{background:var(--ew-ink);color:var(--ew-paper);border-color:var(--ew-ink)}
+    #eating-wheel-draft .ew-plain{border:0;background:transparent;padding:7px 5px}
+    #eating-wheel-draft .ew-menu-line{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:0 0 4px}
+    #eating-wheel-draft .ew-menu-line button{max-width:76%;text-align:left;overflow-wrap:anywhere}
+    #eating-wheel-draft .ew-dirty{font-size:12px;color:var(--ew-muted)}
+    #eating-wheel-draft .ew-location{font-size:12px;color:var(--ew-muted);margin:2px 0 10px}
+    #eating-wheel-draft .ew-search{display:flex;gap:8px;align-items:center}
+    #eating-wheel-draft select,#eating-wheel-draft input{min-height:44px;min-width:0;background:var(--ew-white);color:var(--ew-ink);border:1px solid var(--ew-line);border-radius:14px;padding:9px 11px}
+    #eating-wheel-draft .ew-search select{width:96px}
+    #eating-wheel-draft .ew-search button{flex:1}
+    #eating-wheel-draft .ew-wheel-area{position:relative;margin:24px -7px 12px;aspect-ratio:1;isolation:isolate}
+    #eating-wheel-draft .ew-wheel{display:block;width:100%;height:100%;overflow:visible;transition:transform 1.5s cubic-bezier(.15,.75,.12,1)}
+    #eating-wheel-draft .ew-pointer{position:absolute;top:-4px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:10px solid transparent;border-right:10px solid transparent;border-top:27px solid var(--ew-ink);z-index:3}
+    #eating-wheel-draft .ew-spin{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:88px;height:88px;border:6px solid var(--ew-paper);border-radius:50%;background:var(--ew-ink);color:var(--ew-paper);font-size:23px;font-weight:500;z-index:2;padding:0}
+    #eating-wheel-draft .ew-message{min-height:25px;text-align:center;font-size:13px;color:var(--ew-muted);padding:2px 4px 8px;overflow-wrap:anywhere}
+    #eating-wheel-draft .ew-error{color:#9b3f27}
+    #eating-wheel-draft .ew-candidates{border-top:1px dashed #aebcb5;padding-top:18px;margin-top:7px}
+    #eating-wheel-draft .ew-section-title{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:12px}
+    #eating-wheel-draft h2{font-size:19px;font-weight:500;margin:0}
+    #eating-wheel-draft .ew-count{font-size:12px;color:var(--ew-muted);white-space:nowrap}
+    #eating-wheel-draft .ew-add{display:flex;gap:8px;margin-bottom:15px}
+    #eating-wheel-draft .ew-add input{flex:1;width:0}
+    #eating-wheel-draft .ew-chips{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+    #eating-wheel-draft .ew-chip{display:flex;align-items:center;gap:6px;min-height:48px;background:var(--ew-white);border:1px solid var(--ew-line);border-radius:17px;padding:6px 4px 6px 10px;min-width:0}
+    #eating-wheel-draft .ew-dot{width:8px;height:8px;border-radius:50%;background:var(--ew-blue);flex:none}
+    #eating-wheel-draft .ew-chip[data-source="manual"] .ew-dot{background:var(--ew-orange)}
+    #eating-wheel-draft .ew-chip-text{flex:1;min-width:0;font-size:13px;overflow-wrap:anywhere}
+    #eating-wheel-draft .ew-chip small{display:block;color:var(--ew-muted);font-size:11px}
+    #eating-wheel-draft .ew-chip button{border:0;border-radius:12px;padding:0;width:32px;min-width:32px;min-height:36px;background:transparent;font-size:20px}
+    #eating-wheel-draft .ew-empty{grid-column:1/-1;text-align:center;color:var(--ew-muted);padding:18px 4px;font-size:14px}
+    #eating-wheel-draft .ew-footer{font-size:12px;color:var(--ew-muted);text-align:center;margin-top:20px}
+    #eating-wheel-draft .ew-layer{position:absolute;inset:0;z-index:10;background:#163b3c55;display:flex;align-items:flex-start;justify-content:center;padding:100px 14px 24px}
+    #eating-wheel-draft .ew-layer[hidden]{display:none}
+    #eating-wheel-draft .ew-dialog{width:100%;padding:21px;background:var(--ew-paper);border-radius:23px;box-shadow:0 14px 40px #163b3c33;overflow-wrap:anywhere}
+    #eating-wheel-draft .ew-dialog-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:13px}
+    #eating-wheel-draft .ew-dialog input{display:block;width:100%;margin:8px 0 12px}
+    #eating-wheel-draft .ew-dialog label{font-size:13px;color:var(--ew-muted)}
+    #eating-wheel-draft .ew-actions{display:grid;gap:8px;margin-top:15px}
+    #eating-wheel-draft .ew-dialog-note{font-size:13px;color:var(--ew-muted)}
+    #eating-wheel-draft .ew-result{font-size:27px;text-align:center;margin:28px 0;color:var(--ew-ink);font-weight:500}
+    #eating-wheel-draft .ew-menu-item{border-top:1px solid var(--ew-line);padding:12px 0}
+    #eating-wheel-draft .ew-menu-item>button{display:block;width:100%;text-align:left;background:var(--ew-white)}
+    #eating-wheel-draft .ew-menu-actions{display:flex;justify-content:flex-end;gap:16px;font-size:12px}
+    #eating-wheel-draft .ew-compact .ew-chip{min-height:44px}
+    #eating-wheel-draft .ew-compact .ew-chips{gap:5px}
+    #eating-wheel-draft .ew-sr{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+    @media(max-width:360px){#eating-wheel-draft{padding:12px 0}#eating-wheel-draft .ew-main{padding:0 15px 20px}#eating-wheel-draft h1{font-size:29px}#eating-wheel-draft .ew-chips{gap:6px}}
+    @media(pointer:coarse){#eating-wheel-draft .ew-chip button{min-width:44px;min-height:44px}#eating-wheel-draft .ew-chip{padding-right:0}}
+    @media(prefers-reduced-motion:reduce){#eating-wheel-draft .ew-wheel{transition:none}}
+  </style>
+  <section class="ew-phone ew-texture" aria-label="今天吃什么界面草案">
+    <div class="ew-content">
+      <div class="ew-nav"><span>今天吃什么</span><span class="ew-sample">界面草案 · 示例数据</span></div>
+      <div class="ew-main">
+        <header class="ew-hero"><h1>今天吃什么<span>？</span></h1><p class="ew-subtitle">选择困难症的福音 · 让转盘替你决定</p></header>
+        <div class="ew-menu-line"><button type="button" class="ew-plain cursor-interaction" data-action="menus">午饭常用 ▾</button><span class="ew-dirty"></span></div>
+        <p class="ew-location">示例位置 · 林萃桥站附近</p>
+        <div class="ew-search"><label class="ew-sr" for="ew-distance">搜索直线半径</label><select id="ew-distance" aria-label="搜索直线半径"><option value="1">1 公里</option><option value="3" selected>3 公里</option><option value="5">5 公里</option></select><button type="button" data-action="nearby" class="cursor-interaction">搜索附近餐厅</button></div>
+        <div class="ew-wheel-area"><span class="ew-pointer" aria-hidden="true"></span><svg class="ew-wheel" viewBox="0 0 360 360" role="img" aria-label="餐厅候选转盘"></svg><button type="button" class="ew-spin cursor-interaction" data-action="spin">开吃</button></div>
+        <p class="ew-message" role="status" aria-live="polite">点击开吃，今天就有着落</p>
+        <section class="ew-candidates"><div class="ew-section-title"><h2>候选菜单</h2><span class="ew-count"></span></div><div class="ew-add"><label for="ew-name" class="ew-sr">手动添加店名</label><input id="ew-name" aria-label="手动添加店名" placeholder="想吃哪家？只填店名" autocomplete="off"><button class="ew-primary cursor-interaction" type="button">加入</button></div><div class="ew-chips" role="list" aria-label="当前候选"></div></section>
+        <div class="ew-actions"><button type="button" class="ew-primary cursor-interaction" data-action="save">保存这份菜单</button></div>
+        <p class="ew-footer">多份菜单 · 当前手机保存</p>
+      </div>
+    </div>
+    <div class="ew-layer" hidden></div>
+  </section>
+  <script>
+    (()=>{
+      const root=document.getElementById('eating-wheel-draft');
+      const phone=root.querySelector('.ew-phone'),content=root.querySelector('.ew-content'),layer=root.querySelector('.ew-layer');
+      const wheel=root.querySelector('.ew-wheel'),chips=root.querySelector('.ew-chips'),nameInput=root.querySelector('#ew-name'),distance=root.querySelector('#ew-distance');
+      const namespace='http://www.w3.org/2000/svg';
+      const demoNames=['桥北面馆','林间小馆','巷口饺子馆','四季家常菜','小灶米饭','阿婆砂锅','牛记牛肉面','三禾快餐','一味麻辣烫','小城烤肉','邻里馄饨铺','一碗热汤面'];
+      const nearby=()=>demoNames.map((name,i)=>({id:'demo-map-'+i,name,source:'map'}));
+      const copy=x=>JSON.parse(JSON.stringify(x));
+      const initial=[...nearby().slice(0,10),{id:'manual-a',name:'家门口饺子馆',source:'manual'},{id:'manual-b',name:'楼下牛肉面',source:'manual'}];
+      let model={items:copy(initial),menus:[{id:'lunch',name:'午饭常用',items:copy(initial)},{id:'weekend',name:'周末换个口味',items:[{id:'manual-c',name:'常吃的烤肉店',source:'manual'},{id:'manual-d',name:'街角火锅店',source:'manual'},{id:'manual-e',name:'小区门口面馆',source:'manual'}]}],active:'lunch',dirty:false,radius:'3'};
+      let angle=0,busy=false,pendingTarget=null;
+      const settings={texture:true,compact:false,searchState:'success'};
+      function applySaved(snapshot){
+        const saved=snapshot&&snapshot.privateContent&&snapshot.privateContent.eatingDraft;
+        if(saved&&Array.isArray(saved.items)&&saved.items.length<=24&&Array.isArray(saved.menus)&&saved.menus.every(m=>Array.isArray(m.items)&&m.items.length<=24)){model=copy(saved);angle=0;render();}
+      }
+      function remember(){const payload={modelContent:{design:'cream-wheel',candidateCount:model.items.length,activeMenu:model.menus.find(m=>m.id===model.active)?.name||'临时候选'},privateContent:{eatingDraft:model}};if(JSON.stringify(payload).length<14000&&window.openai?.setWidgetState)window.openai.setWidgetState(payload).catch(()=>{});}
+      function element(tag,text,cls){const node=document.createElement(tag);if(text!==undefined)node.textContent=text;if(cls)node.className=cls;return node;}
+      function button(text,fn,cls=''){const b=element('button',text,cls+' cursor-interaction');b.type='button';b.addEventListener('click',fn);return b;}
+      function message(text,error=false){const status=root.querySelector('.ew-message');status.textContent=text;status.classList.toggle('ew-error',error);}
+      function closeDialog(){layer.hidden=true;layer.replaceChildren();content.inert=false;}
+      function dialog(title){closeDialog();layer.hidden=false;content.inert=true;const box=element('section',undefined,'ew-dialog');box.setAttribute('role','dialog');box.setAttribute('aria-modal','true');box.setAttribute('aria-label',title);const head=element('div',undefined,'ew-dialog-head');head.append(element('h2',title),button('关闭',closeDialog,'ew-plain'));box.append(head);layer.append(box);return box;}
+      function textField(box,label,value=''){const l=element('label',label),input=element('input');input.type='text';input.value=value;input.setAttribute('aria-label',label);l.append(input);box.append(l);return input;}
+      function actions(box){const row=element('div',undefined,'ew-actions');box.append(row);return row;}
+      function validation(box,text){let node=box.querySelector('[role="alert"]');if(!node){node=element('p',undefined,'ew-error');node.setAttribute('role','alert');box.append(node);}node.textContent=text;}
+      function markChanged(){model.dirty=true;render();remember();}
+      function render(){
+        phone.classList.toggle('ew-texture',settings.texture);phone.classList.toggle('ew-compact',settings.compact);
+        distance.value=model.radius;
+        const active=model.menus.find(m=>m.id===model.active);
+        root.querySelector('[data-action="menus"]').textContent=(active?active.name:'临时候选')+' ▾';
+        root.querySelector('.ew-dirty').textContent=model.dirty?'未保存改动':'';
+        root.querySelector('.ew-count').textContent='共 '+model.items.length+' / 24 项';
+        content.querySelectorAll('button,input,select').forEach(node=>node.disabled=busy);
+        root.querySelector('[data-action="spin"]').textContent=busy?'转动中':'开吃';
+        const n=model.items.length;wheel.replaceChildren();
+        const title=document.createElementNS(namespace,'title');title.textContent=n+' 个等概率候选；完整店名见下方列表';wheel.append(title);
+        if(n===0){const circle=document.createElementNS(namespace,'circle');circle.setAttribute('cx','180');circle.setAttribute('cy','180');circle.setAttribute('r','166');circle.setAttribute('fill','var(--ew-beige)');wheel.append(circle);}
+        const colors=['var(--ew-orange)','var(--ew-gold)','var(--ew-blue)','var(--ew-beige)'];
+        model.items.forEach((item,i)=>{
+          const step=360/n,from=(-90-step/2+i*step)*Math.PI/180,to=from+step*Math.PI/180;
+          const shape=document.createElementNS(namespace,n===1?'circle':'path');
+          if(n===1){shape.setAttribute('cx','180');shape.setAttribute('cy','180');shape.setAttribute('r','166');}else shape.setAttribute('d',`M180 180 L${180+166*Math.cos(from)} ${180+166*Math.sin(from)} A166 166 0 ${step>180?1:0} 1 ${180+166*Math.cos(to)} ${180+166*Math.sin(to)} Z`);
+          shape.setAttribute('fill',colors[i%4]);shape.setAttribute('stroke','var(--ew-paper)');shape.setAttribute('stroke-width','2');wheel.append(shape);
+          const text=document.createElementNS(namespace,'text'),a=-90+i*step;
+          text.setAttribute('x','287');text.setAttribute('y','185');text.setAttribute('fill','var(--ew-ink)');text.setAttribute('text-anchor','middle');text.setAttribute('font-size','14');text.setAttribute('font-weight','500');text.setAttribute('transform',`rotate(${a} 180 180)`);
+          text.textContent=n>12?String(i+1):(item.name.length>5?item.name.slice(0,5)+'…':item.name);wheel.append(text);
+        });
+        const rim=document.createElementNS(namespace,'circle');rim.setAttribute('cx','180');rim.setAttribute('cy','180');rim.setAttribute('r','168');rim.setAttribute('fill','none');rim.setAttribute('stroke','var(--ew-ink)');rim.setAttribute('stroke-width','3');wheel.append(rim);
+        wheel.style.transform=`rotate(${angle}deg)`;
+        chips.replaceChildren();
+        model.items.forEach((item,i)=>{const chip=element('div',undefined,'ew-chip');chip.dataset.source=item.source;chip.setAttribute('role','listitem');const dot=element('span',undefined,'ew-dot');dot.setAttribute('aria-hidden','true');const name=element('span',(n>12?(i+1)+'. ':'')+item.name,'ew-chip-text');name.append(element('small',item.source==='manual'?'手动添加':'附近餐厅 · 示例'));const remove=button('×',()=>{if(busy)return;model.items=model.items.filter(x=>x.id!==item.id);markChanged();message('已移除 '+item.name);});remove.setAttribute('aria-label','移除 '+item.name);remove.disabled=busy;chip.append(dot,name,remove);chips.append(chip);});
+        if(!n)chips.append(element('p','还没有候选，搜索附近或手动加一家吧','ew-empty'));
+      }
+      function showResult(item){const box=dialog('今天就吃');box.append(element('p',item.name,'ew-result'));const row=actions(box);row.append(button('再抽一次',()=>{closeDialog();spin();},'ew-primary'),button('就这家',closeDialog));}
+      function spin(){if(busy)return;const n=model.items.length;if(!n){message('先添加一家店，再开吃吧',true);return;}const selected=Math.floor(Math.random()*n);if(n===1){showResult(model.items[0]);return;}busy=true;const target=-selected*360/n,delta=((target-angle)%360+360)%360;angle+=1440+delta;render();message('让转盘替你决定…');const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;setTimeout(()=>{busy=false;render();message('点击开吃，可以再抽一次');showResult(model.items[selected]);},reduce?0:1550);}
+      function loadMenu(id){const menu=model.menus.find(m=>m.id===id);if(!menu)return;model.items=copy(menu.items);model.active=id;model.dirty=false;angle=0;pendingTarget=null;closeDialog();render();remember();message('已加载 '+menu.name+'，保留原来的候选');}
+      function requestLoad(id){if(!model.dirty){loadMenu(id);return;}pendingTarget=id;const box=dialog('先处理未保存改动');box.append(element('p','保存当前改动、放弃改动，或留在当前菜单。','ew-dialog-note'));const row=actions(box);row.append(button('保存并切换',()=>{const active=model.menus.find(m=>m.id===model.active);if(active){active.items=copy(model.items);loadMenu(id);}else saveDialog(id);},'ew-primary'),button('放弃并切换',()=>loadMenu(id)),button('取消',()=>{pendingTarget=null;closeDialog();}));}
+      function saveDialog(afterId=null){
+        const active=model.menus.find(m=>m.id===model.active),box=dialog('保存完整候选');
+        box.append(element('p','当前 '+model.items.length+' 项，包含附近餐厅和手动项。','ew-dialog-note'));
+        const input=textField(box,active?'另存菜单名称':'菜单名称',active?active.name+'（副本）':'');
+        const row=actions(box);
+        if(active)row.append(button('覆盖「'+active.name+'」',()=>{active.items=copy(model.items);model.dirty=false;closeDialog();render();remember();message('已保存 '+active.name);if(afterId)loadMenu(afterId);},'ew-primary'));
+        row.append(button(active?'另存为新菜单':'保存菜单',()=>{const name=input.value.trim();if(!name){validation(box,'请填写菜单名称');return;}const id='menu-'+Date.now();model.menus.push({id,name,items:copy(model.items)});model.active=id;model.dirty=false;closeDialog();render();remember();message('已保存 '+name);if(afterId)loadMenu(afterId);},active?'':'ew-primary'));
+      }
+      function renameMenu(id){const menu=model.menus.find(m=>m.id===id);if(!menu)return;const box=dialog('重命名菜单'),input=textField(box,'菜单名称',menu.name);actions(box).append(button('保存名称',()=>{const name=input.value.trim();if(!name){validation(box,'请填写菜单名称');return;}menu.name=name;closeDialog();render();remember();showMenus();},'ew-primary'));}
+      function deleteMenu(id){const menu=model.menus.find(m=>m.id===id);if(!menu)return;const box=dialog('删除这份菜单？');box.append(element('p',menu.name,'ew-dialog-note'));actions(box).append(button('确认删除',()=>{model.menus=model.menus.filter(m=>m.id!==id);if(model.active===id){model.active=null;model.dirty=true;}closeDialog();render();remember();message('已删除菜单，当前候选仍保留');}),button('取消',showMenus));}
+      function showMenus(){const box=dialog('我的菜单');model.menus.forEach(menu=>{const row=element('div',undefined,'ew-menu-item');row.append(button(menu.name+' · '+menu.items.length+' 项',()=>requestLoad(menu.id)));const secondary=element('div',undefined,'ew-menu-actions');secondary.append(button('重命名',()=>renameMenu(menu.id),'ew-plain'),button('删除',()=>deleteMenu(menu.id),'ew-plain'));row.append(secondary);box.append(row);});if(!model.menus.length)box.append(element('p','保存一份常用菜单，下次直接加载。','ew-dialog-note'));}
+      root.querySelector('[data-action="spin"]').addEventListener('click',spin);
+      root.querySelector('[data-action="menus"]').addEventListener('click',showMenus);
+      root.querySelector('[data-action="save"]').addEventListener('click',()=>saveDialog());
+      distance.addEventListener('change',()=>{model.radius=distance.value;remember();message('已选 '+model.radius+' 公里，点击搜索才更新候选');});
+      root.querySelector('[data-action="nearby"]').addEventListener('click',()=>{
+        const manual=model.items.filter(item=>item.source==='manual');if(manual.length>=24){message('手动项已满 24 项，请先删除候选',true);return;}
+        if(settings.searchState!=='success'){const msg={empty:'没有找到合适餐厅，当前候选未更新',failed:'搜索失败，当前候选未更新',denied:'定位未授权，仍可手动添加和加载菜单'};message(msg[settings.searchState],true);return;}
+        const found=nearby().slice(0,model.radius==='1'?4:12).slice(0,24-manual.length);model.items=[...manual,...found];angle=0;markChanged();message('已更新 '+found.length+' 家餐厅，保留 '+manual.length+' 个手动项');
+      });
+      function addManual(){const name=nameInput.value.trim();if(!name){message('请先填写店名',true);return;}if(model.items.length>=24){message('已满 24 项，请先删除候选',true);return;}if(model.items.some(item=>item.source==='manual'&&item.name===name)){message('这家店已经手动加入了',true);return;}model.items.push({id:'manual-'+Date.now(),name,source:'manual'});nameInput.value='';markChanged();message('已加入 '+name);}
+      root.querySelector('.ew-add button').addEventListener('click',addManual);
+      nameInput.addEventListener('keydown',event=>{if(event.key==='Enter'){event.preventDefault();addManual();}});
+      render();applySaved(window.openai?.widgetState);
+      window.addEventListener('openai:set_globals',event=>{if(event.detail?.globals?.widgetState&&!busy){closeDialog();applySaved(event.detail.globals.widgetState);}});
+      if(globalThis.Tweak){const tweak=new Tweak({container:phone,onChange:render});tweak.addToggle(settings,'texture',{label:'纸纹背景'});tweak.addToggle(settings,'compact',{label:'紧凑候选间距'});tweak.addSelect(settings,'searchState',{label:'附近搜索状态',options:[{label:'正常返回',value:'success'},{label:'无结果',value:'empty'},{label:'搜索失败',value:'failed'},{label:'定位未授权',value:'denied'}]});}
+    })();
+  </script>
+</div>
