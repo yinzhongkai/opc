@@ -44,6 +44,11 @@
 - 工程仓库 ssh tiger:/home/oops/workspace/meta-tiger，feature/t-016-chapter4-revision 最终 `4dd7dfda8f2af2d59bdcfe6585418cf43eaa73e8`；六个普通模块提交在报告列明。实际构建 metadata 为 `cd6c348836346004e801cb13f32ad3fcb12c1dfd`，后续只修改部署测试/README；工程干净，未推送/合并。原 QEMU patch、固件源、模型工具、持久 source/全部 refs/归档 bundle 与输入不变，master 和 WORKSPACE 正式 revision 未推进。
 - [归档清单](work-records/t016-yocto-system-raw/handoff-2/manifest.json)及[本地核验回执](work-records/t016-yocto-system-raw/verification.json)：9 包、291 份原始文本按字节数/SHA-256 全部通过。本人阶段记录与治理提交完成后停止，待 project-manager 核对后衔接 writer；T-016 整体、独立审校及章节批准尚未完成。
 
+## T-016 系统交接核对与正文修订安排（project-manager）
+
+- [2026-10-19 结构化核对回执](work-records/t016-yocto-pm-handoff-20261019.json)：9 包/291 份原文完整性、正式构建/任务依赖、两轮 runqemu 的实际执行/reset、16 项模型结果与部署诊断记录核对通过；远端精确版本、90 份关键任务日志、正式发布资产/helper/工具 hash 及持久源码保护一致。无发现的工程交接阻断项，可供 writer 回填；未重跑运行测试，不代替独立审校或章节批准。
+- 按用户明确授权衔接 writer，唯一正文对象为第 4 章；固定输入、教学校准、已知限制和阶段出口见 [T-016 writer 正文修订安排](../TASKS.md)。提交后串行通知本人接收，正文实际修订尚待执行；原专业报告、失败/告警及获批设计保持原样。
+
 ## 正文元信息样式（不是真实成果）
 
 ```text

@@ -1,8 +1,8 @@
 # 项目状态摘要
 
-- 汇总日期与信息截至点：2026-10-18；project-manager 已完成 QEMU 工程交接核对，9 个日志包/263 份原始文本及远端版本、patch、固件实物一致，无发现的交接阻断项；Yocto 正式集成阶段已安排，待接收。16/16 仍为模型作者自测，正式干净构建/runqemu 系统验收待完成，见 [T-016](TASKS.md)。
+- 汇总日期与信息截至点：2026-10-19；Yocto 正式集成、干净来源重构建、runqemu 冷启动/同进程两次复位、16/16 模型复验及部署诊断/恢复已交付。PM 已核对 9 包/291 份原文及远端实物，结果一致；writer 第 4 章正文修订已安排待接收，独立审校和章节批准待后续。详见 [T-016](TASKS.md)。
 - 维护人：project-manager（按 [PROJECT.md](PROJECT.md) 指定的协调记录维护人）。
-- 当前阶段：P1/P2 完成；P3 逐章推进，chapter 1–3 已定稿。T-016 in_progress，QEMU 阶段交接头 `b303ae6d614f067e11d4cbba57feacaf84ee7e8e`，模型作者自测通过，PM 工程交接核对通过；下一阶段为 Yocto（待接收）。持久源码位于 `tiger:/home/oops/workspace/sources/qemu-system-native`，当前 `7ed31149ac01a9d6bb3a682b9d768936c4315ed3`。WORKSPACE 仍锁定书稿 `main@9c74596591728c0f2d614e357059034551a42dca` 与 meta-tiger `master@0e3da48b34ef772532535a730a21878cc30ccf67`，T-016 尚未最终合并。
+- 当前阶段：P1/P2 完成；P3 逐章推进，chapter 1–3 已定稿。T-016 in_progress，工程交接头 `4dd7dfda8f2af2d59bdcfe6585418cf43eaa73e8`，实际构建 metadata 为 `cd6c348836346004e801cb13f32ad3fcb12c1dfd`；系统验证已交付且 PM 交接核对通过，下一位 writer（待接收）。持久源码 `tiger:/home/oops/workspace/sources/qemu-system-native` 的 `7ed31149ac01a9d6bb3a682b9d768936c4315ed3` 及全部 refs/归档未变。WORKSPACE 仍锁定书稿 `main@9c74596591728c0f2d614e357059034551a42dca` 与 meta-tiger `master@0e3da48b34ef772532535a730a21878cc30ccf67`，T-016 尚未最终合并。
 - 任务进展：
   - T-001 书稿现状评估（writer）：completed，产出 [A-001](artifacts/A-001-书稿现状评估.md) v0.1（draft）。
   - T-002 起草全书打磨计划（project-manager）：completed，[A-002](artifacts/A-002-book-polishing-plan.md) 当前 v0.8（draft，保留 D-007/D-010/D-011/D-013 要求；在 QEMU 模型开发与 Yocto 集成验证之前加入 architect 平台设计、专业核对与用户确认，并作为 writer 蓝图输入；原起草任务不因此重新打开）。
@@ -19,15 +19,15 @@
   - T-013 补充硬件型号与等宽文本排版规则（writer）：completed——A-004 v0.5 于 2026-09-27 经用户明确批准，approved 状态与成果索引已在 Git `36c5e35` 回写并经 project-manager 复核。
   - T-014 chapter 3《搭起 meta-tiger 的骨架》修订与第 1 轮评审（writer/reviewer/project-manager/用户）：**completed（2026-10-08 用户最终确认）**——2026-10-03～2026-10-08 完成用户逐项审校、writer 统一修订、reviewer 针对性复核及 Docker 真实环境复验/补证；最终复核 `pass`。源码整理为 `9c745965...`，以 merge commit `f444790f...` 合入并推送 `main`；最终净差异仅 chapter 3 正文，215 insertions / 123 deletions。验证报告与日志按 D-012 保存在 OPC 工作记录，不进入书稿主线。
   - T-015 chapter 3 命令、配置与输出真实环境核验（reviewer）：completed（2026-09-27 project-manager 复核通过）——12 组核验 9 组通过、3 组局部不符；构建和两次 `yocto-check-layer` 成功，错误实验均恢复，远端 `meta-tiger` 提交为 `0e3da48`；N-1/N-2/O-1 已流转至 T-014。
-  - T-016 chapter 4《让 QEMU 长出 tiger 这块板》修订与第 1 轮评审：in_progress（设计/蓝图输入已就绪，QEMU 模型/固件源和作者测试已交付，PM 交接核对通过；Yocto 阶段已安排待接收，源码按 D-015 长期保留，正式集成/干净重构建/runqemu、正文校准及审校待完成）。
+  - T-016 chapter 4《让 QEMU 长出 tiger 这块板》修订与第 1 轮评审：in_progress（设计/蓝图、QEMU 模型与正式系统集成验证证据已交付，PM 交接核对通过；writer 正文修订已安排待接收，独立审校/用户确认待后续。源码按 D-015 长期保留）。
   - T-017 全书四仓库叙事迁移为 `meta-tiger` patch-only 模型：todo（2026-10-09 已登记；全文扫描命中前言、chapter 2–16、尾声、附录 B/C 共 19 个文件；等待 T-016 收口后再建立配对分支，不并行启动）。
-- 团队状态：六名成员不变；architect/writer/QEMU 工程师均已完成各自本阶段并停止。project-manager 本轮完成工程交接核对及正式集成安排，提交后串行通知 yocto-engineer 并停止；接收和实际开始由本人登记，不同时启动其他成员。H-002/H-003 行政收尾不阻塞。
-- 开发仓库状态：OPC 当前 T-016 feature 已有 QEMU 治理交付 `d46643c8f5a257e06076224eb7a504be077b2649`；本轮追加 PM 交接核对及 Yocto 阶段安排。meta-tiger 为已提交且干净的任务 feature、交接头 `b303ae6d614f067e11d4cbba57feacaf84ee7e8e`，尚未合入 master。QEMU 持久源码迁移后 HEAD/tree/原 refs 不变且干净，已有构建路径通过旧路径软链接兼容；devtool status 和 BitBake EXTERNALSRC/S 已核对指向新目录。书稿、Poky 和正式成果物版本未推进。
+- 团队状态：六名成员不变；architect/writer 蓝图阶段及两位工程成员的当前工程阶段均已完成并停止。project-manager 本轮完成系统交接核对及正文修订安排，提交后串行通知 writer 并停止；接收和实际开始由本人登记，不同时启动其他成员。H-002/H-003 行政收尾不阻塞。
+- 开发仓库状态：OPC 已有 Yocto 治理交付 `d7983c3f0ee9f21e3a36e8990eaf8b59dddc4acc`，本轮追加 PM 系统交接核对与 writer 安排。meta-tiger feature 为干净的 `4dd7dfda8f2af2d59bdcfe6585418cf43eaa73e8`，尚未推送或合入 master；新正式构建树不含旧 workspace，qemu-system-native 的 override 已解除。持久源码及恢复材料完整保留；书稿、Poky 和 WORKSPACE 正式版本未推进。
 - 关键成果：A-004 v0.5 approved、A-002 v0.8 draft；A-005 v0.2 approved / D-014；A-006 v0.1 draft 已交付，用户同意继续工程实施（TASKS 蓝图阶段确认记录）。原设计意见/作者回复/复核及历史批准 SHA 保留；A-001/A-003 v0.1 仍为 draft。
 - 阻塞、待确认事项及下一位行动人：
   - **chapter 3 无未完成阻塞**：用户确认、专业复核、真实环境验证、源码合并和远端推送均已完成。
   - **平台设计确认及回写已完成**：用户批准 A-005 v0.2（D-014），architect 元信息/索引回写已核验，技术正文保持不变；SPI NAND/CS/watchdog 等后续依赖仍在首次使用前补齐，不纳入本章最小实现。
-  - **工程交接核对通过，待 Yocto 接收**：模型作者自测 16/16 的原始证据及远端版本核对一致，正式 patch/metadata/fixture/helper 集成、解除 override、干净重构建与 runqemu 系统复验已安排。源码保留与清理按 D-015 执行；工作区当前 override 不作为干净构建通过依据。
+  - **系统交接核对通过，待 writer 接收**：正式集成、干净来源重构建及真实 runqemu/复位、模型矩阵/部署恢复证据已核对，下一阶段是第 4 章正文修订。保留 uninative 禁用告警和 runqemu 可能不传播子进程失败的局限，不仅以返回 0 判断启动；未验证的未来功能按 A-005/A-006 门槛处理。
   - **H-002/H-003 待发起人核对关闭**：project-manager 已接收并提供协调结果，均为 accepted；行政收尾不阻塞设计专业核对，不代表设计获批或工程实现已开始。
   - **跨章一致性已登记、不并行启动**：T-017 覆盖 19 个受影响文件，依赖 T-016 的真实 QEMU patch 范式和最终章节版本；T-016 完成前不建立下一轮 feature 分支。
   - **用户持续事项**：继续全书通读校验；A-003 中原四仓库依赖和 chapter 8 的 X-1 将在对应修订轮统一处理。
