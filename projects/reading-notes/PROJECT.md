@@ -8,7 +8,7 @@
 - 精确框架提交：`464ca52aafc6c73ff780a7120acd3bf63c9d31dd`。
 - OPC 项目长期分支：`project/reading-notes`。
 - 建项开发分支：`feature/reading-notes/project-bootstrap`；建项提交及合并边界通过 Git 历史定位。
-- 工作区版本基线：`driver: git`，仓库 `git@github.com:yinzhongkai/reading-notes.git`（D-006），目标分支 `main`，精确 revision 为 `a3bf768f62a87e1f31dc6702497b2ab5b40989c5`。当前 OPC 位于 `C:/Users/YinZh/Documents/workspace/opc-reading-notes`，checkout `../reading-notes` 对应 `C:/Users/YinZh/Documents/workspace/reading-notes`（D-010）。该 revision 为本次必要初始化的空 Git 基线，业务书目尚未保存；成员环境验证及 H-003 后续核对见下方工作区配置记录。D-007、T-003、T-004 中的 D 盘位置保留为历史事实。
+- 工作区版本基线：`driver: git`，仓库 `git@github.com:yinzhongkai/reading-notes.git`（D-006），目标分支 `main`，当前精确 revision 为 `66ac807098f9c169745e5e339431ec314df69044`，与 WORKSPACE 及成果物仓库 main、HEAD 一致。当前 OPC 位于 `C:/Users/YinZh/Documents/workspace/opc-reading-notes`，checkout `../reading-notes` 对应 `C:/Users/YinZh/Documents/workspace/reading-notes`（D-010）。本轮 H-004 只读使用其中的 b001 书目档案；初始空基线及 D-007、T-003、T-004 中的 D 盘位置保留为历史事实，见下方工作区配置记录。
 
 ## 框架升级记录
 
@@ -108,6 +108,23 @@
 - 初始化消息：框架根目录为本 OPC 克隆；项目 `reading-notes`，成员 `book-recommender`，分工为书目推荐官。请按 `SESSION_PROTOCOL.md` 初始化，读取实际 TEAM、成员配置、`researcher` 角色和有效技能，查看当前工作并返回初始化回执。配置完成不等于会话创建或初始化完成。
 - 交接后续：配置结果供 H-002 发起人 `project-manager` 核对，并据实际结果更新交接与状态摘要；本管理员仅记录本次配置事实。
 - 记录人：框架超级管理员。
+
+### 2026-10-19：按 H-004 配置《聪明的投资者》阅读伙伴
+
+- 用户授权来源：本超级管理员会话用户于 2026-10-19（Asia/Shanghai）明确要求“请按 reading-notes 项目的 H-004，配置《聪明的投资者》的阅读伙伴，并创建专属会话、完成初始化。实际阅读版本和当前位置暂标待补充。”；配置输入为 H-004、T-009 及 D-004、D-005。
+- 变更：创建并登记成员 [reading-partner-intelligent-investor](members/reading-partner-intelligent-investor.yaml)，展示分工为“《聪明的投资者》阅读伙伴”，仅对应 b001。scope 正文以成员文件为准，不预先配置其他书籍伙伴。
+- 角色与技能适配：新增 active 的共享 [reading-partner](../../roles/reading-partner.md) 角色，明确阅读讨论、可追溯记录与读后归纳职责；基础技能依次为 [critical-reading](../../knowledge/critical-reading.md)、[research](../../knowledge/research.md)。项目补充技能为空，有效集合为 `[critical-reading, research]`；未改变现有两名成员的技能组合。
+- 公共能力来源：先在 `feature/framework/reading-partner` 实现不含项目资料的角色、阅读方法和目录引用，结构与本地链接检查通过后以 `--ff-only` 合入本克隆的 `opc-v0.0.5-dev`；原提交为 `c6b19b651849168208501041e40b9d31e2d03576`。随后在本项目配置分支采用该单一公共功能，采用提交为 `1f8d3356ec6fc33ab49229d87c83d40145c0906d`，保留原提交来源。
+- 提前采用说明：本次仅为满足用户已授权的 H-004 职责缺口提前采用上述尚未发布的增量，框架发布基线仍为 v0.0.4，不将其视为完成整版升级。新增内容依赖既有 research 和公共协议，不修改配置 schema、既有角色或技能；兼容风险为其他克隆在未采用该增量前不能识别新角色。后续正式框架升级仍按分支策略核对与去重，本轮不发布版本或推送。
+- 范围与未知项：实际阅读语言、版本、译者及本次章节或页码均待用户补充；2026-10-13“接近读完”只作历史事实，不推断本次已读完。书目输入 `books/b001-intelligent-investor/README.md` 为 0.1，来源提交 `66ac807098f9c169745e5e339431ec314df69044`；其中“阅读伙伴尚未配置”保留为该版快照，当前成员身份以 TEAM 和实际成员文件为准。
+- 资料与责任边界：本书后续获授权的讨论、笔记及总结使用现有 b001 目录；书目推荐官继续维护书目档案及全项目索引，本次不转移其责任，不修改成果物仓库或 WORKSPACE。
+- OPC 开发分支：`feature/reading-notes/h-004-intelligent-investor-partner`，目标为 `project/reading-notes`，合入前目标提交为 `eb277dd927c700c993904618728bd67be62a0492`。H-004、T-009 的既有未提交内容已原样保存为独立治理提交；配置及验证结果按模块另行记录，提交范围由来源分支和 Git 历史定位。
+- 保留依据：原 HANDOFFS、TASKS、PROJECT 和 TEAM 已备份至本机 `C:/Users/YinZh/AppData/Local/Temp/reading-notes-h004-6ae686b2ddb943b090b108913515b4de`；原有治理内容、成员及书目输入继续保留。
+- 配置验证：结构校验通过（23 个角色、38 份技能、1 个实际项目、441 处本地链接），git diff --check 通过；成员 ID、索引、角色及技能 active 状态和 scope 对应关系均已核对，T-009 任务正文 SHA256 与管理员操作前一致。
+- 会话初始化：按用户授权创建专属会话后，目标会话于 2026-10-19 自行返回“初始化完成”，说明已实际读取根协议、项目配置、自身成员与角色、两份有效技能正文、相关决定与 H-004/T-009，以及 b001 书目档案 0.1；已核对成果物 main、HEAD 与声明同为 `66ac807098f9c169745e5e339431ec314df69044`。管理员依据目标会话真实回执核验完成，本条为结果记录，不替代原回执。
+- 初始化范围及待补：目标会话报告身份和必读资料无缺口，实际阅读语言、版本、译者及当前章节或页码仍待补充；未取得原书正文或既往讨论、笔记，未将书目介绍当作已读全书。该轮只读初始化已结束，没有业务文件修改、任务执行或跨会话发送，等待用户在专属会话开展阅读交流。
+- 后续核对：管理员提供实际配置和目标会话回执，H-004、T-009 仍由原发起人 project-manager 按完成条件核对，不代写项目经理的接收、关闭或任务完成。
+- 记录人：框架超级管理员，2026-10-19（Asia/Shanghai）。
 
 ## 建项验证记录
 
