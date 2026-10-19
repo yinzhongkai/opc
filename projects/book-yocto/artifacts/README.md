@@ -55,6 +55,11 @@
 - 书稿位置：本机 `D:/book-yocto`，`git@github.com:yinzhongkai/book-yocto.git`，`feature/t-016-chapter4-revision`；唯一正文 `yocto/task05-4-让QEMU长出tiger这块板.md`，固定开发提交 `003910bf2971e10702019940535c690957740431`，blob `394494f1f7cb078b197d562ff376f6ef8d76e9af`。792 行、只改本章；未推送/合入 main，不推进 WORKSPACE 正式 revision。
 - 本轮为作者静态校准与自查，未重跑工程。输入、E-01～E-10 对应、源码/原文检查、配套工程获取和跨章待核对项见记录；实际交付与停止写在 [T-016 writer 阶段](../TASKS.md)，原工程结论及其边界保持不变。
 
+## T-016 第 1 轮正文审校（project-manager）
+
+- 当前受评成果：第 4 章候选稿 v0.1，状态 in_review，书稿仓库 `D:/book-yocto` / `feature/t-016-chapter4-revision`，路径 `yocto/task05-4-让QEMU长出tiger这块板.md`，固定提交 `003910bf2971e10702019940535c690957740431`、blob `394494f1f7cb078b197d562ff376f6ef8d76e9af`。作者交付时的 draft/自查记录按上节保留，本轮不代表章节批准。
+- 2026-10-19 PM 已核对交接并依用户“你来协调执行吧”安排 reviewer → qemu-engineer → yocto-engineer → architect 串行审校；范围、署名意见区、用户通读和统一修订条件见 [T-016 正文第 1 轮安排](../TASKS.md)。受评正文和工程输入不变，各成员尚待按序接收；PM-C4-01 跟踪正式试读前同版配套资产的获取条件。
+
 ## 正文元信息样式（不是真实成果）
 
 ```text
