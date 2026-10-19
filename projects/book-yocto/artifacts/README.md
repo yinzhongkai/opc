@@ -49,6 +49,12 @@
 - [2026-10-19 结构化核对回执](work-records/t016-yocto-pm-handoff-20261019.json)：9 包/291 份原文完整性、正式构建/任务依赖、两轮 runqemu 的实际执行/reset、16 项模型结果与部署诊断记录核对通过；远端精确版本、90 份关键任务日志、正式发布资产/helper/工具 hash 及持久源码保护一致。无发现的工程交接阻断项，可供 writer 回填；未重跑运行测试，不代替独立审校或章节批准。
 - 按用户明确授权衔接 writer，唯一正文对象为第 4 章；固定输入、教学校准、已知限制和阶段出口见 [T-016 writer 正文修订安排](../TASKS.md)。提交后串行通知本人接收，正文实际修订尚待执行；原专业报告、失败/告警及获批设计保持原样。
 
+## T-016 chapter 4 作者候选稿（writer）
+
+- [作者修订与自查记录](work-records/t016-chapter4-writer-revision.md)：2026-10-19 依据固定设计/蓝图和真实模型/系统证据重写九节教学主线；候选稿 v0.1 draft，待 PM 核对后组织后续审校及用户通读，不作章节批准。
+- 书稿位置：本机 `D:/book-yocto`，`git@github.com:yinzhongkai/book-yocto.git`，`feature/t-016-chapter4-revision`；唯一正文 `yocto/task05-4-让QEMU长出tiger这块板.md`，固定开发提交 `003910bf2971e10702019940535c690957740431`，blob `394494f1f7cb078b197d562ff376f6ef8d76e9af`。792 行、只改本章；未推送/合入 main，不推进 WORKSPACE 正式 revision。
+- 本轮为作者静态校准与自查，未重跑工程。输入、E-01～E-10 对应、源码/原文检查、配套工程获取和跨章待核对项见记录；实际交付与停止写在 [T-016 writer 阶段](../TASKS.md)，原工程结论及其边界保持不变。
+
 ## 正文元信息样式（不是真实成果）
 
 ```text
