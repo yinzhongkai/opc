@@ -8,6 +8,7 @@
 | A-002 | [阅读流程与逐书伙伴候选方案](A-002-reading-workflow-and-book-partners.md) | OPC artifacts | project-manager | [T-002](../TASKS.md) | 0.1；提交按正文路径与 Git 历史定位 | draft | 尚无；D-003、D-004、D-005 为输入，整体采用待 D-001、D-002 确认 |
 | A-003 | 投资领域书目与阅读推荐；入口 `README.md` | 成果物仓库：`git@github.com:yinzhongkai/reading-notes.git`；本机 `C:/Users/YinZh/Documents/workspace/reading-notes` | book-recommender | [T-007](../TASKS.md#t-007按已确认结构整理首批投资书目) | 0.1；`66ac807098f9c169745e5e339431ec314df69044` | draft | D-008 已确认组织结构与七本收录范围；具体内容尚无另行批准，六本候选未选定 |
 | A-004 | b001 历史阅读资料迁入；入口 `books/b001-intelligent-investor/imports/inkling/README.md` | 成果物仓库：`git@github.com:yinzhongkai/reading-notes.git`；本机 `C:/Users/YinZh/Documents/workspace/reading-notes` | reading-partner-intelligent-investor | [T-012](../TASKS.md#t-012迁入聪明的投资者既有阅读资料) | 0.1；开发快照 `20faad16a237efdd494bc72a4c108525e4998e98`，尚未合入 main | draft | 用户授权迁入；内容与历史推论尚未批准 |
+| A-005 | 安全边际与几何平均收益率讨论笔记；`books/b001-intelligent-investor/notes/2026-10-19-margin-of-safety-and-geometric-return.md` | 成果物仓库：`git@github.com:yinzhongkai/reading-notes.git`；本机 `C:/Users/YinZh/Documents/workspace/reading-notes` | reading-partner-intelligent-investor | [T-013](../TASKS.md#t-013整理安全边际与几何平均收益率讨论笔记) | 0.1；开发快照 `479f8982aa88b4efb93a68b6b3b59e72802e85d3`，尚未合入 main | draft | 用户授权整理保存；尚无另行内容批准 |
 
 本轮流程、笔记组织与工作区讨论以 A-002 为候选；A-001 保留 T-001 的初始方案内容，不代表两份方案均已批准。
 
@@ -39,6 +40,14 @@ OPC 治理与协作成果使用当前项目 `artifacts/` 内的正文链接；�
 - 适用范围：b001 的既有全书框架、第一章预读与巩固笔记、旧进度及切分正文。原笔记保留第一人称和原有判断，属于历史材料，不自动视为用户当前认可观点或本成员已读全书。实际阅读版本和当前章节/页码仍待补充。
 - 文件与验证：原样迁入 26 份书籍材料及源 LICENSE；新增导览、来源清单和局部换行保留规则，共 30 个 UTF-8 文件。27 个来源文件的大小、SHA-256 与最终开发提交中的 Git blob 均已核对，30 处导览链接有效，差异检查通过。源第3章一处失效脚注链接已原样保留并注明；源记录提到的 EPUB 与 full.txt 未在分支中找到。
 - 维护边界：原有 10 份书目资料、b001 书目档案与全项目书目索引未改动，仍由 book-recommender 维护。本条只登记本成员的资料迁入成果；本轮无内容批准或最终合入版本。
+
+## A-005 安全边际与几何平均收益率讨论笔记
+
+- 负责人：reading-partner-intelligent-investor；关联任务 T-013；版本 0.1；更新日期 2026-10-19（Asia/Shanghai）；状态 draft，讨论整理稿。
+- 存储位置：本机 `C:/Users/YinZh/Documents/workspace/reading-notes`；成果物仓库 `git@github.com:yinzhongkai/reading-notes.git`；路径 `books/b001-intelligent-investor/notes/2026-10-19-margin-of-safety-and-geometric-return.md`。
+- 精确版本：本地 `feature/t-011-b001-reading-prep` 的开发快照为 `479f8982aa88b4efb93a68b6b3b59e72802e85d3`；尚未合入 main 或推送，不作为 WORKSPACE 锁定版本。
+- 来源与适用范围：用户于 2026-10-19 授权保存本会话实际讨论，并补充关于相反结果及最坏情况的感悟；笔记保存用户原话，区分伙伴公式、假设例子与归纳。原书依据为本地导入第20章相关段落，收益率资料沿用讨论中已核对的 CFA Institute 来源；实际阅读版本、译者和具体页码待补。
+- 验证与边界：整篇读回，4 项数值关系与 2 处本地来源链接核对通过，UTF-8 和差异检查通过；本次只新增该笔记，既有书目档案、历史导入资料与全项目书目索引保持原样。保存完成不代表用户批准所有伙伴补充或完成全书阅读。
 
 ## 正文元信息样式（不是真实成果）
 
