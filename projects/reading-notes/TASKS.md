@@ -201,6 +201,46 @@
 - 阻塞与下一位行动人：本任务无遗留事项；本地整理后的 2 个提交等待后续推送安排，T-009、H-004 及其他既有记录的状态保持原样。
 - 更新日期：2026-10-19（Asia/Shanghai）。
 
+## T-011：准备《聪明的投资者》阅读工作分支
+
+- 负责人：reading-partner-intelligent-investor
+- 状态：completed
+- 授权来源与日期：用户于 2026-10-19（Asia/Shanghai）在本阅读伙伴会话明确要求“可以先创建一个feature分支”；本轮仅受理分支准备，不据此启动书籍讨论或业务内容写作。
+- 变更类型：governance-only；创建 OPC 本地 feature 分支并登记本次请求。
+- OPC 开发分支：feature/reading-notes/t-011-b001-reading-prep，目标 project/reading-notes。
+- OPC 合入前目标提交：尚未合入；创建时目标及本地 HEAD 为 35f56c6aa0d45db83368cba0ad470a2c7523bd96，已通过只读远端查询核对与 origin/project/reading-notes 一致。
+- 成果物仓库与开发分支：本轮未创建成果物分支；声明仓库 git@github.com:yinzhongkai/reading-notes.git 仅作基线、分支和工作树核对。
+- 成果物仓库合入后的最终提交：本轮不适用；既有 main、HEAD 与 WORKSPACE revision 均为 66ac807098f9c169745e5e339431ec314df69044。
+- 目标与范围：从已核对的项目长期分支创建并切换到本书阅读准备分支，保留供后续获授权工作使用。
+- 输入与依赖：本次用户请求；根分支策略与会话刷新协议；当前 TEAM、自身成员、reading-partner 角色及有效技能；WORKSPACE；T-010 的上一轮整理与分支清理记录。
+- 优先级：未设定。
+- 完成条件与确认方式：本地 feature 分支创建成功且当前 checkout 已切换，其 HEAD 等于创建起点；采用 Git 读回核对，无另行评审安排；本轮不要求提交、合并或推送。
+- 进展：已刷新身份与约束，核对两个仓库工作树干净、成果物基线一致、OPC 本地与远端目标头一致；上一轮本地及本项目远端 feature/bugfix 引用已清理，随后完成本次分支创建及切换。
+- 成果与验证证据：git switch -c 成功；读回当前分支为 feature/reading-notes/t-011-b001-reading-prep、HEAD 为 35f56c6aa0d45db83368cba0ad470a2c7523bd96；原任务、交接及书目内容继续保留。
+- 合并与清理状态：分支准备完成时尚未提交、合并、推送或清理；后续用户授权的资料迁入由 T-012 在同一分支承接，本条准备记录随该轮治理提交保存。任务完成仅表示本次分支准备完成，不表示阅读、业务成果或开发轮次已经结束。
+- 阻塞与下一位行动人：本次分支准备无阻塞；后续阅读内容由用户在本会话提出，实际语言、版本、译者及阅读位置仍待补充，书目档案与全项目索引维护责任不变。
+- 更新日期：2026-10-19（Asia/Shanghai）。
+
+## T-012：迁入《聪明的投资者》既有阅读资料
+
+- 负责人：reading-partner-intelligent-investor
+- 状态：completed
+- 授权来源与日期：用户于 2026-10-19（Asia/Shanghai）在本阅读伙伴会话提供 git@gitee.com:nullstack/inkling.git，要求查看 add-intelligent-investor 分支并将以前记录的内容拿过来。
+- 变更类型：feature；在 T-011 已准备的同一开发轮次内迁入 b001 历史阅读资料，不新建下一轮 OPC 分支。
+- OPC 开发分支：feature/reading-notes/t-011-b001-reading-prep，目标 project/reading-notes。
+- OPC 合入前目标提交：尚未合入；当前目标基线为 35f56c6aa0d45db83368cba0ad470a2c7523bd96。
+- 成果物仓库与开发分支：git@github.com:yinzhongkai/reading-notes.git；已从 main 的 66ac807098f9c169745e5e339431ec314df69044 创建 feature/t-011-b001-reading-prep，与 OPC 使用相同后缀。
+- 成果物仓库合入后的最终提交：尚未合入；本地开发快照为 20faad16a237efdd494bc72a4c108525e4998e98，不是 main 最终合入版本。WORKSPACE revision 保持既有 main 基线，不将开发快照标为已锁定成果版本。
+- 目标与范围：将指定源分支中 books/intelligent-investor 的现存材料原样迁入 books/b001-intelligent-investor/imports/inkling/，保留源许可证、精确来源、文件清单和校验信息；新增导览，区分历史笔记、切分正文与本次解释。
+- 输入与依赖：本次用户请求；源分支精确提交 ee2616eab9b0a5f90a49fda3c1f1bc01ff77021d；已声明成果物工作区、b001 既有档案及本成员 scope；D-004、D-005、D-008、D-010；T-011 已创建分支和本会话既有刷新结果。
+- 优先级：未设定。
+- 完成条件与确认方式：在本地成果物 feature 分支保存指定书籍现存资料，逐文件核对字节与源 Git blob，核对 UTF-8、导览链接和引用范围；记录开发快照及实际读取范围，保留既有书目档案、索引和配置。完成表示可供用户查看的迁入候选稿，不以合并、推送或用户批准为条件；本轮采用作者自查。
+- 进展：已在本地成果物 feature 分支保存迁入候选稿，入口为 books/b001-intelligent-investor/imports/inkling/README.md，治理索引见 A-004。已完整读取全局框架、第一章预读与巩固笔记、旧进度及许可证，扫描文件树并抽查前置内容和第20章片段；正文未逐章完整读取。
+- 成果与验证证据：27 个来源文件（4 份框架/笔记/进度、22 份切分文本及 LICENSE）的字节、SHA-256、大小与提交后的 Git blob 均与源快照一致；新增导览、来源清单及局部换行保留规则，共 30 个 UTF-8 文件、30 处有效导览链接，git diff --cached --check 通过。源第3章第15行脚注1指向缺失目标2，该既有问题原样保留并在导览及清单登记；旧 progress.md 所列 EPUB 与 full.txt 不在源文件树中。原有 10 份书目资料未修改；源进度仍仅作 2026-07-11 至 2026-07-14 的历史记录，不替代本次阅读进度或实际版本。
+- 合并与清理状态：成果物已本地提交，OPC 配套记录随本轮治理提交保存；两个长期分支及 WORKSPACE 未改变。两个 feature 分支均保留，尚未合并、推送或清理，本轮不将候选稿标为批准成果。
+- 阻塞与下一位行动人：迁入候选稿已具备查看条件，无执行阻塞；后续由用户在本会话继续阅读讨论。T-011 原有准备记录一并保留，不更新其他成员任务、书目档案或全项目书目索引；未知版本和立场归属不填猜测值。
+- 更新日期：2026-10-19（Asia/Shanghai）。
+
 ## 记录样式（不是真实任务）
 
 ```text

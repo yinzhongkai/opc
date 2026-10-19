@@ -7,6 +7,7 @@
 | A-001 | [笔记组织与工作区候选方案](A-001-note-organization-and-workspace.md) | OPC artifacts | project-manager | [T-001](../TASKS.md) | 0.1；提交按正文路径与 Git 历史定位 | draft | 尚无；D-001、D-002 为 proposed |
 | A-002 | [阅读流程与逐书伙伴候选方案](A-002-reading-workflow-and-book-partners.md) | OPC artifacts | project-manager | [T-002](../TASKS.md) | 0.1；提交按正文路径与 Git 历史定位 | draft | 尚无；D-003、D-004、D-005 为输入，整体采用待 D-001、D-002 确认 |
 | A-003 | 投资领域书目与阅读推荐；入口 `README.md` | 成果物仓库：`git@github.com:yinzhongkai/reading-notes.git`；本机 `C:/Users/YinZh/Documents/workspace/reading-notes` | book-recommender | [T-007](../TASKS.md#t-007按已确认结构整理首批投资书目) | 0.1；`66ac807098f9c169745e5e339431ec314df69044` | draft | D-008 已确认组织结构与七本收录范围；具体内容尚无另行批准，六本候选未选定 |
+| A-004 | b001 历史阅读资料迁入；入口 `books/b001-intelligent-investor/imports/inkling/README.md` | 成果物仓库：`git@github.com:yinzhongkai/reading-notes.git`；本机 `C:/Users/YinZh/Documents/workspace/reading-notes` | reading-partner-intelligent-investor | [T-012](../TASKS.md#t-012迁入聪明的投资者既有阅读资料) | 0.1；开发快照 `20faad16a237efdd494bc72a4c108525e4998e98`，尚未合入 main | draft | 用户授权迁入；内容与历史推论尚未批准 |
 
 本轮流程、笔记组织与工作区讨论以 A-002 为候选；A-001 保留 T-001 的初始方案内容，不代表两份方案均已批准。
 
@@ -28,6 +29,16 @@ OPC 治理与协作成果使用当前项目 `artifacts/` 内的正文链接；�
 - 投资领域入口：`recommendations/investing/README.md`。
 - 本次推荐记录：`recommendations/investing/after-intelligent-investor.md`。
 - 单书档案：`books/b001-intelligent-investor/README.md`、`books/b002-most-important-thing/README.md`、`books/b003-one-up-on-wall-street/README.md`、`books/b004-essays-of-warren-buffett/README.md`、`books/b005-common-stocks-uncommon-profits/README.md`、`books/b006-random-walk-down-wall-street/README.md`、`books/b007-security-analysis/README.md`。
+
+## A-004 b001 历史阅读资料迁入
+
+- 负责人：reading-partner-intelligent-investor；关联任务 T-012；版本 0.1；更新日期 2026-10-19（Asia/Shanghai）；状态 draft。
+- 存储位置：本机 `C:/Users/YinZh/Documents/workspace/reading-notes`；成果物仓库 `git@github.com:yinzhongkai/reading-notes.git`；入口 `books/b001-intelligent-investor/imports/inkling/README.md`。
+- 版本范围：本地 `feature/t-011-b001-reading-prep` 的精确开发快照为 `20faad16a237efdd494bc72a4c108525e4998e98`；尚未合入 main 或推送，不是 WORKSPACE 锁定的最终合入提交。main 与 WORKSPACE revision 继续为 `66ac807098f9c169745e5e339431ec314df69044`。
+- 来源与授权：用户于 2026-10-19 提供 `git@gitee.com:nullstack/inkling.git` 的 `add-intelligent-investor` 分支并要求迁入以前记录；源快照为 `ee2616eab9b0a5f90a49fda3c1f1bc01ff77021d`，源目录 `books/intelligent-investor/`。
+- 适用范围：b001 的既有全书框架、第一章预读与巩固笔记、旧进度及切分正文。原笔记保留第一人称和原有判断，属于历史材料，不自动视为用户当前认可观点或本成员已读全书。实际阅读版本和当前章节/页码仍待补充。
+- 文件与验证：原样迁入 26 份书籍材料及源 LICENSE；新增导览、来源清单和局部换行保留规则，共 30 个 UTF-8 文件。27 个来源文件的大小、SHA-256 与最终开发提交中的 Git blob 均已核对，30 处导览链接有效，差异检查通过。源第3章一处失效脚注链接已原样保留并注明；源记录提到的 EPUB 与 full.txt 未在分支中找到。
+- 维护边界：原有 10 份书目资料、b001 书目档案与全项目书目索引未改动，仍由 book-recommender 维护。本条只登记本成员的资料迁入成果；本轮无内容批准或最终合入版本。
 
 ## 正文元信息样式（不是真实成果）
 
