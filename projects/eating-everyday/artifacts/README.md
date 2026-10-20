@@ -2,15 +2,18 @@
 
 每位成果负责人维护自己的条目，协调记录维护人检查索引一致性。元信息与批准规则见根 [项目运行协议](../../../PROJECT_PROTOCOL.md)。
 
+当前首版以 A-001 v0.9、D-016 为准，全部候选由用户输入，不获取定位或附近餐厅数据。A-002/A-003 仅为旧核实资料，A-004 仅保留视觉参考；architect 已按 H-005 更新 A-005/A-006 v0.3，并新增 A-008 v0.1；旧数据验证退出首版，当前架构对应 11/11/27，平台真机能力仍未验收。
+
 | 成果 ID | 名称与位置 | 存储位置 | 负责人 | 关联任务 | 版本/精确提交 | 状态 | 批准决定 |
 |---|---|---|---|---|---|---|---|
-| A-001 | [今天吃什么首版产品需求草案](product-requirements.md) | OPC artifacts；截图参考位于 references/meal-wheel-reference.png | product-manager | [T-001](../TASKS.md#t-001产品需求首轮澄清)、[T-003](../TASKS.md#t-003整理首版需求与架构师交接)、[T-006](../TASKS.md#t-006写回用户确认的七项规则) | 0.8，2026-10-19；当前指纹见 H-003，v0.7 输入历史见 H-002 | draft | D-012 至 D-015 确认七项业务选择；现为 15/13/35，具体来源、平台、许可与真实覆盖仍待验证，未新增整份版本批准 |
-| A-002 | [高德接口免费额度与本机菜单保存授权核实](amap-usage-assessment.md) | OPC artifacts | product-manager | [T-001](../TASKS.md#t-001产品需求首轮澄清) | 0.2，2026-10-16 | draft | 尚无；已按 D-009 补充长期免费判断，未批准最终选型 |
-| A-003 | [首版餐厅数据源可行性比较](data-source-feasibility.md) | OPC artifacts | product-manager | [T-002](../TASKS.md#t-002数据源可行性验证与首版界面方案) | 0.1，2026-10-16 | draft | 尚无；林萃桥真实覆盖及最终选型未确认 |
-| A-004 | [首版页面与交互方案](interface-plan.md) | OPC artifacts；治理附件 meal-wheel-preview.html | product-manager | [T-002](../TASKS.md#t-002数据源可行性验证与首版界面方案) | 0.1，2026-10-16 | draft | D-011 记录用户同意先沿用界面方向；保留为参考，后续设计由架构师负责 |
-| A-005 | [数据源与林萃桥覆盖验证记录](architecture-data-verification.md) | OPC artifacts；官方中心补证及实际查询记录 | architect | [T-002](../TASKS.md#t-002数据源可行性验证与首版界面方案) | 0.2，2026-10-19 | draft | 按 D-012/D-013 验证开放数据及成功样本；OSM 站点中心核验通过，餐厅样本、项目许可、平台与运行条件仍未通过，未选定服务 |
-| A-006 | [首版系统架构与交互设计](system-architecture.md) | OPC artifacts；系统、模型、接口、状态及 15/13/35 追溯 | architect | [T-002](../TASKS.md#t-002数据源可行性验证与首版界面方案) | 0.2，2026-10-19 | draft | 已按 A-001 v0.8、D-012 至 D-015 同步七项业务选择；H-003 整理范围已关闭，未获整份架构或实现批准 |
-| A-007 | [首版业务规则与数据源推进选项](product-decision-options.md) | OPC artifacts；7 项已确认选择、5 项外部待补条件及架构反馈对应 | product-manager | [T-005](../TASKS.md#t-005整理架构反馈中的用户确认选项)、[T-006](../TASKS.md#t-006写回用户确认的七项规则) | 0.2，2026-10-19；原选项输入提交 048a30563eaacfcf1c5cfc0337ae1a40d7dc8a5e | draft | D-012 至 D-015 确认 1A、2B、3A 至 7A；业务规则已写回 A-001 v0.8，外部技术和许可条件继续待验证 |
+| A-001 | [今天吃什么首版产品需求草案](product-requirements.md) | OPC artifacts；截图参考位于 references/meal-wheel-reference.png | product-manager | [T-001](../TASKS.md#t-001产品需求首轮澄清)、[T-003](../TASKS.md#t-003整理首版需求与架构师交接)、[T-006](../TASKS.md#t-006写回用户确认的七项规则)、[T-007](../TASKS.md#t-007调整为全手动候选需求) | 0.9，2026-10-20；当前正文指纹见 H-005，旧版本历史见 H-002/H-003 | draft | D-016 确认全手动候选并撤销定位、距离、搜索、餐厅数据源和覆盖验证；有效数量 11/11/27，原菜单边界继续有效，未批准整份架构或实现 |
+| A-002 | [高德接口免费额度与本机菜单保存授权核实](amap-usage-assessment.md) | OPC artifacts | product-manager | [T-001](../TASKS.md#t-001产品需求首轮澄清) | 0.2，2026-10-16 | draft | D-016 后仅作历史核实记录，不再作为本版数据接口待办；未批准最终选型 |
+| A-003 | [首版餐厅数据源可行性比较](data-source-feasibility.md) | OPC artifacts | product-manager | [T-002](../TASKS.md#t-002数据源可行性验证与首版界面方案) | 0.1，2026-10-16 | draft | D-016 已取消本版数据源和林萃桥覆盖需求；原未验证事实保留为历史，不视为通过 |
+| A-004 | [首版页面与交互方案](interface-plan.md) | OPC artifacts；治理附件 meal-wheel-preview.html | product-manager | [T-002](../TASKS.md#t-002数据源可行性验证与首版界面方案) | 0.1，2026-10-16 | draft | D-011/D-016 保留截图视觉方向；旧搜索和模拟数据仅作历史，v0.9 页面由架构师适配 |
+| A-005 | [数据源与林萃桥覆盖验证记录](architecture-data-verification.md) | OPC artifacts；旧证据与 D-016 撤销说明 | architect | [T-002](../TASKS.md#t-002数据源可行性验证与首版界面方案) | 0.3，2026-10-20 | draft | 旧 V-01 至 V-04 已撤销，不再补名单；保留历史失败及接收前 Overture 成功取数，未作最终餐厅去重或选型 |
+| A-006 | [首版系统架构与交互设计](system-architecture.md) | OPC artifacts；全手动本机系统与 11/11/27 追溯 | architect | [T-002](../TASKS.md#t-002数据源可行性验证与首版界面方案) | 0.3，2026-10-20；输入双指纹见 H-005 | draft | 已按 A-001 v0.9/D-016 移除定位和餐厅依赖；补官方平台文档证据，尚无真机验收或整份架构批准 |
+| A-007 | [首版业务规则与数据源推进选项](product-decision-options.md) | OPC artifacts；v0.8 七项答复历史和 v0.9 适用/撤销映射 | product-manager | [T-005](../TASKS.md#t-005整理架构反馈中的用户确认选项)、[T-006](../TASKS.md#t-006写回用户确认的七项规则)、[T-007](../TASKS.md#t-007调整为全手动候选需求) | 0.3，2026-10-20；当前指纹见 H-005 | draft | D-016 替代旧来源、样本和跨来源同名范围；D-014 菜单管理保留，历史选项不再作为数据验证待办 |
+| A-008 | [当前首版账号与权限前置清单](accounts-access-checklist.md) | OPC artifacts；测试/发布与已撤销路线分别说明 | architect | [T-002](../TASKS.md#t-002数据源可行性验证与首版界面方案) | 0.1，2026-10-20 | draft | 当前无需地图、定位或餐厅账号；后续 AppID/测试入口及发布资格、费用须按实际条件核实，未代办服务 |
 
 OPC 治理与协作成果使用当前项目 `artifacts/` 内的正文链接；产品代码和直接业务交付物使用“成果物仓库 + 仓库内路径”，并记录其合入后的最终提交。快进合并后可直接引用通过最终验证的普通功能提交，可移动分支名不能代替精确提交。
 
