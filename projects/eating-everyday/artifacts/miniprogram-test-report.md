@@ -1,23 +1,26 @@
-# 小程序独立平台测试与阻塞缺陷报告
+# 小程序独立平台测试与缺陷复测报告
 
 - 项目：eating-everyday（今天吃什么）
 - 成果 ID：A-014
 - 负责人：tester（测试工程师，兼职）
 - 关联任务：[T-013](../TASKS.md#t-013验证小程序导入编译与预览闭环)；输入为 T-012 固定交接，不代写 developer 修复或任务状态。
-- 版本：0.1
+- 版本：0.2
 - 更新日期：2026-10-21（Asia/Shanghai）
 - 状态：draft
-- 适用范围：当前原生候选的独立源码/桌面复跑、真实开发者工具编译、PNG/按钮及抽取平台复现；真实菜单闭环和手机验收尚未完成。
-- 授权及输入：用户既定串行授权、项目经理本轮通知；[A-001 v0.9](product-requirements.md)、[A-006 v0.4](system-architecture.md)、[A-010 v0.1](core-test-plan.md)、[A-012 v0.3](core-test-report.md)、[A-013 v0.1](miniprogram-preview-handoff.md)及现行决定。接收时刷新 tester 身份、scope、角色、testing/微信小程序测试正文；未变规则及历史按 Git 范围核对复用。
-- OPC 接手版本：7d497ef99bd9a26566982ebb86c8af13ce6f84f7，feature/eating-everyday/t-002-readiness-review；目标 project/eating-everyday 的本轮合入前基线 a735031c37c09e75fb9478681aaf42010a82f378。
-- 被测实现：本机产品 git@github.com:yinzhongkai/eating-everyday.git，checkout=`C:/Users/YinZh/Documents/workspace/eating-everyday`，feature/t-002-readiness-review，**f7ceaf791dd06e8749fa1754b6a0143d1193fb63**；测试期间未改生产。
-- 测试资产：同一产品仓库 **f678942064fb9dc8fdf37ddf9a2257a8b459c1c0**。自上述实现起仅新增20份 tester 测试/证据；首次资产提交 c0dcb576647535aa8b82200ad80b4c03787af6c4，后续 f7581070b90b0d1d3d50615e364107a0f0b26da9 / f678942 只修正新 JPEG 的二进制保存及证据字节哈希，未重写历史或改变失败断言。
+- 适用范围：固定原生候选的独立缺陷复测、当前可导入预览里程碑及分层平台检查；保留原失败和本轮证据缺口，手机及整体验收未完成。
+- v0.1授权及输入：用户既定串行授权、项目经理本轮通知；[A-001 v0.9](product-requirements.md)、[A-006 v0.4](system-architecture.md)、[A-010 v0.1](core-test-plan.md)、[A-012 v0.3](core-test-report.md)、[A-013 v0.1](miniprogram-preview-handoff.md)及现行决定。接收时刷新 tester 身份、scope、角色、testing/微信小程序测试正文；未变规则及历史按 Git 范围核对复用。
+- v0.1 OPC接手版本：7d497ef99bd9a26566982ebb86c8af13ce6f84f7，feature/eating-everyday/t-002-readiness-review；目标 project/eating-everyday 的本轮合入前基线 a735031c37c09e75fb9478681aaf42010a82f378。
+- v0.1被测实现：本机产品 git@github.com:yinzhongkai/eating-everyday.git，checkout=`C:/Users/YinZh/Documents/workspace/eating-everyday`，feature/t-002-readiness-review，**f7ceaf791dd06e8749fa1754b6a0143d1193fb63**；测试期间未改生产。
+- v0.1测试资产：同一产品仓库 **f678942064fb9dc8fdf37ddf9a2257a8b459c1c0**。自上述实现起仅新增20份 tester 测试/证据；首次资产提交 c0dcb576647535aa8b82200ad80b4c03787af6c4，后续 f7581070b90b0d1d3d50615e364107a0f0b26da9 / f678942 只修正新 JPEG 的二进制保存及证据字节哈希，未重写历史或改变失败断言。
+- v0.2接手及当前版本：项目经理按用户既定恢复授权串行通知，developer已停止；OPC输入6eca7297c1de1a2c6cd32a6068c3e412d0b12318及A-013 v0.2，固定产品实现**8e4472006f1d3cdff5b774052e01ce8db5a96453**，新tester资产**d212b5908484c47906a3eb62f254b74556175a0e**（父为该实现）。本轮仅新增test/evidence/tester-retest-t013-001/16份文件；37份非test和原44份tester原始工作树指纹不变，旧Git内容不变。结果及证据限制见第6节。
 - 存储位置：治理报告在 OPC artifacts；执行代码、截图、日志在产品 test/independent/defect-t013-001.test.js、test/evidence/tester-t013-preflight/、test/evidence/tester-t013-platform/，以下均为产品仓库内路径。
 - 主线交付：未合入或推送。产品 main/已有 origin/main/WORKSPACE.revision 仍为 8fa87fe4cb8f7f33aacf2842798a486150a6105e。
 - 批准依据：无整份成果批准；测试成功子项不代表完整预览闭环、真机验收或正式发布。
-- 版本记录：0.1 首轮独立平台执行，发现 BUG-T013-001 并按约定停止；原 T-011 completed 和001/002 closed历史不变。
+- 版本记录：0.1首轮发现BUG-T013-001并停止；0.2独立复测关闭001，执行关键平台分支并生成本轮新码；原T-011 completed及其001/002 closed历史不变。
 
-**当前结论：BUG-T013-001 open，阻塞双项抽取，T-013 blocked。** 桌面原套件285/285通过；真实编译及最终PNG/中央按钮显示、单项实际点击通过；加入两项后实际点击中央按钮立即报抽取不可用，无旋转、无结果。未生成新预览码，旧码继续无效，不能交付为已验证可用预览。
+**v0.1历史结论：f7ceaf上001 open、T-013 blocked；原285项通过与新增1项失败分别保留。** 第1～5节保持当时正文，不把旧失败改记为通过。
+
+**当前v0.2结论：8e44720上BUG-T013-001独立复测closed，可导入预览里程碑已交接。** 原用例1/1、相关7/7、完整292/292通过；真实鼠标双项/24项旋转与落点、关键菜单操作取得结果，新预览111012字节。部分平台观察器原始图片/JSON因执行工具重置未落盘，只保存明确标注的工具摘录；手机/离线及剩余约定分支未执行，T-013保持in_progress，未整体验收。
 
 ## 1. 授权、环境和证据层次
 
@@ -99,3 +102,57 @@ Computer Use 第一次使用编译前旧窗口句柄失败；刷新后遇到 `Co
 本轮按T-013约定在阻塞缺陷定位后停止业务扩测；最后界面保留双项错误供开发查看，没有继续GUI/CLI/SDK业务操作，不生成新码，不修改生产、需求、架构、他人任务/索引、STATUS或WORKSPACE，不合入、推送、发布、重写历史或删分支。
 
 本报告、T-013和本人A-014索引完成本地治理保存后停止，由项目经理按既定授权串行安排developer修复并提交新精确候选；tester收到后先复测BUG-T013-001与受影响回归，再继续PNG动画/菜单/新预览和手机分层检查。当前不存在需要重复确认的恢复操作授权；审批已解除，不能用原Esc或AppID缺失解释当前失败。成果draft，T-013不completed。
+
+## 6. v0.2独立复测与当前预览交接
+
+### 固定版本及独立回归
+
+本轮刷新tester登记/role/scope、testing及微信小程序测试正文；根规则、需求、架构、决定经b44d985以来Git范围比较未变，读取A-013 v0.2和本人T-013。两仓库接手时同后缀feature且干净；固定实现8e4472006f1d3cdff5b774052e01ce8db5a96453，父为原tester资产f678942。沿用用户已经恢复的自动操作授权、已处理的应用审批、既有私有AppID/端口/官方SDK，不改安全隐私设置或AppSecret。developer停止，未联系其他会话。
+
+产品新资产d212b5908484c47906a3eb62f254b74556175a0e的test/evidence/tester-retest-t013-001/保存下列独立执行结果。环境仍为Windows11/Node24.19.0、开发工具2.02.2608080、基础库3.17.4、WebView、iPhone12/13(Pro)模拟器390×844/视口390×753/DPR3、SDK0.13.0；模拟iOS/微信版本不冒充手机环境。
+
+| 独立命令 | 实际结果 |
+|---|---|
+| node --test --test-reporter=tap test/independent/defect-t013-001.test.js | 退出0，原失败断言未改，1/1通过。original-defect.tap。 |
+| node --test --test-reporter=tap test/wx-random-realms.test.js test/independent/defect-t013-001.test.js | 退出0，7/7通过。related-realms.tap；包含开发新增案例，本成员复跑。 |
+| node --test --test-reporter=tap test/*.test.js test/independent/*.test.js | 退出0，292/292（开发157＋独立135），失败/取消/跳过/todo均0。combined-292.tap；三次计数不叠加为独立覆盖总数。 |
+
+desktop-run.json保留命令、时间及前后指纹；收尾run.json再次核对37份非test和44份原tester原始工作树字节未变，Git内容与f678942一致。未改src/draw.js、旧用例或业务代码。新16份资产暂存字节逐项与元数据SHA-256一致；原CLI的CRLF/空行只在本证据目录设例外，不改全局规则。
+
+### 001关闭及实际平台操作
+
+CLI重新编译退出0后，实际鼠标操作前断开SDK；每次按真实窗口状态输入/点击，SDK只作离散观察、夹具或截图。下表“工具摘录”均指platform-tool-excerpts.md及本聊天实际工具响应，原始附件缺口在下一小节单列，不能把观察与缺失文件混写。
+
+| 范围 | 实际观察与边界 |
+|---|---|
+| BUG-T013-001 | 真实输入面馆/饺子、实际中心点击，看到旋转及饺子结果；记录index1、rotation1980、busy=false/error空，指针/完整结果/核心结果一致。结合原1/1通过，tester将001由open改为closed，限固定8e44720及该环境；原失败保留。 |
+| 0/1/24/25、长名称 | 0项实际点击提示先加入；唯一152个UTF-16单元长名实际抽取，结果内部可滚动到末尾emoji与“终”，按钮可达。页面handler填24并拒绝25，实际GUI看到编号01～24，实际中心点击旋转并返回第一项长名，关闭卡片后顶部指针落01。填24/尝试25由程序handler执行，非逐项物理输入；不作有限样本均匀性证明。 |
+| 保存/页面重进/原样加载 | 21个汉字菜单名实际输入后拒绝并保留副本；20字符保存成功。SDK reLaunch回空副本后，实际点列表/目标，原menuId及面馆、饺子顺序恢复、dirty=false；不是手机结束重开。 |
+| 覆盖/另存/重命名 | 实际另存“独立晚餐”新ID/3项，原20字符菜单仍2项；稳定原生选项中实际覆盖保持ID、revision1→2；实际重命名“独立夜宵”保持ID、revision→3，其他菜单不变。 |
+| dirty三分支 | 实际取消保留4项dirty副本/原关联；实际放弃恢复另一菜单2项，旧3项保存未覆盖；原2项添加汤后实际保存并切换，持久原菜单为面馆/饺子/汤，当前目标仍面馆/饺子/米饭。SDK对真实快照读取确认了差异。 |
+| 写失败保护（注入） | 在真实wx仓储的storage.write前注入一次WRITE_FAILED，程序选择保存并切换；targetLoadCalls=0，四项dirty副本/当前关联/两份旧记录保留，错误“保存未完成，当前内容已保留”。选择/确认函数及写失败均为显式运行时夹具，结束恢复；不是实际存储满或真实系统故障。 |
+| 删除/另存、21份菜单（控制器＋真实wx） | 程序确认删除当前菜单，原ID不可加载，候选保留、current=null/dirty=true；再保存获得新ID。通过页面handlers累计21份实际完整快照，无固定20份上限；原其他菜单不变。删除确认是夹具返回true，未计为实际鼠标原生确认通过。 |
+| 字素/空覆盖/长名往返（控制器＋真实wx） | 20个家庭emoji字素改名成功，21拒绝且旧名不变；删光当前后空覆盖拒绝，旧3项记录保留；152单元候选完整保存、切走、加载恢复，随后实际鼠标单项结果检查如上。 |
+
+当前AC映射：03/04/09/10/36/37取得上述抽取/数量子项；05/06/14/15/16/17取得所列菜单分支；08/25/27取得模拟器所列布局、容量与长名子项；29/30/31/32/35取得明确注明的控制器/真实wx或注入子项。11只实际输入基本中文，其余输入法/空白/粘贴分支未平台重测；12/28平台重复/同名组合未另跑。07手机留存、18离线、20同域清除后重建/手机清除，以及全部M层均未完成；隔离清理不能冒充这些验收。L层历史及本轮292复跑单列，不自动把27项AC全部判通过。
+
+### 保留的失败、证据缺口与清理
+
+一次原生弹层尚在动画中，鼠标实际落到“另存”，提前按“已覆盖”检查dirty=false而断言失败；随后按真实分支完成另存，重新观察稳定选项后才实际覆盖。该输入/期望偏差不当作新生产缺陷，也不把最初失败改成通过。批量控制器观察器在24秒限时退出1，异步任务继续；随后只读取得status=passed、8组事件及injectionsRestored=true。两次被遮挡窗口截图出现其他前台应用，均弃用，不作点击依据，激活实际微信窗口后恢复。
+
+**执行工具重置导致长期观察器进程及内存中的平台JSON/PNG未落盘。** 目录中没有mouse-two-result/menu20-saved/dirty各分支/24-result等原观察器图片，也没有platform-session.json或原extended-result.json；不得用不存在的文件当证据。上述已执行观察按真实聊天工具响应整理为明确标注的摘录，保留方法、状态和数字，不能称完整原始平台附件。未重跑整段场景来覆盖该缺口；这是本阶段交接的审计限制。desktop TAP、旧失败文件、新清理/CLI记录及当前空页PNG实际存在。
+
+重置后SDK连接失败的原始错误保存在platform-recovery.json；重新CLI auto连接同一候选后，只核对并清理确切前缀eating-everyday:tester-retest-t013-001:1792583020228:。cleanup.json记录移除54个测试key、剩余0；用户v1域清理前后均0key，SHA-256均为4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945。该哈希对照仅覆盖清理，不伪造丢失的整轮初始哈希。重新进入取得ready/PNG/0项/空菜单，after-cleanup-empty.png已实际查看。没有操作其他前缀或用户菜单。
+
+### 当前新预览与用户入口
+
+本成员为同一未改实现独立执行CLI preview，退出0，preview-info.json实际总包**111012字节（108.4KB）**，preview-cli.txt保留本机AppID脱敏后的命令输出。开发121174及旧83913是其他构建记录，不混用为本次大小。新码绝对路径：`C:/Users/YinZh/Documents/workspace/eating-everyday/.local/tester-t013-001/preview.jpg`，已查看、被Git忽略；二维码SHA-256见run.json。未宣称手机已扫码成功或已发布。
+
+用户最少操作：
+
+1. 微信开发者工具导入产品根目录`C:/Users/YinZh/Documents/workspace/eating-everyday`，沿用既有私有AppID配置。
+2. 使用基础库3.17.4，点“编译”，查看首页中央“开吃”与候选入口。
+3. 点“预览”生成该目录当前版本的新码，或直接打开上述本轮新码。
+4. 用有权限的微信“扫一扫”；在手机加入两项后点“开吃”，保存一份菜单，再正常关闭重开并显式加载核对。扫码/设备结果按用户实际反馈另记。
+
+当前“可导入并预览候选”的阶段目标已交接；因手机扫码/进程结束留存、手机键盘字体小屏安全区、真实容量/生命周期、打开后断网和部分原生分支未执行，且本轮原始GUI附件不完整，T-013仍in_progress，不整体completed。治理本地保存后停止，后续由用户反馈/项目经理安排接续；不自动唤醒、跨会话发送、修改他人记录、合并推送、删分支或发布。
