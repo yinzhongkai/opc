@@ -1,3 +1,7 @@
 schemaVersion: 1
 workspace:
-  driver: none
+  driver: git
+  repository: git@github.com:yinzhongkai/eating-everyday.git
+  branch: main
+  revision: 8fa87fe4cb8f7f33aacf2842798a486150a6105e
+  checkout: ../eating-everyday

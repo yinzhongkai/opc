@@ -14,6 +14,7 @@
 | A-006 | [首版系统架构与交互设计](system-architecture.md) | OPC artifacts；全手动本机系统与 11/11/27 追溯 | architect | [T-002](../TASKS.md#t-002数据源可行性验证与首版界面方案) | 0.3，2026-10-20；输入双指纹见 H-005 | draft | 已按 A-001 v0.9/D-016 移除定位和餐厅依赖；补官方平台文档证据，尚无真机验收或整份架构批准 |
 | A-007 | [首版业务规则与数据源推进选项](product-decision-options.md) | OPC artifacts；v0.8 七项答复历史和 v0.9 适用/撤销映射 | product-manager | [T-005](../TASKS.md#t-005整理架构反馈中的用户确认选项)、[T-006](../TASKS.md#t-006写回用户确认的七项规则)、[T-007](../TASKS.md#t-007调整为全手动候选需求) | 0.3，2026-10-20；当前指纹见 H-005 | draft | D-016 替代旧来源、样本和跨来源同名范围；D-014 菜单管理保留，历史选项不再作为数据验证待办 |
 | A-008 | [当前首版账号与权限前置清单](accounts-access-checklist.md) | OPC artifacts；测试/发布与已撤销路线分别说明 | architect | [T-002](../TASKS.md#t-002数据源可行性验证与首版界面方案) | 0.1，2026-10-20 | draft | 当前无需地图、定位或餐厅账号；后续 AppID/测试入口及发布资格、费用须按实际条件核实，未代办服务 |
+| A-009 | [产品仓库初始化 README](https://github.com/yinzhongkai/eating-everyday/blob/8fa87fe4cb8f7f33aacf2842798a486150a6105e/README.md) | 产品仓库 git@github.com:yinzhongkai/eating-everyday.git；主机：本机；checkout：../eating-everyday；仓库内路径：README.md | project-manager | [T-009](../TASKS.md#t-009初始化产品仓库并配置独立工作区) | 8fa87fe4cb8f7f33aacf2842798a486150a6105e，main，2026-10-21 | draft | D-017 授权 README 初始化、推送和工作区基线登记；仓库仅完成初始化，无应用实现或验收 |
 
 OPC 治理与协作成果使用当前项目 `artifacts/` 内的正文链接；产品代码和直接业务交付物使用“成果物仓库 + 仓库内路径”，并记录其合入后的最终提交。快进合并后可直接引用通过最终验证的普通功能提交，可移动分支名不能代替精确提交。
 
