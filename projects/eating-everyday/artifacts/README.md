@@ -15,6 +15,7 @@
 | A-007 | [首版业务规则与数据源推进选项](product-decision-options.md) | OPC artifacts；v0.8 七项答复历史和 v0.9 适用/撤销映射 | product-manager | [T-005](../TASKS.md#t-005整理架构反馈中的用户确认选项)、[T-006](../TASKS.md#t-006写回用户确认的七项规则)、[T-007](../TASKS.md#t-007调整为全手动候选需求) | 0.3，2026-10-20；当前指纹见 H-005 | draft | D-016 替代旧来源、样本和跨来源同名范围；D-014 菜单管理保留，历史选项不再作为数据验证待办 |
 | A-008 | [当前首版账号与权限前置清单](accounts-access-checklist.md) | OPC artifacts；已解除/可推进/实现测试/用户准备/发布阶段分列 | architect | [T-002](../TASKS.md#t-002数据源可行性验证与首版界面方案) | 0.2，2026-10-21 | draft | 当前四项最少准备与替代路径、负责人及解除条件已列；测试号覆盖/项目资格/发布费用仍未核实，无账号代办或产品写入 |
 | A-009 | [产品仓库初始化 README](https://github.com/yinzhongkai/eating-everyday/blob/8fa87fe4cb8f7f33aacf2842798a486150a6105e/README.md) | 产品仓库 git@github.com:yinzhongkai/eating-everyday.git；主机：本机；checkout：../eating-everyday；仓库内路径：README.md | project-manager | [T-009](../TASKS.md#t-009初始化产品仓库并配置独立工作区) | 8fa87fe4cb8f7f33aacf2842798a486150a6105e，main，2026-10-21 | draft | D-017 授权 README 初始化、推送和工作区基线登记；仓库仅完成初始化，无应用实现或验收 |
+| A-010 | [全手动首版测试计划与第一阶段交接](core-test-plan.md) | OPC artifacts；27 项 AC 分层用例、边界/状态、故障矩阵、随机及接口观察约定；实际测试资产后续仅进产品仓库 | tester | [T-011](../TASKS.md#t-011准备验收用例并执行不依赖-appid-的测试)，供 T-010 读取 | 0.1，2026-10-21；输入 OPC 405d219750041903643312d7b79b29b10fb9eab8；阶段成果精确提交由 T-011 及 Git 历史定位 | draft | 第一阶段测试设计交付，无产品实现或执行结论；第二阶段等待 T-010 固定候选，平台/真机另待用户环境，不代表方案批准或整体验收 |
 
 OPC 治理与协作成果使用当前项目 `artifacts/` 内的正文链接；产品代码和直接业务交付物使用“成果物仓库 + 仓库内路径”，并记录其合入后的最终提交。快进合并后可直接引用通过最终验证的普通功能提交，可移动分支名不能代替精确提交。
 
