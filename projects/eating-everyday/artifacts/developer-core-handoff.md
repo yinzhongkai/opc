@@ -4,19 +4,21 @@
 - 成果 ID：A-011
 - 负责人：developer（研发工程师）
 - 关联任务：[T-010](../TASKS.md#t-010实现不依赖-appid-的核心逻辑与开发自测)；接续 [T-011](../TASKS.md#t-011准备验收用例并执行不依赖-appid-的测试) 第二阶段。
-- 版本：0.2
+- 版本：0.3
 - 更新日期：2026-10-21（Asia/Shanghai）
 - 状态：draft
 - 适用范围：不依赖 AppID 的领域、接口替身和开发自测交付；不是完整小程序、独立测试或真机验收。
 - 来源及输入：[A-001 v0.9](product-requirements.md)、[A-007 v0.3](product-decision-options.md)、[A-006 v0.4](system-architecture.md)、[A-008 v0.2](accounts-access-checklist.md)、[A-010 v0.1](core-test-plan.md)，现行 D-005/D-011/D-014/D-016/D-017。实际接手 OPC 为 1f537859636de9f763e10a355ec20887da29e148；A-010 第一阶段已提交且 tester 已停止。
 - 存储位置：本治理交接在 OPC artifacts；产品代码、示例、自测及证据均在本机产品仓库 git@github.com:yinzhongkai/eating-everyday.git，checkout=../eating-everyday（相对 OPC 根目录）。
-- 固定开发候选：feature/t-002-readiness-review，**3fb016d22ba69f0046afdc6f0e88329477e911cf**；父提交为测试资产 bcbcf7c7ae9ddf5480dac45d121afd60b2c88431，初始实现 c4cb8bb34d53efee92b512f0394ad0656dc9d531 保留为历史。OPC 沿用 feature/eating-everyday/t-002-readiness-review。
+- 固定开发候选：feature/t-002-readiness-review，**54b720fa920dfcda9a3db5fa0e42378be01f5535**；父提交为tester资产a82d86b11a3daebcacd94e34af353b326e1e6d89，之前c4cb8bb/3fb016d的实现及证据保留历史。OPC沿用feature/eating-everyday/t-002-readiness-review。
 - 主线交付：未合入、未推送；main、已有 origin/main 和 WORKSPACE.revision 保持 8fa87fe4cb8f7f33aacf2842798a486150a6105e。以上开发候选不能填作已合入最终版本。未重新联网核验 Git 远端。
 - 批准依据：T-010 用户授权及原完成条件允许核心开发交接；无整份成果批准，不代写 T-011 结果或 T-002 完成。
 
-- 本次修复输入：[A-012 v0.1 独立报告与 BUG-T011-001](core-test-report.md)；OPC接手 ce5375a050ee064381857b0bcee68c19a56aba35。用户明确授权“需要修复和复测时继续按开发、测试串行推进”，developer 在 tester 停止后按该授权重开并完成修复交接。
+- v0.2修复输入：[A-012 v0.1 独立报告与 BUG-T011-001](core-test-report.md)；OPC接手 ce5375a050ee064381857b0bcee68c19a56aba35。用户明确授权“需要修复和复测时继续按开发、测试串行推进”，developer 在 tester 停止后按该授权重开并完成修复交接。
 
-以下第1～5节保留 v0.1 首次交付的范围、版本与当时证据（包括当时尚未执行T-011的事实）；**当前修复及待复测状态以第6节为准**，不把历史93项或原候选当作当前版本。
+- v0.3输入：[A-012 v0.2](core-test-report.md)第6节及T-010项目经理重开安排，实际接手OPC为9ccd252091368c2a356f1c282a1246fa998e1cf2。001已由tester独立关闭；本轮仅修复002并检查四类公开历史回放，不执行T-012平台接入。
+
+以下第1～5节保留v0.1初次交付历史，第6节保留v0.2的001开发修复及当时待复测事实；**当前v0.3以第7节为准**，不把历史状态、数量或旧候选当作当前结论。
 
 ## 1. 实际实现及工程选择
 
@@ -125,9 +127,33 @@ T-010 原完成条件为核心开发交接，本次已达到；T-011 第二阶�
 
 以上60项原独立用例是 **developer执行的开发复核**，不冒充tester实际复测或新的独立验收。BUG-T011-001的open状态及T-011 blocked/未覆盖表仍由tester维护，本成员未改A-012、T-011或其索引。T-010按原核心修复交接条件完成；tester需在本会话停止后通过授权的串行通知，在新候选上实际复测并继续A-012列出的剩余L场景。本次开发103项不自动补齐tester的未覆盖范围。微信适配、页面/动画、工具、手机留存及离线仍未实现/执行，不等待AppID进行本轮纯逻辑复测；无新的批准或发布结论。
 
+## 7. v0.3：BUG-T011-002及四类历史回放修复
+
+本轮由项目经理依据用户明确授权安排，tester及项目经理停止后接手。原产品HEAD为测试资产a82d86b11a3daebcacd94e34af353b326e1e6d89，生产源码对应3fb016d。先运行原defect-t011-002.test.js，实际退出1、MENU_NOT_FOUND；原始新复现输出单独保存在test/evidence/developer-fix-t011-002/before-fix.tap，没有覆盖tester日志。
+
+新固定候选为 **54b720fa920dfcda9a3db5fa0e42378be01f5535**，父提交为a82d86b11a3daebcacd94e34af353b326e1e6d89。保持既有持久化schema及旧回执签名兼容；修改限于Session/Repository的回放路径、接口说明及本成员回归/证据：
+
+- 重命名携带原expectedRevision时，直接交仓储先核验完整原意图回执，不再预读取可能已删除的来源。未给版本的首次操作仍使用当前基线或实时目标，新的不存在目标仍拒绝。
+- Repository新增同队列只读replayWrite，和真正写命令共用_signature/_receipt，精确比较命令、目标/名称、有序候选及原版本。命中才回放，变意图或版本冲突仍拒绝；读失败不降级成新写入，不修改旧回执或数据格式。
+- 新建/覆盖先检查完整回执，再检查新写入的当前状态限制；无回执的新覆盖仍须是已加载当前目标，新保存仍须等于当前有序候选。历史回放不清dirty、不换基线/关联、不改变generation或当前结果、不复活目标、无额外持久提交。
+- 新建/覆盖新增可选options.candidateNames以显式保留原请求的候选快照。未提供时仍采样当前副本；当前内容已变时复用旧operationId属于不同实际意图，应报REVISION_CONFLICT，不以只比请求ID掩盖变更。重试可保留首次快照，或从首次结果snapshot.orderedCandidates映射displayName取得；目标、原菜单名/版本及operationId也须保留。该参数只表达原技术请求，不允许新命令保存与当前副本不同的隐藏内容。详见产品docs/core-api.md“保留完整历史意图”。
+
+新增test/historical-replay.test.js共20项开发回归：四类操作在后续修改/删除后的回放、重建后的不同dirty当前菜单、错误命令/目标/名称/顺序/版本、新写入目标和内容保护、隐式内容变化与显式原快照的区分、回执读取失败及异步输入捕获。原test/delete-replay.test.js及全部tester用例不改。
+
+| 实际开发复核命令（产品仓库根目录） | 结果 | 证据路径（同候选内） |
+|---|---|---|
+| node --test --test-reporter=tap test/*.test.js | 123/123通过（原103+新增20）。 | test/evidence/developer-fix-t011-002/developer.tap |
+| node --test --test-reporter=tap test/independent/*.test.js | 原113/113通过，含001/002原断言及52项剩余场景；这是developer复核。 | test/evidence/developer-fix-t011-002/independent.tap |
+| node --test --test-reporter=tap test/*.test.js test/independent/*.test.js | 提交前236/236通过；上述固定提交上再次236/236通过，失败/取消/跳过/todo均0。 | test/evidence/developer-fix-t011-002/combined.tap；固定提交复跑回执。 |
+
+Windows 11 10.0.26300、Node v24.19.0，无AppID、微信或新增运行依赖。运行元数据、源码SHA-256及17份tester文件SHA-256见test/evidence/developer-fix-t011-002/run.json；这17份文件（独立测试、两个tester证据目录及原失败/夹具输出）与a82d86b逐字节一致。原001开发复核和原始开发证据同样保留。本次源码指纹与固定提交匹配，产品工作树干净，main/origin/main与WORKSPACE仍为8fa87fe4cb8f7f33aacf2842798a486150a6105e；不合入、推送、改写历史或删分支。
+
+本次236项由developer执行，不代写tester独立复测。001的closed来自A-012 v0.2原记录；002的open、T-011 blocked、其原报告和索引未改。下一步由项目经理在本会话停止后串行通知tester，在新候选复测002、回归四类历史回放和错误意图/副本保护，并按变更影响补测。T-010本轮核心修复交接完成；T-012/T-013仍待后续通知，未提前执行平台接入。规模/性能及未穷举的交叉依然不冒称全覆盖；真实wx、页面/动画、工具编译和手机留存/离线未验证。
+
 ## 版本记录
 
 | 日期 | 版本 | 变化 | 状态 |
 |---|---|---|---|
 | 2026-10-21 | 0.1 | T-010核心实现、固定候选、93项开发自测及853条官方分界检查；接口/阶段/计划映射与未覆盖项交接。 | draft |
 | 2026-10-21 | 0.2 | BUG-T011-001公开删除重试修复；103项开发及原60项独立用例的开发复核通过，固定新候选，原失败资产保留，待tester独立复测。 | draft |
+| 2026-10-21 | 0.3 | 002及四类历史回放修复，新增20项；开发123和原独立113项复核通过、合并236项通过，固定新候选，待tester独立复测。 | draft |
