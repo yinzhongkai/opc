@@ -160,6 +160,11 @@
 - 历史与清理：旧 c03aa5a 及其祖先保留在本地 refs/codex-backups/eating-everyday/pre-squash-c03aa5a，确保文档中实际读取过的旧 SHA 可追溯。经验证后更新项目主线至整理后的来源头，核对二者一致，再使用 git branch -d 删除 feature；远端无该分支，无需远端删除或强制推送。本次仅本地处理，main 和框架分支不变。
 - 业务边界：T-002 保持 blocked，成果保持 draft，H-005/H-006 仍待发起人核对；后续实施入口和真机验证不因压缩或分支清理自动完成，也未启动新工作轮次。
 
+### 2026-10-21 项目经理同步产品工作区前置变化
+
+- 依据用户 D-017 和 T-009，产品仓库已在同级 ../eating-everyday 初始化 README 并推送至 main，实际基线为 8fa87fe4cb8f7f33aacf2842798a486150a6105e，WORKSPACE 已登记 git 驱动与精确版本。此前记录中的 none 是各轮执行时的事实，当前产品仓库缺口已解除。
+- 本次只落实仓库和配置；AppID/可用测试入口、实际本机留存/失败恢复、字符与 24 项界面验证仍未完成，T-002 保持 architect 负责和 blocked。后续由其刷新工作区实际 checkout 与新安排后继续，项目经理不代写技术验收、恢复执行或交接关闭；本次未触发其他会话。
+
 ## T-003：整理首版需求与架构师交接
 
 - 负责人：product-manager
@@ -279,6 +284,35 @@
 - 合并与清理状态：不适用；本次不推送、合并、重写历史或清理分支。
 - 阻塞与下一位行动人：本次需求整理和提交无阻塞；后续架构资料另行整理，实施工作区和测试入口仍待落实。
 - 更新日期：2026-10-20。
+
+## T-009：初始化产品仓库并配置独立工作区
+
+- 负责人：project-manager
+- 状态：completed
+- 授权来源与日期：2026-10-21，用户提供 git@github.com:yinzhongkai/eating-everyday.git，确认使用 OPC 同级目录及相对路径，并明确要求“你直接给产品仓库加个 README，提交并推送到 main，然后把 WORKSPACE.yaml 配置好”。
+- 变更类型：governance-only；仓库初始化与有界工作区配置维护。
+- OPC 开发分支：feature/eating-everyday/workspace-setup；本轮由用户要求创建，来源为已同步的 project/eating-everyday。
+- OPC 合入前目标提交：6b8f6e307ea46a77a772f51b2918e38a226f9bd6；本轮创建时基线，2026-10-21 用户追加 Git 收尾授权后重新 fetch，确认本地及远端项目主线仍为该提交。
+- 成果物仓库与开发分支：git@github.com:yinzhongkai/eating-everyday.git；用户明确授权直接在空仓库 main 初始化 README，本次不创建产品功能分支。
+- 成果物仓库合入后的最终提交：8fa87fe4cb8f7f33aacf2842798a486150a6105e；本次为用户直接授权的 main 初始提交，不经过产品功能分支合并。
+- 目标与范围：在已确认同级目录 ../eating-everyday 初始化 README 并提交、推送到产品 main；随后按实际主线提交将 WORKSPACE 从 none 配置为 git，登记 repository、branch、revision 和 checkout，并同步必要治理记录。本次不制作应用代码或办理平台账号。
+- 输入与依赖：用户上述授权、A-001 v0.9、A-006 v0.3、现有空产品克隆及当前 WORKSPACE.yaml；配置按 CONFIG_SCHEMA.md，以 OPC 根目录为相对路径基准。
+- 优先级：按用户要求先落实产品仓库基线和工作区。
+- 完成条件与确认方式：产品 main 只包含本次 README 初始化，远端头与本地头一致且工作区干净；WORKSPACE 声明与实际 origin/main/HEAD、同级相对路径一致；框架、链接和 Git 范围检查通过。README 初始化不是应用实现或 T-002 真机验收，无需新增专业评审。
+- 进展：产品 README 已初始化并推送到 main，本地 HEAD、origin/main 与 GitHub main 均为上述真实提交，工作树干净。WORKSPACE 已登记 git、repository、main、精确 revision 和 ../eating-everyday，并同步 D-017、项目摘要和 A-009 索引，作为独立工作区配置模块在当前 OPC feature 本地提交。
+- 成果与验证证据：产品 main 仅有一个初始化提交且只包含 README.md，消息为单行；本地及远端主线一致，产品工作树干净。按 WORKSPACE 实际解析同级 checkout，逐项核对 origin、main、revision、HEAD 和 origin/main 一致；python -X utf8 -B scripts/validate_framework.py 通过（22 个角色、37 份技能、1 个实际项目、510 处本地链接），git diff --check 通过。实际应用、AppID 和真机测试不属于本次检查，未记为通过。
+- 管理边界：依据 SUPER_ADMIN.md 末段，本成员会话仅按用户明确授权执行本项目的有界配置维护，原 project-manager 身份不变；不调整团队、角色、技能或其他项目配置。
+- 合并与清理状态：产品 main 的初始化提交、推送与远端验证完成；用户同日追加授权将本轮 OPC feature 快进合入 project/eating-everyday、推送 GitHub 并安全删除 feature。配置与本次收尾记录整理为同一功能提交，消息保持单行；最终主线头与远端引用、验证及分支清理结果按本条来源分支和 Git 历史核对。
+- 阻塞与下一位行动人：本次仓库初始化和工作区配置已完成，无阻塞。小程序测试入口仍需后续落实，architect 刷新 T-002 的实际输入和实施安排后继续；本次未发送跨会话消息或自动开展应用开发。
+- 更新日期：2026-10-21。
+
+### 本轮 OPC Git 收尾（2026-10-21 追加授权）
+
+- 用户原话：“把 workspace-setup 分支合并到 project/eating-everyday，推送到 GitHub，然后删除这个 feature 分支。”操作人：project-manager；仓库为 git@github.com:yinzhongkai/opc.git。
+- 合并范围：仅本项目 WORKSPACE 配置及 6 份配套记录；合入前目标为上述 6b8f6e3，原本地配置提交为 74b67b914abff9e45f326423085be596c5d4f57f。该提交尚未共享，在原功能提交内补齐本次收尾记录，保留一个功能提交和单行消息；不新增 merge commit，最终头由 Git 历史定位，不在正文写入自身哈希。
+- 跨仓库核对：产品 origin、main、HEAD、origin/main 与 GitHub main 均对应 WORKSPACE 的 8fa87fe4cb8f7f33aacf2842798a486150a6105e；checkout 为 ../eating-everyday，产品工作树干净。本次 OPC 合并不改动产品仓库内容。
+- 验证与顺序：来源分支检查框架、510 处本地链接及空白，确认目标为来源祖先；以 --ff-only 合入后在项目主线再次验证并核对来源头。推送仅更新 refs/heads/project/eating-everyday，读回 GitHub 目标头后再执行本地 git branch -d；远端检查无 workspace-setup 时无需远端删除，若存在则先核对已进入目标的内容再按授权安全清理。
+- 完成边界：本轮工作区配置与 Git 收尾不改变 T-002 的 blocked 状态、draft 架构或尚未完成的小程序验证，不触发其他成员会话。
 
 ## 记录样式（不是真实任务）
 

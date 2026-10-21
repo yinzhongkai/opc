@@ -6,7 +6,7 @@
 
 - 建立日期：2026-10-15。
 - 用户请求来源：本会话建项用户，2026-10-15 明确请求“我想创建一个叫今天吃什么的项目”。
-- 当前阶段：依据 D-016 改为全手动候选首版，需求 A-001 v0.9 和架构草案 A-006 v0.3 已同步；尚未进入产品开发，等待实施入口及真机验证。T-007 已完成；T-002 由 architect 负责，仍为 blocked，旧餐厅数据验证退出当前范围。
+- 当前阶段：依据 D-016 改为全手动候选首版，需求 A-001 v0.9 和架构草案 A-006 v0.3 已同步；产品仓库已按 T-009/D-017 初始化 README 并登记工作区，应用代码尚未实现。T-002 仍由 architect 负责且为 blocked，小程序测试入口和真机验证继续待落实。
 - 建项记录人：框架超级管理员。
 - 框架基线：已发布标签 `v0.0.4`，提交 `464ca52aafc6c73ff780a7120acd3bf63c9d31dd`。
 - 项目长期分支：`project/eating-everyday`。
@@ -32,7 +32,7 @@
 
 ## 交付约定
 
-- 需求、方案、计划、评审、验收等治理与协作成果位于 OPC 的 `artifacts/`；产品代码、可直接交付的业务内容及其中间文件位于 [WORKSPACE.yaml](WORKSPACE.yaml) 声明的成果物仓库。当前工作区驱动为 `none`，尚未声明成果物仓库，工作区版本基线不适用；后续工作区形式和位置待用户确认。`none` 不创建工作目录；独立产品源码优先使用外部 git。`artifacts/README.md` 同时索引两类成果，并为工作区成果记录仓库、路径和精确版本。声明本身不授权联网或修改外部仓库。
+- 需求、方案、计划、评审、验收等治理与协作成果位于 OPC 的 `artifacts/`；产品代码、可直接交付的业务内容及其中间文件位于 [WORKSPACE.yaml](WORKSPACE.yaml) 声明的外部 Git 仓库。依据 D-017，产品仓库为 `git@github.com:yinzhongkai/eating-everyday.git`，日常主线为 `main`，checkout 使用相对 OPC 根目录的同级路径 `../eating-everyday`，当前精确基线为 `8fa87fe4cb8f7f33aacf2842798a486150a6105e`，仅包含初始化 README。`artifacts/README.md` 同时索引两类成果，并为工作区成果记录仓库、路径和精确版本；后续操作继续以对应任务授权和实际基线核对为准。
 - 用户保证当前仓库每次只有一个会话执行，前一会话完成或停止后再启动下一会话；框架不实现文件锁或自动调度。
 - 每份文档默认维护一个当前版本，记录版本及批准依据；历史通过用户维护的 Git 追溯。
 - 评审与批准要求在任务中明确。专业交叉评审由现有成员在原会话执行，不默认新建评审会话；用户保证受评版本可读取且不变，本轮全部评审者提交意见后作者再统一修订。采用根 [项目运行协议](../../PROJECT_PROTOCOL.md) 的评审、完成与状态规则。
@@ -69,6 +69,15 @@
 - 本轮开发分支：`feature/eating-everyday/initial-team`；合入前目标提交：`0ab3b8a1dfedb072f7b0935200d18d41ee0a824a`。
 - 会话与任务事实：本次创建成员配置，成员会话待分别初始化；暂无已分配业务任务。
 - 记录人：框架超级管理员。
+
+## 工作区配置记录
+
+### 2026-10-21：初始化独立产品仓库并登记同级工作区
+
+- 授权来源：用户提供产品仓库 SSH 地址，确认 OPC 同级目录和相对路径，并要求直接添加 README、提交推送到 main 后配置 WORKSPACE；完整确认见 D-017、执行见 T-009。
+- 原配置为 driver: none；本次按用户明确授权进行有界配置维护，改为 driver: git，repository、main、同级 checkout 和精确 revision 以上述声明为准。原 project-manager 身份不变，团队、角色和技能配置未变。
+- 产品主线初始化提交：8fa87fe4cb8f7f33aacf2842798a486150a6105e；本地 HEAD、origin/main 和 GitHub refs/heads/main 已核对一致，仅含 README.md，无应用代码。
+- OPC 交付主线为 project/eating-everyday，本轮来源为 feature/eating-everyday/workspace-setup；用户同日追加授权按 --ff-only 合入、推送 GitHub 并删除 feature，Git 收尾记录见 T-009。产品仓库 main 的 README 提交与推送已经实际完成。
 
 ## 当前资料
 
