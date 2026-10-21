@@ -583,7 +583,7 @@
 
 ## T-016：chapter 4《让 QEMU 长出 tiger 这块板》修订与第 1 轮评审（P3 第三章）
 - 负责人：architect（平台设计前置阶段、接口契约及设计问题修订）；writer（章节蓝图、作者自查与统一修订）；qemu-engineer（设计可实现性核对、tiger QEMU 模型代码、正确性、模型测试与 patch 交付）；yocto-engineer（设计集成约束核对、patch 与 metadata 集成、BitBake 构建、逐章真实环境核验和系统验证）；reviewer（独立技术审校与复核）；project-manager（计划、评审安排与意见闭环）；用户（平台设计基线与章节定稿确认）
-- 状态：in_review（固定第 4 章候选稿 `003910bf2971e10702019940535c690957740431`；reviewer 与 qemu-engineer 已分别提交本轮独立/专业审校 pass，PM 2026-10-21 核对交接后衔接 yocto-engineer。Yocto/架构意见及用户通读仍待完成，受评正文不变，尚未整章批准）
+- 状态：in_review（固定第 4 章候选稿 `003910bf2971e10702019940535c690957740431`；reviewer、qemu-engineer、yocto-engineer 已分别提交本轮审校 pass，均限已声明范围。PM 2026-10-21 核对 Yocto 交接后衔接 architect；架构意见、用户通读和 PM-C4-01 仍待完成，受评稿不变，尚未整章批准）
 - 授权来源与日期：2026-10-08 用户在 project-manager 会话要求创建 feature 分支；2026-10-09 用户确认 D-013 的“上游源码 + 临时 devtool workspace + `meta-tiger` patch”模型，并明确指示按该方案执行。授权覆盖 T-016 范围调整、作者修订、QEMU 实际实现与验证、评审和跨章影响登记；不将尚未发生的正文修订、工程实现、评审或核验写成进展。
   - 2026-10-11 分工刷新依据：用户明确要求新增 QEMU 工程师，已由超级管理员登记到 TEAM 并细化两个工程成员的 scope（PROJECT 成员配置记录、H-002）；同日用户在 project-manager 会话报告创建完成并询问下一步。project-manager 在既有 T-016 授权范围内安排模型开发与集成验证的职责和串行次序，不改变 D-013 或章节验收标准。
   - 2026-10-11 平台设计前置安排依据：用户采纳优先新增 tiger 系统架构师的建议并明确要求建员，配置已提交为 `737d1d78fdc858c60e81b8eace9f8c1ede59a804`；随后用户报告架构师会话已经创建。project-manager 接收 H-003，在既有范围内将平台设计、必要的专业核对与用户确认置于章节蓝图和模型实施之前；会话创建不等于初始化或设计完成。
@@ -608,8 +608,8 @@
 - 成果与验证证据：书稿与 OPC 两条 feature 分支、D-013/H-001、[WORKSPACE.yaml](WORKSPACE.yaml)；[A-005 v0.2 draft](artifacts/A-005-tiger-platform-design.md) 固定于 `08bdf9c08d6d8cbd8836df3771ffd28231470059`，13 项作者回复见本任务；原 v0.1 固定于 `69ce591cd9e4ee310b80cff4663c20c776364cfd`。初轮 Yocto/QEMU revise 及来源报告分别见 `dd15379ebea54b36dab7b5cc2638fd345e71553f` 的 [Yocto 证据](artifacts/work-records/t016-a005-yocto-review.md) 与 `1c8304446f8bf82fd46a56413a5fa5787e271ae6` 的 [QEMU 证据](artifacts/work-records/t016-a005-qemu-review.md)，均引用原始日志。新版本针对性复核 pass 分别提交 `5287e43f824dfe63d6a3e3371b5882a4944d9c48`（QEMU）、`b3fbff33ee4ee7332cd123d3eef008879e3c3ac1`（Yocto），见下文；均限设计问题处理，书稿正文修订、meta-tiger 工程提交及新 tiger 构建/运行证据尚未产生。
   - 本轮作者交付：[A-005 v0.2 draft](artifacts/A-005-tiger-platform-design.md)、下文 13 项作者处理回复及成果索引。校验通过：3 个最小窗口与 7 个预留窗口、测试固件/后续 RAM 分阶段占用、条件性 NAND/UBI/watchdog/UART 分频算术、8 份来源区间、13 项唯一作者回复；原评审内容及其他任务一致。`python -B scripts/validate_framework.py` 返回 0（482 处本地链接），差异空白检查通过。未代写工程复核或运行结果；v0.1 按上述固定提交追溯，当前路径为 v0.2。
 - 合并与清理状态：OPC、书稿及 meta-tiger 的 T-016 feature 均未合并、不得清理；待全部完成条件满足后按 v0.0.4 分支策略处理，持久源码继续遵循 D-015。
-- 阻塞与下一位行动人：reviewer、qemu-engineer 均已提交本人意见并停止，结论均为 pass；PM 已核对 QEMU 提交 `510af0dc6eeb595f05b6967db5b6bbb766a3a209` 只变更本人意见，书稿 commit/blob/main 和干净状态不变。下一位 yocto-engineer，之后 architect；PM-C4-01 和用户通读仍待完成，全部意见到齐前 writer 不改稿，T-017 等待本任务收口。
-- 更新日期：2026-10-21（核对 QEMU 正文专业审校交付并衔接 Yocto 核对；受评稿及原专业意见保留）
+- 阻塞与下一位行动人：reviewer/QEMU/Yocto 均已交付本人意见并停止，结论均为 pass。PM 已核对 Yocto 提交 `abb439f6efbd2b35b63a9ddb2d7d9aca4d39a907` 仅修改本人意见，书稿 commit/blob/main 及洁净状态不变；下一位 architect。PM-C4-01 配套获取条件及用户通读仍待完成，全部意见到齐前 writer 不改稿，T-017 等待本任务收口。
+- 更新日期：2026-10-21（核对 Yocto 正文专业审校交付并衔接架构核对；固定受评稿及原署名意见保留）
 
 ### T-016 前置阶段：tiger 平台设计
 - 主责与授权：architect；由 project-manager 根据 2026-10-11 用户采纳增员建议、PROJECT 配置记录及 H-003 在本任务内安排，不新增一轮 feature 或扩大正文修订范围。
@@ -715,17 +715,19 @@
 |---|---|---|
 | reviewer | 独立全文技术/教学审校：九节是否可连续跟做；源码节选、命令/配置、真实输出与现有实测证据是否对应；首次讲解、前置依赖、排障恢复、语气/术语/ASCII 图表是否符合体例。特别指出新增步骤或实测缺口，区分本章问题与 T-017 的跨章旧叙事；不以作者/工程师自测代替独立判断 | 署名问题/未覆盖项及 pass/revise/blocked，建议编号 R-C4-01 起；completed；2026-10-20 pass，提交 d2d9420，限本人已声明的范围 |
 | qemu-engineer | 针对正文 4.1～4.4/4.7～4.8 的专业核对：8.2.7+31 OE 基线、真实唯一 patch/可读代码、ROM/RAM/CPU/PL011/时钟、raw/ELF/启动初始化、EL3/入口、once-only loader/reset、ROM 与 RAM 哨兵及负向判据；不将旧 752 字节独立产物与正式 760 字节结果混用，不重复做全面模型开发 | 正文主张与固定源码/模型证据的专业意见、覆盖边界及结论，编号 QE-C4-01 起；completed；2026-10-21 pass，提交 510af0d，限本人已声明的范围 |
-| yocto-engineer | 针对正文 4.1/4.4～4.8 的专业核对：实际 devtool/导出/保留/reset-n 路线，精确 append/31+1/SRC_URI、MACHINE=tiger/fixture/helper/任务图/签名/deploy/none/相对路径，独立构建来源与续跑、原始命令/配置/产物身份、真实 runqemu/私有错误注入与恢复；核查正文新增操作是否有逐章证据，明确 uninative/launcher=0/路径与全配套资产前提 | 事实/步骤/证据覆盖、需补实测项与结论，编号 Y-C4-01 起；待通知后接收 |
+| yocto-engineer | 针对正文 4.1/4.4～4.8 的专业核对：实际 devtool/导出/保留/reset-n 路线，精确 append/31+1/SRC_URI、MACHINE=tiger/fixture/helper/任务图/签名/deploy/none/相对路径，独立构建来源与续跑、原始命令/配置/产物身份、真实 runqemu/私有错误注入与恢复；核查正文新增操作是否有逐章证据，明确 uninative/launcher=0/路径与全配套资产前提 | 事实/步骤/证据覆盖、需补实测项与结论，编号 Y-C4-01 起；completed；2026-10-21 pass，提交 abb439f，限本人已声明的范围 |
 | architect | 有界核对正文与获批 A-005 的一致性：最小资源/CPU/EL/启动复位契约、本章 tiger 与后续 tiger-aarch64、SPI/CS/芯片/完整链等首次使用门槛，是否把预留/未来能力说成已实现；核对必要前后章接口指向，不重做工程自测或全部历史设计评审 | 契约一致性、跨章影响与结论，编号 AR-C4-01 起；待通知后接收 |
 
 - 方法与权限：按会话协议刷新本人身份/有效技能及关联资料，先全文读取受评稿，再按职责读取固定源码/配置和证据；可在已授权 tiger 工程/持久源码/构建证据目录只读核对，访问前重核 checkout。当前轮先对照已有真实证据审校；确需新增实测时登记明确缺口、固定版本、建议操作和负责人，交 PM 串行分流，不自行重建/reset、注入故障或改写任何固定工程/原日志。作者静态检查、工程作者验证、本次独立/专业审校和用户批准分别表述。
 - 记录与出口：默认在下方本人意见区记录，不另建重复报告或审校任务。每个问题包含本轮唯一编号、受评正文行号/小节、依据、影响、修改建议与原稿责任人（通常 writer；设计/工程问题交 PM 分流）；即便无问题也给出明确结论、实际范围、未覆盖项和版本。每人只修改本人意见区及必要原始核对证据，不改他人意见、作者原报告、总体安排或正文；完成适当校验与普通本地提交后停止，回执放本人会话和正式记录，由 PM 读取。
 - 本轮收口条件：四位成员均提交本轮意见、PM 协调检查完成、用户明确本轮通读意见到齐后，才由 PM 汇总交 writer 统一修订并逐项回复。revise/blocked 如实记录，不要求本轮全部 pass 才算意见已提交；若有缺口先分流补证/协调。新稿按变更影响组织原评审者复核，旧 pass 不自动覆盖新稿；最终定稿仍由用户确认。未合并、不清理分支、不启动 T-017。
-- 当前进度（2026-10-21 PM 核对）：reviewer 的 `d2d9420af3756fcb0978d5f2b118abec502614b7`、qemu-engineer 的 `510af0dc6eeb595f05b6967db5b6bbb766a3a209` 均已交付并停止，结论均为 pass。PM 已完整读取 QEMU 本轮署名依据/实际范围/未覆盖及停止回执，核对其提交仅变更本人意见，受评正文 commit/blob、书稿 main 和干净状态保持不变，接受其交接。本轮 QEMU 结论是对 writer 正文与固定源码/既有证据的专业核对，未重跑模型，也未重新独立验证本人模型；不得扩大为其他成员通过、读者获取条件满足或章节批准。下一位 yocto-engineer，按原范围通知其接收，architect 等待；用户通读意见未声明到齐，writer 保持原稿不变。
+- 当前进度（2026-10-21 PM 核对）：reviewer `d2d9420af3756fcb0978d5f2b118abec502614b7`、QEMU `510af0dc6eeb595f05b6967db5b6bbb766a3a209`、Yocto `abb439f6efbd2b35b63a9ddb2d7d9aca4d39a907` 均已交付并停止，结论均为已声明范围内的 pass。PM 已完整读取 Yocto 署名的依据/实际覆盖/未覆盖和停止回执，核对提交只变更本人意见、受评 commit/blob/main 与工作树未变，接受交接。本轮 Yocto 是正文与固定 metadata/既有证据的专业核对，未重跑实验、未重新独立验收本人集成，不外推为架构通过、读者可获取条件满足或章节批准。下一位 architect，按原有界范围通知；用户通读意见尚未声明到齐，writer 保持原稿不变。
 
 - 本次衔接：沿用用户此前“你来协调执行吧”的授权，PM 2026-10-21 完成记录/校验/提交后只通知 qemu-engineer 并停止；其本人收到通知后登记接收/开始，其他成员不同时启动。reviewer 原文及所有旧记录保留。
 
 - 本次 Yocto 衔接（2026-10-21）：继续依据用户“你来协调执行吧”的授权及原串行安排；PM 完成本轮记录/校验/提交后只通知 yocto-engineer 并停止，由其本人登记接收/开始。原 reviewer/QEMU 署名意见及所有固定输入保留；不同时唤醒 architect 或 writer。
+
+- 本次架构衔接（2026-10-21）：沿用用户“你来协调执行吧”的授权和原串行安排，PM 完成记录/校验/提交后只通知 architect 并停止；其本人收到通知后登记接收/开始，不同时唤醒其他成员。前三位署名意见、固定正文/工程及 PM-C4-01 待协调状态保留。
 
 #### project-manager 的交接与协调意见
 
