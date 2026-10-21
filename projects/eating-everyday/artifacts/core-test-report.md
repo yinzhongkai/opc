@@ -1,20 +1,24 @@
-# 核心独立测试报告与 BUG-T011-001
+# 核心独立测试报告与缺陷复测
 
 - 项目：eating-everyday（今天吃什么）
 - 成果 ID：A-012
 - 负责人：tester（测试工程师，兼职）
 - 关联任务：[T-011](../TASKS.md#t-011准备验收用例并执行不依赖-appid-的测试) 第二阶段；原开发交接 T-010。
-- 版本：0.1
+- 版本：0.2
 - 更新日期：2026-10-21（Asia/Shanghai）
 - 状态：draft
 - 适用范围：固定桌面核心的独立领域/接口替身测试、失败复现和串行修复交接；不含实际微信、页面、手机或离线验收。
 - 授权与实际接收：用户授权的串行通知要求在 developer 停止后执行 T-011 第二阶段，发现需修复的核心缺陷时保留证据、登记并停止。本成员已实际接收，刷新身份、角色和 testing/微信小程序测试技能；管理员仅等待，developer 空闲。
-- 输入版本：[A-010 v0.1 测试计划](core-test-plan.md)、[A-011 v0.1 开发交接](developer-core-handoff.md)、A-001 v0.9、A-007 v0.3、A-006 v0.4、A-008 v0.2 及现行决定。OPC 接手提交 26123349daeb829a7724ea49b08e2dfa4c2b379c；相对第一阶段提交仅开发任务/交接/索引变化，已读规则、需求/架构、计划和决定未变。
-- 原被测实现：本机产品仓库 git@github.com:yinzhongkai/eating-everyday.git，C:/Users/YinZh/Documents/workspace/eating-everyday，feature/t-002-readiness-review，**c4cb8bb34d53efee92b512f0394ad0656dc9d531**。开始时工作树干净，origin 与声明一致；仅核对本地引用，未联网查询远端。
-- 独立测试资产及证据：同一产品仓库 **bcbcf7c7ae9ddf5480dac45d121afd60b2c88431**，父提交为上述原被测实现；仅新增 test/independent/ 与 test/evidence/tester-stage2/ 共八份文件，生产代码、原开发测试及接口文档未修改。该提交是活动 feature 测试资产版本，未合入 main。
+- 首次输入版本（v0.1）：[A-010 v0.1 测试计划](core-test-plan.md)、[A-011 v0.1 开发交接](developer-core-handoff.md)、A-001 v0.9、A-007 v0.3、A-006 v0.4、A-008 v0.2 及现行决定。首次OPC接手提交26123349daeb829a7724ea49b08e2dfa4c2b379c；当时规则、需求/架构、计划和决定未变。
+- v0.1原被测实现：本机产品仓库 git@github.com:yinzhongkai/eating-everyday.git，C:/Users/YinZh/Documents/workspace/eating-everyday，feature/t-002-readiness-review，**c4cb8bb34d53efee92b512f0394ad0656dc9d531**。首次开始时工作树干净，仅核对本地引用，未联网查询远端。
+- v0.1独立测试资产及证据：同一产品仓库 **bcbcf7c7ae9ddf5480dac45d121afd60b2c88431**，父提交为上述原实现；当时仅新增test/independent/与test/evidence/tester-stage2/八份文件。原59通过/1失败、源码与原始证据逐字节保留，未合入main。
 - 主线基线：产品 main、已有 origin/main 和 WORKSPACE.revision 仍为 8fa87fe4cb8f7f33aacf2842798a486150a6105e；OPC 沿用 feature/eating-everyday/t-002-readiness-review，目标 project/eating-everyday 未改变。
 - 存储位置：本治理报告在 OPC projects/eating-everyday/artifacts/core-test-report.md；可执行测试、隔离端口和原始日志均在声明产品仓库，以测试资产提交定位。
 - 批准依据：无整份成果批准。以下为 tester 实际执行结果，不代写 developer 修复/接收、T-010 重开或 T-002 完成。
+
+**当前v0.2结论：BUG-T011-001已由tester独立复测通过并关闭；新增BUG-T011-002为open，T-011因新缺陷保持blocked，本轮已停止。** 新被测实现为3fb016d22ba69f0046afdc6f0e88329477e911cf，新测试资产为a82d86b11a3daebcacd94e34af353b326e1e6d89，详见第6节。
+
+第1～5节保留v0.1首次执行的原始结论、open状态和未覆盖范围，作为历史；其当时的59/1不改写成通过。当前复测、补充覆盖、缺陷状态及剩余范围以第6节为准。
 
 ## 1. 结论与执行范围
 
@@ -115,8 +119,77 @@ test/evidence/tester-stage2/run.json 保存原实现提交、命令、退出码�
 3. 平台/手机/O 另待用户环境和相应工程安排；无 AppID 不阻塞纯逻辑修复或复测，不以该缺口掩盖已失败的 L 合约。
 4. 只维护本人 T-011、测试报告和本人索引，A-010 v0.1 保留为阶段一计划；不改 T-010 已有结论、业务范围、WORKSPACE、T-002 或协调摘要。两仓库仅在当前 feature 本地保存，不合入、不推送、不删除或改写分支。
 
+## 6. v0.2：独立复测、补充L场景与BUG-T011-002
+
+### 6.1 实际接收、版本及命令
+
+2026-10-21按用户原授权串行接收，确认developer已停止、管理员仅等待；实际刷新tester身份/scope、角色及两份有效技能。OPC接手b841482ea6c8ac9c200c5fbf1931c2fd3af9b5a8，读取A-011 v0.2、公开删除修复差异及接口补充说明；A-010 v0.1、A-012 v0.1、根规则和现行需求/架构经Git内容范围核对未变，两仓库初始干净。
+
+新固定被测实现为本机产品feature/t-002-readiness-review的 **3fb016d22ba69f0046afdc6f0e88329477e911cf**；原缺陷用例未改。新测试/复测证据资产为 **a82d86b11a3daebcacd94e34af353b326e1e6d89**，父提交为新固定实现，仅新增两份独立测试和证据目录七份文件。所有非test跟踪文件与3fb016d一致，原tester八份测试/失败资产与bcbcf7c逐字节一致；未修改生产源码、原断言、开发测试、主线或WORKSPACE。
+
+环境为Windows 11 10.0.26300、Node v24.19.0，无AppID、wx或新增依赖安装。所有命令在产品仓库根目录实际执行；test/evidence/tester-retest-t011-001/run.json记录运行时间、命令/退出码、原资产核对和全部非test文件前后SHA-256。
+
+| 本成员实际命令 | 结果与证据（产品仓库内） |
+|---|---|
+| node --test --test-reporter=tap test/independent/defect-t011-001.test.js | 退出0，原缺陷1/1通过；defect-retest.tap。 |
+| node --test --test-reporter=tap test/*.test.js test/independent/*.test.js | 补充测试加入前实际163/163通过，含开发103与原独立60，失败/取消/跳过/todo均0；baseline-combined.tap。不是developer代写的复核。 |
+| node --test --test-reporter=tap test/independent/core.remaining.test.js | 首轮52项51通过/1夹具失败，原输出remaining-initial-fixture.tap；纠正隔离前置后同一52项52/52通过，输出remaining.tap。原断言不变，见6.3。 |
+| node --test --test-reporter=tap test/independent/defect-t011-002.test.js | 退出1，1项失败；defect-t011-002.tap，发现后停止扩展或重跑业务测试。 |
+
+本版本独立用例按最终有效结果去重为 **113项：112通过、1失败**（原60复测通过＋新52补充通过＋新缺陷1失败）；开发103复跑另列。原缺陷单项复测已经包含在163组合中的原60内，不重复累计；初次夹具失败保留为测试自身历史，不伪计产品缺陷。没有在发现002后执行统一216项组合，不能将上述不同运行说成某次统一套件通过。
+
+### 6.2 BUG-T011-001复测闭环
+
+| 字段 | 本次记录 |
+|---|---|
+| 当前状态 | closed（tester于2026-10-21独立复测通过）；仅关闭原公开删除同意图回放缺陷，不代表T-011或整体产品完成。 |
+| 复测版本/资产 | 实现3fb016d22ba69f0046afdc6f0e88329477e911cf；资产a82d86b11a3daebcacd94e34af353b326e1e6d89。 |
+| 步骤/预期 | 完全沿用未改的defect-t011-001.test.js；同menuId、confirmed、operationId、原expectedRevision的第二次公开删除应replayed=true，原storeRevision不变，保留未保存候选、不复活目标、不改其他记录。 |
+| 实际/证据 | 独立单项1/1通过；现有163项组合也通过，补充RM-REPLAY-delete通过。原c4cb8bb/bcbcf7c的59/1失败历史和TAP未改，见defect-retest.tap、baseline-combined.tap、remaining.tap。 |
+
+### 6.3 补充L覆盖与夹具修正
+
+下列是对第3/4节历史未覆盖项的实际补充，均使用独立AuditStorage/随机输入，不能替代真实wx或手机证据。
+
+| 新独立范围 | 实际补充及依据 |
+|---|---|
+| AC-04/09/10，RN | RM-DRAW验证session的0/1完整名、无熵、连续重复结果和不同drawId；RM-RANDOM-ALL用独立BigInt预期核对N=2～24接受边界和拒绝次数；六种熵源无效/拒绝路径不产结果。L通过，不以有限频数证明真实熵源均匀。 |
+| AC-17/35 | RM-SWITCH验证源确认后才load目标、目标完整内容；RM-AFTER-FAIL在已知保存失败后分别取消/明确放弃；原结果不明恢复复跑通过。 |
+| AC-20/27/32 | RM-CLEAR实际清除已保存的隔离域后重建，合法空库不写入；四种空白/错误类型菜单名的新建和重命名拒绝不变；空候选当前菜单删除后留副本、空保存拒绝、其他菜单保护。 |
+| 字素一致性/PV-03 | 新解析器从固定官方GraphemeBreakTest的÷/×预期独立构建分段并与splitGraphemes比较，853条全部一致。是1项Node测试内853条语料断言，不虚增为853项产品验收。 |
+| FI-03/04/05 | 内容多块first/middle/last各before/after六场景、内容/索引回读缺失或不符四场景、无效注入clock等通过；旧可见提交和工作副本保护均有断言。 |
+| FI-02/07/08/09/10 | 预估可用但实际内容/根写入时配额不足、已落盘后回调配额错误、首次genesis回读结果不明恢复、五种首次保存停止/重建通过；不宣称微信跨key或断电原子性。 |
+| FI-12/13/14/15 | 独立编码损坏根/缺引用/未知格式/空名/重名/25项/坏菜单名，原存储保留且拒绝；清理错误/中断不碰活块；迟到加载失效不替换当前副本，通过。 |
+| FI-11 / ST-05 | 新建/覆盖/重命名/删除的公开同意图即时回放均无新写入、工作副本不变；历史重命名在目标随后删除后的回放失败，见002。 |
+
+初次RM-CLEANUP-error的“错误数必须1”断言实际看到2：种子库已有未被当前根引用的旧索引，另加一个指定孤块，清理两者都命中注入。该失败是本成员测试前置不隔离。已在设置故障前显式清理种子历史孤块，再只加入一个目标；错误数必须1、活菜单内容必须不变等原断言全部保留，未修改生产实现。首轮51/1及原因和纠正后的52/52均留在run.json与两个TAP中。
+
+### 6.4 新缺陷BUG-T011-002
+
+| 字段 | 内容 |
+|---|---|
+| 状态/优先级 | open / P2，公开重命名的历史幂等回放失败，待developer修复与tester复测。 |
+| 被测与资产 | 实现3fb016d22ba69f0046afdc6f0e88329477e911cf；资产a82d86b11a3daebcacd94e34af353b326e1e6d89。 |
+| 位置/原因定位 | src/session.js:56～60，renameMenu在第59行先load来源；目标已被后续删除时先抛MENU_NOT_FOUND，未进入repository的持久回执判断。仓储同意图直接调用可正确replayed=true。 |
+| 依据 | A-006第4.2节的固定意图/重试先核对提交、A-010 FI-11/ST-05，以及docs/core-api.md的同operationId/命令/原始参数/expectedRevision回放和历史回执不回退当前副本契约。不是修改为“允许新的重命名作用于不存在目标”。 |
+| 前置/输入 | M午餐含面馆/饺子、revision=1，N晚餐含咖喱；原重命名参数menuId=M、name=午饭、operationId=rename-M-original、expectedRevision=1。 |
+| 最小步骤 | ①按原参数公开rename M成功（storeRevision=3、M变revision=2）；②另一次确认delete M，使用revision=2，成功后storeRevision=4；③明确放弃副本切换N；④以完全相同的原重命名参数重试，不更换目标、名称、operationId或原版本。 |
+| 预期 | 回放步骤①的原回执，replayed=true、storeRevision=3；当前N及基线不回退，不新增提交或复活M。 |
+| 实际/频次 | 本次1次执行1次失败：公开接口抛MENU_NOT_FOUND；底层repo.renameMenu同意图返回replayed=true、storeRevision=3。当前N及持久状态均未变，未观察到数据丢失。 |
+| 复现/证据 | 产品资产版本执行node --test test/independent/defect-t011-002.test.js，当前退出1；原始输入、对照、栈及第19行失败断言见test/evidence/tester-retest-t011-001/defect-t011-002.tap。 |
+| 影响与建议 | 同一已成功请求的迟到重试被后续删除阻断，公开端到端历史回放不成立；建议先验证持久意图回执，保留版本/目标/参数冲突保护，不能简单吞掉MENU_NOT_FOUND。修复后回归新意图/错误参数仍拒绝、历史结果不覆盖当前副本，以及001和四种写命令。具体实现由developer决定。 |
+
+### 6.5 停止、剩余范围与下一步
+
+发现002后本轮停止业务测试，仅整理并本地保存测试/失败证据与治理记录；001关闭，002 open，T-011 blocked，未completed。下一位developer由用户授权串行通知修复，交新的精确候选及自测后停止，再由tester复测；本会话不创建、启动或联系其他会话，不修改他人任务结论。
+
+第3节历史L缺口已按6.3补测，但没有把每一操作类型×每一故障阶段×每一多块位置的交叉穷举为通过。部分历史回放、额外乱序/中断交叉及规模/性能仍未覆盖；这些和002回归待下一固定版本按影响补测。工具、真实wx、页面/动画、手机输入/小屏、正常关闭后真实留存和实际平台可打开后的离线D/M/O仍全部未执行；平台环境不阻塞L修复或复测。
+
+产品和OPC仅在现有feature本地保存，不合入、不推送、不改历史或删除分支；产品main、已有origin/main、WORKSPACE.revision仍为8fa87fe4cb8f7f33aacf2842798a486150a6105e。旧报告历史、原失败证据及已批准业务范围保留。
+
 ## 版本记录
 
 | 日期 | 版本 | 变化 | 状态 |
 |---|---|---|---|
 | 2026-10-21 | 0.1 | 第二阶段实际接收；开发93项复跑、独立59项通过及公开删除重试1项失败；保存 BUG-T011-001、分层限制和停止交接。 | draft |
+| 2026-10-21 | 0.2 | tester独立复测关闭001、现有163项复跑通过；补充52项通过并保留夹具修正历史，发现历史重命名回放002，停止待修复。新独立范围去重113项112通过/1失败。 | draft |
