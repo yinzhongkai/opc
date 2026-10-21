@@ -1,7 +1,11 @@
 schemaVersion: 3
 project: 'eating-everyday'
-roleKnowledge: {}
+roleKnowledge:
+  developer:
+    - frontend-development
 members:
   - project-manager
   - product-manager
   - architect
+  - developer
+  - tester
