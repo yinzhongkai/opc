@@ -82,6 +82,28 @@
 - 验证：python -X utf8 -B scripts/validate_framework.py 通过（22 个角色、37 份技能、1 个实际项目、513 处本地链接），git diff --check 通过；核对成员文件与 TEAM 一一对应，新增 ID 未复用历史，角色及有效技能均 active，原有三名成员和工作区配置未改。检查不代表成员已初始化或软件测试通过。
 - 记录人：框架超级管理员（仅本次获授权的有界成员配置维护）。
 
+### 2026-10-21：采用公共小程序技能并配置成员
+
+- 用户授权来源：本超级管理员会话用户明确要求“按你的建议补充小程序开发和测试这两项技能，先更新框架，再同步到本项目并配置给对应成员”；随后确认项目经理和系统架构师两个会话均已停止，可以继续。
+- 公共来源：先从框架集成线 opc-v0.0.5-dev 的 464ca52aafc6c73ff780a7120acd3bf63c9d31dd 建立 feature/framework/wechat-miniprogram-skills；纯框架提交 ac636667718849a03a1eaf47007d78b55c53ce20 仅新增两份技能并更新 knowledge/INDEX.md，已通过校验和 60 项现有回归测试，以 --ff-only 合入集成线并推送，读回远端头与原提交一致。
+- 采用原因与方式：本项目新增的开发、兼职测试成员需要小程序平台方法。按根分支策略第 6 节提前采用未发布的单项公共能力，使用 cherry-pick -x 保留上述原提交来源，再独立登记项目配置；本轮项目接入基线为 16834698461942a9052e377af827cb83dd96bc94。
+- 同步范围：接入当前活动分支 feature/eating-everyday/t-002-platform-validation；T-002 验证尚未结束，本次技能配置不将该分支合入项目长期分支。正式发布基线仍为 v0.0.4，不创建新发布标签或改写项目历史；新框架正式发布后按根策略 rebase 并核对等价公共提交去重。
+- 配置结果：[TEAM.yaml](TEAM.yaml) 的 developer 项目补充技能保留 frontend-development，增加 [wechat-miniprogram-development](../../knowledge/wechat-miniprogram-development.md)；其有效集合为 software-engineering、frontend-development、wechat-miniprogram-development。tester 增加 [wechat-miniprogram-testing](../../knowledge/wechat-miniprogram-testing.md)，有效集合为 testing、wechat-miniprogram-testing。
+- 影响与兼容风险：本次只增加文档型公共方法及本项目 developer/tester 的技能组合，不修改共享角色基础技能、成员 role/scope、既有业务规则、工作区或产品源码。来源尚未正式发布，未来可能调整；采用提交固定，后续修改必须另行核对。平台接口与工具版本需执行时核实，方法配置和框架测试不代表小程序实测通过。
+- 配置事实与会话边界：两份技能均为 active；成员下次初始化或开始新工作时按会话协议完整加载新增正文。本次未创建、启动或联系成员会话，不代写其初始化或刷新回执。保留架构师已有的未提交任务进展，不把其工作纳入本次配置提交。
+- 验证：框架及项目结构校验通过（22 个角色、39 份技能；项目快照含 1 个实际项目、520 处本地链接）；既有 60 项框架回归测试通过，git diff --check 通过。逐项核对 developer/tester 的有效技能集合和 active 状态，项目 knowledge 内容与源集成提交一致，角色、成员 scope、工作区声明及既有任务正文未变。实际产品仓库 main、origin 与精确 HEAD 已按原始 OPC 根目录解析同级路径核对，工作树干净且为已声明的 README 基线；本次成果物分支与新源码提交均不适用。
+- 记录人：框架超级管理员。
+
+### 2026-10-21：技能配置独立合入项目主线（追加授权）
+
+- 用户授权来源：本超级管理员会话用户明确要求“把这次技能和配置变更合入项目主线并推送，保留架构师未提交的改动，不要把未完成的 T-002 工作一起合入”。本条将技能配置的交付范围从上述首次活动分支接入扩展到项目主线，保留首次接入的历史事实。
+- 分离来源与范围：从本地 project/eating-everyday 的 bf3362d537d7249e352f2f61b83c8de48333e86a 建立 feature/eating-everyday/miniprogram-skills-mainline，分别以 cherry-pick -x 采用公共技能原提交 ac636667718849a03a1eaf47007d78b55c53ce20 和项目配置原提交 f82131e28c7b000e42b8176b040d947673105995。相对合入前项目主线仅涉及 knowledge/INDEX.md、两份小程序技能、TEAM.yaml 和本配置记录，共五个文件。
+- 合入前远端头：origin/project/eating-everyday 为 80fa2605a3796681354174f1a95525b115a27fad；本地主线已包含作为技能配置前提的建员提交 bf3362d537d7249e352f2f61b83c8de48333e86a，该既有提交保留并随主线推送。
+- 明确排除：T-002 续接提交 16834698461942a9052e377af827cb83dd96bc94 不进入本次祖先链；任务、状态、交接、决定、专业成果、成员身份和工作区相对上述项目主线不变。T-002 的未完成状态和原 feature 分支继续保留，不因技能合入而完成任务。
+- 未提交改动保护：原工作树继续留在 feature/eating-everyday/t-002-platform-validation；架构师 TASKS.md 未提交内容的 SHA-256 为 2f73affd1c09a2a5529c35ee1cbe59bd253d091ad1aa11eadb76f74ebe821ced，本轮以临时工作树操作并在结束时核对，不暂存、提交或覆盖该内容。
+- 验证与交付约定：项目结构及 520 处本地链接校验通过，git diff --check 通过；五文件范围、有效技能集合及公共技能与框架来源内容一致性均已核对，新增范围无 merge commit，T-002 提交及业务记录已排除。完成目标分支最终校验后，以 --ff-only 合入 project/eating-everyday，仅推送该项目主线并读回远端引用；不推送 T-002 分支，不操作产品仓库，成果物分支及新源码提交不适用。
+- 记录人：框架超级管理员。
+
 ## 工作区配置记录
 
 ### 2026-10-21：初始化独立产品仓库并登记同级工作区
