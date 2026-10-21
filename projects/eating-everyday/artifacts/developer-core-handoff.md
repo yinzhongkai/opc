@@ -4,15 +4,19 @@
 - 成果 ID：A-011
 - 负责人：developer（研发工程师）
 - 关联任务：[T-010](../TASKS.md#t-010实现不依赖-appid-的核心逻辑与开发自测)；接续 [T-011](../TASKS.md#t-011准备验收用例并执行不依赖-appid-的测试) 第二阶段。
-- 版本：0.1
+- 版本：0.2
 - 更新日期：2026-10-21（Asia/Shanghai）
 - 状态：draft
 - 适用范围：不依赖 AppID 的领域、接口替身和开发自测交付；不是完整小程序、独立测试或真机验收。
 - 来源及输入：[A-001 v0.9](product-requirements.md)、[A-007 v0.3](product-decision-options.md)、[A-006 v0.4](system-architecture.md)、[A-008 v0.2](accounts-access-checklist.md)、[A-010 v0.1](core-test-plan.md)，现行 D-005/D-011/D-014/D-016/D-017。实际接手 OPC 为 1f537859636de9f763e10a355ec20887da29e148；A-010 第一阶段已提交且 tester 已停止。
 - 存储位置：本治理交接在 OPC artifacts；产品代码、示例、自测及证据均在本机产品仓库 git@github.com:yinzhongkai/eating-everyday.git，checkout=../eating-everyday（相对 OPC 根目录）。
-- 固定开发候选：feature/t-002-readiness-review，**c4cb8bb34d53efee92b512f0394ad0656dc9d531**；实现、自测、锁文件和日志在同一提交。OPC 沿用 feature/eating-everyday/t-002-readiness-review。
+- 固定开发候选：feature/t-002-readiness-review，**3fb016d22ba69f0046afdc6f0e88329477e911cf**；父提交为测试资产 bcbcf7c7ae9ddf5480dac45d121afd60b2c88431，初始实现 c4cb8bb34d53efee92b512f0394ad0656dc9d531 保留为历史。OPC 沿用 feature/eating-everyday/t-002-readiness-review。
 - 主线交付：未合入、未推送；main、已有 origin/main 和 WORKSPACE.revision 保持 8fa87fe4cb8f7f33aacf2842798a486150a6105e。以上开发候选不能填作已合入最终版本。未重新联网核验 Git 远端。
 - 批准依据：T-010 用户授权及原完成条件允许核心开发交接；无整份成果批准，不代写 T-011 结果或 T-002 完成。
+
+- 本次修复输入：[A-012 v0.1 独立报告与 BUG-T011-001](core-test-report.md)；OPC接手 ce5375a050ee064381857b0bcee68c19a56aba35。用户明确授权“需要修复和复测时继续按开发、测试串行推进”，developer 在 tester 停止后按该授权重开并完成修复交接。
+
+以下第1～5节保留 v0.1 首次交付的范围、版本与当时证据（包括当时尚未执行T-011的事实）；**当前修复及待复测状态以第6节为准**，不把历史93项或原候选当作当前版本。
 
 ## 1. 实际实现及工程选择
 
@@ -100,8 +104,30 @@ node examples/core-demo.js
 
 T-010 原完成条件为核心开发交接，本次已达到；T-011 第二阶段尚未执行，T-002 整体及成果批准由相应负责人维护。developer 固定候选、保存本交接和本人任务/索引后停止，由用户授权的串行通知再让 tester 在精确候选上执行并记录独立结果。不启动或联系其他会话；后续缺陷修复待 tester 停止后按安排处理。
 
+## 6. v0.2：BUG-T011-001 修复交接
+
+本次只修复公开 Session 删除接口的原意图回放。已在未改生产源码的 bcbcf7c7ae9ddf5480dac45d121afd60b2c88431 上运行原独立缺陷用例，实际退出1、MENU_NOT_FOUND，与A-012一致。原因是Session先load已删除来源，尚未进入仓储的持久回执判断；未观察到数据丢失。
+
+当前产品候选为 **3fb016d22ba69f0046afdc6f0e88329477e911cf**。src/session.js 的 deleteMenu 在显式传入 expectedRevision 时，将原 menuId/operationId/expectedRevision 直接交给仓储，先核对持久回执，再由仓储处理目标存在性和版本。不捕获并吞掉所有MENU_NOT_FOUND，不重新推算原意图版本；未给版本的首次操作仍使用当前基线或读取实时目标。确认/取消、BUSY、不明状态锁、旧副本、其他菜单和持久化协议保持原语义。
+
+同意图返回原 storeRevision 且 replayed=true，不产生新提交；更换目标/原版本仍REVISION_CONFLICT，新操作删除不存在记录仍MENU_NOT_FOUND，取消不写入。新增 test/delete-replay.test.js 的10项开发回归覆盖当前/非当前删除重试、重建后回放与新副本保护、错误意图/版本/不存在目标、默认版本及过期基线、删除结果不明的已/未提交恢复，以及公开新建/覆盖/重命名正常回放。
+
+| 本次开发实际复核命令（产品仓库根目录） | 结果 | 新证据路径 |
+|---|---|---|
+| node --test --test-reporter=tap test/*.test.js | 103/103通过；含原93项和新增10项，官方853条分界语料仍在原语料测试中。 | test/evidence/developer-fix-t011-001/developer.tap |
+| node --test --test-reporter=tap test/independent/core.acceptance.test.js | 原59项均通过，原独立用例/断言未改。 | test/evidence/developer-fix-t011-001/independent.tap |
+| node --test --test-reporter=tap test/independent/defect-t011-001.test.js | 原缺陷用例1/1通过；同参数公开重试返回原回执。 | test/evidence/developer-fix-t011-001/defect.tap |
+| node --test --test-reporter=tap test/*.test.js test/independent/*.test.js | 在上述已固定提交上合并复跑163/163通过，失败/取消/跳过/todo均0。 | 本次固定版本复核回执；前三组完整TAP在上述候选内。 |
+
+环境仍为Windows 11 10.0.26300、Node v24.19.0，无AppID/wx/依赖安装。本次运行元数据、源码指纹及八份原tester文件指纹见 test/evidence/developer-fix-t011-001/run.json。独立测试源码与 test/evidence/tester-stage2/ 的原失败日志、run.json和目录规则均与bcbcf7c7逐字节相同；初始开发证据也未覆盖。本次只增加自己的复核目录，TAP空白例外限定该目录。
+
+产品提交只改 src/session.js、README、接口说明，并新增本成员回归和复核证据；核心仓储、业务规则、依赖锁、Unicode数据、tester源码与原日志未改。提交后源指纹匹配、工作树干净、main仍为8fa87fe4cb8f7f33aacf2842798a486150a6105e；未合入、推送、改写历史或删分支，WORKSPACE不变。
+
+以上60项原独立用例是 **developer执行的开发复核**，不冒充tester实际复测或新的独立验收。BUG-T011-001的open状态及T-011 blocked/未覆盖表仍由tester维护，本成员未改A-012、T-011或其索引。T-010按原核心修复交接条件完成；tester需在本会话停止后通过授权的串行通知，在新候选上实际复测并继续A-012列出的剩余L场景。本次开发103项不自动补齐tester的未覆盖范围。微信适配、页面/动画、工具、手机留存及离线仍未实现/执行，不等待AppID进行本轮纯逻辑复测；无新的批准或发布结论。
+
 ## 版本记录
 
 | 日期 | 版本 | 变化 | 状态 |
 |---|---|---|---|
 | 2026-10-21 | 0.1 | T-010核心实现、固定候选、93项开发自测及853条官方分界检查；接口/阶段/计划映射与未覆盖项交接。 | draft |
+| 2026-10-21 | 0.2 | BUG-T011-001公开删除重试修复；103项开发及原60项独立用例的开发复核通过，固定新候选，原失败资产保留，待tester独立复测。 | draft |
