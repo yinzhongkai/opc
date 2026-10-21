@@ -3,6 +3,9 @@ project: 'eating-everyday'
 roleKnowledge:
   developer:
     - frontend-development
+    - wechat-miniprogram-development
+  tester:
+    - wechat-miniprogram-testing
 members:
   - project-manager
   - product-manager
