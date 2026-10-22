@@ -6,7 +6,7 @@
 
 - 建立日期：2026-10-15。
 - 用户请求来源：本会话建项用户，2026-10-15 明确请求“我想创建一个叫今天吃什么的项目”。
-- 当前阶段：2026-10-22原生首版本轮Git交付完成，T-001至T-016均completed；实现、平台专项、架构复核和配置差异独立复测已完成。按用户追加要求，本轮产品17条提交、OPC项目27条提交各压缩为一条单行功能提交；当前产品main为95173d4eb44f9cf3002ca6e0a546b7c0c46d26c0，本次追加纳入project.config.json及配套校验和说明，业务实现保持，完成记录和历史映射见A-015 v0.4/T-016。正式账号由用户另行准备，本次Git交付不包含微信提审或发布；具体版本、证据及限制见当前TASKS和成果索引。
+- 当前阶段：原生首版代码已交付；按用户最新要求，T-017已先为产品创建双父发布merge 6c9ef2b3135a0013fb0b06ebbe761b298c4b7260并将附注v0.1.0推送GitHub，299/299通过，文件树与95173d4一致。当前发布版本及来源见A-016 v0.1；此前单提交整理与配置收尾仍见A-015 v0.4/T-016。README/发布说明、新最终独立复核和GitHub Release页面尚未执行，正式账号由用户准备；不等于微信上线或整份成果批准。
 - 建项记录人：框架超级管理员。
 - 框架基线：已发布标签 `v0.0.4`，提交 `464ca52aafc6c73ff780a7120acd3bf63c9d31dd`。
 - 项目长期分支：`project/eating-everyday`。
@@ -32,7 +32,7 @@
 
 ## 交付约定
 
-- 需求、方案、计划、评审、验收等治理与协作成果位于OPC `artifacts/`；源码及测试资产位于[WORKSPACE.yaml](WORKSPACE.yaml)声明的产品Git仓库`git@github.com:yinzhongkai/eating-everyday.git`，主线`main`，checkout为相对OPC根目录的`../eating-everyday`。依据D-017、T-016及用户追加的单提交压缩要求，2026-10-22当前交付基线为已验证并核对GitHub的`95173d4eb44f9cf3002ca6e0a546b7c0c46d26c0`，包含原生工程与测试，已按用户追加要求纳入测试号工程配置及配套校验和说明；原业务实现未改；旧README基线8fa87fe4cb8f7f33aacf2842798a486150a6105e保留为T-009历史。原被测提交由两仓库的archive/eating-everyday/t016-before-squash-20261022标签保留，不把旧SHA当作压缩后主线的祖先。统一索引记录成果的仓库、路径和精确版本，详细交付证据见[A-015](artifacts/git-delivery-handoff.md)。
+- 需求、方案、计划、评审、验收等治理与协作成果位于OPC `artifacts/`；源码及测试资产位于[WORKSPACE.yaml](WORKSPACE.yaml)声明的产品Git仓库`git@github.com:yinzhongkai/eating-everyday.git`，主线`main`，checkout为相对OPC根目录的`../eating-everyday`。依据D-017、T-016及用户T-017先打带merge commit发布标签的追加要求，2026-10-22当前交付基线为已验证并核对GitHub的`6c9ef2b3135a0013fb0b06ebbe761b298c4b7260`，包含原生工程与测试，v0.1.0指向双父发布merge；与95173d4文件树一致，工程配置仍按用户授权纳入；旧README基线8fa87fe4cb8f7f33aacf2842798a486150a6105e保留为T-009历史。原被测提交由两仓库的archive/eating-everyday/t016-before-squash-20261022标签保留，不把旧SHA当作压缩后主线的祖先。统一索引记录成果的仓库、路径和精确版本，历史交付证据见[A-015](artifacts/git-delivery-handoff.md)，当前发布标签见[A-016](artifacts/product-release-tag.md)。
 - 用户保证当前仓库每次只有一个会话执行，前一会话完成或停止后再启动下一会话；框架不实现文件锁或自动调度。
 - 每份文档默认维护一个当前版本，记录版本及批准依据；历史通过用户维护的 Git 追溯。
 - 评审与批准要求在任务中明确。专业交叉评审由现有成员在原会话执行，不默认新建评审会话；用户保证受评版本可读取且不变，本轮全部评审者提交意见后作者再统一修订。采用根 [项目运行协议](../../PROJECT_PROTOCOL.md) 的评审、完成与状态规则。

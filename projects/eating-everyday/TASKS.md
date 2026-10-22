@@ -714,6 +714,26 @@
 - 产品main及无.git、无私有配置的固定提交干净导出分别完整299/299通过，失败/取消/跳过/todo均0；这是project-manager实际收尾验证。原始TAP、配置原字节及改写前bundle位于产品.local/t016-config-amend-20261022/。公开配置原始SHA97f3a135…e2db不变，Git按既有LF规则保存后blob SHA为4e4b7ceb6fca79fc699b161f69ada2bb22eec994f0087bb45e4114a5a57ef835；私有SHA988e8a38…cff4不变且仍被忽略。产品工作树干净，实际测试号AppID随用户指定配置进入提交，未发现密钥字段。
 - 产品使用显式旧头44ef58be的--force-with-lease推送并读回GitHub main为95173d4e。OPC原头96bd69a2e0672d94a1b4da4cc7c0745550b68874已本机备份，当前引用/说明继续amend进原治理提交，保持本轮一条单行提交；OPC同步仅允许显式旧头lease。WORKSPACE仅推进revision，详情见A-015 v0.4，最终OPC版本由Git历史和远端读回定位。
 
+## T-017：为成果物v0.1.0创建发布merge提交与标签
+
+- 负责人：project-manager
+- 状态：completed
+- 授权来源与日期：2026-10-22用户先授权开发更新README/发布说明、测试复核后发布GitHub，随后明确调整顺序：“先给成果物仓库打一个release的tag 要求有merge commit”。当前先标记既有产品v0.1.0，不把尚未执行的文档更新或新一轮独立复核记为完成。
+- 变更类型：governance-only；产品Git发布元数据，不修改业务、测试或工程配置。
+- OPC 开发分支：feature/eating-everyday/t-017-release-v0-1-0，目标project/eating-everyday。
+- OPC 合入前目标提交：4afeda71b5b7123ed35a36e938ecf418cbfd3ebd。
+- 成果物仓库与开发分支：git@github.com:yinzhongkai/eating-everyday.git；checkout=../eating-everyday；feature/t-017-release-v0-1-0，目标main；合入前main=95173d4eb44f9cf3002ca6e0a546b7c0c46d26c0。
+- 成果物仓库合入后的最终提交：6c9ef2b3135a0013fb0b06ebbe761b298c4b7260，产品main及GitHub同SHA；附注v0.1.0标签指向该发布merge，tag对象为d12b4b9c30f198400ca6fa15d2a36b4b19c94ef7。
+- 目标与范围：为当前已交付代码创建真正具有两个父提交的发布merge commit，让附注标签v0.1.0指向该提交并同步GitHub。用户本次对产品发布明确要求merge commit，覆盖普通feature只用--ff-only的默认规则，仅限本次产品发布；OPC仍快进合入，不触及框架main。
+- 输入与依赖：A-015 v0.4/T-016、已交付95173d4、package.json版本0.1.0、用户本次调整。两仓库分支干净，v0.1.0本机与远端均不存在；开发/tester会话均idle，本轮未发送任务通知。
+- 优先级：按用户“先”执行；原README/发布说明、最终独立复核及GitHub Release页面工作保留为后续，不在本标签步骤提前宣称完成。正式小程序账号由用户准备，不操作微信上传、提审或上线。
+- 完成条件与确认方式：发布merge第一父为原main，第二父为已核对的版本准备提交；发布树与95173d4完全一致，目标main完整299项测试通过；v0.1.0为附注标签，剥离后等于merge，远端main及tag对象/目标均核对相同。两仓库本机公开/私有配置原始指纹保留、工作树干净，WORKSPACE和当前交付引用指向真实发布提交。
+- 进展：已从95173d4建立不改文件的版本准备提交fe5045769e83044a0b75185dd2c72a329de39b01，再--no-ff合入main得到6c9ef2b3135a0013fb0b06ebbe761b298c4b7260；第一父为95173d4、第二父为上述准备提交。release/main/source文件树均为a7cf6d7d3218a13b5fb35e2a7d80ebbfa9f488f2，所有message单行。目标main299/299通过后创建附注v0.1.0，并与main原子推送GitHub、读回main/tag对象/剥离目标均一致；未强推，标签不可移动。
+- 成果与验证证据：[A-016 v0.1产品发布标签记录](artifacts/product-release-tag.md)；实际release.json、remote-verified.json及release-main-299.tap在产品忽略目录.local/t017-release-v0.1.0/。产品工作树干净，公开/私有配置原字节保持，未改业务或历史证据；299项是本次目标分支执行，不冒充新独立复核。
+- 合并与清理状态：产品main发布merge及附注标签已原子推送并验证；OPC以本条实际结果同步WORKSPACE和当前引用，验证后--ff-only合入项目主线并推送，再git branch -d安全清理本轮两个临时分支。最后同步及清理结果以Git引用核对和会话回执为准；不在正文自引用OPC提交哈希。
+- 阻塞与下一位行动人：本次发布merge与标签无剩余阻塞，project-manager完成OPC同步后收尾。原README/发布说明更新、新一轮最终独立复核及GitHub Release页面仍未执行，未通知developer/tester；后续接续保留该范围但不得移动已推送v0.1.0，新文档变更不在该标签文件树中。正式账号由用户准备，不触发微信发布。
+- 更新日期：2026-10-22。
+
 ## 记录样式（不是真实任务）
 
 ```text
