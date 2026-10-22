@@ -4,6 +4,8 @@
 
 当前首版以 A-001 v0.9、D-016 为准，全部候选由用户输入，不获取定位或附近餐厅数据。A-002/A-003仅为旧核实资料，A-004保留视觉参考，A-005 v0.3归档旧数据验证。architect基于8e44720实现、10f52d4专项资产及用户手机自测，完成A-006 v0.5/A-008 v0.3复核：11/11/27追溯不变，原B-01～B-04解除，当前无须用户确认；手机来源与未覆盖边界如实保留，成果仍draft，不等于整份批准或全设备验收。
 
+2026-10-22 OPC项目发布更新：用户追加明确要求标签名project/eating-everyday/v0.1.0且必须指向最新提交；本次所有发布回执先提交，再生成最终双父发布merge，新附注tag剥离目标须与本机/GitHub项目主线HEAD一致，旧名eating-everyday/v0.1.0按授权删除；见[A-017 v0.3](opc-release-tag.md)。用户另要求折叠旧发布merge与回执，当前拓扑以A-017 v0.3为准；下段及A-017旧版本为历史，既有框架v0.0.*与产品v0.1.0不改。
+
 2026-10-22发布标签更新：按用户最新要求先执行T-017，产品main为6c9ef2b3135a0013fb0b06ebbe761b298c4b7260，附注v0.1.0指向该双父发布merge，299/299通过且树与95173d4相同；见[A-016 v0.1](product-release-tag.md)。下段及A-015保留此前源码交付与单提交整理事实；当前GitHub Release页面、文档更新及新最终独立复核尚未执行。
 
 2026-10-22交付更新：T-014/T-015已完成配置适配与独立复测，两类配置各299/299。按用户追加的单提交要求，本轮产品17条、OPC项目27条提交各整理为一条单行提交；当前产品main为95173d4eb44f9cf3002ca6e0a546b7c0c46d26c0，本次按用户追加要求纳入工程配置及配套校验/说明，业务实现保持；主线和干净导出各299/299，GitHub核对通过，当前交付状态见[A-015 v0.4](git-delivery-handoff.md)。本次工程配置提交改变了此前“实际AppID仅保留在本机”的收尾约定；下表A-013/A-014的未提交说明仅指其原执行时点，专业成果的原被测版本与历史结论保留，旧SHA可通过两仓库archive/eating-everyday/t016-before-squash-20261022标签追溯，不表示压缩后main的祖先。
@@ -26,6 +28,7 @@
 | A-014 | [小程序独立平台测试与缺陷复测](miniprogram-test-report.md) | OPC artifacts；本机产品git@github.com:yinzhongkai/eating-everyday.git，checkout=../eating-everyday；新test/evidence/tester-t015-appid/及T-013历史证据 | tester | 当前[T-015](../TASKS.md#t-015独立复测两类appid配置并给出合入结论)；[T-013](../TASKS.md#t-013验证小程序导入编译与预览闭环)历史保留 | 0.4，2026-10-22；业务8e4472006f1d3cdff5b774052e01ce8db5a96453，配置测试ac9ae93596633919e527934b5c5f64c40112b49a，被测候选aa8c6d83946ca7ec0ebe420c408a9511799c77ea，新测试资产f642dcad85d86d4c1adf251fbd2dad6d8cc84065；内容保留于当前main交付95173d4eb44f9cf3002ca6e0a546b7c0c46d26c0，原SHA见归档标签 | draft | 两配置独立完整回归各299/299，85/85辅助检查及六类隔离缺陷拒绝均通过；211原文件与本机公共/私有配置字节不变、个人AppID未提交，新临时目录已清理。T-015 completed、可合入，T-016交project-manager；T-013完成/手机用户自测及旧291/292、292/292和设备/附件限制保留，不等于批准或发布 |
 | A-015 | [首版Git交付与配置修正记录](git-delivery-handoff.md) | OPC artifacts；产品git@github.com:yinzhongkai/eating-everyday.git，本机../eating-everyday，main；源码与test/evidence/ | project-manager | [T-016](../TASKS.md#t-016合入并推送本轮双仓库代码交付) | 0.4，2026-10-22；压缩后产品最终95173d4eb44f9cf3002ca6e0a546b7c0c46d26c0，GitHub main已核对 | draft | 用户追加要求本轮每仓库一条单行提交；保留旧基线、归档标签和bundle，显式旧头lease同步。已将工程配置及配套测试/说明amend到原提交；主线与干净导出各299/299，本机字节和私有文件保留、工作树干净，旧专业结论仍按原版本适用，不包含微信提审或发布 |
 | A-016 | [产品v0.1.0发布merge与标签记录](product-release-tag.md) | OPC artifacts；产品git@github.com:yinzhongkai/eating-everyday.git，本机../eating-everyday，main及附注v0.1.0 | project-manager | [T-017](../TASKS.md#t-017为成果物v010创建发布merge提交与标签) | 0.1，2026-10-22；发布merge 6c9ef2b3135a0013fb0b06ebbe761b298c4b7260，GitHub main/tag剥离目标已核对 | draft | 用户最新要求先打带merge commit的发布标签；双父及树一致、299/299、原子推送已实际完成。GitHub Release页面和新文档/最终独立复核未执行，不代表微信上线或整份成果批准 |
+| A-017 | [OPC项目发布标签记录](opc-release-tag.md) | OPC artifacts；git@github.com:yinzhongkai/opc.git，项目主线project/eating-everyday，附注project/eating-everyday/v0.1.0 | project-manager | [T-018](../TASKS.md#t-018为opc当前项目快照创建发布merge与标签) | 0.3，2026-10-22；新标签固定最终发布merge且等于最新项目主线HEAD，确切提交通过已核对Git引用解析，不在同一提交自写自身哈希 | draft | 用户明确修正命名、最新头并要求合并旧发布/回执节点；所有回执先纳入发布merge，新tag/主线/旧名删除由原子推送及旧头lease保护，发布后不再追加commit。旧tag已作本机恢复备份，最终结果按远端核对；产品和框架保持 |
 
 OPC 治理与协作成果使用当前项目 `artifacts/` 内的正文链接；产品代码和直接业务交付物使用“成果物仓库 + 仓库内路径”，并记录其合入后的最终提交。快进合并后可直接引用通过最终验证的普通功能提交，可移动分支名不能代替精确提交。
 
