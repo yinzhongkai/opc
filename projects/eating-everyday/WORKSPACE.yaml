@@ -3,5 +3,5 @@ workspace:
   driver: git
   repository: git@github.com:yinzhongkai/eating-everyday.git
   branch: main
-  revision: 95173d4eb44f9cf3002ca6e0a546b7c0c46d26c0
+  revision: 6c9ef2b3135a0013fb0b06ebbe761b298c4b7260
   checkout: ../eating-everyday
