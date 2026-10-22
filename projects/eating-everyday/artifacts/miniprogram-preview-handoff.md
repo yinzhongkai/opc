@@ -3,19 +3,19 @@
 - 项目：eating-everyday（今天吃什么）
 - 成果 ID：A-013
 - 负责人：developer（研发工程师）
-- 关联任务：[T-012](../TASKS.md#t-012补齐原生小程序工程与开发工具预览)，供[T-013](../TASKS.md#t-013验证小程序导入编译与预览闭环)串行接收。
-- 版本：0.2
-- 更新日期：2026-10-21（Asia/Shanghai）
+- 关联任务：当前[T-014](../TASKS.md#t-014适配仓库与本机appid配置检查)，供[T-015](../TASKS.md#t-015独立复测两类appid配置并给出合入结论)串行接收；T-012/T-013为已完成历史，不重开。
+- 版本：0.3
+- 更新日期：2026-10-22（Asia/Shanghai）
 - 状态：draft
-- 适用范围：原生工程及BUG-T013-001开发修复；真实双项鼠标抽取/指针/结果、关键保存加载和新预览已取得。T-012完成本地开发候选交接，001仍待tester独立复测，手机与整体验收未完成。
-- 来源及输入：本次用户授权及项目经理T-012安排；[A-001 v0.9](product-requirements.md)、[A-007 v0.3](product-decision-options.md)、[A-006 v0.4](system-architecture.md)、[A-008 v0.2](accounts-access-checklist.md)、[A-010 v0.1](core-test-plan.md)、[A-011 v0.3](developer-core-handoff.md)、[A-012 v0.3第7节](core-test-report.md)，现行D-005/D-011/D-014/D-016/D-017；v0.2另输入[A-014 v0.1 BUG-T013-001](miniprogram-test-report.md)，用户已明确恢复开发/测试自动操作并处理审批。
+- 适用范围：T-014配置测试适配；区分受控默认与合法本机配置，干净导出及保留本机配置工作树均开发复跑通过。业务/打包配置未改，T-002/T-013完成事实以其负责人最新报告为准，本次不操作微信工具或重跑手机。
+- 来源及输入：2026-10-22用户明确要求先开发/测试解决AppID配置差异，通过后合并推送；project-manager的T-014/T-015/T-016安排（OPC接手fafe2d8e71d7e5442715c35e25cbde0d36957fdb）。已读取[A-006 v0.5§9.4](system-architecture.md)、[A-008 v0.3§3](accounts-access-checklist.md)、[A-014 v0.3§7](miniprogram-test-report.md)；原T-012输入及旧结果保留各历史段落。
 - 存储位置：本治理正文在OPC artifacts；产品源码、测试、中间证据全部在本机产品仓库git@github.com:yinzhongkai/eating-everyday.git，checkout=../eating-everyday。
-- 固定工程候选：**8e4472006f1d3cdff5b774052e01ce8db5a96453**，产品feature/t-002-readiness-review，父提交为tester资产f678942064fb9dc8fdf37ddf9a2257a8b459c1c0。继承f7ceaf791dd06e8749fa1754b6a0143d1193fb63工程及已独立通过的核心54b720fa920dfcda9a3db5fa0e42378be01f5535；原历史/24份原tester字节保留，当前44份tester Git内容一致，无测试断言改写。
+- 固定工程候选：配置测试修正**ac9ae93596633919e527934b5c5f64c40112b49a**，父为接手资产10f52d40bb8a62b04a8f84793e44117fe3c28e46；证据提交ebc4e7d70ee2450dd1bbd98eda9ef55dc8feb129及追加TAP格式属性提交**aa8c6d83946ca7ec0ebe420c408a9511799c77ea**，后者为当前接续资产HEAD。三份测试源码在两类验证与资产HEAD间一致；业务实现8e44720及后续tester资产未改。
 - 主线交付：未合入、未推送；产品main/已有origin/main/WORKSPACE.revision仍为8fa87fe4cb8f7f33aacf2842798a486150a6105e。OPC沿用feature/eating-everyday/t-002-readiness-review，目标project/eating-everyday及已有origin目标仍a735031c37c09e75fb9478681aaf42010a82f378。
-- 批准依据：无整份成果批准；本次授权允许开发和本地候选交接，不代写tester平台结论，不将开发自测当作独立测试。
-- 版本记录：0.1首次原生候选及Esc停止历史；0.2在用户恢复授权、tester实际发现001后修复宿主随机值兼容，完成真实双项/菜单冒烟与新版预览。
+- 批准依据：本次用户已授权T-014开发与后续独立复测/合并顺序；本成员仅完成开发和本地交接，不代写T-015独立结论，不执行T-016合并推送或推进WORKSPACE。
+- 版本记录：0.1首次原生候选及Esc停止历史；0.2随机跨域修复与开发预览；0.3仅配置测试适配及双环境结果，保留本机配置字节，交T-015独立复测。
 
-以下第1～4节保留v0.1当时的停止和未验证事实，**当前以第5节v0.2为准**；旧失败记录不改记为通过。
+以下第1～4节为v0.1、第5节为v0.2的历史事实；**当前T-014以第6节v0.3为准**。旧Esc、未验证手机和待关闭缺陷说法不作为当前目标，最新T-013/手机分层结果以A-014 v0.3为准；不倒写旧失败。
 
 ## 1. 工程与操作入口
 
@@ -105,3 +105,35 @@ T-012因最终平台复核未完成标blocked，不能以285项桌面通过替�
 T-012按“完整工程＋开发自测＋实际可用首个预览候选”完成本次开发交接，不代表BUG-T013-001由tester关闭或T-013完成。A-014/T-013原open/blocked由tester维护；本会话停止，由项目经理串行通知tester先独立复测001与真实双项，再继续菜单平台分支及新预览。本人不联系/唤醒其他会话、不改STATUS/WORKSPACE或他人报告。
 
 手机扫码、正常关闭重开留存、完整原生覆盖/另存/重命名/删除/dirty选择分支、键盘/小屏/大字/安全区、实体生命周期与真实容量边界、已打开后的断网仍待T-013分层执行；不扩展首版需求，不等待全部机型才交当前预览。
+
+## 6. v0.3：T-014仓库默认与本机配置测试适配
+
+### 接收与最小变更
+
+项目经理已完成安排且其他成员停止，本成员独占执行。重新读取本人配置/scope、角色与三项有效技能、WORKSPACE、T-014及相关输入；未变规则经Git范围核对复用。OPC接手fafe2d8e71d7e5442715c35e25cbde0d36957fdb干净，产品接手10f52d40bb8a62b04a8f84793e44117fe3c28e46，唯一已协调差异为用户授权保留的project.config.json。当前分支仍为本轮同后缀feature，未创建新轮次。
+
+只改test/miniprogram-package.test.js，并新增test/support/project-config.js、test/project-config.test.js。Git检出从只读git show HEAD:project.config.json检查受控默认占位AppID；无.git的干净导出检查导出文件，不向上寻找父Git。工作树运行配置接受touristappid或wx＋16位小写十六进制格式，拒绝空白/填充、错误前缀/长度/字符、非字符串；仅检查格式，不替代账号授权/发布资格。错误消息不回显账户输入。
+
+两来源都执行根目录、compileType、固定基础库和带folder/file类型的打包排除保护，包含本机私有配置排除；不因本机AppID不同跳过整个复合用例。原app/page/事件/JS可达依赖/Unicode等值/可视转盘检查继续运行。新增一项默认来源实查及六项合法/非法/来源/打包/元数据测试，共7项；没有任意AppID放行、测试skip或业务代码变更。Git检出使用现有Git进行只读来源审计，导出套件只需Node，无npm依赖增加。
+
+### 双配置开发验证
+
+固定被测测试修正提交为ac9ae93596633919e527934b5c5f64c40112b49a。以下均为developer执行；独立合入结论交T-015：
+
+| 配置来源/阶段 | 实际结果 | 产品证据 |
+|---|---|---|
+| 修正前本机文件 | 输入10f52d4完整套件退出1，291/292，唯一AppID固定断言失败 | before-working-redacted.tap、before.json；原始日志仅在忽略的.local/t014/ |
+| 修正后保留本机配置工作树 | HEAD=ac9ae935；默认来源为git HEAD，实际文件仍为原授权配置；完整套件299/299、退出0 | working.tap、run.json |
+| 修正后干净Git导出 | git archive ac9ae935；无.git/私有配置，默认文件仍touristappid；完整套件299/299、退出0 | clean-export.tap、run.json中archive SHA/来源；新导出目录已安全清理 |
+
+两类完整命令相同：`node --test --test-reporter=tap test/*.test.js test/independent/*.test.js`，Node v24.19.0；失败/取消/跳过/todo均0。原A-014的291/292与提交292/292仍是其当时结果，没有倒写为新通过。产品证据位置为test/evidence/developer-t014-appid/，含脱敏TAP、配置/私有文件前后SHA、源码绑定和T-015最少步骤。
+
+用户project.config.json原始SHA-256前后均**97f3a1355a54a3c8875f6da96580357c1fbc3a639079e009acf0aa07c6bae2db**，从未改写、暂存或提交；私有配置指纹前后相同。业务src/adapters/pages/ui原始指纹不变；受控公共配置与输入Git版本一致。公开日志脱敏，个人AppID不入提交。失败TAP保留报告缩进，证据首次空白检查提示两处blank-at-eol后，仅在本证据目录加*.tap格式属性并追加提交，保留日志SHA与旧失败，不屏蔽测试失败或放宽源码检查。
+
+### 固定交接、最少复测与停止
+
+修正提交ac9ae93596633919e527934b5c5f64c40112b49a；原始证据ebc4e7d70ee2450dd1bbd98eda9ef55dc8feb129，当前完整资产HEAD aa8c6d83946ca7ec0ebe420c408a9511799c77ea。追加提交仅测试证据/格式说明，不改被测三份测试源码、业务或公共配置。
+
+下一位tester先核对当前资产HEAD及本机配置SHA，然后在保留该配置的工作树执行上述完整命令，再将固定候选git archive到产品.local/内新的空目录，在导出目录执行相同命令；两处应299/299。读取test/project-config.test.js的合法/非法与打包用例，不复制本机配置覆盖导出默认；导出/复测后再核对本机原SHA。具体PowerShell步骤见产品证据README，无需GUI、正式账号或手机重复测试。T-015接收时另记当前资产HEAD，源码SHA与日志被测ac9ae935分列。
+
+T-014按本次开发完成条件completed，T-015仍由tester独立执行、T-016仅项目经理在通过后推进。本成员只改本人T-014/A-013/索引，不改STATUS/PROJECT/WORKSPACE、其他任务或他人专业报告；不合并、推送、重写历史、删分支、微信上传或发布，不联系/唤醒其他会话。治理提交后停止，产品工作树仅保留已授权的project.config.json差异，不能称其完全干净；OPC保存后干净。
