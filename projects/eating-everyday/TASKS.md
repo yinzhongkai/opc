@@ -734,6 +734,40 @@
 - 阻塞与下一位行动人：本次发布merge与标签无剩余阻塞，project-manager完成OPC同步后收尾。原README/发布说明更新、新一轮最终独立复核及GitHub Release页面仍未执行，未通知developer/tester；后续接续保留该范围但不得移动已推送v0.1.0，新文档变更不在该标签文件树中。正式账号由用户准备，不触发微信发布。
 - 更新日期：2026-10-22。
 
+## T-018：为OPC当前项目快照创建发布merge与标签
+
+- 负责人：project-manager
+- 状态：completed
+- 授权来源与日期：2026-10-22用户明确“把opc仓库打一个release的tag 要求有merge commit”；沿当前eating-everyday项目上下文标记项目快照，不发布或合入公共框架main。
+- 变更类型：governance-only；Git发布元数据及实际回执，既有项目文件树不改动后标记快照。
+- OPC 开发分支：feature/eating-everyday/t-018-opc-release-v0-1-0，目标project/eating-everyday。
+- OPC 合入前目标提交：8012e2beb4ead9b19259ddf7b10d06366d58103b；发布merge生成后，标签后的回执从17c859ea2dafebe99503e46e595ab391649bcf05继续，按--ff-only同步，不移动标签。
+- 成果物仓库与开发分支：不适用；本次不修改产品仓库，只读核对既有main/v0.1.0为6c9ef2b3135a0013fb0b06ebbe761b298c4b7260，工作树干净。
+- 成果物仓库合入后的最终提交：不适用；WORKSPACE保持既有产品发布merge，不产生新的产品提交。
+- 目标与范围：OPC现有v0.0.*为框架发布，当前项目使用附注标签eating-everyday/v0.1.0；让该标签指向真正两个父提交的项目发布merge。用户本次明确merge要求覆盖该次OPC项目发布的默认快进限制；后续治理回执仍快进同步，框架main和既有版本标签均不动。
+- 输入与依赖：T-017/A-016、已交付OPC 8012e2beb4ead9b19259ddf7b10d06366d58103b及有效WORKSPACE；发布前项目工作树干净、远端同SHA、新项目标签未占用，已有成员本轮未被通知执行。
+- 优先级：用户当前直接要求。
+- 完成条件与确认方式：第一父为原项目主线8012e2beb4ead9b19259ddf7b10d06366d58103b、第二父为准备提交eed44d0a15635cb378ef723b91bbfad453399c1d，发布merge=17c859ea2dafebe99503e46e595ab391649bcf05，树与发布前完全一致；附注标签剥离指向merge，项目分支和tag原子推送、远端读回一致，框架及590处本地链接校验通过，产品与既有框架引用不变。
+- 进展：实际从原项目主线创建不改文件的版本准备提交eed44d0a15635cb378ef723b91bbfad453399c1d，以--no-ff合入得到17c859ea2dafebe99503e46e595ab391649bcf05，两个父提交及树一致已核对。项目主线和附注标签已原子推送GitHub；tag对象3e86c7f32c97a2ba7e611fea4eb4ed73d1001966、剥离目标17c859ea2dafebe99503e46e595ab391649bcf05与本机一致，未强推。main及四个框架v0.0.*对象与操作前核对一致。
+- 成果与验证证据：[A-017 v0.1 OPC项目发布标签记录](artifacts/opc-release-tag.md)；真实release.json、remote-verified.json、snapshot-validation.txt保留在OPC本机.git/codex-backups/t018-opc-release-v0.1.0/，不进入标签文件树。不重跑或冒充新的产品独立复核。
+- 合并与清理状态：发布merge和标签已实际推送完成；本条和A-017为标签后的真实回执，随后以普通单行治理提交--ff-only同步并正常推送项目主线，再git branch -d安全清理本轮已合入分支。标签固定17c859ea2dafebe99503e46e595ab391649bcf05，项目主线允许因回执向前推进；最终回执提交由Git历史定位，不在正文自引用。
+- 阻塞与下一位行动人：本次OPC发布merge/tag无阻塞；原README/发布说明、新最终独立复核和GitHub Release页面仍待后续，不移动已冻结的OPC项目及产品标签。正式账号由用户准备，本次不操作微信或公共框架发布。
+- 更新日期：2026-10-22。
+
+### 2026-10-22用户修正T-018标签命名及最新头目标
+
+- 用户追加明确要求“把tag命名成 project/eating-everyday/v0.1.0，另外该tag应该批向最新的提交”。本次沿T-018修正，替代先前“eating-everyday/v0.1.0固定旧merge、回执另在标签后提交”的安排；原表述保留为历史，不再用作当前要求。
+- 新发布分支为feature/eating-everyday/t-018-opc-tag-correction，合入前项目主线fb7d4e2d2a1d06208540c0ee34f8e2f48da0cc26。旧tag对象3e86c7f32c97a2ba7e611fea4eb4ed73d1001966及旧项目头已先备份为本机恢复引用和可验证bundle。
+- 当前发布名称为project/eating-everyday/v0.1.0，必须满足新tag剥离目标=本机项目主线HEAD=GitHub项目主线最新头，且恰为两个不同父提交的发布merge。先将全部五份发布资料/回执修正提交，再--no-ff合入项目主线、验证并创建附注tag，后续不再追加commit；本轮只清理已合入修正分支，不改WORKSPACE或产品仓库。
+- 新tag、项目主线及旧名删除一次原子同步；明确旧主线头、旧tag对象、新tag未占用三重lease，任何远端变化均停止。最终merge/tag对象由Git引用与会话回执核对，不在同一提交正文自写自身哈希；细节见[A-017 v0.2](artifacts/opc-release-tag.md)。旧名称删除是用户本次明确重命名授权，不修改产品/框架标签。
+
+### 2026-10-22用户要求折叠T-018旧发布与回执提交
+
+- 用户明确指定fb7d4e2d2a1d06208540c0ee34f8e2f48da0cc26和17c859ea2dafebe99503e46e595ab391649bcf05应与前后提交合并，不单独显示在Git历史；本轮沿T-018完成历史整理，不创建新业务任务或修改产品。
+- 整理范围为8012e2beb4ead9b19259ddf7b10d06366d58103b之后原五条发布记录；删除旧空准备及旧merge节点，把完整回执与命名修正作为一条资料提交，再以8012e2b和该资料提交为双父形成最终release merge。既有文件内容保留，仅同步这次整合的追溯说明与当前父提交约定，详见[A-017 v0.3](artifacts/opc-release-tag.md)。
+- 新标签名称保持project/eating-everyday/v0.1.0，必须等于本机/远端最新项目HEAD；本次明确整理授权覆盖对原分支和tag的必要改写，仅允许显式旧头/旧tag对象保护的原子lease推送。最终merge和tag对象通过Git引用核对，之后不追加commit。
+- 旧分支、tag及过时恢复引用先保存并校验本机.git/codex-backups/t018-history-squash-20261022/before-squash.bundle；同步成功后清理仅这些旧恢复引用，不把旧历史以新远端tag/分支重新发布。不改历史专业报告、WORKSPACE、成果物或框架引用；本次结果以最终祖先检查、框架校验、远端读回和会话回执确认。
+
 ## 记录样式（不是真实任务）
 
 ```text
