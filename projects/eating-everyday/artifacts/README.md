@@ -4,7 +4,7 @@
 
 当前首版以 A-001 v0.9、D-016 为准，全部候选由用户输入，不获取定位或附近餐厅数据。A-002/A-003仅为旧核实资料，A-004保留视觉参考，A-005 v0.3归档旧数据验证。architect基于8e44720实现、10f52d4专项资产及用户手机自测，完成A-006 v0.5/A-008 v0.3复核：11/11/27追溯不变，原B-01～B-04解除，当前无须用户确认；手机来源与未覆盖边界如实保留，成果仍draft，不等于整份批准或全设备验收。
 
-2026-10-22交付更新：T-014/T-015已完成配置适配与独立复测，两类配置各299/299。产品main最终提交f642dcad85d86d4c1adf251fbd2dad6d8cc84065已合入、验证及推送；当前交付状态见[A-015](git-delivery-handoff.md)。下表保留各轮专业成果的原被测版本与历史结论，后续交付引用不改写其执行结果。
+2026-10-22交付更新：T-014/T-015已完成配置适配与独立复测，两类配置各299/299。产品main最终提交f642dcad85d86d4c1adf251fbd2dad6d8cc84065已合入、验证及推送；OPC项目主线也已合入、验证及推送，当前交付状态见[A-015 v0.2](git-delivery-handoff.md)。下表保留各轮专业成果的原被测版本与历史结论，后续交付引用不改写其执行结果。
 
 | 成果 ID | 名称与位置 | 存储位置 | 负责人 | 关联任务 | 版本/精确提交 | 状态 | 批准决定 |
 |---|---|---|---|---|---|---|---|
@@ -22,7 +22,7 @@
 | A-012 | [核心独立测试报告与缺陷复测](core-test-report.md) | OPC artifacts；本机产品仓库git@github.com:yinzhongkai/eating-everyday.git，checkout=../eating-everyday；test/independent/与test/evidence/下三个tester证据目录 | tester | [T-011](../TASKS.md#t-011准备验收用例并执行不依赖-appid-的测试)，D/M/O后续由T-013接续 | 0.3，2026-10-21；通过的被测实现54b720fa920dfcda9a3db5fa0e42378be01f5535，新测试资产f2646b52f7e6746b2814076bfab99e91a5e95f07；旧版本/失败历史保留，治理提交按T-011/Git定位 | draft | 001/002均独立复测closed；新增21项及最终257/257（开发123＋独立134）通过，T-011当前L范围completed。真实wx/UI/工具/手机/离线D/M/O未执行，交T-013，不代表整体验收或方案批准 |
 | A-013 | [原生小程序工程与平台复核交接](miniprogram-preview-handoff.md) | OPC artifacts；本机产品git@github.com:yinzhongkai/eating-everyday.git，checkout=../eating-everyday；本轮test配置适配及test/evidence/developer-t014-appid/ | developer | 当前[T-014](../TASKS.md#t-014适配仓库与本机appid配置检查)，供T-015独立复测；T-012历史保留 | 0.3，2026-10-22；测试修正ac9ae93596633919e527934b5c5f64c40112b49a，证据资产HEAD aa8c6d83946ca7ec0ebe420c408a9511799c77ea；已包含于main交付f642dcad85d86d4c1adf251fbd2dad6d8cc84065 | draft | 两来源完整套件各299/299；本机配置97f3a135…e2db原字节保持且未提交，业务/公共打包未改。新增7项保护，旧291/292历史保留；T-014完成开发交接，独立结论及合并推送交T-015/T-016，不重开T-002/T-013 |
 | A-014 | [小程序独立平台测试与缺陷复测](miniprogram-test-report.md) | OPC artifacts；本机产品git@github.com:yinzhongkai/eating-everyday.git，checkout=../eating-everyday；新test/evidence/tester-t015-appid/及T-013历史证据 | tester | 当前[T-015](../TASKS.md#t-015独立复测两类appid配置并给出合入结论)；[T-013](../TASKS.md#t-013验证小程序导入编译与预览闭环)历史保留 | 0.4，2026-10-22；业务8e4472006f1d3cdff5b774052e01ce8db5a96453，配置测试ac9ae93596633919e527934b5c5f64c40112b49a，被测候选aa8c6d83946ca7ec0ebe420c408a9511799c77ea，新测试资产f642dcad85d86d4c1adf251fbd2dad6d8cc84065；已包含于main交付f642dcad85d86d4c1adf251fbd2dad6d8cc84065 | draft | 两配置独立完整回归各299/299，85/85辅助检查及六类隔离缺陷拒绝均通过；211原文件与本机公共/私有配置字节不变、个人AppID未提交，新临时目录已清理。T-015 completed、可合入，T-016交project-manager；T-013完成/手机用户自测及旧291/292、292/292和设备/附件限制保留，不等于批准或发布 |
-| A-015 | [首版Git交付与配置修正记录](git-delivery-handoff.md) | OPC artifacts；产品git@github.com:yinzhongkai/eating-everyday.git，本机../eating-everyday，main；源码与test/evidence/ | project-manager | [T-016](../TASKS.md#t-016合入并推送本轮双仓库代码交付) | 0.1，2026-10-22；产品最终f642dcad85d86d4c1adf251fbd2dad6d8cc84065，GitHub main已核对 | draft | 用户授权配置修正、独立复测通过后合并推送；产品已交付，OPC收尾进行中。保留本机字节、历史证据和专业限制，不包含微信提审或发布 |
+| A-015 | [首版Git交付与配置修正记录](git-delivery-handoff.md) | OPC artifacts；产品git@github.com:yinzhongkai/eating-everyday.git，本机../eating-everyday，main；源码与test/evidence/ | project-manager | [T-016](../TASKS.md#t-016合入并推送本轮双仓库代码交付) | 0.2，2026-10-22；产品最终f642dcad85d86d4c1adf251fbd2dad6d8cc84065，GitHub main已核对 | draft | 用户授权配置修正、独立复测通过后合并推送；两主线均已合入验证推送，完成记录沿原分支同步后安全清理。保留本机字节、历史证据和专业限制，不包含微信提审或发布 |
 
 OPC 治理与协作成果使用当前项目 `artifacts/` 内的正文链接；产品代码和直接业务交付物使用“成果物仓库 + 仓库内路径”，并记录其合入后的最终提交。快进合并后可直接引用通过最终验证的普通功能提交，可移动分支名不能代替精确提交。
 

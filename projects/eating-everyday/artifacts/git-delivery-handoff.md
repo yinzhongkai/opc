@@ -2,7 +2,7 @@
 
 - 项目：eating-everyday（今天吃什么）
 - 成果ID：A-015；负责人：project-manager；关联任务：[T-016](../TASKS.md#t-016合入并推送本轮双仓库代码交付)。
-- 版本：0.1，2026-10-22（Asia/Shanghai）；状态：draft。
+- 版本：0.2，2026-10-22（Asia/Shanghai）；状态：draft。
 - 来源：用户授权配置修正、独立复测通过后合并并推送GitHub；T-014/T-015、A-013 v0.3、A-014 v0.4及A-006 v0.5。
 - 范围：产品源码与OPC治理资料的Git交付，不包含正式账号办理、微信上传审核或公开上线，不替代专业报告和成果批准。
 
@@ -15,7 +15,7 @@
 | 业务与配置修正 | 业务固定8e4472006f1d3cdff5b774052e01ce8db5a96453；测试修正ac9ae93596633919e527934b5c5f64c40112b49a；开发资产aa8c6d8、独立资产f642dcad。后续增量只涉及测试/证据，业务未变。 |
 | 独立复测 | A-014 v0.4：保留本机配置与无.git干净导出各299/299；85/85独立配置检查，六类隔离错误均命中原工程保护。各类计数分列，不相加成一次验收。 |
 | 目标分支验证 | 产品main再次运行node --test --test-reporter=tap test/*.test.js test/independent/*.test.js，退出0、299/299，失败/取消/跳过/todo均0。原始TAP在产品忽略目录.local/delivery-t016-20261022/main-299.tap；独立公开证据在test/evidence/tester-t015-appid/。 |
-| OPC当前接手点 | e03c707f44738e0ddcb90f4708cf4bd5998b7595；目标project/eating-everyday，合入前目标a735031c37c09e75fb9478681aaf42010a82f378。当前在原feature同步交付引用，待OPC快进合入、验证及远端核对。 |
+| OPC项目主线 | 从a735031c37c09e75fb9478681aaf42010a82f378快进合入集成检查点1b95cd3dbfa961501ea22d4bee51b5910bc46591，目标分支校验和584处本地链接、空白/项目范围及交付引用检查通过，GitHub project/eating-everyday已核对同SHA。当前收尾记录的最终提交以Git历史及远端分支核对定位，不在正文自引用。 |
 
 17个产品功能/修复/验证提交保留原SHA，未重写阶段证据依赖的历史；新增范围无merge commit。T-010至T-015各任务的原被测SHA和专业结论继续保留，最终交付字段引用上述main提交。旧T-013阶段的291/292与292/292是修正前事实，当前配置复测以A-014 v0.4为准。
 
@@ -27,7 +27,7 @@
 
 ## 当前收尾与边界
 
-WORKSPACE.revision在产品main真实合入、验证及远端核对后更新到f642dcad，repository/branch/driver/相对checkout均未改变。OPC尚待按--ff-only合入project/eating-everyday、验证推送；全部成功后才安全清理两个开发分支。本阶段没有开始新一轮开发。
+WORKSPACE.revision在产品main真实合入、验证及远端核对后更新到f642dcad，repository/branch/driver/相对checkout均未改变。OPC已按--ff-only合入project/eating-everyday并验证推送，新增范围只含当前项目13个路径，无框架变更、新增merge commit或强推。T-016的Git交付已完成，当前只补记完成事实；该收尾记录快进同步且最终远端核对后，使用git branch -d安全清理两个已合入开发分支，最终清理结果由Git引用及会话回执核对。本阶段没有开始新一轮开发。
 
 正式小程序账号由用户另行准备。手机结果仍为用户自测，设备/微信版本、实际构建指纹、真实满配额、多设备及历史GUI原始附件缺口等按A-014/A-006保留。H-005/H-006等交接由原发起人核对，不因本次Git操作自动关闭；需求与架构等成果保持draft。
 
@@ -36,3 +36,4 @@ WORKSPACE.revision在产品main真实合入、验证及远端核对后更新到f
 | 日期 | 版本 | 变化 |
 |---|---|---|
 | 2026-10-22 | 0.1 | 记录配置修正与独立通过、产品main合入验证和远端核对；同步最终产品版本，OPC收尾继续于T-016。 |
+| 2026-10-22 | 0.2 | 补记OPC项目主线快进合入、目标分支验证与GitHub核对，T-016完成；沿原分支同步完成记录并执行最终安全清理。 |
