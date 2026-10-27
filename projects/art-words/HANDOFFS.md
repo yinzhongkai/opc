@@ -1,6 +1,19 @@
 # 行动请求与交接
 
-暂无需要其他成员行动的交接。普通进展直接写 [TASKS.md](TASKS.md)，接收和关闭规则见根 [项目运行协议](../../PROJECT_PROTOCOL.md)。
+## H-001：提交首轮 8 篇选题与首篇文案样稿
+- 发起人：`project-manager`
+- 目标：`writer`
+- 关联任务：`T-002`
+- 期望结果：接收 `T-002`，核对执行前提，提出首轮 8 篇选题并完成首篇标题、正文和配图分镜文字样稿，提交明确版本供专业评审和用户确认。
+- 输入与证据：[PROJECT.md](PROJECT.md)、[D-002](DECISIONS.md) 至 [D-004](DECISIONS.md)、[视觉参考与内容要求](artifacts/references/README.md)、[WORKSPACE.yaml](WORKSPACE.yaml) 声明的仓库与精确基线。
+- 未完成事项：选题和文案尚未产生；成果物仓库 checkout、当前提交和 `feature/t-001-first-content-cycle` 尚未核验或创建；首篇英文使用要求在后续 `T-003` 提出并由用户确认。
+- 状态：open
+- 创建日期：2026-10-27
+- 接收反馈：尚未接收。
+- 处理结果与证据：暂无。
+- 关闭或取消依据：暂无。
+
+普通进展直接写 [TASKS.md](TASKS.md)，接收和关闭规则见根 [项目运行协议](../../PROJECT_PROTOCOL.md)。
 
 已在任务内明确安排的轻量评审或复核无需重复建立交接；另有补充输入、协调或责任转交请求时再登记。
 
