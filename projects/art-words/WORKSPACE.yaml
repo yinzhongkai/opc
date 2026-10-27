@@ -1,0 +1,7 @@
+schemaVersion: 1
+workspace:
+  driver: git
+  repository: git@github.com:yinzhongkai/art-words.git
+  branch: main
+  revision: daa6eb4a0d79b005533dfd0820c7a9a545e5e4a9
+  checkout: ../art-words
