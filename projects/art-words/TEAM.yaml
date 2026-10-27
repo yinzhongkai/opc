@@ -1,4 +1,9 @@
 schemaVersion: 3
 project: 'art-words'
 roleKnowledge: {}
-members: []
+members:
+  - writer
+  - visual-designer
+  - social-media-operator
+  - project-manager
+  - reviewer
