@@ -1959,6 +1959,14 @@ PM实际消息已送达当前reviewer。其最新真实回执说明仍见PM acti
 - 阻塞与下一位行动人：三篇定时提交均已完成并核验，当前无网页操作阻塞；T-021保持in_progress，等待各档期后的真实审核／公开结果与后续数据闭环，不能提前记公开发布成功或任务completed。后续仅在用户发起回查或提供真实结果时补记实际状态，未发生的公开字段保持null，不创建无人监控或全自动托管。
 - 更新日期：2026-10-28
 
+### PM双仓压缩合并、分支清理与空间维护登记（2026-10-28）
+
+- 授权与串行：用户逐次明确指示——OPC `1249099..b88abcd`按功能压缩（单行message）合入`project/free-pipi-shrimp`；清理本项目OPC feature；两次更新WORKSPACE.revision；删除评审副本及过程稿／中间版本；对已发布素材明确“先不删除了”。各步执行时无其他成员在写，产品业务固定图文、前两篇与三篇定时均未触碰。
+- OPC压缩合并：区间约40提交按功能压为12个单行message提交（T-015规划至T-021定时及产品合并／分支清理记录），复用各组末快照树，最终树与`b88abcdea082375aa697cf99f9b551e0085d8f95`完全一致；`project/free-pipi-shrimp`由`1249099d3836da0ecd489bcdfd34aeb5bbac3c75`快进至`cfdfe54646f3c2f6e67680c8506d9997871be142`，无merge commit，推送后ls-remote核对一致。
+- 分支清理：OPC feature `feature/free-pipi-shrimp/t-015-station01-completion`（`b88abcd`）本地+远端删除并核对不存在；原始提交哈希短期可经本地reflog找回，内容由压缩链完整保留。产品feature此前已按用户指示删除；其他项目／框架分支及archive恢复点未动。
+- 空间维护：产品1.3GB→699MB。删除`.git/opc-review-inputs/T-012`评审临时副本（377MB，非Git数据）；work/已结项过程稿（T-003／005／006／011／012／013／016／017／020，其中未跟踪忽略过程图删除后不可恢复）；deliverables中间版本449个已跟踪文件（保留T-003 v0.4-approved、T-016 v0.5-exhibit-disclosure、T-017 v0.2-exhibits-draft、T-011发布包／回执等最终版，已跟踪删除可从Git历史／远端找回）。清理提交`b708c850e1d38f6e10eb8c4fb91359f9afd205c9`以单行message推送并核对一致。已发布两篇最终素材（T-006 47MB、T-012 170MB）按用户决定完整保留，LFS缓存（约392MB）未清理，`work/T-021-station01-web-publication`在制记录保留。
+- 版本定位与后续：WORKSPACE.revision经`0ae1201`（`f6018c3`）后本轮推进至`b708c85`；上方任务字段中的feature名为登记时点事实，两仓当前均以主分支为工作线。T-021仍in_progress，三篇定时（03＝2026-10-29、04＝11-02、05＝11-05各20:30）不变；后续档期真实审核／公开结果补记直接在产品main与OPC `project/free-pipi-shrimp`提交，不再新建feature（除非用户另行指示）。H-003 accepted、PAUSED监控、A-015 v0.2 draft不变；公开链接／稳定ID／实际公开时间／实际可见范围保持null，未到档期不记发布成功。
+
 ## 记录样式（不是真实任务）
 
 ```text
