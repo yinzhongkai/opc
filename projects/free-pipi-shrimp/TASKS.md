@@ -1994,7 +1994,7 @@ PM实际消息已送达当前reviewer。其最新真实回执说明仍见PM acti
 
 ## T-023：第二站首批 2 篇视觉资源制作
 - 负责人：visual-designer
-- 状态：todo
+- 状态：completed（draft 交付即完成本阶段；不等于 PM 核对通过、reviewer 评审、成果批准或发布）
 - 变更类型：feature
 - OPC开发分支：`feature/free-pipi-shrimp/t-023-station02-first-two-visual-assets`（从T-022合入后的项目主分支头创建）
 - OPC合入前目标提交：以实际合入时项目主分支头为准
@@ -2004,9 +2004,9 @@ PM实际消息已送达当前reviewer。其最新真实回执说明仍见PM acti
 - 输入与依赖：A-016 v0.1；A-002 v0.4；A-004 v0.2；A-007 v0.1；visual-design／ai-character-image-consistency有效技能
 - 优先级：P1（第二站缓冲存量，衔接首站11-05发布完成后的更新节奏）
 - 完成条件与确认方式：视觉资源包登记为成果（A-017 draft），逐图身份锚点／3:4／导出规格／安全区自查留痕，manifest与双仓固定提交齐备；draft交付即完成本阶段，PM核对与reviewer独立评审按首站流程另行安排，不等于成果批准或发布
-- 进展：尚未开始
-- 成果与验证证据：暂无
-- 阻塞与下一位行动人：无阻塞；下一位visual-designer（派发消息由用户转交）。猴图许可不确定时按A-016备选改用原创剪影，不构成阻塞；新短句／新背景须重新实测安全区，不沿用首站旧示例结论
+- 进展：2026-10-29 visual-designer 按 SESSION_PROTOCOL 刷新身份与记录（TEAM.yaml、members/visual-designer.yaml、角色与 scope、有效技能；T-023、D-015、A-016 v0.1 及 A-002 v0.4／A-004 v0.2／A-007 v0.1），确认无人在写仓库后双仓切至 T-023 feature 分支。按 A-016 第 1、2 篇素材卡完成 17 页制作（2 篇各 1 封面＋7 正文图，另第 1 篇"预约未成功、线上预习"备选封面），30 个创意文案槽全部留空 pending-writer-k3；野生动物／预约／事实许可边界按 A-016 §6 执行，猴形象仅原创远景剪影并标"AI 情境图"。导出器逐页规格与安全区自查、保留清单校验提交前后均 passed；双仓固定提交已推送。已登记成果 A-017 v0.1 draft。
+- 成果与验证证据：[A-017](artifacts/A-017-峨眉山首批两篇视觉资源.md) v0.1 draft；产品固定 `feature/t-023-station02-first-two-visual-assets@051203883c11ad37eae45716bf1ff84cf806c667`（单行 message 提交，`b708c85..0512038` 与远端一致）；manifest 68 项 SHA-256 `627f5064617121b524b444b5d9bfc200d636343ee21638b3a252776a1b3d29f6`；`verify_asset_retention.py` 提交前 `--staged` 与提交后复跑均 `result: passed`（73 图片路径／73 唯一 LFS 对象／161634870 字节／43 SVG／41 依赖）；逐图来源与许可登记见产品包内 `reference-register.json`，作者目视自查见 `work/T-023-station02-first-two-visual-assets/batch-20261029/visual-self-check.md`。含保留清单 b708c85 后续同步更正（71 条已删路径移 archived，详见 A-017）。LFS 上传曾遇 git-lfs 客户端 PUT 持续超时，改用标准流程 curl 重放完成 30 个新对象上传后 push 成功，对象内容与引用未受影响。
+- 阻塞与下一位行动人：无阻塞；下一位 project-manager 核对 A-017 固定版本（本回报由用户转交），reviewer 独立评审与 writer 配文（T-024）按首站流程另行安排。已知留评审事项：p1-06 捕捉肢偏细长、p2-cover 剪影刻意淡远，均不阻断。
 - 更新日期：2026-10-29
 
 ## T-024：第二站首批 2 篇文案与整合制作
