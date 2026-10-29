@@ -6,6 +6,7 @@
 |---|---|---|---|---|---|---|---|
 | `A-001` | 首轮 8 篇选题 | 成果物仓库 `git@github.com:yinzhongkai/art-words.git`；`content/round-01/00-topics.md`；`feature/t-001-first-content-cycle` | `writer` | `T-002` | 0.1；未合入，内容摘要见下 | approved | [D-005](../DECISIONS.md) |
 | `A-002` | 首篇文案样稿《免费拥抱，不附赠针灸》 | 成果物仓库 `git@github.com:yinzhongkai/art-words.git`；`content/round-01/01-free-hugs.md`；`feature/t-001-first-content-cycle` | `writer` | `T-002` | 0.1；未合入，内容摘要见下 | approved | [D-006](../DECISIONS.md) |
+| `A-003` | 首篇视觉规范、分镜与完整配图样篇《免费拥抱，不附赠针灸》 | 成果物仓库 `git@github.com:yinzhongkai/art-words.git`；`content/round-01/02-free-hugs-visual/`；`feature/t-001-first-content-cycle` | `visual-designer` | `T-003` | 0.1；未合入，包摘要见下 | in_review | 尚无 |
 
 OPC 治理与协作成果使用当前项目 `artifacts/` 内的正文链接；产品代码和直接业务交付物使用“成果物仓库 + 仓库内路径”，并记录其合入后的最终提交。快进合并后可直接引用通过最终验证的普通功能提交，可移动分支名不能代替精确提交。
 
@@ -14,6 +15,7 @@ OPC 治理与协作成果使用当前项目 `artifacts/` 内的正文链接；�
 - 基线：`daa6eb4a0d79b005533dfd0820c7a9a545e5e4a9`；当前内容位于成果物开发分支，尚未提交 Git 或合入 `main`，合入后的最终提交待补。
 - `A-001` 0.1：提交时 SHA-256 `cd19d2df17d7a741e5d7d98725213a74181f5779694ebb10154b57d348a483b6`；写回批准元信息后的当前 SHA-256 `ddd27ac092be31cb490a299471a12c34131f2fa872f2e7cb2a2381c5d2226546`，选题与故事走向未改，批准依据为 `D-005`。
 - `A-002` 0.1：SHA-256 `85e0a7fe902e3e32cd6171c6620642a4f7ce70be2ed3f5b4545e18750d4ea7dc`。
+- `A-003` 0.1：视觉规范、候选角色与场景设定、1 张封面和 12 张正文图位于 `content/round-01/02-free-hugs-visual/`，另附角色锚点、联系表、生成与派生清单。`checksums.sha256` 覆盖其余 17 个文件，其自身 SHA-256 为 `f90f64c192ff506d92e8e7b9ee078bf2e4f501d8c8073082009659b4dbbfe084`。分镜与规范耗时 7 分 13 秒，配图耗时 28 分钟；建议首篇图片均只使用中文，待建项用户确认。当前为作者自查后的 `in_review`，尚无 `writer`、`reviewer` 评审或用户批准，未发布。
 - 2026-10-28 `A-002` 第 1 轮汇总：`reviewer` 与 `visual-designer` 均在各自约定范围内给出 `pass`，无问题、无阻断项；`writer` 完整读取后确认无需修订，受评文件及摘要未变，未发生变更因而无需复核。现已提交建项用户确认，`T-002` 与 `A-002` 仍为 `in_review`，详见 [T-002](../TASKS.md) 的署名意见与作者处理回复。
 - 2026-10-27 作者自查：8 篇选题完整；首篇正文 646 字符（不含空白、含标点），含 1 张封面和 12 张正文图的分镜文字，图上短句最长 10 字（不含标点）。作者自查不代替专业评审或复核；`A-001` 的用户批准见 `D-005`。
 - 2026-10-29 `A-002` 0.1 已由建项用户通过 [D-006](../DECISIONS.md) 批准，批准版本 SHA-256 仍为 `85e0a7fe902e3e32cd6171c6620642a4f7ce70be2ed3f5b4545e18750d4ea7dc`；本次批准仅覆盖首篇文本及分镜文字，不包括实际配图、英文使用或发布。
