@@ -2059,7 +2059,7 @@ PM实际消息已送达当前reviewer。其最新真实回执说明仍见PM acti
 
 ## T-024：第二站首批 2 篇文案与整合制作
 - 负责人：writer
-- 状态：todo
+- 状态：completed（draft 整合交付完成；不等于用户最终采用、成果批准、运营检查或发布）
 - 变更类型：feature（沿用T-023双仓开发线，不另建分支）
 - OPC开发分支：`feature/free-pipi-shrimp/t-023-station02-first-two-visual-assets`
 - 成果物仓库及开发分支：`git@github.com:yinzhongkai/free-pipi-shrimp.git`，`feature/t-023-station02-first-two-visual-assets`
@@ -2069,9 +2069,29 @@ PM实际消息已送达当前reviewer。其最新真实回执说明仍见PM acti
 - 优先级：P1
 - 完成条件与确认方式：2篇成稿登记A-018 draft并完成逐篇自查即完成本阶段；运营检查、用户批准与发布另行安排
 - 进展：2026-10-30 reviewer第1轮意见收齐（`e5a919d`），整体`pass`、未启用RV-T023-VIS编号；两项留评均获独立接受——p1-06两条捕捉肢细窄单端可辨、无人手人臂化，p2-cover远树剪影100%局部可辨猴形、刻意淡远符合素材卡功能。PM核对reviewer提交仅TASKS追加32行、受评产品`0512038`未变，A-017保持v0.1 draft。现登记writer正式安排（见下节），下一位writer（派发由用户转交）
-- 成果与验证证据：暂无（输入证据见A-017及T-023评审记录）
-- 阻塞与下一位行动人：无阻塞；下一位writer按下方正式安排执行
-- 更新日期：2026-10-30
+- writer来源阶段进展（2026-10-30）：按正式安排准备两篇完整K3提示词，在Kimi官网可见`K3.1 Pro`／`进阶`标签下提交第1篇单份prompt；发送时出现登录层，至复核时仍无生成回答，第2篇未提交。未填写账号或验证码，未以其他模型补称K3。ChatGPT官网输入框虽可见，但没有真实K3原稿可审，故未启动审核。两篇候选文案、30槽映射、manifest及A-018 v0.1 draft均未形成；本任务不满足完成条件。产品记录提交`7c5609fb474967156eb3bcb3477f6bd1812c4e5d`已推送并与跟踪分支一致；仅新增T-024独立目录下两份prompt与一份受阻记录，既有产品及A-017视觉字节未改。
+- writer候选交付进展（2026-10-30）：用户14:23在当前会话明确“当前就是kimi啊”，据此以当前Kimi会话作为项目K3初稿入口，具体模型／模式／后台参数记unknown；两篇完整prompt与未编辑raw已保存。ChatGPT官网实际审核于14:29提交，首次连接中断的部分回答保留，14:32页面重试取得两篇完整审核修订；可见具体模型／模式unknown。作者形成两篇候选、30槽映射、采纳记录与逐篇AC-2／AC-3／AC-6自查，未采纳删除第2篇“动物形态以实物为准”的冲突建议。产品提交`184512485dc5998e0185790d80719fac722830b8`已推送并与跟踪分支一致；A-018 v0.1 draft登记，上午受阻历史保留。ChatGPT建议与作者自查均不代替项目reviewer独立审校。
+- 成果与验证证据：产品`work/T-024-station02-first-two-copy/batch-20261030-k3-draft/`固定于`7c5609fb474967156eb3bcb3477f6bd1812c4e5d`；`article-01-prompt.txt` SHA-256`9e9e699c70f2b6a6e667cd768d0ef1f2b5a33742dbfd2df82a67a6c07c580c04`，`article-02-prompt.txt` SHA-256`bcb6859066e92fbb33840a2b978a993f60bf09b95919f7aec7b45c5d623af1a3`，`k3-access-record.md` SHA-256`385546e626f4906de8139ba0ad9956a9663d8a5359169c1f3dc40ccf5cf7bad8`。这些是输入准备与真实受阻证据，不是K3原始输出、ChatGPT审核或候选成果；输入依据仍见A-017及T-023评审记录。
+- 本阶段成果与验证证据：[A-018](artifacts/A-018-峨眉山前两篇文案候选包.md) v0.1 draft；产品`deliverables/T-024-station02-first-two-copy/v0.1-draft/`及`work/T-024-station02-first-two-copy/batch-20261030-current-kimi-k3-draft/`固定于`184512485dc5998e0185790d80719fac722830b8`。两篇各3标题、正文267／277非空白字符、独立AI说明；30槽16＋14，25有值、5可选空值附理由，18原必填及两个收束槽均有值。manifest 22项SHA-256`1e295ee23a7ef3005caf69e39046c5acb3296590cbdcc1028bbaf7547f0fa045`；`verify-delivery.py`实跑pass，7份关键来源哈希、Markdown／JSON／ChatGPT修订稿一致性、ChatGPT输入完整含K3 raw及视觉只读均通过。A-017相对`051203883c11ad37eae45716bf1ff84cf806c667`无diff，未套版、未重渲染。
+- PM接收进展（2026-10-30）：PM核对writer产品提交`184512485dc5998e0185790d80719fac722830b8`与OPC登记提交`fcd105b92da3bc140fa19f152164f891bc7ae557`，产品相对视觉固定版本为23文件、1807行新增、无删除，A-017视觉范围无diff。PM复算两篇K3 prompt／raw四项SHA-256均与A-018一致，并完整复跑`verify-delivery.py`得到`pass`：两篇各3标题、正文267／277非空白字符、30槽（18必填、12可选；25有值、5空值附理由）、7份关键来源哈希及22项manifest均通过。上午官网受阻与下午用户确认当前Kimi会话的来源链分段保留，未把网页标签或unknown参数补写成已知。现安排A-018第1轮文案与来源独立审校；A-018保持v0.1 draft，PM技术核对不等于独立审校、用户批准或发布。
+- PM第1轮评审接收进展（2026-10-30）：reviewer以OPC`bac471fa27da5b634726ac94ceaf365282e5ba24`提交A-018 v0.1第1轮意见，整体`pass`、问题为空、未启用RV-T024-COPY编号。PM核对该提交仅向TASKS追加12行reviewer本人意见；产品仍为`184512485dc5998e0185790d80719fac722830b8`、23个相对视觉版本的新增文件及A-017只读范围不变，本地与远端一致。现按首站职责顺序登记writer草稿选择与套版输入准备，下一位writer（派发由用户转交）；A-018保持draft，尚不启动实际套版或整篇整合。
+- writer套版输入进展（2026-10-30）：按PM最新安排，从已评v0.1候选中为两篇各选候选1——“慢慢去见山里的邻居”／“远远看见，就很好”；正文、独立AI／虚构说明及逐页配文逐字保留。默认`p1-cover`进入正式图序，`p1-alt`仅保留备用且未选。形成v0.2套版输入、选择记录、`selected_value`映射及清单，正式16页29槽（15＋14），17必填全有值、12可选中7有值／5空值附原理由。产品提交`615190d10a5212b948eb541338a17858e8b2cfab`已单行message提交、推送并以`git ls-remote`核对，工作区干净；A-018推进为v0.2 draft，T-024保持in_progress。
+- v0.2成果与验证证据：产品`deliverables/T-024-station02-first-two-copy/v0.2-layout-input-draft/`、`work/T-024-station02-first-two-copy/batch-20261030-layout-selection/`及`manifests/T-024-station02-first-two-copy/manifest-v0.2-layout-input-draft.json`固定于`615190d10a5212b948eb541338a17858e8b2cfab`。manifest 10个新文件＋23个只读来源，SHA-256`cfd8d6511bc8b2b6b7a351bc36bf397448d7835b12e08753c994c82eaac0454f`；17份SVG固定Git blob哈希及节点一一对应。`verify-layout-input.py`暂存后与提交后均实跑`pass`，正文267／277非空白字符、选择值逐字等于已评候选、备用未选、v0.1来源链与A-017视觉只读均通过；`rendered: false`、`ready_for_typesetting: false`、`user_final_adoption: null`，未回填SVG、排版、导出或整合。
+- PM套版输入接收进展（2026-10-30）：PM核对writer产品`615190d10a5212b948eb541338a17858e8b2cfab`与OPC登记`4fdf9f980cb2c0fcb592282b2d86983f99477acd`，产品相对已评候选为11个纯新增文件，A-017及v0.1来源范围无diff。以不写回固定文件的方式复跑`validate()`与`verify_manifest()`均为`pass`：两篇各选候选1，正文267／277非空白字符及AI说明原句不变，正式16页29槽、17份SVG固定哈希、备用未选均一致；manifest 10个新文件＋23个只读来源，SHA-256`cfd8d6511bc8b2b6b7a351bc36bf397448d7835b12e08753c994c82eaac0454f`。现安排visual-designer实际填词套版与导出（派发由用户转交），A-018 v0.2保持draft，T-024不结项。
+- visual-designer套版进展（2026-10-30）：按SESSION_PROTOCOL刷新并在既有双仓feature执行，未新建分支、未合main。严格按selected-slot-mapping.json将正式16页29槽的`selected_value`逐字套入真实节点，24有值槽标`typeset-a018-v0.2`、5可选空槽保持空白标`blank-optional-a018-v0.2`并附原理由；两份图外note按v0.2原字节随包；`p1-alt`未启用、未导出、未入包。未改字、未新增事实、未重新生成或修改画面，A-017／A-018旧文件未覆盖（源SVG逐页哈希复核一致）。产品提交`8b0c88d72eded3b42f67d3ed47b084532dde1428`单行message已推送并与远端一致（16张新PNG对象中14个经curl重放标准LFS流程上传、2个由中断的推送已传，14背景对象服务端已有）。已登记A-019 v0.1 draft；本阶段交付完成，T-024整体保持in_progress，下一位project-manager核对后安排reviewer完整图文独立审校，再由writer整篇整合。
+- visual-designer校验一致性修正进展（2026-10-30）：按PM退回（OPC`451ecd8dc1e6cfdb88e1906503e2d67fb162a1a1`）核对实际条目集合：55项构成为1 README＋2 note＋16 SVG＋16 PNG＋14背景＋6批次文本，集合本身正确但漏列核验脚本`verify-typeset.py`本身，纠正为56项（对齐writer既往将verify脚本列入manifest的做法）。修正脚本第62行断言54→56，真实复跑两次均143项全pass且`validation-result-typeset.json`字节稳定（SHA-256`3d24c8a3e9d4761cf6db9b8503dc9dde96ae90c86dd861b1012176c75a49a09a`），manifest同步为56＋33项（SHA-256`db5a7bb94270d61fd93f124231d647bf9979b50ac9083d3d32eeac67c4201bbd`）。变更仅限verify-typeset.py、validation-result-typeset.json、manifest三个文本；16 PNG／16 SVG／2 note／14背景及A-017／A-018旧文件字节不变，无新增LFS对象、未重新导出。素材保留`--staged`与提交后无参校验均passed。产品提交`dc8feeae719b4f1bb3bc24e8ea238877f997bd70`单行message已推送并与远端一致；A-019与索引已同步。T-024整体保持in_progress，下一位project-manager复核修正并实际检查16页成品后决定是否安排reviewer。
+- visual-designer固定来源哈希修正进展（2026-10-31）：按PM复核退回（OPC`3445b64f4e70a24b12e8e3707cf8ef92174f178f`）修正manifest首个只读来源`selected-slot-mapping.json`的`sha256_fixed_git_blob`：原登记`0fbd4ec8…`实为工作树CRLF原始字节（20432字节），改为`615190d`实际固定Git blob`b38b03621a65ca751d20d35964c713a2766b6a24aeb98d0beefb25570bf695a6`（19920字节LF），本人已按固定提交独立复算一致。`verify-typeset.py`新增该固定来源blob独立断言（git show固定提交复算哈希与字节数），真实复跑两次均144项全pass且`validation-result-typeset.json`字节稳定（SHA-256`818e373dac7b5d9af63fb129bd69c17fbb0050d04352d3270ce94c8885c8f93b`）；manifest同步（56＋33项，SHA-256`cdb1d32e1ba2c8bd84313d93b03debdb0755a3bffee7e1fcd595fc54e25022aa`）。变更仍仅限verify-typeset.py、validation-result-typeset.json、manifest三个文本；映射正文及其余88项登记、16 PNG／16 SVG／2 note／14背景、A-017／A-018旧文件字节不变，无新增LFS对象、未重新导出；素材保留提交前后校验均passed。产品提交`67ed39349cda7b6d1fae7f27e2cd6e8adcd374a8`单行message已推送并与远端一致；A-019与索引已同步。T-024整体保持in_progress，下一位project-manager复核并实际查看成品后决定是否安排reviewer。
+- visual-designer脚本自身清单条目修正进展（2026-10-31）：按PM退回（OPC`3a296bed0e58dff9f0d4d24e3066a8858d1df302`）处理。独立按固定提交复算确认verify-typeset.py实际固定blob为4972字节、`7336c270cc684b0a13ff1e4943dd13ed6d845759d64de6dbe6ccfc85a3a94d79`（第二轮加断言后未同步其清单条目所致），仅将manifest该条目同步为实际大小／哈希；脚本行为、144项断言与`validation-result-typeset.json`原字节不变，真实复跑两次均144项全pass且字节稳定（`818e373d…f93b`）。按新固定提交`dce20b50cd8f6f8f29cb75722760da2cce9af8d6`独立逐项复算全部56个新文件（文本按blob字节、LFS按指针对象与字节数）＋33个只读来源（按各自固定提交blob／LFS对象），89项全部匹配无差异。manifest本体SHA-256`4c2a1a4282417a8fb16bdc4290bbf06980be26efb43238b1cc7f7425e6103e2e`；素材保留提交前后均passed。变更仅manifest一个文件，成品、映射正文及旧文件不变，无新增LFS对象。产品单行message已推送并与远端一致；A-019与索引已同步。T-024保持in_progress，下一位project-manager全量复核并实际查看16页成品后决定是否安排reviewer。
+- PM套版交付核对进展（2026-10-30）：PM核对A-019 v0.1 draft产品`8b0c88d72eded3b42f67d3ed47b084532dde1428`与OPC`45ea39c3cb7a89b019033f095e7be990471892e6`。素材保留复跑`passed`（103路径／89对象／194651874字节／59 SVG／55依赖）；manifest实际55个新文件＋33个只读来源，Git blob LF SHA-256`ef4d6456a796c79c0cff6386680a2c66bd34cc487e277cb59464e8d7981dd36b`，工作树CRLF归一化一致。但以禁止回写验证结果的方式复跑当前`verify-typeset.py`，143项中1项失败：脚本仍断言manifest 54项，实际为55项；其余142项通过。当前登记“143项pass”不可复现，完整图文评审暂缓，退回visual-designer同步校验链（派发由用户转交）。
+- PM校验一致性修正复核（2026-10-31）：首轮修正产品`dc8feeae719b4f1bb3bc24e8ea238877f997bd70`、OPC`1f63fc35ee02866fd65eac779c42e16f69fcc496`均已推送核对，变更仅限verify脚本、验证结果和manifest三个文本。PM两次实跑均为143项全pass，验证结果原始字节稳定，素材保留复跑passed；独立逐项复算56个新文件＋33个只读来源时，88项匹配，但A-019将selected-slot-mapping的工作树CRLF哈希`0fbd4ec8…`误标为固定Git blob哈希，`615190d`实际固定blob为`b38b0362…`。这是来源哈希口径错误，不是映射正文、画面或配文变化；现再次退回visual-designer做最小元数据与校验覆盖修正，修正前不启动reviewer或整合。
+- PM固定来源哈希修正复核（2026-10-31）：第二轮修正产品`67ed39349cda7b6d1fae7f27e2cd6e8adcd374a8`、OPC`700005249c6178714411d7452fe88f85bbb1614c`均已推送核对。selected-slot-mapping固定blob已纠正，PM两次实跑144项全pass、验证结果原始字节稳定，素材保留passed。独立复算56＋33项时发现唯一剩余不一致：manifest的verify-typeset.py自身条目仍为上一轮4306字节／`8883404a…`，第二轮实际固定blob已为4972字节／`7336c270…`；其余88项匹配。这是脚本修改后清单未同步，不涉及映射正文、画面或配文变化。现退回visual-designer仅同步该陈旧条目及受影响登记，修正前不启动reviewer或整合。
+- PM脚本自身清单修正复核与评审核对（2026-10-31）：第三轮修正产品`dce20b50cd8f6f8f29cb75722760da2cce9af8d6`、设计师OPC`5f71310260373cd545855deac5f9b77f6e363024`均已推送核对，`67ed393..dce20b5`仅manifest变化。PM连续两次实跑均为144项全pass，验证结果运行前及两次运行后的原始字节SHA-256均为`841c67ff8120f57697d4f4e935ed3b593570e582db89235ad642158b9ca6883f`；独立按固定提交复算56个新文件＋33个只读来源全部匹配，manifest本体SHA-256`4c2a1a4282417a8fb16bdc4290bbf06980be26efb43238b1cc7f7425e6103e2e`，素材保留复跑passed（103路径／89对象／194651874字节／59 SVG／55依赖），产品工作树干净。PM已逐张实际查看16张原尺寸PNG及两篇16格270×360拼版，未发现新增文字溢出／互遮、文图冲突或野生动物边界问题；p1-06捕捉肢与p2-cover淡远剪影沿用T-023独立接受结论，不因偏好重开。现安排下方A-019 v0.1与两篇完整图文第2轮独立审校，T-024转in_review；A-019保持draft，本核对不代替reviewer结论、整篇整合、用户批准或发布。
+- PM第2轮完整图文评审接收进展（2026-10-31）：reviewer提交`9ca8f6105575175231da4fe0deda0efd8bab8592`已推送核对，相对PM安排`9694081882bca38a76eb3f353a48174aadd2b6c0`仅TASKS追加37行本人意见；受评产品`dce20b50cd8f6f8f29cb75722760da2cce9af8d6`保持固定且工作树干净。限定整体及两篇均`pass`，问题为空、未启用RV-T024-VIS-001；reviewer实际查看16张原尺寸PNG及16格270×360、完整阅读两份note，独立复算766项0失败，覆盖56＋33项清单、29槽、字体／安全区／导出及事实／AI／虚构和野生动物边界。本轮无需作者返修；现按既定流程安排原writer最终整合（见下节），T-024转in_progress，A-018／A-019仍draft，不据此批准或发布。
+- writer最终整合进展（2026-10-31）：以已评A-019产品`dce20b50cd8f6f8f29cb75722760da2cce9af8d6`为固定输入，完成两篇完整候选稿、图序／来源映射、manifest、整合验证及逐篇AC-2／AC-3／AC-6自查。每篇含已选标题、完整正文、独立AI／虚构说明和既定顺序1封面＋7正文图；公开字句与16张PNG原字节不变，`p1-alt`未启用，套版note内部历史状态未带入读者稿且原note保留。产品提交`9b24721a9a69d7389661973c021882964c2152e1`已单行message提交、推送并经独立`git ls-remote`核对，工作区干净；A-018推进为v0.3 draft，T-024仅按draft整合交付范围登记completed。
+- v0.3成果与验证证据：总入口`deliverables/T-024-station02-first-two-copy/v0.3-integrated-draft/README.md`，工作批次`work/T-024-station02-first-two-copy/batch-20261031-integration/`；manifest`manifests/T-024-station02-first-two-copy/manifest-v0.3-integrated-draft.json`含27个新文件＋54个只读来源，SHA-256`19a80b6c5ae9c569ecc9f723ed8d7fc4a06d7331fbe47e5e784394dc6e736668`。正文267／277非空白字符，16图共33017004字节并复用16个原LFS对象，新增唯一对象0；固定提交后`verify-integration.py --check-only --fixed-new-head HEAD`实跑328项全过，素材保留提交前后均`passed`（119图片路径／89唯一LFS对象／194651874字节／59 SVG／55依赖）。v0.1／v0.2、A-019及全部来源／审校历史无diff。
+- PM最终整合接收进展（2026-10-31）：PM核对writer产品`9b24721a9a69d7389661973c021882964c2152e1`与OPC登记`394c71b8fe0268b2974c242b6ec03676122c63d1`，两仓本地、跟踪及独立远端一致；产品相对已评`dce20b50cd8f6f8f29cb75722760da2cce9af8d6`仅为27个清单新文件、manifest本体及4份必要存储元数据，无旧版或来源改写。PM完整阅读两篇读者note／package、映射、manifest、整合记录与逐篇自查，实跑整合验证328项全过且保存结果可逐字节复现；另按固定Git blob／LFS对象独立复算27个新文件＋54个只读来源，并核对公开字段、图序、图片字节和完整变更范围，372项检查全过。当前无参及`--staged`素材保留均`passed`（119路径／89对象／194651874字节／59 SVG／55依赖）。公开标题、正文及独立AI／虚构说明与已评note逐字一致，仅分离内部制作状态；两篇各8图按序复用16个原LFS对象、新增唯一对象0，`p1-alt`未启用，无未评公开内容或图片修改，无需重开完整图文评审。T-024的draft整合交付completed依据成立，A-018／A-019仍draft，不扩展为运营检查、用户采用、成果批准或发布。
+- 阻塞与下一位行动人：无本任务阻塞；PM已核对接收，T-024维持completed（仅draft整合交付）。下一位用户决定两篇后续运营检查与最终采用安排；未登记新任务或派发，未合main、未改WORKSPACE、未删分支，首站T-021 in_progress、H-003 accepted、PAUSED监控不变。
+- 更新日期：2026-10-31
 
 ### writer文案与来源阶段正式安排（project-manager，2026-10-30）
 
@@ -2081,6 +2101,157 @@ PM实际消息已送达当前reviewer。其最新真实回执说明仍见PM acti
 - 文案边界：皮皮虾第一人称、不代看、五个人设关键词与治愈基调；野生动物事实仅用A-016第6.1节（核查2026-10-28），不新增数量／票价／开放／时刻等时效断言，不诱导投喂／抚摸／近距离打卡，不用“猴精”“必看猴”等表述；示例短句可作槽位意图参考但正式文案须重新创作；读者稿与内部来源／模型记录分离。
 - 不改范围：A-017全部视觉字节、30空槽节点ID与坐标、事实卡与固定文字不变；如配文与画面语义冲突（参照首站p1-03／p2-06先例），如实记录候选问题交PM，不自行改图。
 - 保存与回交：业务文件仅落产品T-024独立目录（work／deliverables／manifests），OPC仅登记A-018与本人记录；先产品提交推送、再OPC登记推送，完成后仅回报PM（由用户转交）。
+
+### PM接收A-018与独立核对（2026-10-30）
+
+- 固定版本与变更范围：产品受评提交`184512485dc5998e0185790d80719fac722830b8`，视觉对照提交`051203883c11ad37eae45716bf1ff84cf806c667`；writer的OPC登记头为`fcd105b92da3bc140fa19f152164f891bc7ae557`。产品相对视觉版本共23个文件、1807行新增、无删除；T-023的deliverables／manifests／work无diff。两仓feature均已推送核对，未合main。
+- PM实核：完整复跑`verify-delivery.py`结果为`pass`，覆盖两篇各3标题、正文267／277非空白字符、30槽结构与理由、7份关键来源哈希、ChatGPT输入包含两篇K3 raw、22项manifest及视觉只读；manifest本体SHA-256为`1e295ee23a7ef3005caf69e39046c5acb3296590cbdcc1028bbaf7547f0fa045`。另行复算两篇K3 prompt／raw四项SHA-256，与A-018第2节逐项一致。
+- 来源链判断：上午Kimi官网登录层阻断、第1篇无回答且第2篇未提交的记录保持原样；下午依用户“当前就是kimi啊”以当前Kimi Work会话生成两篇初稿，模型版本／模式／后台参数均保留unknown。ChatGPT首次中断部分输出与重试完整输出分别保存，作者采纳与拒绝建议有记录。该核对只确认证据链及声明一致，不替来源平台补造不可见信息。
+- 接收边界：A-018仍为v0.1 draft；当前只有候选文案、映射、来源与作者自查，未套版、未整篇整合、未运营检查、未获用户采用或发布批准。PM核对不代替reviewer独立判断。
+
+### 本轮评审：A-018 v0.1 文案与来源独立审校（第 1 轮）
+
+- 受评正文：[A-018](artifacts/A-018-峨眉山前两篇文案候选包.md)；产品`deliverables/T-024-station02-first-two-copy/v0.1-draft/`与`work/T-024-station02-first-two-copy/batch-20261030-current-kimi-k3-draft/`，并对照A-016第1、2篇及第6.1节、A-017实际视觉与映射。
+- 固定版本：产品`184512485dc5998e0185790d80719fac722830b8`；视觉`051203883c11ad37eae45716bf1ff84cf806c667`；OPC以本评审安排提交为固定版本，reviewer初始化时记录实际HEAD。受评产品只读，后续治理追加不改变上述产品固定版本。
+- 安排来源与日期：project-manager依据T-024授权及writer交付，于2026-10-30安排；由原reviewer独立审校，派发由用户转交。
+- 审校范围与完成条件：实际阅读两篇标题／正文／独立AI与虚构说明、逐页配文与30槽映射、K3及ChatGPT原始来源、作者修订记录和逐篇AC-2／AC-3／AC-6自查；独立核对第一人称与五个人设、不代看及治愈基调、事实与野生动物边界、文图语义一致性、候选完整性和来源声明是否如实。提交明确`pass`／`revise`／`blocked`结论、证据、未覆盖项与问题清单，不以作者或ChatGPT结论代替本人意见。
+- 重点文图核对：p1-03收好零食与画面一致；p1-05只写官方渠道核对预约、不暗示预约成功；p1-alt仅作预约未成功的线上预习备用封面；p2-04固定事实卡不重复或补入未核验事实；p2-06空白本子不伪造观察文字。野生动物事实仅限A-016第6.1节已核验内容，不新增数量／票价／开放／时刻等时效断言，不出现投喂、抚摸、近距离自拍或必遇猴引导。
+- 写入与串行边界：问题从`RV-T024-COPY-001`起连续编号；reviewer只读产品，不改视觉或候选文案，只在OPC本feature追加本人意见并提交、单行message、推送核对。审校期间不启动套版、整篇整合、运营或发布；完成后回报project-manager，由PM收齐意见后再统一安排必要修订。
+- 本轮进度与下一位行动人：reviewer已提交`pass`、无问题；PM已核对接收并安排writer进行草稿选择与套版输入准备，下一位writer。
+
+#### reviewer 的意见
+
+- 日期、评审依据与固定版本：2026-10-30；依据本轮PM安排，初始化时OPC HEAD为`91ffaefa03d331690dc60dcd11f201696d153530`，受评产品固定为`184512485dc5998e0185790d80719fac722830b8`，视觉固定为`051203883c11ad37eae45716bf1ff84cf806c667`。产品全程只读；实读A-018、A-016第1／2篇及第6.1节、相关需求与文字槽位规范、两篇标题／正文／独立AI与虚构说明、逐页配文及30槽映射、K3与ChatGPT原始来源、作者修订记录和逐篇AC-2／AC-3／AC-6自查，并结合本人对同一视觉固定版已完成的17张成品及缩略效果逐图评审核对文图语义。
+- 文案与文图核对：两篇均为皮皮虾第一人称虚构旅行，不代看、不写成用户亲历；慢吞吞、知足、容易感动、偶尔笨拙、说话简短及治愈基调成立，两篇独立AI／虚构说明完整。`p1-03`收好零食、`p1-05`不暗示预约成功、`p1-alt`仅限预约未成功的线上预习、`p2-04`只补角色感受、`p2-06`保持空白本子，均与固定视觉及边界一致。未新增野生动物、数量、票价、开放或时刻等事实，也无投喂、抚摸、近距离自拍／打卡或必遇猴引导。
+- 来源链与作者处理：上午Kimi官网登录层受阻历史原样保留；下午依用户明确说明使用当前Kimi会话，具体模型／模式／后台参数均保留`unknown`，未把上午网页标签移植为本批已知参数。ChatGPT首次部分输出与重试完整输出分别保存，审核输入完整包含两篇K3 raw；作者采纳两篇完整修订，并有依据地保留第2篇“动物形态以实物为准”说明。逐篇AC-2／AC-3／AC-6自查未把未套版候选扩张为最终验收或实际互动保证。
+- 独立复算与覆盖证据：本人复算通过，产品HEAD及 tracked工作树保持固定、干净；相对视觉固定版为23个纯新增文件，T-023视觉范围及上午历史批次均无diff。manifest本体SHA-256为`1e295ee23a7ef3005caf69e39046c5acb3296590cbdcc1028bbaf7547f0fa045`，22项文件大小与SHA-256逐项匹配，7份关键来源哈希通过；两篇各3标题、正文267／277非空白字符，30槽为16＋14、18必填、12可选、25有值、5个可选空值附理由，Markdown／JSON／ChatGPT完整修订稿对应一致。以只读方式复跑作者`validate()`亦为`pass`。其中`validation-result.json`工作树为CRLF、Git blob为LF，LF归一化后内容一致，且实际文件字节与manifest吻合，不构成本轮文案问题。
+- 未覆盖项：本轮不覆盖套版、填词后的最终排版与安全区实测、整篇整合、AC-1／AC-4／AC-5、手机端与平台压缩、运营检查、用户最终采用及发布；本结论不等于上述环节验收或批准。
+- 问题：无。未发现需要登记`RV-T024-COPY-001`起编号的问题，故未启用RV编号。
+- 结论：`pass`。A-018保持v0.1 draft，由project-manager接收并统一安排后续；不因本轮通过而启动套版、整篇整合或发布。
+- 作者处理回复：不适用，本轮无问题。
+- 复核：不适用，本轮无问题。
+
+### PM接收第1轮意见与writer套版输入准备安排（2026-10-30）
+
+- 接收结论与固定输入：reviewer提交`bac471fa27da5b634726ac94ceaf365282e5ba24`，仅向TASKS追加本人意见12行；结论`pass`、无返修或证据性阻塞，未启用RV-T024-COPY编号。产品受评版`184512485dc5998e0185790d80719fac722830b8`、视觉版`051203883c11ad37eae45716bf1ff84cf806c667`均保持不变；文案pass不覆盖实际套版、整篇整合、运营、用户采用或发布。
+- 执行成员与串行：沿用T-024授权及首站“作者选择输入→设计师套版→完整图文评审→作者整合”职责顺序，本阶段仅由原writer在既有双仓feature执行。writer先按SESSION_PROTOCOL刷新并核对无人在写；不新建分支、不合main、不改WORKSPACE，不同时启动visual-designer、reviewer或运营。
+- 草稿选择：从A-018 v0.1已评候选中为两篇各选1条图外笔记标题，记录候选序号、原句、理由和日期；正文与独立AI／虚构说明保持已评原文。本轮默认以`p1-cover`进入第1篇正式图序，`p1-alt`继续仅作预约未成功的线上预习备用封面，不加入两篇各1封面＋7正文图；没有真实预约未成功依据不得启用备用情境。30槽原候选及来源链保留，`user_final_adoption`仍为null。
+- 套版输入包：在产品T-024新版本／新批次保存选择记录、两篇已选图外文案、逐页真实SVG／节点／来源哈希及`selected_value`映射和清单，建议使用`deliverables/T-024-station02-first-two-copy/v0.2-layout-input-draft/`、`work/T-024-station02-first-two-copy/batch-20261030-layout-selection/`及`manifests/T-024-station02-first-two-copy/manifest-v0.2-layout-input-draft.json`。正式两篇16页对应29个创意槽（第1篇15＋第2篇14），备用封面1槽单独标未选；本阶段只准备输入，不回填A-017、不排版、不导出、不整合。
+- 不变范围与异常：所有已选标题、正文、AI说明和逐页字句必须逐字来自固定已评候选；可选空值及理由原样保留，不新增事实、标签、叙事或图像，不覆盖K3／ChatGPT原始来源及A-018 v0.1。若发现必须改字、改图或改变图序的问题，记录精确位置与影响交回PM，不把未评修改混入输入包。
+- 自查与治理：核对两篇各1标题、完整正文及独立AI说明，正式29槽中17必填全有值、12可选中7有值／5空值附理由，节点ID与视觉固定版一一对应；选择值逐字等于已评候选，读者稿不含内部模型／评审信息。writer可将A-018推进为v0.2 draft套版输入版并维护本人索引及TASKS实际记录，明确`rendered: false`、未获用户最终采用；不将T-024标completed。
+- 保存与回交：先以单行message提交并推送产品feature、核对固定版本和清单，再登记并提交推送OPC feature；全部写入结束后仅回报project-manager。PM核对后再安排visual-designer实际字体／换行／安全区／缩略图／导出，当前不启动这些工作。
+
+### PM套版输入接收与visual-designer制作安排（2026-10-30）
+
+- 固定输入与接收依据：A-018 v0.2 draft，产品`615190d10a5212b948eb541338a17858e8b2cfab`，writer OPC`4fdf9f980cb2c0fcb592282b2d86983f99477acd`；已评候选`184512485dc5998e0185790d80719fac722830b8`与reviewer`bac471fa27da5b634726ac94ceaf365282e5ba24`保持，视觉固定`051203883c11ad37eae45716bf1ff84cf806c667`。输入包中`ready_for_typesetting: false`／`pm_layout_input_review_required: true`是作者交回时状态；本次PM只读核对通过并正式派发即允许本阶段制作，不回写旧输入字节。
+- 执行成员与串行：本阶段仅原visual-designer在既有双仓feature执行专业协作，writer仍为T-024整体负责人。先按SESSION_PROTOCOL刷新身份、有效技能与完整安排，确认无人在写；不新建分支、不合main、不改WORKSPACE，不同时启动writer、reviewer或运营。
+- 制作范围：严格按`selected-slot-mapping.json`将正式16页29槽的`selected_value`套入对应真实`node_id`，保持已选字句／标点、固定值、图序及5个可选空值与理由；两份图外note按v0.2原字节随包交付，独立AI／虚构说明不得遗漏。`p1-alt`不启用、不导出、不计入正式图序。不得改字、新增事实或标签，不重新生成／改图，不改角色、背景、猴剪影、构图、事实卡或其他非文字视觉；冲突记录精确位置交回PM。
+- 产物与依赖：全部工程、成品、脚本与文字证据只落产品T-024新版本／新批次，建议使用`deliverables/T-024-station02-first-two-copy/v0.1-typeset-draft/`、`work/T-024-station02-first-two-copy/batch-20261030-typeset/`及`manifests/T-024-station02-first-two-copy/manifest-v0.1-typeset-draft.json`。提供正式16份可编辑SVG及16张1080×1440 RGB/sRGB PNG、源到成品映射、相对依赖与清单；沿用既有受控导出方法并先核对输出目标，A-017／A-018旧文件不得覆盖，背景依赖须可解析且按原字节登记。
+- 存储边界：按当前`ASSET_STORAGE.md`仅将16张成品PNG及继续编辑必需的图像依赖加入精确路径LFS与保留清单，同步`.gitattributes`／`.gitignore`及必要说明；SVG和过程文字普通Git，QA位图、缩略图、拼版、过程预览及本地运行目录不入库。提交前后分别运行`python tools/verify_asset_retention.py --staged`与无参数校验并保存真实结果。
+- 专业自查：逐页实测实际中文字体／缺字或回退、字号／层级／换行、溢出／互遮、安全区及导出规格；实际打开16张原尺寸PNG，并检查16格270×360缩略或完整拼版的主句与整体观感。重点核对p1-03收零食、p1-05预约边界、p2-cover远猴剪影与标题分区、p2-04固定事实卡新增角色感受不遮来源、p2-06空白本子不伪造观察、p2-07收束句与固定落款；其余页面同样覆盖。QA文字报告、字体／导出记录及局限入库，过程位图只留本地。
+- 治理与完成条件：可新增A-019“峨眉山前两篇文字套版视觉包”v0.1 draft（写前再核编号唯一），维护本人索引行及TASKS实际接收／制作／自查／交回记录；不改A-018、他人意见或整体任务完成状态。16页文字正确、工程／依赖与PNG可读、逐页原尺寸／缩略自查留证、清单与保留校验通过才构成本专业阶段交付，不等于独立pass、整篇验收、用户批准或T-024 completed。
+- 保存与回交：先以单行message提交并推送产品feature，核对固定版本、清单及LFS对象，再登记并提交推送OPC feature；全部写入结束后仅回报project-manager。PM核对后再安排原reviewer进行完整图文独立审校，之后才由writer整篇整合；当前不启动这些后续工作，不合主线、不删分支、不发布。
+
+### PM套版交付核对与校验一致性退回（2026-10-30）
+
+- 固定交付与已核范围：A-019 v0.1 draft，产品`8b0c88d72eded3b42f67d3ed47b084532dde1428`、OPC`45ea39c3cb7a89b019033f095e7be990471892e6`，两仓本地与跟踪分支一致。当前manifest为55个新文件＋33个只读来源，Git blob LF SHA-256`ef4d6456a796c79c0cff6386680a2c66bd34cc487e277cb59464e8d7981dd36b`；工作树CRLF归一化后与Git blob一致，不是本次失败原因。素材保留复跑`passed`（103图片路径／89唯一对象／194651874字节／59当前SVG／55依赖）。
+- 实际不一致：`verify-typeset.py`第62行仍断言`len(manifest["files"]) == 54`，但当前固定manifest为55项，A-019及索引也登记55项。PM以防止回写`validation-result-typeset.json`的方式执行当前脚本，实际输出`overall: fail`、`checks: 143`、`failed: 1`，唯一失败为`manifest file count: 55`，其余142项通过。因此现有验证结果与A-019／索引的“143项pass”不能由当前固定版本复现；本记录不把它扩张为已证实的画面或配文缺陷，也不忽略校验失败。
+- 退回修正：仅由原visual-designer核对并同步实际条目集合、脚本计数断言、验证结果、manifest及受影响的A-019／索引／TASKS记录。若55项集合正确，应以实际集合修正脚本并重新跑至全部通过，再同步因验证结果变化而受影响的哈希；若集合不应为55项，须说明并纠正来源。不得只把结果文件或登记文字改为pass来掩盖不一致。
+- 不变范围：本退回针对校验可复现性，不要求重新生成或导出画面。16张PNG、16份SVG、2份note、14张背景及A-017／A-018旧文件保持字节不变，不新增文案、事实、图像或LFS对象；若发现其他必须改动的问题，停止并如实交回PM，不夹带未核修改。
+- 修正完成条件：新产品固定版本中`verify-typeset.py`实跑143项全pass，重复执行后验证结果与manifest条目／哈希保持稳定，manifest计数与A-019／索引一致；素材保留`--staged`及提交后无参校验均passed，变更范围仅限本次一致性修正及必要登记。PM之后仍须实际检查16页成品，再决定是否安排reviewer。
+- 保存与回交：先以单行message提交并推送产品feature，再登记并提交推送OPC feature，完成后仅回报project-manager。修正及PM复核前不启动reviewer、整篇整合、运营或发布，T-024整体不结项。
+
+### PM首轮修正复核与固定来源哈希退回（2026-10-31）
+
+- 固定输入与首轮修正结论：产品`dc8feeae719b4f1bb3bc24e8ea238877f997bd70`、OPC`1f63fc35ee02866fd65eac779c42e16f69fcc496`，两仓feature本地／跟踪一致，产品main与WORKSPACE基线仍为`b708c850e1d38f6e10eb8c4fb91359f9afd205c9`。`8b0c88d..dc8feea`仅修改verify-typeset.py、validation-result-typeset.json与manifest三个文本；首轮54／55计数及漏列脚本问题已按实际56项解决。
+- 已通过技术核对：PM连续两次实跑`verify-typeset.py`均为143项全pass，验证结果运行前／两次运行后的原始字节SHA-256均为`42205b655431f3e9794b13a3bf134cb600c0011075c04ad4f720030571033d62`，固定Git blob哈希为`3d24c8a3e9d4761cf6db9b8503dc9dde96ae90c86dd861b1012176c75a49a09a`。manifest本体固定blob为`db5a7bb94270d61fd93f124231d647bf9979b50ac9083d3d32eeac67c4201bbd`；素材保留复跑passed（103图片路径／89唯一LFS对象／194651874字节／59当前SVG／55依赖），产品工作树干净。
+- 新发现的单项不一致：PM独立按固定提交逐项复算56个新文件及33个只读来源，其余88项匹配，但manifest首个只读来源`deliverables/T-024-station02-first-two-copy/v0.2-layout-input-draft/selected-slot-mapping.json`的`sha256_fixed_git_blob`登记为`0fbd4ec8a6642cf26b6bbfc1a0ccd52fe3e971aca28cd9a8368784c1d9fd99d3`，而`615190d10a5212b948eb541338a17858e8b2cfab`的实际固定Git blob SHA-256为`b38b03621a65ca751d20d35964c713a2766b6a24aeb98d0beefb25570bf695a6`。前者是当前工作树CRLF原始字节哈希，不能标作固定Git blob；固定blob为19920字节，工作树为20432字节。映射正文及各selected_value未发现变化，本项是哈希口径与追溯登记错误，不是画面或配文缺陷。
+- 退回修正范围：仅由原visual-designer把A-019 manifest该项改为实际固定Git blob哈希，并在`verify-typeset.py`增加该固定来源blob的独立断言或等效只读来源校验，真实复跑后同步验证结果、manifest及A-019／索引／TASKS的实际检查数与哈希。不得只改清单数值而保留校验盲点，也不得以工作树换行字节冒充固定提交字节。
+- 不变范围：A-018 v0.2的selected-slot-mapping正文及其旧manifest不改；16 PNG、16 SVG、2 note、14背景、A-017／A-018旧文件与全部非文字视觉保持字节不变，不重新导出、不新增LFS对象。首轮已通过的56项集合与素材保留范围不因本次元数据修正扩大。
+- 完成与后续：修正后重复实跑须全部通过且验证结果稳定，56＋33项独立固定字节复核无差异，素材保留提交前／后均passed。PM之后实际查看16张原尺寸成品及16格270×360效果，再决定是否安排reviewer；本次仍不启动reviewer、writer整合、运营或发布，不合main、不改WORKSPACE、不结项。
+- 保存与回交：先以单行message提交并推送产品feature，再登记并提交推送OPC feature，完成后仅回报project-manager（派发由用户转交）。
+
+### PM固定来源哈希修正复核与脚本自身清单陈旧项退回（2026-10-31）
+
+- 固定输入与已解决项：产品`67ed39349cda7b6d1fae7f27e2cd6e8adcd374a8`、OPC`700005249c6178714411d7452fe88f85bbb1614c`，两仓feature本地／跟踪一致，产品main／WORKSPACE基线不变。第二轮仅修改verify-typeset.py、validation-result-typeset.json与manifest；selected-slot-mapping已登记为`615190d`实际固定blob `b38b03621a65ca751d20d35964c713a2766b6a24aeb98d0beefb25570bf695a6`，新增独立断言生效。
+- 已通过部分：PM两次实跑均为144项全pass，验证结果运行前／两次运行后的原始字节SHA-256均为`841c67ff8120f57697d4f4e935ed3b593570e582db89235ad642158b9ca6883f`；素材保留复跑passed（103图片路径／89唯一LFS对象／194651874字节／59当前SVG／55依赖），产品工作树干净。当前manifest本体固定blob为`cdb1d32e1ba2c8bd84313d93b03debdb0755a3bffee7e1fcd595fc54e25022aa`。
+- 唯一剩余不一致：PM按固定提交逐项复算56个新文件及33个只读来源，其余88项匹配，但manifest的`work/T-024-station02-first-two-copy/batch-20261030-typeset/verify-typeset.py`条目仍为上一轮4306字节、SHA-256`8883404a0eb82a06f70ee6105545c0b9774f0cf42d2987a5b0d8900c20e8e7b4`；第二轮实际固定Git blob已为4972字节、SHA-256`7336c270cc684b0a13ff1e4943dd13ed6d845759d64de6dbe6ccfc85a3a94d79`。脚本修改后其自身清单未同步，现有144项脚本不覆盖这一项。
+- 最小修正要求：仅由原visual-designer将manifest的脚本自身条目同步为上述实际固定blob大小／哈希，并更新manifest本体及A-019／索引／TASKS受影响登记。本轮无需再改verify-typeset.py行为；现有144项断言及validation-result-typeset.json保持原字节，真实复跑两次确认稳定即可。
+- 全量交回条件：不得只运行现有144项脚本就声明清单完整；交回前须独立按固定提交逐项复算全部56个新文件与33个只读来源的大小／哈希，确认无差异。16 PNG、16 SVG、2 note、14背景、映射正文、A-017／A-018旧文件及全部非文字视觉不变，不重新导出、不新增LFS对象；素材保留提交前后均passed。
+- 后续与保存：PM收到后再次独立复算全部89项，并实际查看16张原尺寸成品及16格270×360效果，通过后才安排reviewer。先以单行message提交并推送产品feature，再登记并提交推送OPC feature，完成后仅回报project-manager（派发由用户转交）；当前不启动reviewer、writer整合、运营或发布，不合main、不改WORKSPACE、不结项。
+
+### 本轮评审：A-019 v0.1 与两篇完整图文（第 2 轮）
+
+- 安排来源与日期：2026-10-31 用户告知visual-designer任务完成；project-manager完成最新清单修正的全量技术复核及16页实际目视后，沿用T-024既有授权和首站“设计师套版→完整图文独立审校→作者整合”流程安排本轮，仅原reviewer一人执行，派发由用户转交。
+- 固定受评版本：[A-019](artifacts/A-019-峨眉山前两篇文字套版视觉包.md) v0.1 draft及设计师交付记录，OPC`5f71310260373cd545855deac5f9b77f6e363024`；产品`feature/t-023-station02-first-two-visual-assets@dce20b50cd8f6f8f29cb75722760da2cce9af8d6`。正式包`deliverables/T-024-station02-first-two-copy/v0.1-typeset-draft/`，证据`work/T-024-station02-first-two-copy/batch-20261030-typeset/`，清单`manifests/T-024-station02-first-two-copy/manifest-v0.1-typeset-draft.json`，本体SHA-256`4c2a1a4282417a8fb16bdc4290bbf06980be26efb43238b1cc7f7425e6103e2e`。PM安排提交以本次新提交为准；评审期间上述受评产品保持不变。
+- 比较及依据：A-018 v0.2套版输入固定于产品`615190d10a5212b948eb541338a17858e8b2cfab`，已评v0.1候选为`184512485dc5998e0185790d80719fac722830b8`，文案reviewer为`bac471fa27da5b634726ac94ceaf365282e5ba24`；A-017视觉固定于`051203883c11ad37eae45716bf1ff84cf806c667`。A-016第1／2篇及第6节、A-001、A-002 C、A-004、A-007与既有评审结论继续适用；原文案及视觉pass不自动覆盖本次选择与套版组合。
+- 实际图文覆盖：reviewer须逐张实际查看全部16张原尺寸PNG，并以两篇完整拼版或等效方式逐格查看16格270×360效果；完整阅读两份note的标题、正文及独立AI／虚构说明，检查两篇图序、叙事衔接、第一人称、人设／治愈基调、文图语义和逐篇AC-2／AC-3／AC-6本两篇范围。`p1-alt`未启用，不计第九图或第三篇；不以作者或PM目视代替本人观察。
+- 排版、工程与来源：核对正式16页29槽（24有值、5可选空值附理由）与selected_value／真实node_id逐字对应，检查实际中文字体／缺字／回退、层级／换行、溢出／互遮、安全区、1080×1440 RGB/sRGB导出、SVG相对依赖及固定事实／来源小字；独立核对manifest 56个新文件＋33个只读来源和必要的校验证据。`verify-typeset.py`会回写验证结果，不得在原固定包直接运行；需要复算时使用只读方式或隔离临时输出，QA位图不入库。
+- 重点与边界：专项核对p1-03收好零食、p1-05不暗示预约成功、p2-cover远猴与标题分区、p2-04角色感受不遮固定事实／来源、p2-06空白本子、p2-07收束与落款，其余页面同样覆盖；检查固定事实、AI／虚构说明、图像许可和野生动物安全边界，不新增时效事实或投喂／抚摸／自拍引导。p1-06捕捉肢偏细长及p2-cover剪影淡远已由T-023独立评审接受，不因个人偏好重开；若发现新遮挡、文图冲突或其他实质问题，按新证据登记。
+- 参与成员、记录与完成条件：仅原reviewer，记录实际身份、工具／模型可见性、固定版本、完整读取／目视／复算范围、逐篇及限定整体结论、未覆盖项与下一位；结论为pass／revise／blocked，全部本人意见提交即本轮完成，不预设pass。新问题从`RV-T024-VIS-001`起唯一编号，注明级别、精确位置／证据、影响、建议、原稿责任人及复核条件；视觉／版式归visual-designer，文案归writer。
+- 写入、保存与串行：reviewer只读产品及受评正文，仅在OPC本TASKS追加本人意见，以单行message提交并推送原OPC feature后核对；完成后仅向project-manager回报（由用户转交），不直接唤醒作者或设计师。本人意见收齐前原作者不修改受评内容，PM之后再统一安排修订／复核或writer整合。
+- 本轮进度与下一位行动人：唯一评审者已提交全部意见，限定整体及两篇均`pass`，问题为空、未启用RV-T024-VIS-001；PM已核对接收并安排原writer最终整合，下一位writer（派发由用户转交）。A-019保持draft，T-024转in_progress；完整图文审校不等于writer已整合、任务结项、成果批准、运营检查或发布，首站T-021、H-003与PAUSED监控不变。
+
+#### reviewer 的意见
+
+- 日期、身份与工具可见性：2026-10-31；本人为`free-pipi-shrimp/reviewer`，当前执行环境可见身份为Kimi，具体模型版本与后台参数不可见。本人独立使用本地原图／拼版目视、文本读取及Python／Git只读复算，无其他成员代审；产品全程只读，未在原固定包运行会回写结果的`verify-typeset.py`，未重新渲染或生成图像。
+- 固定版本与读取范围：OPC安排提交`9694081882bca38a76eb3f353a48174aadd2b6c0`，受评产品`dce20b50cd8f6f8f29cb75722760da2cce9af8d6`，A-018 v0.2输入`615190d10a5212b948eb541338a17858e8b2cfab`，A-017视觉`051203883c11ad37eae45716bf1ff84cf806c667`。实读A-019、A-018、A-016、A-017及A-001／A-002 C／A-004／A-007相关规范，两份完整note、29槽选择映射、逐页套版记录、导出／验证／作者自查、manifest与第三方图像许可登记。
+- 实际目视覆盖：逐张查看全部16张1080×1440原尺寸PNG，并逐格查看两篇各8格、合计16格的270×360拼版；独立脚本另确认16张单页缩略均为270×360，拼版每格与对应缩略RGB像素一致。缩略检查用于封面标题、普通页主句、图序、留白和整体层级；预约说明、事实卡角色感受、固定来源／日期及AI小字均以原尺寸核对，不声称在270格中全部可细读。
+- 逐页文图与版式证据（每页均覆盖原尺寸及对应缩略格）：
+
+| 页 | 本人目视结论 |
+|---|---|
+| p1-cover | “慢慢去见邻居”、第2站与峨眉山分区明确，未压角色眼柄／帽檐；AI标在位。 |
+| p1-01 | 愿望主句与“峨眉山·看猴子”便签一致；可选辅助槽留空自然。 |
+| p1-02 | 车窗移动画面与出发叙事一致，未补具体车次／时刻；辅助空槽正常。 |
+| p1-03 | 零食收好、整理入包与两句配文一致，未见外挂塑料袋或投喂引导。 |
+| p1-04 | 山脚停顿、屋檐树影与安静／感动句相符，主辅句无互遮。 |
+| p1-05 | 主句与预约说明分居手机示意上下；仅提示官方渠道核对，保留“流程示意，非真实票据”，不暗示预约成功。 |
+| p1-06 | 扶正帽子动作与主句一致；捕捉肢仍属T-023已接受的细窄形态，本轮无新增文字遮挡或实质冲突。 |
+| p1-07 | 入林收束、知足句与“—— 皮皮虾，于峨眉山”齐全，人物与文字无冲突。 |
+| p2-cover | 标题与远猴分区明确；原尺寸可辨淡远树上剪影，270格仍不宣称猴形清晰，沿用T-023接受结论，无新增遮挡。 |
+| p2-01 | 沿溪入林与主句一致，画面未提前编造遇猴；辅助空槽正常。 |
+| p2-02 | 深峡谷、放轻脚步与角色尺度相符，无文字溢出或互遮。 |
+| p2-03 | 远处树枝猴影与“不靠近”一致，无互动；动物形态说明在位。 |
+| p2-04 | 藏酋猴保护级别及原生野生种群／出没不定两项事实、来源和2026-10-28核查行保持；新增角色感受不遮事实或来源。 |
+| p2-05 | 角色留在原地、远猴在树上，守住距离的文图一致，无接触／自拍引导；动物形态说明在位。 |
+| p2-06 | 本子保持空白，铅笔仅作道具，未伪造观察文字；两句配文与整理心情一致。 |
+| p2-07 | 轻轻离开、远观满足与固定落款收束完整，无新增事实或不当互动。 |
+
+- note与逐篇AC判断：两篇标题、正文及独立AI／虚构说明均完整阅读，并与v0.2固定输入逐字节一致；note第3行保留输入阶段“未排版、未导出”的内部历史状态，按安排原字节随包，不把它误作已整合读者稿状态。第1篇从愿望、准备到山脚停顿与稳帽，慢吞吞、知足、容易感动、偶尔笨拙和简短第一人称成立；8图、站点／目的地与落款符合AC-3，给想旅行而暂未成行者以轻柔代偿及谨慎预约提示，AC-2／AC-6在本篇范围`pass`。第2篇以入林、远观、不靠近和空白本子收束，五个人设、第一人称与治愈基调一致；8图及固定结构符合AC-3，以尊重距离和安静观察提供情绪共鸣与追更线索，AC-2／AC-6在本篇范围`pass`。这些是本两篇候选稿判断，不是实际点赞／收藏／关注保证。
+- 独立工程复算：本人临时脚本实算`pass`，共766项、0失败；按固定Git blob及工作树CRLF归一化口径核对文本，按固定LFS指针oid／size与实际对象核对图片，覆盖manifest 56个新文件＋33个只读来源、16页29槽（17必填、12可选；24有值、5个可选空值附理由）、2份note及14张背景。manifest本体SHA-256为`4c2a1a4282417a8fb16bdc4290bbf06980be26efb43238b1cc7f7425e6103e2e`；24个有值槽的真实node_id、SVG源码与渲染DOM记录逐字匹配，备用封面未入正式包。过程证据仅在`temp/t024-vis-review/`，不纳入正式提交。
+- 字体、导出与安全区：16张实际PNG均为1080×1440、RGB并含480字节ICC，实际SHA-256与manifest／导出报告一致，同页重复截图哈希一致；导出记录的实际平台字体均为Noto Sans SC／Noto Serif SC，本机字体文件哈希独立复算一致，结合原尺寸目视未见缺字、异常回退或裁切。按导出报告逐节点bbox独立复算，均在相应安全区内，非空文字bbox两两无交叠；未据此扩张为其他设备、字体环境或平台压缩保证。
+- 事实、AI／虚构与许可边界：事实卡仅使用A-016第6.1节已核内容，未新增数量、票价、开放或时刻断言；两篇均明确虚构数字角色、非用户亲历及AI辅助，猴页保留“动物形态以实物为准”。许可登记`third_party_images`为空，本轮未见新闻／网页／网友／官方照片或品牌、第三方IP进入成品；猴为原创远景剪影，无投喂、抚摸、搂抱、骑乘、近距离自拍或宠物化引导。本项是固定包及所读来源链核对，不作版权裁定或平台发布验收。
+- 未覆盖项：不覆盖writer整篇整合、任意3篇AC-1、连续更新AC-4、实际账号／通道AC-5、手机端与平台压缩上传、平台AI设置、运营检查、用户最终采用及发布；不重新访问或补造K3／ChatGPT不可见后台参数，不启用备用封面，不评价未授权的其他篇次。
+- 问题：无。本轮未发现需登记的新问题，未启用`RV-T024-VIS-001`。
+- 结论：`pass`。仅限于上述固定A-019 v0.1及两篇完整图文候选的实际套版、文图与证据范围；A-019保持draft，T-024不因此自动结项、批准或发布。
+- 作者处理回复：不适用，本轮无问题。
+- 复核：不适用，本轮无问题。
+- 下一位行动人：`project-manager`核对接收本轮意见，再统一决定writer整篇整合或其他后续安排；本人不派下一位作者、不合main、不改WORKSPACE、不启动运营或发布。
+
+### 完整图文第2轮接收与writer最终整合安排（project-manager，2026-10-31）
+
+- 接收与授权：用户告知reviewer任务完成后，PM核对`9ca8f6105575175231da4fe0deda0efd8bab8592`已正常推送，且相对安排提交仅追加本人评审意见。限定整体及两篇均`pass`、问题为空、无返修或证据性阻塞；沿用T-024既有授权和“文案→套版→完整图文评审→作者整合”流程，现仅安排原writer执行最终整合，不新建会话或分支。
+- 执行成员与固定输入：writer先按SESSION_PROTOCOL刷新身份、有效技能及完整安排，确认无人在写后沿用双仓T-023 feature。受评产品固定`dce20b50cd8f6f8f29cb75722760da2cce9af8d6`；A-018 v0.2输入`615190d10a5212b948eb541338a17858e8b2cfab`，A-019设计师OPC`5f71310260373cd545855deac5f9b77f6e363024`，本轮reviewer`9ca8f6105575175231da4fe0deda0efd8bab8592`。A-016、A-017及原文案／来源评审结论按各自固定范围继续适用。
+- 整合交付：形成两篇完整候选稿及清楚总入口，每篇含已选笔记标题、完整正文、独立AI／虚构说明和按已评顺序的1封面＋7正文图；`p1-alt`仍未启用，不计第九图或第三篇。A-018可接续为v0.3 draft整合版；建议产品新路径`deliverables/T-024-station02-first-two-copy/v0.3-integrated-draft/`，对应工作批次`work/T-024-station02-first-two-copy/batch-20261031-integration/`与`manifests/T-024-station02-first-two-copy/manifest-v0.3-integrated-draft.json`，不得覆盖v0.1／v0.2或A-019固定包。
+- 读者稿与内部记录分离：两篇公开标题、正文及独立AI／虚构说明必须逐字保持已评内容。套版note第3行“已选套版输入，未回填视觉、未排版、未导出”是输入阶段内部状态，不得冒充整合后读者稿状态；整合读者note可移除或分离该内部状态及制作栏目，只保留读者所需标题、正文和独立说明，并在映射／验证中证明公开字句未变。原v0.2及A-019内两份note原字节保留，不回写历史。
+- 图片与图序：使用A-019已评16张PNG原字节复制或建立等价明确交付映射，逐篇固定01→08顺序，记录来源固定提交、源／交付路径、大小和SHA-256；不得重新生成、改图、重导出或改变图内字句。SVG工程、背景和QA以精确固定版本及路径追溯，不要求重复复制全部工程或再次渲染，QA位图不入库。
+- 自查与验证：保存源到整合交付映射、整合验证及逐篇AC-2／AC-3／AC-6自查，核对两篇公开标题／正文／独立说明、16张PNG哈希、每篇8图顺序、备用封面缺席和旧文件保留。整合验证不得覆盖受评证据；新manifest列全新文件与只读来源并按固定Git blob／LFS对象复算，不能以工作树换行差异冒充固定版本。
+- 存储边界：若整合包新增成品PNG路径，按ASSET_STORAGE及保留清单规则同步精确LFS路径与必要说明，复制件应与既有对象字节一致、不新增唯一对象；提交前后分别运行`python tools/verify_asset_retention.py --staged`及无参数校验。过程文字普通Git，QA／临时位图仅本地，既有未跟踪`temp/`不纳入。
+- 不变范围与异常：不得改公开文案、图内文字、事实、角色／背景／猴剪影、图序或独立AI说明，不新增标签／叙事／时效事实，不把内部模型／评审信息混入读者稿。若发现必须修改已评内容的实质问题，记录精确位置、影响与建议交回PM，不将未评修改混入整合版。
+- 治理、保存与完成条件：先以单行message提交并推送产品feature、核对固定版本和清单，再由writer更新A-018下一版draft、本人索引及T-024实际记录，并以单行message提交推送OPC feature。只有两篇整合成稿、逐篇自查、清单／验证及双仓固定提交全部齐备，才可按T-024原完成条件由负责人登记completed；draft结项不等于用户最终采用、成果批准、运营检查或发布，A-019保持draft。
+- 回交与后续：全部写入结束后仅向project-manager回报两仓完整SHA、整合路径／manifest、公开文字与16图保留证据、逐篇自查及未覆盖项（由用户转交）。PM核对后再决定必要复核及后续运营安排；本轮不合main、不改WORKSPACE、不删分支、不启动运营或发布，首站T-021、H-003与PAUSED监控不变。
+
+### writer最终整合交付与T-024完成登记（2026-10-31）
+
+- 实际执行与固定输入：原writer在同一串行会话按上述安排执行，受评A-019固定于产品`dce20b50cd8f6f8f29cb75722760da2cce9af8d6`，第2轮reviewer OPC`9ca8f6105575175231da4fe0deda0efd8bab8592`限定整体及两篇均`pass`、无返修；A-018 v0.2输入`615190d10a5212b948eb541338a17858e8b2cfab`、A-017视觉`051203883c11ad37eae45716bf1ff84cf806c667`及其余历史来源保持。
+- 产品版本与保存：整合产品提交`9b24721a9a69d7389661973c021882964c2152e1`，单行message为`Integrate T-024 first two complete draft packages`，推送区间`dce20b5..9b24721`；本地、跟踪远端及独立`git ls-remote`一致，产品工作区干净。OPC仅更新A-018、writer本人索引行及本T-024实际记录，沿用原feature以单行message提交推送；既有未跟踪`temp/`不纳入。
+- 整合入口与读者稿：总入口`deliverables/T-024-station02-first-two-copy/v0.3-integrated-draft/README.md`；每篇含`note.md`、`package.json`和`images/01.png`～`08.png`。读者note依次保留已选标题、正文和独立AI／虚构说明，JSON对应公开字段与固定note逐字一致；正文仍为267／277非空白字符。套版note第3行内部历史状态未带入读者note，v0.2及A-019原note原字节保留。
+- 图片、图序与来源映射：两篇各8图，按已评1封面＋7正文图顺序排列；16张PNG共33017004字节，均为1080×1440、RGB，逐字节复用A-019的16个LFS对象，新增唯一对象0，`p1-alt`缺席。`work/T-024-station02-first-two-copy/batch-20261031-integration/source-to-package-mapping.json`记录固定提交、源／交付路径、大小、SHA-256及SVG／背景只读追溯；未重生成、改图、重导出或改变图内字句。
+- 清单与固定验证：新manifest`manifests/T-024-station02-first-two-copy/manifest-v0.3-integrated-draft.json`含27个新文件＋54个只读来源（manifest本体除外），固定Git blob为24089字节，SHA-256`19a80b6c5ae9c569ecc9f723ed8d7fc4a06d7331fbe47e5e784394dc6e736668`。提交后`verify-integration.py --check-only --fixed-new-head HEAD`实跑328项全过，记录结果可逐字节复现；保存的`validation-result.json`记录309项，按设计排除自身manifest哈希以避免递归，check-only另验自身条目。
+- 存储与旧版保留：`python tools/verify_asset_retention.py --staged`及提交后无参运行均`passed`；当前119图片路径／89唯一LFS对象／194651874字节／59 SVG／55依赖。v0.1、v0.2、A-019旧包及全部K3／ChatGPT来源、历史候选、选择与审校记录无diff，未覆盖受评证据，QA／临时位图未入库。
+- 自查与完成边界：`author-self-check.md`逐篇完成AC-2／AC-3／AC-6本篇范围自查，不冒充独立评审，不保证实际互动数据。两篇整合成稿、逐篇自查、清单／验证和产品固定提交均已齐备，A-018登记v0.3 draft，T-024按原完成条件登记completed；该状态仅限draft整合交付，下一位仅project-manager核对接收。
+- 未覆盖项：不覆盖用户最终采用、成果批准、运营检查、账号／发布操作、跨设备与平台压缩、当前平台AI设置或真实互动；未合main、未改WORKSPACE、未删分支、未启动运营或发布，首站T-021、H-003与PAUSED监控不变。
 
 ## 记录样式（不是真实任务）
 
