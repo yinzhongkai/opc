@@ -2059,7 +2059,7 @@ PM实际消息已送达当前reviewer。其最新真实回执说明仍见PM acti
 
 ## T-024：第二站首批 2 篇文案与整合制作
 - 负责人：writer
-- 状态：todo
+- 状态：blocked
 - 变更类型：feature（沿用T-023双仓开发线，不另建分支）
 - OPC开发分支：`feature/free-pipi-shrimp/t-023-station02-first-two-visual-assets`
 - 成果物仓库及开发分支：`git@github.com:yinzhongkai/free-pipi-shrimp.git`，`feature/t-023-station02-first-two-visual-assets`
@@ -2069,8 +2069,9 @@ PM实际消息已送达当前reviewer。其最新真实回执说明仍见PM acti
 - 优先级：P1
 - 完成条件与确认方式：2篇成稿登记A-018 draft并完成逐篇自查即完成本阶段；运营检查、用户批准与发布另行安排
 - 进展：2026-10-30 reviewer第1轮意见收齐（`e5a919d`），整体`pass`、未启用RV-T023-VIS编号；两项留评均获独立接受——p1-06两条捕捉肢细窄单端可辨、无人手人臂化，p2-cover远树剪影100%局部可辨猴形、刻意淡远符合素材卡功能。PM核对reviewer提交仅TASKS追加32行、受评产品`0512038`未变，A-017保持v0.1 draft。现登记writer正式安排（见下节），下一位writer（派发由用户转交）
-- 成果与验证证据：暂无（输入证据见A-017及T-023评审记录）
-- 阻塞与下一位行动人：无阻塞；下一位writer按下方正式安排执行
+- writer来源阶段进展（2026-10-30）：按正式安排准备两篇完整K3提示词，在Kimi官网可见`K3.1 Pro`／`进阶`标签下提交第1篇单份prompt；发送时出现登录层，至复核时仍无生成回答，第2篇未提交。未填写账号或验证码，未以其他模型补称K3。ChatGPT官网输入框虽可见，但没有真实K3原稿可审，故未启动审核。两篇候选文案、30槽映射、manifest及A-018 v0.1 draft均未形成；本任务不满足完成条件。产品记录提交`7c5609fb474967156eb3bcb3477f6bd1812c4e5d`已推送并与跟踪分支一致；仅新增T-024独立目录下两份prompt与一份受阻记录，既有产品及A-017视觉字节未改。
+- 成果与验证证据：产品`work/T-024-station02-first-two-copy/batch-20261030-k3-draft/`固定于`7c5609fb474967156eb3bcb3477f6bd1812c4e5d`；`article-01-prompt.txt` SHA-256`9e9e699c70f2b6a6e667cd768d0ef1f2b5a33742dbfd2df82a67a6c07c580c04`，`article-02-prompt.txt` SHA-256`bcb6859066e92fbb33840a2b978a993f60bf09b95919f7aec7b45c5d623af1a3`，`k3-access-record.md` SHA-256`385546e626f4906de8139ba0ad9956a9663d8a5359169c1f3dc40ccf5cf7bad8`。这些是输入准备与真实受阻证据，不是K3原始输出、ChatGPT审核或候选成果；输入依据仍见A-017及T-023评审记录。
+- 阻塞与下一位行动人：真实K3生成受官网登录阻断；解除条件为用户／project-manager提供可实际生成回答的K3入口，再依次取得两篇K3原稿、完整来源元数据及独立ChatGPT审核修订链。下一位project-manager核对并协调入口，writer在阻塞解除后续作；不登记不存在的A-018，不启动独立审校、套版、整篇整合或发布。
 - 更新日期：2026-10-30
 
 ### writer文案与来源阶段正式安排（project-manager，2026-10-30）
