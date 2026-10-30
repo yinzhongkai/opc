@@ -2079,7 +2079,8 @@ PM实际消息已送达当前reviewer。其最新真实回执说明仍见PM acti
 - v0.2成果与验证证据：产品`deliverables/T-024-station02-first-two-copy/v0.2-layout-input-draft/`、`work/T-024-station02-first-two-copy/batch-20261030-layout-selection/`及`manifests/T-024-station02-first-two-copy/manifest-v0.2-layout-input-draft.json`固定于`615190d10a5212b948eb541338a17858e8b2cfab`。manifest 10个新文件＋23个只读来源，SHA-256`cfd8d6511bc8b2b6b7a351bc36bf397448d7835b12e08753c994c82eaac0454f`；17份SVG固定Git blob哈希及节点一一对应。`verify-layout-input.py`暂存后与提交后均实跑`pass`，正文267／277非空白字符、选择值逐字等于已评候选、备用未选、v0.1来源链与A-017视觉只读均通过；`rendered: false`、`ready_for_typesetting: false`、`user_final_adoption: null`，未回填SVG、排版、导出或整合。
 - PM套版输入接收进展（2026-10-30）：PM核对writer产品`615190d10a5212b948eb541338a17858e8b2cfab`与OPC登记`4fdf9f980cb2c0fcb592282b2d86983f99477acd`，产品相对已评候选为11个纯新增文件，A-017及v0.1来源范围无diff。以不写回固定文件的方式复跑`validate()`与`verify_manifest()`均为`pass`：两篇各选候选1，正文267／277非空白字符及AI说明原句不变，正式16页29槽、17份SVG固定哈希、备用未选均一致；manifest 10个新文件＋23个只读来源，SHA-256`cfd8d6511bc8b2b6b7a351bc36bf397448d7835b12e08753c994c82eaac0454f`。现安排visual-designer实际填词套版与导出（派发由用户转交），A-018 v0.2保持draft，T-024不结项。
 - visual-designer套版进展（2026-10-30）：按SESSION_PROTOCOL刷新并在既有双仓feature执行，未新建分支、未合main。严格按selected-slot-mapping.json将正式16页29槽的`selected_value`逐字套入真实节点，24有值槽标`typeset-a018-v0.2`、5可选空槽保持空白标`blank-optional-a018-v0.2`并附原理由；两份图外note按v0.2原字节随包；`p1-alt`未启用、未导出、未入包。未改字、未新增事实、未重新生成或修改画面，A-017／A-018旧文件未覆盖（源SVG逐页哈希复核一致）。产品提交`8b0c88d72eded3b42f67d3ed47b084532dde1428`单行message已推送并与远端一致（16张新PNG对象中14个经curl重放标准LFS流程上传、2个由中断的推送已传，14背景对象服务端已有）。已登记A-019 v0.1 draft；本阶段交付完成，T-024整体保持in_progress，下一位project-manager核对后安排reviewer完整图文独立审校，再由writer整篇整合。
-- 阻塞与下一位行动人：当前无阻塞。下一位visual-designer按下方PM安排制作16页文字套版视觉包并自查（派发由用户转交）；不直接启动reviewer或整篇整合，不标completed或approved、不发布。
+- PM套版交付核对进展（2026-10-30）：PM核对A-019 v0.1 draft产品`8b0c88d72eded3b42f67d3ed47b084532dde1428`与OPC`45ea39c3cb7a89b019033f095e7be990471892e6`。素材保留复跑`passed`（103路径／89对象／194651874字节／59 SVG／55依赖）；manifest实际55个新文件＋33个只读来源，Git blob LF SHA-256`ef4d6456a796c79c0cff6386680a2c66bd34cc487e277cb59464e8d7981dd36b`，工作树CRLF归一化一致。但以禁止回写验证结果的方式复跑当前`verify-typeset.py`，143项中1项失败：脚本仍断言manifest 54项，实际为55项；其余142项通过。当前登记“143项pass”不可复现，完整图文评审暂缓，退回visual-designer同步校验链（派发由用户转交）。
+- 阻塞与下一位行动人：套版清单与校验脚本的54／55计数不一致，需作者最小修正并重新固定；下一位visual-designer按下方PM退回安排处理。修正及PM复核前不启动reviewer或整篇整合，不标completed或approved、不发布。
 - 更新日期：2026-10-30
 
 ### writer文案与来源阶段正式安排（project-manager，2026-10-30）
@@ -2140,6 +2141,15 @@ PM实际消息已送达当前reviewer。其最新真实回执说明仍见PM acti
 - 专业自查：逐页实测实际中文字体／缺字或回退、字号／层级／换行、溢出／互遮、安全区及导出规格；实际打开16张原尺寸PNG，并检查16格270×360缩略或完整拼版的主句与整体观感。重点核对p1-03收零食、p1-05预约边界、p2-cover远猴剪影与标题分区、p2-04固定事实卡新增角色感受不遮来源、p2-06空白本子不伪造观察、p2-07收束句与固定落款；其余页面同样覆盖。QA文字报告、字体／导出记录及局限入库，过程位图只留本地。
 - 治理与完成条件：可新增A-019“峨眉山前两篇文字套版视觉包”v0.1 draft（写前再核编号唯一），维护本人索引行及TASKS实际接收／制作／自查／交回记录；不改A-018、他人意见或整体任务完成状态。16页文字正确、工程／依赖与PNG可读、逐页原尺寸／缩略自查留证、清单与保留校验通过才构成本专业阶段交付，不等于独立pass、整篇验收、用户批准或T-024 completed。
 - 保存与回交：先以单行message提交并推送产品feature，核对固定版本、清单及LFS对象，再登记并提交推送OPC feature；全部写入结束后仅回报project-manager。PM核对后再安排原reviewer进行完整图文独立审校，之后才由writer整篇整合；当前不启动这些后续工作，不合主线、不删分支、不发布。
+
+### PM套版交付核对与校验一致性退回（2026-10-30）
+
+- 固定交付与已核范围：A-019 v0.1 draft，产品`8b0c88d72eded3b42f67d3ed47b084532dde1428`、OPC`45ea39c3cb7a89b019033f095e7be990471892e6`，两仓本地与跟踪分支一致。当前manifest为55个新文件＋33个只读来源，Git blob LF SHA-256`ef4d6456a796c79c0cff6386680a2c66bd34cc487e277cb59464e8d7981dd36b`；工作树CRLF归一化后与Git blob一致，不是本次失败原因。素材保留复跑`passed`（103图片路径／89唯一对象／194651874字节／59当前SVG／55依赖）。
+- 实际不一致：`verify-typeset.py`第62行仍断言`len(manifest["files"]) == 54`，但当前固定manifest为55项，A-019及索引也登记55项。PM以防止回写`validation-result-typeset.json`的方式执行当前脚本，实际输出`overall: fail`、`checks: 143`、`failed: 1`，唯一失败为`manifest file count: 55`，其余142项通过。因此现有验证结果与A-019／索引的“143项pass”不能由当前固定版本复现；本记录不把它扩张为已证实的画面或配文缺陷，也不忽略校验失败。
+- 退回修正：仅由原visual-designer核对并同步实际条目集合、脚本计数断言、验证结果、manifest及受影响的A-019／索引／TASKS记录。若55项集合正确，应以实际集合修正脚本并重新跑至全部通过，再同步因验证结果变化而受影响的哈希；若集合不应为55项，须说明并纠正来源。不得只把结果文件或登记文字改为pass来掩盖不一致。
+- 不变范围：本退回针对校验可复现性，不要求重新生成或导出画面。16张PNG、16份SVG、2份note、14张背景及A-017／A-018旧文件保持字节不变，不新增文案、事实、图像或LFS对象；若发现其他必须改动的问题，停止并如实交回PM，不夹带未核修改。
+- 修正完成条件：新产品固定版本中`verify-typeset.py`实跑143项全pass，重复执行后验证结果与manifest条目／哈希保持稳定，manifest计数与A-019／索引一致；素材保留`--staged`及提交后无参校验均passed，变更范围仅限本次一致性修正及必要登记。PM之后仍须实际检查16页成品，再决定是否安排reviewer。
+- 保存与回交：先以单行message提交并推送产品feature，再登记并提交推送OPC feature，完成后仅回报project-manager。修正及PM复核前不启动reviewer、整篇整合、运营或发布，T-024整体不结项。
 
 ## 记录样式（不是真实任务）
 

@@ -1,5 +1,7 @@
 # 项目状态摘要
 
+- 当前协调更新（2026-10-30，project-manager）：A-019 v0.1 draft套版交付核对发现一项可复现性不一致——产品固定`8b0c88d`、OPC`45ea39c`，manifest实际55个新文件＋33个只读来源，Git blob LF哈希`ef4d6456…d36b`与登记一致；素材保留复跑passed（103路径／89对象／194651874字节／59 SVG／55依赖）。但`verify-typeset.py`仍断言54项，当前只读复跑为143项中1项失败（仅manifest计数）、其余142项通过，故A-019／索引所载“143项pass”暂不可复现。已退回原visual-designer最小同步脚本、验证结果、manifest与登记，不预设画面或配文有缺陷；修正及PM复核前不启动完整图文评审或整合。T-024 in_progress，A-019仍draft、未批准／发布；首站T-021 in_progress、H-003 accepted、PAUSED监控不变。
+
 - 当前协调更新（2026-10-30，project-manager）：A-018 v0.2 draft套版输入接收——writer选定两篇候选1“慢慢去见山里的邻居”／“远远看见，就很好”，正文、独立AI／虚构说明及逐页配文原句不变；产品固定`615190d10a5212b948eb541338a17858e8b2cfab`、OPC writer登记`4fdf9f9`，11个产品文件纯新增，A-017与v0.1来源未改。PM只读复跑校验`pass`：正式16页29槽（17必填、12可选；24有值、5空值附理由）、17份SVG哈希、备用封面未选均一致；manifest 10个新文件＋23个只读来源，SHA-256`cfd8d651…0454f`。已安排原visual-designer制作16页文字套版视觉包（拟A-019 v0.1 draft，派发由用户转交）；T-024 in_progress，未实际套版／整合／批准／发布，首站T-021 in_progress、H-003 accepted、PAUSED监控不变。
 
 - 当前协调更新（2026-10-30，project-manager）：A-018 v0.1第1轮文案与来源独立审校`pass`——reviewer提交`bac471f`，问题为空、未启用RV-T024-COPY编号；已核文案／人设／AI说明、30槽文图语义、K3／ChatGPT来源及作者修订，并独立复算22项manifest与来源哈希。PM核对该提交仅TASKS追加12行本人意见，产品仍固定`184512485dc5998e0185790d80719fac722830b8`、视觉`051203883c11ad37eae45716bf1ff84cf806c667`，产品23个纯新增及视觉只读范围不变。T-024转in_progress，下一位原writer进行两篇标题草稿选择与套版输入包（正式16页29槽，p1-alt备用不启用；派发由用户转交）；PM核对后才安排visual-designer实际套版。A-018保持draft，未套版、未整合、未批准、未发布；首站T-021 in_progress、H-003 accepted、PAUSED监控不变。
