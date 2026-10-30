@@ -1,5 +1,7 @@
 # 项目状态摘要
 
+- 当前协调更新（2026-10-30，project-manager）：A-017第1轮独立评审`pass`——reviewer逐张目视17成品＋缩略／拼版并独立复算68项清单与30空槽，未启用RV-T023-VIS；两项留评（p1-06捕捉肢、p2-cover淡远剪影）均按可见证据接受，E01～E03事实来源经reviewer重读一致。PM核对意见提交仅TASKS追加、受评产品未变，A-017保持draft。T-024正式安排已登记：writer沿用T-023双仓feature，先交两篇K3文案候选包（A-018 v0.1 draft），下一位writer（派发由用户转交）；首站T-021 in_progress、H-003 accepted、PAUSED监控不变。
+
 - 当前协调更新（2026-10-30，project-manager）：A-017 v0.1 draft接收——visual-designer交付第二站首批2篇视觉资源（17 PNG／17 SVG／15背景，30创意槽全空pending-writer-k3），产品固定`0512038`、OPC`f9abe23`均推送一致。PM独立核对：17成品全1080×1440、manifest 68项哈希一致、保留校验复跑passed（73路径／73对象）、空槽恰30个、QA位图未入库；目视抽查5张（双封面／事实卡／预约页／p1-06）边界执行正确。保留清单b708c85同步更正与LFS curl重放上传两项说明已核实接受。已安排原reviewer第1轮独立评审（RV-T023-VIS-001起，消息由用户转交）；A-017保持draft，T-024待评审后登记，首站T-021 in_progress（第03篇10-29 20:30档期已过、真实结果未回查）、H-003 accepted、PAUSED监控不变。
 
 - 当前协调更新（2026-10-29，project-manager）：用户“可以的”授权后，T-022 feature已`--ff-only`合入`project/free-pipi-shrimp`（`0a75009`）并推送；A-016 v0.1 draft成为第二站制作输入。已登记T-023（visual-designer，首批2篇视觉资源，todo）与T-024（writer，文案与整合，todo待T-023），双仓T-023 feature已建；下一位visual-designer（派发由用户转交）。首站第03篇今晚20:30定时不变，T-021 in_progress、H-003 accepted、PAUSED监控不变。
