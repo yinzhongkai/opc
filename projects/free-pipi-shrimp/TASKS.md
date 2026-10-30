@@ -2059,7 +2059,7 @@ PM实际消息已送达当前reviewer。其最新真实回执说明仍见PM acti
 
 ## T-024：第二站首批 2 篇文案与整合制作
 - 负责人：writer
-- 状态：blocked
+- 状态：in_review
 - 变更类型：feature（沿用T-023双仓开发线，不另建分支）
 - OPC开发分支：`feature/free-pipi-shrimp/t-023-station02-first-two-visual-assets`
 - 成果物仓库及开发分支：`git@github.com:yinzhongkai/free-pipi-shrimp.git`，`feature/t-023-station02-first-two-visual-assets`
@@ -2070,8 +2070,10 @@ PM实际消息已送达当前reviewer。其最新真实回执说明仍见PM acti
 - 完成条件与确认方式：2篇成稿登记A-018 draft并完成逐篇自查即完成本阶段；运营检查、用户批准与发布另行安排
 - 进展：2026-10-30 reviewer第1轮意见收齐（`e5a919d`），整体`pass`、未启用RV-T023-VIS编号；两项留评均获独立接受——p1-06两条捕捉肢细窄单端可辨、无人手人臂化，p2-cover远树剪影100%局部可辨猴形、刻意淡远符合素材卡功能。PM核对reviewer提交仅TASKS追加32行、受评产品`0512038`未变，A-017保持v0.1 draft。现登记writer正式安排（见下节），下一位writer（派发由用户转交）
 - writer来源阶段进展（2026-10-30）：按正式安排准备两篇完整K3提示词，在Kimi官网可见`K3.1 Pro`／`进阶`标签下提交第1篇单份prompt；发送时出现登录层，至复核时仍无生成回答，第2篇未提交。未填写账号或验证码，未以其他模型补称K3。ChatGPT官网输入框虽可见，但没有真实K3原稿可审，故未启动审核。两篇候选文案、30槽映射、manifest及A-018 v0.1 draft均未形成；本任务不满足完成条件。产品记录提交`7c5609fb474967156eb3bcb3477f6bd1812c4e5d`已推送并与跟踪分支一致；仅新增T-024独立目录下两份prompt与一份受阻记录，既有产品及A-017视觉字节未改。
+- writer候选交付进展（2026-10-30）：用户14:23在当前会话明确“当前就是kimi啊”，据此以当前Kimi会话作为项目K3初稿入口，具体模型／模式／后台参数记unknown；两篇完整prompt与未编辑raw已保存。ChatGPT官网实际审核于14:29提交，首次连接中断的部分回答保留，14:32页面重试取得两篇完整审核修订；可见具体模型／模式unknown。作者形成两篇候选、30槽映射、采纳记录与逐篇AC-2／AC-3／AC-6自查，未采纳删除第2篇“动物形态以实物为准”的冲突建议。产品提交`184512485dc5998e0185790d80719fac722830b8`已推送并与跟踪分支一致；A-018 v0.1 draft登记，上午受阻历史保留。ChatGPT建议与作者自查均不代替项目reviewer独立审校。
 - 成果与验证证据：产品`work/T-024-station02-first-two-copy/batch-20261030-k3-draft/`固定于`7c5609fb474967156eb3bcb3477f6bd1812c4e5d`；`article-01-prompt.txt` SHA-256`9e9e699c70f2b6a6e667cd768d0ef1f2b5a33742dbfd2df82a67a6c07c580c04`，`article-02-prompt.txt` SHA-256`bcb6859066e92fbb33840a2b978a993f60bf09b95919f7aec7b45c5d623af1a3`，`k3-access-record.md` SHA-256`385546e626f4906de8139ba0ad9956a9663d8a5359169c1f3dc40ccf5cf7bad8`。这些是输入准备与真实受阻证据，不是K3原始输出、ChatGPT审核或候选成果；输入依据仍见A-017及T-023评审记录。
-- 阻塞与下一位行动人：真实K3生成受官网登录阻断；解除条件为用户／project-manager提供可实际生成回答的K3入口，再依次取得两篇K3原稿、完整来源元数据及独立ChatGPT审核修订链。下一位project-manager核对并协调入口，writer在阻塞解除后续作；不登记不存在的A-018，不启动独立审校、套版、整篇整合或发布。
+- 本阶段成果与验证证据：[A-018](artifacts/A-018-峨眉山前两篇文案候选包.md) v0.1 draft；产品`deliverables/T-024-station02-first-two-copy/v0.1-draft/`及`work/T-024-station02-first-two-copy/batch-20261030-current-kimi-k3-draft/`固定于`184512485dc5998e0185790d80719fac722830b8`。两篇各3标题、正文267／277非空白字符、独立AI说明；30槽16＋14，25有值、5可选空值附理由，18原必填及两个收束槽均有值。manifest 22项SHA-256`1e295ee23a7ef3005caf69e39046c5acb3296590cbdcc1028bbaf7547f0fa045`；`verify-delivery.py`实跑pass，7份关键来源哈希、Markdown／JSON／ChatGPT修订稿一致性、ChatGPT输入完整含K3 raw及视觉只读均通过。A-017相对`051203883c11ad37eae45716bf1ff84cf806c667`无diff，未套版、未重渲染。
+- 阻塞与下一位行动人：上午入口阻塞已由用户明确当前Kimi会话作为项目K3初稿入口解除；当前无阻塞。下一位project-manager核对A-018固定版本并安排文案独立审校；审校与必要修订通过前不启动套版或整篇整合，不标approved、不发布。
 - 更新日期：2026-10-30
 
 ### writer文案与来源阶段正式安排（project-manager，2026-10-30）
