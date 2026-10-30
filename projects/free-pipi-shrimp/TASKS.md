@@ -2059,7 +2059,7 @@ PM实际消息已送达当前reviewer。其最新真实回执说明仍见PM acti
 
 ## T-024：第二站首批 2 篇文案与整合制作
 - 负责人：writer
-- 状态：in_review
+- 状态：in_progress
 - 变更类型：feature（沿用T-023双仓开发线，不另建分支）
 - OPC开发分支：`feature/free-pipi-shrimp/t-023-station02-first-two-visual-assets`
 - 成果物仓库及开发分支：`git@github.com:yinzhongkai/free-pipi-shrimp.git`，`feature/t-023-station02-first-two-visual-assets`
@@ -2074,7 +2074,8 @@ PM实际消息已送达当前reviewer。其最新真实回执说明仍见PM acti
 - 成果与验证证据：产品`work/T-024-station02-first-two-copy/batch-20261030-k3-draft/`固定于`7c5609fb474967156eb3bcb3477f6bd1812c4e5d`；`article-01-prompt.txt` SHA-256`9e9e699c70f2b6a6e667cd768d0ef1f2b5a33742dbfd2df82a67a6c07c580c04`，`article-02-prompt.txt` SHA-256`bcb6859066e92fbb33840a2b978a993f60bf09b95919f7aec7b45c5d623af1a3`，`k3-access-record.md` SHA-256`385546e626f4906de8139ba0ad9956a9663d8a5359169c1f3dc40ccf5cf7bad8`。这些是输入准备与真实受阻证据，不是K3原始输出、ChatGPT审核或候选成果；输入依据仍见A-017及T-023评审记录。
 - 本阶段成果与验证证据：[A-018](artifacts/A-018-峨眉山前两篇文案候选包.md) v0.1 draft；产品`deliverables/T-024-station02-first-two-copy/v0.1-draft/`及`work/T-024-station02-first-two-copy/batch-20261030-current-kimi-k3-draft/`固定于`184512485dc5998e0185790d80719fac722830b8`。两篇各3标题、正文267／277非空白字符、独立AI说明；30槽16＋14，25有值、5可选空值附理由，18原必填及两个收束槽均有值。manifest 22项SHA-256`1e295ee23a7ef3005caf69e39046c5acb3296590cbdcc1028bbaf7547f0fa045`；`verify-delivery.py`实跑pass，7份关键来源哈希、Markdown／JSON／ChatGPT修订稿一致性、ChatGPT输入完整含K3 raw及视觉只读均通过。A-017相对`051203883c11ad37eae45716bf1ff84cf806c667`无diff，未套版、未重渲染。
 - PM接收进展（2026-10-30）：PM核对writer产品提交`184512485dc5998e0185790d80719fac722830b8`与OPC登记提交`fcd105b92da3bc140fa19f152164f891bc7ae557`，产品相对视觉固定版本为23文件、1807行新增、无删除，A-017视觉范围无diff。PM复算两篇K3 prompt／raw四项SHA-256均与A-018一致，并完整复跑`verify-delivery.py`得到`pass`：两篇各3标题、正文267／277非空白字符、30槽（18必填、12可选；25有值、5空值附理由）、7份关键来源哈希及22项manifest均通过。上午官网受阻与下午用户确认当前Kimi会话的来源链分段保留，未把网页标签或unknown参数补写成已知。现安排A-018第1轮文案与来源独立审校；A-018保持v0.1 draft，PM技术核对不等于独立审校、用户批准或发布。
-- 阻塞与下一位行动人：上午入口阻塞已由用户明确当前Kimi会话作为项目K3初稿入口解除；当前无阻塞。下一位reviewer按下方第1轮安排独立审校A-018（派发由用户转交）；审校与必要修订通过前不启动套版或整篇整合，不标approved、不发布。
+- PM第1轮评审接收进展（2026-10-30）：reviewer以OPC`bac471fa27da5b634726ac94ceaf365282e5ba24`提交A-018 v0.1第1轮意见，整体`pass`、问题为空、未启用RV-T024-COPY编号。PM核对该提交仅向TASKS追加12行reviewer本人意见；产品仍为`184512485dc5998e0185790d80719fac722830b8`、23个相对视觉版本的新增文件及A-017只读范围不变，本地与远端一致。现按首站职责顺序登记writer草稿选择与套版输入准备，下一位writer（派发由用户转交）；A-018保持draft，尚不启动实际套版或整篇整合。
+- 阻塞与下一位行动人：当前无阻塞。下一位writer按下方安排完成两篇已评候选的草稿选择与套版输入包（派发由用户转交）；PM核对输入前不安排visual-designer实际填词／导出，不标approved、不发布。
 - 更新日期：2026-10-30
 
 ### writer文案与来源阶段正式安排（project-manager，2026-10-30）
@@ -2101,7 +2102,7 @@ PM实际消息已送达当前reviewer。其最新真实回执说明仍见PM acti
 - 审校范围与完成条件：实际阅读两篇标题／正文／独立AI与虚构说明、逐页配文与30槽映射、K3及ChatGPT原始来源、作者修订记录和逐篇AC-2／AC-3／AC-6自查；独立核对第一人称与五个人设、不代看及治愈基调、事实与野生动物边界、文图语义一致性、候选完整性和来源声明是否如实。提交明确`pass`／`revise`／`blocked`结论、证据、未覆盖项与问题清单，不以作者或ChatGPT结论代替本人意见。
 - 重点文图核对：p1-03收好零食与画面一致；p1-05只写官方渠道核对预约、不暗示预约成功；p1-alt仅作预约未成功的线上预习备用封面；p2-04固定事实卡不重复或补入未核验事实；p2-06空白本子不伪造观察文字。野生动物事实仅限A-016第6.1节已核验内容，不新增数量／票价／开放／时刻等时效断言，不出现投喂、抚摸、近距离自拍或必遇猴引导。
 - 写入与串行边界：问题从`RV-T024-COPY-001`起连续编号；reviewer只读产品，不改视觉或候选文案，只在OPC本feature追加本人意见并提交、单行message、推送核对。审校期间不启动套版、整篇整合、运营或发布；完成后回报project-manager，由PM收齐意见后再统一安排必要修订。
-- 本轮进度与下一位行动人：reviewer尚未评审；下一位reviewer。
+- 本轮进度与下一位行动人：reviewer已提交`pass`、无问题；PM已核对接收并安排writer进行草稿选择与套版输入准备，下一位writer。
 
 #### reviewer 的意见
 
@@ -2114,6 +2115,16 @@ PM实际消息已送达当前reviewer。其最新真实回执说明仍见PM acti
 - 结论：`pass`。A-018保持v0.1 draft，由project-manager接收并统一安排后续；不因本轮通过而启动套版、整篇整合或发布。
 - 作者处理回复：不适用，本轮无问题。
 - 复核：不适用，本轮无问题。
+
+### PM接收第1轮意见与writer套版输入准备安排（2026-10-30）
+
+- 接收结论与固定输入：reviewer提交`bac471fa27da5b634726ac94ceaf365282e5ba24`，仅向TASKS追加本人意见12行；结论`pass`、无返修或证据性阻塞，未启用RV-T024-COPY编号。产品受评版`184512485dc5998e0185790d80719fac722830b8`、视觉版`051203883c11ad37eae45716bf1ff84cf806c667`均保持不变；文案pass不覆盖实际套版、整篇整合、运营、用户采用或发布。
+- 执行成员与串行：沿用T-024授权及首站“作者选择输入→设计师套版→完整图文评审→作者整合”职责顺序，本阶段仅由原writer在既有双仓feature执行。writer先按SESSION_PROTOCOL刷新并核对无人在写；不新建分支、不合main、不改WORKSPACE，不同时启动visual-designer、reviewer或运营。
+- 草稿选择：从A-018 v0.1已评候选中为两篇各选1条图外笔记标题，记录候选序号、原句、理由和日期；正文与独立AI／虚构说明保持已评原文。本轮默认以`p1-cover`进入第1篇正式图序，`p1-alt`继续仅作预约未成功的线上预习备用封面，不加入两篇各1封面＋7正文图；没有真实预约未成功依据不得启用备用情境。30槽原候选及来源链保留，`user_final_adoption`仍为null。
+- 套版输入包：在产品T-024新版本／新批次保存选择记录、两篇已选图外文案、逐页真实SVG／节点／来源哈希及`selected_value`映射和清单，建议使用`deliverables/T-024-station02-first-two-copy/v0.2-layout-input-draft/`、`work/T-024-station02-first-two-copy/batch-20261030-layout-selection/`及`manifests/T-024-station02-first-two-copy/manifest-v0.2-layout-input-draft.json`。正式两篇16页对应29个创意槽（第1篇15＋第2篇14），备用封面1槽单独标未选；本阶段只准备输入，不回填A-017、不排版、不导出、不整合。
+- 不变范围与异常：所有已选标题、正文、AI说明和逐页字句必须逐字来自固定已评候选；可选空值及理由原样保留，不新增事实、标签、叙事或图像，不覆盖K3／ChatGPT原始来源及A-018 v0.1。若发现必须改字、改图或改变图序的问题，记录精确位置与影响交回PM，不把未评修改混入输入包。
+- 自查与治理：核对两篇各1标题、完整正文及独立AI说明，正式29槽中17必填全有值、12可选中7有值／5空值附理由，节点ID与视觉固定版一一对应；选择值逐字等于已评候选，读者稿不含内部模型／评审信息。writer可将A-018推进为v0.2 draft套版输入版并维护本人索引及TASKS实际记录，明确`rendered: false`、未获用户最终采用；不将T-024标completed。
+- 保存与回交：先以单行message提交并推送产品feature、核对固定版本和清单，再登记并提交推送OPC feature；全部写入结束后仅回报project-manager。PM核对后再安排visual-designer实际字体／换行／安全区／缩略图／导出，当前不启动这些工作。
 
 ## 记录样式（不是真实任务）
 
