@@ -2077,7 +2077,8 @@ PM实际消息已送达当前reviewer。其最新真实回执说明仍见PM acti
 - PM第1轮评审接收进展（2026-10-30）：reviewer以OPC`bac471fa27da5b634726ac94ceaf365282e5ba24`提交A-018 v0.1第1轮意见，整体`pass`、问题为空、未启用RV-T024-COPY编号。PM核对该提交仅向TASKS追加12行reviewer本人意见；产品仍为`184512485dc5998e0185790d80719fac722830b8`、23个相对视觉版本的新增文件及A-017只读范围不变，本地与远端一致。现按首站职责顺序登记writer草稿选择与套版输入准备，下一位writer（派发由用户转交）；A-018保持draft，尚不启动实际套版或整篇整合。
 - writer套版输入进展（2026-10-30）：按PM最新安排，从已评v0.1候选中为两篇各选候选1——“慢慢去见山里的邻居”／“远远看见，就很好”；正文、独立AI／虚构说明及逐页配文逐字保留。默认`p1-cover`进入正式图序，`p1-alt`仅保留备用且未选。形成v0.2套版输入、选择记录、`selected_value`映射及清单，正式16页29槽（15＋14），17必填全有值、12可选中7有值／5空值附原理由。产品提交`615190d10a5212b948eb541338a17858e8b2cfab`已单行message提交、推送并以`git ls-remote`核对，工作区干净；A-018推进为v0.2 draft，T-024保持in_progress。
 - v0.2成果与验证证据：产品`deliverables/T-024-station02-first-two-copy/v0.2-layout-input-draft/`、`work/T-024-station02-first-two-copy/batch-20261030-layout-selection/`及`manifests/T-024-station02-first-two-copy/manifest-v0.2-layout-input-draft.json`固定于`615190d10a5212b948eb541338a17858e8b2cfab`。manifest 10个新文件＋23个只读来源，SHA-256`cfd8d6511bc8b2b6b7a351bc36bf397448d7835b12e08753c994c82eaac0454f`；17份SVG固定Git blob哈希及节点一一对应。`verify-layout-input.py`暂存后与提交后均实跑`pass`，正文267／277非空白字符、选择值逐字等于已评候选、备用未选、v0.1来源链与A-017视觉只读均通过；`rendered: false`、`ready_for_typesetting: false`、`user_final_adoption: null`，未回填SVG、排版、导出或整合。
-- 阻塞与下一位行动人：当前无阻塞。下一位project-manager核对v0.2固定版本、选择记录、29槽映射和清单；PM核对前不安排visual-designer实际填词／导出，不直接启动reviewer，不标completed或approved、不发布。
+- PM套版输入接收进展（2026-10-30）：PM核对writer产品`615190d10a5212b948eb541338a17858e8b2cfab`与OPC登记`4fdf9f980cb2c0fcb592282b2d86983f99477acd`，产品相对已评候选为11个纯新增文件，A-017及v0.1来源范围无diff。以不写回固定文件的方式复跑`validate()`与`verify_manifest()`均为`pass`：两篇各选候选1，正文267／277非空白字符及AI说明原句不变，正式16页29槽、17份SVG固定哈希、备用未选均一致；manifest 10个新文件＋23个只读来源，SHA-256`cfd8d6511bc8b2b6b7a351bc36bf397448d7835b12e08753c994c82eaac0454f`。现安排visual-designer实际填词套版与导出（派发由用户转交），A-018 v0.2保持draft，T-024不结项。
+- 阻塞与下一位行动人：当前无阻塞。下一位visual-designer按下方PM安排制作16页文字套版视觉包并自查（派发由用户转交）；不直接启动reviewer或整篇整合，不标completed或approved、不发布。
 - 更新日期：2026-10-30
 
 ### writer文案与来源阶段正式安排（project-manager，2026-10-30）
@@ -2127,6 +2128,17 @@ PM实际消息已送达当前reviewer。其最新真实回执说明仍见PM acti
 - 不变范围与异常：所有已选标题、正文、AI说明和逐页字句必须逐字来自固定已评候选；可选空值及理由原样保留，不新增事实、标签、叙事或图像，不覆盖K3／ChatGPT原始来源及A-018 v0.1。若发现必须改字、改图或改变图序的问题，记录精确位置与影响交回PM，不把未评修改混入输入包。
 - 自查与治理：核对两篇各1标题、完整正文及独立AI说明，正式29槽中17必填全有值、12可选中7有值／5空值附理由，节点ID与视觉固定版一一对应；选择值逐字等于已评候选，读者稿不含内部模型／评审信息。writer可将A-018推进为v0.2 draft套版输入版并维护本人索引及TASKS实际记录，明确`rendered: false`、未获用户最终采用；不将T-024标completed。
 - 保存与回交：先以单行message提交并推送产品feature、核对固定版本和清单，再登记并提交推送OPC feature；全部写入结束后仅回报project-manager。PM核对后再安排visual-designer实际字体／换行／安全区／缩略图／导出，当前不启动这些工作。
+
+### PM套版输入接收与visual-designer制作安排（2026-10-30）
+
+- 固定输入与接收依据：A-018 v0.2 draft，产品`615190d10a5212b948eb541338a17858e8b2cfab`，writer OPC`4fdf9f980cb2c0fcb592282b2d86983f99477acd`；已评候选`184512485dc5998e0185790d80719fac722830b8`与reviewer`bac471fa27da5b634726ac94ceaf365282e5ba24`保持，视觉固定`051203883c11ad37eae45716bf1ff84cf806c667`。输入包中`ready_for_typesetting: false`／`pm_layout_input_review_required: true`是作者交回时状态；本次PM只读核对通过并正式派发即允许本阶段制作，不回写旧输入字节。
+- 执行成员与串行：本阶段仅原visual-designer在既有双仓feature执行专业协作，writer仍为T-024整体负责人。先按SESSION_PROTOCOL刷新身份、有效技能与完整安排，确认无人在写；不新建分支、不合main、不改WORKSPACE，不同时启动writer、reviewer或运营。
+- 制作范围：严格按`selected-slot-mapping.json`将正式16页29槽的`selected_value`套入对应真实`node_id`，保持已选字句／标点、固定值、图序及5个可选空值与理由；两份图外note按v0.2原字节随包交付，独立AI／虚构说明不得遗漏。`p1-alt`不启用、不导出、不计入正式图序。不得改字、新增事实或标签，不重新生成／改图，不改角色、背景、猴剪影、构图、事实卡或其他非文字视觉；冲突记录精确位置交回PM。
+- 产物与依赖：全部工程、成品、脚本与文字证据只落产品T-024新版本／新批次，建议使用`deliverables/T-024-station02-first-two-copy/v0.1-typeset-draft/`、`work/T-024-station02-first-two-copy/batch-20261030-typeset/`及`manifests/T-024-station02-first-two-copy/manifest-v0.1-typeset-draft.json`。提供正式16份可编辑SVG及16张1080×1440 RGB/sRGB PNG、源到成品映射、相对依赖与清单；沿用既有受控导出方法并先核对输出目标，A-017／A-018旧文件不得覆盖，背景依赖须可解析且按原字节登记。
+- 存储边界：按当前`ASSET_STORAGE.md`仅将16张成品PNG及继续编辑必需的图像依赖加入精确路径LFS与保留清单，同步`.gitattributes`／`.gitignore`及必要说明；SVG和过程文字普通Git，QA位图、缩略图、拼版、过程预览及本地运行目录不入库。提交前后分别运行`python tools/verify_asset_retention.py --staged`与无参数校验并保存真实结果。
+- 专业自查：逐页实测实际中文字体／缺字或回退、字号／层级／换行、溢出／互遮、安全区及导出规格；实际打开16张原尺寸PNG，并检查16格270×360缩略或完整拼版的主句与整体观感。重点核对p1-03收零食、p1-05预约边界、p2-cover远猴剪影与标题分区、p2-04固定事实卡新增角色感受不遮来源、p2-06空白本子不伪造观察、p2-07收束句与固定落款；其余页面同样覆盖。QA文字报告、字体／导出记录及局限入库，过程位图只留本地。
+- 治理与完成条件：可新增A-019“峨眉山前两篇文字套版视觉包”v0.1 draft（写前再核编号唯一），维护本人索引行及TASKS实际接收／制作／自查／交回记录；不改A-018、他人意见或整体任务完成状态。16页文字正确、工程／依赖与PNG可读、逐页原尺寸／缩略自查留证、清单与保留校验通过才构成本专业阶段交付，不等于独立pass、整篇验收、用户批准或T-024 completed。
+- 保存与回交：先以单行message提交并推送产品feature，核对固定版本、清单及LFS对象，再登记并提交推送OPC feature；全部写入结束后仅回报project-manager。PM核对后再安排原reviewer进行完整图文独立审校，之后才由writer整篇整合；当前不启动这些后续工作，不合主线、不删分支、不发布。
 
 ## 记录样式（不是真实任务）
 

@@ -1,5 +1,7 @@
 # 项目状态摘要
 
+- 当前协调更新（2026-10-30，project-manager）：A-018 v0.2 draft套版输入接收——writer选定两篇候选1“慢慢去见山里的邻居”／“远远看见，就很好”，正文、独立AI／虚构说明及逐页配文原句不变；产品固定`615190d10a5212b948eb541338a17858e8b2cfab`、OPC writer登记`4fdf9f9`，11个产品文件纯新增，A-017与v0.1来源未改。PM只读复跑校验`pass`：正式16页29槽（17必填、12可选；24有值、5空值附理由）、17份SVG哈希、备用封面未选均一致；manifest 10个新文件＋23个只读来源，SHA-256`cfd8d651…0454f`。已安排原visual-designer制作16页文字套版视觉包（拟A-019 v0.1 draft，派发由用户转交）；T-024 in_progress，未实际套版／整合／批准／发布，首站T-021 in_progress、H-003 accepted、PAUSED监控不变。
+
 - 当前协调更新（2026-10-30，project-manager）：A-018 v0.1第1轮文案与来源独立审校`pass`——reviewer提交`bac471f`，问题为空、未启用RV-T024-COPY编号；已核文案／人设／AI说明、30槽文图语义、K3／ChatGPT来源及作者修订，并独立复算22项manifest与来源哈希。PM核对该提交仅TASKS追加12行本人意见，产品仍固定`184512485dc5998e0185790d80719fac722830b8`、视觉`051203883c11ad37eae45716bf1ff84cf806c667`，产品23个纯新增及视觉只读范围不变。T-024转in_progress，下一位原writer进行两篇标题草稿选择与套版输入包（正式16页29槽，p1-alt备用不启用；派发由用户转交）；PM核对后才安排visual-designer实际套版。A-018保持draft，未套版、未整合、未批准、未发布；首站T-021 in_progress、H-003 accepted、PAUSED监控不变。
 
 - 当前协调更新（2026-10-30，project-manager）：A-018 v0.1 draft接收并进入第1轮独立审校——writer交付第二站前两篇候选文案、真实K3／ChatGPT来源链、30槽映射及逐篇AC-2／AC-3／AC-6自查，产品固定`184512485dc5998e0185790d80719fac722830b8`、视觉固定`051203883c11ad37eae45716bf1ff84cf806c667`，OPC writer登记`fcd105b`；产品相对视觉版本23文件、1807行纯新增，A-017无diff。PM复算两篇K3 prompt／raw四项哈希一致，完整复跑验证`pass`（30槽、7份来源哈希、22项manifest）；上午官网受阻与下午当前Kimi会话来源分段如实保留。已安排原reviewer独立审校（RV-T024-COPY-001起，派发由用户转交）；A-018仍draft，未套版、未整合、未批准、未发布。首站T-021 in_progress（第03篇真实结果未回查）、H-003 accepted、PAUSED监控不变。
