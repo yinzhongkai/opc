@@ -1,5 +1,7 @@
 # 项目状态摘要
 
+- 当前协调更新（2026-10-31，project-manager）：A-019首轮校验一致性修正已核——产品`dc8feea`、OPC`1f63fc3`均推送一致，变更仅三份校验文本；PM两次实跑143／143 pass、验证结果字节稳定，素材保留passed（103路径／89对象／194651874字节／59 SVG／55依赖），manifest 56＋33项本体哈希`db5a7bb9…`。但独立复算全部89项时发现1项来源哈希错标：A-019把selected-slot-mapping工作树CRLF哈希`0fbd4ec8…`写作固定Git blob，`615190d`实际blob为`b38b0362…`；其余88项匹配。映射正文、16 PNG／16 SVG、2 note、14背景及旧来源均未变。现退回visual-designer仅修正该固定哈希口径并补上对应校验断言、同步受影响登记；PM全量复核及16页目视前不启动reviewer或整合。T-024 in_progress、A-019 draft、未合main／批准／发布；首站T-021 in_progress、H-003 accepted、PAUSED监控不变。
+
 - 当前协调更新（2026-10-30，project-manager）：A-019 v0.1 draft套版交付核对发现一项可复现性不一致——产品固定`8b0c88d`、OPC`45ea39c`，manifest实际55个新文件＋33个只读来源，Git blob LF哈希`ef4d6456…d36b`与登记一致；素材保留复跑passed（103路径／89对象／194651874字节／59 SVG／55依赖）。但`verify-typeset.py`仍断言54项，当前只读复跑为143项中1项失败（仅manifest计数）、其余142项通过，故A-019／索引所载“143项pass”暂不可复现。已退回原visual-designer最小同步脚本、验证结果、manifest与登记，不预设画面或配文有缺陷；修正及PM复核前不启动完整图文评审或整合。T-024 in_progress，A-019仍draft、未批准／发布；首站T-021 in_progress、H-003 accepted、PAUSED监控不变。
 
 - 当前协调更新（2026-10-30，project-manager）：A-018 v0.2 draft套版输入接收——writer选定两篇候选1“慢慢去见山里的邻居”／“远远看见，就很好”，正文、独立AI／虚构说明及逐页配文原句不变；产品固定`615190d10a5212b948eb541338a17858e8b2cfab`、OPC writer登记`4fdf9f9`，11个产品文件纯新增，A-017与v0.1来源未改。PM只读复跑校验`pass`：正式16页29槽（17必填、12可选；24有值、5空值附理由）、17份SVG哈希、备用封面未选均一致；manifest 10个新文件＋23个只读来源，SHA-256`cfd8d651…0454f`。已安排原visual-designer制作16页文字套版视觉包（拟A-019 v0.1 draft，派发由用户转交）；T-024 in_progress，未实际套版／整合／批准／发布，首站T-021 in_progress、H-003 accepted、PAUSED监控不变。

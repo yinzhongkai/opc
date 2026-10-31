@@ -2081,8 +2081,9 @@ PM实际消息已送达当前reviewer。其最新真实回执说明仍见PM acti
 - visual-designer套版进展（2026-10-30）：按SESSION_PROTOCOL刷新并在既有双仓feature执行，未新建分支、未合main。严格按selected-slot-mapping.json将正式16页29槽的`selected_value`逐字套入真实节点，24有值槽标`typeset-a018-v0.2`、5可选空槽保持空白标`blank-optional-a018-v0.2`并附原理由；两份图外note按v0.2原字节随包；`p1-alt`未启用、未导出、未入包。未改字、未新增事实、未重新生成或修改画面，A-017／A-018旧文件未覆盖（源SVG逐页哈希复核一致）。产品提交`8b0c88d72eded3b42f67d3ed47b084532dde1428`单行message已推送并与远端一致（16张新PNG对象中14个经curl重放标准LFS流程上传、2个由中断的推送已传，14背景对象服务端已有）。已登记A-019 v0.1 draft；本阶段交付完成，T-024整体保持in_progress，下一位project-manager核对后安排reviewer完整图文独立审校，再由writer整篇整合。
 - visual-designer校验一致性修正进展（2026-10-30）：按PM退回（OPC`451ecd8dc1e6cfdb88e1906503e2d67fb162a1a1`）核对实际条目集合：55项构成为1 README＋2 note＋16 SVG＋16 PNG＋14背景＋6批次文本，集合本身正确但漏列核验脚本`verify-typeset.py`本身，纠正为56项（对齐writer既往将verify脚本列入manifest的做法）。修正脚本第62行断言54→56，真实复跑两次均143项全pass且`validation-result-typeset.json`字节稳定（SHA-256`3d24c8a3e9d4761cf6db9b8503dc9dde96ae90c86dd861b1012176c75a49a09a`），manifest同步为56＋33项（SHA-256`db5a7bb94270d61fd93f124231d647bf9979b50ac9083d3d32eeac67c4201bbd`）。变更仅限verify-typeset.py、validation-result-typeset.json、manifest三个文本；16 PNG／16 SVG／2 note／14背景及A-017／A-018旧文件字节不变，无新增LFS对象、未重新导出。素材保留`--staged`与提交后无参校验均passed。产品提交`dc8feeae719b4f1bb3bc24e8ea238877f997bd70`单行message已推送并与远端一致；A-019与索引已同步。T-024整体保持in_progress，下一位project-manager复核修正并实际检查16页成品后决定是否安排reviewer。
 - PM套版交付核对进展（2026-10-30）：PM核对A-019 v0.1 draft产品`8b0c88d72eded3b42f67d3ed47b084532dde1428`与OPC`45ea39c3cb7a89b019033f095e7be990471892e6`。素材保留复跑`passed`（103路径／89对象／194651874字节／59 SVG／55依赖）；manifest实际55个新文件＋33个只读来源，Git blob LF SHA-256`ef4d6456a796c79c0cff6386680a2c66bd34cc487e277cb59464e8d7981dd36b`，工作树CRLF归一化一致。但以禁止回写验证结果的方式复跑当前`verify-typeset.py`，143项中1项失败：脚本仍断言manifest 54项，实际为55项；其余142项通过。当前登记“143项pass”不可复现，完整图文评审暂缓，退回visual-designer同步校验链（派发由用户转交）。
-- 阻塞与下一位行动人：套版清单与校验脚本的54／55计数不一致，需作者最小修正并重新固定；下一位visual-designer按下方PM退回安排处理。修正及PM复核前不启动reviewer或整篇整合，不标completed或approved、不发布。
-- 更新日期：2026-10-30
+- PM校验一致性修正复核（2026-10-31）：首轮修正产品`dc8feeae719b4f1bb3bc24e8ea238877f997bd70`、OPC`1f63fc35ee02866fd65eac779c42e16f69fcc496`均已推送核对，变更仅限verify脚本、验证结果和manifest三个文本。PM两次实跑均为143项全pass，验证结果原始字节稳定，素材保留复跑passed；独立逐项复算56个新文件＋33个只读来源时，88项匹配，但A-019将selected-slot-mapping的工作树CRLF哈希`0fbd4ec8…`误标为固定Git blob哈希，`615190d`实际固定blob为`b38b0362…`。这是来源哈希口径错误，不是映射正文、画面或配文变化；现再次退回visual-designer做最小元数据与校验覆盖修正，修正前不启动reviewer或整合。
+- 阻塞与下一位行动人：首轮manifest计数／漏列脚本问题已解决；当前仅余A-019的selected-slot-mapping固定blob哈希错标及相应校验缺口。下一位visual-designer按下方2026-10-31 PM退回安排处理；PM完成全量固定字节复核与16页目视前，不启动reviewer或整篇整合，不标completed或approved、不发布。
+- 更新日期：2026-10-31
 
 ### writer文案与来源阶段正式安排（project-manager，2026-10-30）
 
@@ -2151,6 +2152,16 @@ PM实际消息已送达当前reviewer。其最新真实回执说明仍见PM acti
 - 不变范围：本退回针对校验可复现性，不要求重新生成或导出画面。16张PNG、16份SVG、2份note、14张背景及A-017／A-018旧文件保持字节不变，不新增文案、事实、图像或LFS对象；若发现其他必须改动的问题，停止并如实交回PM，不夹带未核修改。
 - 修正完成条件：新产品固定版本中`verify-typeset.py`实跑143项全pass，重复执行后验证结果与manifest条目／哈希保持稳定，manifest计数与A-019／索引一致；素材保留`--staged`及提交后无参校验均passed，变更范围仅限本次一致性修正及必要登记。PM之后仍须实际检查16页成品，再决定是否安排reviewer。
 - 保存与回交：先以单行message提交并推送产品feature，再登记并提交推送OPC feature，完成后仅回报project-manager。修正及PM复核前不启动reviewer、整篇整合、运营或发布，T-024整体不结项。
+
+### PM首轮修正复核与固定来源哈希退回（2026-10-31）
+
+- 固定输入与首轮修正结论：产品`dc8feeae719b4f1bb3bc24e8ea238877f997bd70`、OPC`1f63fc35ee02866fd65eac779c42e16f69fcc496`，两仓feature本地／跟踪一致，产品main与WORKSPACE基线仍为`b708c850e1d38f6e10eb8c4fb91359f9afd205c9`。`8b0c88d..dc8feea`仅修改verify-typeset.py、validation-result-typeset.json与manifest三个文本；首轮54／55计数及漏列脚本问题已按实际56项解决。
+- 已通过技术核对：PM连续两次实跑`verify-typeset.py`均为143项全pass，验证结果运行前／两次运行后的原始字节SHA-256均为`42205b655431f3e9794b13a3bf134cb600c0011075c04ad4f720030571033d62`，固定Git blob哈希为`3d24c8a3e9d4761cf6db9b8503dc9dde96ae90c86dd861b1012176c75a49a09a`。manifest本体固定blob为`db5a7bb94270d61fd93f124231d647bf9979b50ac9083d3d32eeac67c4201bbd`；素材保留复跑passed（103图片路径／89唯一LFS对象／194651874字节／59当前SVG／55依赖），产品工作树干净。
+- 新发现的单项不一致：PM独立按固定提交逐项复算56个新文件及33个只读来源，其余88项匹配，但manifest首个只读来源`deliverables/T-024-station02-first-two-copy/v0.2-layout-input-draft/selected-slot-mapping.json`的`sha256_fixed_git_blob`登记为`0fbd4ec8a6642cf26b6bbfc1a0ccd52fe3e971aca28cd9a8368784c1d9fd99d3`，而`615190d10a5212b948eb541338a17858e8b2cfab`的实际固定Git blob SHA-256为`b38b03621a65ca751d20d35964c713a2766b6a24aeb98d0beefb25570bf695a6`。前者是当前工作树CRLF原始字节哈希，不能标作固定Git blob；固定blob为19920字节，工作树为20432字节。映射正文及各selected_value未发现变化，本项是哈希口径与追溯登记错误，不是画面或配文缺陷。
+- 退回修正范围：仅由原visual-designer把A-019 manifest该项改为实际固定Git blob哈希，并在`verify-typeset.py`增加该固定来源blob的独立断言或等效只读来源校验，真实复跑后同步验证结果、manifest及A-019／索引／TASKS的实际检查数与哈希。不得只改清单数值而保留校验盲点，也不得以工作树换行字节冒充固定提交字节。
+- 不变范围：A-018 v0.2的selected-slot-mapping正文及其旧manifest不改；16 PNG、16 SVG、2 note、14背景、A-017／A-018旧文件与全部非文字视觉保持字节不变，不重新导出、不新增LFS对象。首轮已通过的56项集合与素材保留范围不因本次元数据修正扩大。
+- 完成与后续：修正后重复实跑须全部通过且验证结果稳定，56＋33项独立固定字节复核无差异，素材保留提交前／后均passed。PM之后实际查看16张原尺寸成品及16格270×360效果，再决定是否安排reviewer；本次仍不启动reviewer、writer整合、运营或发布，不合main、不改WORKSPACE、不结项。
+- 保存与回交：先以单行message提交并推送产品feature，再登记并提交推送OPC feature，完成后仅回报project-manager（派发由用户转交）。
 
 ## 记录样式（不是真实任务）
 
