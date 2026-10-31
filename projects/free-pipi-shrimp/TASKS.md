@@ -2059,7 +2059,7 @@ PM实际消息已送达当前reviewer。其最新真实回执说明仍见PM acti
 
 ## T-024：第二站首批 2 篇文案与整合制作
 - 负责人：writer
-- 状态：in_progress
+- 状态：completed（draft 整合交付完成；不等于用户最终采用、成果批准、运营检查或发布）
 - 变更类型：feature（沿用T-023双仓开发线，不另建分支）
 - OPC开发分支：`feature/free-pipi-shrimp/t-023-station02-first-two-visual-assets`
 - 成果物仓库及开发分支：`git@github.com:yinzhongkai/free-pipi-shrimp.git`，`feature/t-023-station02-first-two-visual-assets`
@@ -2087,7 +2087,9 @@ PM实际消息已送达当前reviewer。其最新真实回执说明仍见PM acti
 - PM固定来源哈希修正复核（2026-10-31）：第二轮修正产品`67ed39349cda7b6d1fae7f27e2cd6e8adcd374a8`、OPC`700005249c6178714411d7452fe88f85bbb1614c`均已推送核对。selected-slot-mapping固定blob已纠正，PM两次实跑144项全pass、验证结果原始字节稳定，素材保留passed。独立复算56＋33项时发现唯一剩余不一致：manifest的verify-typeset.py自身条目仍为上一轮4306字节／`8883404a…`，第二轮实际固定blob已为4972字节／`7336c270…`；其余88项匹配。这是脚本修改后清单未同步，不涉及映射正文、画面或配文变化。现退回visual-designer仅同步该陈旧条目及受影响登记，修正前不启动reviewer或整合。
 - PM脚本自身清单修正复核与评审核对（2026-10-31）：第三轮修正产品`dce20b50cd8f6f8f29cb75722760da2cce9af8d6`、设计师OPC`5f71310260373cd545855deac5f9b77f6e363024`均已推送核对，`67ed393..dce20b5`仅manifest变化。PM连续两次实跑均为144项全pass，验证结果运行前及两次运行后的原始字节SHA-256均为`841c67ff8120f57697d4f4e935ed3b593570e582db89235ad642158b9ca6883f`；独立按固定提交复算56个新文件＋33个只读来源全部匹配，manifest本体SHA-256`4c2a1a4282417a8fb16bdc4290bbf06980be26efb43238b1cc7f7425e6103e2e`，素材保留复跑passed（103路径／89对象／194651874字节／59 SVG／55依赖），产品工作树干净。PM已逐张实际查看16张原尺寸PNG及两篇16格270×360拼版，未发现新增文字溢出／互遮、文图冲突或野生动物边界问题；p1-06捕捉肢与p2-cover淡远剪影沿用T-023独立接受结论，不因偏好重开。现安排下方A-019 v0.1与两篇完整图文第2轮独立审校，T-024转in_review；A-019保持draft，本核对不代替reviewer结论、整篇整合、用户批准或发布。
 - PM第2轮完整图文评审接收进展（2026-10-31）：reviewer提交`9ca8f6105575175231da4fe0deda0efd8bab8592`已推送核对，相对PM安排`9694081882bca38a76eb3f353a48174aadd2b6c0`仅TASKS追加37行本人意见；受评产品`dce20b50cd8f6f8f29cb75722760da2cce9af8d6`保持固定且工作树干净。限定整体及两篇均`pass`，问题为空、未启用RV-T024-VIS-001；reviewer实际查看16张原尺寸PNG及16格270×360、完整阅读两份note，独立复算766项0失败，覆盖56＋33项清单、29槽、字体／安全区／导出及事实／AI／虚构和野生动物边界。本轮无需作者返修；现按既定流程安排原writer最终整合（见下节），T-024转in_progress，A-018／A-019仍draft，不据此批准或发布。
-- 阻塞与下一位行动人：本轮无返修或证据性阻塞；下一位仅原writer按下方最终整合安排交付两篇完整候选稿（派发由用户转交）。整合须保持已评公开字句和16张PNG字节不变，形成A-018下一版draft、图序／来源映射、manifest及逐篇自查；实际交付前不标completed，不启动运营、合main、改WORKSPACE、批准或发布。
+- writer最终整合进展（2026-10-31）：以已评A-019产品`dce20b50cd8f6f8f29cb75722760da2cce9af8d6`为固定输入，完成两篇完整候选稿、图序／来源映射、manifest、整合验证及逐篇AC-2／AC-3／AC-6自查。每篇含已选标题、完整正文、独立AI／虚构说明和既定顺序1封面＋7正文图；公开字句与16张PNG原字节不变，`p1-alt`未启用，套版note内部历史状态未带入读者稿且原note保留。产品提交`9b24721a9a69d7389661973c021882964c2152e1`已单行message提交、推送并经独立`git ls-remote`核对，工作区干净；A-018推进为v0.3 draft，T-024仅按draft整合交付范围登记completed。
+- v0.3成果与验证证据：总入口`deliverables/T-024-station02-first-two-copy/v0.3-integrated-draft/README.md`，工作批次`work/T-024-station02-first-two-copy/batch-20261031-integration/`；manifest`manifests/T-024-station02-first-two-copy/manifest-v0.3-integrated-draft.json`含27个新文件＋54个只读来源，SHA-256`19a80b6c5ae9c569ecc9f723ed8d7fc4a06d7331fbe47e5e784394dc6e736668`。正文267／277非空白字符，16图共33017004字节并复用16个原LFS对象，新增唯一对象0；固定提交后`verify-integration.py --check-only --fixed-new-head HEAD`实跑328项全过，素材保留提交前后均`passed`（119图片路径／89唯一LFS对象／194651874字节／59 SVG／55依赖）。v0.1／v0.2、A-019及全部来源／审校历史无diff。
+- 阻塞与下一位行动人：无阻塞；下一位仅project-manager核对接收A-018 v0.3 draft及T-024完成范围（本回报由用户转交）。本次completed不覆盖用户最终采用、成果批准、运营检查或发布；未合main、未改WORKSPACE、未删分支、未启动运营。
 - 更新日期：2026-10-31
 
 ### writer文案与来源阶段正式安排（project-manager，2026-10-30）
@@ -2238,6 +2240,17 @@ PM实际消息已送达当前reviewer。其最新真实回执说明仍见PM acti
 - 不变范围与异常：不得改公开文案、图内文字、事实、角色／背景／猴剪影、图序或独立AI说明，不新增标签／叙事／时效事实，不把内部模型／评审信息混入读者稿。若发现必须修改已评内容的实质问题，记录精确位置、影响与建议交回PM，不将未评修改混入整合版。
 - 治理、保存与完成条件：先以单行message提交并推送产品feature、核对固定版本和清单，再由writer更新A-018下一版draft、本人索引及T-024实际记录，并以单行message提交推送OPC feature。只有两篇整合成稿、逐篇自查、清单／验证及双仓固定提交全部齐备，才可按T-024原完成条件由负责人登记completed；draft结项不等于用户最终采用、成果批准、运营检查或发布，A-019保持draft。
 - 回交与后续：全部写入结束后仅向project-manager回报两仓完整SHA、整合路径／manifest、公开文字与16图保留证据、逐篇自查及未覆盖项（由用户转交）。PM核对后再决定必要复核及后续运营安排；本轮不合main、不改WORKSPACE、不删分支、不启动运营或发布，首站T-021、H-003与PAUSED监控不变。
+
+### writer最终整合交付与T-024完成登记（2026-10-31）
+
+- 实际执行与固定输入：原writer在同一串行会话按上述安排执行，受评A-019固定于产品`dce20b50cd8f6f8f29cb75722760da2cce9af8d6`，第2轮reviewer OPC`9ca8f6105575175231da4fe0deda0efd8bab8592`限定整体及两篇均`pass`、无返修；A-018 v0.2输入`615190d10a5212b948eb541338a17858e8b2cfab`、A-017视觉`051203883c11ad37eae45716bf1ff84cf806c667`及其余历史来源保持。
+- 产品版本与保存：整合产品提交`9b24721a9a69d7389661973c021882964c2152e1`，单行message为`Integrate T-024 first two complete draft packages`，推送区间`dce20b5..9b24721`；本地、跟踪远端及独立`git ls-remote`一致，产品工作区干净。OPC仅更新A-018、writer本人索引行及本T-024实际记录，沿用原feature以单行message提交推送；既有未跟踪`temp/`不纳入。
+- 整合入口与读者稿：总入口`deliverables/T-024-station02-first-two-copy/v0.3-integrated-draft/README.md`；每篇含`note.md`、`package.json`和`images/01.png`～`08.png`。读者note依次保留已选标题、正文和独立AI／虚构说明，JSON对应公开字段与固定note逐字一致；正文仍为267／277非空白字符。套版note第3行内部历史状态未带入读者note，v0.2及A-019原note原字节保留。
+- 图片、图序与来源映射：两篇各8图，按已评1封面＋7正文图顺序排列；16张PNG共33017004字节，均为1080×1440、RGB，逐字节复用A-019的16个LFS对象，新增唯一对象0，`p1-alt`缺席。`work/T-024-station02-first-two-copy/batch-20261031-integration/source-to-package-mapping.json`记录固定提交、源／交付路径、大小、SHA-256及SVG／背景只读追溯；未重生成、改图、重导出或改变图内字句。
+- 清单与固定验证：新manifest`manifests/T-024-station02-first-two-copy/manifest-v0.3-integrated-draft.json`含27个新文件＋54个只读来源（manifest本体除外），固定Git blob为24089字节，SHA-256`19a80b6c5ae9c569ecc9f723ed8d7fc4a06d7331fbe47e5e784394dc6e736668`。提交后`verify-integration.py --check-only --fixed-new-head HEAD`实跑328项全过，记录结果可逐字节复现；保存的`validation-result.json`记录309项，按设计排除自身manifest哈希以避免递归，check-only另验自身条目。
+- 存储与旧版保留：`python tools/verify_asset_retention.py --staged`及提交后无参运行均`passed`；当前119图片路径／89唯一LFS对象／194651874字节／59 SVG／55依赖。v0.1、v0.2、A-019旧包及全部K3／ChatGPT来源、历史候选、选择与审校记录无diff，未覆盖受评证据，QA／临时位图未入库。
+- 自查与完成边界：`author-self-check.md`逐篇完成AC-2／AC-3／AC-6本篇范围自查，不冒充独立评审，不保证实际互动数据。两篇整合成稿、逐篇自查、清单／验证和产品固定提交均已齐备，A-018登记v0.3 draft，T-024按原完成条件登记completed；该状态仅限draft整合交付，下一位仅project-manager核对接收。
+- 未覆盖项：不覆盖用户最终采用、成果批准、运营检查、账号／发布操作、跨设备与平台压缩、当前平台AI设置或真实互动；未合main、未改WORKSPACE、未删分支、未启动运营或发布，首站T-021、H-003与PAUSED监控不变。
 
 ## 记录样式（不是真实任务）
 
