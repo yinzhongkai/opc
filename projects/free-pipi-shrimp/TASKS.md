@@ -2059,7 +2059,7 @@ PM实际消息已送达当前reviewer。其最新真实回执说明仍见PM acti
 
 ## T-024：第二站首批 2 篇文案与整合制作
 - 负责人：writer
-- 状态：in_progress
+- 状态：in_review
 - 变更类型：feature（沿用T-023双仓开发线，不另建分支）
 - OPC开发分支：`feature/free-pipi-shrimp/t-023-station02-first-two-visual-assets`
 - 成果物仓库及开发分支：`git@github.com:yinzhongkai/free-pipi-shrimp.git`，`feature/t-023-station02-first-two-visual-assets`
@@ -2085,7 +2085,8 @@ PM实际消息已送达当前reviewer。其最新真实回执说明仍见PM acti
 - PM套版交付核对进展（2026-10-30）：PM核对A-019 v0.1 draft产品`8b0c88d72eded3b42f67d3ed47b084532dde1428`与OPC`45ea39c3cb7a89b019033f095e7be990471892e6`。素材保留复跑`passed`（103路径／89对象／194651874字节／59 SVG／55依赖）；manifest实际55个新文件＋33个只读来源，Git blob LF SHA-256`ef4d6456a796c79c0cff6386680a2c66bd34cc487e277cb59464e8d7981dd36b`，工作树CRLF归一化一致。但以禁止回写验证结果的方式复跑当前`verify-typeset.py`，143项中1项失败：脚本仍断言manifest 54项，实际为55项；其余142项通过。当前登记“143项pass”不可复现，完整图文评审暂缓，退回visual-designer同步校验链（派发由用户转交）。
 - PM校验一致性修正复核（2026-10-31）：首轮修正产品`dc8feeae719b4f1bb3bc24e8ea238877f997bd70`、OPC`1f63fc35ee02866fd65eac779c42e16f69fcc496`均已推送核对，变更仅限verify脚本、验证结果和manifest三个文本。PM两次实跑均为143项全pass，验证结果原始字节稳定，素材保留复跑passed；独立逐项复算56个新文件＋33个只读来源时，88项匹配，但A-019将selected-slot-mapping的工作树CRLF哈希`0fbd4ec8…`误标为固定Git blob哈希，`615190d`实际固定blob为`b38b0362…`。这是来源哈希口径错误，不是映射正文、画面或配文变化；现再次退回visual-designer做最小元数据与校验覆盖修正，修正前不启动reviewer或整合。
 - PM固定来源哈希修正复核（2026-10-31）：第二轮修正产品`67ed39349cda7b6d1fae7f27e2cd6e8adcd374a8`、OPC`700005249c6178714411d7452fe88f85bbb1614c`均已推送核对。selected-slot-mapping固定blob已纠正，PM两次实跑144项全pass、验证结果原始字节稳定，素材保留passed。独立复算56＋33项时发现唯一剩余不一致：manifest的verify-typeset.py自身条目仍为上一轮4306字节／`8883404a…`，第二轮实际固定blob已为4972字节／`7336c270…`；其余88项匹配。这是脚本修改后清单未同步，不涉及映射正文、画面或配文变化。现退回visual-designer仅同步该陈旧条目及受影响登记，修正前不启动reviewer或整合。
-- 阻塞与下一位行动人：manifest计数、漏列脚本与selected-slot-mapping固定blob问题均已解决；当前技术复核仅余verify-typeset.py自身清单大小／哈希陈旧。下一位visual-designer按下方2026-10-31“脚本自身清单陈旧项退回”处理，并在交回前独立复算全部56＋33项；PM全量复核与16页目视前，不启动reviewer或整篇整合，不标completed或approved、不发布。
+- PM脚本自身清单修正复核与评审核对（2026-10-31）：第三轮修正产品`dce20b50cd8f6f8f29cb75722760da2cce9af8d6`、设计师OPC`5f71310260373cd545855deac5f9b77f6e363024`均已推送核对，`67ed393..dce20b5`仅manifest变化。PM连续两次实跑均为144项全pass，验证结果运行前及两次运行后的原始字节SHA-256均为`841c67ff8120f57697d4f4e935ed3b593570e582db89235ad642158b9ca6883f`；独立按固定提交复算56个新文件＋33个只读来源全部匹配，manifest本体SHA-256`4c2a1a4282417a8fb16bdc4290bbf06980be26efb43238b1cc7f7425e6103e2e`，素材保留复跑passed（103路径／89对象／194651874字节／59 SVG／55依赖），产品工作树干净。PM已逐张实际查看16张原尺寸PNG及两篇16格270×360拼版，未发现新增文字溢出／互遮、文图冲突或野生动物边界问题；p1-06捕捉肢与p2-cover淡远剪影沿用T-023独立接受结论，不因偏好重开。现安排下方A-019 v0.1与两篇完整图文第2轮独立审校，T-024转in_review；A-019保持draft，本核对不代替reviewer结论、整篇整合、用户批准或发布。
+- 阻塞与下一位行动人：本轮技术复核及PM目视均无阻断；下一位仅原reviewer按下方第2轮安排独立审校固定A-019与两篇完整图文（派发由用户转交）。收到实际评审意见后再决定writer整合或责任成员修订；当前不启动writer整合、运营或发布，不合main、不改WORKSPACE、不标completed或approved。
 - 更新日期：2026-10-31
 
 ### writer文案与来源阶段正式安排（project-manager，2026-10-30）
@@ -2174,6 +2175,18 @@ PM实际消息已送达当前reviewer。其最新真实回执说明仍见PM acti
 - 最小修正要求：仅由原visual-designer将manifest的脚本自身条目同步为上述实际固定blob大小／哈希，并更新manifest本体及A-019／索引／TASKS受影响登记。本轮无需再改verify-typeset.py行为；现有144项断言及validation-result-typeset.json保持原字节，真实复跑两次确认稳定即可。
 - 全量交回条件：不得只运行现有144项脚本就声明清单完整；交回前须独立按固定提交逐项复算全部56个新文件与33个只读来源的大小／哈希，确认无差异。16 PNG、16 SVG、2 note、14背景、映射正文、A-017／A-018旧文件及全部非文字视觉不变，不重新导出、不新增LFS对象；素材保留提交前后均passed。
 - 后续与保存：PM收到后再次独立复算全部89项，并实际查看16张原尺寸成品及16格270×360效果，通过后才安排reviewer。先以单行message提交并推送产品feature，再登记并提交推送OPC feature，完成后仅回报project-manager（派发由用户转交）；当前不启动reviewer、writer整合、运营或发布，不合main、不改WORKSPACE、不结项。
+
+### 本轮评审：A-019 v0.1 与两篇完整图文（第 2 轮）
+
+- 安排来源与日期：2026-10-31 用户告知visual-designer任务完成；project-manager完成最新清单修正的全量技术复核及16页实际目视后，沿用T-024既有授权和首站“设计师套版→完整图文独立审校→作者整合”流程安排本轮，仅原reviewer一人执行，派发由用户转交。
+- 固定受评版本：[A-019](artifacts/A-019-峨眉山前两篇文字套版视觉包.md) v0.1 draft及设计师交付记录，OPC`5f71310260373cd545855deac5f9b77f6e363024`；产品`feature/t-023-station02-first-two-visual-assets@dce20b50cd8f6f8f29cb75722760da2cce9af8d6`。正式包`deliverables/T-024-station02-first-two-copy/v0.1-typeset-draft/`，证据`work/T-024-station02-first-two-copy/batch-20261030-typeset/`，清单`manifests/T-024-station02-first-two-copy/manifest-v0.1-typeset-draft.json`，本体SHA-256`4c2a1a4282417a8fb16bdc4290bbf06980be26efb43238b1cc7f7425e6103e2e`。PM安排提交以本次新提交为准；评审期间上述受评产品保持不变。
+- 比较及依据：A-018 v0.2套版输入固定于产品`615190d10a5212b948eb541338a17858e8b2cfab`，已评v0.1候选为`184512485dc5998e0185790d80719fac722830b8`，文案reviewer为`bac471fa27da5b634726ac94ceaf365282e5ba24`；A-017视觉固定于`051203883c11ad37eae45716bf1ff84cf806c667`。A-016第1／2篇及第6节、A-001、A-002 C、A-004、A-007与既有评审结论继续适用；原文案及视觉pass不自动覆盖本次选择与套版组合。
+- 实际图文覆盖：reviewer须逐张实际查看全部16张原尺寸PNG，并以两篇完整拼版或等效方式逐格查看16格270×360效果；完整阅读两份note的标题、正文及独立AI／虚构说明，检查两篇图序、叙事衔接、第一人称、人设／治愈基调、文图语义和逐篇AC-2／AC-3／AC-6本两篇范围。`p1-alt`未启用，不计第九图或第三篇；不以作者或PM目视代替本人观察。
+- 排版、工程与来源：核对正式16页29槽（24有值、5可选空值附理由）与selected_value／真实node_id逐字对应，检查实际中文字体／缺字／回退、层级／换行、溢出／互遮、安全区、1080×1440 RGB/sRGB导出、SVG相对依赖及固定事实／来源小字；独立核对manifest 56个新文件＋33个只读来源和必要的校验证据。`verify-typeset.py`会回写验证结果，不得在原固定包直接运行；需要复算时使用只读方式或隔离临时输出，QA位图不入库。
+- 重点与边界：专项核对p1-03收好零食、p1-05不暗示预约成功、p2-cover远猴与标题分区、p2-04角色感受不遮固定事实／来源、p2-06空白本子、p2-07收束与落款，其余页面同样覆盖；检查固定事实、AI／虚构说明、图像许可和野生动物安全边界，不新增时效事实或投喂／抚摸／自拍引导。p1-06捕捉肢偏细长及p2-cover剪影淡远已由T-023独立评审接受，不因个人偏好重开；若发现新遮挡、文图冲突或其他实质问题，按新证据登记。
+- 参与成员、记录与完成条件：仅原reviewer，记录实际身份、工具／模型可见性、固定版本、完整读取／目视／复算范围、逐篇及限定整体结论、未覆盖项与下一位；结论为pass／revise／blocked，全部本人意见提交即本轮完成，不预设pass。新问题从`RV-T024-VIS-001`起唯一编号，注明级别、精确位置／证据、影响、建议、原稿责任人及复核条件；视觉／版式归visual-designer，文案归writer。
+- 写入、保存与串行：reviewer只读产品及受评正文，仅在OPC本TASKS追加本人意见，以单行message提交并推送原OPC feature后核对；完成后仅向project-manager回报（由用户转交），不直接唤醒作者或设计师。本人意见收齐前原作者不修改受评内容，PM之后再统一安排修订／复核或writer整合。
+- 本轮进度与下一位行动人：当前等待reviewer实际评审，尚无本轮专业结论；T-024为in_review，A-019保持draft。完整图文审校不等于writer已整合、任务结项、成果批准、运营检查或发布；本轮不合main、不改WORKSPACE、不删分支、不启动运营或发布，首站T-021、H-003与PAUSED监控不变。
 
 ## 记录样式（不是真实任务）
 

@@ -1,5 +1,7 @@
 # 项目状态摘要
 
+- 当前协调更新（2026-10-31，project-manager）：A-019清单修正全量复核通过并进入完整图文独立审校——产品`dce20b50cd8f6f8f29cb75722760da2cce9af8d6`、设计师OPC`5f71310260373cd545855deac5f9b77f6e363024`；较上轮仅manifest变化，PM连续两次实跑144／144 pass、验证结果原始字节稳定为`841c67ff…883f`，独立复算56个新文件＋33个只读来源全部匹配，manifest SHA-256`4c2a1a4282417a8fb16bdc4290bbf06980be26efb43238b1cc7f7425e6103e2e`，素材保留passed（103路径／89对象／194651874字节／59 SVG／55依赖）。PM已逐张查看16张原尺寸PNG及两篇16格270×360拼版，未见新增文字溢出／遮挡、文图冲突或野生动物边界问题；T-023两项已接受留评不重开。已登记原reviewer对A-019 v0.1与两篇完整图文的第2轮独立审校（新问题RV-T024-VIS-001起，派发由用户转交）；T-024转in_review，A-019仍draft，未整合／结项／批准／发布，首站T-021 in_progress、H-003 accepted、PAUSED监控不变。
+
 - 当前协调更新（2026-10-31，project-manager）：A-019固定来源哈希修正已核——产品`67ed393`、OPC`7000052`均推送一致，selected-slot-mapping已改为实际固定blob，PM两次实跑144／144 pass、结果稳定，素材保留passed。完整复算56＋33项时其余88项匹配，仅verify-typeset.py自身清单仍保留上一轮4306字节／`8883404a…`，实际固定blob已为4972字节／`7336c270…`。现退回visual-designer只同步该陈旧条目、manifest本体及受影响登记；本轮无需再改脚本行为或任何成品，交回前须独立全量复算。PM复核及16页目视前不启动reviewer或整合。T-024 in_progress、A-019 draft、未合main／批准／发布；首站T-021 in_progress、H-003 accepted、PAUSED监控不变。
 
 - 当前协调更新（2026-10-31，project-manager）：A-019首轮校验一致性修正已核——产品`dc8feea`、OPC`1f63fc3`均推送一致，变更仅三份校验文本；PM两次实跑143／143 pass、验证结果字节稳定，素材保留passed（103路径／89对象／194651874字节／59 SVG／55依赖），manifest 56＋33项本体哈希`db5a7bb9…`。但独立复算全部89项时发现1项来源哈希错标：A-019把selected-slot-mapping工作树CRLF哈希`0fbd4ec8…`写作固定Git blob，`615190d`实际blob为`b38b0362…`；其余88项匹配。映射正文、16 PNG／16 SVG、2 note、14背景及旧来源均未变。现退回visual-designer仅修正该固定哈希口径并补上对应校验断言、同步受影响登记；PM全量复核及16页目视前不启动reviewer或整合。T-024 in_progress、A-019 draft、未合main／批准／发布；首站T-021 in_progress、H-003 accepted、PAUSED监控不变。
