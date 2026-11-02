@@ -1,0 +1,8 @@
+schemaVersion: 3
+project: 'zhen-core'
+roleKnowledge:
+  product-manager: [research]
+  architect: [research]
+members:
+  - product-manager
+  - architect
