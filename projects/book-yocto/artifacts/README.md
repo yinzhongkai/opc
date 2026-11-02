@@ -57,8 +57,8 @@
 
 ## T-016 第 1 轮正文审校（project-manager）
 
-- 当前受评成果：第 4 章候选稿 v0.1，状态 in_review，书稿仓库 `D:/book-yocto` / `feature/t-016-chapter4-revision`，路径 `yocto/task05-4-让QEMU长出tiger这块板.md`，固定提交 `003910bf2971e10702019940535c690957740431`、blob `394494f1f7cb078b197d562ff376f6ef8d76e9af`。作者交付时的 draft/自查记录按上节保留，本轮不代表章节批准。
-- 2026-10-19 PM 已核对交接并依用户“你来协调执行吧”安排 reviewer → qemu-engineer → yocto-engineer → architect 串行审校；范围、署名意见区、用户通读和统一修订条件见 [T-016 正文第 1 轮安排](../TASKS.md)。受评正文和工程输入不变；2026-10-20 reviewer 提交独立审校 pass（`d2d9420af3756fcb0978d5f2b118abec502614b7`），2026-10-21 qemu-engineer 提交正文专业核对 pass（`510af0dc6eeb595f05b6967db5b6bbb766a3a209`），Yocto 专业核对亦于 2026-10-21 提交 pass（`abb439f6efbd2b35b63a9ddb2d7d9aca4d39a907`），PM 核对后衔接 architect，用户意见待收集。PM-C4-01 继续跟踪正式试读前同版配套资产的获取条件，尚未整章批准。
+- 第 1 轮受评成果及本次修订起点：第 4 章候选稿 v0.1，书稿仓库 `D:/book-yocto` / `feature/t-016-chapter4-revision`，路径 `yocto/task05-4-让QEMU长出tiger这块板.md`，固定提交 `003910bf2971e10702019940535c690957740431`、blob `394494f1f7cb078b197d562ff376f6ef8d76e9af`。旧稿及作者自查按实际 Git 版本追溯，新稿待 writer 交付，不代表章节批准。
+- 原串行审校已完成四位意见提交：reviewer `d2d9420af3756fcb0978d5f2b118abec502614b7`、qemu-engineer `510af0dc6eeb595f05b6967db5b6bbb766a3a209`、yocto-engineer `abb439f6efbd2b35b63a9ddb2d7d9aca4d39a907`、architect `39655def8bed654501c41927491afa91666fef18` 均为各自声明范围的 pass，署名原文保留。2026-11-01 用户及 PM 提交教学与操作衔接意见；2026-11-02 用户明确允许按所述逻辑先改写，现进入作者统一修订，见 [T-016 本轮意见及修订安排](../TASKS.md)。writer 待接收并逐项处理 U-C4-01～04、PM-C4-02～07；新稿需针对性复核，PM-C4-01 同版配套资产获取条件继续跟踪。
 
 ## 正文元信息样式（不是真实成果）
 
