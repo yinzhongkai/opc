@@ -252,6 +252,19 @@
 - 替代关系：将原 WORKSPACE 的 none 状态替换为独立 git 工作区；D-016 的业务范围及 D-011 的职责继续有效，不批准整份架构或软件实现。
 - 记录人及更新日期：project-manager，2026-10-21；配置维护依据用户本次有界授权，成员身份与团队配置不变。
 
+## D-018：取消GitHub Release页面安排
+
+- 状态：confirmed
+- 提出者：用户
+- 问题与候选方案：首版Git交付及发布标签完成后，是否继续创建GitHub Release页面。
+- 确认人：本项目经理会话用户。
+- 结果：不创建本项目的GitHub Release页面，将该项从后续计划移除；已有产品v0.1.0及OPC project/eating-everyday/v0.1.0 Git标签保留且不移动。
+- 确认来源与日期：2026-11-02，project-manager在本会话汇报GitHub Release页面仍待后续后，用户明确回复“不用在github release”。
+- 适用范围与影响：只取消此前首版收尾中的GitHub Release页面创建安排；README/发布说明、新最终独立复核及用户准备正式小程序账号的事项继续保留，本次不启动这些工作，不代表微信发布或成果批准。已完成的T-017/T-018及A-016/A-017保留原事实，本次治理决定独立于已冻结发布点。
+- 关联任务与成果：T-019；历史计划见T-017/T-018、A-016 v0.1、A-017 v0.3；同步PROJECT.md、STATUS.md和artifacts/README.md。
+- 替代关系：替代T-017/T-018及项目摘要中“GitHub Release页面仍待后续”的计划，不替代既有发布标签和测试结论。
+- 记录人及更新日期：project-manager，2026-11-02。
+
 ## 记录样式（不是真实决定）
 
 ```text
