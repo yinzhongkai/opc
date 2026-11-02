@@ -51,9 +51,9 @@
 
 ## T-016 chapter 4 作者候选稿（writer）
 
-- [作者修订与自查记录](work-records/t016-chapter4-writer-revision.md)：2026-10-19 依据固定设计/蓝图和真实模型/系统证据重写九节教学主线；候选稿 v0.1 draft，待 PM 核对后组织后续审校及用户通读，不作章节批准。
-- 书稿位置：本机 `D:/book-yocto`，`git@github.com:yinzhongkai/book-yocto.git`，`feature/t-016-chapter4-revision`；唯一正文 `yocto/task05-4-让QEMU长出tiger这块板.md`，固定开发提交 `003910bf2971e10702019940535c690957740431`，blob `394494f1f7cb078b197d562ff376f6ef8d76e9af`。792 行、只改本章；未推送/合入 main，不推进 WORKSPACE 正式 revision。
-- 本轮为作者静态校准与自查，未重跑工程。输入、E-01～E-10 对应、源码/原文检查、配套工程获取和跨章待核对项见记录；实际交付与停止写在 [T-016 writer 阶段](../TASKS.md)，原工程结论及其边界保持不变。
+- [作者修订与自查记录](work-records/t016-chapter4-writer-revision.md)：当前为 2026-11-02 第 1 轮统一修订候选稿 v0.2 draft，整章重写并逐项回复 U-C4-01～04、PM-C4-02～07；旧 v0.1 交付及其检查按原文保留，新稿待 PM 核对和针对性复核，不作试读验证或章节批准。
+- 书稿位置：本机 `D:/book-yocto`，`git@github.com:yinzhongkai/book-yocto.git`，`feature/t-016-chapter4-revision`；唯一正文 `yocto/task05-4-让QEMU长出tiger这块板.md`，当前提交 `22c428c3aa4257b0072a5ba66da59af2cfc2a12c`、blob `223b9b48569eb4355400f79d990e5408819a4b79`，842 行。旧受评稿 `003910bf2971e10702019940535c690957740431` / blob `394494f1f7cb078b197d562ff376f6ef8d76e9af` 保留；仅本章变化，未推送/合入 main，不推进 WORKSPACE 正式 revision。
+- 本轮未重跑工程；首次外置提取/新开发串联的补证、UART 新解释专业核对及 PM-C4-01 获取条件仍待处理，详见记录 §5。实际回复与停止写在 [T-016 本轮作者区](../TASKS.md)，旧 pass 不自动覆盖新稿；`yocto/debug.log` 保留且未读取/暂存。
 
 ## T-016 第 1 轮正文审校（project-manager）
 
