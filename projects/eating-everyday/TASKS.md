@@ -883,21 +883,21 @@
 ## T-024：按功能整理并合入OPC默认菜单记录
 
 - 负责人：project-manager
-- 状态：blocked
-- 授权来源与日期：2026-11-02，用户在本会话明确要求“把opc仓库的代码按功能压缩后合并到主开发分支”，随后补充“主开发分支是 project/eating-everyday 另外commit message要求保存一行”。本次范围为OPC本地整理与合并，未授权推送；目标为project/eating-everyday，四组提交信息均只保留一行。
+- 状态：in_progress
+- 授权来源与日期：2026-11-02，用户原要求按功能压缩OPC并合入project/eating-everyday，message单行，随后暂缓OPC、先完成产品。T-028完成产品清理及远端同步后，用户现明确“现在改opc仓库吧，可能先要把workspace.yaml改一下”，据此恢复本任务，在已验证产品版本上有界推进WORKSPACE.revision，完成OPC整合；延续前述主线同步及功能分支清理安排，仅处理本项目分支，不扩大到框架main或移动标签。
 - 变更类型：feature
 - OPC 开发分支：feature/eating-everyday/default-menu，目标project/eating-everyday；沿用当前一轮，不另起功能。
 - OPC 合入前目标提交：8474050eb2ddf6b1a414f649c4ba242636ecd4e8；2026-11-02已fetch，origin/project/eating-everyday仍为d4e65980fb30d4fe9a65248c277861823402eb9a，无远端新增提交；本地目标含既有T-019取消Release页面记录。
-- 成果物仓库与开发分支：git@github.com:yinzhongkai/eating-everyday.git；feature/default-menu原头12649a797966299c4f23b6d4a4b9f0b3d2d1619e，由后续T-025整理并本地合入main；原project.config.json修改保留。
-- 成果物仓库合入后的最终提交：T-025合入94afc6fd191ac09fa8fc2e216bb2fb8e3c7726d5，T-026补充正式AppID，T-027再按用户要求创建发布merge；当前产品main/v1.0.1为3800e6dd8bc32b7d767bfc873a4b9ae57d10232b，已复验。OPC采用与合并仍按用户指令暂缓，恢复时重新核对，不冒充已完成OPC整合。
-- 目标与范围：将本轮OPC的9个过程提交按需求、架构、研发交接、独立测试四组整理，同步T-023已完成的摘要；保留专业正文、历史事实、发布标签及.tmp/。在产品合并前置条件满足、引用核对和验证通过后，以--ff-only合入项目长期分支。
+- 成果物仓库与开发分支：git@github.com:yinzhongkai/eating-everyday.git；main，原feature/default-menu已由T-028安全删除。产品main/origin/main/远端main及v1.0.1剥离目标均为下述最终提交，工作树干净；正式AppID经T-026确认纳入，已无原公共配置差异。
+- 成果物仓库合入后的最终提交：3800e6dd8bc32b7d767bfc873a4b9ae57d10232b，发布main完整501/501，T-028远端全部tag对象/目标已核对，本次恢复再次读取一致。WORKSPACE只推进revision到该已合入发布提交，driver/repository/branch/checkout保持，不修改产品文件或重新运行未变测试。
+- 目标与范围：按需求、架构、研发交接、独立测试、产品发布交付等功能整理过程提交，再独立记录工作区采用和OPC整合回执，所有message单行；保留六份专业正文、历史事实、全部发布标签及.tmp/。更新当前引用与摘要，验证后--ff-only合入项目长期分支并完成本项目交付与清理。
 - 输入与依赖：D-019、T-020～T-023、A-001 v0.10/A-007 v0.4、A-006 v0.6/A-008 v0.4、A-013 v0.4、A-014 v0.6及根BRANCH_STRATEGY.md第4～5节；T-023无剩余测试阻塞，独立建议可合入。
 - 优先级与顺序：本轮收尾；不启动其他成员或下一轮开发。
 - 完成条件与确认方式：本地保存改写前可恢复副本；按功能整理且专业正文与原交付一致，结构/链接校验、git diff --check、目录边界、标签、无新增merge及工作树检查通过；产品最终版本合入并验证后核对引用，再在OPC目标分支复验。合入前不标记completed。
-- 进展：已核对两仓库分支、目标与原始测试结论，并同步PROJECT/STATUS/索引顶部旧暂停摘要。OPC远端不存在本轮feature，成员均已停止。原9个提交及目标/全部标签已保存为.git/codex-backups/t024-default-menu-20261102/original.bundle，git bundle verify通过，原头ded0e9c099b1d21b399dee12fc84cb7c5cff9a2a可恢复；含本次协调记录的改写前版本另存prepared.bundle。交互式rebase已完成，形成需求、架构、研发交接、独立测试及合入计划四组，逐条验证commit message均只有一行。用户随后明确只先合产品，本任务的OPC合并据此暂缓；T-025另保存产品合入与本次范围调整事实。
+- 进展：原四组整理及产品优先/OPC暂缓事实保留在历史。用户现明确恢复后，已再次核对产品本机/远端/发布tag、干净状态及OPC最新目标；原8个过程提交和全部tag另存.git/codex-backups/t024-final-integration-20261102/original.bundle并验证。已交互式rebase为五组功能提交，最终树与原c539bbc8cbb51d89f91b754e9b6a7aac4e3b63b4完全一致；现仅推进WORKSPACE.revision及本任务，准备合入并在目标复验后同步摘要和最终回执。
 - 成果与验证证据：python -X utf8 -B scripts/validate_framework.py通过（22个角色、39份技能、1个实际项目、605处本地链接）；git diff --check通过。四组边界文件树与对应原提交完全一致，6份专业成果与原ded0e9c字节相同；11个变更文件均在projects/eating-everyday/内，本轮新增merge为0，全部既有标签及WORKSPACE不变。OPC受控工作树干净、仅原.tmp/；产品HEAD/main/分支及公共/私有配置原始字节与交接一致、仅原project.config.json差异。检查报告位于本机.git/codex-backups/t024-default-menu-20261102/validation-pre-merge.json。上述为OPC整理验证，不新运行或代替产品测试，也不是目标分支合并后复验。
-- 合并与清理状态：尚未合并，保留两仓库开发分支；未推送、打移标签或创建Release。OPC自身提交由本任务ID、来源分支、合入前目标及Git历史定位，不在正文写自身哈希。
-- 阻塞与下一位行动人：用户在本次范围询问中明确回复“先合并产品仓库，opc仓库稍后再说”，据此将OPC合并暂缓；已完成的四组整理结果保留，不标记completed。产品由T-025先行本地合入，之后仍需用户明确恢复OPC合并，不能因产品完成而自动合OPC或清理两仓库开发分支。
+- 合并与清理状态：OPC合并已按本次最新授权恢复，尚待合入/复验及项目主线同步；产品已完成合入/验证/推送/分支清理。OPC标签及框架main保持，不创建Release；自身最终提交由任务ID、来源分支、合入前目标及Git历史定位，不写入自身哈希。
+- 阻塞与下一位行动人：产品前置条件和用户暂缓均已解除，无剩余合并阻塞；project-manager执行WORKSPACE采用、OPC快进合入、验证与交付，不启动其他成员或下一轮。
 - 更新日期：2026-11-02。
 
 ## T-025：整理并本地合入产品默认菜单
