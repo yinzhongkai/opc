@@ -252,6 +252,26 @@
 - 阻塞与下一位行动人：无；project-manager 完成校验和同步收尾。其他克隆随后显式切换新项目历史；后续业务仍由 researcher / writer 按 T-003 / T-004 领取。
 - 更新日期：2026-10-12
 
+## T-014：恢复本机书稿检出并核对版本
+
+- 负责人：project-manager
+- 状态：completed
+- 授权来源与日期：2026-11-02 用户在本项目经理会话要求检查 D:\book-bitcoin 的实际位置、分支和版本；确认当前环境无 D: 盘及声明检出后，用户要求“那先拉下代码吧”。
+- 变更类型：governance-only；恢复既定本机检出并记录核对结果，无书稿内容变更
+- OPC 开发分支：bugfix/book-bitcoin/t-014-workspace-restore；目标 project/book-bitcoin
+- OPC 合入前目标提交：42e1618dd4efb953842d5dcb5c38e6e7d2920648；本地目标与已缓存 origin/project/book-bitcoin 一致，本轮未联网刷新 OPC 远端
+- 成果物仓库与开发分支：git@github.com:yinzhongkai/book-bitcoin.git；从远端克隆 main 至 WORKSPACE 声明的 ../book-bitcoin；无产品修改，开发分支不适用
+- 成果物仓库合入后的最终提交：不适用；实际检出 main 与克隆取得的 origin/main 均为 0811b23eb19d79ceb55a3c64a81944312eec0f2c，与 WORKSPACE 锁定版本一致
+- 目标与范围：恢复当前克隆旁的既定书稿工作区，核对实际位置、origin、分支、精确提交和工作树；不执行领域核查、独立审校、书稿修订或实验。
+- 输入与依赖：用户本轮拉取授权、WORKSPACE 的 git 工作区声明及 D-001 至 D-003 的仓库与版本记录。
+- 优先级：未设定
+- 完成条件与确认方式：克隆到声明路径，origin、main 和精确提交符合配置，工作树干净，13 篇书稿及导航已检出；据实际命令结果确认，不据此作内容质量判断。
+- 进展：已完成克隆和只读核对；实际目录 C:\Users\YinZh\Documents\workspace\book-bitcoin，当前分支 main。
+- 成果与验证证据：git rev-parse --show-toplevel、remote get-url origin、branch --show-current、rev-parse HEAD / origin/main 均符合声明；status --porcelain=v1 为空；ls-files 共 15 个文件，含 bitcoin/task00–task12 共 13 篇，以及 README.md 和 bitcoin/index.md。当前环境未发现 D: 盘，PROJECT 中 D:\book-bitcoin 保留为历史来源；本次没有修改 WORKSPACE。
+- 合并与清理状态：本轮治理记录经校验后按 --ff-only 合入 project/book-bitcoin，并在目标分支验证后安全清理本地开发分支；实际收尾通过 T-014 Git 历史定位。本轮不推送 OPC 远端，不改写产品历史。
+- 阻塞与下一位行动人：本机书稿检出缺口已解除；后续由 researcher / writer 按 T-003 / T-004 刷新输入，T-006 的执行者、环境和授权仍待落实。本轮未启动这些业务任务。
+- 更新日期：2026-11-02
+
 ## 记录样式（不是真实任务）
 
 ```text

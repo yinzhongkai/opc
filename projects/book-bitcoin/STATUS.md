@@ -1,5 +1,17 @@
 # 项目状态摘要
 
+## 当前补充：2026-11-02
+
+- 汇总日期与信息截至点：2026-11-02，project-manager 依据用户“那先拉下代码吧”的授权恢复本机书稿检出并完成版本核对，见 [T-014](TASKS.md)。下列历史摘要保留原日期和当时证据，不作为当前本机位置或远端状态的新核对。
+- 当前阶段：出版前审核筹备；全书盘点、计划及审校标准已经形成，尚无出版就绪结论。
+- 任务进展：T-001、T-002、T-012、T-013、T-014 为 completed；T-003 至 T-011 仍为 todo。本轮未执行专业核查、审校、修订或实验。
+- 本机书稿工作区：已从 git@github.com:yinzhongkai/book-bitcoin.git 克隆至 C:\Users\YinZh\Documents\workspace\book-bitcoin，符合 [WORKSPACE.yaml](WORKSPACE.yaml) 的 ../book-bitcoin；当前分支 main，HEAD 与克隆取得的 origin/main 均为 0811b23eb19d79ceb55a3c64a81944312eec0f2c，与锁定基线一致，工作树干净。
+- 核对范围：15 个跟踪文件已检出，其中 bitcoin/task00–task12 共 13 篇，另有 README.md 和 bitcoin/index.md。本次检查仓库身份、分支、提交和文件清单，未重新计算原稿指纹或审查正文。当前环境未发现 D: 盘，D:\book-bitcoin 仅保留为历史登记。
+- 输入与下一步：本机检出缺口已解除；researcher / writer 后续按 T-003 / T-004 刷新并领取领域核查与配套清单工作；T-006 由 project-manager 组织证据，实际运行前仍需用户落实具体执行者、环境及授权。交付格式、工期与出版渠道仍待明确。
+- 本轮范围：未修改书稿及 WORKSPACE 配置，未访问 tiger；OPC 仅记录本次恢复与核对结果，不刷新或推送 OPC 远端，不改变已有审批事实。
+
+## 历史摘要：2026-10-12
+
 - 汇总日期与信息截至点：2026-10-12，本轮按 D-007 完成 v0.0.4 基线之上的项目历史整理及校验，实际同步收尾通过 T-013 Git 历史定位；审校进展沿用 2026-10-11 确认记录。
 - 维护人：`project-manager`，见 [PROJECT.md](PROJECT.md)；D-006 的框架升级与基线事实此前由框架超级管理员补录，2026-10-12。
 - 当前阶段：出版前审核筹备。
