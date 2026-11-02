@@ -768,6 +768,26 @@
 - 新标签名称保持project/eating-everyday/v0.1.0，必须等于本机/远端最新项目HEAD；本次明确整理授权覆盖对原分支和tag的必要改写，仅允许显式旧头/旧tag对象保护的原子lease推送。最终merge和tag对象通过Git引用核对，之后不追加commit。
 - 旧分支、tag及过时恢复引用先保存并校验本机.git/codex-backups/t018-history-squash-20261022/before-squash.bundle；同步成功后清理仅这些旧恢复引用，不把旧历史以新远端tag/分支重新发布。不改历史专业报告、WORKSPACE、成果物或框架引用；本次结果以最终祖先检查、框架校验、远端读回和会话回执确认。
 
+## T-019：同步取消GitHub Release页面安排
+
+- 负责人：project-manager
+- 状态：completed
+- 授权来源与日期：2026-11-02，本项目用户在当前项目经理会话明确“不用在github release”，要求取消此前汇报的GitHub Release页面待办。
+- 变更类型：governance-only
+- OPC 开发分支：feature/eating-everyday/t-019-cancel-github-release，目标project/eating-everyday。
+- OPC 合入前目标提交：d4e65980fb30d4fe9a65248c277861823402eb9a；开始前核对本地主线与已有origin/project/eating-everyday同SHA，受控工作树干净，仅原有未跟踪.tmp/。本次未联网刷新远端。
+- 成果物仓库与开发分支：不适用；只同步OPC治理记录，不操作产品仓库。
+- 成果物仓库合入后的最终提交：不适用；WORKSPACE.revision保持原产品发布版本。
+- 目标与范围：记录D-018，并同步PROJECT.md、STATUS.md及成果索引的当前计划，移除GitHub Release页面待办；保留原任务、发布事实及已有标签。
+- 输入与依赖：用户本次明确答复、T-017/T-018、A-016 v0.1/A-017 v0.3及当前项目摘要。
+- 优先级：未设定。
+- 完成条件与确认方式：用户决定有可复核来源，当前项目阶段和后续计划一致移除GitHub Release页面；旧发布历史不改写，README/发布说明及最终独立复核保留，文档引用和范围检查通过。本任务只同步明确决定，无需新增专业评审，不批准其他成果。
+- 进展：已刷新本人身份、scope及project-management技能，登记D-018并同步当前计划；用户明确取消的页面创建已移出当前待办，其他后续事项保留，完成记录同步条件。
+- 成果与验证证据：D-018及本次PROJECT.md、STATUS.md、artifacts/README.md局部修改；python -X utf8 -B scripts/validate_framework.py通过（22角色、39技能、1实际项目、601处本地链接），git diff --check通过。逐字核对TASKS/DECISIONS原历史前缀及模板未变，新编号唯一；本轮仅五份本项目治理文件，OPC既有标签目标仍为d4e65980fb30d4fe9a65248c277861823402eb9a。未重跑产品测试，不替代成果批准。
+- 合并与清理状态：本次治理记录在上述分支形成一个普通提交，使用--ff-only本地合入并在目标验证后安全清理；最终结果以Git引用及本会话回执核对。本次不联网、不推送或操作产品仓库，原有.tmp/保留。
+- 阻塞与下一位行动人：无；project-manager完成记录校验后收尾，不启动其余后续任务或联系其他会话。
+- 更新日期：2026-11-02。
+
 ## 记录样式（不是真实任务）
 
 ```text
