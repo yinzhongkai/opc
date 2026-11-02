@@ -1,6 +1,6 @@
-# 掌上卦盘：项目入口
+# 卦刻：项目入口
 
-项目 ID：`pocket-gua`。
+项目 ID：`guake`。
 
 遵循根目录 [AGENTS.md](../../AGENTS.md)。成员工作先执行 [会话初始化协议](../../SESSION_PROTOCOL.md)，会话创建和消息边界见 [SESSION_MESSAGING.md](../../SESSION_MESSAGING.md)，项目运行规则见 [PROJECT_PROTOCOL.md](../../PROJECT_PROTOCOL.md)，配置规范见 [CONFIG_SCHEMA.md](../../CONFIG_SCHEMA.md)。
 

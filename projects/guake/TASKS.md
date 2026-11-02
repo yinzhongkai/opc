@@ -10,7 +10,7 @@
 - 状态：todo
 - 授权来源与日期：<用户直接指派或项目经理安排的可核对依据>
 - 变更类型：<feature | bugfix | governance-only>
-- OPC 开发分支：<feature/pocket-gua/<name> | bugfix/pocket-gua/<name> | 不适用>
+- OPC 开发分支：<feature/guake/<name> | bugfix/guake/<name> | 不适用>
 - OPC 合入前目标提交：<完整 commit hash；同步最新目标分支后记录 | 不适用>
 - 成果物仓库与开发分支：<repository；feature/<name> | bugfix/<name> | 不适用>
 - 成果物仓库合入后的最终提交：<完整 commit hash；快进合并并验证后填写，可以是普通功能提交 | 不适用>
