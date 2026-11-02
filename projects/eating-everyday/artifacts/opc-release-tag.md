@@ -1,10 +1,46 @@
 # OPC项目发布标签记录
 
 - 项目：eating-everyday（今天吃什么）；成果ID：A-017；负责人：project-manager。
-- 版本：0.3，2026-10-22（Asia/Shanghai）；状态：draft；关联任务：[T-018](../TASKS.md#t-018为opc当前项目快照创建发布merge与标签)。
+- 版本：0.6，2026-11-02（Asia/Shanghai）；状态：draft；关联任务：T-018、T-029、T-030、[T-031](../TASKS.md#t-031压缩opc发布记录并保护强推当前版本)。
 - 用户来源：本次明确“把opc仓库打一个release的tag 要求有merge commit”。当前克隆以eating-everyday项目身份工作，标签发布当前项目资料；不把项目内容合入公共框架main。
 
-## 当前发布结构（v0.3）
+## 当前release结构（v0.6）
+
+用户明确要求把45b72e4e9d63741a7562794a35871d2280735d08和8aa7e59dbc6f234151ae1d60af929664274d042c合并，允许强推，并指定release message格式参考d4e6598；授权见D-023/T-031。本次将两个相邻节点及本次必要历史说明压为一条普通release提交，唯一父为a4dc4a2a0ece4e88250fd17523b5244b352ecbf7，message为单行release(eating-everyday): project/eating-everyday/v1.1.0。
+
+项目主线与附注project/eating-everyday/v1.1.0同时指向整理后的release提交；新SHA及tag对象由Git引用解析核对，不在同一提交正文自写。原45b72e4/8aa7e59不再作为当前主线/tag的祖先，旧发布内容与专业正文保留；本次仅同步必要当前说明，所有记录一并纳入，不在新release之后追加治理提交。
+
+先完整保存旧主线/tag和两个旧节点，再在来源分支rebase/fixup，核对新树与准备树一致。按预期旧SHA更新本机主线与同名附注tag，使用旧远端头8aa7e59及旧tag对象5b7d7de2438ef87e15665fccd85f77b8a7f1087c的显式lease原子强推；远端变化即停止。before.bundle、旧附注、准备/验证/推送及最终读回均保存在.git/codex-backups/t031-opc-release-squash-20261102/。
+
+仅本项目v1.1.0及项目主线受本次明确历史改写授权影响。OPC v1.0.0仍固定d4e6598，框架及其他标签不变；产品main/v1.1.0和WORKSPACE仍为3800e6d。本次验证结构/链接、diff、唯一父提交/单行message、旧节点非祖先、范围/专业正文及配置保护，不重跑未变产品测试，不创建GitHub Release页面。
+
+## 2026-11-02更名记录（v0.5历史）
+
+用户在T-030连续要求将OPC及产品的v1.0.1标签更名为v1.1.0，确认见D-022。本机和远端现有附注project/eating-everyday/v1.1.0，仍指向原发布快照45b72e4e9d63741a7562794a35871d2280735d08；旧project/eating-everyday/v1.0.1名称两边均已删除。project/eating-everyday/v1.0.0仍为d4e6598，其他OPC标签/框架main不变。
+
+更名只改Git标签名称与附注内部名称，不移动目标或改写发布提交。新名称及旧名删除已原子推送，实际远端读回的新对象/目标与本机相同，所有无关引用不变。原tag对象d8745fbb1162a267e7b5ce03d96419e41ed11e55及完整历史已备份至.git/codex-backups/t030-version-tag-rename-20261102/，tag-verification.json保存实际新对象与前后引用。
+
+本段属于更名后的后续治理回执，项目主线可因本回执前进；发布标签保持原45b72e4，不移动标签来纳入回执。WORKSPACE仍锁定产品3800e6d，产品新v1.1.0同样保留原3800e6d。回执通过T-030功能分支快进纳入/同步项目主线，最终结果见同目录final-verification.json；不创建GitHub Release页面或修改发布内容。
+
+## 2026-11-02标签创建（v0.4历史）
+
+用户在2026-11-02明确将project/eating-everyday/v0.1.0更名为project/eating-everyday/v1.0.0，同时新增project/eating-everyday/v1.0.1，授权及范围见[D-021](../DECISIONS.md#d-021opc项目标签更名并新增v101)。本次只调整本项目标签和必要治理记录；产品main/v1.0.1及WORKSPACE仍为3800e6dd8bc32b7d767bfc873a4b9ae57d10232b，框架main/其他标签不变。
+
+| 标签 | 当前定位规则 |
+|---|---|
+| project/eating-everyday/v1.0.0 | 由旧v0.1.0更名，附注标签，保留原发布目标d4e65980fb30d4fe9a65248c277861823402eb9a；不纳入后续默认菜单资料。 |
+| project/eating-everyday/v1.0.1 | 附注标签；本次全部治理记录先快进合入project/eating-everyday，再固定最终本机/远端项目主线HEAD。最终SHA由Git引用解析核对，不在同一提交自写自身哈希。 |
+| project/eating-everyday/v0.1.0 | 旧名称从本机/远端移除；旧对象251e3b6cf04464cbc21aa24b57cf441b05ed2048及完整历史已备份。 |
+
+本轮记录通过feature/eating-everyday/t-029-opc-version-tags形成单行普通治理提交，以--ff-only合入项目主线；tag说明均为单行。新tag创建后不追加治理commit，避免标签落在本次回执之前。已共享历史不改写，旧版本目标不移动。
+
+项目主线、两个新tag及旧tag删除使用显式refspec和--atomic同步，各引用由预期旧头或新tag必须不存在的lease保护；核对项目主线为快进。最终实际提交、标签对象/剥离目标、其他引用保护及远端读回以.git/codex-backups/t029-opc-tags-20261102/final-verification.json和Git为准，验证后安全删除已合入的本轮feature。原恢复点before.bundle已通过git bundle verify，旧附注原文另存old.tag。
+
+检查覆盖项目结构/本地链接、diff、目录边界、单行message、附注内部名称与目标一致、WORKSPACE和产品只读不变、其他标签/框架main/原.tmp保护。本次不重跑未变产品测试，不新增专业验收；按D-018不创建GitHub Release页面。
+
+以下v0.1～v0.3为2026-10-22的原执行历史，其旧标签名称和“当前发布”仅在各自时点适用，现以本节及T-029为准。
+
+## 2026-10-22发布结构（v0.3历史）
 
 用户再次明确要求把fb7d4e2d2a1d06208540c0ee34f8e2f48da0cc26和17c859ea2dafebe99503e46e595ab391649bcf05合入相邻提交，不作为独立节点保留在Git历史。本次据此整理8012e2beb4ead9b19259ddf7b10d06366d58103b之后的五条发布提交：旧发布merge与无文件变化的准备提交不再保留，回执及命名修正合为一条完整资料提交，再生成最终双父发布merge。
 
@@ -58,3 +94,6 @@
 | 2026-10-22 | 0.1 | 据实际Git结果记录OPC项目发布merge、附注标签、590处链接校验与原子推送核对，保留框架/产品不变范围，并补记标签后的交付回执。 |
 | 2026-10-22 | 0.2 | 按用户明确要求修正为project/eating-everyday/v0.1.0；全部回执先提交，标签固定项目主线最新发布merge，原子同步新标签/主线并按旧对象保护删除旧名，最终结果由Git引用核对。 |
 | 2026-10-22 | 0.3 | 按用户要求折叠旧发布merge与回执，五条整理为一条资料提交和最终双父release merge；保留全部内容并同步当前拓扑，tag仍等于最新HEAD，旧历史仅留本机bundle恢复。 |
+| 2026-11-02 | 0.4 | 按D-021将旧tag更名为project/eating-everyday/v1.0.0并保持原目标；全部记录先合入主线，再创建project/eating-everyday/v1.0.1固定最终HEAD，同步远端/旧名删除并保存实际引用校验。 |
+| 2026-11-02 | 0.5 | 按D-022/T-030将project/eating-everyday/v1.0.1更名为v1.1.0并同步远端，保留原45b72e4目标；更名回执为后续治理提交，不纳入既有发布快照。 |
+| 2026-11-02 | 0.6 | 按D-023/T-031将45b72e4和8aa7e59合为单条release，采用d4e6598同格式单行message，项目主线/tag同步指向新提交并按旧对象保护强推。 |

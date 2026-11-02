@@ -980,6 +980,66 @@
 - 阻塞与下一位行动人：本次产品清理与远端同步已完成，无剩余工作；OPC整合仍由用户后续明确安排，不自动启动下一轮。
 - 更新日期：2026-11-02。
 
+## T-029：更名OPC项目旧标签并创建v1.0.1
+
+- 负责人：project-manager
+- 状态：completed
+- 授权来源与日期：2026-11-02，用户明确要求将project/eating-everyday/v0.1.0更名为project/eating-everyday/v1.0.0，同时新增project/eating-everyday/v1.0.1；依据D-021，延续项目主线与标签远端同步和单行message要求。
+- 变更类型：governance-only；本OPC项目Git标签及必要记录。
+- OPC 开发分支：feature/eating-everyday/t-029-opc-version-tags，目标project/eating-everyday，从最新主线建立。
+- OPC 合入前目标提交：a4dc4a2a0ece4e88250fd17523b5244b352ecbf7，本机/远端一致；受控工作树干净，仅原.tmp/。
+- 成果物仓库与开发分支：产品不新建分支、不修改；WORKSPACE/main/v1.0.1仍为3800e6dd8bc32b7d767bfc873a4b9ae57d10232b，只读核对。
+- 成果物仓库合入后的最终提交：本任务不适用新增产品提交，继续引用已交付3800e6dd8bc32b7d767bfc873a4b9ae57d10232b。
+- 目标与范围：本机/远端旧标签更名并保持d4e65980fb30d4fe9a65248c277861823402eb9a；全部本次记录先以单行普通提交快进合入项目主线，再创建附注project/eating-everyday/v1.0.1指向最终HEAD，之后不追加治理提交。原子同步项目主线、两个新标签及旧名删除，核对后安全清理本轮feature。
+- 输入与依赖：用户当前要求、D-021、T-024完整交付及A-017历史；现有旧tag对象251e3b6cf04464cbc21aa24b57cf441b05ed2048，两新标签本机/远端不存在。
+- 优先级与顺序：保存恢复点、同步记录、快进合入、创建tag、原子推送并核对、清理；不启动其他成员。
+- 完成条件与确认方式：两新标签均为附注，旧名两边不存在；v1.0.0目标仍d4e6598，v1.0.1目标等于最终本机/远端项目HEAD；message单行，目录/结构/链接/标签及只读产品基线检查通过，其他标签/框架main/WORKSPACE/原.tmp不变。
+- 进展：原项目主线/全部tag的完整before.bundle已验证，旧附注原文及产品配置指纹已保存。本机旧名称已更为附注project/eating-everyday/v1.0.0，目标仍d4e6598。全部本次资料先纳入单行治理提交并--ff-only合入主线，再创建附注project/eating-everyday/v1.0.1锁定该最终HEAD；随后原子同步主线/新tag/旧名删除并核对，不在tag后追加治理commit。
+- 成果与验证证据：[A-017 v0.4](artifacts/opc-release-tag.md)。本次结构/链接、diff、目录边界、单行message、附注类型/内部名称/剥离目标及前后引用检查按同次交付执行；完整日志与最终实际SHA、tag对象及远端读回保存在.git/codex-backups/t029-opc-tags-20261102/final-verification.json。不在提交正文自写自身SHA，不运行未变产品套件或代写专业验收。
+- 合并与清理状态：治理记录通过feature/eating-everyday/t-029-opc-version-tags快进纳入project/eating-everyday；两个新tag、项目主线及旧tag删除按显式预期旧头/新tag不存在的lease原子同步，验证后用-d清理已合入feature。最终结果由Git引用及上述交付日志核对；不移动旧发布目标、不改写历史或其他标签。
+- 阻塞与下一位行动人：无；project-manager完成本次最终交付及远端核对，不修改业务范围/产品发布或启动其他成员。
+- 更新日期：2026-11-02。
+
+## T-030：两个仓库的v1.0.1标签更名为v1.1.0
+
+- 负责人：project-manager
+- 状态：completed
+- 授权来源与日期：2026-11-02，用户先要求更名OPC project/eating-everyday/v1.0.1，再要求更名产品v1.0.1；合并执行两个独立更名，保留OPC前缀和各自原目标，同步远端，依据D-022。
+- 变更类型：governance-only；标签引用及后续治理回执，不修改发布内容或提交历史。
+- OPC 开发分支：feature/eating-everyday/t-030-version-tag-rename，目标project/eating-everyday。
+- OPC 合入前目标提交：45b72e4e9d63741a7562794a35871d2280735d08，本机/远端一致，只有原.tmp/未跟踪。
+- 成果物仓库与开发分支：git@github.com:yinzhongkai/eating-everyday.git；main，无产品源码分支或新提交；本次只调整产品tag。
+- 成果物仓库合入后的最终提交：不适用新增产品提交；产品main/原发布merge仍3800e6dd8bc32b7d767bfc873a4b9ae57d10232b，WORKSPACE不变。
+- 目标与范围：产品v1.0.1 → v1.1.0，OPC project/eating-everyday/v1.0.1 → project/eating-everyday/v1.1.0。各自创建内部名称正确的附注tag并保持原剥离目标，再删除本机/远端旧名；逐仓库原子同步新tag及旧tag删除，其他tag不动。
+- 输入与依赖：用户连续两条明确要求、D-022、T-027～T-029既有发布及已核对引用；两个新名字本机/远端均不存在。
+- 优先级与顺序：两边先备份，再执行产品更名及OPC更名；随后仅OPC补充回执、快进合入并同步项目主线，安全清理该记录分支，不移动新标签以追随回执。
+- 完成条件与确认方式：两边新tag为附注且各自目标不变，旧名本机/远端不存在，新对象及剥离目标一致；主线历史不改写，治理commit单行；产品工作树/文件/配置、WORKSPACE及其他tag不变，原.tmp保留。
+- 进展：两边before.bundle均已验证，原tag对象/原文及引用/配置指纹已保存。产品先完成v1.0.1 → v1.1.0并原子同步，OPC再完成带前缀的同项更名并原子同步；两次推送均退出0，实际读回两个仓库全部heads/tags均与预期一致。新名称目标分别保持3800e6d及45b72e4，旧名本机/远端均不存在，其他引用不变。
+- 成果与验证证据：A-017 v0.5、A-018 v0.4；各仓库.git/codex-backups/t030-version-tag-rename-20261102/保存before.bundle、old.tag、前后引用、tag-push-result.json和tag-verification.json。新tag附注类型/内部名称、对象及剥离目标核验通过；产品main及发布内容、配置/WORKSPACE不变。OPC后续回执仅治理文件、单行commit，以--ff-only合入并同步项目主线；其最终头/清理记录保存在同目录final-verification.json，不移动新tag纳入回执，不重跑未变产品测试。
+- 合并与清理状态：两个仓库标签更名及远端读回已完成；本回执按既定步骤快进纳入OPC项目主线并同步，验证后-d清理记录分支。OPC新tag仍固定原45b72e4发布快照，允许主线因后续回执前进；产品main/tag仍同3800e6d，其他tag/框架main/原.tmp保持。
+- 阻塞与下一位行动人：无剩余更名工作；project-manager完成本次回执交付，不更改发布内容或上传发布。
+- 更新日期：2026-11-02。
+
+## T-031：压缩OPC发布记录并保护强推当前版本
+
+- 负责人：project-manager
+- 状态：completed
+- 授权来源与日期：2026-11-02，用户明确合并45b72e4和8aa7e59并允许强推，要求release message格式参考d4e6598；依据D-023，包含将受影响的OPC v1.1.0标签同步指向整理后的release提交。
+- 变更类型：governance-only；已发布OPC历史及必要记录整理，不改业务成果或产品发布。
+- OPC 开发分支：feature/eating-everyday/t-031-release-squash，目标project/eating-everyday，本任务为明确授权的历史整理例外。
+- OPC 合入前目标提交：旧本机/远端头8aa7e59dbc6f234151ae1d60af929664274d042c；其唯一父为45b72e4e9d63741a7562794a35871d2280735d08，后者父为保留的a4dc4a2a0ece4e88250fd17523b5244b352ecbf7。
+- 成果物仓库与开发分支：产品不创建分支或提交，只读核对main/v1.1.0与配置；WORKSPACE保持。
+- 成果物仓库合入后的最终提交：不适用新产品提交，继续为3800e6dd8bc32b7d767bfc873a4b9ae57d10232b。
+- 目标与范围：两个旧节点压成a4dc4a2后的单个普通release提交，message严格为release(eating-everyday): project/eating-everyday/v1.1.0且只有一行。必要历史/当前指向说明一并纳入该提交，之后不追加回执；重新创建同名附注v1.1.0指向新提交，主线/tag原子保护强推。
+- 输入与依赖：D-023、两个精确旧SHA、d4e6598 message格式、已同步的本机/远端引用，六份专业正文及已锁定产品版本。
+- 优先级与顺序：备份/冻结范围核对、同步说明、交互式rebase/fixup压缩、验证、按旧头CAS更新本机主线与tag、带显式lease原子强推、读回及安全清理。
+- 完成条件与确认方式：新release只有a4dc4a2一个父提交，两个旧节点不再是当前主线/tag祖先；新树与含本次说明的准备版本一致，原专业正文/WORKSPACE/产品不变；结构/链接/diff通过，message单行；主线/tag对象及剥离目标本机/远端一致，其他引用不变，原.tmp保留。
+- 进展：已核对精确父子关系及远端旧头/tag，原主线、两个旧节点和全部tag已完整备份并验证，旧附注原文另存。本次当前说明与原两条发布记录一并fixup为a4dc4a2之后的一条release；message严格采用用户指定格式。主线和OPC v1.1.0均同步到该新提交，不再额外追加回执节点。
+- 成果与验证证据：A-017 v0.6/A-018 v0.5；本次准备树/压缩树、唯一父提交、单行message、结构/链接/diff、目录边界、六份专业正文、产品及WORKSPACE保护按同次交付实际核验。最终新SHA、tag对象、旧节点非祖先及远端读回保存在.git/codex-backups/t031-opc-release-squash-20261102/final-verification.json，不在同一提交自写自身SHA；旧SHA仅作恢复/来源历史。
+- 合并与清理状态：本次为用户明确授权的共享历史整理例外；在验证来源后按预期旧SHA更新本机项目主线/OPC v1.1.0，再以两个显式旧对象lease原子强推，核对后安全清理来源分支。实际结果以Git及上述最终日志为准；其他项目/标签/框架main及产品不变，不使用无条件force。
+- 阻塞与下一位行动人：无；project-manager完成本次保护强推和最终核对，不唤醒其他成员或修改产品。
+- 更新日期：2026-11-02。
+
 ## 记录样式（不是真实任务）
 
 ```text
