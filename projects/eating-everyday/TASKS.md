@@ -889,7 +889,7 @@
 - OPC 开发分支：feature/eating-everyday/default-menu，目标project/eating-everyday；沿用当前一轮，不另起功能。
 - OPC 合入前目标提交：8474050eb2ddf6b1a414f649c4ba242636ecd4e8；2026-11-02已fetch，origin/project/eating-everyday仍为d4e65980fb30d4fe9a65248c277861823402eb9a，无远端新增提交；本地目标含既有T-019取消Release页面记录。
 - 成果物仓库与开发分支：git@github.com:yinzhongkai/eating-everyday.git；feature/default-menu原头12649a797966299c4f23b6d4a4b9f0b3d2d1619e，由后续T-025整理并本地合入main；原project.config.json修改保留。
-- 成果物仓库合入后的最终提交：94afc6fd191ac09fa8fc2e216bb2fb8e3c7726d5，由T-025取得并复验；用户明确OPC稍后再说，本任务暂缓采用和合并，WORKSPACE保留旧发布基线，不冒充已完成OPC整合。
+- 成果物仓库合入后的最终提交：T-025合入94afc6fd191ac09fa8fc2e216bb2fb8e3c7726d5，T-026补充正式AppID，T-027再按用户要求创建发布merge；当前产品main/v1.0.1为3800e6dd8bc32b7d767bfc873a4b9ae57d10232b，已复验。OPC采用与合并仍按用户指令暂缓，恢复时重新核对，不冒充已完成OPC整合。
 - 目标与范围：将本轮OPC的9个过程提交按需求、架构、研发交接、独立测试四组整理，同步T-023已完成的摘要；保留专业正文、历史事实、发布标签及.tmp/。在产品合并前置条件满足、引用核对和验证通过后，以--ff-only合入项目长期分支。
 - 输入与依赖：D-019、T-020～T-023、A-001 v0.10/A-007 v0.4、A-006 v0.6/A-008 v0.4、A-013 v0.4、A-014 v0.6及根BRANCH_STRATEGY.md第4～5节；T-023无剩余测试阻塞，独立建议可合入。
 - 优先级与顺序：本轮收尾；不启动其他成员或下一轮开发。
@@ -918,6 +918,66 @@
 - 成果与验证证据：Windows/Node v24.22.1；三环境均执行node --test --test-reporter=tap test/*.test.js test/independent/*.test.js，各501通过，失败/取消/跳过/todo均0；git diff --check通过。整理后文件树与含README调整的准备版本完全一致，三组与各对应原版本相比仅README不同，实现、测试及全部历史证据Git内容保持；两份独立证据清单39个文件的原始SHA-256均核验通过。公共配置eecc59987ea459258c2bf0329b69d98e73e790dfa6110d60f28ed3645456e645及私有df846e395e410139062950e08f81795908fc694a5755b96e0970551f11aee63d原始字节不变，公共差异未夹带提交；本次保护stash确认恢复后已移除，既有stash列表不变。原始被测SHA保存在original.bundle，可追溯但不误作压缩后main祖先。完整检查与TAP位于产品.git/codex-backups/t025-default-menu-20261102/final-verification.json及同目录prepared-working.tap、prepared-clean.tap、main-final.tap；历史12组wx仍按A-014原执行时点保留。
 - 合并与清理状态：产品本机main已合入并完成最终验证，当前checkout为main，origin/main仍为旧基线、未推送。保留feature/default-menu和OPC开发分支，按用户指令及双仓库规则等待OPC后续安排，不开始下一轮。产品v0.1.0仍固定原6c9ef2b，OPC标签/长期分支/WORKSPACE不变；未创建Release或微信发布，原忽略目录和.tmp/未清理。
 - 阻塞与下一位行动人：本任务产品本地交付已完成，无剩余产品合并阻塞。OPC采用/合并仍按用户决定暂缓，由用户后续明确恢复T-024，不因本任务completed自动推进。
+- 更新日期：2026-11-02。
+
+## T-026：纳入用户确认的正式小程序AppID
+
+- 负责人：project-manager
+- 状态：completed
+- 授权来源与日期：2026-11-02，用户先询问产品库剩余修改是否提交；本会话说明若为项目统一AppID应独立提交后，用户明确“wx8c3f40e0d7f5acab 这个是小程序正式的app id”。据此将已有配置差异作为项目公共配置单独提交，本地合入main，沿用单行message及不推送约定。
+- 变更类型：feature
+- OPC 开发分支：沿用feature/eating-everyday/default-menu，仅登记本次范围确认及结果；project/eating-everyday仍保持8474050eb2ddf6b1a414f649c4ba242636ecd4e8，OPC合并继续按T-024暂缓。
+- OPC 合入前目标提交：8474050eb2ddf6b1a414f649c4ba242636ecd4e8，本任务不合入OPC。
+- 成果物仓库与开发分支：git@github.com:yinzhongkai/eating-everyday.git；../eating-everyday；沿用本轮保留的feature/default-menu，目标main，合入前目标94afc6fd191ac09fa8fc2e216bb2fb8e3c7726d5，合入后两者均为8ad2ae35f8a9da39c1c9202c072b9045c9edc4b4。属于用户对本轮公共配置的补充确认，不另起下一轮或改写T-025已合入历史；fetch确认origin/main仍为6c9ef2b3135a0013fb0b06ebbe761b298c4b7260。
+- 成果物仓库合入后的最终提交：8ad2ae35f8a9da39c1c9202c072b9045c9edc4b4，已--ff-only合入main并完成复验；WORKSPACE采用仍暂缓。
+- 目标与范围：只纳入project.config.json现有appid差异，并修正README将其称为测试号的说明；其余配置、业务实现、测试和历史证据保持。原AppID为wx9911c002bdc2fffb，新正式AppID为wx8c3f40e0d7f5acab。
+- 输入与依赖：用户本次明确确认、T-025本地交付及既有配置兼容检查；不把提供AppID当作开发者权限、手机验收、上传或发布授权。
+- 优先级与顺序：本轮产品配置收尾；OPC继续暂缓，不启动其他成员或下一轮。
+- 完成条件与确认方式：配置差异范围和用户确认一致；独立单行提交，现有配置/打包检查及约定回归通过，快进合入main并复验；私有配置与发布标签保持，产品工作树不再有该公共配置差异，未推送。
+- 进展：已将project.config.json的appid和README正式账号说明形成独立单行提交chore(T-026): configure the official WeChat mini program AppID，以--ff-only合入main，未改写T-025历史。公共配置除appid外的JSON值完全一致，按仓库.gitattributes的LF规则规范化工作树换行；私有配置未改，产品工作树已干净。
+- 成果与验证证据：Windows/Node v24.22.1，来源工作树、无私有配置的git archive干净导出、合并后main分别执行node --test --test-reporter=tap test/*.test.js test/independent/*.test.js，各501/501，失败/取消/跳过/todo均0，含已有AppID兼容与打包检查；git diff --check通过。本次仅README.md及project.config.json两文件、一个普通提交、message仅一行、新增merge为0；正式AppID与用户确认一致。最初合并后工作树检查识别CRLF/LF差异，配置值无差异，按仓库规则恢复LF后工作树干净并完成上述main复验，未当作产品缺陷。私有配置SHA-256仍df846e395e410139062950e08f81795908fc694a5755b96e0970551f11aee63d，标签不变；配置恢复点、三份TAP与完整记录位于产品.git/codex-backups/t026-official-appid-20261102/及final-verification.json。未新增测试文件、平台/手机验收或改写原专业证据。
+- 合并与清理状态：本次配置已在本机main提交并完成复验，产品工作树干净，未推送。保留两仓库开发分支与旧标签，OPC长期分支/WORKSPACE仍不推进；未创建Release、上传或微信发布。
+- 阻塞与下一位行动人：本次正式AppID配置收尾完成，无剩余产品配置阻塞；OPC仍按T-024待用户后续安排，不自动恢复。
+- 更新日期：2026-11-02。
+
+## T-027：调整产品标签并创建v1.0.1发布merge
+
+- 负责人：project-manager
+- 状态：completed
+- 授权来源与日期：2026-11-02，用户要求将产品tag v0.1.0更名为v1.0.0，再创建release tag v1.0.1，要求有merge commit且message单行；依据D-020，仅本地执行，沿用不推送及OPC暂缓约定。
+- 变更类型：governance-only；产品Git发布元数据及必要说明，不修改运行实现或测试。
+- OPC 开发分支：feature/eating-everyday/default-menu，仅保存协调记录和发布证据，目标project/eating-everyday仍暂缓合入。
+- OPC 合入前目标提交：8474050eb2ddf6b1a414f649c4ba242636ecd4e8，本任务不移动该目标。
+- 成果物仓库与开发分支：git@github.com:yinzhongkai/eating-everyday.git；../eating-everyday；来源为本轮保留的feature/default-menu，目标main；合入前main/source均为8ad2ae35f8a9da39c1c9202c072b9045c9edc4b4，受控工作树干净。fetch及远端读取确认origin/main仍为6c9ef2b3135a0013fb0b06ebbe761b298c4b7260，旧标签对象d12b4b9c30f198400ca6fa15d2a36b4b19c94ef7、剥离目标同该旧发布提交，两个新标签均不存在。
+- 成果物仓库合入后的最终提交：3800e6dd8bc32b7d767bfc873a4b9ae57d10232b，发布merge/main/v1.0.1剥离目标一致，main验证通过；WORKSPACE仍保留旧发布提交，OPC版本采用暂缓。
+- 目标与范围：本机附注v1.0.0替换旧v0.1.0名称并保持原剥离目标；更新README当前标签说明，在main以--no-ff合入发布准备提交，创建双父发布merge及附注v1.0.1，所有新增commit message和tag说明均为单行。用户明确要求merge commit，作为本次产品发布例外；不改写既有main历史或其他标签。
+- 输入与依赖：用户两项最新要求、D-020、T-025/T-026已验证main、A-016历史发布方法；T-023独立建议及原验证限制保持。
+- 优先级与顺序：先保存恢复点并更名旧标签，再创建并验证新发布merge，最后创建v1.0.1；不启动其他成员、OPC合入或新一轮开发。
+- 完成条件与确认方式：备份旧tag对象、引用与配置；v1.0.0为附注且目标仍6c9ef2b，v0.1.0本机引用移除；发布merge恰有两个不同父提交，第一父为原main、第二父为已验证准备提交，tree与准备版本一致；main完整501项通过，v1.0.1剥离目标等于该merge/main，message均单行。产品工作树干净、配置和其他标签不变，未推送。
+- 进展：旧标签/历史与配置指纹已备份且bundle验证通过。本机v0.1.0更名为附注v1.0.0，标签对象c9b959b9fe77931109688e4de0bf8af89ce0243b，目标仍6c9ef2b；旧名称引用已删除。README发布准备提交a63531b35e462f3f815529a786ac067891ecb7f0以--no-ff合入main，发布merge为3800e6dd8bc32b7d767bfc873a4b9ae57d10232b，第一父8ad2ae35f8a9da39c1c9202c072b9045c9edc4b4、第二父为上述准备提交。main复验通过后创建附注v1.0.1，对象43b32337887b8a44a55739e22d4415f011ee523e，剥离目标等于merge/main；message为单行release(T-027): v1.0.1，准备提交及两个tag说明亦为单行。
+- 成果与验证证据：[A-018 v0.1](artifacts/product-release-v1.0.1.md)。Windows/Node v24.22.1，发布main实际执行完整501/501，失败/取消/跳过/todo均0，git diff --check通过；恰有两个不同父提交，merge/source树同为cacb8fac4dd779add01690415bbf00b29802306d，相比发布前main仅README变化。公共/私有配置字节、实现/测试/历史证据不变，工作树干净。产品.git/codex-backups/t027-release-v1.0.1-20261102/保存original.bundle、旧tag对象、引用与配置指纹、final-verification.json及release-main.tap；未新做平台或独立验收，不改写A-016原发布事实。
+- 合并与清理状态：两项本地标签操作和产品发布merge已完成，未推送；远端仍为此前main/旧标签状态，未更名或创建新tag。继续保留两仓库开发分支，OPC长期分支/标签/WORKSPACE保持，未创建Release页面或微信发布。
+- 阻塞与下一位行动人：本次产品本地发布元数据无剩余工作；远端同步及OPC合入留待用户后续安排，不自动执行。
+- 更新日期：2026-11-02。
+
+## T-028：删除产品功能分支并同步主线及标签到远端
+
+- 负责人：project-manager
+- 状态：completed
+- 授权来源与日期：2026-11-02，用户明确“把feature分支删除，然后把主分支和所有tag和远程同步下”。依本轮上下文执行产品仓库；该最新授权解除产品此前不推送及保留已合入功能分支的限制，包含同步T-027标签更名时删除远端旧v0.1.0；OPC合并继续暂缓。
+- 变更类型：governance-only；Git引用清理与远端同步，不修改产品文件或提交历史。
+- OPC 开发分支：feature/eating-everyday/default-menu，仅记录同步结果；目标project/eating-everyday不合并、不推送，也不删除其未合入功能分支。
+- OPC 合入前目标提交：8474050eb2ddf6b1a414f649c4ba242636ecd4e8，保持。
+- 成果物仓库与开发分支：git@github.com:yinzhongkai/eating-everyday.git；../eating-everyday；当前main为3800e6dd8bc32b7d767bfc873a4b9ae57d10232b，feature/default-menu为a63531b35e462f3f815529a786ac067891ecb7f0且已作为发布merge第二父完整合入；远端只有main/6c9ef2b及旧附注v0.1.0，无远端feature。
+- 成果物仓库合入后的最终提交：沿用T-027已验证的3800e6dd8bc32b7d767bfc873a4b9ae57d10232b，本任务只同步，不新建提交或移动发布标签。
+- 目标与范围：先保存本地/远端引用恢复点，验证已合入后用git branch -d删除本机feature/default-menu；以显式refspec原子同步main及全部两个本机标签v1.0.0/v1.0.1，并将远端v0.1.0删除以落实已授权更名。不得镜像推送或删除其他分支/标签。
+- 输入与依赖：用户本次追加授权、T-027/A-018发布结果、现有main完整501/501及精确版本；D-018不创建GitHub Release页面和OPC暂缓安排保持。
+- 优先级与顺序：删除已验证产品feature后同步远端，再读回所有heads/tags核对；不启动其他成员或下一轮。
+- 完成条件与确认方式：main保持发布merge及单行message，配置/工作树不变；本机及远端无产品feature，远端main与本机一致，全部标签的对象和剥离目标一致且旧名称不存在；推送前记录远端旧头并用显式lease保护，确认main为快进而非历史改写。OPC主线/标签/WORKSPACE保持。
+- 进展：已保存并验证before-sync.bundle，核对feature/default-menu/a63531b为main祖先后用git branch -d安全删除；远端原无feature，前后均未创建。使用显式四个refspec及--atomic，一次将main从6c9ef2b快进到3800e6d、新建v1.0.0/v1.0.1并删除旧v0.1.0；逐引用指定预期旧头/新标签不存在的lease，main祖先关系已核对，无提交历史改写。推送退出0，随后实际ls-remote读回全部heads/tags核对通过。
+- 成果与验证证据：[A-018 v0.2](artifacts/product-release-v1.0.1.md)。远端main=3800e6dd8bc32b7d767bfc873a4b9ae57d10232b；v1.0.0对象c9b959b9fe77931109688e4de0bf8af89ce0243b/剥离目标6c9ef2b3135a0013fb0b06ebbe761b298c4b7260；v1.0.1对象43b32337887b8a44a55739e22d4415f011ee523e/剥离目标等于main。旧名称不存在，全部本机标签对象/目标与远端一致；本机及远端分支仅main，本机origin/main亦一致。工作树干净、两份配置原始字节和T-027已验证树/message不变，本次仅引用操作，沿用同一发布提交501/501，不冒充新运行。产品.git/codex-backups/t028-sync-remote-20261102/保存before-sync.bundle、前后远端快照、推送命令/输出及final-verification.json。
+- 合并与清理状态：产品feature已安全删除，main与全部标签已原子同步并读回验证，旧远端tag更名完成。OPC feature未合入，按用户原暂缓安排保留；OPC长期分支/标签/WORKSPACE及原.tmp/不变，未创建GitHub Release页面或微信发布。
+- 阻塞与下一位行动人：本次产品清理与远端同步已完成，无剩余工作；OPC整合仍由用户后续明确安排，不自动启动下一轮。
 - 更新日期：2026-11-02。
 
 ## 记录样式（不是真实任务）
