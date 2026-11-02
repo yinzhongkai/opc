@@ -6,7 +6,7 @@
 
 - 建立日期：2026-10-15。
 - 用户请求来源：本会话建项用户，2026-10-15 明确请求“我想创建一个叫今天吃什么的项目”。
-- 当前阶段：默认菜单及正式AppID已在产品main/v1.0.1发布merge 3800e6dd8bc32b7d767bfc873a4b9ae57d10232b交付，message单行、main完整501/501。T-028按用户新授权安全删除已合入的产品feature，将main与全部tag原子同步远端并读回一致；v1.0.0仍固定旧6c9ef2b，旧v0.1.0两边名称均已删除，产品工作树干净。OPC的T-024合并/版本采用继续暂缓，OPC功能分支、长期分支/WORKSPACE及项目标签保持；恢复时再核对产品最终版本。按D-018不创建GitHub Release页面，Git交付不代表微信正式发布或整份成果批准。
+- 当前阶段：默认菜单及正式AppID已在产品main/v1.0.1发布merge 3800e6dd8bc32b7d767bfc873a4b9ae57d10232b交付，完整501/501、远端引用已核对。用户恢复OPC后，T-024已将WORKSPACE.revision锁定该版本，按功能整理并快进合入project/eating-everyday，结构/链接、专业正文、目录边界及跨仓库版本核验通过。交付方式为项目主线快进同步和已合入功能分支安全清理，最终引用及回执由Git和本机验证日志核对；框架main和OPC项目/框架标签保持。产品v1.0.0仍指向旧6c9ef2b，旧v0.1.0两边已删除；按D-018不创建GitHub Release页面，Git交付不代表微信正式发布或整份成果批准。
 - 建项记录人：框架超级管理员。
 - 框架基线：已发布标签 `v0.0.4`，提交 `464ca52aafc6c73ff780a7120acd3bf63c9d31dd`。
 - 项目长期分支：`project/eating-everyday`。
@@ -32,7 +32,7 @@
 
 ## 交付约定
 
-- 需求、方案、计划、评审、验收等治理与协作成果位于OPC `artifacts/`；源码及测试资产位于[WORKSPACE.yaml](WORKSPACE.yaml)声明的产品Git仓库`git@github.com:yinzhongkai/eating-everyday.git`，主线`main`，checkout为相对OPC根目录的`../eating-everyday`。依据D-017、T-016及用户T-017先打带merge commit发布标签的追加要求，2026-10-22当前交付基线为已验证并核对GitHub的`6c9ef2b3135a0013fb0b06ebbe761b298c4b7260`，包含原生工程与测试，v0.1.0指向双父发布merge；与95173d4文件树一致，工程配置仍按用户授权纳入；旧README基线8fa87fe4cb8f7f33aacf2842798a486150a6105e保留为T-009历史。原被测提交由两仓库的archive/eating-everyday/t016-before-squash-20261022标签保留，不把旧SHA当作压缩后主线的祖先。统一索引记录成果的仓库、路径和精确版本，历史交付证据见[A-015](artifacts/git-delivery-handoff.md)，当前发布标签见[A-016](artifacts/product-release-tag.md)。
+- 治理与协作成果位于OPC `artifacts/`；产品源码/测试资产位于[WORKSPACE.yaml](WORKSPACE.yaml)声明的`git@github.com:yinzhongkai/eating-everyday.git`，main、相对checkout `../eating-everyday`。2026-11-02当前锁定交付基线为已验证并同步GitHub的`3800e6dd8bc32b7d767bfc873a4b9ae57d10232b`，附注v1.0.1指向双父发布merge，含默认菜单及正式AppID；发布结构、验证及远端同步见[A-018 v0.3](artifacts/product-release-v1.0.1.md)。旧6c9ef2b现由产品v1.0.0保留，原v0.1.0名称按用户要求更名；A-015/A-016及旧README基线保留各自历史。原开发/被测提交的恢复点见T-016及T-024～T-028所列tag或bundle，不将被改写SHA误作当前main祖先。统一索引引用仓库、路径和精确版本，OPC自身提交由任务、来源分支、合入前目标及Git历史定位。
 - 用户保证当前仓库每次只有一个会话执行，前一会话完成或停止后再启动下一会话；框架不实现文件锁或自动调度。
 - 每份文档默认维护一个当前版本，记录版本及批准依据；历史通过用户维护的 Git 追溯。
 - 评审与批准要求在任务中明确。专业交叉评审由现有成员在原会话执行，不默认新建评审会话；用户保证受评版本可读取且不变，本轮全部评审者提交意见后作者再统一修订。采用根 [项目运行协议](../../PROJECT_PROTOCOL.md) 的评审、完成与状态规则。

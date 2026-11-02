@@ -1,8 +1,8 @@
 # 产品标签更名与v1.0.1发布记录
 
 - 项目：eating-everyday（今天吃什么）；成果ID：A-018；负责人：project-manager。
-- 版本：0.2，2026-11-02（Asia/Shanghai）；状态：draft；关联任务：[T-027](../TASKS.md#t-027调整产品标签并创建v101发布merge)、[T-028](../TASKS.md#t-028删除产品功能分支并同步主线及标签到远端)。
-- 来源及批准边界：[D-020](../DECISIONS.md#d-020产品标签更名及v101发布merge)记录标签更名及发布merge授权；随后用户明确要求删除产品feature并同步main及全部tag到远端，T-028已实际完成。成果本身尚无整份批准，OPC合并仍暂缓。
+- 版本：0.3，2026-11-02（Asia/Shanghai）；状态：draft；关联任务：[T-027](../TASKS.md#t-027调整产品标签并创建v101发布merge)、[T-028](../TASKS.md#t-028删除产品功能分支并同步主线及标签到远端)、[T-024](../TASKS.md#t-024按功能整理并合入opc默认菜单记录)。
+- 来源及批准边界：D-020及T-028的产品标签/发布/远端同步已完成。用户随后恢复OPC并要求先核对WORKSPACE，T-024已采用本次最终产品版本并快进合入项目主线。成果仍draft，无整份批准或微信正式发布结论。
 - 存储位置：治理记录在OPC；产品仓库git@github.com:yinzhongkai/eating-everyday.git，本机checkout=../eating-everyday。
 
 ## 标签与提交
@@ -37,7 +37,9 @@ T-027时仅本机完成，远端main为6c9ef2b，v0.1.0对象为d12b4b9，两个
 
 T-028使用显式refspec及--atomic同步main、两个新tag及旧tag删除，分别用预期旧头/不存在新标签的lease保护。main从6c9ef2b快进到3800e6d，无提交历史改写；推送退出0。实际读回远端全部heads/tags：main=3800e6dd8bc32b7d767bfc873a4b9ae57d10232b；两个tag对象及剥离目标与上表完全一致，v0.1.0不存在。产品本机main/origin/main一致，仅保留main分支，工作树干净。完整bundle、前后引用、推送命令/输出及验证报告保存于产品.git/codex-backups/t028-sync-remote-20261102/；本次未改产品文件、配置、发布merge或tag对象，沿用同一版本的501/501，不重复执行未变测试。
 
-OPC的project/eating-everyday仍为8474050eb2ddf6b1a414f649c4ba242636ecd4e8；WORKSPACE.revision仍锁定旧发布提交6c9ef2b，按用户指令暂缓采用和合并。OPC project/eating-everyday/v0.1.0及框架标签不变。仅保留未合入的OPC功能分支，产品已按用户新指令清理；不开始下一轮，恢复OPC整合时重新核对本次产品最终提交。
+用户明确恢复OPC后，WORKSPACE.revision已从旧6c9ef2b推进到3800e6dd8bc32b7d767bfc873a4b9ae57d10232b，地址/驱动/main/相对checkout保持，实际产品本机和远端再次核对一致。OPC按功能整理后以--ff-only合入project/eating-everyday，合入前后结构/链接、目录边界、专业正文、无新增merge及版本引用检查通过；最终回执继续快进纳入，提交均单行。OPC自身最终版本由任务、来源分支、合入前目标8474050e及Git历史定位，不在同一提交自写哈希。
+
+项目主线同步及已合入功能分支安全清理按T-024交付步骤执行，最终本机/远端引用与清理校验保存在OPC本机.git/codex-backups/t024-final-integration-20261102/final-verification.json；原历史和tag已备份为同目录完整original.bundle。OPC project/eating-everyday/v0.1.0、框架main及全部标签保持，不新增发布或启动下一轮。
 
 按D-018不创建GitHub Release页面；未执行微信上传、提审或正式发布。
 
@@ -47,3 +49,4 @@ OPC的project/eating-everyday仍为8474050eb2ddf6b1a414f649c4ba242636ecd4e8；WO
 |---|---|---|
 | 2026-11-02 | 0.1 | 记录本地标签更名、v1.0.1双父发布merge、单行message、501项main复验及未推送/OPC暂缓状态。 |
 | 2026-11-02 | 0.2 | 按追加授权安全删除产品feature，原子同步main/全部tag及旧tag删除，实际读回对象/目标一致；产品干净，OPC仍暂缓。 |
+| 2026-11-02 | 0.3 | 用户恢复OPC，WORKSPACE锁定产品最终发布，按功能整理/快进合入及目标检查完成，登记最终交付的引用和清理验证位置。 |
