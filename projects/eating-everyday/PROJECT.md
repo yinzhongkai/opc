@@ -6,7 +6,7 @@
 
 - 建立日期：2026-10-15。
 - 用户请求来源：本会话建项用户，2026-10-15 明确请求“我想创建一个叫今天吃什么的项目”。
-- 当前阶段：默认菜单及正式AppID已在产品main/v1.0.1发布merge 3800e6dd8bc32b7d767bfc873a4b9ae57d10232b交付，完整501/501、远端引用已核对。用户恢复OPC后，T-024已将WORKSPACE.revision锁定该版本，按功能整理并快进合入project/eating-everyday，结构/链接、专业正文、目录边界及跨仓库版本核验通过。交付方式为项目主线快进同步和已合入功能分支安全清理，最终引用及回执由Git和本机验证日志核对；框架main和OPC项目/框架标签保持。产品v1.0.0仍指向旧6c9ef2b，旧v0.1.0两边已删除；按D-018不创建GitHub Release页面，Git交付不代表微信正式发布或整份成果批准。
+- 当前阶段：产品main/v1.1.0及WORKSPACE继续固定3800e6dd8bc32b7d767bfc873a4b9ae57d10232b。用户最新D-023/T-031明确合并OPC的45b72e4和8aa7e59并允许强推，release message采用release(eating-everyday): project/eating-everyday/v1.1.0。两条记录和本次必要说明一并压为a4dc4a2之后的一条release，项目主线/OPC v1.1.0按显式旧对象保护原子同步到新提交；最终SHA、树与远端结果通过Git及T-031本机日志核对，不在正文自写自身哈希。产品、WORKSPACE、OPC v1.0.0、框架及其他标签保持，原专业结论和D-018边界继续有效。
 - 建项记录人：框架超级管理员。
 - 框架基线：已发布标签 `v0.0.4`，提交 `464ca52aafc6c73ff780a7120acd3bf63c9d31dd`。
 - 项目长期分支：`project/eating-everyday`。
