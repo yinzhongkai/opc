@@ -3,19 +3,19 @@
 - 项目：eating-everyday（今天吃什么）
 - 成果 ID：A-013
 - 负责人：developer（研发工程师）
-- 关联任务：当前[T-022](../TASKS.md#t-022实现首次自动加载内置默认菜单)，供[T-023](../TASKS.md#t-023独立验证默认菜单及已有数据保护)串行接收；T-012～T-016等已完成事实保留，不重开。
-- 版本：0.4
-- 更新日期：2026-11-02（Asia/Shanghai）
+- 关联任务：当前[T-034](../TASKS.md#t-034实现启动恢复上次使用的菜单)，供[T-035](../TASKS.md#t-035独立验证启动恢复和本机菜单保护)串行接收；T-012～T-023等原完成事实保留。
+- 版本：0.6
+- 更新日期：2026-11-03（Asia/Shanghai）
 - 状态：draft
-- 适用范围：T-022一次性默认菜单、旧菜单/空库及失败恢复保护，实现、开发自测与隔离真实wx冒烟；不包含本次独立或手机验收。第1～6节保留旧原生工程及配置测试历史，第7节为本轮当前交接。
-- 来源及输入：2026-11-02用户D-019及TASKS开头串行派发授权，project-manager通知T-022；OPC接手19005a6b980a3bf6fbe8e4f7f6e704a46c36961f。完整读取[A-001 v0.10](product-requirements.md)、[A-007 v0.4](product-decision-options.md)、[A-006 v0.6第10节](system-architecture.md)、[A-008 v0.4第0节](accounts-access-checklist.md)及T-020/T-021实际结果、T-023要求；12/12/32与DM-01～DM-12为当前输入。原T-012/T-014的输入及结果保留各历史段落。
+- 适用范围：T-034同轮重开修复BUG-T035-001及开发复测；第1～8节保留原工程、配置及首轮启动恢复历史，第9节为当前修复交接。BUG仍open，T-035保持blocked；不包含独立关闭或手机验收。
+- 来源及输入：2026-11-03 D-024及用户既定串行授权，project-manager明确重开T-034并通知修复；本次OPC接手fbddd9c508813293e6942a786f5309762c9b47e0。已刷新身份/角色/scope及三项有效技能，现行[A-001 v0.11](product-requirements.md)、[A-007 v0.5](product-decision-options.md)、[A-006 v0.7第11节](system-architecture.md)、[A-008 v0.5第0节](accounts-access-checklist.md)保持；新增读取[A-014 v0.7第11节](miniprogram-test-report.md)及独立两层复现。13/13/40及SR-01～13范围不扩展，原输入保留各历史段落。
 - 存储位置：本治理正文在OPC artifacts；产品源码、测试、中间证据全部在本机产品仓库git@github.com:yinzhongkai/eating-everyday.git，checkout=../eating-everyday。
-- 固定工程候选：代码/测试/最小说明提交**dcb22d3bdcec196e37b544805f79196de126f676**，父为产品发布基线6c9ef2b3135a0013fb0b06ebbe761b298c4b7260；完整证据资产HEAD **33e3e64cd3e59d48adbd13d69622a82087468016**，后者相对代码候选只增加test/evidence/developer-t022-default-menu/，运行代码与测试不变。
-- 主线交付：本轮产品feature/default-menu与OPC feature/eating-everyday/default-menu仅本地提交，未合入/推送；产品main/WORKSPACE保持6c9ef2b3135a0013fb0b06ebbe761b298c4b7260，OPC目标project/eating-everyday为8474050eb2ddf6b1a414f649c4ba242636ecd4e8。既有产品v0.1.0和OPC项目发布标签保持固定，本次未联网核对远端；当前代码候选不是已合入交付基线。
-- 批准依据：D-019确认功能范围、T-022授权本成员实现/开发交接；无整份成果批准，不代写T-023独立结论或执行后续合入、发布、WORKSPACE推进。
-- 版本记录：0.1首次原生候选及Esc停止历史；0.2随机跨域修复与开发预览；0.3配置测试适配及双环境结果；0.4默认菜单一次性初始化/兼容/恢复及当前开发验证，交T-023独立接续。
+- 固定工程候选：修复代码/测试/说明 **5085636ba8955b08fcf39c24cf84b0329ef89c6d**，父为tester复现资产48469cfa7594b127b0af549b9ecafe0698b47cc9，产品main/WORKSPACE基线仍3800e6dd8bc32b7d767bfc873a4b9ae57d10232b；完整修复证据资产HEAD **ae61a36c59d95e24669010900b8d8b99b739cded**，后者只增加test/evidence/developer-fix-t035-001/，运行代码与测试不变。
+- 主线交付：本轮产品feature/t-032-startup-restore与OPC feature/eating-everyday/t-032-startup-restore仅本地提交，未合入/推送；产品main/WORKSPACE及v1.1.0保持3800e6dd8bc32b7d767bfc873a4b9ae57d10232b，OPC目标project/eating-everyday保持2e241e6b489a65701ba2078640b2794cdabba429。未联网刷新远端，未移动标签；当前候选不是已合入交付基线。
+- 批准依据：D-024/T-034授权本成员实现和开发交接；无整份成果批准，不代写T-035独立结论或执行后续合入、发布、WORKSPACE推进。
+- 版本记录：0.1首次原生候选及Esc停止历史；0.2随机跨域修复与开发预览；0.3配置测试适配及双环境结果；0.4默认菜单一次性初始化/兼容/恢复；0.5启动恢复首轮开发验证；0.6修复旧意图遮蔽当前补记及警示误清，交T-035独立复测，不关闭原BUG。
 
-以下第1～4节为v0.1、第5节为v0.2、第6节为v0.3的历史事实；**当前T-022以第7节v0.4为准**。旧输入SHA、首次为空、Esc、未验证手机和待关闭缺陷均限于原执行时点，不覆盖当前契约；既有专业测试事实以其原任务/A-014对应版本为准，不倒写旧失败。
+以下第1～4节为v0.1、第5节为v0.2、第6节为v0.3、第7节为v0.4、第8节为v0.5的历史事实；**当前T-034修复以第9节v0.6为准**。旧输入SHA、首次为空/重进手动加载、Esc、未验证手机和待关闭缺陷均限于原执行时点，不覆盖当前契约；既有专业测试事实以其原任务/A-014对应版本为准，不倒写旧失败。
 
 ## 1. 工程与操作入口
 
@@ -175,3 +175,89 @@ tester先核对产品feature/default-menu的完整资产HEAD 33e3e64cd3e59d48adb
 手机扫码/本次预览码、实体离线首次、物理满配额/强杀/断电、多设备、旧程序降级写入兼容与多进程CAS未新增验证。真实工具的动作通过SDK/控制器调用，未作为物理鼠标/手机触控验收；内容故障为注入，不是物理磁盘满。原生重试入口已有回调级页面测试，真实工具本轮故障使用启动协调器直接调用，T-023按风险补充按钮路径及实际平台差异。没有把这些未覆盖项写成通过，也没有索取新的账号或重复业务确认。
 
 T-022已满足实现、自测、固定候选及开发交接条件，当前无剩余研发阻塞，成果仍draft，T-023尚待独立执行。两仓库本地提交本人内容并核对后停止，由project-manager确认停止后通知tester；本成员不发消息、不启动他人，不合入主线/推送/打移标签/创建GitHub Release/微信发布，不推进WORKSPACE、不清理原.tmp/、私有配置或开发分支。PROJECT/STATUS及索引顶部旧摘要由原维护人后续同步。
+
+## 8. v0.5：T-034启动恢复实现与开发交接（2026-11-03）
+
+### 固定输入、代码与交付边界
+
+本轮接手OPC 42aeb7235a1c6070afaba695f334b0b2cd73d9a9，产品基线3800e6dd8bc32b7d767bfc873a4b9ae57d10232b。T-032提交2cf3714163a84e5b0fa68c93cc62a16bc7f87f46、T-033提交b47f6081af7392d4c4fc4d52624ca73678781dbb，均经项目经理核对完成、停止后才实际接收。本成员按SESSION_PROTOCOL刷新身份/角色/scope与software-engineering、frontend-development、wechat-miniprogram-development三项有效技能，读取WORKSPACE和相关需求/技术正文；不启动或联系其他会话。
+
+输入UTF-8/LF归一化正文SHA-256为：A-001 v0.11 `989002414d6817db1b5539a4e27757972dac0408a0ee054741a0d18d1babb454`，A-007 v0.5 `4864d15138e96d90d83ae5f17c728af6e13f5953ebcab8c30e51b034babffcdd`，A-006 v0.7 `f31ca08f9af88c7ee989065ebb785d3cac2e77cec6f3339b50ad119cac21f511`，A-008 v0.5 `0e6b9b5b0a350f257574b4a971850dbe486a2abd8d4e45b06a3e60ff984fd6ef`。落实D-024、13项需求/13条规则/40项验收及SR-01～13，不追加用户业务确认。
+
+固定代码/测试/最小说明为产品 **e3ce8cfecde344d3bd7c4c003ee427696fd9a877**；完整资产HEAD **9ab18b3e283b72f576055547453fbcfa5b192bd3**，后者仅增加 `test/evidence/developer-t034-startup-restore/`。本机仓库 `git@github.com:yinzhongkai/eating-everyday.git`、checkout `../eating-everyday`、分支 `feature/t-032-startup-restore`；OPC配对分支 `feature/eating-everyday/t-032-startup-restore`。产品main、v1.1.0和WORKSPACE仍3800e6d，OPC目标project/eating-everyday仍2e241e6b489a65701ba2078640b2794cdabba429；未合入、推送、发布、移动标签或删除分支，未联网刷新远端。
+
+### 实现与风险处理
+
+| 契约 | 本轮实际实现 |
+|---|---|
+| SR-01～04 启动/升级 | 新增MenuController作为原生页面实际入口，先复用既有pending/complete初始化，再核验当前菜单库及选择，加载最新保存快照。优先有效记忆ID；无/空/悬空选择按内置bootstrap ID（改名仍成立）、trim同名“默认菜单”、原索引首份回退。合法旧空库及删空保持空，不补种或加载历史回执。 |
+| SR-05～08 菜单操作 | 成功关联/创建/覆盖/另存才记稳定ID；改名不改ID。dirty保存A再切B按阶段执行，A成功与B读取失败分别保留；选择不明停在已完成阶段。删除仅按实际记忆ID清null，保留有效其他选择及当前未保存副本，记忆重试不重复菜单保存/删除或重载。旧回执重放不制造选择事件，也不能丢弃新dirty内容。 |
+| SR-09～10 故障分离 | 必需菜单读错/损坏阻断启动，不能当不存在；单独选择读错/坏校验/未知schema不覆盖raw，健康菜单仍可手动选。菜单事实与选择状态独立返回，页面明确显示“菜单已保存，启动选择未能记住”及专用重试入口。 |
+| SR-11 写入顺序/不明状态 | SelectionStore与菜单写共享repository串行队列，容量/原raw与revision guard/写后回读。超时保留真实write settled状态并冻结冲突持久动作；旧值或更高值不能释放仍可能落盘的旧写。完整唯一拟写记录且Port声明singleWriteEffect才可提前确认；WxStorage单次调用setStorage且无内部重试。不是多进程CAS、跨key事务或物理断电保证。 |
+| SR-12 生命周期/授权 | sessionEpoch、choiceEpoch、Session editGeneration及owner控制适用性。新关联即使同ID且无需IO也撤销旧补记授权；旧owner不能撤销新owner意图，unload后的回调/恢复不能回放旧工作副本。普通同页hide/show保留编辑；后台尚未应用的启动保持waiting，onShow重新读取再应用。 |
+| SR-13 兼容 | 仅新增精确逻辑key `ee/selection`，沿用WxStorage原前缀和pack/unpack。v1 menu-selection记录含revision/baseRevision/menuId或null/operationId，校验严格；原根/索引/内容/bootstrap/receipt格式不变，既有非空menuId不加新格式限制。无根但有选择不是全新，其他未知key仍拒绝。 |
+
+代码主要在 `src/selection.js`、`src/menu-controller.js`、`src/repository.js`、`src/session.js`、`adapters/wx.js`、`pages/index/`。原 `StartupCoordinator` 保留为低层bootstrap原语供旧调用及原独立测试使用，不再是原生页面应用入口；直接WorkingSession/repository CRUD仍只管菜单，不把检查读写当用户选择。产品 `docs/core-api.md` 与README说明当前接口、阶段结果、恢复条件和最少复测。
+
+### 开发验证与原始证据
+
+以下均由developer执行，不代替T-035独立设计/执行或合入批准。
+
+| 环境/范围 | 实际结果与证据 |
+|---|---|
+| Windows、Node v24.22.1，保留本机配置工作树 | 完整命令 `node --test --test-reporter=tap test/*.test.js test/independent/*.test.js`，**559/559**，失败/取消/跳过/todo均0；产品本轮目录working.tap。 |
+| 固定代码候选git archive干净导出 | 无.git/私有配置，同一完整命令 **559/559**，四类非通过计数均0；clean-export.tap，archive SHA-256 `74d101667ff78d94f0c3826d9e8572b000894ee30735df06c9388c09ed6dd02c`及22份运行文件SHA在candidate-manifest.json。 |
+| 新专项及旧保护 | 两份startup-restore测试新增 **58个顶层检查**，覆盖上述SR-01～13；页面专项为回调级wx替身。原default-menu-page中四项开发者旧重进预期按新需求调整；原独立测试/历史证据 **229份** 原始字节完全保持，未删用例、skip或改tester结论。 |
+| 真实微信开发工具、基础库3.17.4、SDK0.13.0 | **九组**隔离冒烟通过、0运行异常：默认8项及选择、SDK点击真实wx抽取、另存9项B后reLaunch恢复、切回A后重建恢复、未保存编辑不跨重建、真实保存handler中注入记忆失败的部分成功提示、实际重试handler只补记且菜单根不变、补记后重建恢复、真实WxStorage旧complete根无选择/已改名内置ID升级。native.json逐步记录。 |
+| 视觉、隔离和清理 | 三张PNG已实际查看：默认8项、恢复9项B、部分成功及补记入口。页面注册前即注入独立前缀；临时工程只更改注册注入/工程名，正式AppID保留。最终仅移除本前缀13个key，非测试删除0，临时工程已关闭；CLI日志脱敏。未读取/清空实际用户菜单。 |
+| 配置及固定候选保护 | 公共原始SHA-256前后均 `27a614c100e150979107c9f648b67f757d81b586883c9eb89a46f2670c143bbf`，私有前后均 `df846e395e410139062950e08f81795908fc694a5755b96e0970551f11aee63d`，两份均未暂存/改写；证据资产相对e3ce8cf只含本轮目录。 |
+
+本轮产品证据目录README含SR覆盖/复现/限制，run.json含环境、计数和保护结果，保留三组historical失败及阶段通过TAP：旧页面预期4项失败、初版显式flag及同ID新关联后旧重试权限2项失败、B读取故障注入阶段错误1项fixture失败。authority退休与回归已修复；fixture改为在A选择写后才注入B读失败，不弱化断言。没有重写旧失败为通过。
+
+首轮真实工具已通过前两步，SDK page.callMethod随后返回 `this.onCloseResult is not a function`，该方法实际存在；原native-first-failed.json及脚本保留，当轮清理4个本域key。脚本改为mini.evaluate调用当前页面handler，在同一已清理测试前缀重跑九步通过，产品候选未改。转盘为SDK按钮tap，其他动作由真实handler/控制器调用，不作为物理鼠标/手机触控验收。模拟器390×753/DPR3及其iOS字段不是实体手机环境，选择写失败为注入，不是物理满配额。
+
+### T-035最少接收与停止点
+
+tester由project-manager确认本成员停止后串行接续，先核对资产HEAD 9ab18b3e283b72f576055547453fbcfa5b192bd3、代码候选e3ce8cfecde344d3bd7c4c003ee427696fd9a877及本节配置指纹，读取现行需求/契约、docs/core-api与本轮证据README，自行设计SR-01～13独立风险用例。可先执行两份新专项，再执行上述完整命令及新的隔离真实平台路径；不复制测试配置覆盖正式配置，不清用户实际菜单，测试域必须在任何onLoad前注入。
+
+本轮未新增实体手机/预览码、实体离线、物理满配额/强杀/断电、多设备、旧写入者降级及多进程CAS验证；单次Port写效果声明不证明这些条件。现无剩余研发阻塞，T-034实现/开发自测/固定候选/交接完成，成果仍draft，T-035尚待独立执行。两仓库提交本人内容并核对后停止，仅维护T-034/A-013/本人索引行；STATUS/PROJECT/索引顶部摘要由原维护人后续同步，不改WORKSPACE/T-035/A-014或旧H项，不发消息/唤醒成员，不执行合入、推送、移tag或发布，不清原.tmp/、私有配置及开发分支。
+
+## 9. v0.6：BUG-T035-001修复开发交接（2026-11-03）
+
+### 重开依据与精确候选
+
+project-manager依据T-035独立缺陷明确重开T-034后串行通知，发送方及tester均已停止。本次实际接手OPC **fbddd9c508813293e6942a786f5309762c9b47e0**，产品 **48469cfa7594b127b0af549b9ecafe0698b47cc9**；已核对其相对首轮9ab18b3只增9份tester复现/证据，工作树干净，没有覆盖独立新增资产。TEAM、developer角色/scope和三项有效技能完整刷新，根公共协议及原需求/技术正文经Git比较未变；实际读取A-014 v0.7第11节、产品BUG说明和独立测试、当前任务及受影响实现。仍按D-024、13/13/40及SR-01～13执行，不扩展业务。
+
+当前固定修复代码/新增开发回归/接口说明为 **5085636ba8955b08fcf39c24cf84b0329ef89c6d**；完整证据HEAD为 **ae61a36c59d95e24669010900b8d8b99b739cded**，后者只增加 `test/evidence/developer-fix-t035-001/`。仓库/本机checkout及配对feature分支与第8节相同；main/v1.1.0和WORKSPACE仍3800e6dd8bc32b7d767bfc873a4b9ae57d10232b，OPC目标仍2e241e6b489a65701ba2078640b2794cdabba429。全部仅本地单行提交，不合入/推送/移tag/发布或删分支，未联网刷新远端。
+
+### 两层复现、原因及修复
+
+在任何实现修改前，分别运行独立控制器 `--test-name-pattern="T035 SR10/12"` 与实际页面handler `--test-name-pattern="T035 page"`，文件均为 `test/independent/startup-restore.acceptance.test.js`。各0通过/1失败、退出1，确认同一BUG：A已记住，B记忆写明确失败，C加载成功但选择读失败；IO恢复后的重试取旧B并返回superseded，当前警示被清除，持久及新页面仍为A。原始before-controller.tap、before-page.tap保存于本轮产品证据目录，原独立文件/失败资产不改写。
+
+原因是SelectionStore先读取选择，只有读取成功后才清旧pending；新C读失败提前返回时遗留旧B。retry随后把旧B的退休结果反馈给当前C，页面原先对superseded清warning。此次只改 `src/selection.js`、`pages/index/index.js`，新增 `test/selection-retry-repair.test.js` 并在 `docs/core-api.md`补说明：
+
+- 新关联在任何选择IO前退休已结束的旧补记意图，即使新读取不可用也不会遮蔽当前授权。原uncertain检查仍在此前，尚可能落盘的物理写保持pending/冻结，不盲清或放行。
+- 当前重试不带显式旧intent时以当前仍授权目标为准。旧意图的authority/目标不符不再阻断当前补记；已安全结束的raw/版本冲突至多新建一次意图重读，仍执行目标存在性、原raw/版本guard和写后核验。显式旧请求、旧owner或不匹配目标继续superseded；恢复不明状态前后均核对当前上下文，不能借旧目标已提交确认新目标成功。
+- 页面对superseded明确提示“启动选择尚未确认，请重新选择菜单或重试记住菜单”。持续unavailable/failed/uncertain或guard冲突不会清警示；当前选择确认后才清除。补记始终不重存菜单、不加载或回放快照、不改变候选/基线/dirty。
+
+### 当前开发验证与保护
+
+以下是developer执行结果，BUG仍由tester独立复测关闭，T-035保持blocked/暂不可合入，不改其原报告或专业结论。
+
+| 范围 | 实际结果及证据 |
+|---|---|
+| 原两层失败复现 | 修改前各1项失败、退出1；before-controller.tap、before-page.tap。控制器及页面均确认旧B/当前C/持久A，不把首轮开发559通过改写为独立通过。 |
+| 新风险回归＋原独立文件 | 新增 **15个顶层检查**；与原独立四项合跑 **19/19**。覆盖同/不同ID×unavailable/failed/uncertain、未知格式、显式旧意图、已结束版本冲突、未settled写冻结、旧owner、不明恢复目标/authority、迟到读取及两组实际页面连续失败/guard反馈。targeted.tap；原独立文件原字节不变。 |
+| Windows、Node v24.22.1工作树全套 | 完整命令 `node --test --test-reporter=tap test/*.test.js test/independent/*.test.js`，**578/578**，失败/取消/跳过/todo均0；working.tap。 |
+| 同固定候选git archive干净导出 | 无.git/私有配置，相同命令 **578/578**，四类非通过计数均0；clean-export.tap。archive SHA-256为 `8b5f48ad960a5b2f34f4d4f78ccd9564b256412813566577650fd6bc9a063b9e`，22份运行文件SHA在candidate-manifest.json。 |
+| 真实微信工具、基础库3.17.4、SDK0.13.0 | 新隔离工程 **八组通过、0运行异常**：A及B/C夹具；B实际handler选择写前失败；C选择读失败退休B并保留编辑；SDK点补记时持续读错警示保留；解故障后SDK再点确认C且全部菜单/完整编辑状态不变；reLaunch恢复C保存1项且真实wx抽取正确；guard冲突时返回superseded、SDK重试仍保留警示；解除后SDK补记B、新页面恢复B。native.json逐步记录。 |
+| 视觉和隔离 | 三张截图已实际查看：当前C不可用提示/未保存标记、新页面恢复C、superseded保留提示。注册前即注入独立前缀，仅临时工程名/注册注入不同，正式AppID保留。只清本前缀8个key，非测试删除0；隔离工程已关闭，CLI日志脱敏；未读/清用户实际菜单。 |
+| 原文件/配置保护 | 接手时原独立测试/历史证据 **260份** 原始字节不变，含tester本次失败资产；清单protected-before.json。公共配置前后SHA仍 `27a614c100e150979107c9f648b67f757d81b586883c9eb89a46f2670c143bbf`，私有仍 `df846e395e410139062950e08f81795908fc694a5755b96e0970551f11aee63d`，均未改写/暂存或读取私有凭据字段。 |
+
+实际命令、环境、数量及阶段62/62、18/18记录在产品本轮README/run.json；最终19/19和双578/578对应齐备后的修复候选。原独立测试诊断保留初始fixedCode=e3ce8cf文字，没有为新候选修改其源码；实际被测修复由本节及manifest固定为5085636。SDK按钮tap不同于物理鼠标/手机触控；选菜单/编辑夹具通过mini.evaluate调用真实页面handler，存储故障按阶段注入，不是物理故障。模拟器390×753/DPR3及iOS字段不作为实体手机环境。
+
+### 复测接收与停止
+
+tester由project-manager核对本交付并确认本成员停止后串行接续，先核对代码5085636与完整资产ae61a36精确SHA、差异仅本轮证据目录及两配置指纹，读取原BUG、现行需求/契约和产品修复README，再独立复跑两层失败和相邻风险，继续完成T-035原定剩余全套及隔离真实平台检查。BUG-T035-001仍open，独立关闭/解除blocked和合入建议由tester给出，本成员不代写。
+
+未新增实体手机/预览码、实体离线、物理满配额/强杀/断电、多设备、旧写入者降级及多进程CAS结论；原不明写冻结、未知格式及Port单次写前提保持。T-034本次重开修复已满足实现、开发复现/回归、固定新候选和交接条件，成果仍draft。两仓库本地提交本人范围并核对后停止，不联系/唤醒其他成员，不改T-035/A-014、STATUS/PROJECT/索引顶部摘要、WORKSPACE或旧H项；原.tmp/、私有配置和开发分支保留，不合入/推送/发布。
