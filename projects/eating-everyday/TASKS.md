@@ -1040,6 +1040,158 @@
 - 阻塞与下一位行动人：无；project-manager完成本次保护强推和最终核对，不唤醒其他成员或修改产品。
 - 更新日期：2026-11-02。
 
+## T-032：明确启动恢复上次菜单的需求与验收
+
+- 负责人：product-manager
+- 状态：completed
+- 授权来源与日期：2026-11-03，用户启动空转盘反馈及D-024明确选择；project-manager据此安排本轮串行工作。
+- 变更类型：feature；补充启动恢复，不将旧版按原契约通过的行为改写为测试失败。
+- OPC 开发分支：feature/eating-everyday/t-032-startup-restore，目标project/eating-everyday。
+- OPC 合入前目标提交：2e241e6b489a65701ba2078640b2794cdabba429；合入前再核对。
+- 成果物仓库与开发分支：git@github.com:yinzhongkai/eating-everyday.git；已从main建立feature/t-032-startup-restore，本任务只读，不修改产品。
+- 成果物仓库合入后的最终提交：尚未合入；本轮输入基线3800e6dd8bc32b7d767bfc873a4b9ae57d10232b，与WORKSPACE一致。
+- 目标与范围：更新A-001/A-007及本人索引，明确再次启动恢复上次使用的已保存菜单、全新首次仍用默认菜单、存量默认菜单无选择记录的升级路径、改名/删除/空库/未保存编辑和读写失败行为。
+- 输入与依赖：D-024、D-019仍有效的数据保护规则；A-001 v0.10/A-007 v0.4；用户确认默认菜单存在；src/startup.js及原页面测试的只读复现。
+- 优先级：未设定；本轮首先执行，完成并停止后由project-manager核对并安排T-033。
+- 完成条件与确认方式：需求和可执行验收覆盖上述场景，尤其现有默认菜单重启可直接抽取、切换菜单后重启恢复选择；既有保存内容不被覆盖，删除不复活；默认降级方案符合D-024，实质新增业务选择交用户确认。更新版本及追溯，结构/链接/diff通过，本地提交信息单行；不冒充实现或独立测试通过。
+- 进展：2026-11-03，product-manager 按串行通知实际接收并完成需求交付。已刷新 TEAM、自身配置、角色/scope、requirements-analysis、根入口/会话协议和当前项目记录，其余已完整读取的根协议经与前次提交内容比较未变。接手 OPC 为 397089d15ae882ca8c49c85b37f4a9550425eef3，分支 feature/eating-everyday/t-032-startup-restore，目标仍 2e241e6b489a65701ba2078640b2794cdabba429，受控工作树原干净、仅原 .tmp/。产品仅只读核对匹配分支、HEAD/main=3800e6dd8bc32b7d767bfc873a4b9ae57d10232b、origin 与 WORKSPACE 一致且工作树干净，读取启动协调器、完整原页面测试及页面启动片段；未执行产品测试或检查用户实际存储。已交付 A-001 v0.11/A-007 v0.5 及本人两条索引：新增 R-18/P-15、AC-43 至 AC-50，修订 AC-07/AC-39/AC-40，有效数量 13/13/40。有效上次身份优先，无记忆或已删除时依次加载现存内置默认身份、现存同名菜单、列表首份；已使用空库保持空，读取异常不冒充缺失。成功加载/保存/切换、改名删除、未保存编辑与记忆单独写失败/结果不明/迟到结果均有明确规则，无需新增用户业务选择。
+- 成果与验证证据：[A-001 v0.11](artifacts/product-requirements.md)、[A-007 v0.5](artifacts/product-decision-options.md)，UTF-8/LF 归一化 SHA-256 分别为 989002414d6817db1b5539a4e27757972dac0408a0ee054741a0d18d1babb454、4864d15138e96d90d83ae5f17c728af6e13f5953ebcab8c30e51b034babffcdd。python -X utf8 -B scripts/validate_framework.py 通过（22角色、39技能、1实际项目、637处本地链接），git diff --check 通过；一次性文档检查核对 13/13/40 编号及追溯、原8项名称/顺序、表格与有效引用，29条未变 AC、全部原需求/规则行、撤销表、原版本记录和七项历史选择正文均保持。差异仅本任务、两份本人正文及 A-001/A-007 索引行。项目经理接手前记录的内存复现（首次8项、第二次0项且菜单存在、手动选择恢复8项）及原页面8/8通过保留来源；本成员仅阅读旧测试预期，不重跑、不改写为旧版失败，不把旧501/501当新功能通过，成果仍 draft。
+- 合并与清理状态：本人四文件交付在当前 OPC 功能分支本地提交后停止，单行提交信息包含 T-032；精确提交由接手 HEAD、任务 ID 和 Git 历史定位，不在正文自写自身哈希。整轮仍由 T-036 统一整理；本阶段不改产品/测试/配置/WORKSPACE，不合入、不推送、不改tag、不删除开发分支，不联网或启动工具，原 .tmp/ 保留。
+- 阻塞与下一位行动人：T-032 需求交付条件已满足，无剩余业务确认问题；T-033 仍需设计选择与菜单操作的一致性、旧版兼容和异常核验契约，随后 T-034/T-035 实现及独立验证。由 project-manager 核对本成员提交并确认停止后逐个通知，本成员不发送消息或启动后续成员。PROJECT/STATUS 与成果索引顶部摘要由原维护人同步，不覆盖本人当前正文及索引条目；旧 H-001/H-005/H-006 本轮保持原状态。任务完成不等于成果批准。
+- 更新日期：2026-11-03。
+
+## T-033：设计启动菜单选择记忆与恢复契约
+
+- 负责人：architect
+- 状态：completed
+- 授权来源与日期：2026-11-03，project-manager依据D-024安排。
+- 变更类型：feature
+- OPC 开发分支：feature/eating-everyday/t-032-startup-restore，目标project/eating-everyday。
+- OPC 合入前目标提交：2e241e6b489a65701ba2078640b2794cdabba429；合入前再核对。
+- 成果物仓库与开发分支：git@github.com:yinzhongkai/eating-everyday.git；feature/t-032-startup-restore，本任务只读产品。
+- 成果物仓库合入后的最终提交：尚未合入；输入基线3800e6dd8bc32b7d767bfc873a4b9ae57d10232b。
+- 目标与范围：依据T-032最终需求更新A-006及必要的A-008，明确稳定菜单标识、选择记忆更新时机、存量兼容、读取与写入恢复、生命周期及删除/改名一致性；不扩大业务范围。
+- 输入与依赖：project-manager已核对T-032提交2cf3714163a84e5b0fa68c93cc62a16bc7f87f46、A-001 v0.11/A-007 v0.5及T-032记载的两个正文指纹；D-024、现行A-006 v0.6/A-008 v0.4及产品基线保持。按本次通知执行。
+- 优先级：未设定；T-032之后。
+- 完成条件与确认方式：契约足以供实现和测试，覆盖首次/重启/升级/缺失/删除/异常，失败不覆写菜单或伪称成功；完成需求追溯、结构/链接/diff及单行本地提交。
+- 进展：2026-11-03，architect按用户授权的project-manager串行通知实际接收并完成T-033，发送方和product-manager已停止。已刷新TEAM、自身角色/scope及有效技能system-design，根规则和原A-006 v0.6/A-008 v0.4经Git/正文指纹核对未变并复用已完整加载的正文；读取项目当前摘要/索引、T-032实际结果、T-033、D-024和A-001 v0.11/A-007 v0.5完整正文，双LF指纹与T-032一致。OPC接手feature/eating-everyday/t-032-startup-restore，HEAD ea4a2436f96f41f49d6eec3a5710744c5faec4c0，目标仍2e241e6b489a65701ba2078640b2794cdabba429，仅原.tmp/。产品同后缀分支HEAD/main=WORKSPACE的3800e6dd8bc32b7d767bfc873a4b9ae57d10232b、origin匹配；普通沙箱git status曾返回非工作树错误，按工具流程获必要只读审批后实际确认工作树干净，无权限缺口。只读加载启动协调器、default-menu、仓储、Session、页面、WxStorage、codec、核心接口说明及旧页面用例相关文本；已交付A-006 v0.7/A-008 v0.5、本人两条索引和SR-01～13验证交接。契约覆盖合法v1存量/缺记忆兼容、稳定ID和降级顺序、独立ee/selection格式及精确key识别、保存/切换/删除的部分成功、记忆专用重试/幂等/不明核验、生命周期/迟到写顺序与原初始化交互。未执行产品测试、读取用户实际菜单或修改产品/配置/WORKSPACE，不把旧通过改写为失败。
+- 成果与验证证据：[A-006 v0.7](artifacts/system-architecture.md)第11节、[A-008 v0.5](artifacts/accounts-access-checklist.md)第0节。UTF-8/LF归一化正文SHA-256分别为f31ca08f9af88c7ee989065ebb785d3cac2e77cec6f3339b50ad119cac21f511、0e6b9b5b0a350f257574b4a971850dbe486a2abd8d4e45b06a3e60ff984fd6ef。python -X utf8 -B scripts/validate_framework.py、git diff --check及一次性文档检查通过：13/13/40逐号顺序匹配需求、SR-01～13完整、8项默认名称/顺序不变、29条未变AC和旧第9节/第10节专业正文、A-008原准备与第1～5节历史均保持；表格列一致。核对差异仅本任务、本人两份正文及A-006/A-008索引行，未改其他任务/需求/成果/交接/决定、PROJECT/STATUS/TEAM/WORKSPACE或公共定义。公共配置原SHA-256 27a614c100e150979107c9f648b67f757d81b586883c9eb89a46f2670c143bbf保持。上述为设计及只读/文档自查，不是本轮实现、自测或独立结论，不用旧501/501证明新功能通过，成果仍draft。
+- 合并与清理状态：仅本轮四份治理文件在现有功能分支以含T-033的单行message本地提交后停止；提交由接手HEAD、任务ID及Git历史定位，不自写自身哈希。待T-036整合；本阶段不写产品、改配置/WORKSPACE、合并、联网推送、移动任何tag、清理分支/.tmp/或创建GitHub Release/微信上传发布，不联系或唤醒其他会话。
+- 阻塞与下一位行动人：技术契约完成条件已满足，无新增用户确认项或访问缺口。真实剩余风险为选择key接入兼容、菜单/记忆部分成功及迟到写顺序等尚待实现/验证，最小解除条件为T-034固定候选和针对性/全套自测、T-035独立及真实平台证据，不阻塞本设计任务完成。由project-manager核对本轮成果/提交并确认architect停止后继续通知developer/T-034，再串行T-035；不代写其接收或专业结果，摘要/索引顶部由原维护人后续同步，旧H项保持。
+- 更新日期：2026-11-03。
+
+## T-034：实现启动恢复上次使用的菜单
+
+- 负责人：developer
+- 状态：completed
+- 授权来源与日期：2026-11-03，project-manager依据D-024安排。
+- 变更类型：feature
+- OPC 开发分支：feature/eating-everyday/t-032-startup-restore，目标project/eating-everyday。
+- OPC 合入前目标提交：2e241e6b489a65701ba2078640b2794cdabba429；合入前再核对。
+- 成果物仓库与开发分支：git@github.com:yinzhongkai/eating-everyday.git；feature/t-032-startup-restore，目标main。
+- 成果物仓库合入后的最终提交：尚未合入；起点3800e6dd8bc32b7d767bfc873a4b9ae57d10232b。
+- 目标与范围：按T-032/T-033实现选择留存和启动恢复，补充与存储及生命周期风险相称的回归、说明和A-013交接。代码、测试及中间资产仅在声明产品仓库，不改正式AppID或私有配置。
+- 输入与依赖：D-024、A-001 v0.11/A-007 v0.5（T-032提交2cf3714163a84e5b0fa68c93cc62a16bc7f87f46）、A-006 v0.7第11节/A-008 v0.5（T-033提交b47f6081af7392d4c4fc4d52624ca73678781dbb）及SR-01～13；project-manager已核对两阶段完成、停止和正文指纹，按本次通知执行。
+- 优先级：未设定；T-033之后。
+- 完成条件与确认方式：已保存默认菜单重启直接可抽取、成功切换后恢复所选菜单，保留已保存内容及原功能；兼容/失败/删除/改名场景与契约一致；完成针对性及现有全套测试，固定精确候选版本和证据，更新本人交接/索引，单行本地提交；开发自测不等同独立测试。
+- 进展：2026-11-03，developer按用户授权的project-manager串行通知实际接收；上游T-032/T-033和项目经理均已停止写入。已实际刷新TEAM、自身role/scope和三项有效技能，根规则经Git范围比较未变；读取当前项目事实、相关任务/决定及A-001 v0.11/A-007 v0.5、A-006 v0.7第11节/A-008 v0.5完整适用正文。OPC接手42aeb7235a1c6070afaba695f334b0b2cd73d9a9，当前及产品均为t-032-startup-restore配对功能分支；产品HEAD/main为WORKSPACE的3800e6dd8bc32b7d767bfc873a4b9ae57d10232b、origin匹配且干净，仅OPC原.tmp/保留。已建立原测试/历史证据及公共/私有配置原始指纹基线，正在实现菜单与选择分阶段协调及风险自测；不使用旧default-menu分支/候选，不读取用户实际菜单。
+- 成果与验证证据：[A-013 v0.5第8节](artifacts/miniprogram-preview-handoff.md#8-v05t-034启动恢复实现与开发交接2026-11-03)。固定代码/测试/说明e3ce8cfecde344d3bd7c4c003ee427696fd9a877，完整产品证据HEAD 9ab18b3e283b72f576055547453fbcfa5b192bd3，后者只增test/evidence/developer-t034-startup-restore/。MenuController实际接入页面，SelectionStore共享写入队列、阶段事实及不明冻结，稳定ID恢复/兼容/记忆专用重试/代次保护落实SR-01～13。新增58项，Node v24.22.1工作树与干净导出各559/559，非通过计数均0；真实微信工具基础库3.17.4/SDK0.13.0九组隔离冒烟通过、0运行异常，截图已查看。原独立/历史229份及两配置原字节不变，公共SHA 27a614c100e150979107c9f648b67f757d81b586883c9eb89a46f2670c143bbf，私有df846e395e410139062950e08f81795908fc694a5755b96e0970551f11aee63d。清理本测试前缀13 key并关闭临时工程，未动用户域；失败历史、注入与实体手机/物理故障等限制均保留，开发验证不代表独立结论。
+- 合并与清理状态：待T-035独立验证和T-036整合；不推送、不改tag、不提前合入或清理。
+- 完成与停止：2026-11-03已满足本任务实现、自测、固定版本和本人交接条件；原进展保留实际接收时点。python -X utf8 -B scripts/validate_framework.py通过（22角色、39技能、1实际项目、635处本地链接），git diff --check通过；逐段核对其他任务、其他索引行及A-013第1～7节不变。两仓库仅本地单行提交，治理只改本任务/A-013及本人索引行，校验后停止，不发消息或唤醒其他成员，不合入/推送/移tag/发布或推进WORKSPACE，原.tmp/保留。
+- 阻塞与下一位行动人：BUG-T035-001修复开发候选已交付，BUG仍open、T-035保持blocked且暂不可合入。由project-manager核对新固定候选及本成员停止后串行通知tester独立复测，关闭及合入建议由tester给出，本轮不合并或发布。
+- 项目经理重开记录：2026-11-03，project-manager依据T-035实际独立缺陷BUG-T035-001（P2/open）明确重开本任务，继续由developer在当前配对feature分支修复。上述首轮完成、自测559/559及九组开发冒烟事实原样保留，不代表后续独立通过。tester已停止，OPC缺陷回执d08eadc7b21820b3b2c6c2c87a03cdc9112460ea、产品复现/证据48469cfa7594b127b0af549b9ecafe0698b47cc9已核对，产品工作树干净；未修改被测实现。当前todo待developer实际接收，不代写其进展。
+- 本次修复完成条件：先复现test/independent/startup-restore.acceptance.test.js的控制器及实际页面handler失败；修复旧B意图在新C选择读取失败后仍遮蔽当前补记、页面错误清警示的问题。保留原独立断言和失败证据，验证当前授权C的记忆/重启恢复、相邻不可用/失败/不明/代次保护及完整回归；更新A-013和固定新候选后停止，BUG状态和最终关闭仍由tester复测决定，不直接改A-014或T-035结论。
+- 修复接收：2026-11-03，developer按本次串行通知实际接收BUG-T035-001；发送方及tester均已停止。已刷新TEAM/自身role/scope及三项有效技能，根协议与原需求/技术正文经Git范围核对未变，读取当前任务、A-014 v0.7第11节、独立缺陷说明/测试和相关实现。OPC接手fbddd9c508813293e6942a786f5309762c9b47e0，产品接手48469cfa7594b127b0af549b9ecafe0698b47cc9且干净，配对feature分支/WORKSPACE基线一致，仅原.tmp/保留。独立控制器与实际页面handler最小复现分别1项失败、退出1，确认旧B遮蔽当前C且清警示；原始日志在产品.local/t034-fix-001/。已建立260份原独立/历史证据和两配置原始字节保护，开始仅修复本缺陷与相邻风险，不修改tester资产/结论或正式配置。
+- 修复成果与开发验证：[A-013 v0.6第9节](artifacts/miniprogram-preview-handoff.md#9-v06bug-t035-001修复开发交接2026-11-03)。新代码/开发回归/说明5085636ba8955b08fcf39c24cf84b0329ef89c6d，完整资产ae61a36c59d95e24669010900b8d8b99b739cded只增test/evidence/developer-fix-t035-001/。新关联提前退休安全旧意图，当前授权补记及superseded警示修复；不明写冻结/未知格式/部分成功保护保持。修改前两层各1项失败；新增15项与未改独立四项共19/19；Node v24.22.1工作树/干净导出各578/578，非通过计数均0；真实微信基础库3.17.4/SDK0.13.0八组隔离开发验证通过、0运行异常，实际SDK补记按钮和新页面恢复已验证，截图已查看。260份原独立/历史资产及两配置原始SHA不变；只清本前缀8 key并关闭临时工程，未读/清用户域。原失败及首轮历史保持；不是tester关闭或独立通过。
+- 修复完成与停止：本次重开研发完成条件已满足；治理仍仅本任务/A-013及本人索引行，保留他人报告和任务原状态。两仓库单行本地提交并完成范围/结构/空白及保护核对后停止，不消息/唤醒他人、不合入/推送/移tag/发布/推进WORKSPACE或清理分支；由project-manager继续串行安排。
+- 更新日期：2026-11-03。
+
+## T-035：独立验证启动恢复和本机菜单保护
+
+- 负责人：tester
+- 状态：completed
+- 授权来源与日期：2026-11-03，project-manager依据D-024安排。
+- 变更类型：feature
+- OPC 开发分支：feature/eating-everyday/t-032-startup-restore，目标project/eating-everyday。
+- OPC 合入前目标提交：2e241e6b489a65701ba2078640b2794cdabba429；合入前再核对。
+- 成果物仓库与开发分支：git@github.com:yinzhongkai/eating-everyday.git；feature/t-032-startup-restore，目标main。
+- 成果物仓库合入后的最终提交：尚未合入；本轮独立通过固定修复5085636ba8955b08fcf39c24cf84b0329ef89c6d、开发资产ae61a36c59d95e24669010900b8d8b99b739cded及本人新测试证据912d77154d1c3958680a6f01400d9218c688eafd；主线/WORKSPACE仍3800e6d，首轮e3ce8cf/9ab18b3及失败记录按原时点保留。
+- 目标与范围：独立验证全新首次、已有默认菜单的升级重启、切换后重启、改名/删除/空库/未保存修改及读写失败；在隔离域完成真实平台关闭重进、选择和转盘交互，保护用户非测试数据，更新A-014及本人索引。
+- 输入与依赖：D-024、A-001 v0.11/A-007 v0.5、A-006 v0.7第11节/A-008 v0.5及SR-01～13；A-013 v0.5第8节和上述产品候选。T-034治理提交1415c29c4f938f58de9f72b2bfe605ab2f18400c及developer完成/停止已由project-manager核对；按本次通知接收。
+- 优先级：未设定；T-034之后。
+- 完成条件与确认方式：独立可复现证据、精确环境/版本/结果和范围内合入建议；执行针对性及全套回归，平台操作按实际条件区分通过/失败/未执行，不以旧501项通过代替本轮；若缺陷则记录并停止，交project-manager串行安排研发修复；不修改被测产品实现。
+- 进展：2026-11-03，tester按project-manager串行通知实际接收；上游与发送方均已停止。接手OPC b8447b991ee56e99ee0053f4f96f353c2220b96f、产品9ab18b3e283b72f576055547453fbcfa5b192bd3，配对t-032-startup-restore分支、基线和干净状态均已核对，仅原OPC.tmp/保留。本人TEAM/角色/scope及testing、wechat-miniprogram-testing完整刷新，根公共规则经Git比较未变；读取D-024、T-032～T-036、A-001 v0.11/A-007 v0.5、A-006 v0.7第11节/A-008 v0.5、A-013 v0.5第8节、产品接口与本轮证据README。已建立原受控文件及两配置字节保护，公共SHA 27a614c100e150979107c9f648b67f757d81b586883c9eb89a46f2670c143bbf、私有df846e395e410139062950e08f81795908fc694a5755b96e0970551f11aee63d匹配；开始针对真实MenuController/页面独立设计SR-01～13风险用例，不以开发559或旧501代替独立结论。
+- 首轮成果与验证证据（历史）：[A-014 v0.7第11节](artifacts/miniprogram-test-report.md)，BUG-T035-001（P2/open）。固定代码e3ce8cfecde344d3bd7c4c003ee427696fd9a877独立三项首轮2通过/1失败，另定向实际页面handler确认0通过/1失败（同一缺陷的两层证据）。B记忆写失败后，C加载遇选择读失败；恢复IO后重试仍取旧B意图，返回superseded、持久仍A，页面清警示且新页面恢复A。313份原受控文件及两配置字节保持；本人新增复现/原始失败证据产品48469cfa7594b127b0af549b9ecafe0698b47cc9，只增9份测试/证据文件，未改实现/作者测试。
+- 首轮合并与清理状态（历史）：产品本人复现/证据已在现有功能分支本地单行提交；OPC仅本人T-035/A-014/索引行本地提交后停止。发现产品缺陷后按约定未继续全套/干净导出/真实wx或UI验证；没有创建真实测试域或key，清理不适用，未碰用户菜单或其他窗口。原.tmp/和两配置保留；未合入、推送、改tag/WORKSPACE、删分支、创建Release或微信发布，T-036仍由原负责人处理。
+- 首轮阻塞与下一位行动人（历史）：BUG-T035-001未修复及独立复测关闭，T-035 blocked、未完成，暂不可合入。由project-manager核对本回执后串行安排developer修复并给新固定候选，再由tester复跑两层最小复现、相邻风险/全套及隔离真实平台验证；本成员提交后停止，不发消息、不直接重开/改T-034或安排他人工作。开发559/559/九组冒烟及旧501/手机反馈不作为本轮通过。
+- 复测输入与接续安排：2026-11-03，project-manager核对developer重开修复已完成并停止，治理1ee3a547b03d57078ea3349db372d21e7abbafe8、A-013 v0.6第9节。新固定修复代码/开发回归/说明5085636ba8955b08fcf39c24cf84b0329ef89c6d，完整资产ae61a36c59d95e24669010900b8d8b99b739cded只追加test/evidence/developer-fix-t035-001/，已实际核对产品配对分支和干净状态。原独立复现48469cf及失败证据保留；新候选优先用于本轮复测，不能沿用e3ce8cf或9ab18b3当修复代码。
+- 复测安排与完成条件：按既定授权通知tester重新接续本任务，实际接收后由本人依据事实更新in_progress；现在保留blocked和BUG open，不预判关闭。先独立复跑控制器/实际页面两层缺陷及相邻不可用/失败/不明/代次风险，再完成原任务尚未执行的全套及隔离真实平台验证。研发19/19、双578/578及八组平台仅为输入；关闭缺陷和新合入建议由tester实际验证，不改原失败记录或作者实现。
+- 复测实际接收：2026-11-03，tester刷新本人TEAM/角色/scope及testing、wechat-miniprogram-testing全文；根公共规则与四份需求/技术正文经Git及LF指纹核对未变，复用已完整读正文，重读SR-01～13、D-024、A-014 v0.7原缺陷和A-013 v0.6第9节/修复README。接手OPC a7257eb7664fcbfee993a307ea495501ef663b02及产品ae61a36c59d95e24669010900b8d8b99b739cded，固定修复5085636ba8955b08fcf39c24cf84b0329ef89c6d，差异仅开发修复证据；配对分支、目标/WORKSPACE及两配置原指纹已实际核对。发送方与developer均已停止，仅原.tmp/保留，现按安排in_progress，独立复跑后再判缺陷与最终状态。
+- 复测成果与验证证据：[A-014 v0.8第12节](artifacts/miniprogram-test-report.md)。BUG-T035-001（P2）在5085636上独立复测closed；未改原四项4/4、新增独立31/31，工作树及固定代码干净导出全套各609/609，失败/取消/跳过/todo均0。真实微信基础库3.17.4/SDK0.13.0完成20条行为断言及1条清理记录、0运行异常，实际鼠标补记恰1次正确记C/完整保留编辑与菜单、鼠标抽取、新页恢复C、旧v1升级/空库、保存切换/改名删除/后台及异常提示、隔离工程关闭重开恢复B均通过。测试/SDK夹具失败原始记录及层级限制保留，不改验收或作者断言。
+- 复测合并与清理状态：仅新增30份本人测试/证据，产品本地单行提交912d77154d1c3958680a6f01400d9218c688eafd且干净；接手343原受控文件及两配置原始SHA逐字节保持。只清本轮唯一前缀累计50 key、最后19、剩余0、非测试删除0，先卸载页面再清理并关闭隔离工程，窗口不存在已核对；未读/清用户菜单。OPC只改本人T-035/A-014及索引行，原.tmp/及临时导出保留；未合入/推送/移tag/改WORKSPACE/删分支/创建Release或微信发布。
+- 复测完成与下一位行动人：T-035 completed，原缺陷closed，本轮声明范围内建议合入固定5085636及测试资产912d771；无新产品缺陷。实体手机/新预览码、实体离线/物理故障、多设备/旧写入者降级/CAS未新增验证，模拟器及决策注入不冒称真机/实际弹层点击。适当结构/链接/空白和范围/保护核对后OPC本人记录本地单行提交并停止，不消息/唤醒他人；由project-manager核对本回执后处理T-036，不由tester执行或代写整合。
+- 更新日期：2026-11-03。
+
+## T-036：整理本轮启动恢复的双仓库交付
+
+- 负责人：project-manager
+- 状态：completed
+- 授权来源与日期：2026-11-03，project-manager依据D-024安排正常功能交付收尾。
+- 变更类型：feature
+- OPC 开发分支：feature/eating-everyday/t-032-startup-restore，目标project/eating-everyday。
+- OPC 合入前目标提交：2e241e6b489a65701ba2078640b2794cdabba429；合入前再同步核对。
+- 成果物仓库与开发分支：git@github.com:yinzhongkai/eating-everyday.git；feature/t-032-startup-restore，目标main。
+- 成果物仓库合入后的最终提交：84db035b85a30e8825273f5ec7ebd2247ddd03c7；产品main已快进到整理后的三条功能提交之末，树与独立资产912d77154d1c3958680a6f01400d9218c688eafd完全一致。
+- 目标与范围：核对T-032～T-035交付和问题闭环，按功能整理单行提交；验证后产品先以--ff-only合入main，再采用实际最终SHA更新WORKSPACE和索引，验证OPC后以--ff-only合入project/eating-everyday，完成两边验证后安全清理开发分支。
+- 输入与依赖：T-035已completed并停止，A-014 v0.8确认BUG-T035-001 closed、声明范围内建议合入；OPC原头1fb281265577e444f4e6b111b1e6079dc6513f69，产品原资产912d771。项目经理核对实际会话、精确版本、干净状态和远端基线，未代写独立结论。
+- 优先级：未设定；T-035之后。
+- 完成条件与确认方式：实际产品和OPC合入提交可复核，引用一致，约定验证通过；无新增merge、正式AppID/私有配置及既有发布tag保持，不创建GitHub Release或微信发布。远端推送本轮另依用户明确范围，不推定前次tag强推授权适用于本轮。
+- 进展：2026-11-03，T-035独立关闭缺陷并建议合入后已完成本地交付：产品6条过程记录整理为实现/开发证据/独立验证3组，文件树与原独立完整资产912d771完全一致，--ff-only合入main 84db035b85a30e8825273f5ec7ebd2247ddd03c7后609/609。OPC按需求/架构/验证/协调/工作区采用5组整理，六份专业正文与原1fb2812逐blob一致，已--ff-only合入project/eating-everyday并通过结构/链接/diff；本回执再快进纳入项目主线，最终SHA与安全清理结果见Git及本机日志。
+- 成果与验证证据：A-014 v0.8第12节；两仓库.git/codex-backups/t036-startup-restore-20261103/分别保留已验证before.bundle、来源/目标/tag指纹和整理验证。产品product-verification.json/main.tap固定3条新SHA/原最终树/609项及配置/tag保持；OPC opc-integration.json记录5组树/专业正文保持，final-verification.json记录回执后最终头、无merge、引用/配置/远端/安全清理检查。旧受评SHA可从bundle恢复，不冒充整理后主线祖先。
+- 合并与清理状态：两本地目标分支已合入验证，WORKSPACE仅revision独立采用产品最终84db035。最终回执快进纳入后按安全-d清理两来源分支，精确结果以Git和final-verification.json为准；本轮不推送、不新增merge，不移动任何既有tag，未创建GitHub Release或微信发布。
+- 阻塞与下一位行动人：本地实施、修复、独立验证及整合无剩余业务/测试阻塞。project-manager完成最终回执与安全清理；远端同步或新版本发布待用户另行明确安排，不以本次整合恢复已取消的发布页面或扩大实体设备结论。
+- 更新日期：2026-11-03。
+
+## T-037：为启动恢复版本创建产品发布merge与新标签
+
+- 负责人：project-manager
+- 状态：completed
+- 授权来源与日期：2026-11-03，用户明确「把产品仓库按之前的提交逻辑再提交下，并打一个新的tag」，依据D-025沿用T-027产品发布模式。
+- 变更类型：governance-only；README及Git发布元数据，不修改业务实现。
+- OPC 开发分支：feature/eating-everyday/t-037-release-v1-2-0，目标project/eating-everyday。
+- OPC 合入前目标提交：3252c928462e4e0d7af037c3a6e8b83be96f4b67。
+- 成果物仓库与开发分支：git@github.com:yinzhongkai/eating-everyday.git；feature/t-037-release-v1-2-0，目标main；发布合并按本次明确的--no-ff例外。
+- 成果物仓库合入后的最终提交：38b1e69350ad2b4cf43c3124a3635f4a0b9c47a0；产品main和附注v1.2.0均指向该双父release，准备提交23b8d52a2d14971efec201ab61189108be39a52d。
+- 目标与范围：更新README当前发布说明，创建单行message的双父release merge及附注v1.2.0指向该提交；号码为本轮功能增量默认命名，非用户逐字指定。保留现有v1.0.0/v1.1.0、原功能三条提交和全部专业证据，不修改package/配置，不推送或发布页面。
+- 输入与依赖：D-025、T-036最终交付、A-014 v0.8独立通过及限制、旧T-027发布结构；产品本地main当前ahead3且干净，远端main仍3800e6d，远端v1.2.0尚不存在。
+- 优先级：未设定。
+- 完成条件与确认方式：release第一父为发布前main84db035，第二父为本次README准备版本，恰两个不同父且树与准备版本一致；相对发布前main仅README变化，所有新增message和tag说明单行，tag为附注且剥离目标等于新main。发布main复验609/609、配置/旧tag/历史资产保持，采用实际新SHA并验证OPC快进、引用及安全清理；不把本次Git发布等同微信发布或新实体手机验收。
+- 进展：已按D-025默认v1.2.0完成README单独准备和--no-ff发布，第一父84db035、第二父23b8d52，树与准备版本相同，相对发布前main仅README变化；新release/main实际609/609，所有非通过计数0，旧tag/配置/代码/测试/证据保持。新附注v1.2.0已创建且对象/剥离目标/单行说明核验通过。OPC必要记录和WORKSPACE采用实际新发布SHA，经验证后快进纳入项目主线，来源安全清理由Git和最终日志核对。
+- 成果与验证证据：A-018 v0.6；两仓库.git/codex-backups/t037-release-v1.2.0-20261103/before.bundle/before.json已验证，产品release-before-validation.json、release-main.tap和product-verification.json记录精确双父/树/tag/fadaed19cb4261f76dcb73f369d97b5c1b97c596及609项结果；最终采用、旧tag/其他refs保护、单行message和安全清理见final-verification.json。
+- 合并与清理状态：产品发布main/tag已完成并验证；OPC记录和WORKSPACE仅revision独立提交后--ff-only纳入project/eating-everyday，最终验证后安全-d清理两条准备分支。旧tag不移动，OPC不新打tag，不推送、不创建GitHub Release或执行微信发布，实际最终结果由Git及日志确认。
+- 阻塞与下一位行动人：本次本地发布无业务/测试阻塞；project-manager完成OPC采用、最终核对和安全清理。远端同步不在本次请求内，等待用户另行明确安排。
+- 更新日期：2026-11-03。
+
+## T-038：同步产品main和v1.2.0到远端
+
+- 负责人：project-manager
+- 状态：completed
+- 授权来源与日期：2026-11-03，用户明确「把产品仓库的main分支和v1.2.0 tag同步到远程」。
+- 变更类型：governance-only；仅同步指定Git引用及记录，不修改产品文件。
+- OPC 开发分支：feature/eating-everyday/t-038-sync-product-v1-2-0，目标project/eating-everyday，仅本地记录。
+- OPC 合入前目标提交：c5c3c8ad8c070e5db371f980a10bfd4ee41b69a9。
+- 成果物仓库与开发分支：git@github.com:yinzhongkai/eating-everyday.git；产品不新建分支，直接同步已验证的main与附注v1.2.0。
+- 成果物仓库合入后的最终提交：不新增产品提交；main/v1.2.0剥离目标均38b1e69350ad2b4cf43c3124a3635f4a0b9c47a0，tag对象fadaed19cb4261f76dcb73f369d97b5c1b97c596。
+- 目标与范围：原子同步且仅同步产品refs/heads/main及refs/tags/v1.2.0。main须快进，旧v1.0.0/v1.1.0保持，使用明确旧头/标签不存在保护并读回对象/目标；不推OPC，不创建GitHub Release或执行微信发布。
+- 输入与依赖：T-037/A-018 v0.6及产品发布609/609；实际产品工作树干净，远端main为3800e6dd8bc32b7d767bfc873a4b9ae57d10232b，尚无v1.2.0，旧两个标签已核对。
+- 优先级：未设定。
+- 完成条件与确认方式：远端main等于本机release，v1.2.0对象/剥离目标等于本机；其他远端heads/tags不变，快进且不改历史，配置/产品文件保持；本地origin/main同步、工作树干净，有实际推送和读回日志。OPC回执仅本地按--ff-only合入并验证清理。
+- 进展：2026-11-03已备份当前发布历史和本机/远端引用，核对远端main=3800e6d且v1.2.0不存在、main为可快进祖先；关闭followTags，以两个显式refspec及明确旧头/标签不存在lease执行--atomic推送，退出0。main实际3800e6d..38b1e69快进，新tag首次创建；重新读取远端全部heads/tags，main和tag目标/对象均与本机一致，其他引用保持。
+- 成果与验证证据：产品.git/codex-backups/t038-sync-product-v1.2.0-20261103/保存已验证before.bundle、before.json、push-result.json及remote-verification.json；实际原子推送、完整远端差异、origin/main、配置和干净状态均核验通过。A-018 v0.7记录当前同步事实，沿用T-037未变版本609/609，不新增产品测试。
+- 合并与清理状态：产品main与v1.2.0已同步并读回验证，WORKSPACE已有同一SHA无需改。OPC仅保存本地回执并--ff-only合入、验证后安全-d清理记录分支，不推送OPC、不改其tag；最终本地回执由Git及final-verification.json确认。
+- 阻塞与下一位行动人：无剩余产品同步工作；project-manager完成本地记录收尾，不创建GitHub Release或执行微信上传/提审/发布。
+- 更新日期：2026-11-03。
+
 ## 记录样式（不是真实任务）
 
 ```text

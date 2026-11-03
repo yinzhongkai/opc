@@ -1,11 +1,38 @@
 # 产品发布与标签更名记录
 
 - 项目：eating-everyday（今天吃什么）；成果ID：A-018；负责人：project-manager。
-- 版本：0.5，2026-11-02（Asia/Shanghai）；状态：draft；关联任务：T-027、T-028、T-024、T-030、[T-031](../TASKS.md#t-031压缩opc发布记录并保护强推当前版本)。
-- 来源及批准边界：D-020及T-028的产品标签/发布/远端同步已完成。用户随后恢复OPC并要求先核对WORKSPACE，T-024已采用本次最终产品版本并快进合入项目主线。成果仍draft，无整份批准或微信正式发布结论。
+- 版本：0.7，2026-11-03（Asia/Shanghai）；状态：draft；关联任务：T-038、T-037、T-027、T-028、T-024、T-030、[T-031](../TASKS.md#t-031压缩opc发布记录并保护强推当前版本)。
+- 当前同步授权及边界：2026-11-03用户明确将产品main和v1.2.0同步远端，T-038已原子完成并读回；未授权OPC远端同步、GitHub Release页面或微信发布。
+- T-037准备时点授权及边界：D-025/T-037沿用T-027产品双父发布merge和附注tag，v1.2.0为本轮功能增量默认命名，非用户逐字指定号码；仅本地Git发布，未推送或微信发布。成果仍draft。
+- 历史来源及批准边界：D-020及T-028的产品标签/发布/远端同步已完成。用户随后恢复OPC并要求先核对WORKSPACE，T-024已采用本次最终产品版本并快进合入项目主线。成果仍draft，无整份批准或微信正式发布结论。
 - 存储位置：治理记录在OPC；产品仓库git@github.com:yinzhongkai/eating-everyday.git，本机checkout=../eating-everyday。
 
-## 当前标签名称
+## v1.2.0远端同步（当前）
+
+T-038依据用户明确指令，仅以两个显式refspec同步产品main与v1.2.0。推送前main为3800e6dd8bc32b7d767bfc873a4b9ae57d10232b，新tag不存在；已验证其为本机main祖先。使用--atomic及明确旧main/新tag不存在的lease保护，禁用followTags，实际main快进3800e6d..38b1e69、新tag首次创建、退出0，没有历史改写。
+
+读回全部远端heads/tags：main及v1.2.0目标均38b1e69350ad2b4cf43c3124a3635f4a0b9c47a0，附注对象fadaed19cb4261f76dcb73f369d97b5c1b97c596，与本机一致；其他引用包括v1.0.0/v1.1.0原对象/目标不变。本机origin/main已同步，产品工作树干净、文件/公共和私有配置及本机标签均不改，沿用T-037同一发布版本609/609，不重复测试。
+
+恢复与实证位于产品.git/codex-backups/t038-sync-product-v1.2.0-20261103/：before.bundle已验证，before.json保留原远端快照，push-result.json保存精确命令/输出，remote-verification.json保存全量读回和保护检查。OPC回执仅本地快进及安全清理，WORKSPACE已为同一SHA无需再改，不推OPC或打OPC新tag。当前正文及产品README中的T-037“未推送”说明限准备时点，以下保留历史，不代表T-038仍待执行；不再改发布内容以免tag和main偏离。
+
+## v1.2.0本地发布准备（T-037历史）
+
+| 项目 | 实际结果 |
+|---|---|
+| 发布前main/第一父 | 84db035b85a30e8825273f5ec7ebd2247ddd03c7，T-036已验证的启动恢复交付。 |
+| README准备/第二父 | 23b8d52a2d14971efec201ab61189108be39a52d，源feature/t-037-release-v1-2-0；只更新README发布说明。 |
+| release merge/main | 38b1e69350ad2b4cf43c3124a3635f4a0b9c47a0；恰有上述两个不同父提交，message单行为release(eating-everyday): v1.2.0。 |
+| 新附注标签 | v1.2.0，对象fadaed19cb4261f76dcb73f369d97b5c1b97c596，剥离目标等于release/main，单行说明Release v1.2.0。 |
+| 发布树及内容 | 1e8714955ba20e2fa90e067cc3f379c88adaf36c，与README准备版本树相同；相对发布前main仅README变化。 |
+| 发布验证 | 新release/main实际609/609，失败/取消/跳过/todo均0；diff通过，原实现/测试/证据、package和公共/私有配置不变。 |
+| 旧标签及范围 | v1.0.0/v1.1.0原对象及目标保持；不重写main历史，不新增OPC项目tag，不创建GitHub Release页面或执行微信上传发布。 |
+| 本地/远端 | 本机main及新v1.2.0已建立；未推送，远端main仍为发布前已同步3800e6d，新tag在远端尚不存在。 |
+
+本次--no-ff仅为用户「按之前的提交逻辑」明确沿用的产品发布例外，OPC记录及WORKSPACE仍按普通--ff-only采用新实际发布SHA。独立通过与限制继续按A-014 v0.8，未新增实体手机、实体离线或物理故障结论；本次609是发布版本的桌面复验，不冒称新的独立平台或微信验收。
+
+两仓库.git/codex-backups/t037-release-v1.2.0-20261103/保留已验证before.bundle和原refs/tag/配置指纹；产品另有release-before-validation.json、release-main.tap、product-verification.json。最终OPC采用、引用、旧tag和安全清理结果由Git及final-verification.json核对，OPC自身SHA不写入同一提交正文。下述v1.1.0及更早内容均保留原时点历史。
+
+## v1.1.0标签更名（历史）
 
 T-030按用户最新明确要求将产品v1.0.1更名为附注v1.1.0，仍指向发布merge/main 3800e6dd8bc32b7d767bfc873a4b9ae57d10232b。本机及远端旧名均已移除，新对象/剥离目标已实际读回一致；v1.0.0及其他引用不变。仅更名，不改产品文件、配置、package版本、原发布merge及其message，WORKSPACE无须变更。
 
@@ -58,3 +85,5 @@ T-028使用显式refspec及--atomic同步main、两个新tag及旧tag删除，�
 | 2026-11-02 | 0.3 | 用户恢复OPC，WORKSPACE锁定产品最终发布，按功能整理/快进合入及目标检查完成，登记最终交付的引用和清理验证位置。 |
 | 2026-11-02 | 0.4 | 按T-030将产品v1.0.1更名为v1.1.0并同步远端，main/发布merge仍3800e6d，文件与配置不变。 |
 | 2026-11-02 | 0.5 | 说明T-031仅压缩OPC发布记录并同步其tag，产品main/v1.1.0、文件/配置及WORKSPACE均不变。 |
+| 2026-11-03 | 0.6 | T-037按既有逻辑创建产品v1.2.0双父release与附注tag，README单独准备，release/main609/609，旧tag/配置/业务证据保持；仅本地，OPC采用实际新发布SHA。 |
+| 2026-11-03 | 0.7 | T-038按用户明确请求原子同步产品main和v1.2.0，读回全部远端对象/目标一致，旧tag及其他引用/配置/产品文件保持；OPC回执仅本地，未创建GitHub Release或微信发布。 |
