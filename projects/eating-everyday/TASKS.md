@@ -1192,6 +1192,26 @@
 - 阻塞与下一位行动人：无剩余产品同步工作；project-manager完成本地记录收尾，不创建GitHub Release或执行微信上传/提审/发布。
 - 更新日期：2026-11-03。
 
+## T-039：整理OPC功能记录并创建v1.2.0发布merge和标签
+
+- 负责人：project-manager
+- 状态：completed
+- 授权来源与日期：2026-11-03，用户要求OPC也按之前逻辑整理，并明确选择双父release merge及project/eating-everyday/v1.2.0，依据D-026。
+- 变更类型：governance-only；未推送记录整理与项目Git发布，不改业务实现。
+- OPC 开发分支：feature/eating-everyday/t-039-opc-release-v1-2-0，目标project/eating-everyday；本次项目发布按用户明确--no-ff例外。
+- OPC 合入前目标提交：原本机e4d3f7a5518233a8ae366ee427ed76d382a1a931、已发布/远端2e241e6b489a65701ba2078640b2794cdabba429；9条整理后真实发布第一父为70c0d37792bd22494a4c67766ac8e858a0f5424d，发布第二父/最终release以实际Git及日志核对。
+- 成果物仓库与开发分支：产品不建立分支，只读核对git@github.com:yinzhongkai/eating-everyday.git的main/v1.2.0、配置及WORKSPACE引用。
+- 成果物仓库合入后的最终提交：不新增产品提交，继续38b1e69350ad2b4cf43c3124a3635f4a0b9c47a0，本机与远端已同步。
+- 目标与范围：原9条按5组功能整理并保持文件树，再准备完整发布说明/回执，创建单行双父release及附注project/eating-everyday/v1.2.0，tag等于项目主线最终HEAD；旧tag、框架及其他项目/产品不变，未推送记录及原受评SHA以bundle恢复。
+- 输入与依赖：D-026、T-032～T-038实际交付、A-014 v0.8独立通过、产品发布与同步已完成；本机9条均未推送，远端项目仍2e241e6，远端新tag不存在。
+- 优先级：未设定。
+- 完成条件与确认方式：五组整理树等于原e4d3f7a；发布merge恰有两个不同父且第一父为整理后项目主线、第二父为本次准备版本，发布树与准备版本相同。新增message与tag说明单行，新tag附注/内部名称/剥离目标正确；结构/链接/diff、目录/专业正文/WORKSPACE及产品和旧ref保护通过；验证后安全-d清理来源，tag之后不再追加提交，不推送或创建Release页面。
+- 进展：已按用户选择完成9→5组功能整理，文件树与原e4d3f7a严格相同，六份专业正文、WORKSPACE及产品只读状态保持；以两个显式旧头保护的本地事务更新未推送主线/来源，未改原远端。当前完整治理回执先纳入本次准备版本，再使用--no-ff形成双父release及新附注tag固定项目主线；最终引用/树/清理结果由Git及本机日志核对，tag后不追加回执。
+- 成果与验证证据：A-017 v0.7；.git/codex-backups/t039-opc-release-v1.2.0-20261103/保存已验证before.bundle、before.json、registered-task.patch、functional-build.json和functional-verification.json。首次Git stdin因CRLF解析失败未改引用，LF字节事务重试通过；5组实际SHA/原树及专业正文保持已核对。最终双父、准备树、单行message/附注tag、结构链接/diff、目录/旧refs/产品保护与安全清理结果见release-verification.json、final-verification.json。
+- 合并与清理状态：已发布2e241e6及旧tag不变，只整理其后未推送本地记录；按本次用户例外创建项目release merge及project/eating-everyday/v1.2.0，最终主线/tag相等，验证后安全-d清理准备分支，不推送或改产品/框架/其他项目，不在tag后追加commit。
+- 阻塞与下一位行动人：本次本地治理整理无业务或测试阻塞；project-manager核对最终双父发布与新tag及安全清理，远端同步待用户另行明确安排，不创建GitHub Release或执行微信发布。
+- 更新日期：2026-11-03。
+
 ## 记录样式（不是真实任务）
 
 ```text
