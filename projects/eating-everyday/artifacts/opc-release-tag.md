@@ -1,10 +1,29 @@
 # OPC项目发布标签记录
 
 - 项目：eating-everyday（今天吃什么）；成果ID：A-017；负责人：project-manager。
-- 版本：0.6，2026-11-02（Asia/Shanghai）；状态：draft；关联任务：T-018、T-029、T-030、[T-031](../TASKS.md#t-031压缩opc发布记录并保护强推当前版本)。
-- 用户来源：本次明确“把opc仓库打一个release的tag 要求有merge commit”。当前克隆以eating-everyday项目身份工作，标签发布当前项目资料；不把项目内容合入公共框架main。
+- 版本：0.7，2026-11-03（Asia/Shanghai）；状态：draft；关联任务：T-039、T-018、T-029、T-030、[T-031](../TASKS.md#t-031压缩opc发布记录并保护强推当前版本)。
+- 当前用户来源：2026-11-03先要求OPC按之前逻辑整理，随后明确选择「与产品一致：保留 release merge，并打 project/eating-everyday/v1.2.0」，见D-026/T-039；只在本地完成，不创建GitHub Release页面。
+- 初始用户来源（历史）：本次明确“把opc仓库打一个release的tag 要求有merge commit”。当前克隆以eating-everyday项目身份工作，标签发布当前项目资料；不把项目内容合入公共框架main。
 
-## 当前release结构（v0.6）
+## 当前release结构（v0.7）
+
+本轮先将远端已发布2e241e6b489a65701ba2078640b2794cdabba429之后尚未推送的9条记录整理为需求/决定、架构、实现与独立验证、交付及产品发布记录、WORKSPACE采用5组单行功能提交。整理后主线为70c0d37792bd22494a4c67766ac8e858a0f5424d，文件树仍38ba31c0adccf30d64165ae10167b1a26fe2f510，与原e4d3f7a5518233a8ae366ee427ed76d382a1a931完全一致；原9条及旧受评SHA由完整before.bundle保留，不误认新主线祖先。
+
+| 当前发布约束 | 记录与核验方式 |
+|---|---|
+| 发布名称 | 新附注project/eating-everyday/v1.2.0，仅本地，不移动旧tag。 |
+| 第一父提交 | 70c0d37792bd22494a4c67766ac8e858a0f5424d，为整理后的项目主线。 |
+| 第二父提交 | feature/eating-everyday/t-039-opc-release-v1-2-0的完整发布准备版本，恰为第一父之后一条本次说明提交；发布后从merge父列表及本机日志核对实际SHA。 |
+| release commit | 使用--no-ff创建恰有两个不同父的真正merge；message单行release(eating-everyday): project/eating-everyday/v1.2.0。 |
+| 树与tag | release树等于准备版本树；附注tag内部名称/单行说明正确，剥离目标等于项目主线最新HEAD，所有本次治理回执都在准备版本中，tag后不追加commit。 |
+| 产品与WORKSPACE | 仍锁定已远端同步产品main/v1.2.0的38b1e69350ad2b4cf43c3124a3635f4a0b9c47a0，产品仓库及两配置只读不变；六份专业正文逐blob保持，不重跑未变609项。 |
+| 旧引用和远端 | 已发布project/eating-everyday/v1.1.0仍指向2e241e6，v1.0.0及框架/其他项目全部引用保持；本次不推送，未来项目主线仍可从原2e241e6正常快进。 |
+
+恢复和证据位于.git/codex-backups/t039-opc-release-v1.2.0-20261103/：before.bundle已验证，before.json固定原引用、专业正文、WORKSPACE及产品只读指纹；functional-build/functional-verification记录5组实际SHA和树等价，registered-task.patch保存登记改动。首次本地update-ref事务因Windows文本换行解析失败且未改引用，明确LF字节重试后事务通过，已核对登记改动保持。发布双父、准备树/tag对象和旧引用/产品保护/安全清理结果以release-verification.json及final-verification.json和Git引用为准，不在同一提交写自身SHA。
+
+本次项目发布merge为用户明确例外，不修改公共框架策略或把项目资料合入框架main。所有新message和tag说明均单行；本轮只进行OPC治理/Git操作，无新增业务实现、独立测试或微信发布，产品已通过的609及实体手机等限制保留原范围。下述v0.6及更早为历史阶段，不描述当前发布结构。
+
+## 2026-11-02单父release整理（v0.6历史）
 
 用户明确要求把45b72e4e9d63741a7562794a35871d2280735d08和8aa7e59dbc6f234151ae1d60af929664274d042c合并，允许强推，并指定release message格式参考d4e6598；授权见D-023/T-031。本次将两个相邻节点及本次必要历史说明压为一条普通release提交，唯一父为a4dc4a2a0ece4e88250fd17523b5244b352ecbf7，message为单行release(eating-everyday): project/eating-everyday/v1.1.0。
 
@@ -97,3 +116,4 @@
 | 2026-11-02 | 0.4 | 按D-021将旧tag更名为project/eating-everyday/v1.0.0并保持原目标；全部记录先合入主线，再创建project/eating-everyday/v1.0.1固定最终HEAD，同步远端/旧名删除并保存实际引用校验。 |
 | 2026-11-02 | 0.5 | 按D-022/T-030将project/eating-everyday/v1.0.1更名为v1.1.0并同步远端，保留原45b72e4目标；更名回执为后续治理提交，不纳入既有发布快照。 |
 | 2026-11-02 | 0.6 | 按D-023/T-031将45b72e4和8aa7e59合为单条release，采用d4e6598同格式单行message，项目主线/tag同步指向新提交并按旧对象保护强推。 |
+| 2026-11-03 | 0.7 | D-026/T-039将9条未推送记录按5组功能整理，保持原树，再按用户选择创建真正双父release及附注project/eating-everyday/v1.2.0；旧tag、产品和WORKSPACE保持，仅本地，tag固定最新项目主线。 |
