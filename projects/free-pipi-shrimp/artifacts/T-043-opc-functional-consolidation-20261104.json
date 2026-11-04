@@ -1,0 +1,441 @@
+{
+  "task": "T-043",
+  "date": "2026-11-04",
+  "result": "passed",
+  "repository": "git@github.com:yinzhongkai/opc.git",
+  "branch": "feature/free-pipi-shrimp/t-023-station02-first-two-visual-assets",
+  "base_unchanged": "c7ad18166b0e2c4fca152c3c9a24fdea3110af75",
+  "old_head": "cb47ef73d5fd98438f3f5ef7348fe7d4b292dc95",
+  "consolidated_head": "16dcd268127635c15b227ec7e0c84149d1a54fd4",
+  "old_commits": 58,
+  "functional_commits": 11,
+  "all_messages_single_line_no_body": true,
+  "every_function_tree_matches_its_original_group_endpoint": true,
+  "original_final_tree_unchanged": "05a3d885c1622f5927c8da77a104587e6f3b8389",
+  "tracked_working_files_byte_identical": 176,
+  "untracked_temp_files_byte_identical": 17,
+  "live_index_tree_unchanged": true,
+  "all_other_live_refs_unchanged": true,
+  "product_head_unchanged": "5061a76052e19d393988c1932f92912d60c9e745",
+  "product_tracked_files_byte_identical": true,
+  "isolated_interactive_rebase_used": true,
+  "no_merge_commits_added": true,
+  "git_fsck_passed": true,
+  "source_bundle": {
+    "path": "C:\\Users\\YinZh\\Documents\\workspace\\opc-free-pipi-shrimp\\.git\\history-consolidation-t043-20261104\\before-consolidation.bundle",
+    "bytes": 1384005,
+    "sha256": "2f7b68ed422ec53e3c84d6a962d96bf925bad816f314f600ea72e274ead0a6f1",
+    "independent_clone_and_fsck_passed": true
+  },
+  "remote_expected_old_head": "8b2f5e7c75677dc930bf4a26aa8b3207d57e6501",
+  "remote_sync": "pending",
+  "mapping": [
+    {
+      "old": "f9abe234fdaa1833a1d25d261837e7b8f349fc91",
+      "function_commit": "a881c6030e8e7d05caf602bf9e57f1722786ec4e",
+      "function_ordinal": 1,
+      "message": "feat(T-023): register and review station02 first-two visual assets",
+      "original_exact_snapshot_requires_source_bundle": true
+    },
+    {
+      "old": "10458911545b2a0d0c8728ba4f879f6c9f7477fd",
+      "function_commit": "a881c6030e8e7d05caf602bf9e57f1722786ec4e",
+      "function_ordinal": 1,
+      "message": "feat(T-023): register and review station02 first-two visual assets",
+      "original_exact_snapshot_requires_source_bundle": true
+    },
+    {
+      "old": "e5a919d9ca654233ca258c6aa89810ced47cbbfd",
+      "function_commit": "a881c6030e8e7d05caf602bf9e57f1722786ec4e",
+      "function_ordinal": 1,
+      "message": "feat(T-023): register and review station02 first-two visual assets",
+      "original_exact_snapshot_requires_source_bundle": true
+    },
+    {
+      "old": "b5df063b30ec952283fa2548ace242791dbbf213",
+      "function_commit": "a881c6030e8e7d05caf602bf9e57f1722786ec4e",
+      "function_ordinal": 1,
+      "message": "feat(T-023): register and review station02 first-two visual assets",
+      "original_exact_snapshot_requires_source_bundle": false
+    },
+    {
+      "old": "ed2f211588ca641f079228a3ac827d7c33e4fe68",
+      "function_commit": "4d0e3d7c04004fd48e7d37325d502992a21284f0",
+      "function_ordinal": 2,
+      "message": "feat(T-024): prepare reviewed first-two copy and illustrated drafts",
+      "original_exact_snapshot_requires_source_bundle": true
+    },
+    {
+      "old": "fcd105b92da3bc140fa19f152164f891bc7ae557",
+      "function_commit": "4d0e3d7c04004fd48e7d37325d502992a21284f0",
+      "function_ordinal": 2,
+      "message": "feat(T-024): prepare reviewed first-two copy and illustrated drafts",
+      "original_exact_snapshot_requires_source_bundle": true
+    },
+    {
+      "old": "91ffaefa03d331690dc60dcd11f201696d153530",
+      "function_commit": "4d0e3d7c04004fd48e7d37325d502992a21284f0",
+      "function_ordinal": 2,
+      "message": "feat(T-024): prepare reviewed first-two copy and illustrated drafts",
+      "original_exact_snapshot_requires_source_bundle": true
+    },
+    {
+      "old": "bac471fa27da5b634726ac94ceaf365282e5ba24",
+      "function_commit": "4d0e3d7c04004fd48e7d37325d502992a21284f0",
+      "function_ordinal": 2,
+      "message": "feat(T-024): prepare reviewed first-two copy and illustrated drafts",
+      "original_exact_snapshot_requires_source_bundle": true
+    },
+    {
+      "old": "dfbc6c7b2279a144b8903bba27ecc0c0b7a87f4f",
+      "function_commit": "4d0e3d7c04004fd48e7d37325d502992a21284f0",
+      "function_ordinal": 2,
+      "message": "feat(T-024): prepare reviewed first-two copy and illustrated drafts",
+      "original_exact_snapshot_requires_source_bundle": true
+    },
+    {
+      "old": "4fdf9f980cb2c0fcb592282b2d86983f99477acd",
+      "function_commit": "4d0e3d7c04004fd48e7d37325d502992a21284f0",
+      "function_ordinal": 2,
+      "message": "feat(T-024): prepare reviewed first-two copy and illustrated drafts",
+      "original_exact_snapshot_requires_source_bundle": true
+    },
+    {
+      "old": "290d87d447533ab90f03f1f010041dc53eecac01",
+      "function_commit": "4d0e3d7c04004fd48e7d37325d502992a21284f0",
+      "function_ordinal": 2,
+      "message": "feat(T-024): prepare reviewed first-two copy and illustrated drafts",
+      "original_exact_snapshot_requires_source_bundle": true
+    },
+    {
+      "old": "45ea39c3cb7a89b019033f095e7be990471892e6",
+      "function_commit": "4d0e3d7c04004fd48e7d37325d502992a21284f0",
+      "function_ordinal": 2,
+      "message": "feat(T-024): prepare reviewed first-two copy and illustrated drafts",
+      "original_exact_snapshot_requires_source_bundle": true
+    },
+    {
+      "old": "451ecd8dc1e6cfdb88e1906503e2d67fb162a1a1",
+      "function_commit": "4d0e3d7c04004fd48e7d37325d502992a21284f0",
+      "function_ordinal": 2,
+      "message": "feat(T-024): prepare reviewed first-two copy and illustrated drafts",
+      "original_exact_snapshot_requires_source_bundle": true
+    },
+    {
+      "old": "1f63fc35ee02866fd65eac779c42e16f69fcc496",
+      "function_commit": "4d0e3d7c04004fd48e7d37325d502992a21284f0",
+      "function_ordinal": 2,
+      "message": "feat(T-024): prepare reviewed first-two copy and illustrated drafts",
+      "original_exact_snapshot_requires_source_bundle": true
+    },
+    {
+      "old": "3445b64f4e70a24b12e8e3707cf8ef92174f178f",
+      "function_commit": "4d0e3d7c04004fd48e7d37325d502992a21284f0",
+      "function_ordinal": 2,
+      "message": "feat(T-024): prepare reviewed first-two copy and illustrated drafts",
+      "original_exact_snapshot_requires_source_bundle": true
+    },
+    {
+      "old": "700005249c6178714411d7452fe88f85bbb1614c",
+      "function_commit": "4d0e3d7c04004fd48e7d37325d502992a21284f0",
+      "function_ordinal": 2,
+      "message": "feat(T-024): prepare reviewed first-two copy and illustrated drafts",
+      "original_exact_snapshot_requires_source_bundle": true
+    },
+    {
+      "old": "3a296bed0e58dff9f0d4d24e3066a8858d1df302",
+      "function_commit": "4d0e3d7c04004fd48e7d37325d502992a21284f0",
+      "function_ordinal": 2,
+      "message": "feat(T-024): prepare reviewed first-two copy and illustrated drafts",
+      "original_exact_snapshot_requires_source_bundle": true
+    },
+    {
+      "old": "5f71310260373cd545855deac5f9b77f6e363024",
+      "function_commit": "4d0e3d7c04004fd48e7d37325d502992a21284f0",
+      "function_ordinal": 2,
+      "message": "feat(T-024): prepare reviewed first-two copy and illustrated drafts",
+      "original_exact_snapshot_requires_source_bundle": true
+    },
+    {
+      "old": "9694081882bca38a76eb3f353a48174aadd2b6c0",
+      "function_commit": "4d0e3d7c04004fd48e7d37325d502992a21284f0",
+      "function_ordinal": 2,
+      "message": "feat(T-024): prepare reviewed first-two copy and illustrated drafts",
+      "original_exact_snapshot_requires_source_bundle": true
+    },
+    {
+      "old": "9ca8f6105575175231da4fe0deda0efd8bab8592",
+      "function_commit": "4d0e3d7c04004fd48e7d37325d502992a21284f0",
+      "function_ordinal": 2,
+      "message": "feat(T-024): prepare reviewed first-two copy and illustrated drafts",
+      "original_exact_snapshot_requires_source_bundle": true
+    },
+    {
+      "old": "c5839ca4841dcc3fe75f01328cd8cf028308acd3",
+      "function_commit": "4d0e3d7c04004fd48e7d37325d502992a21284f0",
+      "function_ordinal": 2,
+      "message": "feat(T-024): prepare reviewed first-two copy and illustrated drafts",
+      "original_exact_snapshot_requires_source_bundle": true
+    },
+    {
+      "old": "394c71b8fe0268b2974c242b6ec03676122c63d1",
+      "function_commit": "4d0e3d7c04004fd48e7d37325d502992a21284f0",
+      "function_ordinal": 2,
+      "message": "feat(T-024): prepare reviewed first-two copy and illustrated drafts",
+      "original_exact_snapshot_requires_source_bundle": true
+    },
+    {
+      "old": "62e95cd84ab7bdf2ddc4b7cb668d9200d8b5217f",
+      "function_commit": "4d0e3d7c04004fd48e7d37325d502992a21284f0",
+      "function_ordinal": 2,
+      "message": "feat(T-024): prepare reviewed first-two copy and illustrated drafts",
+      "original_exact_snapshot_requires_source_bundle": false
+    },
+    {
+      "old": "63c1d90f3eb16829ca2abf2c352c8bc2a6a7fcd0",
+      "function_commit": "77803f676865a54aea756cf4db5c232aa18a0d97",
+      "function_ordinal": 3,
+      "message": "feat(T-025): record first-two operations checks and station01 publication",
+      "original_exact_snapshot_requires_source_bundle": true
+    },
+    {
+      "old": "a3f164790054213c62066e0e4470e5657bf61d60",
+      "function_commit": "77803f676865a54aea756cf4db5c232aa18a0d97",
+      "function_ordinal": 3,
+      "message": "feat(T-025): record first-two operations checks and station01 publication",
+      "original_exact_snapshot_requires_source_bundle": true
+    },
+    {
+      "old": "fe16be38d3619e40e18d7229ef7803995a3a60e6",
+      "function_commit": "77803f676865a54aea756cf4db5c232aa18a0d97",
+      "function_ordinal": 3,
+      "message": "feat(T-025): record first-two operations checks and station01 publication",
+      "original_exact_snapshot_requires_source_bundle": false
+    },
+    {
+      "old": "2a9e99155b7df3762db7ce4965308bd1ddbf0218",
+      "function_commit": "2805cb6e4cf9bd2317fcac048e4246abef276945",
+      "function_ordinal": 4,
+      "message": "feat(T-026): plan remaining station02 stories and serial delivery",
+      "original_exact_snapshot_requires_source_bundle": true
+    },
+    {
+      "old": "016e2774e857025c9be414e037721334b5998ea9",
+      "function_commit": "2805cb6e4cf9bd2317fcac048e4246abef276945",
+      "function_ordinal": 4,
+      "message": "feat(T-026): plan remaining station02 stories and serial delivery",
+      "original_exact_snapshot_requires_source_bundle": true
+    },
+    {
+      "old": "bdb47ff326f3261c13cc5354ec0dac9baa566355",
+      "function_commit": "2805cb6e4cf9bd2317fcac048e4246abef276945",
+      "function_ordinal": 4,
+      "message": "feat(T-026): plan remaining station02 stories and serial delivery",
+      "original_exact_snapshot_requires_source_bundle": true
+    },
+    {
+      "old": "aeeb3fd54058e261610f6da52e36922ca7a2a8d9",
+      "function_commit": "2805cb6e4cf9bd2317fcac048e4246abef276945",
+      "function_ordinal": 4,
+      "message": "feat(T-026): plan remaining station02 stories and serial delivery",
+      "original_exact_snapshot_requires_source_bundle": false
+    },
+    {
+      "old": "f638af7ffb4d3a10962ce034cd0df2f91ea98e2f",
+      "function_commit": "0efcb5ac5aad8a4a17333a0009f9a780dcc1bf15",
+      "function_ordinal": 5,
+      "message": "feat(T-027,T-028): deliver remaining-three copy, visuals and disclosures",
+      "original_exact_snapshot_requires_source_bundle": true
+    },
+    {
+      "old": "61f7734a88e924afbcfecfab0827bea98789d0e0",
+      "function_commit": "0efcb5ac5aad8a4a17333a0009f9a780dcc1bf15",
+      "function_ordinal": 5,
+      "message": "feat(T-027,T-028): deliver remaining-three copy, visuals and disclosures",
+      "original_exact_snapshot_requires_source_bundle": true
+    },
+    {
+      "old": "61e6457fbed5e004589c5b637ccdcbe714522283",
+      "function_commit": "0efcb5ac5aad8a4a17333a0009f9a780dcc1bf15",
+      "function_ordinal": 5,
+      "message": "feat(T-027,T-028): deliver remaining-three copy, visuals and disclosures",
+      "original_exact_snapshot_requires_source_bundle": true
+    },
+    {
+      "old": "1a5d6e5c53f06cc13db37fea825f791f8670f69d",
+      "function_commit": "0efcb5ac5aad8a4a17333a0009f9a780dcc1bf15",
+      "function_ordinal": 5,
+      "message": "feat(T-027,T-028): deliver remaining-three copy, visuals and disclosures",
+      "original_exact_snapshot_requires_source_bundle": true
+    },
+    {
+      "old": "4b5c30c99a70309006fa72a9f9980aa2013c7266",
+      "function_commit": "0efcb5ac5aad8a4a17333a0009f9a780dcc1bf15",
+      "function_ordinal": 5,
+      "message": "feat(T-027,T-028): deliver remaining-three copy, visuals and disclosures",
+      "original_exact_snapshot_requires_source_bundle": true
+    },
+    {
+      "old": "a12620c353affb14c02d03f018d74a6256f4bd21",
+      "function_commit": "0efcb5ac5aad8a4a17333a0009f9a780dcc1bf15",
+      "function_ordinal": 5,
+      "message": "feat(T-027,T-028): deliver remaining-three copy, visuals and disclosures",
+      "original_exact_snapshot_requires_source_bundle": false
+    },
+    {
+      "old": "f61ce0b09499f7ce88165d8380051b5f86f85dc7",
+      "function_commit": "aa583f2e401d9b2b2f0806b02400cb7deff43496",
+      "function_ordinal": 6,
+      "message": "feat(T-029,T-030,T-031): review, integrate and accept five-post candidates",
+      "original_exact_snapshot_requires_source_bundle": true
+    },
+    {
+      "old": "dff9d12b429250e74dfba755a3cfd0ed6e3dda24",
+      "function_commit": "aa583f2e401d9b2b2f0806b02400cb7deff43496",
+      "function_ordinal": 6,
+      "message": "feat(T-029,T-030,T-031): review, integrate and accept five-post candidates",
+      "original_exact_snapshot_requires_source_bundle": true
+    },
+    {
+      "old": "67a400a7058b428f96ef2f95bb4f693537e0effc",
+      "function_commit": "aa583f2e401d9b2b2f0806b02400cb7deff43496",
+      "function_ordinal": 6,
+      "message": "feat(T-029,T-030,T-031): review, integrate and accept five-post candidates",
+      "original_exact_snapshot_requires_source_bundle": true
+    },
+    {
+      "old": "9d08c77d96abbd827eaae66eb4a1ad1f346aed24",
+      "function_commit": "aa583f2e401d9b2b2f0806b02400cb7deff43496",
+      "function_ordinal": 6,
+      "message": "feat(T-029,T-030,T-031): review, integrate and accept five-post candidates",
+      "original_exact_snapshot_requires_source_bundle": true
+    },
+    {
+      "old": "6da448097e01e4a4b8b8505b4ab9b8b4f07ddfd3",
+      "function_commit": "aa583f2e401d9b2b2f0806b02400cb7deff43496",
+      "function_ordinal": 6,
+      "message": "feat(T-029,T-030,T-031): review, integrate and accept five-post candidates",
+      "original_exact_snapshot_requires_source_bundle": true
+    },
+    {
+      "old": "a3200230e1b8bdbc1ca95bd78c1eb0a7dd260543",
+      "function_commit": "aa583f2e401d9b2b2f0806b02400cb7deff43496",
+      "function_ordinal": 6,
+      "message": "feat(T-029,T-030,T-031): review, integrate and accept five-post candidates",
+      "original_exact_snapshot_requires_source_bundle": false
+    },
+    {
+      "old": "23092d017e46bbb7bf6e97fe901c25630439007e",
+      "function_commit": "2cda9f9fdbc7192c340bb019e62e1ae4071a9299",
+      "function_ordinal": 7,
+      "message": "feat(T-032,T-033): prepare operations package and confirm publication plan",
+      "original_exact_snapshot_requires_source_bundle": true
+    },
+    {
+      "old": "2899801216f1a149f1de9691a98a41e65d9ed7d6",
+      "function_commit": "2cda9f9fdbc7192c340bb019e62e1ae4071a9299",
+      "function_ordinal": 7,
+      "message": "feat(T-032,T-033): prepare operations package and confirm publication plan",
+      "original_exact_snapshot_requires_source_bundle": true
+    },
+    {
+      "old": "deb16266cfc1a3032e99a170b4a29d5a25e7dea2",
+      "function_commit": "2cda9f9fdbc7192c340bb019e62e1ae4071a9299",
+      "function_ordinal": 7,
+      "message": "feat(T-032,T-033): prepare operations package and confirm publication plan",
+      "original_exact_snapshot_requires_source_bundle": true
+    },
+    {
+      "old": "ed88445369f5af167087e29f81f497c6063805a4",
+      "function_commit": "2cda9f9fdbc7192c340bb019e62e1ae4071a9299",
+      "function_ordinal": 7,
+      "message": "feat(T-032,T-033): prepare operations package and confirm publication plan",
+      "original_exact_snapshot_requires_source_bundle": true
+    },
+    {
+      "old": "f86a6072a5eafebe5029bc02bd2036a5a216f869",
+      "function_commit": "2cda9f9fdbc7192c340bb019e62e1ae4071a9299",
+      "function_ordinal": 7,
+      "message": "feat(T-032,T-033): prepare operations package and confirm publication plan",
+      "original_exact_snapshot_requires_source_bundle": false
+    },
+    {
+      "old": "55269406a6073a1f4a9f5053f74b457f9e041615",
+      "function_commit": "8a0a6ccfb0ac6b0cb66501863427d9b015834f2b",
+      "function_ordinal": 8,
+      "message": "chore(T-034): record product integration and workspace baseline",
+      "original_exact_snapshot_requires_source_bundle": false
+    },
+    {
+      "old": "adbfb184f8f9d7f01e290fd1259c15952cb45c3d",
+      "function_commit": "f5a1da19ddcae422465f73ecef193832add4b1d7",
+      "function_ordinal": 9,
+      "message": "chore(T-035,T-036): clean local assets and archive station01 editing files",
+      "original_exact_snapshot_requires_source_bundle": true
+    },
+    {
+      "old": "55516aa17ca02ca5b82aa6044d39453a7d1eea93",
+      "function_commit": "f5a1da19ddcae422465f73ecef193832add4b1d7",
+      "function_ordinal": 9,
+      "message": "chore(T-035,T-036): clean local assets and archive station01 editing files",
+      "original_exact_snapshot_requires_source_bundle": false
+    },
+    {
+      "old": "3a24d8070d1810b4bf613428f022d1ab95657150",
+      "function_commit": "1481fda62cd2344762981084752afd819bfe991d",
+      "function_ordinal": 10,
+      "message": "chore(T-037,T-038,T-039): migrate final assets and restore browsable history",
+      "original_exact_snapshot_requires_source_bundle": true
+    },
+    {
+      "old": "f3533d8e543ceb06fcff1f84a73234a96f1a0d88",
+      "function_commit": "1481fda62cd2344762981084752afd819bfe991d",
+      "function_ordinal": 10,
+      "message": "chore(T-037,T-038,T-039): migrate final assets and restore browsable history",
+      "original_exact_snapshot_requires_source_bundle": true
+    },
+    {
+      "old": "2735804254ff4ff8c193ec52bd81c7669d2313be",
+      "function_commit": "1481fda62cd2344762981084752afd819bfe991d",
+      "function_ordinal": 10,
+      "message": "chore(T-037,T-038,T-039): migrate final assets and restore browsable history",
+      "original_exact_snapshot_requires_source_bundle": true
+    },
+    {
+      "old": "6a4382e8e5471c40d1e6d6ff75028b69c08cfc14",
+      "function_commit": "1481fda62cd2344762981084752afd819bfe991d",
+      "function_ordinal": 10,
+      "message": "chore(T-037,T-038,T-039): migrate final assets and restore browsable history",
+      "original_exact_snapshot_requires_source_bundle": true
+    },
+    {
+      "old": "369c9688ab1049e65c47a4eff626133cecb4dc42",
+      "function_commit": "1481fda62cd2344762981084752afd819bfe991d",
+      "function_ordinal": 10,
+      "message": "chore(T-037,T-038,T-039): migrate final assets and restore browsable history",
+      "original_exact_snapshot_requires_source_bundle": false
+    },
+    {
+      "old": "1cda9f0eb383fdc258d265b1ea946151bff44f12",
+      "function_commit": "16dcd268127635c15b227ec7e0c84149d1a54fd4",
+      "function_ordinal": 11,
+      "message": "chore(T-040,T-041,T-042): clean product refs and obsolete OPC work copy",
+      "original_exact_snapshot_requires_source_bundle": true
+    },
+    {
+      "old": "8b2f5e7c75677dc930bf4a26aa8b3207d57e6501",
+      "function_commit": "16dcd268127635c15b227ec7e0c84149d1a54fd4",
+      "function_ordinal": 11,
+      "message": "chore(T-040,T-041,T-042): clean product refs and obsolete OPC work copy",
+      "original_exact_snapshot_requires_source_bundle": true
+    },
+    {
+      "old": "cb47ef73d5fd98438f3f5ef7348fe7d4b292dc95",
+      "function_commit": "16dcd268127635c15b227ec7e0c84149d1a54fd4",
+      "function_ordinal": 11,
+      "message": "chore(T-040,T-041,T-042): clean product refs and obsolete OPC work copy",
+      "original_exact_snapshot_requires_source_bundle": false
+    }
+  ],
+  "remote_receipt_file": "remote-result.json"
+}

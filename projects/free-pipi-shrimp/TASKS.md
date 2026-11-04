@@ -2867,6 +2867,18 @@ PM实际消息已送达当前reviewer。其最新真实回执说明仍见PM acti
 - 阻塞与下一位行动人：本次限定清理完成，无清理剩余项；OPC治理已在现有项目分支本地提交，GitHub返回Permission denied (publickey)，尚未推送成功，待SSH认证恢复后同步。未合长期分支或修改平台发布状态。
 - 更新日期：2026-11-04
 
+## T-043：按功能压缩c7ad181至cb47ef7的OPC提交
+
+- 负责人：project-manager（用户直接授权的历史整理）。
+- 状态：completed
+- 授权来源与日期：2026-11-04用户要求把cb47ef7到c7ad181的commit按功能整理压缩，提交说明仅一行；本地整理范围完成，远端同步结果单列。
+- 范围与基线：原功能分支feature/free-pipi-shrimp/t-023-station02-first-two-visual-assets；c7ad18166b0e2c4fca152c3c9a24fdea3110af75为保留基线，之后至cb47ef73d5fd98438f3f5ef7348fe7d4b292dc95共58条非merge提交。产品内容分支与提交不适用，未合入项目长期分支。
+- 功能划分与结果：视觉资源、前两篇图文、前两篇运营、后三篇规划、后三篇文案制图、审校整合验收、运营与发布安排、产品集成、本地素材整理、远端素材与历史恢复、引用与旧副本清理，共11条功能提交，每条完整说明单行无正文。功能链末尾16dcd268127635c15b227ec7e0c84149d1a54fd4；另1条独立治理提交登记整理记录与映射。
+- 方法与验证：先创建1.4MB自包含bundle并独立克隆／fsck，在隔离副本执行interactive rebase／fixup；逐组tree等于对应原组末尾，最终tree保持05a3d885c1622f5927c8da77a104587e6f3b8389。当前176个跟踪文件及17个temp原字节保持，索引tree保持，产品跟踪内容及main保持；之后仅新增本轮治理文件。其他本地refs保持，无新增merge，Git完整性与框架／链接校验通过。
+- 历史读取：[功能划分与恢复说明](artifacts/T-043-opc-functional-consolidation-20261104.md)、[核验回执](artifacts/T-043-opc-functional-consolidation-20261104.json)、[58条来源查询表](artifacts/T-043-opc-commit-map-20261104.tsv)。旧OPC精确快照从本地源bundle读取，不能直接用多对一功能映射替代；既有产品SHA与T-039映射保持。
+- 远端同步与下一位行动人：已记录真实远端旧头8b2f5e7c75677dc930bf4a26aa8b3207d57e6501及项目基线c7ad181，尝试显式旧头force-with-lease原子推送，SSH公钥认证失败未成功。待认证恢复后PM重新核对远端旧头，再同步当前功能分支；不无条件强推，不自动合长期分支或清理其他分支。
+- 更新日期：2026-11-04
+
 ## 记录样式（不是真实任务）
 
 ```text

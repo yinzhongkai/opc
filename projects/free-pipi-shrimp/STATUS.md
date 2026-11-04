@@ -1,5 +1,7 @@
 # 项目状态摘要
 
+- 当前OPC历史整理完成（2026-11-04，project-manager）：T-043完成本地整理，原c7ad18166b0e2c4fca152c3c9a24fdea3110af75..cb47ef73d5fd98438f3f5ef7348fe7d4b292dc95共58条提交按11个功能单元压缩，功能链末尾16dcd268127635c15b227ec7e0c84149d1a54fd4。每条说明单行无正文，每组tree与原组末尾一致，功能链最终tree与旧cb47ef7完全相同；176跟踪工作文件、17份temp及产品成果字节保持。另用独立治理提交保存本回执及58条来源映射；旧精确OPC快照可从本地1.4MB bundle恢复。c7ad181基线、其他分支／标签、产品main／WORKSPACE保持；受保护推送再次返回SSH公钥失败，远端尚未更新。[功能划分、验证与历史读取](artifacts/T-043-opc-functional-consolidation-20261104.md)。
+
 - 当前OPC本地清理完成（2026-11-04，project-manager）：按用户要求，T-042 completed；仅删除.git/agent-work/t020旧隔离副本1810文件1389182486字节，OPC约1.54GB→155MB（含核验回执与治理提交）。旧产品副本44条提交均已从既有原始历史bundle独立恢复／fsck验证。删除前后其余435个OPC文件、当前产品库全部777文件及历史备份原字节一致，两仓Git完整性／引用／工作区注册保持；随后仅新增本轮治理记录。产品main／WORKSPACE仍5061a76052e19d393988c1932f92912d60c9e745，OPC的Git对象、LFS及temp保留。治理回执已本地提交，GitHub返回SSH公钥认证失败，远端同步待认证恢复。[清理结果与保全证据](artifacts/T-042-opc-t020-cleanup-20261104.md)。
 
 - 当前产品标签清理完成（2026-11-04，project-manager）：用户要求本地／远端tag全部清理，T-041 completed；两端8个标签已删除，仅main@5061a76052e19d393988c1932f92912d60c9e745，无标签。main仍32条提交，350工作文件／索引摘要及82个LFS缓存158.2MB保持、工作树干净。清理前全部102条记录已保存至本地约1.9MB自包含bundle，独立恢复／fsck通过；其中70条非main记录不再由GitHub分支／标签提供浏览入口，需从本地备份恢复。D-025记录最新引用范围，覆盖下列旧摘要中的标签保留状态；[标签清理与恢复方法](artifacts/T-041-product-tag-cleanup-20261104.md)。

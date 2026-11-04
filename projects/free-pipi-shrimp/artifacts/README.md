@@ -1,5 +1,9 @@
 # 项目成果索引
 
+## OPC功能提交整理（2026-11-04，T-043本地完成，远端待同步）
+
+- [功能划分与精确快照恢复](T-043-opc-functional-consolidation-20261104.md)、[结构化回执](T-043-opc-functional-consolidation-20261104.json)、[58条来源查询表](T-043-opc-commit-map-20261104.tsv)：c7ad181..cb47ef7的58条提交压为11条单行说明的功能提交，功能链末尾16dcd268127635c15b227ec7e0c84149d1a54fd4，逐组tree及旧最终tree保持。另1条独立治理提交仅登记本次整理。产品main／WORKSPACE仍5061a76052e19d393988c1932f92912d60c9e745。原OPC固定SHA保留为原始时点，可从本地bundle恢复；映射后的功能提交不能替代组内较早的精确快照。远端推送因SSH认证失败待恢复后同步。
+
 ## OPC旧隔离副本清理（2026-11-04，T-042 completed）
 
 - [T-020副本清理与历史保全](T-042-opc-t020-cleanup-20261104.md)、[实际核验回执](T-042-opc-t020-cleanup-20261104.json)：仅清理.git/agent-work/t020，释放约1.39GB，OPC本地约154.2MB。44条旧产品提交已从既有历史备份独立恢复验证；其余OPC文件、当前产品成果及Git历史／备份在删除前后逐文件保持。本轮未清理剩余LFS、Git对象或temp，未改变产品main。
