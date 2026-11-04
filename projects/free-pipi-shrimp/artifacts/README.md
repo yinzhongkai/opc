@@ -1,5 +1,13 @@
 # 项目成果索引
 
+## 首站已发布素材本地归档（2026-11-04，T-036）
+
+- [归档、保留及恢复步骤](T-036-station01-archive-20261104.md)：D-020已确认，首站独占工程／背景51文件归档后从工作目录移出，净释放约82.2MB，当前产品约929.9MB；[逐文件快照](T-036-station01-archive-plan-20261104.json)与[实际核验](T-036-station01-archive-result-20261104.json)。40成品、最终文案／记录、共享头像／模板和第二站均保留，main／WORKSPACE仍771c9d2；Git历史未改，archive/station01-editing-assets-20261104已同步。当前本地38工程不检出，验证与恢复按归档记录执行。
+
+## 本地空间清理（2026-11-04，T-035）
+
+- [清理及保全结果](T-035-local-storage-cleanup-20261104.md)：产品约1.45GB→1.01GB，释放约440MB；[逐文件计划](T-035-local-cleanup-plan-20261104.json)与[实际核验](T-035-local-cleanup-result-20261104.json)可追溯。664受跟踪文件、首站额外29成品／编辑素材、99个Git提交及所有引用保持，素材与Git完整性校验通过；历史保护LFS缓存保留，产品main／WORKSPACE仍771c9d2，无新产品提交。
+
 ## 产品main集成定位（2026-11-04，T-034）
 
 - [按功能整理与合并证据](T-034-product-integration-20261104.md)：产品main及远程已固定771c9d2be5427cfa59decfed53acf26dffa93066，16→8功能提交且均单行message；WORKSPACE基线一致。当前业务路径与原b938a81860945acc527b8198d554fb67a83d78e4的完整tree和664文件字节一致，既有成果行保留原交付时点；旧来源SHA通过归档标签archive/t-023-pre-squash-20261104继续读取。未新增图文或平台执行，OPC仍当前feature，不合稳定框架。
