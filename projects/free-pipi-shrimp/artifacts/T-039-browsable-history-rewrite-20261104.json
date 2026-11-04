@@ -1,0 +1,1593 @@
+{
+  "task": "T-039",
+  "date": "2026-11-04",
+  "timezone": "Asia/Shanghai",
+  "status": "completed",
+  "user_authorization": "D-024: Rewrite history to keep GitHub-browsable commit records while removing intermediate image references; SHA changes explicitly accepted.",
+  "rewrite_verification": {
+    "result": "passed",
+    "input_commit_records": 101,
+    "output_commit_records": 101,
+    "changed_commit_ids": 95,
+    "author_committer_dates_encoding_and_messages_preserved": true,
+    "parent_topology_preserved": true,
+    "all_commit_trees_equal_original_minus_retired_files": true,
+    "retired_pointer_blobs_removed": 243,
+    "superseded_raw_bundle_removed_from_published_graph": true,
+    "historical_file_entries_removed": 5789,
+    "retained_unique_lfs_objects_in_entire_history": 82,
+    "ref_names_preserved": 11,
+    "annotated_tag_metadata_preserved": 2,
+    "extra_original_commit_headers": [],
+    "old_main": "62c0e4463bf3e37c08d4d112b555e6685a46c708",
+    "rewritten_main_before_new_final_commit": "9d175ee41410b2abfa62abceb31217a4f2b6abc1",
+    "old_main_commits": 31,
+    "rewritten_main_commits": 31,
+    "mapping": [
+      {
+        "old": "03b1d2ad1f81dae634882c5359b0369521e26fbd",
+        "new": "ddfbe12010a651d44f55bc0c5aa1baf8396538c7",
+        "subject": "feat(T-023): add Emeishan first-two visual assets",
+        "old_parents": [
+          "b708c850e1d38f6e10eb8c4fb91359f9afd205c9"
+        ],
+        "new_parents": [
+          "a154c0254588181e61434f86f05ba41776c9aef2"
+        ]
+      },
+      {
+        "old": "051203883c11ad37eae45716bf1ff84cf806c667",
+        "new": "8c96d3c10ea05f3b957c1a3c3f16b66e2d5c39a9",
+        "subject": "T-023 deliver station02 first-two visual asset drafts",
+        "old_parents": [
+          "b708c850e1d38f6e10eb8c4fb91359f9afd205c9"
+        ],
+        "new_parents": [
+          "a154c0254588181e61434f86f05ba41776c9aef2"
+        ]
+      },
+      {
+        "old": "0624abdf8e6d37426a3bd0c6f700d5679db4b806",
+        "new": "363e4a2a704feb52f8e21b9a8d832541a4ee8153",
+        "subject": "feat(T-030): integrate remaining three reviewed Emeishan plogs",
+        "old_parents": [
+          "b1596c8a9be6652e2656f546fa2d3848047d9e81"
+        ],
+        "new_parents": [
+          "cc8d4b67b9da6cf695446bbc3e7506c6dc0c8a7b"
+        ]
+      },
+      {
+        "old": "0e880f05067f4d03633965d5315971a36a48868b",
+        "new": "7f08daa4f9b977c531f7bd51ce6eb17761536792",
+        "subject": "T-016 record official ChatGPT dispatch and first state read failure",
+        "old_parents": [
+          "b7193aca51d8bd49b810a372b69450faeb60c406"
+        ],
+        "new_parents": [
+          "fc5ef3bff489b36284f7a60fcbaf4244ca02571a"
+        ]
+      },
+      {
+        "old": "104b533b4bd66825918e2f32871268f31179d876",
+        "new": "66b61c3671b5fef117255751a1cf93c149899b4a",
+        "subject": "feature(T-006): integrate two complete drafts and operations handoff inputs",
+        "old_parents": [
+          "5af5615d83b59fff85bdbdb50583f825cb5f82ba"
+        ],
+        "new_parents": [
+          "3e1d4ec2e5bd958cc927edbf932957eff31f7048"
+        ]
+      },
+      {
+        "old": "139f806709f63fbcab1c526a2b68386debb6268b",
+        "new": "f812a442fcea6299e442219bf98ecb43561332a7",
+        "subject": "Prepare T-032 five-article operations handoff and candidate calendar",
+        "old_parents": [
+          "b2710855608c1eef4fdc47d9f1cb73604462e307"
+        ],
+        "new_parents": [
+          "c9af2d7140d0b85807ce7841b697f8b975086818"
+        ]
+      },
+      {
+        "old": "147224e430061be3915c1df070c2903eaf888560",
+        "new": "147224e430061be3915c1df070c2903eaf888560",
+        "subject": "feat(T-013): preserve K3 copy and reviewed revision provenance",
+        "old_parents": [
+          "7b227f4a3354df50c9c8c80ef48dbbf2c348eea8"
+        ],
+        "new_parents": [
+          "7b227f4a3354df50c9c8c80ef48dbbf2c348eea8"
+        ]
+      },
+      {
+        "old": "14d4fdd613489d2e156e9d9a0a275bd02ad82d59",
+        "new": "9e9c26aecef47ecb7c1e49865611053729597622",
+        "subject": "feat(T-028): illustrate and typeset remaining Emeishan plogs",
+        "old_parents": [
+          "c2a7c4833ac185471592fadee5f00d6a3c8c8d80"
+        ],
+        "new_parents": [
+          "6792e006860b7b9601bcce60b472c54e19a2fbcc"
+        ]
+      },
+      {
+        "old": "184512485dc5998e0185790d80719fac722830b8",
+        "new": "6ea84914b9be6b1d8f32b1c0babd51ed4a20cc23",
+        "subject": "feat(t-024): add station two copy candidates",
+        "old_parents": [
+          "7c5609fb474967156eb3bcb3477f6bd1812c4e5d"
+        ],
+        "new_parents": [
+          "80e34b30190b98870397aa827a1add24ba1e0d67"
+        ]
+      },
+      {
+        "old": "1ca027d6ce84ab5cb9d1b7783cbce3fbf7eabb29",
+        "new": "553dcfac55a3c4a43071a2bc63861d7977001930",
+        "subject": "feat(T-011): clarify AI text participation in both publication drafts",
+        "old_parents": [
+          "b46e262f0abc34cd19044342668b33d17d3ebcb4"
+        ],
+        "new_parents": [
+          "e44320f92b59802f8252989b9e212c018f4036f3"
+        ]
+      },
+      {
+        "old": "240f418a1a693313cb79e8efddb34cd82b3b9f79",
+        "new": "ee078edcbe3669b1e9c18492bdd7bc85714e9c62",
+        "subject": "docs(visual): add approved T-003 baseline v0.4",
+        "old_parents": [
+          "86661ecc1f287e9bcaea79fab7a9e76de7d5a1a8"
+        ],
+        "new_parents": [
+          "9af85e0a1586992de9716e2d2038e921a1f8019a"
+        ]
+      },
+      {
+        "old": "25294dbebbf68f542389a749f20cc5555839b8e2",
+        "new": "e815c1c9112fab83767efcb3a98d8c453d46a0e2",
+        "subject": "T-021 record station01 scheduled publication",
+        "old_parents": [
+          "40d190d4302546ef3f937c8efe437a1ee9311691"
+        ],
+        "new_parents": [
+          "27888bf6779d578ba512c97b4b3b5788b6d410a4"
+        ]
+      },
+      {
+        "old": "28ba1b3053dce11950aa00502ca5fad011afcbf2",
+        "new": "7a2860c50b40b7fba46252a3d4efd5a3a3efe545",
+        "subject": "feat(t-013): add Kimi K3 cover copy draft and provenance records",
+        "old_parents": [
+          "eca9ea0e1114e03f0874396103edb6b8477a4d1c"
+        ],
+        "new_parents": [
+          "e46e2184f3e6b530724b59a1957a092db7457cb0"
+        ]
+      },
+      {
+        "old": "2b4eb32d952b4cb7c4caa795625f77aa02c8bde4",
+        "new": "25412945b0ad0c54099ff5e5bfd871a8c3cb4e38",
+        "subject": "T-027 adapt AI disclosures to fixed illustrated drafts",
+        "old_parents": [
+          "e7eabe3ffba3c6df5882132a317a6573e8d5f6b9"
+        ],
+        "new_parents": [
+          "6a56275123f578bdd4ba4e372524c85fae1f1310"
+        ]
+      },
+      {
+        "old": "2d75a3d69d3374749530afb6e477038a8f4143d5",
+        "new": "fe4d32c0b3f25c50bd502e11b4a4e3f7bf2fe2ed",
+        "subject": "feat(visual): add hand-drawn storybook chibi candidates",
+        "old_parents": [
+          "b547bd6ba987381400c61c16baca26532c4a7767"
+        ],
+        "new_parents": [
+          "0535e595634351ba8134461c743dc944e9d599c5"
+        ]
+      },
+      {
+        "old": "2ebbb013396ccdace268e3475678410f5699f62e",
+        "new": "2b63773f05f7138c4250e700f1388e7c3a1393f3",
+        "subject": "feat(t-005): deliver reviewed candidate A layout and exports",
+        "old_parents": [
+          "a7cca968e1459c6931d6ef7f551cf04f03273b11"
+        ],
+        "new_parents": [
+          "90542f1a84bf20b85db94c45fbe8c934fe042fa0"
+        ]
+      },
+      {
+        "old": "2ef1fd50b63206c80057d055a9e6e9e298b71fc4",
+        "new": "f1a10671c1dd2ebbcb1438f92eecf06a5840fb68",
+        "subject": "T-017 revise remaining plogs around licensed exhibit references",
+        "old_parents": [
+          "c8642657201c5780de313247ff1ed13210b28c2e"
+        ],
+        "new_parents": [
+          "434bccdb2668200bc60d7712b6bb68722e14b18c"
+        ]
+      },
+      {
+        "old": "33e90ceca12ebc5d70b908031f6a8380debd60e5",
+        "new": "903dd1f006579a9bb69346e4499fd71079f46ebb",
+        "subject": "feat(T-006): typeset selected copy across 16 visual pages",
+        "old_parents": [
+          "a11d0da0cfdefa5e579584966c06163b7dd6cceb"
+        ],
+        "new_parents": [
+          "a11d0da0cfdefa5e579584966c06163b7dd6cceb"
+        ]
+      },
+      {
+        "old": "3960731e7ba5eb2322d2cf82ebc3cb9e14b7efb7",
+        "new": "a18ed49b4bbbf175891800428066a257eecfcc9a",
+        "subject": "T-016 adapt disclosures and references to exhibit visuals",
+        "old_parents": [
+          "782cd870d6fba40a43ca017daaafcd9b89ea7c6f"
+        ],
+        "new_parents": [
+          "a52b0b5cf910963898d53fb712c8475ff45f2b80"
+        ]
+      },
+      {
+        "old": "3c1c05f3a1ba02ce264ca55be339db7d6dc0d508",
+        "new": "c7a6951d196e847f19e211cf350bd0883dc25ed7",
+        "subject": "T-018 complete S10 author registration per RV-T018-001",
+        "old_parents": [
+          "3960731e7ba5eb2322d2cf82ebc3cb9e14b7efb7"
+        ],
+        "new_parents": [
+          "a18ed49b4bbbf175891800428066a257eecfcc9a"
+        ]
+      },
+      {
+        "old": "3d722ffcdc3bfe0c37167add748ae300ef1a473a",
+        "new": "c41b701a113b34e49a4d2354df832d09944364a0",
+        "subject": "T-016 preserve user-returned P03 and prepare author revision candidate",
+        "old_parents": [
+          "6e4c948aa537ca9859ce5484f9a283b0138946fc"
+        ],
+        "new_parents": [
+          "6942a00ad30ca931250a53e8b2ebfa29381edeb7"
+        ]
+      },
+      {
+        "old": "3db7ee607b3b47597ccaf8ff0ceeff7de09712fc",
+        "new": "9162e4d1f090b915a6ea1e97e2b846a0a825e9dc",
+        "subject": "docs: approve T-003 avatar baseline v0.4",
+        "old_parents": [
+          "783eaea6c75d4871f82b1678c855e0f1af296150"
+        ],
+        "new_parents": [
+          "bf0ffd7f6ad4c2d15e45c382b34023f80956d686"
+        ]
+      },
+      {
+        "old": "40b144f7aea38d78b453e0a0b5ed5331d0bdcd70",
+        "new": "3ac28fc30d328b9d284e1c603665c25154c751d5",
+        "subject": "feat: add warm handdrawn animation avatar batch",
+        "old_parents": [
+          "2d75a3d69d3374749530afb6e477038a8f4143d5"
+        ],
+        "new_parents": [
+          "fe4d32c0b3f25c50bd502e11b4a4e3f7bf2fe2ed"
+        ]
+      },
+      {
+        "old": "40d190d4302546ef3f937c8efe437a1ee9311691",
+        "new": "27888bf6779d578ba512c97b4b3b5788b6d410a4",
+        "subject": "T-020 add station01 remaining operations handoff package",
+        "old_parents": [
+          "3c1c05f3a1ba02ce264ca55be339db7d6dc0d508"
+        ],
+        "new_parents": [
+          "c7a6951d196e847f19e211cf350bd0883dc25ed7"
+        ]
+      },
+      {
+        "old": "4b53d0834c7869592ba1d579f74102fb2a4edf4a",
+        "new": "4b53d0834c7869592ba1d579f74102fb2a4edf4a",
+        "subject": "feat(T-012): consolidate Sanxingdui visual assets and fixed Git LFS verification",
+        "old_parents": [
+          "d7070010b3684795aa3906f3b01934c2a6d5b6e1"
+        ],
+        "new_parents": [
+          "d7070010b3684795aa3906f3b01934c2a6d5b6e1"
+        ]
+      },
+      {
+        "old": "4d023fdcb6190d710512e98d7c03c790c715b234",
+        "new": "4d023fdcb6190d710512e98d7c03c790c715b234",
+        "subject": "chore: initialize production asset workspace",
+        "old_parents": [],
+        "new_parents": []
+      },
+      {
+        "old": "5404a33758b83fd5aff00ced55a4d893bf700c08",
+        "new": "e8c913539b2936284bf487bd817acca7f3693522",
+        "subject": "feat(T-005): consolidate cover template, scene sources and adopted exports",
+        "old_parents": [
+          "9f5cb8e8a50a161583bc72b5f321e4875aed6fc0"
+        ],
+        "new_parents": [
+          "2d5fce7e52268ff169691c2af509d3714e2c828a"
+        ]
+      },
+      {
+        "old": "56dae24a7388b39292113f06c5575c1f3854d5ef",
+        "new": "5a631b034d6944f1140dfdf19086604956c56ef2",
+        "subject": "feat(T-011): consolidate publication checks, operations workflow and evidence",
+        "old_parents": [
+          "1ca027d6ce84ab5cb9d1b7783cbce3fbf7eabb29"
+        ],
+        "new_parents": [
+          "553dcfac55a3c4a43071a2bc63861d7977001930"
+        ]
+      },
+      {
+        "old": "5af5615d83b59fff85bdbdb50583f825cb5f82ba",
+        "new": "3e1d4ec2e5bd958cc927edbf932957eff31f7048",
+        "subject": "feat(T-006): typeset selected copy across 16 visual pages",
+        "old_parents": [
+          "5f58227db0b340056f1dbbab8752039a72740be2"
+        ],
+        "new_parents": [
+          "3aebf91196e966d01a056881c3c6a6e44fa3ee42"
+        ]
+      },
+      {
+        "old": "5c5c934ce419c206120a258027dfabb4620eef0e",
+        "new": "c20fa0d130c69a9889d704656223ed4c6c6e806a",
+        "subject": "feat(t-006): add K3 raw draft and candidate mapping for first two plogs",
+        "old_parents": [
+          "db81ecb78c1e3430cc30e7b7cfad4c091dd3ffbb"
+        ],
+        "new_parents": [
+          "092918078300b2d4c980e18aca88a02667ddbf31"
+        ]
+      },
+      {
+        "old": "5f58227db0b340056f1dbbab8752039a72740be2",
+        "new": "3aebf91196e966d01a056881c3c6a6e44fa3ee42",
+        "subject": "feature(T-006): select reviewed draft and prepare 16-page typesetting inputs",
+        "old_parents": [
+          "db7e1d2d3132d03394472897c8391efb51752728"
+        ],
+        "new_parents": [
+          "e89a5e8d86983628dc5e70e31d066960cfed13a0"
+        ]
+      },
+      {
+        "old": "607c571ce84c5f125173906949656fb29beba4d8",
+        "new": "f457455bf3828dc9c028aac9462a2b3c2add6962",
+        "subject": "Merge T-005 cover visual template from feature/t-005-cover-visual-template",
+        "old_parents": [
+          "730429312be85e33b4534b58adad54a207a8b797",
+          "2ebbb013396ccdace268e3475678410f5699f62e"
+        ],
+        "new_parents": [
+          "2217280ebc7134a71cf5960141bf934c1f8e9722",
+          "2b63773f05f7138c4250e700f1388e7c3a1393f3"
+        ]
+      },
+      {
+        "old": "615190d10a5212b948eb541338a17858e8b2cfab",
+        "new": "be0e1110e0c63dbeed017492ff356d549827b49f",
+        "subject": "feat(t-024): prepare station two layout inputs",
+        "old_parents": [
+          "184512485dc5998e0185790d80719fac722830b8"
+        ],
+        "new_parents": [
+          "6ea84914b9be6b1d8f32b1c0babd51ed4a20cc23"
+        ]
+      },
+      {
+        "old": "62c0e4463bf3e37c08d4d112b555e6685a46c708",
+        "new": "9d175ee41410b2abfa62abceb31217a4f2b6abc1",
+        "subject": "chore(T-038): retain final station images and shared templates",
+        "old_parents": [
+          "771c9d2be5427cfa59decfed53acf26dffa93066"
+        ],
+        "new_parents": [
+          "8bae97cb9c771ea914fc3fd82ebda982a139ddaa"
+        ]
+      },
+      {
+        "old": "67ed39349cda7b6d1fae7f27e2cd6e8adcd374a8",
+        "new": "39a190a447ec0a6bb7f0ae20148f0a1706f6b56d",
+        "subject": "T-024 fix layout-mapping fixed blob hash and pin it in verification",
+        "old_parents": [
+          "dc8feeae719b4f1bb3bc24e8ea238877f997bd70"
+        ],
+        "new_parents": [
+          "34f565fb5750399f5d083b156a35803cc002b851"
+        ]
+      },
+      {
+        "old": "6e4c948aa537ca9859ce5484f9a283b0138946fc",
+        "new": "6942a00ad30ca931250a53e8b2ebfa29381edeb7",
+        "subject": "T-016 verify direct DOM fill and record K3 login gate",
+        "old_parents": [
+          "ec5a588ef0a25576292a2b0bc112affc1e4e2f4a"
+        ],
+        "new_parents": [
+          "6ab4e3e6e51acedfe284943d734aa83884d70ba4"
+        ]
+      },
+      {
+        "old": "730429312be85e33b4534b58adad54a207a8b797",
+        "new": "2217280ebc7134a71cf5960141bf934c1f8e9722",
+        "subject": "merge: complete T-003 visual baseline",
+        "old_parents": [
+          "b547bd6ba987381400c61c16baca26532c4a7767",
+          "240f418a1a693313cb79e8efddb34cd82b3b9f79"
+        ],
+        "new_parents": [
+          "0535e595634351ba8134461c743dc944e9d599c5",
+          "ee078edcbe3669b1e9c18492bdd7bc85714e9c62"
+        ]
+      },
+      {
+        "old": "73b36f9a43dfc012e232191321e48f6091d3c3ed",
+        "new": "1993029d4b467854c3e54f57fb5052438fffe740",
+        "subject": "T-016 finalize disclosures and references as v0.5 exhibit disclosure",
+        "old_parents": [
+          "2ef1fd50b63206c80057d055a9e6e9e298b71fc4"
+        ],
+        "new_parents": [
+          "f1a10671c1dd2ebbcb1438f92eecf06a5840fb68"
+        ]
+      },
+      {
+        "old": "771c9d2be5427cfa59decfed53acf26dffa93066",
+        "new": "8bae97cb9c771ea914fc3fd82ebda982a139ddaa",
+        "subject": "feat(T-032): prepare adopted five-post Emeishan publishing package",
+        "old_parents": [
+          "0624abdf8e6d37426a3bd0c6f700d5679db4b806"
+        ],
+        "new_parents": [
+          "363e4a2a704feb52f8e21b9a8d832541a4ee8153"
+        ]
+      },
+      {
+        "old": "782cd870d6fba40a43ca017daaafcd9b89ea7c6f",
+        "new": "a52b0b5cf910963898d53fb712c8475ff45f2b80",
+        "subject": "T-017 revise remaining plogs around licensed exhibit references",
+        "old_parents": [
+          "f3dad37cb0ca49c444be672580fb3b69e198f16b"
+        ],
+        "new_parents": [
+          "0d45cca447c0756026e0a7dfb4a76d6992aec04f"
+        ]
+      },
+      {
+        "old": "783eaea6c75d4871f82b1678c855e0f1af296150",
+        "new": "bf0ffd7f6ad4c2d15e45c382b34023f80956d686",
+        "subject": "docs: fix T-003 batch-008 record link",
+        "old_parents": [
+          "bc04b7e004b77c2a75c7e9866a241701f4196709"
+        ],
+        "new_parents": [
+          "406bcc3ff8d76190df66bd409b830c53de15d097"
+        ]
+      },
+      {
+        "old": "7a2452c4dfd9ad0236428a1c026d73fccda931f7",
+        "new": "e5eedca7b292ee55f5b2d4246254bf7bbaf830fc",
+        "subject": "T-017 produce remaining three Sanxingdui plog visuals and typeset pages",
+        "old_parents": [
+          "c15f0fa636f11f48e31ee2c8557e59f3a3a97673"
+        ],
+        "new_parents": [
+          "93618cf98a8e346fcf0a0aed242402dd39b0b8a9"
+        ]
+      },
+      {
+        "old": "7a45af747589508574db1e17fd861cb96ac84bea",
+        "new": "4d30ade08273707b96afbc2c44bbf5104a0dad01",
+        "subject": "docs: add T-003 theme visual baseline v0.2",
+        "old_parents": [
+          "40b144f7aea38d78b453e0a0b5ed5331d0bdcd70"
+        ],
+        "new_parents": [
+          "3ac28fc30d328b9d284e1c603665c25154c751d5"
+        ]
+      },
+      {
+        "old": "7b227f4a3354df50c9c8c80ef48dbbf2c348eea8",
+        "new": "7b227f4a3354df50c9c8c80ef48dbbf2c348eea8",
+        "subject": "feat(T-003): consolidate character exploration and approved visual baseline",
+        "old_parents": [
+          "4d023fdcb6190d710512e98d7c03c790c715b234"
+        ],
+        "new_parents": [
+          "4d023fdcb6190d710512e98d7c03c790c715b234"
+        ]
+      },
+      {
+        "old": "7ba8921f5aa23e5bf9d0d282008d6285e81f8add",
+        "new": "4d509564aff5e38ba634b27f92ecf724a80fd30b",
+        "subject": "Clarify cover-copy field use and unverified layout claims",
+        "old_parents": [
+          "28ba1b3053dce11950aa00502ca5fad011afcbf2"
+        ],
+        "new_parents": [
+          "7a2860c50b40b7fba46252a3d4efd5a3a3efe545"
+        ]
+      },
+      {
+        "old": "7c5609fb474967156eb3bcb3477f6bd1812c4e5d",
+        "new": "80e34b30190b98870397aa827a1add24ba1e0d67",
+        "subject": "docs(t-024): record K3 access blocker",
+        "old_parents": [
+          "051203883c11ad37eae45716bf1ff84cf806c667"
+        ],
+        "new_parents": [
+          "8c96d3c10ea05f3b957c1a3c3f16b66e2d5c39a9"
+        ]
+      },
+      {
+        "old": "7d9aae9999281071c1cfb7f4d0b64ffbaf07f5b0",
+        "new": "0eb78562b32004c5b5b77fbbd09b45497c85858c",
+        "subject": "T-016 update post-image AI disclosures for three plogs",
+        "old_parents": [
+          "7a2452c4dfd9ad0236428a1c026d73fccda931f7"
+        ],
+        "new_parents": [
+          "e5eedca7b292ee55f5b2d4246254bf7bbaf830fc"
+        ]
+      },
+      {
+        "old": "7e3080c7f84c70bb765a4bf5d9dffe35d829f056",
+        "new": "386865ca771ae1d74f53c75a3e493359b303757b",
+        "subject": "feat(t-005): add reusable 3:4 cover template",
+        "old_parents": [
+          "730429312be85e33b4534b58adad54a207a8b797"
+        ],
+        "new_parents": [
+          "2217280ebc7134a71cf5960141bf934c1f8e9722"
+        ]
+      },
+      {
+        "old": "86661ecc1f287e9bcaea79fab7a9e76de7d5a1a8",
+        "new": "9af85e0a1586992de9716e2d2038e921a1f8019a",
+        "subject": "feat(visual): add T-003 hand-drawn generation batches",
+        "old_parents": [
+          "b547bd6ba987381400c61c16baca26532c4a7767"
+        ],
+        "new_parents": [
+          "0535e595634351ba8134461c743dc944e9d599c5"
+        ]
+      },
+      {
+        "old": "8b0c88d72eded3b42f67d3ed47b084532dde1428",
+        "new": "0906ea0b5c11bafcfbe95dcd8e3ba18819ed2e9e",
+        "subject": "T-024 typeset 16 formal pages with A-018 v0.2 selected copy (A-019 draft)",
+        "old_parents": [
+          "615190d10a5212b948eb541338a17858e8b2cfab"
+        ],
+        "new_parents": [
+          "be0e1110e0c63dbeed017492ff356d549827b49f"
+        ]
+      },
+      {
+        "old": "8f71f63d378de9f34ae03fefac54491632521644",
+        "new": "8320ec90ba7e9c7740f2edbf16ee0b724f0a3275",
+        "subject": "T-027 draft remaining Emeishan copy with direct client provenance",
+        "old_parents": [
+          "d4501c37eea9d740bb9c37c553a55c884cab2651"
+        ],
+        "new_parents": [
+          "0c0dc2457dbc1f07d7225cfc162aba429d1c138f"
+        ]
+      },
+      {
+        "old": "9219dd0f213a3a3593f9d7ee24f7391eecc29540",
+        "new": "7a8e36b238d033769a830ac1e78458eef740a7c9",
+        "subject": "T-016 prepare remaining plog source and semantic inputs",
+        "old_parents": [
+          "ef5399b0ec6dc89bc657a65968346f62ad3e4434"
+        ],
+        "new_parents": [
+          "8fd15bbab85faaeded567fa8e67e04c1516751fd"
+        ]
+      },
+      {
+        "old": "92a2a77e74c846d10eda954de18c575bc5d5c50a",
+        "new": "6e43287f49536f5087e68b8ef1df9c7a3cfa61f3",
+        "subject": "feat(T-011): prepare publication checks and manual operations package",
+        "old_parents": [
+          "104b533b4bd66825918e2f32871268f31179d876"
+        ],
+        "new_parents": [
+          "66b61c3671b5fef117255751a1cf93c149899b4a"
+        ]
+      },
+      {
+        "old": "96a7a59346545cb717317ffaf4cc9ab55137aed2",
+        "new": "28d492eeb9fb6ac394ac4e324570abbf3cf63ebd",
+        "subject": "feat(T-025): prepare first-two Emeishan operations handoff",
+        "old_parents": [
+          "da0be8e22abb63ae510e7e121ec718cee736a337"
+        ],
+        "new_parents": [
+          "13131b304172cc6ca67abe823d619b2ebefc8fe6"
+        ]
+      },
+      {
+        "old": "974a630c4814be74cd02f812dd5cb49f9f0d5c2d",
+        "new": "40ecd808deaf0ff984241d58f6b65c052bd17ebe",
+        "subject": "fix(T-012): clarify mask gaze and hat-settling visual beats",
+        "old_parents": [
+          "cf96f969a4e0ba6fbb95c3d518e0c82fee471047"
+        ],
+        "new_parents": [
+          "2fb872552aa755c5c3d24b344000a19f51ab96eb"
+        ]
+      },
+      {
+        "old": "9b24721a9a69d7389661973c021882964c2152e1",
+        "new": "2ed920ff9a016104e7a89af67888a29dc287451f",
+        "subject": "Integrate T-024 first two complete draft packages",
+        "old_parents": [
+          "dce20b50cd8f6f8f29cb75722760da2cce9af8d6"
+        ],
+        "new_parents": [
+          "38f675bfb2ee05daa2a19ec6d5ff316a72f175a1"
+        ]
+      },
+      {
+        "old": "9f5cb8e8a50a161583bc72b5f321e4875aed6fc0",
+        "new": "2d5fce7e52268ff169691c2af509d3714e2c828a",
+        "subject": "feat(T-013): preserve K3 copy and reviewed revision provenance",
+        "old_parents": [
+          "b7e90ac756f996cc35d5e7e9186b52e6f2cdedbd"
+        ],
+        "new_parents": [
+          "bf3c08dfcd04bc89054f2729524025078c46ecf4"
+        ]
+      },
+      {
+        "old": "a11d0da0cfdefa5e579584966c06163b7dd6cceb",
+        "new": "a11d0da0cfdefa5e579584966c06163b7dd6cceb",
+        "subject": "feat(T-006): consolidate K3 copy, provenance review and typesetting inputs",
+        "old_parents": [
+          "4b53d0834c7869592ba1d579f74102fb2a4edf4a"
+        ],
+        "new_parents": [
+          "4b53d0834c7869592ba1d579f74102fb2a4edf4a"
+        ]
+      },
+      {
+        "old": "a4a94144742dce0cf604aeecb03b1e020765053b",
+        "new": "a4c1f8985fff08c6d6f7b6878105b5b9e8e045b5",
+        "subject": "feat(T-012): deliver two Sanxingdui visual asset drafts",
+        "old_parents": [
+          "607c571ce84c5f125173906949656fb29beba4d8"
+        ],
+        "new_parents": [
+          "f457455bf3828dc9c028aac9462a2b3c2add6962"
+        ]
+      },
+      {
+        "old": "a7cca968e1459c6931d6ef7f551cf04f03273b11",
+        "new": "90542f1a84bf20b85db94c45fbe8c934fe042fa0",
+        "subject": "feat(t-013): preserve K3 copy and ChatGPT revision chain",
+        "old_parents": [
+          "dc4673367017c3b100dc4c3bbe9921ceae3312b5"
+        ],
+        "new_parents": [
+          "7b464d9d949a37fa8dbf0b700b3dfebe734a2ecd"
+        ]
+      },
+      {
+        "old": "ac0c74bd9360f5645b01515eba1f9188e8cdc5f9",
+        "new": "3f6897857ff4e333f0b3dc9d1bee2c67496e1450",
+        "subject": "chore(T-038): publish final assets with recoverable history archive",
+        "old_parents": [],
+        "new_parents": []
+      },
+      {
+        "old": "af4086ebce7b21f36416d31727f17dfe92bcfa41",
+        "new": "881dc4ce7fa69a079cc92ee7d5b124b76a10688a",
+        "subject": "T-018 fix S10 author registration per RV-T018-001",
+        "old_parents": [
+          "73b36f9a43dfc012e232191321e48f6091d3c3ed"
+        ],
+        "new_parents": [
+          "1993029d4b467854c3e54f57fb5052438fffe740"
+        ]
+      },
+      {
+        "old": "b1587cee657ff494dfc081f005e7ff496020533e",
+        "new": "2b04dcf526f46d8c6be6b0e67cdab68f3911b73a",
+        "subject": "feature(T-011): revise operations workflow and phone verification package",
+        "old_parents": [
+          "c589870894cc379ad98689f7e8e79d94dfb6a2e3"
+        ],
+        "new_parents": [
+          "0398bc1c25afeb1d0bc1b8359f93cf9d905136a5"
+        ]
+      },
+      {
+        "old": "b1596c8a9be6652e2656f546fa2d3848047d9e81",
+        "new": "cc8d4b67b9da6cf695446bbc3e7506c6dc0c8a7b",
+        "subject": "fix(T-027): align AI disclosures with generated illustrations",
+        "old_parents": [
+          "14d4fdd613489d2e156e9d9a0a275bd02ad82d59"
+        ],
+        "new_parents": [
+          "9e9c26aecef47ecb7c1e49865611053729597622"
+        ]
+      },
+      {
+        "old": "b2710855608c1eef4fdc47d9f1cb73604462e307",
+        "new": "c9af2d7140d0b85807ce7841b697f8b975086818",
+        "subject": "T-030 integrate three reviewed Emeishan plogs without byte changes",
+        "old_parents": [
+          "2b4eb32d952b4cb7c4caa795625f77aa02c8bde4"
+        ],
+        "new_parents": [
+          "25412945b0ad0c54099ff5e5bfd871a8c3cb4e38"
+        ]
+      },
+      {
+        "old": "b46e262f0abc34cd19044342668b33d17d3ebcb4",
+        "new": "e44320f92b59802f8252989b9e212c018f4036f3",
+        "subject": "chore(T-014): keep process documents out of LFS",
+        "old_parents": [
+          "ee79bd840a361e806cb0371c603a40dafdd3fb2d"
+        ],
+        "new_parents": [
+          "ef6c56ceb108649ee438ebaca29892db3b85bfc8"
+        ]
+      },
+      {
+        "old": "b547bd6ba987381400c61c16baca26532c4a7767",
+        "new": "0535e595634351ba8134461c743dc944e9d599c5",
+        "subject": "feat(visual): explore pixel and chibi avatar styles",
+        "old_parents": [
+          "d8a7b55ead856505f2f1af3cb886ef2e08d24472"
+        ],
+        "new_parents": [
+          "5b9754d3b7377ffe0797547bed10f3411340b009"
+        ]
+      },
+      {
+        "old": "b708c850e1d38f6e10eb8c4fb91359f9afd205c9",
+        "new": "a154c0254588181e61434f86f05ba41776c9aef2",
+        "subject": "chore: remove superseded work drafts and intermediate deliverable versions",
+        "old_parents": [
+          "f6018c31c4dc81c590aad39f76ec4cdb100bd72e"
+        ],
+        "new_parents": [
+          "d014dee3147b9e1733eb21e237cde1d036b597b4"
+        ]
+      },
+      {
+        "old": "b7193aca51d8bd49b810a372b69450faeb60c406",
+        "new": "fc5ef3bff489b36284f7a60fcbaf4244ca02571a",
+        "subject": "T-016 preserve P04 P05 and consolidate three author candidates",
+        "old_parents": [
+          "3d722ffcdc3bfe0c37167add748ae300ef1a473a"
+        ],
+        "new_parents": [
+          "c41b701a113b34e49a4d2354df832d09944364a0"
+        ]
+      },
+      {
+        "old": "b7e90ac756f996cc35d5e7e9186b52e6f2cdedbd",
+        "new": "bf3c08dfcd04bc89054f2729524025078c46ecf4",
+        "subject": "feat(T-003): consolidate character exploration and approved visual baseline",
+        "old_parents": [
+          "4d023fdcb6190d710512e98d7c03c790c715b234"
+        ],
+        "new_parents": [
+          "4d023fdcb6190d710512e98d7c03c790c715b234"
+        ]
+      },
+      {
+        "old": "b938a81860945acc527b8198d554fb67a83d78e4",
+        "new": "148f7dd5ac86e57eee563f98b94d9c2448e9dad5",
+        "subject": "Prepare T-032 adopted handoff and confirmed publication plans",
+        "old_parents": [
+          "139f806709f63fbcab1c526a2b68386debb6268b"
+        ],
+        "new_parents": [
+          "f812a442fcea6299e442219bf98ecb43561332a7"
+        ]
+      },
+      {
+        "old": "b93ffbfd4d99d2e956641cbc85fc876322743ff9",
+        "new": "4d3cce5fe28f2cf8836c3a030b0735ba8491ecd7",
+        "subject": "feat(T-006): integrate two complete drafts and operations handoff",
+        "old_parents": [
+          "33e90ceca12ebc5d70b908031f6a8380debd60e5"
+        ],
+        "new_parents": [
+          "903dd1f006579a9bb69346e4499fd71079f46ebb"
+        ]
+      },
+      {
+        "old": "bc04b7e004b77c2a75c7e9866a241701f4196709",
+        "new": "406bcc3ff8d76190df66bd409b830c53de15d097",
+        "subject": "docs: revise T-003 avatar forelimbs for PM review",
+        "old_parents": [
+          "7a45af747589508574db1e17fd861cb96ac84bea"
+        ],
+        "new_parents": [
+          "4d30ade08273707b96afbc2c44bbf5104a0dad01"
+        ]
+      },
+      {
+        "old": "c15f0fa636f11f48e31ee2c8557e59f3a3a97673",
+        "new": "93618cf98a8e346fcf0a0aed242402dd39b0b8a9",
+        "subject": "T-016 select unchanged v0.3 copy for production handoff",
+        "old_parents": [
+          "dd49633ae962a70e113dc8210005b0a89f369010"
+        ],
+        "new_parents": [
+          "3183298db2606882af16f1ad0c9a31680cf40ddd"
+        ]
+      },
+      {
+        "old": "c2a7c4833ac185471592fadee5f00d6a3c8c8d80",
+        "new": "6792e006860b7b9601bcce60b472c54e19a2fbcc",
+        "subject": "feat(T-027): draft remaining three Emeishan plogs",
+        "old_parents": [
+          "96a7a59346545cb717317ffaf4cc9ab55137aed2"
+        ],
+        "new_parents": [
+          "28d492eeb9fb6ac394ac4e324570abbf3cf63ebd"
+        ]
+      },
+      {
+        "old": "c589870894cc379ad98689f7e8e79d94dfb6a2e3",
+        "new": "0398bc1c25afeb1d0bc1b8359f93cf9d905136a5",
+        "subject": "feature(T-011): clarify AI text participation in two draft disclosures",
+        "old_parents": [
+          "92a2a77e74c846d10eda954de18c575bc5d5c50a"
+        ],
+        "new_parents": [
+          "6e43287f49536f5087e68b8ef1df9c7a3cfa61f3"
+        ]
+      },
+      {
+        "old": "c8642657201c5780de313247ff1ed13210b28c2e",
+        "new": "434bccdb2668200bc60d7712b6bb68722e14b18c",
+        "subject": "T-016 update post-image AI disclosures pending exhibit visuals",
+        "old_parents": [
+          "cfcd6cfeaaaa0665d21b13f6135832e40a887a98"
+        ],
+        "new_parents": [
+          "b6318062225dae038dda69723d337922b85ae7d4"
+        ]
+      },
+      {
+        "old": "cf96f969a4e0ba6fbb95c3d518e0c82fee471047",
+        "new": "2fb872552aa755c5c3d24b344000a19f51ab96eb",
+        "subject": "feat(T-012): deliver first two Sanxingdui visual asset drafts",
+        "old_parents": [
+          "5404a33758b83fd5aff00ced55a4d893bf700c08"
+        ],
+        "new_parents": [
+          "e8c913539b2936284bf487bd817acca7f3693522"
+        ]
+      },
+      {
+        "old": "cfcd6cfeaaaa0665d21b13f6135832e40a887a98",
+        "new": "b6318062225dae038dda69723d337922b85ae7d4",
+        "subject": "T-017 produce remaining plog visuals and typeset pages",
+        "old_parents": [
+          "f12298ce3db0f471feb3a17041c7175e4619816d"
+        ],
+        "new_parents": [
+          "7f1d1433e5e7854b44e0cd2bfef21bb6b9499858"
+        ]
+      },
+      {
+        "old": "d1f42cea3230374640d8f2efdc7329d0f2c7fff5",
+        "new": "5eea8b7014f46b510d98bb0d800366096aa3d494",
+        "subject": "fix(T-012): verify manifest against fixed Git and LFS contents",
+        "old_parents": [
+          "974a630c4814be74cd02f812dd5cb49f9f0d5c2d"
+        ],
+        "new_parents": [
+          "40ecd808deaf0ff984241d58f6b65c052bd17ebe"
+        ]
+      },
+      {
+        "old": "d39a76cb117791cc609ce2951d9eb7fa8768586e",
+        "new": "6c1538942bdeb0110240d676a4a5904e9fdf2262",
+        "subject": "feature(T-011): correct current counts and evidence provenance",
+        "old_parents": [
+          "b1587cee657ff494dfc081f005e7ff496020533e"
+        ],
+        "new_parents": [
+          "2b04dcf526f46d8c6be6b0e67cdab68f3911b73a"
+        ]
+      },
+      {
+        "old": "d4501c37eea9d740bb9c37c553a55c884cab2651",
+        "new": "0c0dc2457dbc1f07d7225cfc162aba429d1c138f",
+        "subject": "Prepare T-025 Emeishan operations checks and handoff",
+        "old_parents": [
+          "9b24721a9a69d7389661973c021882964c2152e1"
+        ],
+        "new_parents": [
+          "2ed920ff9a016104e7a89af67888a29dc287451f"
+        ]
+      },
+      {
+        "old": "d7070010b3684795aa3906f3b01934c2a6d5b6e1",
+        "new": "d7070010b3684795aa3906f3b01934c2a6d5b6e1",
+        "subject": "feat(T-005): consolidate cover template, scene sources and adopted exports",
+        "old_parents": [
+          "147224e430061be3915c1df070c2903eaf888560"
+        ],
+        "new_parents": [
+          "147224e430061be3915c1df070c2903eaf888560"
+        ]
+      },
+      {
+        "old": "d8a7b55ead856505f2f1af3cb886ef2e08d24472",
+        "new": "5b9754d3b7377ffe0797547bed10f3411340b009",
+        "subject": "feat(visual): add T-003 character baseline draft",
+        "old_parents": [
+          "4d023fdcb6190d710512e98d7c03c790c715b234"
+        ],
+        "new_parents": [
+          "4d023fdcb6190d710512e98d7c03c790c715b234"
+        ]
+      },
+      {
+        "old": "da0be8e22abb63ae510e7e121ec718cee736a337",
+        "new": "13131b304172cc6ca67abe823d619b2ebefc8fe6",
+        "subject": "feat(T-024): deliver first-two illustrated Emeishan plogs",
+        "old_parents": [
+          "03b1d2ad1f81dae634882c5359b0369521e26fbd"
+        ],
+        "new_parents": [
+          "ddfbe12010a651d44f55bc0c5aa1baf8396538c7"
+        ]
+      },
+      {
+        "old": "db7e1d2d3132d03394472897c8391efb51752728",
+        "new": "e89a5e8d86983628dc5e70e31d066960cfed13a0",
+        "subject": "feature(T-006): revise two plog candidates and supplement K3 provenance",
+        "old_parents": [
+          "5c5c934ce419c206120a258027dfabb4620eef0e"
+        ],
+        "new_parents": [
+          "c20fa0d130c69a9889d704656223ed4c6c6e806a"
+        ]
+      },
+      {
+        "old": "db81ecb78c1e3430cc30e7b7cfad4c091dd3ffbb",
+        "new": "092918078300b2d4c980e18aca88a02667ddbf31",
+        "subject": "feat(T-006): prepare local K3 copy input and source package",
+        "old_parents": [
+          "d1f42cea3230374640d8f2efdc7329d0f2c7fff5"
+        ],
+        "new_parents": [
+          "5eea8b7014f46b510d98bb0d800366096aa3d494"
+        ]
+      },
+      {
+        "old": "dc4673367017c3b100dc4c3bbe9921ceae3312b5",
+        "new": "7b464d9d949a37fa8dbf0b700b3dfebe734a2ecd",
+        "subject": "feat(t-005): add cover template and scene provenance",
+        "old_parents": [
+          "730429312be85e33b4534b58adad54a207a8b797"
+        ],
+        "new_parents": [
+          "2217280ebc7134a71cf5960141bf934c1f8e9722"
+        ]
+      },
+      {
+        "old": "dc8feeae719b4f1bb3bc24e8ea238877f997bd70",
+        "new": "34f565fb5750399f5d083b156a35803cc002b851",
+        "subject": "T-024 fix typeset verification count consistency and relist manifest",
+        "old_parents": [
+          "8b0c88d72eded3b42f67d3ed47b084532dde1428"
+        ],
+        "new_parents": [
+          "0906ea0b5c11bafcfbe95dcd8e3ba18819ed2e9e"
+        ]
+      },
+      {
+        "old": "dce20b50cd8f6f8f29cb75722760da2cce9af8d6",
+        "new": "38f675bfb2ee05daa2a19ec6d5ff316a72f175a1",
+        "subject": "T-024 sync verifier self entry in typeset manifest",
+        "old_parents": [
+          "67ed39349cda7b6d1fae7f27e2cd6e8adcd374a8"
+        ],
+        "new_parents": [
+          "39a190a447ec0a6bb7f0ae20148f0a1706f6b56d"
+        ]
+      },
+      {
+        "old": "dd49633ae962a70e113dc8210005b0a89f369010",
+        "new": "3183298db2606882af16f1ad0c9a31680cf40ddd",
+        "subject": "T-016 record read-only recovery with original ChatGPT page missing",
+        "old_parents": [
+          "0e880f05067f4d03633965d5315971a36a48868b"
+        ],
+        "new_parents": [
+          "7f08daa4f9b977c531f7bd51ce6eb17761536792"
+        ]
+      },
+      {
+        "old": "e7eabe3ffba3c6df5882132a317a6573e8d5f6b9",
+        "new": "6a56275123f578bdd4ba4e372524c85fae1f1310",
+        "subject": "T-028 create and typeset Emeishan last three visual drafts",
+        "old_parents": [
+          "8f71f63d378de9f34ae03fefac54491632521644"
+        ],
+        "new_parents": [
+          "8320ec90ba7e9c7740f2edbf16ee0b724f0a3275"
+        ]
+      },
+      {
+        "old": "ec5a588ef0a25576292a2b0bc112affc1e4e2f4a",
+        "new": "6ab4e3e6e51acedfe284943d734aa83884d70ba4",
+        "subject": "T-016 record bounded K3 entry retry and timeout evidence",
+        "old_parents": [
+          "9219dd0f213a3a3593f9d7ee24f7391eecc29540"
+        ],
+        "new_parents": [
+          "7a8e36b238d033769a830ac1e78458eef740a7c9"
+        ]
+      },
+      {
+        "old": "eca9ea0e1114e03f0874396103edb6b8477a4d1c",
+        "new": "e46e2184f3e6b530724b59a1957a092db7457cb0",
+        "subject": "fix(t-005): reserve Kimi K3 copy slot",
+        "old_parents": [
+          "7e3080c7f84c70bb765a4bf5d9dffe35d829f056"
+        ],
+        "new_parents": [
+          "386865ca771ae1d74f53c75a3e493359b303757b"
+        ]
+      },
+      {
+        "old": "ee79bd840a361e806cb0371c603a40dafdd3fb2d",
+        "new": "ef6c56ceb108649ee438ebaca29892db3b85bfc8",
+        "subject": "chore(T-014): retain final assets and archive superseded image history",
+        "old_parents": [
+          "b93ffbfd4d99d2e956641cbc85fc876322743ff9"
+        ],
+        "new_parents": [
+          "4d3cce5fe28f2cf8836c3a030b0735ba8491ecd7"
+        ]
+      },
+      {
+        "old": "ef5399b0ec6dc89bc657a65968346f62ad3e4434",
+        "new": "8fd15bbab85faaeded567fa8e67e04c1516751fd",
+        "subject": "feat(T-011): receive scheduled notes and close preparation",
+        "old_parents": [
+          "56dae24a7388b39292113f06c5575c1f3854d5ef"
+        ],
+        "new_parents": [
+          "5a631b034d6944f1140dfdf19086604956c56ef2"
+        ]
+      },
+      {
+        "old": "f12298ce3db0f471feb3a17041c7175e4619816d",
+        "new": "7f1d1433e5e7854b44e0cd2bfef21bb6b9499858",
+        "subject": "T-016 prepare station01 remaining copy sources and author candidates",
+        "old_parents": [
+          "ef5399b0ec6dc89bc657a65968346f62ad3e4434"
+        ],
+        "new_parents": [
+          "8fd15bbab85faaeded567fa8e67e04c1516751fd"
+        ]
+      },
+      {
+        "old": "f2be09a0e1012b04969bb8372a98faebd13c6693",
+        "new": "16398bff12e43ac124ae10cd2dde33e0d26a4a47",
+        "subject": "T-020 add station01 remaining operations handoff package",
+        "old_parents": [
+          "af4086ebce7b21f36416d31727f17dfe92bcfa41"
+        ],
+        "new_parents": [
+          "881dc4ce7fa69a079cc92ee7d5b124b76a10688a"
+        ]
+      },
+      {
+        "old": "f3dad37cb0ca49c444be672580fb3b69e198f16b",
+        "new": "0d45cca447c0756026e0a7dfb4a76d6992aec04f",
+        "subject": "T-016 retain disclosure draft pending exhibit-focused visuals",
+        "old_parents": [
+          "7d9aae9999281071c1cfb7f4d0b64ffbaf07f5b0"
+        ],
+        "new_parents": [
+          "0eb78562b32004c5b5b77fbbd09b45497c85858c"
+        ]
+      },
+      {
+        "old": "f6018c31c4dc81c590aad39f76ec4cdb100bd72e",
+        "new": "d014dee3147b9e1733eb21e237cde1d036b597b4",
+        "subject": "T-021 record station01 scheduled publication",
+        "old_parents": [
+          "f2be09a0e1012b04969bb8372a98faebd13c6693"
+        ],
+        "new_parents": [
+          "16398bff12e43ac124ae10cd2dde33e0d26a4a47"
+        ]
+      },
+      {
+        "old": "fa4bd5f14c2db431607096dd8b722665284fab4f",
+        "new": "16cfaf8f31398c825f5d97fb08a62213406f3133",
+        "subject": "feat(t-005): typeset candidate A with reproducible layout checks",
+        "old_parents": [
+          "7ba8921f5aa23e5bf9d0d282008d6285e81f8add"
+        ],
+        "new_parents": [
+          "4d509564aff5e38ba634b27f92ecf724a80fd30b"
+        ]
+      }
+    ]
+  },
+  "final_plan": {
+    "final_commit": "5061a76052e19d393988c1932f92912d60c9e745",
+    "final_tree": "0faa665195635f3fd8501ecd1cdd75e78a9a50db",
+    "parent_rewritten_old_main": "9d175ee41410b2abfa62abceb31217a4f2b6abc1",
+    "source_old_main": "62c0e4463bf3e37c08d4d112b555e6685a46c708",
+    "expected_remote_old_main": "ac0c74bd9360f5645b01515eba1f9188e8cdc5f9",
+    "main_commits": 32,
+    "all_refs_commit_records": 102,
+    "existing_commit_records_preserved": 101,
+    "refs_to_publish": {
+      "refs/heads/archive/local-before-sync-20261019/main-104b533": "66b61c3671b5fef117255751a1cf93c149899b4a",
+      "refs/heads/feature/t-023-station02-first-two-visual-assets": "9d175ee41410b2abfa62abceb31217a4f2b6abc1",
+      "refs/heads/main": "5061a76052e19d393988c1932f92912d60c9e745",
+      "refs/tags/archive/station01-editing-assets-20261104": "983736f9bfa7c815ffe439ca4da3058083cc91f2",
+      "refs/tags/archive/t-023-pre-squash-20261104": "7412f5939633ee3b22ddc0f729134212d8c1cce9",
+      "refs/tags/archive/t-038-final-only-root-20261104": "3f6897857ff4e333f0b3dc9d1bee2c67496e1450",
+      "refs/tags/archive/t-038-history-before-rebuild-20261104/25294dbebbf6": "e815c1c9112fab83767efcb3a98d8c453d46a0e2",
+      "refs/tags/archive/t-038-history-before-rebuild-20261104/3db7ee607b3b": "9162e4d1f090b915a6ea1e97e2b846a0a825e9dc",
+      "refs/tags/archive/t-038-history-before-rebuild-20261104/a4a94144742d": "a4c1f8985fff08c6d6f7b6878105b5b9e8e045b5",
+      "refs/tags/archive/t-038-history-before-rebuild-20261104/d39a76cb1177": "6c1538942bdeb0110240d676a4a5904e9fdf2262",
+      "refs/tags/archive/t-038-history-before-rebuild-20261104/fa4bd5f14c2d": "16cfaf8f31398c825f5d97fb08a62213406f3133"
+    },
+    "retained_lfs_objects": 82,
+    "retained_lfs_bytes": 158163528,
+    "history_map_tsv": "archives/history-rewrite-map-20261104.tsv",
+    "history_map_json": "archives/history-rewrite-map-20261104.json",
+    "published_raw_bundle_removed": true,
+    "source_original_99_commit_ids": [
+      "03b1d2ad1f81dae634882c5359b0369521e26fbd",
+      "051203883c11ad37eae45716bf1ff84cf806c667",
+      "0624abdf8e6d37426a3bd0c6f700d5679db4b806",
+      "0e880f05067f4d03633965d5315971a36a48868b",
+      "104b533b4bd66825918e2f32871268f31179d876",
+      "139f806709f63fbcab1c526a2b68386debb6268b",
+      "147224e430061be3915c1df070c2903eaf888560",
+      "14d4fdd613489d2e156e9d9a0a275bd02ad82d59",
+      "184512485dc5998e0185790d80719fac722830b8",
+      "1ca027d6ce84ab5cb9d1b7783cbce3fbf7eabb29",
+      "240f418a1a693313cb79e8efddb34cd82b3b9f79",
+      "25294dbebbf68f542389a749f20cc5555839b8e2",
+      "28ba1b3053dce11950aa00502ca5fad011afcbf2",
+      "2b4eb32d952b4cb7c4caa795625f77aa02c8bde4",
+      "2d75a3d69d3374749530afb6e477038a8f4143d5",
+      "2ebbb013396ccdace268e3475678410f5699f62e",
+      "2ef1fd50b63206c80057d055a9e6e9e298b71fc4",
+      "33e90ceca12ebc5d70b908031f6a8380debd60e5",
+      "3960731e7ba5eb2322d2cf82ebc3cb9e14b7efb7",
+      "3c1c05f3a1ba02ce264ca55be339db7d6dc0d508",
+      "3d722ffcdc3bfe0c37167add748ae300ef1a473a",
+      "3db7ee607b3b47597ccaf8ff0ceeff7de09712fc",
+      "40b144f7aea38d78b453e0a0b5ed5331d0bdcd70",
+      "40d190d4302546ef3f937c8efe437a1ee9311691",
+      "4b53d0834c7869592ba1d579f74102fb2a4edf4a",
+      "4d023fdcb6190d710512e98d7c03c790c715b234",
+      "5404a33758b83fd5aff00ced55a4d893bf700c08",
+      "56dae24a7388b39292113f06c5575c1f3854d5ef",
+      "5af5615d83b59fff85bdbdb50583f825cb5f82ba",
+      "5c5c934ce419c206120a258027dfabb4620eef0e",
+      "5f58227db0b340056f1dbbab8752039a72740be2",
+      "607c571ce84c5f125173906949656fb29beba4d8",
+      "615190d10a5212b948eb541338a17858e8b2cfab",
+      "67ed39349cda7b6d1fae7f27e2cd6e8adcd374a8",
+      "6e4c948aa537ca9859ce5484f9a283b0138946fc",
+      "730429312be85e33b4534b58adad54a207a8b797",
+      "73b36f9a43dfc012e232191321e48f6091d3c3ed",
+      "771c9d2be5427cfa59decfed53acf26dffa93066",
+      "782cd870d6fba40a43ca017daaafcd9b89ea7c6f",
+      "783eaea6c75d4871f82b1678c855e0f1af296150",
+      "7a2452c4dfd9ad0236428a1c026d73fccda931f7",
+      "7a45af747589508574db1e17fd861cb96ac84bea",
+      "7b227f4a3354df50c9c8c80ef48dbbf2c348eea8",
+      "7ba8921f5aa23e5bf9d0d282008d6285e81f8add",
+      "7c5609fb474967156eb3bcb3477f6bd1812c4e5d",
+      "7d9aae9999281071c1cfb7f4d0b64ffbaf07f5b0",
+      "7e3080c7f84c70bb765a4bf5d9dffe35d829f056",
+      "86661ecc1f287e9bcaea79fab7a9e76de7d5a1a8",
+      "8b0c88d72eded3b42f67d3ed47b084532dde1428",
+      "8f71f63d378de9f34ae03fefac54491632521644",
+      "9219dd0f213a3a3593f9d7ee24f7391eecc29540",
+      "92a2a77e74c846d10eda954de18c575bc5d5c50a",
+      "96a7a59346545cb717317ffaf4cc9ab55137aed2",
+      "974a630c4814be74cd02f812dd5cb49f9f0d5c2d",
+      "9b24721a9a69d7389661973c021882964c2152e1",
+      "9f5cb8e8a50a161583bc72b5f321e4875aed6fc0",
+      "a11d0da0cfdefa5e579584966c06163b7dd6cceb",
+      "a4a94144742dce0cf604aeecb03b1e020765053b",
+      "a7cca968e1459c6931d6ef7f551cf04f03273b11",
+      "af4086ebce7b21f36416d31727f17dfe92bcfa41",
+      "b1587cee657ff494dfc081f005e7ff496020533e",
+      "b1596c8a9be6652e2656f546fa2d3848047d9e81",
+      "b2710855608c1eef4fdc47d9f1cb73604462e307",
+      "b46e262f0abc34cd19044342668b33d17d3ebcb4",
+      "b547bd6ba987381400c61c16baca26532c4a7767",
+      "b708c850e1d38f6e10eb8c4fb91359f9afd205c9",
+      "b7193aca51d8bd49b810a372b69450faeb60c406",
+      "b7e90ac756f996cc35d5e7e9186b52e6f2cdedbd",
+      "b938a81860945acc527b8198d554fb67a83d78e4",
+      "b93ffbfd4d99d2e956641cbc85fc876322743ff9",
+      "bc04b7e004b77c2a75c7e9866a241701f4196709",
+      "c15f0fa636f11f48e31ee2c8557e59f3a3a97673",
+      "c2a7c4833ac185471592fadee5f00d6a3c8c8d80",
+      "c589870894cc379ad98689f7e8e79d94dfb6a2e3",
+      "c8642657201c5780de313247ff1ed13210b28c2e",
+      "cf96f969a4e0ba6fbb95c3d518e0c82fee471047",
+      "cfcd6cfeaaaa0665d21b13f6135832e40a887a98",
+      "d1f42cea3230374640d8f2efdc7329d0f2c7fff5",
+      "d39a76cb117791cc609ce2951d9eb7fa8768586e",
+      "d4501c37eea9d740bb9c37c553a55c884cab2651",
+      "d7070010b3684795aa3906f3b01934c2a6d5b6e1",
+      "d8a7b55ead856505f2f1af3cb886ef2e08d24472",
+      "da0be8e22abb63ae510e7e121ec718cee736a337",
+      "db7e1d2d3132d03394472897c8391efb51752728",
+      "db81ecb78c1e3430cc30e7b7cfad4c091dd3ffbb",
+      "dc4673367017c3b100dc4c3bbe9921ceae3312b5",
+      "dc8feeae719b4f1bb3bc24e8ea238877f997bd70",
+      "dce20b50cd8f6f8f29cb75722760da2cce9af8d6",
+      "dd49633ae962a70e113dc8210005b0a89f369010",
+      "e7eabe3ffba3c6df5882132a317a6573e8d5f6b9",
+      "ec5a588ef0a25576292a2b0bc112affc1e4e2f4a",
+      "eca9ea0e1114e03f0874396103edb6b8477a4d1c",
+      "ee79bd840a361e806cb0371c603a40dafdd3fb2d",
+      "ef5399b0ec6dc89bc657a65968346f62ad3e4434",
+      "f12298ce3db0f471feb3a17041c7175e4619816d",
+      "f2be09a0e1012b04969bb8372a98faebd13c6693",
+      "f3dad37cb0ca49c444be672580fb3b69e198f16b",
+      "f6018c31c4dc81c590aad39f76ec4cdb100bd72e",
+      "fa4bd5f14c2db431607096dd8b722665284fab4f"
+    ]
+  },
+  "prepublish": {
+    "result": "passed",
+    "old_main": "ac0c74bd9360f5645b01515eba1f9188e8cdc5f9",
+    "candidate_main": "5061a76052e19d393988c1932f92912d60c9e745",
+    "main_commits": 32,
+    "all_existing_records_preserved": 101,
+    "all_published_records_including_new_maintenance": 102,
+    "outgoing_refs": 11,
+    "current_tree_paths": 350,
+    "unchanged_existing_current_files": 343,
+    "current_storage_metadata_modified": [
+      ".gitignore",
+      "ASSET_STORAGE.md",
+      "README.md",
+      "archives/README.md",
+      "manifests/asset-retention-20261018.json"
+    ],
+    "all_83_final_image_pointer_blobs_unchanged": true,
+    "publication_and_operations_files_unchanged": 120,
+    "retired_lfs_pointer_blobs_remaining_in_any_published_history": 0,
+    "retained_unique_lfs_objects_in_entire_published_history": 82,
+    "raw_original_bundle_path_in_any_history": false
+  },
+  "protected_atomic_push": {
+    "result": "passed",
+    "protected_old_main": "ac0c74bd9360f5645b01515eba1f9188e8cdc5f9",
+    "remote_new_main": "5061a76052e19d393988c1932f92912d60c9e745",
+    "all_refs_atomically_updated": 11,
+    "force_with_explicit_old_head_lease": true,
+    "new_refs_expected_absent": true,
+    "lfs_payloads_uploaded_in_this_push": 0,
+    "remote_refs_before": {
+      "refs/heads/main": "ac0c74bd9360f5645b01515eba1f9188e8cdc5f9"
+    },
+    "remote_refs_after": {
+      "refs/heads/archive/local-before-sync-20261019/main-104b533": "66b61c3671b5fef117255751a1cf93c149899b4a",
+      "refs/heads/feature/t-023-station02-first-two-visual-assets": "9d175ee41410b2abfa62abceb31217a4f2b6abc1",
+      "refs/heads/main": "5061a76052e19d393988c1932f92912d60c9e745",
+      "refs/tags/archive/station01-editing-assets-20261104": "983736f9bfa7c815ffe439ca4da3058083cc91f2",
+      "refs/tags/archive/t-023-pre-squash-20261104": "7412f5939633ee3b22ddc0f729134212d8c1cce9",
+      "refs/tags/archive/t-038-final-only-root-20261104": "3f6897857ff4e333f0b3dc9d1bee2c67496e1450",
+      "refs/tags/archive/t-038-history-before-rebuild-20261104/25294dbebbf6": "e815c1c9112fab83767efcb3a98d8c453d46a0e2",
+      "refs/tags/archive/t-038-history-before-rebuild-20261104/3db7ee607b3b": "9162e4d1f090b915a6ea1e97e2b846a0a825e9dc",
+      "refs/tags/archive/t-038-history-before-rebuild-20261104/a4a94144742d": "a4c1f8985fff08c6d6f7b6878105b5b9e8e045b5",
+      "refs/tags/archive/t-038-history-before-rebuild-20261104/d39a76cb1177": "6c1538942bdeb0110240d676a4a5904e9fdf2262",
+      "refs/tags/archive/t-038-history-before-rebuild-20261104/fa4bd5f14c2d": "16cfaf8f31398c825f5d97fb08a62213406f3133"
+    }
+  },
+  "local_sync": {
+    "result": "passed",
+    "local_main": "5061a76052e19d393988c1932f92912d60c9e745",
+    "main_commits": 32,
+    "all_local_refs_commits": 102,
+    "local_refs_rewritten_with_explicit_old_values": 12,
+    "retained_image_paths_sha256_verified": 83,
+    "local_status_clean": true,
+    "only_82_final_lfs_objects_referenced_by_any_local_ref": true,
+    "raw_original_history_backup_retained": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\history-rewrite-t039-20261104\\before-t039-all-local-history.bundle",
+    "worktrees": "worktree C:/Users/YinZh/Documents/workspace/free-pipi-shrimp\nHEAD 5061a76052e19d393988c1932f92912d60c9e745\nbranch refs/heads/main\n\n",
+    "refs_after": "66b61c3671b5fef117255751a1cf93c149899b4a refs/heads/archive/local-before-sync-20261019/main-104b533\n9d175ee41410b2abfa62abceb31217a4f2b6abc1 refs/heads/archive/t-038-full-history-main-20261104\n9d175ee41410b2abfa62abceb31217a4f2b6abc1 refs/heads/feature/t-023-station02-first-two-visual-assets\n5061a76052e19d393988c1932f92912d60c9e745 refs/heads/main\n5061a76052e19d393988c1932f92912d60c9e745 refs/remotes/origin/HEAD\n66b61c3671b5fef117255751a1cf93c149899b4a refs/remotes/origin/archive/local-before-sync-20261019/main-104b533\n9d175ee41410b2abfa62abceb31217a4f2b6abc1 refs/remotes/origin/feature/t-023-station02-first-two-visual-assets\n5061a76052e19d393988c1932f92912d60c9e745 refs/remotes/origin/main\n983736f9bfa7c815ffe439ca4da3058083cc91f2 refs/tags/archive/station01-editing-assets-20261104\n7412f5939633ee3b22ddc0f729134212d8c1cce9 refs/tags/archive/t-023-pre-squash-20261104\n3f6897857ff4e333f0b3dc9d1bee2c67496e1450 refs/tags/archive/t-038-final-only-root-20261104\ne815c1c9112fab83767efcb3a98d8c453d46a0e2 refs/tags/archive/t-038-history-before-rebuild-20261104/25294dbebbf6\n9162e4d1f090b915a6ea1e97e2b846a0a825e9dc refs/tags/archive/t-038-history-before-rebuild-20261104/3db7ee607b3b\na4c1f8985fff08c6d6f7b6878105b5b9e8e045b5 refs/tags/archive/t-038-history-before-rebuild-20261104/a4a94144742d\n6c1538942bdeb0110240d676a4a5904e9fdf2262 refs/tags/archive/t-038-history-before-rebuild-20261104/d39a76cb1177\n16cfaf8f31398c825f5d97fb08a62213406f3133 refs/tags/archive/t-038-history-before-rebuild-20261104/fa4bd5f14c2d\n"
+  },
+  "fresh_remote_clone": {
+    "result": "passed",
+    "new_remote_main": "5061a76052e19d393988c1932f92912d60c9e745",
+    "main_commits": 32,
+    "all_branch_and_tag_records": 102,
+    "all_101_prior_commit_records_directly_reachable": true,
+    "original_99_records_present": true,
+    "refs_verified": 11,
+    "metadata_and_topology_verification_preserved_by_exact_commit_ids": true,
+    "all_published_history_only_references_retained_lfs_objects": 82,
+    "historical_retired_pointer_objects_remaining": 0,
+    "raw_bundle_path_in_any_published_commit": false,
+    "old_to_new_mapping_records": 101,
+    "remote_unique_lfs_objects": 82,
+    "remote_unique_lfs_bytes": 158163528,
+    "known_lfs_candidates_checked": 325,
+    "known_absent_candidates": 243,
+    "fresh_git_object_bytes": 1987872,
+    "fresh_git_and_lfs_bytes": 160151400,
+    "git_fsck_passed": true,
+    "lfs_payloads_newly_uploaded_for_rewrite": 0
+  },
+  "cache_cleanup": {
+    "result": "passed",
+    "method": "official git lfs prune --force --verify-remote; obsolete objects became unreachable after the user-authorized history rewrite",
+    "before_objects": 269,
+    "before_bytes": 513221309,
+    "removed_objects": 187,
+    "removed_bytes": 355057781,
+    "after_objects": 82,
+    "after_bytes": 158163528,
+    "only_final_shared_lfs_cache_objects_remain": true,
+    "retained_83_working_images_and_82_cache_sha256_verified": true,
+    "git_head_index_refs_unchanged_by_prune": true,
+    "manual_cache_deletion_used": false,
+    "removed": [
+      "023b11ff72100208fc1ac7810603b5dda748c9e0483ffb39b0ede23041a5277c",
+      "035bc655527e17e84acfcd0afd026a897d66efd846d195b7d2ff1e0bfdc9e4d1",
+      "03781d408be2deef778828936009eb2235679e3ef560af141466c9c08303a822",
+      "045b08df4f3f6f0ab996765755ca1f6548785cb1c861384a7bc77ca87caabaa3",
+      "06ce51230aedab66e3d02dd7d9056dc636f2c7475f78421379470d459e84c3c1",
+      "075821d7f166f8e50b8f444c2f4dde872d561da93eda5fd56bf264872c1abb31",
+      "07854be517640a04a8247f93f2e0d29827245ea3e0035456a7a2871fd2a10f7b",
+      "0a3461271bf98d487e32056054a032c5e91ea7a3bac63858ecbab5d22b840b74",
+      "0a9b384bd2fe3bf6fecab81b327a3fe87e041804fc69c95e7586be9cabb5b2e6",
+      "0c6c9caefbf6e5b411df7f2ae7f37b83500cc872f16914cdacb89af5de149d27",
+      "113baed5f80f5808d91ad23a5908272596a0a01db48a712919928ad2b96ed624",
+      "146002a4d5da0d9b963e37b12c45edfe526001ecded9987889a6b4b8feac81b1",
+      "14b1da03f8d59f5bd6e53f00f4873d66fe3a9873e34caaf7d0308a39546679c7",
+      "1699d607d7f0f7f9798acee2b759da6101d9790a3bb7784a35763567a8a8afbf",
+      "1aadef54f623337087e1ed50ae45cc2d3d34fb48981857c0a135499cd13e322c",
+      "1ca2ed00c49f30cc8b036be7cf942496b2a9730c13f03b437fbb88455984d08e",
+      "1cd0b46888e05e0316e890ed448ef753f8ea319854552d56dd3c5984d01453ac",
+      "1e015e59a732d313ea8bac5d2397a61e146b7cc4aac7514759fda43ff6c95450",
+      "1e1639c017bc395f980db51e74062b992ae6f702f291635c9e0e96bdab160c64",
+      "21d4bc52c7879b75ef3337c70afaec2d27dc25d0d33be0a9e8553f9a24bb4310",
+      "23986e4c9801a54a0e2f8f61d8a83678e95c10046242afed3bcf73165d08cf1b",
+      "260e0f9c5c2e2db060ed0af2bcdfca6896c52969ff491f132a35e93392d028b1",
+      "276727c6fde17336d1fa22b541564572071003a678460b42921d1d00de9e0ce9",
+      "28e9d44f562f62a0ef4c06cdd11f1370b97306dc8d50f6d6a5ec17684cadf1d1",
+      "2a4d9192b124f48b492e2ddd531ddc2d34ea20fa67293e8242e068cce6b6ef88",
+      "2b4b9172a9e8bde4f0c40eecd5cbe58d1271c8f150666cf863cd66ae33fc9cb9",
+      "2b51d3a12e81b37359309b56ec45947bf7c57a32b57853f14251339fe80089ab",
+      "2b56dba4085115480c297cc37da72576eba0dde17709831226e8173f16af705e",
+      "2ffb37fbb3fa7bf45b9fc7b383632cf238e910d2a11e0bcdf7f53f8ca4a1fb02",
+      "3062cbbd834493a8e13eb6681435579a8ce9aad355586ef3c346d903c135ee9a",
+      "306e71fe0313d65c317e2ea00900d44d5c12dfc6403fabd4b1e70a85188a666d",
+      "30d2992ee00c81b5e2ec94d38d632eabcba5cc0633e0d24f3731f2d2b0538f86",
+      "3201c52585b1e10c6fc8c03b09e533b46b8cd7d99388944e26175d9e74c9f431",
+      "32157c39ef1f4116570c51c1ec1099cbde12380d31eca1e44e512669eff2c6d9",
+      "32587f1405a7290fcc554f9e67fd9202b16752e0ae7866b611a5a523381b95d3",
+      "329a9c4d1e62cfd0ef40e7cc2bdd23afbe677b4aea1650ee844e35646190a378",
+      "35d1b69e692cc58b84a0c46a02299663a8289d70715cdd5a341af13b244ebfcd",
+      "37fd308037ad0f4d1a90eb237649b51afa6c25aef031814295aa5272173c4e23",
+      "38844895e5d87efbd1a21fde2f78bd45d944f6c9035e8cae135a04a8adf89f14",
+      "38931b1b5f210ef759ca931dde2fd7e2eb8ac14f77c5dbd507d8b212fc203943",
+      "3d129c5db8d47d7e6a84cc47473df71ef4edfa69a9f7271c43f5a48b8bfe344e",
+      "3dfbf9dbebf1ec0fa828e6c48628a5d6d9f743658343afef93db29ef92da18db",
+      "4449cb849940bdd037d6875327b6fd035a22506221eae1b624d74a1b860c14ee",
+      "45d062410246293fc6a49d952cea99e96f3f630b498a9f4103ebb7f8052af672",
+      "49191f011b40e010a2f9146d5d33ce4d40eef357b185b16d21c481ab12281b36",
+      "4967bdd406c070ef96afcfc3f94a7c5338b66a546b23be3e91070602dea98f04",
+      "4b9d5bffd1518fa697482265b1b146df87de557dfebd7d47b936b8506cafc43a",
+      "4cc38b0e75de57b7a11307bb3b48abf2c753a7135c2a0b955f0c00c6e2cc17ef",
+      "4e66dba01799d17619876f6493942c5335bef73c4eaf1dcb036cb78fe96befd6",
+      "4ef73bf4327a9d9a0e5629f1edf0f0f19ffb550ce0557f6d96a4ba2ece0b9a8a",
+      "4f9f818bcab8d27d83f12716fbecf2579fb3ac5bf10a6719fed1cb932e28b4f3",
+      "51f9675d1c9bfd7a0a6e6c178b119a1c1bda16de4ab5f2bee6950bfa6573e710",
+      "52252bfca29db3ac5afe1f59c4f3912a85e9fd378a48b964efffe81a651c8ab0",
+      "52bb1d0e9dc7cc6382af0ba3376501bb95d430195e9866c2e8c7dd3c8652ddf7",
+      "52f40160d6434eab5cd7828cccb75043654f03ed3829eca3e5c574acc562e207",
+      "55afb58c5160f962eb07427a26795d6cec069ee2fa842fef70e829625f9e1879",
+      "571546c7b4f002f11b6cbb6cdf8ea167fd9f8cacc1dcd6120daf2c802e15c580",
+      "573461205d0445da1485777bc5f106cf2d24096a37a1d129e638e6d24b97cd50",
+      "592fc579c03e14d890c81acff47f295d42bc01c93177267a593fee8c13a980a4",
+      "5ab9ae146f554350239a1afbd4029473547d926265e85ddb205698767ca905fb",
+      "5c1fe3a9a9d7cafd1f114d92be7102798111f500abd669bd5a5e1646b0a6aab6",
+      "5e98b74e65ea8cbf4336f29d50e77382f6326be91fd542ca3a3292eb39824ea4",
+      "60e9ef57396525dfbffa72f1ccff5465cc3369afdd8e30ae1f3c2b0e9437b98b",
+      "622d35062741b74f21496aad70c53d5399a9c226d971038160da7a6bee4ef920",
+      "641437d63f11b323822e7af18c2b608b5ea6ff7b43262511a19c3930ca91894b",
+      "67a34bab623c0224a9d021804b7f5a7d72addbb3e091375d8af9efa58ce20a62",
+      "6de4b0f14fbe7cf32fae7a48c0c730460a45c2251623b36cd858ff60c8851348",
+      "6fabe3bda5d593380cfdce11134d054f115d00096151ef3cf2eb84bc50e2cd2d",
+      "6fbb3b459d6869d72e425ef5584fd9d06fdcc23a98bfe21a3b259ecd0040289a",
+      "71d228f83e8618a20b8617299c9b8cfd2e7f561db1c5fef6368544b461cdaf51",
+      "7398367d72cc849bf263f67f505810b8d70ffbcf47fa2146e04b83f493beca2c",
+      "754dd630f93bbe3e01f005a617dd5399ffa1874f80f820e5867cd828e3ebd6b5",
+      "762b7114411afb80e15237e10071372174042de25be9c9f1e1c1e14d3d88b209",
+      "770533f6cd94a0655a7b0e90dd36cba9be7deac9b0e322c7ccd96bebbea89fd3",
+      "77dd4593f2d8c06ec5fd947c124ac0d09aa4c62529a0a6ecbfa8a6a58f49d6c1",
+      "795d047842d8af4fa88908f9e959843efd0025d5089a48f5f23999323ca543fa",
+      "79617c9e9f6f1eb1da60d32882a2841ad8a3885e79570b935006d5814cc2794c",
+      "799e0d65fda0634d430a2d1c3f8cb0ec7bce85a4aa0f6966d2462ff5764f2bdd",
+      "7c4c232685814353269a8f5ff9e99ae4cb9864b80e95f88c751cf704c3ef9c67",
+      "7c69d6b89ddcdd4879098557d5d98b019cf7e3c568dbcb2859bfb82bfbd36ad2",
+      "7ebc08ee4419f2e7766d475f53a79cde963f99386dd33b3902bde13351e001d6",
+      "80a46fd68dca655e9ac6121e5cb4737974e75b3b210189b3527fe63c945faa73",
+      "81102b98621ba5070d2636a77140f67fff06f9868ab73e05f22ad0a814b2a3c8",
+      "8151cfafe2095de15a13edb7b41980e4e26a7e29b6c016529fe117ab0ba25c3e",
+      "84223403209fae41ba6db981b2ca4d8408214694474b7b989d1e414091c347a9",
+      "855f604b5dec641aa0fded3f5ed04fb2dcedadee4da7a63744e97ea4ff28db0c",
+      "85e6b60a1fbb5e14080f5d32ae59584a7c259b5dbb64ba3c54ce51875f478d87",
+      "87d4ba1a026ffce4153f4426cfb0325d75f8d7d4bb7f600745b07bc73b96c568",
+      "899bb8e8a3219e7aa35d0aad6a296c52f017d18b62596074d75ab5669a6c3556",
+      "8b7e8bff93cd8f8dff5ac8ad993002fc89bbdeb61dbfb54da365cccf598e665e",
+      "8bc8831e9b7180ca3102722c7c24478786e1f998278dc012d350eda62e283ce8",
+      "8c759910d8eebfce21892480cbbefd514043518de1db1d8704b4ee1e02e5805b",
+      "8e354199e294698bdd59ab7071647ad722d5425f6a56a2bdd9c29ac89ec76025",
+      "8e5b119039917f3cc6034beda381b1931ead5e7d739e65d67e3ad3130303d620",
+      "8e768c6b458d5293bb3b898d852e20366c2bb8a79bc8f261080610fd0b36d826",
+      "8f032a76b672681748deffdd5570323ab99fa8327bca50f7585b70652b057b0e",
+      "8f1ad520e1053d822cae6eddb4afadd2b8120c3ebd096096f39685075a90c03e",
+      "90a1cab55e5d9ec372ab656f8be6cb48af3838e4aaba638e9f94986b6fc4f076",
+      "9242ac0379d5980fc5afc2472e146bec5f4441afa908f5a30fa0a67ca13cfc6b",
+      "938b4a6d84a8fcd84100bec0cecaa3f68638534e43d6ac227109788676e9af8c",
+      "9438edeac456cfce5e12a0651b476e93d482d328fe7b9f5533a51362f606fa0a",
+      "94523364eb25b420f7fbbbea96186959569ce858ee4be99688691bdde27adda7",
+      "9481099b8c9d9695aa7432ed3e98e0c64116c2150f211197aa5f43fd3428e028",
+      "9a394b02f9a976b07716ac09acf94b4ed16c3dce8c874cd38d193582d7514d5d",
+      "9c90f7734ae209e6ee56aeeb57a33e6a33b4b0f8868ae7daab879e17be6c87c6",
+      "9d5f00df95c603e91f4ebd327619e50eb642bed03e57c2616c65e41dbd71283c",
+      "9e26e1fce4197a094b6bfd505845447854f22fe4d55213a51caf9494543bb2c1",
+      "9e40e8bc2eb017245d8b16931e5961a519d310ede54b3b71ab643744628748cb",
+      "9e53716495999051bc2dac8a23c0af854503348425955ccbee15f501bf6fbc1f",
+      "a2813f218a3d838655915d4f443dbb21d1dfa916c0facea7d15af3f572878ce4",
+      "a29105211a97e282bde4ad2de2fc6a8fee73cad731e648a20219b3beeda3aed0",
+      "a30bdeacf20c035f670933b6568ffae1bb80d75debe1298d2cae507e9fe3bf9f",
+      "a317068761d5309b82581a75055f041e0be0afb28172f553115767cbaff8765a",
+      "a37ebdd70a60b2b88b5b52bd623356a3788d4f594adf1c641502159b33b9ebd6",
+      "a49838a0f2e6e1f14cc76af9bf77d46630d5d407ce0ea1c454b4a16f053157e4",
+      "a4f41ee8780a042a96dd2bcd5a7aa2b148df49bcc65e0cdce36ece6e2334a8a8",
+      "a54f837bf4eee7c9c2fe5ae1d1205162ef919f13f617cc452a3d3fc364bbb788",
+      "a73cc2d043fd597ab5542df18370bd20ed253bc5e458b9de65a93ae894ea8b82",
+      "a77d3906b5952732afe56d8051b9760b807afba1c5e213dbfcd94fce4c424de2",
+      "ab446a04dd1dd85cd531e30d654983539b156ab5216e56cb267664769f8350bf",
+      "ad72c0f6989b206bede65e735028faf4754a9a8835f410741a86384c2b1cbe46",
+      "ae5a8acf846970ce1c8fa5cc106685d16f78f2bb1d135973d3f21ffd97fbf39d",
+      "aebcc35aa030e394ff3fdd199b3c133e642ac994b5489fa42afc00e00c0ceb02",
+      "af59741c617f0c37664183bc8f5726b8c0a81d9b67ef84868c8bb8efe16bfeb5",
+      "af8f78502feadbad2114a4591e4cedfcee117e33faced098c6ccffd1a6b492b7",
+      "b1e8a8eabdfa3448359b41ea53a84769177b7023a5248dd7ecae90ef1d63a664",
+      "b436acbb2a9cc4641e47fcc6324d54e2a1a13eb9c8978d96be5eb1d6f3ce53c4",
+      "b5f4e26b965751d470e23dc254b1dae13e2b7020ffabf0e282ab3651529b9625",
+      "b7b74f4c3b527191e2d5c38d56b4489038b536c192b7138d3e9fbdb256d623b0",
+      "b869f9b282ba4e7ce1c4fae390a25d1266abb6091ecae0a82ed8c816b41e34f3",
+      "b890fee18ec6d422c340c02cc69f36c44a91f088de849dd9629cde2f1ab1e0f2",
+      "b8ea50e17ad678df0ef3c2fd8910fab5c0262a79bfa0f0b6ca1786c3fca5605a",
+      "ba13679cdf782315a000fe35ea20ca85358d31426c125b2477ea5e7da23ed60d",
+      "bb2150ca2fd38d0a4b8c0187ed6d0bc426b13915f679f04c671bdefba550ec28",
+      "bc058644795a9b8a3d3e9202b7dccee35766f0e28e2f49328549f2892f799fe1",
+      "bc0e00924009a4845edbc3eb999bdf73402e8cec263c68dd091b08c2f5131359",
+      "bc1b7189428d03c413685458c79c5b7da1f2364d9c39decba21f165c9ab46837",
+      "bc91ec1c6abdeb4a6b7ae3a0075510a9cce88e01ac8cec3d666d62aca42e70dc",
+      "c22d782b678a0dc05379d00c4b71662d1e154bb6a8dd47862c76c62597887d04",
+      "c430554efb355e8e3bcc7b4dc17588bc194ee601cffd04cdaa3ead3b2d6f4133",
+      "c50bd8750544789cc4fa1d25b3b62565e77f09d8574c5387ace28463faaa3a94",
+      "c5549d9625bc0a0924bfa3dd96dd65200d73faacfccba0661df101456ab5ae10",
+      "c6cf78652c4f079a8b2058a9ce6cda8084bce835d363d9ad99009e28e3b01242",
+      "c890c1dd24a5d43da2f1b3d363876c994e4bd216c8e733bdb18ed30cf632f0da",
+      "cbb4d486924055523722298dbeab15fd472e092f539627e00e873f271c8a99fa",
+      "cc0d91944959f25bede5b81e4fa4f29e50babf52f0560ae398e68b24fb475570",
+      "cc904c14dabf3527ffa0db2f9babe3288aa9f131763a886b69efef1618a0acfc",
+      "cd590ac0e3f0a03f40f3c60dc475b44af29e6fb3240379a5bc3754db8ef8a737",
+      "ce0995195227762c824ba57fedf22bf58b960b2d07715511d3d371239de7bfec",
+      "d27720b68310bc88b9d49135bcb059dd6d96c7839cb0859a7695106701184d21",
+      "d2d9c445fcb8f4163f02b02f6d1bede1e34591036641802b295ec37cac7d564a",
+      "d31fbbad67f555cf0d2a663df2ab6bd70e821e0f4e754736e0ba8874729a5bdf",
+      "d359dee4dd0200ce3e040685d308bb53eaf974d30e461bf9b1ac8a6de925e512",
+      "d374abfe1f207f4df4f99a3ced706653b13e63cef7f33baa8852a9edfc46e5a4",
+      "d421fdfe7b75ef703e0007131efbf0d69403cb465f45f58003d062b405594bfa",
+      "d6ce45ee425486c000f0f8261b365afd960fea5a7ff035425330c3b3e9a716ca",
+      "d6fc1df6c6c5a12b179c6276fc707dddc43105db31941438260082cb76f7e8d6",
+      "d70924e4ae2e47b0166c401a5318750e9036fc0bfdc8b6e207b3c3d051d3203a",
+      "d71fefe70694ea2e12d009320da9493ab7349d68c3fa28c3826a7acafc7dbdf4",
+      "d794d96c05091d814998bc45a617e0e3c47103f3bd96e35b9a0c10ae6c0b9c10",
+      "db267b13c31bc2f0b704d07d6a86725a5b983eb78903f8ed21d4f9de4c44ae16",
+      "dbd712c6216aec554aeaae2e70f6e298043b2824841238a809c6ef5e0164cd2c",
+      "dda6a311d86323d3781f54ad0e1095fc38a06c7dbd7df72d6569a8cc3f0fda09",
+      "df2ef3e1e1c8d1823230d809938ae0eca1e1a3ce290eef7643e5a8d665eb2c9d",
+      "e02f35b90b56cdd1d4224b0639f6fb759e096a4278b020a326e7b787d2dcd05c",
+      "e071fe009905631900123359c3842c1cc0cab035b190c14bd7983bb2e62464d6",
+      "e0e82d590ea24cea63fa520dd777582757d18a66374d2bef38443e2e0c75f516",
+      "e2488cc7f188fe62dfc6f51d5e289c0d2477820c188ec254ce4d9ade44117bd9",
+      "e2c15acccc3ffee8855a8c435e40658ddfbe8559e4d223b0e9f963ede00a8519",
+      "e353070efb21cb31a578547c6ec3b5be5d47ac8169e1077a886123a03af5a151",
+      "e49cce7400d0566fef9ca9fd2ca4147abd357bf9114bfa62578823865662e0e8",
+      "e4cb64235f25acc7f2eed7a5bf23da7370de9cdb3ba9d2967dd5e6fddcc9e885",
+      "e70e55f37e8c78c31cf958efe45f8f2a35cf2ebae45f1ac2cc944af6c75b0302",
+      "e80f7aa71a2456202518df52936814241d5ed4ec73fb46842209ce41ca0d9e2c",
+      "edc7bb1b7577a705dde57b6dffe0a432edf224f0c5fd356bb95c8b08e0e906a2",
+      "ef02f932125600c111579590e0103f5fa8ab966b944c4a41a7b98b0e4e74e62e",
+      "f020bc54a536a8705628625616874644e688d5792ee532c664d7dcf6e922779d",
+      "f11d1d664088b1471a1a46884d350e90b98958d07cf5c26ad73e58c101af28d0",
+      "f1382d6dd91a3308ebc806e9d45e8d6503ce33246ba04e6eb5a84158c6fdd98f",
+      "f339c0df9ff206769dbc06698b9dbbf711d18712cc99ef0dc65365135ff2e5a1",
+      "f4fdaa716520815b70e597aa704fbd0bb41dfc6d3e2ea1c1e7f8c317e9d75948",
+      "f7c05ea398822ee2050ed273bcc35141b984b32b2a8e60186468fb08390dfe6f",
+      "f81920e7f405b4b5963850f54821f4b70676a5bb697016a87a534d12cec85be8",
+      "f8fb01c99e9c45f121aaa58bc6e2b719cebde0d65885533eb0e8645f54041dcc",
+      "fa0aa162ddf697d535b8e6438056d2aa7ba24648243fefa34cbc4c021e88885a",
+      "fa2f2703f4a6c75e9baa14d6d9f00e309af37d08d87ab5b0159ced7c4d2cd14d",
+      "fe2a6255989c1a4f383918f652eee4fb041e519e3a5f7d68ba02ff49cf307b6f"
+    ]
+  },
+  "dependency": {
+    "package": "git-filter-repo",
+    "version": "2.47.0",
+    "source": "PyPI git-filter-repo package, newren/git-filter-repo upstream",
+    "installed_only_under": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\history-rewrite-t039-20261104\\dependencies"
+  },
+  "filter_options": {
+    "input_commits": 101,
+    "removed_pointer_git_blobs": 243,
+    "removed_path": "archives/git-history-before-rebuild-20261104.bundle",
+    "raw_history_backup_retained_locally": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\history-rewrite-t039-20261104\\before-t039-all-local-history.bundle",
+    "prune_empty": "never",
+    "prune_degenerate": "never",
+    "preserve_commit_message_hash_references": true,
+    "preserve_commit_encoding": true,
+    "command": [
+      "C:\\Users\\YinZh\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+      "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\history-rewrite-t039-20261104\\run-filter-repo.py",
+      "--strip-blobs-with-ids",
+      "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\history-rewrite-t039-20261104\\strip-pointer-blob-ids.txt",
+      "--invert-paths",
+      "--path",
+      "archives/git-history-before-rebuild-20261104.bundle",
+      "--prune-empty",
+      "never",
+      "--prune-degenerate",
+      "never",
+      "--preserve-commit-hashes",
+      "--preserve-commit-encoding",
+      "--replace-refs",
+      "delete-no-add"
+    ]
+  },
+  "new_main": "5061a76052e19d393988c1932f92912d60c9e745",
+  "local_product_bytes": 358386325,
+  "raw_original_history_backup": {
+    "path": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\history-rewrite-t039-20261104\\before-t039-all-local-history.bundle",
+    "bytes": 3772969,
+    "sha256": "b7e63318adcc5cf349ffe6eaf4be46ccc7ebee7673bb156e5227edf0aa4e6a8f"
+  },
+  "source_final_image_and_publishing_bytes_unchanged": true,
+  "team_scopes_framework_and_xiaohongshu_publication_unchanged": true
+}

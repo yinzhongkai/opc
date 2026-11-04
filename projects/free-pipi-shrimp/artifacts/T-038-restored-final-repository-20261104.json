@@ -1,0 +1,599 @@
+{
+  "task": "T-038",
+  "date": "2026-11-04",
+  "timezone": "Asia/Shanghai",
+  "status": "completed_remote_final_retention_and_recovery",
+  "user_adopted_decision": "D-023: Adopt archived Git history plus a new final-deliverables main root.",
+  "final_plan": {
+    "user_adopted_archive_history_and_new_main_root": true,
+    "adopted_root_commit": "ac0c74bd9360f5645b01515eba1f9188e8cdc5f9",
+    "adopted_tree": "5635c4af98a7dd230dd6209ab827c2199e68df25",
+    "old_local_main": "62c0e4463bf3e37c08d4d112b555e6685a46c708",
+    "history_bundle_path": "archives/git-history-before-rebuild-20261104.bundle",
+    "history_bundle_bytes": 1897539,
+    "history_bundle_sha256": "e798d1cb52f0465194bb61ee1194776253bf9b6f6a2c287b5f906373db235191",
+    "original_99_commits_preserved_in_archive": true,
+    "archive_total_commits": 100,
+    "retained_lfs_objects": 82,
+    "retained_lfs_bytes": 158163528,
+    "remote_git_refs_before_publish": "empty",
+    "alternate_index": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\storage-cleanup-t038-20261104\\archived-history-final-snapshot.index"
+  },
+  "restoration": {
+    "new_main_pushed": true,
+    "remote_main": "ac0c74bd9360f5645b01515eba1f9188e8cdc5f9",
+    "local_main": "ac0c74bd9360f5645b01515eba1f9188e8cdc5f9",
+    "local_old_main_preserved_as": "archive/t-038-full-history-main-20261104",
+    "local_old_main_commit": "62c0e4463bf3e37c08d4d112b555e6685a46c708",
+    "remote_default_head": "ref: refs/heads/main\tHEAD\nac0c74bd9360f5645b01515eba1f9188e8cdc5f9\tHEAD\n",
+    "remote_refs": "ac0c74bd9360f5645b01515eba1f9188e8cdc5f9\tHEAD\nac0c74bd9360f5645b01515eba1f9188e8cdc5f9\trefs/heads/main\n",
+    "all_83_working_image_paths_sha256_verified": true,
+    "history_archive_sha256_verified": true,
+    "main_status_clean": true
+  },
+  "fresh_remote_verification": {
+    "result": "passed",
+    "new_main": "ac0c74bd9360f5645b01515eba1f9188e8cdc5f9",
+    "new_main_tree": "5635c4af98a7dd230dd6209ab827c2199e68df25",
+    "fresh_remote_main_commits": 1,
+    "fresh_remote_tracked_paths": 349,
+    "fresh_remote_git_object_bytes": 2363301,
+    "history_bundle_path": "archives/git-history-before-rebuild-20261104.bundle",
+    "history_bundle_bytes": 1897539,
+    "history_bundle_sha256": "e798d1cb52f0465194bb61ee1194776253bf9b6f6a2c287b5f906373db235191",
+    "history_archive_cloned_from_remote": true,
+    "history_archive_commits": 100,
+    "all_99_original_commit_ids_preserved_in_remote_archive": true,
+    "source_cleanup_commit_preserved_in_archive": "62c0e4463bf3e37c08d4d112b555e6685a46c708",
+    "retained_bitmap_paths": 83,
+    "retained_unique_lfs_objects": 82,
+    "retained_unique_lfs_bytes": 158163528,
+    "known_historical_candidates_checked": 325,
+    "known_candidates_absent": 243,
+    "old_112_remote_intermediates_absent": true,
+    "full_remote_asset_download_sha256_verified": 82,
+    "full_remote_asset_download_bytes": 158163528,
+    "git_fsck_for_current_and_archived_history_passed": true,
+    "remote_refs": "ac0c74bd9360f5645b01515eba1f9188e8cdc5f9\tHEAD\nac0c74bd9360f5645b01515eba1f9188e8cdc5f9\trefs/heads/main\n"
+  },
+  "all_asset_remote_download_verification": {
+    "result": "assets_passed_git_pending",
+    "final_head": "62c0e4463bf3e37c08d4d112b555e6685a46c708",
+    "remote_clone_commits": 0,
+    "remote_clone_refs": 0,
+    "git_history_verification_performed": false,
+    "all_99_original_commits_preserved": null,
+    "known_historical_candidates_checked": 325,
+    "remote_available_objects": 82,
+    "remote_available_bytes": 158163528,
+    "remote_unavailable_known_candidates": 243,
+    "old_112_remote_intermediate_objects_absent": true,
+    "downloaded_and_sha256_verified_objects": 82,
+    "downloaded_and_sha256_verified_bytes": 158163528,
+    "download_method": "Full remote downloads streamed into SHA-256; no duplicate image files retained",
+    "objects": [
+      {
+        "sha256": "00380d8453ea2c96bdbd186e90b7593b986f0e7bb89b039f18ab4d7c41171e54",
+        "bytes": 2405724,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "00c0a222c88a6d8f731134aed382be2a6517ebd76e558fcef417dc2cec13a59a",
+        "bytes": 1084102,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "0728c6527cb0855ae96c793d86789fce094e0e3a1eb980e49c9ac53a1ec2b505",
+        "bytes": 1534803,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "08f58762619d50de07b04940231aa0a9b0fa1b4fd196276f9cd82e7403bd1c5c",
+        "bytes": 2321925,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "0ad62e023fc1944d4946ef443c154231e9f084ea0de1bb7082c88a2c601c5859",
+        "bytes": 1886966,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "0bafce7c0f790bfdcbe46bb2df589867144a1648e18c6c5d4fffed64aa0542d3",
+        "bytes": 962814,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "0bdde0e1f8953a285313d1909a62040224f12a1f6449b5c8d8e72ea0e5e8efe0",
+        "bytes": 2788525,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "0cc11e44a245e3f45b6a24b3004751414d74f92fce9e8b624f0ae2373ca9aeeb",
+        "bytes": 68010,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "1490e967d1d1bb8c413ce830b9add1617cff477bf73d6e78c923aea579ceb8c2",
+        "bytes": 2175768,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "15337045755874825606dbccb2f5330e36c031994f44342f95e2266a08517f9b",
+        "bytes": 2232526,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "15f65681518628beba335ed6e588aa2450bc8f92067378decddaee3987f6584f",
+        "bytes": 2654310,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "1881072798b7f7296ea6ee4999e4fc75be259200df74d450cc4b6359b6a2e445",
+        "bytes": 970647,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "1ffb9122bcfd205145c9d13cf9b22953f6174ad522cdc6adc9bcad2cb8d3cebc",
+        "bytes": 3104530,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "2397e3607f32194c8c21b48c2a99245a663e57f28a961379dc2cd82ff7c3a8d1",
+        "bytes": 2222480,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "2655c7aa7c0edf4ad68c577064571314e446775254920f38674cf762e85dce8b",
+        "bytes": 2167145,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "2a06b7f7a8f3dc23464e0020cb46ecbc1e1336b8ee0da435c5bc2c8e1865166f",
+        "bytes": 954744,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "2b95c6850f4aad5d040b175ccf927d825557290270bf0e6745885f18168a23b3",
+        "bytes": 949230,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "2bada261d2cef8f886be5dec9a9eff39a763f1bcb01dcabb267949a2320bd709",
+        "bytes": 980784,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "32875567842fffa4155cb47b0b31c86d1c0edf4fa8661315f517d1cd56ee45be",
+        "bytes": 984406,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "34a422fd40189cec1b099b86d30d9423f03006d02f531e8f2b87c8c76703d8e9",
+        "bytes": 969633,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "36022997eba610d9330825ad8894290c6d294dcbee3e1cb3c5030b67c276e2dc",
+        "bytes": 947264,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "407c83f26a0c8a9d248a1544a644acad16adeac4c5d83165f6db250d412302b1",
+        "bytes": 1042609,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "40ad697adde10f1bf1ff5241dedfdd77d8b3e8ad7b2ef78077089669828e0a25",
+        "bytes": 1146630,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "421659eae0f867d50e8be5099f99ae9b3aa60dd3dbe62219b7f3eaad7fc5ab81",
+        "bytes": 2723222,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "4419d34556882539e59dab5b8606ac9d1f1583684785998bc28630c7698804fc",
+        "bytes": 2976419,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "478dd06195a230655a6c6eb19093bc861eb6d7075bef2bb73578e3dc2352c698",
+        "bytes": 2055457,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "4aeb7c390745cad22ae027c51f56e1a876c134962f8fdc1e8287b9b924906238",
+        "bytes": 3122815,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "506b804e969f1ac8ebd69977d6725497acaabbfb134ac2e094d34a9a74cb4ad3",
+        "bytes": 2469699,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "52b08e4638fe60a3422156f28c7cb33cfe3cbf4ab8a0db35ca4cb4bd7f8a8811",
+        "bytes": 2271922,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "5f87c80a24a7a9d838881d5979f5e1ebfcc0e9a6db23faed75079468ab5c1d3e",
+        "bytes": 3092469,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "62b3a92c19a05116623541157147c79525801c6b381f941d74a7170e3628fe80",
+        "bytes": 3156685,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "63fc5fa929f24cccb0c75a50efd2e2cde18580b7355f9455249bd54e5771861e",
+        "bytes": 2387807,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "661cc2e5974cedfaec35a1499b69e31e9a0e9d907890dac699368dbb630b748f",
+        "bytes": 2476865,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "67f8f5802a82ffa9998ab64e7a2e316db77b41a49212bd79541f105571c937bc",
+        "bytes": 2315060,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "68fbb7b948c7bb6dca25a1c78a7f810f520b0bfe6deb6d7e198c6a31cfa0f0a1",
+        "bytes": 849000,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "6caa391ae209ec15c0d7d45c72b4c7c4a380d552002dd34e36a56bd95da4274f",
+        "bytes": 1106864,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "6d51501cbc69786bf0aa9d8d24538ace8d2865cb9581db69d69631fd92eb512f",
+        "bytes": 2477262,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "6f01d66462dc7f0821b4f0302cc074a0f88bef9dfb5cb1a353b479320293a2df",
+        "bytes": 2866587,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "712c2842e5d521678bfd20c65765e429dcb0551ecff48f5e06c3355a6f07d377",
+        "bytes": 2590122,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "76562e921afa3186e58b3c0fd426bf948c517920b313b09f5e653ce99dce3d63",
+        "bytes": 2724902,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "7c23649b2235fb78411f2fbb4b4f88300988443322ccee1a1140ee8b4bc14639",
+        "bytes": 984069,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "829d988ca4322ed010cd52fc59afe8ef26392a464d221789db30d8fb1261f977",
+        "bytes": 3155271,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "8783205c1b9122d52c361d7191b5e999dccad9205a1e056a44b98ce662a5d21e",
+        "bytes": 3137571,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "87982c8b736811057f84b086542a15062b050974ae002a86b9f38c898718e715",
+        "bytes": 1134580,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "886b6e0c6385e070ffce616242635856b816c2b4978f3015c2bd1419ba14c5fa",
+        "bytes": 2811780,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "89d4225f064ac8c48945e4a5852dcedd1dc2de8df3e1c94d0fb6a9d9449f1415",
+        "bytes": 2508118,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "8a9ab3fabc43800731ae664129caf66f98cb40fe302fceaefe44ebaadc66c8a3",
+        "bytes": 1162716,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "90f591412ce74c3c6343058025835ecd83dd9e6639b7ea36ed120e11f5ec9813",
+        "bytes": 2362619,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "96b506e3eb5824741a15887dc65ac69a6d9a9dd62ded4398c42270f153e371ec",
+        "bytes": 2021984,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "9869123c92d53c2c4804c22269468b5b03cf50885b69422cd6d14bbfdd4fe808",
+        "bytes": 3155736,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "9b894316ff32bd95aae5272f656515a273df86de39e9cf93718fbb7ba3434d68",
+        "bytes": 974417,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "9b9cd41589f4758d46ad0741efaf30f0bd5a8c0b60447694ffb4c5da2126058b",
+        "bytes": 2684480,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "9c15ba968b14c6992afb708988da2118a87bba116d471eef0a619764e6c38277",
+        "bytes": 68441,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "a15b8e4f679287d773067177c9e68c2b6229ae6462e05c2ab8b6ac14d3248806",
+        "bytes": 2217689,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "a4c1072087555e8d4de088fc03ecd132d033c9daf20a866f9c5e4b0f94835a14",
+        "bytes": 1005959,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "a73739873918c590ea1ef86988109644d89b4a2662e96760815f6e8425e02cc9",
+        "bytes": 2609441,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "aa9540e628e4eb1c49ffd685476503abca457d5f41d50f98db20e1fb08bd5cf4",
+        "bytes": 2446797,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "ac202e10ca462aee9f83a2f49f0730be10a9bb29e52976cf66a5df53ed1b13ba",
+        "bytes": 2169007,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "ac70f65616b6e94e149b215dea30b82b3a34ddaadf6118e89db13b92bce48286",
+        "bytes": 1187788,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "ae0002bf398056fa54e6303ab866df2e8e525d01e73a80404106ae0eba0430fb",
+        "bytes": 1717449,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "b2c13cb928b7409a739da707ed23be503933e4a4e2a2923ff3965ebc3edebd30",
+        "bytes": 2479447,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "b7417bd0b2233e9dfcbac7c8f2257a52d631c11649bb0541c7861769e2e86878",
+        "bytes": 2589874,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "ba71c342117fd6aa3800f51f04a61986561db901b5a340c29d67627f54fa8d5d",
+        "bytes": 936168,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "bc313864c689c5a9fef4daa31005da3002292eef5294e48a410050cf4777854d",
+        "bytes": 2906361,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "bea3e32e9e449c2cd9043bfeb2d394dbe2fe0607a5fb8231dc7aeac073cf61f4",
+        "bytes": 960092,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "bfafd17d88bd43882e6d361b72f4bf785370c06036633e41b8186e681e48c305",
+        "bytes": 1625923,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "c05a9f3e1e1d530b44fb4ba970a6338092cdc233ee0b510d309b19d73023cc8f",
+        "bytes": 88325,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "c1bfd4ff5fc0962d4c756edd8029353a431c863fd20419741a41a8c5722df24a",
+        "bytes": 2166382,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "c1c70e219c9dd63f860247613aac7019ca06cea81b5357bf83e06e879814b231",
+        "bytes": 966469,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "c2db2d8563d8f67a4743632c4f25be2a2c66a5128e04c3e52220791bb61b2417",
+        "bytes": 2101743,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "cf3a9244eda57e4c31d4e08d8e55beb53a92fe21b822c02d1b9082fa7cad2bf2",
+        "bytes": 917294,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "d11d97d1f8f722600672a27a3bab90a9fa336f07a47942a6d4dc9f16cf71c9ed",
+        "bytes": 2091084,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "d6c5508decc094d44e882dd4ca5aa2822af3bfb79ac94631bb69a536f84ef685",
+        "bytes": 2540212,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "d9079e88e97e9a97228d423c7a260fdb1c912bc3ba01ecb03652d067eea9670d",
+        "bytes": 2676150,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "d928ca8fd9a54dea9906d60c5786292bf8da9d4c5dc17e9164e5b918f85659af",
+        "bytes": 2044583,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "e7f5b3526b128c21e1e0d79606856ca7c38de5ecb35017cc31247ae298eeff66",
+        "bytes": 2658083,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "e8ebaaa3bbbe1cec5d83a463ea430233263e95fe0dbdd370e03c2f4e96bac848",
+        "bytes": 1191234,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "ea2774f1de6f5c0842306649ae949b3f79f300c7bb3b62b06123bfadbd2b8ec5",
+        "bytes": 2146613,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "f098c8c077fc9a2ad0bf44ee6958aef874dbbe8cb64f5b8258d379362f9c9d25",
+        "bytes": 2628967,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "f5962ae51d68b6630911b3a2909ef79ee06eb75965b3d8b9b4c42355acb4899c",
+        "bytes": 2562747,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "fae8929a41d457bb9c416926e90036846fc943c9b340d2285eb8c6ca8b967625",
+        "bytes": 2081248,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      },
+      {
+        "sha256": "fdc5c722ea40b8a6d4bde0a4519e9074a0895dabe3759f4e1d3f0949371b4d9d",
+        "bytes": 69885,
+        "downloaded_from_remote": true,
+        "sha256_verified": true
+      }
+    ]
+  },
+  "source_final_content_preservation": {
+    "old_head": "771c9d2be5427cfa59decfed53acf26dffa93066",
+    "final_head": "62c0e4463bf3e37c08d4d112b555e6685a46c708",
+    "old_tracked_paths": 664,
+    "new_tracked_paths": 347,
+    "unchanged_retained_existing_files": 326,
+    "added_final_image_paths": 16,
+    "retired_intermediate_and_old_attribute_paths": 333,
+    "modified_storage_metadata_paths": [
+      ".gitattributes",
+      ".gitignore",
+      "ASSET_STORAGE.md",
+      "README.md",
+      "manifests/asset-retention-20261018.json"
+    ],
+    "publication_and_operations_files_unchanged": 120,
+    "all_original_final_image_bytes_preserved": true
+  },
+  "old_remote_unique_lfs_bytes": 424687731,
+  "current_remote_unique_lfs_bytes": 158163528,
+  "remote_unique_lfs_bytes_reduced": 266524203,
+  "fresh_clone_git_object_bytes": 2363301,
+  "fresh_clone_git_object_plus_lfs_bytes": 160526829,
+  "local_product_bytes": 700663277,
+  "local_cache_objects": 269,
+  "local_cache_bytes": 513221309,
+  "local_retired_cache_objects_still_retained": 187,
+  "local_retired_cache_bytes_still_retained": 355057781,
+  "scope_limitation": "Remote repository recovery completed. Existing local protected retired LFS caches were not deleted; prior manual-cache-deletion automatic approval rejection remains. GitHub main has a new root; all 99 original commit IDs are recoverable from the versioned Git bundle.",
+  "framework_scope_roles_and_publication_unchanged": true
+}

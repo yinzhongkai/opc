@@ -1,0 +1,1674 @@
+{
+  "source_head": "771c9d2be5427cfa59decfed53acf26dffa93066",
+  "prepared_tree": "70e7bcce62d6bdca4510323d9964bcdc9850902c",
+  "keep_unique_objects": 82,
+  "keep_unique_bytes": 158163528,
+  "keep_images": [
+    {
+      "path": "deliverables/T-006-first-two-buffer-plogs/v0.1-typeset-draft/article-01/cover/cover-sanxingdui-station-1.png",
+      "sha256": "0bdde0e1f8953a285313d1909a62040224f12a1f6449b5c8d8e72ea0e5e8efe0",
+      "bytes": 2788525
+    },
+    {
+      "path": "deliverables/T-006-first-two-buffer-plogs/v0.1-typeset-draft/article-01/p1-01-wish-note.png",
+      "sha256": "c2db2d8563d8f67a4743632c4f25be2a2c66a5128e04c3e52220791bb61b2417",
+      "bytes": 2101743
+    },
+    {
+      "path": "deliverables/T-006-first-two-buffer-plogs/v0.1-typeset-draft/article-01/p1-02-departure-window.png",
+      "sha256": "478dd06195a230655a6c6eb19093bc861eb6d7075bef2bb73578e3dc2352c698",
+      "bytes": 2055457
+    },
+    {
+      "path": "deliverables/T-006-first-two-buffer-plogs/v0.1-typeset-draft/article-01/p1-03-guanghan-transition.png",
+      "sha256": "2397e3607f32194c8c21b48c2a99245a663e57f28a961379dc2cd82ff7c3a8d1",
+      "bytes": 2222480
+    },
+    {
+      "path": "deliverables/T-006-first-two-buffer-plogs/v0.1-typeset-draft/article-01/p1-04-arrival-pause.png",
+      "sha256": "d928ca8fd9a54dea9906d60c5786292bf8da9d4c5dc17e9164e5b918f85659af",
+      "bytes": 2044583
+    },
+    {
+      "path": "deliverables/T-006-first-two-buffer-plogs/v0.1-typeset-draft/article-01/p1-05-reservation-boundary.png",
+      "sha256": "9c15ba968b14c6992afb708988da2118a87bba116d471eef0a619764e6c38277",
+      "bytes": 68441
+    },
+    {
+      "path": "deliverables/T-006-first-two-buffer-plogs/v0.1-typeset-draft/article-01/p1-06-before-entry.png",
+      "sha256": "ae0002bf398056fa54e6303ab866df2e8e525d01e73a80404106ae0eba0430fb",
+      "bytes": 1717449
+    },
+    {
+      "path": "deliverables/T-006-first-two-buffer-plogs/v0.1-typeset-draft/article-01/p1-07-entry-closure.png",
+      "sha256": "0ad62e023fc1944d4946ef443c154231e9f084ea0de1bb7082c88a2c601c5859",
+      "bytes": 1886966
+    },
+    {
+      "path": "deliverables/T-006-first-two-buffer-plogs/v0.1-typeset-draft/article-02/p2-cover-bronze-gaze-cover.png",
+      "sha256": "a73739873918c590ea1ef86988109644d89b4a2662e96760815f6e8425e02cc9",
+      "bytes": 2609441
+    },
+    {
+      "path": "deliverables/T-006-first-two-buffer-plogs/v0.1-typeset-draft/article-02/p2-01-enter-hall.png",
+      "sha256": "c1bfd4ff5fc0962d4c756edd8029353a431c863fd20419741a41a8c5722df24a",
+      "bytes": 2166382
+    },
+    {
+      "path": "deliverables/T-006-first-two-buffer-plogs/v0.1-typeset-draft/article-02/p2-02-relative-scale.png",
+      "sha256": "4aeb7c390745cad22ae027c51f56e1a876c134962f8fdc1e8287b9b924906238",
+      "bytes": 3122815
+    },
+    {
+      "path": "deliverables/T-006-first-two-buffer-plogs/v0.1-typeset-draft/article-02/p2-03-eyes-echo.png",
+      "sha256": "ea2774f1de6f5c0842306649ae949b3f79f300c7bb3b62b06123bfadbd2b8ec5",
+      "bytes": 2146613
+    },
+    {
+      "path": "deliverables/T-006-first-two-buffer-plogs/v0.1-typeset-draft/article-02/p2-04-verified-fact-card.png",
+      "sha256": "fdc5c722ea40b8a6d4bde0a4519e9074a0895dabe3759f4e1d3f0949371b4d9d",
+      "bytes": 69885
+    },
+    {
+      "path": "deliverables/T-006-first-two-buffer-plogs/v0.1-typeset-draft/article-02/p2-05-quiet-look.png",
+      "sha256": "bfafd17d88bd43882e6d361b72f4bf785370c06036633e41b8186e681e48c305",
+      "bytes": 1625923
+    },
+    {
+      "path": "deliverables/T-006-first-two-buffer-plogs/v0.1-typeset-draft/article-02/p2-06-hall-notes.png",
+      "sha256": "a15b8e4f679287d773067177c9e68c2b6229ae6462e05c2ab8b6ac14d3248806",
+      "bytes": 2217689
+    },
+    {
+      "path": "deliverables/T-006-first-two-buffer-plogs/v0.1-typeset-draft/article-02/p2-07-leaving-closure.png",
+      "sha256": "0728c6527cb0855ae96c793d86789fce094e0e3a1eb980e49c9ac53a1ec2b505",
+      "bytes": 1534803
+    },
+    {
+      "path": "deliverables/T-017-station01-remaining-plogs/v0.2-exhibits-draft/article-03/images/01-p03-00.png",
+      "sha256": "cf3a9244eda57e4c31d4e08d8e55beb53a92fe21b822c02d1b9082fa7cad2bf2",
+      "bytes": 917294
+    },
+    {
+      "path": "deliverables/T-017-station01-remaining-plogs/v0.2-exhibits-draft/article-03/images/02-p03-01.png",
+      "sha256": "68fbb7b948c7bb6dca25a1c78a7f810f520b0bfe6deb6d7e198c6a31cfa0f0a1",
+      "bytes": 849000
+    },
+    {
+      "path": "deliverables/T-017-station01-remaining-plogs/v0.2-exhibits-draft/article-03/images/03-p03-02.png",
+      "sha256": "8a9ab3fabc43800731ae664129caf66f98cb40fe302fceaefe44ebaadc66c8a3",
+      "bytes": 1162716
+    },
+    {
+      "path": "deliverables/T-017-station01-remaining-plogs/v0.2-exhibits-draft/article-03/images/04-p03-03.png",
+      "sha256": "ac70f65616b6e94e149b215dea30b82b3a34ddaadf6118e89db13b92bce48286",
+      "bytes": 1187788
+    },
+    {
+      "path": "deliverables/T-017-station01-remaining-plogs/v0.2-exhibits-draft/article-03/images/05-p03-04.png",
+      "sha256": "36022997eba610d9330825ad8894290c6d294dcbee3e1cb3c5030b67c276e2dc",
+      "bytes": 947264
+    },
+    {
+      "path": "deliverables/T-017-station01-remaining-plogs/v0.2-exhibits-draft/article-03/images/06-p03-05.png",
+      "sha256": "32875567842fffa4155cb47b0b31c86d1c0edf4fa8661315f517d1cd56ee45be",
+      "bytes": 984406
+    },
+    {
+      "path": "deliverables/T-017-station01-remaining-plogs/v0.2-exhibits-draft/article-03/images/07-p03-06.png",
+      "sha256": "2b95c6850f4aad5d040b175ccf927d825557290270bf0e6745885f18168a23b3",
+      "bytes": 949230
+    },
+    {
+      "path": "deliverables/T-017-station01-remaining-plogs/v0.2-exhibits-draft/article-03/images/08-p03-07.png",
+      "sha256": "c1c70e219c9dd63f860247613aac7019ca06cea81b5357bf83e06e879814b231",
+      "bytes": 966469
+    },
+    {
+      "path": "deliverables/T-017-station01-remaining-plogs/v0.2-exhibits-draft/article-04/images/01-p04-00.png",
+      "sha256": "407c83f26a0c8a9d248a1544a644acad16adeac4c5d83165f6db250d412302b1",
+      "bytes": 1042609
+    },
+    {
+      "path": "deliverables/T-017-station01-remaining-plogs/v0.2-exhibits-draft/article-04/images/02-p04-01.png",
+      "sha256": "34a422fd40189cec1b099b86d30d9423f03006d02f531e8f2b87c8c76703d8e9",
+      "bytes": 969633
+    },
+    {
+      "path": "deliverables/T-017-station01-remaining-plogs/v0.2-exhibits-draft/article-04/images/03-p04-02.png",
+      "sha256": "87982c8b736811057f84b086542a15062b050974ae002a86b9f38c898718e715",
+      "bytes": 1134580
+    },
+    {
+      "path": "deliverables/T-017-station01-remaining-plogs/v0.2-exhibits-draft/article-04/images/04-p04-03.png",
+      "sha256": "7c23649b2235fb78411f2fbb4b4f88300988443322ccee1a1140ee8b4bc14639",
+      "bytes": 984069
+    },
+    {
+      "path": "deliverables/T-017-station01-remaining-plogs/v0.2-exhibits-draft/article-04/images/05-p04-04.png",
+      "sha256": "2bada261d2cef8f886be5dec9a9eff39a763f1bcb01dcabb267949a2320bd709",
+      "bytes": 980784
+    },
+    {
+      "path": "deliverables/T-017-station01-remaining-plogs/v0.2-exhibits-draft/article-04/images/06-p04-05.png",
+      "sha256": "40ad697adde10f1bf1ff5241dedfdd77d8b3e8ad7b2ef78077089669828e0a25",
+      "bytes": 1146630
+    },
+    {
+      "path": "deliverables/T-017-station01-remaining-plogs/v0.2-exhibits-draft/article-04/images/07-p04-06.png",
+      "sha256": "9b894316ff32bd95aae5272f656515a273df86de39e9cf93718fbb7ba3434d68",
+      "bytes": 974417
+    },
+    {
+      "path": "deliverables/T-017-station01-remaining-plogs/v0.2-exhibits-draft/article-04/images/08-p04-07.png",
+      "sha256": "1881072798b7f7296ea6ee4999e4fc75be259200df74d450cc4b6359b6a2e445",
+      "bytes": 970647
+    },
+    {
+      "path": "deliverables/T-017-station01-remaining-plogs/v0.2-exhibits-draft/article-05/images/01-p05-00.png",
+      "sha256": "00c0a222c88a6d8f731134aed382be2a6517ebd76e558fcef417dc2cec13a59a",
+      "bytes": 1084102
+    },
+    {
+      "path": "deliverables/T-017-station01-remaining-plogs/v0.2-exhibits-draft/article-05/images/02-p05-01.png",
+      "sha256": "a4c1072087555e8d4de088fc03ecd132d033c9daf20a866f9c5e4b0f94835a14",
+      "bytes": 1005959
+    },
+    {
+      "path": "deliverables/T-017-station01-remaining-plogs/v0.2-exhibits-draft/article-05/images/03-p05-02.png",
+      "sha256": "e8ebaaa3bbbe1cec5d83a463ea430233263e95fe0dbdd370e03c2f4e96bac848",
+      "bytes": 1191234
+    },
+    {
+      "path": "deliverables/T-017-station01-remaining-plogs/v0.2-exhibits-draft/article-05/images/04-p05-03.png",
+      "sha256": "6caa391ae209ec15c0d7d45c72b4c7c4a380d552002dd34e36a56bd95da4274f",
+      "bytes": 1106864
+    },
+    {
+      "path": "deliverables/T-017-station01-remaining-plogs/v0.2-exhibits-draft/article-05/images/05-p05-04.png",
+      "sha256": "2a06b7f7a8f3dc23464e0020cb46ecbc1e1336b8ee0da435c5bc2c8e1865166f",
+      "bytes": 954744
+    },
+    {
+      "path": "deliverables/T-017-station01-remaining-plogs/v0.2-exhibits-draft/article-05/images/06-p05-05.png",
+      "sha256": "bea3e32e9e449c2cd9043bfeb2d394dbe2fe0607a5fb8231dc7aeac073cf61f4",
+      "bytes": 960092
+    },
+    {
+      "path": "deliverables/T-017-station01-remaining-plogs/v0.2-exhibits-draft/article-05/images/07-p05-06.png",
+      "sha256": "ba71c342117fd6aa3800f51f04a61986561db901b5a340c29d67627f54fa8d5d",
+      "bytes": 936168
+    },
+    {
+      "path": "deliverables/T-017-station01-remaining-plogs/v0.2-exhibits-draft/article-05/images/08-p05-07.png",
+      "sha256": "0bafce7c0f790bfdcbe46bb2df589867144a1648e18c6c5d4fffed64aa0542d3",
+      "bytes": 962814
+    },
+    {
+      "path": "deliverables/T-024-station02-first-two-copy/v0.3-integrated-draft/article-01/images/01.png",
+      "sha256": "f5962ae51d68b6630911b3a2909ef79ee06eb75965b3d8b9b4c42355acb4899c",
+      "bytes": 2562747
+    },
+    {
+      "path": "deliverables/T-024-station02-first-two-copy/v0.3-integrated-draft/article-01/images/02.png",
+      "sha256": "90f591412ce74c3c6343058025835ecd83dd9e6639b7ea36ed120e11f5ec9813",
+      "bytes": 2362619
+    },
+    {
+      "path": "deliverables/T-024-station02-first-two-copy/v0.3-integrated-draft/article-01/images/03.png",
+      "sha256": "d11d97d1f8f722600672a27a3bab90a9fa336f07a47942a6d4dc9f16cf71c9ed",
+      "bytes": 2091084
+    },
+    {
+      "path": "deliverables/T-024-station02-first-two-copy/v0.3-integrated-draft/article-01/images/04.png",
+      "sha256": "08f58762619d50de07b04940231aa0a9b0fa1b4fd196276f9cd82e7403bd1c5c",
+      "bytes": 2321925
+    },
+    {
+      "path": "deliverables/T-024-station02-first-two-copy/v0.3-integrated-draft/article-01/images/05.png",
+      "sha256": "67f8f5802a82ffa9998ab64e7a2e316db77b41a49212bd79541f105571c937bc",
+      "bytes": 2315060
+    },
+    {
+      "path": "deliverables/T-024-station02-first-two-copy/v0.3-integrated-draft/article-01/images/06.png",
+      "sha256": "0cc11e44a245e3f45b6a24b3004751414d74f92fce9e8b624f0ae2373ca9aeeb",
+      "bytes": 68010
+    },
+    {
+      "path": "deliverables/T-024-station02-first-two-copy/v0.3-integrated-draft/article-01/images/07.png",
+      "sha256": "506b804e969f1ac8ebd69977d6725497acaabbfb134ac2e094d34a9a74cb4ad3",
+      "bytes": 2469699
+    },
+    {
+      "path": "deliverables/T-024-station02-first-two-copy/v0.3-integrated-draft/article-01/images/08.png",
+      "sha256": "fae8929a41d457bb9c416926e90036846fc943c9b340d2285eb8c6ca8b967625",
+      "bytes": 2081248
+    },
+    {
+      "path": "deliverables/T-024-station02-first-two-copy/v0.3-integrated-draft/article-02/images/01.png",
+      "sha256": "63fc5fa929f24cccb0c75a50efd2e2cde18580b7355f9455249bd54e5771861e",
+      "bytes": 2387807
+    },
+    {
+      "path": "deliverables/T-024-station02-first-two-copy/v0.3-integrated-draft/article-02/images/02.png",
+      "sha256": "d6c5508decc094d44e882dd4ca5aa2822af3bfb79ac94631bb69a536f84ef685",
+      "bytes": 2540212
+    },
+    {
+      "path": "deliverables/T-024-station02-first-two-copy/v0.3-integrated-draft/article-02/images/03.png",
+      "sha256": "aa9540e628e4eb1c49ffd685476503abca457d5f41d50f98db20e1fb08bd5cf4",
+      "bytes": 2446797
+    },
+    {
+      "path": "deliverables/T-024-station02-first-two-copy/v0.3-integrated-draft/article-02/images/04.png",
+      "sha256": "b2c13cb928b7409a739da707ed23be503933e4a4e2a2923ff3965ebc3edebd30",
+      "bytes": 2479447
+    },
+    {
+      "path": "deliverables/T-024-station02-first-two-copy/v0.3-integrated-draft/article-02/images/05.png",
+      "sha256": "c05a9f3e1e1d530b44fb4ba970a6338092cdc233ee0b510d309b19d73023cc8f",
+      "bytes": 88325
+    },
+    {
+      "path": "deliverables/T-024-station02-first-two-copy/v0.3-integrated-draft/article-02/images/06.png",
+      "sha256": "52b08e4638fe60a3422156f28c7cb33cfe3cbf4ab8a0db35ca4cb4bd7f8a8811",
+      "bytes": 2271922
+    },
+    {
+      "path": "deliverables/T-024-station02-first-two-copy/v0.3-integrated-draft/article-02/images/07.png",
+      "sha256": "89d4225f064ac8c48945e4a5852dcedd1dc2de8df3e1c94d0fb6a9d9449f1415",
+      "bytes": 2508118
+    },
+    {
+      "path": "deliverables/T-024-station02-first-two-copy/v0.3-integrated-draft/article-02/images/08.png",
+      "sha256": "96b506e3eb5824741a15887dc65ac69a6d9a9dd62ded4398c42270f153e371ec",
+      "bytes": 2021984
+    },
+    {
+      "path": "deliverables/T-030-station02-last-three-integrated/v0.1-integrated-draft/article-03/images/00.png",
+      "sha256": "5f87c80a24a7a9d838881d5979f5e1ebfcc0e9a6db23faed75079468ab5c1d3e",
+      "bytes": 3092469
+    },
+    {
+      "path": "deliverables/T-030-station02-last-three-integrated/v0.1-integrated-draft/article-03/images/01.png",
+      "sha256": "712c2842e5d521678bfd20c65765e429dcb0551ecff48f5e06c3355a6f07d377",
+      "bytes": 2590122
+    },
+    {
+      "path": "deliverables/T-030-station02-last-three-integrated/v0.1-integrated-draft/article-03/images/02.png",
+      "sha256": "1ffb9122bcfd205145c9d13cf9b22953f6174ad522cdc6adc9bcad2cb8d3cebc",
+      "bytes": 3104530
+    },
+    {
+      "path": "deliverables/T-030-station02-last-three-integrated/v0.1-integrated-draft/article-03/images/03.png",
+      "sha256": "b7417bd0b2233e9dfcbac7c8f2257a52d631c11649bb0541c7861769e2e86878",
+      "bytes": 2589874
+    },
+    {
+      "path": "deliverables/T-030-station02-last-three-integrated/v0.1-integrated-draft/article-03/images/04.png",
+      "sha256": "886b6e0c6385e070ffce616242635856b816c2b4978f3015c2bd1419ba14c5fa",
+      "bytes": 2811780
+    },
+    {
+      "path": "deliverables/T-030-station02-last-three-integrated/v0.1-integrated-draft/article-03/images/05.png",
+      "sha256": "4419d34556882539e59dab5b8606ac9d1f1583684785998bc28630c7698804fc",
+      "bytes": 2976419
+    },
+    {
+      "path": "deliverables/T-030-station02-last-three-integrated/v0.1-integrated-draft/article-03/images/06.png",
+      "sha256": "bc313864c689c5a9fef4daa31005da3002292eef5294e48a410050cf4777854d",
+      "bytes": 2906361
+    },
+    {
+      "path": "deliverables/T-030-station02-last-three-integrated/v0.1-integrated-draft/article-03/images/07.png",
+      "sha256": "6f01d66462dc7f0821b4f0302cc074a0f88bef9dfb5cb1a353b479320293a2df",
+      "bytes": 2866587
+    },
+    {
+      "path": "deliverables/T-030-station02-last-three-integrated/v0.1-integrated-draft/article-04/images/00.png",
+      "sha256": "9b9cd41589f4758d46ad0741efaf30f0bd5a8c0b60447694ffb4c5da2126058b",
+      "bytes": 2684480
+    },
+    {
+      "path": "deliverables/T-030-station02-last-three-integrated/v0.1-integrated-draft/article-04/images/01.png",
+      "sha256": "15337045755874825606dbccb2f5330e36c031994f44342f95e2266a08517f9b",
+      "bytes": 2232526
+    },
+    {
+      "path": "deliverables/T-030-station02-last-three-integrated/v0.1-integrated-draft/article-04/images/02.png",
+      "sha256": "00380d8453ea2c96bdbd186e90b7593b986f0e7bb89b039f18ab4d7c41171e54",
+      "bytes": 2405724
+    },
+    {
+      "path": "deliverables/T-030-station02-last-three-integrated/v0.1-integrated-draft/article-04/images/03.png",
+      "sha256": "2655c7aa7c0edf4ad68c577064571314e446775254920f38674cf762e85dce8b",
+      "bytes": 2167145
+    },
+    {
+      "path": "deliverables/T-030-station02-last-three-integrated/v0.1-integrated-draft/article-04/images/04.png",
+      "sha256": "62b3a92c19a05116623541157147c79525801c6b381f941d74a7170e3628fe80",
+      "bytes": 3156685
+    },
+    {
+      "path": "deliverables/T-030-station02-last-three-integrated/v0.1-integrated-draft/article-04/images/05.png",
+      "sha256": "ac202e10ca462aee9f83a2f49f0730be10a9bb29e52976cf66a5df53ed1b13ba",
+      "bytes": 2169007
+    },
+    {
+      "path": "deliverables/T-030-station02-last-three-integrated/v0.1-integrated-draft/article-04/images/06.png",
+      "sha256": "829d988ca4322ed010cd52fc59afe8ef26392a464d221789db30d8fb1261f977",
+      "bytes": 3155271
+    },
+    {
+      "path": "deliverables/T-030-station02-last-three-integrated/v0.1-integrated-draft/article-04/images/07.png",
+      "sha256": "6d51501cbc69786bf0aa9d8d24538ace8d2865cb9581db69d69631fd92eb512f",
+      "bytes": 2477262
+    },
+    {
+      "path": "deliverables/T-030-station02-last-three-integrated/v0.1-integrated-draft/article-05/images/00.png",
+      "sha256": "f098c8c077fc9a2ad0bf44ee6958aef874dbbe8cb64f5b8258d379362f9c9d25",
+      "bytes": 2628967
+    },
+    {
+      "path": "deliverables/T-030-station02-last-three-integrated/v0.1-integrated-draft/article-05/images/01.png",
+      "sha256": "e7f5b3526b128c21e1e0d79606856ca7c38de5ecb35017cc31247ae298eeff66",
+      "bytes": 2658083
+    },
+    {
+      "path": "deliverables/T-030-station02-last-three-integrated/v0.1-integrated-draft/article-05/images/02.png",
+      "sha256": "76562e921afa3186e58b3c0fd426bf948c517920b313b09f5e653ce99dce3d63",
+      "bytes": 2724902
+    },
+    {
+      "path": "deliverables/T-030-station02-last-three-integrated/v0.1-integrated-draft/article-05/images/03.png",
+      "sha256": "9869123c92d53c2c4804c22269468b5b03cf50885b69422cd6d14bbfdd4fe808",
+      "bytes": 3155736
+    },
+    {
+      "path": "deliverables/T-030-station02-last-three-integrated/v0.1-integrated-draft/article-05/images/04.png",
+      "sha256": "421659eae0f867d50e8be5099f99ae9b3aa60dd3dbe62219b7f3eaad7fc5ab81",
+      "bytes": 2723222
+    },
+    {
+      "path": "deliverables/T-030-station02-last-three-integrated/v0.1-integrated-draft/article-05/images/05.png",
+      "sha256": "d9079e88e97e9a97228d423c7a260fdb1c912bc3ba01ecb03652d067eea9670d",
+      "bytes": 2676150
+    },
+    {
+      "path": "deliverables/T-030-station02-last-three-integrated/v0.1-integrated-draft/article-05/images/06.png",
+      "sha256": "15f65681518628beba335ed6e588aa2450bc8f92067378decddaee3987f6584f",
+      "bytes": 2654310
+    },
+    {
+      "path": "deliverables/T-030-station02-last-three-integrated/v0.1-integrated-draft/article-05/images/07.png",
+      "sha256": "661cc2e5974cedfaec35a1499b69e31e9a0e9d907890dac699368dbb630b748f",
+      "bytes": 2476865
+    },
+    {
+      "path": "deliverables/T-003-ai-character-baseline/v0.4-approved/avatar/xiaohongshu-avatar-final-v0.3.png",
+      "sha256": "1490e967d1d1bb8c413ce830b9add1617cff477bf73d6e78c923aea579ceb8c2",
+      "bytes": 2175768
+    },
+    {
+      "path": "deliverables/T-005-cover-visual-template/v0.2-draft/assets/cover-background-sanxingdui-arrival-1080x1440.png",
+      "sha256": "8783205c1b9122d52c361d7191b5e999dccad9205a1e056a44b98ce662a5d21e",
+      "bytes": 3137571
+    },
+    {
+      "path": "deliverables/T-005-cover-visual-template/v0.2-draft/example/cover-sanxingdui-station-1.png",
+      "sha256": "0bdde0e1f8953a285313d1909a62040224f12a1f6449b5c8d8e72ea0e5e8efe0",
+      "bytes": 2788525
+    }
+  ],
+  "remove_objects": [
+    {
+      "sha256": "023b11ff72100208fc1ac7810603b5dda748c9e0483ffb39b0ede23041a5277c",
+      "bytes": 3802126,
+      "paths": [
+        "deliverables/T-023-station02-first-two-visual-assets/v0.1-draft/article-01/assets/p1-03-background.png",
+        "deliverables/T-024-station02-first-two-copy/v0.1-typeset-draft/article-01/assets/p1-03-background.png"
+      ],
+      "station": "station02",
+      "category": "station02_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\02\\3b\\023b11ff72100208fc1ac7810603b5dda748c9e0483ffb39b0ede23041a5277c",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "035bc655527e17e84acfcd0afd026a897d66efd846d195b7d2ff1e0bfdc9e4d1",
+      "bytes": 2233641,
+      "paths": [
+        "deliverables/T-028-station02-last-three-visuals/v0.1-draft/assets/S06.png"
+      ],
+      "station": "station02",
+      "category": "station02_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\03\\5b\\035bc655527e17e84acfcd0afd026a897d66efd846d195b7d2ff1e0bfdc9e4d1",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "03781d408be2deef778828936009eb2235679e3ef560af141466c9c08303a822",
+      "bytes": 3387911,
+      "paths": [
+        "deliverables/T-006-first-two-buffer-plogs/v0.1-typeset-draft/assets/p1-06-background.png"
+      ],
+      "station": "station01",
+      "category": "station01_historical_and_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\03\\78\\03781d408be2deef778828936009eb2235679e3ef560af141466c9c08303a822",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "06ce51230aedab66e3d02dd7d9056dc636f2c7475f78421379470d459e84c3c1",
+      "bytes": 2745337,
+      "paths": [
+        "deliverables/T-028-station02-last-three-visuals/v0.1-draft/assets/S05.png"
+      ],
+      "station": "station02",
+      "category": "station02_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\06\\ce\\06ce51230aedab66e3d02dd7d9056dc636f2c7475f78421379470d459e84c3c1",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "07854be517640a04a8247f93f2e0d29827245ea3e0035456a7a2871fd2a10f7b",
+      "bytes": 2463184,
+      "paths": [
+        "deliverables/T-023-station02-first-two-visual-assets/v0.1-draft/article-01/p1-06-hat-adjust.png"
+      ],
+      "station": "station02",
+      "category": "station02_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\07\\85\\07854be517640a04a8247f93f2e0d29827245ea3e0035456a7a2871fd2a10f7b",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "0a0813c733db32556575534b0512fc475a7d9014057bb9ff793cbcb65d6e16e1",
+      "bytes": 2428880,
+      "paths": [
+        "deliverables/T-017-station01-remaining-plogs/v0.2-exhibits-draft/assets/e01-selected-original.png"
+      ],
+      "station": "station01",
+      "category": "station01_historical_and_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\0a\\08\\0a0813c733db32556575534b0512fc475a7d9014057bb9ff793cbcb65d6e16e1",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "14b1da03f8d59f5bd6e53f00f4873d66fe3a9873e34caaf7d0308a39546679c7",
+      "bytes": 2524070,
+      "paths": [
+        "deliverables/T-028-station02-last-three-visuals/v0.1-draft/assets/S11.png"
+      ],
+      "station": "station02",
+      "category": "station02_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\14\\b1\\14b1da03f8d59f5bd6e53f00f4873d66fe3a9873e34caaf7d0308a39546679c7",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "1cbf0db164cbdf2fdce7beaceaea726f754e0e008449faf33c64a35957117544",
+      "bytes": 1714634,
+      "paths": [
+        "deliverables/T-017-station01-remaining-plogs/v0.2-exhibits-draft/assets/reference-r03.jpg"
+      ],
+      "station": "station01",
+      "category": "station01_historical_and_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\1c\\bf\\1cbf0db164cbdf2fdce7beaceaea726f754e0e008449faf33c64a35957117544",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "1cd0b46888e05e0316e890ed448ef753f8ea319854552d56dd3c5984d01453ac",
+      "bytes": 2316357,
+      "paths": [
+        "deliverables/T-028-station02-last-three-visuals/v0.1-draft/assets/S02.png"
+      ],
+      "station": "station02",
+      "category": "station02_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\1c\\d0\\1cd0b46888e05e0316e890ed448ef753f8ea319854552d56dd3c5984d01453ac",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "1e015e59a732d313ea8bac5d2397a61e146b7cc4aac7514759fda43ff6c95450",
+      "bytes": 3988798,
+      "paths": [
+        "deliverables/T-023-station02-first-two-visual-assets/v0.1-draft/article-02/assets/p2-02-background.png",
+        "deliverables/T-024-station02-first-two-copy/v0.1-typeset-draft/article-02/assets/p2-02-background.png"
+      ],
+      "station": "station02",
+      "category": "station02_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\1e\\01\\1e015e59a732d313ea8bac5d2397a61e146b7cc4aac7514759fda43ff6c95450",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "21d4bc52c7879b75ef3337c70afaec2d27dc25d0d33be0a9e8553f9a24bb4310",
+      "bytes": 3362665,
+      "paths": [
+        "deliverables/T-006-first-two-buffer-plogs/v0.1-typeset-draft/assets/p1-02-background.png"
+      ],
+      "station": "station01",
+      "category": "station01_historical_and_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\21\\d4\\21d4bc52c7879b75ef3337c70afaec2d27dc25d0d33be0a9e8553f9a24bb4310",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "239733ab5f5fac89e7dd55bfb1e34a7809d01408b15295fcce9b57b2fabd1950",
+      "bytes": 2589987,
+      "paths": [
+        "deliverables/T-017-station01-remaining-plogs/v0.2-exhibits-draft/assets/e03-selected-original.png"
+      ],
+      "station": "station01",
+      "category": "station01_historical_and_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\23\\97\\239733ab5f5fac89e7dd55bfb1e34a7809d01408b15295fcce9b57b2fabd1950",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "23986e4c9801a54a0e2f8f61d8a83678e95c10046242afed3bcf73165d08cf1b",
+      "bytes": 2007549,
+      "paths": [
+        "deliverables/T-023-station02-first-two-visual-assets/v0.1-draft/article-02/p2-07-leaving-closure.png"
+      ],
+      "station": "station02",
+      "category": "station02_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\23\\98\\23986e4c9801a54a0e2f8f61d8a83678e95c10046242afed3bcf73165d08cf1b",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "276727c6fde17336d1fa22b541564572071003a678460b42921d1d00de9e0ce9",
+      "bytes": 2067803,
+      "paths": [
+        "deliverables/T-023-station02-first-two-visual-assets/v0.1-draft/article-01/p1-07-forest-closure.png"
+      ],
+      "station": "station02",
+      "category": "station02_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\27\\67\\276727c6fde17336d1fa22b541564572071003a678460b42921d1d00de9e0ce9",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "2767f56d4cda04ccf0e0850b9b6cd8091f427820f42a84c5a42cd3a6d226f857",
+      "bytes": 1413982,
+      "paths": [
+        "deliverables/T-017-station01-remaining-plogs/v0.1-draft/article-05/images/01-p05-00.png"
+      ],
+      "station": "station01",
+      "category": "station01_historical_and_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\27\\67\\2767f56d4cda04ccf0e0850b9b6cd8091f427820f42a84c5a42cd3a6d226f857",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "28e9d44f562f62a0ef4c06cdd11f1370b97306dc8d50f6d6a5ec17684cadf1d1",
+      "bytes": 4011195,
+      "paths": [
+        "deliverables/T-023-station02-first-two-visual-assets/v0.1-draft/article-02/assets/p2-07-background.png",
+        "deliverables/T-024-station02-first-two-copy/v0.1-typeset-draft/article-02/assets/p2-07-background.png"
+      ],
+      "station": "station02",
+      "category": "station02_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\28\\e9\\28e9d44f562f62a0ef4c06cdd11f1370b97306dc8d50f6d6a5ec17684cadf1d1",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "2b51d3a12e81b37359309b56ec45947bf7c57a32b57853f14251339fe80089ab",
+      "bytes": 2256137,
+      "paths": [
+        "deliverables/T-023-station02-first-two-visual-assets/v0.1-draft/article-02/p2-05-keep-distance.png"
+      ],
+      "station": "station02",
+      "category": "station02_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\2b\\51\\2b51d3a12e81b37359309b56ec45947bf7c57a32b57853f14251339fe80089ab",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "2c9de1d918e7a51f0aac0c73e450a83accab3600ae6d6c6025c87af8af9eda3b",
+      "bytes": 2909662,
+      "paths": [
+        "deliverables/T-017-station01-remaining-plogs/v0.2-exhibits-draft/assets/e02-selected-original.png"
+      ],
+      "station": "station01",
+      "category": "station01_historical_and_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\2c\\9d\\2c9de1d918e7a51f0aac0c73e450a83accab3600ae6d6c6025c87af8af9eda3b",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "2ffb37fbb3fa7bf45b9fc7b383632cf238e910d2a11e0bcdf7f53f8ca4a1fb02",
+      "bytes": 3490918,
+      "paths": [
+        "deliverables/T-006-first-two-buffer-plogs/v0.1-typeset-draft/assets/p2-07-background.png"
+      ],
+      "station": "station01",
+      "category": "station01_historical_and_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\2f\\fb\\2ffb37fbb3fa7bf45b9fc7b383632cf238e910d2a11e0bcdf7f53f8ca4a1fb02",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "306e71fe0313d65c317e2ea00900d44d5c12dfc6403fabd4b1e70a85188a666d",
+      "bytes": 3041031,
+      "paths": [
+        "deliverables/T-023-station02-first-two-visual-assets/v0.1-draft/article-01/assets/p1-cover-background.png",
+        "deliverables/T-024-station02-first-two-copy/v0.1-typeset-draft/article-01/assets/p1-cover-background.png"
+      ],
+      "station": "station02",
+      "category": "station02_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\30\\6e\\306e71fe0313d65c317e2ea00900d44d5c12dfc6403fabd4b1e70a85188a666d",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "3201c52585b1e10c6fc8c03b09e533b46b8cd7d99388944e26175d9e74c9f431",
+      "bytes": 2465157,
+      "paths": [
+        "deliverables/T-023-station02-first-two-visual-assets/v0.1-draft/article-02/p2-03-first-sighting.png"
+      ],
+      "station": "station02",
+      "category": "station02_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\32\\01\\3201c52585b1e10c6fc8c03b09e533b46b8cd7d99388944e26175d9e74c9f431",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "329a9c4d1e62cfd0ef40e7cc2bdd23afbe677b4aea1650ee844e35646190a378",
+      "bytes": 2846120,
+      "paths": [
+        "deliverables/T-023-station02-first-two-visual-assets/v0.1-draft/article-02/assets/p2-cover-background.png",
+        "deliverables/T-024-station02-first-two-copy/v0.1-typeset-draft/article-02/assets/p2-cover-background.png"
+      ],
+      "station": "station02",
+      "category": "station02_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\32\\9a\\329a9c4d1e62cfd0ef40e7cc2bdd23afbe677b4aea1650ee844e35646190a378",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "34bd4d8d0262e22f6b4088ff52867cb946e44de3bd4ce57c81efb6e4f5cf252f",
+      "bytes": 2289456,
+      "paths": [
+        "deliverables/T-017-station01-remaining-plogs/v0.1-draft/assets/p05-05-selected-original.png"
+      ],
+      "station": "station01",
+      "category": "station01_historical_and_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\34\\bd\\34bd4d8d0262e22f6b4088ff52867cb946e44de3bd4ce57c81efb6e4f5cf252f",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "36f20648ddd9c60303e088e45fa8ee382d7fd10179cc8e14423081e01c17936c",
+      "bytes": 1506166,
+      "paths": [
+        "deliverables/T-017-station01-remaining-plogs/v0.1-draft/article-04/images/08-p04-07.png"
+      ],
+      "station": "station01",
+      "category": "station01_historical_and_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\36\\f2\\36f20648ddd9c60303e088e45fa8ee382d7fd10179cc8e14423081e01c17936c",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "377362ae4a65ed12c342125d2969479138f8ac0e787a7105556f23bad0e3b40a",
+      "bytes": 1487550,
+      "paths": [
+        "deliverables/T-017-station01-remaining-plogs/v0.1-draft/article-03/images/05-p03-04.png"
+      ],
+      "station": "station01",
+      "category": "station01_historical_and_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\37\\73\\377362ae4a65ed12c342125d2969479138f8ac0e787a7105556f23bad0e3b40a",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "38844895e5d87efbd1a21fde2f78bd45d944f6c9035e8cae135a04a8adf89f14",
+      "bytes": 2517967,
+      "paths": [
+        "deliverables/T-028-station02-last-three-visuals/v0.1-draft/assets/S03.png"
+      ],
+      "station": "station02",
+      "category": "station02_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\38\\84\\38844895e5d87efbd1a21fde2f78bd45d944f6c9035e8cae135a04a8adf89f14",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "38931b1b5f210ef759ca931dde2fd7e2eb8ac14f77c5dbd507d8b212fc203943",
+      "bytes": 3527511,
+      "paths": [
+        "deliverables/T-023-station02-first-two-visual-assets/v0.1-draft/article-01/assets/p1-alt-background.png"
+      ],
+      "station": "station02",
+      "category": "station02_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\38\\93\\38931b1b5f210ef759ca931dde2fd7e2eb8ac14f77c5dbd507d8b212fc203943",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "3d129c5db8d47d7e6a84cc47473df71ef4edfa69a9f7271c43f5a48b8bfe344e",
+      "bytes": 3588833,
+      "paths": [
+        "deliverables/T-006-first-two-buffer-plogs/v0.1-typeset-draft/assets/p2-06-background.png"
+      ],
+      "station": "station01",
+      "category": "station01_historical_and_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\3d\\12\\3d129c5db8d47d7e6a84cc47473df71ef4edfa69a9f7271c43f5a48b8bfe344e",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "3ffb32d628c6b05d57cc74175074f76508e464884b6d7aa628dd403a41bc054b",
+      "bytes": 2236422,
+      "paths": [
+        "deliverables/T-017-station01-remaining-plogs/v0.1-draft/assets/p03-00-selected-original.png"
+      ],
+      "station": "station01",
+      "category": "station01_historical_and_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\3f\\fb\\3ffb32d628c6b05d57cc74175074f76508e464884b6d7aa628dd403a41bc054b",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "4449cb849940bdd037d6875327b6fd035a22506221eae1b624d74a1b860c14ee",
+      "bytes": 3764110,
+      "paths": [
+        "deliverables/T-006-first-two-buffer-plogs/v0.1-typeset-draft/assets/p1-07-background.png"
+      ],
+      "station": "station01",
+      "category": "station01_historical_and_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\44\\49\\4449cb849940bdd037d6875327b6fd035a22506221eae1b624d74a1b860c14ee",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "45d062410246293fc6a49d952cea99e96f3f630b498a9f4103ebb7f8052af672",
+      "bytes": 3810673,
+      "paths": [
+        "deliverables/T-006-first-two-buffer-plogs/v0.1-typeset-draft/assets/p2-01-background.png"
+      ],
+      "station": "station01",
+      "category": "station01_historical_and_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\45\\d0\\45d062410246293fc6a49d952cea99e96f3f630b498a9f4103ebb7f8052af672",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "4705dc528e36ba2aed9173954032afc981256dbd743900eac9365adeb9641335",
+      "bytes": 2031533,
+      "paths": [
+        "deliverables/T-017-station01-remaining-plogs/v0.1-draft/assets/p05-01-selected-original.png"
+      ],
+      "station": "station01",
+      "category": "station01_historical_and_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\47\\05\\4705dc528e36ba2aed9173954032afc981256dbd743900eac9365adeb9641335",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "4b786f6871d93677a790c20556a197b3bec00c75b014fe7fed109a16b4bb45bc",
+      "bytes": 68415,
+      "paths": [
+        "deliverables/T-017-station01-remaining-plogs/v0.1-draft/article-04/images/03-p04-02.png"
+      ],
+      "station": "station01",
+      "category": "station01_historical_and_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\4b\\78\\4b786f6871d93677a790c20556a197b3bec00c75b014fe7fed109a16b4bb45bc",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "4b9d5bffd1518fa697482265b1b146df87de557dfebd7d47b936b8506cafc43a",
+      "bytes": 3776219,
+      "paths": [
+        "deliverables/T-023-station02-first-two-visual-assets/v0.1-draft/article-01/assets/p1-04-background.png",
+        "deliverables/T-024-station02-first-two-copy/v0.1-typeset-draft/article-01/assets/p1-04-background.png"
+      ],
+      "station": "station02",
+      "category": "station02_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\4b\\9d\\4b9d5bffd1518fa697482265b1b146df87de557dfebd7d47b936b8506cafc43a",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "4e66dba01799d17619876f6493942c5335bef73c4eaf1dcb036cb78fe96befd6",
+      "bytes": 3629880,
+      "paths": [
+        "deliverables/T-006-first-two-buffer-plogs/v0.1-typeset-draft/assets/p1-03-background.png"
+      ],
+      "station": "station01",
+      "category": "station01_historical_and_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\4e\\66\\4e66dba01799d17619876f6493942c5335bef73c4eaf1dcb036cb78fe96befd6",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "4ef73bf4327a9d9a0e5629f1edf0f0f19ffb550ce0557f6d96a4ba2ece0b9a8a",
+      "bytes": 2370487,
+      "paths": [
+        "deliverables/T-028-station02-last-three-visuals/v0.1-draft/assets/S12.png"
+      ],
+      "station": "station02",
+      "category": "station02_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\4e\\f7\\4ef73bf4327a9d9a0e5629f1edf0f0f19ffb550ce0557f6d96a4ba2ece0b9a8a",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "4f61887f1077319837e6010ef797988908fa2e1831a2bd39f0f8025986f25fe6",
+      "bytes": 1566943,
+      "paths": [
+        "deliverables/T-017-station01-remaining-plogs/v0.1-draft/article-03/images/01-p03-00.png"
+      ],
+      "station": "station01",
+      "category": "station01_historical_and_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\4f\\61\\4f61887f1077319837e6010ef797988908fa2e1831a2bd39f0f8025986f25fe6",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "4f9f818bcab8d27d83f12716fbecf2579fb3ac5bf10a6719fed1cb932e28b4f3",
+      "bytes": 3224361,
+      "paths": [
+        "deliverables/T-006-first-two-buffer-plogs/v0.1-typeset-draft/assets/p2-05-background.png"
+      ],
+      "station": "station01",
+      "category": "station01_historical_and_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\4f\\9f\\4f9f818bcab8d27d83f12716fbecf2579fb3ac5bf10a6719fed1cb932e28b4f3",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "52252bfca29db3ac5afe1f59c4f3912a85e9fd378a48b964efffe81a651c8ab0",
+      "bytes": 2965769,
+      "paths": [
+        "deliverables/T-006-first-two-buffer-plogs/v0.1-typeset-draft/assets/p2-cover-background.png"
+      ],
+      "station": "station01",
+      "category": "station01_historical_and_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\52\\25\\52252bfca29db3ac5afe1f59c4f3912a85e9fd378a48b964efffe81a651c8ab0",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "559fa1924750c16a4e614cbd17018f8c8dd62e12296e68fdfcc7fe0c01f3e24d",
+      "bytes": 2193108,
+      "paths": [
+        "deliverables/T-017-station01-remaining-plogs/v0.1-draft/assets/p03-07-selected-original.png"
+      ],
+      "station": "station01",
+      "category": "station01_historical_and_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\55\\9f\\559fa1924750c16a4e614cbd17018f8c8dd62e12296e68fdfcc7fe0c01f3e24d",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "57a0b32d9b5ef482d2f5f3f22b975ba5eef175680ee5202cb93160f7dfd408d5",
+      "bytes": 84901,
+      "paths": [
+        "deliverables/T-017-station01-remaining-plogs/v0.1-draft/article-04/images/06-p04-05.png"
+      ],
+      "station": "station01",
+      "category": "station01_historical_and_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\57\\a0\\57a0b32d9b5ef482d2f5f3f22b975ba5eef175680ee5202cb93160f7dfd408d5",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "592fc579c03e14d890c81acff47f295d42bc01c93177267a593fee8c13a980a4",
+      "bytes": 3210647,
+      "paths": [
+        "deliverables/T-006-first-two-buffer-plogs/v0.1-typeset-draft/assets/p2-02-background.png"
+      ],
+      "station": "station01",
+      "category": "station01_historical_and_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\59\\2f\\592fc579c03e14d890c81acff47f295d42bc01c93177267a593fee8c13a980a4",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "596819e8386d1512ccd67d85d24f92292e8a8577d5afc03575ab869dbe8043b9",
+      "bytes": 1471969,
+      "paths": [
+        "deliverables/T-017-station01-remaining-plogs/v0.1-draft/article-04/images/01-p04-00.png"
+      ],
+      "station": "station01",
+      "category": "station01_historical_and_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\59\\68\\596819e8386d1512ccd67d85d24f92292e8a8577d5afc03575ab869dbe8043b9",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "5f0367774ae8e54f4afda07813638fee70a5394b9a9cd1b5c2e49558e19f1cb7",
+      "bytes": 1556936,
+      "paths": [
+        "deliverables/T-017-station01-remaining-plogs/v0.1-draft/article-04/images/04-p04-03.png"
+      ],
+      "station": "station01",
+      "category": "station01_historical_and_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\5f\\03\\5f0367774ae8e54f4afda07813638fee70a5394b9a9cd1b5c2e49558e19f1cb7",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "5f2c01b154bff1cfee6fa3a5f7081dc0df9ce58867996b0191bf3931a0978141",
+      "bytes": 2583749,
+      "paths": [
+        "deliverables/T-017-station01-remaining-plogs/v0.2-exhibits-draft/assets/e10-selected-original.png"
+      ],
+      "station": "station01",
+      "category": "station01_historical_and_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\5f\\2c\\5f2c01b154bff1cfee6fa3a5f7081dc0df9ce58867996b0191bf3931a0978141",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "5f7dba1d1b441fc76fa1847678f59d5b535e89d31c2a761377f333a6dbb95623",
+      "bytes": 2168841,
+      "paths": [
+        "deliverables/T-017-station01-remaining-plogs/v0.1-draft/assets/p04-03-selected-original.png"
+      ],
+      "station": "station01",
+      "category": "station01_historical_and_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\5f\\7d\\5f7dba1d1b441fc76fa1847678f59d5b535e89d31c2a761377f333a6dbb95623",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "66d4e165ad4fc02f28fec8ac23dac3cf64e0b93923ec48e29234963c6b57d009",
+      "bytes": 39214,
+      "paths": [
+        "deliverables/T-017-station01-remaining-plogs/v0.1-draft/article-05/images/05-p05-04.png"
+      ],
+      "station": "station01",
+      "category": "station01_historical_and_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\66\\d4\\66d4e165ad4fc02f28fec8ac23dac3cf64e0b93923ec48e29234963c6b57d009",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "67cacd16fc7fc9b1e0d4bf07aa42f3ae57aa0ba749b4bf0b3367f99a3cfd0735",
+      "bytes": 63231,
+      "paths": [
+        "deliverables/T-017-station01-remaining-plogs/v0.1-draft/article-03/images/04-p03-03.png"
+      ],
+      "station": "station01",
+      "category": "station01_historical_and_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\67\\ca\\67cacd16fc7fc9b1e0d4bf07aa42f3ae57aa0ba749b4bf0b3367f99a3cfd0735",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "6e5f6055e563ccb7f9076705aa8eb799a436f6859230aeaad5913627701d2f17",
+      "bytes": 2264986,
+      "paths": [
+        "deliverables/T-017-station01-remaining-plogs/v0.1-draft/assets/p03-06-selected-original.png"
+      ],
+      "station": "station01",
+      "category": "station01_historical_and_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\6e\\5f\\6e5f6055e563ccb7f9076705aa8eb799a436f6859230aeaad5913627701d2f17",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "71d228f83e8618a20b8617299c9b8cfd2e7f561db1c5fef6368544b461cdaf51",
+      "bytes": 2082717,
+      "paths": [
+        "deliverables/T-023-station02-first-two-visual-assets/v0.1-draft/article-01/p1-02-departure-window.png"
+      ],
+      "station": "station02",
+      "category": "station02_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\71\\d2\\71d228f83e8618a20b8617299c9b8cfd2e7f561db1c5fef6368544b461cdaf51",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "73b855bd457db3ec5c44e455e6b596a5ee5f1db42c94adefe764abb93bc50aef",
+      "bytes": 3075721,
+      "paths": [
+        "deliverables/T-017-station01-remaining-plogs/v0.2-exhibits-draft/assets/e09-selected-original.png"
+      ],
+      "station": "station01",
+      "category": "station01_historical_and_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\73\\b8\\73b855bd457db3ec5c44e455e6b596a5ee5f1db42c94adefe764abb93bc50aef",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "77dd4593f2d8c06ec5fd947c124ac0d09aa4c62529a0a6ecbfa8a6a58f49d6c1",
+      "bytes": 3697516,
+      "paths": [
+        "deliverables/T-023-station02-first-two-visual-assets/v0.1-draft/article-02/assets/p2-05-background.png",
+        "deliverables/T-024-station02-first-two-copy/v0.1-typeset-draft/article-02/assets/p2-05-background.png"
+      ],
+      "station": "station02",
+      "category": "station02_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\77\\dd\\77dd4593f2d8c06ec5fd947c124ac0d09aa4c62529a0a6ecbfa8a6a58f49d6c1",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "79ccdd5f46fdd9885167f621eb6003beada7ed728ad395423ab85046f6bd8bf1",
+      "bytes": 1643565,
+      "paths": [
+        "deliverables/T-017-station01-remaining-plogs/v0.1-draft/article-05/images/07-p05-06.png"
+      ],
+      "station": "station01",
+      "category": "station01_historical_and_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\79\\cc\\79ccdd5f46fdd9885167f621eb6003beada7ed728ad395423ab85046f6bd8bf1",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "7b1b736990d8d4c1000512c4bae9691a6ddc28a5b5b062051045896791d49143",
+      "bytes": 2756269,
+      "paths": [
+        "deliverables/T-017-station01-remaining-plogs/v0.2-exhibits-draft/assets/e05-selected-original.png"
+      ],
+      "station": "station01",
+      "category": "station01_historical_and_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\7b\\1b\\7b1b736990d8d4c1000512c4bae9691a6ddc28a5b5b062051045896791d49143",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "7c69d6b89ddcdd4879098557d5d98b019cf7e3c568dbcb2859bfb82bfbd36ad2",
+      "bytes": 2216972,
+      "paths": [
+        "deliverables/T-028-station02-last-three-visuals/v0.1-draft/assets/S07.png"
+      ],
+      "station": "station02",
+      "category": "station02_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\7c\\69\\7c69d6b89ddcdd4879098557d5d98b019cf7e3c568dbcb2859bfb82bfbd36ad2",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "80d89a21422c796f6235b747e3752503efa5a3ab68ba24a82eddd6f9e105b589",
+      "bytes": 2352084,
+      "paths": [
+        "deliverables/T-017-station01-remaining-plogs/v0.2-exhibits-draft/assets/e07-selected-original.png"
+      ],
+      "station": "station01",
+      "category": "station01_historical_and_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\80\\d8\\80d89a21422c796f6235b747e3752503efa5a3ab68ba24a82eddd6f9e105b589",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "81102b98621ba5070d2636a77140f67fff06f9868ab73e05f22ad0a814b2a3c8",
+      "bytes": 79923,
+      "paths": [
+        "deliverables/T-023-station02-first-two-visual-assets/v0.1-draft/article-02/p2-04-verified-fact-card.png"
+      ],
+      "station": "station02",
+      "category": "station02_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\81\\10\\81102b98621ba5070d2636a77140f67fff06f9868ab73e05f22ad0a814b2a3c8",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "8293c2be07d14159b0219b23ba8b08086d2bd46be0a8e9462f42ce8dbac89c25",
+      "bytes": 2908475,
+      "paths": [
+        "deliverables/T-017-station01-remaining-plogs/v0.2-exhibits-draft/assets/reference-r01.jpg"
+      ],
+      "station": "station01",
+      "category": "station01_historical_and_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\82\\93\\8293c2be07d14159b0219b23ba8b08086d2bd46be0a8e9462f42ce8dbac89c25",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "84223403209fae41ba6db981b2ca4d8408214694474b7b989d1e414091c347a9",
+      "bytes": 3408955,
+      "paths": [
+        "deliverables/T-023-station02-first-two-visual-assets/v0.1-draft/article-01/assets/p1-02-background.png",
+        "deliverables/T-024-station02-first-two-copy/v0.1-typeset-draft/article-01/assets/p1-02-background.png"
+      ],
+      "station": "station02",
+      "category": "station02_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\84\\22\\84223403209fae41ba6db981b2ca4d8408214694474b7b989d1e414091c347a9",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "888e79fb36a83edb2558c70480f981c0695da58ac77967d0eaf62981d625ae5e",
+      "bytes": 29492,
+      "paths": [
+        "deliverables/T-017-station01-remaining-plogs/v0.1-draft/article-05/images/03-p05-02.png"
+      ],
+      "station": "station01",
+      "category": "station01_historical_and_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\88\\8e\\888e79fb36a83edb2558c70480f981c0695da58ac77967d0eaf62981d625ae5e",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "89c61df05a7d6d44dc20aa79815de36ea691a53ffadb7edc2c99055e0a10e6c1",
+      "bytes": 2168228,
+      "paths": [
+        "deliverables/T-017-station01-remaining-plogs/v0.1-draft/assets/p04-06-selected-original.png"
+      ],
+      "station": "station01",
+      "category": "station01_historical_and_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\89\\c6\\89c61df05a7d6d44dc20aa79815de36ea691a53ffadb7edc2c99055e0a10e6c1",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "8b7e8bff93cd8f8dff5ac8ad993002fc89bbdeb61dbfb54da365cccf598e665e",
+      "bytes": 2378908,
+      "paths": [
+        "deliverables/T-023-station02-first-two-visual-assets/v0.1-draft/article-02/p2-cover-first-sighting-cover.png"
+      ],
+      "station": "station02",
+      "category": "station02_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\8b\\7e\\8b7e8bff93cd8f8dff5ac8ad993002fc89bbdeb61dbfb54da365cccf598e665e",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "8d1702de5f550a2bc8c7b3d67becdeeb8c2f270f7efa9f0a019947c9ec789d69",
+      "bytes": 1426220,
+      "paths": [
+        "deliverables/T-017-station01-remaining-plogs/v0.1-draft/article-05/images/02-p05-01.png"
+      ],
+      "station": "station01",
+      "category": "station01_historical_and_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\8d\\17\\8d1702de5f550a2bc8c7b3d67becdeeb8c2f270f7efa9f0a019947c9ec789d69",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "8e768c6b458d5293bb3b898d852e20366c2bb8a79bc8f261080610fd0b36d826",
+      "bytes": 2250632,
+      "paths": [
+        "deliverables/T-028-station02-last-three-visuals/v0.1-draft/assets/S09.png"
+      ],
+      "station": "station02",
+      "category": "station02_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\8e\\76\\8e768c6b458d5293bb3b898d852e20366c2bb8a79bc8f261080610fd0b36d826",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "8f1ad520e1053d822cae6eddb4afadd2b8120c3ebd096096f39685075a90c03e",
+      "bytes": 2301889,
+      "paths": [
+        "deliverables/T-023-station02-first-two-visual-assets/v0.1-draft/article-01/p1-04-mountain-foot-pause.png"
+      ],
+      "station": "station02",
+      "category": "station02_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\8f\\1a\\8f1ad520e1053d822cae6eddb4afadd2b8120c3ebd096096f39685075a90c03e",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "90296706006dc8046506b045c0a7160f27956a4a530c7a2813fdc118642f46b2",
+      "bytes": 1471574,
+      "paths": [
+        "deliverables/T-017-station01-remaining-plogs/v0.1-draft/article-03/images/02-p03-01.png"
+      ],
+      "station": "station01",
+      "category": "station01_historical_and_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\90\\29\\90296706006dc8046506b045c0a7160f27956a4a530c7a2813fdc118642f46b2",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "918d77ba76eec82d9a5a12368fcfdbb695f0a910366c9060621ef28786e30d3e",
+      "bytes": 2264691,
+      "paths": [
+        "deliverables/T-017-station01-remaining-plogs/v0.1-draft/assets/p05-06-selected-original.png"
+      ],
+      "station": "station01",
+      "category": "station01_historical_and_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\91\\8d\\918d77ba76eec82d9a5a12368fcfdbb695f0a910366c9060621ef28786e30d3e",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "9242ac0379d5980fc5afc2472e146bec5f4441afa908f5a30fa0a67ca13cfc6b",
+      "bytes": 3532454,
+      "paths": [
+        "deliverables/T-006-first-two-buffer-plogs/v0.1-typeset-draft/assets/p1-04-background.png"
+      ],
+      "station": "station01",
+      "category": "station01_historical_and_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\92\\42\\9242ac0379d5980fc5afc2472e146bec5f4441afa908f5a30fa0a67ca13cfc6b",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "94d792fef2b02e40c6fe259336a5872b359fad70f11dcb301845c0554e859ae6",
+      "bytes": 2861137,
+      "paths": [
+        "deliverables/T-017-station01-remaining-plogs/v0.2-exhibits-draft/assets/reference-r04.jpg"
+      ],
+      "station": "station01",
+      "category": "station01_historical_and_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\94\\d7\\94d792fef2b02e40c6fe259336a5872b359fad70f11dcb301845c0554e859ae6",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "95c0399240bc57f2a6377150a3aacc2cf91a6a5ae77024ffe546a4e631e0f9d0",
+      "bytes": 1536532,
+      "paths": [
+        "deliverables/T-017-station01-remaining-plogs/v0.1-draft/article-04/images/07-p04-06.png"
+      ],
+      "station": "station01",
+      "category": "station01_historical_and_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\95\\c0\\95c0399240bc57f2a6377150a3aacc2cf91a6a5ae77024ffe546a4e631e0f9d0",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "9b6eb219036b563b661c0b8039b70642b59baddc20466e6ab586cb4e0c99c15c",
+      "bytes": 1504749,
+      "paths": [
+        "deliverables/T-017-station01-remaining-plogs/v0.1-draft/article-04/images/02-p04-01.png"
+      ],
+      "station": "station01",
+      "category": "station01_historical_and_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\9b\\6e\\9b6eb219036b563b661c0b8039b70642b59baddc20466e6ab586cb4e0c99c15c",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "9b9500233613b885427ff55fb68b8d54ab435b4b60c6c4026ad6afa092922d96",
+      "bytes": 2108697,
+      "paths": [
+        "deliverables/T-017-station01-remaining-plogs/v0.1-draft/assets/p03-01-selected-original.png"
+      ],
+      "station": "station01",
+      "category": "station01_historical_and_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\9b\\95\\9b9500233613b885427ff55fb68b8d54ab435b4b60c6c4026ad6afa092922d96",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "9db691de4571f4d531a5c492d01275f80ea31bb6eb4bb385fcdd8835cf07a1f5",
+      "bytes": 1517665,
+      "paths": [
+        "deliverables/T-017-station01-remaining-plogs/v0.1-draft/article-03/images/03-p03-02.png"
+      ],
+      "station": "station01",
+      "category": "station01_historical_and_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\9d\\b6\\9db691de4571f4d531a5c492d01275f80ea31bb6eb4bb385fcdd8835cf07a1f5",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "9e26e1fce4197a094b6bfd505845447854f22fe4d55213a51caf9494543bb2c1",
+      "bytes": 48907,
+      "paths": [
+        "deliverables/T-023-station02-first-two-visual-assets/v0.1-draft/article-01/p1-05-reservation-boundary.png"
+      ],
+      "station": "station02",
+      "category": "station02_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\9e\\26\\9e26e1fce4197a094b6bfd505845447854f22fe4d55213a51caf9494543bb2c1",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "a2813f218a3d838655915d4f443dbb21d1dfa916c0facea7d15af3f572878ce4",
+      "bytes": 4126773,
+      "paths": [
+        "deliverables/T-023-station02-first-two-visual-assets/v0.1-draft/article-01/assets/p1-07-background.png",
+        "deliverables/T-024-station02-first-two-copy/v0.1-typeset-draft/article-01/assets/p1-07-background.png"
+      ],
+      "station": "station02",
+      "category": "station02_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\a2\\81\\a2813f218a3d838655915d4f443dbb21d1dfa916c0facea7d15af3f572878ce4",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "a30bdeacf20c035f670933b6568ffae1bb80d75debe1298d2cae507e9fe3bf9f",
+      "bytes": 2907530,
+      "paths": [
+        "deliverables/T-023-station02-first-two-visual-assets/v0.1-draft/article-01/p1-alt-online-prestudy-cover.png"
+      ],
+      "station": "station02",
+      "category": "station02_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\a3\\0b\\a30bdeacf20c035f670933b6568ffae1bb80d75debe1298d2cae507e9fe3bf9f",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "a37ebdd70a60b2b88b5b52bd623356a3788d4f594adf1c641502159b33b9ebd6",
+      "bytes": 2309196,
+      "paths": [
+        "deliverables/T-023-station02-first-two-visual-assets/v0.1-draft/article-01/p1-03-luggage-check.png"
+      ],
+      "station": "station02",
+      "category": "station02_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\a3\\7e\\a37ebdd70a60b2b88b5b52bd623356a3788d4f594adf1c641502159b33b9ebd6",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "ab1794f7556b77a5e78827f3000cbf4dc1ab08a89af53b24edbc35ca6250c473",
+      "bytes": 2110184,
+      "paths": [
+        "deliverables/T-017-station01-remaining-plogs/v0.1-draft/assets/p04-07-selected-original.png"
+      ],
+      "station": "station01",
+      "category": "station01_historical_and_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\ab\\17\\ab1794f7556b77a5e78827f3000cbf4dc1ab08a89af53b24edbc35ca6250c473",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "ab5fb457135d464462e37fc374113fe7ececb61d98d6311e449b70e644c7577f",
+      "bytes": 1535384,
+      "paths": [
+        "deliverables/T-017-station01-remaining-plogs/v0.1-draft/article-05/images/08-p05-07.png"
+      ],
+      "station": "station01",
+      "category": "station01_historical_and_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\ab\\5f\\ab5fb457135d464462e37fc374113fe7ececb61d98d6311e449b70e644c7577f",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "ac60b2de871e55f317008796cb4ea95a0eca396b0f8606d086a7c1eeeb8bab12",
+      "bytes": 1547566,
+      "paths": [
+        "deliverables/T-017-station01-remaining-plogs/v0.1-draft/article-03/images/08-p03-07.png"
+      ],
+      "station": "station01",
+      "category": "station01_historical_and_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\ac\\60\\ac60b2de871e55f317008796cb4ea95a0eca396b0f8606d086a7c1eeeb8bab12",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "ad72c0f6989b206bede65e735028faf4754a9a8835f410741a86384c2b1cbe46",
+      "bytes": 2531463,
+      "paths": [
+        "deliverables/T-023-station02-first-two-visual-assets/v0.1-draft/article-02/p2-01-enter-forest.png"
+      ],
+      "station": "station02",
+      "category": "station02_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\ad\\72\\ad72c0f6989b206bede65e735028faf4754a9a8835f410741a86384c2b1cbe46",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "ae5a8acf846970ce1c8fa5cc106685d16f78f2bb1d135973d3f21ffd97fbf39d",
+      "bytes": 3871206,
+      "paths": [
+        "deliverables/T-023-station02-first-two-visual-assets/v0.1-draft/article-01/assets/p1-01-background.png",
+        "deliverables/T-024-station02-first-two-copy/v0.1-typeset-draft/article-01/assets/p1-01-background.png"
+      ],
+      "station": "station02",
+      "category": "station02_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\ae\\5a\\ae5a8acf846970ce1c8fa5cc106685d16f78f2bb1d135973d3f21ffd97fbf39d",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "b043117cb505a850f972d02d8eb981027d5e1427636c5d9a947cc853a1e992f3",
+      "bytes": 2042501,
+      "paths": [
+        "deliverables/T-017-station01-remaining-plogs/v0.1-draft/assets/p04-04-selected-original.png"
+      ],
+      "station": "station01",
+      "category": "station01_historical_and_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\b0\\43\\b043117cb505a850f972d02d8eb981027d5e1427636c5d9a947cc853a1e992f3",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "b237d8a499617a4a6fbe797fde817b3e3cedbaf93122a1c24e4a79372faec628",
+      "bytes": 2126642,
+      "paths": [
+        "deliverables/T-017-station01-remaining-plogs/v0.1-draft/assets/p03-04-selected-original.png"
+      ],
+      "station": "station01",
+      "category": "station01_historical_and_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\b2\\37\\b237d8a499617a4a6fbe797fde817b3e3cedbaf93122a1c24e4a79372faec628",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "b3de0d8d348d55590e179b0bde3e33879d467777adca3394e96a725fe0f06354",
+      "bytes": 2085695,
+      "paths": [
+        "deliverables/T-017-station01-remaining-plogs/v0.1-draft/assets/p04-00-selected-original.png"
+      ],
+      "station": "station01",
+      "category": "station01_historical_and_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\b3\\de\\b3de0d8d348d55590e179b0bde3e33879d467777adca3394e96a725fe0f06354",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "b7b45a0806683f1dc1f97d5195899a54dcb07a4e5d345c5ea50f7f65aa8056ee",
+      "bytes": 2040521,
+      "paths": [
+        "deliverables/T-017-station01-remaining-plogs/v0.1-draft/assets/p05-00-selected-original.png"
+      ],
+      "station": "station01",
+      "category": "station01_historical_and_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\b7\\b4\\b7b45a0806683f1dc1f97d5195899a54dcb07a4e5d345c5ea50f7f65aa8056ee",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "b99ab81165a9dfa68fad49d35f4ff51a693675c0d40ccdb22dd28b81861cb624",
+      "bytes": 2706217,
+      "paths": [
+        "deliverables/T-017-station01-remaining-plogs/v0.2-exhibits-draft/assets/e04-selected-original.png"
+      ],
+      "station": "station01",
+      "category": "station01_historical_and_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\b9\\9a\\b99ab81165a9dfa68fad49d35f4ff51a693675c0d40ccdb22dd28b81861cb624",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "bc058644795a9b8a3d3e9202b7dccee35766f0e28e2f49328549f2892f799fe1",
+      "bytes": 4028373,
+      "paths": [
+        "deliverables/T-023-station02-first-two-visual-assets/v0.1-draft/article-02/assets/p2-03-background.png",
+        "deliverables/T-024-station02-first-two-copy/v0.1-typeset-draft/article-02/assets/p2-03-background.png"
+      ],
+      "station": "station02",
+      "category": "station02_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\bc\\05\\bc058644795a9b8a3d3e9202b7dccee35766f0e28e2f49328549f2892f799fe1",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "be02c2843dbc2e65bc1e1fa8d5bbc0a32dfd2dbe48571f85d7be9b77454719fa",
+      "bytes": 1450540,
+      "paths": [
+        "deliverables/T-017-station01-remaining-plogs/v0.1-draft/article-04/images/05-p04-04.png"
+      ],
+      "station": "station01",
+      "category": "station01_historical_and_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\be\\02\\be02c2843dbc2e65bc1e1fa8d5bbc0a32dfd2dbe48571f85d7be9b77454719fa",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "c22d782b678a0dc05379d00c4b71662d1e154bb6a8dd47862c76c62597887d04",
+      "bytes": 2523710,
+      "paths": [
+        "deliverables/T-028-station02-last-three-visuals/v0.1-draft/assets/S08.png"
+      ],
+      "station": "station02",
+      "category": "station02_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\c2\\2d\\c22d782b678a0dc05379d00c4b71662d1e154bb6a8dd47862c76c62597887d04",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "c33dc92609a3aae077babfe131ef216caf5c90f0bc8f15ce0e70aabbf4cecbdf",
+      "bytes": 2838732,
+      "paths": [
+        "deliverables/T-017-station01-remaining-plogs/v0.2-exhibits-draft/assets/e08-selected-original.png"
+      ],
+      "station": "station01",
+      "category": "station01_historical_and_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\c3\\3d\\c33dc92609a3aae077babfe131ef216caf5c90f0bc8f15ce0e70aabbf4cecbdf",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "c78e0db8d109f78305af3cbbff54a89bed346a887c19085b22fa4c326f3a298f",
+      "bytes": 2798284,
+      "paths": [
+        "deliverables/T-017-station01-remaining-plogs/v0.2-exhibits-draft/assets/e06-selected-original.png"
+      ],
+      "station": "station01",
+      "category": "station01_historical_and_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\c7\\8e\\c78e0db8d109f78305af3cbbff54a89bed346a887c19085b22fa4c326f3a298f",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "cc0d91944959f25bede5b81e4fa4f29e50babf52f0560ae398e68b24fb475570",
+      "bytes": 3745363,
+      "paths": [
+        "deliverables/T-006-first-two-buffer-plogs/v0.1-typeset-draft/assets/p2-03-background.png"
+      ],
+      "station": "station01",
+      "category": "station01_historical_and_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\cc\\0d\\cc0d91944959f25bede5b81e4fa4f29e50babf52f0560ae398e68b24fb475570",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "cd590ac0e3f0a03f40f3c60dc475b44af29e6fb3240379a5bc3754db8ef8a737",
+      "bytes": 2541481,
+      "paths": [
+        "deliverables/T-028-station02-last-three-visuals/v0.1-draft/assets/S01M.png"
+      ],
+      "station": "station02",
+      "category": "station02_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\cd\\59\\cd590ac0e3f0a03f40f3c60dc475b44af29e6fb3240379a5bc3754db8ef8a737",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "cde294a4ee4917112e46ac7d21908e410b827d60d08533df23e99a0e8f7de0f6",
+      "bytes": 2523692,
+      "paths": [
+        "deliverables/T-017-station01-remaining-plogs/v0.2-exhibits-draft/assets/e11-selected-original.png"
+      ],
+      "station": "station01",
+      "category": "station01_historical_and_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\cd\\e2\\cde294a4ee4917112e46ac7d21908e410b827d60d08533df23e99a0e8f7de0f6",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "cef2d73e5c0ceef7fede79b08184ff1365fdb1468249fd4719fc0e0e165d2277",
+      "bytes": 2141181,
+      "paths": [
+        "deliverables/T-017-station01-remaining-plogs/v0.1-draft/assets/p05-07-selected-original.png"
+      ],
+      "station": "station01",
+      "category": "station01_historical_and_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\ce\\f2\\cef2d73e5c0ceef7fede79b08184ff1365fdb1468249fd4719fc0e0e165d2277",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "d0654c1e619d4515449a85067571d623e29cc6a6dcc66fde25c748ecd2206a72",
+      "bytes": 2136286,
+      "paths": [
+        "deliverables/T-017-station01-remaining-plogs/v0.1-draft/assets/p03-02-selected-original.png"
+      ],
+      "station": "station01",
+      "category": "station01_historical_and_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\d0\\65\\d0654c1e619d4515449a85067571d623e29cc6a6dcc66fde25c748ecd2206a72",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "d359dee4dd0200ce3e040685d308bb53eaf974d30e461bf9b1ac8a6de925e512",
+      "bytes": 2539222,
+      "paths": [
+        "deliverables/T-028-station02-last-three-visuals/v0.1-draft/assets/S10.png"
+      ],
+      "station": "station02",
+      "category": "station02_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\d3\\59\\d359dee4dd0200ce3e040685d308bb53eaf974d30e461bf9b1ac8a6de925e512",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "d421fdfe7b75ef703e0007131efbf0d69403cb465f45f58003d062b405594bfa",
+      "bytes": 4147367,
+      "paths": [
+        "deliverables/T-023-station02-first-two-visual-assets/v0.1-draft/article-02/assets/p2-01-background.png",
+        "deliverables/T-024-station02-first-two-copy/v0.1-typeset-draft/article-02/assets/p2-01-background.png"
+      ],
+      "station": "station02",
+      "category": "station02_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\d4\\21\\d421fdfe7b75ef703e0007131efbf0d69403cb465f45f58003d062b405594bfa",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "da972ac94d1edd4c154786b6cefed2f38ab824461fe16ea991d8cdf65aa67e4f",
+      "bytes": 77030,
+      "paths": [
+        "deliverables/T-017-station01-remaining-plogs/v0.1-draft/article-03/images/06-p03-05.png"
+      ],
+      "station": "station01",
+      "category": "station01_historical_and_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\da\\97\\da972ac94d1edd4c154786b6cefed2f38ab824461fe16ea991d8cdf65aa67e4f",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "db1138ceb7434ef19a8b162092faa79ba6705059e562ec4d85c5d07a89a03305",
+      "bytes": 39201,
+      "paths": [
+        "deliverables/T-017-station01-remaining-plogs/v0.1-draft/article-05/images/04-p05-03.png"
+      ],
+      "station": "station01",
+      "category": "station01_historical_and_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\db\\11\\db1138ceb7434ef19a8b162092faa79ba6705059e562ec4d85c5d07a89a03305",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "e071fe009905631900123359c3842c1cc0cab035b190c14bd7983bb2e62464d6",
+      "bytes": 2354592,
+      "paths": [
+        "deliverables/T-023-station02-first-two-visual-assets/v0.1-draft/article-01/p1-01-wish-note.png"
+      ],
+      "station": "station02",
+      "category": "station02_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\e0\\71\\e071fe009905631900123359c3842c1cc0cab035b190c14bd7983bb2e62464d6",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "e0e82d590ea24cea63fa520dd777582757d18a66374d2bef38443e2e0c75f516",
+      "bytes": 4077857,
+      "paths": [
+        "deliverables/T-023-station02-first-two-visual-assets/v0.1-draft/article-02/assets/p2-06-background.png",
+        "deliverables/T-024-station02-first-two-copy/v0.1-typeset-draft/article-02/assets/p2-06-background.png"
+      ],
+      "station": "station02",
+      "category": "station02_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\e0\\e8\\e0e82d590ea24cea63fa520dd777582757d18a66374d2bef38443e2e0c75f516",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "e2488cc7f188fe62dfc6f51d5e289c0d2477820c188ec254ce4d9ade44117bd9",
+      "bytes": 2493583,
+      "paths": [
+        "deliverables/T-023-station02-first-two-visual-assets/v0.1-draft/article-02/p2-06-zone-notes.png"
+      ],
+      "station": "station02",
+      "category": "station02_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\e2\\48\\e2488cc7f188fe62dfc6f51d5e289c0d2477820c188ec254ce4d9ade44117bd9",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "eb755e3d6b16fb55cf2a05d204b8cd8399097797de98034913e6f5a0b9b0507e",
+      "bytes": 1656986,
+      "paths": [
+        "deliverables/T-017-station01-remaining-plogs/v0.1-draft/article-03/images/07-p03-06.png"
+      ],
+      "station": "station01",
+      "category": "station01_historical_and_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\eb\\75\\eb755e3d6b16fb55cf2a05d204b8cd8399097797de98034913e6f5a0b9b0507e",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "ed902005fcc678099c97503576c7c3a78970d0d21894129457c3ea345269335e",
+      "bytes": 2109945,
+      "paths": [
+        "deliverables/T-017-station01-remaining-plogs/v0.1-draft/assets/p04-01-selected-original.png"
+      ],
+      "station": "station01",
+      "category": "station01_historical_and_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\ed\\90\\ed902005fcc678099c97503576c7c3a78970d0d21894129457c3ea345269335e",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "edc7bb1b7577a705dde57b6dffe0a432edf224f0c5fd356bb95c8b08e0e906a2",
+      "bytes": 4024706,
+      "paths": [
+        "deliverables/T-023-station02-first-two-visual-assets/v0.1-draft/article-01/assets/p1-06-background.png",
+        "deliverables/T-024-station02-first-two-copy/v0.1-typeset-draft/article-01/assets/p1-06-background.png"
+      ],
+      "station": "station02",
+      "category": "station02_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\ed\\c7\\edc7bb1b7577a705dde57b6dffe0a432edf224f0c5fd356bb95c8b08e0e906a2",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "f1382d6dd91a3308ebc806e9d45e8d6503ce33246ba04e6eb5a84158c6fdd98f",
+      "bytes": 2578475,
+      "paths": [
+        "deliverables/T-028-station02-last-three-visuals/v0.1-draft/assets/S04.png"
+      ],
+      "station": "station02",
+      "category": "station02_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\f1\\38\\f1382d6dd91a3308ebc806e9d45e8d6503ce33246ba04e6eb5a84158c6fdd98f",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "f4fdaa716520815b70e597aa704fbd0bb41dfc6d3e2ea1c1e7f8c317e9d75948",
+      "bytes": 3396277,
+      "paths": [
+        "deliverables/T-006-first-two-buffer-plogs/v0.1-typeset-draft/assets/p1-01-background.png"
+      ],
+      "station": "station01",
+      "category": "station01_historical_and_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\f4\\fd\\f4fdaa716520815b70e597aa704fbd0bb41dfc6d3e2ea1c1e7f8c317e9d75948",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "f7c05ea398822ee2050ed273bcc35141b984b32b2a8e60186468fb08390dfe6f",
+      "bytes": 2555468,
+      "paths": [
+        "deliverables/T-023-station02-first-two-visual-assets/v0.1-draft/article-01/cover/cover-emeishan-station-2.png"
+      ],
+      "station": "station02",
+      "category": "station02_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\f7\\c0\\f7c05ea398822ee2050ed273bcc35141b984b32b2a8e60186468fb08390dfe6f",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "fa2f2703f4a6c75e9baa14d6d9f00e309af37d08d87ab5b0159ced7c4d2cd14d",
+      "bytes": 2436211,
+      "paths": [
+        "deliverables/T-023-station02-first-two-visual-assets/v0.1-draft/article-02/p2-02-gorge-depth.png"
+      ],
+      "station": "station02",
+      "category": "station02_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\fa\\2f\\fa2f2703f4a6c75e9baa14d6d9f00e309af37d08d87ab5b0159ced7c4d2cd14d",
+      "sha256_verified": true
+    },
+    {
+      "sha256": "fe55570832b016e0f4cc9bdc22b0f0fcabde64512e797629a5ce61262c9bd01e",
+      "bytes": 1677770,
+      "paths": [
+        "deliverables/T-017-station01-remaining-plogs/v0.1-draft/article-05/images/06-p05-05.png"
+      ],
+      "station": "station01",
+      "category": "station01_historical_and_editing_assets",
+      "local_file": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\lfs\\objects\\fe\\55\\fe55570832b016e0f4cc9bdc22b0f0fcabde64512e797629a5ce61262c9bd01e",
+      "sha256_verified": true
+    }
+  ],
+  "remove_unique_objects": 112,
+  "remove_unique_bytes": 266524203,
+  "status": "proposal_only_not_executed"
+}
