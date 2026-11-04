@@ -1,0 +1,57 @@
+{
+  "task": "T-041",
+  "date": "2026-11-04",
+  "result": "passed",
+  "product_repository": "git@github.com:yinzhongkai/free-pipi-shrimp.git",
+  "local_product_path": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp",
+  "main_unchanged": "5061a76052e19d393988c1932f92912d60c9e745",
+  "tree_unchanged": "0faa665195635f3fd8501ecd1cdd75e78a9a50db",
+  "local_tags_deleted": [
+    "refs/tags/archive/station01-editing-assets-20261104",
+    "refs/tags/archive/t-023-pre-squash-20261104",
+    "refs/tags/archive/t-038-final-only-root-20261104",
+    "refs/tags/archive/t-038-history-before-rebuild-20261104/25294dbebbf6",
+    "refs/tags/archive/t-038-history-before-rebuild-20261104/3db7ee607b3b",
+    "refs/tags/archive/t-038-history-before-rebuild-20261104/a4a94144742d",
+    "refs/tags/archive/t-038-history-before-rebuild-20261104/d39a76cb1177",
+    "refs/tags/archive/t-038-history-before-rebuild-20261104/fa4bd5f14c2d"
+  ],
+  "remote_tags_deleted": [
+    "refs/tags/archive/station01-editing-assets-20261104",
+    "refs/tags/archive/t-023-pre-squash-20261104",
+    "refs/tags/archive/t-038-final-only-root-20261104",
+    "refs/tags/archive/t-038-history-before-rebuild-20261104/25294dbebbf6",
+    "refs/tags/archive/t-038-history-before-rebuild-20261104/3db7ee607b3b",
+    "refs/tags/archive/t-038-history-before-rebuild-20261104/a4a94144742d",
+    "refs/tags/archive/t-038-history-before-rebuild-20261104/d39a76cb1177",
+    "refs/tags/archive/t-038-history-before-rebuild-20261104/fa4bd5f14c2d"
+  ],
+  "local_tags_after": 0,
+  "remote_tags_after": 0,
+  "only_main_branch_remains_locally_and_remotely": true,
+  "main_reachable_commits": 32,
+  "previous_commits": 102,
+  "non_main_commits_preserved_in_local_bundle": 70,
+  "backup": {
+    "path": "C:\\Users\\YinZh\\Documents\\workspace\\free-pipi-shrimp\\.git\\tag-cleanup-t041-20261104\\before-tags.bundle",
+    "bytes": 1924100,
+    "sha256": "f4d74eb70c670c7ef280e18be1bde8a3c65b9783ec05e1c5d225d75b27ccd6d2",
+    "independent_mirror_restore_and_fsck_passed": true,
+    "all_102_commits_and_8_original_tags_restorable": true,
+    "git_history_only_lfs_payloads_not_embedded": true
+  },
+  "tracked_files_unchanged": {
+    "paths": 350,
+    "bytes": 162975742,
+    "sha256": "1a1cc63f534a28265433711c258f863dbe4803386e3c436b8a3ad822f98ba468",
+    "index_sha256": "ab2d65f63d4db144554b26eac9443581a1d43053d01c446d836b0d7ffdd79f99"
+  },
+  "lfs_cache_objects_unchanged": 82,
+  "lfs_cache_bytes_unchanged": 158163528,
+  "product_status_clean": true,
+  "remote_deletions_atomic_with_explicit_old_sha_leases": true,
+  "remote_refs_after": {
+    "refs/heads/main": "5061a76052e19d393988c1932f92912d60c9e745"
+  },
+  "local_total_file_bytes_before_result_written": 360318491
+}

@@ -4,11 +4,11 @@
 
 - 框架基线：`v0.0.4`（提交 `464ca52aafc6c73ff780a7120acd3bf63c9d31dd`）。当前项目历史已按 T-014 功能归并为线性提交，不保留项目 merge commit；框架发布标签及其发布合并历史保持不变。项目继续使用外部单 Git 工作区，TEAM 版本 3、WORKSPACE 版本 1。
 
-## 当前成果物版本与可浏览历史（2026-11-04）
+## 当前成果物版本与历史读取（2026-11-04）
 
-用户在重建同地址产品仓库后，按D-024改为“移除中间图片引用并重写历史，保留GitHub直接浏览”，替代D-023仅归档方式。当前产品main／origin/main／WORKSPACE为5061a76052e19d393988c1932f92912d60c9e745，main 32条提交；原101条既有记录完整保留在原主线／分支／标签，加本轮维护共102条，作者、时间、说明及提交关系保持。所有可达历史仅引用82个最终／共用LFS对象约158.2MB。
+用户在重建同地址产品仓库后，按D-024重写历史以移除中间图片引用，保留提交元数据和父子关系。随后先按[T-040](artifacts/T-040-product-branch-cleanup-20261104.md)删除非main分支，再按用户明确要求在[T-041](artifacts/T-041-product-tag-cleanup-20261104.md)删除全部本地／远端标签。当前产品main／origin/main／WORKSPACE仍为5061a76052e19d393988c1932f92912d60c9e745，两端仅main、无标签；main的32条提交可直接浏览。删除标签前全部102条清理后提交已保存为本地自包含Git bundle并独立恢复／fsck验证，其中70条非main记录需从该备份读取。最终文件与82个最终／共用LFS对象约158.2MB保持。
 
-旧成果里的固定产品SHA保留原意：产品archives/history-rewrite-map-20261104.tsv／JSON及治理库[SHA查询表](artifacts/T-039-commit-map-20261104.tsv)提供101条旧新映射；读取旧版本先查新SHA，无需再下载bundle才能浏览提交。原始未清理历史仅留本地备份，中间图片已清退；具体核验与方法见[历史重写结项](artifacts/T-039-browsable-history-rewrite-20261104.md)。本地中间LFS缓存也已通过官方命令清理，产品约358.4MB。此为产品存储维护，不改变本OPC框架基线、角色或发布状态。
+旧成果里的固定产品SHA保留原意：产品archives/history-rewrite-map-20261104.tsv／JSON及治理库[SHA查询表](artifacts/T-039-commit-map-20261104.tsv)提供101条旧新映射；先查新SHA，属于main的可直接读取，其余从T-041本地备份恢复。原始未清理历史另有本地备份，中间图片已清退；历史重写时点见[T-039结项](artifacts/T-039-browsable-history-rewrite-20261104.md)，当前引用与恢复方式以[T-041](artifacts/T-041-product-tag-cleanup-20261104.md)为准。本轮新增约1.9MB历史备份，产品本地约360.3MB。此为产品存储维护，不改变本OPC框架基线、角色或发布状态。
 
 ## 框架升级记录
 

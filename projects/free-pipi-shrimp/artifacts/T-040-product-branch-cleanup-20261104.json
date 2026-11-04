@@ -1,0 +1,38 @@
+{
+  "result": "passed",
+  "main_unchanged": "5061a76052e19d393988c1932f92912d60c9e745",
+  "local_branches_after": [
+    "main"
+  ],
+  "remote_branches_after": [
+    "main"
+  ],
+  "local_branches_deleted": [
+    "archive/local-before-sync-20261019/main-104b533",
+    "archive/t-038-full-history-main-20261104",
+    "feature/t-023-station02-first-two-visual-assets"
+  ],
+  "remote_branches_deleted": [
+    "archive/local-before-sync-20261019/main-104b533",
+    "feature/t-023-station02-first-two-visual-assets"
+  ],
+  "existing_history_tags_unchanged": 8,
+  "all_102_commit_records_preserved": true,
+  "original_commit_set_sha256": "8fdb6a0d57086cce442b31cca3e499b480d7fc03e667c52d6b37430c2ba2119c",
+  "feature_and_merged_archive_deleted_with_git_branch_d": true,
+  "unmerged_history_archive_ref_deleted_only_after_remote_tag_coverage_verified": "refs/tags/archive/t-038-history-before-rebuild-20261104/d39a76cb1177",
+  "remote_deletions_protected_by_explicit_old_tip_leases": true,
+  "git_tree_index_working_files_unchanged": true,
+  "product_status_clean": true,
+  "remote_refs_after": {
+    "refs/heads/main": "5061a76052e19d393988c1932f92912d60c9e745",
+    "refs/tags/archive/station01-editing-assets-20261104": "983736f9bfa7c815ffe439ca4da3058083cc91f2",
+    "refs/tags/archive/t-023-pre-squash-20261104": "7412f5939633ee3b22ddc0f729134212d8c1cce9",
+    "refs/tags/archive/t-038-final-only-root-20261104": "3f6897857ff4e333f0b3dc9d1bee2c67496e1450",
+    "refs/tags/archive/t-038-history-before-rebuild-20261104/25294dbebbf6": "e815c1c9112fab83767efcb3a98d8c453d46a0e2",
+    "refs/tags/archive/t-038-history-before-rebuild-20261104/3db7ee607b3b": "9162e4d1f090b915a6ea1e97e2b846a0a825e9dc",
+    "refs/tags/archive/t-038-history-before-rebuild-20261104/a4a94144742d": "a4c1f8985fff08c6d6f7b6878105b5b9e8e045b5",
+    "refs/tags/archive/t-038-history-before-rebuild-20261104/d39a76cb1177": "6c1538942bdeb0110240d676a4a5904e9fdf2262",
+    "refs/tags/archive/t-038-history-before-rebuild-20261104/fa4bd5f14c2d": "16cfaf8f31398c825f5d97fb08a62213406f3133"
+  }
+}
