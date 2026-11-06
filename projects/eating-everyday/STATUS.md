@@ -1,5 +1,13 @@
 # 项目状态摘要
 
+- 汇总日期与信息截至点：2026-11-06，D-029/T-045工作区采用及OPC项目本地v1.3.0发布。
+- 当前阶段：已先将WORKSPACE.revision更新为产品main/v1.3.0的571802a6e4697bb5d61fd508e902dc1746c54c00；产品实时远端main/tag同目标，本次未操作其推送或文件。OPC原13条加本次工作区/计划准备共15条按5组整理，源树72a9d92e保持并快进项目主线到1506c020dd104dced5abec24e335c2dc172481f0。
+- 发布结构：本次完整回执先纳入准备版本，再以1506c020为第一父、本次准备为第二父形成真正双父release；附注project/eating-everyday/v1.3.0固定该最终项目HEAD，实际对象/父/树从Git及本机T-045日志核对，不在提交正文自写自身SHA。message为release(eating-everyday): project/eating-everyday/v1.3.0，说明Release project/eating-everyday/v1.3.0，全部新增message/说明单行，tag后不追加提交。
+- 验证与保护：功能整理树严格等于准备源快照，整合前后结构/链接/diff通过；六份专业正文原字节、产品626受控文件/两配置/全部引用及OPC旧tag/框架保持。沿用原受测范围671/671，不重复产品或微信验证，不扩大实体设备或正式发布结论；详见A-017 v0.8/A-018 v0.9及最终日志。
+- 本地与后续：本次仅OPC本地整理合入和新项目tag，远端OPC项目主线仍1970f68、feature仍9565625的原状态，未推送；产品保持已核对的571802a。原.tmp/、两个feature和完整恢复bundle保留，不删除分支或开始下一轮。完成最终核对后停止，后续远端同步按用户安排。
+
+## OPC项目v1.3.0发布前的产品交付快照（历史）
+
 - 汇总日期与信息截至点：2026-11-06，D-028/T-044产品本地v1.3.0发布完成。
 - 当前阶段：产品7条过程提交按实现、开发证据、独立证据整理为3组，文件树与原fdf6460完全一致，先快进合入main，再创建README准备和真正双父release。产品main与附注v1.3.0目标均571802a6e4697bb5d61fd508e902dc1746c54c00；tag对象f1ae71c4cb3383533cbc339becfb2e519b05f123。
 - 提交及标签格式：功能头167951a83f522582c5a2103a31f7aadccafd0402为release第一父，README准备93ed96beab2ce722289387c8c4dd924e9f05cc82为第二父；发布树等于准备树，相对原完整交付仅README变化。5条新增commit message均单行，release为release(eating-everyday): v1.3.0，附注说明为Release v1.3.0；旧tag保持。
