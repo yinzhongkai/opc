@@ -3,19 +3,19 @@
 - 项目：eating-everyday（今天吃什么）
 - 成果 ID：A-013
 - 负责人：developer（研发工程师）
-- 关联任务：当前[T-034](../TASKS.md#t-034实现启动恢复上次使用的菜单)，供[T-035](../TASKS.md#t-035独立验证启动恢复和本机菜单保护)串行接收；T-012～T-023等原完成事实保留。
-- 版本：0.6
-- 更新日期：2026-11-03（Asia/Shanghai）
+- 关联任务：当前[T-041](../TASKS.md#t-041实现首页好友转发与朋友圈分享)，供[T-042](../TASKS.md#t-042独立验证首页分享及既有菜单行为)串行接收；原任务事实保留各历史节。
+- 版本：0.8
+- 更新日期：2026-11-06（Asia/Shanghai；本轮2026-11-05开始）
 - 状态：draft
-- 适用范围：T-034同轮重开修复BUG-T035-001及开发复测；第1～8节保留原工程、配置及首轮启动恢复历史，第9节为当前修复交接。BUG仍open，T-035保持blocked；不包含独立关闭或手机验收。
-- 来源及输入：2026-11-03 D-024及用户既定串行授权，project-manager明确重开T-034并通知修复；本次OPC接手fbddd9c508813293e6942a786f5309762c9b47e0。已刷新身份/角色/scope及三项有效技能，现行[A-001 v0.11](product-requirements.md)、[A-007 v0.5](product-decision-options.md)、[A-006 v0.7第11节](system-architecture.md)、[A-008 v0.5第0节](accounts-access-checklist.md)保持；新增读取[A-014 v0.7第11节](miniprogram-test-report.md)及独立两层复现。13/13/40及SR-01～13范围不扩展，原输入保留各历史段落。
+- 适用范围：T-041重开后的分享静态图解析兼容修复与开发交接；第1～10节原事实保持，第11节为当前固定候选。已完成本机真实预览/取消及关闭重开开发验证，不包含T-042独立结论、实体手机收卡或实际外发验收。
+- 来源及输入：project-manager依用户“继续找对应的成员完成测试任务吧”和[D-027](../DECISIONS.md#d-027先建feature分支再实现首页分享)明确重开T-041，串行通知本成员。OPC接手22c61fe62e1c899f994fd2bf7d3f39340ab75c62，产品939d55f07322afebe889943dbae9445dd9c1439d；输入A-014 v0.10第14节及tester最小复现，原v0.7交接保留第10节。本人配置/角色/scope及三技能已完整刷新，根规则/原需求架构比较未变；[A-001 v0.11](product-requirements.md)、[A-006 v0.7](system-architecture.md)的数据保护与恢复契约不改。
 - 存储位置：本治理正文在OPC artifacts；产品源码、测试、中间证据全部在本机产品仓库git@github.com:yinzhongkai/eating-everyday.git，checkout=../eating-everyday。
-- 固定工程候选：修复代码/测试/说明 **5085636ba8955b08fcf39c24cf84b0329ef89c6d**，父为tester复现资产48469cfa7594b127b0af549b9ecafe0698b47cc9，产品main/WORKSPACE基线仍3800e6dd8bc32b7d767bfc873a4b9ae57d10232b；完整修复证据资产HEAD **ae61a36c59d95e24669010900b8d8b99b739cded**，后者只增加test/evidence/developer-fix-t035-001/，运行代码与测试不变。
-- 主线交付：本轮产品feature/t-032-startup-restore与OPC feature/eating-everyday/t-032-startup-restore仅本地提交，未合入/推送；产品main/WORKSPACE及v1.1.0保持3800e6dd8bc32b7d767bfc873a4b9ae57d10232b，OPC目标project/eating-everyday保持2e241e6b489a65701ba2078640b2794cdabba429。未联网刷新远端，未移动标签；当前候选不是已合入交付基线。
-- 批准依据：D-024/T-034授权本成员实现和开发交接；无整份成果批准，不代写T-035独立结论或执行后续合入、发布、WORKSPACE推进。
-- 版本记录：0.1首次原生候选及Esc停止历史；0.2随机跨域修复与开发预览；0.3配置测试适配及双环境结果；0.4默认菜单一次性初始化/兼容/恢复；0.5启动恢复首轮开发验证；0.6修复旧意图遮蔽当前补记及警示误清，交T-035独立复测，不关闭原BUG。
+- 固定工程候选：代码/回归/说明 **a647d1f04acc7d8022699baa0a5c54af1856c4ee**，父为接手资产939d55f；完整研发证据 **e280b9559d119c6e66cfdc01b42e4d9d4929c522**，仅追加test/evidence/developer-t041-image-20261105/88文件。旧fb27d41/cc9c191按第10节保留；新代码不改其历史结论。
+- 主线交付：仍在原配对feature，仅本地提交。WORKSPACE锁定38b1e69350ad2b4cf43c3124a3635f4a0b9c47a0、OPC任务基线1970f68a均为当前feature祖先；本克隆本机main仍6c9ef2b3135a0013fb0b06ebbe761b298c4b7260、project/eating-everyday仍d4e65980fb30d4fe9a65248c277861823402eb9a，按T-040协调保持。本轮只查本机引用，未联网核远端、切换/拉取/改写或合入主线；候选不是已合入基线。
+- 批准依据：D-027/T-041授权本成员实现、自测和有界本地交接；无整份成果批准，不代写T-042独立结论或执行合入、推送、发布、WORKSPACE推进及实际外发。
+- 版本记录：0.1首次原生候选及Esc停止历史；0.2随机跨域修复与开发预览；0.3配置测试适配及双环境结果；0.4默认菜单一次性初始化/兼容/恢复；0.5启动恢复首轮开发验证；0.6旧意图/补记修复历史；0.7首页分享实现、13项新回归及工具启动失败限制；0.8包内图解析有界对照、本地静态文件兼容、双652与真实固定候选预览/取消/重开及精确清理，待tester独立复测。
 
-以下第1～4节为v0.1、第5节为v0.2、第6节为v0.3、第7节为v0.4、第8节为v0.5的历史事实；**当前T-034修复以第9节v0.6为准**。旧输入SHA、首次为空/重进手动加载、Esc、未验证手机和待关闭缺陷均限于原执行时点，不覆盖当前契约；既有专业测试事实以其原任务/A-014对应版本为准，不倒写旧失败。
+以下第1～10节保留v0.1～v0.7历史事实；**当前T-041以第11节v0.8为准**。旧输入SHA、旧启动方式、Esc及缺陷待复测状态均限于原执行时点；后续独立事实以其原任务/A-014对应版本为准，不倒写旧失败或把旧通过扩为新候选已独立验收。
 
 ## 1. 工程与操作入口
 
@@ -261,3 +261,83 @@ project-manager依据T-035独立缺陷明确重开T-034后串行通知，发送�
 tester由project-manager核对本交付并确认本成员停止后串行接续，先核对代码5085636与完整资产ae61a36精确SHA、差异仅本轮证据目录及两配置指纹，读取原BUG、现行需求/契约和产品修复README，再独立复跑两层失败和相邻风险，继续完成T-035原定剩余全套及隔离真实平台检查。BUG-T035-001仍open，独立关闭/解除blocked和合入建议由tester给出，本成员不代写。
 
 未新增实体手机/预览码、实体离线、物理满配额/强杀/断电、多设备、旧写入者降级及多进程CAS结论；原不明写冻结、未知格式及Port单次写前提保持。T-034本次重开修复已满足实现、开发复现/回归、固定新候选和交接条件，成果仍draft。两仓库本地提交本人范围并核对后停止，不联系/唤醒其他成员，不改T-035/A-014、STATUS/PROJECT/索引顶部摘要、WORKSPACE或旧H项；原.tmp/、私有配置和开发分支保留，不合入/推送/发布。
+
+## 10. v0.7：T-041首页分享开发交接（2026-11-05）
+
+### 接收、版本与实现
+
+按project-manager依用户既定授权及D-027发送的串行通知实际接收；发送方已停止。已重读根AGENTS/SESSION_PROTOCOL、TEAM、自身developer角色/scope与software-engineering、frontend-development、wechat-miniprogram-development三项技能，根公共规则经Git比较未变，读取D-027/T-040～T-042、当前项目、索引及本人交接。产品代码缺少两个分享回调的原定位保留为输入，不改写为本轮测试结果。
+
+接手OPC **fc5cc8b78dd2c05bf5de2e7483dfa1d5b031e447**，产品main/v1.2.0 **38b1e69350ad2b4cf43c3124a3635f4a0b9c47a0**；已确认配对分支及WORKSPACE。固定代码/开发回归/说明 **fb27d41c598a52425f3401c1cbd17b4ecc2129fd**，完整证据HEAD **cc9c1912996035ddfa3a2b39e7f1cd062312e7f6**，后者只增加 `test/evidence/developer-t041-share/`。当前产品feature/t-040-share、OPC feature/eating-everyday/t-040-share仅本地提交；两主线/v1.2.0/WORKSPACE保持本节基线，未合入/推送/打tag或发布。
+
+实际页面定义新增onShareAppMessage/onShareTimeline，标题固定“今天吃什么”；好友path固定 `/pages/index/index`，朋友圈使用当前首页并显式 `query:''`。两份代码包静态转盘PNG分别5:4及1:1，不使用当前页面截图，不拼菜单/选择记忆/抽中结果，无shareTicket或参数导入，不从截图账号名改产品名称。接收方普通首页仍读取自身保存菜单。
+
+onLoad在独立于菜单读取的步骤请求shareAppMessage/shareTimeline；无API、同步异常或异步失败不阻止启动，只做一次好友入口回退。隐藏/卸载后的旧失败回调不更新菜单。分享回调是纯元数据返回，不保存/加载或修改工作态。场景1154跳过分享菜单API，原菜单/恢复/抽取行为保持。变更为pages/index/index.js、两份assets PNG、新test/sharing.test.js及README/docs/sharing.md，无新增业务依赖或云服务。
+
+### 官方现行接口核实
+
+2026-11-05直接读取三份微信官方正文，均HTTP 200，链接/HTML与提取正文SHA保存在产品official-interfaces.json；最初Web读取器不可达后按工具权限流程通过只读HTTPS取得原文。不是只靠旧类型声明。
+
+- [Page分享回调](https://developers.weixin.qq.com/miniprogram/dev/reference/api/Page.html)明确好友完整path、静态PNG/JPG和朋友圈query/image返回；朋友圈不接受自定义path。静态分享图避免默认截图携带本机内容。
+- [朋友圈专页](https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/share-timeline.html)现行编辑日期2026-06-16，支持Android及微信8.0.24以上iOS，基础库2.11.3起；页面同时具备好友与朋友圈处理后，入口由客户端支持情况决定。单页模式存储与普通模式不共用，原生底部“前往小程序”进入普通模式后才使用接收方原菜单，不做跨模式复制。
+- [showShareMenu](https://developers.weixin.qq.com/miniprogram/dev/api/share/wx.showShareMenu.html)允许同时请求两个入口，朋友圈不能脱离好友入口；参数说明仍有旧Beta/Android字样，代码没有据此硬编码排除iOS。单页场景禁用的API不调用。
+
+这些版本条件是官方文档范围，不是已实测所有手机或账号能力；产品docs/sharing.md说明单页差异和最少验证入口。
+
+### 开发检查、保护和平台待补项
+
+| 范围 | 本轮实际结果 |
+|---|---|
+| 新页面/集成专项 | **13/13**，test/sharing.test.js；真实页面定义接入固定元数据/PNG打包、回调纯度、缺失/同步及异步失败/迟到API、单页场景、普通接收方自身菜单、分享准备/取消/前后台/未保存编辑及迟到抽取。wx为回调级替身；不是手机分享或真实单页模式。 |
+| Windows、Node v24.22.1工作树全套 | `node --test --test-reporter=tap test/*.test.js test/independent/*.test.js`，**622/622**，失败/取消/跳过/todo均0；working.tap。 |
+| 同固定候选git archive干净导出 | 无.git/私有配置，同命令 **622/622**，四类非通过计数均0；clean-export.tap，archive及24份运行文件SHA在candidate-manifest.json。 |
+| 静态分享图 | 两份实际查看，几何绘图与原配色一致，不含菜单名称/结果/个人信息。实际生成器随产品本轮证据保存，未新增图片网络服务。 |
+| 原独立/历史证据 | 接手 **310份** 原始字节不变，含旧独立断言和原失败/通过资产；protected-before.json可逐项复核。 |
+| 配置保护 | 公共原始SHA始终 `eecc59987ea459258c2bf0329b69d98e73e790dfa6110d60f28ed3645456e645`，私有始终 `df846e395e410139062950e08f81795908fc694a5755b96e0970551f11aee63d`；公共过滤blob与索引始终 `c2c297e3db63062e72a6ef0476e02a611914dbba`。原已协调CRLF导致的M仍携带，未格式化、暂存或提交配置，不能把产品树称为完全干净。 |
+
+**真实分享菜单、卡片预览、取消路径及真实wx行为本轮未验证通过。** 本机Stable 2.02.2608080隔离工程从Page注册前即注入新前缀，正式AppID/其余配置来自Git候选，仅临时工程名/注册注入不同，不复制私有配置。官方auto两次在Fetching AppID permissions阶段ECONNRESET/TLS建连失败，虽CLI退出0，原文明确失败。通过已安装工具和官方open打开隔离工程后，唯一标题窗口显示“模拟器启动失败 / Error: simulator launch failed”，不是首页或分享菜单；在已打开工程启用auto仍同错。未改分享代码的v1.2.0隔离对照auto也在同一AppID/TLS阶段失败，证明该自动化启动故障并非分享代码特有；UI模拟器失败的具体原因未进一步诊断，不冒称产品通过或新增业务缺陷。
+
+原失败CLI、open/close及对照日志脱敏保留；native.json标为setup_unavailable，ui-observation.json记录实际观察层级。只关闭本隔离工程，窗口清单已确认该标题消失、对照工程未打开。没有自动化运行时，未通过API枚举/清理测试key，也未核实本测试前缀剩余数；可能的页面执行已从注册前隔离，前缀留待环境恢复后核对，没有清空任何用户缓存或菜单。配置目标基础库3.17.4不写成已实际查询到的运行版本。
+
+### T-042接收与停止
+
+本次按实现、开发自测、官方核验及可执行平台尝试交付，T-041研发完成；真实平台待补项明确留存，不等于分享已独立通过或正式手机可用。tester由project-manager核对精确候选/本成员停止后串行接收，读取D-027/T-041、docs/sharing.md、本轮证据README和既有菜单契约，独立设计参数/旧API/生命周期及回归。先核对代码fb27d41与资产cc9c191的完整SHA及差异仅本目录，再跑新专项和全套；工具启动恢复后须补真实菜单/静态卡片/取消与数据留存，使用新的独立前缀，任何实际发送/发布前停止。
+
+本轮未做好友/群外发、朋友圈发布、真实iOS/Android收卡/单页模式或账号权限验收。两仓库只提交本人范围后停止，不联系/唤醒tester或其他成员，不代写T-042/A-014，不改STATUS/PROJECT/索引顶部摘要/WORKSPACE、旧专业正文或.tmp/，不合入/推送/打tag/GitHub Release/微信上传提审发布。原独立T-035及旧BUG事实由原报告对应版本保留，不由本次分享交接改写。
+
+## 11. v0.8：T-041分享图解析兼容修复（2026-11-06）
+
+### 实际接收与固定版本
+
+本轮2026-11-05接收、2026-11-06完成（Asia/Shanghai），依据T-041下项目经理的明确重开安排，发送方及其他成员已停止。OPC接手22c61fe62e1c899f994fd2bf7d3f39340ab75c62，产品接手939d55f07322afebe889943dbae9445dd9c1439d，仍使用原配对t-040-share。本人TEAM登记、配置/角色/scope及三项有效技能完整刷新；根规则、原需求/架构经Git比较未变，补读A-014 v0.10第14节、tester续测README/OBS/截图、原分享说明及相关契约。未重新授权、改登录/安全设置或安装SDK。
+
+代码/开发回归/说明固定为 **a647d1f04acc7d8022699baa0a5c54af1856c4ee**，父为939d55f；完整证据 **e280b9559d119c6e66cfdc01b42e4d9d4929c522**，后者仅追加产品`test/evidence/developer-t041-image-20261105/`的88份文件。两条提交信息为含T-041的单行。本文及TASKS保留第10节原fb27d41/cc9c191开发结论，不移动标签或把新候选冒充主线采用版本。
+
+### 图片解析链与最小修复
+
+新隔离工程中实际鼠标打开原好友预览，标题正确而图破。只把`/assets/share-home.png`换为页面相对`../../assets/share-home.png`、实际getImageInfo返回的`assets/share-home.png`，均仍破；三次PNG原字节不变。原两图PNG结构/CRC有效，getImageInfo成功不当预览通过。随后将**同一PNG原样复制为本地用户文件**，好友和朋友圈预览均显示；真实FS逐字节比较18,987/18,143字节一致。证据为原始/relative/canonical截图、image-paths、local-bytes与local-file两预览，旧TLS失败不作为本次图片归因。
+
+因果边界是本机环境的包内`imageUrl`到分享预览的资源解析兼容：本地文件形式能显示同一图片，不能据此泛称全部手机路径错误或已证明工具内部通用缺陷。未重编码图片、去掉图片、替换成当前页面截图或引入网络托管。
+
+产品只改页面接入、新增`ui/share-images.js`与5项开发测试并补分享说明。`onLoad`准备两个固定命名的本地静态图，回调只返回已准备路径；图片仍来自包内中性图，不携带候选、选择、结果或用户参数。文件API缺失/抛错、缓存不可写/容量不足时按图回退包内路径，不阻塞菜单启动，也不承诺该失败环境图片已显示；1154不请求文件写入。每次新页重建固定两文件，不逐次分享累积缓存。实际工具`http://usr`是微信本地文件映射，不是外部图片服务。
+
+### 固定候选实际验证
+
+| 范围 | 本轮结果与边界 |
+|---|---|
+| 开发完整套件 | Node v24.22.1，工作树与固定a647d1f的无.git/私有配置干净导出各**652/652**；fail/cancel/skip/todo均0。新增5项已包含，旧647、原13项及多次执行不叠加。原独立断言未改，本次执行者为developer。 |
+| 新测试重点 | 返回本地文件与原图逐字节一致、回调无额外IO/私有菜单；缺失文件能力/抛错/容量失败时启动及按图回退；新页固定两文件恢复；1154文件请求数0。替身故障不冒称真实物理满配额。 |
+| 实际环境 | 已安装wechatide 0.3.11、工具2.02.2608080、实际库3.17.4，模拟器390×753/DPR3。状态equal、登录有效、CLI无需token。新导出只注入页面注册前独立WxStorage前缀与临时projectname，不复制私有配置；固定helper/页面业务正文无诊断替换。 |
+| 真正好友/朋友圈预览 | 固定候选实际鼠标打开两预览，标题与中性转盘图均正常；`fixed-friend.png`、`fixed-timeline.png`由官方simulator_screenshot保存并实际查看。只取消/X，未发送、发布或进入朋友圈单页链接。 |
+| 两取消保护 | 真实handler准备9项已保存菜单、10项dirty副本。两取消后候选含ID/顺序、菜单身份、基线、dirty、phase/result/storage状态及持久字节均保持。既有onHide使generation由4变5以失效抽取；该计数器未冒称不变。 |
+| 真正关闭重开 | 旧窗口4524796消失后新窗口4459596、新页面恢复同一menuId的9项保存内容、dirty=false、存储字节一致，无旧fixture属性；未保存第10项不留存。新窗口好友图仍显示，取消后数据保持，`fixed-reopened-friend.png`及原生快照可核对。 |
+
+`verification.json`验证上述快照、运行时字节/两处临时注入和文件保护；`manifest.json`固定87份证据文件哈希（本清单本身另计，目录共88）。原始失败均保留：首次运行时查询超时由一次currentPage重试恢复；桌面输入曾被ChatGPT遮挡，用户把唯一隔离窗口置前台后才继续。新包装器help参数错误、跨仓库Git读取信任范围错误分别保留并按真实接口/各自cwd解决，未改全局trust。初版新离线核对器将generation与业务态一并判相等而失败，保留`verify-first.py`/失败说明；修正为业务各字段全等并单独断言真实generation递增，未改产品或原测试造绿。这些不是新增产品缺陷或独立通过。
+
+### 保护、精确清理与后续
+
+接手475份受控文件中，仅预期页面和分享说明改变，另新增helper与开发测试；所有原独立断言、失败/通过证据、源PNG及其他实现保持。公共配置SHA-256 `27a614c100e150979107c9f648b67f757d81b586883c9eb89a46f2670c143bbf`、私有`d5db685f26b2319769eb494e7dc43ff31bcb5a9f0ae0aa626ac22892e944299a`均保持，不回写旧环境指纹。
+
+本轮control精确域`eating-everyday:developer-t041-image:10c00a036ae443788d4ba25ab9111764:`为4→0；fixed域`eating-everyday:developer-t041-fixed:3758b1dc538b4512a605030b9c2f6180:`为6→0，baseline为0，非测试key删除数均0。两份唯一对照文件已清；fixed加载前两固定缓存文件明确不存在，本轮新建后与源图全字节一致才清除，并核实文件不存在。没有读取/清除用户菜单值，旧C盘不可访问域余数仍未知。本次隔离工程最终关闭、标题已从新窗口清单消失；忽略目录中的复现工程保留。
+
+**T-041本次研发completed，A-013仍draft；T-042/OBS-T042-001不由developer关闭。** project-manager核对固定代码a647d1f、证据e280b95及停止回执后，再串行通知tester独立复测两图、取消、真正重开和文件能力失败边界。未执行实体iOS/Android收卡、实际外发/朋友圈发布、真实单页/前往小程序跳转、物理故障或发布验收。原长期分支差异按T-040保留，无合入、推送、改tag/WORKSPACE或删除分支；本成员仅本地提交T-041/A-013/本人索引行后停止，不联系或启动其他会话。
