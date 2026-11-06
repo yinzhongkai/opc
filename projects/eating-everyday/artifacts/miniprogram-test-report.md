@@ -3,11 +3,11 @@
 - 项目：eating-everyday（今天吃什么）
 - 成果 ID：A-014
 - 负责人：tester（测试工程师，兼职）
-- 关联任务：当前[T-035](../TASKS.md#t-035独立验证启动恢复和本机菜单保护)；T-013/T-015/T-023及其独立结论保留原版本历史，不代写 developer 结果。
-- 版本：0.8
-- 更新日期：2026-11-03（Asia/Shanghai）
+- 关联任务：当前[T-042](../TASKS.md#t-042独立验证首页分享及既有菜单行为)；T-013/T-015/T-023/T-035及旧BUG结论保留原版本历史，不代写developer结果。
+- 版本：0.11
+- 更新日期：2026-11-06（Asia/Shanghai）
 - 状态：draft
-- 适用范围：当前为T-035修复后独立复测及剩余启动恢复验证。BUG-T035-001在固定5085636上closed，T-035 completed，声明范围内建议合入；第1～11节保留原专业历史及首轮失败，不扩为实体手机或正式发布验收，成果仍draft。
+- 适用范围：T-042固定a647d1f分享图片修复独立复测已完成，OBS-T042-001在声明环境关闭，范围内建议合入；第15节为当前结果。第1～14节及旧BUG/失败保持原时点，旧C盘域历史余数仍未知；本轮未新增实体机、真实单页、外发或发布验收，成果仍draft。
 - v0.1授权及输入：用户既定串行授权、项目经理本轮通知；[A-001 v0.9](product-requirements.md)、[A-006 v0.4](system-architecture.md)、[A-010 v0.1](core-test-plan.md)、[A-012 v0.3](core-test-report.md)、[A-013 v0.1](miniprogram-preview-handoff.md)及现行决定。接收时刷新 tester 身份、scope、角色、testing/微信小程序测试正文；未变规则及历史按 Git 范围核对复用。
 - v0.1 OPC接手版本：7d497ef99bd9a26566982ebb86c8af13ce6f84f7，feature/eating-everyday/t-002-readiness-review；目标 project/eating-everyday 的本轮合入前基线 a735031c37c09e75fb9478681aaf42010a82f378。
 - v0.1被测实现：本机产品 git@github.com:yinzhongkai/eating-everyday.git，checkout=`C:/Users/YinZh/Documents/workspace/eating-everyday`，feature/t-002-readiness-review，**f7ceaf791dd06e8749fa1754b6a0143d1193fb63**；测试期间未改生产。
@@ -17,7 +17,7 @@
 - 主线交付：未合入或推送。产品 main/已有 origin/main/WORKSPACE.revision 仍为 8fa87fe4cb8f7f33aacf2842798a486150a6105e。
 - 批准依据：无整份成果批准；测试成功子项不代表完整预览闭环、真机验收或正式发布。
 - v0.3接手与当前资产：OPC输入cb1107213c148e5ee006f5c5697e31eedbf87b90；原同后缀feature和目标基线未变。固定实现仍为8e4472006f1d3cdff5b774052e01ce8db5a96453，新测试资产**10f52d40bb8a62b04a8f84793e44117fe3c28e46**（父为d212b59），仅新增test/evidence/tester-t013-special22/49份文件。用户授权保留的既有project.config.json差异未提交且本轮字节未变，其他受控文件未变。
-- 版本记录：0.1首轮发现BUG-T013-001并停止；0.2独立复测关闭001及预览交接；0.3补齐专项并纳入用户手机确认、清理隔离数据后完成T-013。原T-011 completed及其001/002 closed历史不变；0.4追加T-015两配置独立完整回归及可合入结论；0.5保留T-023桌面结果及用户暂停检查点；0.6按用户恢复授权完成真实按钮/平台差异及隔离清理，T-023 completed、建议合入，原结果不改写；0.7追加T-035独立复现BUG-T035-001，任务blocked、等待修复复测；0.8独立复测关闭001并完成T-035剩余桌面/隔离平台验证，声明范围内可合入。
+- 版本记录：0.1首轮发现BUG-T013-001并停止；0.2独立复测关闭001及预览交接；0.3补齐专项并纳入用户手机确认、清理隔离数据后完成T-013。原T-011 completed及其001/002 closed历史不变；0.4追加T-015两配置独立完整回归及可合入结论；0.5保留T-023桌面结果及用户暂停检查点；0.6按用户恢复授权完成真实按钮/平台差异及隔离清理，T-023 completed、建议合入，原结果不改写；0.7追加T-035独立复现BUG-T035-001，任务blocked、等待修复复测；0.8独立复测关闭001并完成T-035剩余桌面/隔离平台验证，声明范围内可合入；0.9新增T-042首页分享独立检查及真实预览观察，代码回归通过，平台图片/重开/清理未决，任务blocked。0.10按用户恢复指令续测，授权实际解除，D盘域取消/新运行时留存/6键清理通过，破图复现待研发归因，历史域余数不冒称清零。
 
 **v0.1历史结论：f7ceaf上001 open、T-013 blocked；原285项通过与新增1项失败分别保留。** 第1～5节保持当时正文，不把旧失败改记为通过。
 
@@ -31,7 +31,13 @@
 
 **v0.7历史结论：T-035 blocked，暂不可合入。** 固定代码e3ce8cfecde344d3bd7c4c003ee427696fd9a877独立复现BUG-T035-001（P2/open）：B记忆写失败后，C加载时选择读失败；恢复IO后重试仍被旧B意图遮蔽，页面静默清警示但持久记忆仍A，新页面恢复A。控制器首轮2通过/1失败，实际页面handler确认0通过/1失败，是同一缺陷的两层证据。按发现缺陷后停止约定，未执行全套/干净导出/真实wx或UI。313份原文件和两配置字节不变；新产品测试证据48469cfa7594b127b0af549b9ecafe0698b47cc9。详见第11节，等待项目经理安排修复后复测。
 
-**当前v0.8：T-035 completed，BUG-T035-001（P2）独立复测closed，声明范围内可合入。** 固定修复5085636ba8955b08fcf39c24cf84b0329ef89c6d，未改原四项4/4、新增独立31/31，工作树/干净导出全套各609/609。真实微信隔离域完成鼠标补记/抽取、旧v1升级/空库、菜单保存切换/改名删除/后台编辑与异常提示，以及工程窗口关闭重开恢复B；20条行为断言及1条清理记录、0运行异常。343原文件及两配置字节保持，累计仅清本前缀50 key、最终剩余0，隔离工程已关闭。本人新测试证据912d77154d1c3958680a6f01400d9218c688eafd，详见第12节；未合入/推送或新增实体手机、物理故障和发布结论。
+**v0.8历史结论：T-035 completed，BUG-T035-001（P2）独立复测closed，声明范围内可合入。** 固定修复5085636ba8955b08fcf39c24cf84b0329ef89c6d，未改原四项4/4、新增独立31/31，工作树/干净导出全套各609/609。真实微信隔离域完成鼠标补记/抽取、旧v1升级/空库、菜单保存切换/改名删除/后台编辑与异常提示，以及工程窗口关闭重开恢复B；20条行为断言及1条清理记录、0运行异常。343原文件及两配置字节保持，累计仅清本前缀50 key、最终剩余0，隔离工程已关闭。本人新测试证据912d77154d1c3958680a6f01400d9218c688eafd，详见第12节；未合入/推送或新增实体手机、物理故障和发布结论。
+
+**v0.9历史检查点：T-042 blocked，平台部分通过，尚无整体分享通过或合入建议。** 固定代码fb27d41c598a52425f3401c1cbd17b4ecc2129fd，独立新25/25、工作树及干净导出各647/647。真实工具两种分享入口均可打开、标题正确、取消后编辑/菜单字节保持，普通新页面恢复接收方自身保存内容；但好友和朋友圈静态图预览均破图（OBS-T042-001，原因未定），重开后模拟器启动失败及SDK超时（OBS-T042-002），最终测试域清理未执行/余数未核实。本人测试证据23a96085acc5d43dca585ca20ba032c94a51a200；396原文件与当前两配置字节保持，隔离工程已关闭，未外发。详见第13节。
+
+**v0.10历史检查点：T-042仍blocked，图片问题已在本克隆复现；其余本次可访问域剩余验证已补齐。** 用户完成Codex授权后，原pending任务实际success，工具版本匹配且登录有效；两分享预览破图但取消保持保存/编辑，真正关闭重开恢复同一份9项保存菜单且持久字节一致。本次新前缀6→0、非测试删除0，两历史前缀在当前D盘域为0；旧C盘域仍未知。续测资产939d55f07322afebe889943dbae9445dd9c1439d，详见第14节。
+
+**当前v0.11：T-042 completed，固定图片修复在声明独立范围通过，OBS-T042-001关闭，建议范围内合入。** 新独立19/19、工作树及干净导出各671/671；真实鼠标四次预览图片/标题、取消保护及真正关闭重开9项保存留存通过。新域6→0、非测试删除0；两缓存首次可核验即已存在且原字节相同，删除0/保留2。565原文件及两配置保持。独立资产fdf64604db125569efd8e131f46c29922fa9a5d8，详见第15节；不覆盖旧失败或扩大为全设备/正式发布批准。
 
 ## 1. 授权、环境和证据层次
 
@@ -543,3 +549,163 @@ before/after-mouse-retry、mouse-draw-result、guard-warning、project-reopened-
 本轮重置夹具及最终收尾累计仅删除本唯一前缀**50 key**，最后一次19、最终剩余**0**、非测试域删除**0**。最终先onUnload再清前缀，随后关闭隔离工程，computer-use列表核对标题已不存在；没有读取或清除用户菜单值。保留产品.local临时导出及OPC原.tmp/，不清理其他资产。
 
 **T-035 completed；本轮声明范围内建议合入固定修复5085636及独立资产912d771。** 测试接收/实现/原失败与新证据的精确链已保存，343原文件、两配置及主线基线保持。本成员仅更新T-035、本报告当前元信息/第12节和A-014索引行，结构/链接/空白及范围核对通过后本地单行提交并停止；原第1～11节及他人任务/成果不改。不发消息或唤醒成员、不改STATUS/PROJECT/TEAM/WORKSPACE、不合入/推送/移tag/删开发分支/创建Release或微信上传发布。由project-manager核对独立回执及最终版本后处理原T-036，tester不代写整合完成。
+
+## 13. v0.9 首页分享独立验证与平台阻塞（T-042，2026-11-05）
+
+### 13.1 实际接收、版本与保护
+
+按project-manager依人类用户已有分享/串行成员通知授权发送的交接接续，发送方及developer已停止。完整刷新TEAM自身登记、members/tester.yaml、tester角色/scope、testing及wechat-miniprogram-testing；根公共协议及原四份需求/技术正文经Git内容比较未变，复用已完整读正文。实际读取当前项目/任务/索引、D-027、T-040～T-042、A-013 v0.7第10节、产品docs/sharing.md、开发证据README/run/native。原A-014/BUG结论按版本保留，原609或开发622不替代本轮独立结果。
+
+| 定位 | 本轮实际版本/边界 |
+|---|---|
+| OPC接手/分支 | f825b1fd6ef741a079eabd986946f007bf88f9e4；feature/eating-everyday/t-040-share；目标project/eating-everyday仍1970f68a906e0e7148553ec833c6728cbd94b17a，原.tmp/保留。 |
+| 产品固定受测 | 本机C:/Users/YinZh/Documents/workspace/eating-everyday，origin与WORKSPACE一致；feature/t-040-share。代码fb27d41c598a52425f3401c1cbd17b4ecc2129fd，接手资产cc9c1912996035ddfa3a2b39e7f1cd062312e7f6，实际比较仅增加developer-t041-share证据目录。 |
+| 本人测试资产 | **23a96085acc5d43dca585ca20ba032c94a51a200**；仅新增test/independent/homepage-sharing.acceptance.test.js及test/evidence/tester-t042-share/，30份文件，包括原始TAP、原生SDK/鼠标观察、两种破图截图、资源探针与失败记录。 |
+| 当前配置 | 公共原始SHA-256 **eecc59987ea459258c2bf0329b69d98e73e790dfa6110d60f28ed3645456e645**；私有当前 **a5312f8c43cbae297edf96440cd70ce5fd95e3c3b945a2aa016c2fafde142fc0**。公共过滤/索引blob均c2c297e3db63062e72a6ef0476e02a611914dbba；原M为已协调CRLF，normalized diff为空，未暂存或提交。私有名称现值保留，未回写研发旧df846e39。 |
+| 原文件与主线 | 接手**396份**原受控文件逐字节保持，含实现、开发证据、旧独立断言与失败/通过历史；产品main/v1.2.0/WORKSPACE仍38b1e69350ad2b4cf43c3124a3635f4a0b9c47a0。无实现/原断言修改。 |
+| 方法与环境 | Windows 11 10.0.26300、Node v24.22.1；独立StoragePort/wx替身围绕真实页面定义/handler。固定代码git archive无.git/私有配置，仅加新独立文件后跑同全套命令。candidate-manifest.json固定archive、24份运行文件及新独立源码SHA。 |
+
+protected-before.json/run.json/manifest.json记录版本、执行/未执行和全部证据原始哈希，提交后核对Git blob相同。代码回归、真实wx、可见鼠标、模拟器和实体手机分层；不会把元数据回调调用说成好友已收卡。
+
+### 13.2 独立代码、参数和完整回归
+
+| 实际调用 | 结果与证据 |
+|---|---|
+| node --test --test-reporter=tap test/independent/homepage-sharing.acceptance.test.js | **25/25**，退出0；independent.tap。 |
+| 当前工作配置，全套node --test --test-reporter=tap test/*.test.js test/independent/*.test.js | **647/647**，退出0；working-all.tap。 |
+| 固定代码干净导出＋新独立文件，同全套命令 | **647/647**，退出0；clean-export-all.tap。 |
+
+三次最终运行失败/取消/跳过/todo均0；完整647已含独立25，不重复累加不同调用。专项/全套首次均通过，开发13/13、622/622仅为输入。
+
+新25项独立检查覆盖：好友固定标题/完整首页path、朋友圈空query/无自定义path，忽略发送方样式的menuId/候选/结果等参数；初始化前/默认/已保存/dirty/抽中结果/保存弹层/菜单列表中分享回调不触发IO或修改完整状态；返回对象隔离；两份已打包PNG的5:4/1:1尺寸及资源存在；无API、同步抛错、异步失败及有界好友回退；隐藏/卸载后的迟到失败不回写；launch API缺失/异常；启动pending、菜单读取失败及重试；接收方自身保存身份、取消模型/前后台与未保存编辑、迟到抽取不复活。原菜单/默认菜单/启动恢复/保存/字符/随机/存储全套已执行。scene1154及iOS/Android标签均为wx替身条件，不是真实客户端或实际朋友圈单页模式。
+
+两份源PNG已独立查看，几何转盘不含本机菜单/结果。独立只读HTTPS取得[Page](https://developers.weixin.qq.com/miniprogram/dev/reference/api/Page.html)、[showShareMenu](https://developers.weixin.qq.com/miniprogram/dev/api/share/wx.showShareMenu.html)、[朋友圈专页](https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/share-timeline.html)官方正文，均HTTP 200；web读取器及初次沙箱DNS失败记录保持，授权直接读取成功。实际正文核对完整首页路径、朋友圈显式参数和1:1图、两分享菜单关系、单页模式独立存储及禁用接口；来源/正文指纹与检查词见official-review及fetch记录，原文仅留产品忽略目录。文档支持范围不冒称手机实测。
+
+### 13.3 已恢复的真实平台范围与两个未决观察
+
+本轮首次官方auto确实成功进入运行时，开发时TLS失败未在该次复现。实际查询基础库**3.17.4**、DevTools Stable **2.02.2608080**、SDK **0.13.0**、模拟器390×753/DPR3；iPhone/iOS字段仅为模拟器。新的隔离工程在Page注册、任何onLoad前即注入独立WxStorage前缀；临时配置只改projectname，未复制私有配置，其他源码/公共配置已比较。未修改分享的baseline工程只准备，**本轮未启动**，不虚报新对照结果。
+
+native.json记录六条通过的实际行为：
+
+1. 真实WxStorage全新默认8项/选择及实际分享回调固定元数据。
+2. 实际保存/对话确认/新增/抽取handler建立9项已保存菜单、10项dirty副本和结果；分享标题/home/query仍固定。原生抽取为handler调用，不冒称鼠标抽取。
+3. 实际鼠标打开好友预览并取消后，当前ID、候选/基线/dirty及持久字节保持。
+4. 实际鼠标打开朋友圈预览并关闭后，同样保持保存与编辑状态。
+5. 普通页面真正重建，携带发送方样式query仍只恢复自身9项保存内容/原ID，dirty=false，不导入发送方或自动保存第10项，存储字节不变。
+6. 无结果弹层、无dirty的新页面上再次打开好友预览并取消，保存状态保持。
+
+**OBS-T042-001（open观察，未确认产品归因）**：右上角好友及朋友圈入口均为可点击态，两种实际预览标题均为“今天吃什么”，但好友预览出现破图/空白图框，朋友圈预览出现破图；等待后好友仍未显示，新普通页面重复也失败。friend-preview-observed.png、timeline-preview-observed.png已实际观察并由官方模拟器截图API保存。同期真实wx.getImageInfo读取`/assets/share-home.png`成功500×400、`/assets/share-timeline.png`成功400×400；仅用于诊断的无前导斜线路径读取失败，未将其替换到产品元数据。实际回调均返回两个正确绝对包内路径。
+
+资源存在且可读不能证明分享图在当前预览链可用，也不能据此认定为产品路径错误或工具bug。未改回调/图片路径制造通过；需要可用支持客户端/工具下进一步归因及确认。图中没有发送方私有内容不等于静态卡片图片已经通过。产品OBS-T042-001.md给出完整前置、步骤、预期/实际及恢复条件；ui-observation.json记录10次基于新观察的鼠标输入，未点发送/发布。
+
+**OBS-T042-002（open平台观察）**：实际关闭并重新打开隔离工程后，CLI auto虽再返回成功，SDK新页面查询报timeout waiting for automator response；一次有界清理恢复查询同样超时。重新按唯一标题选择的新窗口可见“模拟器启动失败 / Error: simulator launch failed”。该次新运行时留存检查未通过/未完成；与普通reLaunch已通过分别记录。native-cleanup-timeout.json保留原SDK错误，重开超时实际工具回执转录在native-reopen-tool-output.txt；原CLI日志脱敏保存。旧开发baseline只证明其当时同阶段TLS失败，不证明本次破图或重开失败的原因。
+
+初次原生准备还有一条保留的**测试夹具失败**：编辑后替换PNG尚未就绪就调用draw，产品正确拒绝，测试误预期结果已打开。native-initial-paint-wait.json及初版脚本保持；仅给新夹具增加图像ready等待后在同一夹具续做抽取，没有重复保存/编辑或修改被测实现。它与上述实际预览/重开观察分开归类。
+
+### 13.4 清理、未执行和阻塞交接
+
+最终清理命令在公共ready/运行时查询阶段即超时，**没有进入枚举/删除evaluate，清理remove调用0**。本人测试域重开前最后已知6个逻辑key，最终余数未核实；研发旧精确前缀及baseline子域也未能枚举/核实，均不得写成0。完整新前缀见本轮candidate-manifest.json/native.json；研发待核对域为`eating-everyday:developer-t041:6cc2ebafb80c4cf989e0b7d86bb51e71:`及其`baseline:`子域。没有清全库、用户菜单值或修改工具登录/权限/安全设置。
+
+最终仅关闭本隔离工程，窗口列表核实本轮candidate及未启动baseline标题均不存在；临时项目、测试前缀和OPC原.tmp/保留待平台恢复后按精确前缀收尾。未执行真实好友/群收卡、朋友圈发布、实体iOS/Android、真实单页模式及其“前往小程序”跳转；普通页面query检查不能代替跨模式存储验证。新工程进程留存及最终前缀清理仍未完成。
+
+**T-042 blocked，代码/参数/回归通过、平台部分通过；尚无完整分享通过或合入建议。** 两项观察未确定产品归因，未新建虚假confirmed产品缺陷，也不改旧BUG-T035-001 closed等历史。下一位由project-manager核对本回执、协调可用平台与必要研发归因；图片观察解除后补未完成平台/清理，再由tester记录最终结论。原候选/配置/开发证据和历史保持，不自动联系或唤醒其他成员。
+
+本人仅新增产品测试/证据并本地单行提交，OPC仅改T-042、本报告当前元信息/第13节及A-014索引行，原第1～12节和他人成果/任务保持；结构/链接/空白、范围、版本及字节保护核对后本地提交并停止。不改STATUS/PROJECT/TEAM/WORKSPACE，不合主线/推送/改tag/删开发分支/创建Release/微信上传提审发布，不实际外发或发朋友圈。
+
+## 14. v0.10 本克隆平台续测与图片复现（T-042，2026-11-05）
+
+### 14.1 接续、授权恢复与精确版本
+
+按T-040中项目经理正式接续安排及用户“继续找对应的成员完成测试任务吧／等整轮初始化刷新结束后继续测试”执行；项目经理与其他成员已停止，本人未跨会话发送消息。重新完整读取本人TEAM登记、成员配置、tester角色/scope及testing、wechat-miniprogram-testing；公共规则与初始化输入经Git差异核对，读取本轮正式安排及A-013 v0.7第10节、A-014 v0.9第13节/两观察、产品分享说明与原证据，按既有相关需求/契约章节约束执行。
+
+| 定位 | 本次实际值 |
+|---|---|
+| OPC接手 | c0f59bf84a6867fea2c6598f64ed8a93b5e1bdd1；feature/eating-everyday/t-040-share。 |
+| 产品固定候选与接手 | 代码fb27d41c598a52425f3401c1cbd17b4ecc2129fd；原开发证据cc9c1912996035ddfa3a2b39e7f1cd062312e7f6；接手23a96085acc5d43dca585ca20ba032c94a51a200，D:/eating-everyday，feature/t-040-share。 |
+| 本轮新增证据 | 939d55f07322afebe889943dbae9445dd9c1439d；仅新增test/evidence/tester-t042-share/resume-local-20261105/，49份文件；包含原授权检查点、实际恢复、原生快照/两图、失败、断言与保护清单，无产品实现/原测试改动。 |
+| 长期分支与基线 | 本机OPC project仍d4e65980、产品main仍6c9ef2b3，均按T-040协调保持；任务起点1970f68a/WORKSPACE的38b1e693为对应feature祖先。不切换/拉取/改写长期分支，不把本次证据SHA冒作main采用。 |
+| 当前保护 | 接手426份受控文件及两配置原始字节全保持；公共SHA-256为27a614c100e150979107c9f648b67f757d81b586883c9eb89a46f2670c143bbf，私有d5db685f26b2319769eb494e7dc43ff31bcb5a9f0ae0aa626ac22892e944299a。不回写旧环境eecc5998/a5312f8c。 |
+
+本克隆没有原.local SDK/工程，已核实旧C盘SDK及t042-share临时路径不存在；用户产品工程未打开。固定Git候选导出到D盘新的忽略目录，仅在Page注册前注入独立WxStorage前缀及临时projectname，不复制私有配置。实际完整文件/前缀见candidate-manifest.json。
+
+工具内置安装诊断因Program Files空格引用错误报cli_unavailable；正确引用既有接口能够执行，不据此重装或改设置。首次check_wechatide_status自动返回auth/pending；该真实检查点保留。本人成员尚未停止时，项目经理转达人类用户“已在开发者工具完成授权，继续测试”，随后查询原task实际success/authorization_success，再核实versionRelation=equal、skill0.3.11、loginExpired=false、cliTokenRequired=false。没有重发授权、收集token或代点权限；登录用户信息未纳入证据。使用已安装微信工具2.02.2608080的注册自动化接口，没有下载SDK。
+
+### 14.2 实际验证、复现与已解除项
+
+| 范围 | 实际结果与证据（均为产品续测证据目录内） |
+|---|---|
+| 环境与合成夹具 | 实际基础库3.17.4，devtools模拟iPhone 12/13 (Pro)，390×753/DPR3；不是实体机。真实页面handler保存9项菜单，加第10项未保存编辑并抽取；before-share.json记录6个本域key、dirty=true。 |
+| 好友/朋友圈静态图 | 实际鼠标打开两预览，标题正确，图均破图；官方simulator_screenshot保存friend-preview.png/timeline-preview.png并实际查看。只点取消/X，不发送/发布或进入分享页。OBS-T042-001仍open。 |
+| 取消保护 | after-friend.json/after-timeline.json逐项核对身份、候选顺序、保存基线、dirty及持久字节不变。生命周期关闭结果弹层不当作菜单数据丢失。 |
+| 真正关闭重开 | 原隔离窗口消失后，新窗口8849236实际打开；查询恢复后reopened-snapshot.json确认同一menuId、原9项保存顺序、dirty=false、保存字节全同，无旧测试harness属性，第10项未保存内容不留存。满足本次新运行时留存要求。 |
+| 有界干净页对照 | 真正重开后无dirty/结果弹层，好友预览仍破图；取消后保存身份/基线/内容/字节保持，after-clean-friend.json。未更改候选代码或启动新修改对照。 |
+| 资源与元数据诊断 | 实际getImageInfo两绝对包内路径成功500×400/400×400；源PNG实际查看正常，原文件哈希相同，回调仍固定首页/空query和原图片。资源可读不等于预览显示通过，也不足确认产品或工具归因。 |
+
+首次异步evaluate快照超时及首次重开后快照超时均保留；最小currentPage查询及同步探针成功后，分离“启动原生异步步骤”和“后续读取结果”，同步快照/清理实际完成。当前窗口未出现原历史“模拟器启动失败”。OBS-T042-002造成的本次D盘运行时阻塞已解除，原C盘失败及其原因保持历史，不泛称根因修复。初版新离线结果核对器把候选对象列表与名称字符串基线直接比较，类型断言失败；原脚本/失败记录保留，修正为名称顺序比较并继续核对menuId、revision、原始存储字节和dirty，没有改产品或原断言。
+
+check_results.py已核实6项记录检查（两取消、新窗口留存、干净页取消、资源诊断、清理）；这是本次原生/证据验证，不与旧独立25/25及两配置647/647叠加，未重复运行未变套件。精确环境、输入、原始返回、实际鼠标9次及未执行项见results.json/ui-observation.json；元数据调用不冒称好友收卡或真实单页模式。
+
+### 14.3 清理范围、限制与下一位行动人
+
+新精确前缀eating-everyday:tester-t042-resume:5f82465cd39a4dc390ad27ce9a9fe3af:在本次D盘临时工程普通运行域为6→0，其baseline为0→0。旧tester-t042:7ca473dfd4384e3cb93c9e20d9aad7c6:及developer-t041:6cc2ebafb80c4cf989e0b7d86bb51e71:（均含eating-everyday:开头）及各baseline子域在此可访问域均0→0。只删除6个本次匹配key，非测试删除0、非测试key名集合不变、未读用户菜单值；exact-prefix-cleanup.json保存完整前后数量。旧C盘临时工程不可访问，其原运行域余数仍未知，不用本次0冒充其历史清理完成。
+
+最终官方接口仅关闭本次隔离工程，新窗口清单确认精确标题不存在；临时文件保留。未做实体iOS/Android收卡、好友/群外发、朋友圈发布、真实单页模式/“前往小程序”跳转，也未改用户登录/安全设置。原426文件、两配置和全部旧失败/通过资产保持；本轮产品只新增证据，OPC仅更新本人T-042、本报告当前元信息/第14节及A-014索引行。
+
+**T-042仍blocked，无整体分享通过或合入建议。** 当前实际需他人行动的是OBS-T042-001预览图片归因：由project-manager核对本回执后串行安排developer检查分享图打包/路径与工具预览解析链，提供固定修复候选或可核实的支持运行环境证据，再交tester复测。必要实体机输入由用户另行配合且停在外发前；不以历史TLS对照或资源读取成功替代渲染证据。旧C盘域清理仅在明确可访问时按原精确前缀处理。保存、结构/链接/范围/保护检查和本地单行提交后停止，不自行联系/启动其他成员、不合入/推送/tag/改WORKSPACE或删开发分支。
+
+## 15. v0.11 固定分享图片修复独立复测（T-042，2026-11-06）
+
+### 15.1 接收、职责与固定版本
+
+依据T-040“2026-11-06 项目经理安排固定图片修复候选独立复测”和用户继续由对应成员完成测试的授权执行。其他成员已停止；本轮中断后按同一tester身份刷新TEAM登记、实际配置、active角色、scope及testing/微信小程序测试全文，根公共规则经Git内容比较未变，读取本轮安排、A-013 v0.8第11节、新开发说明/证据、A-014 v0.10第14节和相关有效契约。未创建或联系其他会话，不代写研发或项目经理结论。
+
+| 定位 | 本轮实际值 |
+|---|---|
+| OPC接收及分支 | 3a35191a89284a5f534695b2cc0cd01979261a65，feature/eating-everyday/t-040-share；研发治理f7c82751775d900f84120398aea836840e1ad349。 |
+| 产品候选 | 本机D:/eating-everyday，git@github.com:yinzhongkai/eating-everyday.git，feature/t-040-share；固定实现a647d1f04acc7d8022699baa0a5c54af1856c4ee，父939d55f；接手e280b9559d119c6e66cfdc01b42e4d9d4929c522相对固定实现仅追加88份研发证据。 |
+| 独立交付 | fdf64604db125569efd8e131f46c29922fa9a5d8；只新增test/independent/share-image-cache.acceptance.test.js及test/evidence/tester-t042-share/retest-images-20261106/，共61文件。证据目录60文件；manifest.json固定其余59文件及独立源码的字节数/SHA-256。 |
+| 分支与基线 | 长期OPC project仍d4e65980、产品main仍6c9ef2b3，差异按T-040协调保持。任务1970f68a和WORKSPACE锁定38b1e693分别是对应feature祖先；未将独立资产当作main采用，不切换/拉取或改写长期分支。 |
+
+新隔离工程从固定a647d1f导出到产品忽略目录.local/tester-t042-image-retest-20261106/。candidate-manifest.json固定导出/运行文件及注册注入全文；运行时只改临时projectname及Page注册包装器，预先注入独立WxStorage、核对固定缓存原有状态，再运行原onLoad。未复制私有配置，固定helper/页面业务/PNG没有诊断替换。遇原有缓存与中性PNG不同时包装器会在原onLoad前中止，避免覆盖未知原文件。
+
+### 15.2 独立检查与原始结果
+
+| 实际命令和形态 | 实际结果 | 本轮证据文件 |
+|---|---|---|
+| node --test --test-reporter=tap test/independent/share-image-cache.acceptance.test.js | 19/19，exit0 | independent.tap、independent-run.json |
+| node --test --test-reporter=tap test/*.test.js test/independent/*.test.js；接手工作配置＋本轮新独立文件 | 671/671，exit0 | working-all.tap、working-all-run.json |
+| 同一完整命令；固定a647d1f的git archive，无.git/私有配置，仅追加同一新独立文件 | 671/671，exit0 | clean-export-all.tap、clean-export-all-run.json |
+
+Windows / Node v24.22.1，最终fail/cancel/skip/todo全部0；19已含在671，不与旧25/647、研发652及多次执行相加。独立页面级测试以自行编写StoragePort/文件替身围绕真实page/repository验证：原中性PNG字节和固定两文件名、固定标题/首页/空query及恶意输入隔离、加载前/dirty时回调纯度、正常hide/show及分享无额外文件/菜单IO、文件能力缺失/抛错/复制EIO/容量或单图失败的按图回退和菜单启动、新页修复同两文件无累积、失败刷新不误用旧本地文件、1154不请求文件能力，以及图片准备成功不掩盖真实菜单读取失败。故障注入验证处理路径，不冒称物理满配额或真实单页运行。
+
+新测试首版18/19失败已保留independent-first.*、源码和independent-harness-correction.json：首版把再次显式onLoad误当同页后台返回，现改为分享/hide/show无额外IO，另保留新页重建同名文件的契约测试。本轮离线新检查器也曾误把临时抽取result列入必须不变的业务字段，native-first-comparison.json保留失败；最终逐项核对要求的业务字段，并单独断言generation/result失效。未修改产品、研发断言、旧独立断言或旧失败记录。
+
+### 15.3 真实工具、四次预览与新运行时留存
+
+实际check_wechatide_status为versionRelation=equal、skill0.3.11、loginExpired=false、cliTokenRequired=false；使用既有已授权注册CLI，无新SDK/登录/权限或安全设置变更。工具Stable2.02.2608080，实际基础库3.17.4，devtools模拟iPhone12/13(Pro)、390×753/DPR3；API内iOS/微信字段不当实体机证据。environment.json、各原始CLI返回及ui-observation.json保存环境/操作。
+
+| 场景、输入与预期 | 实际结果及可复核证据 |
+|---|---|
+| 9项已保存菜单＋第10项dirty编辑＋临时抽取结果；图片应只含中性静态图 | 真实页面handler建立合成菜单；before-share.json包含完整工作态、6个本域key和原始保存字节，未读用户菜单值。 |
+| 实际鼠标打开好友/朋友圈预览，标题及图片应正常；取消不改变菜单/编辑/保存 | friend.png、timeline.png官方截图已实际查看，均为“今天吃什么”及中性问号转盘，无私有内容。仅取消/X，未Send/发布。after-friend/after-timeline逐项保存候选ID/顺序、菜单身份、基线/revision、dirty、phase/storageStatus和持久字节。既有onHide使generation5→6并清理临时抽取result，另行记录为正常失效。 |
+| 真正关闭工程并重开新运行时，应恢复同一份9项已保存内容 | 旧窗口2165914关闭且新清单确认消失；新窗口2690228并非reLaunch。reopened.json确认同一menuId、9项及顺序、基线/revision/保存字节相同，dirty=false、旧夹具属性不存在；第10项未保存内容按契约不恢复。 |
+| 新运行时再实际打开两预览并取消，图像与数据仍应可用 | reopened-friend.png、reopened-timeline.png均已实际查看，固定标题/中性图正常。两取消后工作态业务字段/持久字节与reopened相同；generation1→2为正常失效。 |
+| 源图与缓存必须原字节相同；回调不携带私有菜单 | 各原生快照逐字节对比home18,987、timeline18,143字节全同；本地wx.env.USER_DATA_PATH实际映射http://usr，两固定文件名、首页/空query不携带候选/选择/结果。http://usr不是外部托管。 |
+
+verify.py核实五项原生记录检查（两取消、真正重开、重开后两取消）及上述文件/元数据/保护/计数，不与Node计数叠加。初始和重开后首次RPC查询超时均保留，各经一次currentPage重试恢复；另一次自动审批检查超时发生在进程创建前，按工具明确许可重试一次即成功，permission-review-timeout.json记录。后续实际渲染/重开通过不删除先前失败，亦不把工具超时当产品缺陷。收尾未重复执行已通过且无代码变化的套件/UI。
+
+### 15.4 精确清理与原文件保护
+
+新精确前缀eating-everyday:tester-t042-images:c9da2c7ce1bb41fbada62328c1984c4d:在本次D盘普通运行域6→0，baseline余数0，非测试key删除0、未读用户菜单值。加载前首次可核验两固定缓存均已存在，且逐字节等于源图，来源不推断；故删除文件0、保留2，并复核仍存在且原字节相同。cache-provenance.json、cleanup.json记录前后事实；新工程不自动等于新文件。旧C盘域未访问，其历史余数仍未知，不冒写0或历史全清。
+
+protected-before.json/verification.json核实接手565份受控文件原字节均保持；公共配置SHA-256为27a614c100e150979107c9f648b67f757d81b586883c9eb89a46f2670c143bbf，私有为d5db685f26b2319769eb494e7dc43ff31bcb5a9f0ae0aa626ac22892e944299a，不回写旧指纹。最终仅关闭精确隔离工程，官方结果及新窗口清单确认标题消失；忽略临时工程保留。产品提交只含上述61项新增，OPC只更新本人T-042、本报告元信息/第15节及A-014索引行，第1～14节、其他成员记录和源PNG保持。
+
+### 15.5 观察复核、合入建议与未覆盖项
+
+**OBS-T042-001：针对a647d1f和声明环境独立关闭。** 真正重开前后共四次真实预览均显示固定中性图/标题，源图与本地缓存字节一致、取消和留存保护通过，所安排的兼容/失败边界也已独立验证。旧fb27d41破图仍是其版本实际结果，不倒写通过；本地文件形式可显示同一PNG，不证明所有手机包内路径均错误或工具内部通用根因。
+
+**OBS-T042-002：当前运行时与工程重开阻塞解除。** 本轮新窗口和同一保存菜单字节已核实；旧C盘模拟器故障根因与不可访问域余数仍保留未知，不冒称已全域清理或根因修复。无新确认产品缺陷。
+
+此前本tester会话用户反馈“当前开发版，两种都正常”，指当时好友卡片/朋友圈真机均正常。仅作为用户报告的历史证据：手机型号、微信版本和精确构建未提供，不能计入本轮a647d1f由tester亲自执行的实体机结果。原“其他会话仍在工作先不写回”是此前串行等待，已由本轮T-040正式接续及停止状态满足后续执行条件，未在并发时写回。
+
+**T-042 completed，声明范围内建议合入；A-014仍draft。** 本轮受测版本和原完成条件证据已齐备。未新增实体iOS/Android收卡、真实朋友圈单页/前往小程序、好友/群外发、朋友圈发布、物理配额/强杀或全设备验收，不能把模拟器回调当真实投递。主线合入、推送、标签、WORKSPACE采用及正式发布须按用户后续安排；本轮没有执行。本人结构/链接/diff、字节与范围校验及本地单行提交后停止，project-manager被动读取回执并统一维护T-040/总体摘要，不由本人成员代写或发送跨会话通知。
