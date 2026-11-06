@@ -1,13 +1,50 @@
 # 产品发布与标签更名记录
 
 - 项目：eating-everyday（今天吃什么）；成果ID：A-018；负责人：project-manager。
-- 版本：0.7，2026-11-03（Asia/Shanghai）；状态：draft；关联任务：T-038、T-037、T-027、T-028、T-024、T-030、[T-031](../TASKS.md#t-031压缩opc发布记录并保护强推当前版本)。
-- 当前同步授权及边界：2026-11-03用户明确将产品main和v1.2.0同步远端，T-038已原子完成并读回；未授权OPC远端同步、GitHub Release页面或微信发布。
+- 版本：0.8，2026-11-06（Asia/Shanghai）；状态：draft；关联任务：[T-044](../TASKS.md#t-044整理产品分享功能并创建v130发布与标签)、T-038、T-037、T-027、T-028、T-024、T-030、[T-031](../TASKS.md#t-031压缩opc发布记录并保护强推当前版本)。
+- 当前授权及边界：D-028/T-044按用户明确要求先将产品feature按功能压缩、合入main，并按之前格式创建v1.3.0；本次仅本地产品Git交付，OPC当前feature保存必要回执，WORKSPACE暂留旧基线待后续采用，不推送、不删除分支或微信发布。
+- T-038同步时点授权及边界（历史）：2026-11-03用户明确将产品main和v1.2.0同步远端，T-038已原子完成并读回；当时未授权OPC远端同步、GitHub Release页面或微信发布。
 - T-037准备时点授权及边界：D-025/T-037沿用T-027产品双父发布merge和附注tag，v1.2.0为本轮功能增量默认命名，非用户逐字指定号码；仅本地Git发布，未推送或微信发布。成果仍draft。
 - 历史来源及批准边界：D-020及T-028的产品标签/发布/远端同步已完成。用户随后恢复OPC并要求先核对WORKSPACE，T-024已采用本次最终产品版本并快进合入项目主线。成果仍draft，无整份批准或微信正式发布结论。
 - 存储位置：治理记录在OPC；产品仓库git@github.com:yinzhongkai/eating-everyday.git，本机checkout=../eating-everyday。
 
-## v1.2.0远端同步（当前）
+## v1.3.0本地功能整理与发布（当前）
+
+2026-11-06用户明确先处理产品feature，将commit按功能压缩后合入main，再打v1.3.0，格式沿用之前且commit message只一行。T-044在现有分享配对feature上收尾，不开新业务轮次；四名成员均已核对停止。发布前本机、origin及实时远端main均38b1e69350ad2b4cf43c3124a3635f4a0b9c47a0，原feature及实时远端为fdf64604db125569efd8e131f46c29922fa9a5d8，远端v1.3.0不存在。
+
+### 按功能整理与原始版本恢复
+
+| 分组 | 整理后提交 | 范围 |
+|---|---|---|
+| 分享实现与开发回归 | 29a07826b9f2fe4792ab68c409477af12d77343e | 8路径：页面、静态图、ui/share-images.js、两份开发测试及README/分享说明；最终实现blob不改。 |
+| 开发验证证据 | dda797143ec8e98aa71438e3fdb62bd932423050 | 107份developer-t041分享与图片修复证据，保留原失败/对照/平台输出。 |
+| 独立验证与证据 | 167951a83f522582c5a2103a31f7aadccafd0402 | 140路径：两份独立源码及138份tester-t042原始/续测/复测资产。 |
+
+原7条整理为上述3条线性提交。第三条tree为6c083977dbf345e13beeaf12c8b3abeb776a18bb，与原fdf6460严格相同；原实现、原始证据及失败历史没有为整理而更改。原受测a647d1f及过程SHA继续作为对应历史时点引用，不冒称整理后main祖先。修改本地feature引用前已验证完整before.bundle，含原main、feature及旧tag可达历史；远端feature未改写，无强推。功能整理通过后使用--ff-only合入main。
+
+### 发布提交与附注标签
+
+| 项目 | 实际结果 |
+|---|---|
+| 发布第一父/功能合入后main | 167951a83f522582c5a2103a31f7aadccafd0402。 |
+| README准备/第二父 | 93ed96beab2ce722289387c8c4dd924e9f05cc82，源feature/t-040-share，只增README当前v1.3.0说明并保留旧发布历史。 |
+| release/main | 571802a6e4697bb5d61fd508e902dc1746c54c00；恰有上述两个不同父，message为release(eating-everyday): v1.3.0。 |
+| 发布树 | 5be2e88a700d3c9bad9e60587eae519d395b36e2，与README准备版本相同；相对原fdf6460仅README变化。 |
+| 附注v1.3.0 | 对象f1ae71c4cb3383533cbc339becfb2e519b05f123；内部tag名称v1.3.0，说明Release v1.3.0，剥离目标等于release/main。 |
+
+新增范围共3条功能、1条README准备和1条发布merge，message全部单行，tag说明也单行。--no-ff仅用于本次沿用的发布节点，第一父固定为已经快进合入的功能头，不改变普通功能合并规则。原main/v1.2.0以前的共享历史未改写，v1.0.0/v1.1.0/v1.2.0对象及目标保持。
+
+### 验证、配置与边界
+
+Node v24.22.1，完整命令node --test --test-reporter=tap test/*.test.js test/independent/*.test.js。整理后的工作树、无.git/私有配置干净导出、功能合入main、release/main分别671/671，fail/cancel/skip/todo均0；这是同一套用例在规定阶段的验证，不能累加。diff检查、原树一致、两父/发布树、单行message及附注对象/指向通过。此次没有重新操作微信或补实体机验收，A-013 v0.8/A-014 v0.11保留原专业结论和未覆盖边界。
+
+当前公共配置原始SHA-256为eecc59987ea459258c2bf0329b69d98e73e790dfa6110d60f28ed3645456e645，私有为a5312f8c43cbae297edf96440cd70ce5fd95e3c3b945a2aa016c2fafde142fc0，整理、切换、合入和发布前后原字节相同；公共M只是已协调CRLF表示差异，过滤blob始终c2c297e3db63062e72a6ef0476e02a611914dbba。未格式化或提交配置，不宣称工作树完全无M；package不改。
+
+产品.git/codex-backups/t044-product-v1.3.0-20261106/保存before.bundle、before.json、原两配置、functional-build.json、functional-verification.json、integrated-main.json、prepared.json、release-verification.json及四阶段原始TAP。OPC对应.git目录保存本次登记patch、专业正文/WORKSPACE原指纹和最终校验。原受评及资产SHA可从bundle恢复，不依赖改写后的本地feature或创建新的远端归档tag。
+
+本次仅本地产品main/v1.3.0；远端main/feature及旧tag保持，无推送、分支删除、GitHub Release或微信上传提审发布。产品当前checkout已为571802a；按用户“先产品”安排，OPC只在现有feature保存治理回执，不合项目主线、不推进WORKSPACE旧锁定38b1e69、不打OPC新标签。后续采用须记录该实际产品版本，不能用旧WORKSPACE或另一克隆旧长期分支说明否认本次本地交付。两feature均保留，等待用户后续安排。
+
+## v1.2.0远端同步（历史）
 
 T-038依据用户明确指令，仅以两个显式refspec同步产品main与v1.2.0。推送前main为3800e6dd8bc32b7d767bfc873a4b9ae57d10232b，新tag不存在；已验证其为本机main祖先。使用--atomic及明确旧main/新tag不存在的lease保护，禁用followTags，实际main快进3800e6d..38b1e69、新tag首次创建、退出0，没有历史改写。
 
@@ -87,3 +124,4 @@ T-028使用显式refspec及--atomic同步main、两个新tag及旧tag删除，�
 | 2026-11-02 | 0.5 | 说明T-031仅压缩OPC发布记录并同步其tag，产品main/v1.1.0、文件/配置及WORKSPACE均不变。 |
 | 2026-11-03 | 0.6 | T-037按既有逻辑创建产品v1.2.0双父release与附注tag，README单独准备，release/main609/609，旧tag/配置/业务证据保持；仅本地，OPC采用实际新发布SHA。 |
 | 2026-11-03 | 0.7 | T-038按用户明确请求原子同步产品main和v1.2.0，读回全部远端对象/目标一致，旧tag及其他引用/配置/产品文件保持；OPC回执仅本地，未创建GitHub Release或微信发布。 |
+| 2026-11-06 | 0.8 | T-044/D-028将分享原7条整理为3组并保留原树，先快进main再以README准备创建双父release及附注v1.3.0；5条新增message/附注说明单行，四阶段各671/671，原证据/配置/旧tag保持。本次仅产品本地交付，OPC仍在feature保存回执、WORKSPACE暂留旧基线，未推送或清理分支。 |
