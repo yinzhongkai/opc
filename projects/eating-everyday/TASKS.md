@@ -1396,7 +1396,7 @@
 ## T-045：采用产品v1.3.0并整理发布OPC项目标签
 
 - 负责人：project-manager
-- 状态：in_progress
+- 状态：completed
 - 授权来源与日期：2026-11-06用户明确要求先更新workspace，再将OPC feature按功能压缩合入project/eating-everyday，并按之前格式打project/eating-everyday/v1.3.0，commit message只有一行，依据D-029。
 - 变更类型：governance-only；既有分享轮次的工作区采用、治理交付整理与本地Git发布。
 - OPC 开发分支：feature/eating-everyday/t-040-share，延续原轮次；目标project/eating-everyday。
@@ -1407,10 +1407,12 @@
 - 输入与依赖：D-029、T-044产品发布及671/671、A-018 v0.8、A-013 v0.8/A-014 v0.11的原独立结论；本次只做治理及Git，不重复未变产品测试或扩大实体设备/正式发布结论。
 - 优先级：未设定。
 - 完成条件与确认方式：WORKSPACE精确匹配实际产品main/tag；原feature/引用/配置有完整恢复点。功能整理树等于本次工作区/计划准备后的源快照，5组线性message单行，六份专业正文及产品626受控文件/两配置/全部引用保持；结构、链接、diff、范围通过后快进主线。发布恰有两个不同父，树等于准备版本，附注tag内部名称/说明/目标正确并等于最终项目HEAD；旧tag/框架/其他项目不动，无推送或分支清理。
-- 进展：已刷新本人登记、scope/角色/有效技能与公共规则，四名成员当前均completed且停止。实时核对OPC远端主线1970f68、feature9565625，新项目v1.3.0不存在；产品实时远端main/tag均571802a。已验证before.bundle、记录全部引用/原专业正文/产品原文件及配置指纹，先局部更新WORKSPACE为571802a；后续功能整理与发布待实际执行。
-- 成果与验证证据：OPC.git/codex-backups/t045-opc-v1.3.0-20261106/保存before.bundle与before.json；待补源快照、5组映射和发布验证。原产品T-044恢复点及原专业受测SHA继续保留。
-- 合并与清理状态：尚未整理或合入，OPC原.tmp/及产品公共CRLF差异/私有配置保持；两个feature保留，不推送或删除。本次发布--no-ff为D-029明确例外，不改公共策略。
-- 阻塞与下一位行动人：无；project-manager完成工作区采用、功能整理、验证和本地项目发布，不唤醒其他成员。
+- 进展：已刷新本人登记、scope/角色/有效技能与公共规则，四名成员均停止。先局部更新WORKSPACE为571802a并单独提交a0a2c9478334e7c04206c493660c378b53369770，再单独登记计划形成源快照947085bd3e507da77d8c94da7c0f89ca1621a820；其15条包括原13条及本轮2条准备。源tree为72a9d92e1351fb70f56ca826fe71cd27f0f8b7c9，压缩后5组tree严格相同，已快进合入项目主线并完成结构/链接/diff及专业正文保护核对。
+- 功能整理映射：d6c1bd6d5342a90b51a9f4b6bf06f5c61882e184为协调计划/决定/共享记录，126e63035deb3eae2f8f460ac25b12cb0159980f为研发交接，6b0eb8572b97b524bf62d95e5790857fb9857390为独立报告，17fe058576e6c4b42d4da248aef3d8176d060ea0为产品交付记录，1506c020dd104dced5abec24e335c2dc172481f0为WORKSPACE采用；5条均为单行、无merge，最后一条为本次release第一父。
+- 发布结构：全部本次回执先进入完整准备版本，再以--no-ff创建真正双父release和附注project/eating-everyday/v1.3.0。第一父1506c020，第二父为本次完整准备，发布树等于准备树；message单行release(eating-everyday): project/eating-everyday/v1.3.0，附注说明Release project/eating-everyday/v1.3.0。最终第二父/release SHA、树/tag对象及主线相等由Git原文和本机release-verification.json、final-verification.json定位，不在本提交正文自写其SHA，tag后不追加commit。
+- 成果与验证证据：A-017 v0.8、A-018 v0.9。OPC.git/codex-backups/t045-opc-v1.3.0-20261106/保存已验证before.bundle/source.bundle、before.json、source.json、functional-build.json、functional-verification.json及integrated-main.json；5组源树一致及整合前后结构/链接/diff均通过，最终发布/旧引用/产品及配置保护见上述最终日志。六份专业正文原字节与产品626受控文件、两配置及全部引用保持；原产品671/671不重复运行或扩大为本次新增测试。
+- 合并与清理状态：5组已快进项目主线，本次完整准备按D-029形成双父项目发布及附注v1.3.0固定最终HEAD，WORKSPACE采用产品571802a。原OPC.tmp/、原共享feature历史及产品状态保持；两个feature保留，不推送、不删除，框架及旧tag不动，不开始新轮次。
+- 阻塞与下一位行动人：本次本地采用/整理/发布无剩余业务阻塞；project-manager完成最终引用与保护验证后停止，远端同步及分支清理待用户安排，不唤醒其他成员或执行微信发布。
 - 更新日期：2026-11-06。
 
 ## 记录样式（不是真实任务）
