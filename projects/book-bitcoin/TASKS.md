@@ -45,21 +45,22 @@
 ## T-003：全书领域事实与精确版本核查
 
 - 负责人：researcher
-- 状态：todo
+- 状态：completed
 - 授权来源与日期：2026-10-11 project-manager 依据用户“先盘点全书，再规划各个任务”安排现有书稿出版前审核计划；执行以本任务进入条件和成员 scope 为限。
 - 变更类型：feature
-- OPC 开发分支：计划 feature/book-bitcoin/t-003-source-audit，尚未创建；目标 project/book-bitcoin
+- OPC 开发分支：feature/book-bitcoin/t-003-source-audit；2026-11-10 从 project/book-bitcoin 建立，目标 project/book-bitcoin
+- OPC 合入前目标提交：eb3856a9e30779a3aabd8c35f4c16a4af4812121；开始时本地目标与缓存 origin/project/book-bitcoin 一致，本轮未刷新 OPC 远端
 - 成果物仓库与开发分支：不适用；只生成 OPC 治理 / 审校记录，产品内容只读
 - 成果物仓库最终合并提交：不适用
 - 目标与范围：核查全 13 篇关键主张、Core / BIP / 官方文档来源及版本边界，优先检查 v31.0 接口、共识与策略、性能论断和附录指标；指出实测缺口。
 - 输入与依赖：T-002 已确认范围与标准；原稿 0811b23eb19d79ceb55a3c64a81944312eec0f2c；授权可读的 Core 6574cb40869b96b9ffc79c19dc8f4e467d60f321 及一手资料。
 - 优先级：高；先落实审核输入与首轮意见
 - 完成条件与确认方式：提交覆盖表、位置—主张—来源—结论证据；注明日期、版本、条件、冲突和未覆盖项；不以静态核查代替运行证据。
-- 进展：尚未开始；本次仅登记计划，未触发成员会话或执行实验。
-- 成果与验证证据：暂无；计划见 [A-002 0.1](artifacts/book/review-plan.md)。实际成果 / 受评版本开始时登记。
-- 合并与清理状态：尚未开始；前轮合入、验证及清理后才创建本轮分支；沿用已确认线性提交偏好。
-- 阻塞与下一位行动人：researcher 在原会话领取任务；实际源码读取与联网按具体授权执行。
-- 更新日期：2026-10-11
+- 进展：2026-11-10 依据 project-manager 的同项目启动通知完成首轮有界核查；已刷新 researcher 身份、scope、四份有效技能、v0.0.5 规则和当前标准。覆盖全部 13 篇的关键主张，形成 47 项修订/补证建议（6 项建议按阻断影响处理）、32 条限定条件下有一手依据的主张及 13 组未执行运行补证；专业结论 revise，不构成书稿批准。
+- 成果与验证证据：[A-004 0.1](artifacts/book/source-audit.md)、[证据 JSON](artifacts/book/source-audit-evidence.json) 和 [只读复核器](artifacts/book/source-audit-check.py)，状态 draft；依据 [A-002 0.2](artifacts/book/review-plan.md)、A-003 1.0 / D-005。固定原稿路径 C:\Users\YinZh\Documents\workspace\book-bitcoin，提交 0811b23eb19d79ceb55a3c64a81944312eec0f2c，已只读核对 origin、main、HEAD 与干净工作树；13 篇工作树与 Git 检出过滤字节一致、规范化后与 blob 一致，分别保存双指纹。公开 HTTPS 核对 Core v31.0 tag 解引用与指定提交一致，80 条来源登记、77 个可缓存文件及 tag/API/源码压缩包指纹通过；报告行号、来源链接和内部一致性、框架结构/本地链接及 diff 检查通过。以上均为静态/来源验证，不证明运行正确；D:\book-bitcoin 仅为历史登记。
+- 合并与清理状态：本轮成果整理为单一 T-003 治理功能提交，按 --ff-only 本地合入 project/book-bitcoin，在目标分支复核后安全清理本地开发分支；实际最终提交及收尾通过来源分支、合入前目标提交与 T-003 Git 历史定位，不在提交中自引用。本轮未推送 OPC 远端，未修改成果物仓库。
+- 阻塞与下一位行动人：本任务交付无阻塞；project-manager 归集本轮意见，reviewer 按 T-005 独立审校，writer 按 T-004 补齐资源清单、待本轮全部意见齐备后在 T-007 统一修订；T-006 按既有条件落实执行者、环境及运行证据。未创建会话或向成员发信，不使用 SSH，不执行书稿实验；STATUS 由 project-manager 后续刷新。
+- 更新日期：2026-11-10
 
 ## T-004：配套资料与正文引用清单
 

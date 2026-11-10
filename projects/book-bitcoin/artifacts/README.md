@@ -7,6 +7,7 @@
 | A-001 | [全书内容与配套资料盘点](book/content-inventory.md)；[扫描证据](book/inventory-evidence.json) | OPC artifacts/book/ | project-manager | [T-001](../TASKS.md) | 0.1；书稿输入 0811b23eb19d79ceb55a3c64a81944312eec0f2c | draft | 尚无 |
 | A-002 | [全书审核与修订计划](book/review-plan.md) | OPC artifacts/book/ | project-manager | [T-001、T-002](../TASKS.md) | 0.2；输入 A-001 0.1、A-003 1.0 与 D-005 | draft | 具体标准 / 边界已由 D-005 确认；书稿最终批准尚无 |
 | A-003 | [审校标准与配套交付边界](book/review-criteria.md) | OPC artifacts/book/ | project-manager | [T-002](../TASKS.md) | 1.0；获确认草案 0.1 位于 OPC 提交 07e2bdcc23625d2e7f2499d7bdcc7242a50d995f | approved | D-005；2026-10-11 用户采用整体建议，范围仅标准与交付边界 |
+| A-004 | [全书领域事实与精确版本核查](book/source-audit.md)；[证据](book/source-audit-evidence.json)；[只读复核器](book/source-audit-check.py) | OPC artifacts/book/ | researcher | [T-003](../TASKS.md) | 0.1；书稿 0811b23eb19d79ceb55a3c64a81944312eec0f2c；Core 6574cb40869b96b9ffc79c19dc8f4e467d60f321 | draft | 尚无；研究交付不构成书稿或出版批准 |
 
 OPC 治理与协作成果使用当前项目 `artifacts/` 内的正文链接；产品代码和直接业务交付物使用“成果物仓库 + 仓库内路径”，并记录其合入后的最终提交，可以是快进合并后的普通功能提交。可移动分支名不能代替精确提交。
 
