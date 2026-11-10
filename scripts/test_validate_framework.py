@@ -768,7 +768,7 @@ class RealTemplateIntegrationTests(unittest.TestCase):
             # Copy only public framework material; never read or copy real projects.
             for path in source.glob("*.md"):
                 shutil.copy2(path, root / path.name)
-            for name in ("roles", "knowledge", "adapters", "templates"):
+            for name in ("roles", "knowledge", "adapters", "templates", "docs"):
                 shutil.copytree(source / name, root / name)
 
             project = root / "projects" / "demo-project"

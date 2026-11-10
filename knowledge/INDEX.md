@@ -5,6 +5,15 @@
 | 技能 ID | 名称 |
 |---|---|
 | [ai-character-image-consistency](ai-character-image-consistency.md) | AI 角色图片一致性 |
+| [ai-comic-asset-design](ai-comic-asset-design.md) | AI 漫剧角色场景与道具资产设计 |
+| [ai-comic-audio-production](ai-comic-audio-production.md) | AI 漫剧配音音效与音乐设计 |
+| [ai-comic-business-iteration](ai-comic-business-iteration.md) | AI 漫剧流程升级与商业迭代 |
+| [ai-comic-image-production](ai-comic-image-production.md) | AI 漫剧分镜图像生产与修订 |
+| [ai-comic-production-integration](ai-comic-production-integration.md) | AI 漫剧全流程整合与返工判断 |
+| [ai-comic-production-planning](ai-comic-production-planning.md) | AI 漫剧定位与制作规划 |
+| [ai-comic-script-adaptation](ai-comic-script-adaptation.md) | AI 漫剧故事改编与剧本拆解 |
+| [ai-comic-video-production](ai-comic-video-production.md) | AI 漫剧视频生成与连续性控制 |
+| [ai-comic-visual-storytelling](ai-comic-visual-storytelling.md) | AI 漫剧分镜与视觉叙事 |
 | [backend-development](backend-development.md) | 后端开发 |
 | [audio-dsp-rhythm-engineering](audio-dsp-rhythm-engineering.md) | 音频 DSP 与节奏工程 |
 | [book-planning](book-planning.md) | 图书定位与章节规划 |
@@ -34,7 +43,11 @@
 | [technical-book-validation](technical-book-validation.md) | 技术书示例与实验验证 |
 | [testing](testing.md) | 测试设计与执行 |
 | [travel-planning](travel-planning.md) | 旅行规划 |
+| [video-directing](video-directing.md) | 影视导演与分镜设计 |
+| [video-production-editing](video-production-editing.md) | 视频制作剪辑与后期 |
 | [visual-design](visual-design.md) | 视觉设计 |
+| [wechat-miniprogram-development](wechat-miniprogram-development.md) | 微信小程序开发 |
+| [wechat-miniprogram-testing](wechat-miniprogram-testing.md) | 微信小程序测试 |
 | [windows-qt-build-engineering](windows-qt-build-engineering.md) | Windows x64 与 Qt 构建工程 |
 | [windows-release-engineering](windows-release-engineering.md) | Windows 发布与供应链工程 |
 | [writing](writing.md) | 长篇写作与编辑 |
@@ -66,7 +79,29 @@ status: active
 
 visual-design 是视觉设计师的通用基础方法；ai-character-image-consistency 只适用于采用 AI 生成角色图片的项目，应作为 visual-designer 的项目补充知识按需配置。二者分层避免普通视觉设计任务被强制加载特定生成工具流程。
 
+video-directing 和 video-production-editing 分别是导演、视频制作与后期岗位的通用基础方法。AI 漫剧的按章知识通过项目角色补充技能选择，沿用各岗位职责，不自动增加工具或发布权限。
+
 social-media-operations 是社交媒体运营岗位的通用基础知识；xhs-content-operations 是该岗位面向小红书的项目补充知识，负责日历、发布协作和数据反馈。xhs-plog-creation 负责单条 plog 的图文创作，可按项目分配给作者等内容成员；运营知识不取代创作职责。
+
+wechat-miniprogram-development 和 wechat-miniprogram-testing 分别提供微信小程序实现与平台测试方法，适合作为 developer、tester 的项目补充技能。网页前端方法不能代替小程序运行环境与真机验证；具体业务规则由项目需求提供，不改变共享角色的基础技能或职责。
+
+### AI 漫剧知识的按章导航
+
+以下九项由《AI漫剧创作一本通》按章独立提炼，按实际任务组合使用。它们不自动加入共享角色基础技能；需要供项目成员持续加载时，由获授权的配置维护者按角色职责配置项目 `TEAM.yaml.roleKnowledge`，成员在新任务开始时按会话协议刷新。临时查阅可从本索引进入；索引不能代替完整技能正文。
+
+| 原书章节 | 可复用知识 | 主要使用时机 |
+|---|---|---|
+| 第1章 | [定位与制作规划](ai-comic-production-planning.md) | 明确受众、形式、资源与试制范围 |
+| 第2章 | [故事改编与剧本拆解](ai-comic-script-adaptation.md) | 从故事设定走向可制作剧本与分镜表 |
+| 第3章 | [角色场景与道具资产设计](ai-comic-asset-design.md) | 设计和固定可反复引用的视觉资产 |
+| 第4章 | [分镜与视觉叙事](ai-comic-visual-storytelling.md) | 选择景别、视角、运动与剪切方式 |
+| 第5章 | [分镜图像生产与修订](ai-comic-image-production.md) | 生成静帧，处理多图参考与局部编辑 |
+| 第6章 | [视频生成与连续性控制](ai-comic-video-production.md) | 选择生成模式，检查动作与跨镜头连续性 |
+| 第7章 | [配音音效与音乐设计](ai-comic-audio-production.md) | 设计并检查人物声音、动作音效与音乐 |
+| 第8章 | [全流程整合与返工判断](ai-comic-production-integration.md) | 组织完整样片，定位问题和修订环节 |
+| 第9章 | [流程升级与商业迭代](ai-comic-business-iteration.md) | 评估自动化、生产成本与反馈循环 |
+
+章节来源、阅读覆盖和未验证范围见[来源与阅读记录](../docs/ai-comic-creation-source.md)。这组知识保存工作方法；具体项目的原始媒体、完整指令、生成记录与源工程仍保存在声明的成果物工作区。
 
 ## 维护
 

@@ -27,7 +27,7 @@ class BookTemplateIntegrationTests(unittest.TestCase):
         # Never copy actual projects or modify the shared working tree.
         for path in source.glob("*.md"):
             shutil.copy2(path, self.root / path.name)
-        for name in ("roles", "knowledge", "adapters", "templates"):
+        for name in ("roles", "knowledge", "adapters", "templates", "docs"):
             shutil.copytree(source / name, self.root / name)
         self.pack = self.root / "templates/book"
         guide = (self.pack / "README.md").read_text(encoding="utf-8")
