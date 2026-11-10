@@ -1,4 +1,35 @@
 schemaVersion: 3
 project: 'ai-comic'
-roleKnowledge: {}
-members: []
+roleKnowledge:
+  project-manager:
+    - ai-comic-production-planning
+    - ai-comic-production-integration
+    - ai-comic-business-iteration
+  product-manager:
+    - ai-comic-production-planning
+    - ai-comic-business-iteration
+  writer:
+    - ai-comic-script-adaptation
+    - ai-comic-visual-storytelling
+  director:
+    - ai-comic-script-adaptation
+    - ai-comic-visual-storytelling
+    - ai-comic-video-production
+    - ai-comic-audio-production
+    - ai-comic-production-integration
+  visual-designer:
+    - ai-character-image-consistency
+    - ai-comic-asset-design
+    - ai-comic-image-production
+  video-producer:
+    - ai-comic-image-production
+    - ai-comic-video-production
+    - ai-comic-audio-production
+    - ai-comic-production-integration
+members:
+  - project-manager
+  - product-manager
+  - writer
+  - director
+  - visual-designer
+  - video-producer
