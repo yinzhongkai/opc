@@ -22,6 +22,8 @@
 | [release-engineer](release-engineer.md) | 发布工程师 |
 | [tester](tester.md) | 测试工程师 |
 | [writer](writer.md) | 作者 |
+| [director](director.md) | 导演 |
+| [video-producer](video-producer.md) | 视频制作与后期 |
 | [social-media-operator](social-media-operator.md) | 社交媒体运营 |
 | [reviewer](reviewer.md) | 独立评审者 |
 | [yocto-engineer](yocto-engineer.md) | Yocto 工程师 |
@@ -38,5 +40,7 @@ reviewer 是可选的独立检查角色；日常专业交叉评审使用现有�
 visual-designer 的公共基础知识是 visual-design；只有采用 AI 生成角色图片的项目，才通过 `TEAM.roleKnowledge` 按需补充 ai-character-image-consistency。补充知识提供方法，不扩大岗位职责或工具权限。
 
 writer 负责内容创作与修订；social-media-operator 负责内容日历、发布准备、人工发布协作、规则核对以及数据和反馈闭环。运营岗位不因承担发布协作而自动获得账号或发布权限。
+
+director 负责视听表达、分镜与创作指导；video-producer 负责镜头制作、声音、剪辑与后期交付。AI 漫剧等具体制作方法通过项目补充技能配置，不强制进入通用角色基础技能。multimedia-engineer 继续负责媒体软件与编解码工程。
 
 共享定义的维护与影响检查遵循 [超级管理员入口](../SUPER_ADMIN.md)。

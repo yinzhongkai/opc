@@ -43,6 +43,8 @@
 | [technical-book-validation](technical-book-validation.md) | 技术书示例与实验验证 |
 | [testing](testing.md) | 测试设计与执行 |
 | [travel-planning](travel-planning.md) | 旅行规划 |
+| [video-directing](video-directing.md) | 影视导演与分镜设计 |
+| [video-production-editing](video-production-editing.md) | 视频制作剪辑与后期 |
 | [visual-design](visual-design.md) | 视觉设计 |
 | [wechat-miniprogram-development](wechat-miniprogram-development.md) | 微信小程序开发 |
 | [wechat-miniprogram-testing](wechat-miniprogram-testing.md) | 微信小程序测试 |
@@ -76,6 +78,8 @@ status: active
 专业技能可以被多个角色、多个项目复用。同项目同角色的成员加载相同组合，分工差异放在成员 scope。索引不代替技能正文；这些文档也不负责安装工具或提供执行环境。
 
 visual-design 是视觉设计师的通用基础方法；ai-character-image-consistency 只适用于采用 AI 生成角色图片的项目，应作为 visual-designer 的项目补充知识按需配置。二者分层避免普通视觉设计任务被强制加载特定生成工具流程。
+
+video-directing 和 video-production-editing 分别是导演、视频制作与后期岗位的通用基础方法。AI 漫剧的按章知识通过项目角色补充技能选择，沿用各岗位职责，不自动增加工具或发布权限。
 
 social-media-operations 是社交媒体运营岗位的通用基础知识；xhs-content-operations 是该岗位面向小红书的项目补充知识，负责日历、发布协作和数据反馈。xhs-plog-creation 负责单条 plog 的图文创作，可按项目分配给作者等内容成员；运营知识不取代创作职责。
 
