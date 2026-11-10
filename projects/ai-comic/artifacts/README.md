@@ -1,11 +1,18 @@
 # 项目成果索引
 
-暂无已登记成果。每位成果负责人维护自己的条目，协调记录维护人检查索引一致性。元信息与批准规则见根 [项目运行协议](../../../PROJECT_PROTOCOL.md)。
+暂无已登记业务成果。每位成果负责人维护自己的条目，协调记录维护人检查索引一致性。元信息与批准规则见根 [项目运行协议](../../../PROJECT_PROTOCOL.md)。
 
 | 成果 ID | 名称与位置 | 存储位置 | 负责人 | 关联任务 | 版本/精确提交 | 状态 | 批准决定 |
 |---|---|---|---|---|---|---|---|
 
 OPC 治理与协作成果使用当前项目 `artifacts/` 内的正文链接；产品代码和直接业务交付物使用“成果物仓库 + 仓库内路径”，并记录其合入后的最终提交。快进合并后可直接引用通过最终验证的普通功能提交，可移动分支名不能代替精确提交。
+
+## 成果物工作区基线
+
+- 基础设施配置依据：[D-001](../DECISIONS.md#d-001配置独立-git-成果物工作区) 与 [WORKSPACE.yaml](../WORKSPACE.yaml)，由框架超级管理员按用户授权登记。
+- 位置：本机 `C:/Users/YinZh/Documents/workspace/ai-comic`，相对 OPC 根目录的 checkout 为 `../ai-comic`；仓库为 `git@github.com:yinzhongkai/ai-comic.git`，目标分支 `main`。
+- 精确提交：`787f5af54367f13c8776fa1279252d24dbee0d12`；[仓库 README](https://github.com/yinzhongkai/ai-comic/blob/787f5af54367f13c8776fa1279252d24dbee0d12/README.md) 记录目录用途与 Git LFS 使用方法。本机与远端该提交已核对，当前仅有基础配置和占位目录。
+- 路径：`scripts/`、`storyboards/`、`assets/characters/`、`assets/scenes/`、`assets/props/`、`images/`、`audio/`、`video/`、`records/generation/`、`source-projects/`。后续业务成果按上表逐项登记负责人、任务、仓库内路径及合入后精确版本。
 
 ## 正文元信息样式（不是真实成果）
 
