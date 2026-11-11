@@ -9,6 +9,7 @@
 | A-003 | 投资领域书目与阅读推荐；入口 `README.md` | 成果物仓库：`git@github.com:yinzhongkai/reading-notes.git`；本机 `C:/Users/YinZh/Documents/workspace/reading-notes` | book-recommender | [T-007](../TASKS.md#t-007按已确认结构整理首批投资书目) | 0.1；`66ac807098f9c169745e5e339431ec314df69044` | draft | D-008 已确认组织结构与七本收录范围；具体内容尚无另行批准，六本候选未选定 |
 | A-004 | b001 历史阅读资料迁入；入口 `books/b001-intelligent-investor/imports/inkling/README.md` | 成果物仓库：`git@github.com:yinzhongkai/reading-notes.git`；本机 `C:/Users/YinZh/Documents/workspace/reading-notes` | reading-partner-intelligent-investor | [T-012](../TASKS.md#t-012迁入聪明的投资者既有阅读资料) | 0.1；开发快照 `20faad16a237efdd494bc72a4c108525e4998e98`，尚未合入 main | draft | 用户授权迁入；内容与历史推论尚未批准 |
 | A-005 | 安全边际与几何平均收益率讨论笔记；`books/b001-intelligent-investor/notes/2026-10-19-margin-of-safety-and-geometric-return.md` | 成果物仓库：`git@github.com:yinzhongkai/reading-notes.git`；本机 `C:/Users/YinZh/Documents/workspace/reading-notes` | reading-partner-intelligent-investor | [T-013](../TASKS.md#t-013整理安全边际与几何平均收益率讨论笔记) | 0.1；开发快照 `479f8982aa88b4efb93a68b6b3b59e72802e85d3`，尚未合入 main | draft | 用户授权整理保存；尚无另行内容批准 |
+| A-006 | 《投资是赚的谁的钱》文章提纲；`books/b001-intelligent-investor/notes/investing-whose-money-outline.md` | 成果物仓库：`git@github.com:yinzhongkai/reading-notes.git`；本机 `C:/Users/YinZh/Documents/workspace/reading-notes` | reading-partner-intelligent-investor | [T-014](../TASKS.md#t-014整理投资是赚的谁的钱文章提纲) | 0.1；未提交工作树，SHA-256 见下方详情；尚未合入 main | draft | 用户授权整理提纲；文章结论和引用内容待继续讨论 |
 
 本轮流程、笔记组织与工作区讨论以 A-002 为候选；A-001 保留 T-001 的初始方案内容，不代表两份方案均已批准。
 
@@ -48,6 +49,15 @@ OPC 治理与协作成果使用当前项目 `artifacts/` 内的正文链接；�
 - 精确版本：本地 `feature/t-011-b001-reading-prep` 的开发快照为 `479f8982aa88b4efb93a68b6b3b59e72802e85d3`；尚未合入 main 或推送，不作为 WORKSPACE 锁定版本。
 - 来源与适用范围：用户于 2026-10-19 授权保存本会话实际讨论，并补充关于相反结果及最坏情况的感悟；笔记保存用户原话，区分伙伴公式、假设例子与归纳。原书依据为本地导入第20章相关段落，收益率资料沿用讨论中已核对的 CFA Institute 来源；实际阅读版本、译者和具体页码待补。
 - 验证与边界：整篇读回，4 项数值关系与 2 处本地来源链接核对通过，UTF-8 和差异检查通过；本次只新增该笔记，既有书目档案、历史导入资料与全项目书目索引保持原样。保存完成不代表用户批准所有伙伴补充或完成全书阅读。
+
+## A-006 投资是赚的谁的钱文章提纲
+
+- 负责人：reading-partner-intelligent-investor；关联任务 T-014；版本 0.1；更新日期 2026-11-04（Asia/Shanghai）；状态 draft。
+- 存储位置：本机 C:/Users/YinZh/Documents/workspace/reading-notes；成果物仓库 git@github.com:yinzhongkai/reading-notes.git；提纲为 `books/b001-intelligent-investor/notes/investing-whose-money-outline.md`，对话来源为 `books/b001-intelligent-investor/notes/sources/2026-11-04-kimi-investing-whose-money.txt`。
+- 精确版本：本地 feature/t-011-b001-reading-prep 上的未提交工作树；提纲 SHA-256 为 `5925751c6e68058966a5a7f16f786085c2659f7ef465ba0cdb5793093753b09c`，来源片段 SHA-256 为 `09ee11018bde6ac2b45191d556f13eca5e0e5b1d67863dd4a863ed8cc4ab3d00`。现有开发 HEAD 为 479f8982aa88b4efb93a68b6b3b59e72802e85d3，该提交不含本次新增文件；main 与 WORKSPACE revision 保持 66ac807098f9c169745e5e339431ec314df69044。
+- 来源与适用范围：用户于 2026-11-04 提供 Kimi 对话文本，并明确要求整理可继续补充的文章提纲、保留本人观点和问题。提纲含六部分，区分用户材料、Kimi 候选解释和新增讨论问题，并链接 T-012 迁入的第一章历史笔记；历史推演不自动作为本文结论。
+- 验证：提纲全文读回，13 项用户关键材料覆盖、6 处本地链接及 UTF-8 解码通过；来源片段从文章意图处至附件结尾逐字符一致，保留 10 条 User 消息。
+- 批准与边界：形成提纲草稿不等于文章成文或内容获批。实际阅读版本、译者及原书引文出处待补；本次保留原有书目、历史导入和讨论笔记，不修改其内容，也不推进长期分支或 WORKSPACE。
 
 ## 正文元信息样式（不是真实成果）
 
