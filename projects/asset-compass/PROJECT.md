@@ -4,8 +4,8 @@
 
 ## 框架基线
 
-- 框架发布标签：`v0.0.4`。
-- 精确框架提交：`464ca52aafc6c73ff780a7120acd3bf63c9d31dd`。
+- 框架发布标签：`v0.0.5`。
+- 精确框架提交：`29b10981da2358ae7ed8df2c77ff5093c03c5ad6`。
 - OPC 项目长期分支：`project/asset-compass`。
 - 建项开发分支：`feature/asset-compass/project-bootstrap`；建项提交及合并边界通过 Git 历史定位。
 - 工作区版本基线：当前 `driver: git`；成果物仓库为 `git@github.com:yinzhongkai/asset-compass.git`，本地 checkout 为 OPC 同级 `../asset-compass`（`C:/Users/YinZh/Documents/workspace/asset-compass`），演进线为 `main`，精确提交见 [WORKSPACE.yaml](WORKSPACE.yaml)。原 `D:/asset-compass` 记录保留在下述 Git 历史整理回执；2026-10-13 的实际环境无法访问该路径，本次按用户的投资表归档要求启用上述同级目录，配置依据见 D-006。
@@ -21,11 +21,19 @@
 
 ## 框架升级记录
 
+### 2026-11-11 升级到 v0.0.5
+
+- 框架超级管理员依据用户本次请求“把项目分支rebase到v0.0.5上，做一下框架升级”，按[分支策略第 6 节](../../BRANCH_STRATEGY.md#6-公共框架演进发布和项目升级)迁移 `project/asset-compass`。
+- 升级前，项目分支本地和 `origin` 均指向 `1287b232fca7eca01ab688359b3cc8e4e383330e`，工作树干净，本项目无活动 feature 或 bugfix 分支。恢复标签 `archive/asset-compass-pre-v0.0.5-20261111` 保存该提交，旧项目提交引用可通过此标签追溯。
+- 从 `v0.0.4`（`464ca52aafc6c73ff780a7120acd3bf63c9d31dd`）之后重放 17 个项目提交到 `v0.0.5`。逐提交核对了项目文件树、作者信息和提交说明。升级范围内有 0 个合并提交，公共文件树与 `v0.0.5` 发布一致。项目的成员、任务、决定、交接和成果记录通过原项目文件树完整保留。
+- 成果物仓库的本地 `main` 与 [WORKSPACE.yaml](WORKSPACE.yaml) 声明的地址和版本 `6a42b987dbbea912e9a7f6de47741580cea4e3f0` 一致，工作树干净。现有 TEAM 版本 3 和 WORKSPACE 版本 1 可直接使用，成员下次开始工作时按[会话协议](../../SESSION_PROTOCOL.md)刷新。
+- 发布快照和升级后的项目均通过结构与链接校验及全部 60 项测试。项目侧核对了 618 处本地链接，`git diff --check` 通过。项目基线提交以本节和 Git 历史定位。远程同步按分支策略以显式旧头保护更新项目分支，并与恢复标签一起原子推送。
+
 ### 2026-10-12：升级到 v0.0.4
 
 - 执行者与授权来源：框架超级管理员，依据本会话用户请求：“先同步下最新代码，然后将项目升级到v0.0.4框架”。
 - 同步与升级前核对：已同步 origin 分支及发布标签；项目本地头与旧远程头均为 `15f0cd8547a522e63aec1ee8a74b6d91f0756371`，工作树干净，没有本项目活动 feature/bugfix 分支。工作区为 `none`，成果物仓库核对与升级不适用。
-- 原框架基线：`v0.0.3`，精确提交 `6f79b98e219e0bbf8f7de45dd35ec54c2a6f1f07`；目标发布标签及精确提交见上方当前框架基线。
+- 原框架基线为 `v0.0.3`（`6f79b98e219e0bbf8f7de45dd35ec54c2a6f1f07`），当时升级目标为 `v0.0.4`（`464ca52aafc6c73ff780a7120acd3bf63c9d31dd`）。
 - 恢复点：不可移动归档标签 `archive/asset-compass-pre-v0.0.4-20261012` 保存上述旧远程头；历史记录中的旧 OPC 提交引用继续按该归档历史读取，不把旧头合回新项目线。
 - 历史迁移：按根分支策略第 6 节执行 `rebase --rebase-merges --onto v0.0.4 v0.0.3`，保留 4 条既有项目功能合并结构，不建立升级 feature 或升级 merge commit。提前采用的纯框架提交 `2c70299d5765daaf8b7b2136a5bf61914bac6f02` 与正式框架提交 `8c3bfbb19a85e1213d1467fc17fbc75aae796072` 等价，重放时已去重；投资顾问角色与技能正文和发布版本一致。
 - 记录迁移：T-001、T-002、T-003、T-004、T-006 补齐新版“OPC 合入前目标提交”字段；这些治理任务没有开发分支合入，该字段明确为不适用。上述任务的成果物提交字段及任务样式采用新版用语；T-005 保留已完成的历史记录。
