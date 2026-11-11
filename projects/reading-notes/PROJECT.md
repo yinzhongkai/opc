@@ -4,13 +4,22 @@
 
 ## 框架基线
 
-- 框架发布标签：`v0.0.4`。
-- 精确框架提交：`464ca52aafc6c73ff780a7120acd3bf63c9d31dd`。
+- 框架发布标签：`v0.0.5`。
+- 精确框架提交：`29b10981da2358ae7ed8df2c77ff5093c03c5ad6`。
 - OPC 项目长期分支：`project/reading-notes`。
 - 建项开发分支：`feature/reading-notes/project-bootstrap`；建项提交及合并边界通过 Git 历史定位。
-- 工作区版本基线：`driver: git`，仓库 `git@github.com:yinzhongkai/reading-notes.git`（D-006），目标分支 `main`，当前精确 revision 为 `66ac807098f9c169745e5e339431ec314df69044`，与 WORKSPACE 及成果物仓库 main、HEAD 一致。当前 OPC 位于 `C:/Users/YinZh/Documents/workspace/opc-reading-notes`，checkout `../reading-notes` 对应 `C:/Users/YinZh/Documents/workspace/reading-notes`（D-010）。本轮 H-004 只读使用其中的 b001 书目档案；初始空基线及 D-007、T-003、T-004 中的 D 盘位置保留为历史事实，见下方工作区配置记录。
+- 工作区版本基线：`driver: git`，仓库 `git@github.com:yinzhongkai/reading-notes.git`（D-006），目标分支 `main`，精确 revision 为 `66ac807098f9c169745e5e339431ec314df69044`，与 WORKSPACE 及成果物仓库 `main` 一致。当前 OPC 位于 `C:/Users/YinZh/Documents/workspace/opc-reading-notes`，checkout `../reading-notes` 对应 `C:/Users/YinZh/Documents/workspace/reading-notes`（D-010）。H-004 当时只读使用其中的 b001 书目档案。初始空基线及 D-007、T-003、T-004 中的 D 盘位置见下方工作区配置记录。
 
 ## 框架升级记录
+
+### 2026-11-11：升级到 v0.0.5
+
+- 用户要求将项目分支 rebase 到 `v0.0.5`，并确认将 T-014 的四份未提交文件原样保存到各自现有的开发分支。OPC 台账保存于 `76e0ab65f9d80b55f47c96455c8a0dcac2bf1155`，成果物提纲和对话来源保存于 `6b13d3ceeeb388c160857336c81a7ceac89992d7`。
+- 本地标签 `archive/reading-notes-pre-v0.0.5-20261111` 保存升级前的本地和远端项目头 `35f56c6aa0d45db83368cba0ad470a2c7523bd96`。`archive/reading-notes-b001-pre-v0.0.5-20261111` 保存含 T-014 台账的旧开发分支头。升级前 OPC 开发分支仅存在于本地。
+- 按 [分支策略第 6 节](../../BRANCH_STRATEGY.md) 将 `v0.0.4` 之后的 10 个提交 rebase 到 `v0.0.5`，补丁逐一等价，重放后的项目头为 `f7ee4fb1eacbb90754a353ba41f9e19df46cd0bd`。项目继续采用 `reading-partner` 角色与 `critical-reading` 技能，提前采用的提交 `19f90b3bba7d034f2e6b334c02bca7aa0bb4d85c` 重放为 `e474224`，项目目录在更新本记录前与旧版本完全一致。
+- 活动 OPC 分支 `feature/reading-notes/t-011-b001-reading-prep` 的三个提交随本次升级重放到新项目基线。成果物分支 `feature/t-011-b001-reading-prep` 保存 T-014 后继续以 `66ac807098f9c169745e5e339431ec314df69044` 为基线，`WORKSPACE.yaml` 仍锁定该 `main` 提交。T-014 两份成果物的 Git blob 均通过原始 SHA-256 核验。
+- `v0.0.5` 发布快照与升级后的项目分支均通过结构校验及全部 60 项测试。项目分支校验覆盖 25 个角色、51 份技能、1 个实际项目、1 套项目模板和 505 处本地链接。
+- 记录人：框架超级管理员，2026-11-11（Asia/Shanghai）。
 
 ### 2026-10-12：升级到 v0.0.4
 
