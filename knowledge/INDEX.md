@@ -44,6 +44,7 @@
 | [technical-book-validation](technical-book-validation.md) | 技术书示例与实验验证 |
 | [testing](testing.md) | 测试设计与执行 |
 | [travel-planning](travel-planning.md) | 旅行规划 |
+| [value-investing](value-investing.md) | 价值投资与企业估值 |
 | [video-directing](video-directing.md) | 影视导演与分镜设计 |
 | [video-production-editing](video-production-editing.md) | 视频制作剪辑与后期 |
 | [visual-design](visual-design.md) | 视觉设计 |
