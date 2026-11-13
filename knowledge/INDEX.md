@@ -33,6 +33,7 @@
 | [reader-feedback](reader-feedback.md) | 读者学习反馈与修订 |
 | [research](research.md) | 资料研究与事实核查 |
 | [reverse-engineering](reverse-engineering.md) | Linux 与 Windows 可执行文件逆向分析 |
+| [securities-analysis](securities-analysis.md) | 证券分析 |
 | [social-media-operations](social-media-operations.md) | 社交媒体运营 |
 | [qt-quick-ui-engineering](qt-quick-ui-engineering.md) | Qt Quick/QML 界面设计与工程 |
 | [qt-scene-graph-engineering](qt-scene-graph-engineering.md) | Qt Scene Graph 实时渲染工程 |
