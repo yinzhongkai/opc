@@ -25,7 +25,7 @@
 - 团队状态：六名成员登记不变；五位执行成员均按用户要求完成并回消息、停止工作，PM 协调核对及汇总完成；当前不启动修订或下一轮成员执行。
 - 后续章节修订参考：[第 4 章人工校审记录](artifacts/work-records/t016-chapter4-manual-review-style.md)已整理本轮明确的正文、示例、命令输出和排版偏好，结合 A-004 使用。
 - 开发仓库状态：书稿 `main@619c4efcd57a08818572f360b61b97abe2462ed0`、工程 `main@79d9696c1d37fcbf65724eb05a253b3168d2eab7` 和工程注释标签 `chapter4`（对象 `8f3da6ea761049c2fe83e87a4a25bbe0c99d8940`）均与本轮 GitHub 查询一致，两个本机成果物工作树干净，批准正文未变。原开发分支及配套发布/交接治理分支已清理；OPC 原 54 笔历史和两个成果物旧历史由既有恢复引用及 bundle 保留。配套发布提交 `c95f7a5` 保留，交接与任务结案按本轮功能整理合为一笔，整理范围与恢复点见 [T-016](TASKS.md)。两份 WORKSPACE revision、tiger 主机和路径不变；服务器 checkout 未重新核验或更改，标签发布阶段的 SSH 连接限制按原记录保留。
-- 当前开发分支：OPC `feature/book-yocto/t-018-chapter5-revision`（创建基线 `92e3513bded527c6aa50a26bd6c2651db993906f`）；书稿 `feature/t-018-chapter5-revision`（创建基线 `619c4efcd57a08818572f360b61b97abe2462ed0`）。两边已在本机创建并切换，尚未推送；正文与工程内容未改，WORKSPACE revision 不变。
+- 当前开发分支：OPC `feature/book-yocto/t-018-chapter5-revision`（创建基线 `92e3513bded527c6aa50a26bd6c2651db993906f`）已于 2026-11-20 按用户要求推送并跟踪 origin 同名分支，评审汇总 `23f0292` 的远端引用已核对一致；书稿 `feature/t-018-chapter5-revision`（创建基线 `619c4efcd57a08818572f360b61b97abe2462ed0`）仍仅本机保留。正文与工程内容未改，WORKSPACE revision 不变，均未合入长期分支。
 - 关键成果：第 4 章正文已获用户确认定稿（D-016）；A-004 v0.5 approved、A-002 v0.8 draft、A-005 v0.2 approved / D-014、A-006 v0.1 draft。蓝图和各阶段报告保留其原版本及当时状态。当前工程构建与手工复位证据见[工程回执](artifacts/work-records/remove-tests-minboot-result.json)和[监控器日志](artifacts/work-records/manual-monitor-minboot-20261120.log)。
 - 阻塞、待确认事项及下一位行动人：
   - **chapter 3 无未完成阻塞**：用户确认、专业复核、真实环境验证、源码合并和远端推送均已完成。

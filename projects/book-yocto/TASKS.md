@@ -1213,7 +1213,7 @@
 - 状态：in_progress（首轮五位成员自查/评审、回报及 PM 协调核对已完成，均需修订；待用户通读意见后统一修订，正文与新实测尚未启动）
 - 授权来源与日期：2026-11-20 用户在确认第 4 章结案后询问是否可推进第 5 章，随后明确指示“先创建一个feature分支吧”；先完成分支与任务准备。同日用户追加指示：“你调度下各个成员review一下吧，要求成员review完需要给你回消息，然后你在接着进行调度”。据此安排现有成员依次审查并向 project-manager 回报，由 project-manager 接续调度。
 - 变更类型：feature
-- OPC 开发分支与目标：`feature/book-yocto/t-018-chapter5-revision` → `project/book-yocto`；已本机创建，尚未推送。
+- OPC 开发分支与目标：`feature/book-yocto/t-018-chapter5-revision` → `project/book-yocto`；2026-11-20 按用户要求推送至 origin 同名分支并设置上游，尚未合入目标分支。
 - OPC 合入前目标提交：创建分支时为 `92e3513bded527c6aa50a26bd6c2651db993906f`；正式合入前须重新读取并记录实际目标头。
 - 成果物仓库及开发分支：`git@github.com:yinzhongkai/book-yocto.git`，`feature/t-018-chapter5-revision` → `main`；已在 `C:/Users/YinZh/Documents/workspace/book-yocto` 本机创建，尚未推送。创建基线为 `619c4efcd57a08818572f360b61b97abe2462ed0`，与 WORKSPACE revision 一致。
 - 成果物仓库合入后的最终提交：尚未产生；当前仅创建分支，未修改正文或工程，WORKSPACE revision 不变。
@@ -1228,8 +1228,9 @@
   - 同日 qemu-engineer 已回报 revise、Q5-001～Q5-005 共 5 项，正式记录提交 `3501adca025472e32d660087ac833eb3f5fe2631`。project-manager 已核对该提交只修改 QEMU 小节，冻结正文与两个工作树状态不变、成员会话已停止；服务器直接源码核对因 SSH 连接失败未完成，未重跑模型或本章实验。下一位 yocto-engineer。
   - 同日 yocto-engineer 已回报 revise、Y5-001～Y5-009 共 9 项，正式记录提交 `f4c2faddb488eae4352233527c8cc0af2a4ba2f4`；另列 VY5-01～09 九组未执行的 D-010 实测计划。project-manager 已核对仅本人小节变化、版本和工作树干净、成员已停止；下一位 reviewer，需独立核对 Y5-006 的目标自身无 provider 与依赖不完整查询状态区分。
   - 同日 reviewer 已回报 revise、R5-001～R5-012 共 12 项，正式记录提交 `18091d614fa1177061c2ad0997e8e1526d51265f`。project-manager 核对仅本人小节变化、冻结正文不变、工作树干净、成员已停止；五位均按用户要求回报后，完成本轮协调核对及 7 组事项归并。39 条署名意见包含重叠，不计为 39 个独立缺陷；用户意见尚待提交，未启动统一修订或实测。
+  - 同日用户要求“把评审内容先提交下，然后推送到远程”。project-manager 核对评审内容均已本地提交、工作树干净，新增范围仅 TASKS / STATUS / PROJECT 且无 merge commit；已将包含五位署名意见及 PM 汇总的 `23f02924b35f20898bf61c2b602809e40cb4e7d8` 推送至 origin 的本任务 feature 分支，并读取远端引用确认一致。正文、工程及 WORKSPACE revision 不变；本次不合入长期分支。
 - 成果与验证证据：两个仓库的 Git 分支与精确创建基线；本任务及 STATUS / PROJECT 的准备和协调记录。分支准备时框架只读校验通过（24 角色、50 技能、1 实际项目、1 套模板、737 处本地链接），`git diff --check` 通过；后续五份署名记录、精确提交与各自验证范围见下方。作者自查及四位专业/独立评审均为 revise，共 39 条意见和 9 组未执行实测计划，PM 协调核对已完成；未产生本轮正文修订或新实测结论。
-- 合并与清理状态：仅本机创建分支，未推送、未合并，保留开发分支供后续本章工作使用。
+- 合并与清理状态：OPC feature 分支已推送并跟踪 origin 同名分支；书稿 feature 分支仍仅本机保留，未新增正文提交。两个分支均未合入或清理，供后续本章工作使用。
 - 阻塞与下一位行动人：本轮成员审查、逐一回报和 PM 汇总已完成，当前待用户通读意见或明确无新增意见（D-007）；收到后由 project-manager 衔接 writer 统一修订、后续真实环境核验及按影响复核。服务器访问和 D-010 实测缺口未解除；本轮不自动启动修稿、构建或下一轮成员执行，T-018 整体尚未 completed。
 - 更新日期：2026-11-20
 
