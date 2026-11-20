@@ -1,0 +1,1273 @@
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/checkpatch.log", "bytes": 208, "sha256": "2acaf89204cc69800934ff00642db62e46703d26661f52666453f8bb38f3cc60", "bundle": "session-builds.log"} =====
+total: 0 errors, 0 warnings, 175 lines checked
+
+/home/oops/workspace/meta-tiger/recipes-devtools/qemu/files/0001-arm-add-minimal-tiger-machine.patch has no obvious style problems and is ready for submission.
+
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/checkpatch.rc", "bytes": 2, "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa", "bundle": "session-builds.log"} =====
+0
+
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/devtool-build-1.log", "bytes": 73616, "sha256": "b2c96ef72d6601dd4ba32e11ac3f1fd92ea50b69f450c40e9e1d2c716300391b", "bundle": "session-builds.log"} =====
+NOTE: Starting bitbake server...
+NOTE: Reconnecting to bitbake server...
+NOTE: Retrying server connection (#1)... (23:10:18.871342)
+Loading cache...done.
+Loaded 1878 entries from dependency cache.
+Parsing recipes...done.
+Parsing of 920 .bb files complete (919 cached, 1 parsed). 1878 targets, 58 skipped, 0 masked, 0 errors.
+WARNING: No bb files in default matched BBFILE_PATTERN_meta-tiger '^/home/oops/workspace/meta-tiger/'
+
+Summary: There was 1 WARNING message.
+Loading cache...done.
+Loaded 1878 entries from dependency cache.
+Parsing recipes...done.
+Parsing of 920 .bb files complete (919 cached, 1 parsed). 1878 targets, 58 skipped, 0 masked, 0 errors.
+WARNING: No bb files in default matched BBFILE_PATTERN_meta-tiger '^/home/oops/workspace/meta-tiger/'
+NOTE: Resolving any missing task queue dependencies
+
+Build Configuration:
+BB_VERSION           = "2.8.1"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "aarch64-poky-linux"
+MACHINE              = "qemuarm64"
+DISTRO               = "poky"
+DISTRO_VERSION       = "5.0.20"
+TUNE_FEATURES        = "aarch64 crc cortexa57"
+TARGET_FPU           = ""
+meta                 
+meta-poky            
+meta-yocto-bsp       = "scarthgap:77d1feb37e280733684ae8a9449fb031d5d7ff40"
+meta-tiger           = "feature/t-016-chapter4-revision:0e3da48b34ef772532535a730a21878cc30ccf67"
+workspace            = "<unknown>:<unknown>"
+
+Initialising tasks...Sstate summary: Wanted 355 Local 352 Mirrors 0 Missed 3 Current 8 (99% match, 99% complete)
+done.
+NOTE: Executing Tasks
+NOTE: Running setscene task 13 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-multimedia/libpng/libpng_1.6.42.bb:do_populate_sysroot_setscene)
+NOTE: Running setscene task 15 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-graphics/libsdl2/libsdl2_2.30.1.bb:do_populate_sysroot_setscene)
+NOTE: Running setscene task 16 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-graphics/xorg-lib/pixman_0.42.2.bb:do_populate_sysroot_setscene)
+NOTE: Running setscene task 17 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-multimedia/alsa/alsa-lib_1.2.11.bb:do_populate_sysroot_setscene)
+NOTE: Running setscene task 19 of 363 (/home/oops/workspace/poky/meta/recipes-devtools/qemu/qemu-native_8.2.7.bb:do_populate_sysroot_setscene)
+NOTE: Running setscene task 20 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-connectivity/slirp/libslirp_git.bb:do_populate_sysroot_setscene)
+NOTE: Running setscene task 21 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-graphics/virglrenderer/virglrenderer_1.0.1.bb:do_populate_sysroot_setscene)
+NOTE: Running setscene task 22 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-kernel/dtc/dtc_1.7.0.bb:do_populate_sysroot_setscene)
+NOTE: recipe qemu-native-8.2.7-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe libsdl2-native-2.30.1-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe alsa-lib-native-1.2.11-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe libpng-native-1.6.42-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe pixman-native-1_0.42.2-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe libslirp-native-4.7.0-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe virglrenderer-native-1.0.1-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe dtc-native-1.7.0-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe libpng-native-1.6.42-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 24 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-multimedia/libpng/libpng_1.6.42.bb:do_recipe_qa_setscene)
+NOTE: recipe alsa-lib-native-1.2.11-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: recipe libslirp-native-4.7.0-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: recipe pixman-native-1_0.42.2-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 28 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-multimedia/alsa/alsa-lib_1.2.11.bb:do_recipe_qa_setscene)
+NOTE: Running setscene task 29 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-connectivity/slirp/libslirp_git.bb:do_recipe_qa_setscene)
+NOTE: Running setscene task 31 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-graphics/xorg-lib/pixman_0.42.2.bb:do_recipe_qa_setscene)
+NOTE: recipe libsdl2-native-2.30.1-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 33 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-graphics/libsdl2/libsdl2_2.30.1.bb:do_recipe_qa_setscene)
+NOTE: recipe virglrenderer-native-1.0.1-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 35 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-graphics/libepoxy/libepoxy_1.5.10.bb:do_populate_sysroot_setscene)
+NOTE: recipe dtc-native-1.7.0-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 36 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-graphics/virglrenderer/virglrenderer_1.0.1.bb:do_recipe_qa_setscene)
+NOTE: recipe qemu-native-8.2.7-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 38 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-core/glib-2.0/glib-2.0_2.78.6.bb:do_populate_sysroot_setscene)
+NOTE: recipe alsa-lib-native-1.2.11-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe libslirp-native-4.7.0-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe libpng-native-1.6.42-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe pixman-native-1_0.42.2-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe libsdl2-native-2.30.1-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe libepoxy-native-1.5.10-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe alsa-lib-native-1.2.11-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: Running setscene task 39 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-kernel/dtc/dtc_1.7.0.bb:do_recipe_qa_setscene)
+NOTE: recipe virglrenderer-native-1.0.1-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe libslirp-native-4.7.0-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe pixman-native-1_0.42.2-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe libpng-native-1.6.42-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: Running setscene task 41 of 363 (/home/oops/workspace/poky/meta/recipes-devtools/qemu/qemu-native_8.2.7.bb:do_recipe_qa_setscene)
+NOTE: recipe libsdl2-native-2.30.1-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: Running task 29 of 1224 (/home/oops/workspace/poky/meta/recipes-devtools/qemu/qemu-system-native_8.2.7.bb:do_recipe_qa)
+NOTE: Running task 34 of 1224 (/home/oops/workspace/poky/meta/recipes-devtools/qemu/qemu-system-native_8.2.7.bb:do_deploy_source_date_epoch)
+NOTE: recipe libepoxy-native-1.5.10-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 43 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-graphics/mesa/mesa_24.0.7.bb:do_populate_sysroot_setscene)
+NOTE: Running setscene task 44 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-graphics/libepoxy/libepoxy_1.5.10.bb:do_recipe_qa_setscene)
+NOTE: recipe virglrenderer-native-1.0.1-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe glib-2.0-native-1_2.78.6-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe qemu-native-8.2.7-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe qemu-system-native-8.2.7-r0: task do_recipe_qa: Started
+NOTE: recipe qemu-system-native-8.2.7-r0: task do_recipe_qa: Succeeded
+NOTE: Running task 39 of 1224 (/home/oops/workspace/poky/meta/recipes-devtools/qemu/qemu-system-native_8.2.7.bb:do_fetch)
+NOTE: recipe dtc-native-1.7.0-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe qemu-system-native-8.2.7-r0: task do_deploy_source_date_epoch: Started
+NOTE: recipe qemu-native-8.2.7-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe qemu-system-native-8.2.7-r0: task do_deploy_source_date_epoch: Succeeded
+NOTE: recipe libepoxy-native-1.5.10-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe dtc-native-1.7.0-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe glib-2.0-native-1_2.78.6-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 46 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-core/glib-2.0/glib-2.0_2.78.6.bb:do_recipe_qa_setscene)
+NOTE: recipe mesa-native-2_24.0.7-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe libepoxy-native-1.5.10-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe qemu-system-native-8.2.7-r0: task do_fetch: Started
+NOTE: recipe mesa-native-2_24.0.7-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 48 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/elfutils/elfutils_0.191.bb:do_populate_sysroot_setscene)
+NOTE: Running setscene task 49 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-graphics/xorg-lib/libxdamage_1.1.6.bb:do_populate_sysroot_setscene)
+NOTE: Running setscene task 50 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/python/python3-mako_1.3.2.bb:do_populate_sysroot_setscene)
+NOTE: Running setscene task 51 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-graphics/wayland/wayland_1.22.0.bb:do_populate_sysroot_setscene)
+NOTE: Running setscene task 52 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-graphics/wayland/wayland-protocols_1.33.bb:do_populate_sysroot_setscene)
+NOTE: Running setscene task 53 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-graphics/xorg-lib/libxxf86vm_1.1.5.bb:do_populate_sysroot_setscene)
+NOTE: recipe glib-2.0-native-1_2.78.6-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe glib-2.0-native-1_2.78.6-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: Running setscene task 54 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/chrpath/chrpath_0.16.bb:do_populate_sysroot_setscene)
+NOTE: recipe python3-mako-native-1.3.2-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe libxdamage-native-1_1.1.6-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe elfutils-native-0.191-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe libxxf86vm-native-1_1.1.5-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe wayland-native-1.22.0-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe libxdamage-native-1_1.1.6-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 55 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-core/gettext/gettext_0.22.5.bb:do_populate_sysroot_setscene)
+NOTE: recipe wayland-protocols-native-1.33-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe python3-mako-native-1.3.2-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 56 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/python/python3-pygments_2.17.2.bb:do_populate_sysroot_setscene)
+NOTE: recipe libxxf86vm-native-1_1.1.5-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 57 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-graphics/xorg-lib/libxshmfence_1.3.2.bb:do_populate_sysroot_setscene)
+NOTE: recipe wayland-native-1.22.0-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 58 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-graphics/xorg-util/makedepend_1.0.9.bb:do_populate_sysroot_setscene)
+NOTE: recipe chrpath-native-0.16-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe wayland-protocols-native-1.33-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: recipe elfutils-native-0.191-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 59 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/python/python3-markupsafe_2.1.5.bb:do_populate_sysroot_setscene)
+NOTE: Running setscene task 60 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-graphics/mesa/mesa_24.0.7.bb:do_recipe_qa_setscene)
+NOTE: recipe chrpath-native-0.16-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 61 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/llvm/llvm_18.1.8.bb:do_populate_sysroot_setscene)
+NOTE: recipe libxshmfence-native-1.3.2-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe python3-pygments-native-2.17.2-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe gettext-native-0.22.5-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe makedepend-native-1_1.0.9-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe libxshmfence-native-1.3.2-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: recipe python3-markupsafe-native-2.1.5-r0: task do_populate_sysroot_setscene: Started
+NOTE: Running setscene task 63 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-graphics/drm/libdrm_2.4.120.bb:do_populate_sysroot_setscene)
+NOTE: recipe makedepend-native-1_1.0.9-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 64 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-support/libmicrohttpd/libmicrohttpd_1.0.1.bb:do_populate_sysroot_setscene)
+NOTE: recipe python3-pygments-native-2.17.2-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 66 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/elfutils/elfutils_0.191.bb:do_recipe_qa_setscene)
+NOTE: recipe mesa-native-2_24.0.7-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe gettext-native-0.22.5-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: recipe llvm-native-18.1.8-r0: task do_populate_sysroot_setscene: Started
+NOTE: Running setscene task 68 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-graphics/xorg-app/xrandr_1.5.2.bb:do_populate_sysroot_setscene)
+NOTE: recipe python3-markupsafe-native-2.1.5-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 69 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-extended/libarchive/libarchive_3.7.9.bb:do_populate_sysroot_setscene)
+NOTE: recipe mesa-native-2_24.0.7-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: Running setscene task 70 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/python/python3-hatchling_1.21.1.bb:do_populate_sysroot_setscene)
+NOTE: recipe libmicrohttpd-native-1.0.1-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe libdrm-native-2.4.120-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe elfutils-native-0.191-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe libmicrohttpd-native-1.0.1-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 72 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-graphics/xorg-lib/libxfixes_6.0.1.bb:do_populate_sysroot_setscene)
+NOTE: recipe elfutils-native-0.191-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: Running setscene task 74 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/python/python3-mako_1.3.2.bb:do_recipe_qa_setscene)
+NOTE: recipe libdrm-native-2.4.120-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 80 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-graphics/xorg-util/makedepend_1.0.9.bb:do_recipe_qa_setscene)
+NOTE: recipe xrandr-native-1_1.5.2-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe libarchive-native-3.7.9-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe python3-hatchling-native-1.21.1-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe xrandr-native-1_1.5.2-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 81 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-support/gnutls/gnutls_3.8.4.bb:do_populate_sysroot_setscene)
+NOTE: recipe python3-hatchling-native-1.21.1-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: recipe libarchive-native-3.7.9-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: recipe libxfixes-native-1_6.0.1-r0: task do_populate_sysroot_setscene: Started
+NOTE: Running setscene task 82 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/python/python3-pygments_2.17.2.bb:do_recipe_qa_setscene)
+NOTE: Running setscene task 83 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-graphics/wayland/wayland-protocols_1.33.bb:do_recipe_qa_setscene)
+NOTE: recipe python3-mako-native-1.3.2-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe makedepend-native-1_1.0.9-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe libxfixes-native-1_6.0.1-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 87 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/python/python3-pluggy_1.4.0.bb:do_populate_sysroot_setscene)
+NOTE: recipe qemu-system-native-8.2.7-r0: task do_fetch: Succeeded
+NOTE: recipe python3-mako-native-1.3.2-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: Running setscene task 89 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-graphics/xorg-lib/libxrandr_1.5.4.bb:do_populate_sysroot_setscene)
+NOTE: Running setscene task 90 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-graphics/wayland/wayland_1.22.0.bb:do_recipe_qa_setscene)
+NOTE: recipe makedepend-native-1_1.0.9-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: Running setscene task 92 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/python/python3-trove-classifiers_2024.2.23.bb:do_populate_sysroot_setscene)
+NOTE: recipe gnutls-native-3.8.4-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe wayland-protocols-native-1.33-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe python3-pygments-native-2.17.2-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe wayland-protocols-native-1.33-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: Running setscene task 93 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-graphics/xorg-lib/libxshmfence_1.3.2.bb:do_recipe_qa_setscene)
+NOTE: recipe python3-pluggy-native-1.4.0-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe python3-pygments-native-2.17.2-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe libxrandr-native-1_1.5.4-r0: task do_populate_sysroot_setscene: Started
+NOTE: Running setscene task 94 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-support/libmicrohttpd/libmicrohttpd_1.0.1.bb:do_recipe_qa_setscene)
+NOTE: recipe python3-trove-classifiers-native-2024.2.23-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe gnutls-native-3.8.4-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: recipe wayland-native-1.22.0-r0: task do_recipe_qa_setscene: Started
+NOTE: Running setscene task 95 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/chrpath/chrpath_0.16.bb:do_recipe_qa_setscene)
+NOTE: recipe python3-pluggy-native-1.4.0-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: recipe libxrandr-native-1_1.5.4-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 96 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/python/python3-markupsafe_2.1.5.bb:do_recipe_qa_setscene)
+NOTE: Running setscene task 97 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-support/curl/curl_8.7.1.bb:do_populate_sysroot_setscene)
+NOTE: recipe python3-trove-classifiers-native-2024.2.23-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 98 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-support/libgcrypt/libgcrypt_1.10.4.bb:do_populate_sysroot_setscene)
+NOTE: recipe wayland-native-1.22.0-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: Running setscene task 99 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-graphics/xorg-lib/libpciaccess_0.18.bb:do_populate_sysroot_setscene)
+NOTE: recipe libxshmfence-native-1.3.2-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe libmicrohttpd-native-1.0.1-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe libxshmfence-native-1.3.2-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe chrpath-native-0.16-r0: task do_recipe_qa_setscene: Started
+NOTE: Running setscene task 101 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-support/attr/acl_2.3.2.bb:do_populate_sysroot_setscene)
+NOTE: recipe libmicrohttpd-native-1.0.1-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: Running setscene task 102 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/python/python3-calver_2022.6.26.bb:do_populate_sysroot_setscene)
+NOTE: recipe python3-markupsafe-native-2.1.5-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe chrpath-native-0.16-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe libgcrypt-native-1.10.4-r0: task do_populate_sysroot_setscene: Started
+NOTE: Running setscene task 103 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-core/gettext/gettext_0.22.5.bb:do_recipe_qa_setscene)
+NOTE: recipe libpciaccess-native-0.18-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe curl-native-8.7.1-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe llvm-native-18.1.8-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 104 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/python/python3-editables_0.5.bb:do_populate_sysroot_setscene)
+NOTE: recipe python3-markupsafe-native-2.1.5-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: Running setscene task 107 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-graphics/xorg-lib/libxdamage_1.1.6.bb:do_recipe_qa_setscene)
+NOTE: recipe curl-native-8.7.1-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 108 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/python/python3-pluggy_1.4.0.bb:do_recipe_qa_setscene)
+NOTE: recipe libpciaccess-native-0.18-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 109 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-graphics/xorg-lib/libxxf86vm_1.1.5.bb:do_recipe_qa_setscene)
+NOTE: recipe libgcrypt-native-1.10.4-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 110 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-graphics/drm/libdrm_2.4.120.bb:do_recipe_qa_setscene)
+NOTE: recipe acl-native-2.3.2-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe python3-calver-native-2022.6.26-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe gettext-native-0.22.5-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe python3-editables-native-0.5-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe acl-native-2.3.2-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 111 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-graphics/xorg-lib/libxext_1.3.6.bb:do_populate_sysroot_setscene)
+NOTE: recipe python3-calver-native-2022.6.26-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: recipe libxdamage-native-1_1.1.6-r0: task do_recipe_qa_setscene: Started
+NOTE: Running setscene task 113 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/python/python3-pathspec_0.12.1.bb:do_populate_sysroot_setscene)
+NOTE: recipe gettext-native-0.22.5-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: Running setscene task 114 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-extended/libidn/libidn2_2.3.7.bb:do_populate_sysroot_setscene)
+NOTE: recipe python3-editables-native-0.5-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: recipe python3-pluggy-native-1.4.0-r0: task do_recipe_qa_setscene: Started
+NOTE: Running setscene task 115 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-graphics/xorg-lib/libxrender_0.9.11.bb:do_populate_sysroot_setscene)
+NOTE: recipe libxxf86vm-native-1_1.1.5-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe libxdamage-native-1_1.1.6-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: Running setscene task 117 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-support/nettle/nettle_3.9.1.bb:do_populate_sysroot_setscene)
+NOTE: recipe libdrm-native-2.4.120-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe python3-pluggy-native-1.4.0-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: Running setscene task 120 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-graphics/xorg-app/xrandr_1.5.2.bb:do_recipe_qa_setscene)
+NOTE: recipe libxxf86vm-native-1_1.1.5-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: Running setscene task 122 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-support/libgpg-error/libgpg-error_1.48.bb:do_populate_sysroot_setscene)
+NOTE: recipe libdrm-native-2.4.120-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe libxext-native-1_1.3.6-r0: task do_populate_sysroot_setscene: Started
+NOTE: Running setscene task 123 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-support/attr/attr_2.5.1.bb:do_populate_sysroot_setscene)
+NOTE: recipe python3-pathspec-native-0.12.1-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe libidn2-native-2.3.7-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe libxrender-native-1_0.9.11-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe libxext-native-1_1.3.6-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 124 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/python/python3-importlib-metadata_7.0.1.bb:do_populate_sysroot_setscene)
+NOTE: recipe python3-pathspec-native-0.12.1-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 125 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/python/python3-hatchling_1.21.1.bb:do_recipe_qa_setscene)
+NOTE: recipe nettle-native-3.9.1-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe xrandr-native-1_1.5.2-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe libidn2-native-2.3.7-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: recipe libxrender-native-1_0.9.11-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 128 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-support/libcap/libcap_2.69.bb:do_populate_sysroot_setscene)
+NOTE: Running setscene task 129 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/python/python3-editables_0.5.bb:do_recipe_qa_setscene)
+NOTE: recipe libgpg-error-native-1.48-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe xrandr-native-1_1.5.2-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: Running setscene task 132 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-graphics/xorg-lib/libpciaccess_0.18.bb:do_recipe_qa_setscene)
+NOTE: recipe attr-native-2.5.1-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe nettle-native-3.9.1-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 133 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/python/python3-trove-classifiers_2024.2.23.bb:do_recipe_qa_setscene)
+NOTE: recipe python3-importlib-metadata-native-7.0.1-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe libgpg-error-native-1.48-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 134 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-support/gnutls/libtasn1_4.20.0.bb:do_populate_sysroot_setscene)
+NOTE: recipe python3-editables-native-0.5-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe attr-native-2.5.1-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 136 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-graphics/xorg-lib/libxfixes_6.0.1.bb:do_recipe_qa_setscene)
+NOTE: recipe libcap-native-2.69-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe python3-hatchling-native-1.21.1-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe python3-importlib-metadata-native-7.0.1-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 137 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-core/libxml/libxml2_2.12.10.bb:do_populate_sysroot_setscene)
+NOTE: recipe python3-editables-native-0.5-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: Running setscene task 138 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-core/util-linux/util-linux_2.39.3.bb:do_populate_sysroot_setscene)
+NOTE: recipe libpciaccess-native-0.18-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe python3-hatchling-native-1.21.1-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: Running setscene task 139 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-support/attr/acl_2.3.2.bb:do_recipe_qa_setscene)
+NOTE: recipe libcap-native-2.69-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 140 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-extended/libarchive/libarchive_3.7.9.bb:do_recipe_qa_setscene)
+NOTE: recipe libpciaccess-native-0.18-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe libtasn1-native-4.20.0-r0: task do_populate_sysroot_setscene: Started
+NOTE: Running setscene task 143 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-graphics/xorg-lib/libxrandr_1.5.4.bb:do_recipe_qa_setscene)
+NOTE: recipe libxfixes-native-1_6.0.1-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe python3-trove-classifiers-native-2024.2.23-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe libxfixes-native-1_6.0.1-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe python3-trove-classifiers-native-2024.2.23-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: Running setscene task 145 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-support/libgcrypt/libgcrypt_1.10.4.bb:do_recipe_qa_setscene)
+NOTE: Running setscene task 148 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/llvm/llvm_18.1.8.bb:do_recipe_qa_setscene)
+NOTE: recipe libtasn1-native-4.20.0-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 149 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/python/python3-pathlib2_2.3.7.bb:do_populate_sysroot_setscene)
+NOTE: recipe libxml2-native-2.12.10-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe acl-native-2.3.2-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe util-linux-native-2.39.3-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe libarchive-native-3.7.9-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe libxrandr-native-1_1.5.4-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe acl-native-2.3.2-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: Running setscene task 150 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-graphics/xorg-lib/libx11_1.8.9.bb:do_populate_sysroot_setscene)
+NOTE: recipe libxml2-native-2.12.10-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: recipe libarchive-native-3.7.9-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe libxrandr-native-1_1.5.4-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: Running setscene task 151 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-support/curl/curl_8.7.1.bb:do_recipe_qa_setscene)
+NOTE: Running setscene task 154 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/python/python3-zipp_3.17.0.bb:do_populate_sysroot_setscene)
+NOTE: Running setscene task 156 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/python/python3-pathspec_0.12.1.bb:do_recipe_qa_setscene)
+NOTE: recipe libgcrypt-native-1.10.4-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe llvm-native-18.1.8-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe python3-pathlib2-native-2.3.7-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe libgcrypt-native-1.10.4-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: Running setscene task 157 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-support/gmp/gmp_6.3.0.bb:do_populate_sysroot_setscene)
+NOTE: recipe llvm-native-18.1.8-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: Running setscene task 159 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-extended/libidn/libidn2_2.3.7.bb:do_recipe_qa_setscene)
+NOTE: recipe libx11-native-1_1.8.9-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe python3-pathlib2-native-2.3.7-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 160 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-support/libunistring/libunistring_1.2.bb:do_populate_sysroot_setscene)
+NOTE: recipe python3-zipp-native-3.17.0-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe python3-pathspec-native-0.12.1-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe curl-native-8.7.1-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe libx11-native-1_1.8.9-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 163 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-support/gnutls/gnutls_3.8.4.bb:do_recipe_qa_setscene)
+NOTE: recipe python3-pathspec-native-0.12.1-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: Running setscene task 164 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-graphics/xorg-lib/libxext_1.3.6.bb:do_recipe_qa_setscene)
+NOTE: recipe curl-native-8.7.1-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe python3-zipp-native-3.17.0-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 167 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-graphics/xorg-lib/libxcb_1.16.bb:do_populate_sysroot_setscene)
+NOTE: Running setscene task 168 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-support/gnutls/libtasn1_4.20.0.bb:do_recipe_qa_setscene)
+NOTE: recipe util-linux-native-2.39.3-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: recipe gmp-native-6.3.0-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe libidn2-native-2.3.7-r0: task do_recipe_qa_setscene: Started
+NOTE: Running setscene task 170 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/python/python3-six_1.16.0.bb:do_populate_sysroot_setscene)
+NOTE: recipe libunistring-native-1.2-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe libidn2-native-2.3.7-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: Running setscene task 171 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-support/libcap-ng/libcap-ng_0.8.5.bb:do_populate_sysroot_setscene)
+NOTE: recipe gmp-native-6.3.0-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 173 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-support/attr/attr_2.5.1.bb:do_recipe_qa_setscene)
+NOTE: recipe libunistring-native-1.2-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 175 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/python/python3-toml_0.10.2.bb:do_populate_sysroot_setscene)
+NOTE: recipe libxext-native-1_1.3.6-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe gnutls-native-3.8.4-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe libxcb-native-1.16-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe python3-six-native-1.16.0-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe libtasn1-native-4.20.0-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe libxext-native-1_1.3.6-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: Running setscene task 176 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/python/python3-calver_2022.6.26.bb:do_recipe_qa_setscene)
+NOTE: recipe gnutls-native-3.8.4-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: Running setscene task 178 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/bison/bison_3.8.2.bb:do_populate_sysroot_setscene)
+NOTE: recipe libxcb-native-1.16-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: recipe libtasn1-native-4.20.0-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe libcap-ng-native-0.8.5-r0: task do_populate_sysroot_setscene: Started
+NOTE: Running setscene task 179 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-graphics/xorg-lib/xtrans_1.5.0.bb:do_populate_sysroot_setscene)
+NOTE: Running setscene task 182 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/python/python3-more-itertools_10.2.0.bb:do_populate_sysroot_setscene)
+NOTE: recipe python3-six-native-1.16.0-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 183 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-graphics/xorg-lib/libxrender_0.9.11.bb:do_recipe_qa_setscene)
+NOTE: recipe libcap-ng-native-0.8.5-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 184 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-support/libgpg-error/libgpg-error_1.48.bb:do_recipe_qa_setscene)
+NOTE: recipe python3-toml-native-0.10.2-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe attr-native-2.5.1-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe python3-toml-native-0.10.2-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 185 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/python/python3-zipp_3.17.0.bb:do_recipe_qa_setscene)
+NOTE: recipe python3-calver-native-2022.6.26-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe attr-native-2.5.1-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: Running setscene task 187 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-graphics/xorg-lib/libx11_1.8.9.bb:do_recipe_qa_setscene)
+NOTE: recipe bison-native-3.8.2-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe xtrans-native-1_1.5.0-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe libxrender-native-1_0.9.11-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe python3-calver-native-2022.6.26-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: Running setscene task 188 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-graphics/xorg-lib/libxau_1.0.11.bb:do_populate_sysroot_setscene)
+NOTE: recipe python3-more-itertools-native-10.2.0-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe libxrender-native-1_0.9.11-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe xtrans-native-1_1.5.0-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 189 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-support/nettle/nettle_3.9.1.bb:do_recipe_qa_setscene)
+NOTE: Running setscene task 190 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-graphics/xorg-lib/libpthread-stubs_0.5.bb:do_populate_sysroot_setscene)
+NOTE: recipe bison-native-3.8.2-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 193 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-core/util-linux/util-linux_2.39.3.bb:do_recipe_qa_setscene)
+NOTE: recipe libgpg-error-native-1.48-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe python3-more-itertools-native-10.2.0-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: recipe python3-zipp-native-3.17.0-r0: task do_recipe_qa_setscene: Started
+NOTE: Running setscene task 195 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-support/libcap-ng/libcap-ng_0.8.5.bb:do_recipe_qa_setscene)
+NOTE: recipe libx11-native-1_1.8.9-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe libgpg-error-native-1.48-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: Running setscene task 196 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/flex/flex_2.6.4.bb:do_populate_sysroot_setscene)
+NOTE: recipe python3-zipp-native-3.17.0-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: Running setscene task 197 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-core/libxml/libxml2_2.12.10.bb:do_recipe_qa_setscene)
+NOTE: recipe libxau-native-1_1.0.11-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe libx11-native-1_1.8.9-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: Running setscene task 198 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/python/python3-setuptools-scm_8.0.4.bb:do_populate_sysroot_setscene)
+NOTE: recipe libpthread-stubs-native-0.5-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe nettle-native-3.9.1-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe libxau-native-1_1.0.11-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 199 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-support/libcap/libcap_2.69.bb:do_recipe_qa_setscene)
+NOTE: recipe util-linux-native-2.39.3-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe libcap-ng-native-0.8.5-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe nettle-native-3.9.1-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: Running setscene task 202 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-support/libpcre/libpcre2_10.43.bb:do_populate_sysroot_setscene)
+NOTE: recipe libpthread-stubs-native-0.5-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 203 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/python/python3-importlib-metadata_7.0.1.bb:do_recipe_qa_setscene)
+NOTE: recipe flex-native-2.6.4-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe util-linux-native-2.39.3-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: Running setscene task 204 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-graphics/xorg-lib/libxdmcp_1.1.4.bb:do_populate_sysroot_setscene)
+NOTE: recipe libcap-ng-native-0.8.5-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe python3-setuptools-scm-native-8.0.4-r0: task do_populate_sysroot_setscene: Started
+NOTE: Running setscene task 206 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-graphics/xorg-lib/libxau_1.0.11.bb:do_recipe_qa_setscene)
+NOTE: recipe libxml2-native-2.12.10-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe flex-native-2.6.4-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 207 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-graphics/xorg-proto/xcb-proto_1.16.0.bb:do_populate_sysroot_setscene)
+NOTE: recipe libcap-native-2.69-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe libxml2-native-2.12.10-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: Running setscene task 209 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/python/python3-pathlib2_2.3.7.bb:do_recipe_qa_setscene)
+NOTE: recipe python3-setuptools-scm-native-8.0.4-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 213 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/python/python3-more-itertools_10.2.0.bb:do_recipe_qa_setscene)
+NOTE: recipe libpcre2-native-10.43-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe python3-importlib-metadata-native-7.0.1-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe libcap-native-2.69-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: Running setscene task 215 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/python/python3-pyparsing_3.1.1.bb:do_populate_sysroot_setscene)
+NOTE: recipe libxdmcp-native-1_1.1.4-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe libxau-native-1_1.0.11-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe python3-importlib-metadata-native-7.0.1-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: Running setscene task 217 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/python/python3-tomli_2.0.1.bb:do_populate_sysroot_setscene)
+NOTE: recipe libpcre2-native-10.43-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 219 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/python/python3-toml_0.10.2.bb:do_recipe_qa_setscene)
+NOTE: recipe xcb-proto-native-1.16.0-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe libxau-native-1_1.0.11-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: Running setscene task 220 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/python/python3-six_1.16.0.bb:do_recipe_qa_setscene)
+NOTE: recipe python3-pathlib2-native-2.3.7-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe libxdmcp-native-1_1.1.4-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 221 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-support/gmp/gmp_6.3.0.bb:do_recipe_qa_setscene)
+NOTE: recipe python3-more-itertools-native-10.2.0-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe xcb-proto-native-1.16.0-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 224 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/bison/bison_3.8.2.bb:do_recipe_qa_setscene)
+NOTE: recipe python3-pathlib2-native-2.3.7-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: Running setscene task 225 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-graphics/xorg-lib/libxdmcp_1.1.4.bb:do_recipe_qa_setscene)
+NOTE: recipe python3-pyparsing-native-3.1.1-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe python3-more-itertools-native-10.2.0-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: Running setscene task 226 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-graphics/xorg-proto/xorgproto_2023.2.bb:do_populate_sysroot_setscene)
+NOTE: recipe python3-tomli-native-2.0.1-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe python3-toml-native-0.10.2-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe python3-pyparsing-native-3.1.1-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: recipe python3-six-native-1.16.0-r0: task do_recipe_qa_setscene: Started
+NOTE: Running setscene task 229 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/flex/flex_2.6.4.bb:do_recipe_qa_setscene)
+NOTE: recipe python3-tomli-native-2.0.1-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 230 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-support/libunistring/libunistring_1.2.bb:do_recipe_qa_setscene)
+NOTE: recipe gmp-native-6.3.0-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe python3-toml-native-0.10.2-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: Running setscene task 232 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-graphics/xorg-lib/libpthread-stubs_0.5.bb:do_recipe_qa_setscene)
+NOTE: recipe bison-native-3.8.2-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe python3-six-native-1.16.0-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: Running setscene task 235 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-graphics/xorg-lib/libxcb_1.16.bb:do_recipe_qa_setscene)
+NOTE: recipe gmp-native-6.3.0-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: Running setscene task 236 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/python/python3-pip_24.0.bb:do_populate_sysroot_setscene)
+NOTE: recipe xorgproto-native-2023.2-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe libxdmcp-native-1_1.1.4-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe bison-native-3.8.2-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: Running setscene task 237 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/python/python3-typing-extensions_4.10.0.bb:do_populate_sysroot_setscene)
+NOTE: recipe libxdmcp-native-1_1.1.4-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: Running setscene task 239 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/python/python3-setuptools-scm_8.0.4.bb:do_recipe_qa_setscene)
+NOTE: recipe libunistring-native-1.2-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe flex-native-2.6.4-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe xorgproto-native-2023.2-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 240 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-graphics/xorg-lib/xtrans_1.5.0.bb:do_recipe_qa_setscene)
+NOTE: recipe libpthread-stubs-native-0.5-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe libxcb-native-1.16-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe libunistring-native-1.2-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: Running setscene task 241 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-graphics/xorg-util/util-macros_1.20.0.bb:do_populate_sysroot_setscene)
+NOTE: recipe flex-native-2.6.4-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe python3-pip-native-24.0-r0: task do_populate_sysroot_setscene: Started
+NOTE: Running setscene task 242 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/python/python3-pyparsing_3.1.1.bb:do_recipe_qa_setscene)
+NOTE: recipe libxcb-native-1.16-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe python3-typing-extensions-native-4.10.0-r0: task do_populate_sysroot_setscene: Started
+NOTE: Running setscene task 243 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/meson/meson_1.3.1.bb:do_populate_sysroot_setscene)
+NOTE: recipe libpthread-stubs-native-0.5-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: Running setscene task 245 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-graphics/xorg-proto/xcb-proto_1.16.0.bb:do_recipe_qa_setscene)
+NOTE: recipe python3-setuptools-scm-native-8.0.4-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe xtrans-native-1_1.5.0-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe python3-typing-extensions-native-4.10.0-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 246 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/python/python3-tomli_2.0.1.bb:do_recipe_qa_setscene)
+NOTE: recipe python3-pip-native-24.0-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: recipe python3-setuptools-scm-native-8.0.4-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: Running setscene task 249 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-support/libpcre/libpcre2_10.43.bb:do_recipe_qa_setscene)
+NOTE: Running setscene task 251 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/python/python3-pip_24.0.bb:do_recipe_qa_setscene)
+NOTE: recipe util-macros-native-1_1.20.0-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe python3-pyparsing-native-3.1.1-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe xtrans-native-1_1.5.0-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: Running setscene task 253 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-graphics/xorg-proto/xorgproto_2023.2.bb:do_recipe_qa_setscene)
+NOTE: recipe meson-native-1.3.1-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe xcb-proto-native-1.16.0-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe python3-pyparsing-native-3.1.1-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: Running setscene task 254 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/python/python3-typing-extensions_4.10.0.bb:do_recipe_qa_setscene)
+NOTE: recipe util-macros-native-1_1.20.0-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 256 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-graphics/xorg-util/util-macros_1.20.0.bb:do_recipe_qa_setscene)
+NOTE: recipe xcb-proto-native-1.16.0-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe python3-tomli-native-2.0.1-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe libpcre2-native-10.43-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe meson-native-1.3.1-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 257 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/python/python3-setuptools_69.1.1.bb:do_populate_sysroot_setscene)
+NOTE: Running setscene task 259 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/meson/meson_1.3.1.bb:do_recipe_qa_setscene)
+NOTE: recipe python3-pip-native-24.0-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe python3-tomli-native-2.0.1-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe xorgproto-native-2023.2-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe libpcre2-native-10.43-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe python3-pip-native-24.0-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe python3-typing-extensions-native-4.10.0-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe util-macros-native-1_1.20.0-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe xorgproto-native-2023.2-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe python3-setuptools-native-69.1.1-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe python3-typing-extensions-native-4.10.0-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe util-macros-native-1_1.20.0-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe meson-native-1.3.1-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe meson-native-1.3.1-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe python3-setuptools-native-69.1.1-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 260 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/python/python3-wheel_0.42.0.bb:do_populate_sysroot_setscene)
+NOTE: Running setscene task 262 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/python/python3-setuptools_69.1.1.bb:do_recipe_qa_setscene)
+NOTE: recipe python3-wheel-native-0.42.0-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe python3-setuptools-native-69.1.1-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe python3-setuptools-native-69.1.1-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe python3-wheel-native-0.42.0-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 263 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/python/python3-build_1.1.1.bb:do_populate_sysroot_setscene)
+NOTE: Running setscene task 265 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/python/python3-wheel_0.42.0.bb:do_recipe_qa_setscene)
+NOTE: recipe python3-build-native-1.1.1-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe python3-wheel-native-0.42.0-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe python3-wheel-native-0.42.0-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe python3-build-native-1.1.1-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 267 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/python/python3-packaging_23.2.bb:do_populate_sysroot_setscene)
+NOTE: Running setscene task 268 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/python/python3-pyproject-hooks_1.0.0.bb:do_populate_sysroot_setscene)
+NOTE: Running setscene task 269 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/python/python3-build_1.1.1.bb:do_recipe_qa_setscene)
+NOTE: recipe python3-packaging-native-23.2-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe python3-build-native-1.1.1-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe python3-pyproject-hooks-native-1.0.0-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe python3-build-native-1.1.1-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe python3-packaging-native-23.2-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 271 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/python/python3-packaging_23.2.bb:do_recipe_qa_setscene)
+NOTE: recipe python3-pyproject-hooks-native-1.0.0-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 273 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/python/python3-installer_0.7.0.bb:do_populate_sysroot_setscene)
+NOTE: Running setscene task 274 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/python/python3-pyproject-hooks_1.0.0.bb:do_recipe_qa_setscene)
+NOTE: recipe python3-packaging-native-23.2-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe python3-pyproject-hooks-native-1.0.0-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe python3-installer-native-0.7.0-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe python3-packaging-native-23.2-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe python3-pyproject-hooks-native-1.0.0-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe python3-installer-native-0.7.0-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 275 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/python/python3-flit-core_3.9.0.bb:do_populate_sysroot_setscene)
+NOTE: Running setscene task 277 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/python/python3-installer_0.7.0.bb:do_recipe_qa_setscene)
+NOTE: recipe python3-installer-native-0.7.0-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe python3-flit-core-native-3.9.0-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe python3-installer-native-0.7.0-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe python3-flit-core-native-3.9.0-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 278 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/python/python3_3.12.14.bb:do_populate_sysroot_setscene)
+NOTE: Running setscene task 279 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-extended/unzip/unzip_6.0.bb:do_populate_sysroot_setscene)
+NOTE: Running setscene task 281 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/python/python3-flit-core_3.9.0.bb:do_recipe_qa_setscene)
+NOTE: recipe unzip-native-1_6.0-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe python3-flit-core-native-3.9.0-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe python3-flit-core-native-3.9.0-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe unzip-native-1_6.0-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: recipe python3-native-3.12.14-r0: task do_populate_sysroot_setscene: Started
+NOTE: Running setscene task 283 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-extended/unzip/unzip_6.0.bb:do_recipe_qa_setscene)
+NOTE: recipe unzip-native-1_6.0-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe unzip-native-1_6.0-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe python3-native-3.12.14-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 285 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-support/libffi/libffi_3.4.6.bb:do_populate_sysroot_setscene)
+NOTE: Running setscene task 286 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/libedit/libedit_20230828-3.1.bb:do_populate_sysroot_setscene)
+NOTE: Running setscene task 287 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-core/expat/expat_2.6.4.bb:do_populate_sysroot_setscene)
+NOTE: Running setscene task 288 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-support/sqlite/sqlite3_3.45.3.bb:do_populate_sysroot_setscene)
+NOTE: Running setscene task 289 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-core/util-linux/util-linux-libuuid_2.39.3.bb:do_populate_sysroot_setscene)
+NOTE: Running setscene task 291 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-extended/libnsl/libnsl2_git.bb:do_populate_sysroot_setscene)
+NOTE: Running setscene task 293 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/python/python3_3.12.14.bb:do_recipe_qa_setscene)
+NOTE: recipe sqlite3-native-3_3.45.3-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe libffi-native-3.4.6-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe libedit-native-20230828-3.1-r1: task do_populate_sysroot_setscene: Started
+NOTE: recipe util-linux-libuuid-native-2.39.3-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe libnsl2-native-2.0.1-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe expat-native-2.6.4-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe sqlite3-native-3_3.45.3-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 296 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-support/sqlite/sqlite3_3.45.3.bb:do_recipe_qa_setscene)
+NOTE: recipe libnsl2-native-2.0.1-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: recipe libffi-native-3.4.6-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 298 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-extended/libtirpc/libtirpc_1.3.4.bb:do_populate_sysroot_setscene)
+NOTE: Running setscene task 299 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-extended/libnsl/libnsl2_git.bb:do_recipe_qa_setscene)
+NOTE: Running setscene task 301 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-support/libffi/libffi_3.4.6.bb:do_recipe_qa_setscene)
+NOTE: recipe util-linux-libuuid-native-2.39.3-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 303 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-core/util-linux/util-linux-libuuid_2.39.3.bb:do_recipe_qa_setscene)
+NOTE: recipe libedit-native-20230828-3.1-r1: task do_populate_sysroot_setscene: Succeeded
+NOTE: recipe python3-native-3.12.14-r0: task do_recipe_qa_setscene: Started
+NOTE: Running setscene task 305 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/libedit/libedit_20230828-3.1.bb:do_recipe_qa_setscene)
+NOTE: recipe expat-native-2.6.4-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 306 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/ninja/ninja_1.11.1.bb:do_populate_sysroot_setscene)
+NOTE: recipe python3-native-3.12.14-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: Running setscene task 307 of 363 (/home/oops/workspace/poky/meta/recipes-devtools/cmake/cmake-native_3.28.3.bb:do_populate_sysroot_setscene)
+NOTE: recipe sqlite3-native-3_3.45.3-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe libtirpc-native-1.3.4-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe libffi-native-3.4.6-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe libnsl2-native-2.0.1-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe util-linux-libuuid-native-2.39.3-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe libedit-native-20230828-3.1-r1: task do_recipe_qa_setscene: Started
+NOTE: recipe sqlite3-native-3_3.45.3-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: Running setscene task 309 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-core/expat/expat_2.6.4.bb:do_recipe_qa_setscene)
+NOTE: recipe cmake-native-3.28.3-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe ninja-native-1.11.1-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe libffi-native-3.4.6-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe libnsl2-native-2.0.1-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe util-linux-libuuid-native-2.39.3-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe libtirpc-native-1.3.4-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 311 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-extended/libtirpc/libtirpc_1.3.4.bb:do_recipe_qa_setscene)
+NOTE: recipe libedit-native-20230828-3.1-r1: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe ninja-native-1.11.1-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 312 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-support/re2c/re2c_3.1.bb:do_populate_sysroot_setscene)
+NOTE: Running setscene task 314 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/ninja/ninja_1.11.1.bb:do_recipe_qa_setscene)
+NOTE: recipe expat-native-2.6.4-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe expat-native-2.6.4-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe libtirpc-native-1.3.4-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe re2c-native-3.1-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe ninja-native-1.11.1-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe cmake-native-3.28.3-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: recipe libtirpc-native-1.3.4-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: Running setscene task 315 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-core/ncurses/ncurses_6.4.bb:do_populate_sysroot_setscene)
+NOTE: Running setscene task 316 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-connectivity/openssl/openssl_3.5.7.bb:do_populate_sysroot_setscene)
+NOTE: Running setscene task 317 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-extended/zstd/zstd_1.5.5.bb:do_populate_sysroot_setscene)
+NOTE: Running setscene task 319 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-extended/bzip2/bzip2_1.0.8.bb:do_populate_sysroot_setscene)
+NOTE: Running setscene task 320 of 363 (/home/oops/workspace/poky/meta/recipes-devtools/cmake/cmake-native_3.28.3.bb:do_recipe_qa_setscene)
+NOTE: recipe ninja-native-1.11.1-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe re2c-native-3.1-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 322 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-support/re2c/re2c_3.1.bb:do_recipe_qa_setscene)
+NOTE: recipe cmake-native-3.28.3-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe ncurses-native-6.4-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe cmake-native-3.28.3-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe zstd-native-1.5.5-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe bzip2-native-1.0.8-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe re2c-native-3.1-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe openssl-native-3.5.7-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe ncurses-native-6.4-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 324 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-core/ncurses/ncurses_6.4.bb:do_recipe_qa_setscene)
+NOTE: recipe zstd-native-1.5.5-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: recipe bzip2-native-1.0.8-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 326 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-extended/zstd/zstd_1.5.5.bb:do_recipe_qa_setscene)
+NOTE: Running setscene task 328 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-extended/bzip2/bzip2_1.0.8.bb:do_recipe_qa_setscene)
+NOTE: recipe re2c-native-3.1-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe openssl-native-3.5.7-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 330 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-connectivity/openssl/openssl_3.5.7.bb:do_recipe_qa_setscene)
+NOTE: Running setscene task 331 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/perl/perl_5.38.4.bb:do_populate_sysroot_setscene)
+NOTE: recipe zstd-native-1.5.5-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe ncurses-native-6.4-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe bzip2-native-1.0.8-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe zstd-native-1.5.5-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe ncurses-native-6.4-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe bzip2-native-1.0.8-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe perl-native-5.38.4-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe openssl-native-3.5.7-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe openssl-native-3.5.7-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe perl-native-5.38.4-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 333 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-support/gdbm/gdbm_1.23.bb:do_populate_sysroot_setscene)
+NOTE: Running setscene task 334 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-core/zlib/zlib_1.3.1.bb:do_populate_sysroot_setscene)
+NOTE: Running setscene task 335 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/perl/perl_5.38.4.bb:do_recipe_qa_setscene)
+NOTE: Running setscene task 337 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/make/make_4.4.1.bb:do_populate_sysroot_setscene)
+NOTE: recipe zlib-native-1.3.1-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe make-native-4.4.1-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe gdbm-native-1.23-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe perl-native-5.38.4-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe zlib-native-1.3.1-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: recipe perl-native-5.38.4-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: Running setscene task 341 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-core/zlib/zlib_1.3.1.bb:do_recipe_qa_setscene)
+NOTE: recipe make-native-4.4.1-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 342 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/pkgconfig/pkgconfig_git.bb:do_populate_sysroot_setscene)
+NOTE: Running setscene task 344 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/make/make_4.4.1.bb:do_recipe_qa_setscene)
+NOTE: recipe gdbm-native-1.23-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 346 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-support/gdbm/gdbm_1.23.bb:do_recipe_qa_setscene)
+NOTE: recipe zlib-native-1.3.1-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe pkgconfig-native-0.29.2+git-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe make-native-4.4.1-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe gdbm-native-1.23-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe zlib-native-1.3.1-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe make-native-4.4.1-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe gdbm-native-1.23-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe pkgconfig-native-0.29.2+git-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 350 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/pkgconfig/pkgconfig_git.bb:do_recipe_qa_setscene)
+NOTE: Running setscene task 353 of 363 (/home/oops/workspace/poky/meta/recipes-devtools/m4/m4-native_1.4.19.bb:do_populate_sysroot_setscene)
+NOTE: recipe m4-native-1.4.19-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe pkgconfig-native-0.29.2+git-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe m4-native-1.4.19-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 356 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/gnu-config/gnu-config_git.bb:do_populate_sysroot_setscene)
+NOTE: Running setscene task 358 of 363 (/home/oops/workspace/poky/meta/recipes-devtools/m4/m4-native_1.4.19.bb:do_recipe_qa_setscene)
+NOTE: recipe pkgconfig-native-0.29.2+git-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe m4-native-1.4.19-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe gnu-config-native-20240101+git-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe m4-native-1.4.19-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe gnu-config-native-20240101+git-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 362 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/gnu-config/gnu-config_git.bb:do_recipe_qa_setscene)
+NOTE: recipe gnu-config-native-20240101+git-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe gnu-config-native-20240101+git-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: Running task 1219 of 1224 (/home/oops/workspace/poky/meta/recipes-devtools/qemu/qemu-system-native_8.2.7.bb:do_unpack)
+NOTE: Running task 1220 of 1224 (/home/oops/workspace/poky/meta/recipes-devtools/qemu/qemu-system-native_8.2.7.bb:do_prepare_recipe_sysroot)
+NOTE: recipe qemu-system-native-8.2.7-r0: task do_unpack: Started
+NOTE: recipe qemu-system-native-8.2.7-r0: task do_prepare_recipe_sysroot: Started
+NOTE: recipe qemu-system-native-8.2.7-r0: task do_prepare_recipe_sysroot: Succeeded
+NOTE: recipe qemu-system-native-8.2.7-r0: task do_unpack: Succeeded
+NOTE: Running task 1221 of 1224 (/home/oops/workspace/poky/meta/recipes-devtools/qemu/qemu-system-native_8.2.7.bb:do_configure)
+NOTE: recipe qemu-system-native-8.2.7-r0: task do_configure: Started
+NOTE: recipe qemu-system-native-8.2.7-r0: task do_configure: Succeeded
+NOTE: Running task 1222 of 1224 (/home/oops/workspace/poky/meta/recipes-devtools/qemu/qemu-system-native_8.2.7.bb:do_compile)
+NOTE: recipe qemu-system-native-8.2.7-r0: task do_compile: Started
+NOTE: qemu-system-native: compiling from external source tree /home/oops/workspace/build/workspace/sources/qemu-system-native
+Bitbake still alive (no events for 600s). Active tasks:
+/home/oops/workspace/poky/meta/recipes-devtools/qemu/qemu-system-native_8.2.7.bb:do_compile
+NOTE: recipe qemu-system-native-8.2.7-r0: task do_compile: Succeeded
+NOTE: Running task 1223 of 1224 (/home/oops/workspace/poky/meta/recipes-devtools/qemu/qemu-system-native_8.2.7.bb:do_install)
+NOTE: recipe qemu-system-native-8.2.7-r0: task do_install: Started
+NOTE: recipe qemu-system-native-8.2.7-r0: task do_install: Succeeded
+NOTE: Running task 1224 of 1224 (/home/oops/workspace/poky/meta/recipes-devtools/qemu/qemu-system-native_8.2.7.bb:do_populate_sysroot)
+NOTE: recipe qemu-system-native-8.2.7-r0: task do_populate_sysroot: Started
+NOTE: recipe qemu-system-native-8.2.7-r0: task do_populate_sysroot: Succeeded
+NOTE: Tasks Summary: Attempted 1224 tasks of which 1215 didn't need to be rerun and all succeeded.
+
+Summary: There was 1 WARNING message.
+
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/devtool-build-1.log.rc", "bytes": 2, "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa", "bundle": "session-builds.log"} =====
+0
+
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/devtool-build-2.log", "bytes": 2687, "sha256": "931e9aada24f1353310aa7144b6bef74989fc3dc7bf49c902324889f000f2615", "bundle": "session-builds.log"} =====
+NOTE: Starting bitbake server...
+NOTE: Reconnecting to bitbake server...
+NOTE: Retrying server connection (#1)... (23:30:41.340693)
+Loading cache...done.
+Loaded 1878 entries from dependency cache.
+Parsing recipes...done.
+Parsing of 920 .bb files complete (919 cached, 1 parsed). 1878 targets, 58 skipped, 0 masked, 0 errors.
+WARNING: No bb files in default matched BBFILE_PATTERN_meta-tiger '^/home/oops/workspace/meta-tiger/'
+
+Summary: There was 1 WARNING message.
+Loading cache...done.
+Loaded 1878 entries from dependency cache.
+Parsing recipes...done.
+Parsing of 920 .bb files complete (919 cached, 1 parsed). 1878 targets, 58 skipped, 0 masked, 0 errors.
+WARNING: No bb files in default matched BBFILE_PATTERN_meta-tiger '^/home/oops/workspace/meta-tiger/'
+NOTE: Resolving any missing task queue dependencies
+
+Build Configuration:
+BB_VERSION           = "2.8.1"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "aarch64-poky-linux"
+MACHINE              = "qemuarm64"
+DISTRO               = "poky"
+DISTRO_VERSION       = "5.0.20"
+TUNE_FEATURES        = "aarch64 crc cortexa57"
+TARGET_FPU           = ""
+meta                 
+meta-poky            
+meta-yocto-bsp       = "scarthgap:77d1feb37e280733684ae8a9449fb031d5d7ff40"
+meta-tiger           = "feature/t-016-chapter4-revision:0e3da48b34ef772532535a730a21878cc30ccf67"
+workspace            = "<unknown>:<unknown>"
+
+Initialising tasks...Sstate summary: Wanted 137 Local 136 Mirrors 0 Missed 1 Current 226 (99% match, 99% complete)
+Removing 1 stale sstate objects for arch x86_64...done.
+NOTE: Executing Tasks
+NOTE: Running task 1222 of 1224 (/home/oops/workspace/poky/meta/recipes-devtools/qemu/qemu-system-native_8.2.7.bb:do_compile)
+NOTE: recipe qemu-system-native-8.2.7-r0: task do_compile: Started
+NOTE: qemu-system-native: compiling from external source tree /home/oops/workspace/build/workspace/sources/qemu-system-native
+NOTE: recipe qemu-system-native-8.2.7-r0: task do_compile: Succeeded
+NOTE: Running task 1223 of 1224 (/home/oops/workspace/poky/meta/recipes-devtools/qemu/qemu-system-native_8.2.7.bb:do_install)
+NOTE: recipe qemu-system-native-8.2.7-r0: task do_install: Started
+NOTE: recipe qemu-system-native-8.2.7-r0: task do_install: Succeeded
+NOTE: Running task 1224 of 1224 (/home/oops/workspace/poky/meta/recipes-devtools/qemu/qemu-system-native_8.2.7.bb:do_populate_sysroot)
+NOTE: recipe qemu-system-native-8.2.7-r0: task do_populate_sysroot: Started
+NOTE: recipe qemu-system-native-8.2.7-r0: task do_populate_sysroot: Succeeded
+NOTE: Tasks Summary: Attempted 1224 tasks of which 1221 didn't need to be rerun and all succeeded.
+
+Summary: There was 1 WARNING message.
+
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/devtool-build-2.rc", "bytes": 2, "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa", "bundle": "session-builds.log"} =====
+0
+
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/devtool-modify.log", "bytes": 2105, "sha256": "587fb13f75228747531148b39f6787103b3d01cad422e3d11fd2acf2a50f5fd5", "bundle": "session-builds.log"} =====
+NOTE: Starting bitbake server...
+NOTE: Reconnecting to bitbake server...
+NOTE: Retrying server connection (#1)... (23:04:59.667719)
+Loading cache...done.
+Loaded 1878 entries from dependency cache.
+WARNING: No bb files in default matched BBFILE_PATTERN_meta-tiger '^/home/oops/workspace/meta-tiger/'
+
+Summary: There was 1 WARNING message.
+INFO: SRC_URI contains some conditional appends/prepends - will create branches to represent these
+WARNING: No bb files in default matched BBFILE_PATTERN_meta-tiger '^/home/oops/workspace/meta-tiger/'
+NOTE: Resolving any missing task queue dependencies
+
+Build Configuration:
+BB_VERSION           = "2.8.1"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "aarch64-poky-linux"
+MACHINE              = "qemuarm64"
+DISTRO               = "poky"
+DISTRO_VERSION       = "5.0.20"
+TUNE_FEATURES        = "aarch64 crc cortexa57"
+TARGET_FPU           = ""
+meta                 
+meta-poky            
+meta-yocto-bsp       = "scarthgap:77d1feb37e280733684ae8a9449fb031d5d7ff40"
+meta-tiger           = "feature/t-016-chapter4-revision:0e3da48b34ef772532535a730a21878cc30ccf67"
+workspace            = "<unknown>:<unknown>"
+
+Initialising tasks...Sstate summary: Wanted 27 Local 27 Mirrors 0 Missed 0 Current 0 (100% match, 0% complete)
+done.
+NOTE: Executing Tasks
+NOTE: Tasks Summary: Attempted 93 tasks of which 90 didn't need to be rerun and all succeeded.
+INFO: Adding local source files to srctree...
+INFO: Source tree extracted to /home/oops/workspace/build/workspace/sources/qemu-system-native
+WARNING: SRC_URI is conditionally overridden in this recipe, thus several devtool-override-* branches have been created, one for each override that makes changes to SRC_URI. It is recommended that you make changes to the devtool branch first, then checkout and rebase each devtool-override-* branch and update any unique patches there (duplicates on those branches will be ignored by devtool finish/update-recipe)
+INFO: Recipe qemu-system-native now set up to build from /home/oops/workspace/build/workspace/sources/qemu-system-native
+
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/devtool-modify.rc", "bytes": 2, "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa", "bundle": "session-builds.log"} =====
+0
+
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/env-after.rc", "bytes": 2, "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa", "bundle": "session-builds.log"} =====
+0
+
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/env-before.rc", "bytes": 2, "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa", "bundle": "session-builds.log"} =====
+0
+
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/firmware-build-1.log", "bytes": 5323, "sha256": "18df066333b258dce6d2e7436f3a50780d93353956ac113cfd84f7dcf68e6fe4", "bundle": "session-builds.log"} =====
+COMMAND ["/home/oops/workspace/build/tmp/work/cortexa57-poky-linux/libedit/20230828-3.1/recipe-sysroot-native/usr/bin/aarch64-poky-linux/aarch64-poky-linux-gcc", "--version"]
+aarch64-poky-linux-gcc (GCC) 13.4.0
+Copyright (C) 2023 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+COMMAND ["/home/oops/workspace/build/tmp/work/cortexa57-poky-linux/libedit/20230828-3.1/recipe-sysroot-native/usr/bin/aarch64-poky-linux/aarch64-poky-linux-gcc", "-O2", "-Wall", "-Wextra", "-Werror", "-march=armv8-a", "-mgeneral-regs-only", "-mstrict-align", "-ffreestanding", "-fno-builtin", "-fno-stack-protector", "-fno-pie", "-fno-pic", "-fno-unwind-tables", "-fno-asynchronous-unwind-tables", "-nostdlib", "-nostartfiles", "-static", "-no-pie", "-DTIGER_BUILD_ID=\"sha256:7fbb005bd53a3f3fa2ed0a933181e50db7a6bff97cab78ce9429557ccb9818d7\"", "/home/oops/workspace/meta-tiger/recipes-test/tiger-minboot/files/start.S", "/home/oops/workspace/meta-tiger/recipes-test/tiger-minboot/files/main.c", "-Wl,--build-id=none", "-Wl,-T,/home/oops/workspace/meta-tiger/recipes-test/tiger-minboot/files/tiger-minboot.ld", "-Wl,-Map,/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.map", "-o", "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.elf"]
+COMMAND ["/home/oops/workspace/build/tmp/work/cortexa57-poky-linux/libedit/20230828-3.1/recipe-sysroot-native/usr/bin/aarch64-poky-linux/aarch64-poky-linux-objcopy", "-O", "binary", "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.elf", "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.bin"]
+COMMAND ["/home/oops/workspace/build/tmp/work/cortexa57-poky-linux/libedit/20230828-3.1/recipe-sysroot-native/usr/bin/aarch64-poky-linux/aarch64-poky-linux-readelf", "-h", "-l", "-S", "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.elf"]
+COMMAND ["/home/oops/workspace/build/tmp/work/cortexa57-poky-linux/libedit/20230828-3.1/recipe-sysroot-native/usr/bin/aarch64-poky-linux/aarch64-poky-linux-nm", "-n", "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.elf"]
+COMMAND ["/home/oops/workspace/build/tmp/work/cortexa57-poky-linux/libedit/20230828-3.1/recipe-sysroot-native/usr/bin/aarch64-poky-linux/aarch64-poky-linux-nm", "-u", "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.elf"]
+COMMAND ["/home/oops/workspace/build/tmp/work/cortexa57-poky-linux/libedit/20230828-3.1/recipe-sysroot-native/usr/bin/aarch64-poky-linux/aarch64-poky-linux-objdump", "-d", "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.elf"]
+{
+  "build_id": "sha256:7fbb005bd53a3f3fa2ed0a933181e50db7a6bff97cab78ce9429557ccb9818d7",
+  "compiler": "/home/oops/workspace/build/tmp/work/cortexa57-poky-linux/libedit/20230828-3.1/recipe-sysroot-native/usr/bin/aarch64-poky-linux/aarch64-poky-linux-gcc",
+  "compiler_sha256": "7848a1aa5883d8a9c7d61f11f664f918226b94cd25894cfe4ef7d8b99ef64474",
+  "compiler_version": "aarch64-poky-linux-gcc (GCC) 13.4.0\nCopyright (C) 2023 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+  "flags": [
+    "-O2",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-march=armv8-a",
+    "-mgeneral-regs-only",
+    "-mstrict-align",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-fno-stack-protector",
+    "-fno-pie",
+    "-fno-pic",
+    "-fno-unwind-tables",
+    "-fno-asynchronous-unwind-tables",
+    "-nostdlib",
+    "-nostartfiles",
+    "-static",
+    "-no-pie"
+  ],
+  "source_files": {
+    "start.S": "4e04d7a7f24a93963681c23f223a2e5b8023773b0138f3a4886c6c74ab49fd50",
+    "main.c": "aca3ed3a16e00f7f24c1617eea83b6a413eda707e896a885becc82fafa624ac1",
+    "tiger-minboot.ld": "3b24e7bb31a41271e8d0a682b0eb509b61cc5ab0a92aca5d0df03cc355627640",
+    "COPYING.MIT": "314a2ef2e4e48871ebdae4aad8c9e598041458abbab3a3f9accef0b74e9b09e5"
+  },
+  "symbols": {
+    "_start": 0,
+    "puts": 128,
+    "firmware_main": 192,
+    "__data_load": 744,
+    "__data_start": 1073741824,
+    "test_data": 1073741824,
+    "__bss_start": 1073741832,
+    "__data_end": 1073741832,
+    "test_bss": 1073741832,
+    "observed_el": 1073741840,
+    "observed_sp": 1073741848,
+    "observed_mpidr": 1073741856,
+    "observed_sctlr": 1073741864,
+    "__bss_end": 1073741872,
+    "__stack_bottom": 1073807360,
+    "__stack_top": 1073872896
+  },
+  "outputs": {
+    "tiger-minboot.elf": {
+      "sha256": "b80e02248b16f19121e123beae2aee26f74454fdaaf54bac9cb45e2de76edf57",
+      "bytes": 132448
+    },
+    "tiger-minboot.bin": {
+      "sha256": "2b67c2bfb9d2fcbf3fd1880a1c1bf3ff09ece73b8bcbf5235116477fd2714376",
+      "bytes": 752
+    },
+    "tiger-minboot.map": {
+      "sha256": "63daf43f04104354e42c4090fb73e43370479fc40bd6a5241b3f0f52c610fa3d",
+      "bytes": 3649
+    },
+    "readelf.txt": {
+      "sha256": "e7ced196248f6f01daa00fbec2c726b14086271bd9766cea9f4b421fdac0c0df",
+      "bytes": 2969
+    },
+    "nm.txt": {
+      "sha256": "95cba225fdd9ce26231d786e8de030afa3fe2bc23c3d317b5db1848184ae2c9a",
+      "bytes": 488
+    },
+    "disassembly.txt": {
+      "sha256": "3c88fc6c710d9f78ba4f8dde765135e65429ef9dde285ad97fb08dbe3f969abb",
+      "bytes": 6979
+    }
+  }
+}
+
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/firmware-build-1.rc", "bytes": 2, "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa", "bundle": "session-builds.log"} =====
+0
+
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/machine-help-new-B.log", "bytes": 6586, "sha256": "96fa972e76d6e3f0aa0c57c2db4f5a468f13e6fe423a740ecf2b113b350691fb", "bundle": "session-builds.log"} =====
+Supported machines are:
+akita                Sharp SL-C1000 (Akita) PDA (PXA270)
+ast1030-evb          Aspeed AST1030 MiniBMC (Cortex-M4)
+ast2500-evb          Aspeed AST2500 EVB (ARM1176)
+ast2600-evb          Aspeed AST2600 EVB (Cortex-A7)
+bletchley-bmc        Facebook Bletchley BMC (Cortex-A7)
+borzoi               Sharp SL-C3100 (Borzoi) PDA (PXA270)
+bpim2u               Bananapi M2U (Cortex-A7)
+canon-a1100          Canon PowerShot A1100 IS (ARM946)
+cheetah              Palm Tungsten|E aka. Cheetah PDA (OMAP310)
+collie               Sharp SL-5500 (Collie) PDA (SA-1110)
+connex               Gumstix Connex (PXA255)
+cubieboard           cubietech cubieboard (Cortex-A8)
+emcraft-sf2          SmartFusion2 SOM kit from Emcraft (M2S010)
+fby35-bmc            Facebook fby35 BMC (Cortex-A7)
+fby35                Meta Platforms fby35
+fp5280g2-bmc         Inspur FP5280G2 BMC (ARM1176)
+fuji-bmc             Facebook Fuji BMC (Cortex-A7)
+g220a-bmc            Bytedance G220A BMC (ARM1176)
+highbank             Calxeda Highbank (ECX-1000)
+imx25-pdk            ARM i.MX25 PDK board (ARM926)
+integratorcp         ARM Integrator/CP (ARM926EJ-S)
+kudo-bmc             Kudo BMC (Cortex-A9)
+kzm                  ARM KZM Emulation Baseboard (ARM1136)
+lm3s6965evb          Stellaris LM3S6965EVB (Cortex-M3)
+lm3s811evb           Stellaris LM3S811EVB (Cortex-M3)
+mainstone            Mainstone II (PXA27x)
+mcimx6ul-evk         Freescale i.MX6UL Evaluation Kit (Cortex-A7)
+mcimx7d-sabre        Freescale i.MX7 DUAL SABRE (Cortex-A7)
+microbit             BBC micro:bit (Cortex-M0)
+midway               Calxeda Midway (ECX-2000)
+mori-bmc             Mori BMC (Cortex-A9)
+mps2-an385           ARM MPS2 with AN385 FPGA image for Cortex-M3
+mps2-an386           ARM MPS2 with AN386 FPGA image for Cortex-M4
+mps2-an500           ARM MPS2 with AN500 FPGA image for Cortex-M7
+mps2-an505           ARM MPS2 with AN505 FPGA image for Cortex-M33
+mps2-an511           ARM MPS2 with AN511 DesignStart FPGA image for Cortex-M3
+mps2-an521           ARM MPS2 with AN521 FPGA image for dual Cortex-M33
+mps3-an524           ARM MPS3 with AN524 FPGA image for dual Cortex-M33
+mps3-an547           ARM MPS3 with AN547 FPGA image for Cortex-M55
+musca-a              ARM Musca-A board (dual Cortex-M33)
+musca-b1             ARM Musca-B1 board (dual Cortex-M33)
+musicpal             Marvell 88w8618 / MusicPal (ARM926EJ-S)
+n800                 Nokia N800 tablet aka. RX-34 (OMAP2420)
+n810                 Nokia N810 tablet aka. RX-44 (OMAP2420)
+netduino2            Netduino 2 Machine (Cortex-M3)
+netduinoplus2        Netduino Plus 2 Machine (Cortex-M4)
+none                 empty machine
+npcm750-evb          Nuvoton NPCM750 Evaluation Board (Cortex-A9)
+nuri                 Samsung NURI board (Exynos4210)
+olimex-stm32-h405    Olimex STM32-H405 (Cortex-M4)
+orangepi-pc          Orange Pi PC (Cortex-A7)
+palmetto-bmc         OpenPOWER Palmetto BMC (ARM926EJ-S)
+qcom-dc-scm-v1-bmc   Qualcomm DC-SCM V1 BMC (Cortex A7)
+qcom-firework-bmc    Qualcomm DC-SCM V1/Firework BMC (Cortex A7)
+quanta-gbs-bmc       Quanta GBS (Cortex-A9)
+quanta-gsj           Quanta GSJ (Cortex-A9)
+quanta-q71l-bmc      Quanta-Q71l BMC (ARM926EJ-S)
+rainier-bmc          IBM Rainier BMC (Cortex-A7)
+raspi0               Raspberry Pi Zero (revision 1.2)
+raspi1ap             Raspberry Pi A+ (revision 1.1)
+raspi2b              Raspberry Pi 2B (revision 1.1)
+raspi3ap             Raspberry Pi 3A+ (revision 1.0)
+raspi3b              Raspberry Pi 3B (revision 1.2)
+realview-eb          ARM RealView Emulation Baseboard (ARM926EJ-S)
+realview-eb-mpcore   ARM RealView Emulation Baseboard (ARM11MPCore)
+realview-pb-a8       ARM RealView Platform Baseboard for Cortex-A8
+realview-pbx-a9      ARM RealView Platform Baseboard Explore for Cortex-A9
+romulus-bmc          OpenPOWER Romulus BMC (ARM1176)
+sabrelite            Freescale i.MX6 Quad SABRE Lite Board (Cortex-A9)
+sbsa-ref             QEMU 'SBSA Reference' ARM Virtual Machine
+smdkc210             Samsung SMDKC210 board (Exynos4210)
+sonorapass-bmc       OCP SonoraPass BMC (ARM1176)
+spitz                Sharp SL-C3000 (Spitz) PDA (PXA270)
+stm32vldiscovery     ST STM32VLDISCOVERY (Cortex-M3)
+supermicro-x11spi-bmc Supermicro X11 SPI BMC (ARM1176)
+supermicrox11-bmc    Supermicro X11 BMC (ARM926EJ-S)
+sx1                  Siemens SX1 (OMAP310) V2
+sx1-v1               Siemens SX1 (OMAP310) V1
+tacoma-bmc           OpenPOWER Tacoma BMC (Cortex-A7)
+terrier              Sharp SL-C3200 (Terrier) PDA (PXA270)
+tiger                Tiger minimal single-core A53 teaching board
+tiogapass-bmc        Facebook Tiogapass BMC (ARM1176)
+tosa                 Sharp SL-6000 (Tosa) PDA (PXA255)
+verdex               Gumstix Verdex Pro XL6P COMs (PXA270)
+versatileab          ARM Versatile/AB (ARM926EJ-S)
+versatilepb          ARM Versatile/PB (ARM926EJ-S)
+vexpress-a15         ARM Versatile Express for Cortex-A15
+vexpress-a9          ARM Versatile Express for Cortex-A9
+virt-2.10            QEMU 2.10 ARM Virtual Machine
+virt-2.11            QEMU 2.11 ARM Virtual Machine
+virt-2.12            QEMU 2.12 ARM Virtual Machine
+virt-2.6             QEMU 2.6 ARM Virtual Machine
+virt-2.7             QEMU 2.7 ARM Virtual Machine
+virt-2.8             QEMU 2.8 ARM Virtual Machine
+virt-2.9             QEMU 2.9 ARM Virtual Machine
+virt-3.0             QEMU 3.0 ARM Virtual Machine
+virt-3.1             QEMU 3.1 ARM Virtual Machine
+virt-4.0             QEMU 4.0 ARM Virtual Machine
+virt-4.1             QEMU 4.1 ARM Virtual Machine
+virt-4.2             QEMU 4.2 ARM Virtual Machine
+virt-5.0             QEMU 5.0 ARM Virtual Machine
+virt-5.1             QEMU 5.1 ARM Virtual Machine
+virt-5.2             QEMU 5.2 ARM Virtual Machine
+virt-6.0             QEMU 6.0 ARM Virtual Machine
+virt-6.1             QEMU 6.1 ARM Virtual Machine
+virt-6.2             QEMU 6.2 ARM Virtual Machine
+virt-7.0             QEMU 7.0 ARM Virtual Machine
+virt-7.1             QEMU 7.1 ARM Virtual Machine
+virt-7.2             QEMU 7.2 ARM Virtual Machine
+virt-8.0             QEMU 8.0 ARM Virtual Machine
+virt-8.1             QEMU 8.1 ARM Virtual Machine
+virt                 QEMU 8.2 ARM Virtual Machine (alias of virt-8.2)
+virt-8.2             QEMU 8.2 ARM Virtual Machine
+witherspoon-bmc      OpenPOWER Witherspoon BMC (ARM1176)
+xilinx-zynq-a9       Xilinx Zynq Platform Baseboard for Cortex-A9
+xlnx-versal-virt     Xilinx Versal Virtual development board
+xlnx-zcu102          Xilinx ZynqMP ZCU102 board with 4xA53s and 2xR5Fs based on the value of smp
+yosemitev2-bmc       Facebook YosemiteV2 BMC (ARM1176)
+z2                   Zipit Z2 (PXA27x)
+
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/machine-help.log", "bytes": 6520, "sha256": "a7811ff9760c28961cf7573a3543118e1affe8e4492e97d7f81beb48b807e526", "bundle": "session-builds.log"} =====
+Supported machines are:
+akita                Sharp SL-C1000 (Akita) PDA (PXA270)
+ast1030-evb          Aspeed AST1030 MiniBMC (Cortex-M4)
+ast2500-evb          Aspeed AST2500 EVB (ARM1176)
+ast2600-evb          Aspeed AST2600 EVB (Cortex-A7)
+bletchley-bmc        Facebook Bletchley BMC (Cortex-A7)
+borzoi               Sharp SL-C3100 (Borzoi) PDA (PXA270)
+bpim2u               Bananapi M2U (Cortex-A7)
+canon-a1100          Canon PowerShot A1100 IS (ARM946)
+cheetah              Palm Tungsten|E aka. Cheetah PDA (OMAP310)
+collie               Sharp SL-5500 (Collie) PDA (SA-1110)
+connex               Gumstix Connex (PXA255)
+cubieboard           cubietech cubieboard (Cortex-A8)
+emcraft-sf2          SmartFusion2 SOM kit from Emcraft (M2S010)
+fby35-bmc            Facebook fby35 BMC (Cortex-A7)
+fby35                Meta Platforms fby35
+fp5280g2-bmc         Inspur FP5280G2 BMC (ARM1176)
+fuji-bmc             Facebook Fuji BMC (Cortex-A7)
+g220a-bmc            Bytedance G220A BMC (ARM1176)
+highbank             Calxeda Highbank (ECX-1000)
+imx25-pdk            ARM i.MX25 PDK board (ARM926)
+integratorcp         ARM Integrator/CP (ARM926EJ-S)
+kudo-bmc             Kudo BMC (Cortex-A9)
+kzm                  ARM KZM Emulation Baseboard (ARM1136)
+lm3s6965evb          Stellaris LM3S6965EVB (Cortex-M3)
+lm3s811evb           Stellaris LM3S811EVB (Cortex-M3)
+mainstone            Mainstone II (PXA27x)
+mcimx6ul-evk         Freescale i.MX6UL Evaluation Kit (Cortex-A7)
+mcimx7d-sabre        Freescale i.MX7 DUAL SABRE (Cortex-A7)
+microbit             BBC micro:bit (Cortex-M0)
+midway               Calxeda Midway (ECX-2000)
+mori-bmc             Mori BMC (Cortex-A9)
+mps2-an385           ARM MPS2 with AN385 FPGA image for Cortex-M3
+mps2-an386           ARM MPS2 with AN386 FPGA image for Cortex-M4
+mps2-an500           ARM MPS2 with AN500 FPGA image for Cortex-M7
+mps2-an505           ARM MPS2 with AN505 FPGA image for Cortex-M33
+mps2-an511           ARM MPS2 with AN511 DesignStart FPGA image for Cortex-M3
+mps2-an521           ARM MPS2 with AN521 FPGA image for dual Cortex-M33
+mps3-an524           ARM MPS3 with AN524 FPGA image for dual Cortex-M33
+mps3-an547           ARM MPS3 with AN547 FPGA image for Cortex-M55
+musca-a              ARM Musca-A board (dual Cortex-M33)
+musca-b1             ARM Musca-B1 board (dual Cortex-M33)
+musicpal             Marvell 88w8618 / MusicPal (ARM926EJ-S)
+n800                 Nokia N800 tablet aka. RX-34 (OMAP2420)
+n810                 Nokia N810 tablet aka. RX-44 (OMAP2420)
+netduino2            Netduino 2 Machine (Cortex-M3)
+netduinoplus2        Netduino Plus 2 Machine (Cortex-M4)
+none                 empty machine
+npcm750-evb          Nuvoton NPCM750 Evaluation Board (Cortex-A9)
+nuri                 Samsung NURI board (Exynos4210)
+olimex-stm32-h405    Olimex STM32-H405 (Cortex-M4)
+orangepi-pc          Orange Pi PC (Cortex-A7)
+palmetto-bmc         OpenPOWER Palmetto BMC (ARM926EJ-S)
+qcom-dc-scm-v1-bmc   Qualcomm DC-SCM V1 BMC (Cortex A7)
+qcom-firework-bmc    Qualcomm DC-SCM V1/Firework BMC (Cortex A7)
+quanta-gbs-bmc       Quanta GBS (Cortex-A9)
+quanta-gsj           Quanta GSJ (Cortex-A9)
+quanta-q71l-bmc      Quanta-Q71l BMC (ARM926EJ-S)
+rainier-bmc          IBM Rainier BMC (Cortex-A7)
+raspi0               Raspberry Pi Zero (revision 1.2)
+raspi1ap             Raspberry Pi A+ (revision 1.1)
+raspi2b              Raspberry Pi 2B (revision 1.1)
+raspi3ap             Raspberry Pi 3A+ (revision 1.0)
+raspi3b              Raspberry Pi 3B (revision 1.2)
+realview-eb          ARM RealView Emulation Baseboard (ARM926EJ-S)
+realview-eb-mpcore   ARM RealView Emulation Baseboard (ARM11MPCore)
+realview-pb-a8       ARM RealView Platform Baseboard for Cortex-A8
+realview-pbx-a9      ARM RealView Platform Baseboard Explore for Cortex-A9
+romulus-bmc          OpenPOWER Romulus BMC (ARM1176)
+sabrelite            Freescale i.MX6 Quad SABRE Lite Board (Cortex-A9)
+sbsa-ref             QEMU 'SBSA Reference' ARM Virtual Machine
+smdkc210             Samsung SMDKC210 board (Exynos4210)
+sonorapass-bmc       OCP SonoraPass BMC (ARM1176)
+spitz                Sharp SL-C3000 (Spitz) PDA (PXA270)
+stm32vldiscovery     ST STM32VLDISCOVERY (Cortex-M3)
+supermicro-x11spi-bmc Supermicro X11 SPI BMC (ARM1176)
+supermicrox11-bmc    Supermicro X11 BMC (ARM926EJ-S)
+sx1                  Siemens SX1 (OMAP310) V2
+sx1-v1               Siemens SX1 (OMAP310) V1
+tacoma-bmc           OpenPOWER Tacoma BMC (Cortex-A7)
+terrier              Sharp SL-C3200 (Terrier) PDA (PXA270)
+tiogapass-bmc        Facebook Tiogapass BMC (ARM1176)
+tosa                 Sharp SL-6000 (Tosa) PDA (PXA255)
+verdex               Gumstix Verdex Pro XL6P COMs (PXA270)
+versatileab          ARM Versatile/AB (ARM926EJ-S)
+versatilepb          ARM Versatile/PB (ARM926EJ-S)
+vexpress-a15         ARM Versatile Express for Cortex-A15
+vexpress-a9          ARM Versatile Express for Cortex-A9
+virt-2.10            QEMU 2.10 ARM Virtual Machine
+virt-2.11            QEMU 2.11 ARM Virtual Machine
+virt-2.12            QEMU 2.12 ARM Virtual Machine
+virt-2.6             QEMU 2.6 ARM Virtual Machine
+virt-2.7             QEMU 2.7 ARM Virtual Machine
+virt-2.8             QEMU 2.8 ARM Virtual Machine
+virt-2.9             QEMU 2.9 ARM Virtual Machine
+virt-3.0             QEMU 3.0 ARM Virtual Machine
+virt-3.1             QEMU 3.1 ARM Virtual Machine
+virt-4.0             QEMU 4.0 ARM Virtual Machine
+virt-4.1             QEMU 4.1 ARM Virtual Machine
+virt-4.2             QEMU 4.2 ARM Virtual Machine
+virt-5.0             QEMU 5.0 ARM Virtual Machine
+virt-5.1             QEMU 5.1 ARM Virtual Machine
+virt-5.2             QEMU 5.2 ARM Virtual Machine
+virt-6.0             QEMU 6.0 ARM Virtual Machine
+virt-6.1             QEMU 6.1 ARM Virtual Machine
+virt-6.2             QEMU 6.2 ARM Virtual Machine
+virt-7.0             QEMU 7.0 ARM Virtual Machine
+virt-7.1             QEMU 7.1 ARM Virtual Machine
+virt-7.2             QEMU 7.2 ARM Virtual Machine
+virt-8.0             QEMU 8.0 ARM Virtual Machine
+virt-8.1             QEMU 8.1 ARM Virtual Machine
+virt                 QEMU 8.2 ARM Virtual Machine (alias of virt-8.2)
+virt-8.2             QEMU 8.2 ARM Virtual Machine
+witherspoon-bmc      OpenPOWER Witherspoon BMC (ARM1176)
+xilinx-zynq-a9       Xilinx Zynq Platform Baseboard for Cortex-A9
+xlnx-versal-virt     Xilinx Versal Virtual development board
+xlnx-zcu102          Xilinx ZynqMP ZCU102 board with 4xA53s and 2xR5Fs based on the value of smp
+yosemitev2-bmc       Facebook YosemiteV2 BMC (ARM1176)
+z2                   Zipit Z2 (PXA27x)
+
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/model-run-1.log", "bytes": 13398, "sha256": "d78148282e22c5aab27bf9121d43bed6e4ccd29bf8dd385eac51416ac011c685", "bundle": "session-builds.log"} =====
+{"name": "cold-and-two-warm-resets", "status": "fail", "traceback": "Traceback (most recent call last):\n  File \"/home/oops/workspace/meta-tiger/tests/model/test-tiger.py\", line 26, in __init__\n    self.sock.connect(str(path))\nConnectionRefusedError: [Errno 111] Connection refused\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/home/oops/workspace/meta-tiger/tests/model/test-tiger.py\", line 107, in result\n    details = fn()\n              ^^^^\n  File \"/home/oops/workspace/meta-tiger/tests/model/test-tiger.py\", line 259, in <lambda>\n    lambda: vm_test(\"cold-and-two-warm-resets\", raw, 2))\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/oops/workspace/meta-tiger/tests/model/test-tiger.py\", line 135, in vm_test\n    q = QMP(sock, p, d / \"qmp.log\")\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/oops/workspace/meta-tiger/tests/model/test-tiger.py\", line 30, in __init__\n    raise RuntimeError(\"QMP unavailable; inspect qemu.stderr\")\nRuntimeError: QMP unavailable; inspect qemu.stderr\n"}
+{"name": "exact-1MiB", "status": "fail", "traceback": "Traceback (most recent call last):\n  File \"/home/oops/workspace/meta-tiger/tests/model/test-tiger.py\", line 26, in __init__\n    self.sock.connect(str(path))\nConnectionRefusedError: [Errno 111] Connection refused\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/home/oops/workspace/meta-tiger/tests/model/test-tiger.py\", line 107, in result\n    details = fn()\n              ^^^^\n  File \"/home/oops/workspace/meta-tiger/tests/model/test-tiger.py\", line 262, in <lambda>\n    result(\"exact-1MiB\", lambda: vm_test(\"exact-1MiB\", exact, 0))\n                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/oops/workspace/meta-tiger/tests/model/test-tiger.py\", line 135, in vm_test\n    q = QMP(sock, p, d / \"qmp.log\")\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/oops/workspace/meta-tiger/tests/model/test-tiger.py\", line 30, in __init__\n    raise RuntimeError(\"QMP unavailable; inspect qemu.stderr\")\nRuntimeError: QMP unavailable; inspect qemu.stderr\n"}
+{"name": "missing-bios-option", "status": "pass", "details": {"argv": ["/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64", "-machine", "tiger", "-accel", "tcg", "-cpu", "cortex-a53", "-smp", "1", "-m", "1024", "-display", "none", "-monitor", "none", "-nic", "none", "-serial", "file:/home/oops/workspace/build/t016-qemu/model-run-1/missing-bios-option/uart.log", "-d", "in_asm", "-D", "/home/oops/workspace/build/t016-qemu/model-run-1/missing-bios-option/instructions.log"], "exit_code": 1, "output": "qemu-system-aarch64: tiger: a non-empty raw -bios image is required\n", "instruction_bytes": 0}}
+{"name": "nonexistent-bios", "status": "pass", "details": {"argv": ["/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64", "-machine", "tiger", "-accel", "tcg", "-cpu", "cortex-a53", "-smp", "1", "-m", "1024", "-display", "none", "-monitor", "none", "-nic", "none", "-serial", "file:/home/oops/workspace/build/t016-qemu/model-run-1/nonexistent-bios/uart.log", "-d", "in_asm", "-D", "/home/oops/workspace/build/t016-qemu/model-run-1/nonexistent-bios/instructions.log", "-bios", "/home/oops/workspace/build/t016-qemu/model-run-1/absent.bin"], "exit_code": 1, "output": "qemu-system-aarch64: tiger: cannot find BIOS '/home/oops/workspace/build/t016-qemu/model-run-1/absent.bin'\n", "instruction_bytes": 0}}
+{"name": "empty-bios", "status": "pass", "details": {"argv": ["/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64", "-machine", "tiger", "-accel", "tcg", "-cpu", "cortex-a53", "-smp", "1", "-m", "1024", "-display", "none", "-monitor", "none", "-nic", "none", "-serial", "file:/home/oops/workspace/build/t016-qemu/model-run-1/empty-bios/uart.log", "-d", "in_asm", "-D", "/home/oops/workspace/build/t016-qemu/model-run-1/empty-bios/instructions.log", "-bios", "/home/oops/workspace/build/t016-qemu/model-run-1/empty.bin"], "exit_code": -6, "output": "/home/oops/workspace/build/workspace/sources/qemu-system-native/include/hw/qdev-core.h:77:DEVICE: Object 0x62ba142014a0 is not an instance of type device\n", "instruction_bytes": 0}}
+{"name": "too-large-bios", "status": "pass", "details": {"argv": ["/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64", "-machine", "tiger", "-accel", "tcg", "-cpu", "cortex-a53", "-smp", "1", "-m", "1024", "-display", "none", "-monitor", "none", "-nic", "none", "-serial", "file:/home/oops/workspace/build/t016-qemu/model-run-1/too-large-bios/uart.log", "-d", "in_asm", "-D", "/home/oops/workspace/build/t016-qemu/model-run-1/too-large-bios/instructions.log", "-bios", "/home/oops/workspace/build/t016-qemu/model-run-1/too-large.bin"], "exit_code": -6, "output": "/home/oops/workspace/build/workspace/sources/qemu-system-native/include/hw/qdev-core.h:77:DEVICE: Object 0x5acc05b534a0 is not an instance of type device\n", "instruction_bytes": 0}}
+{"name": "unreadable-bios", "status": "pass", "details": {"argv": ["/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64", "-machine", "tiger", "-accel", "tcg", "-cpu", "cortex-a53", "-smp", "1", "-m", "1024", "-display", "none", "-monitor", "none", "-nic", "none", "-serial", "file:/home/oops/workspace/build/t016-qemu/model-run-1/unreadable-bios/uart.log", "-d", "in_asm", "-D", "/home/oops/workspace/build/t016-qemu/model-run-1/unreadable-bios/instructions.log", "-bios", "/home/oops/workspace/build/t016-qemu/model-run-1/unreadable.bin"], "exit_code": 1, "output": "qemu-system-aarch64: tiger: cannot find BIOS '/home/oops/workspace/build/t016-qemu/model-run-1/unreadable.bin'\n", "instruction_bytes": 0}}
+{"name": "load-failure-directory", "status": "pass", "details": {"argv": ["/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64", "-machine", "tiger", "-accel", "tcg", "-cpu", "cortex-a53", "-smp", "1", "-m", "1024", "-display", "none", "-monitor", "none", "-nic", "none", "-serial", "file:/home/oops/workspace/build/t016-qemu/model-run-1/load-failure-directory/uart.log", "-d", "in_asm", "-D", "/home/oops/workspace/build/t016-qemu/model-run-1/load-failure-directory/instructions.log", "-bios", "/home/oops/workspace/build/t016-qemu/model-run-1/directory-bios"], "exit_code": -6, "output": "/home/oops/workspace/build/workspace/sources/qemu-system-native/include/hw/qdev-core.h:77:DEVICE: Object 0x6499937674d0 is not an instance of type device\n", "instruction_bytes": 0}}
+{"name": "wrong-cpu", "status": "pass", "details": {"argv": ["/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64", "-machine", "tiger", "-accel", "tcg", "-cpu", "cortex-a57", "-smp", "1", "-m", "1024", "-display", "none", "-monitor", "none", "-nic", "none", "-serial", "file:/home/oops/workspace/build/t016-qemu/model-run-1/wrong-cpu/uart.log", "-d", "in_asm", "-D", "/home/oops/workspace/build/t016-qemu/model-run-1/wrong-cpu/instructions.log", "-bios", "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.bin"], "exit_code": 1, "output": "qemu-system-aarch64: Invalid CPU type: cortex-a57-arm-cpu\nThe valid types are: cortex-a53-arm-cpu\n", "instruction_bytes": 0}}
+{"name": "wrong-smp", "status": "pass", "details": {"argv": ["/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64", "-machine", "tiger", "-accel", "tcg", "-cpu", "cortex-a53", "-smp", "2", "-m", "1024", "-display", "none", "-monitor", "none", "-nic", "none", "-serial", "file:/home/oops/workspace/build/t016-qemu/model-run-1/wrong-smp/uart.log", "-d", "in_asm", "-D", "/home/oops/workspace/build/t016-qemu/model-run-1/wrong-smp/instructions.log", "-bios", "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.bin"], "exit_code": 1, "output": "qemu-system-aarch64: Invalid SMP CPUs 2. The max CPUs supported by machine 'tiger' is 1\n", "instruction_bytes": 0}}
+{"name": "wrong-ram", "status": "pass", "details": {"argv": ["/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64", "-machine", "tiger", "-accel", "tcg", "-cpu", "cortex-a53", "-smp", "1", "-m", "512", "-display", "none", "-monitor", "none", "-nic", "none", "-serial", "file:/home/oops/workspace/build/t016-qemu/model-run-1/wrong-ram/uart.log", "-d", "in_asm", "-D", "/home/oops/workspace/build/t016-qemu/model-run-1/wrong-ram/instructions.log", "-bios", "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.bin"], "exit_code": 1, "output": "qemu-system-aarch64: tiger: RAM must be exactly 1024 MiB without hotplug\n", "instruction_bytes": 0}}
+{"name": "ram-hotplug", "status": "pass", "details": {"argv": ["/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64", "-machine", "tiger", "-accel", "tcg", "-cpu", "cortex-a53", "-smp", "1", "-m", "1024,maxmem=2G,slots=1", "-display", "none", "-monitor", "none", "-nic", "none", "-serial", "file:/home/oops/workspace/build/t016-qemu/model-run-1/ram-hotplug/uart.log", "-d", "in_asm", "-D", "/home/oops/workspace/build/t016-qemu/model-run-1/ram-hotplug/instructions.log", "-bios", "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.bin"], "exit_code": 1, "output": "qemu-system-aarch64: tiger: RAM must be exactly 1024 MiB without hotplug\n", "instruction_bytes": 0}}
+{"name": "wrong-accelerator", "status": "pass", "details": {"argv": ["/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64", "-machine", "tiger", "-accel", "qtest", "-cpu", "cortex-a53", "-smp", "1", "-m", "1024", "-display", "none", "-monitor", "none", "-nic", "none", "-serial", "file:/home/oops/workspace/build/t016-qemu/model-run-1/wrong-accelerator/uart.log", "-d", "in_asm", "-D", "/home/oops/workspace/build/t016-qemu/model-run-1/wrong-accelerator/instructions.log", "-bios", "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.bin"], "exit_code": 1, "output": "qemu-system-aarch64: tiger: only the TCG accelerator is supported\n", "instruction_bytes": 0}}
+{"name": "kernel-input", "status": "pass", "details": {"argv": ["/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64", "-machine", "tiger", "-accel", "tcg", "-cpu", "cortex-a53", "-smp", "1", "-m", "1024", "-display", "none", "-monitor", "none", "-nic", "none", "-serial", "file:/home/oops/workspace/build/t016-qemu/model-run-1/kernel-input/uart.log", "-d", "in_asm", "-D", "/home/oops/workspace/build/t016-qemu/model-run-1/kernel-input/instructions.log", "-bios", "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.bin", "-kernel", "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.bin"], "exit_code": 1, "output": "qemu-system-aarch64: tiger: kernel, initrd and DTB inputs are unsupported\n", "instruction_bytes": 0}}
+{"name": "initrd-input", "status": "pass", "details": {"argv": ["/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64", "-machine", "tiger", "-accel", "tcg", "-cpu", "cortex-a53", "-smp", "1", "-m", "1024", "-display", "none", "-monitor", "none", "-nic", "none", "-serial", "file:/home/oops/workspace/build/t016-qemu/model-run-1/initrd-input/uart.log", "-d", "in_asm", "-D", "/home/oops/workspace/build/t016-qemu/model-run-1/initrd-input/instructions.log", "-bios", "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.bin", "-initrd", "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.bin"], "exit_code": 1, "output": "qemu-system-aarch64: -initrd only allowed with -kernel option\n", "instruction_bytes": 0}}
+{"name": "dtb-input", "status": "pass", "details": {"argv": ["/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64", "-machine", "tiger", "-accel", "tcg", "-cpu", "cortex-a53", "-smp", "1", "-m", "1024", "-display", "none", "-monitor", "none", "-nic", "none", "-serial", "file:/home/oops/workspace/build/t016-qemu/model-run-1/dtb-input/uart.log", "-d", "in_asm", "-D", "/home/oops/workspace/build/t016-qemu/model-run-1/dtb-input/instructions.log", "-bios", "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.bin", "-dtb", "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.bin"], "exit_code": 1, "output": "qemu-system-aarch64: tiger: kernel, initrd and DTB inputs are unsupported\n", "instruction_bytes": 0}}
+{"passed": 14, "failed": 2, "identity": {"qemu": "/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64", "qemu_sha256": "2462e8c386ad0c8068655f973148727344cd5307256701009b5d1a7bce41e23e", "firmware": "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.bin", "firmware_sha256": "2b67c2bfb9d2fcbf3fd1880a1c1bf3ff09ece73b8bcbf5235116477fd2714376", "manifest_sha256": "e8e70e40ba10f828d3be575725f42c3b9279c16c44392f9dec39cc69ee73884b", "test_script_sha256": "8aa1201f4362ad40e5a6c4cac8cea40c389f95362cfa40773862f20151aa1807"}}
+
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/model-run-1.rc", "bytes": 2, "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865", "bundle": "session-builds.log"} =====
+1
+
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/model-run-2.log", "bytes": 12508, "sha256": "a578ff3c93593208f117441701fda4c340b9681573a0545c4cdd396984a432a9", "bundle": "session-builds.log"} =====
+{"name": "cold-and-two-warm-resets", "status": "fail", "traceback": "Traceback (most recent call last):\n  File \"/home/oops/workspace/meta-tiger/tests/model/test-tiger.py\", line 107, in result\n    details = fn()\n              ^^^^\n  File \"/home/oops/workspace/meta-tiger/tests/model/test-tiger.py\", line 259, in <lambda>\n    lambda: vm_test(\"cold-and-two-warm-resets\", raw, 2))\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/oops/workspace/meta-tiger/tests/model/test-tiger.py\", line 252, in vm_test\n    assert \"pl011_write\" in trace, \"guest UART trace missing\"\n           ^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: guest UART trace missing\n"}
+{"name": "exact-1MiB", "status": "fail", "traceback": "Traceback (most recent call last):\n  File \"/home/oops/workspace/meta-tiger/tests/model/test-tiger.py\", line 107, in result\n    details = fn()\n              ^^^^\n  File \"/home/oops/workspace/meta-tiger/tests/model/test-tiger.py\", line 262, in <lambda>\n    result(\"exact-1MiB\", lambda: vm_test(\"exact-1MiB\", exact, 0))\n                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/oops/workspace/meta-tiger/tests/model/test-tiger.py\", line 252, in vm_test\n    assert \"pl011_write\" in trace, \"guest UART trace missing\"\n           ^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: guest UART trace missing\n"}
+{"name": "missing-bios-option", "status": "pass", "details": {"argv": ["/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64", "-machine", "tiger", "-accel", "tcg", "-cpu", "cortex-a53", "-smp", "1", "-m", "1024", "-display", "none", "-monitor", "none", "-nic", "none", "-serial", "file:/home/oops/workspace/build/t016-qemu/model-run-2/missing-bios-option/uart.log", "-d", "in_asm", "-D", "/home/oops/workspace/build/t016-qemu/model-run-2/missing-bios-option/instructions.log"], "exit_code": 1, "output": "qemu-system-aarch64: tiger: a non-empty raw -bios image is required\n", "instruction_bytes": 0}}
+{"name": "nonexistent-bios", "status": "pass", "details": {"argv": ["/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64", "-machine", "tiger", "-accel", "tcg", "-cpu", "cortex-a53", "-smp", "1", "-m", "1024", "-display", "none", "-monitor", "none", "-nic", "none", "-serial", "file:/home/oops/workspace/build/t016-qemu/model-run-2/nonexistent-bios/uart.log", "-d", "in_asm", "-D", "/home/oops/workspace/build/t016-qemu/model-run-2/nonexistent-bios/instructions.log", "-bios", "/home/oops/workspace/build/t016-qemu/model-run-2/absent.bin"], "exit_code": 1, "output": "qemu-system-aarch64: tiger: cannot find BIOS '/home/oops/workspace/build/t016-qemu/model-run-2/absent.bin'\n", "instruction_bytes": 0}}
+{"name": "empty-bios", "status": "pass", "details": {"argv": ["/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64", "-machine", "tiger", "-accel", "tcg", "-cpu", "cortex-a53", "-smp", "1", "-m", "1024", "-display", "none", "-monitor", "none", "-nic", "none", "-serial", "file:/home/oops/workspace/build/t016-qemu/model-run-2/empty-bios/uart.log", "-d", "in_asm", "-D", "/home/oops/workspace/build/t016-qemu/model-run-2/empty-bios/instructions.log", "-bios", "/home/oops/workspace/build/t016-qemu/model-run-2/empty.bin"], "exit_code": 1, "output": "qemu-system-aarch64: tiger: BIOS must be readable raw data with 0 < size <= 1 MiB: '/home/oops/workspace/build/t016-qemu/model-run-2/empty.bin'\n", "instruction_bytes": 0}}
+{"name": "too-large-bios", "status": "pass", "details": {"argv": ["/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64", "-machine", "tiger", "-accel", "tcg", "-cpu", "cortex-a53", "-smp", "1", "-m", "1024", "-display", "none", "-monitor", "none", "-nic", "none", "-serial", "file:/home/oops/workspace/build/t016-qemu/model-run-2/too-large-bios/uart.log", "-d", "in_asm", "-D", "/home/oops/workspace/build/t016-qemu/model-run-2/too-large-bios/instructions.log", "-bios", "/home/oops/workspace/build/t016-qemu/model-run-2/too-large.bin"], "exit_code": 1, "output": "qemu-system-aarch64: tiger: BIOS must be readable raw data with 0 < size <= 1 MiB: '/home/oops/workspace/build/t016-qemu/model-run-2/too-large.bin'\n", "instruction_bytes": 0}}
+{"name": "unreadable-bios", "status": "pass", "details": {"argv": ["/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64", "-machine", "tiger", "-accel", "tcg", "-cpu", "cortex-a53", "-smp", "1", "-m", "1024", "-display", "none", "-monitor", "none", "-nic", "none", "-serial", "file:/home/oops/workspace/build/t016-qemu/model-run-2/unreadable-bios/uart.log", "-d", "in_asm", "-D", "/home/oops/workspace/build/t016-qemu/model-run-2/unreadable-bios/instructions.log", "-bios", "/home/oops/workspace/build/t016-qemu/model-run-2/unreadable.bin"], "exit_code": 1, "output": "qemu-system-aarch64: tiger: cannot find BIOS '/home/oops/workspace/build/t016-qemu/model-run-2/unreadable.bin'\n", "instruction_bytes": 0}}
+{"name": "load-failure-directory", "status": "pass", "details": {"argv": ["/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64", "-machine", "tiger", "-accel", "tcg", "-cpu", "cortex-a53", "-smp", "1", "-m", "1024", "-display", "none", "-monitor", "none", "-nic", "none", "-serial", "file:/home/oops/workspace/build/t016-qemu/model-run-2/load-failure-directory/uart.log", "-d", "in_asm", "-D", "/home/oops/workspace/build/t016-qemu/model-run-2/load-failure-directory/instructions.log", "-bios", "/home/oops/workspace/build/t016-qemu/model-run-2/directory-bios"], "exit_code": 1, "output": "qemu-system-aarch64: tiger: BIOS must be readable raw data with 0 < size <= 1 MiB: '/home/oops/workspace/build/t016-qemu/model-run-2/directory-bios'\n", "instruction_bytes": 0}}
+{"name": "wrong-cpu", "status": "pass", "details": {"argv": ["/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64", "-machine", "tiger", "-accel", "tcg", "-cpu", "cortex-a57", "-smp", "1", "-m", "1024", "-display", "none", "-monitor", "none", "-nic", "none", "-serial", "file:/home/oops/workspace/build/t016-qemu/model-run-2/wrong-cpu/uart.log", "-d", "in_asm", "-D", "/home/oops/workspace/build/t016-qemu/model-run-2/wrong-cpu/instructions.log", "-bios", "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.bin"], "exit_code": 1, "output": "qemu-system-aarch64: Invalid CPU type: cortex-a57-arm-cpu\nThe valid types are: cortex-a53-arm-cpu\n", "instruction_bytes": 0}}
+{"name": "wrong-smp", "status": "pass", "details": {"argv": ["/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64", "-machine", "tiger", "-accel", "tcg", "-cpu", "cortex-a53", "-smp", "2", "-m", "1024", "-display", "none", "-monitor", "none", "-nic", "none", "-serial", "file:/home/oops/workspace/build/t016-qemu/model-run-2/wrong-smp/uart.log", "-d", "in_asm", "-D", "/home/oops/workspace/build/t016-qemu/model-run-2/wrong-smp/instructions.log", "-bios", "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.bin"], "exit_code": 1, "output": "qemu-system-aarch64: Invalid SMP CPUs 2. The max CPUs supported by machine 'tiger' is 1\n", "instruction_bytes": 0}}
+{"name": "wrong-ram", "status": "pass", "details": {"argv": ["/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64", "-machine", "tiger", "-accel", "tcg", "-cpu", "cortex-a53", "-smp", "1", "-m", "512", "-display", "none", "-monitor", "none", "-nic", "none", "-serial", "file:/home/oops/workspace/build/t016-qemu/model-run-2/wrong-ram/uart.log", "-d", "in_asm", "-D", "/home/oops/workspace/build/t016-qemu/model-run-2/wrong-ram/instructions.log", "-bios", "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.bin"], "exit_code": 1, "output": "qemu-system-aarch64: tiger: RAM must be exactly 1024 MiB without hotplug\n", "instruction_bytes": 0}}
+{"name": "ram-hotplug", "status": "pass", "details": {"argv": ["/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64", "-machine", "tiger", "-accel", "tcg", "-cpu", "cortex-a53", "-smp", "1", "-m", "1024,maxmem=2G,slots=1", "-display", "none", "-monitor", "none", "-nic", "none", "-serial", "file:/home/oops/workspace/build/t016-qemu/model-run-2/ram-hotplug/uart.log", "-d", "in_asm", "-D", "/home/oops/workspace/build/t016-qemu/model-run-2/ram-hotplug/instructions.log", "-bios", "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.bin"], "exit_code": 1, "output": "qemu-system-aarch64: tiger: RAM must be exactly 1024 MiB without hotplug\n", "instruction_bytes": 0}}
+{"name": "wrong-accelerator", "status": "pass", "details": {"argv": ["/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64", "-machine", "tiger", "-accel", "qtest", "-cpu", "cortex-a53", "-smp", "1", "-m", "1024", "-display", "none", "-monitor", "none", "-nic", "none", "-serial", "file:/home/oops/workspace/build/t016-qemu/model-run-2/wrong-accelerator/uart.log", "-d", "in_asm", "-D", "/home/oops/workspace/build/t016-qemu/model-run-2/wrong-accelerator/instructions.log", "-bios", "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.bin"], "exit_code": 1, "output": "qemu-system-aarch64: tiger: only the TCG accelerator is supported\n", "instruction_bytes": 0}}
+{"name": "kernel-input", "status": "pass", "details": {"argv": ["/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64", "-machine", "tiger", "-accel", "tcg", "-cpu", "cortex-a53", "-smp", "1", "-m", "1024", "-display", "none", "-monitor", "none", "-nic", "none", "-serial", "file:/home/oops/workspace/build/t016-qemu/model-run-2/kernel-input/uart.log", "-d", "in_asm", "-D", "/home/oops/workspace/build/t016-qemu/model-run-2/kernel-input/instructions.log", "-bios", "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.bin", "-kernel", "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.bin"], "exit_code": 1, "output": "qemu-system-aarch64: tiger: kernel, initrd and DTB inputs are unsupported\n", "instruction_bytes": 0}}
+{"name": "initrd-input", "status": "pass", "details": {"argv": ["/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64", "-machine", "tiger", "-accel", "tcg", "-cpu", "cortex-a53", "-smp", "1", "-m", "1024", "-display", "none", "-monitor", "none", "-nic", "none", "-serial", "file:/home/oops/workspace/build/t016-qemu/model-run-2/initrd-input/uart.log", "-d", "in_asm", "-D", "/home/oops/workspace/build/t016-qemu/model-run-2/initrd-input/instructions.log", "-bios", "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.bin", "-initrd", "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.bin"], "exit_code": 1, "output": "qemu-system-aarch64: -initrd only allowed with -kernel option\n", "instruction_bytes": 0}}
+{"name": "dtb-input", "status": "pass", "details": {"argv": ["/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64", "-machine", "tiger", "-accel", "tcg", "-cpu", "cortex-a53", "-smp", "1", "-m", "1024", "-display", "none", "-monitor", "none", "-nic", "none", "-serial", "file:/home/oops/workspace/build/t016-qemu/model-run-2/dtb-input/uart.log", "-d", "in_asm", "-D", "/home/oops/workspace/build/t016-qemu/model-run-2/dtb-input/instructions.log", "-bios", "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.bin", "-dtb", "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.bin"], "exit_code": 1, "output": "qemu-system-aarch64: tiger: kernel, initrd and DTB inputs are unsupported\n", "instruction_bytes": 0}}
+{"passed": 14, "failed": 2, "identity": {"qemu": "/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64", "qemu_sha256": "4bd5db20de2c77e4df878019f097200ff170f9b180062f2c869e9abe7e8af528", "firmware": "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.bin", "firmware_sha256": "2b67c2bfb9d2fcbf3fd1880a1c1bf3ff09ece73b8bcbf5235116477fd2714376", "manifest_sha256": "e8e70e40ba10f828d3be575725f42c3b9279c16c44392f9dec39cc69ee73884b", "test_script_sha256": "89e8087184faa36a9617a0561e1efc073fe2d109ca8e6c2138925cf31d07eacb"}}
+
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/model-run-2.rc", "bytes": 2, "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865", "bundle": "session-builds.log"} =====
+1
+
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/model-run-3.log", "bytes": 25273, "sha256": "2308d8aafb4d83f2ae3850e38de17350ba6afe385edd5c6728780894b4ee9e40", "bundle": "session-builds.log"} =====
+{"name": "cold-and-two-warm-resets", "status": "pass", "details": {"pid": 80887, "argv": ["/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64", "-machine", "tiger", "-accel", "tcg", "-cpu", "cortex-a53", "-smp", "1", "-m", "1024", "-display", "none", "-monitor", "none", "-nic", "none", "-bios", "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.bin", "-S", "-serial", "file:/home/oops/workspace/build/t016-qemu/model-run-3/cold-and-two-warm-resets/uart.log", "-qmp", "unix:/home/oops/workspace/build/t016-qemu/model-run-3/cold-and-two-warm-resets/qmp.sock,server=on,wait=off", "-gdb", "tcp:127.0.0.1:46339", "-d", "in_asm,guest_errors", "-D", "/home/oops/workspace/build/t016-qemu/model-run-3/cold-and-two-warm-resets/instructions.log", "-trace", "enable=pl011_*"], "snapshots": [{"label": "cold-before-entry", "registers": "\r\nCPU#0\r\n PC=0000000000000000 X00=0000000000000000 X01=0000000000000000\r\nX02=0000000000000000 X03=0000000000000000 X04=0000000000000000\r\nX05=0000000000000000 X06=0000000000000000 X07=0000000000000000\r\nX08=0000000000000000 X09=0000000000000000 X10=0000000000000000\r\nX11=0000000000000000 X12=0000000000000000 X13=0000000000000000\r\nX14=0000000000000000 X15=0000000000000000 X16=0000000000000000\r\nX17=0000000000000000 X18=0000000000000000 X19=0000000000000000\r\nX20=0000000000000000 X21=0000000000000000 X22=0000000000000000\r\nX23=0000000000000000 X24=0000000000000000 X25=0000000000000000\r\nX26=0000000000000000 X27=0000000000000000 X28=0000000000000000\r\nX29=0000000000000000 X30=0000000000000000  SP=0000000000000000\r\nPSTATE=400003cd -Z-- EL3h     FPCR=00000000 FPSR=00000000\r\nQ00=0000000000000000:0000000000000000 Q01=0000000000000000:0000000000000000\r\nQ02=0000000000000000:0000000000000000 Q03=0000000000000000:0000000000000000\r\nQ04=0000000000000000:0000000000000000 Q05=0000000000000000:0000000000000000\r\nQ06=0000000000000000:0000000000000000 Q07=0000000000000000:0000000000000000\r\nQ08=0000000000000000:0000000000000000 Q09=0000000000000000:0000000000000000\r\nQ10=0000000000000000:0000000000000000 Q11=0000000000000000:0000000000000000\r\nQ12=0000000000000000:0000000000000000 Q13=0000000000000000:0000000000000000\r\nQ14=0000000000000000:0000000000000000 Q15=0000000000000000:0000000000000000\r\nQ16=0000000000000000:0000000000000000 Q17=0000000000000000:0000000000000000\r\nQ18=0000000000000000:0000000000000000 Q19=0000000000000000:0000000000000000\r\nQ20=0000000000000000:0000000000000000 Q21=0000000000000000:0000000000000000\r\nQ22=0000000000000000:0000000000000000 Q23=0000000000000000:0000000000000000\r\nQ24=0000000000000000:0000000000000000 Q25=0000000000000000:0000000000000000\r\nQ26=0000000000000000:0000000000000000 Q27=0000000000000000:0000000000000000\r\nQ28=0000000000000000:0000000000000000 Q29=0000000000000000:0000000000000000\r\nQ30=0000000000000000:0000000000000000 Q31=0000000000000000:0000000000000000\r\n", "uart": {"0x18": 144, "0x24": 0, "0x28": 0, "0x2c": 0, "0x30": 768, "0x38": 0, "0x3c": 0, "0x40": 0}, "cpu_properties": {"rvbar": 0, "has_el2": true, "has_el3": true, "cntfrq": 24000000, "start-powered-off": false, "psci-conduit": 0}}, {"label": "guest-1", "poison_data": "0xdadadadadadadada", "poison_bss": "0xb0b0b0b0b0b0b0b0", "rom_sha256": "6d3e07c3a13d98da2cee9600eb80f097806874e4c06fc6070a262e1d034550a1", "sp": "0x4001fff0"}, {"label": "reset-1-before-cont", "registers": "\r\nCPU#0\r\n PC=0000000000000000 X00=0000000000000000 X01=0000000000000000\r\nX02=0000000000000000 X03=0000000000000000 X04=0000000000000000\r\nX05=0000000000000000 X06=0000000000000000 X07=0000000000000000\r\nX08=0000000000000000 X09=0000000000000000 X10=0000000000000000\r\nX11=0000000000000000 X12=0000000000000000 X13=0000000000000000\r\nX14=0000000000000000 X15=0000000000000000 X16=0000000000000000\r\nX17=0000000000000000 X18=0000000000000000 X19=0000000000000000\r\nX20=0000000000000000 X21=0000000000000000 X22=0000000000000000\r\nX23=0000000000000000 X24=0000000000000000 X25=0000000000000000\r\nX26=0000000000000000 X27=0000000000000000 X28=0000000000000000\r\nX29=0000000000000000 X30=0000000000000000  SP=0000000000000000\r\nPSTATE=400003cd -Z-- EL3h     FPCR=00000000 FPSR=00000000\r\nQ00=0000000000000000:0000000000000000 Q01=0000000000000000:0000000000000000\r\nQ02=0000000000000000:0000000000000000 Q03=0000000000000000:0000000000000000\r\nQ04=0000000000000000:0000000000000000 Q05=0000000000000000:0000000000000000\r\nQ06=0000000000000000:0000000000000000 Q07=0000000000000000:0000000000000000\r\nQ08=0000000000000000:0000000000000000 Q09=0000000000000000:0000000000000000\r\nQ10=0000000000000000:0000000000000000 Q11=0000000000000000:0000000000000000\r\nQ12=0000000000000000:0000000000000000 Q13=0000000000000000:0000000000000000\r\nQ14=0000000000000000:0000000000000000 Q15=0000000000000000:0000000000000000\r\nQ16=0000000000000000:0000000000000000 Q17=0000000000000000:0000000000000000\r\nQ18=0000000000000000:0000000000000000 Q19=0000000000000000:0000000000000000\r\nQ20=0000000000000000:0000000000000000 Q21=0000000000000000:0000000000000000\r\nQ22=0000000000000000:0000000000000000 Q23=0000000000000000:0000000000000000\r\nQ24=0000000000000000:0000000000000000 Q25=0000000000000000:0000000000000000\r\nQ26=0000000000000000:0000000000000000 Q27=0000000000000000:0000000000000000\r\nQ28=0000000000000000:0000000000000000 Q29=0000000000000000:0000000000000000\r\nQ30=0000000000000000:0000000000000000 Q31=0000000000000000:0000000000000000\r\n", "uart": {"0x18": 144, "0x24": 0, "0x28": 0, "0x2c": 0, "0x30": 768, "0x38": 0, "0x3c": 0, "0x40": 0}, "cpu_properties": {"rvbar": 0, "has_el2": true, "has_el3": true, "cntfrq": 24000000, "start-powered-off": false, "psci-conduit": 0}, "retained_data": "0xdadadadadadadada", "retained_bss": "0xb0b0b0b0b0b0b0b0"}, {"label": "guest-2", "poison_data": "0xdadadadadadadada", "poison_bss": "0xb0b0b0b0b0b0b0b0", "rom_sha256": "6d3e07c3a13d98da2cee9600eb80f097806874e4c06fc6070a262e1d034550a1", "sp": "0x4001fff0"}, {"label": "reset-2-before-cont", "registers": "\r\nCPU#0\r\n PC=0000000000000000 X00=0000000000000000 X01=0000000000000000\r\nX02=0000000000000000 X03=0000000000000000 X04=0000000000000000\r\nX05=0000000000000000 X06=0000000000000000 X07=0000000000000000\r\nX08=0000000000000000 X09=0000000000000000 X10=0000000000000000\r\nX11=0000000000000000 X12=0000000000000000 X13=0000000000000000\r\nX14=0000000000000000 X15=0000000000000000 X16=0000000000000000\r\nX17=0000000000000000 X18=0000000000000000 X19=0000000000000000\r\nX20=0000000000000000 X21=0000000000000000 X22=0000000000000000\r\nX23=0000000000000000 X24=0000000000000000 X25=0000000000000000\r\nX26=0000000000000000 X27=0000000000000000 X28=0000000000000000\r\nX29=0000000000000000 X30=0000000000000000  SP=0000000000000000\r\nPSTATE=400003cd -Z-- EL3h     FPCR=00000000 FPSR=00000000\r\nQ00=0000000000000000:0000000000000000 Q01=0000000000000000:0000000000000000\r\nQ02=0000000000000000:0000000000000000 Q03=0000000000000000:0000000000000000\r\nQ04=0000000000000000:0000000000000000 Q05=0000000000000000:0000000000000000\r\nQ06=0000000000000000:0000000000000000 Q07=0000000000000000:0000000000000000\r\nQ08=0000000000000000:0000000000000000 Q09=0000000000000000:0000000000000000\r\nQ10=0000000000000000:0000000000000000 Q11=0000000000000000:0000000000000000\r\nQ12=0000000000000000:0000000000000000 Q13=0000000000000000:0000000000000000\r\nQ14=0000000000000000:0000000000000000 Q15=0000000000000000:0000000000000000\r\nQ16=0000000000000000:0000000000000000 Q17=0000000000000000:0000000000000000\r\nQ18=0000000000000000:0000000000000000 Q19=0000000000000000:0000000000000000\r\nQ20=0000000000000000:0000000000000000 Q21=0000000000000000:0000000000000000\r\nQ22=0000000000000000:0000000000000000 Q23=0000000000000000:0000000000000000\r\nQ24=0000000000000000:0000000000000000 Q25=0000000000000000:0000000000000000\r\nQ26=0000000000000000:0000000000000000 Q27=0000000000000000:0000000000000000\r\nQ28=0000000000000000:0000000000000000 Q29=0000000000000000:0000000000000000\r\nQ30=0000000000000000:0000000000000000 Q31=0000000000000000:0000000000000000\r\n", "uart": {"0x18": 144, "0x24": 0, "0x28": 0, "0x2c": 0, "0x30": 768, "0x38": 0, "0x3c": 0, "0x40": 0}, "cpu_properties": {"rvbar": 0, "has_el2": true, "has_el3": true, "cntfrq": 24000000, "start-powered-off": false, "psci-conduit": 0}, "retained_data": "0xdadadadadadadada", "retained_bss": "0xb0b0b0b0b0b0b0b0"}, {"label": "guest-3", "poison_data": "0xdadadadadadadada", "poison_bss": "0xb0b0b0b0b0b0b0b0", "rom_sha256": "6d3e07c3a13d98da2cee9600eb80f097806874e4c06fc6070a262e1d034550a1", "sp": "0x4001fff0"}], "gdb": [{"label": "cold", "rc": 0, "output": "0x0000000000000000 in _start ()\nHardware assisted breakpoint 1 at 0xc0\n\nBreakpoint 1, 0x00000000000000c0 in firmware_main ()\nGDB_PC=0xc0 GDB_SP=0x40020000 GDB_PSTATE=0x600003cd\nGDB_DATA=0x1122334455667788\nGDB_BSS=0x0\n[Inferior 1 (process 1) detached]\n"}, {"label": "warm-1", "rc": 0, "output": "0x0000000000000000 in _start ()\nHardware assisted breakpoint 1 at 0xc0\n\nBreakpoint 1, 0x00000000000000c0 in firmware_main ()\nGDB_PC=0xc0 GDB_SP=0x40020000 GDB_PSTATE=0x600003cd\nGDB_DATA=0x1122334455667788\nGDB_BSS=0x0\n[Inferior 1 (process 1) detached]\n"}, {"label": "warm-2", "rc": 0, "output": "0x0000000000000000 in _start ()\nHardware assisted breakpoint 1 at 0xc0\n\nBreakpoint 1, 0x00000000000000c0 in firmware_main ()\nGDB_PC=0xc0 GDB_SP=0x40020000 GDB_PSTATE=0x600003cd\nGDB_DATA=0x1122334455667788\nGDB_BSS=0x0\n[Inferior 1 (process 1) detached]\n"}], "exit_code": 0, "final_returncode": 0, "serial": "TIGER-CH4 FW=sha256:7fbb005bd53a3f3fa2ed0a933181e50db7a6bff97cab78ce9429557ccb9818d7 CPU0 EL3 INIT=OK UART0 CFG=OK ROM=RO\nTIGER-CH4 FW=sha256:7fbb005bd53a3f3fa2ed0a933181e50db7a6bff97cab78ce9429557ccb9818d7 CPU0 EL3 INIT=OK UART0 CFG=OK ROM=RO\nTIGER-CH4 FW=sha256:7fbb005bd53a3f3fa2ed0a933181e50db7a6bff97cab78ce9429557ccb9818d7 CPU0 EL3 INIT=OK UART0 CFG=OK ROM=RO\n", "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "trace_sha256": "930fd727c01b31119e5b81fdfcbe3f9a99df22dcd961cc39c39f5f12ade0a561"}}
+{"name": "exact-1MiB", "status": "pass", "details": {"pid": 80921, "argv": ["/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64", "-machine", "tiger", "-accel", "tcg", "-cpu", "cortex-a53", "-smp", "1", "-m", "1024", "-display", "none", "-monitor", "none", "-nic", "none", "-bios", "/home/oops/workspace/build/t016-qemu/model-run-3/exact-1MiB.bin", "-S", "-serial", "file:/home/oops/workspace/build/t016-qemu/model-run-3/exact-1MiB/uart.log", "-qmp", "unix:/home/oops/workspace/build/t016-qemu/model-run-3/exact-1MiB/qmp.sock,server=on,wait=off", "-gdb", "tcp:127.0.0.1:57823", "-d", "in_asm,guest_errors", "-D", "/home/oops/workspace/build/t016-qemu/model-run-3/exact-1MiB/instructions.log", "-trace", "enable=pl011_*"], "snapshots": [{"label": "cold-before-entry", "registers": "\r\nCPU#0\r\n PC=0000000000000000 X00=0000000000000000 X01=0000000000000000\r\nX02=0000000000000000 X03=0000000000000000 X04=0000000000000000\r\nX05=0000000000000000 X06=0000000000000000 X07=0000000000000000\r\nX08=0000000000000000 X09=0000000000000000 X10=0000000000000000\r\nX11=0000000000000000 X12=0000000000000000 X13=0000000000000000\r\nX14=0000000000000000 X15=0000000000000000 X16=0000000000000000\r\nX17=0000000000000000 X18=0000000000000000 X19=0000000000000000\r\nX20=0000000000000000 X21=0000000000000000 X22=0000000000000000\r\nX23=0000000000000000 X24=0000000000000000 X25=0000000000000000\r\nX26=0000000000000000 X27=0000000000000000 X28=0000000000000000\r\nX29=0000000000000000 X30=0000000000000000  SP=0000000000000000\r\nPSTATE=400003cd -Z-- EL3h     FPCR=00000000 FPSR=00000000\r\nQ00=0000000000000000:0000000000000000 Q01=0000000000000000:0000000000000000\r\nQ02=0000000000000000:0000000000000000 Q03=0000000000000000:0000000000000000\r\nQ04=0000000000000000:0000000000000000 Q05=0000000000000000:0000000000000000\r\nQ06=0000000000000000:0000000000000000 Q07=0000000000000000:0000000000000000\r\nQ08=0000000000000000:0000000000000000 Q09=0000000000000000:0000000000000000\r\nQ10=0000000000000000:0000000000000000 Q11=0000000000000000:0000000000000000\r\nQ12=0000000000000000:0000000000000000 Q13=0000000000000000:0000000000000000\r\nQ14=0000000000000000:0000000000000000 Q15=0000000000000000:0000000000000000\r\nQ16=0000000000000000:0000000000000000 Q17=0000000000000000:0000000000000000\r\nQ18=0000000000000000:0000000000000000 Q19=0000000000000000:0000000000000000\r\nQ20=0000000000000000:0000000000000000 Q21=0000000000000000:0000000000000000\r\nQ22=0000000000000000:0000000000000000 Q23=0000000000000000:0000000000000000\r\nQ24=0000000000000000:0000000000000000 Q25=0000000000000000:0000000000000000\r\nQ26=0000000000000000:0000000000000000 Q27=0000000000000000:0000000000000000\r\nQ28=0000000000000000:0000000000000000 Q29=0000000000000000:0000000000000000\r\nQ30=0000000000000000:0000000000000000 Q31=0000000000000000:0000000000000000\r\n", "uart": {"0x18": 144, "0x24": 0, "0x28": 0, "0x2c": 0, "0x30": 768, "0x38": 0, "0x3c": 0, "0x40": 0}, "cpu_properties": {"rvbar": 0, "has_el2": true, "has_el3": true, "cntfrq": 24000000, "start-powered-off": false, "psci-conduit": 0}}, {"label": "guest-1", "poison_data": "0xdadadadadadadada", "poison_bss": "0xb0b0b0b0b0b0b0b0", "rom_sha256": "6d3e07c3a13d98da2cee9600eb80f097806874e4c06fc6070a262e1d034550a1", "sp": "0x4001fff0"}], "gdb": [{"label": "cold", "rc": 0, "output": "0x0000000000000000 in _start ()\nHardware assisted breakpoint 1 at 0xc0\n\nBreakpoint 1, 0x00000000000000c0 in firmware_main ()\nGDB_PC=0xc0 GDB_SP=0x40020000 GDB_PSTATE=0x600003cd\nGDB_DATA=0x1122334455667788\nGDB_BSS=0x0\n[Inferior 1 (process 1) detached]\n"}], "exit_code": 0, "final_returncode": 0, "serial": "TIGER-CH4 FW=sha256:7fbb005bd53a3f3fa2ed0a933181e50db7a6bff97cab78ce9429557ccb9818d7 CPU0 EL3 INIT=OK UART0 CFG=OK ROM=RO\n", "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "trace_sha256": "f0aeead419a85a566531820a158887bf09fdb3c8ce817d5e7f4d6208d9014546"}}
+{"name": "missing-bios-option", "status": "pass", "details": {"argv": ["/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64", "-machine", "tiger", "-accel", "tcg", "-cpu", "cortex-a53", "-smp", "1", "-m", "1024", "-display", "none", "-monitor", "none", "-nic", "none", "-serial", "file:/home/oops/workspace/build/t016-qemu/model-run-3/missing-bios-option/uart.log", "-d", "in_asm", "-D", "/home/oops/workspace/build/t016-qemu/model-run-3/missing-bios-option/instructions.log"], "exit_code": 1, "output": "qemu-system-aarch64: tiger: a non-empty raw -bios image is required\n", "instruction_bytes": 0}}
+{"name": "nonexistent-bios", "status": "pass", "details": {"argv": ["/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64", "-machine", "tiger", "-accel", "tcg", "-cpu", "cortex-a53", "-smp", "1", "-m", "1024", "-display", "none", "-monitor", "none", "-nic", "none", "-serial", "file:/home/oops/workspace/build/t016-qemu/model-run-3/nonexistent-bios/uart.log", "-d", "in_asm", "-D", "/home/oops/workspace/build/t016-qemu/model-run-3/nonexistent-bios/instructions.log", "-bios", "/home/oops/workspace/build/t016-qemu/model-run-3/absent.bin"], "exit_code": 1, "output": "qemu-system-aarch64: tiger: cannot find BIOS '/home/oops/workspace/build/t016-qemu/model-run-3/absent.bin'\n", "instruction_bytes": 0}}
+{"name": "empty-bios", "status": "pass", "details": {"argv": ["/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64", "-machine", "tiger", "-accel", "tcg", "-cpu", "cortex-a53", "-smp", "1", "-m", "1024", "-display", "none", "-monitor", "none", "-nic", "none", "-serial", "file:/home/oops/workspace/build/t016-qemu/model-run-3/empty-bios/uart.log", "-d", "in_asm", "-D", "/home/oops/workspace/build/t016-qemu/model-run-3/empty-bios/instructions.log", "-bios", "/home/oops/workspace/build/t016-qemu/model-run-3/empty.bin"], "exit_code": 1, "output": "qemu-system-aarch64: tiger: BIOS must be readable raw data with 0 < size <= 1 MiB: '/home/oops/workspace/build/t016-qemu/model-run-3/empty.bin'\n", "instruction_bytes": 0}}
+{"name": "too-large-bios", "status": "pass", "details": {"argv": ["/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64", "-machine", "tiger", "-accel", "tcg", "-cpu", "cortex-a53", "-smp", "1", "-m", "1024", "-display", "none", "-monitor", "none", "-nic", "none", "-serial", "file:/home/oops/workspace/build/t016-qemu/model-run-3/too-large-bios/uart.log", "-d", "in_asm", "-D", "/home/oops/workspace/build/t016-qemu/model-run-3/too-large-bios/instructions.log", "-bios", "/home/oops/workspace/build/t016-qemu/model-run-3/too-large.bin"], "exit_code": 1, "output": "qemu-system-aarch64: tiger: BIOS must be readable raw data with 0 < size <= 1 MiB: '/home/oops/workspace/build/t016-qemu/model-run-3/too-large.bin'\n", "instruction_bytes": 0}}
+{"name": "unreadable-bios", "status": "pass", "details": {"argv": ["/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64", "-machine", "tiger", "-accel", "tcg", "-cpu", "cortex-a53", "-smp", "1", "-m", "1024", "-display", "none", "-monitor", "none", "-nic", "none", "-serial", "file:/home/oops/workspace/build/t016-qemu/model-run-3/unreadable-bios/uart.log", "-d", "in_asm", "-D", "/home/oops/workspace/build/t016-qemu/model-run-3/unreadable-bios/instructions.log", "-bios", "/home/oops/workspace/build/t016-qemu/model-run-3/unreadable.bin"], "exit_code": 1, "output": "qemu-system-aarch64: tiger: cannot find BIOS '/home/oops/workspace/build/t016-qemu/model-run-3/unreadable.bin'\n", "instruction_bytes": 0}}
+{"name": "load-failure-directory", "status": "pass", "details": {"argv": ["/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64", "-machine", "tiger", "-accel", "tcg", "-cpu", "cortex-a53", "-smp", "1", "-m", "1024", "-display", "none", "-monitor", "none", "-nic", "none", "-serial", "file:/home/oops/workspace/build/t016-qemu/model-run-3/load-failure-directory/uart.log", "-d", "in_asm", "-D", "/home/oops/workspace/build/t016-qemu/model-run-3/load-failure-directory/instructions.log", "-bios", "/home/oops/workspace/build/t016-qemu/model-run-3/directory-bios"], "exit_code": 1, "output": "qemu-system-aarch64: tiger: BIOS must be readable raw data with 0 < size <= 1 MiB: '/home/oops/workspace/build/t016-qemu/model-run-3/directory-bios'\n", "instruction_bytes": 0}}
+{"name": "wrong-cpu", "status": "pass", "details": {"argv": ["/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64", "-machine", "tiger", "-accel", "tcg", "-cpu", "cortex-a57", "-smp", "1", "-m", "1024", "-display", "none", "-monitor", "none", "-nic", "none", "-serial", "file:/home/oops/workspace/build/t016-qemu/model-run-3/wrong-cpu/uart.log", "-d", "in_asm", "-D", "/home/oops/workspace/build/t016-qemu/model-run-3/wrong-cpu/instructions.log", "-bios", "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.bin"], "exit_code": 1, "output": "qemu-system-aarch64: Invalid CPU type: cortex-a57-arm-cpu\nThe valid types are: cortex-a53-arm-cpu\n", "instruction_bytes": 0}}
+{"name": "wrong-smp", "status": "pass", "details": {"argv": ["/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64", "-machine", "tiger", "-accel", "tcg", "-cpu", "cortex-a53", "-smp", "2", "-m", "1024", "-display", "none", "-monitor", "none", "-nic", "none", "-serial", "file:/home/oops/workspace/build/t016-qemu/model-run-3/wrong-smp/uart.log", "-d", "in_asm", "-D", "/home/oops/workspace/build/t016-qemu/model-run-3/wrong-smp/instructions.log", "-bios", "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.bin"], "exit_code": 1, "output": "qemu-system-aarch64: Invalid SMP CPUs 2. The max CPUs supported by machine 'tiger' is 1\n", "instruction_bytes": 0}}
+{"name": "wrong-ram", "status": "pass", "details": {"argv": ["/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64", "-machine", "tiger", "-accel", "tcg", "-cpu", "cortex-a53", "-smp", "1", "-m", "512", "-display", "none", "-monitor", "none", "-nic", "none", "-serial", "file:/home/oops/workspace/build/t016-qemu/model-run-3/wrong-ram/uart.log", "-d", "in_asm", "-D", "/home/oops/workspace/build/t016-qemu/model-run-3/wrong-ram/instructions.log", "-bios", "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.bin"], "exit_code": 1, "output": "qemu-system-aarch64: tiger: RAM must be exactly 1024 MiB without hotplug\n", "instruction_bytes": 0}}
+{"name": "ram-hotplug", "status": "pass", "details": {"argv": ["/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64", "-machine", "tiger", "-accel", "tcg", "-cpu", "cortex-a53", "-smp", "1", "-m", "1024,maxmem=2G,slots=1", "-display", "none", "-monitor", "none", "-nic", "none", "-serial", "file:/home/oops/workspace/build/t016-qemu/model-run-3/ram-hotplug/uart.log", "-d", "in_asm", "-D", "/home/oops/workspace/build/t016-qemu/model-run-3/ram-hotplug/instructions.log", "-bios", "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.bin"], "exit_code": 1, "output": "qemu-system-aarch64: tiger: RAM must be exactly 1024 MiB without hotplug\n", "instruction_bytes": 0}}
+{"name": "wrong-accelerator", "status": "pass", "details": {"argv": ["/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64", "-machine", "tiger", "-accel", "qtest", "-cpu", "cortex-a53", "-smp", "1", "-m", "1024", "-display", "none", "-monitor", "none", "-nic", "none", "-serial", "file:/home/oops/workspace/build/t016-qemu/model-run-3/wrong-accelerator/uart.log", "-d", "in_asm", "-D", "/home/oops/workspace/build/t016-qemu/model-run-3/wrong-accelerator/instructions.log", "-bios", "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.bin"], "exit_code": 1, "output": "qemu-system-aarch64: tiger: only the TCG accelerator is supported\n", "instruction_bytes": 0}}
+{"name": "kernel-input", "status": "pass", "details": {"argv": ["/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64", "-machine", "tiger", "-accel", "tcg", "-cpu", "cortex-a53", "-smp", "1", "-m", "1024", "-display", "none", "-monitor", "none", "-nic", "none", "-serial", "file:/home/oops/workspace/build/t016-qemu/model-run-3/kernel-input/uart.log", "-d", "in_asm", "-D", "/home/oops/workspace/build/t016-qemu/model-run-3/kernel-input/instructions.log", "-bios", "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.bin", "-kernel", "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.bin"], "exit_code": 1, "output": "qemu-system-aarch64: tiger: kernel, initrd and DTB inputs are unsupported\n", "instruction_bytes": 0}}
+{"name": "initrd-input", "status": "pass", "details": {"argv": ["/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64", "-machine", "tiger", "-accel", "tcg", "-cpu", "cortex-a53", "-smp", "1", "-m", "1024", "-display", "none", "-monitor", "none", "-nic", "none", "-serial", "file:/home/oops/workspace/build/t016-qemu/model-run-3/initrd-input/uart.log", "-d", "in_asm", "-D", "/home/oops/workspace/build/t016-qemu/model-run-3/initrd-input/instructions.log", "-bios", "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.bin", "-initrd", "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.bin"], "exit_code": 1, "output": "qemu-system-aarch64: -initrd only allowed with -kernel option\n", "instruction_bytes": 0}}
+{"name": "dtb-input", "status": "pass", "details": {"argv": ["/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64", "-machine", "tiger", "-accel", "tcg", "-cpu", "cortex-a53", "-smp", "1", "-m", "1024", "-display", "none", "-monitor", "none", "-nic", "none", "-serial", "file:/home/oops/workspace/build/t016-qemu/model-run-3/dtb-input/uart.log", "-d", "in_asm", "-D", "/home/oops/workspace/build/t016-qemu/model-run-3/dtb-input/instructions.log", "-bios", "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.bin", "-dtb", "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.bin"], "exit_code": 1, "output": "qemu-system-aarch64: tiger: kernel, initrd and DTB inputs are unsupported\n", "instruction_bytes": 0}}
+{"passed": 16, "failed": 0, "identity": {"qemu": "/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64", "qemu_sha256": "4bd5db20de2c77e4df878019f097200ff170f9b180062f2c869e9abe7e8af528", "firmware": "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.bin", "firmware_sha256": "2b67c2bfb9d2fcbf3fd1880a1c1bf3ff09ece73b8bcbf5235116477fd2714376", "manifest_sha256": "e8e70e40ba10f828d3be575725f42c3b9279c16c44392f9dec39cc69ee73884b", "test_script_sha256": "5f3cb82d80e99e3ed4b7efca704f16dbfb95ef26ac8fcd9aa13db6b29b5f1b73"}}
+
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/model-run-3.rc", "bytes": 2, "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa", "bundle": "session-builds.log"} =====
+0
+
+===== END FILE =====

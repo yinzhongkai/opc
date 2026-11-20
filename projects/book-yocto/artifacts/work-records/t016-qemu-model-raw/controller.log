@@ -1,0 +1,1208 @@
+T-016 QEMU model-stage controller outputs
+Client date: 2026-10-14 to 2026-10-15, Asia/Shanghai
+Exact nested build/test argv and complete remote outputs are in the evidence bundles.
+Product file-writing payloads remain in meta-tiger/devtool, referenced by source/patch hashes and commits.
+The first setup process handle was lost across the date transition; its completion was re-established by the resume probe. No missing result is treated as exit 0.
+
+===== impl_resume =====
+SSH/controller exit code: 0
+OUTPUT:
+COMMAND ["git", "status", "--short", "--branch"] CWD /home/oops/workspace/meta-tiger
+RC 0
+## feature/t-016-chapter4-revision
+
+COMMAND ["git", "rev-parse", "HEAD"] CWD /home/oops/workspace/meta-tiger
+RC 0
+0e3da48b34ef772532535a730a21878cc30ccf67
+
+COMMAND ["bash", "-c", "source /home/oops/workspace/poky/oe-init-build-env /home/oops/workspace/build >/dev/null && devtool status && devtool modify --help"] CWD None
+RC 0
+NOTE: Starting bitbake server...
+INFO: No recipes currently in your workspace - you can use "devtool modify" to work on an existing recipe or "devtool add" to add a new one
+NOTE: Starting bitbake server...
+usage: devtool modify [-h] [--wildcard] [--extract | --no-extract]
+                      [--same-dir | --no-same-dir] [--branch BRANCH]
+                      [--no-overrides] [--keep-temp] [--debug-build]
+                      recipename [srctree]
+
+Sets up the build environment to modify the source for an existing recipe. The
+default behaviour is to extract the source being fetched by the recipe into a
+git tree so you can work on it; alternatively if you already have your own
+pre-prepared source tree you can specify -n/--no-extract.
+
+arguments:
+  recipename            Name of existing recipe to edit (just name - no
+                        version, path or extension)
+  srctree               Path to external source tree. If not specified, a
+                        subdirectory of
+                        /home/oops/workspace/build/workspace/sources will be
+                        used.
+
+options:
+  -h, --help            show this help message and exit
+  --wildcard, -w        Use wildcard for unversioned bbappend
+  --extract, -x         Extract source for recipe (default)
+  --no-extract, -n      Do not extract source, expect it to exist
+  --same-dir, -s        Build in same directory as source
+  --no-same-dir         Force build in a separate build directory
+  --branch BRANCH, -b BRANCH
+                        Name for development branch to checkout (when not
+                        using -n/--no-extract) (default "devtool")
+  --no-overrides, -O    Do not create branches for other override
+                        configurations
+  --keep-temp           Keep temporary directory (for debugging)
+  --debug-build         Add DEBUG_BUILD = "1" to the modified recipe
+
+COMPILER_CANDIDATES []
+COMPILER_CANDIDATES ['/home/oops/workspace/build/tmp/work/cortexa57-poky-linux/libedit/20230828-3.1/recipe-sysroot-native/usr/bin/aarch64-poky-linux/aarch64-poky-linux-gcc', '/home/oops/workspace/build/tmp/work/cortexa57-poky-linux/libmicrohttpd/1.0.1/recipe-sysroot-native/usr/bin/aarch64-poky-linux/aarch64-poky-linux-gcc', '/home/oops/workspace/build/tmp/work/cortexa57-poky-linux/psmisc/23.6/recipe-sysroot-native/usr/bin/aarch64-poky-linux/aarch64-poky-linux-gcc', '/home/oops/workspace/build/tmp/work/cortexa57-poky-linux/busybox/1.36.1/recipe-sysroot-native/usr/bin/aarch64-poky-linux/aarch64-poky-linux-gcc', '/home/oops/workspace/build/tmp/work/cortexa57-poky-linux/nettle/3.9.1/recipe-sysroot-native/usr/bin/aarch64-poky-linux/aarch64-poky-linux-gcc']
+COMMAND ["bash", "-c", "command -v clang; command -v ld.lld; command -v llvm-objcopy"] CWD None
+RC 1
+
+
+
+===== impl_devtool =====
+SSH/controller exit code: 0
+OUTPUT:
+RUN env-before bitbake -e qemu-system-native LOG /home/oops/workspace/build/t016-qemu/env-before.log
+EXIT env-before 0
+B="/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/build"
+BPN="qemu"
+FILE="/home/oops/workspace/poky/meta/recipes-devtools/qemu/qemu-system-native_8.2.7.bb"
+MACHINE="qemuarm64"
+OVERRIDES="linux:x86-64:pn-qemu-system-native:layer-core::poky:class-native:forcevariable"
+PN="qemu-system-native"
+PV="8.2.7"
+S="/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7"
+SRC_URI="https://download.qemu.org/qemu-8.2.7.tar.xz            file://powerpc_rom.bin            file://run-ptest            file://0001-qemu-Add-addition-environment-space-to-boot-loader-q.patch            file://0003-apic-fixup-fallthrough-to-PIC.patch            file://0004-configure-Add-pkg-config-handling-for-libgcrypt.patch            file://0005-qemu-Do-not-include-file-if-not-exists.patch            file://0006-qemu-Add-some-user-space-mmap-tweaks-to-address-musl.patch            file://0007-qemu-Determinism-fixes.patch            file://0008-tests-meson.build-use-relative-path-to-refer-to-file.patch            file://0009-Define-MAP_SYNC-and-MAP_SHARED_VALIDATE-on-needed-li.patch            file://0010-hw-pvrdma-Protect-against-buggy-or-malicious-guest-d.patch            file://0002-linux-user-Replace-use-of-lfs64-related-functions-an.patch            file://fixedmeson.patch            file://no-pip.patch            file://4a8579ad8629b57a43daa62e46cc7af6e1078116.patch            file://0002-linux-user-loongarch64-Remove-TARGET_FORCE_SHMLBA.patch            file://0003-linux-user-Add-strace-for-shmat.patch            file://0004-linux-user-Rewrite-target_shmat.patch            file://0005-tests-tcg-Check-that-shmat-does-not-break-proc-self-.patch            file://0001-sched_attr-Do-not-define-for-glibc-2.41.patch            file://qemu-guest-agent.init            file://qemu-guest-agent.udev            file://CVE-2024-8354.patch            file://CVE-2025-12464.patch            file://0001-python-backport-Remove-deprecated-get_event_loop-cal.patch            file://0002-python-backport-avoid-creating-additional-event-loop.patch            file://CVE-2025-11234-01.patch            file://CVE-2025-11234-02.patch            file://CVE-2024-6519.patch            file://CVE-2025-14876_p1.patch            file://CVE-2025-14876_p2.patch            file://CVE-2026-0665.patch            file://CVE-2026-2243.patch             	file://0011-linux-user-workaround-for-missing-MAP_FIXED_NOREPLAC.patch 	file://0012-linux-user-workaround-for-missing-MAP_SHARED_VALIDAT.patch         "
+TARGET_ARCH="x86_64"
+RUN devtool-modify devtool modify qemu-system-native LOG /home/oops/workspace/build/t016-qemu/devtool-modify.log
+EXIT devtool-modify 0
+NOTE: Reconnecting to bitbake server...
+NOTE: Retrying server connection (#1)... (23:04:59.667719)
+Loading cache...done.
+Loaded 1878 entries from dependency cache.
+WARNING: No bb files in default matched BBFILE_PATTERN_meta-tiger '^/home/oops/workspace/meta-tiger/'
+
+Summary: There was 1 WARNING message.
+INFO: SRC_URI contains some conditional appends/prepends - will create branches to represent these
+WARNING: No bb files in default matched BBFILE_PATTERN_meta-tiger '^/home/oops/workspace/meta-tiger/'
+NOTE: Resolving any missing task queue dependencies
+
+Build Configuration:
+BB_VERSION           = "2.8.1"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "aarch64-poky-linux"
+MACHINE              = "qemuarm64"
+DISTRO               = "poky"
+DISTRO_VERSION       = "5.0.20"
+TUNE_FEATURES        = "aarch64 crc cortexa57"
+TARGET_FPU           = ""
+meta                 
+meta-poky            
+meta-yocto-bsp       = "scarthgap:77d1feb37e280733684ae8a9449fb031d5d7ff40"
+meta-tiger           = "feature/t-016-chapter4-revision:0e3da48b34ef772532535a730a21878cc30ccf67"
+workspace            = "<unknown>:<unknown>"
+
+Initialising tasks...Sstate summary: Wanted 27 Local 27 Mirrors 0 Missed 0 Current 0 (100% match, 0% complete)
+done.
+NOTE: Executing Tasks
+NOTE: Tasks Summary: Attempted 93 tasks of which 90 didn't need to be rerun and all succeeded.
+INFO: Adding local source files to srctree...
+INFO: Source tree extracted to /home/oops/workspace/build/workspace/sources/qemu-system-native
+WARNING: SRC_URI is conditionally overridden in this recipe, thus several devtool-override-* branches have been created, one for each override that makes changes to SRC_URI. It is recommended that you make changes to the devtool branch first, then checkout and rebase each devtool-override-* branch and update any unique patches there (duplicates on those branches will be ignored by devtool finish/update-recipe)
+INFO: Recipe qemu-system-native now set up to build from /home/oops/workspace/build/workspace/sources/qemu-system-native
+
+
+===== impl_api =====
+SSH/controller exit code: 0
+OUTPUT:
+FILE include/hw/boards.h
+154: * @max_cpus: maximum number of CPUs supported. Default: 1
+185: * @default_cpu_type:
+218: * @default_ram_id:
+225: * @fixup_ram_size:
+250:    int max_cpus;
+267:    ram_addr_t default_ram_size;
+268:    const char *default_cpu_type;
+276:    const char * const *valid_cpu_types;
+287:    const char *default_ram_id;
+297:    ram_addr_t (*fixup_ram_size)(ram_addr_t size);
+337: * @max_cpus: the maximum number of logical processors on the machine
+348:    unsigned int max_cpus;
+379:    MemoryRegion *ram;
+390:    ram_addr_t ram_size;
+391:    ram_addr_t maxram_size;
+FILE hw/arm/meson.build
+3:arm_ss.add(when: 'CONFIG_ARM_VIRT', if_true: files('virt.c'))
+4:arm_ss.add(when: 'CONFIG_ACPI', if_true: files('virt-acpi-build.c'))
+5:arm_ss.add(when: 'CONFIG_DIGIC', if_true: files('digic_boards.c'))
+6:arm_ss.add(when: 'CONFIG_EMCRAFT_SF2', if_true: files('msf2-som.c'))
+7:arm_ss.add(when: 'CONFIG_HIGHBANK', if_true: files('highbank.c'))
+8:arm_ss.add(when: 'CONFIG_INTEGRATOR', if_true: files('integratorcp.c'))
+9:arm_ss.add(when: 'CONFIG_MAINSTONE', if_true: files('mainstone.c'))
+10:arm_ss.add(when: 'CONFIG_MICROBIT', if_true: files('microbit.c'))
+11:arm_ss.add(when: 'CONFIG_MUSICPAL', if_true: files('musicpal.c'))
+12:arm_ss.add(when: 'CONFIG_NETDUINO2', if_true: files('netduino2.c'))
+13:arm_ss.add(when: 'CONFIG_NETDUINOPLUS2', if_true: files('netduinoplus2.c'))
+14:arm_ss.add(when: 'CONFIG_OLIMEX_STM32_H405', if_true: files('olimex-stm32-h405.c'))
+15:arm_ss.add(when: 'CONFIG_NPCM7XX', if_true: files('npcm7xx.c', 'npcm7xx_boards.c'))
+16:arm_ss.add(when: 'CONFIG_NSERIES', if_true: files('nseries.c'))
+17:arm_ss.add(when: 'CONFIG_SX1', if_true: files('omap_sx1.c'))
+18:arm_ss.add(when: 'CONFIG_CHEETAH', if_true: files('palm.c'))
+19:arm_ss.add(when: 'CONFIG_GUMSTIX', if_true: files('gumstix.c'))
+20:arm_ss.add(when: 'CONFIG_SPITZ', if_true: files('spitz.c'))
+21:arm_ss.add(when: 'CONFIG_Z2', if_true: files('z2.c'))
+22:arm_ss.add(when: 'CONFIG_REALVIEW', if_true: files('realview.c'))
+23:arm_ss.add(when: 'CONFIG_SBSA_REF', if_true: files('sbsa-ref.c'))
+24:arm_ss.add(when: 'CONFIG_STELLARIS', if_true: files('stellaris.c'))
+25:arm_ss.add(when: 'CONFIG_STM32VLDISCOVERY', if_true: files('stm32vldiscovery.c'))
+26:arm_ss.add(when: 'CONFIG_COLLIE', if_true: files('collie.c'))
+27:arm_ss.add(when: 'CONFIG_VERSATILE', if_true: files('versatilepb.c'))
+28:arm_ss.add(when: 'CONFIG_VEXPRESS', if_true: files('vexpress.c'))
+29:arm_ss.add(when: 'CONFIG_ZYNQ', if_true: files('xilinx_zynq.c'))
+30:arm_ss.add(when: 'CONFIG_SABRELITE', if_true: files('sabrelite.c'))
+32:arm_ss.add(when: 'CONFIG_ARM_V7M', if_true: files('armv7m.c'))
+33:arm_ss.add(when: 'CONFIG_EXYNOS4', if_true: files('exynos4210.c'))
+34:arm_ss.add(when: 'CONFIG_PXA2XX', if_true: files('pxa2xx.c', 'pxa2xx_gpio.c', 'pxa2xx_pic.c'))
+35:arm_ss.add(when: 'CONFIG_DIGIC', if_true: files('digic.c'))
+36:arm_ss.add(when: 'CONFIG_OMAP', if_true: files('omap1.c', 'omap2.c'))
+37:arm_ss.add(when: 'CONFIG_STRONGARM', if_true: files('strongarm.c'))
+38:arm_ss.add(when: 'CONFIG_ALLWINNER_A10', if_true: files('allwinner-a10.c', 'cubieboard.c'))
+39:arm_ss.add(when: 'CONFIG_ALLWINNER_H3', if_true: files('allwinner-h3.c', 'orangepi.c'))
+40:arm_ss.add(when: 'CONFIG_ALLWINNER_R40', if_true: files('allwinner-r40.c', 'bananapi_m2u.c'))
+41:arm_ss.add(when: 'CONFIG_RASPI', if_true: files('bcm2836.c', 'raspi.c'))
+42:arm_ss.add(when: 'CONFIG_STM32F100_SOC', if_true: files('stm32f100_soc.c'))
+43:arm_ss.add(when: 'CONFIG_STM32F205_SOC', if_true: files('stm32f205_soc.c'))
+44:arm_ss.add(when: 'CONFIG_STM32F405_SOC', if_true: files('stm32f405_soc.c'))
+45:arm_ss.add(when: 'CONFIG_XLNX_ZYNQMP_ARM', if_true: files('xlnx-zynqmp.c', 'xlnx-zcu102.c'))
+46:arm_ss.add(when: 'CONFIG_XLNX_VERSAL', if_true: files('xlnx-versal.c', 'xlnx-versal-virt.c'))
+47:arm_ss.add(when: 'CONFIG_FSL_IMX25', if_true: files('fsl-imx25.c', 'imx25_pdk.c'))
+48:arm_ss.add(when: 'CONFIG_FSL_IMX31', if_true: files('fsl-imx31.c', 'kzm.c'))
+49:arm_ss.add(when: 'CONFIG_FSL_IMX6', if_true: files('fsl-imx6.c'))
+50:arm_ss.add(when: 'CONFIG_ASPEED_SOC', if_true: files(
+58:arm_ss.add(when: 'CONFIG_MPS2', if_true: files('mps2.c'))
+59:arm_ss.add(when: 'CONFIG_MPS2', if_true: files('mps2-tz.c'))
+60:arm_ss.add(when: 'CONFIG_MSF2', if_true: files('msf2-soc.c'))
+61:arm_ss.add(when: 'CONFIG_MUSCA', if_true: files('musca.c'))
+62:arm_ss.add(when: 'CONFIG_ARMSSE', if_true: files('armsse.c'))
+63:arm_ss.add(when: 'CONFIG_FSL_IMX7', if_true: files('fsl-imx7.c', 'mcimx7d-sabre.c'))
+64:arm_ss.add(when: 'CONFIG_ARM_SMMUV3', if_true: files('smmuv3.c'))
+65:arm_ss.add(when: 'CONFIG_FSL_IMX6UL', if_true: files('fsl-imx6ul.c', 'mcimx6ul-evk.c'))
+66:arm_ss.add(when: 'CONFIG_NRF51_SOC', if_true: files('nrf51_soc.c'))
+67:arm_ss.add(when: 'CONFIG_XEN', if_true: files('xen_arm.c'))
+69:system_ss.add(when: 'CONFIG_ARM_SMMUV3', if_true: files('smmu-common.c'))
+70:system_ss.add(when: 'CONFIG_EXYNOS4', if_true: files('exynos4_boards.c'))
+71:system_ss.add(when: 'CONFIG_RASPI', if_true: files('bcm2835_peripherals.c'))
+72:system_ss.add(when: 'CONFIG_TOSA', if_true: files('tosa.c'))
+FILE hw/arm/Kconfig
+1:config ARM_VIRT
+19:    select PL011 # UART
+78:    select ARM_V7M
+79:    select PL011 # UART
+92:    select PL011 # UART
+113:    select PL011
+222:    select PL011 # UART
+242:    select PL011  # UART
+255:config SBSA_REF
+266:    select PL011 # UART
+285:    select ARM_V7M
+288:    select PL011 # UART
+346:    select PL011 # UART
+424:    select PL011 # UART
+430:    select ARM_V7M
+436:    select ARM_V7M
+446:    select ARM_V7M
+476:    select PL011
+623:    select ARM_V7M
+635:    select ARM_V7M
+663:    select ARM_V7M
+FILE include/hw/clock.h
+117: * clock_new:
+127:Clock *clock_new(Object *parent, const char *name);
+190:static inline bool clock_set_hz(Clock *clk, unsigned hz)
+FILE include/hw/arm/boot.h
+40:struct arm_boot_info {
+41:    uint64_t ram_size;
+46:    hwaddr loader_start;
+59:    hwaddr smp_loader_start;
+67:    int (*atag_board)(const struct arm_boot_info *info, void *p);
+80:                                 const struct arm_boot_info *info);
+82:                                     const struct arm_boot_info *info);
+89:    void *(*get_dtb)(const struct arm_boot_info *info, int *size);
+93:    void (*modify_dtb)(const struct arm_boot_info *info, void *fdt);
+96:     * it should set this to QEMU_PSCI_CONDUIT_HVC or QEMU_PSCI_CONDUIT_SMC
+113:    bool firmware_loaded;
+123:                              const struct arm_boot_info *info);
+152:void arm_load_kernel(ARMCPU *cpu, MachineState *ms, struct arm_boot_info *info);
+155:                                     const struct arm_boot_info *info);
+178:int arm_load_dtb(hwaddr addr, const struct arm_boot_info *binfo,
+183:                                            const struct arm_boot_info *info,
+FILE hw/arm/virt.c
+2946:    mc->max_cpus = 512;
+2962:    mc->default_cpu_type = ARM_CPU_TYPE_NAME("cortex-a15");
+2964:    mc->default_cpu_type = ARM_CPU_TYPE_NAME("max");
+2980:    mc->default_ram_id = "mach-virt.ram";
+3339:    mc->max_cpus = 255;
+SOURCE_TAIL_BOOT
+
+    /*
+     * arm_load_dtb() may add a PSCI node so it must be called after we have
+     * decided whether to enable PSCI and set the psci-conduit CPU properties.
+     */
+    if (!info->skip_dtb_autoload && have_dtb(info)) {
+        if (arm_load_dtb(info->dtb_start, info, info->dtb_limit, as, ms) < 0) {
+            exit(1);
+        }
+    }
+}
+
+static const TypeInfo arm_linux_boot_if_info = {
+    .name = TYPE_ARM_LINUX_BOOT_IF,
+    .parent = TYPE_INTERFACE,
+    .class_size = sizeof(ARMLinuxBootIfClass),
+};
+
+static void arm_linux_boot_register_types(void)
+{
+    type_register_static(&arm_linux_boot_if_info);
+}
+
+type_init(arm_linux_boot_register_types)
+CC /home/oops/workspace/build/tmp/work/cortexa57-poky-linux/libedit/20230828-3.1/recipe-sysroot-native/usr/bin/aarch64-poky-linux/aarch64-poky-linux-gcc
+RC 0 aarch64-poky-linux-gcc (GCC) 13.4.0
+Copyright (C) 2023 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+
+
+
+===== impl_devbase =====
+SSH/controller exit code: 0
+OUTPUT:
+COMMAND ['git', 'status', '--short', '--branch'] RC 0
+## devtool
+
+COMMAND ['git', 'branch', '-v'] RC 0
+* devtool                          3a261f929 linux-user/*: workaround for missing MAP_SHARED_VALIDATE
+  devtool-no-overrides             a1d3a1200 block/vmdk: fix OOB read in vmdk_read_extent()
+  devtool-override-class-native    3a261f929 linux-user/*: workaround for missing MAP_SHARED_VALIDATE
+  devtool-override-class-nativesdk 20319f905 linux-user/*: workaround for missing MAP_SHARED_VALIDATE
+  master                           041c1c657 Initial commit from upstream at version 8.2.7
+
+COMMAND ['git', 'log', '-8', '--oneline'] RC 0
+3a261f929 linux-user/*: workaround for missing MAP_SHARED_VALIDATE
+ff7a6a033 linux-user/*: workaround for missing MAP_FIXED_NOREPLACE
+a1d3a1200 block/vmdk: fix OOB read in vmdk_read_extent()
+ddccc083a hw/i386/kvm: fix PIRQ bounds check in xen_physdev_map_pirq()
+f8b8df68c cryptodev-builtin: Limit the maximum size
+bb834ca53 hw/virtio/virtio-crypto: verify asym request size
+54dd1d8f2 lsi53c895a: keep a reference to the device while SCRIPTS execute
+1a1e893a4 io: fix use after free in websocket handshake code
+
+COMMAND ['git', 'tag', '--list', 'devtool*'] RC 0
+devtool-base
+devtool-patched
+
+APPEND /home/oops/workspace/build/workspace/appends/qemu-system-native_8.2.7.bbappend
+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
+FILESPATH:prepend := "/home/oops/workspace/build/workspace/sources/qemu-system-native/oe-local-files:"
+# srctreebase: /home/oops/workspace/build/workspace/sources/qemu-system-native
+
+inherit externalsrc
+# NOTE: We use pn- overrides here to avoid affecting multiple variants in the case where the recipe uses BBCLASSEXTEND
+EXTERNALSRC:pn-qemu-system-native = "/home/oops/workspace/build/workspace/sources/qemu-system-native"
+
+# initial_rev .: 041c1c65762b96bce77da424335150d654bf144a
+# commit .: 21ce599b1d288bbf5ae5b00669c71fd5be489ee5
+# commit .: 90e6ba7e1fe6708134a087ad8b73fac4e1d6bf3d
+# commit .: 1e341f45d9357d03ade58abd8dfb711c87efc521
+# commit .: 9e35fe9dfbac216c5fbe8e614384b213d1a16e5b
+# commit .: ffb4dbf0df34043aad352e45f77a599f1f52544e
+# commit .: 8d245aaef47f140d15b7114e3ae97c2709241831
+# commit .: bc9238ace7ef65973c5e75dc0e69472bdb4c92b6
+# commit .: 33c2dec5a175c2b4d5da13a4b5603c89a5c76996
+# commit .: ff3b8fe25b8a809a4edc9d173d17203aca2d2e6c
+# commit .: 8d139b1ffb9104634594dc42007ff4ab6d0ae667
+# commit .: 81b3386d1969998c20c5caa5fefa816d268036e8
+# commit .: 7c02b2a48f06611ca454d0c35e2bc94d993913cb
+# commit .: bde92bb75a03d754bf5a699567be5ce9c467b2ba
+# commit .: 1fc6d61f99dddee71831105feb53bf4f5085feab
+# commit .: f0efc627cd50478aca8153a7ed263eedbce8d142
+# commit .: 3a35e267ce6f757ef02ce46f7fe848cc63e73764
+# commit .: 49840b1004504d5de5298700c4852fd397b8e45c
+# commit .: 64cf4e953d71ecd5dddbb1eb17d2ee044571c642
+# commit .: caf2fd04a759809c276b02577d64bf1caffb9809
+# commit .: c4ff679926f7558aea8e67c7bd1be099bab8f3c5
+# commit .: 6dd1fa429c6dc22c38a55a17958a881d7f12626c
+# commit .: c48e0c7271bdd5b8d7d4d86a7396af3911a847ff
+# commit .: 00d3f497f750772a5b66154edb5cd78f8e1cb4dd
+# commit .: 1a1e893a4f85338a410350e9c7269b4d1cc42e12
+# commit .: 54dd1d8f2c72ba9b91c5c6b4214a9470f1013c09
+# commit .: bb834ca53d23131f380f32c1fb62786c1f8d898e
+# commit .: f8b8df68cb170de933131d60b01aae3930aedc90
+# commit .: ddccc083a2580fe358d8a40de498293b1eb78b6e
+# commit .: a1d3a120027fa3800b115dad4a97c01d14f360d4
+# commit .: ff7a6a0332fc6ebd4137902c332bc7db6df72303
+# commit .: 3a261f929a6154bdc315aabf4cb6c79c57f73652
+# patches_devtool-override-class-native: 
+# patches_devtool-override-class-nativesdk: 
+
+SOURCE hw/arm/Kconfig 250 275
+250:    select PL310  # cache controller
+251:    select ARM_SBCON_I2C
+252:    select DS1338 # I2C RTC+NVRAM
+253:    select USB_OHCI
+254:
+255:config SBSA_REF
+256:    bool
+257:    default y
+258:    depends on TCG && AARCH64
+259:    imply PCI_DEVICES
+260:    select AHCI
+261:    select ARM_SMMUV3
+262:    select GPIO_KEY
+263:    select PCI_EXPRESS
+264:    select PCI_EXPRESS_GENERIC_BRIDGE
+265:    select PFLASH_CFI01
+266:    select PL011 # UART
+267:    select PL031 # RTC
+268:    select PL061 # GPIO
+269:    select USB_XHCI_SYSBUS
+270:    select WDT_SBSA
+271:    select BOCHS_DISPLAY
+272:
+273:config SABRELITE
+274:    bool
+275:    default y
+SOURCE include/hw/boards.h 140 232
+140: */
+141:typedef struct {
+142:    bool prefer_sockets;
+143:    bool dies_supported;
+144:    bool clusters_supported;
+145:    bool has_clusters;
+146:    bool books_supported;
+147:    bool drawers_supported;
+148:} SMPCompatProps;
+149:
+150:/**
+151: * MachineClass:
+152: * @deprecation_reason: If set, the machine is marked as deprecated. The
+153: *    string should provide some clear information about what to use instead.
+154: * @max_cpus: maximum number of CPUs supported. Default: 1
+155: * @min_cpus: minimum number of CPUs supported. Default: 1
+156: * @default_cpus: number of CPUs instantiated if none are specified. Default: 1
+157: * @is_default:
+158: *    If true QEMU will use this machine by default if no '-M' option is given.
+159: * @get_hotplug_handler: this function is called during bus-less
+160: *    device hotplug. If defined it returns pointer to an instance
+161: *    of HotplugHandler object, which handles hotplug operation
+162: *    for a given @dev. It may return NULL if @dev doesn't require
+163: *    any actions to be performed by hotplug handler.
+164: * @cpu_index_to_instance_props:
+165: *    used to provide @cpu_index to socket/core/thread number mapping, allowing
+166: *    legacy code to perform mapping from cpu_index to topology properties
+167: *    Returns: tuple of socket/core/thread ids given cpu_index belongs to.
+168: *    used to provide @cpu_index to socket number mapping, allowing
+169: *    a machine to group CPU threads belonging to the same socket/package
+170: *    Returns: socket number given cpu_index belongs to.
+171: * @hw_version:
+172: *    Value of QEMU_VERSION when the machine was added to QEMU.
+173: *    Set only by old machines because they need to keep
+174: *    compatibility on code that exposed QEMU_VERSION to guests in
+175: *    the past (and now use qemu_hw_version()).
+176: * @possible_cpu_arch_ids:
+177: *    Returns an array of @CPUArchId architecture-dependent CPU IDs
+178: *    which includes CPU IDs for present and possible to hotplug CPUs.
+179: *    Caller is responsible for freeing returned list.
+180: * @get_default_cpu_node_id:
+181: *    returns default board specific node_id value for CPU slot specified by
+182: *    index @idx in @ms->possible_cpus[]
+183: * @has_hotpluggable_cpus:
+184: *    If true, board supports CPUs creation with -device/device_add.
+185: * @default_cpu_type:
+186: *    specifies default CPU_TYPE, which will be used for parsing target
+187: *    specific features and for creating CPUs if CPU name wasn't provided
+188: *    explicitly at CLI
+189: * @minimum_page_bits:
+190: *    If non-zero, the board promises never to create a CPU with a page size
+191: *    smaller than this, so QEMU can use a more efficient larger page
+192: *    size than the target architecture's minimum. (Attempting to create
+193: *    such a CPU will fail.) Note that changing this is a migration
+194: *    compatibility break for the machine.
+195: * @ignore_memory_transaction_failures:
+196: *    If this is flag is true then the CPU will ignore memory transaction
+197: *    failures which should cause the CPU to take an exception due to an
+198: *    access to an unassigned physical address; the transaction will instead
+199: *    return zero (for a read) or be ignored (for a write). This should be
+200: *    set only by legacy board models which rely on the old RAZ/WI behaviour
+201: *    for handling devices that QEMU does not yet model. New board models
+202: *    should instead use "unimplemented-device" for all memory ranges where
+203: *    the guest will attempt to probe for a device that QEMU doesn't
+204: *    implement and a stub device is required.
+205: * @kvm_type:
+206: *    Return the type of KVM corresponding to the kvm-type string option or
+207: *    computed based on other criteria such as the host kernel capabilities.
+208: *    kvm-type may be NULL if it is not needed.
+209: * @numa_mem_supported:
+210: *    true if '--numa node.mem' option is supported and false otherwise
+211: * @hotplug_allowed:
+212: *    If the hook is provided, then it'll be called for each device
+213: *    hotplug to check whether the device hotplug is allowed.  Return
+214: *    true to grant allowance or false to reject the hotplug.  When
+215: *    false is returned, an error must be set to show the reason of
+216: *    the rejection.  If the hook is not provided, all hotplug will be
+217: *    allowed.
+218: * @default_ram_id:
+219: *    Specifies initial RAM MemoryRegion name to be used for default backend
+220: *    creation if user explicitly hasn't specified backend with "memory-backend"
+221: *    property.
+222: *    It also will be used as a way to option into "-m" option support.
+223: *    If it's not set by board, '-m' will be ignored and generic code will
+224: *    not create default RAM MemoryRegion.
+225: * @fixup_ram_size:
+226: *    Amends user provided ram size (with -m option) using machine
+227: *    specific algorithm. To be used by old machine types for compat
+228: *    purposes only.
+229: *    Applies only to default memory backend, i.e., explicit memory backend
+230: *    wasn't used.
+231: */
+232:struct MachineClass {
+EXTRA_OECONF="     --prefix=/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/recipe-sysroot-native/usr     --bindir=/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/recipe-sysroot-native/usr/bin     --includedir=/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/recipe-sysroot-native/usr/include     --libdir=/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/recipe-sysroot-native/usr/lib     --mandir=/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/recipe-sysroot-native/usr/share/man     --datadir=/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/recipe-sysroot-native/usr/share     --docdir=/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/recipe-sysroot-native/usr/share/doc/qemu     --sysconfdir=/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/recipe-sysroot-native/etc     --libexecdir=/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/recipe-sysroot-native/usr/libexec     --localstatedir=/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/recipe-sysroot-native/var     --with-suffix=qemu     --disable-strip     --disable-werror     --extra-cflags='-isystem/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/recipe-sysroot-native/usr/include -O2 -pipe'     --extra-ldflags='-L/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/recipe-sysroot-native/usr/lib                         -L/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/recipe-sysroot-native/lib                         -Wl,--enable-new-dtags                         -Wl,-rpath-link,/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/recipe-sysroot-native/usr/lib                         -Wl,-rpath-link,/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/recipe-sysroot-native/lib                         -Wl,-rpath,/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/recipe-sysroot-native/usr/lib                         -Wl,-rpath,/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/recipe-sysroot-native/lib                         -Wl,-O1 -Wl,--allow-shlib-undefined -Wl,--dynamic-linker=/home/oops/workspace/build/tmp/sysroots-uninative/x86_64-linux/lib/ld-linux-x86-64.so.2 -pthread -fuse-ld=bfd'     --disable-download     --disable-docs     --host-cc='gcc '     --disable-af-xdp      --disable-linux-aio --audio-drv-list=default --disable-attr --disable-bpf --disable-brlapi --disable-bzip2 --disable-capstone --disable-curses --disable-libdaxctl --disable-dbus-display --disable-libdw --enable-opengl --enable-fdt --disable-fuse --disable-fuse-lseek --disable-gcrypt --disable-glusterfs --disable-gnutls --disable-gtk --disable-jack --enable-kvm --disable-cap-ng --disable-curl --disable-libiscsi --disable-libnfs --disable-libudev --disable-libusb --disable-lzo --disable-nettle --disable-smartcard --disable-numa --enable-pie --disable-pipewire --disable-libpmem --enable-png --disable-pa --disable-rbd --disable-rdma --enable-sdl --disable-seccomp --disable-selinux --enable-slirp --disable-snappy --disable-sndio --disable-spice --disable-libssh --disable-linux-io-uring --disable-usb-redir --disable-vde --disable-vhost-net --enable-virglrenderer --disable-virtfs --disable-vnc-jpeg --disable-vnc-sasl --disable-vte --disable-xen --disable-xkbcommon      --target-list=arm-softmmu,aarch64-softmmu,i386-softmmu,loongarch64-softmmu,mips-softmmu,mipsel-softmmu,mips64-softmmu,mips64el-softmmu,ppc-softmmu,ppc64-softmmu,riscv32-softmmu,riscv64-softmmu,sh4-softmmu,x86_64-softmmu"
+PACKAGECONFIG="fdt alsa kvm pie slirp png     virglrenderer epoxy  sdl"
+QEMU_TARGETS="arm aarch64 i386 loongarch64 mips mipsel mips64 mips64el ppc ppc64 ppc64le riscv32 riscv64 sh4 x86_64"
+
+
+===== impl_build1 =====
+SSH/controller exit code: 0
+OUTPUT:
+PATCHED_SOURCE_BASE 3a261f929a6154bdc315aabf4cb6c79c57f73652 31 commits after 041c1c65762b96bce77da424335150d654bf144a
+WROTE /home/oops/workspace/meta-tiger/recipes-test/tiger-minboot/files/start.S SHA256 4e04d7a7f24a93963681c23f223a2e5b8023773b0138f3a4886c6c74ab49fd50
+WROTE /home/oops/workspace/meta-tiger/recipes-test/tiger-minboot/files/main.c SHA256 aca3ed3a16e00f7f24c1617eea83b6a413eda707e896a885becc82fafa624ac1
+WROTE /home/oops/workspace/meta-tiger/recipes-test/tiger-minboot/files/tiger-minboot.ld SHA256 3b24e7bb31a41271e8d0a682b0eb509b61cc5ab0a92aca5d0df03cc355627640
+WROTE /home/oops/workspace/meta-tiger/recipes-test/tiger-minboot/files/COPYING.MIT SHA256 314a2ef2e4e48871ebdae4aad8c9e598041458abbab3a3f9accef0b74e9b09e5
+MODEL_WRITTEN /home/oops/workspace/build/workspace/sources/qemu-system-native/hw/arm/tiger.c
+RUN source /home/oops/workspace/poky/oe-init-build-env /home/oops/workspace/build >/dev/null && devtool build qemu-system-native LOG /home/oops/workspace/build/t016-qemu/devtool-build-1.log
+EXIT_BUILD 0
+NOTE: Running setscene task 337 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/make/make_4.4.1.bb:do_populate_sysroot_setscene)
+NOTE: recipe zlib-native-1.3.1-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe make-native-4.4.1-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe gdbm-native-1.23-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe perl-native-5.38.4-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe zlib-native-1.3.1-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: recipe perl-native-5.38.4-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: Running setscene task 341 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-core/zlib/zlib_1.3.1.bb:do_recipe_qa_setscene)
+NOTE: recipe make-native-4.4.1-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 342 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/pkgconfig/pkgconfig_git.bb:do_populate_sysroot_setscene)
+NOTE: Running setscene task 344 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/make/make_4.4.1.bb:do_recipe_qa_setscene)
+NOTE: recipe gdbm-native-1.23-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 346 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-support/gdbm/gdbm_1.23.bb:do_recipe_qa_setscene)
+NOTE: recipe zlib-native-1.3.1-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe pkgconfig-native-0.29.2+git-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe make-native-4.4.1-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe gdbm-native-1.23-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe zlib-native-1.3.1-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe make-native-4.4.1-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe gdbm-native-1.23-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe pkgconfig-native-0.29.2+git-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 350 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/pkgconfig/pkgconfig_git.bb:do_recipe_qa_setscene)
+NOTE: Running setscene task 353 of 363 (/home/oops/workspace/poky/meta/recipes-devtools/m4/m4-native_1.4.19.bb:do_populate_sysroot_setscene)
+NOTE: recipe m4-native-1.4.19-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe pkgconfig-native-0.29.2+git-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe m4-native-1.4.19-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 356 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/gnu-config/gnu-config_git.bb:do_populate_sysroot_setscene)
+NOTE: Running setscene task 358 of 363 (/home/oops/workspace/poky/meta/recipes-devtools/m4/m4-native_1.4.19.bb:do_recipe_qa_setscene)
+NOTE: recipe pkgconfig-native-0.29.2+git-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe m4-native-1.4.19-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe gnu-config-native-20240101+git-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe m4-native-1.4.19-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe gnu-config-native-20240101+git-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 362 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/gnu-config/gnu-config_git.bb:do_recipe_qa_setscene)
+NOTE: recipe gnu-config-native-20240101+git-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe gnu-config-native-20240101+git-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: Running task 1219 of 1224 (/home/oops/workspace/poky/meta/recipes-devtools/qemu/qemu-system-native_8.2.7.bb:do_unpack)
+NOTE: Running task 1220 of 1224 (/home/oops/workspace/poky/meta/recipes-devtools/qemu/qemu-system-native_8.2.7.bb:do_prepare_recipe_sysroot)
+NOTE: recipe qemu-system-native-8.2.7-r0: task do_unpack: Started
+NOTE: recipe qemu-system-native-8.2.7-r0: task do_prepare_recipe_sysroot: Started
+NOTE: recipe qemu-system-native-8.2.7-r0: task do_prepare_recipe_sysroot: Succeeded
+NOTE: recipe qemu-system-native-8.2.7-r0: task do_unpack: Succeeded
+NOTE: Running task 1221 of 1224 (/home/oops/workspace/poky/meta/recipes-devtools/qemu/qemu-system-native_8.2.7.bb:do_configure)
+NOTE: recipe qemu-system-native-8.2.7-r0: task do_configure: Started
+NOTE: recipe qemu-system-native-8.2.7-r0: task do_configure: Succeeded
+NOTE: Running task 1222 of 1224 (/home/oops/workspace/poky/meta/recipes-devtools/qemu/qemu-system-native_8.2.7.bb:do_compile)
+NOTE: recipe qemu-system-native-8.2.7-r0: task do_compile: Started
+NOTE: qemu-system-native: compiling from external source tree /home/oops/workspace/build/workspace/sources/qemu-system-native
+Bitbake still alive (no events for 600s). Active tasks:
+/home/oops/workspace/poky/meta/recipes-devtools/qemu/qemu-system-native_8.2.7.bb:do_compile
+NOTE: recipe qemu-system-native-8.2.7-r0: task do_compile: Succeeded
+NOTE: Running task 1223 of 1224 (/home/oops/workspace/poky/meta/recipes-devtools/qemu/qemu-system-native_8.2.7.bb:do_install)
+NOTE: recipe qemu-system-native-8.2.7-r0: task do_install: Started
+NOTE: recipe qemu-system-native-8.2.7-r0: task do_install: Succeeded
+NOTE: Running task 1224 of 1224 (/home/oops/workspace/poky/meta/recipes-devtools/qemu/qemu-system-native_8.2.7.bb:do_populate_sysroot)
+NOTE: recipe qemu-system-native-8.2.7-r0: task do_populate_sysroot: Started
+NOTE: recipe qemu-system-native-8.2.7-r0: task do_populate_sysroot: Succeeded
+NOTE: Tasks Summary: Attempted 1224 tasks of which 1215 didn't need to be rerun and all succeeded.
+
+Summary: There was 1 WARNING message.
+
+
+===== impl_fwbuild1 =====
+SSH/controller exit code: 0
+OUTPUT:
+COMMAND ["python3", "/home/oops/workspace/meta-tiger/tests/model/build-minboot.py", "--cc", "/home/oops/workspace/build/tmp/work/cortexa57-poky-linux/libedit/20230828-3.1/recipe-sysroot-native/usr/bin/aarch64-poky-linux/aarch64-poky-linux-gcc", "--out", "/home/oops/workspace/build/t016-qemu/fixture-1"]
+RC 0
+COMMAND ["/home/oops/workspace/build/tmp/work/cortexa57-poky-linux/libedit/20230828-3.1/recipe-sysroot-native/usr/bin/aarch64-poky-linux/aarch64-poky-linux-gcc", "--version"]
+aarch64-poky-linux-gcc (GCC) 13.4.0
+Copyright (C) 2023 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+COMMAND ["/home/oops/workspace/build/tmp/work/cortexa57-poky-linux/libedit/20230828-3.1/recipe-sysroot-native/usr/bin/aarch64-poky-linux/aarch64-poky-linux-gcc", "-O2", "-Wall", "-Wextra", "-Werror", "-march=armv8-a", "-mgeneral-regs-only", "-mstrict-align", "-ffreestanding", "-fno-builtin", "-fno-stack-protector", "-fno-pie", "-fno-pic", "-fno-unwind-tables", "-fno-asynchronous-unwind-tables", "-nostdlib", "-nostartfiles", "-static", "-no-pie", "-DTIGER_BUILD_ID=\"sha256:7fbb005bd53a3f3fa2ed0a933181e50db7a6bff97cab78ce9429557ccb9818d7\"", "/home/oops/workspace/meta-tiger/recipes-test/tiger-minboot/files/start.S", "/home/oops/workspace/meta-tiger/recipes-test/tiger-minboot/files/main.c", "-Wl,--build-id=none", "-Wl,-T,/home/oops/workspace/meta-tiger/recipes-test/tiger-minboot/files/tiger-minboot.ld", "-Wl,-Map,/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.map", "-o", "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.elf"]
+COMMAND ["/home/oops/workspace/build/tmp/work/cortexa57-poky-linux/libedit/20230828-3.1/recipe-sysroot-native/usr/bin/aarch64-poky-linux/aarch64-poky-linux-objcopy", "-O", "binary", "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.elf", "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.bin"]
+COMMAND ["/home/oops/workspace/build/tmp/work/cortexa57-poky-linux/libedit/20230828-3.1/recipe-sysroot-native/usr/bin/aarch64-poky-linux/aarch64-poky-linux-readelf", "-h", "-l", "-S", "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.elf"]
+COMMAND ["/home/oops/workspace/build/tmp/work/cortexa57-poky-linux/libedit/20230828-3.1/recipe-sysroot-native/usr/bin/aarch64-poky-linux/aarch64-poky-linux-nm", "-n", "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.elf"]
+COMMAND ["/home/oops/workspace/build/tmp/work/cortexa57-poky-linux/libedit/20230828-3.1/recipe-sysroot-native/usr/bin/aarch64-poky-linux/aarch64-poky-linux-nm", "-u", "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.elf"]
+COMMAND ["/home/oops/workspace/build/tmp/work/cortexa57-poky-linux/libedit/20230828-3.1/recipe-sysroot-native/usr/bin/aarch64-poky-linux/aarch64-poky-linux-objdump", "-d", "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.elf"]
+{
+  "build_id": "sha256:7fbb005bd53a3f3fa2ed0a933181e50db7a6bff97cab78ce9429557ccb9818d7",
+  "compiler": "/home/oops/workspace/build/tmp/work/cortexa57-poky-linux/libedit/20230828-3.1/recipe-sysroot-native/usr/bin/aarch64-poky-linux/aarch64-poky-linux-gcc",
+  "compiler_sha256": "7848a1aa5883d8a9c7d61f11f664f918226b94cd25894cfe4ef7d8b99ef64474",
+  "compiler_version": "aarch64-poky-linux-gcc (GCC) 13.4.0\nCopyright (C) 2023 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+  "flags": [
+    "-O2",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-march=armv8-a",
+    "-mgeneral-regs-only",
+    "-mstrict-align",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-fno-stack-protector",
+    "-fno-pie",
+    "-fno-pic",
+    "-fno-unwind-tables",
+    "-fno-asynchronous-unwind-tables",
+    "-nostdlib",
+    "-nostartfiles",
+    "-static",
+    "-no-pie"
+  ],
+  "source_files": {
+    "start.S": "4e04d7a7f24a93963681c23f223a2e5b8023773b0138f3a4886c6c74ab49fd50",
+    "main.c": "aca3ed3a16e00f7f24c1617eea83b6a413eda707e896a885becc82fafa624ac1",
+    "tiger-minboot.ld": "3b24e7bb31a41271e8d0a682b0eb509b61cc5ab0a92aca5d0df03cc355627640",
+    "COPYING.MIT": "314a2ef2e4e48871ebdae4aad8c9e598041458abbab3a3f9accef0b74e9b09e5"
+  },
+  "symbols": {
+    "_start": 0,
+    "puts": 128,
+    "firmware_main": 192,
+    "__data_load": 744,
+    "__data_start": 1073741824,
+    "test_data": 1073741824,
+    "__bss_start": 1073741832,
+    "__data_end": 1073741832,
+    "test_bss": 1073741832,
+    "observed_el": 1073741840,
+    "observed_sp": 1073741848,
+    "observed_mpidr": 1073741856,
+    "observed_sctlr": 1073741864,
+    "__bss_end": 1073741872,
+    "__stack_bottom": 1073807360,
+    "__stack_top": 1073872896
+  },
+  "outputs": {
+    "tiger-minboot.elf": {
+      "sha256": "b80e02248b16f19121e123beae2aee26f74454fdaaf54bac9cb45e2de76edf57",
+      "bytes": 132448
+    },
+    "tiger-minboot.bin": {
+      "sha256": "2b67c2bfb9d2fcbf3fd1880a1c1bf3ff09ece73b8bcbf5235116477fd2714376",
+      "bytes": 752
+    },
+    "tiger-minboot.map": {
+      "sha256": "63daf43f04104354e42c4090fb73e43370479fc40bd6a5241b3f0f52c610fa3d",
+      "bytes": 3649
+    },
+    "readelf.txt": {
+      "sha256": "e7ced196248f6f01daa00fbec2c726b14086271bd9766cea9f4b421fdac0c0df",
+      "bytes": 2969
+    },
+    "nm.txt": {
+      "sha256": "95cba225fdd9ce26231d786e8de030afa3fe2bc23c3d317b5db1848184ae2c9a",
+      "bytes": 488
+    },
+    "disassembly.txt": {
+      "sha256": "3c88fc6c710d9f78ba4f8dde765135e65429ef9dde285ad97fb08dbe3f969abb",
+      "bytes": 6979
+    }
+  }
+}
+
+
+
+===== impl_tests_ready =====
+SSH/controller exit code: 0
+OUTPUT:
+BUILD_TAIL
+NOTE: recipe pkgconfig-native-0.29.2+git-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe m4-native-1.4.19-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe gnu-config-native-20240101+git-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe m4-native-1.4.19-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe gnu-config-native-20240101+git-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 362 of 363 (virtual:native:/home/oops/workspace/poky/meta/recipes-devtools/gnu-config/gnu-config_git.bb:do_recipe_qa_setscene)
+NOTE: recipe gnu-config-native-20240101+git-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe gnu-config-native-20240101+git-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: Running task 1219 of 1224 (/home/oops/workspace/poky/meta/recipes-devtools/qemu/qemu-system-native_8.2.7.bb:do_unpack)
+NOTE: Running task 1220 of 1224 (/home/oops/workspace/poky/meta/recipes-devtools/qemu/qemu-system-native_8.2.7.bb:do_prepare_recipe_sysroot)
+NOTE: recipe qemu-system-native-8.2.7-r0: task do_unpack: Started
+NOTE: recipe qemu-system-native-8.2.7-r0: task do_prepare_recipe_sysroot: Started
+NOTE: recipe qemu-system-native-8.2.7-r0: task do_prepare_recipe_sysroot: Succeeded
+NOTE: recipe qemu-system-native-8.2.7-r0: task do_unpack: Succeeded
+NOTE: Running task 1221 of 1224 (/home/oops/workspace/poky/meta/recipes-devtools/qemu/qemu-system-native_8.2.7.bb:do_configure)
+NOTE: recipe qemu-system-native-8.2.7-r0: task do_configure: Started
+NOTE: recipe qemu-system-native-8.2.7-r0: task do_configure: Succeeded
+NOTE: Running task 1222 of 1224 (/home/oops/workspace/poky/meta/recipes-devtools/qemu/qemu-system-native_8.2.7.bb:do_compile)
+NOTE: recipe qemu-system-native-8.2.7-r0: task do_compile: Started
+NOTE: qemu-system-native: compiling from external source tree /home/oops/workspace/build/workspace/sources/qemu-system-native
+BUILD_RC RUNNING
+CLOCK_TRACE hw/char/trace-events
+10:serial_update_parameters(uint64_t baudrate, char parity, int data_bits, int stop_bits) "baudrate=%"PRIu64" parity='%c' data=%d stop=%d"
+63:pl011_baudrate_change(unsigned int baudrate, uint64_t clock, uint32_t ibrd, uint32_t fbrd) "new baudrate %u (clk: %" PRIu64 "hz, ibrd: %" PRIu32 ", fbrd: %" PRIu32 ")"
+103:cadence_uart_baudrate(unsigned baudrate) "baudrate %u"
+CLOCK_TRACE hw/char/pl011.c
+235:static unsigned int pl011_get_baudrate(const PL011State *s)
+247:static void pl011_trace_baudrate_change(const PL011State *s)
+249:    trace_pl011_baudrate_change(pl011_get_baudrate(s),
+283:        pl011_trace_baudrate_change(s);
+287:        pl011_trace_baudrate_change(s);
+378:    pl011_trace_baudrate_change(s);
+
+
+===== impl_test1 =====
+SSH/controller exit code: 1
+OUTPUT:
+QEMU /home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/build/qemu-system-aarch64 SHA256 53f28628d0a2ddcc24b36d55cdfe5bb89fece1cb4fa47da1d13ade249cb6b5e5
+VERSION_RC 0 QEMU emulator version 8.2.7
+Copyright (c) 2003-2023 Fabrice Bellard and the QEMU Project developers
+
+MACHINE_HELP_RC 0
+
+Traceback (most recent call last):
+  File "<stdin>", line 13, in <module>
+AssertionError
+
+
+===== impl_binary_locate =====
+SSH/controller exit code: 0
+OUTPUT:
+COMPILE_TASK_CWD
+72:export BUILD_RANLIB="ranlib -D"
+110:export RANLIB="ranlib -D"
+BINARY /home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/build/qemu-system-aarch64 SHA256 53f28628d0a2ddcc24b36d55cdfe5bb89fece1cb4fa47da1d13ade249cb6b5e5
+TIGER_LINES []
+BINARY /home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64 SHA256 2462e8c386ad0c8068655f973148727344cd5307256701009b5d1a7bce41e23e
+TIGER_LINES ['tiger                Tiger minimal single-core A53 teaching board']
+CONFIG /home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/build/config-host.mak
+SRC_PATH=/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7
+TARGET_DIRS=arm-softmmu aarch64-softmmu i386-softmmu loongarch64-softmmu mips-softmmu mipsel-softmmu mips64-softmmu mips64el-softmmu ppc-softmmu ppc64-softmmu riscv32-softmmu riscv64-softmmu sh4-softmmu x86_64-softmmu
+CONFIG /home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/config-host.mak
+SRC_PATH=/home/oops/workspace/build/workspace/sources/qemu-system-native
+TARGET_DIRS=arm-softmmu aarch64-softmmu i386-softmmu loongarch64-softmmu mips-softmmu mipsel-softmmu mips64-softmmu mips64el-softmmu ppc-softmmu ppc64-softmmu riscv32-softmmu riscv64-softmmu sh4-softmmu x86_64-softmmu
+
+
+===== impl_test2 =====
+SSH/controller exit code: 0
+OUTPUT:
+QEMU /home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64 SHA256 2462e8c386ad0c8068655f973148727344cd5307256701009b5d1a7bce41e23e
+MACHINE_HELP_RC 0 ['tiger                Tiger minimal single-core A53 teaching board']
+COMMAND ["python3", "/home/oops/workspace/meta-tiger/tests/model/test-tiger.py", "--qemu", "/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64", "--fixture", "/home/oops/workspace/build/t016-qemu/fixture-1", "--out", "/home/oops/workspace/build/t016-qemu/model-run-1"]
+TEST_RC 1
+cold-and-two-warm-resets fail Traceback (most recent call last):
+  File "/home/oops/workspace/meta-tiger/tests/model/test-tiger.py", line 26, in __init__
+    self.sock.connect(str(path))
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/oops/workspace/meta-tiger/tests/model/test-tiger.py", line 107, in result
+    details = fn()
+              ^^^^
+  File "/home/oops/workspace/meta-tiger/tests/model/test-tiger.py", line 259, in <lambda>
+    lambda: vm_test("cold-and-two-warm-resets", raw, 2))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oops/workspace/meta-tiger/tests/model/test-tiger.py", line 135, in vm_test
+    q = QMP(sock, p, d / "qmp.log")
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oops/workspace/meta-tiger/tests/model/test-tiger.py", line 30, in __init__
+    raise RuntimeError("QMP unavailable; inspect qemu.stderr")
+RuntimeError: QMP unavailable; inspect qemu.stderr
+
+exact-1MiB fail Traceback (most recent call last):
+  File "/home/oops/workspace/meta-tiger/tests/model/test-tiger.py", line 26, in __init__
+    self.sock.connect(str(path))
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/oops/workspace/meta-tiger/tests/model/test-tiger.py", line 107, in result
+    details = fn()
+              ^^^^
+  File "/home/oops/workspace/meta-tiger/tests/model/test-tiger.py", line 262, in <lambda>
+    result("exact-1MiB", lambda: vm_test("exact-1MiB", exact, 0))
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oops/workspace/meta-tiger/tests/model/test-tiger.py", line 135, in vm_test
+    q = QMP(sock, p, d / "qmp.log")
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oops/workspace/meta-tiger/tests/model/test-tiger.py", line 30, in __init__
+    raise RuntimeError("QMP unavailable; inspect qemu.stderr")
+RuntimeError: QMP unavailable; inspect qemu.stderr
+
+missing-bios-option pass 
+nonexistent-bios pass 
+empty-bios pass 
+too-large-bios pass 
+unreadable-bios pass 
+load-failure-directory pass 
+wrong-cpu pass 
+wrong-smp pass 
+wrong-ram pass 
+ram-hotplug pass 
+wrong-accelerator pass 
+kernel-input pass 
+initrd-input pass 
+dtb-input pass 
+
+
+===== impl_test1_failure =====
+SSH/controller exit code: 0
+OUTPUT:
+STDERR cold-and-two-warm-resets
+/home/oops/workspace/build/workspace/sources/qemu-system-native/include/hw/qdev-core.h:77:DEVICE: Object 0x60e9500fb990 is not an instance of type device
+
+STDERR exact-1MiB
+/home/oops/workspace/build/workspace/sources/qemu-system-native/include/hw/qdev-core.h:77:DEVICE: Object 0x5865e0a8b980 is not an instance of type device
+
+REJECTION missing-bios-option 1 qemu-system-aarch64: tiger: a non-empty raw -bios image is required
+REJECTION nonexistent-bios 1 qemu-system-aarch64: tiger: cannot find BIOS '/home/oops/workspace/build/t016-qemu/model-run-1/absent.bin'
+REJECTION empty-bios -6 /home/oops/workspace/build/workspace/sources/qemu-system-native/include/hw/qdev-core.h:77:DEVICE: Object 0x62ba142014a0 is not an instance of type device
+REJECTION too-large-bios -6 /home/oops/workspace/build/workspace/sources/qemu-system-native/include/hw/qdev-core.h:77:DEVICE: Object 0x5acc05b534a0 is not an instance of type device
+REJECTION unreadable-bios 1 qemu-system-aarch64: tiger: cannot find BIOS '/home/oops/workspace/build/t016-qemu/model-run-1/unreadable.bin'
+REJECTION load-failure-directory -6 /home/oops/workspace/build/workspace/sources/qemu-system-native/include/hw/qdev-core.h:77:DEVICE: Object 0x6499937674d0 is not an instance of type device
+REJECTION wrong-cpu 1 qemu-system-aarch64: Invalid CPU type: cortex-a57-arm-cpu
+The valid types are: cortex-a53-arm-cpu
+REJECTION wrong-smp 1 qemu-system-aarch64: Invalid SMP CPUs 2. The max CPUs supported by machine 'tiger' is 1
+REJECTION wrong-ram 1 qemu-system-aarch64: tiger: RAM must be exactly 1024 MiB without hotplug
+REJECTION ram-hotplug 1 qemu-system-aarch64: tiger: RAM must be exactly 1024 MiB without hotplug
+REJECTION wrong-accelerator 1 qemu-system-aarch64: tiger: only the TCG accelerator is supported
+REJECTION kernel-input 1 qemu-system-aarch64: tiger: kernel, initrd and DTB inputs are unsupported
+REJECTION initrd-input 1 qemu-system-aarch64: -initrd only allowed with -kernel option
+REJECTION dtb-input 1 qemu-system-aarch64: tiger: kernel, initrd and DTB inputs are unsupported
+
+
+===== impl_rom_api =====
+SSH/controller exit code: 0
+OUTPUT:
+SOURCE /home/oops/workspace/build/workspace/sources/qemu-system-native/system/memory.c
+3583:     * which case we can relax this restriction.
+3584:     */
+3585:    owner_dev = DEVICE(owner);
+3586:    vmstate_register_ram(mr, owner_dev);
+3587:}
+3588:
+3589:void memory_region_init_rom(MemoryRegion *mr,
+3590:                            Object *owner,
+3591:                            const char *name,
+3592:                            uint64_t size,
+3593:                            Error **errp)
+3594:{
+3595:    DeviceState *owner_dev;
+3596:    Error *err = NULL;
+3597:
+3598:    memory_region_init_rom_nomigrate(mr, owner, name, size, &err);
+3599:    if (err) {
+3600:        error_propagate(errp, err);
+3601:        return;
+3602:    }
+3603:    /* This will assert if owner is neither NULL nor a DeviceState.
+3604:     * We only want the owner here for the purposes of defining a
+3605:     * unique name for migration. TODO: Ideally we should implement
+3606:     * a naming scheme for Objects which are not DeviceStates, in
+3607:     * which case we can relax this restriction.
+3608:     */
+3609:    owner_dev = DEVICE(owner);
+3610:    vmstate_register_ram(mr, owner_dev);
+3611:}
+3612:
+3613:void memory_region_init_rom_device(MemoryRegion *mr,
+3614:                                   Object *owner,
+3615:                                   const MemoryRegionOps *ops,
+3616:                                   void *opaque,
+3617:                                   const char *name,
+3618:                                   uint64_t size,
+3619:                                   Error **errp)
+3620:{
+3621:    DeviceState *owner_dev;
+3622:    Error *err = NULL;
+3623:
+SOURCE /home/oops/workspace/build/workspace/sources/qemu-system-native/hw/core/loader.c
+SOURCE /home/oops/workspace/build/workspace/sources/qemu-system-native/include/exec/memory.h
+1601: * @owner: the object that tracks the region's reference count
+1602: * @name: Region name, becomes part of RAMBlock name used in migration stream
+1603: *        must be unique within any device
+1604: * @size: size of the region.
+1605: * @errp: pointer to Error*, to store an error if it happens.
+1606: */
+1607:void memory_region_init_rom(MemoryRegion *mr,
+1608:                            Object *owner,
+1609:                            const char *name,
+1610:                            uint64_t size,
+1611:                            Error **errp);
+1612:
+1613:/**
+1614: * memory_region_init_rom_device:  Initialize a ROM memory region.
+1615: *                                 Writes are handled via callbacks.
+1616: *
+1617: * This function initializes a memory region backed by RAM for reads
+1618: * and callbacks for writes, and arranges for the RAM backing to
+BOARD_ROM_OWNERS
+hw/arm/virt.c 1580     memory_region_init_ram(tagram, NULL, name, size / 32, &error_fatal);
+    memory_region_add_subregion(tag_sysmem, base / 32, tagram);
+}
+hw/arm/virt.c 1594     memory_region_init_ram(secram, NULL, "virt.secure-ram", size,
+                           &error_fatal);
+    memory_region_add_subregion(secure_sysmem, base, secram);
+hw/arm/virt.c 1993             memory_region_init_ram(pvtime, NULL, "pvtime", pvtime_size, NULL);
+            memory_region_add_subregion(sysmem, pvtime_reg_base, pvtime);
+        }
+hw/arm/sbsa-ref.c 417     memory_region_init_ram(secram, NULL, "sbsa-ref.secure-ram", size,
+                           &error_fatal);
+    memory_region_add_subregion(secure_sysmem, base, secram);
+
+
+===== impl_build2 =====
+SSH/controller exit code: 0
+OUTPUT:
+FIXED_ROM_OWNER_SHA256 89b25e7f0aa17dd5689641f426277db0caa8b3a7e37c8baf4b6d9c4b8954bc45
+STRICT_TEST_SHA256 89e8087184faa36a9617a0561e1efc073fe2d109ca8e6c2138925cf31d07eacb
+RUN source /home/oops/workspace/poky/oe-init-build-env /home/oops/workspace/build >/dev/null && devtool build qemu-system-native LOG /home/oops/workspace/build/t016-qemu/devtool-build-2.log
+EXIT_BUILD 0
+meta-yocto-bsp       = "scarthgap:77d1feb37e280733684ae8a9449fb031d5d7ff40"
+meta-tiger           = "feature/t-016-chapter4-revision:0e3da48b34ef772532535a730a21878cc30ccf67"
+workspace            = "<unknown>:<unknown>"
+
+Initialising tasks...Sstate summary: Wanted 137 Local 136 Mirrors 0 Missed 1 Current 226 (99% match, 99% complete)
+Removing 1 stale sstate objects for arch x86_64...done.
+NOTE: Executing Tasks
+NOTE: Running task 1222 of 1224 (/home/oops/workspace/poky/meta/recipes-devtools/qemu/qemu-system-native_8.2.7.bb:do_compile)
+NOTE: recipe qemu-system-native-8.2.7-r0: task do_compile: Started
+NOTE: qemu-system-native: compiling from external source tree /home/oops/workspace/build/workspace/sources/qemu-system-native
+NOTE: recipe qemu-system-native-8.2.7-r0: task do_compile: Succeeded
+NOTE: Running task 1223 of 1224 (/home/oops/workspace/poky/meta/recipes-devtools/qemu/qemu-system-native_8.2.7.bb:do_install)
+NOTE: recipe qemu-system-native-8.2.7-r0: task do_install: Started
+NOTE: recipe qemu-system-native-8.2.7-r0: task do_install: Succeeded
+NOTE: Running task 1224 of 1224 (/home/oops/workspace/poky/meta/recipes-devtools/qemu/qemu-system-native_8.2.7.bb:do_populate_sysroot)
+NOTE: recipe qemu-system-native-8.2.7-r0: task do_populate_sysroot: Started
+NOTE: recipe qemu-system-native-8.2.7-r0: task do_populate_sysroot: Succeeded
+NOTE: Tasks Summary: Attempted 1224 tasks of which 1221 didn't need to be rerun and all succeeded.
+
+Summary: There was 1 WARNING message.
+
+
+===== impl_test3 =====
+SSH/controller exit code: 0
+OUTPUT:
+QEMU_SHA256 4bd5db20de2c77e4df878019f097200ff170f9b180062f2c869e9abe7e8af528
+COMMAND ["python3", "/home/oops/workspace/meta-tiger/tests/model/test-tiger.py", "--qemu", "/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64", "--fixture", "/home/oops/workspace/build/t016-qemu/fixture-1", "--out", "/home/oops/workspace/build/t016-qemu/model-run-2"]
+TEST_RC 1
+cold-and-two-warm-resets fail Traceback (most recent call last):
+  File "/home/oops/workspace/meta-tiger/tests/model/test-tiger.py", line 107, in result
+    details = fn()
+              ^^^^
+  File "/home/oops/workspace/meta-tiger/tests/model/test-tiger.py", line 259, in <lambda>
+    lambda: vm_test("cold-and-two-warm-resets", raw, 2))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oops/workspace/meta-tiger/tests/model/test-tiger.py", line 252, in vm_test
+    assert "pl011_write" in trace, "guest UART trace missing"
+           ^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: guest UART trace missing
+
+exact-1MiB fail Traceback (most recent call last):
+  File "/home/oops/workspace/meta-tiger/tests/model/test-tiger.py", line 107, in result
+    details = fn()
+              ^^^^
+  File "/home/oops/workspace/meta-tiger/tests/model/test-tiger.py", line 262, in <lambda>
+    result("exact-1MiB", lambda: vm_test("exact-1MiB", exact, 0))
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oops/workspace/meta-tiger/tests/model/test-tiger.py", line 252, in vm_test
+    assert "pl011_write" in trace, "guest UART trace missing"
+           ^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: guest UART trace missing
+
+missing-bios-option pass 
+nonexistent-bios pass 
+empty-bios pass 
+too-large-bios pass 
+unreadable-bios pass 
+load-failure-directory pass 
+wrong-cpu pass 
+wrong-smp pass 
+wrong-ram pass 
+ram-hotplug pass 
+wrong-accelerator pass 
+kernel-input pass 
+initrd-input pass 
+dtb-input pass 
+
+
+===== impl_trace_locate =====
+SSH/controller exit code: 0
+OUTPUT:
+STATE cold-and-two-warm-resets PID 80681 RC 0
+UART TIGER-CH4 FW=sha256:7fbb005bd53a3f3fa2ed0a933181e50db7a6bff97cab78ce9429557ccb9818d7 CPU0 EL3 INIT=OK UART0 CFG=OK ROM=RO
+TIGER-CH4 FW=sha256:7fbb005bd53a3f3fa2ed0a933181e50db7a6bff97cab78ce9429557ccb9818d7 CPU0 EL3 INIT=OK UART0 CFG=OK ROM=RO
+TIGER-CH4 FW=sha256:7fbb005bd53a3f3fa2ed0a933181e50db7a6bff97cab78ce9429557ccb9818d7 CPU0 EL3 INIT=OK UART0 CFG=OK ROM=RO
+
+SNAPSHOTS [{"label": "cold-before-entry", "registers": "\r\nCPU#0\r\n PC=0000000000000000 X00=0000000000000000 X01=0000000000000000\r\nX02=0000000000000000 X03=0000000000000000 X04=0000000000000000\r\nX05=0000000000000000 X06=0000000000000000 X07=0000000000000000\r\nX08=0000000000000000 X09=0000000000000000 X10=0000000000000000\r\nX11=0000000000000000 X12=0000000000000000 X13=0000000000000000\r\nX14=0000000000000000 X15=0000000000000000 X16=0000000000000000\r\nX17=0000000000000000 X18=0000000000000000 X19=0000000000000000\r\nX20=0000000000000000 X21=0000000000000000 X22=0000000000000000\r\nX23=0000000000000000 X24=0000000000000000 X25=0000000000000000\r\nX26=0000000000000000 X27=0000000000000000 X28=0000000000000000\r\nX29=0000000000000000 X30=0000000000000000  SP=0000000000000000\r\nPSTATE=400003cd -Z-- EL3h     FPCR=00000000 FPSR=00000000\r\nQ00=0000000000000000:0000000000000000 Q01=0000000000000000:0000000000000000\r\nQ02=0000000000000000:0000000000000000 Q03=0000000000000000:0000000000000000\r\nQ04=0000000000000000:0000000000000000 Q05=0000000000000000:0000000000000000\r\nQ06=0000000000000000:0000000000000000 Q07=0000000000000000:0000000000000000\r\nQ08=0000000000000000:0000000000000000 Q09=0000000000000000:0000000000000000\r\nQ10=0000000000000000:0000000000000000 Q11=0000000000000000:0000000000000000\r\nQ12=0000000000000000:0000000000000000 Q13=0000000000000000:0000000000000000\r\nQ14=0000000000000000:0000000000000000 Q15=0000000000000000:0000000000000000\r\nQ16=0000000000000000:0000000000000000 Q17=0000000000000000:0000000000000000\r\nQ18=0000000000000000:0000000000000000 Q19=0000000000000000:0000000000000000\r\nQ20=0000000000000000:0000000000000000 Q21=0000000000000000:0000000000000000\r\nQ22=0000000000000000:0000000000000000 Q23=0000000000000000:0000000000000000\r\nQ24=0000000000000000:0000000000000000 Q25=0000000000000000:0000000000000000\r\nQ26=0000000000000000:0000000000000000 Q27=0000000000000000:0000000000000000\r\nQ28=0000000000000000:0000000000000000 Q29=0000000000000000:0000000000000000\r\nQ30=0000000000000000:0000000000000000 Q31=0000000000000000:0000000000000000\r\n", "uart": {"0x18": 144, "0x24": 0, "0x28": 0, "0x2c": 0, "0x30": 768, "0x38": 0, "0x3c": 0, "0x40": 0}}, {"label": "guest-1", "poison_data": "0xdadadadadadadada", "poison_bss": "0xb0b0b0b0b0b0b0b0", "rom_sha256": "6d3e07c3a13d98da2cee9600eb80f097806874e4c06fc6070a262e1d034550a1", "sp": "0x4001fff0"}, {"label": "reset-1-before-cont", "registers": "\r\nCPU#0\r\n PC=0000000000000000 X00=0000000000000000 X01=0000000000000000\r\nX02=0000000000000000 X03=0000000000000000 X04=0000000000000000\r\nX05=0000000000000000 X06=0000000000000000 X07=0000000000000000\r\nX08=0000000000000000 X09=0000000000000000 X10=0000000000000000\r\nX11=0000000000000000 X12=0000000000000000 X13=0000000000000000\r\nX14=0000000000000000 X15=0000000000000000 X16=0000000000000000\r\nX17=0000000000000000 X18=0000000000000000 X19=0000000000000000\r\nX20=0000000000000000 X21=0000000000000000 X22=0000000000000000\r\nX23=0000000000000000 X24=0000000000000000 X25=0000000000000000\r\nX26=0000000000000000 X27=0000000000000000 X28=0000000000000000\r\nX29=0000000000000000 X30=0000000000000000  SP=0000000000000000\r\nPSTATE=400003cd -Z-- EL3h     FPCR=00000000 FPSR=00000000\r\nQ00=0000000000000000:0000000000000000 Q01=0000000000000000:0000000000000000\r\nQ02=0000000000000000:0000000000000000 Q03=0000000000000000:0000000000000000\r\nQ04=0000000000000000:0000000000000000 Q05=0000000000000000:0000000000000000\r\nQ06=0000000000000000:0000000000000000 Q07=0000000000000000:0000000000000000\r\nQ08=0000000000000000:0000000000000000 Q09=0000000000000000:0000000000000000\r\nQ10=0000000000000000:0000000000000000 Q11=0000000000000000:0000000000000000\r\nQ12=0000000000000000:0000000000000000 Q13=0000000000000000:0000000000000000\r\nQ14=0000000000000000:0000000000000000 Q15=0000000000000000:0000000000000000\r\nQ16=0000000000000000:0000000000000000 Q17=0000000000000000:0000000000000000\r\nQ18=0000000000000000:0000000000000000 Q19=0000000000000000:0000000000000000\r\nQ20=0000000000000000:0000000000000000 Q21=0000000000000000:0000000000000000\r\nQ22=0000000000000000:0000000000000000 Q23=0000000000000000:0000000000000000\r\nQ24=0000000000000000:0000000000000000 Q25=0000000000000000:0000000000000000\r\nQ26=0000000000000000:0000000000000000 Q27=0000000000000000:0000000000000000\r\nQ28=0000000000000000:0000000000000000 Q29=0000000000000000:0000000000000000\r\nQ30=0000000000000000:0000000000000000 Q31=0000000000000000:0000000000000000\r\n", "uart": {"0x18": 144, "0x24": 0, "0x28": 0, "0x2c": 0, "0x30": 768, "0x38": 0, "0x3c": 0, "0x40": 0}, "retained_data": "0xdadadadadadadada", "retained_bss": "0xb0b0b0b0b0b0b0b0"}, {"label": "guest-2", "poison_data": "0xdadadadadadadada", "poison_bss": "0xb0b0b0b0b0b0b0b0", "rom_sha256": "6d3e07c3a13d98da2cee9600eb80f097806874e4c06fc6070a262e1d034550a1", "sp": "0x4001fff0"}, {"label": "reset-2-before-cont", "registers": "\r\nCPU#0\r\n PC=0000000000000000 X00=0000000000000000 X01=0000000000000000\r\nX02=0000000000000000 X03=0000000000000000 X04=0000000000000000\r\nX05=0000000000000000 X06=0000000000000000 X07=0000000000000000\r\nX08=0000000000000000 X09=0000000000000000 X10=0000000000000000\r\nX11=0000000000000000 X12=0000000000000000 X13=0000000000000000\r\nX14=0000000000000000 X15=0000000000000000 X16=0000000000000000\r\nX17=0000000000000000 X18=0000000000000000 X19=0000000000000000\r\nX20=0000000000000000 X21=0000000000000000 X22=0000000000000000\r\nX23=0000000000000000 X24=0000000000000000 X25=0000000000000000\r\nX26=0000000000000000 X27=0000000000000000 X28=0000000000000000\r\nX29=0000000000000000 X30=0000000000000000  SP=0000000000000000\r\nPSTATE=400003cd -Z-- EL3h     FPCR=00000000 FPSR=00000000\r\nQ00=0000000000000000:0000000000000000 Q01=0000000000000000:0000000000000000\r\nQ02=0000000000000000:0000000000000000 Q03=0000000000000000:0000000000000000\r\nQ04=0000000000000000:0000000000000000 Q05=0000000000000000:0000000000000000\r\nQ06=0000000000000000:0000000000000000 Q07=0000000000000000:0000000000000000\r\nQ08=0000000000000000:0000000000000000 Q09=0000000000000000:0000000000000000\r\nQ10=0000000000000000:0000000000000000 Q11=0000000000000000:0000000000000000\r\nQ12=0000000000000000:0000000000000000 Q13=0000000000000000:0000000000000000\r\nQ14=0000000000000000:0000000000000000 Q15=0000000000000000:0000000000000000\r\nQ16=0000000000000000:0000000000000000 Q17=0000000000000000:0000000000000000\r\nQ18=0000000000000000:0000000000000000 Q19=0000000000000000:0000000000000000\r\nQ20=0000000000000000:0000000000000000 Q21=0000000000000000:0000000000000000\r\nQ22=0000000000000000:0000000000000000 Q23=0000000000000000:0000000000000000\r\nQ24=0000000000000000:0000000000000000 Q25=0000000000000000:0000000000000000\r\nQ26=0000000000000000:0000000000000000 Q27=0000000000000000:0000000000000000\r\nQ28=0000000000000000:0000000000000000 Q29=0000000000000000:0000000000000000\r\nQ30=0000000000000000:0000000000000000 Q31=0000000000000000:0000000000000000\r\n", "uart": {"0x18": 144, "0x24": 0, "0x28": 0, "0x2c": 0, "0x30": 768, "0x38": 0, "0x3c": 0, "0x40": 0}, "retained_data": "0xdadadadadadadada", "retained_bss": "0xb0b0b0b0b0b0b0b0"}, {"label": "guest-3", "poison_data": "0xdadadadadadadada", "poison_bss": "0xb0b0b0b0b0b0b0b0", "rom_sha256": "6d3e07c3a13d98da2cee9600eb80f097806874e4c06fc6070a262e1d034550a1", "sp": "0x4001fff0"}]
+GDB_COLD 0x0000000000000000 in _start ()
+Hardware assisted breakpoint 1 at 0xc0
+
+Breakpoint 1, 0x00000000000000c0 in firmware_main ()
+GDB_PC=0xc0 GDB_SP=0x40020000 GDB_PSTATE=0x600003cd
+GDB_DATA=0x1122334455667788
+GDB_BSS=0x0
+[Inferior 1 (process 1) detached]
+
+TRACE_FILE qemu.stderr BYTES 0
+
+TRACE_FILE instructions.log BYTES 63552
+pl011_write addr 0x030 value 0x00000000 reg CR
+pl011_write addr 0x038 value 0x00000000 reg IMSC
+pl011_write addr 0x044 value 0x000007ff reg ICR
+pl011_write addr 0x024 value 0x0000000d reg IBRD
+pl011_baudrate_change new baudrate 115384 (clk: 24000000hz, ibrd: 13, fbrd: 0)
+pl011_write addr 0x028 value 0x00000001 reg FBRD
+pl011_baudrate_change new baudrate 115244 (clk: 24000000hz, ibrd: 13, fbrd: 1)
+pl011_write addr 0x02c value 0x00000060 reg LCRH
+STATE exact-1MiB PID 80715 RC 0
+UART TIGER-CH4 FW=sha256:7fbb005bd53a3f3fa2ed0a933181e50db7a6bff97cab78ce9429557ccb9818d7 CPU0 EL3 INIT=OK UART0 CFG=OK ROM=RO
+
+SNAPSHOTS [{"label": "cold-before-entry", "registers": "\r\nCPU#0\r\n PC=0000000000000000 X00=0000000000000000 X01=0000000000000000\r\nX02=0000000000000000 X03=0000000000000000 X04=0000000000000000\r\nX05=0000000000000000 X06=0000000000000000 X07=0000000000000000\r\nX08=0000000000000000 X09=0000000000000000 X10=0000000000000000\r\nX11=0000000000000000 X12=0000000000000000 X13=0000000000000000\r\nX14=0000000000000000 X15=0000000000000000 X16=0000000000000000\r\nX17=0000000000000000 X18=0000000000000000 X19=0000000000000000\r\nX20=0000000000000000 X21=0000000000000000 X22=0000000000000000\r\nX23=0000000000000000 X24=0000000000000000 X25=0000000000000000\r\nX26=0000000000000000 X27=0000000000000000 X28=0000000000000000\r\nX29=0000000000000000 X30=0000000000000000  SP=0000000000000000\r\nPSTATE=400003cd -Z-- EL3h     FPCR=00000000 FPSR=00000000\r\nQ00=0000000000000000:0000000000000000 Q01=0000000000000000:0000000000000000\r\nQ02=0000000000000000:0000000000000000 Q03=0000000000000000:0000000000000000\r\nQ04=0000000000000000:0000000000000000 Q05=0000000000000000:0000000000000000\r\nQ06=0000000000000000:0000000000000000 Q07=0000000000000000:0000000000000000\r\nQ08=0000000000000000:0000000000000000 Q09=0000000000000000:0000000000000000\r\nQ10=0000000000000000:0000000000000000 Q11=0000000000000000:0000000000000000\r\nQ12=0000000000000000:0000000000000000 Q13=0000000000000000:0000000000000000\r\nQ14=0000000000000000:0000000000000000 Q15=0000000000000000:0000000000000000\r\nQ16=0000000000000000:0000000000000000 Q17=0000000000000000:0000000000000000\r\nQ18=0000000000000000:0000000000000000 Q19=0000000000000000:0000000000000000\r\nQ20=0000000000000000:0000000000000000 Q21=0000000000000000:0000000000000000\r\nQ22=0000000000000000:0000000000000000 Q23=0000000000000000:0000000000000000\r\nQ24=0000000000000000:0000000000000000 Q25=0000000000000000:0000000000000000\r\nQ26=0000000000000000:0000000000000000 Q27=0000000000000000:0000000000000000\r\nQ28=0000000000000000:0000000000000000 Q29=0000000000000000:0000000000000000\r\nQ30=0000000000000000:0000000000000000 Q31=0000000000000000:0000000000000000\r\n", "uart": {"0x18": 144, "0x24": 0, "0x28": 0, "0x2c": 0, "0x30": 768, "0x38": 0, "0x3c": 0, "0x40": 0}}, {"label": "guest-1", "poison_data": "0xdadadadadadadada", "poison_bss": "0xb0b0b0b0b0b0b0b0", "rom_sha256": "6d3e07c3a13d98da2cee9600eb80f097806874e4c06fc6070a262e1d034550a1", "sp": "0x4001fff0"}]
+GDB_COLD 0x0000000000000000 in _start ()
+Hardware assisted breakpoint 1 at 0xc0
+
+Breakpoint 1, 0x00000000000000c0 in firmware_main ()
+GDB_PC=0xc0 GDB_SP=0x40020000 GDB_PSTATE=0x600003cd
+GDB_DATA=0x1122334455667788
+GDB_BSS=0x0
+[Inferior 1 (process 1) detached]
+
+TRACE_FILE qemu.stderr BYTES 0
+
+TRACE_FILE instructions.log BYTES 21184
+pl011_write addr 0x030 value 0x00000000 reg CR
+pl011_write addr 0x038 value 0x00000000 reg IMSC
+pl011_write addr 0x044 value 0x000007ff reg ICR
+pl011_write addr 0x024 value 0x0000000d reg IBRD
+pl011_baudrate_change new baudrate 115384 (clk: 24000000hz, ibrd: 13, fbrd: 0)
+pl011_write addr 0x028 value 0x00000001 reg FBRD
+pl011_baudrate_change new baudrate 115244 (clk: 24000000hz, ibrd: 13, fbrd: 1)
+pl011_write addr 0x02c value 0x00000060 reg LCRH
+
+
+===== impl_test4 =====
+SSH/controller exit code: 0
+OUTPUT:
+COMMAND ["python3", "/home/oops/workspace/meta-tiger/tests/model/test-tiger.py", "--qemu", "/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64", "--fixture", "/home/oops/workspace/build/t016-qemu/fixture-1", "--out", "/home/oops/workspace/build/t016-qemu/model-run-3"]
+TEST_RC 0
+cold-and-two-warm-resets pass 
+exact-1MiB pass 
+missing-bios-option pass 
+nonexistent-bios pass 
+empty-bios pass 
+too-large-bios pass 
+unreadable-bios pass 
+load-failure-directory pass 
+wrong-cpu pass 
+wrong-smp pass 
+wrong-ram pass 
+ram-hotplug pass 
+wrong-accelerator pass 
+kernel-input pass 
+initrd-input pass 
+dtb-input pass 
+
+
+===== impl_patch =====
+SSH/controller exit code: 0
+OUTPUT:
+COMMAND ["git", "status", "--short", "--branch"] CWD /home/oops/workspace/build/workspace/sources/qemu-system-native
+RC 0
+## devtool
+ M hw/arm/Kconfig
+ M hw/arm/meson.build
+?? hw/arm/tiger.c
+
+COMMAND ["git", "diff", "--check"] CWD /home/oops/workspace/build/workspace/sources/qemu-system-native
+RC 0
+
+COMMAND ["git", "rev-parse", "HEAD"] CWD /home/oops/workspace/build/workspace/sources/qemu-system-native
+RC 0
+3a261f929a6154bdc315aabf4cb6c79c57f73652
+
+COMMAND ["git", "add", "--", "hw/arm/tiger.c", "hw/arm/Kconfig", "hw/arm/meson.build"] CWD /home/oops/workspace/build/workspace/sources/qemu-system-native
+RC 0
+
+COMMAND ["git", "commit", "--file", "/home/oops/workspace/build/t016-qemu/model-commit-message.txt"] CWD /home/oops/workspace/build/workspace/sources/qemu-system-native
+RC 0
+[devtool 7ed31149a] T-016: arm: add minimal Tiger A53 teaching machine
+ 3 files changed, 169 insertions(+)
+ create mode 100644 hw/arm/tiger.c
+
+COMMAND ["git", "rev-parse", "HEAD"] CWD /home/oops/workspace/build/workspace/sources/qemu-system-native
+RC 0
+7ed31149ac01a9d6bb3a682b9d768936c4315ed3
+
+COMMAND ["git", "rev-list", "--count", "3a261f929a6154bdc315aabf4cb6c79c57f73652..HEAD"] CWD /home/oops/workspace/build/workspace/sources/qemu-system-native
+RC 0
+1
+
+SOURCE_COMMIT 7ed31149ac01a9d6bb3a682b9d768936c4315ed3 PATCH_SHA256 5437db1b7a95d656840d3ef0e590b84c889a891aed378b0813e1d4b989b94797
+COMMAND ["git", "apply", "--check", "/home/oops/workspace/meta-tiger/recipes-devtools/qemu/files/0001-arm-add-minimal-tiger-machine.patch"] CWD /home/oops/workspace/build/t016-qemu/patch-apply-check
+RC 0
+
+COMMAND ["git", "apply", "/home/oops/workspace/meta-tiger/recipes-devtools/qemu/files/0001-arm-add-minimal-tiger-machine.patch"] CWD /home/oops/workspace/build/t016-qemu/patch-apply-check
+RC 0
+
+CLEAN_BASE_APPLY_AND_CONTENT_MATCH True
+COMMAND ["perl", "/home/oops/workspace/build/workspace/sources/qemu-system-native/scripts/checkpatch.pl", "--no-tree", "--no-signoff", "/home/oops/workspace/meta-tiger/recipes-devtools/qemu/files/0001-arm-add-minimal-tiger-machine.patch"] CWD /home/oops/workspace/build/workspace/sources/qemu-system-native
+RC 0
+total: 0 errors, 0 warnings, 175 lines checked
+
+/home/oops/workspace/meta-tiger/recipes-devtools/qemu/files/0001-arm-add-minimal-tiger-machine.patch has no obvious style problems and is ready for submission.
+
+COMMAND ["git", "status", "--short", "--branch"] CWD /home/oops/workspace/build/workspace/sources/qemu-system-native
+RC 0
+## devtool
+
+COMMAND ["git", "status", "--short", "--branch"] CWD /home/oops/workspace/meta-tiger
+RC 0
+## feature/t-016-chapter4-revision
+?? recipes-devtools/
+?? recipes-test/
+?? tests/
+
+
+
+===== impl_meta_commit =====
+SSH/controller exit code: 1
+OUTPUT:
+COMMAND ["git", "status", "--short", "--branch"] CWD /home/oops/workspace/meta-tiger
+RC 0
+## feature/t-016-chapter4-revision
+?? recipes-devtools/
+?? recipes-test/
+?? tests/
+
+COMMAND ["git", "add", "--", "recipes-devtools/qemu/files/0001-arm-add-minimal-tiger-machine.patch"] CWD /home/oops/workspace/meta-tiger
+RC 0
+
+COMMAND ["git", "-c", "core.whitespace=-blank-at-eol", "diff", "--cached", "--check"] CWD /home/oops/workspace/meta-tiger
+RC 2
+recipes-devtools/qemu/files/0001-arm-add-minimal-tiger-machine.patch:211: new blank line at EOF.
+
+Traceback (most recent call last):
+  File "<stdin>", line 13, in <module>
+  File "<stdin>", line 9, in run
+RuntimeError: ['git', '-c', 'core.whitespace=-blank-at-eol', 'diff', '--cached', '--check']
+
+
+===== impl_meta_commit2 =====
+SSH/controller exit code: 0
+OUTPUT:
+COMMAND ["git", "rev-parse", "HEAD"] CWD /home/oops/workspace/meta-tiger
+RC 0
+0e3da48b34ef772532535a730a21878cc30ccf67
+
+COMMAND ["git", "diff", "--cached", "--name-only"] CWD /home/oops/workspace/meta-tiger
+RC 0
+recipes-devtools/qemu/files/0001-arm-add-minimal-tiger-machine.patch
+
+PATCH_MAIL_FORMAT: preserve canonical format-patch context/footer; source checkpatch is 0 errors/0 warnings.
+COMMAND ["git", "-c", "core.whitespace=-blank-at-eol,-blank-at-eof", "diff", "--cached", "--check"] CWD /home/oops/workspace/meta-tiger
+RC 0
+
+COMMAND ["git", "commit", "-m", "T-016: add minimal Tiger QEMU model patch"] CWD /home/oops/workspace/meta-tiger
+RC 0
+[feature/t-016-chapter4-revision 0e73cd7] T-016: add minimal Tiger QEMU model patch
+ 1 file changed, 211 insertions(+)
+ create mode 100644 recipes-devtools/qemu/files/0001-arm-add-minimal-tiger-machine.patch
+
+COMMAND ["git", "rev-parse", "HEAD"] CWD /home/oops/workspace/meta-tiger
+RC 0
+0e73cd7faacff219fa5de0a7365743ce31402d73
+
+COMMAND ["git", "add", "--", "recipes-test/tiger-minboot/files/start.S", "recipes-test/tiger-minboot/files/main.c", "recipes-test/tiger-minboot/files/tiger-minboot.ld", "recipes-test/tiger-minboot/files/COPYING.MIT", "tests/model/build-minboot.py", "tests/model/test-tiger.py", "tests/model/README.md"] CWD /home/oops/workspace/meta-tiger
+RC 0
+
+COMMAND ["git", "diff", "--cached", "--check"] CWD /home/oops/workspace/meta-tiger
+RC 0
+
+COMMAND ["git", "commit", "-m", "T-016: add minboot firmware and model validation"] CWD /home/oops/workspace/meta-tiger
+RC 0
+[feature/t-016-chapter4-revision b303ae6] T-016: add minboot firmware and model validation
+ 7 files changed, 694 insertions(+)
+ create mode 100644 recipes-test/tiger-minboot/files/COPYING.MIT
+ create mode 100644 recipes-test/tiger-minboot/files/main.c
+ create mode 100644 recipes-test/tiger-minboot/files/start.S
+ create mode 100644 recipes-test/tiger-minboot/files/tiger-minboot.ld
+ create mode 100644 tests/model/README.md
+ create mode 100644 tests/model/build-minboot.py
+ create mode 100644 tests/model/test-tiger.py
+
+COMMAND ["git", "rev-parse", "HEAD"] CWD /home/oops/workspace/meta-tiger
+RC 0
+b303ae6d614f067e11d4cbba57feacaf84ee7e8e
+
+META_PATCH_COMMIT 0e73cd7faacff219fa5de0a7365743ce31402d73 META_HANDOFF_COMMIT b303ae6d614f067e11d4cbba57feacaf84ee7e8e
+COMMITTED_INPUTS_MATCH_PASSING_TESTS True
+COMMAND ["git", "status", "--short", "--branch"] CWD /home/oops/workspace/meta-tiger
+RC 0
+## feature/t-016-chapter4-revision
+
+COMMAND ["git", "log", "-2", "--oneline"] CWD /home/oops/workspace/meta-tiger
+RC 0
+b303ae6 T-016: add minboot firmware and model validation
+0e73cd7 T-016: add minimal Tiger QEMU model patch
+
+COMMAND ["git", "rev-list", "--merges", "0e3da48b34ef772532535a730a21878cc30ccf67..HEAD"] CWD /home/oops/workspace/meta-tiger
+RC 0
+
+ENV_AFTER_RC 0
+B="/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7"
+BPN="qemu"
+EXTERNALSRC="/home/oops/workspace/build/workspace/sources/qemu-system-native"
+MACHINE="qemuarm64"
+PN="qemu-system-native"
+PV="8.2.7"
+S="/home/oops/workspace/build/workspace/sources/qemu-system-native"
+COMPILE_LOG_FILE log.do_compile.2225826 452507
+COMPILE_LOG_FILE log.do_compile.57036 453964
+COMPILE_LOG_FILE log.do_compile.80239 2334
+
+
+===== impl_collect =====
+SSH/controller exit code: 0
+OUTPUT:
+
+Name                  Length
+----                  ------
+.collection.json.tmp 9746311
+
+
+

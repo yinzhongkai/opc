@@ -1,0 +1,76 @@
+{
+  "remote": {
+    "date": "2026-10-18",
+    "scope": "Project-manager handoff verification; no new model/system test run",
+    "meta_head": "b303ae6d614f067e11d4cbba57feacaf84ee7e8e",
+    "meta_branch": "feature/t-016-chapter4-revision",
+    "meta_master": "0e3da48b34ef772532535a730a21878cc30ccf67",
+    "meta_clean": true,
+    "source_path": "/home/oops/workspace/sources/qemu-system-native",
+    "source_head": "7ed31149ac01a9d6bb3a682b9d768936c4315ed3",
+    "source_clean": true,
+    "poky_head": "77d1feb37e280733684ae8a9449fb031d5d7ff40",
+    "poky_clean": true,
+    "patch_applied_to_recorded_base_and_matches_source": true,
+    "file_sha256": {
+      "recipes-devtools/qemu/files/0001-arm-add-minimal-tiger-machine.patch": "5437db1b7a95d656840d3ef0e590b84c889a891aed378b0813e1d4b989b94797",
+      "recipes-test/tiger-minboot/files/start.S": "4e04d7a7f24a93963681c23f223a2e5b8023773b0138f3a4886c6c74ab49fd50",
+      "recipes-test/tiger-minboot/files/main.c": "aca3ed3a16e00f7f24c1617eea83b6a413eda707e896a885becc82fafa624ac1",
+      "recipes-test/tiger-minboot/files/tiger-minboot.ld": "3b24e7bb31a41271e8d0a682b0eb509b61cc5ab0a92aca5d0df03cc355627640",
+      "recipes-test/tiger-minboot/files/COPYING.MIT": "314a2ef2e4e48871ebdae4aad8c9e598041458abbab3a3f9accef0b74e9b09e5",
+      "tests/model/build-minboot.py": "d13bc2ba577e63164ee7e0ba74b88cf330fc618541c0a06580e9500e7cc3fca8",
+      "tests/model/test-tiger.py": "5f3cb82d80e99e3ed4b7efca704f16dbfb95ef26ac8fcd9aa13db6b29b5f1b73",
+      "tests/model/README.md": "913c5fb1b328eb0ba894f616d5fe944a27ed5badb403949321dcd3ae70f5fa47"
+    },
+    "model_artifacts_match_recorded_identity": true,
+    "actual_identity": {
+      "qemu_sha256": "4bd5db20de2c77e4df878019f097200ff170f9b180062f2c869e9abe7e8af528",
+      "firmware_sha256": "2b67c2bfb9d2fcbf3fd1880a1c1bf3ff09ece73b8bcbf5235116477fd2714376"
+    },
+    "fixture_outputs_verified": 6,
+    "persistent_source_protection_verified": true,
+    "active_build_or_qemu_processes": [],
+    "disk_free_gib": 641.9
+  },
+  "date": "2026-10-18",
+  "author": "project-manager",
+  "input_opc_commit": "4fd1f2e712192a6e059ddc89bda4896d0f4a6705",
+  "local_evidence": {
+    "manifest_sha256": "3e6c34ac78157dd9ae3eb90caa1970e11a55e41c5e280b1e15594e36e7c51acc",
+    "bundles_verified": 9,
+    "embedded_payloads_verified": 263,
+    "exact_bytes_and_sha256": true,
+    "final_identity_matches_summary": true,
+    "final_results_match_summary": true,
+    "final_author_model_cases": 16,
+    "positive_cases_exit_zero": 2,
+    "negative_cases_expected_exit_one_and_no_instruction_trace": 14,
+    "cold_and_two_host_resets": {
+      "pid": 80887,
+      "snapshots": 6,
+      "gdb_entries": 3,
+      "serial": "TIGER-CH4 FW=sha256:7fbb005bd53a3f3fa2ed0a933181e50db7a6bff97cab78ce9429557ccb9818d7 CPU0 EL3 INIT=OK UART0 CFG=OK ROM=RO\nTIGER-CH4 FW=sha256:7fbb005bd53a3f3fa2ed0a933181e50db7a6bff97cab78ce9429557ccb9818d7 CPU0 EL3 INIT=OK UART0 CFG=OK ROM=RO\nTIGER-CH4 FW=sha256:7fbb005bd53a3f3fa2ed0a933181e50db7a6bff97cab78ce9429557ccb9818d7 CPU0 EL3 INIT=OK UART0 CFG=OK ROM=RO\n"
+    }
+  },
+  "conclusion": "ready_for_yocto_handoff",
+  "blockers": [],
+  "limitations": [
+    "Handoff evidence and physical version verification only; no independent model review or runtime test rerun",
+    "Formal metadata integration, clean rebuild and runqemu system acceptance remain pending",
+    "T-016 and chapter approval remain pending"
+  ],
+  "governance_validation": {
+    "framework_validator_exit_code": 0,
+    "roles": 22,
+    "skills": 37,
+    "projects": 1,
+    "project_template_sets": 1,
+    "local_links_checked": 547,
+    "git_diff_check_exit_code": 0,
+    "unrelated_tasks_and_professional_records_unchanged": true,
+    "workspace_members_decisions_and_handoffs_unchanged": true,
+    "A005_A006_and_original_reports_raw_logs_unchanged": true,
+    "manuscript_commit": "9c74596591728c0f2d614e357059034551a42dca",
+    "manuscript_clean": true
+  }
+}

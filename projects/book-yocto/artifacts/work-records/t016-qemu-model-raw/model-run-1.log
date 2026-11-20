@@ -1,0 +1,1329 @@
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/model-run-1/cold-and-two-warm-resets/argv.json", "bytes": 808, "sha256": "599d4ba4b1c3e271871ff38577a925ef09d67d3cc55daa9af55a3ac0f1b6c55d", "bundle": "model-run-1.log"} =====
+[
+  "/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64",
+  "-machine",
+  "tiger",
+  "-accel",
+  "tcg",
+  "-cpu",
+  "cortex-a53",
+  "-smp",
+  "1",
+  "-m",
+  "1024",
+  "-display",
+  "none",
+  "-monitor",
+  "none",
+  "-nic",
+  "none",
+  "-bios",
+  "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.bin",
+  "-S",
+  "-serial",
+  "file:/home/oops/workspace/build/t016-qemu/model-run-1/cold-and-two-warm-resets/uart.log",
+  "-qmp",
+  "unix:/home/oops/workspace/build/t016-qemu/model-run-1/cold-and-two-warm-resets/qmp.sock,server=on,wait=off",
+  "-gdb",
+  "tcp:127.0.0.1:51177",
+  "-d",
+  "in_asm,guest_errors",
+  "-D",
+  "/home/oops/workspace/build/t016-qemu/model-run-1/cold-and-two-warm-resets/instructions.log",
+  "-trace",
+  "enable=pl011_*"
+]
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/model-run-1/cold-and-two-warm-resets/instructions.log", "bytes": 0, "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "bundle": "model-run-1.log"} =====
+
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/model-run-1/cold-and-two-warm-resets/qemu.stderr", "bytes": 154, "sha256": "75c1b3384ec0137a7a8632caee58ba542c81ba7be4573b1ee9646ecab68456cb", "bundle": "model-run-1.log"} =====
+/home/oops/workspace/build/workspace/sources/qemu-system-native/include/hw/qdev-core.h:77:DEVICE: Object 0x60e9500fb990 is not an instance of type device
+
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/model-run-1/cold-and-two-warm-resets/qmp.log", "bytes": 0, "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "bundle": "model-run-1.log"} =====
+
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/model-run-1/cold-and-two-warm-resets/state.json", "bytes": 1065, "sha256": "720897a0c956985b5c45afc00ee7549ba51c35f9eba5a9b62f0173080d6788ab", "bundle": "model-run-1.log"} =====
+{
+  "pid": 79152,
+  "argv": [
+    "/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64",
+    "-machine",
+    "tiger",
+    "-accel",
+    "tcg",
+    "-cpu",
+    "cortex-a53",
+    "-smp",
+    "1",
+    "-m",
+    "1024",
+    "-display",
+    "none",
+    "-monitor",
+    "none",
+    "-nic",
+    "none",
+    "-bios",
+    "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.bin",
+    "-S",
+    "-serial",
+    "file:/home/oops/workspace/build/t016-qemu/model-run-1/cold-and-two-warm-resets/uart.log",
+    "-qmp",
+    "unix:/home/oops/workspace/build/t016-qemu/model-run-1/cold-and-two-warm-resets/qmp.sock,server=on,wait=off",
+    "-gdb",
+    "tcp:127.0.0.1:51177",
+    "-d",
+    "in_asm,guest_errors",
+    "-D",
+    "/home/oops/workspace/build/t016-qemu/model-run-1/cold-and-two-warm-resets/instructions.log",
+    "-trace",
+    "enable=pl011_*"
+  ],
+  "snapshots": [],
+  "gdb": [],
+  "final_returncode": -6,
+  "serial": "",
+  "stderr_sha256": "75c1b3384ec0137a7a8632caee58ba542c81ba7be4573b1ee9646ecab68456cb"
+}
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/model-run-1/cold-and-two-warm-resets/uart.log", "bytes": 0, "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "bundle": "model-run-1.log"} =====
+
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/model-run-1/dtb-input/argv.json", "bytes": 648, "sha256": "4db78dfadd24d44baf9502689ea87f719c7d098ff0817c800452e500e87da608", "bundle": "model-run-1.log"} =====
+[
+  "/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64",
+  "-machine",
+  "tiger",
+  "-accel",
+  "tcg",
+  "-cpu",
+  "cortex-a53",
+  "-smp",
+  "1",
+  "-m",
+  "1024",
+  "-display",
+  "none",
+  "-monitor",
+  "none",
+  "-nic",
+  "none",
+  "-serial",
+  "file:/home/oops/workspace/build/t016-qemu/model-run-1/dtb-input/uart.log",
+  "-d",
+  "in_asm",
+  "-D",
+  "/home/oops/workspace/build/t016-qemu/model-run-1/dtb-input/instructions.log",
+  "-bios",
+  "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.bin",
+  "-dtb",
+  "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.bin"
+]
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/model-run-1/dtb-input/instructions.log", "bytes": 0, "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "bundle": "model-run-1.log"} =====
+
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/model-run-1/dtb-input/output.log", "bytes": 74, "sha256": "fa735e9bd4b9ff3c95f70f32b800e0fd6fc4c1b9ab8bf6906e0b3b45e6ce8318", "bundle": "model-run-1.log"} =====
+qemu-system-aarch64: tiger: kernel, initrd and DTB inputs are unsupported
+
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/model-run-1/dtb-input/uart.log", "bytes": 0, "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "bundle": "model-run-1.log"} =====
+
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/model-run-1/empty-bios/argv.json", "bytes": 564, "sha256": "a0623ac1fd5c2cfc4c9b7fd0fe532138502512db782856906438b66b0c5f9cd1", "bundle": "model-run-1.log"} =====
+[
+  "/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64",
+  "-machine",
+  "tiger",
+  "-accel",
+  "tcg",
+  "-cpu",
+  "cortex-a53",
+  "-smp",
+  "1",
+  "-m",
+  "1024",
+  "-display",
+  "none",
+  "-monitor",
+  "none",
+  "-nic",
+  "none",
+  "-serial",
+  "file:/home/oops/workspace/build/t016-qemu/model-run-1/empty-bios/uart.log",
+  "-d",
+  "in_asm",
+  "-D",
+  "/home/oops/workspace/build/t016-qemu/model-run-1/empty-bios/instructions.log",
+  "-bios",
+  "/home/oops/workspace/build/t016-qemu/model-run-1/empty.bin"
+]
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/model-run-1/empty-bios/instructions.log", "bytes": 0, "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "bundle": "model-run-1.log"} =====
+
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/model-run-1/empty-bios/output.log", "bytes": 154, "sha256": "1a8cbe0742974bf52f1ad932da6121e6f7c0e60289eac8b23a8268fa3c0f4eb1", "bundle": "model-run-1.log"} =====
+/home/oops/workspace/build/workspace/sources/qemu-system-native/include/hw/qdev-core.h:77:DEVICE: Object 0x62ba142014a0 is not an instance of type device
+
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/model-run-1/empty-bios/uart.log", "bytes": 0, "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "bundle": "model-run-1.log"} =====
+
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/model-run-1/exact-1MiB/argv.json", "bytes": 765, "sha256": "538f277e680c7010be324a12ba3cb36b52d218a8a090a59ca7e68f306a4831e5", "bundle": "model-run-1.log"} =====
+[
+  "/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64",
+  "-machine",
+  "tiger",
+  "-accel",
+  "tcg",
+  "-cpu",
+  "cortex-a53",
+  "-smp",
+  "1",
+  "-m",
+  "1024",
+  "-display",
+  "none",
+  "-monitor",
+  "none",
+  "-nic",
+  "none",
+  "-bios",
+  "/home/oops/workspace/build/t016-qemu/model-run-1/exact-1MiB.bin",
+  "-S",
+  "-serial",
+  "file:/home/oops/workspace/build/t016-qemu/model-run-1/exact-1MiB/uart.log",
+  "-qmp",
+  "unix:/home/oops/workspace/build/t016-qemu/model-run-1/exact-1MiB/qmp.sock,server=on,wait=off",
+  "-gdb",
+  "tcp:127.0.0.1:48561",
+  "-d",
+  "in_asm,guest_errors",
+  "-D",
+  "/home/oops/workspace/build/t016-qemu/model-run-1/exact-1MiB/instructions.log",
+  "-trace",
+  "enable=pl011_*"
+]
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/model-run-1/exact-1MiB/instructions.log", "bytes": 0, "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "bundle": "model-run-1.log"} =====
+
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/model-run-1/exact-1MiB/qemu.stderr", "bytes": 154, "sha256": "6d906b378415175919d778762bc49cc17e89806bc4c5edf68e0dd90e87af4c77", "bundle": "model-run-1.log"} =====
+/home/oops/workspace/build/workspace/sources/qemu-system-native/include/hw/qdev-core.h:77:DEVICE: Object 0x5865e0a8b980 is not an instance of type device
+
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/model-run-1/exact-1MiB/qmp.log", "bytes": 0, "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "bundle": "model-run-1.log"} =====
+
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/model-run-1/exact-1MiB/state.json", "bytes": 1022, "sha256": "5a71a83a4c58e88342020927f8eac7d9660a36515aa93d5cb0300da5fde7c27b", "bundle": "model-run-1.log"} =====
+{
+  "pid": 79155,
+  "argv": [
+    "/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64",
+    "-machine",
+    "tiger",
+    "-accel",
+    "tcg",
+    "-cpu",
+    "cortex-a53",
+    "-smp",
+    "1",
+    "-m",
+    "1024",
+    "-display",
+    "none",
+    "-monitor",
+    "none",
+    "-nic",
+    "none",
+    "-bios",
+    "/home/oops/workspace/build/t016-qemu/model-run-1/exact-1MiB.bin",
+    "-S",
+    "-serial",
+    "file:/home/oops/workspace/build/t016-qemu/model-run-1/exact-1MiB/uart.log",
+    "-qmp",
+    "unix:/home/oops/workspace/build/t016-qemu/model-run-1/exact-1MiB/qmp.sock,server=on,wait=off",
+    "-gdb",
+    "tcp:127.0.0.1:48561",
+    "-d",
+    "in_asm,guest_errors",
+    "-D",
+    "/home/oops/workspace/build/t016-qemu/model-run-1/exact-1MiB/instructions.log",
+    "-trace",
+    "enable=pl011_*"
+  ],
+  "snapshots": [],
+  "gdb": [],
+  "final_returncode": -6,
+  "serial": "",
+  "stderr_sha256": "6d906b378415175919d778762bc49cc17e89806bc4c5edf68e0dd90e87af4c77"
+}
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/model-run-1/exact-1MiB/uart.log", "bytes": 0, "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "bundle": "model-run-1.log"} =====
+
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/model-run-1/identity.json", "bytes": 558, "sha256": "3edfe9b6e11096391b293af050de7e563add79c45bdd213e1294baf9051f4ab9", "bundle": "model-run-1.log"} =====
+{
+  "qemu": "/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64",
+  "qemu_sha256": "2462e8c386ad0c8068655f973148727344cd5307256701009b5d1a7bce41e23e",
+  "firmware": "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.bin",
+  "firmware_sha256": "2b67c2bfb9d2fcbf3fd1880a1c1bf3ff09ece73b8bcbf5235116477fd2714376",
+  "manifest_sha256": "e8e70e40ba10f828d3be575725f42c3b9279c16c44392f9dec39cc69ee73884b",
+  "test_script_sha256": "8aa1201f4362ad40e5a6c4cac8cea40c389f95362cfa40773862f20151aa1807"
+}
+
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/model-run-1/initrd-input/argv.json", "bytes": 657, "sha256": "b7b357b655e7027d95d6235cad48c04e3eb24b162573bf7dd0ed3e3da36dc5fe", "bundle": "model-run-1.log"} =====
+[
+  "/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64",
+  "-machine",
+  "tiger",
+  "-accel",
+  "tcg",
+  "-cpu",
+  "cortex-a53",
+  "-smp",
+  "1",
+  "-m",
+  "1024",
+  "-display",
+  "none",
+  "-monitor",
+  "none",
+  "-nic",
+  "none",
+  "-serial",
+  "file:/home/oops/workspace/build/t016-qemu/model-run-1/initrd-input/uart.log",
+  "-d",
+  "in_asm",
+  "-D",
+  "/home/oops/workspace/build/t016-qemu/model-run-1/initrd-input/instructions.log",
+  "-bios",
+  "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.bin",
+  "-initrd",
+  "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.bin"
+]
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/model-run-1/initrd-input/output.log", "bytes": 62, "sha256": "7475dd7bbf5fd1a3e80984aa3dc631cc6b0c3b235a6e180e9e488eee579036cf", "bundle": "model-run-1.log"} =====
+qemu-system-aarch64: -initrd only allowed with -kernel option
+
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/model-run-1/kernel-input/argv.json", "bytes": 657, "sha256": "6f5a5a2a644fee35d09d7ade7c955f6dfaad92db4ef4113f1ab1134508a6af94", "bundle": "model-run-1.log"} =====
+[
+  "/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64",
+  "-machine",
+  "tiger",
+  "-accel",
+  "tcg",
+  "-cpu",
+  "cortex-a53",
+  "-smp",
+  "1",
+  "-m",
+  "1024",
+  "-display",
+  "none",
+  "-monitor",
+  "none",
+  "-nic",
+  "none",
+  "-serial",
+  "file:/home/oops/workspace/build/t016-qemu/model-run-1/kernel-input/uart.log",
+  "-d",
+  "in_asm",
+  "-D",
+  "/home/oops/workspace/build/t016-qemu/model-run-1/kernel-input/instructions.log",
+  "-bios",
+  "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.bin",
+  "-kernel",
+  "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.bin"
+]
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/model-run-1/kernel-input/instructions.log", "bytes": 0, "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "bundle": "model-run-1.log"} =====
+
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/model-run-1/kernel-input/output.log", "bytes": 74, "sha256": "fa735e9bd4b9ff3c95f70f32b800e0fd6fc4c1b9ab8bf6906e0b3b45e6ce8318", "bundle": "model-run-1.log"} =====
+qemu-system-aarch64: tiger: kernel, initrd and DTB inputs are unsupported
+
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/model-run-1/kernel-input/uart.log", "bytes": 0, "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "bundle": "model-run-1.log"} =====
+
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/model-run-1/load-failure-directory/argv.json", "bytes": 593, "sha256": "b8b6ef633d1980a4a84cb0a10718dc6f9bec7d9bbae4db139db4a865b8a23fbb", "bundle": "model-run-1.log"} =====
+[
+  "/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64",
+  "-machine",
+  "tiger",
+  "-accel",
+  "tcg",
+  "-cpu",
+  "cortex-a53",
+  "-smp",
+  "1",
+  "-m",
+  "1024",
+  "-display",
+  "none",
+  "-monitor",
+  "none",
+  "-nic",
+  "none",
+  "-serial",
+  "file:/home/oops/workspace/build/t016-qemu/model-run-1/load-failure-directory/uart.log",
+  "-d",
+  "in_asm",
+  "-D",
+  "/home/oops/workspace/build/t016-qemu/model-run-1/load-failure-directory/instructions.log",
+  "-bios",
+  "/home/oops/workspace/build/t016-qemu/model-run-1/directory-bios"
+]
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/model-run-1/load-failure-directory/instructions.log", "bytes": 0, "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "bundle": "model-run-1.log"} =====
+
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/model-run-1/load-failure-directory/output.log", "bytes": 154, "sha256": "84e0aa508dc1626b2c63422cf11f2ca00a5a639cfcba9b96d49956ce42cfdd58", "bundle": "model-run-1.log"} =====
+/home/oops/workspace/build/workspace/sources/qemu-system-native/include/hw/qdev-core.h:77:DEVICE: Object 0x6499937674d0 is not an instance of type device
+
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/model-run-1/load-failure-directory/uart.log", "bytes": 0, "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "bundle": "model-run-1.log"} =====
+
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/model-run-1/missing-bios-option/argv.json", "bytes": 507, "sha256": "8787c3a3158c98d41e278d0d96f1601efbe782af7c15f33e65fafed127334cc4", "bundle": "model-run-1.log"} =====
+[
+  "/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64",
+  "-machine",
+  "tiger",
+  "-accel",
+  "tcg",
+  "-cpu",
+  "cortex-a53",
+  "-smp",
+  "1",
+  "-m",
+  "1024",
+  "-display",
+  "none",
+  "-monitor",
+  "none",
+  "-nic",
+  "none",
+  "-serial",
+  "file:/home/oops/workspace/build/t016-qemu/model-run-1/missing-bios-option/uart.log",
+  "-d",
+  "in_asm",
+  "-D",
+  "/home/oops/workspace/build/t016-qemu/model-run-1/missing-bios-option/instructions.log"
+]
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/model-run-1/missing-bios-option/instructions.log", "bytes": 0, "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "bundle": "model-run-1.log"} =====
+
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/model-run-1/missing-bios-option/output.log", "bytes": 68, "sha256": "97188aa8cb287daa67a64eceeda458d594930b24db07492d2481e302eeef7318", "bundle": "model-run-1.log"} =====
+qemu-system-aarch64: tiger: a non-empty raw -bios image is required
+
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/model-run-1/missing-bios-option/uart.log", "bytes": 0, "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "bundle": "model-run-1.log"} =====
+
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/model-run-1/nonexistent-bios/argv.json", "bytes": 577, "sha256": "0666b33c4411bdb67a6fa1b04dabd0d7394d537cf78078a0f65f8a196604ea2e", "bundle": "model-run-1.log"} =====
+[
+  "/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64",
+  "-machine",
+  "tiger",
+  "-accel",
+  "tcg",
+  "-cpu",
+  "cortex-a53",
+  "-smp",
+  "1",
+  "-m",
+  "1024",
+  "-display",
+  "none",
+  "-monitor",
+  "none",
+  "-nic",
+  "none",
+  "-serial",
+  "file:/home/oops/workspace/build/t016-qemu/model-run-1/nonexistent-bios/uart.log",
+  "-d",
+  "in_asm",
+  "-D",
+  "/home/oops/workspace/build/t016-qemu/model-run-1/nonexistent-bios/instructions.log",
+  "-bios",
+  "/home/oops/workspace/build/t016-qemu/model-run-1/absent.bin"
+]
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/model-run-1/nonexistent-bios/instructions.log", "bytes": 0, "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "bundle": "model-run-1.log"} =====
+
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/model-run-1/nonexistent-bios/output.log", "bytes": 107, "sha256": "6acbf3d9e6de035323603e678c24c60df1cb10eca98fcb6ae7245fc7de917d02", "bundle": "model-run-1.log"} =====
+qemu-system-aarch64: tiger: cannot find BIOS '/home/oops/workspace/build/t016-qemu/model-run-1/absent.bin'
+
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/model-run-1/nonexistent-bios/uart.log", "bytes": 0, "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "bundle": "model-run-1.log"} =====
+
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/model-run-1/ram-hotplug/argv.json", "bytes": 590, "sha256": "e16a924cc4b747fb1728712377c7038e11daf22beafc7de34eb277a04e22625e", "bundle": "model-run-1.log"} =====
+[
+  "/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64",
+  "-machine",
+  "tiger",
+  "-accel",
+  "tcg",
+  "-cpu",
+  "cortex-a53",
+  "-smp",
+  "1",
+  "-m",
+  "1024,maxmem=2G,slots=1",
+  "-display",
+  "none",
+  "-monitor",
+  "none",
+  "-nic",
+  "none",
+  "-serial",
+  "file:/home/oops/workspace/build/t016-qemu/model-run-1/ram-hotplug/uart.log",
+  "-d",
+  "in_asm",
+  "-D",
+  "/home/oops/workspace/build/t016-qemu/model-run-1/ram-hotplug/instructions.log",
+  "-bios",
+  "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.bin"
+]
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/model-run-1/ram-hotplug/instructions.log", "bytes": 0, "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "bundle": "model-run-1.log"} =====
+
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/model-run-1/ram-hotplug/output.log", "bytes": 73, "sha256": "43a90248fded2787b294db19b234beed6a2dfd86dc8099ee42726d1340ef6d00", "bundle": "model-run-1.log"} =====
+qemu-system-aarch64: tiger: RAM must be exactly 1024 MiB without hotplug
+
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/model-run-1/ram-hotplug/uart.log", "bytes": 0, "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "bundle": "model-run-1.log"} =====
+
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/model-run-1/results.json", "bytes": 16484, "sha256": "8479671e171f35b0c8466ecd42b3d595c75e011405b9ef20366b5fff9310e8ee", "bundle": "model-run-1.log"} =====
+[
+  {
+    "name": "cold-and-two-warm-resets",
+    "status": "fail",
+    "traceback": "Traceback (most recent call last):\n  File \"/home/oops/workspace/meta-tiger/tests/model/test-tiger.py\", line 26, in __init__\n    self.sock.connect(str(path))\nConnectionRefusedError: [Errno 111] Connection refused\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/home/oops/workspace/meta-tiger/tests/model/test-tiger.py\", line 107, in result\n    details = fn()\n              ^^^^\n  File \"/home/oops/workspace/meta-tiger/tests/model/test-tiger.py\", line 259, in <lambda>\n    lambda: vm_test(\"cold-and-two-warm-resets\", raw, 2))\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/oops/workspace/meta-tiger/tests/model/test-tiger.py\", line 135, in vm_test\n    q = QMP(sock, p, d / \"qmp.log\")\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/oops/workspace/meta-tiger/tests/model/test-tiger.py\", line 30, in __init__\n    raise RuntimeError(\"QMP unavailable; inspect qemu.stderr\")\nRuntimeError: QMP unavailable; inspect qemu.stderr\n"
+  },
+  {
+    "name": "exact-1MiB",
+    "status": "fail",
+    "traceback": "Traceback (most recent call last):\n  File \"/home/oops/workspace/meta-tiger/tests/model/test-tiger.py\", line 26, in __init__\n    self.sock.connect(str(path))\nConnectionRefusedError: [Errno 111] Connection refused\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/home/oops/workspace/meta-tiger/tests/model/test-tiger.py\", line 107, in result\n    details = fn()\n              ^^^^\n  File \"/home/oops/workspace/meta-tiger/tests/model/test-tiger.py\", line 262, in <lambda>\n    result(\"exact-1MiB\", lambda: vm_test(\"exact-1MiB\", exact, 0))\n                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/oops/workspace/meta-tiger/tests/model/test-tiger.py\", line 135, in vm_test\n    q = QMP(sock, p, d / \"qmp.log\")\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/oops/workspace/meta-tiger/tests/model/test-tiger.py\", line 30, in __init__\n    raise RuntimeError(\"QMP unavailable; inspect qemu.stderr\")\nRuntimeError: QMP unavailable; inspect qemu.stderr\n"
+  },
+  {
+    "name": "missing-bios-option",
+    "status": "pass",
+    "details": {
+      "argv": [
+        "/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64",
+        "-machine",
+        "tiger",
+        "-accel",
+        "tcg",
+        "-cpu",
+        "cortex-a53",
+        "-smp",
+        "1",
+        "-m",
+        "1024",
+        "-display",
+        "none",
+        "-monitor",
+        "none",
+        "-nic",
+        "none",
+        "-serial",
+        "file:/home/oops/workspace/build/t016-qemu/model-run-1/missing-bios-option/uart.log",
+        "-d",
+        "in_asm",
+        "-D",
+        "/home/oops/workspace/build/t016-qemu/model-run-1/missing-bios-option/instructions.log"
+      ],
+      "exit_code": 1,
+      "output": "qemu-system-aarch64: tiger: a non-empty raw -bios image is required\n",
+      "instruction_bytes": 0
+    }
+  },
+  {
+    "name": "nonexistent-bios",
+    "status": "pass",
+    "details": {
+      "argv": [
+        "/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64",
+        "-machine",
+        "tiger",
+        "-accel",
+        "tcg",
+        "-cpu",
+        "cortex-a53",
+        "-smp",
+        "1",
+        "-m",
+        "1024",
+        "-display",
+        "none",
+        "-monitor",
+        "none",
+        "-nic",
+        "none",
+        "-serial",
+        "file:/home/oops/workspace/build/t016-qemu/model-run-1/nonexistent-bios/uart.log",
+        "-d",
+        "in_asm",
+        "-D",
+        "/home/oops/workspace/build/t016-qemu/model-run-1/nonexistent-bios/instructions.log",
+        "-bios",
+        "/home/oops/workspace/build/t016-qemu/model-run-1/absent.bin"
+      ],
+      "exit_code": 1,
+      "output": "qemu-system-aarch64: tiger: cannot find BIOS '/home/oops/workspace/build/t016-qemu/model-run-1/absent.bin'\n",
+      "instruction_bytes": 0
+    }
+  },
+  {
+    "name": "empty-bios",
+    "status": "pass",
+    "details": {
+      "argv": [
+        "/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64",
+        "-machine",
+        "tiger",
+        "-accel",
+        "tcg",
+        "-cpu",
+        "cortex-a53",
+        "-smp",
+        "1",
+        "-m",
+        "1024",
+        "-display",
+        "none",
+        "-monitor",
+        "none",
+        "-nic",
+        "none",
+        "-serial",
+        "file:/home/oops/workspace/build/t016-qemu/model-run-1/empty-bios/uart.log",
+        "-d",
+        "in_asm",
+        "-D",
+        "/home/oops/workspace/build/t016-qemu/model-run-1/empty-bios/instructions.log",
+        "-bios",
+        "/home/oops/workspace/build/t016-qemu/model-run-1/empty.bin"
+      ],
+      "exit_code": -6,
+      "output": "/home/oops/workspace/build/workspace/sources/qemu-system-native/include/hw/qdev-core.h:77:DEVICE: Object 0x62ba142014a0 is not an instance of type device\n",
+      "instruction_bytes": 0
+    }
+  },
+  {
+    "name": "too-large-bios",
+    "status": "pass",
+    "details": {
+      "argv": [
+        "/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64",
+        "-machine",
+        "tiger",
+        "-accel",
+        "tcg",
+        "-cpu",
+        "cortex-a53",
+        "-smp",
+        "1",
+        "-m",
+        "1024",
+        "-display",
+        "none",
+        "-monitor",
+        "none",
+        "-nic",
+        "none",
+        "-serial",
+        "file:/home/oops/workspace/build/t016-qemu/model-run-1/too-large-bios/uart.log",
+        "-d",
+        "in_asm",
+        "-D",
+        "/home/oops/workspace/build/t016-qemu/model-run-1/too-large-bios/instructions.log",
+        "-bios",
+        "/home/oops/workspace/build/t016-qemu/model-run-1/too-large.bin"
+      ],
+      "exit_code": -6,
+      "output": "/home/oops/workspace/build/workspace/sources/qemu-system-native/include/hw/qdev-core.h:77:DEVICE: Object 0x5acc05b534a0 is not an instance of type device\n",
+      "instruction_bytes": 0
+    }
+  },
+  {
+    "name": "unreadable-bios",
+    "status": "pass",
+    "details": {
+      "argv": [
+        "/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64",
+        "-machine",
+        "tiger",
+        "-accel",
+        "tcg",
+        "-cpu",
+        "cortex-a53",
+        "-smp",
+        "1",
+        "-m",
+        "1024",
+        "-display",
+        "none",
+        "-monitor",
+        "none",
+        "-nic",
+        "none",
+        "-serial",
+        "file:/home/oops/workspace/build/t016-qemu/model-run-1/unreadable-bios/uart.log",
+        "-d",
+        "in_asm",
+        "-D",
+        "/home/oops/workspace/build/t016-qemu/model-run-1/unreadable-bios/instructions.log",
+        "-bios",
+        "/home/oops/workspace/build/t016-qemu/model-run-1/unreadable.bin"
+      ],
+      "exit_code": 1,
+      "output": "qemu-system-aarch64: tiger: cannot find BIOS '/home/oops/workspace/build/t016-qemu/model-run-1/unreadable.bin'\n",
+      "instruction_bytes": 0
+    }
+  },
+  {
+    "name": "load-failure-directory",
+    "status": "pass",
+    "details": {
+      "argv": [
+        "/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64",
+        "-machine",
+        "tiger",
+        "-accel",
+        "tcg",
+        "-cpu",
+        "cortex-a53",
+        "-smp",
+        "1",
+        "-m",
+        "1024",
+        "-display",
+        "none",
+        "-monitor",
+        "none",
+        "-nic",
+        "none",
+        "-serial",
+        "file:/home/oops/workspace/build/t016-qemu/model-run-1/load-failure-directory/uart.log",
+        "-d",
+        "in_asm",
+        "-D",
+        "/home/oops/workspace/build/t016-qemu/model-run-1/load-failure-directory/instructions.log",
+        "-bios",
+        "/home/oops/workspace/build/t016-qemu/model-run-1/directory-bios"
+      ],
+      "exit_code": -6,
+      "output": "/home/oops/workspace/build/workspace/sources/qemu-system-native/include/hw/qdev-core.h:77:DEVICE: Object 0x6499937674d0 is not an instance of type device\n",
+      "instruction_bytes": 0
+    }
+  },
+  {
+    "name": "wrong-cpu",
+    "status": "pass",
+    "details": {
+      "argv": [
+        "/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64",
+        "-machine",
+        "tiger",
+        "-accel",
+        "tcg",
+        "-cpu",
+        "cortex-a57",
+        "-smp",
+        "1",
+        "-m",
+        "1024",
+        "-display",
+        "none",
+        "-monitor",
+        "none",
+        "-nic",
+        "none",
+        "-serial",
+        "file:/home/oops/workspace/build/t016-qemu/model-run-1/wrong-cpu/uart.log",
+        "-d",
+        "in_asm",
+        "-D",
+        "/home/oops/workspace/build/t016-qemu/model-run-1/wrong-cpu/instructions.log",
+        "-bios",
+        "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.bin"
+      ],
+      "exit_code": 1,
+      "output": "qemu-system-aarch64: Invalid CPU type: cortex-a57-arm-cpu\nThe valid types are: cortex-a53-arm-cpu\n",
+      "instruction_bytes": 0
+    }
+  },
+  {
+    "name": "wrong-smp",
+    "status": "pass",
+    "details": {
+      "argv": [
+        "/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64",
+        "-machine",
+        "tiger",
+        "-accel",
+        "tcg",
+        "-cpu",
+        "cortex-a53",
+        "-smp",
+        "2",
+        "-m",
+        "1024",
+        "-display",
+        "none",
+        "-monitor",
+        "none",
+        "-nic",
+        "none",
+        "-serial",
+        "file:/home/oops/workspace/build/t016-qemu/model-run-1/wrong-smp/uart.log",
+        "-d",
+        "in_asm",
+        "-D",
+        "/home/oops/workspace/build/t016-qemu/model-run-1/wrong-smp/instructions.log",
+        "-bios",
+        "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.bin"
+      ],
+      "exit_code": 1,
+      "output": "qemu-system-aarch64: Invalid SMP CPUs 2. The max CPUs supported by machine 'tiger' is 1\n",
+      "instruction_bytes": 0
+    }
+  },
+  {
+    "name": "wrong-ram",
+    "status": "pass",
+    "details": {
+      "argv": [
+        "/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64",
+        "-machine",
+        "tiger",
+        "-accel",
+        "tcg",
+        "-cpu",
+        "cortex-a53",
+        "-smp",
+        "1",
+        "-m",
+        "512",
+        "-display",
+        "none",
+        "-monitor",
+        "none",
+        "-nic",
+        "none",
+        "-serial",
+        "file:/home/oops/workspace/build/t016-qemu/model-run-1/wrong-ram/uart.log",
+        "-d",
+        "in_asm",
+        "-D",
+        "/home/oops/workspace/build/t016-qemu/model-run-1/wrong-ram/instructions.log",
+        "-bios",
+        "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.bin"
+      ],
+      "exit_code": 1,
+      "output": "qemu-system-aarch64: tiger: RAM must be exactly 1024 MiB without hotplug\n",
+      "instruction_bytes": 0
+    }
+  },
+  {
+    "name": "ram-hotplug",
+    "status": "pass",
+    "details": {
+      "argv": [
+        "/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64",
+        "-machine",
+        "tiger",
+        "-accel",
+        "tcg",
+        "-cpu",
+        "cortex-a53",
+        "-smp",
+        "1",
+        "-m",
+        "1024,maxmem=2G,slots=1",
+        "-display",
+        "none",
+        "-monitor",
+        "none",
+        "-nic",
+        "none",
+        "-serial",
+        "file:/home/oops/workspace/build/t016-qemu/model-run-1/ram-hotplug/uart.log",
+        "-d",
+        "in_asm",
+        "-D",
+        "/home/oops/workspace/build/t016-qemu/model-run-1/ram-hotplug/instructions.log",
+        "-bios",
+        "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.bin"
+      ],
+      "exit_code": 1,
+      "output": "qemu-system-aarch64: tiger: RAM must be exactly 1024 MiB without hotplug\n",
+      "instruction_bytes": 0
+    }
+  },
+  {
+    "name": "wrong-accelerator",
+    "status": "pass",
+    "details": {
+      "argv": [
+        "/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64",
+        "-machine",
+        "tiger",
+        "-accel",
+        "qtest",
+        "-cpu",
+        "cortex-a53",
+        "-smp",
+        "1",
+        "-m",
+        "1024",
+        "-display",
+        "none",
+        "-monitor",
+        "none",
+        "-nic",
+        "none",
+        "-serial",
+        "file:/home/oops/workspace/build/t016-qemu/model-run-1/wrong-accelerator/uart.log",
+        "-d",
+        "in_asm",
+        "-D",
+        "/home/oops/workspace/build/t016-qemu/model-run-1/wrong-accelerator/instructions.log",
+        "-bios",
+        "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.bin"
+      ],
+      "exit_code": 1,
+      "output": "qemu-system-aarch64: tiger: only the TCG accelerator is supported\n",
+      "instruction_bytes": 0
+    }
+  },
+  {
+    "name": "kernel-input",
+    "status": "pass",
+    "details": {
+      "argv": [
+        "/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64",
+        "-machine",
+        "tiger",
+        "-accel",
+        "tcg",
+        "-cpu",
+        "cortex-a53",
+        "-smp",
+        "1",
+        "-m",
+        "1024",
+        "-display",
+        "none",
+        "-monitor",
+        "none",
+        "-nic",
+        "none",
+        "-serial",
+        "file:/home/oops/workspace/build/t016-qemu/model-run-1/kernel-input/uart.log",
+        "-d",
+        "in_asm",
+        "-D",
+        "/home/oops/workspace/build/t016-qemu/model-run-1/kernel-input/instructions.log",
+        "-bios",
+        "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.bin",
+        "-kernel",
+        "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.bin"
+      ],
+      "exit_code": 1,
+      "output": "qemu-system-aarch64: tiger: kernel, initrd and DTB inputs are unsupported\n",
+      "instruction_bytes": 0
+    }
+  },
+  {
+    "name": "initrd-input",
+    "status": "pass",
+    "details": {
+      "argv": [
+        "/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64",
+        "-machine",
+        "tiger",
+        "-accel",
+        "tcg",
+        "-cpu",
+        "cortex-a53",
+        "-smp",
+        "1",
+        "-m",
+        "1024",
+        "-display",
+        "none",
+        "-monitor",
+        "none",
+        "-nic",
+        "none",
+        "-serial",
+        "file:/home/oops/workspace/build/t016-qemu/model-run-1/initrd-input/uart.log",
+        "-d",
+        "in_asm",
+        "-D",
+        "/home/oops/workspace/build/t016-qemu/model-run-1/initrd-input/instructions.log",
+        "-bios",
+        "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.bin",
+        "-initrd",
+        "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.bin"
+      ],
+      "exit_code": 1,
+      "output": "qemu-system-aarch64: -initrd only allowed with -kernel option\n",
+      "instruction_bytes": 0
+    }
+  },
+  {
+    "name": "dtb-input",
+    "status": "pass",
+    "details": {
+      "argv": [
+        "/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64",
+        "-machine",
+        "tiger",
+        "-accel",
+        "tcg",
+        "-cpu",
+        "cortex-a53",
+        "-smp",
+        "1",
+        "-m",
+        "1024",
+        "-display",
+        "none",
+        "-monitor",
+        "none",
+        "-nic",
+        "none",
+        "-serial",
+        "file:/home/oops/workspace/build/t016-qemu/model-run-1/dtb-input/uart.log",
+        "-d",
+        "in_asm",
+        "-D",
+        "/home/oops/workspace/build/t016-qemu/model-run-1/dtb-input/instructions.log",
+        "-bios",
+        "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.bin",
+        "-dtb",
+        "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.bin"
+      ],
+      "exit_code": 1,
+      "output": "qemu-system-aarch64: tiger: kernel, initrd and DTB inputs are unsupported\n",
+      "instruction_bytes": 0
+    }
+  }
+]
+
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/model-run-1/too-large-bios/argv.json", "bytes": 576, "sha256": "0cb6a8220893570850e40fb4ca9b1c67ac624f47cfa00e391393e0035951db4f", "bundle": "model-run-1.log"} =====
+[
+  "/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64",
+  "-machine",
+  "tiger",
+  "-accel",
+  "tcg",
+  "-cpu",
+  "cortex-a53",
+  "-smp",
+  "1",
+  "-m",
+  "1024",
+  "-display",
+  "none",
+  "-monitor",
+  "none",
+  "-nic",
+  "none",
+  "-serial",
+  "file:/home/oops/workspace/build/t016-qemu/model-run-1/too-large-bios/uart.log",
+  "-d",
+  "in_asm",
+  "-D",
+  "/home/oops/workspace/build/t016-qemu/model-run-1/too-large-bios/instructions.log",
+  "-bios",
+  "/home/oops/workspace/build/t016-qemu/model-run-1/too-large.bin"
+]
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/model-run-1/too-large-bios/instructions.log", "bytes": 0, "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "bundle": "model-run-1.log"} =====
+
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/model-run-1/too-large-bios/output.log", "bytes": 154, "sha256": "69f4aeab818f065a0aee836bf9dd9c9cc50d94f71cd42a574f8b06e42e180c1f", "bundle": "model-run-1.log"} =====
+/home/oops/workspace/build/workspace/sources/qemu-system-native/include/hw/qdev-core.h:77:DEVICE: Object 0x5acc05b534a0 is not an instance of type device
+
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/model-run-1/too-large-bios/uart.log", "bytes": 0, "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "bundle": "model-run-1.log"} =====
+
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/model-run-1/unreadable-bios/argv.json", "bytes": 579, "sha256": "2cb6ea1c6f8b708e21c378d278d2fe5add0dd455c8521277db820cb9d8d3a041", "bundle": "model-run-1.log"} =====
+[
+  "/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64",
+  "-machine",
+  "tiger",
+  "-accel",
+  "tcg",
+  "-cpu",
+  "cortex-a53",
+  "-smp",
+  "1",
+  "-m",
+  "1024",
+  "-display",
+  "none",
+  "-monitor",
+  "none",
+  "-nic",
+  "none",
+  "-serial",
+  "file:/home/oops/workspace/build/t016-qemu/model-run-1/unreadable-bios/uart.log",
+  "-d",
+  "in_asm",
+  "-D",
+  "/home/oops/workspace/build/t016-qemu/model-run-1/unreadable-bios/instructions.log",
+  "-bios",
+  "/home/oops/workspace/build/t016-qemu/model-run-1/unreadable.bin"
+]
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/model-run-1/unreadable-bios/instructions.log", "bytes": 0, "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "bundle": "model-run-1.log"} =====
+
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/model-run-1/unreadable-bios/output.log", "bytes": 111, "sha256": "7e6d3796b07d5eb50cbb7cf18b35732254173cb692285ca205c46a4d8b2c37d2", "bundle": "model-run-1.log"} =====
+qemu-system-aarch64: tiger: cannot find BIOS '/home/oops/workspace/build/t016-qemu/model-run-1/unreadable.bin'
+
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/model-run-1/unreadable-bios/uart.log", "bytes": 0, "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "bundle": "model-run-1.log"} =====
+
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/model-run-1/wrong-accelerator/argv.json", "bytes": 586, "sha256": "01c5a9ceef8fde57fdc5ea09e1bff3f3f7c0df51acbed36e6aceb53f708d6739", "bundle": "model-run-1.log"} =====
+[
+  "/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64",
+  "-machine",
+  "tiger",
+  "-accel",
+  "qtest",
+  "-cpu",
+  "cortex-a53",
+  "-smp",
+  "1",
+  "-m",
+  "1024",
+  "-display",
+  "none",
+  "-monitor",
+  "none",
+  "-nic",
+  "none",
+  "-serial",
+  "file:/home/oops/workspace/build/t016-qemu/model-run-1/wrong-accelerator/uart.log",
+  "-d",
+  "in_asm",
+  "-D",
+  "/home/oops/workspace/build/t016-qemu/model-run-1/wrong-accelerator/instructions.log",
+  "-bios",
+  "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.bin"
+]
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/model-run-1/wrong-accelerator/instructions.log", "bytes": 0, "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "bundle": "model-run-1.log"} =====
+
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/model-run-1/wrong-accelerator/output.log", "bytes": 66, "sha256": "87bfe41b09f35714b0894e8df3fed8910fc309c52fb27f81a9137be23d386970", "bundle": "model-run-1.log"} =====
+qemu-system-aarch64: tiger: only the TCG accelerator is supported
+
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/model-run-1/wrong-accelerator/uart.log", "bytes": 0, "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "bundle": "model-run-1.log"} =====
+
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/model-run-1/wrong-cpu/argv.json", "bytes": 568, "sha256": "1b925a4bbe7c757148bc8597199a95eb3d1a24629ed5cc0c19f1eff6692a4ac0", "bundle": "model-run-1.log"} =====
+[
+  "/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64",
+  "-machine",
+  "tiger",
+  "-accel",
+  "tcg",
+  "-cpu",
+  "cortex-a57",
+  "-smp",
+  "1",
+  "-m",
+  "1024",
+  "-display",
+  "none",
+  "-monitor",
+  "none",
+  "-nic",
+  "none",
+  "-serial",
+  "file:/home/oops/workspace/build/t016-qemu/model-run-1/wrong-cpu/uart.log",
+  "-d",
+  "in_asm",
+  "-D",
+  "/home/oops/workspace/build/t016-qemu/model-run-1/wrong-cpu/instructions.log",
+  "-bios",
+  "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.bin"
+]
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/model-run-1/wrong-cpu/instructions.log", "bytes": 0, "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "bundle": "model-run-1.log"} =====
+
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/model-run-1/wrong-cpu/output.log", "bytes": 98, "sha256": "911461a17d14cd3706d984af078b487c063de2f9f1483b6f97da27c53f24c481", "bundle": "model-run-1.log"} =====
+qemu-system-aarch64: Invalid CPU type: cortex-a57-arm-cpu
+The valid types are: cortex-a53-arm-cpu
+
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/model-run-1/wrong-cpu/uart.log", "bytes": 0, "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "bundle": "model-run-1.log"} =====
+
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/model-run-1/wrong-ram/argv.json", "bytes": 567, "sha256": "90abae3795182dc9fffae83f4de51a5a04ab05519cf45856f63d88c2b2459145", "bundle": "model-run-1.log"} =====
+[
+  "/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64",
+  "-machine",
+  "tiger",
+  "-accel",
+  "tcg",
+  "-cpu",
+  "cortex-a53",
+  "-smp",
+  "1",
+  "-m",
+  "512",
+  "-display",
+  "none",
+  "-monitor",
+  "none",
+  "-nic",
+  "none",
+  "-serial",
+  "file:/home/oops/workspace/build/t016-qemu/model-run-1/wrong-ram/uart.log",
+  "-d",
+  "in_asm",
+  "-D",
+  "/home/oops/workspace/build/t016-qemu/model-run-1/wrong-ram/instructions.log",
+  "-bios",
+  "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.bin"
+]
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/model-run-1/wrong-ram/instructions.log", "bytes": 0, "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "bundle": "model-run-1.log"} =====
+
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/model-run-1/wrong-ram/output.log", "bytes": 73, "sha256": "43a90248fded2787b294db19b234beed6a2dfd86dc8099ee42726d1340ef6d00", "bundle": "model-run-1.log"} =====
+qemu-system-aarch64: tiger: RAM must be exactly 1024 MiB without hotplug
+
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/model-run-1/wrong-ram/uart.log", "bytes": 0, "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "bundle": "model-run-1.log"} =====
+
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/model-run-1/wrong-smp/argv.json", "bytes": 568, "sha256": "a46284a581717e87d6ca0623aa3af36478c19b55dd8bc31d99236afe66bd0199", "bundle": "model-run-1.log"} =====
+[
+  "/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64",
+  "-machine",
+  "tiger",
+  "-accel",
+  "tcg",
+  "-cpu",
+  "cortex-a53",
+  "-smp",
+  "2",
+  "-m",
+  "1024",
+  "-display",
+  "none",
+  "-monitor",
+  "none",
+  "-nic",
+  "none",
+  "-serial",
+  "file:/home/oops/workspace/build/t016-qemu/model-run-1/wrong-smp/uart.log",
+  "-d",
+  "in_asm",
+  "-D",
+  "/home/oops/workspace/build/t016-qemu/model-run-1/wrong-smp/instructions.log",
+  "-bios",
+  "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.bin"
+]
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/model-run-1/wrong-smp/instructions.log", "bytes": 0, "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "bundle": "model-run-1.log"} =====
+
+===== END FILE =====
+
+===== FILE {"source": "/home/oops/workspace/build/t016-qemu/model-run-1/wrong-smp/output.log", "bytes": 88, "sha256": "7494bf7050c4be571a585fabd29f1bb6b1762691a2b119aef4b921c8f4099f79", "bundle": "model-run-1.log"} =====
+qemu-system-aarch64: Invalid SMP CPUs 2. The max CPUs supported by machine 'tiger' is 1
+
+===== END FILE =====

@@ -1,0 +1,27 @@
+Final readonly state verification, client date 2026-10-16 Asia/Shanghai
+EXIT_CODE: 0
+REPO /home/oops/workspace/meta-tiger COMMAND ["git", "status", "--short", "--branch"] RC 0
+## feature/t-016-chapter4-revision
+REPO /home/oops/workspace/meta-tiger COMMAND ["git", "rev-parse", "HEAD"] RC 0
+b303ae6d614f067e11d4cbba57feacaf84ee7e8e
+REPO /home/oops/workspace/poky COMMAND ["git", "status", "--short", "--branch"] RC 0
+## scarthgap...origin/scarthgap
+REPO /home/oops/workspace/poky COMMAND ["git", "rev-parse", "HEAD"] RC 0
+77d1feb37e280733684ae8a9449fb031d5d7ff40
+REPO /home/oops/workspace/build/workspace/sources/qemu-system-native COMMAND ["git", "status", "--short", "--branch"] RC 0
+## devtool
+REPO /home/oops/workspace/build/workspace/sources/qemu-system-native COMMAND ["git", "rev-parse", "HEAD"] RC 0
+7ed31149ac01a9d6bb3a682b9d768936c4315ed3
+META_MASTER_UNCHANGED True
+LIVE_STAGE_QEMU_PROCESSES []
+CONFIG_SHA256 bblayers.conf 511f6e952d65a6eae018a40932040911843bd30f9fb674172fa05ab1be30591d
+CONFIG_SHA256 local.conf c4628c9a913df0cf0f3d2f891e0f34af3852664855e28700f42ca57e140f6d20
+Devtool workspace deliberately retained; no merge, branch deletion or push performed.
+
+Supplemental AArch64 execution-state guard (outside the 16-case matrix)
+Controller EXIT_CODE: 0
+CPU_EXECUTION_STATE_GUARD ["/home/oops/workspace/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7/qemu-system-aarch64", "-machine", "tiger", "-accel", "tcg", "-cpu", "cortex-a53,aarch64=off", "-smp", "1", "-m", "1024", "-bios", "/home/oops/workspace/build/t016-qemu/fixture-1/tiger-minboot.bin", "-S", "-display", "none", "-serial", "null", "-nic", "none", "-monitor", "stdio"]
+RC 1
+QEMU 8.2.7 monitor - type 'help' for more information
+qemu-system-aarch64: can't apply global cortex-a53-arm-cpu.aarch64=off: 'aarch64' feature cannot be disabled unless KVM is enabled and 32-bit EL1 is supported
+
