@@ -583,7 +583,7 @@
 
 ## T-016：chapter 4《让 QEMU 长出 tiger 这块板》修订与第 1 轮评审（P3 第三章）
 - 负责人：architect（平台设计前置阶段、接口契约及设计问题修订）；writer（章节蓝图、作者自查与统一修订）；qemu-engineer（设计可实现性核对、tiger QEMU 模型代码、正确性、模型测试与 patch 交付）；yocto-engineer（设计集成约束核对、patch 与 metadata 集成、BitBake 构建、逐章真实环境核验和系统验证）；reviewer（独立技术审校与复核）；project-manager（计划、评审安排与意见闭环）；用户（平台设计基线与章节定稿确认）
-- 状态：in_progress（2026-11-20 第 4 章正文已获用户确认，书稿与 meta-tiger 均已按功能整理并合入各自 main，WORKSPACE 已回写；OPC 项目合入随本轮功能整理收口，配套 chapter4 标签及未结交接仍待处理，见 D-016）
+- 状态：in_progress（2026-11-20 第 4 章正文已获用户确认，书稿、meta-tiger 与 OPC 均已合入各自长期分支，WORKSPACE 已回写；配套 chapter4 标签已发布，PM-C4-01 已关闭，H-002/H-003 仍待发起人核对关闭，见 D-016 及本任务配套版本发布记录）
 - 授权来源与日期：2026-10-08 用户在 project-manager 会话要求创建 feature 分支；2026-10-09 用户确认 D-013 的“上游源码 + 临时 devtool workspace + `meta-tiger` patch”模型，并明确指示按该方案执行。授权覆盖 T-016 范围调整、作者修订、QEMU 实际实现与验证、评审和跨章影响登记；不将尚未发生的正文修订、工程实现、评审或核验写成进展。
   - 2026-10-11 分工刷新依据：用户明确要求新增 QEMU 工程师，已由超级管理员登记到 TEAM 并细化两个工程成员的 scope（PROJECT 成员配置记录、H-002）；同日用户在 project-manager 会话报告创建完成并询问下一步。project-manager 在既有 T-016 授权范围内安排模型开发与集成验证的职责和串行次序，不改变 D-013 或章节验收标准。
   - 2026-10-11 平台设计前置安排依据：用户采纳优先新增 tiger 系统架构师的建议并明确要求建员，配置已提交为 `737d1d78fdc858c60e81b8eace9f8c1ede59a804`；随后用户报告架构师会话已经创建。project-manager 接收 H-003，在既有范围内将平台设计、必要的专业核对与用户确认置于章节蓝图和模型实施之前；会话创建不等于初始化或设计完成。
@@ -607,9 +607,9 @@
   - 2026-10-11 architect 按 `869929b5d4b5e0ff39f10c2fe1ddf6853f9a0445` 的统一修订安排刷新身份/角色/scope/有效技能、WORKSPACE、相关记录，读取固定 v0.1、全部 13 项 U/Y/QE 意见、两份报告及选定原始摘录，交付 [A-005 v0.2 draft](artifacts/A-005-tiger-platform-design.md)。第 4 章收敛为 CPU0/A53/TCG、ROM/RAM、轮询 PL011，固定 raw/EL3/rvbar/ARM loader 纯 firmware reset 注册及独立 fixture 部署/qemuboot/runqemu 契约；回填精确 Poky/包 hash/31 OE patches，删除独立并行 NAND 窗口/IRQ，登记 SPI master/真实 CS/芯片及首次读 BL2/FIP 门槛，撤回已有 SP805 模型假设。本机书稿与固定受评 blob 已核对，远端来源区分工程师只读实查与本轮证据读取；逐项作者回复见下文。原意见/结论/报告保留，运行与实施未执行，提交稳定版本后停止改稿。
 - 成果与验证证据：书稿与 OPC 两条 feature 分支、D-013/H-001、[WORKSPACE.yaml](WORKSPACE.yaml)；[A-005 v0.2 draft](artifacts/A-005-tiger-platform-design.md) 固定于 `08bdf9c08d6d8cbd8836df3771ffd28231470059`，13 项作者回复见本任务；原 v0.1 固定于 `69ce591cd9e4ee310b80cff4663c20c776364cfd`。初轮 Yocto/QEMU revise 及来源报告分别见 `dd15379ebea54b36dab7b5cc2638fd345e71553f` 的 [Yocto 证据](artifacts/work-records/t016-a005-yocto-review.md) 与 `1c8304446f8bf82fd46a56413a5fa5787e271ae6` 的 [QEMU 证据](artifacts/work-records/t016-a005-qemu-review.md)，均引用原始日志。新版本针对性复核 pass 分别提交 `5287e43f824dfe63d6a3e3371b5882a4944d9c48`（QEMU）、`b3fbff33ee4ee7332cd123d3eef008879e3c3ac1`（Yocto），见下文；均限设计问题处理，书稿正文修订、meta-tiger 工程提交及新 tiger 构建/运行证据尚未产生。
   - 本轮作者交付：[A-005 v0.2 draft](artifacts/A-005-tiger-platform-design.md)、下文 13 项作者处理回复及成果索引。校验通过：3 个最小窗口与 7 个预留窗口、测试固件/后续 RAM 分阶段占用、条件性 NAND/UBI/watchdog/UART 分频算术、8 份来源区间、13 项唯一作者回复；原评审内容及其他任务一致。`python -B scripts/validate_framework.py` 返回 0（482 处本地链接），差异空白检查通过。未代写工程复核或运行结果；v0.1 按上述固定提交追溯，当前路径为 v0.2。
-- 合并与清理状态：章节正文已按 D-016 定稿，书稿和 meta-tiger 已提交并推送本轮 feature。OPC、书稿及工程 feature 保留，目标分支合并、配套标签发布和 WORKSPACE 最终版本回写待收尾；持久源码继续遵循 D-015。
-- 阻塞与下一位行动人：用户本章校验及定稿确认已完成。project-manager 依据现行分支策略跟踪版本固化与发布收尾，PM-C4-01 随配套版本和 chapter4 标签发布闭环；T-017 等待本轮收尾后衔接。
-- 更新日期：2026-11-20（记录第 4 章定稿、本轮成果物提交及远程同步）
+- 合并与清理状态：章节正文已按 D-016 定稿，书稿 main@619c4efcd57a08818572f360b61b97abe2462ed0、工程 main@79d9696c1d37fcbf65724eb05a253b3168d2eab7 及 OPC 项目线已合入、推送。原开发分支已按用户前序要求清理，原历史由恢复引用和 bundle 保存；本次配套发布在新的治理分支 feature/book-yocto/t-016-chapter4-release 记录，不恢复旧分支。chapter4 标签已发布，WORKSPACE 两份 revision 不变；持久源码继续遵循 D-015。本次治理分支的验证、合入和清理按本任务下方发布记录收口。
+- 阻塞与下一位行动人：PM-C4-01 的同版配套获取条件已满足；H-002/H-003 待发起人核对关闭，project-manager 随后核对任务剩余完成条件。T-016 保持 in_progress，T-017 等待本轮收尾后衔接。
+- 更新日期：2026-11-20（配套 chapter4 标签发布及 PM-C4-01 闭环；未代写交接关闭或 T-016 整体完成）
 
 ### T-016 前置阶段：tiger 平台设计
 - 主责与授权：architect；由 project-manager 根据 2026-10-11 用户采纳增员建议、PROJECT 配置记录及 H-003 在本任务内安排，不新增一轮 feature 或扩大正文修订范围。
@@ -732,6 +732,8 @@
 #### project-manager 的交接与协调意见
 
 - 日期与结论：2026-10-19；交接完整性核对 pass，范围限上述作者版本/交付/职责与流程检查，非全文技术通过。PM-C4-01（待协调、配套交付条件；责任人 project-manager）：本章依赖同版完整 patch/固件/metadata/测试脚本，目前只能从已授权 SSH 固定工程头取读，工程 feature 尚未推送。正式试读/发布前须确保读者有完整可获得的同版工程及正确获取说明，必要正文说明由 writer 在统一修订时处理；不阻断本轮内部审校，不等于读者获取条件已经满足。跨章旧 fork/三 patch/旧节义引用继续登记 T-017，不在本轮提前改写其他章节。
+
+- PM-C4-01 闭环（project-manager，2026-11-20）：用户了解配套获取目的后明确“执行下吧”，授权落实 chapter4 标签、核对书稿获取说明及工程对应关系。GitHub 注释标签 chapter4 已发布，标签对象为 8f3da6ea761049c2fe83e87a4a25bbe0c99d8940，指向已合入工程提交 79d9696c1d37fcbf65724eb05a253b3168d2eab7；远端引用与按 tag 获取均已核对。已批准书稿的 fetch origin tag chapter4 / switch --detach chapter4 命令、工程路径、代码片段及构建启动名称与该版本一致，正文无需改动。最终工程按用户前序要求移除 tests/，当前正文采用手工监控器步骤；本条早期列出的测试脚本按原时点保留，不作为本次取件要求。状态：closed；[发布记录](artifacts/work-records/t016-chapter4-release-20261120.md)及[核对回执](artifacts/work-records/t016-chapter4-release-20261120.json)保存证据与未重跑运行的边界。
 
 ##### project-manager 补充全文通读（2026-11-01）
 
@@ -1056,6 +1058,16 @@
 - 跨仓库当前版本：书稿为 `main@619c4efcd57a08818572f360b61b97abe2462ed0`，meta-tiger 为 `main@79d9696c1d37fcbf65724eb05a253b3168d2eab7`，均与各自 GitHub main 实时引用核对一致，WORKSPACE 与当前成果索引继续引用这两个已合入版本。历史报告、原始日志、交接和批准记录内的旧 SHA 按当时版本保留，不批量替换；本轮不修改成果物代码或工程主机/路径。
 - 内容与验证：团队配置、设计和蓝图正文、原始证据、阶段报告及 WORKSPACE 与原开发头保持逐字节一致，仅更新本轮合入前基线、当前收口状态和交付引用说明。验证包含五笔提交的文件边界、单行说明、项目目录边界、保留原始文件摘要、配置和本地链接，以及 60 项框架测试；原专业评审与运行证据保留其原执行者、版本和范围，不记为本轮重新执行。
 - 恢复与后续：原开发分支保留，完整历史另存本克隆 `.git/history-backups/20261120-t016/before-consolidation.bundle`、功能分组清单和 `refs/archive/book-yocto/20261120-before-consolidation`。最终项目提交通过合入前项目头、本轮五笔功能提交和 `project/book-yocto` Git 头定位，不在提交内容中写自身哈希。配套 chapter4 标签、H-002/H-003 收尾继续跟踪，T-016 不因此自动 completed，T-017 不启动。
+
+### 第 4 章配套版本发布与 PM-C4-01 闭环（2026-11-20）
+
+- 授权与执行人：用户在 project-manager 会话确认配套获取条目的预期后要求“执行下吧”；project-manager 执行本任务内的标签发布、书稿与工程对应核对及治理记录维护，未开始 T-017。
+- 固定版本：书稿 main@619c4efcd57a08818572f360b61b97abe2462ed0，第 4 章 blob b1311b25af54c4b0f03b5bdada1b193de67b487e；工程 main@79d9696c1d37fcbf65724eb05a253b3168d2eab7，tree 4d41c859b9ba3c167fdb4f0ab51e7291d04ff929。本次不改书稿或工程文件，不新增成果物提交，WORKSPACE revision 不变。
+- 发布结果：在 git@github.com:yinzhongkai/meta-tiger.git 新增注释标签 chapter4，标签对象 8f3da6ea761049c2fe83e87a4a25bbe0c99d8940，解引用提交为上述工程 main；发布前本机和远端均无同名标签，未覆盖已有引用。远端 main/标签对象/解引用提交及实际 fetch tag 结果一致。
+- 核对与结论：50 项静态核对通过，包含两个本机副本及 GitHub main 基线、批准正文 blob、完整工程文件、patch 三文件、书稿代码片段、49 个围栏、8 个 shell 块语法、固件许可校验和 7 份既有构建回执 blob；获取说明与最终 minboot 命名对应。PM-C4-01 closed；未重跑 BitBake、QEMU 或复位，历史专业结论仍限原版本与范围。
+- 工作区边界：SSH tiger 连接被拒绝，未核验或改变服务器 checkout。本次使用同级既有工程副本管理已核对的 GitHub 发布引用，未创建工程副本或改正式工作区声明；host:tiger、/home/oops/workspace/meta-tiger 和 D-015 保留约束不变。本次标签发布不依赖服务器运行状态。
+- OPC 分支与收口：feature/book-yocto/t-016-chapter4-release → project/book-yocto，合入前目标为 a7f47470dcd761a3f120b39a046f66d057935ea8；原开发分支不重建。成果物开发分支及新增提交不适用，仅新增上述标签。治理记录验证通过后按 --ff-only 合入、普通推送并安全清理本次分支，最终结果通过本节来源分支、合入前目标和 Git 历史定位。
+- 证据：[发布记录](artifacts/work-records/t016-chapter4-release-20261120.md)、[结构化核对及远端回执](artifacts/work-records/t016-chapter4-release-20261120.json)。H-002/H-003 状态不变，T-016 仍为 in_progress。
 
 ### 本轮评审：A-005 v0.1 平台设计候选稿，第 1 轮设计专业核对
 - 受评正文：[A-005 v0.1](artifacts/A-005-tiger-platform-design.md)，固定读取 Git `69ce591cd9e4ee310b80cff4663c20c776364cfd` 中的正文。本轮全部意见提交前 architect 保持候选稿不变；后续任务意见提交不改变受评正文版本。

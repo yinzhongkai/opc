@@ -73,7 +73,7 @@
 - 正文已固化为书稿提交 `4e101658e25204255be6bac5424eac9e9ac41eff`，含跨章引用修正的书稿开发头为 `f6b45b536158570813442841bcff27da052d1c93`，工程开发头为 `3a775412328b2e046ac327c5af161978d6f8e25a`。两个开发分支已推送并核对远程头。
 - 工程已按 3 个单行说明功能提交快进合入并推送 `main@79d9696c1d37fcbf65724eb05a253b3168d2eab7`，最终文件树与原开发头 `3a775412328b2e046ac327c5af161978d6f8e25a` 完全一致，WORKSPACE 工程 revision 已回写；模型 patch 接入、minboot 固件部署、机器与启动镜像分别提交。原工程开发分支与 `master` 已按用户要求清理，旧历史由本机恢复引用和 bundle 保留，详见 [T-016 功能整理与合入记录](../TASKS.md)。
 - 书稿已按 2 个单行说明功能提交快进合入并推送 `main@619c4efcd57a08818572f360b61b97abe2462ed0`，WORKSPACE 书稿 revision 已回写：`3ebfb8073cc3dce555f6aff5a45328d52b9d0936` 固化第 4 章定稿，`619c4efcd57a08818572f360b61b97abe2462ed0` 整理跨章及工程版本引用。第 4 章批准 blob 保持不变；相对原开发头仅在第 3 章补注当前工程 main 版本，历史构建输出保留。原书稿开发分支已清理，旧历史由本机恢复点保留，详见 [T-016 书稿整理与合入记录](../TASKS.md)。
-- OPC 治理资料按本轮 5 个功能提交整理，完成快进合入后以 `project/book-yocto` 为当前项目入口；生效边界、配套 `chapter4` 标签及未结交接收尾见 [T-016](../TASKS.md)。
+- OPC 原治理资料已按 5 个功能提交合入 `project/book-yocto`。配套工程注释标签 [`chapter4`](https://github.com/yinzhongkai/meta-tiger/tree/chapter4) 已发布，标签对象 `8f3da6ea761049c2fe83e87a4a25bbe0c99d8940`，指向 `79d9696c1d37fcbf65724eb05a253b3168d2eab7`；书稿获取命令及工程对应核对通过，PM-C4-01 closed。见[发布记录](work-records/t016-chapter4-release-20261120.md)及[核对回执](work-records/t016-chapter4-release-20261120.json)；未结交接仍由 [T-016](../TASKS.md) 跟踪。
 
 ## 人工校审与后续写作参考
 
