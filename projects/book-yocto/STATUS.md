@@ -1,8 +1,8 @@
 # 项目状态摘要
 
-- 汇总日期与信息截至点：2026-11-20。T-016 已按用户确认结案；第 4 章正文批准见 [D-016](DECISIONS.md)，配套标签、PM-C4-01 和 H-002/H-003 均已收尾。T-018 配对分支已准备；用户追加要求调度成员 review、完成后回报再接续调度，现已固定第 5 章现稿并登记首轮串行自查与交叉评审安排，首位 writer，尚未收到成员结论。T-017 保持 todo。
+- 汇总日期与信息截至点：2026-11-20。T-016 已按用户确认结案；第 4 章正文批准见 [D-016](DECISIONS.md)，配套标签、PM-C4-01 和 H-002/H-003 均已收尾。T-018 正按用户授权串行 review：writer 作者自查已完成并回报 revise、8 项问题，project-manager 已核对正式记录、提交范围及冻结版本；下一位 architect。T-017 保持 todo。
 - 维护人：project-manager（按 [PROJECT.md](PROJECT.md) 指定的协调记录维护人）。
-- 当前阶段：P1/P2 完成，P3 已闭环 chapter 1–4；T-001～T-016 均为 completed。第 4 章书稿、meta-tiger 及 OPC 均已合入各自长期分支，WORKSPACE 两份 revision 已回写；chapter4 标签固定工程提交 79d9696c1d37fcbf65724eb05a253b3168d2eab7，获取说明及工程对应核对通过，PM-C4-01 与 H-002/H-003 均已关闭。当前先准备 T-018 第 5 章修订分支；T-017 前置依赖已解除，保持 todo、未启动，其余全书统稿范围继续保留。
+- 当前阶段：P1/P2 完成，P3 已闭环 chapter 1–4；T-001～T-016 均为 completed。第 4 章书稿、meta-tiger 及 OPC 均已合入各自长期分支，WORKSPACE 两份 revision 已回写；chapter4 标签固定工程提交 79d9696c1d37fcbf65724eb05a253b3168d2eab7，获取说明及工程对应核对通过，PM-C4-01 与 H-002/H-003 均已关闭。当前推进 T-018 第 5 章首轮自查与交叉评审；T-017 前置依赖已解除，保持 todo、未启动，其余全书统稿范围继续保留。
 - 任务进展：
   - T-001 书稿现状评估（writer）：completed，产出 [A-001](artifacts/A-001-书稿现状评估.md) v0.1（draft）。
   - T-002 起草全书打磨计划（project-manager）：completed，[A-002](artifacts/A-002-book-polishing-plan.md) 当前 v0.8（draft，保留 D-007/D-010/D-011/D-013 要求；在 QEMU 模型开发与 Yocto 集成验证之前加入 architect 平台设计、专业核对与用户确认，并作为 writer 蓝图输入；原起草任务不因此重新打开）。
@@ -21,8 +21,8 @@
   - T-015 chapter 3 命令、配置与输出真实环境核验（reviewer）：completed（2026-09-27 project-manager 复核通过）——12 组核验 9 组通过、3 组局部不符；构建和两次 `yocto-check-layer` 成功，错误实验均恢复，远端 `meta-tiger` 提交为 `0e3da48`；N-1/N-2/O-1 已流转至 T-014。
   - T-016 chapter 4《让 QEMU 长出 tiger 这块板》修订与第 1 轮评审：completed（2026-11-20 用户明确确认可标记完成；正文、工程证据、合入推送、配套标签、版本回写、分支清理和交接均已核对，详见任务最终结案记录）。
   - T-017 全书四仓库叙事迁移为 `meta-tiger` patch-only 模型：todo（已登记 19 个受影响文件；T-016 前置依赖已解除，尚未创建配对分支或启动修订/评审）。
-  - T-018 chapter 5《写第一份 MACHINE 配置》修订与评审：in_progress（首轮顺序为 writer 自查 → architect → qemu-engineer → yocto-engineer → reviewer → project-manager 汇总；每位回报后再通知下一位，现稿冻结，尚无本轮结论）。
-- 团队状态：六名成员登记不变，五位执行成员的当前有效会话及空闲状态已核实；按用户授权逐一启动 T-018 首轮审查，首位 writer，其余成员等待通知。
+  - T-018 chapter 5《写第一份 MACHINE 配置》修订与评审：in_progress（writer 自查已完成：revise，W5-001～008；下一位 architect，再依次为 qemu-engineer、yocto-engineer、reviewer，最后 project-manager 汇总；每位回报后再通知下一位，现稿冻结）。
+- 团队状态：六名成员登记不变，五位执行成员的当前有效会话已核实。writer 自查完成并停止，当前准备通知 architect，其余成员继续等待 project-manager 通知。
 - 后续章节修订参考：[第 4 章人工校审记录](artifacts/work-records/t016-chapter4-manual-review-style.md)已整理本轮明确的正文、示例、命令输出和排版偏好，结合 A-004 使用。
 - 开发仓库状态：书稿 `main@619c4efcd57a08818572f360b61b97abe2462ed0`、工程 `main@79d9696c1d37fcbf65724eb05a253b3168d2eab7` 和工程注释标签 `chapter4`（对象 `8f3da6ea761049c2fe83e87a4a25bbe0c99d8940`）均与本轮 GitHub 查询一致，两个本机成果物工作树干净，批准正文未变。原开发分支及配套发布/交接治理分支已清理；OPC 原 54 笔历史和两个成果物旧历史由既有恢复引用及 bundle 保留。配套发布提交 `c95f7a5` 保留，交接与任务结案按本轮功能整理合为一笔，整理范围与恢复点见 [T-016](TASKS.md)。两份 WORKSPACE revision、tiger 主机和路径不变；服务器 checkout 未重新核验或更改，标签发布阶段的 SSH 连接限制按原记录保留。
 - 当前开发分支：OPC `feature/book-yocto/t-018-chapter5-revision`（创建基线 `92e3513bded527c6aa50a26bd6c2651db993906f`）；书稿 `feature/t-018-chapter5-revision`（创建基线 `619c4efcd57a08818572f360b61b97abe2462ed0`）。两边已在本机创建并切换，尚未推送；正文与工程内容未改，WORKSPACE revision 不变。
@@ -32,7 +32,7 @@
   - **平台设计确认及回写已完成**：用户批准 A-005 v0.2（D-014），architect 元信息/索引回写已核验，技术正文保持不变；SPI NAND/CS/watchdog 等后续依赖仍在首次使用前补齐，不纳入本章最小实现。
   - **第 4 章及 T-016 已完成**：正文及工程版本不变，chapter4 标签已发布，50 项静态核对通过，PM-C4-01 closed；最终核对及用户完成确认已写回 [T-016](TASKS.md)，见[配套发布记录](artifacts/work-records/t016-chapter4-release-20261120.md)。本轮只作台账结案，未新增构建、运行或专业审校结论。
   - **H-002/H-003 已关闭**：用户于 2026-11-20 明确确认新增成员已完成、可以关闭，project-manager 据此写回 [HANDOFFS](HANDOFFS.md)，两条状态均为 closed；当前无未结交接。
-  - **T-018 首轮串行审查**：安排与冻结正文版本见 [TASKS](TASKS.md)。先由 writer 自查，回报 project-manager 后再依次调度专业评审；所有成员及用户通读意见到齐后统一修订。真实环境核验仍须按 D-010 完成，当前审查不代表实测通过。第 5 章相关 patch-only 一致性向 T-017 回传实际版本；T-017 全书范围继续保留，未启动其分支或成员执行。
+  - **T-018 首轮串行审查**：安排与冻结正文版本见 [TASKS](TASKS.md)。writer 自查已回报并核对，下一位 architect；主要待核对第 4→5 章衔接、当前最小平台与未来 BSP 能力、provider 诊断和实测证据边界。所有成员及用户通读意见到齐后统一修订。真实环境核验仍须按 D-010 完成，当前审查不代表实测通过；T-017 全书范围继续保留，未启动其分支或成员执行。
   - **用户持续事项**：继续全书通读校验；A-003 中原四仓库依赖和 chapter 8 的 X-1 将在对应修订轮统一处理。
 - 通读期协作约定（2026-09-13 用户确认，2026-09-19 D-007 补充）：通读中发现的问题按类型分流，拿不准的一律先汇集到 project-manager 会话分类、登记并跟踪到关闭；**受评章节的用户通读意见在 writer 统一修订前提交，与成员评审意见一并处理**。
 
