@@ -583,7 +583,7 @@
 
 ## T-016：chapter 4《让 QEMU 长出 tiger 这块板》修订与第 1 轮评审（P3 第三章）
 - 负责人：architect（平台设计前置阶段、接口契约及设计问题修订）；writer（章节蓝图、作者自查与统一修订）；qemu-engineer（设计可实现性核对、tiger QEMU 模型代码、正确性、模型测试与 patch 交付）；yocto-engineer（设计集成约束核对、patch 与 metadata 集成、BitBake 构建、逐章真实环境核验和系统验证）；reviewer（独立技术审校与复核）；project-manager（计划、评审安排与意见闭环）；用户（平台设计基线与章节定稿确认）
-- 状态：in_progress（2026-11-20 第 4 章正文已获用户确认，书稿、meta-tiger 与 OPC 均已合入各自长期分支，WORKSPACE 已回写；配套 chapter4 标签已发布，PM-C4-01 已关闭，H-002/H-003 仍待发起人核对关闭，见 D-016 及本任务配套版本发布记录）
+- 状态：completed（2026-11-20 用户明确“可以打上完成的标记吧”；第 4 章正文确认、工程验证、合入推送、WORKSPACE 回写、chapter4 标签及交接收尾均已核对，见 D-016 及本任务最终结案记录）
 - 授权来源与日期：2026-10-08 用户在 project-manager 会话要求创建 feature 分支；2026-10-09 用户确认 D-013 的“上游源码 + 临时 devtool workspace + `meta-tiger` patch”模型，并明确指示按该方案执行。授权覆盖 T-016 范围调整、作者修订、QEMU 实际实现与验证、评审和跨章影响登记；不将尚未发生的正文修订、工程实现、评审或核验写成进展。
   - 2026-10-11 分工刷新依据：用户明确要求新增 QEMU 工程师，已由超级管理员登记到 TEAM 并细化两个工程成员的 scope（PROJECT 成员配置记录、H-002）；同日用户在 project-manager 会话报告创建完成并询问下一步。project-manager 在既有 T-016 授权范围内安排模型开发与集成验证的职责和串行次序，不改变 D-013 或章节验收标准。
   - 2026-10-11 平台设计前置安排依据：用户采纳优先新增 tiger 系统架构师的建议并明确要求建员，配置已提交为 `737d1d78fdc858c60e81b8eace9f8c1ede59a804`；随后用户报告架构师会话已经创建。project-manager 接收 H-003，在既有范围内将平台设计、必要的专业核对与用户确认置于章节蓝图和模型实施之前；会话创建不等于初始化或设计完成。
@@ -607,9 +607,9 @@
   - 2026-10-11 architect 按 `869929b5d4b5e0ff39f10c2fe1ddf6853f9a0445` 的统一修订安排刷新身份/角色/scope/有效技能、WORKSPACE、相关记录，读取固定 v0.1、全部 13 项 U/Y/QE 意见、两份报告及选定原始摘录，交付 [A-005 v0.2 draft](artifacts/A-005-tiger-platform-design.md)。第 4 章收敛为 CPU0/A53/TCG、ROM/RAM、轮询 PL011，固定 raw/EL3/rvbar/ARM loader 纯 firmware reset 注册及独立 fixture 部署/qemuboot/runqemu 契约；回填精确 Poky/包 hash/31 OE patches，删除独立并行 NAND 窗口/IRQ，登记 SPI master/真实 CS/芯片及首次读 BL2/FIP 门槛，撤回已有 SP805 模型假设。本机书稿与固定受评 blob 已核对，远端来源区分工程师只读实查与本轮证据读取；逐项作者回复见下文。原意见/结论/报告保留，运行与实施未执行，提交稳定版本后停止改稿。
 - 成果与验证证据：书稿与 OPC 两条 feature 分支、D-013/H-001、[WORKSPACE.yaml](WORKSPACE.yaml)；[A-005 v0.2 draft](artifacts/A-005-tiger-platform-design.md) 固定于 `08bdf9c08d6d8cbd8836df3771ffd28231470059`，13 项作者回复见本任务；原 v0.1 固定于 `69ce591cd9e4ee310b80cff4663c20c776364cfd`。初轮 Yocto/QEMU revise 及来源报告分别见 `dd15379ebea54b36dab7b5cc2638fd345e71553f` 的 [Yocto 证据](artifacts/work-records/t016-a005-yocto-review.md) 与 `1c8304446f8bf82fd46a56413a5fa5787e271ae6` 的 [QEMU 证据](artifacts/work-records/t016-a005-qemu-review.md)，均引用原始日志。新版本针对性复核 pass 分别提交 `5287e43f824dfe63d6a3e3371b5882a4944d9c48`（QEMU）、`b3fbff33ee4ee7332cd123d3eef008879e3c3ac1`（Yocto），见下文；均限设计问题处理，书稿正文修订、meta-tiger 工程提交及新 tiger 构建/运行证据尚未产生。
   - 本轮作者交付：[A-005 v0.2 draft](artifacts/A-005-tiger-platform-design.md)、下文 13 项作者处理回复及成果索引。校验通过：3 个最小窗口与 7 个预留窗口、测试固件/后续 RAM 分阶段占用、条件性 NAND/UBI/watchdog/UART 分频算术、8 份来源区间、13 项唯一作者回复；原评审内容及其他任务一致。`python -B scripts/validate_framework.py` 返回 0（482 处本地链接），差异空白检查通过。未代写工程复核或运行结果；v0.1 按上述固定提交追溯，当前路径为 v0.2。
-- 合并与清理状态：章节正文已按 D-016 定稿，书稿 main@619c4efcd57a08818572f360b61b97abe2462ed0、工程 main@79d9696c1d37fcbf65724eb05a253b3168d2eab7 及 OPC 项目线已合入、推送。原开发分支已按用户前序要求清理，原历史由恢复引用和 bundle 保存；本次配套发布在新的治理分支 feature/book-yocto/t-016-chapter4-release 记录，不恢复旧分支。chapter4 标签已发布，WORKSPACE 两份 revision 不变；持久源码继续遵循 D-015。本次治理分支的验证、合入和清理按本任务下方发布记录收口。
-- 阻塞与下一位行动人：PM-C4-01 的同版配套获取条件已满足；H-002/H-003 待发起人核对关闭，project-manager 随后核对任务剩余完成条件。T-016 保持 in_progress，T-017 等待本轮收尾后衔接。
-- 更新日期：2026-11-20（配套 chapter4 标签发布及 PM-C4-01 闭环；未代写交接关闭或 T-016 整体完成）
+- 合并与清理状态：章节正文已按 D-016 定稿，书稿 main@619c4efcd57a08818572f360b61b97abe2462ed0、工程 main@79d9696c1d37fcbf65724eb05a253b3168d2eab7 及 OPC 项目线已合入、推送。原开发分支已清理，原历史由恢复引用和 bundle 保存；配套发布提交 c95f7a5 保留，交接与任务结案按本轮功能整理合为一笔，原临时治理分支已安全清理。chapter4 标签已发布，WORKSPACE 两份 revision 不变；持久源码继续遵循 D-015。原完成标记的治理分支为 feature/book-yocto/t-016-completion，原执行与本轮历史整理分别见下方记录。
+- 阻塞与下一位行动人：T-016 无未完成事项或未结交接，按用户确认结案。T-017 的 T-016 前置依赖已解除，保持 todo，后续由 project-manager 按既定范围衔接，本轮未启动。
+- 更新日期：2026-11-20（最终完成条件核对及用户明确确认后标记 completed）
 
 ### T-016 前置阶段：tiger 平台设计
 - 主责与授权：architect；由 project-manager 根据 2026-10-11 用户采纳增员建议、PROJECT 配置记录及 H-003 在本任务内安排，不新增一轮 feature 或扩大正文修订范围。
@@ -1069,6 +1069,40 @@
 - OPC 分支与收口：feature/book-yocto/t-016-chapter4-release → project/book-yocto，合入前目标为 a7f47470dcd761a3f120b39a046f66d057935ea8；原开发分支不重建。成果物开发分支及新增提交不适用，仅新增上述标签。治理记录验证通过后按 --ff-only 合入、普通推送并安全清理本次分支，最终结果通过本节来源分支、合入前目标和 Git 历史定位。
 - 证据：[发布记录](artifacts/work-records/t016-chapter4-release-20261120.md)、[结构化核对及远端回执](artifacts/work-records/t016-chapter4-release-20261120.json)。H-002/H-003 状态不变，T-016 仍为 in_progress。
 
+### H-002/H-003 交接结案（2026-11-20）
+
+- 授权与确认来源：用户在 project-manager 会话明确“已经新增加了，可以直接close了”，直接确认两项增员及分工衔接交接可以关闭；project-manager 按本次用户指令记录，不将其写成框架超级管理员本人确认。
+- 核对与结果：qemu-engineer、architect 已在 TEAM 登记，成员配置存在；两个工程成员 scope 区分模型正确性与集成验证，T-016 已记录模型/集成分工及平台设计前置安排，A-002 v0.7/v0.8 的计划调整和原交接处理结果有据。H-002、H-003 均由 accepted 转为 closed，原创建、接收和处理记录保留，详见 [HANDOFFS](HANDOFFS.md)。
+- 范围与后续：本次仅记录交接结案并同步当前摘要，不变更成员、工作区、成果版本、历轮专业意见或 T-016 整体状态，不启动 T-017。T-016 保持 in_progress，后续由 project-manager 核对最终完成条件。
+- 验证：框架结构及 726 处本地链接检查、git diff --check 和六份治理文件的范围核对通过；H-001、两条交接的原创建/接收/处理证据、T-016 之外任务、配置及既有发布回执保持不变。
+- Git 记录：治理分支 feature/book-yocto/t-016-handoff-closure → project/book-yocto，合入前目标为 c95f7a522c1e8ac915e6a5c1e6f711370e17c7f2；成果物分支及提交不适用。配置/链接、差异和范围核对通过后，以 --ff-only 合入、普通推送并安全清理本次分支；最终提交由本节来源分支、目标基线和 Git 历史定位。
+
+### T-016 最终结案（2026-11-20）
+
+- 确认人与来源：用户在 project-manager 说明最终台账核对范围后明确“可以打上完成的标记吧”；project-manager 依据本次确认及以下证据将 T-016 标记 completed。
+
+| 完成条件 | 结案依据与对应范围 |
+|---|---|
+| 设计与蓝图输入 | A-005 v0.2 按 D-014 approved；A-006 v0.1 的继续实施授权及设计/蓝图交接均已记录，draft 状态按原范围保留 |
+| QEMU 模型与 patch | 本任务模型阶段及模型报告保存真实 patch、来源和 16 项作者模型测试；最终工程提交包含相应模型及配方接入，后续排版与固件简化按原修订和核验记录追溯 |
+| 正式集成与逐章核验 | Yocto 系统报告保存解除 workspace 覆盖后的正式重构建及 runqemu 证据；最终 minboot 构建回执记录 740 项任务成功、冷启动和两次复位，七份文件 blob 已在配套发布核对中对应到最终工程提交 |
+| 章节审校、修订及确认 | 本任务保留历轮署名意见、作者处理及复核范围；后续用户逐项校验见 11 月 12–20 日记录，正文最终按 D-016 确认，blob b1311b25af54c4b0f03b5bdada1b193de67b487e；本次用户进一步确认任务可标完成 |
+| 版本、合入及配套获取 | 书稿 main@619c4efcd57a08818572f360b61b97abe2462ed0、工程 main@79d9696c1d37fcbf65724eb05a253b3168d2eab7 与 WORKSPACE 一致；chapter4 标签对象 8f3da6ea761049c2fe83e87a4a25bbe0c99d8940 指向工程最终提交，PM-C4-01 closed |
+| 清理与交接 | 本轮重新查询三个仓库远端，原开发分支及发布/交接临时分支引用均已清理；H-001/H-002/H-003 均为 closed，原历史恢复引用和 bundle 保留 |
+
+- 最终核对：两个本机成果物副本仍为干净的 main，GitHub main 和工程标签与上述版本一致；本轮只作台账结案，未重跑构建/模型/复位、未生成新的专业 pass，服务器 checkout 不作已更新推断。书稿、工程、WORKSPACE、原始证据和历轮结论保持原义；最终正文采用经用户确认的完整配套工程阅读/构建及手工监控器路线，devtool 完整练习移至后续章节的取舍保留在人工校审记录中。
+- 相关证据：[配套发布记录](artifacts/work-records/t016-chapter4-release-20261120.md)、[发布核对回执](artifacts/work-records/t016-chapter4-release-20261120.json)、[最终工程构建回执](artifacts/work-records/remove-tests-minboot-result.json)、[交接记录](HANDOFFS.md)。本次不批准 A-002/A-006 的新版本，不启动 T-017。
+- 治理校验：框架结构及 735 处本地链接、git diff --check、六份治理文件的范围核对通过；既有任务阶段与评审正文逐字保留，交接、配置和原始证据不变，T-017 的原范围和完成条件保留、仅解除 T-016 等待依赖。
+- Git 记录：feature/book-yocto/t-016-completion → project/book-yocto，合入前目标 b3d6168ff53e5de08ad519eef244b428aeeed172；成果物分支及新增提交不适用。本次完成标记经治理校验、--ff-only 合入及远端引用核对后生效，随后安全清理本次分支；最终提交由任务、来源分支、目标基线及 Git 历史定位。
+
+### OPC 收尾提交按功能整理（2026-11-20）
+
+- 授权与范围：用户在框架超级管理员会话要求将新增三笔提交按此前方式整理。范围为项目基线 a7f47470dcd761a3f120b39a046f66d057935ea8 之后的配套发布、交接关闭与任务完成记录，不重新打开 T-016，不启动 T-017。
+- 功能分组：保留独立的配套发布提交 c95f7a522c1e8ac915e6a5c1e6f711370e17c7f2；将 H-002/H-003 关闭与 T-016 完成标记合为一个结案提交。两笔 commit message 均为单行，来源分支为 bugfix/book-yocto/t-016-closure-consolidation，目标为 project/book-yocto。
+- 内容与引用：保留整理前最终文件内容，仅更新本任务和 STATUS 中的当前提交引用并记录本次整理。前述交接、完成记录中的合入前目标 SHA 继续表示原执行时点，不改写为本轮提交；原始发布回执、用户确认、专业结论及成果物版本不变。
+- 恢复点：整理前项目头 0f0221ebe6d2246f242c8a35b5c21cd00dccf273 及三笔完整历史保存在 refs/archive/book-yocto/20261120-before-closure-consolidation 和本克隆 .git/history-backups/20261120-t016-closure/before-consolidation.bundle，功能映射另存同目录 consolidation.json。原历史中的 c95f7a5、b3d6168 及 0f0221e 均可据此追溯。
+- 验证与生效：以功能边界、逐文件内容及版本引用核对、配置和本地链接、60 项框架测试通过为条件；在明确旧远端头保护下更新项目线，重新核对远端并安全清理本轮分支后收口。最终提交通过上述基线、两笔功能提交与 Git 历史定位，不在正文写入自身哈希。WORKSPACE、两个成果物 main、chapter4 标签及 tiger 主机路径保持原义。
+
 ### 本轮评审：A-005 v0.1 平台设计候选稿，第 1 轮设计专业核对
 - 受评正文：[A-005 v0.1](artifacts/A-005-tiger-platform-design.md)，固定读取 Git `69ce591cd9e4ee310b80cff4663c20c776364cfd` 中的正文。本轮全部意见提交前 architect 保持候选稿不变；后续任务意见提交不改变受评正文版本。
 - 安排来源与日期：2026-10-11 project-manager 依据 T-016 已授权的平台设计前置阶段、PROJECT 的协调职责及用户对 A-005 的两条意见登记。用户在本会话明确“针对A-005，我就提上面的两条建议”；本轮用户意见到齐，不代表批准候选稿。
@@ -1155,7 +1189,7 @@
 
 ## T-017：全书四仓库叙事迁移为 `meta-tiger` patch-only 模型
 - 负责人：writer（跨章改写与统稿）；reviewer（技术与首次讲解次序复核）；project-manager（范围、依赖和意见闭环）；architect（平台设计与跨组件契约一致性核对）；qemu-engineer（QEMU 模型接口与下游依赖事实核对）；yocto-engineer（metadata、构建与系统验证事实复核）；用户（通读意见与最终确认）
-- 状态：todo（已登记影响范围；按单会话与短期分支串行规则，须等待 T-016 完成后再创建分支并开始）
+- 状态：todo（T-016 已于 2026-11-20 completed，相关前置依赖已解除；本任务分支尚未创建，修订与评审尚未启动）
 - 授权来源与日期：2026-10-09 用户确认 D-013 并指示按方案执行；project-manager 根据实际全文检索登记跨章一致性任务。
 - 变更类型：feature
 - OPC 开发分支与目标：计划使用 `feature/book-yocto/t-017-patch-only-alignment` → `project/book-yocto`；尚未创建，不与 T-016 并行启动。
@@ -1170,9 +1204,9 @@
   - 2026-10-11 依据 PROJECT 的用户建员授权与 H-002，补入 QEMU 模型接口和下游依赖事实的专业核对分工；不改变 19 文件范围，不提前启动本任务。
   - 2026-10-11 接收 H-003 后补充 architect 的平台设计与跨组件契约核对分工；继续等待 T-016 收口，设计阶段发现的跨章影响只登记，不提前改写 19 个文件。
 - 成果与验证证据：D-013；2026-10-09 全文影响扫描结论。后续正文提交、复核和实测证据尚未产生。
-- 合并与清理状态：未创建开发分支、未合并；等待 T-016 收口。
-- 阻塞与下一位行动人：依赖 T-016 先确定 QEMU 的实际 patch-only 范式和最终书稿版本；T-016 完成前不启动。下一位行动人为 project-manager，在 T-016 完成后按最新长期分支建立配对 feature 分支并启动 writer。
-- 更新日期：2026-10-12（框架升级仅调整 Git 追踪字段，任务仍等待 T-016 收口）
+- 合并与清理状态：未创建开发分支、未合并；T-016 已结案，本轮未启动 T-017。
+- 阻塞与下一位行动人：T-016 已提供最终章节、工程版本和配套标签，该前置依赖已解除。后续由 project-manager 按最新长期分支及原定范围衔接；各组件后续实际 patch/配方/验证依赖仍按原完成条件核对，本轮不创建 T-017 分支或启动成员执行。
+- 更新日期：2026-11-20（仅同步 T-016 已完成及前置依赖解除；T-017 仍为 todo）
 
 ## 记录样式（不是真实任务）
 
