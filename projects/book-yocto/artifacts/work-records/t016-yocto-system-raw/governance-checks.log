@@ -1,0 +1,179 @@
+T-016 local governance checks (2026-10-18 Asia/Shanghai)
+
+COMMAND: python -B scripts/validate_framework.py
+{
+  "status": "fulfilled",
+  "value": {
+    "chunk_id": "6136e1",
+    "wall_time_seconds": 0.0480817,
+    "exit_code": 0,
+    "original_token_count": 50,
+    "output": "校验通过：22 个角色、37 份技能、1 个实际项目、1 套项目模板、572 处本地链接。\r\n本工具只读；不验证业务语义、任务验收、会话身份或执行权限。\r\n"
+  }
+}
+
+COMMAND: git -c core.excludesFile=NUL diff --check
+{
+  "status": "fulfilled",
+  "value": {
+    "chunk_id": "9fc7e7",
+    "wall_time_seconds": 0.1919142,
+    "exit_code": 0,
+    "original_token_count": 0,
+    "output": ""
+  }
+}
+
+SCOPE ATTEMPT 1: Python Git subprocess used core.excludesFile=NUL; the subprocess rejected it.
+{
+  "status": "fulfilled",
+  "value": {
+    "chunk_id": "817226",
+    "wall_time_seconds": 0.4453146,
+    "exit_code": 1,
+    "original_token_count": 181,
+    "output": "fatal: cannot use NUL as an exclude file\nTraceback (most recent call last):\r\n  File \"<stdin>\", line 23, in <module>\r\n  File \"<stdin>\", line 5, in git\r\n  File \"C:\\Users\\YinZh\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\subprocess.py\", line 466, in check_output\r\n    return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,\r\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"C:\\Users\\YinZh\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\subprocess.py\", line 571, in run\r\n    raise CalledProcessError(retcode, process.args,\r\nsubprocess.CalledProcessError: Command '['git', '-c', 'core.excludesFile=NUL', 'status', '--porcelain=v1', '--untracked-files=all']' returned non-zero exit status 128.\r\n"
+  }
+}
+
+SCOPE ATTEMPT 2: using the existing .git/info/exclude; book repository ownership differs under the sandbox identity.
+{
+  "chunk_id": "4241cc",
+  "wall_time_seconds": 0,
+  "exit_code": 1,
+  "original_token_count": 257,
+  "output": "fatal: detected dubious ownership in repository at 'D:/book-yocto'\n'D:/book-yocto' is owned by:\n\ttiger/YinZh (S-1-5-21-3331407697-1663139351-4136033401-1001)\nbut the current user is:\n\ttiger/CodexSandboxOffline (S-1-5-21-3331407697-1663139351-4136033401-1008)\nTo add an exception for this directory, call:\n\n\tgit config --global --add safe.directory D:/book-yocto\nTraceback (most recent call last):\r\n  File \"<stdin>\", line 28, in <module>\r\n  File \"<stdin>\", line 5, in git\r\n  File \"C:\\Users\\YinZh\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\subprocess.py\", line 466, in check_output\r\n    return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,\r\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"C:\\Users\\YinZh\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\subprocess.py\", line 571, in run\r\n    raise CalledProcessError(retcode, process.args,\r\nsubprocess.CalledProcessError: Command '['git', '-c', 'core.excludesFile=.git/info/exclude', 'rev-parse', 'HEAD']' returned non-zero exit status 128.\r\n"
+}
+
+RECOVERY: use per-command safe.directory for the two explicitly authorized workspaces. No global Git config was changed. No file mutation ran before either failed check.
+RECOVERY SCOPE CHECK SOURCE:
+from pathlib import Path
+import subprocess,json,datetime
+root=Path.cwd()
+def git(*a,cwd=root):
+ return subprocess.check_output(["git","-c","safe.directory=D:/opc-book-yocto","-c","safe.directory=D:/book-yocto","-c","core.excludesFile=.git/info/exclude",*a],cwd=cwd,text=True,encoding="utf-8")
+base="ab33063b73e8147c1d1847f4538695a796accf6d"
+assert git("rev-parse","HEAD").strip()==base
+def compare_section(path,start,end):
+ old=git("show",base+":"+path)
+ cur=Path(path).read_text(encoding="utf-8")
+ assert old.split(start,1)[0]==cur.split(start,1)[0],path+" prefix"
+ assert old.split(end,1)[1]==cur.split(end,1)[1],path+" suffix"
+compare_section("projects/book-yocto/TASKS.md","### T-016 Yocto 正式集成与系统验证阶段","### 本轮评审：A-005 v0.1 平台设计候选稿，第 1 轮设计专业核对")
+path="projects/book-yocto/artifacts/README.md"
+old=git("show",base+":"+path);cur=Path(path).read_text(encoding="utf-8")
+marker="## 正文元信息样式（不是真实成果）";newmarker="## T-016 Yocto 正式集成与系统验证（yocto-engineer）"
+assert old.split(marker,1)[0]==cur.split(newmarker,1)[0]
+assert old.split(marker,1)[1]==cur.split(marker,1)[1]
+frozen=["projects/book-yocto/WORKSPACE.yaml","projects/book-yocto/artifacts/A-005-tiger-platform-design.md","projects/book-yocto/artifacts/A-006-chapter4-blueprint.md","projects/book-yocto/STATUS.md","projects/book-yocto/PROJECT.md","projects/book-yocto/DECISIONS.md"]
+assert all(Path(x).is_file() for x in frozen)
+assert not git("diff",base,"--",*frozen).strip()
+allowed={"projects/book-yocto/TASKS.md","projects/book-yocto/artifacts/README.md","projects/book-yocto/artifacts/work-records/t016-yocto-system-validation.md"}
+prefix="projects/book-yocto/artifacts/work-records/t016-yocto-system-raw/"
+status=git("status","--porcelain=v1","--untracked-files=all")
+paths=[x[3:] for x in status.splitlines()]
+assert all(x in allowed or x.startswith(prefix) for x in paths),paths
+book=Path("D:/book-yocto")
+assert git("rev-parse","HEAD",cwd=book).strip()=="9c74596591728c0f2d614e357059034551a42dca"
+assert git("rev-parse","main",cwd=book).strip()=="9c74596591728c0f2d614e357059034551a42dca"
+assert not git("status","--porcelain=v1",cwd=book).strip()
+assert git("branch","--show-current").strip()=="feature/book-yocto/t-016-chapter4-revision"
+record={"status":"pass","time":datetime.datetime.now().astimezone().isoformat(),
+"base":base,"task_changes_only_own_stage":True,"index_changes_only_own_section":True,
+"frozen_files_unchanged":frozen,"book_head":"9c74596591728c0f2d614e357059034551a42dca",
+"book_clean":True,"changed_paths":paths}
+Path(prefix+"governance-check.json").write_text(json.dumps(record,indent=2,ensure_ascii=False)+"\n",encoding="utf-8")
+print(json.dumps({"status":"pass","changed_files":len(paths),"own_stage_and_index_only":True,"frozen_and_book_unchanged":True},ensure_ascii=False))
+
+
+RECOVERY OUTPUT:
+{
+  "chunk_id": "aae4b1",
+  "wall_time_seconds": 0.4336641,
+  "exit_code": 0,
+  "original_token_count": 28,
+  "output": "{\"status\": \"pass\", \"changed_files\": 17, \"own_stage_and_index_only\": true, \"frozen_and_book_unchanged\": true}\r\n"
+}
+
+FINAL PRE-COMMIT CHECKS:
+
+framework-final
+{
+  "status": "fulfilled",
+  "value": {
+    "chunk_id": "457dcf",
+    "wall_time_seconds": 0.4090278,
+    "exit_code": 0,
+    "original_token_count": 50,
+    "output": "校验通过：22 个角色、37 份技能、1 个实际项目、1 套项目模板、574 处本地链接。\r\n本工具只读；不验证业务语义、任务验收、会话身份或执行权限。\r\n"
+  }
+}
+
+staged-whitespace-first-attempt
+{
+  "status": "fulfilled",
+  "value": {
+    "chunk_id": "2c7ed7",
+    "wall_time_seconds": 0.3030409,
+    "exit_code": 1,
+    "original_token_count": 112,
+    "output": "projects/book-yocto/artifacts/work-records/t016-yocto-system-raw/README.md:47: new blank line at EOF.\nprojects/book-yocto/artifacts/work-records/t016-yocto-system-raw/controller.log:194: new blank line at EOF.\nprojects/book-yocto/artifacts/work-records/t016-yocto-system-raw/governance-checks.log:97: new blank line at EOF.\nprojects/book-yocto/artifacts/work-records/t016-yocto-system-raw/orchestration-supplement.log:23: new blank line at EOF.\n"
+  }
+}
+
+scope-final
+{
+  "status": "fulfilled",
+  "value": {
+    "chunk_id": "e55fbc",
+    "wall_time_seconds": 0.5333063,
+    "exit_code": 0,
+    "original_token_count": 28,
+    "output": "{\"status\": \"pass\", \"changed_files\": 19, \"own_stage_and_index_only\": true, \"frozen_and_book_unchanged\": true}\r\n"
+  }
+}
+
+indexed-raw-bytes
+{
+  "status": "fulfilled",
+  "value": {
+    "chunk_id": "14bee3",
+    "wall_time_seconds": 0.6324484,
+    "exit_code": 0,
+    "original_token_count": 38,
+    "output": "{\"status\": \"pass\", \"indexed_groups\": 9, \"indexed_records\": 291, \"manifest_sha256\": \"5f3e6190d3193963c3a676f945fd3f7b39998b7e45d7d4b95c8e832ddc270708\"}\r\n"
+  }
+}
+
+Recovery for staged whitespace: removed only extra empty wrapper lines after EOF metadata in four local wrapper/readme files; the nine remote evidence bundles and their 291 embedded original texts remain byte-identical.
+Indexed evidence audit source:
+from pathlib import Path
+import json,hashlib,subprocess,datetime
+prefix="projects/book-yocto/artifacts/work-records/t016-yocto-system-raw/"
+def blob(path):
+ return subprocess.check_output(["git","-c","safe.directory=D:/opc-book-yocto","show",":"+path])
+sha=lambda b:hashlib.sha256(b).hexdigest()
+manifest_bytes=blob(prefix+"handoff-2/manifest.json")
+assert sha(manifest_bytes)=="5f3e6190d3193963c3a676f945fd3f7b39998b7e45d7d4b95c8e832ddc270708"
+m=json.loads(manifest_bytes);count=0
+for name,expected in m["groups"].items():
+ b=blob(prefix+"handoff-2/"+name)
+ assert len(b)==expected["bytes"] and sha(b)==expected["sha256"],name
+ rows=json.loads(b)
+ assert len(rows)==expected["records"]
+ for row in rows:
+  b=row["text"].encode("utf-8")
+  assert len(b)==row["bytes"] and sha(b)==row["sha256"],row["path"]
+ count+=len(rows)
+assert count==291
+p=Path(prefix+"verification.json");r=json.loads(p.read_text(encoding="utf-8"))
+r.update(git_index_verified_groups=9,git_index_verified_records=count,
+ git_index_manifest_sha256=sha(manifest_bytes))
+p.write_text(json.dumps(r,indent=2)+"\n",encoding="utf-8")
+print(json.dumps({"status":"pass","indexed_groups":9,"indexed_records":count,"manifest_sha256":sha(manifest_bytes)}))
+
+FINAL STAGED WHITESPACE RECOVERY:
+Command: git -c core.excludesFile=.git/info/exclude diff --cached --check
+Exit code: 0
+Output: empty
+The nine immutable bundle hashes and indexed nested text checks above remain unchanged.

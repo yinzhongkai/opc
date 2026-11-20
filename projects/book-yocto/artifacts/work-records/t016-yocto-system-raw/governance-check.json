@@ -1,0 +1,38 @@
+{
+  "status": "pass",
+  "time": "2026-10-18T23:48:33.725958+08:00",
+  "base": "ab33063b73e8147c1d1847f4538695a796accf6d",
+  "task_changes_only_own_stage": true,
+  "index_changes_only_own_section": true,
+  "frozen_files_unchanged": [
+    "projects/book-yocto/WORKSPACE.yaml",
+    "projects/book-yocto/artifacts/A-005-tiger-platform-design.md",
+    "projects/book-yocto/artifacts/A-006-chapter4-blueprint.md",
+    "projects/book-yocto/STATUS.md",
+    "projects/book-yocto/PROJECT.md",
+    "projects/book-yocto/DECISIONS.md"
+  ],
+  "book_head": "9c74596591728c0f2d614e357059034551a42dca",
+  "book_clean": true,
+  "changed_paths": [
+    "projects/book-yocto/TASKS.md",
+    "projects/book-yocto/artifacts/README.md",
+    "projects/book-yocto/artifacts/work-records/t016-yocto-system-raw/README.md",
+    "projects/book-yocto/artifacts/work-records/t016-yocto-system-raw/controller.log",
+    "projects/book-yocto/artifacts/work-records/t016-yocto-system-raw/governance-check.json",
+    "projects/book-yocto/artifacts/work-records/t016-yocto-system-raw/governance-checks.log",
+    "projects/book-yocto/artifacts/work-records/t016-yocto-system-raw/handoff-2/configuration-and-control.log",
+    "projects/book-yocto/artifacts/work-records/t016-yocto-system-raw/handoff-2/critical-task-logs.log",
+    "projects/book-yocto/artifacts/work-records/t016-yocto-system-raw/handoff-2/deployed-text-identities.log",
+    "projects/book-yocto/artifacts/work-records/t016-yocto-system-raw/handoff-2/deployment-2.log",
+    "projects/book-yocto/artifacts/work-records/t016-yocto-system-raw/handoff-2/deployment-3.log",
+    "projects/book-yocto/artifacts/work-records/t016-yocto-system-raw/handoff-2/interrupted-dependency.log",
+    "projects/book-yocto/artifacts/work-records/t016-yocto-system-raw/handoff-2/manifest.json",
+    "projects/book-yocto/artifacts/work-records/t016-yocto-system-raw/handoff-2/model-2.log",
+    "projects/book-yocto/artifacts/work-records/t016-yocto-system-raw/handoff-2/runqemu-2.log",
+    "projects/book-yocto/artifacts/work-records/t016-yocto-system-raw/handoff-2/runqemu-recovery-3.log",
+    "projects/book-yocto/artifacts/work-records/t016-yocto-system-raw/orchestration-supplement.log",
+    "projects/book-yocto/artifacts/work-records/t016-yocto-system-raw/verification.json",
+    "projects/book-yocto/artifacts/work-records/t016-yocto-system-validation.md"
+  ]
+}

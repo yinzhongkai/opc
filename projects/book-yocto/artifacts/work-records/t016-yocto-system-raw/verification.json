@@ -1,0 +1,71 @@
+{
+  "status": "pass",
+  "time": "2026-10-18T23:39:15.331841+08:00",
+  "manifest_sha256": "5f3e6190d3193963c3a676f945fd3f7b39998b7e45d7d4b95c8e832ddc270708",
+  "groups": {
+    "configuration-and-control.log": {
+      "records": 76,
+      "bytes": 13605771,
+      "sha256": "a30ebd2e32b9901a6a132a49d8a055980aa9f902b144e02f7079c5b399da9c51"
+    },
+    "critical-task-logs.log": {
+      "records": 90,
+      "bytes": 1155945,
+      "sha256": "9f99e19fc34281369a981116b37f203f9758bb9f51d655b232fe1d362a65a872"
+    },
+    "deployed-text-identities.log": {
+      "records": 7,
+      "bytes": 33958,
+      "sha256": "22df6d3f210225995de5f6ad8bf268b2ed966524fb61d7c735266e59c470f8c6"
+    },
+    "deployment-2.log": {
+      "records": 5,
+      "bytes": 6827,
+      "sha256": "b173ba311dc94a74e917ba1330b44e25e44ba91da0ba2902a36bf66dc07233e2"
+    },
+    "deployment-3.log": {
+      "records": 9,
+      "bytes": 14854,
+      "sha256": "f2c5cef1fc31310ed037869a619d53cb69de8bb43ca6a78241373ee1ffe24140"
+    },
+    "interrupted-dependency.log": {
+      "records": 2,
+      "bytes": 1471440,
+      "sha256": "bbb203ba792e86567ff2df5d5cffd45436c3d0ead76f7bce4f0ad2cc93fcf6a6"
+    },
+    "model-2.log": {
+      "records": 76,
+      "bytes": 229748,
+      "sha256": "3aa9693dadb60c2e85f5b9a4bd3261718926c845bc43611ac1f8b7b77d0a7c93"
+    },
+    "runqemu-2.log": {
+      "records": 13,
+      "bytes": 125320,
+      "sha256": "a984b88b4d211c2499a0f00ca70494b2a077ea9214387b55872cef9a62f5f8d3"
+    },
+    "runqemu-recovery-3.log": {
+      "records": 13,
+      "bytes": 125536,
+      "sha256": "961160d2f72c8d255bd6c15c683e143723baf2212f37b9ed979cda0e97d9b2f2"
+    }
+  },
+  "verified_records": 291,
+  "verified_groups": 9,
+  "meta_head": "4dd7dfda8f2af2d59bdcfe6585418cf43eaa73e8",
+  "build_producer_head": "cd6c348836346004e801cb13f32ad3fcb12c1dfd",
+  "source_retained_unchanged": true,
+  "helper_sha256": "1f05c31da60eb777e59b07f5075a143a07281b0d5b5473fac2b763a93bfdb002",
+  "fixture_manifest_sha256": "1a478c87019ffc1eb89ba1473864bc6fd61c50094f6672fb04d0f3b8669fda07",
+  "returncodes": {
+    "parse-1.rc": "1",
+    "parse-2.rc": "0",
+    "build-1.rc": "1",
+    "build-2.rc": "0",
+    "system-1.rc": "1",
+    "system-2.rc": "1",
+    "system-3.rc": "0"
+  },
+  "git_index_verified_groups": 9,
+  "git_index_verified_records": 291,
+  "git_index_manifest_sha256": "5f3e6190d3193963c3a676f945fd3f7b39998b7e45d7d4b95c8e832ddc270708"
+}
