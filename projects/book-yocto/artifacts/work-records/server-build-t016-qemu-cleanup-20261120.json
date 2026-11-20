@@ -1,0 +1,21 @@
+{
+  "date": "2026-11-20",
+  "target": "/home/oops/workspace/build/t016-qemu",
+  "target_allocated_bytes_before": 20156416,
+  "archive": "/home/oops/workspace/archives/book-yocto/cleanup-20261119/t016-qemu-evidence.tar.gz",
+  "archive_bytes": 682948,
+  "archive_sha256": "945cb13f04d9e91523c3840f336ad160fa99565672ce476dd1293cc4b9f11932",
+  "archived_file_count": 279,
+  "archival_scope": "Complete target directory, including firmware binaries and all model test runs",
+  "deletion_completed": true,
+  "free_bytes_before": 692362575872,
+  "free_bytes_after": 692382732288,
+  "free_bytes_gained": 20156416,
+  "readme_update": {
+    "path": "/home/oops/workspace/meta-tiger/tests/model/README.md",
+    "before_sha256": "ef2ce465e73e53aa85d6c657955f7729fa8728546460da5230fc28619c47f4d2",
+    "after_sha256": "7b39ae6353701d82da7c7bdb6224df771d2bb40a2b3ffca2ecd3244e5d876a2f",
+    "new_example_base": "/home/oops/workspace/build/model-tests/"
+  },
+  "other_protected_contents_verified_unchanged": true
+}

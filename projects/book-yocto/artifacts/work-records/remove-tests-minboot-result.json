@@ -1,0 +1,31 @@
+{
+  "date": "2026-11-20",
+  "tests_removed": true,
+  "file_blobs": {
+    "recipes-test/minboot/minboot_0.1.bb": "9fa34e6826bf245516e66f25ab285a47060d6500",
+    "recipes-test/minboot/files/Makefile": "81408c400d9f50a27db14794e4ce62e0948a28d1",
+    "recipes-test/minboot/files/minboot.ld": "279daca47b6ae5721aa98fb7b2b58456170e77bd",
+    "recipes-test/minboot/files/main.c": "cf302b124782ccf777038050f3b2146e474f01ce",
+    "recipes-test/minboot/files/start.S": "333b3515ef853c2eb118f6ee22b160ec4d4ac2e6",
+    "recipes-core/images/minboot-image.bb": "e8fb510246b94c58042c22deec06f98a9857ca4b",
+    "conf/machine/tiger.conf": "c6c09464ba59ff7519e2e48aced41d8502d5ee30"
+  },
+  "image_build": "bitbake minboot-image",
+  "build_tasks": 740,
+  "build_result": "all succeeded",
+  "deployed_files": [
+    "minboot-0.1-tiger.bin",
+    "minboot-0.1-tiger.elf",
+    "minboot-0.1-tiger.map",
+    "minboot-image-tiger.qemuboot.conf"
+  ],
+  "manual_monitor_config": "/home/oops/workspace/build/tmp/deploy/images/tiger/minboot-image-tiger.qemuboot.conf",
+  "manual_monitor_log": "/home/oops/workspace/archives/book-yocto/cleanup-20261119/manual-monitor-minboot-20261120.log",
+  "manual_monitor_uart_count": 3,
+  "cold_boot_and_two_resets": "passed",
+  "persistent_source": "/home/oops/workspace/sources/qemu-system-native",
+  "persistent_source_head": "56cca1395ef631f2b8300f708e9aaa56555429ef",
+  "persistent_source_worktree": "clean",
+  "tests_archive": "/home/oops/workspace/archives/book-yocto/cleanup-20261119/removed-meta-tiger-tests.tar.gz",
+  "rename_backup": "/home/oops/workspace/archives/book-yocto/cleanup-20261119/pre-minboot-rename.tar.gz"
+}

@@ -1,0 +1,185 @@
+===== baseline =====
+HOST=tiger
+USER=oops
+POKY=77d1feb37e280733684ae8a9449fb031d5d7ff40
+LAYER=4dd7dfda8f2af2d59bdcfe6585418cf43eaa73e8
+SKELETON=0e3da48b34ef772532535a730a21878cc30ccf67
+RUN_ROOT=/home/oops/workspace/t016-wv01-20261112.k8rn7S
+EXTERNAL_SOURCE=/home/oops/workspace/t016-wv01-20261112.k8rn7S/sources/qemu-system-native
+
+===== tarball =====
+/home/oops/workspace/t016-wv01-20261112.k8rn7S/downloads/qemu-8.2.7.tar.xz: OK
+
+===== find-recipe-implementation =====
+scripts/lib/devtool/utilcmds.py:42:def find_recipe(args, config, basepath, workspace):
+scripts/lib/devtool/utilcmds.py:43:    """Entry point for the devtool 'find-recipe' subcommand"""
+scripts/lib/devtool/utilcmds.py:224:    parser_find_recipe = subparsers.add_parser('find-recipe', help='Find a recipe file',
+
+===== find-recipe =====
+NOTE: Starting bitbake server...
+INFO: Creating workspace layer in /home/oops/workspace/t016-wv01-20261112.k8rn7S/build/workspace
+NOTE: Reconnecting to bitbake server...
+NOTE: Retrying server connection (#1)... (00:42:57.851203)
+NOTE: Reconnecting to bitbake server...
+NOTE: Reconnecting to bitbake server...
+NOTE: Retrying server connection (#1)... (00:42:57.851203)
+NOTE: Retrying server connection (#1)... (00:42:57.851203)
+NOTE: Starting bitbake server...
+NOTE: Reconnecting to bitbake server...
+NOTE: Retrying server connection (#1)... (00:42:58.516139)
+WARNING: You are using a local hash equivalence server but have configured an sstate mirror. This will likely mean no sstate will match from the mirror. You may wish to disable the hash equivalence use (BB_HASHSERVE), or use a hash equivalence server alongside the sstate mirror.
+Loading cache...done.
+Loaded 0 entries from dependency cache.
+Parsing recipes...done.
+Parsing of 920 .bb files complete (0 cached, 920 parsed). 1878 targets, 58 skipped, 0 masked, 0 errors.
+WARNING: No bb files in default matched BBFILE_PATTERN_meta-tiger '^/home/oops/workspace/t016-wv01-20261112.k8rn7S/meta-tiger/'
+
+Summary: There were 2 WARNING messages.
+/home/oops/workspace/poky/meta/recipes-devtools/qemu/qemu-system-native_8.2.7.bb
+
+===== status-before =====
+NOTE: Starting bitbake server...
+INFO: No recipes currently in your workspace - you can use "devtool modify" to work on an existing recipe or "devtool add" to add a new one
+
+===== modify (key lines from modify.log) =====
+WARNING: You are using a local hash equivalence server but have configured an sstate mirror. This will likely mean no sstate will match from the mirror. You may wish to disable the hash equivalence use (BB_HASHSERVE), or use a hash equivalence server alongside the sstate mirror.
+WARNING: No bb files in default matched BBFILE_PATTERN_meta-tiger '^/home/oops/workspace/t016-wv01-20261112.k8rn7S/meta-tiger/'
+WARNING: You are using a local hash equivalence server but have configured an sstate mirror. This will likely mean no sstate will match from the mirror. You may wish to disable the hash equivalence use (BB_HASHSERVE), or use a hash equivalence server alongside the sstate mirror.
+WARNING: No bb files in default matched BBFILE_PATTERN_meta-tiger '^/home/oops/workspace/t016-wv01-20261112.k8rn7S/meta-tiger/'
+BB_VERSION           = "2.8.1"
+MACHINE              = "qemuarm64"
+DISTRO_VERSION       = "5.0.20"
+WARNING: Disabling uninative as unable to fetch uninative tarball: Network access disabled through BB_NO_NETWORK (or set indirectly due to use of BB_FETCH_PREMIRRORONLY) but access requested with command /usr/bin/env wget -t 2 -T 100 -O /home/oops/workspace/t016-wv01-20261112.k8rn7S/downloads/uninative/2b63a078c26535e0786e87f81ae69509df30f4dce40693004c527bd5e4ab2b85/x86_64-nativesdk-libc-5.1.tar.xz.tmp -P /home/oops/workspace/t016-wv01-20261112.k8rn7S/downloads/uninative/2b63a078c26535e0786e87f81ae69509df30f4dce40693004c527bd5e4ab2b85 'http://downloads.yoctoproject.org/releases/uninative/5.1/x86_64-nativesdk-libc-5.1.tar.xz' (for url http://downloads.yoctoproject.org/releases/uninative/5.1/x86_64-nativesdk-libc-5.1.tar.xz;sha256sum=2b63a078c26535e0786e87f81ae69509df30f4dce40693004c527bd5e4ab2b85)
+WARNING: To build your own uninative loader, please bitbake uninative-tarball and set UNINATIVE_TARBALL appropriately.
+NOTE: Tasks Summary: Attempted 93 tasks of which 90 didn't need to be rerun and all succeeded.
+INFO: Source tree extracted to /home/oops/workspace/t016-wv01-20261112.k8rn7S/sources/qemu-system-native
+WARNING: SRC_URI is conditionally overridden in this recipe, thus several devtool-override-* branches have been created, one for each override that makes changes to SRC_URI. It is recommended that you make changes to the devtool branch first, then checkout and rebase each devtool-override-* branch and update any unique patches there (duplicates on those branches will be ignored by devtool finish/update-recipe)
+INFO: Recipe qemu-system-native now set up to build from /home/oops/workspace/t016-wv01-20261112.k8rn7S/sources/qemu-system-native
+
+===== status-after =====
+NOTE: Starting bitbake server...
+qemu-system-native: /home/oops/workspace/t016-wv01-20261112.k8rn7S/sources/qemu-system-native
+
+===== recipe-after-key =====
+B="/home/oops/workspace/t016-wv01-20261112.k8rn7S/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7"
+EXTERNALSRC="/home/oops/workspace/t016-wv01-20261112.k8rn7S/sources/qemu-system-native"
+FILE="/home/oops/workspace/poky/meta/recipes-devtools/qemu/qemu-system-native_8.2.7.bb"
+PN="qemu-system-native"
+PV="8.2.7"
+S="/home/oops/workspace/t016-wv01-20261112.k8rn7S/sources/qemu-system-native"
+
+===== source-before-reset =====
+QEMU_VERSION=8.2.7
+PATCH_COMMITS=31
+SOURCE_HEAD=2352b8748797a8a05332acd40af326138be6014b
+SOURCE_TREE=00666e1c85f8d3bba64bb30bcce155c7a6b19a29
+REFERENCE_TREE=00666e1c85f8d3bba64bb30bcce155c7a6b19a29
+2352b8748797a8a05332acd40af326138be6014b refs/heads/devtool
+1168a211300f1b0fbc496d3dd8c34a281e1dd543 refs/heads/devtool-no-overrides
+2352b8748797a8a05332acd40af326138be6014b refs/heads/devtool-override-class-native
+4ad130424fa3e773cfccc24145f30733e6f806ea refs/heads/devtool-override-class-nativesdk
+ce7d4740074071361303c1d90931ca570eb86ee6 refs/heads/master
+cd48f9189c19e3efb6cfa48df914bf27362a33b7 refs/notes/devtool
+ce7d4740074071361303c1d90931ca570eb86ee6 refs/tags/devtool-base
+2352b8748797a8a05332acd40af326138be6014b refs/tags/devtool-patched
+
+===== patch-subjects =====
+qemu: Add addition environment space to boot loader qemu-system-mips
+apic: fixup fallthrough to PIC
+configure: Add pkg-config handling for libgcrypt
+qemu: Do not include file if not exists
+qemu: Add some user space mmap tweaks to address musl 32 bit
+qemu: Determinism fixes
+tests/meson.build: use relative path to refer to files
+Define MAP_SYNC and MAP_SHARED_VALIDATE on needed linux systems
+hw/pvrdma: Protect against buggy or malicious guest driver
+linux-user: Replace use of lfs64 related functions and macros
+qemu: Upgrade 8.0.4 -> 8.1.0
+qemu: Ensure pip and the python venv aren't used for meson
+linux-user: Split out do_munmap
+linux-user/loongarch64: Remove TARGET_FORCE_SHMLBA
+linux-user: Add strace for shmat
+linux-user: Rewrite target_shmat
+tests/tcg: Check that shmat() does not break /proc/self/maps
+sched_attr: Do not define for glibc >= 2.41
+hw/usb/hcd-uhci: don't assert for SETUP to non-0 endpoint
+net: pad packets to minimum length in qemu_receive_packet()
+python: backport 'Remove deprecated get_event_loop calls'
+python: backport 'avoid creating additional event loops per thread'
+io: move websock resource release to close method
+io: fix use after free in websocket handshake code
+lsi53c895a: keep a reference to the device while SCRIPTS execute
+hw/virtio/virtio-crypto: verify asym request size
+cryptodev-builtin: Limit the maximum size
+hw/i386/kvm: fix PIRQ bounds check in xen_physdev_map_pirq()
+block/vmdk: fix OOB read in vmdk_read_extent()
+linux-user/*: workaround for missing MAP_FIXED_NOREPLACE
+linux-user/*: workaround for missing MAP_SHARED_VALIDATE
+
+===== source-comparison =====
+HEAD_MATCHES_DEVTOOL_PATCHED=yes
+
+===== reset =====
+NOTE: Starting bitbake server...
+INFO: Leaving source tree /home/oops/workspace/t016-wv01-20261112.k8rn7S/sources/qemu-system-native as-is; if you no longer need it then please delete it manually
+
+===== status-reset =====
+NOTE: Starting bitbake server...
+INFO: No recipes currently in your workspace - you can use "devtool modify" to work on an existing recipe or "devtool add" to add a new one
+
+===== recipe-reset-key =====
+FILE="/home/oops/workspace/poky/meta/recipes-devtools/qemu/qemu-system-native_8.2.7.bb"
+S="/home/oops/workspace/t016-wv01-20261112.k8rn7S/build/tmp/work/x86_64-linux/qemu-system-native/8.2.7/qemu-8.2.7"
+
+===== source-after-reset =====
+QEMU_VERSION=8.2.7
+PATCH_COMMITS=31
+SOURCE_HEAD=2352b8748797a8a05332acd40af326138be6014b
+SOURCE_TREE=00666e1c85f8d3bba64bb30bcce155c7a6b19a29
+REFERENCE_TREE=00666e1c85f8d3bba64bb30bcce155c7a6b19a29
+2352b8748797a8a05332acd40af326138be6014b refs/heads/devtool
+1168a211300f1b0fbc496d3dd8c34a281e1dd543 refs/heads/devtool-no-overrides
+2352b8748797a8a05332acd40af326138be6014b refs/heads/devtool-override-class-native
+4ad130424fa3e773cfccc24145f30733e6f806ea refs/heads/devtool-override-class-nativesdk
+ce7d4740074071361303c1d90931ca570eb86ee6 refs/heads/master
+cd48f9189c19e3efb6cfa48df914bf27362a33b7 refs/notes/devtool
+ce7d4740074071361303c1d90931ca570eb86ee6 refs/tags/devtool-base
+2352b8748797a8a05332acd40af326138be6014b refs/tags/devtool-patched
+
+===== original-before =====
+ec3161abe8737cbe8038f1d6c5bf595952ecc412
+1270be61f9ee6f1132a8bcadfb2e0e800ff055a5
+2109412f6a67166247784537205575d5b11cd6579b2d237933ccd55c11c61be9  -
+
+===== original-after =====
+ec3161abe8737cbe8038f1d6c5bf595952ecc412
+1270be61f9ee6f1132a8bcadfb2e0e800ff055a5
+2109412f6a67166247784537205575d5b11cd6579b2d237933ccd55c11c61be9  -
+
+===== result =====
+EXTRACTED_SOURCE_RETAINED=yes
+PERSISTENT_SOURCE_MATCH=yes
+RESULT=pass
+
+===== command exit codes =====
+find-recipe	0
+status-before	0
+modify	0
+status-after	0
+recipe-after	0
+reset	0
+status-reset	0
+recipe-reset	0
+
+===== full log SHA-256 =====
+cd50c1b55002a4d56556afa83ec74552a08cc5a8f6eda878dc399b6615a2a4de  /home/oops/workspace/t016-wv01-20261112.k8rn7S/evidence/find-recipe.log
+7fa76a8ba3f82e195514965eb39a2e61832f98de1dfd67e93d2e9e4c7a2bdaf9  /home/oops/workspace/t016-wv01-20261112.k8rn7S/evidence/modify.log
+3efe1a1bc0b92b49171928ebcc8ad3fc920fc126e0232619b69b465d5be542b3  /home/oops/workspace/t016-wv01-20261112.k8rn7S/evidence/recipe-after.log
+08c0a0a1b918b0a4dacf181f90111884461942e0614cc8d02489da82849fcfa1  /home/oops/workspace/t016-wv01-20261112.k8rn7S/evidence/recipe-reset.log
+
+===== source checks =====
+$ git -C /home/oops/workspace/t016-wv01-20261112.k8rn7S/sources/qemu-system-native rev-list --count devtool-base..HEAD
+31
+$ git -C /home/oops/workspace/t016-wv01-20261112.k8rn7S/sources/qemu-system-native apply --check /home/oops/workspace/meta-tiger/recipes-devtools/qemu/files/0001-arm-add-minimal-tiger-machine.patch
+[exit 0]
+VERIFICATION=pass

@@ -135,6 +135,52 @@
 - 替代关系：更新 D-002 的交付物物理位置，不改变交付内容和验收标准；补充 D-008、D-009、D-011 中旧路径的迁移后解释。
 - 记录人及更新日期：框架超级管理员，2026-09-28
 
+## D-013：tiger 平台源码采用上游基线加 `meta-tiger` patch 的长期维护模型
+- 状态：confirmed
+- 提出者：用户
+- 问题与候选方案：D-001 原方案要求创建 `qemu-tiger`、`tf-a-tiger`、`u-boot-tiger`、`linux-tiger` 四个长期开发仓库。用户指出这些仓库会重复保存 Poky 配方已经能够获取的上游源码，并增加 GitHub 空间和长期维护成本；建议开发时使用 BitBake/`devtool` 展开的上游源码工作区，最终只把真实修改以 patch、`.bbappend`、`SRC_URI` 和必要配置的形式保存在 `meta-tiger`。chapter 4 同时面临教学次序问题：是否提前完整讲解 `devtool`，或仅使用最少命令完成 QEMU 修改，把重点放在 patch 内容、`meta-tiger` 集成和 `runqemu` 验证。
+- 确认人：建项用户（PROJECT 默认最终确认人）
+- 结果：**确认采用“上游源码基线 + 临时开发工作区 + `meta-tiger` patch”模型**——①不再创建或维护四个长期 GitHub fork；QEMU、TF-A、U-Boot、Linux 均以对应 Poky/BitBake 配方锁定和获取的上游版本为开发基线；②`devtool` workspace 只作为可丢弃的本地开发环境，不是交付物或长期源码仓库；③所有 tiger 专属修改最终以可审阅 patch、`.bbappend`、`SRC_URI`、配置片段及必要说明进入 `meta-tiger`；④每个组件必须在清理或 reset 临时 workspace 后，仅依靠 Poky + `meta-tiger` 从干净状态重新构建和运行验证，继续兑现 D-001/D-010 的完整实测要求；⑤chapter 4 只首次、简要使用 `devtool` 的最少命令完成 QEMU 源码修改，不展开 workspace 机制或以 `devtool finish` 为教学主线，章节重点调整为真实 QEMU patch、`meta-tiger` 集成和 `runqemu`；chapter 15 保留为 `devtool` 生命周期、workspace 机制和 `finish` 的系统讲解。
+- 确认来源与日期：2026-10-09 用户在 project-manager 会话说明不希望创建四个仓库，希望将修改以 patch 集成到 `meta-tiger`；在讨论 chapter 4 的 `devtool` 教学层次及全书影响后明确指示“那就按这个方案执行吧”。
+- 适用范围与影响：工程资产模型覆盖 QEMU、TF-A、U-Boot、Linux 和 `meta-tiger`；不改变现有章节编号与阅读顺序，但须逐步统一前言、chapter 2–16、尾声及附录 B/C 中四仓库、源码来源、patch 集成、验证和交付表述。chapter 4 由 T-016 先落地该模型；跨章受影响文件由后续一致性任务跟踪。`meta-tiger` 成为书稿仓库之外唯一需要长期维护的 tiger 工程代码仓库；在实际写入该仓库前，须由用户转交超级管理员更新 WORKSPACE 声明或提供符合框架规则的工作区边界和精确版本。
+- 替代关系：**部分替代 D-001**——仅替代“创建四个长期开发态仓库”这一实现载体和相应 P0.5 前置条件；D-001 的真实平台代码、完整构建、全链运行验证、C-W/V 回填和前言实测承诺继续有效。同步更新 D-010 中“依赖四仓库”的解释为“依赖对应上游基线、`meta-tiger` patch 与干净环境复验”，不追改历史决定原文。
+- 记录人及更新日期：project-manager，2026-10-09
+
+## D-014：批准 A-005 v0.2 作为 chapter 4 最小平台设计基线
+- 状态：confirmed
+- 提出者：architect（设计成果负责人）
+- 问题与候选方案：A-005 v0.2 已统一处理 13 项 U/Y/QE 意见，QEMU 与 Yocto 针对性复核均 pass，需要由用户确认该明确版本后进入章节蓝图与工程实施。
+- 确认人：建项用户（PROJECT 默认最终确认人）
+- 结果：**批准 A-005 v0.2**。被批准正文固定于 OPC 提交 `08bdf9c08d6d8cbd8836df3771ffd28231470059`，Git blob `26c5fdca1103f37ac3e752208c429231b8191eee`，路径 [A-005-tiger-platform-design.md](artifacts/A-005-tiger-platform-design.md)。chapter 4 按单核 A53/TCG、ROM/RAM、轮询 PL011、raw 固件实际执行及宿主 reset 契约实施；writer 据此编制章节蓝图，再按 T-016 既有次序推进工程与书稿。
+- 确认来源与日期：2026-10-11 用户在当前 project-manager 会话明确回复“批准 v0.2”；此前 QEMU 复核提交 `5287e43f824dfe63d6a3e3371b5882a4944d9c48`、Yocto 复核提交 `b3fbff33ee4ee7332cd123d3eef008879e3c3ac1` 均为 pass，批准时正文与固定 blob 一致。
+- 适用范围与影响：T-016 和 A-005 v0.2 的设计基线。文档中的后续 SPI master→实际 CS→SPI NAND、watchdog、SMP 及完整启动链仍按首次使用前的选型、契约补齐与实测门槛演进；候选型号、条件性几何及未验证能力保持原有边界。本次是设计批准，模型/固件/metadata 实现、构建运行、章节定稿尚未完成。architect 据实更新自身元信息与成果索引，project-manager 串行衔接 writer 蓝图；远程访问、写入或切换仍须核对已有授权和实际 checkout。
+- 替代关系：无；补充 D-013 的 chapter 4 实施输入，不改变 D-001/D-003/D-010/D-013 的全书目标与验收要求。
+- 记录人及更新日期：project-manager，2026-10-11
+
+## D-015：持久保留 QEMU 开发与学习源码
+- 状态：confirmed
+- 提出者及确认人：建项用户（PROJECT 默认最终确认人）
+- 问题与候选方案：用户希望固定 QEMU 开发源码位置，长期查看当前 tiger 增量和后续修改历史。
+- 结果：SSH 主机 `tiger` 的 `/home/oops/workspace/sources/qemu-system-native` 为用户明确指定并授权的持久辅助源码工作区；迁入原 devtool 源码和完整 Git 历史。后续功能修改在此检出中保留可阅读的 Git 提交/版本与 patch 映射，未经用户明确同意不得删除、覆盖或以清理临时 workspace 为由回收该目录。
+- 确认来源与日期：2026-10-17，用户在 project-manager 会话明确“能改到/home/oops/workspace/sources/qemu-system-native目录下吗，并长期保存，后面的修改可能我也需要看看怎么修改的”。
+- 适用范围与影响：T-016 及后续 QEMU 开发、源码学习和环境清理。细化 D-013 的源码目录生命周期；正式工程 patch/metadata 仍交付 meta-tiger，WORKSPACE 的两个成果物仓库及其基线保持原声明。新目录不作为新增上游产品 fork。devtool reset/干净构建验证只解除 externalsrc 等临时覆盖并清理必要构建产物，保留此源码与 Git 历史；再次纳管已有检出时使用经当前版本核对的 `devtool modify -n qemu-system-native <持久源码目录>`。
+- 实施与恢复：完整目录已迁移，HEAD `7ed31149ac01a9d6bb3a682b9d768936c4315ed3` 与 tree 保持不变；原路径软链接至新路径。Git 归档标签/恢复 bundle、devtool/BitBake 引用及校验结果见 [迁移记录](artifacts/work-records/t016-qemu-source-retention-20261017.md)。历史工程报告按原执行时点保留旧路径。
+- 替代关系：补充 D-013 的保存和清理策略，不改变平台设计、模型测试结论或正式成果物验收要求。
+- 记录人及更新日期：project-manager（本轮用户明确指定的目录维护与协调），2026-10-17。
+
+## D-016：第 4 章正文定稿确认
+
+- 状态：confirmed
+- 提出者及确认人：建项用户（PROJECT 默认最终确认人）
+- 确认来源与日期：2026-11-20，用户在本会话明确“我校验完成了，感觉这一章的内容可以了”。
+- 结果：第 4 章《让 QEMU 长出 tiger 这块板》正文定稿，用户通读及本章内容验收完成。
+- 批准版本：`git@github.com:yinzhongkai/book-yocto.git` 的 `feature/t-016-chapter4-revision` 工作区，路径 `yocto/task05-4-让QEMU长出tiger这块板.md`；基于 HEAD `22c428c3aa4257b0072a5ba66da59af2cfc2a12c`，获确认正文的内容摘要为 Git blob `b1311b25af54c4b0f03b5bdada1b193de67b487e`。
+- 配套工程与验证：`tiger:/home/oops/workspace/meta-tiger` 的同名 feature，当前 HEAD `d99bbeb4264ce49b64cf1f10fac8002c4bc677c0`。工作区的 minboot 固件配方、镜像配方和 machine 配置分别为 blob `9fa34e6826bf245516e66f25ab285a47060d6500`、`e8fb510246b94c58042c22deec06f98a9857ca4b`、`c6c09464ba59ff7519e2e48aced41d8502d5ee30`。工程已移除 `tests/`，正文采用 runqemu 与 QEMU 监控器。正常镜像构建 740 项任务成功，冷启动和同进程两次复位通过，见[当前工程回执](artifacts/work-records/remove-tests-minboot-result.json)与[监控器原始输出](artifacts/work-records/manual-monitor-minboot-20261120.log)。
+- 远程固化（2026-11-20）：获确认正文已保存为书稿提交 `4e101658e25204255be6bac5424eac9e9ac41eff`，后续跨章引用提交后的开发头为 `f6b45b536158570813442841bcff27da052d1c93`；配套工程开发头为 `3a775412328b2e046ac327c5af161978d6f8e25a`。两个开发分支均已推送并核对远程头，正文及工程文件摘要与本决定所记值一致。
+- 合入版本映射（2026-11-20，框架超级管理员按用户本轮 Git 整理请求记录）：书稿已整理并合入 `main@619c4efcd57a08818572f360b61b97abe2462ed0`，第 4 章正文 blob 仍为上述获确认值；仅第 3 章新增当前工程版本说明，历史构建输出保留。配套工程已整理并合入 `main@79d9696c1d37fcbf65724eb05a253b3168d2eab7`，文件树与原工程开发头一致。原批准及远程固化字段继续作为当时版本依据，不批量替换历史 SHA。
+- 适用范围与后续：批准覆盖上述第 4 章正文。OPC 项目合入随本轮功能整理收口，生效边界见 T-016；配套 `chapter4` 标签及未结交接继续跟踪，PM-C4-01 随发布收尾。各成员历史评审继续保留原版本与原范围，T-017 在 T-016 收尾后衔接。
+- 记录人及更新日期：project-manager，2026-11-20。
+
 ## 记录样式（不是真实决定）
 
 ```text

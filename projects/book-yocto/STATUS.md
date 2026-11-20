@@ -1,14 +1,14 @@
 # 项目状态摘要
 
-- 汇总日期与信息截至点：2026-10-08；chapter 3 最终定稿已通过用户逐项审校、writer 修订、reviewer 复核及 2026-10-03～2026-10-04 Docker 复验/补证，并以精简功能提交 `9c74596591728c0f2d614e357059034551a42dca`、merge commit `f444790f352b46f699fd3d46198f8b9b9f089a62` 合入并推送书稿仓库 `main`。本摘要与任务收尾为 2026-10-08 事后补录，不伪装成期间已存在 OPC 提交。
+- 汇总日期与信息截至点：2026-11-20。用户明确“我校验完成了，感觉这一章的内容可以了”，第 4 章正文按 [D-016](DECISIONS.md) 定稿；本次刷新章节批准与发布收尾状态，其他任务沿用原记录。
 - 维护人：project-manager（按 [PROJECT.md](PROJECT.md) 指定的协调记录维护人）。
-- 当前阶段：P1 基础修复、P2 章节闭环试点均已完成；**P3 正在推进，chapter 1、chapter 2、chapter 3 均已定稿，A-004 v0.5 已批准生效；下一章为 chapter 4**（计划见 A-002 v0.5）。目标与范围见 [PROJECT.md](PROJECT.md) 与 D-001~D-012。书稿位于 WORKSPACE 声明的独立仓库 `yocto/`，当前锁定 revision 为 `f444790f352b46f699fd3d46198f8b9b9f089a62`。
+- 当前阶段：P1/P2 完成，chapter 1–4 正文已定稿。T-016 in_progress，书稿与 meta-tiger 均已合入各自 main，WORKSPACE 两份 revision 已回写；OPC 项目合入随本轮五笔功能整理收口，生效边界见 T-016。配套 chapter4 标签及未结交接仍待处理，获确认正文见 D-016，计划范围不变。
 - 任务进展：
   - T-001 书稿现状评估（writer）：completed，产出 [A-001](artifacts/A-001-书稿现状评估.md) v0.1（draft）。
-  - T-002 起草全书打磨计划（project-manager）：completed，[A-002](artifacts/A-002-book-polishing-plan.md) 当前 v0.5（draft，含 D-007 用户通读意见、D-010 逐章真实环境核验及 D-011 内部流程清理）。
+  - T-002 起草全书打磨计划（project-manager）：completed，[A-002](artifacts/A-002-book-polishing-plan.md) 当前 v0.8（draft，保留 D-007/D-010/D-011/D-013 要求；在 QEMU 模型开发与 Yocto 集成验证之前加入 architect 平台设计、专业核对与用户确认，并作为 writer 蓝图输入；原起草任务不因此重新打开）。
   - T-003 按章节抽取待校验知识点清单（writer）：completed，产出 [A-003](artifacts/A-003-知识点校验清单.md) v0.1（draft）：86 条注记 + 跨章 X 系列 4 条。
   - T-004 修复 index.md（writer）：completed（2026-09-19）。
-  - T-005 体例约定草案（writer）：completed，[A-004](artifacts/A-004-体例约定草案.md) v0.4 **approved**；v0.3 于 2026-09-25 经用户批准，v0.4 同日依据 D-009 增补全书 `-` 紧凑列表风格并生效。
+  - T-005 体例约定草案（writer）：completed，[A-004](artifacts/A-004-体例约定草案.md) 当前 v0.5 **approved**；v0.3 于 2026-09-25 经用户批准，v0.4 同日依据 D-009 增补全书 `-` 紧凑列表风格，v0.5 的后续批准见 T-013。
   - T-006 chapter 1 试点闭环（writer）：**completed（2026-09-25 用户确认定稿，定稿版本 Git 92ede7e，816 行）**——第 1 轮评审（R-1~R-5、U-1~U-16）、定稿前修订（E-1~E-3）、定稿通读意见（U-17~U-20）、T-009 实测不符项（N-1/N-2/O-1）全部处理并复核闭环；U-3 删节方案随定稿确认闭环。chapter 1 成为全书首章"每个运行结果有实测背书"的定稿，P2 流程试点完成，为 P3 定型；列表风格归一已由 D-009/T-010 闭环。
   - T-007 全书人物"老周"更名"达哥"（writer，D-008）：completed（2026-09-25）——18 文件 381 处逐文件提交（ae9052c…bc6fa78），PM 复核通过：书稿目录"老周"零残留，"达哥"405 处逐文件吻合，抽查语义中性。
   - T-008 真实环境运行核查 chapter 1 环境信息（reviewer）：completed（2026-09-23 容器实测）。
@@ -19,13 +19,19 @@
   - T-013 补充硬件型号与等宽文本排版规则（writer）：completed——A-004 v0.5 于 2026-09-27 经用户明确批准，approved 状态与成果索引已在 Git `36c5e35` 回写并经 project-manager 复核。
   - T-014 chapter 3《搭起 meta-tiger 的骨架》修订与第 1 轮评审（writer/reviewer/project-manager/用户）：**completed（2026-10-08 用户最终确认）**——2026-10-03～2026-10-08 完成用户逐项审校、writer 统一修订、reviewer 针对性复核及 Docker 真实环境复验/补证；最终复核 `pass`。源码整理为 `9c745965...`，以 merge commit `f444790f...` 合入并推送 `main`；最终净差异仅 chapter 3 正文，215 insertions / 123 deletions。验证报告与日志按 D-012 保存在 OPC 工作记录，不进入书稿主线。
   - T-015 chapter 3 命令、配置与输出真实环境核验（reviewer）：completed（2026-09-27 project-manager 复核通过）——12 组核验 9 组通过、3 组局部不符；构建和两次 `yocto-check-layer` 成功，错误实验均恢复，远端 `meta-tiger` 提交为 `0e3da48`；N-1/N-2/O-1 已流转至 T-014。
-- 团队状态：现有 `project-manager`、`writer`、`reviewer`、`yocto-engineer` 四名成员；本轮 chapter 3 审校与验证协作已完成，目前无开放交接或 chapter 3 待办。
-- 开发仓库状态：书稿仓库 `origin/main` 已实时核对为 `f444790f352b46f699fd3d46198f8b9b9f089a62`，WORKSPACE 已同步锁定该精确提交。公开仓库 [yinzhongkai/meta-tiger](https://github.com/yinzhongkai/meta-tiger) 的远端 HEAD 仍以 T-015 记录的 `0e3da48` 为既有基线；P0.5 正式启动前再统一默认分支或明确映射。
-- 关键成果：A-004 体例约定 v0.5 为 approved，已加入硬件型号/粗体/反引号边界、真实输出空白保真及作者 ASCII 图表固定列宽规则，作为后续 P3 修订基线。A-002 v0.5 仍为 draft；A-001/A-003 v0.1 为 draft；T-008/T-009/T-012/T-015 及 T-014 最终复验记录均保存在 OPC `artifacts/work-records/`。
+  - T-016 chapter 4《让 QEMU 长出 tiger 这块板》修订与第 1 轮评审：in_progress（正文已定稿，书稿与工程均已合入 main；OPC 项目合入随本轮功能整理收口，配套标签及未结交接仍待处理）。
+  - T-017 全书四仓库叙事迁移为 `meta-tiger` patch-only 模型：todo（2026-10-09 已登记；全文扫描命中前言、chapter 2–16、尾声、附录 B/C 共 19 个文件；等待 T-016 收口后再建立配对分支，不并行启动）。
+- 团队状态：六名成员登记不变。用户本章校验与定稿确认已完成，project-manager 维护批准版本和发布收尾记录，各成员历史评审保留原版本与范围。
+- 后续章节修订参考：[第 4 章人工校审记录](artifacts/work-records/t016-chapter4-manual-review-style.md)已整理本轮明确的正文、示例、命令输出和排版偏好，结合 A-004 使用。
+- 开发仓库状态：书稿已普通推送 `main@619c4efcd57a08818572f360b61b97abe2462ed0`，包含 2 个单行说明功能提交，原书稿 feature 已清理，本机恢复点仍保存旧头 `f6b45b536158570813442841bcff27da052d1c93`；第 4 章批准正文未变，第 3 章补注当前工程版本。meta-tiger 的 `main@79d9696c1d37fcbf65724eb05a253b3168d2eab7` 保持不变，原工程 feature 和 master 已清理，旧历史由本机恢复点保留。OPC 原 54 笔开发历史保留，本轮以 5 个功能提交收口到项目分支；两份 WORKSPACE revision、tiger 主机和路径不变，chapter4 标签及未结交接继续由 T-016 跟踪。
+- 关键成果：第 4 章正文已获用户确认定稿（D-016）；A-004 v0.5 approved、A-002 v0.8 draft、A-005 v0.2 approved / D-014、A-006 v0.1 draft。蓝图和各阶段报告保留其原版本及当时状态。当前工程构建与手工复位证据见[工程回执](artifacts/work-records/remove-tests-minboot-result.json)和[监控器日志](artifacts/work-records/manual-monitor-minboot-20261120.log)。
 - 阻塞、待确认事项及下一位行动人：
-  - **chapter 3 无未完成阻塞**：用户确认、专业复核、真实环境验证、源码合并和远端推送均已完成；下一位行动人为 project-manager，按 P3 节奏安排 chapter 4。
-  - **用户后续事项**：继续全书通读校验（A-003），chapter 8 时顺带裁决 X-1；决定何时启动 P0.5，并将四个开发态仓库及构建环境工作正式指派给 `yocto-engineer`。
-  - **待协调（D-001=A 派生）**：所需技术成员已就位；P0.5 尚未建立任务或交接，因此四仓库工程开发尚未启动；在后续依赖 tiger 工程的章节进入实测前安排即可，不构成当前 chapter 4 启动阻塞。
+  - **chapter 3 无未完成阻塞**：用户确认、专业复核、真实环境验证、源码合并和远端推送均已完成。
+  - **平台设计确认及回写已完成**：用户批准 A-005 v0.2（D-014），architect 元信息/索引回写已核验，技术正文保持不变；SPI NAND/CS/watchdog 等后续依赖仍在首次使用前补齐，不纳入本章最小实现。
+  - **第 4 章定稿及发布收尾**：正文已获用户确认。T-016 跟踪成果物提交、合并、配套 chapter4 标签和 WORKSPACE 最终版本回写，PM-C4-01 随发布收尾。
+  - **H-002/H-003 待发起人核对关闭**：两项分工与计划交接均已接收并有处理记录，状态为 accepted，发起人核对关闭待办理。
+  - **跨章一致性已登记、不并行启动**：T-017 覆盖 19 个受影响文件，依赖 T-016 的真实 QEMU patch 范式和最终章节版本；T-016 完成前不建立下一轮 feature 分支。
+  - **用户持续事项**：继续全书通读校验；A-003 中原四仓库依赖和 chapter 8 的 X-1 将在对应修订轮统一处理。
 - 通读期协作约定（2026-09-13 用户确认，2026-09-19 D-007 补充）：通读中发现的问题按类型分流，拿不准的一律先汇集到 project-manager 会话分类、登记并跟踪到关闭；**受评章节的用户通读意见在 writer 统一修订前提交，与成员评审意见一并处理**。
 
 本文件是摘要，原始事实以 [TASKS.md](TASKS.md)、[DECISIONS.md](DECISIONS.md)、[HANDOFFS.md](HANDOFFS.md) 和 [成果索引](artifacts/README.md) 为准。汇总后注明实际信息范围，过期摘要不能覆盖原始记录。

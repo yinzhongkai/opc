@@ -4,21 +4,23 @@
 
 - 框架基线：`v0.0.5`（当前本地与远端发布提交 `29b10981da2358ae7ed8df2c77ff5093c03c5ad6`，注释标签对象 `bf0675861b7e762d780103c85c5a72a46709baf9`）。本次升级来源、恢复点和执行口径见下文“框架升级记录”。
 - 历史框架基线：2026-10-08 将项目提交 rebase 到 `v0.0.3`（`6f79b98e219e0bbf8f7de45dd35ec54c2a6f1f07`）正式标签之上，采用角色/技能术语、项目历史工作流、会话消息边界和项目升级 rebase 规则；底层配置字段继续使用 `knowledge`。此前 `v0.0.2` 升级及归档记录继续有效。
+- 历史提前采用记录（公共能力已纳入 v0.0.4）：2026-10-09 为处理 H-001，从框架集成分支 `opc-v0.0.4-dev` 提前采用 `multi-git` 独立成果物声明（原提交 `5a4f6137048ef195f473ddd05caef751e8b508f9`，集成 merge `23bdd9b442e89e47e49515b58ea8be54670b62cb`）及 SSH 主机 checkout 扩展（原提交 `60a30bb889b1b7b42b1644d685738fb1e444a62f`，集成 merge `921a11952946f21f1fbbb5392a5f44a61040192e`）；本项目采用提交为 `c62d87d4ebccae8200f413fba838cad4af7131d8`、`71af3dec61165a1123d81b5ac6760a9796ab8a63`。采用原因为书稿与 `tiger` 服务器上的 `meta-tiger` 是两个独立 Git 成果物，现行 `v0.0.3` 单仓库声明无法同时锁定；兼容风险是该能力尚未正式发布、集成线与项目提交尚未推送，后续升级正式版本时必须核对等价提交并去重。60 项框架测试、框架结构校验和差异检查均通过。
 - 分支迁移：2026-09-28 从原 `book-yocto` 历史收敛为 `project/book-yocto` 的干净项目基线；迁移前完整历史由 `archive/2026-09-28/book-yocto` 保存，项目线中原有的重复 Yocto 框架提交不再作为权威来源。
+- 历史提前采用记录（公共角色与技能已纳入 v0.0.4）：2026-10-11 按用户新增 QEMU 工程师的请求，从 `opc-v0.0.4-dev` 采用公共角色 `qemu-engineer` 与技能 `qemu-engineering`。原提交 `ea967cce2402517d7ee6027c1506ddb269710cf7` 已以 `--no-ff` 合入框架集成线（merge `846270fe2d67a87a01b8ad417e9c27da02a79e01`），项目采用提交为 `cb38bbf459b59df30d46c62c69ec4481ddf7d244`；采用原因是虚拟板和设备模型正确性需要独立专业分工。该能力尚未正式发布，本轮集成及项目提交仅保存在本机；后续升级正式框架版本时核对等价提交并去重。框架合并前后结构校验、60 项测试及差异检查通过，公共提交仅含角色、技能和索引。当前 T-016 开发分支继续保留，建员属于其工程启动准备，不另开下一轮项目开发。
 
 ## 建项信息
 
 - 建立日期：2026-09-12。
 - 用户请求来源：2026-09-12 超级管理员会话中，建项用户请求"创建一个名叫 book-yocto 的项目"，说明 `yocto/` 目录是其撰写的草稿，希望通过本项目使草稿达到出版程度。
-- 当前阶段：P3 逐章修订与逐章真实环境核验（chapter 2 已定稿，chapter 3 第 1 轮评审中）。
+- 当前阶段：P3 逐章修订与逐章真实环境核验。chapter 1–4 正文已定稿；第 4 章于 2026-11-20 获用户校验确认，批准内容版本见 [D-016](DECISIONS.md)。T-016 保持 in_progress，书稿与配套工程均已合入各自 main，WORKSPACE 最终 revision 已回写；OPC 治理记录随本轮五笔功能提交收口到 project/book-yocto，配套 chapter4 标签及未结交接仍待处理，生效边界见 [T-016](TASKS.md)。历史设计、工程及评审记录按各自版本保留，T-017 等待本轮收尾后衔接。
 
 ## 目标与约束
 
 - 目标：把独立 `book-yocto` 仓库 `yocto/` 目录下已有的书稿草稿（task00–task21 共 22 个章节文件，Yocto / meta-tiger 主题）修订、完善至可出版的质量水平。
 - 书稿位置变更：2026-09-13 经用户在 writer 会话确认，书稿从仓库根 `yocto/` 迁入 `projects/book-yocto/yocto/` 并纳入 Git（此前未跟踪）；2026-09-16 经用户在 project-manager 会话指示，再迁入 `projects/book-yocto/workspace/yocto/`。2026-09-28 经用户授权，将当前书稿和 Docker 环境以单一内容基线迁入独立仓库 `git@github.com:yinzhongkai/book-yocto.git`，书稿现位于其根目录下的 `yocto/`，初始基线为 `4bc485e`。旧修订历史、任务过程和核验证据仍由 OPC 管理；此前台账与成果中的旧路径均按迁移前位置理解。
-- 范围与非目标：范围包含技术内容的完整实测验证——实际创建四个开发态仓库并全链构建，回填全部 C-W/V 待验证项（[D-001](DECISIONS.md)，2026-09-18 确认候选 A）；从 chapter 2 起，每章均须对命令、配置、路径、构建/运行输出及依赖实际环境的技术结论执行逐章真实环境核验并保存证据（[D-010](DECISIONS.md)，2026-09-26）；术语与体例统一纳入范围（[D-005](DECISIONS.md)）。非目标：PDF/EPUB 等排版导出与出版渠道对接（[D-002](DECISIONS.md)）。
-- 交付物与验收要求：交付物为独立仓库 `yocto/` 下的 Markdown 终稿（[D-002](DECISIONS.md)，2026-09-18）；验收标准为书稿逐章评审通过、验证按 D-001 与 D-010 执行完毕、学习维度以建项用户通读校验代替外部试读（[D-003](DECISIONS.md)，2026-09-18；[D-010](DECISIONS.md)，2026-09-26）。
-- 时间、资源与其他约束：无硬性截稿日期，按"先闭环一章"节奏推进（[D-004](DECISIONS.md)，2026-09-18）；完整实测需要可用构建环境与四个开发态仓库的工程创建。`yocto-engineer` 已于 2026-09-27 加入团队，但 P0.5 工程任务与仓库责任尚未正式指派。
+- 范围与非目标：范围包含技术内容的完整实测验证——实现 tiger 平台代码并全链构建，回填全部 C-W/V 待验证项（[D-001](DECISIONS.md)，2026-09-18）；按 [D-013](DECISIONS.md)（2026-10-09）不再创建四个长期 fork，而以 Poky 配方锁定的上游源码为基线，在临时 devtool/BitBake workspace 中开发，最终 patch、`.bbappend`、`SRC_URI` 和配置进入 `meta-tiger`，并在清理 workspace 后从干净状态复验。从 chapter 2 起，每章均须对命令、配置、路径、构建/运行输出及依赖实际环境的技术结论执行逐章真实环境核验并保存证据（[D-010](DECISIONS.md)，2026-09-26）；术语与体例统一纳入范围（[D-005](DECISIONS.md)）。非目标：PDF/EPUB 等排版导出与出版渠道对接（[D-002](DECISIONS.md)）。
+- 交付物与验收要求：主交付物为独立书稿仓库 `yocto/` 下的 Markdown 终稿（[D-002](DECISIONS.md)，2026-09-18）；`meta-tiger` 保存支撑书稿复现的长期工程 patch 与集成元数据，不以四个上游源码 fork 作为交付物。验收标准为书稿逐章评审通过、验证按 D-001/D-010/D-013 执行完毕、学习维度以建项用户通读校验代替外部试读（[D-003](DECISIONS.md)，2026-09-18）。
+- 时间、资源与其他约束：无硬性截稿日期，按"先闭环一章"节奏推进（[D-004](DECISIONS.md)，2026-09-18）；完整实测需要可用构建环境、配方对应的上游源码版本和可写的 `meta-tiger` 工程工作区。`yocto-engineer` 已于 2026-09-27 加入团队；2026-10-09 已按 H-001 将 `tiger:/home/oops/workspace/meta-tiger` 纳入 WORKSPACE 并锁定完整基线，实际工作仍须逐次核对远端工作树、分支与 revision，声明本身不授予写入、切换或推送权限。
 
 未知项保持待确认，已确认的范围变更链接 [DECISIONS.md](DECISIONS.md) 中的决定，不从模板预设业务任务。
 
@@ -32,7 +34,8 @@
 
 ## 交付约定
 
-- 正式成果位于 `artifacts/`；书稿与配套环境位于 [WORKSPACE.yaml](WORKSPACE.yaml) 声明的独立 Git 仓库，修订脚本和核验证据位于 OPC 的 `artifacts/work-records/`。先在工作区提交并验证源码修改，再更新 OPC 中的精确 revision 与任务证据。
+- 后续逐章修订参考 [A-004 v0.5 体例约定](artifacts/A-004-体例约定草案.md) 及[第 4 章人工校审与写作参考](artifacts/work-records/t016-chapter4-manual-review-style.md)；后者按用户 2026-11-20 的要求整理本轮语言、代码排版和实验组织偏好，第 4 章专属取舍按文中范围复用。
+- 正式治理成果位于 `artifacts/`；书稿位于 [WORKSPACE.yaml](WORKSPACE.yaml) 声明的 `book-manuscript` 仓库，修订脚本和核验证据位于 OPC 的 `artifacts/work-records/`。D-013 新增的长期工程资产落在同一声明中的远程 `meta-tiger` 仓库；各成果物仓库均先提交并验证源码修改，再更新 OPC 中各自的精确 revision、任务和索引证据。
 - 用户保证当前仓库每次只有一个会话执行，前一会话完成或停止后再启动下一会话；框架不实现文件锁或自动调度。
 - 每份文档默认维护一个当前版本，记录版本及批准依据；历史通过用户维护的 Git 追溯。
 - 评审与批准要求在任务中明确。专业交叉评审由现有成员在原会话执行，不默认新建评审会话；用户保证受评版本可读取且不变，本轮全部评审者提交意见后作者再统一修订。采用根 [项目运行协议](../../PROJECT_PROTOCOL.md) 的评审、完成与状态规则。
@@ -46,11 +49,14 @@
 - 2026-09-12：同一授权下新建 `writer`（角色 writer），配置路径 [members/writer.yaml](members/writer.yaml)；TEAM 登记成员索引并为该角色补充技能 `book-production, reader-feedback, book-planning`。记录人：框架超级管理员。
 - 2026-09-12：同一授权下新建 `reviewer`（角色 reviewer），配置路径 [members/reviewer.yaml](members/reviewer.yaml)；TEAM 登记成员索引并为该角色补充技能 `book-production, book-review, reader-feedback, technical-book-validation`。记录人：框架超级管理员。
 - 2026-09-27：用户在本超级管理员会话要求增加一名专门进行 Yocto 开发的成员，并在 OPC 框架中增加相应技能和角色。新增公共技能 `yocto-engineering`、公共角色 `yocto-engineer`，新建成员 `yocto-engineer`，配置路径 [members/yocto-engineer.yaml](members/yocto-engineer.yaml)；TEAM 登记成员索引并为该角色补充技能 `technical-book-validation`。记录人：框架超级管理员。
+- 2026-10-11：用户在本超级管理员会话明确要求新增 QEMU 工程师并创建会话、完成只读初始化，主责 tiger 模型代码与正确性，现有 Yocto 工程师继续承担 patch 集成、BitBake 构建和系统验证。新建 `qemu-engineer`（角色 qemu-engineer），配置路径 [members/qemu-engineer.yaml](members/qemu-engineer.yaml)；TEAM 登记成员并补充 `technical-book-validation`，有效技能为 `software-engineering, qemu-engineering, technical-book-validation`。同步细化 [members/yocto-engineer.yaml](members/yocto-engineer.yaml) 的 QEMU 集成与模型问题交接边界，角色和技能集合不变。遵循 D-013，上游版本由 Poky 配方锁定，长期 patch 进入既有 `meta-tiger`；WORKSPACE 及成果物基线不变。T-016 的具体任务分工交由项目经理后续调整，见 [H-002](HANDOFFS.md)；本次配置不代表业务开发已启动。记录人：框架超级管理员。
+
+- 2026-10-11：用户在 project-manager 会话明确要求“按你的建议新增加成员吧”，授权新增负责 tiger 平台设计的系统架构师。本轮按超级管理员入口处理有界成员配置维护，原 project-manager 成员身份不变。复用已有 active 角色 `architect`，新建首名该角色成员 `architect`，配置路径 [members/architect.yaml](members/architect.yaml)；TEAM 登记并补充 `qemu-engineering, yocto-engineering, technical-book-validation`，有效技能为 `system-design, qemu-engineering, yocto-engineering, technical-book-validation`。主责跨 QEMU/TF-A/U-Boot/Linux 的平台设计、接口与启动链契约及设计风险；writer 保持章节教学设计和写作职责，两个工程成员保持模型开发与集成验证职责。公共角色、技能正文和 WORKSPACE 基线均未修改；建员属于 T-016 启动准备，不开始下一轮开发。本次完成成员配置，不创建或唤醒平台会话、不代写初始化或专业设计成果；任务和计划衔接见 [H-003](HANDOFFS.md)。记录人：框架超级管理员（本轮用户明确授权的有界配置维护）。
 
 ## 框架升级记录
 
 - 2026-10-12：用户在超级管理员会话要求“先同步下最新代码，然后将项目升级到 v0.0.4 框架”。OPC、独立书稿及 SSH 主机 `tiger` 上的 `meta-tiger` 已刷新远端引用；升级前两个本机仓库及远程工程仓库工作树均干净。书稿保持 `feature/t-016-chapter4-revision`、`main@f444790f352b46f699fd3d46198f8b9b9f089a62`，工程保持 `master@0e3da48b34ef772532535a730a21878cc30ccf67`；本次框架升级不推进成果物版本。
-- 发布来源：远端 `origin` 的 `refs/tags/v0.0.4` 指向上述发布提交，第一父提交为 `v0.0.3`，发布文件树与远端 `main` 一致。本机此前同名注释标签对象 `f529a7a3b0249a1d0abe658f5908b56910a66e65` 指向 `869f04626d0110185c508e9cc46759375df24f9e`，文件树与远端发布相同；旧对象保存在 `refs/tags/archive/2026-10-12/v0.0.4-before-sync`，不改写远端发布标签。
+- 发布来源：远端 `origin` 的 `refs/tags/v0.0.4` 指向上述发布提交，第一父提交为 `v0.0.3`，发布文件树与远端 `main` 一致。本机此前同名注释标签对象 `f529a7a3b0249a1d0abe658f5908b56910a66e65` 指向 `869f04626d0110185c508e9cc46759375df24f9e`，文件树与远端发布相同；旧对象保存在 `refs/tags/archive/2026-10-12/v0.0.4-before-sync`，本机同名标签保持原指向。升级与祖先检查使用单独获取的远端标签引用 `refs/upgrades/book-yocto/v0.0.4-remote-2026-10-12` 及上述精确发布提交；本机和远端发布标签均不改写。
 - 恢复点与旧远程头：`project/book-yocto@f3d8c2ff882e0542f86650829d99feb0dc523729` 保存为 `archive/2026-10-12/book-yocto-before-v0.0.4`；活动分支 `feature/book-yocto/t-016-chapter4-revision@b262ea9c0935d662a42ec0e4ded0c8cb4d24fa58` 保存为 `archive/2026-10-12/book-yocto-t-016-before-v0.0.4`。项目独有提交使用 rebase 迁移；T-016 活动提交继续基于新项目基线，不合入长期分支，不改变任务状态、成员分工或成果批准。
 - 重放与流程口径：已提前采用的 `multi-git`、SSH checkout 和 QEMU 角色/技能属于 `v0.0.4` 正式框架，活动分支重放时按等价内容去重；此前采用记录及旧 SHA 保留为历史依据。后续 feature/bugfix 按当前根 [分支策略](../../BRANCH_STRATEGY.md) 使用 `--ff-only` 合入并记录合入前目标提交与合入后的最终提交；框架发布继续使用 `--no-ff` 发布合并。已完成任务的旧合并证据不追改。
 - 记录人：框架超级管理员。本次为用户授权的框架基线迁移，不构成专业业务任务安排。
@@ -73,6 +79,19 @@
 - 迁移方式：以已保存的远端项目历史为来源，将 6 个项目独有提交从旧发布基线 rebase 到当前 `v0.0.5`，以本普通基线提交记录本轮迁移；T-016 的 49 个活动提交继续 rebase 到新项目头，不合入长期分支、不启动下一轮开发。历史评审、批准和交付 SHA 保留原义，可通过恢复引用追溯。
 - 验证与远端更新：正式发布树已通过结构校验和 60 项完整测试（24 个角色、50 份技能）。迁移后的长期分支及活动分支在推送前执行结构与完整测试，并核对框架树、项目文件边界、49 个活动提交、WORKSPACE 引用及无新增升级合并；更新两个远程分支时使用显式旧 SHA 的 `--force-with-lease` 原子推送，推送前后重新核对分支和标签引用。其他克隆后续采用新历史，不将旧项目头再次合回。
 - 记录人：框架超级管理员。
+
+## 2026-10-14 书稿版本引用对齐
+
+- 授权与原因：项目经理在当前状态汇报中说明 OPC 恢复后书稿版本引用差异及继续前需对齐版本记录；用户随后确认“我大致看了下A-006可以继续执行”。本轮结合既有成果物历史整理授权，按框架入口完成继续 T-016 所需的有界配置修复，原 project-manager 身份不变。
+- 变更：WORKSPACE 的 book-manuscript revision 从 `f444790f352b46f699fd3d46198f8b9b9f089a62` 对齐实际本机/远端 main 与 T-016 分支的 `9c74596591728c0f2d614e357059034551a42dca`。已逐 Git tree 核对两提交文件内容完全一致，书稿工作树干净；这是历史整理后的引用对齐，不推进书稿业务内容。
+- 恢复与边界：旧书稿提交由成果物标签 `archive/book-yocto-before-consolidation-20261013` 保存。OPC 2026-10-13 已恢复的原始提交链继续保留，本轮只追加普通 T-016 协调提交；不重新压缩或改写旧历史。仓库地址、driver、checkout、分支、成员及 meta-tiger 基线不变。历史评审/批准/交付 SHA 不批量替换。
+- 记录人：框架入口（本轮有界配置修复）；业务阶段衔接由 project-manager 按 TASKS 执行。
+
+## QEMU 持久辅助源码工作区
+
+- 2026-10-17 用户明确指定并授权 `tiger:/home/oops/workspace/sources/qemu-system-native` 长期保存 QEMU 开发和学习源码，见 [D-015](DECISIONS.md)。它与 WORKSPACE 的正式成果物仓库配套使用；正式交付继续遵循 D-013，patch/metadata 在 meta-tiger 中维护。
+- 原 devtool 源码及完整 Git 历史已迁入该目录；起始 `devtool@7ed31149ac01a9d6bb3a682b9d768936c4315ed3`，源码内容与原验收版本相同。devtool 和 BitBake 的 EXTERNALSRC/S 已指向新目录，旧路径软链接用于兼容已有构建/调试记录。
+- 长期保留：未来修改保留可阅读的功能提交及版本映射；清理 workspace、解除 externalsrc 和正式干净重构建时保留本目录与 Git 历史，删除或覆盖须由用户明确授权。恢复标签/bundle、实际路径与验证见 [源码保存记录](artifacts/work-records/t016-qemu-source-retention-20261017.md)。历史批准、报告和原始日志不批量改写路径。
 
 ## 当前资料
 

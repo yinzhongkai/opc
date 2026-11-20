@@ -2,12 +2,18 @@
 
 每位成果负责人维护自己的条目，协调记录维护人检查索引一致性。元信息与批准规则见根 [项目运行协议](../../../PROJECT_PROTOCOL.md)。
 
+后续章节写作、修订和复核可结合[体例约定 A-004](A-004-体例约定草案.md)及[第 4 章人工校审与后续写作参考](work-records/t016-chapter4-manual-review-style.md)，对照本轮已经明确的读者偏好和具体改法。
+
+当前交付主线为书稿 `book-yocto/main@619c4efcd57a08818572f360b61b97abe2462ed0` 和工程 `meta-tiger/main@79d9696c1d37fcbf65724eb05a253b3168d2eab7`，与 [WORKSPACE](../WORKSPACE.yaml) 一致。以下阶段报告、蓝图和交接保留当时状态及旧提交作为历史依据，当前交付版本以此处和工作区声明为准。
+
 | 成果 ID | 名称与正文链接 | 负责人 | 关联任务 | 版本 | 状态 | 批准决定 |
 |---|---|---|---|---|---|---|
 | A-001 | [书稿现状评估](A-001-书稿现状评估.md) | writer | T-001 | 0.1 | draft | 尚无 |
-| A-002 | [书稿打磨计划](A-002-book-polishing-plan.md) | project-manager | T-002 | 0.5 | draft | 范围与验收依据 D-001~D-012（confirmed）；v0.5 已纳入逐章真实环境核验及内部流程清理，计划文本待确认 |
+| A-002 | [书稿打磨计划](A-002-book-polishing-plan.md) | project-manager | T-002、T-016、T-017 | 0.8 | draft | 范围与验收依据 D-001~D-013（confirmed）；v0.8 依据用户采用增员建议、PROJECT 配置记录及 H-003，在 T-016 内前置 architect 平台设计、专业核对与用户确认，保留 QEMU/Yocto 分工及 `meta-tiger` patch 模型；计划文本待确认 |
 | A-003 | [知识点校验清单](A-003-知识点校验清单.md) | writer | T-003 | 0.1 | draft | 尚无 |
 | A-004 | [体例约定](A-004-体例约定草案.md) | writer | T-005、T-013 | 0.5 | approved | v0.5 于 2026-09-27 经用户明确批准（“批准 A-004 v0.5”）；新增硬件型号、粗体/反引号边界及等宽文本规则正式生效 |
+| A-005 | [tiger 平台设计说明](A-005-tiger-platform-design.md) | architect | T-016；跨章影响供 T-017 使用 | 0.2 | approved | [D-014](../DECISIONS.md)（confirmed）；2026-10-11 用户明确“批准 v0.2”，固定获批提交 `08bdf9c08d6d8cbd8836df3771ffd28231470059`、原 blob `26c5fdca1103f37ac3e752208c429231b8191eee`；QEMU `5287e43`、Yocto `b3fbff3` 均 pass。本次仅元信息回写，技术正文不变；后续候选与未验证边界保留，实现/运行未执行 |
+| A-006 | [chapter 4 章节蓝图](A-006-chapter4-blueprint.md) | writer | T-016 章节蓝图阶段；跨章影响供 T-017 使用 | 0.1 | draft | 2026-10-14 用户通读后同意继续工程实施，project-manager 已核对交接，来源见 [T-016](../TASKS.md)；本条记录实施授权，当前 draft 保留。输入为 A-005 v0.2 approved / D-014。九节教学、最少 devtool 到干净重构建/runqemu 主线、QEMU/Yocto 工程资产分工、E-01～E-10 证据及验收映射；工程实现、运行与章节定稿尚未完成 |
 
 ## 工作记录与核验证据（非独立成果）
 
@@ -20,6 +26,58 @@
 - [T-015 chapter 3 核验记录](work-records/t015-chapter3-env-check.md)
 - [T-015 原始执行日志](work-records/t015-chapter3-raw.log)
 - [T-014 chapter 3 最终 Docker 复验报告](work-records/t014-chapter3-final-revalidation/report.md)（2026-10-03 执行、2026-10-04 补证，2026-10-08 从源码历史提交 `f5d5fffd972845bb52e6f2a2e9ef36986d3667e1` 补录到 OPC；同目录保存两份原始日志与三份执行脚本）
+
+## T-016 QEMU 工程阶段交付（qemu-engineer）
+
+- [模型、固件与作者模型验证报告](work-records/t016-qemu-model-validation.md)及[原始证据目录](work-records/t016-qemu-model-raw/README.md)：2026-10-15 本阶段最终矩阵 16/16 通过，含冷启动、同进程两次宿主 reset、ROM/参数/BIOS 边界；保留失败和修复。正式 metadata/清理后干净构建/runqemu 系统验收待 Yocto，章节和 T-016 整体未完成。
+- 工程仓库：ssh tiger:/home/oops/workspace/meta-tiger，git@github.com:yinzhongkai/meta-tiger.git；feature/t-016-chapter4-revision。模块提交 0e73cd7faacff219fa5de0a7365743ce31402d73 为 recipes-devtools/qemu/files/0001-arm-add-minimal-tiger-machine.patch；阶段交接头 b303ae6d614f067e11d4cbba57feacaf84ee7e8e 同时含 recipes-test/tiger-minboot/files/ 的 start.S/main.c/tiger-minboot.ld/COPYING.MIT 和 tests/model/ 的构建/测试工具及交接说明。来源/应用基点/顺序/hash与覆盖见报告。
+- 状态：阶段开发提交已保存、模型作者自测通过；尚未推送或合入 master，不作 WORKSPACE 最终 revision。未删除任务分支或清理 devtool source；2026-10-18 project-manager 工程交接核对通过，下一阶段 Yocto 正式集成已安排待接收。
+
+## T-016 源码目录维护（project-manager）
+
+- [QEMU 源码迁移与长期保存记录](work-records/t016-qemu-source-retention-20261017.md)及[原始回执](work-records/t016-qemu-source-retention-20261017.json)：2026-10-17 按用户请求迁入 `tiger:/home/oops/workspace/sources/qemu-system-native`，保留 `devtool@7ed31149ac01a9d6bb3a682b9d768936c4315ed3` 及全部原 refs，增加恢复标签/bundle；devtool 与 BitBake 新路径解析通过。长期保存与后续可读提交约定见 [D-015](../DECISIONS.md)，正式交付继续位于 meta-tiger。
+
+## T-016 工程交接核对（project-manager）
+
+- [结构化核对回执](work-records/t016-qemu-pm-handoff-20261018.json)：2026-10-18 校验 9 个日志包及 263 份内嵌原始文本的字节数/hash、最终 16 项作者测试记录和远端工程/源码/实际二进制/固件身份，结果一致；patch 隔离重应用与持久源码保护核对通过。结论为可交接，无发现的交接阻断项；本轮未重跑模型测试，不代表独立审查、系统验收或章节批准。
+- Yocto 阶段范围、精确输入版本、D-015 保留约束及出口见 [T-016 正式集成安排](../TASKS.md)。本轮提交后串行通知本人接收，正式系统集成与运行尚待执行，WORKSPACE 最终 revision 不变。
+
+## T-016 Yocto 正式集成与系统验证（yocto-engineer）
+
+- [本阶段报告](work-records/t016-yocto-system-validation.md)及[完整原始证据目录](work-records/t016-yocto-system-raw/README.md)：2026-10-18 正式 append、独立 tiger machine、target fixture/helper/生成/deploy 集成完成；新构建树脱离 override，真实 runqemu 冷启动/同进程两次 reset、正式二进制模型矩阵 16/16、三项部署诊断及恢复主线通过。E-01～E-10 覆盖、完整失败/告警、启动器返回码局限和未覆盖项见报告。
+- 工程仓库 ssh tiger:/home/oops/workspace/meta-tiger，feature/t-016-chapter4-revision 最终 `4dd7dfda8f2af2d59bdcfe6585418cf43eaa73e8`；六个普通模块提交在报告列明。实际构建 metadata 为 `cd6c348836346004e801cb13f32ad3fcb12c1dfd`，后续只修改部署测试/README；工程干净，未推送/合并。原 QEMU patch、固件源、模型工具、持久 source/全部 refs/归档 bundle 与输入不变，master 和 WORKSPACE 正式 revision 未推进。
+- [归档清单](work-records/t016-yocto-system-raw/handoff-2/manifest.json)及[本地核验回执](work-records/t016-yocto-system-raw/verification.json)：9 包、291 份原始文本按字节数/SHA-256 全部通过。本人阶段记录与治理提交完成后停止，待 project-manager 核对后衔接 writer；T-016 整体、独立审校及章节批准尚未完成。
+
+## T-016 系统交接核对与正文修订安排（project-manager）
+
+- [2026-10-19 结构化核对回执](work-records/t016-yocto-pm-handoff-20261019.json)：9 包/291 份原文完整性、正式构建/任务依赖、两轮 runqemu 的实际执行/reset、16 项模型结果与部署诊断记录核对通过；远端精确版本、90 份关键任务日志、正式发布资产/helper/工具 hash 及持久源码保护一致。无发现的工程交接阻断项，可供 writer 回填；未重跑运行测试，不代替独立审校或章节批准。
+- 按用户明确授权衔接 writer，唯一正文对象为第 4 章；固定输入、教学校准、已知限制和阶段出口见 [T-016 writer 正文修订安排](../TASKS.md)。提交后串行通知本人接收，正文实际修订尚待执行；原专业报告、失败/告警及获批设计保持原样。
+
+## T-016 chapter 4 历史作者候选稿（writer，截至 2026-11-02）
+
+以下三项保留当时的交付状态；当前定稿版本见下方“第 4 章正文定稿”。
+
+- [作者修订与自查记录](work-records/t016-chapter4-writer-revision.md)：当前为 2026-11-02 第 1 轮统一修订候选稿 v0.2 draft，整章重写并逐项回复 U-C4-01～04、PM-C4-02～07；旧 v0.1 交付及其检查按原文保留，新稿待 PM 核对和针对性复核，不作试读验证或章节批准。
+- 书稿位置：本机 `D:/book-yocto`，`git@github.com:yinzhongkai/book-yocto.git`，`feature/t-016-chapter4-revision`；唯一正文 `yocto/task05-4-让QEMU长出tiger这块板.md`，当前提交 `22c428c3aa4257b0072a5ba66da59af2cfc2a12c`、blob `223b9b48569eb4355400f79d990e5408819a4b79`，842 行。旧受评稿 `003910bf2971e10702019940535c690957740431` / blob `394494f1f7cb078b197d562ff376f6ef8d76e9af` 保留；仅本章变化，未推送/合入 main，不推进 WORKSPACE 正式 revision。
+- 本轮未重跑工程；首次外置提取/新开发串联的补证、UART 新解释专业核对及 PM-C4-01 获取条件仍待处理，详见记录 §5。实际回复与停止写在 [T-016 本轮作者区](../TASKS.md)，旧 pass 不自动覆盖新稿；`yocto/debug.log` 保留且未读取/暂存。
+
+## T-016 第 1 轮正文审校历史（project-manager，截至 2026-11-02）
+
+- 第 1 轮受评成果及本次修订起点：第 4 章候选稿 v0.1，书稿仓库 `D:/book-yocto` / `feature/t-016-chapter4-revision`，路径 `yocto/task05-4-让QEMU长出tiger这块板.md`，固定提交 `003910bf2971e10702019940535c690957740431`、blob `394494f1f7cb078b197d562ff376f6ef8d76e9af`。旧稿及作者自查按实际 Git 版本追溯，新稿待 writer 交付，不代表章节批准。
+- 原串行审校已完成四位意见提交：reviewer `d2d9420af3756fcb0978d5f2b118abec502614b7`、qemu-engineer `510af0dc6eeb595f05b6967db5b6bbb766a3a209`、yocto-engineer `abb439f6efbd2b35b63a9ddb2d7d9aca4d39a907`、architect `39655def8bed654501c41927491afa91666fef18` 均为各自声明范围的 pass，署名原文保留。2026-11-01 用户及 PM 提交教学与操作衔接意见；2026-11-02 用户明确允许按所述逻辑先改写，现进入作者统一修订，见 [T-016 本轮意见及修订安排](../TASKS.md)。writer 待接收并逐项处理 U-C4-01～04、PM-C4-02～07；新稿需针对性复核，PM-C4-01 同版配套资产获取条件继续跟踪。
+
+## 第 4 章正文定稿（2026-11-20）
+
+- 用户校验完成并确认正文可以定稿，批准依据见 [D-016](../DECISIONS.md)。正文位于 `book-manuscript` 仓库的 `yocto/task05-4-让QEMU长出tiger这块板.md`，获确认工作区 blob `b1311b25af54c4b0f03b5bdada1b193de67b487e`，基于 `feature/t-016-chapter4-revision@22c428c3aa4257b0072a5ba66da59af2cfc2a12c`。
+- 当前工程已统一为 minboot 命名并移除 `tests/`，[工程与构建回执](work-records/remove-tests-minboot-result.json)和[监控器原始输出](work-records/manual-monitor-minboot-20261120.log)保存文件摘要、正常构建以及冷启动/两次复位证据。此前阶段报告按原执行时点保留。
+- 正文已固化为书稿提交 `4e101658e25204255be6bac5424eac9e9ac41eff`，含跨章引用修正的书稿开发头为 `f6b45b536158570813442841bcff27da052d1c93`，工程开发头为 `3a775412328b2e046ac327c5af161978d6f8e25a`。两个开发分支已推送并核对远程头。
+- 工程已按 3 个单行说明功能提交快进合入并推送 `main@79d9696c1d37fcbf65724eb05a253b3168d2eab7`，最终文件树与原开发头 `3a775412328b2e046ac327c5af161978d6f8e25a` 完全一致，WORKSPACE 工程 revision 已回写；模型 patch 接入、minboot 固件部署、机器与启动镜像分别提交。原工程开发分支与 `master` 已按用户要求清理，旧历史由本机恢复引用和 bundle 保留，详见 [T-016 功能整理与合入记录](../TASKS.md)。
+- 书稿已按 2 个单行说明功能提交快进合入并推送 `main@619c4efcd57a08818572f360b61b97abe2462ed0`，WORKSPACE 书稿 revision 已回写：`3ebfb8073cc3dce555f6aff5a45328d52b9d0936` 固化第 4 章定稿，`619c4efcd57a08818572f360b61b97abe2462ed0` 整理跨章及工程版本引用。第 4 章批准 blob 保持不变；相对原开发头仅在第 3 章补注当前工程 main 版本，历史构建输出保留。原书稿开发分支已清理，旧历史由本机恢复点保留，详见 [T-016 书稿整理与合入记录](../TASKS.md)。
+- OPC 治理资料按本轮 5 个功能提交整理，完成快进合入后以 `project/book-yocto` 为当前项目入口；生效边界、配套 `chapter4` 标签及未结交接收尾见 [T-016](../TASKS.md)。
+
+## 人工校审与后续写作参考
+
+- [第 4 章人工校审记录](work-records/t016-chapter4-manual-review-style.md)：按用户 2026-11-20 要求整理写作习惯、代码与注释排版、读者实验组织和书稿工程同步做法；第 4 章专属取舍及“踩坑实录”后续评估单列。与 A-004 一起作为后续逐章修订输入。
 
 ## 正文元信息样式（不是真实成果）
 
