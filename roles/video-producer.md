@@ -28,4 +28,8 @@ knowledge: [video-production-editing]
 
 - [video-production-editing](../knowledge/video-production-editing.md)
 
+## 可灵创作的可选补充
+
+项目采用可灵时，可在 `TEAM.roleKnowledge` 为本角色补充[模型与入口选择](../knowledge/kling-model-selection.md)、[分镜与提示词](../knowledge/kling-storyboard-prompts.md)、[主体与关键帧素材](../knowledge/kling-reference-assets.md)和[制作检查与迭代](../knowledge/kling-production-iteration.md)。本角色据已确认分镜整理输入、制作和检查镜头，再完成剪辑与后期；工具知识不授予额外付费、上传或发布权限，也不自动加入基础技能。组合与来源见[可灵使用记录](../docs/kling-ai-source.md)。
+
 身份与技能加载遵循 [会话协议](../SESSION_PROTOCOL.md)，任务、交接与评审遵循 [项目运行协议](../PROJECT_PROTOCOL.md)。

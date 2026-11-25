@@ -25,6 +25,10 @@
 | [ffmpeg-media-engineering](ffmpeg-media-engineering.md) | FFmpeg 多媒体工程 |
 | [frontend-development](frontend-development.md) | 前端开发 |
 | [investment-analysis](investment-analysis.md) | 投资组合分析与跟踪 |
+| [kling-model-selection](kling-model-selection.md) | 可灵模型与创作入口选择 |
+| [kling-storyboard-prompts](kling-storyboard-prompts.md) | 可灵分镜与提示词 |
+| [kling-reference-assets](kling-reference-assets.md) | 可灵主体与关键帧素材 |
+| [kling-production-iteration](kling-production-iteration.md) | 可灵制作检查与迭代 |
 | [opencv-video-rhythm-analysis](opencv-video-rhythm-analysis.md) | OpenCV 视频节奏分析 |
 | [planning](planning.md) | 方案规划 |
 | [project-management](project-management.md) | 项目管理 |
@@ -105,6 +109,10 @@ wechat-miniprogram-development 和 wechat-miniprogram-testing 分别提供微信
 | 第9章 | [流程升级与商业迭代](ai-comic-business-iteration.md) | 评估自动化、生产成本与反馈循环 |
 
 章节来源、阅读覆盖和未验证范围见[来源与阅读记录](../docs/ai-comic-creation-source.md)。这组知识保存工作方法；具体项目的原始媒体、完整指令、生成记录与源工程仍保存在声明的成果物工作区。
+
+### 可灵 AI 视频创作
+
+可灵创作复用导演、视觉设计师、视频制作与后期三个角色：导演侧重模型入口与分镜提示词，视觉侧重主体及关键帧素材，制作侧重输入落实、生成检查和迭代。四项可灵技能作为项目补充方法按需组合，不自动改变共享角色的基础技能。角色组合、25 个目录链接及实际已读/未读范围见[可灵来源与使用记录](../docs/kling-ai-source.md)。
 
 ## 维护
 
