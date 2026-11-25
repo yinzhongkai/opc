@@ -25,6 +25,10 @@
 | [ffmpeg-media-engineering](ffmpeg-media-engineering.md) | FFmpeg 多媒体工程 |
 | [frontend-development](frontend-development.md) | 前端开发 |
 | [investment-analysis](investment-analysis.md) | 投资组合分析与跟踪 |
+| [kling-model-selection](kling-model-selection.md) | 可灵模型与创作入口选择 |
+| [kling-storyboard-prompts](kling-storyboard-prompts.md) | 可灵分镜与提示词 |
+| [kling-reference-assets](kling-reference-assets.md) | 可灵主体与关键帧素材 |
+| [kling-production-iteration](kling-production-iteration.md) | 可灵制作检查与迭代 |
 | [opencv-video-rhythm-analysis](opencv-video-rhythm-analysis.md) | OpenCV 视频节奏分析 |
 | [planning](planning.md) | 方案规划 |
 | [project-management](project-management.md) | 项目管理 |
@@ -33,6 +37,7 @@
 | [reader-feedback](reader-feedback.md) | 读者学习反馈与修订 |
 | [research](research.md) | 资料研究与事实核查 |
 | [reverse-engineering](reverse-engineering.md) | Linux 与 Windows 可执行文件逆向分析 |
+| [securities-analysis](securities-analysis.md) | 证券分析 |
 | [social-media-operations](social-media-operations.md) | 社交媒体运营 |
 | [qt-quick-ui-engineering](qt-quick-ui-engineering.md) | Qt Quick/QML 界面设计与工程 |
 | [qt-scene-graph-engineering](qt-scene-graph-engineering.md) | Qt Scene Graph 实时渲染工程 |
@@ -43,6 +48,8 @@
 | [technical-book-validation](technical-book-validation.md) | 技术书示例与实验验证 |
 | [testing](testing.md) | 测试设计与执行 |
 | [travel-planning](travel-planning.md) | 旅行规划 |
+| [value-investing](value-investing.md) | 价值投资与企业估值 |
+| [value-investing-research](value-investing-research.md) | 价值投资尽调与催化剂 |
 | [video-directing](video-directing.md) | 影视导演与分镜设计 |
 | [video-production-editing](video-production-editing.md) | 视频制作剪辑与后期 |
 | [visual-design](visual-design.md) | 视觉设计 |
@@ -102,6 +109,10 @@ wechat-miniprogram-development 和 wechat-miniprogram-testing 分别提供微信
 | 第9章 | [流程升级与商业迭代](ai-comic-business-iteration.md) | 评估自动化、生产成本与反馈循环 |
 
 章节来源、阅读覆盖和未验证范围见[来源与阅读记录](../docs/ai-comic-creation-source.md)。这组知识保存工作方法；具体项目的原始媒体、完整指令、生成记录与源工程仍保存在声明的成果物工作区。
+
+### 可灵 AI 视频创作
+
+可灵创作复用导演、视觉设计师、视频制作与后期三个角色：导演侧重模型入口与分镜提示词，视觉侧重主体及关键帧素材，制作侧重输入落实、生成检查和迭代。四项可灵技能作为项目补充方法按需组合，不自动改变共享角色的基础技能。角色组合、25 个目录链接及实际已读/未读范围见[可灵来源与使用记录](../docs/kling-ai-source.md)。
 
 ## 维护
 

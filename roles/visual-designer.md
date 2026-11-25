@@ -32,4 +32,6 @@ knowledge: [visual-design]
 
 项目采用 AI 生成角色图片时，可通过 `TEAM.roleKnowledge` 按需补充 [ai-character-image-consistency](../knowledge/ai-character-image-consistency.md)。该链接仅说明可选方法，不自动加入成员的有效知识集合。
 
+项目采用可灵制作角色、场景或关键帧时，还可按需补充[可灵主体与关键帧素材](../knowledge/kling-reference-assets.md)，负责参考职责、图像版本与身份/风格检查。视频生成执行仍按制作分工承接。组合与阅读覆盖见[可灵使用记录](../docs/kling-ai-source.md)。
+
 身份与知识加载遵循 [会话协议](../SESSION_PROTOCOL.md)，任务、交接与评审遵循 [项目运行协议](../PROJECT_PROTOCOL.md)。

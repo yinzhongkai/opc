@@ -8,6 +8,7 @@
 | [product-manager](product-manager.md) | 产品经理 |
 | [researcher](researcher.md) | 研究员 |
 | [investment-advisor](investment-advisor.md) | 投资顾问 |
+| [securities-analyst](securities-analyst.md) | 证券分析师 |
 | [planner](planner.md) | 规划师 |
 | [architect](architect.md) | 系统架构师 |
 | [core-systems-engineer](core-systems-engineer.md) | 核心系统工程师 |
@@ -42,5 +43,7 @@ visual-designer 的公共基础知识是 visual-design；只有采用 AI 生成�
 writer 负责内容创作与修订；social-media-operator 负责内容日历、发布准备、人工发布协作、规则核对以及数据和反馈闭环。运营岗位不因承担发布协作而自动获得账号或发布权限。
 
 director 负责视听表达、分镜与创作指导；video-producer 负责镜头制作、声音、剪辑与后期交付。AI 漫剧等具体制作方法通过项目补充技能配置，不强制进入通用角色基础技能。multimedia-engineer 继续负责媒体软件与编解码工程。
+
+可灵 AI 视频创作沿用 director、visual-designer、video-producer 的分工；各角色文件已列出可选方法入口。[可灵角色组合与来源记录](../docs/kling-ai-source.md)提供补充技能建议及阅读覆盖，不创建新的工具专属身份，也不自动配置项目成员。
 
 共享定义的维护与影响检查遵循 [超级管理员入口](../SUPER_ADMIN.md)。

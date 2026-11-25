@@ -27,4 +27,8 @@ knowledge: [video-directing]
 
 - [video-directing](../knowledge/video-directing.md)
 
+## 可灵创作的可选补充
+
+项目采用可灵时，可在 `TEAM.roleKnowledge` 为本角色补充[模型与入口选择](../knowledge/kling-model-selection.md)和[分镜与提示词](../knowledge/kling-storyboard-prompts.md)，用于确定表达方式、镜头节点、素材职责和样片检查目标。素材生产和生成执行仍由相应制作职责承接；这些链接不自动加入基础技能。完整组合与来源见[可灵使用记录](../docs/kling-ai-source.md)。
+
 身份与技能加载遵循 [会话协议](../SESSION_PROTOCOL.md)，任务、交接与评审遵循 [项目运行协议](../PROJECT_PROTOCOL.md)。
