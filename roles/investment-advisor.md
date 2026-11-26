@@ -30,4 +30,6 @@ knowledge: [research, investment-analysis]
 - [research](../knowledge/research.md)
 - [investment-analysis](../knowledge/investment-analysis.md)
 
+研究企业资本配置或接收单券财务输入的项目，可按职责补充[所有者导向的治理与资本配置](../knowledge/owner-oriented-governance.md)和[股东盈利与会计质量分析](../knowledge/owner-earnings-analysis.md)。基金应用需区分底层企业、基金净值与投资者实际分配；补充方法不改变组合职责。
+
 身份与技能加载遵循 [会话协议](../SESSION_PROTOCOL.md)，任务、交接与评审遵循 [项目运行协议](../PROJECT_PROTOCOL.md)。

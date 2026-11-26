@@ -30,6 +30,8 @@
 | [kling-reference-assets](kling-reference-assets.md) | 可灵主体与关键帧素材 |
 | [kling-production-iteration](kling-production-iteration.md) | 可灵制作检查与迭代 |
 | [opencv-video-rhythm-analysis](opencv-video-rhythm-analysis.md) | OpenCV 视频节奏分析 |
+| [owner-oriented-governance](owner-oriented-governance.md) | 所有者导向的治理与资本配置 |
+| [owner-earnings-analysis](owner-earnings-analysis.md) | 股东盈利与会计质量分析 |
 | [planning](planning.md) | 方案规划 |
 | [project-management](project-management.md) | 项目管理 |
 | [qemu-engineering](qemu-engineering.md) | QEMU 模型开发与验证 |
@@ -113,6 +115,10 @@ wechat-miniprogram-development 和 wechat-miniprogram-testing 分别提供微信
 ### 可灵 AI 视频创作
 
 可灵创作复用导演、视觉设计师、视频制作与后期三个角色：导演侧重模型入口与分镜提示词，视觉侧重主体及关键帧素材，制作侧重输入落实、生成检查和迭代。四项可灵技能作为项目补充方法按需组合，不自动改变共享角色的基础技能。角色组合、25 个目录链接及实际已读/未读范围见[可灵来源与使用记录](../docs/kling-ai-source.md)。
+
+### 企业所有者视角与资本配置
+
+《巴菲特致股东的信》的已读部分提炼为[所有者导向的治理与资本配置](owner-oriented-governance.md)及[股东盈利与会计质量分析](owner-earnings-analysis.md)。章节、版本与未读范围见[阅读记录](../docs/buffett-shareholder-letters-reading-notes.md)。两项方法进入证券分析师基础技能；投资顾问按项目需要补充。
 
 ## 维护
 

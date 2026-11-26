@@ -31,7 +31,7 @@
 
 ## 角色加载
 
-- [证券分析师](../roles/securities-analyst.md)加载 `research`、`securities-analysis`、`value-investing` 和 `value-investing-research`。交付单券估值、证据、压力损失和复核条件。
+- [证券分析师](../roles/securities-analyst.md)使用本文提炼的 `value-investing` 和 `value-investing-research`，结合其余基础技能交付单券估值、证据、压力损失和复核条件。当前完整列表以角色定义为准；治理及股东盈利的后续补充见[《巴菲特致股东的信》阅读记录](buffett-shareholder-letters-reading-notes.md)。
 - [投资顾问](../roles/investment-advisor.md)加载 `research` 和 `investment-analysis`。用单券研究的结果做组合敞口、资金期限、风险预算和再平衡分析。
 
 技能正文保存独立可用的步骤和算例。实际分析以标的财报、公告、契约及当期报价核实输入。示例数据为 OPC 自拟，历史案例用于记录方法出处。
