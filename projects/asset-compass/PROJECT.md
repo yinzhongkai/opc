@@ -105,6 +105,17 @@
 
 2026-10-12，框架超级管理员依据上述用户请求创建项目；用户未指定首批成员，采用版本 3 空团队 `members: []`、`roleKnowledge: {}`，协调记录维护人待指定。超级管理员建员或调整时记录实际日期、用户授权来源、涉及成员 ID、变更内容及配置路径；此处不重复维护成员当前字段。
 
+### 2026-11-26 采用《巴菲特致股东的信》知识
+
+- 框架超级管理员依据用户提供微信读书链接并要求使用 Codex 内置浏览器阅读、总结形成知识和适用角色的请求，整理了[阅读与来源记录](../../docs/buffett-shareholder-letters-reading-notes.md)。实际覆盖为版权、全目录、导言九个主题和第1章 A、第4章 C、第6章 E、第9章 B 正文，其余正文未逐节通读。
+- 新增 active [所有者导向的治理与资本配置](../../knowledge/owner-oriented-governance.md)及[股东盈利与会计质量分析](../../knowledge/owner-earnings-analysis.md)。前者提供披露、激励和资本用途的证据核查，后者提供利润、维持投入、现金、穿透权益及股数桥接。复用现有证券分析师与投资顾问角色，本次没有新增成员或会话。
+- 公共定义先从 `origin/opc-v0.0.7-dev @ 350e10af8d7a60dfdee900fad15a1f55c8ffd64e` 建立 `feature/framework/buffett-owner-analysis`，通过校验后以 `--ff-only` 合入本地 `opc-v0.0.7-dev`。纯框架来源提交为 `4a0b1300bcdea8d48d32e3acdb61e0baa9afe32e`，项目采用提交为 `819a116eb402aade888b7ae7460593535d0d37d3`。为在本项目直接使用本次提炼方法，提前采用这一个已验证功能；正式框架基线仍为 v0.0.6，没有升级或发布 v0.0.7。
+- 兼容性核对：新增两份普通 Markdown 技能与既有定义兼容，TEAM 版本 3、WORKSPACE 版本 1 及成员字段保持有效。证券分析师增加两项基础技能和对应核查职责，现有十三名同角色成员均适用：`securities-analyst`、`securities-analyst-spacex`、`securities-analyst-tesla`、`securities-analyst-alphabet`、`securities-analyst-microsoft`、`securities-analyst-tsmc`、`securities-analyst-meta`、`securities-analyst-anthropic`、`securities-analyst-amazon`、`securities-analyst-apple`、`securities-analyst-amd`、`securities-analyst-asml`、`securities-analyst-lilly`。有效技能按基础顺序为 research、securities-analysis、value-investing、value-investing-research、owner-oriented-governance、owner-earnings-analysis，共六项。
+- 在 [TEAM.yaml](TEAM.yaml) 的 investment-advisor 补充同样两项方法，适用于 `investment-advisor`、`investment-advisor-sp500` 和 `investment-advisor-nasdaq100`。有效技能按基础在前为 research、investment-analysis、securities-analysis、value-investing、value-investing-research、owner-oriented-governance、owner-earnings-analysis，共七项。指数与基金研究按底层企业、基金净值及投资者实际分配区分口径，按具体任务选用。项目经理无需加载这两项专业方法。
+- OPC 项目开发分支为 `feature/asset-compass/buffett-owner-analysis`，合入前目标提交为 `37adb87a763e6bd7863c60f8da698886830fb204`。成果物仓库核对为 `main @ 6a42b987dbbea912e9a7f6de47741580cea4e3f0`，与 WORKSPACE 一致且工作树干净；本次没有成果物变更，成果物开发分支和新增提交不适用。
+- 作者自查完成：框架与项目结构、本地链接校验通过，分别核对 488 和 767 处链接；两侧现有 60 项测试均通过，回购与股东盈利自拟算例复算一致，`git diff --check` 通过。已逐一核对十三名证券分析师的六项、三名投资顾问的七项有效技能与 active 状态，以及公共文件树与来源提交一致。本记录是管理操作自查，不代替成员刷新或业务批准。
+- 未发布定义的后续变化需要显式同步，正式框架升级时按分支策略核对等价提交并去重。成员在原身份下开始新任务时按会话协议完整读取新增技能；配置完成不代表各会话已经刷新。本次没有发送跨会话消息，也不改变业务任务或投资准则。
+
 ### 2026-11-26 创建十四名资产研究专责成员
 
 - 框架超级管理员依据用户本轮连续建员请求，为 SpaceX、标普500／VOO、纳指100／QQQ、Tesla、谷歌、微软、台积电、Meta、Anthropic、亚马逊、苹果、AMD、ASML 和礼来分别创建一名专责成员。用户已确认 Tesla 为单独新增成员，并明确此前的“ant”指 Anthropic。
