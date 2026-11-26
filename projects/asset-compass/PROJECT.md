@@ -4,8 +4,8 @@
 
 ## 框架基线
 
-- 框架发布标签：`v0.0.5`。
-- 精确框架提交：`29b10981da2358ae7ed8df2c77ff5093c03c5ad6`。
+- 框架发布标签：`v0.0.6`。
+- 精确框架提交：`350e10af8d7a60dfdee900fad15a1f55c8ffd64e`。
 - OPC 项目长期分支：`project/asset-compass`。
 - 建项开发分支：`feature/asset-compass/project-bootstrap`；建项提交及合并边界通过 Git 历史定位。
 - 工作区版本基线：当前 `driver: git`；成果物仓库为 `git@github.com:yinzhongkai/asset-compass.git`，本地 checkout 为 OPC 同级 `../asset-compass`（`C:/Users/YinZh/Documents/workspace/asset-compass`），演进线为 `main`，精确提交见 [WORKSPACE.yaml](WORKSPACE.yaml)。原 `D:/asset-compass` 记录保留在下述 Git 历史整理回执；2026-10-13 的实际环境无法访问该路径，本次按用户的投资表归档要求启用上述同级目录，配置依据见 D-006。
@@ -20,6 +20,15 @@
 - 最终版本：投资表归档合入 main 并验证后，WORKSPACE.revision、T-010 和成果索引共同引用最终提交。本节仅登记配置事实，不声称更新 STATUS 或批准原工作簿的模型结果。
 
 ## 框架升级记录
+
+### 2026-11-26 升级到 v0.0.6
+
+- 框架超级管理员依据用户本次要求将项目分支 rebase 并升级框架的请求执行，目标版本经用户更正为“0.06”，对应正式标签 `v0.0.6`。升级遵循[分支策略第 6 节](../../BRANCH_STRATEGY.md#6-公共框架演进发布和项目升级)。
+- 升级前，项目本地分支与 `origin/project/asset-compass` 均为 `efd95aa572fa5f36b9f6539a6b1845c0e3dd1074`，工作树干净，本项目无活动 feature 或 bugfix 分支。恢复标签 `archive/asset-compass-pre-v0.0.6-20261126` 保存该旧头，历史记录中的旧 OPC 提交可通过此标签追溯。
+- 将 `v0.0.5`（`29b10981da2358ae7ed8df2c77ff5093c03c5ad6`）之后的 18 个项目提交重放到 `v0.0.6`。逐提交核对了项目文件树、作者信息和提交说明，重放完成后公共文件树与正式发布完全一致，项目提交范围内有 0 个合并提交。
+- 本版更新投资顾问角色和投资组合分析技能，补充组合共同敞口、永久性资本减损、流动性压力测试和事后归因方法。已核对在册成员分工及新版正文，投资顾问的有效技能仍为 `research`、`investment-analysis`。TEAM 版本 3、WORKSPACE 版本 1 与本版兼容。成员下次工作时按[会话协议](../../SESSION_PROTOCOL.md)刷新角色、技能和项目资料。
+- 成果物仓库本地 `main`、远端地址及精确提交 `6a42b987dbbea912e9a7f6de47741580cea4e3f0` 与 [WORKSPACE.yaml](WORKSPACE.yaml) 一致，工作树干净。项目业务文件通过逐提交文件树核对保留，当前项目基线与本次升级事实由本节记录。
+- 正式发布快照和升级后的项目均通过结构与链接校验及全部 60 项测试，项目侧核对了 691 处本地链接，`git diff --check` 通过。项目基线以一个普通提交收口，提交通过本节和 Git 历史定位。远程同步采用显式旧头保护，将项目分支和恢复标签一起原子推送到现有 `origin`，完成后独立回读引用。
 
 ### 2026-11-11 升级到 v0.0.5
 
