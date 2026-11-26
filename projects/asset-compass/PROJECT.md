@@ -105,6 +105,17 @@
 
 2026-10-12，框架超级管理员依据上述用户请求创建项目；用户未指定首批成员，采用版本 3 空团队 `members: []`、`roleKnowledge: {}`，协调记录维护人待指定。超级管理员建员或调整时记录实际日期、用户授权来源、涉及成员 ID、变更内容及配置路径；此处不重复维护成员当前字段。
 
+### 2026-11-26 完成全书阅读并扩充《巴菲特致股东的信》知识
+
+- 框架超级管理员依据用户追加请求“把全书都读一遍，在总结成知识”，在首次选读基础上补读所有其余条目；完整覆盖文前、导言、九章的 51 个正文小节、章首页和后记，共 76 个目录条目，并逐一打开读取 103 处弹出注释。第1章 B 两页及后记“全书完”已核对；历史财务表没有逐格复算。逐节来源与方法落点见[完整阅读记录](../../docs/buffett-shareholder-letters-reading-notes.md)。下方首次采用记录保留当时选读事实。
+- 扩充 [owner-oriented-governance](../../knowledge/owner-oriented-governance.md) 与 [owner-earnings-analysis](../../knowledge/owner-earnings-analysis.md)，补入控制与继任、经营退出、收购全成本、准备金、养老金及递延税等方法；新增 active [asset-and-contract-risk-analysis](../../knowledge/asset-and-contract-risk-analysis.md) 与 [valuation-and-investment-discipline](../../knowledge/valuation-and-investment-discipline.md)，补充零息与混合权益、衍生品依赖、模型适用性、事件时间、费用及研究复盘。算例为 OPC 自拟，历史规则与作者观点有明确边界。
+- 沿用证券分析师和投资顾问两个既有角色。已读取当前仓库全部成员配置并核对职责：十三名证券分析师 `securities-analyst`、`securities-analyst-spacex`、`securities-analyst-tesla`、`securities-analyst-alphabet`、`securities-analyst-microsoft`、`securities-analyst-tsmc`、`securities-analyst-meta`、`securities-analyst-anthropic`、`securities-analyst-amazon`、`securities-analyst-apple`、`securities-analyst-amd`、`securities-analyst-asml`、`securities-analyst-lilly` 通过角色基础列表增加两项技能，有效集合为 research、securities-analysis、value-investing、value-investing-research、owner-oriented-governance、owner-earnings-analysis、asset-and-contract-risk-analysis、valuation-and-investment-discipline，共八项。
+- 在 [TEAM.yaml](TEAM.yaml) 的 investment-advisor 补充上述两项新增技能，适用于 `investment-advisor`、`investment-advisor-sp500`、`investment-advisor-nasdaq100`。有效集合为 research、investment-analysis、securities-analysis、value-investing、value-investing-research、owner-oriented-governance、owner-earnings-analysis、asset-and-contract-risk-analysis、valuation-and-investment-discipline，共九项。基金研究区分底层企业、基金条款与投资者现金；按具体任务使用合约方法，技能不授权成员扩展到 scope 以外的证券或交易。项目经理的技能不变。
+- 公共功能从本地 `opc-v0.0.7-dev @ 4a0b1300bcdea8d48d32e3acdb61e0baa9afe32e` 建立 `feature/framework/buffett-full-reading`，经校验以 `--ff-only` 合入本地集成线，纯框架来源为 `e169a64abaac32a60a3557f91668db8a9ffd277c`。项目为直接使用本次完整提炼而提前采用该功能，采用提交为 `99e1b748f4158ed295ca91b5d76aa89b55064c11`。正式框架基线仍为 v0.0.6；未发布功能的后续同步、正式升级时的等价提交去重遵循根分支策略。
+- 项目开发分支为 `feature/asset-compass/buffett-full-reading`，合入前目标为 `b3956ec4b1506162ee92f0a9e8f730b5258ab538`。WORKSPACE 声明的成果物仓库 `main @ 6a42b987dbbea912e9a7f6de47741580cea4e3f0` 已只读核对，地址、分支、提交和干净工作树一致；本轮无成果物修改，成果物开发分支及新增提交不适用。TEAM 版本 3、WORKSPACE 版本 1、成员身份和 scope 保持兼容。
+- 框架侧结构及 508 处本地链接校验、现有 60 项测试、差异检查通过，自拟回购、股东盈利、零息、递延支付、事件与费用算例已复算。项目侧结构及 793 处本地链接、现有 60 项测试、差异检查通过，逐一核对了十三名证券分析师的八项和三名投资顾问的九项有效技能及 active 状态，公共文件树与来源提交一致，阅读映射含 51 节正文及全部 76 个条目。本记录是管理员作者自查，不代替专业成员评审或用户业务批准。
+- 本轮仅在本地提交与合入，没有推送或发布新框架版本。未创建新角色、成员或会话，也没有发出跨会话消息或代写刷新回执；成员下次开始任务按会话协议读取更新后的角色与完整有效技能。配置可用与会话已刷新分别认定。
+
 ### 2026-11-26 采用《巴菲特致股东的信》知识
 
 - 框架超级管理员依据用户提供微信读书链接并要求使用 Codex 内置浏览器阅读、总结形成知识和适用角色的请求，整理了[阅读与来源记录](../../docs/buffett-shareholder-letters-reading-notes.md)。实际覆盖为版权、全目录、导言九个主题和第1章 A、第4章 C、第6章 E、第9章 B 正文，其余正文未逐节通读。
