@@ -105,6 +105,35 @@
 
 2026-10-12，框架超级管理员依据上述用户请求创建项目；用户未指定首批成员，采用版本 3 空团队 `members: []`、`roleKnowledge: {}`，协调记录维护人待指定。超级管理员建员或调整时记录实际日期、用户授权来源、涉及成员 ID、变更内容及配置路径；此处不重复维护成员当前字段。
 
+### 2026-11-26 创建十四名资产研究专责成员
+
+- 框架超级管理员依据用户本轮连续建员请求，为 SpaceX、标普500／VOO、纳指100／QQQ、Tesla、谷歌、微软、台积电、Meta、Anthropic、亚马逊、苹果、AMD、ASML 和礼来分别创建一名专责成员。用户已确认 Tesla 为单独新增成员，并明确此前的“ant”指 Anthropic。
+- 本次新增配置及研究对象如下，完整职责以各自成员文件为准。ID 使用角色与稳定研究标的后缀。
+
+| 本次研究对象 | 新增成员配置 | 角色 |
+| --- | --- | --- |
+| SpaceX | [securities-analyst-spacex](members/securities-analyst-spacex.yaml) | 证券分析师 |
+| 标普500／VOO | [investment-advisor-sp500](members/investment-advisor-sp500.yaml) | 投资顾问 |
+| 纳指100／QQQ | [investment-advisor-nasdaq100](members/investment-advisor-nasdaq100.yaml) | 投资顾问 |
+| Tesla（TSLA） | [securities-analyst-tesla](members/securities-analyst-tesla.yaml) | 证券分析师 |
+| 谷歌／Alphabet | [securities-analyst-alphabet](members/securities-analyst-alphabet.yaml) | 证券分析师 |
+| 微软（MSFT） | [securities-analyst-microsoft](members/securities-analyst-microsoft.yaml) | 证券分析师 |
+| 台积电（TSMC） | [securities-analyst-tsmc](members/securities-analyst-tsmc.yaml) | 证券分析师 |
+| Meta（META） | [securities-analyst-meta](members/securities-analyst-meta.yaml) | 证券分析师 |
+| Anthropic | [securities-analyst-anthropic](members/securities-analyst-anthropic.yaml) | 证券分析师 |
+| 亚马逊（AMZN） | [securities-analyst-amazon](members/securities-analyst-amazon.yaml) | 证券分析师 |
+| 苹果（AAPL） | [securities-analyst-apple](members/securities-analyst-apple.yaml) | 证券分析师 |
+| AMD | [securities-analyst-amd](members/securities-analyst-amd.yaml) | 证券分析师 |
+| ASML | [securities-analyst-asml](members/securities-analyst-asml.yaml) | 证券分析师 |
+| 礼来（Eli Lilly） | [securities-analyst-lilly](members/securities-analyst-lilly.yaml) | 证券分析师 |
+
+- 十二名公司研究成员复用 active [证券分析师](../../roles/securities-analyst.md)角色，其有效技能依次为 [research](../../knowledge/research.md)、[securities-analysis](../../knowledge/securities-analysis.md)、[value-investing](../../knowledge/value-investing.md)、[value-investing-research](../../knowledge/value-investing-research.md)。公司分工分别覆盖业务、财务质量、价值区间、股份权利、压力情景及关键反证。
+- 两名指数与基金研究成员复用 active [投资顾问](../../roles/investment-advisor.md)角色，基础技能为 research、[investment-analysis](../../knowledge/investment-analysis.md)，按项目现有 roleKnowledge 加载 securities-analysis、value-investing、value-investing-research，共五项有效技能。研究重点为指数构成、基金文件、费用与跟踪、价格和净值、持仓重叠及组合风险。
+- SpaceX 与 Anthropic 研究从当期发行主体、上市状态、股份类别、持有结构和可核验资料切入。谷歌研究明确 Alphabet 股份类别，台积电及 ASML 研究核对交易市场、币种和存托权益。公司或证券代码、权利与事实在具体研究时核验。
+- 各专责成员向现有主投资顾问提供研究及共同风险输入，由项目经理协调任务、资料和交付。具体任务和完成条件按后续授权登记。成员启动消息采用“你是资产罗盘项目（asset-compass）的成员 [表中成员 ID]，请按 SESSION_PROTOCOL.md 初始化”，实际身份取自对应成员文件。
+- OPC 开发分支为 `feature/asset-compass/add-asset-research-members`，合入前项目头为 `46ce978291cd662320468c082620e874b149cede`。已等待同仓库 NVDA 会话完成，逐文件记录四份已有未提交治理成果的摘要作为保留核对依据。成果物仓库 `main @ 6a42b987dbbea912e9a7f6de47741580cea4e3f0` 与 WORKSPACE 一致。本次配置经校验后独立提交，以 `--ff-only` 合入项目长期分支。
+- 结构与本地引用校验、`git diff --check` 及现有 60 项测试全部通过。已逐项核对十四个新成员 ID、角色、五条专责分工、有效技能与 active 状态，TEAM 共登记十七名成员。四份已有未提交治理成果的文件摘要核对一致。
+
 ### 2026-11-26 创建 NVIDIA 专责证券分析师
 
 - 框架超级管理员依据用户本次请求“我想创建一个成员，专门用来分析nvdia的股票”建员，按本次语境将研究对象理解为 NVIDIA Corporation（英伟达，NVDA）。
