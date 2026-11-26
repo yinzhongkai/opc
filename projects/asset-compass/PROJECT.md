@@ -105,6 +105,16 @@
 
 2026-10-12，框架超级管理员依据上述用户请求创建项目；用户未指定首批成员，采用版本 3 空团队 `members: []`、`roleKnowledge: {}`，协调记录维护人待指定。超级管理员建员或调整时记录实际日期、用户授权来源、涉及成员 ID、变更内容及配置路径；此处不重复维护成员当前字段。
 
+### 2026-11-26 创建 NVIDIA 专责证券分析师
+
+- 框架超级管理员依据用户本次请求“我想创建一个成员，专门用来分析nvdia的股票”建员，按本次语境将研究对象理解为 NVIDIA Corporation（英伟达，NVDA）。
+- 新增本项目首名[证券分析师](../../roles/securities-analyst.md)，成员 ID 采用默认角色 ID `securities-analyst`，配置保存于 [members/securities-analyst.yaml](members/securities-analyst.yaml) 并登记到 [TEAM.yaml](TEAM.yaml)。具体分工以成员文件为准，专责 NVDA 的业务、财报、估值、风险及研究假设复核。
+- 有效技能来自 active 角色的四项基础技能，依次为 [research](../../knowledge/research.md)、[securities-analysis](../../knowledge/securities-analysis.md)、[value-investing](../../knowledge/value-investing.md)、[value-investing-research](../../knowledge/value-investing-research.md)。项目补充技能为空，现有基础技能可支撑本次专责分工。
+- 协作接口为证券分析师提供单股研究与估值依据，投资顾问结合用户约束评估组合影响，项目经理协调研究输入、进展与交付要求。具体研究任务、分析时点和交付深度由用户或获授权的项目经理按项目协议确定。
+- OPC 开发分支为 `feature/asset-compass/add-nvda-analyst`，合入前项目头为 `e27012818ae6427d441285d56cbddffe6a9867a9`。开始配置前已等待投资顾问的 T-021 会话结束，并记录其四份未提交治理成果的文件摘要以核对保留情况。本次成员配置独立提交，经验证后以 `--ff-only` 合入项目长期分支。
+- 结构与引用校验、`git diff --check` 及现有 60 项测试全部通过。已核对新成员的唯一 ID、role、scope、四项有效技能和 active 状态，以及投资顾问四份未提交成果的文件摘要。
+- 新成员启动消息为“你是资产罗盘项目（asset-compass）的证券分析师，成员 ID 为 securities-analyst，专责 NVIDIA（NVDA）股票研究，请按 SESSION_PROTOCOL.md 初始化”。成员会话实际读取资料后返回初始化回执。
+
 ### 2026-11-26 补充投资研究技能并安排框架刷新
 
 - 框架超级管理员依据用户本次要求通知项目经理、投资顾问按 `v0.0.6` 刷新框架、角色和技能，并评估及补充适用知识的请求，完成本项目技能组合评估。配置来源为正式框架 `v0.0.6`（`350e10af8d7a60dfdee900fad15a1f55c8ffd64e`）。
