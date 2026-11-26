@@ -23,6 +23,7 @@
 | [cpp-core-systems-engineering](cpp-core-systems-engineering.md) | C++ 核心系统工程 |
 | [cpp-qt-testing](cpp-qt-testing.md) | C++ 与 Qt 测试工程 |
 | [critical-review](critical-review.md) | 独立评审 |
+| [decision-bias-checklist](decision-bias-checklist.md) | 判断偏差与决策检查 |
 | [ffmpeg-media-engineering](ffmpeg-media-engineering.md) | FFmpeg 多媒体工程 |
 | [frontend-development](frontend-development.md) | 前端开发 |
 | [investment-analysis](investment-analysis.md) | 投资组合分析与跟踪 |
@@ -30,6 +31,7 @@
 | [kling-storyboard-prompts](kling-storyboard-prompts.md) | 可灵分镜与提示词 |
 | [kling-reference-assets](kling-reference-assets.md) | 可灵主体与关键帧素材 |
 | [kling-production-iteration](kling-production-iteration.md) | 可灵制作检查与迭代 |
+| [multidisciplinary-reasoning](multidisciplinary-reasoning.md) | 多元模型与逆向推理 |
 | [opencv-video-rhythm-analysis](opencv-video-rhythm-analysis.md) | OpenCV 视频节奏分析 |
 | [owner-oriented-governance](owner-oriented-governance.md) | 所有者导向的治理与资本配置 |
 | [owner-earnings-analysis](owner-earnings-analysis.md) | 股东盈利与会计质量分析 |
@@ -130,6 +132,12 @@ wechat-miniprogram-development 和 wechat-miniprogram-testing 分别提供微信
 | [估值与投资研究纪律](valuation-and-investment-discipline.md) | 审查模型适用性、事件期限、费用、容量、反证和事后归因 |
 
 四项进入证券分析师基础技能；投资顾问按项目需要补充，基金应用区分底层企业、基金与投资者口径。估值主模型及通用契约方法继续复用既有价值投资和证券分析技能。书籍链接仅作来源归档，执行任务直接使用本地技能及当期标的证据。
+
+### 多元模型与判断检查
+
+根据《穷查理宝典》已读部分整理[多元模型与逆向推理](multidisciplinary-reasoning.md)和[判断偏差与决策检查](decision-bias-checklist.md)，用于解释经济机制、推演失败、检查激励和反证，并保留事前判断与复盘。两项进入证券分析师与投资顾问基础技能；其他角色按实际任务查阅，不增加职责或权限。
+
+已读目录82项、十一篇演讲及附录，律师事务所一节因网页正文显示异常未完成；具体范围、分页与历史材料边界见[阅读记录](../docs/poor-charlies-almanack-reading-notes.md)。不把作者轶事和心理分类直接当作普遍科学定律，实际任务从本地技能取用方法并核实当期证据。
 
 ## 维护
 
