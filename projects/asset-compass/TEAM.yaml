@@ -1,6 +1,10 @@
 schemaVersion: 3
 project: 'asset-compass'
-roleKnowledge: {}
+roleKnowledge:
+  investment-advisor:
+    - securities-analysis
+    - value-investing
+    - value-investing-research
 members:
   - project-manager
   - investment-advisor

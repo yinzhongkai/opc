@@ -105,6 +105,16 @@
 
 2026-10-12，框架超级管理员依据上述用户请求创建项目；用户未指定首批成员，采用版本 3 空团队 `members: []`、`roleKnowledge: {}`，协调记录维护人待指定。超级管理员建员或调整时记录实际日期、用户授权来源、涉及成员 ID、变更内容及配置路径；此处不重复维护成员当前字段。
 
+### 2026-11-26 补充投资研究技能并安排框架刷新
+
+- 框架超级管理员依据用户本次要求通知项目经理、投资顾问按 `v0.0.6` 刷新框架、角色和技能，并评估及补充适用知识的请求，完成本项目技能组合评估。配置来源为正式框架 `v0.0.6`（`350e10af8d7a60dfdee900fad15a1f55c8ffd64e`）。
+- 受影响成员为 `investment-advisor`，身份与分工见[成员配置](members/investment-advisor.yaml)。在 [TEAM.yaml](TEAM.yaml) 的 `roleKnowledge.investment-advisor` 添加 [securities-analysis](../../knowledge/securities-analysis.md)、[value-investing](../../knowledge/value-investing.md)、[value-investing-research](../../knowledge/value-investing-research.md)。三项技能均为 active，分别补充证券财务和条款核查、价值区间及安全边际测算、研究假设与催化剂验证方法。
+- 投资顾问的有效技能按基础在前的顺序为 `research`、`investment-analysis`、`securities-analysis`、`value-investing`、`value-investing-research`。具体研究根据资产类型、实际数据和既有任务选取适用方法。企业估值需有发行人财务和经营证据，ETF 的价格、净值与溢价核查仍采用对应基金口径，BTC 及现金按各自特征分析。
+- 项目经理 `project-manager` 的当前职责为计划协调、风险与依赖跟踪和记录维护，有效技能为 `project-management`。本次刷新请其了解投资顾问新增方法的输入、输出和协作接口。现有投资准则、任务范围与确认责任继续以各自记录为准。
+- OPC 开发分支为 `feature/asset-compass/v006-investment-knowledge`，合入前项目头为 `c64c05f87801811874f65d22fca263e1bc2cbc37`。成果物仓库已核对为 `main @ 6a42b987dbbea912e9a7f6de47741580cea4e3f0`，与 WORKSPACE 声明一致。本次配置经校验后以 `--ff-only` 合入项目长期分支。
+- 结构与引用校验通过，核对了 696 处本地链接，现有 60 项测试全部通过，`git diff --check` 通过。已逐项核对两名成员的有效技能、active 状态与配置变更范围。
+- 成员刷新通过原有效会话串行通知，每位成员自行按会话协议读取当前框架、角色及全部有效技能并返回实际回执。配置记录与成员读取回执分别保存，本节记录本次配置及刷新安排。
+
 ### 2026-10-12：创建项目经理
 
 - 执行者与授权来源：框架超级管理员，依据本会话用户于 2026-10-12 的明确请求：“帮我为 asset-compass 创建一个项目经理，负责项目协调和记录维护。”
