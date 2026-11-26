@@ -15,6 +15,7 @@
 | [ai-comic-video-production](ai-comic-video-production.md) | AI 漫剧视频生成与连续性控制 |
 | [ai-comic-visual-storytelling](ai-comic-visual-storytelling.md) | AI 漫剧分镜与视觉叙事 |
 | [backend-development](backend-development.md) | 后端开发 |
+| [asset-and-contract-risk-analysis](asset-and-contract-risk-analysis.md) | 投资资产与合约风险分析 |
 | [audio-dsp-rhythm-engineering](audio-dsp-rhythm-engineering.md) | 音频 DSP 与节奏工程 |
 | [book-planning](book-planning.md) | 图书定位与章节规划 |
 | [book-production](book-production.md) | 图书生产与统稿 |
@@ -52,6 +53,7 @@
 | [travel-planning](travel-planning.md) | 旅行规划 |
 | [value-investing](value-investing.md) | 价值投资与企业估值 |
 | [value-investing-research](value-investing-research.md) | 价值投资尽调与催化剂 |
+| [valuation-and-investment-discipline](valuation-and-investment-discipline.md) | 估值与投资研究纪律 |
 | [video-directing](video-directing.md) | 影视导演与分镜设计 |
 | [video-production-editing](video-production-editing.md) | 视频制作剪辑与后期 |
 | [visual-design](visual-design.md) | 视觉设计 |
@@ -118,7 +120,16 @@ wechat-miniprogram-development 和 wechat-miniprogram-testing 分别提供微信
 
 ### 企业所有者视角与资本配置
 
-《巴菲特致股东的信》的已读部分提炼为[所有者导向的治理与资本配置](owner-oriented-governance.md)及[股东盈利与会计质量分析](owner-earnings-analysis.md)。章节、版本与未读范围见[阅读记录](../docs/buffett-shareholder-letters-reading-notes.md)。两项方法进入证券分析师基础技能；投资顾问按项目需要补充。
+《巴菲特致股东的信：投资者和公司高管教程（原书第4版）》已完成全书及弹出注释阅读，整理为四项方法。目录覆盖、来源年份和阅读限制见[阅读记录](../docs/buffett-shareholder-letters-reading-notes.md)。
+
+| 方法 | 主要使用时机 |
+| --- | --- |
+| [所有者导向的治理与资本配置](owner-oriented-governance.md) | 核查控制、监督、激励、收购及每股资本用途 |
+| [股东盈利与会计质量分析](owner-earnings-analysis.md) | 桥接利润与现金，检查维持投入、商誉、准备金、养老金及税 |
+| [投资资产与合约风险分析](asset-and-contract-risk-analysis.md) | 检查资产收益来源、特殊支付条款、衍生品与同时失效的现金依赖 |
+| [估值与投资研究纪律](valuation-and-investment-discipline.md) | 审查模型适用性、事件期限、费用、容量、反证和事后归因 |
+
+四项进入证券分析师基础技能；投资顾问按项目需要补充，基金应用区分底层企业、基金与投资者口径。估值主模型及通用契约方法继续复用既有价值投资和证券分析技能。书籍链接仅作来源归档，执行任务直接使用本地技能及当期标的证据。
 
 ## 维护
 
