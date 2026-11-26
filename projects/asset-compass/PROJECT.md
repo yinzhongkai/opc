@@ -105,6 +105,17 @@
 
 2026-10-12，框架超级管理员依据上述用户请求创建项目；用户未指定首批成员，采用版本 3 空团队 `members: []`、`roleKnowledge: {}`，协调记录维护人待指定。超级管理员建员或调整时记录实际日期、用户授权来源、涉及成员 ID、变更内容及配置路径；此处不重复维护成员当前字段。
 
+### 2026-11-26 采用《穷查理宝典》已读部分的方法
+
+- 框架超级管理员依据用户“再读下这本书”的请求，沿用先通读再整理知识的要求，使用 Codex 内置浏览器阅读《穷查理宝典：查理·芒格智慧箴言录（全新增订本）》。已读目录82项，包含十一篇演讲、正文旁注、信件图表、第五章文章、书目及年谱，另打开读取1处弹出注释。目录第20项律师事务所一节因网页正文显示异常未完成；本次不宣称无缺口通读。版本、83项目录覆盖、分页、来源及补读范围见[阅读记录](../../docs/poor-charlies-almanack-reading-notes.md)。
+- 新增 active [multidisciplinary-reasoning](../../knowledge/multidisciplinary-reasoning.md) 与 [decision-bias-checklist](../../knowledge/decision-bias-checklist.md)，分别提供主导机制、逆向失败链、二阶反馈，以及激励、证据选择、反证和事前复盘检查。同步衔接 research、securities-analysis、investment-analysis；历史观点、寓言及心理分类保留证据边界。知识仅基于已读部分，待该节可读后补读并检查是否需要修订。
+- 沿用[证券分析师](../../roles/securities-analyst.md)与[投资顾问](../../roles/investment-advisor.md)，两项方法加入角色基础技能。十三名证券分析师的有效技能由八项增至十项，涉及 `securities-analyst`、`securities-analyst-spacex`、`securities-analyst-tesla`、`securities-analyst-alphabet`、`securities-analyst-microsoft`、`securities-analyst-tsmc`、`securities-analyst-meta`、`securities-analyst-anthropic`、`securities-analyst-amazon`、`securities-analyst-apple`、`securities-analyst-amd`、`securities-analyst-asml`、`securities-analyst-lilly`；顺序为既有八项后接两项新增方法。
+- 三名投资顾问 `investment-advisor`、`investment-advisor-sp500`、`investment-advisor-nasdaq100` 的有效技能由九项增至十一项：research、investment-analysis、multidisciplinary-reasoning、decision-bias-checklist，再接 [TEAM.yaml](TEAM.yaml) 现有七项 roleKnowledge。项目经理仍使用 project-management；本次不新增角色、成员或会话，不更改各成员 ID、role、scope、业务任务与投资准则。配置可用不等于会话已经刷新，成员下次开始任务时按会话协议读取角色和完整有效技能。
+- 公共功能从本地 `opc-v0.0.7-dev @ e169a64abaac32a60a3557f91668db8a9ffd277c` 建立 `feature/framework/munger-decision-methods`，校验后以 `--ff-only` 合入本地集成线，纯框架来源为 `e73829a83119b1de06359c4bfb6df729db7e999c`。项目为直接使用本次方法提前采用该单项功能，采用提交为 `81f6bfdee61e375ba7302bf374c4ee2d8de6bfd1`。正式框架基线仍为 v0.0.6；未发布定义的后续同步及正式升级时的等价提交去重遵循根分支策略。
+- 项目开发分支为 `feature/asset-compass/munger-decision-methods`，合入前目标为 `bc64b76f67a7c62037ebeb0a13664420609f19f9`。已重新同步远程引用并核对在册成员、角色和适用技能。成果物仓库地址、`main @ 6a42b987dbbea912e9a7f6de47741580cea4e3f0` 及干净工作树与 [WORKSPACE.yaml](WORKSPACE.yaml) 一致；本轮没有成果物变更，成果物开发分支及新增提交不适用。TEAM 版本3、WORKSPACE 版本1和成员字段兼容。
+- 本轮只在本地提交与合入，不推送或发布版本；没有发送跨会话消息或代写其他成员的初始化、刷新或评审回执。以下验证为管理员作者自查，不代表专业评审或用户批准。
+- 验证通过：框架侧结构与543处本地链接、项目侧结构与835处本地链接，两侧现有60项测试及 `git diff --check`。已逐一核对十七名成员的有效技能、去重顺序和 active 状态；83项覆盖表连续且明确保留第20项缺口；项目公共文件树与框架来源一致，本轮提交范围没有新增 merge commit。合入目标分支后再次核对文件树、引用和结构，再清理短期分支。
+
 ### 2026-11-26 完成全书阅读并扩充《巴菲特致股东的信》知识
 
 - 框架超级管理员依据用户追加请求“把全书都读一遍，在总结成知识”，在首次选读基础上补读所有其余条目；完整覆盖文前、导言、九章的 51 个正文小节、章首页和后记，共 76 个目录条目，并逐一打开读取 103 处弹出注释。第1章 B 两页及后记“全书完”已核对；历史财务表没有逐格复算。逐节来源与方法落点见[完整阅读记录](../../docs/buffett-shareholder-letters-reading-notes.md)。下方首次采用记录保留当时选读事实。
