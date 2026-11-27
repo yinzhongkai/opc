@@ -23,9 +23,11 @@
 | [cpp-core-systems-engineering](cpp-core-systems-engineering.md) | C++ 核心系统工程 |
 | [cpp-qt-testing](cpp-qt-testing.md) | C++ 与 Qt 测试工程 |
 | [critical-review](critical-review.md) | 独立评审 |
+| [competitive-advantage-and-industry-analysis](competitive-advantage-and-industry-analysis.md) | 竞争优势与行业分析 |
 | [decision-bias-checklist](decision-bias-checklist.md) | 判断偏差与决策检查 |
 | [ffmpeg-media-engineering](ffmpeg-media-engineering.md) | FFmpeg 多媒体工程 |
 | [frontend-development](frontend-development.md) | 前端开发 |
+| [growth-company-research](growth-company-research.md) | 成长企业研究 |
 | [investment-analysis](investment-analysis.md) | 投资组合分析与跟踪 |
 | [kling-model-selection](kling-model-selection.md) | 可灵模型与创作入口选择 |
 | [kling-storyboard-prompts](kling-storyboard-prompts.md) | 可灵分镜与提示词 |
@@ -138,6 +140,17 @@ wechat-miniprogram-development 和 wechat-miniprogram-testing 分别提供微信
 根据《穷查理宝典》已读部分整理[多元模型与逆向推理](multidisciplinary-reasoning.md)和[判断偏差与决策检查](decision-bias-checklist.md)，用于解释经济机制、推演失败、检查激励和反证，并保留事前判断与复盘。两项进入证券分析师与投资顾问基础技能；其他角色按实际任务查阅，不增加职责或权限。
 
 已读目录82项、十一篇演讲及附录，律师事务所一节因网页正文显示异常未完成；具体范围、分页与历史材料边界见[阅读记录](../docs/poor-charlies-almanack-reading-notes.md)。不把作者轶事和心理分类直接当作普遍科学定律，实际任务从本地技能取用方法并核实当期证据。
+
+### 竞争优势、行业与成长企业
+
+《股市真规则（畅销版）》与《怎样选择成长股》的用户提供 EPUB 已完成文件内全部正文、文前文后、附录和图像阅读，分别见[多尔西阅读记录](../docs/stock-investing-rules-reading-notes.md)和[费舍阅读记录](../docs/growth-stocks-reading-notes.md)。来源版本、文件校验值、阅读范围及历史参数、OCR 和表格问题均已注明；完整阅读不等于确认转换文件与纸本逐字一致。
+
+| 方法 | 主要使用时机 |
+| --- | --- |
+| [竞争优势与行业分析](competitive-advantage-and-industry-analysis.md) | 核实市场边界、客户行为、优势机制与期限，按行业选择指标并测算增长资金 |
+| [成长企业研究](growth-company-research.md) | 用十五项调查问题连接需求、研发、销售、组织、融资与每股价值，持续复核证据 |
+
+两项进入证券分析师基础技能，投资顾问按项目需要补充。财务调整、现金和估值主模型继续复用现有技能；两位作者对持有与估值的侧重点分别保留，不转成自动买卖、仓位或行业禁令。现有角色可承担这些研究，无需因书籍另设角色。
 
 ## 维护
 
