@@ -1,0 +1,7 @@
+schemaVersion: 1
+workspace:
+  driver: git
+  repository: git@github.com:yinzhongkai/ai-comic.git
+  branch: main
+  revision: 45c98527699fa337c61193d218c51d1289a58366
+  checkout: ../ai-comic
