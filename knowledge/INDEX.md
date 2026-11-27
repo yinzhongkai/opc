@@ -15,6 +15,7 @@
 | [ai-comic-video-production](ai-comic-video-production.md) | AI 漫剧视频生成与连续性控制 |
 | [ai-comic-visual-storytelling](ai-comic-visual-storytelling.md) | AI 漫剧分镜与视觉叙事 |
 | [backend-development](backend-development.md) | 后端开发 |
+| [asset-and-contract-risk-analysis](asset-and-contract-risk-analysis.md) | 投资资产与合约风险分析 |
 | [audio-dsp-rhythm-engineering](audio-dsp-rhythm-engineering.md) | 音频 DSP 与节奏工程 |
 | [book-planning](book-planning.md) | 图书定位与章节规划 |
 | [book-production](book-production.md) | 图书生产与统稿 |
@@ -22,14 +23,20 @@
 | [cpp-core-systems-engineering](cpp-core-systems-engineering.md) | C++ 核心系统工程 |
 | [cpp-qt-testing](cpp-qt-testing.md) | C++ 与 Qt 测试工程 |
 | [critical-review](critical-review.md) | 独立评审 |
+| [competitive-advantage-and-industry-analysis](competitive-advantage-and-industry-analysis.md) | 竞争优势与行业分析 |
+| [decision-bias-checklist](decision-bias-checklist.md) | 判断偏差与决策检查 |
 | [ffmpeg-media-engineering](ffmpeg-media-engineering.md) | FFmpeg 多媒体工程 |
 | [frontend-development](frontend-development.md) | 前端开发 |
+| [growth-company-research](growth-company-research.md) | 成长企业研究 |
 | [investment-analysis](investment-analysis.md) | 投资组合分析与跟踪 |
 | [kling-model-selection](kling-model-selection.md) | 可灵模型与创作入口选择 |
 | [kling-storyboard-prompts](kling-storyboard-prompts.md) | 可灵分镜与提示词 |
 | [kling-reference-assets](kling-reference-assets.md) | 可灵主体与关键帧素材 |
 | [kling-production-iteration](kling-production-iteration.md) | 可灵制作检查与迭代 |
+| [multidisciplinary-reasoning](multidisciplinary-reasoning.md) | 多元模型与逆向推理 |
 | [opencv-video-rhythm-analysis](opencv-video-rhythm-analysis.md) | OpenCV 视频节奏分析 |
+| [owner-oriented-governance](owner-oriented-governance.md) | 所有者导向的治理与资本配置 |
+| [owner-earnings-analysis](owner-earnings-analysis.md) | 股东盈利与会计质量分析 |
 | [planning](planning.md) | 方案规划 |
 | [project-management](project-management.md) | 项目管理 |
 | [qemu-engineering](qemu-engineering.md) | QEMU 模型开发与验证 |
@@ -50,6 +57,7 @@
 | [travel-planning](travel-planning.md) | 旅行规划 |
 | [value-investing](value-investing.md) | 价值投资与企业估值 |
 | [value-investing-research](value-investing-research.md) | 价值投资尽调与催化剂 |
+| [valuation-and-investment-discipline](valuation-and-investment-discipline.md) | 估值与投资研究纪律 |
 | [video-directing](video-directing.md) | 影视导演与分镜设计 |
 | [video-production-editing](video-production-editing.md) | 视频制作剪辑与后期 |
 | [visual-design](visual-design.md) | 视觉设计 |
@@ -113,6 +121,36 @@ wechat-miniprogram-development 和 wechat-miniprogram-testing 分别提供微信
 ### 可灵 AI 视频创作
 
 可灵创作复用导演、视觉设计师、视频制作与后期三个角色：导演侧重模型入口与分镜提示词，视觉侧重主体及关键帧素材，制作侧重输入落实、生成检查和迭代。四项可灵技能作为项目补充方法按需组合，不自动改变共享角色的基础技能。角色组合、25 个目录链接及实际已读/未读范围见[可灵来源与使用记录](../docs/kling-ai-source.md)。
+
+### 企业所有者视角与资本配置
+
+《巴菲特致股东的信：投资者和公司高管教程（原书第4版）》已完成全书及弹出注释阅读，整理为四项方法。目录覆盖、来源年份和阅读限制见[阅读记录](../docs/buffett-shareholder-letters-reading-notes.md)。
+
+| 方法 | 主要使用时机 |
+| --- | --- |
+| [所有者导向的治理与资本配置](owner-oriented-governance.md) | 核查控制、监督、激励、收购及每股资本用途 |
+| [股东盈利与会计质量分析](owner-earnings-analysis.md) | 桥接利润与现金，检查维持投入、商誉、准备金、养老金及税 |
+| [投资资产与合约风险分析](asset-and-contract-risk-analysis.md) | 检查资产收益来源、特殊支付条款、衍生品与同时失效的现金依赖 |
+| [估值与投资研究纪律](valuation-and-investment-discipline.md) | 审查模型适用性、事件期限、费用、容量、反证和事后归因 |
+
+四项进入证券分析师基础技能；投资顾问按项目需要补充，基金应用区分底层企业、基金与投资者口径。估值主模型及通用契约方法继续复用既有价值投资和证券分析技能。书籍链接仅作来源归档，执行任务直接使用本地技能及当期标的证据。
+
+### 多元模型与判断检查
+
+根据《穷查理宝典》已读部分整理[多元模型与逆向推理](multidisciplinary-reasoning.md)和[判断偏差与决策检查](decision-bias-checklist.md)，用于解释经济机制、推演失败、检查激励和反证，并保留事前判断与复盘。两项进入证券分析师与投资顾问基础技能；其他角色按实际任务查阅，不增加职责或权限。
+
+已读目录82项、十一篇演讲及附录，律师事务所一节因网页正文显示异常未完成；具体范围、分页与历史材料边界见[阅读记录](../docs/poor-charlies-almanack-reading-notes.md)。不把作者轶事和心理分类直接当作普遍科学定律，实际任务从本地技能取用方法并核实当期证据。
+
+### 竞争优势、行业与成长企业
+
+《股市真规则（畅销版）》与《怎样选择成长股》的用户提供 EPUB 已完成文件内全部正文、文前文后、附录和图像阅读，分别见[多尔西阅读记录](../docs/stock-investing-rules-reading-notes.md)和[费舍阅读记录](../docs/growth-stocks-reading-notes.md)。来源版本、文件校验值、阅读范围及历史参数、OCR 和表格问题均已注明；完整阅读不等于确认转换文件与纸本逐字一致。
+
+| 方法 | 主要使用时机 |
+| --- | --- |
+| [竞争优势与行业分析](competitive-advantage-and-industry-analysis.md) | 核实市场边界、客户行为、优势机制与期限，按行业选择指标并测算增长资金 |
+| [成长企业研究](growth-company-research.md) | 用十五项调查问题连接需求、研发、销售、组织、融资与每股价值，持续复核证据 |
+
+两项进入证券分析师基础技能，投资顾问按项目需要补充。财务调整、现金和估值主模型继续复用现有技能；两位作者对持有与估值的侧重点分别保留，不转成自动买卖、仓位或行业禁令。现有角色可承担这些研究，无需因书籍另设角色。
 
 ## 维护
 
